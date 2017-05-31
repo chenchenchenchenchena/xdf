@@ -1,0 +1,59 @@
+body{
+	background: #fff;
+	width: 100%;
+	height: 100%;
+}
+section{
+	margin-left: 0.5rem;
+}
+.loginTitle{
+	margin: 1rem 0 0.5rem 0;
+	font-size: 0.5rem;
+	color:mediumseagreen;
+}
+section input{
+	width:7rem;
+	height: 1rem;
+	margin-bottom: 0.5rem;
+	border: none;
+	border: 1px solid #ccc;
+	outline: none;
+	padding-left: 0.2rem;
+	margin-right: 0.2rem;
+	/*color: #ccc;*/
+	font-size: 0.4rem;
+}
+.email span{
+	font-size: 0.5rem;
+}
+.login{
+	width: 1.5rem;
+	height: 1rem;
+	background: green;
+	color: #fff;
+	border: none;
+	font-size: 0.35rem;
+	outline: none;
+}
+
+
+
+/*扫一扫*/
+.Scan-s{
+	margin-left:-8px;
+}
+.Scan-s img{
+	display:block;
+	width:3rem;
+	height:3rem;
+	margin:2rem auto;
+}
+.Scan-s button{
+	display:block;
+	width:2rem ;
+}
+.Scan-s i{
+	font-size:.6rem;
+	display:block;
+	text-align:center;
+}
