@@ -59,7 +59,7 @@ $.ajax({
         data:JSON.stringify(tname_config),
         success:function(e){
             console.log(e)
-        };
+        }
 });
 
 
