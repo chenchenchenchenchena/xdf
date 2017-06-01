@@ -7,15 +7,16 @@ var p;
             console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
             'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
             'e2State':sessionStorage.e2state})
-$.ajax({
-        url: 'http://10.200.80.120:8080/xdfdtmanager/login/doLogin.do',
-        type: 'post',
-        dataType: 'json',
-        data:{
+            var aa  = {
             'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
             'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
             'e2State':sessionStorage.e2state
-        },
+        }
+$.ajax({
+        url: 'http://10.200.80.120:8080/xdfdtmanager/login/doLogin.do',
+        type: 'post',
+        dataType: 'jsonp',
+        data:JSON.stringify(aa),
         success:function(e){
             console.log(e)
             // alert(sessionStorage.e2state)
