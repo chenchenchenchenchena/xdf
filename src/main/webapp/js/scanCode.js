@@ -35,7 +35,7 @@ $.ajax({
             timestamp: p.timestamp,   // 必填，生成签名的时间戳
             nonceStr: p.nonceStr,   // 必填，生成签名的随机串
             signature: p.signature, // 必填，签名
-            jsApiList: ["scanQRCode"]
+            jsApiList: ["checkJsApi","scanQRCode"]
         });
         //调用成功
         wx.ready(function(){
