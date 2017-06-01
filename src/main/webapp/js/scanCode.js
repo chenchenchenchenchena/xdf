@@ -1,5 +1,7 @@
 var o =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"}
 var p;
+            alert(sessionStorage.e2state)
+
 $.ajax({
     url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do',
     type: 'post',

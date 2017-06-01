@@ -5,8 +5,9 @@ $(function(){
 	    dataType: 'json',
 	    success:function(e){
 	        console.log(e)
-	        // location.href = e.url
-	        sessionstorage.teachname = e.e2state
+	        location.href = e.url
+	        sessionStorage.e2state = e.e2state
+	        // alert(sessionStorage.e2state)
 	    }
 	})
 })
