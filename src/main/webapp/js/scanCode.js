@@ -44,7 +44,7 @@ $.ajax({
     data: JSON.stringify(o),
     success:function(e){
         console.log(e)
-        // location.href = e.url
+        location.href = e.url
     }
 })
 
