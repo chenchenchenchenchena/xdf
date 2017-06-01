@@ -3,7 +3,7 @@ $.ajax({
     type: 'get',
     dataType: 'jsonp',
     success:function(e){
-        alert(e)
+        alert(e+'//////////')
     },
     error:function(){
         alert('qqsb')
