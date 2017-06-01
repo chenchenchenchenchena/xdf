@@ -1,13 +1,13 @@
 //配置
 wx.config({
-    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     // appId: '${appId}', // 必填，公众号的唯一标识
     // timestamp: '${timestamp}', // 必填，生成签名的时间戳
     // nonceStr: '${nonceStr}', // 必填，生成签名的随机串
     // signature: '${signature}',// 必填，签名，见附录1
     // jsApiList: ['checkJsApi','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 
-    appId: 'wxba49de6d10cdcd76',
+    appId: 'wx559791e14e9ce521',
     timestamp: 1453234353,
     nonceStr: 'U5iQqjfV123NT5du',
     signature: '258d9add846405992e4b7ad6e6e6bf825a984ce4',
@@ -43,20 +43,20 @@ $("#scanQRCode").click(function(){
  
 var jsona ={"Method":"syncStudentsData","studentsData":{"acceptorId":"0035005A000C514D413535111","startDate":"2017-03-28 17:39:30","endDate":"2017-03-28 17:39:30","saveType":"new","schoolId":"002","schoolName":"机构校区002","classId":"001","className":"演示版本教室一","teacherId":"002","teacherName":"演示版本辅导老师","masterTeacherId":"aode@xdf.cn","masterTeacherName":" 阿城市市场","lessonNo": "1","devInfos": [{"studentName":"student A21","studentId":"A21","studentUserId":"UserId"}]}}
 var jsonb = JSON.stringify(jsona)
-$.ajax({
-    url: 'http://10.73.81.189:8080/xdfdtmanager/studentDataController/syncStudentsData.do',
-    type: 'POST',
-    dataType: 'JSON',
-    data:{'studentsData':jsonb},
-    success:function(e){
-        var r = JSON.parse(e)
-        console.log(r)
-        if(r.code=='200'){
-            alert('成功')
-        }
-    },
-    error:function(e){
-        console.log(e)
-    }
-})
+// $.ajax({
+//     url: 'http://10.73.81.189:8080/xdfdtmanager/studentDataController/syncStudentsData.do',
+//     type: 'POST',
+//     dataType: 'JSON',
+//     data:{'studentsData':jsonb},
+//     success:function(e){
+//         var r = JSON.parse(e)
+//         console.log(r)
+//         if(r.code=='200'){
+//             alert('成功')
+//         }
+//     },
+//     error:function(e){
+//         console.log(e)
+//     }
+// })
 
