@@ -1,6 +1,6 @@
 
 $(function(){
-    
+
 var o =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"}
 var p;
             // console.log(sessionStorage.e2state);
@@ -8,7 +8,7 @@ var p;
             'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
             'e2State':sessionStorage.e2state})
 $.ajax({
-        url: 'http://10.200.80.120/xdfdtmanager/login/doLogin.do',
+        url: 'http://10.200.80.120:8080/xdfdtmanager/login/doLogin.do',
         type: 'post',
         dataType: 'json',
         data:{
@@ -60,14 +60,13 @@ $.ajax({
 
 
 $("#scanQRCode").click(function() {
-    alert(0)
             wx.scanQRCode({
                 // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
                 needResult : 1,
                 desc : 'scanQRCode desc',
                 success : function(res) {
                     //扫码后获取结果参数赋值给Input
-                    $('body').append('<h1>'+res+'</h1>')
+                    $('body').append('<h1>'+res.resultStr+'</h1>')
                 }
             });
         });
