@@ -24,7 +24,7 @@ $.ajax({
             wx.checkJsApi({
                 jsApiList:['scanQRCode'],
                 success:function(res){
-                    alert('0123498646')
+                    // alert('0123498646')
                 }
             })
         });
@@ -36,19 +36,40 @@ $.ajax({
 
     }
 })
-
-
-
-
-$("#scanQRCode").click(function(){
-	wx.scanQRCode({
-	    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-	    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-	    success: function (res) {
-	    	var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-		}
-	});
+$.ajax({
+    url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/login.do',
+    type: 'post',
+    dataType: 'json',
+    asyns:false,
+    data: JSON.stringify(o),
+    success:function(e){
+        console.log(e)
+        // location.href = e.url
+    }
 })
+
+$("#scanQRCode").click(function() {
+    alert(0)
+            wx.scanQRCode({
+                // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                needResult : 1,
+                desc : 'scanQRCode desc',
+                success : function(res) {
+                    //扫码后获取结果参数赋值给Input
+                    alert(res)
+                }
+            });
+        });
+// $("#scanQRCode").click(function(){
+//     // alert(0)
+// 	wx.scanQRCode({
+// 	    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+// 	    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+// 	    success: function (res) {
+// 	    	var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+// 		}
+// 	});
+// })
 
  
 var jsona ={"Method":"syncStudentsData","studentsData":{"acceptorId":"0035005A000C514D413535111","startDate":"2017-03-28 17:39:30","endDate":"2017-03-28 17:39:30","saveType":"new","schoolId":"002","schoolName":"机构校区002","classId":"001","className":"演示版本教室一","teacherId":"002","teacherName":"演示版本辅导老师","masterTeacherId":"aode@xdf.cn","masterTeacherName":" 阿城市市场","lessonNo": "1","devInfos": [{"studentName":"student A21","studentId":"A21","studentUserId":"UserId"}]}}
