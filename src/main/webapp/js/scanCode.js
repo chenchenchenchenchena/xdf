@@ -1,15 +1,16 @@
 var o =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"}
 var p;
-            console.log(sessionStorage.e2state);
-            console.log(location.search.code);
-            console.log(location.search);
+            // console.log(sessionStorage.e2state);
+            console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
+            'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
+            'e2State':sessionStorage.e2state})
 $.ajax({
         url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/doLogin.do',
         type: 'post',
         dataType: 'json',
         data:{
-            'code':location.search.substring(0,location.search.indexOf('&')),
-            'state':location.search.substring(location.search.indexOf('state='),location.search.length),
+            'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
+            'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
             'e2State':sessionStorage.e2state
         },
         success:function(e){
