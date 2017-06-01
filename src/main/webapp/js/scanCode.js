@@ -13,7 +13,7 @@ var p;
             'e2State':sessionStorage.e2state
         }
 $.ajax({
-        url: 'http://10.200.80.120:8080/xdfdtmanager/login/doLogin.do',
+        url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/doLogin.do',
         type: 'post',
         asyns:false,
         dataType: 'json',
