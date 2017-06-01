@@ -5,7 +5,7 @@ var p;
             'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
             'e2State':sessionStorage.e2state})
 $.ajax({
-        url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/doLogin.do',
+        url: 'http://10.200.80.120/xdfdtmanager/login/doLogin.do',
         type: 'post',
         dataType: 'json',
         data:{
