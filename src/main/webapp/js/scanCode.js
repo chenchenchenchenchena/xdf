@@ -1,9 +1,12 @@
 $.ajax({
-    url: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi',
+    url: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=123&type=jsapi',
     type: 'get',
-    dataType: 'json',
+    dataType: 'jsonp',
     success:function(e){
         alert(e)
+    },
+    error:function(){
+        alert('qqsb')
     }
 })
 
@@ -19,7 +22,7 @@ wx.config({
     appId: 'wx559791e14e9ce521',
     timestamp: 1453234353,
     nonceStr: 'U5iQqjfV123NT5du',
-    signature: 'sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg',
+    signature: 'f4d90daf4b3bca3078ab155816175ba34c443a7b',
     jsApiList: [
                     "scanQRCode"
                 ]
@@ -29,7 +32,7 @@ wx.ready(function(){
     wx.checkJsApi({
     	jsApiList:['scanQRCode'],
     	success:function(res){
-    		
+    		alert(0000)
     	}
     })
     // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
