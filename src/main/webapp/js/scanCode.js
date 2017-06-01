@@ -1,3 +1,12 @@
+$.ajax({
+    url: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi',
+    type: 'get',
+    dataType: 'json',
+    success:function(e){
+        alert(e)
+    }
+})
+
 //配置
 wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -10,7 +19,7 @@ wx.config({
     appId: 'wx559791e14e9ce521',
     timestamp: 1453234353,
     nonceStr: 'U5iQqjfV123NT5du',
-    signature: '258d9add846405992e4b7ad6e6e6bf825a984ce4',
+    signature: 'sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg',
     jsApiList: [
                     "scanQRCode"
                 ]
