@@ -1,3 +1,6 @@
+
+$(function(){
+    
 var o =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"}
 var p;
             // console.log(sessionStorage.e2state);
@@ -99,3 +102,4 @@ var jsonb = JSON.stringify(jsona)
 //     }
 // })
 
+})
