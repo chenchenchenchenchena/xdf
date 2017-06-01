@@ -40,9 +40,9 @@ $.ajax({
         //调用成功
         wx.ready(function(){
             wx.checkJsApi({
-                jsApiList:['scanQRCode'],
+                jsApiList:["checkJsApi",'scanQRCode'],
                 success:function(res){
-                    // alert('0123498646')
+                    alert('0123498646')
                 }
             })
         });
