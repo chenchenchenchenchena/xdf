@@ -1,6 +1,6 @@
 $(function(){
 // 配置微信启动项
-var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"}
+var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
 var Wxconfig_h;
 $.ajax({
     url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do',
@@ -11,10 +11,10 @@ $.ajax({
     success:function(e){
         console.log(e)
         Wxconfig_h = e;
-        console.log(Wxconfig_h.timestamp)
+        console.log(Wxconfig_h.timestamp);
         //配置
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: Wxconfig.appid,   // 必填，公众号的唯一标识  
             timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
             nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
@@ -26,7 +26,6 @@ $.ajax({
             wx.checkJsApi({
                 jsApiList:["checkJsApi",'scanQRCode'],
                 success:function(res){
-                    alert('0123498646')
                 }
             })
         });
@@ -36,7 +35,7 @@ $.ajax({
         });
 
     }
-})
+});
 
 // 绑定点击事件
 $("#scanQRCode").click(function() {
@@ -60,8 +59,8 @@ $.ajax({
         data:JSON.stringify(tname_config),
         success:function(e){
             console.log(e)
-        }
-})
+        };
+});
 
 
 // 获取信息
