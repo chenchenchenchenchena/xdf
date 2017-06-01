@@ -15,7 +15,8 @@ var p;
 $.ajax({
         url: 'http://10.200.80.120:8080/xdfdtmanager/login/doLogin.do',
         type: 'post',
-        dataType: 'jsonp',
+        asyns:false,
+        dataType: 'json',
         data:JSON.stringify(aa),
         success:function(e){
             console.log(e)
