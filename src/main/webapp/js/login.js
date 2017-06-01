@@ -1,14 +1,13 @@
 $(function(){
 	$.ajax({
-		type:"get",
-		url:"",
-		success:function(res){
-			console.log(res);
-		}
-	});
-	$(".email").val();
-	$(".pass").val();
-	$(".login").click(function(){
-		
+	    url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/login.do',
+	    type: 'post',
+	    dataType: 'json',
+	    success:function(e){
+	        console.log(e)
+	        location.href = e.url
+	        sessionStorage.e2state = e.e2state
+	        // alert(sessionStorage.e2state)
+	    }
 	})
 })
