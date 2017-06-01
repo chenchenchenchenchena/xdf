@@ -1,6 +1,6 @@
 $(function(){
 	$.ajax({
-	    url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/login.do',
+	    url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',
 	    type: 'post',
 	    dataType: 'json',
 	    success:function(e){
