@@ -1,9 +1,10 @@
 $(function(){
+	var  cbconfig = {'callbackFlag':'scanCode'};
 	$.ajax({
 	    url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',
 	    type: 'post',
 	    dataType: 'json',
-	    data:{'callbackFlag':'scanCode'},
+	    data:JSON.stringify(cbconfig),
 	    success:function(e){
 	        console.log(e)
 	        location.href = e.url
