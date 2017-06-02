@@ -52,7 +52,7 @@ $("#scanQRCode").click(function() {
 console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state})
 var tname_config  = {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state}
 $.ajax({
-        url: 'http://dt.staff.xdf.cn/xdfdtmanager/login/doLogin.do',
+        url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',
         type: 'post',
         asyns:false,
         dataType: 'json',
