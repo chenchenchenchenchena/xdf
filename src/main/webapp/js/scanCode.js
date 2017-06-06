@@ -58,29 +58,37 @@ $.ajax({
         dataType: 'json',
         data:JSON.stringify(tname_config),
         success:function(e){
-            console.log(e)
+            if(e.message=='登录失败,请重新登录!'){
+                $('.sucs').hide()
+                $('.erro').show()
+            }else{
+                alert('成功')
+            }
         }
 });
 
 
+6-FMX9j&cf
+
 // 获取信息
-var jsona ={"Method":"syncStudentsData","studentsData":{"acceptorId":"0035005A000C514D413535111","startDate":"2017-03-28 17:39:30","endDate":"2017-03-28 17:39:30","saveType":"new","schoolId":"002","schoolName":"机构校区002","classId":"001","className":"演示版本教室一","teacherId":"002","teacherName":"演示版本辅导老师","masterTeacherId":"aode@xdf.cn","masterTeacherName":" 阿城市市场","lessonNo": "1","devInfos": [{"studentName":"student A21","studentId":"A21","studentUserId":"UserId"}]}}
+var jsona ={"Method":"syncStudentsData","studentsData":{"acceptorId":"0035005A000C514D413535121","startDate":"2017-03-28 17:39:30","endDate":"2017-03-28 17:39:30","saveType":"new","schoolId":"002","schoolName":"机构校区002","classId":"001","className":"演示版本教室一","teacherId":"002","teacherName":"演示版本辅导老师","masterTeacherId":"aode@xdf.cn","masterTeacherName":" 阿城市市场","lessonNo": "1","devInfos": [{"studentName":"student A21","studentId":"A21","studentUserId":"UserId"}]}}
 var jsonb = JSON.stringify(jsona)
-// $.ajax({
-//     url: 'http://10.73.81.189:8080/xdfdtmanager/studentDataController/syncStudentsData.do',
-//     type: 'POST',
-//     dataType: 'JSON',
-//     data:{'studentsData':jsonb},
-//     success:function(e){
-//         var r = JSON.parse(e)
-//         console.log(r)
-//         if(r.code=='200'){
-//             alert('成功')
-//         }
-//     },
-//     error:function(e){
-//         console.log(e)
-//     }
-// })
+$.ajax({
+    url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',
+    type: 'POST',
+    dataType: 'JSON',
+    data:{'studentsData':jsonb},
+    success:function(e){    
+        console.log(e)
+        var r = JSON.parse(e)
+        console.log(r)
+        if(r.code=='200'){
+            alert('成功')
+        }
+    },
+    error:function(e){
+        console.log(e)
+    }
+})
 
 })
