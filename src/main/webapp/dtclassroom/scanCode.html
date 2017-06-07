@@ -8,20 +8,21 @@
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="full-screen" content="yes"/>
 		<title>扫码</title>
-		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-		<script src="../js/base/zepto.min.js"></script>
-		<script src="../js/base/rem.js"></script>
-		<script src="../js/scanCode.js"></script>
-		<link rel="stylesheet" href="../css/login.css">
+		<link rel="stylesheet" href="css/Scan.css">
+		<link rel="stylesheet" href="../common/css/base.css"  />
 	</head>
 	<body>
 		<div class="Scan-s sucs">
-			<img src="../images/sys.png" alt=""  id="scanQRCode">
+			<img src="images/sys.png" alt=""  id="scanQRCode">
 			<i>请点击图片进行扫一扫</i>
 		</div>
 		<div class="Scan-s erro" style="display:none">
-			<img src="../images/ere.png" alt=""  id="scanQRCode">
+			<img src="images/ere.png" alt=""  id="scanQRCode">
 			<i>登录失败,请重新登录!</i>
 		</div>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script src="../common/js/zepto.min.js"></script>
+		<script src="../common/js/rem.js"></script>
+		<script src="js/scanCode.js"></script>
 	</body>
 </html>
