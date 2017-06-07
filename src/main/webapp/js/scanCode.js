@@ -120,7 +120,7 @@ $.ajax({
                     }
                         
                     }
-                }
+                }    
             }
             // console.log(teachmore)
             teachjson = {
@@ -128,7 +128,7 @@ $.ajax({
                 'startDate':class_s[i].BeginDate,
                 'endDate':class_s[i].EndDate,
                 'saveType':'new',
-                'schoolId':class_s[i].SchoolId,
+                'schoolId':class_s[i].SchoolId, 
                 'schoolName':'北京校区',   
                 'classId':class_s[i].Id,  
                 'className':class_s[i].ClassName,
