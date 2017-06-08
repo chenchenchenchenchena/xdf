@@ -3,12 +3,12 @@ $(function(){
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
 			$('.card').hide()
+			$('.search').hide()
 		}else{
 			$('.card').show()
 			$('.searchTwo').hide()
-			$('.search').hide()
+			// $('.search').hide()
 		}
-		$('.inputBox input:[type=text]').val() = ''
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
 	})
@@ -85,16 +85,16 @@ $(function(){
 	// 姓名手机号查询
 	function name_se(e){
 		console.log(e.data.studentNo=="[]")
-		var tel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+		// var tel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
 		var name = /^[\u4e00-\u9fa5]{2,4}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
 			return false;
 		}
-		if(!tel.test($('.phoneNumber').val())){
-			layer.msg('请输入正确手机号');
-			return false;
-		}
+		// if(!tel.test($('.phoneNumber').val())){
+		// 	layer.msg('请输入正确手机号');
+		// 	return false;
+		// }
 		if(!name.test($('.stname').val())){
 			layer.msg('请输入正确格式名字');
 			return false;
