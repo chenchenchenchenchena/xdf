@@ -84,17 +84,13 @@ $(function(){
 
 	// 姓名手机号查询
 	function name_se(e){
+		$('.new_S').remove()
 		console.log(e.data.studentNo=="[]")
-		// var tel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
 		var name = /^[\u4e00-\u9fa5]{2,4}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
 			return false;
 		}
-		// if(!tel.test($('.phoneNumber').val())){
-		// 	layer.msg('请输入正确手机号');
-		// 	return false;
-		// }
 		if(!name.test($('.stname').val())){
 			layer.msg('请输入正确格式名字');
 			return false;
@@ -113,7 +109,8 @@ $(function(){
 				// arr.splice(i,1)
 			}else{
 				num++
-				$('.stuNum').append('<li><span>学员号'+num+':</span><span>'+arr[i]+'</span><button>确认关联</button></li>')
+				$('.stuNum').append('<li class="new_S"><span>学员号'+num+':</span><span class="stu_num">'+arr[i]+'</span><button class="Relation">确认关联</button></li>')
+				sessionStorage.stuTel = $('.phoneNumber').val()
 			}
 		}
 	}
@@ -123,15 +120,37 @@ $(function(){
 
 
 $('.tel_log').click(function(){
-	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
+	// var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
+	var stuname = {'name':'常效新','mobile':'13739607950'}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
 
+function telbind(e){
+	console.log(e)
+}
+
+
+$(document).on('click','.Relation',function(){
+	// alert($(this).html())
+	if($(this).html()=='确认关联'){
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+		var stumore = {'StudentCode':stunum,'wechatId':Wxid,'Mobile':sessionStorage.stuTel}	
+		ajax_S(url.s_bind,stumore,telbind)
+		$(this).html('取消关联')
+	}else{
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+		var stumore = {'StudentCode':stunum,'wechatId':Wxid}	
+		ajax_S(url.s_nobd,stumore,telbind)
+		$(this).html('确认关联')
+
+	}
+	
+})
 
 
 
-
+// s_nobd
 
 
 

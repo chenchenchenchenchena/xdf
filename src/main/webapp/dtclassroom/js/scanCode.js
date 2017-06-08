@@ -82,18 +82,18 @@ $.ajax({
     dataType: 'JSON',
     asyns:false,
     data:{'email':teacherid},
-    success:function(e){    
+    success:function(e){   
         var more = JSON.parse(e);
-        console.log(more.data.class)
-        var class_s = more.data.class;
-        for(var i = 0;i<class_s.length;i++){
-            var stumore = class_s[i].students;
-            var teamore = class_s[i].teachers
+        console.log(more)
+        var class_s = more.data;
+        // for(var i = 0;i<class_s.length;i++){
+            var stumore = more.data.Students;
+            var teamore = more.data.teachers;
             for(var k = 0;k<stumore.length;k++){
                 stumodata.push({
-                    'studentName' :stumore[k].Name,
-                    'studentId':stumore[k].Code,
-                    'studentUserId':stumore[k].IdCard ,
+                    'studentName' :stumore[k].StudentName,
+                    'studentId':stumore[k].Id,
+                    'studentUserId':stumore[k].CardCode ,
                 });
             }
             if(teamore.length==1){
@@ -128,23 +128,23 @@ $.ajax({
             // console.log(teachmore)
             teachjson = {
                 'acceptorId':'0035005A000C514D413535111',
-                'startDate':class_s[i].BeginDate,
-                'endDate':class_s[i].EndDate,
-                'saveType':'new',
-                'schoolId':class_s[i].SchoolId, 
-                'schoolName':'北京校区',   
-                'classId':class_s[i].Id,  
-                'className':class_s[i].ClassName,
+                'startDate':class_s.SectBegin,
+                'endDate':class_s.SectEnd,
+                'saveType':'flush',
+                'schoolId':class_s.SchoolId, 
+                'schoolName':class_s.SchoolName,   
+                'classId':class_s.ClassCode,  
+                'className':class_s.ClassName,
                 'teacherId':teachmore.teacherId, 
                 'teacherName':teachmore.teacherName,
                 'masterTeacherId':teachmore.masterTeacherId,
                 'masterTeacherName':teachmore.masterTeacherName,
-                'lessonNo':'1',
+                'lessonNo':class_s.LessonNo,
                 'devInfos':stumodata,
              }
-             studata.push(teachjson);
-        }
-        var  teachjsonT = { "Method": "syncStudentsData",'studentsData':studata}
+             // studata.push(teachjson);
+        // }
+        var  teachjsonT = { "Method": "syncStudentsData",'studentsData':teachjson}
         console.log(teachjsonT)
         $.ajax({
                 url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',
