@@ -13,6 +13,8 @@
 		<script src="../common/js/zepto.min.js"></script>
 		<script src="../common/js/rem.js"></script>
 		<script src="../common/js/etlogin.js"></script>
+		<script src="../common/js/ajax.js"></script>
+		<script src="js/login_s.js"></script>
 	</head>
 	<body>
 		<section>
@@ -23,15 +25,15 @@
 			<div class="inputBox">
 				<p class="studentLogin">
 					<input type="text"  placeholder="输入学员号"/>
-					<button>检测</button>
+					<button class="numb_log">检测</button>
 				</p>
-				<p class="studentLogin">
+				<p class="studentLogin" style="display:none;">
 					<input type="text" class="phoneNumber" placeholder="输入报名时的手机号"/>
 					<input type="text"  placeholder="输入报名时的姓名"/>
-					<button>检测</button>
+					<button class="tel_log">检测</button>
 				</p>
 			</div>
-			<div class="card" style="display: none;">
+			<div class="card">
 				<img src="images/card.png"  />
 			</div>
 			<div class="search" style="display: none;">
@@ -76,5 +78,4 @@
 			</div>
 		</section>
 	</body>
-	<script src="js/student-login.js"></script>
 </html>
