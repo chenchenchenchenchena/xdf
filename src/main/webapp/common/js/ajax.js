@@ -2,7 +2,8 @@
 
 var url = {
     't_more':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
-    't_wxmo':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do'   //学生登录页  通过微信查询是否登录过
+    't_wxmo':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
+    't_siot':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do'   //解绑
 }
 
 var Wxid = 'wechatid123456'
