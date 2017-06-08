@@ -99,9 +99,9 @@ $(function(){
 			layer.msg('没有查到相关信息');
 			return false;
 		}
-		var  studentNo =  e.data.studentNo
-		var  studentNt = studentNo.substring(1,studentNo.length-1)
-		var  arr = studentNo.split('"')
+		var  studentNo =  e.data
+		// var  studentNt = studentNo.substring(1,studentNo.length-1)
+		// var  arr = studentNo.split('"')
 		var  num = 0;
 		var  bindz = ''
 		for(var i = 0;i<studentNo.length;i++){
