@@ -86,7 +86,7 @@ body{
 .stuInfo>li>span:first-child{
 	color: #808080;
 	margin-right: 0.56rem;
-	width: 1.6rem;
+	/*width: 1.6rem;*/
 	display: inline-block;
 }
 .stuInfo>li>span:last-child{
@@ -131,10 +131,11 @@ body{
 	margin-bottom: 0.15rem;
 }
 .stuNum>li>span:first-child{
-	margin-right: 0;
+	margin-right:.2rem;
+	float:left;
 }
 .stuNum>li>span:nth-child(2){
-	margin-right: 1.87rem;
+	float:left;
 }
 .stuNum button{
 	width: 1.81rem;
@@ -156,4 +157,6 @@ body{
 	font-size: 0.32rem;
 	color:#ff6a6a;
 	margin-left: 1.8rem;
+	float:right;
+	margin-top:.2rem;
 }
