@@ -10,10 +10,12 @@
 		<title>学员登陆</title>
 		<link rel="stylesheet" href="../common/css/base.css"  />
 		<link rel="stylesheet" href="css/student-login.css"  />
+		<script src="../common/js/jquery.js"></script>
 		<script src="../common/js/zepto.min.js"></script>
 		<script src="../common/js/rem.js"></script>
 		<script src="../common/js/etlogin.js"></script>
 		<script src="../common/js/ajax.js"></script>
+		<script src="../common/js/layer.js"></script>
 		<script src="js/login_s.js"></script>
 	</head>
 	<body>
@@ -24,8 +26,8 @@
 			</ul>
 			<div class="inputBox">
 				<p class="studentLogin">
-					<input type="text"  placeholder="输入学员号"/>
-					<button class="numb_log">检测</button>
+					<input type="text"  placeholder="输入学员号" class="stunum"/>
+					<button class="numb_log" onclick="">检测</button>
 				</p>
 				<p class="studentLogin" style="display:none;">
 					<input type="text" class="phoneNumber" placeholder="输入报名时的手机号"/>
@@ -39,13 +41,8 @@
 			<div class="search" style="display: none;">
 				<ul class="stuInfo">
 					<li class="res">查询结果</li>
-					<li><span>姓名</span><span>赵东辉</span></li>
-					<li><span>手机号码</span><span>13717271637</span></li>
-					<li><span>课程</span><span>新初一全科进阶班</span></li>
-					<li><span>班号</span><span>KJC871637</span></li>
-					<li><span>老师</span><span>环宝宝</span></li>
-					<li><span>课程时间</span><span>2017/05/01-2017/07/01</span></li>
-					<li class="address"><span>上课地址</span><span>呼家楼大厦9层908教室</span></li>
+					<li><span>姓名</span><span class="stuname"></span></li>
+					<li><span>手机号码</span><span class="stutel"></span></li>
 				</ul>
 				<button class="deterAss">确定关联</button>
 			</div>

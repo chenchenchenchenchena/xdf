@@ -3,7 +3,10 @@
 var url = {
     't_more':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
     't_wxmo':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
-    't_siot':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do'   //解绑
+    't_siot':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do',   //解绑
+    's_seac':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStudentInfo.do',  //学员号查询
+    's_bind':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/bindWechatandStudent.do',   //学员号查询
+    's_nobd':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/unbindStudentInfo.do'   //学员号查询
 }
 
 var Wxid = 'wechatid123456'
