@@ -25,13 +25,19 @@ function binding(e){
 
 
 // 退出登录
-function signOut(){
-	sessionStorage.teacherName = ''
-	sessionStorage.teacherNo = ''
-	sessionStorage.teacherEmail = ''
-	sessionStorage.mobile = ''
-	sessionStorage.schoolId = ''
-	location.href = 'login_s.html'
+function signOut(e){
+	console.log(e)
+	if(e.result==true){
+		sessionStorage.teacherName = ''
+		sessionStorage.teacherNo = ''
+		sessionStorage.teacherEmail = ''
+		sessionStorage.mobile = ''
+		sessionStorage.schoolId = ''
+		location.href = 'login_s.html'
+	}else{
+		alert('解绑失败')
+	}
+	
 }
 	
-ajax_S(url.t_more,calbac,teamore)   //ajax请求
+// ajax_S(url.t_more,calbac,teamore)   //ajax请求
