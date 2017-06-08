@@ -58,11 +58,14 @@ $.ajax({
         dataType: 'json',
         data:JSON.stringify(tname_config),
         success:function(e){
-            if(e.message=='登录失败,请重新登录!'){
+            if(e.result==false){
                 $('.sucs').hide();
                 $('.erro').show();
+                $('.erro i').html(e.message);
             }else{
-                alert('成功')
+                $('.erro').hide();
+                $('.sucs').show();
+                $('.sucs i').html(e.message);
             }
         }
 });
@@ -74,7 +77,7 @@ var  teacherid = 'caoxuefeng@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
-    url: 'http://10.200.80.235:8080/xdfdtmanager/studentDataController/getClassDatas.do',
+    url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/getClassDatas.do',
     type: 'POST',
     dataType: 'JSON',
     asyns:false,
@@ -144,13 +147,14 @@ $.ajax({
         var  teachjsonT = { "Method": "syncStudentsData",'studentsData':studata}
         console.log(teachjsonT)
         $.ajax({
-                url: 'http://10.200.80.235:8080/xdfdtmanager/studentDataController/syncStudentsData.do',
+                url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',
                 type: 'POST',
                 dataType: 'JSON',
                 asyns:false,
                 data:{'studentsData':JSON.stringify(teachjsonT)},
                 success:function(e){    
                     console.log(e+'1111')
+                    console.log(teachjsonT)
                     var r = JSON.parse(e);
                     if(r.code=='200'){
                         alert('成功')
