@@ -13,15 +13,14 @@
 		<script src="../common/js/zepto.min.js"></script>
 		<script src="../common/js/rem.js"></script>
 		<script src="../common/js/etlogin.js"></script>
-		<script src="js/etlogin.js"></script>
 	</head>
 	<body>
 		<section>
 			<div class="search" style="margin-top:.8rem;">
 				<ul class="stuInfo">
 					<li class="res">查询结果</li>
-					<li><span>姓名</span><span class="name_s">赵东辉</span></li>
-					<li><span>邮箱</span><span class="name_ema">13717271637</span></li>
+					<li><span>姓名</span><span class="name_s"></span></li>
+					<li><span>邮箱</span><span class="name_ema"></span></li>
 				</ul>
 				<button class="deterAss" style="background:#fd4116;" onclick="etlogin('teacherWX')">退出登录</button>
 			</div>
@@ -29,24 +28,23 @@
 		</section>
 
 		<script>
-console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state})
-var tname_config  = {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state}
-			$.ajax({
-			        url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',
-			        type: 'post',
-			        asyns:false,
-			        dataType: 'json',
-			        data:JSON.stringify(tname_config),
-			        success:function(e){
-			            if(e.result==true){
-			                $('.name_s').html(e.userName);
-			                $('.name_ema').html(e.email);
-			            }else{
-			                alert(e.message)
-			                etlogin('teacherWX')
-			            }
-			        }
-			});
+		console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state})
+		var tname_config  = {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':sessionStorage.e2state}
+		$.ajax({
+				url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',
+				type: 'post',
+				asyns:false,
+				dataType: 'json',
+				data:JSON.stringify(tname_config),
+				success:function(e){
+					if(e.result==true){
+						$('.name_s').html(e.userName);
+						$('.name_ema').html(e.email);
+					}else{
+						etlogin('teacherWX')
+					}
+				}
+		});
 		</script>
 	</body>
 </html>
