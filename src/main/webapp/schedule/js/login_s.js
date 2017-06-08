@@ -5,7 +5,10 @@ $(function(){
 			$('.card').hide()
 		}else{
 			$('.card').show()
+			$('.searchTwo').hide()
+			$('.search').hide()
 		}
+		$('.inputBox input:[type=text]').val() = ''
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
 	})
