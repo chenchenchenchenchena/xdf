@@ -85,7 +85,7 @@ $(function(){
 	// 姓名手机号查询
 	function name_se(e){
 		$('.new_S').remove()
-		console.log(e.data.studentNo=="[]")
+		console.log(e)
 		var name = /^[\u4e00-\u9fa5]{2,4}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
@@ -103,16 +103,26 @@ $(function(){
 		var  studentNt = studentNo.substring(1,studentNo.length-1)
 		var  arr = studentNo.split('"')
 		var  num = 0;
-		for(var i = 0;i<arr.length;i++){
-				$('.searchTwo').show()
-			if(arr[i]=="["||arr[i]=="]"){
-				// arr.splice(i,1)
+		var  bindz = ''
+		for(var i = 0;i<studentNo.length;i++){
+			if(studentNo[i].state=='0'){
+				bindz = '确认关联'
 			}else{
-				num++
-				$('.stuNum').append('<li class="new_S"><span>学员号'+num+':</span><span class="stu_num">'+arr[i]+'</span><button class="Relation">确认关联</button></li>')
-				sessionStorage.stuTel = $('.phoneNumber').val()
+				bindz = '取消关联'
 			}
+			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
+				sessionStorage.stuTel = $('.phoneNumber').val()
 		}
+		// for(var i = 0;i<arr.length;i++){
+		// 		$('.searchTwo').show()
+		// 	if(arr[i]=="["||arr[i]=="]"){
+		// 		// arr.splice(i,1)
+		// 	}else{
+		// 		num++
+		// 		$('.stuNum').append('<li class="new_S"><span>学员号'+num+':</span><span class="stu_num">'+arr[i]+'</span><button class="Relation">确认关联</button></li>')
+		// 		sessionStorage.stuTel = $('.phoneNumber').val()
+		// 	}
+		// }
 	}
 
 
