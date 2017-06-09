@@ -53,12 +53,18 @@ $(function(){
 		}
 	}
 	function s_bind(e){
-		if(e.result==true){
-			layer.msg('操作成功');
-			location.reload()
-		}else{
-			console.log(e)
+		console.log(e)
+		if(e.message=="解绑成功"){
+			layer.msg('解绑成功');
+			$('.deterAss').html('立即关联')
+			$('.deterAss').css('background','#00ba97')
+			// location.reload()
+		}else if(e.result==false){
 			layer.msg(e.message)
+		}else{
+			layer.msg('绑定成功')
+			$('.deterAss').html('解除关联')
+			$('.deterAss').css('background','#fc1010')
 		}
 	}
 
@@ -74,6 +80,7 @@ $(function(){
 		// 关联点击
 		// alert($(this).html())
 		if($(this).html()=='立即关联'){
+
 			ajax_S(url.s_bind,stumore,s_bind)
 		}
 		//解绑
@@ -140,10 +147,20 @@ $('.tel_log').click(function(){
 
 
 function telbind(e){
-	alert(e.message.length!=0)
-	if(e.message!=''){
+	console.log(e)
+	console.log(e.data)
+	// alert(e.message.length!=0)
+	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
-	}
+	}else if(e.result==false){
+	   layer.msg(e.message)
+			// layer.msg('关联成功')
+			$('.deterAss').html('解除关联')
+			$('.deterAss').css('background','#fc1010')
+	}else{
+	   layer.msg('绑定成功')
+		$('.Relation').html('解除关联')
+	} 
 }
 
 
@@ -152,7 +169,7 @@ $(document).on('click','.Relation',function(){
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
 		var stumore = {'StudentCode':stunum,'wechatId':Wxid,'Mobile':sessionStorage.stuTel}	
 		ajax_S(url.s_bind,stumore,telbind)
-		$(this).html('取消关联')
+		// $(this).html('解除关联')
 	}else{
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
 		var stumore = {'StudentCode':stunum,'wechatId':Wxid}	
