@@ -112,3 +112,9 @@ function ajax_S(link,more,func){
                 }
         });
 }
+
+
+
+
+
+
