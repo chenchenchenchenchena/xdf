@@ -65,7 +65,7 @@ $.ajax({
             //     $('.erro i').html(e.message);
             // }else{
             //     $('.erro').hide();
-            //     $('.sucs').show();
+                $('.sucs').show();
             //     $('.sucs i').html(e.message);
             // }
         }
