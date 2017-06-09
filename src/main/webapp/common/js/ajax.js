@@ -90,7 +90,7 @@ var url = {
     's_nafu':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do'   //姓名手机号查询
 }
 
-var Wxid = sessionStorage.Wxid
+var Wxid = sessionStorage.openid
 
 
 
