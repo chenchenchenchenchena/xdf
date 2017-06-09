@@ -44,6 +44,7 @@ $("#scanQRCode").click(function() {
         desc : 'scanQRCode desc',
         success : function(res) {
             $('.Wxid').val(res.resultStr)
+            more_s()
         }
     });
 });
@@ -73,7 +74,8 @@ $.ajax({
 
 
 //查询用户详细信息
-var  teacherid = 'caoxuefeng@xdf.cn'
+function more_s(){
+    var  teacherid = 'caoxuefeng@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -163,6 +165,8 @@ $.ajax({
             })
     }
 })
+
+}
 
 
 
