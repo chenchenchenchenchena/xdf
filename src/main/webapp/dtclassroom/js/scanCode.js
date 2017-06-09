@@ -75,7 +75,7 @@ $.ajax({
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = 'caoxuefeng@xdf.cn'
+var  teacherid = 'wenxugang@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
