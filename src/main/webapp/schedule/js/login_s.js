@@ -13,8 +13,10 @@ $(function(){
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
 	})
 	var wxnumber = {'email':'','wechatId':Wxid}
+	
 	//判断教师是否绑定
 	function Wxtea(e){
+		console.log(e)
 		if(e.data!='goE2'){
 			location.href = 'schedule_t.html'
 		}
@@ -39,7 +41,7 @@ $(function(){
 			$('.stuname').html(e.data.studentName)
 			$('.stutel').html('')
 			sessionStorage.stuNum = $('.studentLogin input').val()
-			if(e.relatedState==0){
+			if(e.data.relatedState=='0'){
 				$('.deterAss').html('立即关联')
 				$('.deterAss').css('background','#00ba97')
 			}else{
@@ -54,11 +56,14 @@ $(function(){
 		if(e.result==true){
 			layer.msg('操作成功');
 			location.reload()
+		}else{
+			console.log(e)
+			layer.msg(e.message)
 		}
 	}
 
 
-	//学生查询点击
+	//学员号查询点击
 	$('.numb_log').click(function(){
 		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':Wxid}
 		ajax_S(url.s_seac,stumore,stusea)
@@ -67,12 +72,13 @@ $(function(){
 	$('.deterAss').click(function(){
 		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':Wxid}
 		// 关联点击
+		// alert($(this).html())
 		if($(this).html()=='立即关联'){
 			ajax_S(url.s_bind,stumore,s_bind)
 		}
 		//解绑
 		else{
-			ajax_S(url.s_nobd,stunummore,s_bind)
+			ajax_S(url.s_nobd,stumore,s_bind)
 		}
 	})
 	ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
@@ -122,8 +128,13 @@ $(function(){
 
 
 $('.tel_log').click(function(){
-	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
-	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
+	//var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}
+	// var stuname = {};
+	// var name = $('.stname').val();
+	// var mobile  = $('.phoneNumber').val();
+	// stuname['name'] = name;
+	// stuname['mobile'] = mobile;
+	var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
