@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<script>
+		function wechatCode(url) {
+    var code = getRequest()['code'];
+    var url = url;
+    if (code) {//如果有code 已经授权过 进行下一步 获取openId 姓名 头像（获取access_token+info微信安全考虑都在后端进行）
+        if (sessionStorage.openid) {//之前获取过 不再获取 结束操作
+
+        } else {
+            var businessP = {
+                "appid": 'wx559791e14e9ce521',
+                "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+                "code": code
+            }
+            // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
+            jQuery.ajax({
+                type: "POST",
+                url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',
+                async: false,//同步
+                dataType: 'json',
+                data: JSON.stringify(businessP),
+                success: function (json) {
+                    if (json.result == true) {
+                        sessionStorage.openid = json.userInfo.openid;
+                        sessionStorage.nickname = json.userInfo.nickname;
+                        sessionStorage.headimgurl = json.userInfo.headimgurl;
+                        //页面统计
+                        // askCmsFn($('title').html());
+                    } else {
+                        layer.msg('获取用户信息失败')
+                    }
+                },
+                error: function (json) {
+                    layer.msg('获取用户信息失败')
+                }
+            })
+        }
+    } else {
+        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Global.appid + '&redirect_uri=' + url + '&response_type=code&scope=snsapi_userinfo&state=' + getRequest()['userId'] + '#wechat_redirect';
+        return false
+    }
+}
+	</script>
+</body>
+</html>
