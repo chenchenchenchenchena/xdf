@@ -103,7 +103,7 @@ $.ajax({
                 teachmore = {
                     'masterTeacherId':teamore[0].Id,
                     'masterTeacherName':teamore[0].sName,
-                    'teacherId':teamore[0].Id,
+                    'teacherId':teacherid,
                     'teacherName':teamore[0].sName
                 }
             }else{
@@ -111,16 +111,16 @@ $.ajax({
                     if(teamore[j].sEmail ==teacherid){
                     if(j==1){
                             teachmore = {
-                            'masterTeacherId':teamore[j-1].Id,
+                            'masterTeacherId':teamore[j-1].sEmail,
                             'masterTeacherName':teamore[j-1].sName,
-                            'teacherId':teamore[j].Id,
+                            'teacherId':teacherid,
                             'teacherName':teamore[j]. sName
                         }
                     }else{
                         teachmore = {
-                            'masterTeacherId':teamore[j+1].Id,
+                            'masterTeacherId':teamore[j+1].sEmail,
                             'masterTeacherName':teamore[j+1].sName,
-                            'teacherId':teamore[j].Id,
+                            'teacherId':teacherid,
                             'teacherName':teamore[j].sName
                         }
                     }

@@ -23,7 +23,7 @@ function getRequest() {
 var Global = {
     "appid": 'wx559791e14e9ce521',
     "secret": 'baa4373d5a8750c69b9d1655a2e31370',
-    "actionURL":'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do'
+    "actionURL":'http://10.73.81.136:8080/xdfdtmanager/wechatSignature/getUserInfo.do'
 }
 function wechatCode(url) {
     var code = getRequest()['code'];
@@ -81,13 +81,13 @@ function wechatCode(url) {
 
 
 var url = {
-    't_more':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
-    't_wxmo':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
-    't_siot':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do',   //解绑
-    's_seac':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStudentInfo.do',  //学员号查询
-    's_bind':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/bindWechatandStudent.do',   //学员号绑定微信
-    's_nobd':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/unbindStudentInfo.do',  //学员号解绑微信
-    's_nafu':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do'   //姓名手机号查询
+    't_more':'http://10.73.81.136:8080/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
+    't_wxmo':'http://10.73.81.136:8080/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
+    't_siot':'http://10.73.81.136:8080/xdfdtmanager/teacherBind/unbindTeacherInfo.do',   //解绑
+    's_seac':'http://10.73.81.136:8080/xdfdtmanager/studentBind/queryStudentInfo.do',  //学员号查询
+    's_bind':'http://10.73.81.136:8080/xdfdtmanager/studentBind/bindWechatandStudent.do',   //学员号绑定微信
+    's_nobd':'http://10.73.81.136:8080/xdfdtmanager/studentBind/unbindStudentInfo.do',  //学员号解绑微信
+    's_nafu':'http://10.73.81.136:8080/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do'   //姓名手机号查询
 }
 
 // var Wxid = sessionStorage.openid
