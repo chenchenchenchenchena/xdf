@@ -63,7 +63,7 @@ function wechatCode(url) {
         return false
     }
 }
-wechatCode(location.href)
+// wechatCode(location.href)
 
 
 
@@ -90,9 +90,9 @@ var url = {
     's_nafu':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do'   //姓名手机号查询
 }
 
-var Wxid = sessionStorage.openid
+// var Wxid = sessionStorage.openid
 
-
+var Wxid = 'wx5555555'
 
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
