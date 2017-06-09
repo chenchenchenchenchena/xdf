@@ -141,7 +141,7 @@ $('.tel_log').click(function(){
 
 function telbind(e){
 	console.log(e)
-	if(e.message!=''&&e.data.relatedState!='0'&&e.data.relatedState!='1'){
+	if(e.message!=''&&e.data.relatedState){
 		console.log(0)
 	   layer.msg(e.message)
 	}
