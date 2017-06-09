@@ -88,6 +88,7 @@ $(function(){
 		console.log(e)
 		var  studentNo =  e.data
 		var name = /^[\u4e00-\u9fa5]{2,4}$/
+		var tel  = /^1[34578]\d{9}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
 			return false;
@@ -96,14 +97,15 @@ $(function(){
 			layer.msg('请输入正确格式名字');
 			return false;
 		}
-		if(e.data.studentNo=="[]"){
+		if(!tel.test($('.phoneNumber').val())){
+			layer.msg('请输入正确格式手机号');
+			return false;
+		}
+		if(e.result==false){
 			layer.msg('没有查到相关信息');
 			return false;
 		}
 		$('.searchTwo').show()
-
-		// var  studentNt = studentNo.substring(1,studentNo.length-1)
-		// var  arr = studentNo.split('"')
 		var  num = 0;
 		var  bindz = ''
 		for(var i = 0;i<studentNo.length;i++){
@@ -115,16 +117,6 @@ $(function(){
 			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
 				sessionStorage.stuTel = $('.phoneNumber').val()
 		}
-		// for(var i = 0;i<arr.length;i++){
-		// 		$('.searchTwo').show()
-		// 	if(arr[i]=="["||arr[i]=="]"){
-		// 		// arr.splice(i,1)
-		// 	}else{
-		// 		num++
-		// 		$('.stuNum').append('<li class="new_S"><span>学员号'+num+':</span><span class="stu_num">'+arr[i]+'</span><button class="Relation">确认关联</button></li>')
-		// 		sessionStorage.stuTel = $('.phoneNumber').val()
-		// 	}
-		// }
 	}
 
 
@@ -132,8 +124,8 @@ $(function(){
 
 
 $('.tel_log').click(function(){
-	// var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
-	var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
+	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
+	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
@@ -144,7 +136,6 @@ function telbind(e){
 
 
 $(document).on('click','.Relation',function(){
-	// alert($(this).html())
 	if($(this).html()=='确认关联'){
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
 		var stumore = {'StudentCode':stunum,'wechatId':Wxid,'Mobile':sessionStorage.stuTel}	

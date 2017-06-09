@@ -43,7 +43,7 @@ $("#scanQRCode").click(function() {
         needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
         desc : 'scanQRCode desc',
         success : function(res) {
-            $('body').append('<h1>'+res.resultStr+'</h1>')
+            $('.Wxid').val(res.resultStr)
         }
     });
 });
@@ -127,7 +127,7 @@ $.ajax({
             }
             // console.log(teachmore)
             teachjson = {
-                'acceptorId':'0035005A000C514D413535111',
+                'acceptorId':$('.Wxid').val(res.resultStr),
                 'startDate':class_s.SectBegin,
                 'endDate':class_s.SectEnd,
                 'saveType':'flush',
