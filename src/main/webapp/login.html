@@ -6,7 +6,7 @@
 </head>
 <body>
 	<script>
-		function wechatCode(url) {
+		function wechatCode() {
     var code = getRequest()['code'];
     var url = url;
     if (code) {//如果有code 已经授权过 进行下一步 获取openId 姓名 头像（获取access_token+info微信安全考虑都在后端进行）
@@ -46,6 +46,7 @@
         return false
     }
 }
+wechatCode()
 	</script>
 </body>
 </html>
