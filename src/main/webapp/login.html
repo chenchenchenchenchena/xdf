@@ -21,7 +21,7 @@
 	var Global = {
 		 "appid": 'wx559791e14e9ce521',
          "secret": 'baa4373d5a8750c69b9d1655a2e31370',
-         "code": code,
+         // "code": code,s
          "actionURL":'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do'
 	}
 	function wechatCode(url) {
@@ -34,7 +34,7 @@
             var businessP = {
                 "appid": Global.appid,
                 "secret": Global.secret
-                // "code": code
+                "code": code
             }
             var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
             jQuery.ajax({
