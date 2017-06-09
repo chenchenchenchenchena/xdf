@@ -71,7 +71,7 @@ $.ajax({
         }
 });
 
-
+more_s()
 
 //查询用户详细信息
 function more_s(){
@@ -129,7 +129,7 @@ $.ajax({
             }
             // console.log(teachmore)
             teachjson = {
-                'acceptorId':$('.Wxid').val(res.resultStr),
+                'acceptorId':$('.Wxid').val(),
                 'startDate':class_s.SectBegin,
                 'endDate':class_s.SectEnd,
                 'saveType':'flush',
