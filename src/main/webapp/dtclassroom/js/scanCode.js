@@ -111,17 +111,17 @@ $.ajax({
                     if(teamore[j].sEmail ==teacherid){
                     if(j==1){
                             teachmore = {
-                            'masterTeacherId':teamore[j].Id,
-                            'masterTeacherName':teamore[j].sName,
-                            'teacherId':teamore[j-1].Id,
-                            'teacherName':teamore[j-1]. sName
+                            'masterTeacherId':teamore[j-1].Id,
+                            'masterTeacherName':teamore[j-1].sName,
+                            'teacherId':teamore[j].Id,
+                            'teacherName':teamore[j]. sName
                         }
                     }else{
                         teachmore = {
-                            'masterTeacherId':teamore[j].Id,
-                            'masterTeacherName':teamore[j].sName,
-                            'teacherId':teamore[j+1].Id,
-                            'teacherName':teamore[j+1].sName
+                            'masterTeacherId':teamore[j+1].Id,
+                            'masterTeacherName':teamore[j+1].sName,
+                            'teacherId':teamore[j].Id,
+                            'teacherName':teamore[j].sName
                         }
                     }
                         
