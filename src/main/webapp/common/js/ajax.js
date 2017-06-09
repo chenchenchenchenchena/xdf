@@ -23,7 +23,7 @@ function getRequest() {
 var Global = {
     "appid": 'wx559791e14e9ce521',
     "secret": 'baa4373d5a8750c69b9d1655a2e31370',
-    "actionURL":'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do'
+    "actionURL":'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do'
 }
 function wechatCode(url) {
     var code = getRequest()['code'];
@@ -35,21 +35,20 @@ function wechatCode(url) {
             var businessP = {
                 "appid": Global.appid,
                 "secret": Global.secret,
-                // "code": code
+                "code": code
             }
-            var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
+            // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
             jQuery.ajax({
                 type: "POST",
                 url: Global.actionURL,
                 async: false,//同步
                 dataType: 'json',
-                data: JSON.stringify(d),
+                data: JSON.stringify(businessP),
                 success: function (json){
                     if (json.result == true) {
                         sessionStorage.openid = json.userInfo.openid;
                         sessionStorage.nickname = json.userInfo.nickname;
                         sessionStorage.headimgurl = json.userInfo.headimgurl;
-                        sessionStorage.Wxid = json.userInfo.Wxid;
                     } else {
                         layer.msg('获取用户信息失败')
                     }
