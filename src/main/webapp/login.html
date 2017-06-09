@@ -42,8 +42,8 @@
                 url: Global.actionURL,
                 async: false,//同步
                 dataType: 'json',
-                data: JSON.stringify(d),0
-                success: function (json) {
+                data: JSON.stringify(d),
+                success: function (json){
                     if (json.result == true) {
                         sessionStorage.openid = json.userInfo.openid;
                         sessionStorage.nickname = json.userInfo.nickname;
