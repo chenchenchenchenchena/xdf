@@ -1,3 +1,84 @@
+// 获取路径的参数
+function getRequest() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}
+
+
+
+
+
+
+
+// 获取微信id
+
+var Global = {
+    "appid": 'wx559791e14e9ce521',
+    "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+    "actionURL":'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do'
+}
+function wechatCode(url) {
+    var code = getRequest()['code'];
+    var url = url;
+    if (code) {//如果有code 已经授权过 进行下一步 获取openId 姓名 头像（获取access_token+info微信安全考虑都在后端进行）
+        if (sessionStorage.openid) {//之前获取过 不再获取 结束操作
+
+        } else {
+            var businessP = {
+                "appid": Global.appid,
+                "secret": Global.secret,
+                // "code": code
+            }
+            var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
+            jQuery.ajax({
+                type: "POST",
+                url: Global.actionURL,
+                async: false,//同步
+                dataType: 'json',
+                data: JSON.stringify(d),
+                success: function (json){
+                    if (json.result == true) {
+                        sessionStorage.openid = json.userInfo.openid;
+                        sessionStorage.nickname = json.userInfo.nickname;
+                        sessionStorage.headimgurl = json.userInfo.headimgurl;
+                        sessionStorage.Wxid = json.userInfo.Wxid;
+                    } else {
+                        layer.msg('获取用户信息失败')
+                    }
+                },
+                error: function (json) {
+                    layer.msg('获取用户信息失败')
+                }
+            })
+        }
+    } else {
+        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Global.appid + '&redirect_uri=' + url + '&response_type=code&scope=snsapi_userinfo&state=' + getRequest()['userId'] + '#wechat_redirect';
+        return false
+    }
+}
+wechatCode(location.href)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 var url = {
@@ -10,7 +91,7 @@ var url = {
     's_nafu':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do'   //姓名手机号查询
 }
 
-var Wxid = 'wechatid123456'
+var Wxid = sessionStorage.Wxid
 
 
 
