@@ -141,6 +141,7 @@ $('.tel_log').click(function(){
 
 function telbind(e){
 	console.log(e)
+	layer.msg(e.message)
 }
 
 
