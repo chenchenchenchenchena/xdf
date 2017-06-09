@@ -59,15 +59,15 @@ $.ajax({
         dataType: 'json',
         data:JSON.stringify(tname_config),
         success:function(e){
-            if(e.result==false){
-                $('.sucs').hide();
-                $('.erro').show();
-                $('.erro i').html(e.message);
-            }else{
-                $('.erro').hide();
-                $('.sucs').show();
-                $('.sucs i').html(e.message);
-            }
+            // if(e.result==false){
+            //     $('.sucs').hide();
+            //     $('.erro').show();
+            //     $('.erro i').html(e.message);
+            // }else{
+            //     $('.erro').hide();
+            //     $('.sucs').show();
+            //     $('.sucs i').html(e.message);
+            // }
         }
 });
 

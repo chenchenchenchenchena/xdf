@@ -48,8 +48,6 @@
                         sessionStorage.openid = json.userInfo.openid;
                         sessionStorage.nickname = json.userInfo.nickname;
                         sessionStorage.headimgurl = json.userInfo.headimgurl;
-                        //页面统计
-                        askCmsFn($('title').html());
                     } else {
                         layer.msg('获取用户信息失败')
                     }
