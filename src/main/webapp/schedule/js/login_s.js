@@ -12,7 +12,7 @@ $(function(){
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
 	})
-	alert(sessionStorage.Wxid)
+	alert(sessionStorage.openid)
 	var wxnumber = {'email':'','wechatId':Wxid}
 	
 	//判断教师是否绑定
