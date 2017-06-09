@@ -75,7 +75,7 @@ $.ajax({
 
 //查询用户详细信息
 function more_s(){
-    var  teacherid = 'caoxuefeng@xdf.cn'
+var  teacherid = 'caoxuefeng@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -85,6 +85,7 @@ $.ajax({
     asyns:false,
     data:{'email':teacherid},
     success:function(e){   
+        alert(0)
         var more = JSON.parse(e);
         console.log(more)
         var class_s = more.data;
