@@ -54,7 +54,7 @@ function wechatCode() {
             })
         }
     } else {
-        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Global.appid + '&redirect_uri=' + url + '&response_type=code&scope=snsapi_userinfo&state=' + getRequest()['userId'] + '#wechat_redirect';
+        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx559791e14e9ce521&redirect_uri=' + location.href + '&response_type=code&scope=snsapi_userinfo&#wechat_redirect';
         return false
     }
 }
