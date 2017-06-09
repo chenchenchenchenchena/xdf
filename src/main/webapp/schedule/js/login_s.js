@@ -86,6 +86,7 @@ $(function(){
 	function name_se(e){
 		$('.new_S').remove()
 		console.log(e)
+		var  studentNo =  e.data
 		var name = /^[\u4e00-\u9fa5]{2,4}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
@@ -99,7 +100,8 @@ $(function(){
 			layer.msg('没有查到相关信息');
 			return false;
 		}
-		var  studentNo =  e.data
+		$('.searchTwo').show()
+
 		// var  studentNt = studentNo.substring(1,studentNo.length-1)
 		// var  arr = studentNo.split('"')
 		var  num = 0;
@@ -131,7 +133,7 @@ $(function(){
 
 $('.tel_log').click(function(){
 	// var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}	
-	var stuname = {'name':'常效新','mobile':'13739607950'}	
+	var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
