@@ -81,7 +81,6 @@ a{
     text-decoration:none;
 }
 
-
  /*IE7不支持的清除浮动*/
 .clearfix:after{
     visibility:hidden;
