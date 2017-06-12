@@ -38,6 +38,7 @@ body{
     border-bottom-left-radius: 5px;
     float: left;
     font-size: 0.36rem;
+    margin-bottom: 0.4rem;
 }
 .studentLogin button{
 	width:2.3rem;
