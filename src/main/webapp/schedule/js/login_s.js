@@ -135,13 +135,13 @@ $(function(){
 
 
 $('.tel_log').click(function(){
-	//var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val()}
+	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':Wxid}
 	// var stuname = {};
 	// var name = $('.stname').val();
 	// var mobile  = $('.phoneNumber').val();
 	// stuname['name'] = name;
 	// stuname['mobile'] = mobile;
-	var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
+	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
