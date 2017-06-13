@@ -34,8 +34,6 @@ body{
     border: none;
     outline: none;
     padding-left: 0.5rem;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     float: left;
     font-size: 0.36rem;
 }
@@ -47,8 +45,14 @@ body{
 	color: #fff;
 	float: left;
 	font-size: 0.4rem;
-	border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+	border-radius: 0 5px 5px 0;
+}
+.stname{
+	border-radius: 5px;
+	margin-bottom: 15px;
+}
+.stunum{
+	border-radius: 5px 0 0 5px;
 }
 .enter{
 	font-size: 0.4rem;
