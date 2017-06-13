@@ -357,7 +357,33 @@ tr .not_this{
 .today{
     color:#fff;
 }
-.today:before,.xuanzhong:before{
+.inter_S:before{
+    content:'';
+    display:block;
+    width:.1rem;
+    height:.1rem;
+    background:red;
+    border-radius:50%;
+    z-index:-2;
+    color: #fff;
+    position:absolute;
+    bottom:0;
+    left:45%;
+}
+.innet_S:before{
+    content:'';
+    display:block;
+    width:.1rem;
+    height:.1rem;
+    background:#ccc;
+    border-radius:50%;
+    z-index:-2;
+    color: #fff;
+    position:absolute;
+    bottom:0;
+    left:45%;
+}
+.today:after,.xuanzhong:before{
     content:'';
     display:block;
     width:.9rem;
@@ -372,6 +398,7 @@ tr .not_this{
     z-index:-1;
     color: #fff;
 }
+
 .xuanzhong:before{
     background:#ffbb37;
 }
