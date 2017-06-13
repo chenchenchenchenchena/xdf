@@ -95,7 +95,7 @@ var url = {
 
 // var Wxid = sessionStorage.openid
 
-var Wxid = 'wx5555555'
+var Wxid = 'wechatid123456'
 
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
