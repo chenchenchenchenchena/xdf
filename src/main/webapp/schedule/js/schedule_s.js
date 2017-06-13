@@ -7,7 +7,6 @@ var emailm = {
 var curr_e = [];
 
 
-ajax_S(url.s_stud,emailm,stusea)
 // ajax_S(url.data_s,'',sss)
 
 function sss(e){
@@ -82,6 +81,7 @@ $(document).on('touchstart',function(e){
 })
 
 
+ajax_S(url.s_stud,emailm,stusea)
 
 
 
