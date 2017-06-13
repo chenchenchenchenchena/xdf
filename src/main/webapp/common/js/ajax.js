@@ -88,7 +88,9 @@ var url = {
     's_bind':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/bindWechatandStudent.do',   //学员号绑定微信
     's_nobd':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/unbindStudentInfo.do',  //学员号解绑微信
     's_nafu':'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
-    's_emai':'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do'   //邮箱按月获取课程
+    's_emai':'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
+    's_stud':'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程 
+    'data_s':'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do' //主讲查询
 }
 
 // var Wxid = sessionStorage.openid
