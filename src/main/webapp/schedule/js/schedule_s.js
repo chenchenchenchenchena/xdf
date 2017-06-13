@@ -17,6 +17,7 @@ setTimeout(function(){
 	$('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
 },1000)
     alert(0)
+    stusea('1')
 function stusea(e){
     alert(0)
     alert(e)
