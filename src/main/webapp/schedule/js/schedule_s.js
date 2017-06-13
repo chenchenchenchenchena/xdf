@@ -5,7 +5,51 @@ var emailm = {
     'endDate':'2017-02-04'
 }
 var curr_e = [];
-
+var menu_s = {
+    'teacherEmail':'caoxuefeng@xdf.cn',
+    'beginDate':'2017-02-01',
+    'endDate':'2017-02-28'
+}
+var dateH = []
+ajax_S(url.s_emai,menu_s,menufunc)
+function menufunc(e){
+    var arr = [];
+    var moth = e.data.Data
+    for(var i = 0;i<moth.length;i++){
+       arr.push( moth[i].SectBegin.split(' ')[0])
+    }
+    // console.log(arr)
+    // console.log(moth)
+    setTimeout(function(){
+    var html_s = $('.swiper-slide-active table').find('td')
+    var number = 0;
+    for(var k = 0;k<html_s.length;k++){
+        var month = html_s.eq(k).attr('data_m')
+        var day   = html_s.eq(k).attr('data_d')
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        if(!html_s.eq(k).hasClass('not_this')){
+            dateH.push(''+html_s.eq(k).attr('data_y')+'-'+month+'-'+day+'')
+        }else{
+            number++
+        }
+    }
+    for(var j = 0;j<dateH.length;j++){
+        if(dateH[j]!=arr[j]){
+            if(dateH[j]>time1.split(' ')[0]){
+                 html_s.eq(j+number).addClass('inter_S')
+            }else{
+                 html_s.eq(j+number).addClass('innet_S')
+            }
+        }
+    }
+// console.log(dateH)
+},100)
+}
 
 // ajax_S(url.data_s,'',sss)
 
@@ -75,6 +119,8 @@ $(document).on('touchstart',function(e){
                  }
                 alert(time)
                 ajax_S(url.s_stud,emailm,stusea)
+                ajax_S(url.s_emai,menu_s,menufunc)
+
             }
         $(document).off('touchend','.content td')
         })
