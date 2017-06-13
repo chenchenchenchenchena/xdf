@@ -84,7 +84,7 @@ body{
 	height: 3.22rem;
 	background: #fff;
 	margin-top: 0.26rem;
-	padding: 0.4rem 1rem 0.4rem 0.4rem;
+	padding: 0.4rem .4rem 0.4rem 0.4rem;
 	position: relative;
 }
 .classTeacher p{
@@ -192,7 +192,36 @@ body{
 	float: left;
 	margin-left: 0.4rem;
 	line-height: 0.63rem;
+	min-width:20%;
 }
 .name{
 	color: #808080;
 }
+.nocade_s li{
+	display:inline-block;
+	width:50%;
+}   
+.nocade_s span{
+	display:block;
+	width:2rem;
+	height:2rem;
+	background:#ff6a6a;
+	border-radius:50%;
+	margin:0 auto;
+	line-height:2rem;
+	font-size:.8rem;
+	text-align:center;
+	color:#fff;
+}
+.nocade_s p{
+	text-align:center;
+	font-size:.5rem;
+	line-height:1.4rem;
+}
+    .nocade_s{
+    height: 3.22rem;
+    background: #fff;
+    margin-top: 0.26rem;
+    padding: 0.4rem .4rem 0.4rem 0.4rem;
+    position: relative;
+    }

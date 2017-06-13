@@ -10,61 +10,49 @@
 		<title>教师详情一对多</title>
 		<link rel="stylesheet" href="../common/css/base.css"  />
 		<link rel="stylesheet" href="../common/css/swiper-3.4.2.min.css"  />
+		<link rel="stylesheet" href="css/Schedule_t.css">   <!-- 样式文件 -->
 		<link rel="stylesheet" href="css/teacher-detailsMany.css"  />
 		<script src="../common/js/zepto.min.js"></script>
 		<script src="../common/js/rem.js"></script>
+		<script src="../common/js/ajax.js"></script>
 		<script src="../common/js/swiper.min.js"></script>
+		<script src="js/detailsmany_t.js"></script>
 	</head>
 	<body>
+		<div class="load_t">
+			
+		<div class="loading_s ">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+		</div>
+		</div>
 		<section>
 			<div class="scheduleTime">
 				<p class="scheduleTitle">初一全科进阶班(数学)</p>
-				<p class="time"><img src="images/clock.png" />10:30-12:00</p>
-				<p class="date"><img src="images/canlender.png" />2017/03/12-2017/07/06</p>
+				<p class="time"><img src="images/clock.png" /><span>10:30-12:00</span></p>
+				<p class="date"><img src="images/canlender.png" /><span></span></p>
 				<div class="progressBar"><p></p></div><span class="classHour"><i>11</i>/<i>16</i>课时</span>
 			</div>
 			<div class="classTeacher teacherList">
-				<p>搭班老师<span>(8)</span></p>
+				<p><a href="teacherlist.html">搭班老师<span>(8)</span><img src="images/rightArrow.png" /></a></p>
 				<div class="swiper-container">
 					<ul class="swiper-wrapper">
-						<li class="swiper-slide">韩</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
 					</ul>
 				</div>
 			</div>
 			<div class="classTeacher studentList">
-				<p><a href="javascript:;">课堂学生<span>(23)</span><img src="images/rightArrow.png" /></a></p>
+				<p><a href="studentlist_t.html">课堂学生<span>(23)</span><img src="images/rightArrow.png" /></a></p>
 				<div class="swiper-container">
 					<ul class="swiper-wrapper">
-						<li class="swiper-slide">韩</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
-						<li class="swiper-slide">李</li>
+
 					</ul>
 				</div>
 			</div>
 			<div class="schoolCampus">
 				<h3>上课校区(3)</h3>
-				<dl>
-					<dt>邯郸</dt>
-					<dd>海淀区人大校区302教室</dd>
-					<dd class="name">(李晓明:JCK20294)</dd>
-				</dl>
-				<dl>
-					<dt>呼和浩特</dt>
-					<dd>海淀区人大校区302教室</dd>
-					<dd class="name">(李晓明:JCK20294)</dd>
-				</dl>
 			</div>
 		</section>
 	</body>

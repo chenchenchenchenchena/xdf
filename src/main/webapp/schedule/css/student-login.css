@@ -34,9 +34,10 @@ body{
     border: none;
     outline: none;
     padding-left: 0.5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     float: left;
     font-size: 0.36rem;
-    margin-bottom: 0.4rem;
 }
 .studentLogin button{
 	width:2.3rem;
@@ -46,13 +47,8 @@ body{
 	color: #fff;
 	float: left;
 	font-size: 0.4rem;
-	border-radius: 0 5px 5px 0;
-}
-.stname{
-	border-radius: 5px;
-}
-.stunum{
-	border-radius: 5px 0 0 5px;
+	border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .enter{
 	font-size: 0.4rem;

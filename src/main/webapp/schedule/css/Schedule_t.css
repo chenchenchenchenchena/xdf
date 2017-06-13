@@ -821,6 +821,18 @@ html body .Schedule_stu li{
 .Schedule_stu li .CHour_s_more span{
     margin-right:.38rem;
 }
+html body .stu_data li{
+    height:2.3rem;
+}
+.stu_data .CHour_s_more_left{
+    padding:.2rem 0;
+}
+.stu_data .CHour_s_more{
+    margin-top:.3rem;
+}
+.stu_data .CHour_s_more span{
+    margin-left:.3rem;
+}
 .loading_s{
     width: 150px;
     height: 15px;
@@ -862,4 +874,15 @@ html body .Schedule_stu li{
 }
 .loading_s span:nth-child(5){
     -webkit-animation-delay:0.65s;
+}
+.load_t{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    z-index:10;
+    background:#fff;
+}
+.load_t .loading_s{
+    margin-top: 7rem;
 }

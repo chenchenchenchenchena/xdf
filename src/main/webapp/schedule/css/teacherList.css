@@ -18,10 +18,15 @@ body{
 	width:100%;
 	line-height: 1.2rem;
 }
+.studentList li i{
+	display:inline-block;
+	width:.5rem;
+}
 .list li>span:nth-child(3){
 	font-size: 0.4rem;
 	margin-left: 0.4rem;
 	float: left;
+	min-width:54%
 }
 .list li>span:nth-child(2){
 	font-size: 0.36rem;
@@ -35,6 +40,10 @@ body{
 	margin-left: 0.4rem;
 	float: left;
 	margin-top: 0.06rem;
+}
+.list li>span:nth-child(3) span{
+	display:inline-block;
+	min-width:1.3rem
 }
 .list li>i:nth-child(1){
 	font-size: 0.4rem;
