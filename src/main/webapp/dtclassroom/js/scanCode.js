@@ -120,14 +120,14 @@ $.ajax({
                     if(teamore[j].sEmail ==teacherid){
                     if(j==1){
                             teachmore = {
-                            'masterTeacherId':teamore[j-1].sCode,
+                            'masterTeacherId':teamore[j-1].sEmail,
                             'masterTeacherName':teamore[j-1].sName,
                             'teacherId':teacherid,
                             'teacherName':teamore[j]. sName
                         }
                     }else{
                         teachmore = {
-                            'masterTeacherId':teamore[j+1].sCode,
+                            'masterTeacherId':teamore[j+1].sEmail,
                             'masterTeacherName':teamore[j+1].sName,
                             'teacherId':teacherid,
                             'teacherName':teamore[j].sName
