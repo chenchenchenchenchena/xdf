@@ -37,7 +37,6 @@ function wechatCode(url) {
                 "secret": Global.secret,
                 "code": code
             }
-            alert('businessP:' + JSON.stringify(businessP));
             // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
             jQuery.ajax({
                 type: "POST",
@@ -46,7 +45,6 @@ function wechatCode(url) {
                 dataType: 'json',
                 data: JSON.stringify(businessP),
                 success: function (json) {
-                    alert('json:' + JSON.stringify(json));
                     if (json.result == true) {
                         sessionStorage.openid = json.userInfo.openid;
                         sessionStorage.nickname = json.userInfo.nickname;
