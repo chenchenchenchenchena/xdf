@@ -8,8 +8,8 @@ $(function(){
 	    success:function(e){
 	        console.log(e)
 	        location.href = e.url
-	        sessionStorage.e2state = e.e2state
-	        // alert(sessionStorage.e2state)
+	        // window.open('self')
+	        localStorage.e2state = e.e2state
 	    }
 	})
 })
