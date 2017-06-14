@@ -71,7 +71,7 @@ $.ajax({
         }
 });
 
-more_s()
+// more_s()
 
 //查询用户详细信息
 function more_s(){
