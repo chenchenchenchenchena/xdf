@@ -1,5 +1,5 @@
 // var bindingtea = {'email':$('.name_ema').html(),'wechatId':Wxid}
-var bindingtea = {'email':'caoxuefeng@xdf.cn','wechatId':Wxid}
+var bindingtea = {'email':'caoxuefeng@xdf.cn','wechatId':sessionStorage.openid}
 
 //e2登陆完成 stat查询老师信息
 function teamore(e){
