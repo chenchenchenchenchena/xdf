@@ -81,6 +81,10 @@ function wechatCode(url) {
 
 
 var url = {
+    'w_xmor':'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do', //获取微信授权信息
+    'w_teac':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',//查询老师邮箱
+    'w_stum':'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/getClassDatas.do',// 获取班级信息
+    'w_stor':'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',//获取学生信息
     't_more':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
     't_wxmo':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
     't_siot':'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do',   //解绑

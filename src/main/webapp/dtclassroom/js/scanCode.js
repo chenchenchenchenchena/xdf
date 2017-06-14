@@ -3,7 +3,7 @@ $(function(){
 var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
 var Wxconfig_h;
 $.ajax({
-    url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do',
+    url: url.w_xmor,
     type: 'post',
     dataType: 'json',
     asyns:false,
@@ -53,21 +53,23 @@ $("#scanQRCode").click(function() {
 console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length)})
 var tname_config  = {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length)}
 $.ajax({
-        url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',
+        url: url.w_teac,
         type: 'post',
         asyns:false,
         dataType: 'json',
         data:JSON.stringify(tname_config),
         success:function(e){
-            // if(e.result==false){
-            //     $('.sucs').hide();
-            //     $('.erro').show();
-            //     $('.erro i').html(e.message);
-            // }else{
-            //     $('.erro').hide();
+            if(e.result==false){
+                $('.sucs').hide();
+                $('.erro').show();
+                $('.erro i').html(e.message);
+            }else{
+                $('.erro').hide();
                 $('.sucs').show();
-            //     $('.sucs i').html(e.message);
-            // }
+                $('.sucs i').html(e.message);
+                sessionStorage.terEmail = e.email
+
+            }
         }
 });
 
@@ -75,11 +77,11 @@ $.ajax({
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = 'caoxuefeng@xdf.cn'
+var  teacherid = sessionStorage.terEmail
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
-    url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/getClassDatas.do',
+    url:url.w_stum,
     type: 'POST',
     dataType: 'JSON',
     asyns:false,
@@ -150,7 +152,7 @@ $.ajax({
         var  teachjsonT = { "Method": "syncStudentsData",'studentsData':teachjson}
         console.log(teachjsonT)
         $.ajax({
-                url: 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',
+                url:url.w_stor,
                 type: 'POST',
                 dataType: 'JSON',
                 asyns:false,
@@ -160,7 +162,12 @@ $.ajax({
                     console.log(teachjsonT)
                     var r = JSON.parse(e);
                     if(r.code=='200'){
-                        alert('成功')
+                    if(e.msg=='当天没有课程信息'){
+                         layer.msg('当天没有课程信息')
+
+                    }else{
+                        layer.msg('扫描完成')
+                    }
                     }
                 }
             })
