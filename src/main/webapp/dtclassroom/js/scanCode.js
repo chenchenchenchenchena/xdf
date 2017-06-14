@@ -79,11 +79,11 @@ $.ajax({
         }
 });
 
-// more_s()
+more_s()
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = sessionStorage.terEmail
+var  teacherid = 'hanqifan@xdf.cn';
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -93,8 +93,8 @@ $.ajax({
     asyns:false,
     data:{'email':teacherid},
     success:function(e){   
-        // alert(0)
-        var more = JSON.parse(e);
+        console.log(e)
+        var more = e;
         console.log(more)
         var class_s = more.data;
         // for(var i = 0;i<class_s.length;i++){
@@ -164,9 +164,8 @@ $.ajax({
                 asyns:false,
                 data:{'studentsData':JSON.stringify(teachjsonT)},
                 success:function(e){    
-                    console.log(e+'1111')
                     console.log(teachjsonT)
-                    var r = JSON.parse(e);
+                    var r = e;
                     if(r.code=='200'){
                     if(e.msg=='当天没有课程信息'){
                          layer.msg('当天没有课程信息')
