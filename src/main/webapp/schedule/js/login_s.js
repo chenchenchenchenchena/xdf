@@ -35,11 +35,11 @@ setTimeout(function(){
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
 	})
-	var wxnumber = {'email':'','wechatId':Wxid}
+	var wxnumber = {'email':'','wechatId':sessionStorage.openid}
 	
 	//判断教师是否绑定
 	function Wxtea(e){
-		alert(Wxid)
+		alert(sessionStorage.openid)
 		console.log(e)
 		if(e.data!='goE2'){
 
