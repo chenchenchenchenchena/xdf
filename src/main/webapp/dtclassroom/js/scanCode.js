@@ -84,6 +84,7 @@ more_s()
 //查询用户详细信息
 function more_s(){
 var  teacherid = sessionStorage.terEmail
+// var  teacherid = 'jinyongcun@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -119,14 +120,14 @@ $.ajax({
                     if(teamore[j].sEmail ==teacherid){
                     if(j==1){
                             teachmore = {
-                            'masterTeacherId':teamore[j-1].sEmail,
+                            'masterTeacherId':teamore[j-1].sCode,
                             'masterTeacherName':teamore[j-1].sName,
                             'teacherId':teacherid,
                             'teacherName':teamore[j]. sName
                         }
                     }else{
                         teachmore = {
-                            'masterTeacherId':teamore[j+1].sEmail,
+                            'masterTeacherId':teamore[j+1].sCode,
                             'masterTeacherName':teamore[j+1].sName,
                             'teacherId':teacherid,
                             'teacherName':teamore[j].sName
@@ -169,8 +170,7 @@ $.ajax({
                     var r =e;
                     if(r.code=='200'){
                     if(e.msg=='当天没有课程信息'){
-                         layer.msg('当天没有课程信息')
-
+                        layer.msg('当天没有课程信息')
                     }else{
                         layer.msg('扫描完成')
                     }
