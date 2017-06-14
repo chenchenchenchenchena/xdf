@@ -39,10 +39,11 @@ setTimeout(function(){
 	
 	//判断教师是否绑定
 	function Wxtea(e){
+		alert(Wxid)
 		console.log(e)
 		if(e.data!='goE2'){
 
-			location.href = 'schedule_t.html'
+			// location.href = 'schedule_t.html'
 		}
 	}
 
@@ -87,6 +88,7 @@ setTimeout(function(){
 			layer.msg(e.message)
 		}else{
 			layer.msg('绑定成功')
+			location.href = 'schedule_s.html'
 			$('.deterAss').html('解除关联')
 			$('.deterAss').css('background','#fc1010')
 		}
