@@ -50,8 +50,14 @@ $("#scanQRCode").click(function() {
 });
 // alert(sessionStorage.e2state)
 // 请求用户登录信息
-console.log( {'code':location.search.substring(location.search.indexOf('state')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':location.search.substring(location.search.indexOf('state')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length)})
-var tname_config  = {'code':location.search.substring(location.search.indexOf('state')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':location.search.substring(location.search.indexOf('state')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length)}
+var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
+console.log(code_s+','+state_s)
+var tname_config  = {
+    'code':code_s,
+    'e2State':state_s,
+    'state':state_s
+}
 $.ajax({
         url: url.w_teac,
         type: 'post',
