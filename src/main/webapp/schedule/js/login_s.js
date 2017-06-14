@@ -13,7 +13,6 @@ var teacherlogin;
 
 function stud(e){
     console.log(e)
-
     if(e.result==false){
         studentlogin = false;
     }
@@ -27,9 +26,7 @@ function teac(e){
     }
 }
 setTimeout(function(){
-    if(studentlogin==false&&teacherlogin==false){
-            location.href = 'login_s.html'
-    }else if(teacherlogin==false){
+	 if(teacherlogin==false){
             location.href = 'schedule_s.html'
     }
 },1000)
