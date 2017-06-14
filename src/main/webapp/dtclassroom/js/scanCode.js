@@ -83,7 +83,7 @@ more_s()
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = 'hanqifan@xdf.cn';
+var  teacherid = sessionStorage.terEmail
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -93,7 +93,7 @@ $.ajax({
     asyns:false,
     data:{'email':teacherid},
     success:function(e){   
-        console.log(e)
+        // alert(0)
         var more = e;
         console.log(more)
         var class_s = more.data;
@@ -164,8 +164,9 @@ $.ajax({
                 asyns:false,
                 data:{'studentsData':JSON.stringify(teachjsonT)},
                 success:function(e){    
+                    console.log(e+'1111')
                     console.log(teachjsonT)
-                    var r = e;
+                    var r =e;
                     if(r.code=='200'){
                     if(e.msg=='当天没有课程信息'){
                          layer.msg('当天没有课程信息')
