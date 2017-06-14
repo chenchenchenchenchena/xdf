@@ -39,7 +39,7 @@ setTimeout(function(){
 	
 	//判断教师是否绑定
 	function Wxtea(e){
-		alert(sessionStorage.openid)
+		// alert()
 		console.log(e)
 		if(e.data!='goE2'){
 
@@ -97,12 +97,12 @@ setTimeout(function(){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':Wxid}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':Wxid}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
 		// 关联点击
 		// alert($(this).html())
 		if($(this).html()=='立即关联'){
@@ -161,13 +161,13 @@ setTimeout(function(){
 
 
 $('.tel_log').click(function(){
-	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':Wxid}
+	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid}
 	// var stuname = {};
 	// var name = $('.stname').val();
 	// var mobile  = $('.phoneNumber').val();
 	// stuname['name'] = name;
 	// stuname['mobile'] = mobile;
-	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':Wxid}	
+	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}	
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
@@ -193,12 +193,12 @@ function telbind(e){
 $(document).on('click','.Relation',function(){
 	if($(this).html()=='确认关联'){
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':Wxid,'Mobile':sessionStorage.stuTel}	
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel}	
 		ajax_S(url.s_bind,stumore,telbind)
 		// $(this).html('解除关联')
 	}else{
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':Wxid}	
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}	
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
 
