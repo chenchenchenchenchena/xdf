@@ -83,8 +83,8 @@ more_s()
 
 //查询用户详细信息
 function more_s(){
-// var  teacherid = sessionStorage.terEmail
-var  teacherid = 'jinyongcun@xdf.cn'
+var  teacherid = sessionStorage.terEmail
+// var  teacherid = 'jinyongcun@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
