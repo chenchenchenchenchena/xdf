@@ -1,6 +1,6 @@
 $(function(){
 	if(!sessionStorage.WxID){
-   		 wechatCode   ()
+   		 wechatCode(location.href)
 	}
 var WXnum  = {
     'wechatId':sessionStorage.openid
