@@ -1,5 +1,5 @@
 $(function(){
-if(!sessionStorage.WxID){
+if(!sessionStorage.openid){
     wechatCode(location.href)
 }
 
