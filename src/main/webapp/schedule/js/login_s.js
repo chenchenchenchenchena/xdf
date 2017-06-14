@@ -1,6 +1,6 @@
 $(function(){
 	if(!sessionStorage.openid){
-   		 wechatCode(location.href)
+   		 // wechatCode(location.href)
 	}
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -61,6 +61,7 @@ setTimeout(function(){
 		}
 		console.log(e)
 		if(e.result==true){
+			$('.noSearch').hide()
 			$('.card').hide()
 			$('.search').show()
 			$('.stuname').html(e.data.studentName)
@@ -74,6 +75,8 @@ setTimeout(function(){
 				$('.deterAss').css('background','#fc1010')
 			}
 		}else{
+			$('.card').hide()
+			$('.noSearch').show()
 			layer.msg('没有查到相关信息');
 		}
 	}
@@ -97,7 +100,7 @@ setTimeout(function(){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':'11111111'}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
@@ -185,7 +188,6 @@ function telbind(e){
 			$('.deterAss').css('background','#fc1010')
 	}else{
 	   layer.msg('绑定成功')
-		$('.Relation').html('解除关联')
 	} 
 }
 

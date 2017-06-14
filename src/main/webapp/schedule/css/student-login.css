@@ -85,13 +85,15 @@ body{
 }
 .stuInfo>li>span:first-child{
 	color: #808080;
-	margin-right: 0.56rem;
-	/*width: 1.6rem;*/
+	margin-right: 1rem;
+	width: 1.6rem;
+	text-align: justify;
 	display: inline-block;
 }
 .stuInfo>li>span:last-child{
 	color: #333333;
 }
+
 .stuInfo .address{
 	border: none;
 }

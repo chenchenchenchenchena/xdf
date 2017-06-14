@@ -1,21 +1,31 @@
-// var bindingtea = {'email':$('.name_ema').html(),'wechatId':Wxid}
-var bindingtea = {'email':'caoxuefeng@xdf.cn','wechatId':sessionStorage.openid}
-
 //e2登陆完成 stat查询老师信息
 function teamore(e){
-			
+	console.log(e)
 			if(e.result==true){
 				$('.name_s').html(e.userName);
 				$('.name_ema').html(e.email);
-				ajax_S(url.t_wxmo,bindingtea,binding)//ajax请求
+				var openid = sessionStorage.openid;
+				alert(openid);
+				if(openid == undefined || openid == ''){
+					wechatCode(location.href);
+				}
+				var bindingtea0 = {};
+				bindingtea0['email'] = e.email;
+				bindingtea0['wechatId'] = sessionStorage.openid;
+				alert(JSON.stringify(bindingtea0));
+				ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 			}else{
 				etlogin('teacherWX')
 			}
 }
 
 
+
+
+
 //获取老师绑定信息
 function binding(e){
+	console.log(e)
 	var teacontent = JSON.parse(e.data)
 	sessionStorage.teacherName = teacontent.teacherName
 	sessionStorage.teacherNo = teacontent.teacherNo
@@ -24,6 +34,10 @@ function binding(e){
 	sessionStorage.schoolId = teacontent.schoolId
 }
 
+function logout(){
+	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
+	ajax_S(url.t_siot, bindingtea, signOut)
+}
 
 // 退出登录
 function signOut(e){
@@ -34,11 +48,17 @@ function signOut(e){
 		sessionStorage.teacherEmail = ''
 		sessionStorage.mobile = ''
 		sessionStorage.schoolId = ''
-		location.href = 'logissn_s.html'
+		location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
 	}
 	
 }
-	
-// ajax_S(url.t_more,calbac,teamore)   //ajax请求
+var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
+	var calbac = {
+		'code':code_s,
+   	 	'e2State':state_s,
+    	'state':state_s
+	}
+ajax_S(url.t_more,calbac,teamore)   //ajax请求
