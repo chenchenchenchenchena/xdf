@@ -29,9 +29,9 @@ function teac(e){
 }
 setTimeout(function(){
     if(studentlogin==false&&teacherlogin==false){
-            // location.href = 'login_s.html'
+            location.href = 'login_s.html'
     }else if(studentlogin==false){
-            // location.href = 'schedule_t.html'
+            location.href = 'schedule_t.html'
     }
 },1000)
 
