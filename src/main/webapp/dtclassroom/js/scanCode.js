@@ -48,7 +48,7 @@ $("#scanQRCode").click(function() {
         }
     });
 });
-alert(sessionStorage.e2state)
+// alert(sessionStorage.e2state)
 // 请求用户登录信息
 console.log( {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':localStorage.e2state})
 var tname_config  = {'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),'e2State':localStorage.e2state}
@@ -75,7 +75,7 @@ $.ajax({
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = 'wenxugang@xdf.cn'
+var  teacherid = 'caoxuefeng@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
 $.ajax({
@@ -85,7 +85,7 @@ $.ajax({
     asyns:false,
     data:{'email':teacherid},
     success:function(e){   
-        alert(0)
+        // alert(0)
         var more = JSON.parse(e);
         console.log(more)
         var class_s = more.data;
