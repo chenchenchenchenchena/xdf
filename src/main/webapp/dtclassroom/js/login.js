@@ -7,7 +7,7 @@ $(function(){
 	    data:JSON.stringify(cbconfig),
 	    success:function(e){
 	        console.log(e)
-	        // location.href = e.url
+	        location.href = e.url
 	        // window.open('self')
 	        localStorage.e2state = e.e2state
 	    }
