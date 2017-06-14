@@ -1,0 +1,739 @@
+/*2017-3-16 18:37:12*/
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+body {
+    position: fixed;
+    background-color: #fff;
+}
+i,b{ font-style:normal;font-weight: normal;}
+
+
+.line{height: 15px; width: 100%; position: absolute;left: 0;top: 0; background: #ff9d20}
+/*答题状态*/
+.f-question{
+    color: #00ff71;
+    position: absolute;
+    top:30px;
+    right:142px;
+    font-size: 20px;
+}
+
+/*
+    兔子
+    画布尺寸 1366 * 768
+    素材尺寸 159 * 189
+    字体 40
+*/
+.f-rabbit-wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+}
+/*.f-rabbit-item {
+    position: absolute;
+    width: 159px;
+    height: 189px;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background: url(../images/rabbit.png) center bottom no-repeat;
+    background-size: contain;
+    font-size: 40px;
+    color: #fff;
+}*/
+
+/*.f-rabbit-item{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    text-align: center;
+    background: url(../images/rabbit.png) center bottom no-repeat;
+    background-size: contain;
+    color: #fff;
+    transform: translateY(120%)
+}*/
+.f-rabbit-item{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    text-align: center;
+    color: #fff;
+    transform: translateY(125%);
+    width: 1.0rem;
+    height: 1.1rem; 
+}
+.f-rabbit-item .bg{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    background: url(../images/bee.png) center bottom no-repeat;
+    background-size: contain;
+    width: 1.0rem;
+    height: 1.1rem;
+    z-index: 1
+}
+
+.f-rabbit-item h1{
+    text-align: center;
+    width: 100%;
+    position: relative;
+    top: -35px;
+    font-size: 0.3rem;
+    word-break: break-all;
+    color:#333
+}
+
+.f-rabbit-item .fly-L{
+    position: absolute;
+    top:0.45rem;
+    left: -0.1rem;
+    background: url(../images/flyL.png) center bottom no-repeat;
+    background-size: contain;
+    width: 0.5rem;
+    height:0.4rem;
+    -webkit-animation: fly1 0.06s infinite ease-in-out;
+}
+.f-rabbit-item .fly-R{
+    position: absolute;
+    top:0.45rem;
+    right: -0.1rem;
+    background: url(../images/flyR.png) center bottom no-repeat;
+    background-size: contain;
+    width: 0.5rem;
+    height:0.4rem;
+    -webkit-animation: fly2 0.06s infinite ease-in-out;
+}
+@-webkit-keyframes fly1 {
+    0% {
+        -webkit-transform: rotateX(0deg) rotate(30deg);
+        -webkit-transform-origin:100% 100%;
+    }
+    50% {
+        -webkit-transform: rotateX(0deg) rotate(-30deg);
+        -webkit-transform-origin:100% 100%;
+    }
+    100% {
+        -webkit-transform: rotateX(0deg) rotate(30deg);
+        -webkit-transform-origin:100% 100%;
+    }
+}
+@-webkit-keyframes fly2 {
+    0% {
+        -webkit-transform: rotateX(0deg) rotate(-30deg);
+        -webkit-transform-origin:0% 100%;
+    }
+    50% {
+        -webkit-transform: rotateX(0deg) rotate(30deg);
+        -webkit-transform-origin:0% 100%;
+    }
+    100% {
+        -webkit-transform: rotateX(0deg) rotate(-30deg);
+        -webkit-transform-origin:0% 100%;
+    }
+}
+.f-rabbitJump{
+    -webkit-animation: rabbitJump 1s;
+}
+
+@-webkit-keyframes rabbitJump {
+    0% {
+        transform: translateY(100%)
+    }
+    50%{
+        transform: translateY(0%)
+    }
+    100% {
+        transform: translateY(120%)
+    }
+}
+
+.bee0{
+    -webkit-animation: bee0 1.8s 1 linear;/*2*/
+}
+.bee1{
+    -webkit-animation: bee1 2s 1 linear;/*1*/
+}
+.bee2{
+    -webkit-animation: bee2 1.5s 1 linear;/*3*/
+}
+.bee3{
+    -webkit-animation: bee3 2.5s 1 linear;/*0*/
+}
+.bee4{
+    -webkit-animation: bee4 1.5s 1 linear;/*4*/
+}
+@-webkit-keyframes bee0 {
+    10% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    50% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    60% {
+    -webkit-transform: translateX(0.5rem) translateY(-0.7rem) rotate(20deg);
+    }
+    70% {
+    -webkit-transform: translateX(1.3rem) translateY(-1.3rem) rotate(50deg);
+    }
+    80% {
+    -webkit-transform: translateX(2.6rem) translateY(-2rem) rotate(60deg);
+    }
+    100% {
+    -webkit-transform: translateX(4rem) translateY(-2.8rem) rotate(90deg) scale(0.5);
+    }
+}
+@-webkit-keyframes bee1 {
+    10% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    50% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    55% {
+    -webkit-transform: translateX(0.5rem) translateY(-1rem) rotate(30deg);
+    }
+    75% {
+    -webkit-transform: translateX(3rem) translateY(-2.8rem) rotate(100deg);
+    }
+    100% {
+    -webkit-transform: translateX(5.5rem) translateY(-2.5rem) rotate(90deg) scale(0.5);
+    }
+}
+@-webkit-keyframes bee2 {
+    10% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    50% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    60% {
+    -webkit-transform: translateX(0.4rem) translateY(-1rem) rotate(10deg);
+    }
+    75% {
+    -webkit-transform: translateX(0.9rem) translateY(-1.8rem) rotate(20deg);
+    }
+    85% {
+    -webkit-transform: translateX(1.5rem) translateY(-2.3rem) rotate(35deg);
+    }
+    100% {
+    -webkit-transform: translateX(2.5rem) translateY(-2.5rem) rotate(50deg) scale(0.5);
+    }
+}
+@-webkit-keyframes bee3 {
+    15% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    50% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    60% {
+    -webkit-transform: translateX(1.5rem) translateY(-2rem) rotate(50deg);
+    }
+    73% {
+    -webkit-transform: translateX(3.3rem) translateY(-2.8rem) rotate(110deg);
+    }
+    85% {
+    -webkit-transform: translateX(5rem) translateY(-2.2rem) rotate(90deg);
+    }
+    100% {
+    -webkit-transform: translateX(7rem) translateY(-2.5rem) rotate(30deg) scale(0.5);
+    }
+}
+@-webkit-keyframes bee4 {
+    10% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    50% {
+    -webkit-transform: translateX(0rem) translateY(-0.3rem) rotate(0deg);
+    }
+    100% {
+    -webkit-transform: translateX(1rem) translateY(-2.5rem) rotate(10deg) scale(0.5);
+    }
+}
+
+/*
+    萝卜
+    画布尺寸 1366 * 768
+    素材尺寸 255 * 652
+    字体 xx
+*/
+.f-carrot-wrap{
+    position: absolute;
+    right: 0;
+    bottom: 2.4rem;
+    width: 1.5rem;
+    height: 1.9rem;
+}
+/*@media screen and (max-height: 700px) {
+    .f-carrot-wrap {
+        width: 196px;
+        height: 500px;
+        margin-top: -250px;
+    }
+}*/
+/*
+@media screen and (max-height: 700px) {
+    .f-carrot-wrap {
+        width: 196px;
+        height: 500px;
+        margin-top: -250px;
+    }
+}*/
+.f-carrot-grey{
+    position: absolute;
+    background: url(../images/carrot_grey.png) top center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.f-carrot-color{
+    position: absolute;
+    background: url(../images/carrot.png) top center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.f-carrot-text{
+    position: absolute;
+    width: 100%;
+    color: #333;
+    bottom: -15%;
+    text-align: center;
+    font-size: 20px;
+}
+.f-carrot-number{
+    font-size: 20px;
+}
+.f-carrot-total{
+    font-size: 20px;
+}
+
+/*泡泡*/
+/*.f-balloon-wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: -1.5rem;
+    z-index: 900;
+}
+.f-balloon-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    text-align: center;
+    background: url(../images/paopao1.png) center center no-repeat;
+    background-size: contain;
+    font-size: 0.26rem;
+    color: #fff;
+}*/
+.f-balloon-wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+}
+
+.f-balloon-item{
+    position: absolute;
+    left: 0;
+    color: #fff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    background: url(../images/paopao1.png) center center no-repeat;
+    background-size: contain;
+}
+
+@media screen and (max-width: 1300px) {
+    .f-balloon-item {
+        bottom: -120px;        
+        width: 110px;
+        height: 110px;
+        line-height: 110px;
+        font-size: 26px;
+    }
+}
+
+@media screen and (min-width:1300px) and (max-width:1500px) {
+    .f-balloon-item {
+        bottom: -160px;
+        width: 144px;
+        height: 144px;
+        line-height: 144px;
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width:1500px) {
+    .f-balloon-item {
+        bottom: -170px;
+        width: 160px;
+        height: 160px;
+        line-height: 160px;
+        font-size: 34px;
+    }
+}
+
+.f-balloon-item-s3 {
+    -webkit-animation: boom .5s;
+}
+.f-balloon-item-s4 {
+    background: url(../images/paopao3.png) center center no-repeat;
+    background-size: contain;
+    -webkit-animation: boom1 .2s;
+}
+@-webkit-keyframes boom {
+    0% {
+        transform: scale(1)
+    }
+    100% {
+        transform: scale(0)
+    }
+}
+@-webkit-keyframes boom1 {
+    0% {
+        transform: scale(0)
+    }
+    100% {
+        transform: scale(.6)
+    }
+}
+
+/*奖牌*/
+.f-medal-wrap {
+    width: 5rem;
+    height: 1.35rem;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    margin-left: -2.5rem;
+    z-index: 800;
+}
+.f-medal-img {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*background: url("../images/rightAnswer.png") no-repeat;*/
+    background: url("../images/rightAnswerWd.jpg") no-repeat;
+    background-size:contain; 
+}
+.f-medal-show .f-medal-img {
+    -webkit-animation: cssMedalImgShow .8s;
+}
+.f-medal-hide .f-medal-img {
+    -webkit-animation: cssMedalImgHide .8s;
+}
+@-webkit-keyframes cssMedalImgShow {
+    0% {
+        transform: scale(.1)
+    }
+    95% {
+        transform: scale(1.1)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+@-webkit-keyframes cssMedalImgHide {
+    0% {
+        transform: scale(1)
+    }
+    5% {
+        transform: scale(1.1)
+    }
+    100% {
+        transform: scale(.1)
+    }
+}
+.f-medal-text {
+    font-size: 1rem;
+    color: #fff;
+    position: absolute;
+    top: 9%;
+    left: -webkit-calc(40%);
+}
+.f-medal-show .f-medal-text {
+    -webkit-animation: cssMedalTextShow .6s;
+    animation-delay: .2s;
+}
+.f-medal-hide .f-medal-text {
+    -webkit-animation: cssMedalTextHide .3s;
+    animation-delay: .15s;
+}
+@-webkit-keyframes cssMedalTextShow {
+    0% {
+        transform: scale(.1)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+@-webkit-keyframes cssMedalTextHide {
+    0% {
+        transform: scale(1)
+    }
+    100% {
+        transform: scale(.5)
+    }
+}
+
+
+/* 排行榜 */
+.f-rank-wrap-scale{
+    transform: scale(0.5);
+   /* width: 12rem;*/
+    width:16rem;
+    position: absolute;
+    /*left: 50%;*/
+    left:33%;
+    top: 35%;
+    margin-left: -6rem;
+
+}
+.f-rank-wrap{
+    width: 100%;
+    height: 100%;
+}
+.f-rank-wrap-ext{
+    width: 100%;
+    height: 100%;
+}
+.f-rank-wrap-animation {
+    -webkit-animation: animationWrap .6s;
+}
+@-webkit-keyframes animationWrap {
+    0% {
+        transform: translateY(-100%)
+    }
+    65% {
+        transform: translateY(5%)
+    }
+    85% {
+        transform: translateY(2.4%)
+    }
+    100% {
+        transform: translateY(0%)
+    }
+}
+.f-rank-glow{
+    background: url(../images/glow.png) no-repeat;
+    width: 807px;
+    height: 664px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.f-rank-glow-animation{
+    -webkit-animation: animationGlow 8s infinite;
+}
+@-webkit-keyframes animationGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(15deg);
+    }
+    66% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.f-rank-ear {
+    background: url(../images/ear.png) no-repeat left center;
+    width: 138px;
+    height: 65px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    margin-left: -69px;
+}
+.f-rank-cup {
+    background: url(../images/cup.png) no-repeat left center;
+    width: 147px;
+    height: 120px;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    margin-left: -73.5px;
+}
+.f-rank-cup-animation {
+    -webkit-animation: animationCup .5s;
+}
+@-webkit-keyframes animationCup {
+    0% {
+        transform: translateY(0%)
+    }
+    30% {
+        transform: translateY(15%)
+    }
+    80% {
+        transform: translateY(-5%)
+    }
+    100% {
+        transform: translateY(0%)
+    }
+}
+.f-rank-colours {
+    background: url(../images/colours.png) no-repeat left center;
+    width: 592px;
+    height: 150px;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    margin-left: -294px;
+}
+.f-rank-colours-ext{
+    transform: scale(0);
+}
+.f-rank-colours-animation {
+    -webkit-animation: animationColours 1s;
+}
+@-webkit-keyframes animationColours {
+    0% {
+        transform: scale(0)
+    }
+    50% {
+        transform: scale(0)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+.f-rank-board-main {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ffebd2;
+    margin-bottom: 0.3rem
+}
+.f-rank-board-main p{
+    color: #ff961e;
+    font-size: 0.25rem;
+   /* margin:0 0.4rem;*/
+  	margin: 0 1rem;
+    padding: 0;
+    float: left;
+    width: 3.2rem;
+    height: 1rem;
+    line-height: 0.4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.f-rank-board-main p i{
+    color: #fff;
+    font-size: 0.7rem;
+    margin:0 0.1rem 0 0;
+    padding: 0;
+    float: left;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    line-height: 1rem;
+    overflow: hidden;
+    background: #ff9e1f;
+    text-align: center
+}
+.f-rank-board-main p span{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0.1rem
+}
+.f-rank-board-title {
+    background: url(../images/rankTitle.png) no-repeat left center;
+    width: 592px;
+    height: 110px;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin-left: -294px;
+}
+.f-rank-board-list{
+	display: none;
+	margin-left: 40px;
+}
+.f-rank-board-list li{
+    float: left;
+    width: 14%;
+    /*padding: 0 1%;*/
+  	line-height: 70px;
+}
+.f-rank-board-list li i{
+    font-size:0.3rem;
+    color:#fdc950;
+    display: inline-block;
+    width: 0.4rem;
+    text-align: right;
+    margin-right: 0.1rem;
+    vertical-align: middle
+}
+.f-rank-board-list li span{
+    font-size:0.3rem;
+    color:#fdc950;
+    display: inline-block;
+    vertical-align: middle;
+    color: #333;
+}
+
+/**/
+.f-debug{
+    position: absolute;
+    z-index: 10000;
+    top: 15px;
+    left: 15px;
+}
+.f-debug-button{
+    border:1px solid #cdee6e;
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.f-debug-button2{
+    color: #000;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+.f-debugData{
+    width:40%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color:gray;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom: 0;
+    z-index: 10000;
+    overflow:auto;
+}
+.f-debugData-close{
+    float: right;
+    color: #f00;
+    font-size: 30px;
+    padding: 5px;
+}
+.f-debugData-main{
+    
+}
+.f-debugData-item{
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+    border-bottom: 1px solid #fff;
+    white-space:pre-wrap; /*css-3*/ white-space:-moz-pre-wrap; /*Mozilla,since 1999*/ white-space:-pre-wrap; /*Opera 4-6*/ white-space:-o-pre-wrap; /*Opera 7*/ word-wrap:break-word; /*Internet Explorer 5.5+*/ white-space:normal;/*Internet Explorer 5.5+*/
+}
+.f-debugData-item span{
+    color: #f00;
+    background-color: white;
+}

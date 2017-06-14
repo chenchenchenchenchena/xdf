@@ -1,0 +1,4 @@
+Message: The 'options' directive has been replaced with 'unsafe-inline' and 'unsafe-eval' source expressions for the 'script-src' and 'style-src' directives. Please use those directives instead, as 'options' has no effect.
+Source: http://html5test.com/assets/csp.html
+Line: 0
+-----------------------
