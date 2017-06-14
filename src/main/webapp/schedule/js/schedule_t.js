@@ -8,8 +8,8 @@ var WXnum  = {
 }
 
 ajax_S(url.s_seac,WXnum,stud)
-var studentlogin;
-var teacherlogin;
+var studentlogin=true;
+var teacherlogin=true;
 
 
 function stud(e){
@@ -28,9 +28,7 @@ function teac(e){
     }
 }
 setTimeout(function(){
-    if(studentlogin==false&&teacherlogin==false){
-            location.href = 'login_s.html'
-    }else if(teacherlogin==false){
+    if(teacherlogin==false&&studentlogin==true){
             location.href = 'schedule_s.html'
     }
 },1000)
