@@ -6,17 +6,9 @@ var WXnum  = {
     'wechatId':sessionStorage.openid
 }
 
-ajax_S(url.s_seac,WXnum,stud)
-var studentlogin=true;
 var teacherlogin=true;
 
 
-function stud(e){
-    console.log(e)
-    if(e.result==false){
-        studentlogin = false;
-    }
-}
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){

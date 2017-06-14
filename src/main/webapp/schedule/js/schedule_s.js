@@ -1,7 +1,7 @@
 $(function(){
-if(!sessionStorage.openid){
-    wechatCode(location.href)
-}
+// if(!sessionStorage.openid){
+//     wechatCode(location.href)
+// }
 
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -29,26 +29,31 @@ function teac(e){
 }
 setTimeout(function(){
     if(studentlogin==false&&teacherlogin==false){
-            location.href = 'login_s.html'
+            // location.href = 'login_s.html'
     }else if(studentlogin==false){
-            location.href = 'schedule_t.html'
+            // location.href = 'schedule_t.html'
     }
 },1000)
 
 var emailm = {
-    'studentCode':'SS2303',
+    'studentCode':sessionStorage.stuNum,
     'beginDate':'2017-02-04',
     'endDate':'2017-02-04'
 }
 var curr_e = [];
 var menu_s = {
-    'teacherEmail':'caoxuefeng@xdf.cn',
+    'studentCode':sessionStorage.stuNum,
     'beginDate':'2017-02-01',
     'endDate':'2017-02-28'
 }
 var dateH = []
-ajax_S(url.s_emai,menu_s,menufunc)
+ajax_S(url.s_stud,menu_s,menufunc)
 function menufunc(e){
+    if(e.result==false){
+        $('.H-data').hide()
+        $('.N-data').show()
+        return false;
+    }
     var arr = [];
     var moth = e.data.Data
     for(var i = 0;i<moth.length;i++){
@@ -155,7 +160,7 @@ $(document).on('touchstart',function(e){
                  }
                 alert(time)
                 ajax_S(url.s_stud,emailm,stusea)
-                ajax_S(url.s_emai,menu_s,menufunc)
+                ajax_S(url.s_stud,menu_s,menufunc)
 
             }
         $(document).off('touchend','.content td')
