@@ -81,8 +81,8 @@ if (!localStorage.terEmail) {
         }
     });
 }else{
-    $('.sucs').hide();
-    $('.erro').show();
+    $('.erro').hide();
+    $('.sucs').show();
     $('.erro i').html('登录成功');
 }
 
