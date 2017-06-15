@@ -86,7 +86,7 @@ body{
 .stuInfo>li>span:first-child{
 	color: #808080;
 	margin-right: 1rem;
-	width: 1.6rem;
+	min-width: 1.6rem;
 	text-align: justify;
 	display: inline-block;
 }

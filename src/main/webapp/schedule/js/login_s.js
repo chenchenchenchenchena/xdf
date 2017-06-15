@@ -1,27 +1,53 @@
 $(function(){
-	if(!sessionStorage.openid){
-		wechatCode(location.href)
-	}
+	// if(!sessionStorage.openid){
+	// 	wechatCode(location.href)
+	// }
+sessionStorage.openid = '111'
+
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
-
 var teacherlogin=true;
+ajax_S(url.s_seac,WXnum,stuc)
 
-
-
+function stuc(e){
+	console.log(e)
+	if(e.result==false){
+		$('.card').show()
+		$('.enter').show()
+	}
+	if(e.data.relatedState=='1'&&e.data.mobile==''){
+		$('.search').show()
+		$('.stuname').html(e.data.studentName)
+		$('.stutel').html('')
+		$('.deterAss').html('解除关联')
+		$('.deterAss').css('background','#fc1010')
+		sessionStorage.stuNumber = 	e.data.studentNo
+		$('.enter').show()
+	}else{
+		$('.card').show()
+		$('.searchTwo').show()
+		$('.studentLogin').eq(0).hide()
+		$('.studentLogin').eq(1).show()
+		$('.studentTitle li').removeClass('show')
+		$('.studentTitle li').eq(1).addClass('show')
+		$('.card').hide();
+		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>')
+		if(e.data.relatedState=='1'){
+			$('.Relation').html('取消关联')
+		}else{
+			$('.Relation').html('确认关联')
+		}
+		// $('.')
+	}
+}
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
     console.log(e)
-    if(e.data=="goE2"){
-        teacherlogin = false;
+    if(e.data!="goE2"){
+
     }
 }
-setTimeout(function(){
-	if(teacherlogin==false&&studentlogin==true){
-            location.href = 'schedule_s.html'
-    }
-},1000)
 	// tab切换
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
@@ -42,7 +68,6 @@ setTimeout(function(){
 		// alert()
 		console.log(e)
 		if(e.data!='goE2'){
-
 			// location.href = 'schedule_t.html'
 		}
 	}
@@ -91,7 +116,7 @@ setTimeout(function(){
 			layer.msg(e.message)
 		}else{
 			layer.msg('绑定成功')
-			location.href = 'schedule_s.html'
+			// location.href = 'schedule_s.html'
 			$('.deterAss').html('解除关联')
 			$('.deterAss').css('background','#fc1010')
 		}
@@ -100,12 +125,15 @@ setTimeout(function(){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':'11111111'}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
 		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
+		if($('.stunum').val()==''){
+			stumore.StudentCode = sessionStorage.stuNumber
+		}
 		// 关联点击
 		// alert($(this).html())
 		if($(this).html()=='立即关联'){
@@ -124,25 +152,22 @@ setTimeout(function(){
 
 	// 姓名手机号查询
 	function name_se(e){
+		$('.noSearch').hide()
+		$('.searchTwo').hide()
 		$('.new_S').remove()
 		console.log(e)
 		var  studentNo =  e.data
-		var name = /^[\u4e00-\u9fa5]{2,4}$/
 		var tel  = /^1[34578]\d{9}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){
 			layer.msg('请先将信息填写完整');
 			return false;
 		}
-		if(!name.test($('.stname').val())){
-			layer.msg('请输入正确格式名字');
-			return false;
-		}
 		if(!tel.test($('.phoneNumber').val())){
 			layer.msg('请输入正确格式手机号');
 			return false;
-		}
+		}	
 		if(e.result==false){
-			layer.msg('没有查到相关信息');
+			$('.noSearch').show()
 			return false;
 		}
 		$('.searchTwo').show()
