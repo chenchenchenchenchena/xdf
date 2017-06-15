@@ -1,4 +1,5 @@
 //e2登陆完成 stat查询老师信息
+alert(!sessionStorage.openid)
 if (!sessionStorage.openid) {
 	wechatCode(location.href.substring(0,location.href.indexOf('?code')))
 }
