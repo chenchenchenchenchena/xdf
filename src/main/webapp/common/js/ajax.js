@@ -101,7 +101,7 @@ function getwechatInfo(code){
 
 
 var url = {
-    'e_elog':'http://10.200.80.120:8080/xdfdtmanager/e2Login/login.do',//e2登录
+    'e_elog':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',//e2登录
     'w_xmor':'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_teac':'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',//查询老师邮箱
     'w_stum':'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/getClassDatas.do',// 获取班级信息
