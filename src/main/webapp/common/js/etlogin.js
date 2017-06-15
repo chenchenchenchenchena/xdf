@@ -1,7 +1,7 @@
 function etlogin(callback){
 	var  cbconfig = {'callbackFlag':callback};
 	$.ajax({
-	    url: 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',
+	    url: url.e_elog,
 	    type: 'post',
 	    dataType: 'json',
 	    data:JSON.stringify(cbconfig),
