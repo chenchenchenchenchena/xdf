@@ -50,40 +50,48 @@ $("#scanQRCode").click(function() {
 });
 // alert(sessionStorage.e2state)
 // 请求用户登录信息
-var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
-var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
-console.log(code_s+','+state_s)
-var tname_config  = {
-    'code':code_s,
-    'e2State':state_s,
-    'state':state_s
-}
-$.ajax({
+if (!localStorage.terEmail) {
+    var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+    var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
+    console.log(code_s+','+state_s)
+    var tname_config  = {
+        'code':code_s,
+        'e2State':state_s,
+        'state':state_s
+    }
+
+    $.ajax({
         url: url.w_teac,
         type: 'post',
-        asyns:false,
+        asyns: false,
         dataType: 'json',
-        data:JSON.stringify(tname_config),
-        success:function(e){
-            if(e.result==false){
+        data: JSON.stringify(tname_config),
+        success: function (e) {
+            if (e.result == false) {
                 $('.sucs').hide();
                 $('.erro').show();
                 $('.erro i').html(e.message);
-            }else{
+            } else {
                 $('.erro').hide();
                 $('.sucs').show();
                 $('.sucs i').html(e.message);
-                sessionStorage.terEmail = e.email
-
+                //sessionStorage.terEmail = e.email
+                localStorage.terEmail = e.email;
             }
         }
-});
+    });
+}else{
+    $('.sucs').hide();
+    $('.erro').show();
+    $('.erro i').html('登录成功');
+}
 
-more_s()
+
+//more_s()
 
 //查询用户详细信息
 function more_s(){
-var  teacherid = sessionStorage.terEmail
+var  teacherid = localStorage.terEmail;//sessionStorage.terEmail
 // var  teacherid = 'jinyongcun@xdf.cn'
 var  studata   = [],stumodata = [];
 var teachmore = {};
@@ -98,6 +106,10 @@ $.ajax({
         var more = e;
         console.log(more)
         var class_s = more.data;
+        if(class_s == ''){
+            layer.msg(more.msg);
+            return;
+        }
         // for(var i = 0;i<class_s.length;i++){
             var stumore = more.data.Students;
             var teamore = more.data.teachers;
