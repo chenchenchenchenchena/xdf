@@ -83,7 +83,7 @@ if (!localStorage.terEmail) {
 }else{
     $('.erro').hide();
     $('.sucs').show();
-    $('.erro i').html('登录成功');
+    $('.sucs i').html('查询成功');
 }
 
 
