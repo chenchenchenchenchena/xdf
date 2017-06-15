@@ -1,32 +1,29 @@
 //e2登陆完成 stat查询老师信息
-alert(!sessionStorage.openid)
 if (!sessionStorage.openid) {
 	wechatCode(location.href.substring(0,location.href.indexOf('?code')))
 }
-	alert(!sessionStorage.openid)
-	alert(location.href.substring(0, location.href.indexOf('?code')))
 
 
-	function teamore(e){
-	console.log(e)
-			if(e.result==true){
-				$('.name_s').html(e.userName);
-				$('.name_ema').html(e.email);
-				//var openid = sessionStorage.openid;
-				//if (openid == undefined || openid == '' || openid == 'undefined') {
-					//alert(location.href.substring(0, location.href.indexOf('?code')))
-					//wechatCode(location.href.substring(0,location.href.indexOf('?code')));
-				//}
+function teamore(e){
+	console.log(e);
+	if(e.result==true){
+		$('.name_s').html(e.userName);
+		$('.name_ema').html(e.email);
+		//var openid = sessionStorage.openid;
+		//if (openid == undefined || openid == '' || openid == 'undefined') {
+			//alert(location.href.substring(0, location.href.indexOf('?code')))
+			//wechatCode(location.href.substring(0,location.href.indexOf('?code')));
+		//}
 
-				var bindingtea0 = {};
-				bindingtea0['email'] = e.email;
-				bindingtea0['wechatId'] = sessionStorage.openid;
-				alert(JSON.stringify(bindingtea0));
-				ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
+		var bindingtea0 = {};
+		bindingtea0['email'] = e.email;
+		bindingtea0['wechatId'] = sessionStorage.openid;
+		//alert(JSON.stringify(bindingtea0));
+		ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 
-			}else{
-				etlogin('teacherWX')
-			}
+	}else{
+		etlogin('teacherWX')
+	}
 }
 
 
