@@ -1,7 +1,7 @@
 $(function(){
 // 本地测试数据
-sessionStorage.openid = '11'
-sessionStorage.stuNum= 'sy1';
+// sessionStorage.openid = '11'
+// sessionStorage.stuNum= 'sy1';
 // 当前微信号
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -29,9 +29,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-// if(!sessionStorage.openid){
-//     wechatCode(location.href)
-// }
+if(!sessionStorage.openid){
+    wechatCode(location.href)
+}
 //判断长按的定时器
 var touchtime;
 var touchtend;
