@@ -1,8 +1,8 @@
 $(function(){
-if(!sessionStorage.openid){
-    wechatCode(location.href)
-}
-
+// if(!sessionStorage.openid){
+//     wechatCode(location.href)
+// }
+sessionStorage.openid = '11'
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
@@ -150,7 +150,7 @@ $(document).on('touchstart',function(e){
         start_s = parseInt(e.touches[0].pageX)
         $(document).on('touchend','.content td',function(e){
             var even = e||even;
-            end_s = parseInt(e.changedTouches[0].pageX)
+            end_s = parseInt(e.originalEvent.changedTouches[0].pageX)
             if(start_s-end_s<50){
                 var time = ''+$(this).attr('data_y')+'-'+$(this).attr('data_m')+'-'+$(this).attr('data_d')+''
                 var emailm = {

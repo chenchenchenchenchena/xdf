@@ -1,9 +1,7 @@
 $(function(){
-	// if(!sessionStorage.openid){
-	// 	wechatCode(location.href)
-	// }
-sessionStorage.openid = '111'
-
+	if(!sessionStorage.openid){
+		wechatCode(location.href)
+	}
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
