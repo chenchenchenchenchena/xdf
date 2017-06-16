@@ -514,8 +514,7 @@ function set_top(a) {
 		sev_d = parseInt(d);
 		document.getElementById("top_week").innerHTML = weekk;
 		document.getElementById("top_yue").innerHTML = yue;
-		$(".xuanzhong").removeClass('xuanzhong');
-		a.addClass("xuanzhong");
+
 	}
 }
 
