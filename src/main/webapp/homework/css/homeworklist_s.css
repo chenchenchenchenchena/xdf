@@ -84,3 +84,53 @@ body,html{
 	font-size: 30px;
 	color: #aeadad;
 }
+.hwFinish{
+	background: #fff;
+	font-size: 30px;
+	color: #333333;
+	padding: 0 30px;
+}
+.firstList{
+	/*height: 111px;*/
+	border-bottom: 1px solid #e1e1e1;
+	line-height: 111px;
+	background: url(../images/jiao22222.png) no-repeat right 55px;
+	position: relative;
+}
+.secul li>span:nth-child(1){
+	margin-right: 25px;
+}
+.secul li{
+	height: 105px;
+	border-top: 1px solid #e1e1e1;
+	color: #949494;
+	font-size: 25px;
+}
+.secul li>span:nth-child(3){
+	display: inline-block;
+	width: 75px;
+	height: 40px;
+	border-radius: 10px;
+	line-height: 40px;
+	text-align: center;
+	margin-left: 10px;
+}
+.blue{
+	background: #ccf1ea;
+	color: #02bb98;
+}
+.grey{
+	background: #f3f3f3;
+	color: #a1a1a1;
+}
+.redCircle{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: red;
+	position: absolute;
+	top:43px;
+	left: 357px;
+}
+
