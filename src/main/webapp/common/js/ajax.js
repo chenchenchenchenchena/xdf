@@ -14,7 +14,7 @@ function getRequest() {
 
 // 获取微信id
 
-var url = {
+var url_ = {
     'e_elog': 'http://dt.xdf.cn/xdfdtmanager/e2Login/login.do',//e2登录
     'w_xmor': 'http://dt.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_open': 'http://dt.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',//获取openid
@@ -34,7 +34,7 @@ var url = {
 }
 
 
-var url_ = {
+var url = {
     'e_elog': 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',//e2登录
     'w_xmor': 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_open': 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',//获取openid
