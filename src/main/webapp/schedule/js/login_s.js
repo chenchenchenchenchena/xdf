@@ -1,4 +1,5 @@
 $(function(){
+    sessionStorage.openid = '1111'
 	if(!sessionStorage.openid){
 		wechatCode(location.href)
 	}
@@ -67,7 +68,7 @@ function teac(e){
 		// alert()
 		console.log(e)
 		if(e.data!='goE2'){
-			// location.href = 'schedule_t.html'
+			location.href = 'login_t.html'
 		}
 	}
 
