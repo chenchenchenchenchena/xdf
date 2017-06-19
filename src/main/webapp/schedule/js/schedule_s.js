@@ -166,7 +166,7 @@ function stusea(e){
                 month = '0'+month
             }
             if(day<10){
-                day = '0'+month
+                day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
             alert(time);
@@ -186,5 +186,19 @@ function stusea(e){
         }
 
     });
+//点击查看详情
+    $(document).on('click','.H-data li',function(){
+        var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        var day;
+        $('.content td').each(function(){
+            if($(this).hasClass('today')||$(this).hasClass('xuanzhong')||$(this).hasClass('xuanzhong_s')){
+                day = $(this).find('i').html();
+            }
+        });
+        var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+'-'+$(this).find('.CHour_s_more_left p').eq(1).html()+''
+        sessionStorage.timetoday = time_s;
+        location.href = 'details_s.html'
 
+    })
 });

@@ -1,7 +1,4 @@
 $(function(){
-if(!sessionStorage.openid){
-    wechatCode(location.href)
-}
 // 本地测试数据
 sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
@@ -52,8 +49,6 @@ ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
     if(e.data=="goE2"){
         location.href = 'login_s.html';
-    }else{
-        location.href = 'schedule_t.html';
     }
 }
 //按天查课程
@@ -91,7 +86,7 @@ function menufunc(e){
         $('.N-data').show();
         $('.month_hour i').html('0');
     }else{
-    $('.month_hour i').html(month.length);
+    $('.month_hour i').html(moth.length);
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
     }
@@ -146,13 +141,14 @@ function menufunc(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            $('.content td').removeClass('today');
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
             if(month<10){
                 month = '0'+month
             }
             if(day<10){
-                day = '0'+month
+                day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
             alert(time);
@@ -164,6 +160,8 @@ function menufunc(e){
 
             if(time1.split(' ')[0]>time){
                 $(this).addClass('xuanzhong')
+            }else if(time1.split(' ')[0]==time){
+                $(this).addClass('today')
             }else{
                 $(this).addClass('xuanzhong_s')
             }
@@ -174,8 +172,21 @@ function menufunc(e){
     });
 
 // <li class=""><a href="javascript:;"><div class="CHour_s_more_left"><p>13:00</p><span></span><p>13:00</p></div><div class="CHour_s_more"><h4>初中全科一对一</h4><p><i>8/16</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>
+//点击查看详情
+$(document).on('click','.H-data li',function(){
+    var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
+    var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+    var day;
+    $('.content td').each(function(){
+        if($(this).hasClass('today')||$(this).hasClass('xuanzhong')||$(this).hasClass('xuanzhong_s')){
+            day = $(this).find('i').html();
+        }
+    });
+    var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+'-'+$(this).find('.CHour_s_more_left p').eq(1).html()+''
+    sessionStorage.timetoday = time_s;
+    location.href = 'details_s.html'
 
-
+})
 
 
 

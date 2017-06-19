@@ -1,4 +1,5 @@
 $(function(){
+	console.log(sessionStorage.timetoday)
 var emailm = {
     'studentCode':'SS2303',
     'beginDate':'2017-02-04',
@@ -19,22 +20,24 @@ var emailm = {
 					regionindex.push(i)
 			}
 		}
-		var begintime = BeginDate[timeindex].BeginDate.split(' ')[1].substring(0,BeginDate[timeindex].BeginDate.split(' ')[1].length-3)
-		var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace('-','/')
-		var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3)
-		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace('-','/')
-		var LessonCount = BeginDate[timeindex].LessonCount
+		var begintime = BeginDate[timeindex].BeginDate.split(' ')[1].substring(0,BeginDate[timeindex].BeginDate.split(' ')[1].length-3);
+		var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
+		var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3);
+		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
+		var LessonCount = BeginDate[timeindex].LessonCount;
 		var LessonNo = BeginDate[timeindex].LessonNo
-		var teaname = BeginDate[timeindex].Teachers.split(',')
+		var teaname = BeginDate[timeindex].Teachers.split(',');
 		var jteaname;
 		for(var j = 0;j<BeginDate[timeindex].Students.length;j++){
 			sessionStorage.studen_s+=BeginDate[timeindex].Students[j].StudentName+','
 		}
 		console.log(begintime)
-		$('.scheduleTitle').html(BeginDate[timeindex].ClassName)
+		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+BeginDate[timeindex].CourseName+')')
 		$('.stuNum').html(BeginDate[timeindex].ClassCode)
 		$('.time span').html(begintime+'-'+endtime)
 		$('.date span').html(begindata+'-'+enddata)
+        console.log(begindata)
+        console.log(enddata)
 		$('#position').html(BeginDate[timeindex].RoomName)
 		$('.classHour i').eq(0).html(LessonNo)
 		$('.classHour i').eq(1).html(LessonCount)
@@ -72,7 +75,12 @@ var emailm = {
 		console.log(sessionStorage.studen_s)
 
 		$('.load_t').hide()
-
+        var swiper = new Swiper('.studentList .swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 5,
+            paginationClickable: true,
+            spaceBetween: 30
+        });
 
 	}
 

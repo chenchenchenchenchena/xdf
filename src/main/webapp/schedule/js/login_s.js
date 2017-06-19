@@ -58,7 +58,7 @@ function teac(e){
 		}
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
-		$('input').val()=''
+		$('input').val('')
 	})
 	var wxnumber = {'email':'','wechatId':sessionStorage.openid}
 	
