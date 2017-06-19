@@ -51,6 +51,7 @@ function stud(e){
         'beginDate':'2017-02-01',
         'endDate':'2017-02-28'
     };
+    alert(menu_s);
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
