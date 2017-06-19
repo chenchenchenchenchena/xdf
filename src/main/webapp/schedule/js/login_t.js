@@ -15,6 +15,7 @@ function teamore(e){
 	if(e.result==true){
 		$('.name_s').html(e.userName);
 		$('.name_ema').html(e.email);
+		localStorage.terEmail = e.email
 		//var openid = sessionStorage.openid;
 		//if (openid == undefined || openid == '' || openid == 'undefined') {
 			//alert(location.href.substring(0, location.href.indexOf('?code')))
