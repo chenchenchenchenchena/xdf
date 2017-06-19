@@ -1,4 +1,4 @@
-// sessionStorage.openid = '11'
+sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
 
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
@@ -9,7 +9,6 @@ var calbac = {
     'state':state_s
 };
 
-etlogin('teacherWX')
 
 if(localStorage.terEmail){
     etlogin('teacherWX')
@@ -45,11 +44,7 @@ function teamore(e){
 function binding(e){
 	console.log(e)
 	var teacontent = JSON.parse(e.data)
-	sessionStorage.teacherName = teacontent.teacherName
-	sessionStorage.teacherNo = teacontent.teacherNo
-	sessionStorage.teacherEmail = teacontent.teacherEmail
-	sessionStorage.mobile = teacontent.mobile
-	sessionStorage.schoolId = teacontent.schoolId
+	sessionStorage.terEmail = teacontent.teacherEmail
 }
 
 
