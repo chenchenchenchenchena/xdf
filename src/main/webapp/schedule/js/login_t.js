@@ -8,7 +8,7 @@
 if(localStorage.terEmail){
     teamore()
 }else{
-    etlogin('teacherWX')
+    // etlogin('teacherWX')
 }
 function teamore(e){
 	console.log(e);

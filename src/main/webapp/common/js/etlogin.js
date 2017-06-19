@@ -9,6 +9,7 @@ function etlogin(callback){
 	        console.log(e)
 	        alert(1)
 	    	if(e.url==undefined&&cbconfig.callbackFlag=='teacherWX'){
+
 	    		location.href = 'login_t.html'
             }else if(e.url==undefined&&cbconfig.callbackFlag=='scanCode'){
 	    		location.href = 'scanCode.html'
