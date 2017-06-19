@@ -1,7 +1,13 @@
 // sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
 
-
+var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
+var calbac = {
+    'code':code_s,
+    'e2State':state_s,
+    'state':state_s
+};
 
 
 
@@ -29,7 +35,7 @@ function teamore(e){
         //alert(JSON.stringify(bindingtea0));
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 	}else{
-        etlogin('teacherWX')
+        // etlogin('teacherWX')
     }
 }
 
@@ -70,11 +76,4 @@ function signOut(e){
 		alert('解绑失败')
 	}
 	
-}
-var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
-var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
-var calbac = {
-		'code':code_s,
-   	 	'e2State':state_s,
-    	'state':state_s
 }
