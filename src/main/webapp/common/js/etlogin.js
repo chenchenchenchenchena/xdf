@@ -13,7 +13,7 @@ function etlogin(callback){
             }else if(e.url==undefined&&cbconfig.callbackFlag=='scanCode'){
 	    		location.href = 'scanCode.html'
 			}else if(e.result==false){
-            	layer.msg(e.message)
+            	layer.msg(e.message);
             }else{
                 location.href = e.url;
                 localStorage.removeItem('terEmail');
