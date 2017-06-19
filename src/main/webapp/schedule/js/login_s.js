@@ -1,5 +1,4 @@
 $(function(){
-    sessionStorage.openid = '1111'
 	if(!sessionStorage.openid){
 		wechatCode(location.href)
 	}

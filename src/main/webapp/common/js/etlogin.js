@@ -6,8 +6,6 @@ function etlogin(callback){
 	    dataType: 'json',
 	    data:JSON.stringify(cbconfig),
 	    success:function(e){
-	        console.log(e)
-	        alert(e.url)
 	    	if(e.url==undefined&&cbconfig.callbackFlag=='teacherWX'){
 	    		location.href = 'login_t.html'
             }else if(e.url==undefined&&cbconfig.callbackFlag=='scanCode'){
