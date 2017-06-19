@@ -28,7 +28,7 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 var time_this;
 //微信是否授权
 if(!sessionStorage.openid){
-    // wechatCode(location.href)
+    wechatCode(location.href)
 }
 //判断长按的定时器
 var touchtime;
