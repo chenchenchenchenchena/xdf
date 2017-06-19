@@ -1,7 +1,7 @@
 $(function(){
-// if(!sessionStorage.openid){
-//     wechatCode(location.href)
-// }
+if(!sessionStorage.openid){
+    wechatCode(location.href)
+}
 // 本地测试数据
 sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
