@@ -7,6 +7,7 @@ var WXnum  = {
     'wechatId':sessionStorage.openid
 };
 //当天课程
+    alert(sessionStorage.stuNum,)
 var emailm = {
     'studentCode':sessionStorage.stuNum,
     'beginDate':'2017-02-04',
