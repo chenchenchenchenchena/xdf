@@ -1,6 +1,6 @@
 // sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
-
+var WXnum = sessionStorage.openid;
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
 var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
 var calbac = {
@@ -11,6 +11,7 @@ var calbac = {
 
 
 if(localStorage.terEmail){
+    jax_S(url.t_wxmo,WXnum,teac);
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
@@ -18,6 +19,9 @@ if(localStorage.terEmail){
 }else{
     etlogin('teacherWX')
 
+}
+function teac(e){
+	console.log(e)
 }
 function teamore(e){
 	console.log(e);
