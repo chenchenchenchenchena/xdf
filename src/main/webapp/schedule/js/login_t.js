@@ -6,17 +6,14 @@
 
 
 if(localStorage.terEmail){
-    teamore()
+    // teamore()
+    ajax_S(url.t_more,calbac,teamore)   //ajax请求
 }else{
-    // etlogin('teacherWX')
+    etlogin('teacherWX')
 }
 function teamore(e){
 	console.log(e);
-	if(e.result==undefined){
-
-        etlogin('teacherWX')
-
-	}else if(e.result==true){
+	if(e.result==true){
         $('.name_s').html(e.userName);
         $('.name_ema').html(e.email);
         localStorage.terEmail = e.email
@@ -79,4 +76,3 @@ var calbac = {
    	 	'e2State':state_s,
     	'state':state_s
 }
-ajax_S(url.t_more,calbac,teamore)   //ajax请求
