@@ -5,7 +5,11 @@
 
 
 
-
+if(localStorage.terEmail){
+    teamore()
+}else{
+    etlogin('teacherWX')
+}
 function teamore(e){
 	console.log(e);
 	if(e.result==true){
@@ -22,7 +26,6 @@ function teamore(e){
 		bindingtea0['wechatId'] = sessionStorage.openid;
 		//alert(JSON.stringify(bindingtea0));
 		ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
-
 	}else{
 		etlogin('teacherWX')
 	}
