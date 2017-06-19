@@ -9,7 +9,7 @@ var calbac = {
     'state':state_s
 };
 
-
+etlogin('teacherWX')
 
 if(localStorage.terEmail){
     etlogin('teacherWX')
@@ -33,7 +33,7 @@ function teamore(e){
         bindingtea0['wechatId'] = sessionStorage.openid;
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 	}else{
-        // etlogin('teacherWX')
+		layer.msg(e.message)
     }
 }
 
