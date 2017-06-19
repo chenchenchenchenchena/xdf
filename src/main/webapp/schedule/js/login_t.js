@@ -12,10 +12,9 @@ var calbac = {
 
 
 if(localStorage.terEmail){
-    // teamore()
-    ajax_S(url.t_more,calbac,teamore)   //ajax请求
-}else{
     etlogin('teacherWX')
+}else{
+    ajax_S(url.t_more,calbac,teamore)   //ajax请求
 }
 function teamore(e){
 	console.log(e);
@@ -32,7 +31,6 @@ function teamore(e){
         var bindingtea0 = {};
         bindingtea0['email'] = e.email;
         bindingtea0['wechatId'] = sessionStorage.openid;
-        //alert(JSON.stringify(bindingtea0));
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 	}else{
         // etlogin('teacherWX')
