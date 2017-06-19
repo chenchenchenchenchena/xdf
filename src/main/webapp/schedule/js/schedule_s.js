@@ -6,8 +6,6 @@ $(function(){
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
-//当前学生登录状态
-var studentlogin=true;
 //当天课程
 var emailm = {
     'studentCode':sessionStorage.stuNum,
@@ -52,7 +50,6 @@ function stud(e){
 }
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
-    console.log(e)
     if(e.data=="goE2"){
         location.href = 'login_s.html';
     }else{
@@ -62,6 +59,7 @@ function teac(e){
 //学生查询课程  整月查询
 ajax_S(url.s_stud,menu_s,menufunc);
 function menufunc(e){
+    console.log(e)
     if(e.result==false){
         $('.H-data').hide();
         $('.N-data').show();
@@ -146,15 +144,7 @@ function stusea(e){
     }
 
 }
-
-
-// $(document).on('touchend','.curriculum li',function(){
-//     // alert(0)
-//     sessionStorage.beginTime = $(this).find('p').html();
-//     sessionStorage.beginDate = '2017-02-04 '+$(this).find('p').html()+'';
-//     sessionStorage.endDate = '2017-02-04';
-//     location.href = 'details_s.html'
-// })
+//日历点击事件
     $(document).on('touchstart','.content td',function(){
         touchtend = 0;
         touchtime = setInterval(function(){
@@ -163,12 +153,12 @@ function stusea(e){
     });
 
     $(document).on('touchend','.content td',function(){
-        clearInterval(touchtime)
+        clearInterval(touchtime);
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
-            var month  = $(this).attr('data_m')
-            var day = $(this).attr('data_d')
+            var month  = $(this).attr('data_m');
+            var day = $(this).attr('data_d');
             if(month<10){
                 month = '0'+month
             }

@@ -1,6 +1,6 @@
 $(function(){
 	if(!sessionStorage.openid){
-		wechatCode(location.href)
+		// wechatCode(location.href)
 	}
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -104,19 +104,17 @@ function teac(e){
 		}
 	}
 	function s_bind(e){
-		console.log(e)
-		if(e.message=="解绑成功"){
+		console.log(e);
+		if(e.data==undefined){
 			layer.msg('解绑成功');
-			$('.deterAss').html('立即关联')
+			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
 			// location.reload()
-		}else if(e.result==false){
-			layer.msg(e.message)
 		}else{
-			layer.msg('绑定成功')
-			// location.href = 'schedule_s.html'
-			$('.deterAss').html('解除关联')
-			$('.deterAss').css('background','#fc1010')
+			layer.msg('绑定成功');
+			location.href = 'schedule_s.html';
+			$('.deterAss').html('解除关联');
+			$('.deterAss').css('background','#fc1010');
 		}
 	}
 
@@ -193,7 +191,7 @@ $('.tel_log').click(function(){
 	// var mobile  = $('.phoneNumber').val();
 	// stuname['name'] = name;
 	// stuname['mobile'] = mobile;
-	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}	
+	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
@@ -233,7 +231,6 @@ $(document).on('click','.Relation',function(){
 
 
 
-// s_nobd
 
 
 

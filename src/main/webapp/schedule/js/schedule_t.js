@@ -1,58 +1,88 @@
 $(function(){
-if(!sessionStorage.openid){
-    wechatCode(location.href)
-}
-
+// if(!sessionStorage.openid){
+//     wechatCode(location.href)
+// }
+// 本地测试数据
+sessionStorage.openid = '11'
+// sessionStorage.stuNum= 'sy1';
+// 当前微信号
 var WXnum  = {
     'wechatId':sessionStorage.openid
-}
-
-ajax_S(url.s_seac,WXnum,stud)
-var studentlogin=true;
-var teacherlogin=true;
-
-
-function stud(e){
-    console.log(e)
-
-    if(e.result==false){
-        studentlogin = false;
-    }
-}
-
-ajax_S(url.t_wxmo,WXnum,teac)
-function teac(e){
-    console.log(e)
-    if(e.data=="goE2"){
-        teacherlogin = false;
-    }
-}
-setTimeout(function(){
-    if(studentlogin==false&&teacherlogin==false){
-            location.href = 'login_s.html'
-    }else if(teacherlogin==false){
-            location.href = 'schedule_s.html'
-    }
-},1000)
-
-
-
+};
+//当天课程
 var emailm = {
-    'teacherEmail':'caoxuefeng@xdf.cn',
-    'beginDate':'2017-02-04',
-    'endDate':'2017-02-04'
-}
-var curr_e = [];
+        'teacherEmail':'caoxuefeng@xdf.cn',
+        'beginDate':'2017-02-04',
+        'endDate':'2017-02-04'
+};
+//当月课程
 var menu_s = {
     'teacherEmail':'caoxuefeng@xdf.cn',
     'beginDate':'2017-02-01',
     'endDate':'2017-02-28'
+};
+//储存课程信息
+var curr_e = [];
+//储存当月的日期
+var dateH = [];
+//储存当前日期
+var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
+//储存日历本月日期
+var time_this;
+//微信是否授权
+if(!sessionStorage.openid){
+        wechatCode(location.href)
+};
+//判断长按的定时器
+var touchtime;
+var touchtend;
+//微信查询是否绑定微信  参数：当前微信号 学生
+ajax_S(url.s_seac,WXnum,stud);
+function stud(e){
+    console.log(e);
+    if(e.result==false){
+        ajax_S(url.t_wxmo,WXnum,teac);
+    }else{
+        sessionStorage.stuNum = e.data.studentNo;
+    }
 }
-var dateH = []
-ajax_S(url.s_emai,emailm,stusea)
-ajax_S(url.s_emai,menu_s,menufunc)
 
 
+ajax_S(url.t_wxmo,WXnum,teac)
+function teac(e){
+    if(e.data=="goE2"){
+        location.href = 'login_s.html';
+    }else{
+        location.href = 'schedule_t.html';
+    }
+}
+//按天查课程
+ajax_S(url.s_emai,emailm,stusea);
+function stusea(e){
+        console.log(e)
+        curr_e = e.data.Data
+        var time_old = [];
+        var old;
+        // 录入开始时间
+        for(var i = 0;i<curr_e.length;i++){
+            var begtime = curr_e[i].BeginDate.split(' ')
+            var begtime2 = begtime[1].substring(0,begtime[1].length-3)
+            var endtime = curr_e[i].SectEnd.split(' ')
+            var endtime2 = endtime[1].substring(0,begtime[1].length-3)
+            // console.log(begtime[1].substring(0,begtime[1].length-3))
+            if(time1<curr_e[i].BeginDate){
+                old = ''
+            }else{
+                old = 'activ_c'
+            }
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.loading_s').hide()
+            $('.curriculum').show()
+        }
+    }
+
+    //按月查课程
+    ajax_S(url.s_emai,menu_s,menufunc)
 function menufunc(e){
     var arr = [];
     var moth = e.data.Data
@@ -88,78 +118,51 @@ function menufunc(e){
             }
         }
     }
-// console.log(dateH)
 },100)
 }
-
-// inter_S   innet_S
-// var data = new Date()
-// alert(data)
-// var th = '2017-07-09 19:00:00'
-// var tr = '2017-08-07 19:00:00'
-// alert(tr>th)
-// var hour = data.getHours().toString()
-// var minute = data.getMinutes().toString()
-// if(minute<10){
-// 	minute = '0'+minute
-// }
-// var newtime = hour+minute
-// // newtime+= minute
-// // console.log(newtime)
-var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
-console.log(time1);
-setTimeout(function(){
+//赋值今天是周几
+    setTimeout(function(){
 	$('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
 },1000)
-    function stusea(e){
-        console.log(e)
-        curr_e = e.data.Data
-        var time_old = [];
-        var old;
-        // 录入开始时间
-        for(var i = 0;i<curr_e.length;i++){
-        	var begtime = curr_e[i].BeginDate.split(' ')
-        	var begtime2 = begtime[1].substring(0,begtime[1].length-3)
-        	var endtime = curr_e[i].SectEnd.split(' ')
-        	var endtime2 = endtime[1].substring(0,begtime[1].length-3)
-        	// console.log(begtime[1].substring(0,begtime[1].length-3))
-        	if(time1<curr_e[i].BeginDate){
-        		old = ''
-        	}else{
-        		old = 'activ_c'
-        	}
-        	$('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-        	$('.loading_s').hide()
-        	$('.curriculum').show()
-        }
-    }
 
-$(document).on('touchstart',function(e){
-        var even = e||even;
-        start_s = parseInt(e.touches[0].pageX)
-        $(document).on('touchend','.content td',function(e){
-            var even = e||even;
-            end_s = parseInt(e.changedTouches[0].pageX)
-            if(start_s-end_s<50){
-                var time = ''+$(this).attr('data_y')+'-'+$(this).attr('data_m')+'-'+$(this).attr('data_d')+''
-                var emailm = {
-                    'studentCode':'SS2303',
-                    'beginDate':'2017-02-04',
-                    'endDate':'2017-02-04'
-                 }
-                alert(time)
-                ajax_S(url.s_stud,emailm,stusea)
+//日历点击事件
+    $(document).on('touchstart','.content td',function(){
+        touchtend = 0;
+        touchtime = setInterval(function(){
+            touchtend++
+        },100)
+    });
+
+    $(document).on('touchend','.content td',function(){
+        clearInterval(touchtime);
+        $('.content td').removeClass('xuanzhong');
+        $('.content td').removeClass('xuanzhong_s');
+        if(touchtend<=1){
+            var month  = $(this).attr('data_m');
+            var day = $(this).attr('data_d');
+            if(month<10){
+                month = '0'+month
             }
-        $(document).on('touchend','.curriculum li',function(){
-                sessionStorage.beginTime = $(this).find('p').html()
-                sessionStorage.beginDate = '2017 -02-04 '+$(this).find('p').html()+''
-                sessionStorage.endDate = '2017-02-04'
-                location.href = 'detailsmany_t.html'
-        })
-        $(document).off('touchend','.content td')
-        $(document).off('touchend','.curriculum li')
-        })
-})
+            if(day<10){
+                day = '0'+month
+            }
+            var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
+            var emailm = {
+                'studentCode':'SS2303',
+                'beginDate':'2017-02-04',
+                'endDate':'2017-02-04'
+            };
+
+            if(time1.split(' ')[0]>time){
+                $(this).addClass('xuanzhong')
+            }else{
+                $(this).addClass('xuanzhong_s')
+            }
+            ajax_S(url.s_emai,emailm,stusea);
+            ajax_S(url.s_emai,menu_s,menufunc);
+        }
+
+    });
 
 // <li class=""><a href="javascript:;"><div class="CHour_s_more_left"><p>13:00</p><span></span><p>13:00</p></div><div class="CHour_s_more"><h4>初中全科一对一</h4><p><i>8/16</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>
 

@@ -1,10 +1,5 @@
-//e2登陆完成 stat查询老师信息
-// if (!sessionStorage.openid) {
-// 	wechatCode(location.href.substring(0,location.href.indexOf('?code')))
-// }
-// 本地测试数据
-sessionStorage.openid = '11'
-sessionStorage.stuNum= 'sy1';
+// sessionStorage.openid = '11'
+// sessionStorage.stuNum= 'sy1';
 
 
 

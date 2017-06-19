@@ -6,10 +6,16 @@ function etlogin(callback){
 	    dataType: 'json',
 	    data:JSON.stringify(cbconfig),
 	    success:function(e){
-	        console.log(e)
-	        location.href = e.url
-	        sessionStorage.e2state = e.e2state
-	        // alert(sessionStorage.e2state)
+	    	if(e.url==undefined&&cbconfig.callbackFlag=='teacherWX'){
+	    		location.href = 'login_t.html'
+            }else if(e.url==undefined&&cbconfig.callbackFlag=='scanCode'){
+	    		location.href = 'scanCode.html'
+			}else if(e.result==false){
+            	layer.msg(e.message)
+            }else{
+                location.href = e.url;
+                localStorage.removeItem('terEmail');
+            }
 	    }
 	})
 }
