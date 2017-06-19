@@ -220,7 +220,7 @@ var mySwiper = new Swiper('.swiper-container', {
 		  $(".swiper-container").css("paddingBottom",".45rem");
 		}else{
 		  $(".swiper-container").css("paddingBottom","");
-			
+
 		}
 		swiper.unlockSwipes();
 	}
@@ -574,11 +574,11 @@ var LunarDate = {
 			return ts;
 		}
 		var tmp = "";
-		// tmp += this.HsString.charAt((this.Year - 4) % 10);  
-		// tmp += this.EbString.charAt((this.Year - 4) % 12);  
-		// tmp += "年 ";  
+		// tmp += this.HsString.charAt((this.Year - 4) % 10);
+		// tmp += this.EbString.charAt((this.Year - 4) % 12);
+		// tmp += "年 ";
 		if (this.Month < 1) {
-			//tmp += "(闰)";  
+			//tmp += "(闰)";
 			tmp += this.MonString.charAt(-this.Month - 1);
 		} else {
 			tmp += this.MonString.charAt(this.Month - 1);
@@ -655,7 +655,7 @@ $('.date').on('click', function() {
 
 	$('.tc').show();
 	$('.tc-innner').show();
-   
+
 	tc();
 
 });
@@ -670,12 +670,12 @@ function tc() {
 		b = myDate.getFullYear() - 1900;
 		c = myDate.getMonth();
 		d = myDate.getDate()-1;
-	   
+
 	} else {
 		b = sev_y - 1900;
 		c = sev_m - 1;
 		d = sev_d - 1;
-		
+
 
 	}
 	e = 1;
@@ -761,20 +761,19 @@ $('.tc-bot-right').click(function() {
 	$('.tc-innner').hide();
 	var yyyy = parseInt($('.year').children('.swiper-slide-active').html());
 	var mm = parseInt($('.month').children('.swiper-slide-active').html());
-	var dd = parseInt($('.date').children('.swiper-slide-active').html());
+	var dd = 1;
 	if (mm != sev_m || yyyy != sev_y || dd != sev_d) {
 		jump(yyyy, mm, dd);
-	  
  };
-  
- 
+
+
 
 });
 $(".tc").on("click",function(){
 	$(".tc-innner").hide();
 	$(this).hide();
 
-}); 
+});
 setInterval(function(){
 	$('.calenda').css('height',$('.swiper-slide-active').css('height'))
 	$('.calenda').css('padding-bottom','20px')

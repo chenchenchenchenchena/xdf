@@ -28,7 +28,7 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 var time_this;
 //微信是否授权
 if(!sessionStorage.openid){
-    wechatCode(location.href)
+    // wechatCode(location.href)
 }
 //判断长按的定时器
 var touchtime;
@@ -51,9 +51,9 @@ function stud(e){
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
-        location.href = 'login_s.html';
+        // location.href = 'login_s.html';
     }else{
-        location.href = 'schedule_t.html';
+        // location.href = 'schedule_t.html';
     }
 }
 //学生查询课程  整月查询
@@ -63,9 +63,11 @@ function menufunc(e){
     if(e.result==false){
         $('.H-data').hide();
         $('.N-data').show();
+        $('.month_hour i').html('0');
     }else{
         var arr = [];
         var moth = e.data.Data;
+        $('.month_hour i').html(month.length);
         for(var i = 0;i<moth.length;i++){
             arr.push( moth[i].SectBegin.split(' ')[0])
         }
@@ -157,6 +159,7 @@ function stusea(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            $('.content td').removeClass('today')
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
             if(month<10){
@@ -166,6 +169,7 @@ function stusea(e){
                 day = '0'+month
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
+            alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',

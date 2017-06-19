@@ -398,7 +398,9 @@ tr .not_this{
     z-index:-1;
     color: #fff;
 }
-
+.month_hour i{
+    margin-left:.2rem;
+}
 .xuanzhong:before{
     background:#ccc;
 }

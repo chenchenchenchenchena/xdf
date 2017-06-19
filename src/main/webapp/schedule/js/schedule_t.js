@@ -86,11 +86,18 @@ function stusea(e){
 function menufunc(e){
     var arr = [];
     var moth = e.data.Data
+    if(e.result==false){
+        $('.H-data').hide();
+        $('.N-data').show();
+        $('.month_hour i').html('0');
+    }else{
+    $('.month_hour i').html(month.length);
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
     }
     // console.log(arr)
     // console.log(moth)
+    $('.month_hour i').html('0');
     setTimeout(function(){
     var html_s = $('.swiper-slide-active table').find('td')
     var number = 0;
@@ -120,6 +127,7 @@ function menufunc(e){
     }
 },100)
 }
+}
 //赋值今天是周几
     setTimeout(function(){
 	$('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
@@ -147,6 +155,7 @@ function menufunc(e){
                 day = '0'+month
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
+            alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',
