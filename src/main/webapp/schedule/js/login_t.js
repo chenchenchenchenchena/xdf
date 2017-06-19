@@ -1,4 +1,4 @@
-sessionStorage.openid = '11'
+// sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
 
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
@@ -11,22 +11,23 @@ var calbac = {
 
 
 if(localStorage.terEmail){
-    etlogin('teacherWX')
-}else{
     ajax_S(url.t_more,calbac,teamore)   //ajax请求
+
+}else{
+    etlogin('teacherWX')
+
 }
 function teamore(e){
 	console.log(e);
 	if(e.result==true){
         $('.name_s').html(e.userName);
         $('.name_ema').html(e.email);
-        localStorage.terEmail = e.email
+        localStorage.terEmail = e.email;
         //var openid = sessionStorage.openid;
         //if (openid == undefined || openid == '' || openid == 'undefined') {
         //alert(location.href.substring(0, location.href.indexOf('?code')))
         //wechatCode(location.href.substring(0,location.href.indexOf('?code')));
         //}
-
         var bindingtea0 = {};
         bindingtea0['email'] = e.email;
         bindingtea0['wechatId'] = sessionStorage.openid;
