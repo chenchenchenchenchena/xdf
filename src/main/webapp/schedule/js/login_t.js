@@ -11,7 +11,7 @@ var calbac = {
 
 
 if(localStorage.terEmail){
-    jax_S(url.t_wxmo,WXnum,teac);
+    ajax_S(url.t_wxmo,WXnum,teac);
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
