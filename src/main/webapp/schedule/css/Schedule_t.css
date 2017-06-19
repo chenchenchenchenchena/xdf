@@ -822,7 +822,7 @@ td .shangban{
 .activ_c p,.activ_c span,.activ_c h4,.activ_c i{
     color:#ccc!important;
 }
-.activ_c span{
+.activ_c .CHour_s_more_left span{
     background:#ccc!important;
 }
 .H-data{
