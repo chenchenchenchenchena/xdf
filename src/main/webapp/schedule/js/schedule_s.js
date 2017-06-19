@@ -24,7 +24,18 @@ var touchtend;
 
 //存储主讲老师
 var masterteacher='';
-
+//当天课程
+    var emailm = {
+        'studentCode':sessionStorage.stuNum,
+        'beginDate':'2017-02-04',
+        'endDate':'2017-02-04'
+    };
+//当月课程
+    var menu_s = {
+        'studentCode':sessionStorage.stuNum,
+        'beginDate':'2017-02-01',
+        'endDate':'2017-02-28'
+    };
 // 微信查询是否绑定微信  参数：当前微信号 学生
 ajax_S(url.s_seac,WXnum,stud);
 
@@ -37,21 +48,13 @@ function stud(e){
     }else{
         //存储学员号
         sessionStorage.stuNum = e.data.studentNo;
+        emailm.studentCode=sessionStorage.stuNum
+        menu_s.studentCode=sessionStorage.stuNum
+        ajax_S(url.s_stud,menu_s,menufunc);
+        ajax_S(url.s_stud,emailm,stusea);
     }
 }
-//当天课程
-    var emailm = {
-        'studentCode':sessionStorage.stuNum,
-        'beginDate':'2017-02-04',
-        'endDate':'2017-02-04'
-    };
-//当月课程
-    var menu_s = {
-        'menu_s':sessionStorage.stuNum,
-        'beginDate':'2017-02-01',
-        'endDate':'2017-02-28'
-    };
-    alert(menu_s.menu_s);
+
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
@@ -61,7 +64,6 @@ function teac(e){
     }
 }
 //学生查询课程  整月查询
-ajax_S(url.s_stud,menu_s,menufunc);
 function menufunc(e){
     console.log(e)
     if(e.result==false){
@@ -116,7 +118,6 @@ ajax_S(url.data_s,'1',function(e){
     }
 });
 //按天查询课程
-ajax_S(url.s_stud,emailm,stusea);
 //按天查询课程
 function stusea(e){
     var teacherr_m = masterteacher.split(',');
