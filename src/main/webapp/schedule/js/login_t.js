@@ -1,6 +1,8 @@
 sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
-var WXnum = sessionStorage.openid;
+var WXnum  = {
+    'wechatId':sessionStorage.openid
+};
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
 var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
 var calbac = {
