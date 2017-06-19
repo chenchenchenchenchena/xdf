@@ -23,7 +23,10 @@ if(localStorage.terEmail){
 
 }
 function teac(e){
-	console.log(e)
+	console.log(jQuery.parseJSON(e.data));
+	var i = jQuery.parseJSON(e.data)
+    $('.name_s').html(i.teacherName);
+    $('.name_ema').html(i.teacherEmail);
 }
 function teamore(e){
 	console.log(e);
