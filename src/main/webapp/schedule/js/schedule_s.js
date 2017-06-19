@@ -7,7 +7,6 @@ var WXnum  = {
     'wechatId':sessionStorage.openid
 };
 //当天课程
-    alert(sessionStorage.stuNum);
 var emailm = {
     'studentCode':sessionStorage.stuNum,
     'beginDate':'2017-02-04',
@@ -41,6 +40,7 @@ ajax_S(url.s_seac,WXnum,stud)
 
 // 微信查询是否绑定微信  参数：当前微信号 学生
 function stud(e){
+    alert(e.result);
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
         ajax_S(url.t_wxmo,WXnum,teac);
@@ -49,6 +49,8 @@ function stud(e){
         sessionStorage.stuNum = e.data.studentNo;
     }
 }
+    alert(sessionStorage.stuNum);
+
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
