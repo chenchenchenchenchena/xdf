@@ -47,11 +47,11 @@ function stud(e){
     };
 //当月课程
     var menu_s = {
-        'studentCode':sessionStorage.stuNum,
+        'menu_s':sessionStorage.stuNum,
         'beginDate':'2017-02-01',
         'endDate':'2017-02-28'
     };
-    alert(menu_s);
+    alert(menu_s.menu_s);
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
