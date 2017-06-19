@@ -11,26 +11,26 @@ ajax_S(url.s_seac,WXnum,stuc)
 function stuc(e){
 	console.log(e)
 	if(e.result==false){
-		$('.card').show()
-		$('.enter').show()
+		$('.card').show();
+		$('.enter').show();
 	}
 	if(e.data.relatedState=='1'&&e.data.mobile==''){
-		$('.search').show()
-		$('.stuname').html(e.data.studentName)
-		$('.stutel').html('')
-		$('.deterAss').html('解除关联')
-		$('.deterAss').css('background','#fc1010')
-		sessionStorage.stuNumber = 	e.data.studentNo
+		$('.search').show();
+		$('.stuname').html(e.data.studentName);
+		$('.stutel').html('');
+		$('.deterAss').html('解除关联');
+		$('.deterAss').css('background','#fc1010');
+		sessionStorage.stuNumber = 	e.data.studentNo;
 		$('.enter').show()
 	}else{
-		$('.card').show()
-		$('.searchTwo').show()
-		$('.studentLogin').eq(0).hide()
-		$('.studentLogin').eq(1).show()
-		$('.studentTitle li').removeClass('show')
-		$('.studentTitle li').eq(1).addClass('show')
+		$('.card').show();
+		$('.searchTwo').show();
+		$('.studentLogin').eq(0).hide();
+		$('.studentLogin').eq(1).show();
+		$('.studentTitle li').removeClass('show');
+		$('.studentTitle li').eq(1).addClass('show');
 		$('.card').hide();
-		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>')
+		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
 		if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
@@ -112,6 +112,7 @@ function teac(e){
 			$('.deterAss').css('background','#00ba97')
 			// location.reload()
 		}else{
+            sessionStorage.stuNum = $('.stunum').val();
 			layer.msg('绑定成功');
 			location.href = 'schedule_s.html';
 			$('.deterAss').html('解除关联');
