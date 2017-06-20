@@ -62,12 +62,12 @@ function signOut(e){
 	if(e.result==true){
 	    var unlog = {
 	        'sid':localStorage.sid,
-            'returnUrl':'dt.staff.xdf.cn/xdfdthome/schedule/login_s.html'
+            'returnUrl':'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html'
         };
         ajax_S(url.t_logi,unlog,function(a){
             console.log(a)
         });
-        location.href = 'login_s.html'
+        // location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
 	}
