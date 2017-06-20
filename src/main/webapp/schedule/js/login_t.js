@@ -65,7 +65,7 @@ function signOut(e){
             'returnUrl':'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html'
         };
         ajax_S(url.t_logi,unlog,function(a){
-            console.log(a)
+            location.href = a.logoutUrl
         });
         // location.href = 'login_s.html'
 	}else{
