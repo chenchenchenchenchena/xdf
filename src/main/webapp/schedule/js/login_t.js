@@ -11,9 +11,12 @@ var calbac = {
     'state':state_s
 };
 
-if(!localStorage.terEmail){
-    ajax_S(url.t_more,calbac,teac);
-
+if(localStorage.terEmail){
+    // ajax_S(url.t_more,calbac,teac);
+    var bindingtea0 = {};
+    bindingtea0['email'] = localStorage.terEmail;
+    bindingtea0['wechatId'] = sessionStorage.openid;
+    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     etlogin('teacherWX')
 }
@@ -23,11 +26,6 @@ function teac(e){
     $('.name_s').html(e.userName);
     $('.name_ema').html(e.userId);
     localStorage.terEmail = e.userId
-    var bindingtea0 = {};
-    bindingtea0['email'] = localStorage.terEmail;
-    bindingtea0['wechatId'] = sessionStorage.openid;
-
-    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 // s
 
@@ -37,9 +35,13 @@ function teac(e){
 
 //获取老师绑定信息
 function binding(e){
-	console.log(e)
-	var teacontent = JSON.parse(e.data)
-	sessionStorage.terEmail = teacontent.teacherEmail
+	if(e.result==false){
+		layer.msg(e.message)
+	}else{
+        var teacontent = JSON.parse(e.data)
+        sessionStorage.terEmail = teacontent.teacherEmail
+	}
+
 }
 
 
