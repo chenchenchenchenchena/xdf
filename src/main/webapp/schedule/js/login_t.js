@@ -44,7 +44,7 @@ function binding(e){
         // var teacontent = JSON.parse(e.data);
         $('.name_s').html(e.data.teacherEmail);
         $('.name_ema').html(e.data.teacherName);
-        sessionStorage.terEmail = teacontent.teacherEmail
+        sessionStorage.terEmail = e.data.teacherEmail;
 	}
 
 }
@@ -61,6 +61,7 @@ function logout(){
 function signOut(e){
 	console.log(e)
 	if(e.result==true){
+	    console.log(e)
 		location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
