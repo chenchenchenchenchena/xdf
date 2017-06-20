@@ -24,8 +24,6 @@ if(localStorage.terEmail){
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 function teac(e){
-    alert(e.data);
-    alert(e.userName);
 	// var i = jQuery.parseJSON(e.data);
     $('.name_s').html(e.userName);
     $('.name_ema').html(e.userId);
@@ -42,7 +40,10 @@ function binding(e){
 	if(e.result==false){
 		layer.msg(e.message)
 	}else{
-        var teacontent = JSON.parse(e.data)
+	    alert(e.data);
+        var teacontent = JSON.parse(e.data);
+        $('.name_s').html(e.userName);
+        $('.name_ema').html(e.userId);
         sessionStorage.terEmail = teacontent.teacherEmail
 	}
 
