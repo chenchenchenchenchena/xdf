@@ -1,6 +1,6 @@
 $(function(){
 // 本地测试数据
-sessionStorage.openid = '11'
+// sessionStorage.openid = '11'
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
 var WXnum  = {

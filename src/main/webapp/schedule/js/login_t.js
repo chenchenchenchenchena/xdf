@@ -1,4 +1,4 @@
-sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
+// sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -10,7 +10,6 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-
 
 if(localStorage.terEmail){
     ajax_S(url.t_wxmo,WXnum,teac);

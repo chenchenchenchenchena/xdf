@@ -21,8 +21,8 @@ if (window.location.host == onlineUrl) {//正式环境
         'data_s': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do' //主讲查询
     }
     var Global = {
-        "appid": 'wx559791e14e9ce521',
-        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+        "appid": 'wxab29a3e2000b8d2a',
+        "secret": '60eb7eec2b7af5d74a704d3903e853dd',
         "actionURL": url.w_open
     }
 } else {//测试环境
