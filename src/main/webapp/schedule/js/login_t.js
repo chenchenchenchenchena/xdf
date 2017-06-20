@@ -10,11 +10,8 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-delCookie(E2Email);
-delCookie(E2Token);
-delCookie(U2Email);
-delCookie(U2NickName);
-delCookie(U2Token);
+delCookie('E2Email');
+
 if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
