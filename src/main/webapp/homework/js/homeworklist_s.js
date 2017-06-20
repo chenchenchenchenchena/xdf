@@ -27,6 +27,6 @@ $(function(){
 	})
 	//点击作业排行榜
 	$(".hwRankTitle").click(function(){
-		location.href="studentrank.html";
+		location.href="studentrank_s.html";
 	})
 })
