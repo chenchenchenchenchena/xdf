@@ -42,8 +42,8 @@ function binding(e){
 	}else{
 	    alert(e.data);
         var teacontent = JSON.parse(e.data);
-        $('.name_s').html(teacontent.teacherEmail);
-        $('.name_ema').html(teacontent.teacherName);
+        $('.name_s').html(teacontent.teacherName);
+        $('.name_ema').html(teacontent.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail;
 	}
 
