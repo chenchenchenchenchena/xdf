@@ -1,12 +1,12 @@
 $(function(){
-	if(!sessionStorage.openid){
-		wechatCode(location.href)
-	}
+	// if(!sessionStorage.openid){
+	// 	wechatCode(location.href)
+	// }
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
 var teacherlogin=true;
-ajax_S(url.s_seac,WXnum,stuc)
+ajax_S(url.s_seac,WXnum,stuc);
 
 function stuc(e){
 	console.log(e)
@@ -49,12 +49,14 @@ function teac(e){
 	// tab切换
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
-			$('.card').hide()
-			$('.search').hide()
-		}else{
-			$('.card').show()
-			$('.searchTwo').hide()
-			// $('.search').hide()
+			$('.card').hide();
+			$('.search').hide();
+            $('.noSearch').hide();
+
+        }else{
+			$('.card').show();
+			$('.searchTwo').hide();
+			$('.noSearch').hide();
 		}
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
@@ -66,7 +68,7 @@ function teac(e){
 	function Wxtea(e){
 		// alert()
 		console.log(e)
-		if(e.data!='goE2'){
+		if(e.data!='goE2'&&e.result!=false){
 			location.href = 'login_t.html'
 		}
 	}
