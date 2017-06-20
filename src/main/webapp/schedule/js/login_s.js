@@ -2,35 +2,45 @@ $(function(){
 	if(!sessionStorage.openid){
 		wechatCode(location.href)
 	}
+    sessionStorage.openid = '111';
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
 var teacherlogin=true;
-ajax_S(url.s_seac,WXnum,stuc)
+ajax_S(url.s_seac,WXnum,stuc);
 
 function stuc(e){
 	console.log(e)
 	if(e.result==false){
-		$('.card').show()
-		$('.enter').show()
+		$('.card').show();
+		$('.enter').show();
 	}
 	if(e.data.relatedState=='1'&&e.data.mobile==''){
-		$('.search').show()
-		$('.stuname').html(e.data.studentName)
-		$('.stutel').html('')
-		$('.deterAss').html('解除关联')
-		$('.deterAss').css('background','#fc1010')
-		sessionStorage.stuNumber = 	e.data.studentNo
-		$('.enter').show()
+		$('.search').show();
+		$('.stuname').html(e.data.studentName);
+		$('.stutel').html('');
+		$('.deterAss').html('解除关联');
+		$('.deterAss').css('background','#fc1010');
+		sessionStorage.stuNumber = 	e.data.studentNo;
+		$('.enter').show();
+        //
+        // //判断是否绑定
+        // if($('.stuname').html()==''){
+        //     $('.studentTitle').show();
+        //     $('.inputBox').show()
+        // }else{
+        //     $('.studentTitle').hide();
+        //     $('.inputBox').hide()
+        // }
 	}else{
-		$('.card').show()
-		$('.searchTwo').show()
-		$('.studentLogin').eq(0).hide()
-		$('.studentLogin').eq(1).show()
-		$('.studentTitle li').removeClass('show')
-		$('.studentTitle li').eq(1).addClass('show')
+		$('.card').show();
+		$('.searchTwo').show();
+		$('.studentLogin').eq(0).hide();
+		$('.studentLogin').eq(1).show();
+		$('.studentTitle li').removeClass('show');
+		$('.studentTitle li').eq(1).addClass('show');
 		$('.card').hide();
-		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>')
+		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
 		if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
@@ -43,30 +53,37 @@ ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
     console.log(e)
     if(e.data!="goE2"){
-
+		location.href='login_t.html'
     }
 }
+
+
+
+
 	// tab切换
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
-			$('.card').hide()
-			$('.search').hide()
-		}else{
-			$('.card').show()
-			$('.searchTwo').hide()
-			// $('.search').hide()
+			$('.card').hide();
+			$('.search').hide();
+            $('.noSearch').hide();
+
+        }else{
+			$('.card').show();
+			$('.searchTwo').hide();
+			$('.noSearch').hide();
 		}
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
+		$('input').val('')
 	})
 	var wxnumber = {'email':'','wechatId':sessionStorage.openid}
 	
 	//判断教师是否绑定
 	function Wxtea(e){
 		// alert()
-		console.log(e)
-		if(e.data!='goE2'){
-			// location.href = 'schedule_t.html'
+		console.log(e);
+		if(e.data!='goE2'&&e.result!=false){
+			location.href = 'login_t.html'
 		}
 	}
 
@@ -104,19 +121,18 @@ function teac(e){
 		}
 	}
 	function s_bind(e){
-		console.log(e)
-		if(e.message=="解绑成功"){
+		console.log(e);
+		if(e.data==undefined){
 			layer.msg('解绑成功');
-			$('.deterAss').html('立即关联')
+			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
 			// location.reload()
-		}else if(e.result==false){
-			layer.msg(e.message)
 		}else{
-			layer.msg('绑定成功')
-			// location.href = 'schedule_s.html'
-			$('.deterAss').html('解除关联')
-			$('.deterAss').css('background','#fc1010')
+            sessionStorage.stuNum = $('.stunum').val();
+			layer.msg('绑定成功');
+			location.href = 'schedule_s.html';
+			$('.deterAss').html('解除关联');
+			$('.deterAss').css('background','#fc1010');
 		}
 	}
 
@@ -193,14 +209,13 @@ $('.tel_log').click(function(){
 	// var mobile  = $('.phoneNumber').val();
 	// stuname['name'] = name;
 	// stuname['mobile'] = mobile;
-	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}	
+	// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}
 	ajax_S(url.s_nafu,stuname,name_se)//ajax请求
 })
 
 
 function telbind(e){
-	console.log(e)
-	console.log(e.data)
+	console.log(e);
 	// alert(e.message.length!=0)
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
@@ -233,7 +248,6 @@ $(document).on('click','.Relation',function(){
 
 
 
-// s_nobd
 
 
 

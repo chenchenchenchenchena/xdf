@@ -398,7 +398,9 @@ tr .not_this{
     z-index:-1;
     color: #fff;
 }
-
+.month_hour i{
+    margin-left:.2rem;
+}
 .xuanzhong:before{
     background:#ccc;
 }
@@ -814,11 +816,14 @@ td .shangban{
 }
 .CHour_s_more_right{
     float:right;
-    margin-top:.85rem;
+    margin-top:.6rem;
     margin-right:0.66rem;
 }
 .activ_c p,.activ_c span,.activ_c h4,.activ_c i{
     color:#ccc!important;
+}
+.activ_c .CHour_s_more_left span{
+    background:#ccc!important;
 }
 .H-data{
     display:block;
