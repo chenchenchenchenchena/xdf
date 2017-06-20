@@ -20,12 +20,13 @@ if(!localStorage.terEmail){
 function teac(e){
 	console.log(e);
 	// var i = jQuery.parseJSON(e.data);
-    $('.name_s').html(e.data.teacherName);
-    $('.name_ema').html(e.data.teacherEmail);
-    localStorage.terEmail = e.data.teacherEmail
+    $('.name_s').html(e.data.userName);
+    $('.name_ema').html(e.data.userId);
+    localStorage.terEmail = e.data.userId
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
+
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 // s
