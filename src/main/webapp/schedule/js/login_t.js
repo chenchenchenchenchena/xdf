@@ -58,12 +58,12 @@ function logout(){
 
 // 退出登录
 function signOut(e){
-	// console.log(e);
 	if(e.result==true){
 	    var unlog = {
 	        'sid':localStorage.sid,
-            'returnUrl':'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html'
+            'returnUrl':''
         };
+	    //退出e2登录
         ajax_S(url.t_logi,unlog,function(a){
             location.href = a.logoutUrl
         });

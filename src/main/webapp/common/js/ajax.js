@@ -18,7 +18,9 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': 'http://dt.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
-        'data_s': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do' //主讲查询
+        'data_s': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
+        't_logi': 'http://dt.xdf.cn/xdfdtmanager/logout/doLogout.do',//退出登录
+        't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html' //回调地址
     }
     var Global = {
         "appid": 'wxab29a3e2000b8d2a',
@@ -44,8 +46,9 @@ if (window.location.host == onlineUrl) {//正式环境
         's_emai': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
         'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi':'http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do' //退出登录
-    }
+        't_logi': 'http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do' ,//退出登录
+        't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html' //回调地址
+    };
     var Global = {
         "appid": 'wx559791e14e9ce521',
         "secret": 'baa4373d5a8750c69b9d1655a2e31370',
