@@ -21,10 +21,10 @@ if(!localStorage.terEmail){
     etlogin('teacherWX')
 }
 function teac(e){
-	console.log(jQuery.parseJSON(e.data));
-	var i = jQuery.parseJSON(e.data)
-    $('.name_s').html(i.teacherName);
-    $('.name_ema').html(i.teacherEmail);
+	console.log(e);
+	// var i = jQuery.parseJSON(e.data)
+    // $('.name_s').html(i.teacherName);
+    // $('.name_ema').html(i.teacherEmail);
 }
 function teamore(e){
 	console.log(e);
