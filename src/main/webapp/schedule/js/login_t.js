@@ -52,7 +52,6 @@ function binding(e){
 
 function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
-	localStorage.removeItem('terEmail');
     setCookie('E2Email',' ',30);
     setCookie('E2Token',' ',30);
     setCookie('U2Email',' ',30);
