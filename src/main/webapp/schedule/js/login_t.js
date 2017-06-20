@@ -30,7 +30,7 @@ function teac(e){
 }
 // s
 
-
+clearCookie('U2Token','/','.xdf.cn')
 
 
 
