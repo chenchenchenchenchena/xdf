@@ -10,7 +10,7 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-checkCookie();
+clearCookie('E2Email');
 alert(getCookie('E2Email'));
 if(localStorage.terEmail){
     var bindingtea0 = {};
