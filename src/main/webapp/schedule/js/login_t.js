@@ -10,7 +10,6 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-alert(localStorage.terEmail);
 if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
@@ -40,7 +39,6 @@ function binding(e){
 	if(e.result==false){
 		layer.msg(e.message)
 	}else{
-	    alert(e.data);
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
@@ -54,14 +52,14 @@ function binding(e){
 
 function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
+	localStorage.terEmail='';
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
 
 // 退出登录
 function signOut(e){
-	console.log(e)
+	console.log(e);
 	if(e.result==true){
-	    console.log(e)
 		location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
