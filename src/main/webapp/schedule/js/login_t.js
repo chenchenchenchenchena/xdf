@@ -20,9 +20,9 @@ if(!localStorage.terEmail){
 function teac(e){
 	console.log(e);
 	// var i = jQuery.parseJSON(e.data);
-    $('.name_s').html(e.data.userName);
-    $('.name_ema').html(e.data.userId);
-    localStorage.terEmail = e.data.userId
+    $('.name_s').html(e.userName);
+    $('.name_ema').html(e.userId);
+    localStorage.terEmail = e.userId
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
