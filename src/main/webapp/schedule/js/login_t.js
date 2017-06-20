@@ -24,7 +24,8 @@ if(localStorage.terEmail){
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 function teac(e){
-	console.log(e);
+    alert(e.data);
+    alert(e.userName);
 	// var i = jQuery.parseJSON(e.data);
     $('.name_s').html(e.userName);
     $('.name_ema').html(e.userId);
@@ -38,7 +39,6 @@ function teac(e){
 
 //获取老师绑定信息
 function binding(e){
-    alert(e.data)
 	if(e.result==false){
 		layer.msg(e.message)
 	}else{
@@ -60,11 +60,6 @@ function logout(){
 function signOut(e){
 	console.log(e)
 	if(e.result==true){
-		sessionStorage.teacherName = ''
-		sessionStorage.teacherNo = ''
-		sessionStorage.teacherEmail = ''
-		sessionStorage.mobile = ''
-		sessionStorage.schoolId = ''
 		location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
