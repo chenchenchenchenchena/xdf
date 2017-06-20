@@ -45,7 +45,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_stud': 'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
         'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
         't_logi':'http://10.200.80.120:8080/xdfdtmanager/teacherData/logout/doLogout.do' //退出登录
-    }    var Global = {
+    }
+    var Global = {
         "appid": 'wx559791e14e9ce521',
         "secret": 'baa4373d5a8750c69b9d1655a2e31370',
         "actionURL": url.w_open
