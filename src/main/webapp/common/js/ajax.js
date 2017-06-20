@@ -44,7 +44,7 @@ if (window.location.host == onlineUrl) {//正式环境
         's_emai': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
         'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi':'http://10.200.80.120:8080/xdfdtmanager/logout/doLogout.do' //退出登录
+        't_logi':'http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do' //退出登录
     }
     var Global = {
         "appid": 'wx559791e14e9ce521',
