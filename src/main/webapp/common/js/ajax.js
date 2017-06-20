@@ -209,9 +209,3 @@ function getCookie(cname) {
 function clearCookie(name) {
     setCookie(name, "", -1);
 }
-
-function clearCookie(name, path, domain){
-    if(this.get( name )){
-        document.cookie=name+"="+((path)?"; path="+path:"; path=/")+((domain)?"; domain="+domain:"")+";expires=Fri, 02-Jan-1970 00:00:00 GMT";
-    }
-};
