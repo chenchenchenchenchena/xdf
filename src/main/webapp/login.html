@@ -6,20 +6,68 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
-	<script>
-	var a = {
-			"url":location.href,
-			"appid": 'wx559791e14e9ce521',
-   			"secret": 'baa4373d5a8750c69b9d1655a2e31370'
-		}
-	$.ajax({
-		url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',
-		data: JSON.stringify(a),
-		success: function (e){
-			console.log(e)
-			alert('000')
-		}
-	})
-	</script>
+<script>
+	/*
+	 var a = {
+	 "url":location.href,
+	 "appid": 'wx559791e14e9ce521',
+	 "secret": 'baa4373d5a8750c69b9d1655a2e31370'
+	 }
+	 $.ajax({
+	 url: 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',
+	 data: JSON.stringify(a),
+	 success: function (e){
+	 console.log(e)
+	 alert('000')
+	 }
+	 })*/
+	function doUpload() {
+		var formData = new FormData($("#uploadForm")[0]);
+		//formData.userName = $(".filename").val();
+		$.ajax({
+			url: 'http://localhost:8080/xdfdtmanager/upload/uploadFile.do',
+			type: 'POST',
+			data: formData,
+			async: false,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (returndata) {
+				alert(JSON.stringify(returndata));
+			},
+			error: function (returndata) {
+				//alert(returndata);
+			}
+		});
+	}
+
+</script>
+<!--
+<div class="xdf_upload01 xdf_upload02">
+    <span style="margin-top: 8px;">测试上传 ：</span>
+    <dl>
+        <div id="fileId_newyear" style="margin-left: 10px;width:350px;"></div>
+        <dd class="xdf_btncolor">
+            <form action='http://localhost:8080/xdfdtmanager/upload/uploadFile.do' method='post' id="submit-newyear" enctype="multipart/form-data">
+                <input type="hidden" class="filename"/>
+                <input type="file" name="file" id="first_newyear" class="p176-uplodingBtn uplodeFiles"/>
+                <input type="hidden" class="urlClass" id="fileUrl_newyear">
+                <input type="hidden" value="" id="fileNameId_newyear">
+                <input type="hidden" value="" id="fileTimeId_newyear">
+                <input type="hidden" value="" id="fileSizeId_newyear">
+                <a href="#" id="up_newyear">上传</a>
+                <span id="m_newyear" class="up-style"></span>
+            </form>
+        </dd>
+    </dl>
+</div>
+-->
+
+<form id="uploadForm">
+	<p>指定文件名： <input type="text" name="filename" class="filename" value=""/></p>
+	<p>上传文件： <input type="file" name="file"/></p>
+	<input type="button" value="上传" onclick="doUpload()"/>
+</form>
+
 </body>
 </html>
