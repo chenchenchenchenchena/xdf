@@ -11,7 +11,7 @@ var calbac = {
     'state':state_s
 };
 delCookie('E2Email');
-
+alert(getCookie('E2Email'));
 if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
