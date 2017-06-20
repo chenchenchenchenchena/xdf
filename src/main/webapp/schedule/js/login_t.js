@@ -41,9 +41,9 @@ function binding(e){
 		layer.msg(e.message)
 	}else{
 	    alert(e.data);
-        var teacontent = JSON.parse(e.data);
-        $('.name_s').html(e.userName);
-        $('.name_ema').html(e.userId);
+        // var teacontent = JSON.parse(e.data);
+        $('.name_s').html(e.data.teacherEmail);
+        $('.name_ema').html(e.data.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail
 	}
 
