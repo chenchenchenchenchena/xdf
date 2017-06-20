@@ -12,7 +12,7 @@ var calbac = {
 };
 
 if(!localStorage.terEmail){
-    ajax_S(url.t_more,WXnum,teac);
+    ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
