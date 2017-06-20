@@ -52,11 +52,6 @@ function binding(e){
 
 function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
-    setCookie('E2Email',' ',30);
-    setCookie('E2Token',' ',30);
-    setCookie('U2Email',' ',30);
-    setCookie('U2NickName',' ',30);
-    setCookie('U2Token',' ',30);
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
 
