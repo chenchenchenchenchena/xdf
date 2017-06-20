@@ -43,7 +43,7 @@ function binding(e){
 	    alert(e.data);
         // var teacontent = JSON.parse(e.data);
         $('.name_s').html(e.data.teacherEmail);
-        $('.name_ema').html(e.data.teacherEmail);
+        $('.name_ema').html(e.data.teacherName);
         sessionStorage.terEmail = teacontent.teacherEmail
 	}
 
