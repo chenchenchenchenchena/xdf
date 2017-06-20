@@ -10,9 +10,6 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-clearCookie('E2Email');
-setCookie('E2Email',' ',30);
-alert(getCookie('E2Email'));
 if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
@@ -55,7 +52,12 @@ function binding(e){
 
 function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
-	localStorage.removeItem('terEmail')
+	localStorage.removeItem('terEmail');
+    setCookie('E2Email',' ',30);
+    setCookie('E2Token',' ',30);
+    setCookie('U2Email',' ',30);
+    setCookie('U2NickName',' ',30);
+    setCookie('U2Token',' ',30);
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
 
