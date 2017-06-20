@@ -58,9 +58,9 @@ function stud(e){
 // 微信查询是否绑定微信  参数：当前微信号 老师
 function teac(e){
     if(e.data=="goE2"){
-        // location.href = 'login_s.html';
+        location.href = 'login_s.html';
     }else{
-        // location.href = 'schedule_t.html';
+        location.href = 'schedule_t.html';
     }
 }
 //学生查询课程  整月查询
