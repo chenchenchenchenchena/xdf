@@ -26,7 +26,8 @@ function teac(e){
 	// var i = jQuery.parseJSON(e.data);
     $('.name_s').html(e.userName);
     $('.name_ema').html(e.userId);
-    localStorage.terEmail = e.userId
+    localStorage.terEmail = e.userId;
+    localStorage.sid = e.sid;
 }
 // s
 
@@ -57,9 +58,16 @@ function logout(){
 
 // 退出登录
 function signOut(e){
-	console.log(e);
 	if(e.result==true){
-		location.href = 'login_s.html'
+	    var unlog = {
+	        'sid':localStorage.sid,
+            'returnUrl':''
+        };
+	    //退出e2登录
+        ajax_S(url.t_logi,unlog,function(a){
+            location.href = a.logoutUrl
+        });
+        // location.href = 'login_s.html'
 	}else{
 		alert('解绑失败')
 	}
