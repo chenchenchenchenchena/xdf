@@ -1,7 +1,8 @@
 $(function(){
-	if(!sessionStorage.openid){
-		wechatCode(location.href)
-	}
+	// if(!sessionStorage.openid){
+	// 	wechatCode(location.href)
+	// }
+    sessionStorage.openid = '111'
 var WXnum  = {
     'wechatId':sessionStorage.openid
 }
@@ -21,7 +22,16 @@ function stuc(e){
 		$('.deterAss').html('解除关联');
 		$('.deterAss').css('background','#fc1010');
 		sessionStorage.stuNumber = 	e.data.studentNo;
-		$('.enter').show()
+		$('.enter').show();
+        //
+        // //判断是否绑定
+        // if($('.stuname').html()==''){
+        //     $('.studentTitle').show();
+        //     $('.inputBox').show()
+        // }else{
+        //     $('.studentTitle').hide();
+        //     $('.inputBox').hide()
+        // }
 	}else{
 		$('.card').show();
 		$('.searchTwo').show();
@@ -46,6 +56,10 @@ function teac(e){
 
     }
 }
+
+
+
+
 	// tab切换
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
@@ -67,7 +81,7 @@ function teac(e){
 	//判断教师是否绑定
 	function Wxtea(e){
 		// alert()
-		console.log(e)
+		console.log(e);
 		if(e.data!='goE2'&&e.result!=false){
 			location.href = 'login_t.html'
 		}
@@ -201,8 +215,7 @@ $('.tel_log').click(function(){
 
 
 function telbind(e){
-	console.log(e)
-	console.log(e.data)
+	console.log(e);
 	// alert(e.message.length!=0)
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)

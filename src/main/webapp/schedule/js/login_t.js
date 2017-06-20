@@ -11,7 +11,7 @@ var calbac = {
     'state':state_s
 };
 
-if(localStorage.terEmail){
+if(!localStorage.terEmail){
     ajax_S(url.t_wxmo,WXnum,teac);
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
@@ -19,7 +19,6 @@ if(localStorage.terEmail){
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     etlogin('teacherWX')
-
 }
 function teac(e){
 	console.log(jQuery.parseJSON(e.data));
