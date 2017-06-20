@@ -10,7 +10,7 @@ var calbac = {
     'e2State':state_s,
     'state':state_s
 };
-
+alert(localStorage.terEmail);
 if(localStorage.terEmail){
     // ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};
