@@ -38,6 +38,7 @@ function teac(e){
 
 //获取老师绑定信息
 function binding(e){
+    alert(e.data)
 	if(e.result==false){
 		layer.msg(e.message)
 	}else{
