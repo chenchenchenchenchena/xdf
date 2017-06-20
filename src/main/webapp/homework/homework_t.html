@@ -17,38 +17,55 @@
 	<body>
 	<div class="hwHeader">
 		<ul>
-			<li class="hwShow">待交作业</li>
-			<li>已交作业</li>
+			<li class="hwShow">作业列表</li>
+			<li>布置作业</li>
 		</ul>
 	</div>
-	<div class="pendnum">待批复:<span>1</span>份</div>
-	<div class="hwFinish">
-		<ul>
-			<li class="firstList">
-				<p>初一英语暑假提高班(20人)</p><span class="redCircle"></span>
-				<ul class="secul">
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-				</ul>
-			</li>
-			<li class="firstList">
-				<p>初一英语暑假提高班(20人)</p>
-				<ul class="secul">
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-				</ul>
-			</li>
-			<li class="firstList">
-				<p>初一英语暑假提高班(20人)</p>
-				<ul class="secul">
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-					<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
-				</ul>
-			</li>
+	<div class="thwList">
+		<div class="pendnum">待批复:<span>1</span>份</div>
+		<div class="hwFinish">
+			<ul>
+				<li class="firstList">
+					<p>初一英语暑假提高班(20人)</p><span class="redCircle"></span>
+					<ul class="secul">
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+					</ul>
+				</li>
+				<li class="firstList">
+					<p>初一英语暑假提高班(20人)</p>
+					<ul class="secul">
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+					</ul>
+				</li>
+				<li class="firstList">
+					<p>初一英语暑假提高班(20人)</p>
+					<ul class="secul">
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li class="greycolor"><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+						<li><span>第22课次</span><span>05.25 8:00-10:00</span><span>已批:<i>20</i>/未批:<i>20</i>/未交:<i>20</i></span></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="assignment" style="display: none;">
+		<ul class="choose">
+			<li>选择班</li>
+			<li>课次及时间</li>
 		</ul>
+		<div class="txt">
+			<input type="text" placeholder="知识点(只能添加2个，以分号、逗号分隔)" />
+		</div>
+		<div class="txtDiv">
+			<textarea placeholder="作业描述(请输入作业或点击一下按钮上传描述图片、语音)" class="txtbox"></textarea>
+			<p class="txtboxNum"><span>0</span>/<span>200</span></p>
+		</div>
+		<div class="imgs"><img src="images/pic.png" /><img src="images/voice.png" /></div>
+		<button class="subtn">提交</button>
 	</div>
 	<div class="hwEmpty" style="display: none;">
 		<div class="empty">
@@ -56,6 +73,53 @@
 			<p>当前没有待批复的作业</p>
 		</div>
 	</div>
+	<div class="classNumTime" style="display: none;">
+			<p><span>课次及时间</span><span>第10课次(05.25 8:00-10:00)</span></p>
+			<ul>
+				<li>第10课次(05.25 8:00-10:00)</li>
+				<li>第10课次(05.25 8:00-10:00)</li>
+				<li>第10课次(05.25 8:00-10:00)</li>
+			</ul>
+			<button class="confirmBtn">确定</button>
+	</div>
+	<div class="chooseClass" style="display: none;">
+			<p><span>选择班</span><span>已选择<span>1</span>个班</span></p>
+			<ul>
+				<li class="chooseClassActive">班级名称英语二年级</li>
+				<li>班级名称英语二年级</li>
+				<li>班级名称英语二年级</li>
+			</ul>
+			<button class="chooseBtn">确定</button>
+	</div>
+	<!--<div class="homeworkSub"><img src="images/7.png" /><p>作业提交成功</p><button>确定</button></div>-->
+	<!--<div class="picFail"><img src="images/redtan.png" /><p>确定删除图片</p><button>取消</button><button>确定</button></div>-->
+	<!--<div class="homeworkFail"><img src="images/redtan.png" /><p>作业发布失败</p><button>取消</button><button>重试</button></div>-->
 </body>
-	<!--<script src="js/homeworklist_s.js"></script>-->
+	<script src="js/homeworklist_t.js"></script>
+	<!--<script>
+		layer.open({
+	        type: 1,
+	        area: ['548px', '345px'],
+	        shade:[0.2,'#000'],
+	        title:'',
+	        skin: '',
+	        content:$(".picFail")
+	    })
+		layer.open({
+	        type: 1,
+	        area: ['548px', '345px'],
+	        shade:[0.2,'#000'],
+	        title:'',
+	        skin: '',
+	        content:$(".homeworkSub")
+	    })
+		layer.open({
+	        type: 1,
+	        area: ['548px', '345px'],
+	        shade:[0.2,'#000'],
+	        title:'',
+	        skin: '',
+	        content:$(".homeworkFail")
+	    })
+	</script>-->
 </html>
