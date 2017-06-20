@@ -58,14 +58,14 @@ function logout(){
 
 // 退出登录
 function signOut(e){
-	console.log(e);
+	// console.log(e);
 	if(e.result==true){
-	    var data = {
+	    var unlog = {
 	        'sid':localStorage.sid,
             'returnUrl':'dt.staff.xdf.cn/xdfdthome/schedule/login_s.html'
         };
-        ajax_S(url.t_logi,data,function(e){
-            console.log(e)
+        ajax_S(url.t_logi,unlog,function(a){
+            console.log(a)
         });
         location.href = 'login_s.html'
 	}else{
