@@ -28,13 +28,13 @@ if (window.location.host == onlineUrl) {//正式环境
 } else {//测试环境
 
     var url = {
-        'e_elog': 'http://10.200.80.120:8080/xdfdtmanager/e2Login/login.do',//e2登录
+        'e_elog': 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do',//e2登录
         'w_xmor': 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getWeChatSignature.do', //获取微信授权信息
         'w_open': 'http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/getUserInfo.do',//获取openid
-        'w_teac': 'http://10.200.80.120:8080/xdfdtmanager/e2Login/doLogin.do',//查询老师邮箱
+        'w_teac': 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',//查询老师邮箱
         'w_stum': 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/getClassDatas.do',// 获取班级信息
         'w_stor': 'http://dt.staff.xdf.cn/xdfdtmanager/studentDataController/syncStudentsData.do',//获取学生信息
-        't_more': 'http://10.200.80.120:8080/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
+        't_more': 'http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do',   //老师登录页  查询老师信息
         't_wxmo': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
         't_siot': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherBind/unbindTeacherInfo.do',   //解绑
         's_seac': 'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStudentInfo.do',  //学员号查询
@@ -43,7 +43,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': 'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
-        'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do' //主讲查询
+        'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
+        't_logi':'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/localStorage.terEmail = e.userId' //退出登录
     }
     var Global = {
         "appid": 'wx559791e14e9ce521',
