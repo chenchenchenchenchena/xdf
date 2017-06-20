@@ -41,10 +41,10 @@ function binding(e){
 		layer.msg(e.message)
 	}else{
 	    alert(e.data);
-        // var teacontent = JSON.parse(e.data);
-        $('.name_s').html(e.data.teacherEmail);
-        $('.name_ema').html(e.data.teacherName);
-        sessionStorage.terEmail = e.data.teacherEmail;
+        var teacontent = JSON.parse(e.data);
+        $('.name_s').html(teacontent.teacherEmail);
+        $('.name_ema').html(teacontent.teacherName);
+        sessionStorage.terEmail = teacontent.teacherEmail;
 	}
 
 }
