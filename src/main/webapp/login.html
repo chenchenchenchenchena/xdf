@@ -3,79 +3,156 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="common/js/jquery.js"></script>
+	<script src="common/js/ajax.js"></script>
+	<style>
+		button{
+			width: 50px;
+			height: 50px;
+		}
+	</style>
 </head>
 <body>
-<button class="aaa">
-	录音
-</button>
-<button class="bbb">
-	发送
-</button>
-<button class="ccc">
-	播放
-</button>
-<button class="aaa">
-	录音
-</button>
+	<button class="aaa">
+		录音
+	</button>
+	<button class="bbb">
+		保存
+	</button>
+	<button class="ccc" onclick="uploadVoice()">
+		发送
+	</button>
+	<button class="ddd">
+		播放
+	</button>
 <script>
-	var Wxconfig = {"url": location.href, "appid": "wx559791e14e9ce521", "secret": "baa4373d5a8750c69b9d1655a2e31370"};
-	var Wxconfig_h;
-	$.ajax({
-		url: url.w_xmor,
-		type: 'post',
-		dataType: 'json',
-		asyns: false,
-		data: JSON.stringify(Wxconfig),
-		success: function (e) {
-			// console.log(e)
-			Wxconfig_h = e;
-			// console.log(Wxconfig_h.timestamp);
-			//配置
-			wx.config({
-				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-				appId: Wxconfig.appid,   // 必填，公众号的唯一标识
-				timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
-				nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
-				signature: Wxconfig_h.signature, // 必填，签名
-				jsApiList: ["checkJsApi", "scanQRCode"]
-			});
-			//调用成功
-			wx.ready(function () {
-				wx.checkJsApi({
-					jsApiList: ["checkJsApi", 'scanQRCode'],
-					success: function (res) {
-					}
-				})
-			});
-			//调用失败
-			wx.error(function (res) {
-				alert("出错了" + res.errMsg)
-			});
+        var Wxconfig =  {"url" :location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
+        var Wxconfig_h;
+        $.ajax({
+            url: url.w_xmor,
+            type: 'post',
+            dataType: 'json',
+            asyns:false,
+            data: JSON.stringify(Wxconfig),
+            success:function(e){
+                // console.log(e)
+                Wxconfig_h = e;
+                // console.log(Wxconfig_h.timestamp);
+                //配置
+                wx.config({
+                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: Wxconfig.appid,   // 必填，公众号的唯一标识
+                    timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
+                    nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
+                    signature: Wxconfig_h.signature, // 必填，签名
+                    jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"]
+                });
+                //调用成功
+                wx.ready(function(){
+                    wx.checkJsApi({
+                        jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"],
+                        success:function(res){
+                        }
+                    })
+                   
+                });
+                //调用失败
+                wx.error(function(res){
+                    alert("出错了"+res.errMsg)
+                });
 
-		}
-	});
-	$('.aaa').on('touchstart', function () {
-		alert(0);
-		wx.startRecord();
-	});
-	$('.bbb').on('touchstart', function () {
-		alert(1);
-		wx.stopRecord({
-			success: function (res) {
-				var localId = res.localId;
-			}
-		});
-	});
-	$('.ccc').on('touchstart', function () {
-		alert(1)
-		wx.playVoice({
-			localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
-		});
-	});
+            }
+        });
+       //按下开始录音
+$('.aaa').on('touchstart', function(event){
+	alert(1);
+    event.preventDefault();
+    START = new Date().getTime();
 
+    recordTimer = setTimeout(function(){
+        wx.startRecord({
+            success: function(){
+                localStorage.rainAllowRecord = 'true';
+            },
+            cancel: function () {
+                alert('用户拒绝授权录音');
+            }
+        });
+    },300);
+});
+//松手结束录音
+$('.aaa').on('touchend', function(event){
+    event.preventDefault();
+    END = new Date().getTime();
+    
+    if((END - START) < 300){
+        END = 0;
+        START = 0;
+        //小于300ms，不录音
+        clearTimeout(recordTimer);
+    }else{
+        wx.stopRecord({
+          success: function (res) {
+            voice.localId = res.localId;
+            uploadVoice();
+          },
+          fail: function (res) {
+            alert(JSON.stringify(res));
+          }
+        });
+    }
+});
+$('.ddd').on('touchend', function(event){
+	 //播放录音
+	wx.playVoice({
+	    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
+	});
+});
+
+$(".bbb").on("touchend",function(event){
+	wx.downloadVoice({
+	    serverId: '', // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+	    isShowProgressTips: 1, // 默认为1，显示进度提示
+	    success: function (res) {
+	        var localId = res.localId; // 返回音频的本地ID
+	    }
+	});
+})
+
+
+//上传录音
+function uploadVoice(){
+    //调用微信的上传录音接口把本地录音先上传到微信的服务器
+    //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+    wx.uploadVoice({
+        localId: voice.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+        isShowProgressTips: 1, // 默认为1，显示进度提示
+        success: function (res) {
+            //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+            $.ajax({
+                url: '后端处理上传录音的接口',
+                type: 'post',
+                data: JSON.stringify(res),
+                dataType: "json",
+                success: function (data) {
+                    alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                },
+                error: function (xhr, errorType, error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+}
+//注册微信播放录音结束事件【一定要放在wx.ready函数内】
+/*wx.onVoicePlayEnd({
+    success: function (res) {
+        stopWave();
+    }
+});*/
 </script>
-
 
 </body>
 </html>
