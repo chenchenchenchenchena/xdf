@@ -47,7 +47,7 @@ function stud(e){
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
-    alert(e.data);
+    // alert(e.data);
     // alert(WXnum);
     if(e.data=="goE2"){
         location.href = 'login_s.html';
@@ -84,12 +84,12 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span>12个带交作业</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.loading_s').hide()
             $('.curriculum').show()
         }
     }
-
+    // <span>12个带交作业</span>
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc)
 function menufunc(e){
