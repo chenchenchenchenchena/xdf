@@ -47,7 +47,7 @@ function stud(e){
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
-    // alert(e.data);
+    alert(e.data);
     // alert(WXnum);
     if(e.data=="goE2"){
         location.href = 'login_s.html';
@@ -66,13 +66,25 @@ function stusea(e){
             var begtime2 = begtime[1].substring(0,begtime[1].length-3)
             var endtime = curr_e[i].SectEnd.split(' ')
             var endtime2 = endtime[1].substring(0,begtime[1].length-3)
+            var remindedata = {
+               'classCode':curr_e[i].ClassCode,
+                'lessonNo':curr_e[i].CourseLessonNo,
+                'email':localStorage.terEmail
+            };
+            ajax_S(url.t_data,remindedata,function(e){
+                if(e.result==false){
+                    layer.msg(e.message)
+                }else{
+                    console.log(e)
+                }
+            });
             // console.log(begtime[1].substring(0,begtime[1].length-3))
             if(time1<curr_e[i].BeginDate){
                 old = ''
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span>12个带交作业</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.loading_s').hide()
             $('.curriculum').show()
         }

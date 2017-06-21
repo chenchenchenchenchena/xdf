@@ -18,7 +18,12 @@ if(localStorage.terEmail){
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     ajax_S(url.t_more,calbac,teac);
-
+    var bindingtea0 = {};
+    bindingtea0['email'] = localStorage.terEmail;
+    bindingtea0['wechatId'] = sessionStorage.openid;
+    alert(bindingtea0.email);
+    alert(bindingtea0.email);
+    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 function teac(e){
 	// var i = jQuery.parseJSON(e.data);
@@ -26,12 +31,6 @@ function teac(e){
     $('.name_ema').html(e.userId);
     localStorage.terEmail = e.userId;
     localStorage.sid = e.sid;
-    var bindingtea0 = {};
-    bindingtea0['email'] = localStorage.terEmail;
-    bindingtea0['wechatId'] = sessionStorage.openid;
-    alert(bindingtea0.email);
-    alert(bindingtea0.wechatId);
-    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 // s
 
