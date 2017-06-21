@@ -6,6 +6,7 @@ body,html{
 }
 .doHomework{
 	background: #f1f1f1;
+	position: relative;
 }
 .hwRankTitle{
 	height: 88px;
@@ -16,6 +17,9 @@ body,html{
 	color: #333333;
 	font-weight: 700;
 	padding: 0 30px;
+}
+.hwTeacherRankTitle{
+	background: url(../images/jiao22222.png) no-repeat 708px 38px #fff;
 }
 .hwInfo{
 	background: #fff;
@@ -38,6 +42,13 @@ body,html{
 }
 .kon>p:last-child{
 	margin-left: 27px;
+	width: 250px;
+	height: 50px;
+	background: #ccf1ea;
+	border-radius: 20px;
+	color: #1dbf9d;
+	text-align: center;
+	margin-top: 10px;
 }
 .sTitle{
 	background: url(../images/B02-2_07.png) no-repeat left 12px;
@@ -239,4 +250,24 @@ body,html{
 	font-size: 30px;
 	color: #aeadad;
 	margin: 22px 0 0 18px;
+}
+.teacherword{
+	top:327px;
+}
+.voiceControl{
+	background: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	font-size: 30px;
+	color: #333333;
+	width: 100%;
+	border-top: 1px solid #e1e1e1;
+}
+.voiceControl img{
+	margin: 40px 0 0 296px;
+}
+.voiceControl p{
+	text-align: center;
+	margin: 20px 0 40px;
 }

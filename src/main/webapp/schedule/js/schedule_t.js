@@ -47,6 +47,8 @@ function stud(e){
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
+    // alert(e.data);
+    // alert(WXnum);
     if(e.data=="goE2"){
         location.href = 'login_s.html';
     }
@@ -64,6 +66,18 @@ function stusea(e){
             var begtime2 = begtime[1].substring(0,begtime[1].length-3)
             var endtime = curr_e[i].SectEnd.split(' ')
             var endtime2 = endtime[1].substring(0,begtime[1].length-3)
+            var remindedata = {
+               'classCode':curr_e[i].ClassCode,
+                'lessonNo':curr_e[i].CourseLessonNo,
+                'email':localStorage.terEmail
+            };
+            ajax_S(url.t_data,remindedata,function(e){
+                if(e.result==false){
+                    layer.msg(e.message)
+                }else{
+                    console.log(e)
+                }
+            });
             // console.log(begtime[1].substring(0,begtime[1].length-3))
             if(time1<curr_e[i].BeginDate){
                 old = ''
@@ -75,7 +89,7 @@ function stusea(e){
             $('.curriculum').show()
         }
     }
-
+    // <span>12个带交作业</span>
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc)
 function menufunc(e){
@@ -141,6 +155,9 @@ function menufunc(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            setTimeout(function(){
+                $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+            },1000)
             $('.content td').removeClass('today');
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
@@ -151,7 +168,7 @@ function menufunc(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
-            alert(time);
+            // alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',
@@ -187,8 +204,11 @@ $(document).on('click','.H-data li',function(){
     location.href = 'details_s.html'
 
 })
-
-
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS==true){
+        $('.nbxs').css('margin-top','.9rem')
+    }
 
 
 

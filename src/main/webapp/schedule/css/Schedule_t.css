@@ -695,7 +695,7 @@ td .shangban{
 
 .swiper-box-li{width:49%;float: left;text-align: center;overflow: hidden;}
 .nbxs{height: 2.5rem;font-size:.3rem;}
-.nbxs .swiper-slide{height: 0.9rem;line-height: 0.53rem;}
+.nbxs .swiper-slide{height: 0.8rem;line-height: 0.5rem;}
 .nbxs .swiper-slide-active{color: #00ba97;}
 
 .tc-bot{height: 0.8rem;border-top: 1px #e3e3e3 solid;position: relative;}
@@ -814,6 +814,18 @@ td .shangban{
 .CHour_s_more p i{
     color:#00ba97;
 }
+/*html body .CHour_s_more p span{*/
+    /*display:inline-block;*/
+    /*font-size:.32rem;*/
+    /*line-height:.5rem;*/
+    /*background:#ff6966;*/
+    /*padding:.05rem .1rem;*/
+    /*border-radius:.1rem;*/
+    /*color:#fff !important;*/
+    /*position: absolute;*/
+    /*left:4.5rem;*/
+    /*margin-top:-.08rem;*/
+/*}*/
 .CHour_s_more_right{
     float:right;
     margin-top:.6rem;
