@@ -20,6 +20,7 @@ if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
+    alert(bindingtea0);
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 function teac(e){
