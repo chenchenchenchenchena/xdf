@@ -4,7 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    wechatCode(location.href);
+    // wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
@@ -18,7 +18,7 @@ $(function(){
     //储存当月的日期
     var dateH = [];
     //储存当前日期
-    var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
+    var time1 = new Date().format("yyyy-MM-dd");
     //储存日历本月日期
     var time_this;
 
@@ -31,8 +31,8 @@ $(function(){
     //当天课程
     var emailm = {
         'studentCode':sessionStorage.stuNum,
-        'beginDate':'2017-02-04',
-        'endDate':'2017-02-04'
+        'beginDate':time1,
+        'endDate':time1
     };
     //当月课程
     var menu_s = {
@@ -51,8 +51,8 @@ $(function(){
         }else{
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
-            emailm.studentCode=sessionStorage.stuNum
-            menu_s.studentCode=sessionStorage.stuNum
+            emailm.studentCode=sessionStorage.stuNum;
+            menu_s.studentCode=sessionStorage.stuNum;
             ajax_S(url.s_stud,menu_s,menufunc);
             ajax_S(url.s_stud,emailm,stusea);
         }
@@ -123,6 +123,7 @@ $(function(){
     //按天查询课程
     //按天查询课程
     function stusea(e){
+        console.log(e)
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if(e.result==false){
@@ -194,9 +195,9 @@ $(function(){
                 var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
                 // alert(time);
                 var emailm = {
-                    'studentCode':'SS2303',
-                    'beginDate':'2017-02-04',
-                    'endDate':'2017-02-04'
+                    'studentCode':sessionStorage.stuNum,
+                    'beginDate':time,
+                    'endDate':time
                 };
 
                 if(time1.split(' ')[0]>time){

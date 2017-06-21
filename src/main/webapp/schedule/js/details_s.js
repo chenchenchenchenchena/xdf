@@ -1,7 +1,7 @@
 $(function(){
 	// console.log(sessionStorage.timetoday)
 var emailm = {
-    'studentCode':sessionStorage.stuNum,
+    'studentCode':'ss3504',
     'beginDate':'2017-02-04',
     'endDate':'2017-02-04'
 }
@@ -32,7 +32,7 @@ var emailm = {
 			sessionStorage.studen_s+=BeginDate[timeindex].Students[j].StudentName+','
 		}
 		console.log(begintime)
-		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+BeginDate[timeindex].CourseName+')')
+		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+BeginDate[timeindex].subject+')')
 		$('.stuNum').html(BeginDate[timeindex].ClassCode)
 		$('.time span').html(begintime+'-'+endtime)
 		$('.date span').html(begindata+'-'+enddata)

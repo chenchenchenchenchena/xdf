@@ -1,16 +1,17 @@
 $(function(){
 // 本地测试数据
-// sessionStorage.openid = '11'
+sessionStorage.openid = 'ofZfFwgizCmzR5XXMQt/sC5Wx5wZrA';
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
+var time1 = new Date().format("yyyy-MM-dd");
 //当天课程
 var emailm = {
-        'teacherEmail':'caoxuefeng@xdf.cn',
-        'beginDate':'2017-02-04',
-        'endDate':'2017-02-04'
+        'teacherEmail':localStorage.terEmail,
+        'beginDate':time1,
+        'endDate':time1
 };
 //当月课程
 var menu_s = {
@@ -27,16 +28,15 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-if(!sessionStorage.openid){
-        wechatCode(location.href)
-};
+// if(!sessionStorage.openid){
+//         wechatCode(location.href)
+// };
 //判断长按的定时器
 var touchtime;
 var touchtend;
 //微信查询是否绑定微信  参数：当前微信号 学生
 ajax_S(url.s_seac,WXnum,stud);
 function stud(e){
-    console.log(e);
     if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,teac);
     }else{
@@ -56,8 +56,17 @@ function teac(e){
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
-        console.log(e)
-        curr_e = e.data.Data
+        console.log(e);
+        if(e.result==false){
+            $('.curriculum li').remove();
+            $('.N-data').show()
+            $('.H-data').hide()
+            $('.loading_s').hide()
+        }else{
+            $('.N-data').hide()
+            $('.H-data').show()
+        }
+        curr_e = e.data.Data;
         var time_old = [];
         var old;
         // 录入开始时间
@@ -68,14 +77,25 @@ function stusea(e){
             var endtime2 = endtime[1].substring(0,begtime[1].length-3)
             var remindedata = {
                'classCode':curr_e[i].ClassCode,
-                'lessonNo':curr_e[i].CourseLessonNo,
+                'CourseCode':curr_e[i].CourseCode,
                 'email':localStorage.terEmail
             };
+            var htmltx = '';
             ajax_S(url.t_data,remindedata,function(e){
                 if(e.result==false){
                     layer.msg(e.message)
                 }else{
-                    console.log(e)
+                    if(e.remindstatus==1){
+                        htmltx = '没有作业去布置作业'
+                    }else if(e.remindstatus==0){
+                        htmltx = '请求参数不可以为空'
+                    }else if(e.remindstatus==2){
+                        htmltx = '作业待批改'
+                    }else{
+                        htmltx = ''
+                    }
+                    console.log(htmltx)
+                    $('.tx').html(htmltx)
                 }
             });
             // console.log(begtime[1].substring(0,begtime[1].length-3))
@@ -84,12 +104,12 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.loading_s').hide()
             $('.curriculum').show()
         }
     }
-    // <span>12个带交作业</span>
+    //
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc)
 function menufunc(e){
@@ -170,9 +190,9 @@ function menufunc(e){
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
             // alert(time);
             var emailm = {
-                'studentCode':'SS2303',
-                'beginDate':'2017-02-04',
-                'endDate':'2017-02-04'
+                'teacherEmail':localStorage.terEmail,
+                'beginDate':time,
+                'endDate':time
             };
 
             if(time1.split(' ')[0]>time){
