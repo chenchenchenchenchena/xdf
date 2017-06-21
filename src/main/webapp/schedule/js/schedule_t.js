@@ -47,8 +47,8 @@ function stud(e){
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
-    alert(e.data);
-    alert(WXnum);
+    // alert(e.data);
+    // alert(WXnum);
     if(e.data=="goE2"){
         location.href = 'login_s.html';
     }
@@ -192,8 +192,11 @@ $(document).on('click','.H-data li',function(){
     location.href = 'details_s.html'
 
 })
-
-
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS==true){
+        $('.nbxs').css('margin-top','.9rem')
+    }
 
 
 
