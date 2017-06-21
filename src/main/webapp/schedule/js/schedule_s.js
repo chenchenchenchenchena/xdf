@@ -1,13 +1,14 @@
 $(function(){
-    // 本地测试数据
-    // sessionStorage.openid = 'ofZfFwsBvoqZaBMFovXrJn6e9kEM';
-    // sessionStorage.stuNum= 'sy1';
     //微信是否授权
     //if (!sessionStorage.openid) {
     //    wechatCode(location.href)
     //    return false;
     //}
     wechatCode(location.href);
+    // if (!sessionStorage.openid) {
+    //     wechatCode(location.href);
+    //     return false;
+    // }
     // 当前微信号
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -40,14 +41,10 @@ $(function(){
         'endDate':'2017-02-28'
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
-    alert(WXnum.wechatId)
     ajax_S(url.s_seac,WXnum,stud);
 
     // 微信查询是否绑定微信  参数：当前微信号 学生
     function stud(e){
-        alert(e.result);
-        alert(e.message);
-        alert(sessionStorage.openid);
         if(e.result==false){
             // 微信查询是否绑定微信  参数：当前微信号 老师
             ajax_S(url.t_wxmo,WXnum,teac);
