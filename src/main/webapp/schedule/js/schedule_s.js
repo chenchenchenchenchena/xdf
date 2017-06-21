@@ -3,10 +3,11 @@ $(function(){
     // sessionStorage.openid = 'ofZfFwsBvoqZaBMFovXrJn6e9kEM';
     // sessionStorage.stuNum= 'sy1';
     //微信是否授权
-    if (!sessionStorage.openid) {
-        wechatCode(location.href)
-        return false;
-    }
+    //if (!sessionStorage.openid) {
+    //    wechatCode(location.href)
+    //    return false;
+    //}
+    wechatCode(location.href);
     // 当前微信号
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -27,17 +28,17 @@ $(function(){
     //存储主讲老师
     var masterteacher='';
     //当天课程
-        var emailm = {
-            'studentCode':sessionStorage.stuNum,
-            'beginDate':'2017-02-04',
-            'endDate':'2017-02-04'
-        };
+    var emailm = {
+        'studentCode':sessionStorage.stuNum,
+        'beginDate':'2017-02-04',
+        'endDate':'2017-02-04'
+    };
     //当月课程
-        var menu_s = {
-            'studentCode':sessionStorage.stuNum,
-            'beginDate':'2017-02-01',
-            'endDate':'2017-02-28'
-        };
+    var menu_s = {
+        'studentCode':sessionStorage.stuNum,
+        'beginDate':'2017-02-01',
+        'endDate':'2017-02-28'
+    };
     // 微信查询是否绑定微信  参数：当前微信号 学生
     alert(WXnum.wechatId)
     ajax_S(url.s_seac,WXnum,stud);
