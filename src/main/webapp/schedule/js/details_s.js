@@ -1,12 +1,12 @@
 $(function(){
-	console.log(sessionStorage.timetoday)
+	// console.log(sessionStorage.timetoday)
 var emailm = {
-    'studentCode':sessionStorage.stuNum,
+    'studentCode':'SS2303',
     'beginDate':'2017-02-04',
     'endDate':'2017-02-04'
 }
-	sessionStorage.studen_s ='';
-	ajax_S(url.s_stud,emailm,stusea);
+	sessionStorage.studen_s =''
+	ajax_S(url.s_stud,emailm,stusea)
 
 
 	function stusea(e){
@@ -25,24 +25,24 @@ var emailm = {
 		var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3);
 		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
 		var LessonCount = BeginDate[timeindex].LessonCount;
-		var LessonNo = BeginDate[timeindex].LessonNo;
+		var LessonNo = BeginDate[timeindex].LessonNo
 		var teaname = BeginDate[timeindex].Teachers.split(',');
 		var jteaname;
 		for(var j = 0;j<BeginDate[timeindex].Students.length;j++){
 			sessionStorage.studen_s+=BeginDate[timeindex].Students[j].StudentName+','
 		}
-		console.log(begintime);
-		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+BeginDate[timeindex].CourseName+')');
-		$('.stuNum').html(BeginDate[timeindex].ClassCode);
-		$('.time span').html(begintime+'-'+endtime);
-		$('.date span').html(begindata+'-'+enddata);
-        console.log(begindata);
-        console.log(enddata);
-		$('#position').html(BeginDate[timeindex].RoomName);
-		$('.classHour i').eq(0).html(LessonNo);
-		$('.classHour i').eq(1).html(LessonCount);
-		$('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
-		var arr = [];
+		console.log(begintime)
+		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+BeginDate[timeindex].CourseName+')')
+		$('.stuNum').html(BeginDate[timeindex].ClassCode)
+		$('.time span').html(begintime+'-'+endtime)
+		$('.date span').html(begindata+'-'+enddata)
+        console.log(begindata)
+        console.log(enddata)
+		$('#position').html(BeginDate[timeindex].RoomName)
+		$('.classHour i').eq(0).html(LessonNo)
+		$('.classHour i').eq(1).html(LessonCount)
+		$('.progressBar p').css('width',LessonNo/LessonCount*100+'%')
+		var arr = []
 		for(var i = 0;i<regionindex.length;i++){
 			if(BeginDate[regionindex[i]].AreaName==undefined){
 				BeginDate[regionindex[i]].AreaName='暂无数据'
