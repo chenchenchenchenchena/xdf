@@ -47,6 +47,8 @@ function stud(e){
 
 ajax_S(url.t_wxmo,WXnum,teac)
 function teac(e){
+    alert(e.data);
+    alert(WXnum);
     if(e.data=="goE2"){
         location.href = 'login_s.html';
     }
