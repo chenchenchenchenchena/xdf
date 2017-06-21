@@ -5,6 +5,7 @@ $(function(){
     //微信是否授权
     if (!sessionStorage.openid) {
         wechatCode(location.href)
+        return false;
     }
     // 当前微信号
     var WXnum  = {
