@@ -37,14 +37,14 @@ var masterteacher='';
         'endDate':'2017-02-28'
     };
 // 微信查询是否绑定微信  参数：当前微信号 学生
-    alert(WXnum)
+alert(WXnum.wechatId)
 ajax_S(url.s_seac,WXnum,stud);
 
 // 微信查询是否绑定微信  参数：当前微信号 学生
 function stud(e){
     alert(e.result);
     alert(e.message);
-    alert(WXnum);
+    alert(sessionStorage.openid);
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
         ajax_S(url.t_wxmo,WXnum,teac);
