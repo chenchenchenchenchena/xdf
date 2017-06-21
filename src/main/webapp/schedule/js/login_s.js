@@ -123,7 +123,7 @@ function teac(e){
 	function s_bind(e){
 		console.log(e);
 		if(e.data==undefined){
-			layer.msg('解绑成功');
+			layer.msg(e.message);
 			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
 			// location.reload()

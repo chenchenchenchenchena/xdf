@@ -37,11 +37,14 @@ var masterteacher='';
         'endDate':'2017-02-28'
     };
 // 微信查询是否绑定微信  参数：当前微信号 学生
+alert(WXnum.wechatId)
 ajax_S(url.s_seac,WXnum,stud);
 
 // 微信查询是否绑定微信  参数：当前微信号 学生
 function stud(e){
-    console.log(e)
+    alert(e.result);
+    alert(e.message);
+    alert(sessionStorage.openid);
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
         ajax_S(url.t_wxmo,WXnum,teac);
@@ -155,7 +158,7 @@ function stusea(e){
                    }
                 }
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p><p><i>班主任('+zteaname+')</i><span><i>主讲('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span>12个带交作业</span></p><p><i>班主任('+zteaname+')</i><span><i>主讲('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.loading_s').hide();
             $('.curriculum').show()
         }
@@ -175,6 +178,9 @@ function stusea(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            setTimeout(function(){
+                $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+            },1000)
             $('.content td').removeClass('today')
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
@@ -185,7 +191,7 @@ function stusea(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
-            alert(time);
+            // alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',

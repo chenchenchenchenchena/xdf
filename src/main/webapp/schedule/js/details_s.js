@@ -1,7 +1,7 @@
 $(function(){
 	console.log(sessionStorage.timetoday)
 var emailm = {
-    'studentCode':'SS2303',
+    'studentCode':sessionStorage.stuNum,
     'beginDate':'2017-02-04',
     'endDate':'2017-02-04'
 }
