@@ -15,7 +15,7 @@ var emailm = {
 		var timeindex = 0;
 		var regionindex = [];
 		for(var i = 0;i<BeginDate.length;i++){
-			if(BeginDate[i].BeginDate=='2017-02-03 08:00:00'){
+			if(BeginDate[i].BeginDate=="2017-02-03 13:30:00"){
 					timeindex =i
 					regionindex.push(i)
 			}
@@ -38,12 +38,14 @@ var emailm = {
 		$('.date span').html(begindata+'-'+enddata)
         console.log(begindata)
         console.log(enddata)
-		$('#position').html(BeginDate[timeindex].RoomName)
-		$('.classHour i').eq(0).html(LessonNo)
-		$('.classHour i').eq(1).html(LessonCount)
-		$('.progressBar p').css('width',LessonNo/LessonCount*100+'%')
-		var arr = []
+		$('#position').html(BeginDate[timeindex].RoomName);
+		$('.classHour i').eq(0).html(LessonNo);
+		$('.classHour i').eq(1).html(LessonCount);
+		$('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
+		var arr = [];
+		console.log(regionindex)
 		for(var i = 0;i<regionindex.length;i++){
+			console.log(teaname)
 			if(BeginDate[regionindex[i]].AreaName==undefined){
 				BeginDate[regionindex[i]].AreaName='暂无数据'
 			}
@@ -56,9 +58,6 @@ var emailm = {
             }
         	}
 
-
-			// $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'</dt><dd>'+BeginDate[regionindex[i]].SchoolName+'</dd><dd class="name">(李晓明:'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>')
-			$('.teacherList ul').append('<li class="swiper-slide">'+jteaname.substring(0,1)+'</li>')
 			$('.nocade_s ul').append('<li><span>'+jteaname.substring(0,1)+'</span><p>主讲：'+jteaname+'老师</p></li><li><span>曹</span><p>班主任：曹雪峰老师</p></li>')
 
 			var stuall = BeginDate[regionindex[i]].Students
@@ -68,11 +67,9 @@ var emailm = {
 		}
 		$('.teacherList p span').html('('+$('.teacherList li').length+')')
 		$('.studentList p span').html('('+$('.studentList li').length+')')
-		// console.log(Teachers)
 
-		// sessionStorage.n = BeginDate[regionindex[0]].ClassCode
 
-		console.log(sessionStorage.studen_s)
+		console.log(sessionStorage.studen_s);
 
 		$('.load_t').hide()
         var swiper = new Swiper('.studentList .swiper-container', {
