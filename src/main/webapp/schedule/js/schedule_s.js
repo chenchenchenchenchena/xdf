@@ -43,6 +43,7 @@ ajax_S(url.s_seac,WXnum,stud);
 function stud(e){
     alert(e.result);
     alert(e.message);
+    alert(sessionStorage.openid)
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
         ajax_S(url.t_wxmo,WXnum,teac);
