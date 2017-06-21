@@ -32,6 +32,7 @@ function teac(e){
     // alert(bindingtea0.email);
     // alert(bindingtea0.email);
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
+
 }
 // s
 
