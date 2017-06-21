@@ -46,7 +46,7 @@ function stud(e){
     alert(sessionStorage.openid);
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
-        ajax_S(url.t_wxmo,WXnum,teac);
+        ajax_S(url.t_wxmo,{'wechatId':sessionStorage.openid},teac);
     }else{
         //存储学员号
         sessionStorage.stuNum = e.data.studentNo;
