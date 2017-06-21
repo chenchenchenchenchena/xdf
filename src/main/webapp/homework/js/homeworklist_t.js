@@ -57,4 +57,11 @@ $(function(){
 	$(".confirmBtn").click(function(){
 		$(".classNumTime").css("bottom","-440px");
 	})
+	//点击待批复
+	$(".replyOne:eq(0) ul li").click(function(){
+		location.href="dohomework_t.html";
+	})
+	$(".replyOne:eq(1) ul li").click(function(){
+		location.href="replydetail_t.html";
+	})
 })
