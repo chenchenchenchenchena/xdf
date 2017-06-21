@@ -67,7 +67,7 @@
         });
        //按下开始录音
 $('.aaa').on('touchstart', function(event){
-	alert(1);
+	/*alert(1);*/
     event.preventDefault();
     START = new Date().getTime();
 
@@ -107,13 +107,13 @@ $('.aaa').on('touchend', function(event){
 $('.ddd').on('touchend', function(event){
 	 //播放录音
 	wx.playVoice({
-	    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
+	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
 	});
 });
 
 $(".bbb").on("touchend",function(event){
 	wx.downloadVoice({
-	    serverId: '', // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+	    serverId: localId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 	    isShowProgressTips: 1, // 默认为1，显示进度提示
 	    success: function (res) {
 	        var localId = res.localId; // 返回音频的本地ID
