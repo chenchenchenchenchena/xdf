@@ -41,7 +41,8 @@ ajax_S(url.s_seac,WXnum,stud);
 
 // 微信查询是否绑定微信  参数：当前微信号 学生
 function stud(e){
-    console.log(e)
+    alert(e.result);
+    alert(e.message);
     if(e.result==false){
         // 微信查询是否绑定微信  参数：当前微信号 老师
         ajax_S(url.t_wxmo,WXnum,teac);
