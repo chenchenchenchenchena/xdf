@@ -30,7 +30,7 @@ function teac(e){
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
     // alert(bindingtea0.email);
-    alert(bindingtea0.email);
+    // alert(bindingtea0.email);
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }
 // s

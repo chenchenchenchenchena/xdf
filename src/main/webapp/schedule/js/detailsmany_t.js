@@ -4,10 +4,7 @@ $(function(){
     	'beginDate':'2017-02-04',
     	'endDate':'2017-02-04'
 	}
-			sessionStorage.t = ''
-		 	sessionStorage.stuNa= ''
 	ajax_S(url.s_emai,emailm,stusea)
-
 
 	function stusea(e){
 		console.log(e)
