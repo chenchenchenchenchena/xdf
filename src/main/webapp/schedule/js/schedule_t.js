@@ -143,6 +143,7 @@ function menufunc(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
             $('.content td').removeClass('today');
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
