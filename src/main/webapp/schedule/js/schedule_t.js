@@ -143,7 +143,9 @@ function menufunc(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
-            $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+            setTimeout(function(){
+                $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+            },1000)
             $('.content td').removeClass('today');
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
@@ -154,7 +156,7 @@ function menufunc(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
-            alert(time);
+            // alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',

@@ -15,9 +15,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-if(!sessionStorage.openid){
-    wechatCode(location.href)
-}
+// if(!sessionStorage.openid){
+//     wechatCode(location.href)
+// }
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -175,6 +175,9 @@ function stusea(e){
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
+            setTimeout(function(){
+                $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+            },1000)
             $('.content td').removeClass('today')
             var month  = $(this).attr('data_m');
             var day = $(this).attr('data_d');
@@ -185,7 +188,7 @@ function stusea(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
-            alert(time);
+            // alert(time);
             var emailm = {
                 'studentCode':'SS2303',
                 'beginDate':'2017-02-04',
