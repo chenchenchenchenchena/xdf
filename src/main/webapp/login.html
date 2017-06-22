@@ -137,6 +137,7 @@ function uploadVoice(){
                 data: JSON.stringify(res),
                 dataType: "json",
                 success: function (data) {
+                	alert(data);
                     alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
                 },
                 error: function (xhr, errorType, error) {
