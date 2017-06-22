@@ -60,9 +60,9 @@ $(function(){
             $('.schoolCampus h3').html('上课校区('+(i+1)+')')
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:0.2rem;">班主任</span><p>'+masterta[j]+'</p</li>')
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
                 }else{
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:0.2rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')
                 }
             }
             arr.push(BeginDate[regionindex[i]].Students);
