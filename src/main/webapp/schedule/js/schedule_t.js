@@ -1,6 +1,6 @@
 $(function(){
 // 本地测试数据
-sessionStorage.openid = 'ofZfFwgizCmzR5XXMQt/sC5Wx5wZrA';
+// sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtsC5Wx5wZrA';
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
 var WXnum  = {
@@ -15,9 +15,9 @@ var emailm = {
 };
 //当月课程
 var menu_s = {
-    'teacherEmail':'caoxuefeng@xdf.cn',
-    'beginDate':'2017-02-01',
-    'endDate':'2017-02-28'
+    'teacherEmail':localStorage.terEmail,
+    'beginDate':new Date().format("yyyy-MM-01"),
+    'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
 };
 //储存课程信息
 var curr_e = [];
@@ -28,9 +28,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-// if(!sessionStorage.openid){
-//         wechatCode(location.href)
-// };
+if(!sessionStorage.openid){
+        wechatCode(location.href)
+};
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -56,64 +56,78 @@ function teac(e){
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
-        console.log(e);
+    console.log(e);
+        $('.curriculum li').remove();
         if(e.result==false){
-            $('.curriculum li').remove();
-            $('.N-data').show()
-            $('.H-data').hide()
-            $('.loading_s').hide()
+            $('.N-data').show();
+            $('.H-data').hide();
+            $('.loading_s').hide();
+            return;
         }else{
-            $('.N-data').hide()
-            $('.H-data').show()
+            $('.N-data').hide();
+            $('.H-data').show();
         }
         curr_e = e.data.Data;
         var time_old = [];
         var old;
+        var Index =[];
         // 录入开始时间
         for(var i = 0;i<curr_e.length;i++){
-            var begtime = curr_e[i].BeginDate.split(' ')
-            var begtime2 = begtime[1].substring(0,begtime[1].length-3)
-            var endtime = curr_e[i].SectEnd.split(' ')
-            var endtime2 = endtime[1].substring(0,begtime[1].length-3)
+            var begtime = curr_e[i].BeginDate.split(' ');
+            var begtime2 = begtime[1].substring(0,begtime[1].length-3);
+            var endtime = curr_e[i].SectEnd.split(' ');
+            var endtime2 = endtime[1].substring(0,begtime[1].length-3);
             var remindedata = {
                'classCode':curr_e[i].ClassCode,
-                'CourseCode':curr_e[i].CourseCode,
+                'courseCode':curr_e[i].CourseCode,
                 'email':localStorage.terEmail
             };
             var htmltx = '';
             ajax_S(url.t_data,remindedata,function(e){
                 if(e.result==false){
-                    layer.msg(e.message)
+                    layer.msg('请求参数不可以为空')
                 }else{
                     if(e.remindstatus==1){
-                        htmltx = '没有作业去布置作业'
-                    }else if(e.remindstatus==0){
-                        htmltx = '请求参数不可以为空'
+                        htmltx = '去布置作业'
                     }else if(e.remindstatus==2){
-                        htmltx = '作业待批改'
-                    }else{
+                        htmltx = ''+e.data[0].nostudentNum+'份作业待批改'
+                    }
+                    else if(e.remindstatus==3){
                         htmltx = ''
                     }
-                    console.log(htmltx)
-                    $('.tx').html(htmltx)
+                    $('.tx').each(function(){
+                        $('.tx').eq($(this).attr('index')).html(htmltx)
+                    });
+                    Index.push(htmltx);
+                    //放作业提醒
+                    for(var i =0;i<Index.length;i++){
+                        if(Index[i]==''){
+                            $('.tx').eq(i).css('padding','0');
+                        }else{
+                            $('.tx').eq(i).html(Index[i]);
+                        }
+                    }
                 }
             });
+
             // console.log(begtime[1].substring(0,begtime[1].length-3))
             if(time1<curr_e[i].BeginDate){
                 old = ''
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-            $('.loading_s').hide()
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.loading_s').hide();
             $('.curriculum').show()
         }
+
     }
-    //
+
     //按月查课程
-    ajax_S(url.s_emai,menu_s,menufunc)
+    ajax_S(url.s_emai,menu_s,menufunc);
 function menufunc(e){
     var arr = [];
+    dateH = [];
     var moth = e.data.Data
     if(e.result==false){
         $('.H-data').hide();
@@ -128,11 +142,11 @@ function menufunc(e){
     // console.log(moth)
     $('.month_hour i').html('0');
     setTimeout(function(){
-    var html_s = $('.swiper-slide-active table').find('td')
+    var html_s = $('.swiper-slide-active table').find('td');
     var number = 0;
     for(var k = 0;k<html_s.length;k++){
-        var month = html_s.eq(k).attr('data_m')
-        var day   = html_s.eq(k).attr('data_d')
+        var month = html_s.eq(k).attr('data_m');
+        var day   = html_s.eq(k).attr('data_d');
         if(month<10){
             month = '0'+month
         }
@@ -145,14 +159,19 @@ function menufunc(e){
             number++
         }
     }
-    for(var j = 0;j<dateH.length;j++){
-        if(dateH[j]!=arr[j]){
-            if(dateH[j]>time1.split(' ')[0]){
-                 html_s.eq(j+number).addClass('inter_S')
-            }else{
-                 html_s.eq(j+number).addClass('innet_S')
+    for(var j = 0;j<arr.length;j++){
+
+            for(var k = 0;k<dateH.length;k++){
+                if(dateH[k]==arr[j]){
+                    if(arr[j]>new Date().format("yyyy-MM-dd")){
+                            html_s.eq(k+number).addClass('inter_S')
+
+                    }else{
+                            html_s.eq(k+number).addClass('innet_S')
+                    }
+              }
             }
-        }
+
     }
 },100)
 }
@@ -189,10 +208,18 @@ function menufunc(e){
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
             // alert(time);
+            var  day = new Date($(this).attr('data_y'),month,'0');
+            var daycount = day.getDate();
             var emailm = {
                 'teacherEmail':localStorage.terEmail,
                 'beginDate':time,
                 'endDate':time
+            };
+            //当月课程
+            var menu_s = {
+                'teacherEmail':localStorage.terEmail,
+                'beginDate':time.substring(0,7)+'-01',
+                'endDate':time.substring(0,7)+'-'+daycount
             };
 
             if(time1.split(' ')[0]>time){
@@ -214,17 +241,29 @@ $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
     var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
     var day;
+
     $('.content td').each(function(){
         if($(this).hasClass('today')||$(this).hasClass('xuanzhong')||$(this).hasClass('xuanzhong_s')){
             day = $(this).find('i').html();
         }
     });
-    var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+'-'+$(this).find('.CHour_s_more_left p').eq(1).html()+''
+    if(month<10){
+        month = '0'+month
+    }
+    if(day<10){
+        day = '0'+day
+    }
+    var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
+    alert(time_s)
     sessionStorage.timetoday = time_s;
-    location.href = 'details_s.html'
+    location.href = 'detailsmany_t.html'
 
 })
+
+
+
     var u = navigator.userAgent;
+
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
         $('.nbxs').css('margin-top','.9rem')

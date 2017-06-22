@@ -2,7 +2,7 @@ body{
 	background: #f1f1f1;
 }
 .scheduleTime{
-	height: 2.73rem;
+	min-height: 2.73rem;
 	background: #fff;
 	padding: 0.4rem;
 }
@@ -10,6 +10,9 @@ body{
 	font-size: 0.45rem;
 	color: #333333;
 	margin: 0 0 0.4rem 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .classHour{
 	font-size:.6rem;
@@ -71,7 +74,7 @@ body{
 	margin-right: 0.27rem;
 }
 .progressBar{
-	width:7.2rem;
+	width:7rem;
 	height: 0.21rem;
 	background: #f1f1f1;
 	border-radius: 5px;
@@ -92,7 +95,7 @@ body{
 	color: #808080;
 }
 .classTeacher{
-	height: 3.22rem;
+	height: 4rem;
 	background: #fff;
 	margin-top: 0.26rem;
 	padding: 0.4rem .4rem 0.4rem 0.4rem;
@@ -137,19 +140,22 @@ body{
 
 }
 .studentList{
-	height:2.8rem;
+	height:3.5rem;
 }
 .studentList li{
-	width:1.08rem;
-	height: 1.08rem;
+	width:1.2rem;
+	height: 1.2rem;
 	border-radius: 50%;
 	background: #ffbb37;
 	font-size: 0.36rem;
 	color: #fff;
-	line-height: 1.08rem;
+	line-height: 1.2rem;
 	text-align: center;
 	float: left;
 	margin-right: 0.56rem;
+}
+.studentList .swiper-container{
+	height:2rem;
 }
 .rightArrow{
 	position: absolute;
@@ -161,6 +167,12 @@ body{
 	top:1.5rem;
 	left: 95%;
 }
+.teacherList .swiper-container{
+	height:3.1rem;
+}
+.teacherList ul li p{
+	border:none;
+}
 .teacherList .rightArrowOne{
 	/*display: inline-block;*/
 	width:0.16rem;
@@ -168,6 +180,8 @@ body{
 	position: absolute;
 	top:1.65rem;
 	left: 95%;
+}
+.swiper-container{
 }
 .rightArrowTwo img,.rightArrowOne img{
 	width:0.16rem;
