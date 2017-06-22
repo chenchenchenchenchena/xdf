@@ -4,12 +4,12 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    // wechatCode(location.href);
+    wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
     // }
-    sessionStorage.openid='ofZfFwgizCmzR5XXMQt';
+    // sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
     // 当前微信号
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -72,7 +72,7 @@ $(function(){
         console.log(e)
         var arr = [];
         dateH = [];
-        var moth = e.data.Data
+        var moth = e.data.Data;
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
@@ -84,7 +84,7 @@ $(function(){
             }
             // console.log(arr)
             // console.log(moth)
-            $('.month_hour i').html('0');
+            // $('.month_hour i').html('0');
             setTimeout(function(){
                 var html_s = $('.swiper-slide-active table').find('td');
                 var number = 0;
@@ -209,13 +209,13 @@ $(function(){
                 var  day = new Date($(this).attr('data_y'),month,'0');
                 var daycount = day.getDate();
                 var emailm = {
-                    'teacherEmail':localStorage.terEmail,
+                    'studentCode':sessionStorage.stuNum,
                     'beginDate':time,
                     'endDate':time
                 };
                 //当月课程
                 var menu_s = {
-                    'teacherEmail':localStorage.terEmail,
+                    'studentCode':sessionStorage.stuNum,
                     'beginDate':time.substring(0,7)+'-01',
                     'endDate':time.substring(0,7)+'-'+daycount
                 };
@@ -227,8 +227,8 @@ $(function(){
                 }else{
                     $(this).addClass('xuanzhong_s')
                 }
-                ajax_S(url.s_emai,emailm,stusea);
-                ajax_S(url.s_emai,menu_s,menufunc);
+                ajax_S(url.s_stud,emailm,stusea);
+                ajax_S(url.s_stud,menu_s,menufunc);
             }
 
         });
@@ -242,7 +242,13 @@ $(function(){
                     day = $(this).find('i').html();
                 }
             });
-            var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+'-'+$(this).find('.CHour_s_more_left p').eq(1).html()+''
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
             sessionStorage.timetoday = time_s;
             location.href = 'details_s.html'
 

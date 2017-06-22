@@ -135,13 +135,12 @@ function menufunc(e){
         $('.N-data').show();
         $('.month_hour i').html('0');
     }else{
-    $('.month_hour i').html(moth.length);
+        $('.month_hour i').html(moth.length);
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
     }
     // console.log(arr)
     // console.log(moth)
-    $('.month_hour i').html('0');
     setTimeout(function(){
     var html_s = $('.swiper-slide-active table').find('td');
     var number = 0;
