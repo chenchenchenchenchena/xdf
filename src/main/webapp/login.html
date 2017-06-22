@@ -97,6 +97,7 @@ $('.aaa').on('touchend', function(event){
           success: function (res) {
             voice.localId = res.localId;
             uploadVoice();
+            playVoice();
           },
           fail: function (res) {
             alert(JSON.stringify(res));
@@ -106,22 +107,32 @@ $('.aaa').on('touchend', function(event){
 });
 //播放
 $('.ddd').on('touchstart', function(event){
-	 //播放录音
+	 playVoice();
+});
+function playVoice(){
+	//播放录音
 	wx.playVoice({
 	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
 	});
-});
+}
 //下载
 $(".bbb").on("touchstart",function(event){
+	downloadVoice()
+})
+function downloadVoice(){
 	wx.downloadVoice({
-	    serverId: localId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+	    serverId:voice.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 	    isShowProgressTips: 1, // 默认为1，显示进度提示
 	    success: function (res) {
 	        var localId = res.localId; // 返回音频的本地ID
 	    }
 	});
-})
+}
 function uploadVoice(){
+	if(voice.localId==""){
+		alert("请先录制一段语音");
+		return;
+	}
 	//调用微信的上传录音接口把本地录音先上传到微信的服务器
     //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
     wx.uploadVoice({
@@ -129,6 +140,7 @@ function uploadVoice(){
         isShowProgressTips: 1, // 默认为1，显示进度提示
         success: function (res) {
             //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+            voice.serverId=res.serverId;
             $.ajax({
                 url: 'http://dt.staff.xdf.cn/xdfdtmanager/upload/uploadFile.do',
                 type: 'post',
@@ -142,6 +154,7 @@ function uploadVoice(){
                     console.log(error);
                 }
             });
+            downloadVoice();
         }
     });
 }
