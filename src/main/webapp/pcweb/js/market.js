@@ -259,13 +259,13 @@ function jumpPage(functionList) {
 
 function toLogout(serviceId) {
     var businessP = {"returnUrl": getRootPath() + "/index.html", "sid": getCookie("sid")};
-    var param = constructionParams(rsaEncryptedString(businessP), serviceId);
+    // var param = constructionParams(rsaEncryptedString(businessP), serviceId);
     jQuery.ajax({
         type: "POST",
         url: Global.actionURL,
         async: false,//同步
         dataType: 'json',
-        data: JSON.stringify(param),
+        data: JSON.stringify(businessP),
         success: function (json) {
             if (json.result == true) {
                 clearCookie();
