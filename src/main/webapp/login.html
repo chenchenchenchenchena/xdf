@@ -18,11 +18,11 @@
 	<button class="aaa">
 		录音
 	</button>
-	<button class="bbb">
-		保存
-	</button>
 	<button class="ccc" onclick="uploadVoice()">
 		发送
+	</button>
+	<button class="bbb">
+		下载
 	</button>
 	<button class="ddd">
 		播放
@@ -104,14 +104,14 @@ $('.aaa').on('touchend', function(event){
         });
     }
 });
-$('.ddd').on('touchend', function(event){
+$('.ddd').on('touchstart', function(event){
 	 //播放录音
 	wx.playVoice({
 	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
 	});
 });
-
-$(".bbb").on("touchend",function(event){
+//下载
+$(".bbb").on("touchstart",function(event){
 	wx.downloadVoice({
 	    serverId: localId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 	    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -132,7 +132,7 @@ function uploadVoice(){
         success: function (res) {
             //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
             $.ajax({
-                url: '后端处理上传录音的接口',
+                url: 'http://dt.staff.xdf.cn/xdfdtmanager/upload/uploadFile.do',
                 type: 'post',
                 data: JSON.stringify(res),
                 dataType: "json",
