@@ -10,7 +10,7 @@ function toLogin(serviceId) {
     alert("code:"+code_s+"state_s:"+state_s);
     // var param = constructionParams(rsaEncryptedString(calbac), serviceId);
     $.ajax({
-        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/pcLogin.do",
+        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -31,7 +31,7 @@ function showFunctionList(json) {
         setCookie("userName", json.userName, 1);
         setCookie("loginId", json.loginId, 1);
         setCookie("userId", json.userId, 1);
-        setSoukeCookie(json);
+        // setSoukeCookie(json);
         functionIds = [];
         var functionList = json.functionList;
         setFunctionList(functionList);
@@ -40,9 +40,9 @@ function showFunctionList(json) {
         setCookie("functionList", functionIds);
         jumpPage(json.functionList);
     } else {
-        layer.msg(json.message, {icon: 5});
+        // layer.msg(json.message, {icon: 5});
 
-        setTimeout("toLogout('91411a1a05fd4571859044ed18892ac1')", 5000);
+        // setTimeout("toLogout('91411a1a05fd4571859044ed18892ac1')", 5000);
     }
 }
 
