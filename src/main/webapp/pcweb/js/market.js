@@ -23,6 +23,7 @@ function toLogin() {
 
 //定义一个存放功能ID的数组
 var functionIds = [];
+var functionList = [];
 
 //显示功能列表
 function showFunctionList(json) {
@@ -33,10 +34,9 @@ function showFunctionList(json) {
         setCookie("loginId", json.loginId, 1);
         setCookie("userId", json.userId, 1);
         functionIds = [];
-        var functionList = json.functionList;
-        alert(functionList.isArray());
+        functionList = json.functionList;
         //获取functionIds
-        setFunctionList(functionList);
+        setFunctionList();
         localStorage.functionCheckedList = JSON.stringify(functionList);
         //保存功能列表functionIds
         setCookie("functionList", functionIds);
@@ -45,7 +45,7 @@ function showFunctionList(json) {
 }
 
 //获取functionIds
-function setFunctionList(functionList) {
+function setFunctionList() {
     if (functionList.length > 0) {
         for (var i = 0; i < functionList.length; i++) {
             var fun = functionList[i];
