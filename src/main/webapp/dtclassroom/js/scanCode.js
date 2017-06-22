@@ -43,7 +43,7 @@ $("#scanQRCode").click(function() {
         needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
         desc : 'scanQRCode desc',
         success : function(res) {
-            $('.Wxid').val(res.resultStr)
+            $('.Wxid').val(res.resultStr);
             more_s()
         }
     });
@@ -53,7 +53,7 @@ $("#scanQRCode").click(function() {
 if (!localStorage.terEmail) {
     var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
-    console.log(code_s+','+state_s)
+    console.log(code_s+','+state_s);
     var tname_config  = {
         'code':code_s,
         'e2State':state_s,
