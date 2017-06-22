@@ -12,6 +12,7 @@
 			width: 300px;
 			height: 300px;
 			border: 1px solid #000;
+			background: yellow;
 		}
 	</style>
 </head>
@@ -53,12 +54,12 @@
                 });
                 //调用失败
                 wx.error(function(res){
-                    alert("出错了"+res.errMsg)
+                    alert("出错了"+res.errMsg);
                 });
 
             }
         });
-   $("#pic").click(function(){
+   $("#pic").on("touchstart",function(){
    		alert(111);
    		var that = $(this);
    		wx.chooseImage({  
@@ -101,7 +102,7 @@ function wxuploadImage(e) {
 			    },  
 			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
 			        alert("提交失败" + textStatus);  
-			                        }  
+			    }  
 			  
 			});  
 			wx.downloadImage({
