@@ -814,7 +814,7 @@ td .shangban{
 .CHour_s_more p i{
     color:#00ba97;
 }
-html body .CHour_s_more p span{
+html body .CHour_s_more p .tx{
     display:inline-block;
     font-size:.32rem;
     line-height:.5rem;

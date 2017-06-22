@@ -195,7 +195,7 @@ $(function(){
                 setTimeout(function(){
                     $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
                 },1000)
-                $('.content td').removeClass('today')
+                $('.content td').removeClass('today');
                 var month  = $(this).attr('data_m');
                 var day = $(this).attr('data_d');
                 if(month<10){
@@ -206,19 +206,29 @@ $(function(){
                 }
                 var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
                 // alert(time);
+                var  day = new Date($(this).attr('data_y'),month,'0');
+                var daycount = day.getDate();
                 var emailm = {
-                    'studentCode':sessionStorage.stuNum,
+                    'teacherEmail':localStorage.terEmail,
                     'beginDate':time,
                     'endDate':time
+                };
+                //当月课程
+                var menu_s = {
+                    'teacherEmail':localStorage.terEmail,
+                    'beginDate':time.substring(0,7)+'-01',
+                    'endDate':time.substring(0,7)+'-'+daycount
                 };
 
                 if(time1.split(' ')[0]>time){
                     $(this).addClass('xuanzhong')
+                }else if(time1.split(' ')[0]==time){
+                    $(this).addClass('today')
                 }else{
                     $(this).addClass('xuanzhong_s')
                 }
-                ajax_S(url.s_stud,emailm,stusea);
-                ajax_S(url.s_stud,menu_s,menufunc)
+                ajax_S(url.s_emai,emailm,stusea);
+                ajax_S(url.s_emai,menu_s,menufunc);
             }
 
         });
