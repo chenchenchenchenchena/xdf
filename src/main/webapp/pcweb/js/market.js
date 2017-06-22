@@ -34,7 +34,7 @@ function showFunctionList(json) {
         setCookie("userId", json.userId, 1);
         functionIds = [];
         var functionList = json.functionList;
-        alert(isArray(functionList));
+        alert(functionList.isArray());
         //获取functionIds
         setFunctionList(functionList);
         localStorage.functionCheckedList = JSON.stringify(functionList);
