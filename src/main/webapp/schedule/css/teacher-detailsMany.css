@@ -154,6 +154,9 @@ html body .studentList li{
 	float: left;
 	margin-right: 0.56rem;
 }
+.studentList li p{
+	border:none;
+}
 .studentList .swiper-container{
 	height:3rem;
 }
