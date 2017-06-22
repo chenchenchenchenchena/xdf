@@ -75,7 +75,7 @@ $('.aaa').on('touchstart', function(event){
         wx.startRecord({
             success: function(){
                 localStorage.rainAllowRecord = 'true';
-                alert("开始录音");
+               /* alert("开始录音");*/
             },
             cancel: function () {
                 alert('用户拒绝授权录音');
@@ -97,6 +97,7 @@ $('.aaa').on('touchend', function(event){
         wx.stopRecord({
           success: function (res) {
             voice.localId = res.localId;
+            alert(voice.localId+"111111");
             uploadVoice();
             playVoice();
            /* alert("结束录音");*/
