@@ -99,7 +99,7 @@ $('.aaa').on('touchend', function(event){
     	alert(2);
         wx.stopRecord({
           success: function (res) {
-          	alert(res);
+          	alert(JSON.stringify(res));
             voice.localId = res.localId;
             /*alert(voice.localId+"111111");*/
             uploadVoice(voice.localId);
