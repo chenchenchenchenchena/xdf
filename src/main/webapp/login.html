@@ -110,6 +110,7 @@ $('.ddd').on('touchstart', function(event){
 	 playVoice();
 });
 function playVoice(){
+	alert("开始播放");
 	//播放录音
 	wx.playVoice({
 	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
@@ -120,6 +121,7 @@ $(".bbb").on("touchstart",function(event){
 	downloadVoice()
 })
 function downloadVoice(){
+	alert("开始下载");
 	wx.downloadVoice({
 	    serverId:voice.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 	    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -129,6 +131,7 @@ function downloadVoice(){
 	});
 }
 function uploadVoice(){
+	alert("开始上传");
 	if(voice.localId==""){
 		alert("请先录制一段语音");
 		return;
@@ -148,7 +151,7 @@ function uploadVoice(){
                 dataType: "json",
                 success: function (data) {
                 	alert(data);
-                    alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                   /* alert('文件已经保存到七牛的服务器');*///这回，我使用七牛存储
                 },
                 error: function (xhr, errorType, error) {
                     console.log(error);
