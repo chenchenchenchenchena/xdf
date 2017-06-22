@@ -70,7 +70,7 @@ $('.aaa').on('touchstart', function(event){
 	/*alert(1);*/
     event.preventDefault();
     START = new Date().getTime();
-
+	alert(START);
     recordTimer = setTimeout(function(){
         wx.startRecord({
             success: function(){
@@ -87,7 +87,7 @@ $('.aaa').on('touchstart', function(event){
 $('.aaa').on('touchend', function(event){
     event.preventDefault();
     END = new Date().getTime();
-    
+    alert(END);
     if((END - START) < 300){
         END = 0;
         START = 0;
