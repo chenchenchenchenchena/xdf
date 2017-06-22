@@ -5,7 +5,7 @@
 	<title></title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-	<script src="common/js/jquery.js"></script>
+	<script src="common/js/zepto.min.js"></script>
 	<script src="common/js/ajax.js"></script>
 	<style>
 		div{
@@ -59,6 +59,7 @@
             }
         });
    $("#pic").click(function(){
+   	alert(111);
    		var that = $(this);
    		wx.chooseImage({  
 	       count: 1,  
