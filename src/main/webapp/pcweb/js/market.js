@@ -25,7 +25,7 @@ var functionIds = [];
 
 //显示功能列表
 function showFunctionList(json) {
-    console.log(json.result);
+    console.log(json);
     if (json.result == true) {
         setCookie("sid", json.sid, 1);
         setCookie("userName", json.userName, 1);
