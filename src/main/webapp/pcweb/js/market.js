@@ -10,7 +10,7 @@ function toLogin(serviceId) {
     alert("code:"+code_s+"state_s:"+state_s);
     // var param = constructionParams(rsaEncryptedString(calbac), serviceId);
     $.ajax({
-        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
+        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
