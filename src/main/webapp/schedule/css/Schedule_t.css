@@ -357,14 +357,14 @@ tr .not_this{
 .today{
     color:#fff;
 }
-.inter_S:before{
+.inter_S:after{
     content:'';
     display:block;
     width:.1rem;
     height:.1rem;
     background:red;
     border-radius:50%;
-    z-index:-2;
+    z-index: 2;
     color: #fff;
     position:absolute;
     bottom:0;
@@ -386,14 +386,14 @@ tr .not_this{
 .today:after,.xuanzhong:before,.xuanzhong_s:before{
     content:'';
     display:block;
-    width:.9rem;
-    height:.9rem;
+    width:.8rem;
+    height:.8rem;
     background:#00ba97;
     position:absolute;
     left:50%;
-    margin-left:-.45rem;
+    margin-left:-.4rem;
     top:50%;
-    margin-top:-.43rem;
+    margin-top:-.4rem;
     border-radius:50%;
     z-index:-1;
     color: #fff;
@@ -822,8 +822,8 @@ html body .CHour_s_more p span{
     padding:.05rem .1rem;
     border-radius:.1rem;
     color:#fff !important;
-    position: absolute;
-    left:4.5rem;
+    position: relative;
+    left:0.5rem;
     margin-top:-.08rem;
 }
 .CHour_s_more_right{

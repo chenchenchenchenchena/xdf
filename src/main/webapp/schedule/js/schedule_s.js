@@ -130,6 +130,8 @@ $(function(){
             $('.H-data').hide();
             $('.N-data').show();
         }else{
+            $('.H-data').show();
+            $('.N-data').hide();
             curr_e = e.data.Data;
             console.log(curr_e)
             var time_old = [];
