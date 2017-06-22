@@ -8,7 +8,6 @@ function toLogin(serviceId) {
         'state': state_s
     };
     alert("code:"+code_s+"state_s:"+state_s);
-    // var param = constructionParams(rsaEncryptedString(calbac), serviceId);
     $.ajax({
         url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
         type: 'post',
@@ -31,18 +30,14 @@ function showFunctionList(json) {
         setCookie("userName", json.userName, 1);
         setCookie("loginId", json.loginId, 1);
         setCookie("userId", json.userId, 1);
-        // setSoukeCookie(json);
         functionIds = [];
         var functionList = json.functionList;
+        //获取functionIds
         setFunctionList(functionList);
         localStorage.functionCheckedList = JSON.stringify(functionList);
-        //功能列表
+        //保存功能列表functionIds
         setCookie("functionList", functionIds);
         jumpPage(json.functionList);
-    } else {
-        // layer.msg(json.message, {icon: 5});
-
-        // setTimeout("toLogout('91411a1a05fd4571859044ed18892ac1')", 5000);
     }
 }
 
@@ -71,23 +66,16 @@ function showList(page, cityId, areaId, deptId, status) {
         currentPage: page,
         pageSize: pageSize
     };
-    var serverId = "";
-    if (currentType == 1) { //筹课抽奖
-        serverId = "066495bbda9341e5b379043259dd7a23";
-    } else if (currentType == 2) {  //筹课
-        serverId = "63e8e90eeb984ab38bc81394e2c43d8f";
-    }
-    var d = constructionParams(rsaEncryptedString(requestJson), serverId);
     jQuery.ajax({
         type: "POST",
         url: Global.actionURL,
         async: false,//同步
         dataType: 'json',
-        data: JSON.stringify(d),
+        data: JSON.stringify(requestJson),
         success: function (json) {
             if (json.result == true) {
                 totalCounts = json.totalCount;
-                initPage(totalCounts, page);
+                // initPage(totalCounts, page);
                 var ckList = json.dataList;
                 var str = "";
                 for (var i = 0; i < ckList.length; i++) {
@@ -213,6 +201,28 @@ function showList(page, cityId, areaId, deptId, status) {
         }
     });
 }
+
+// function initPage(totalCounts, currentPage) {
+//     if (totalCounts != null && totalCounts != 0) {
+//         $.jqPaginator("#publicPage", {
+//             totalCounts: totalCounts,
+//             pageSize: pageSize,
+//             visiblePages: 10,
+//             currentPage: currentPage,
+//             prev: '<a class="pPrev" href="javascript:;">上一页</a>',
+//             next: '<a class="pNext" href="javascript:;">下一页</a>',
+//             page: '<a href="javascript:;">{{page}}</a>',
+//             activeClass: 'pCurrent',
+//             onPageChange: function (num, type) {
+//                 if (type != "init") {
+//                     showList(num, currentCityId, nameText);
+//                 }
+//             }
+//         });
+//     } else {
+//         $("#publicPage").html("");
+//     }
+// }
 
 
 function setSoukeCookie(json) {
