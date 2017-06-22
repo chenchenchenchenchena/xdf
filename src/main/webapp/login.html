@@ -110,9 +110,9 @@ $('.aaa').on('touchend', function(event){
     }
 });
 //播放
-$('.ddd').on('touchstart', function(event){
+/*$('.ddd').on('touchstart', function(event){
 	 playVoice();
-});
+});*/
 function playVoice(plId){
 	alert("开始播放");
 	//播放录音
@@ -121,9 +121,9 @@ function playVoice(plId){
 	});
 }
 //下载
-$(".bbb").on("touchstart",function(event){
+/*$(".bbb").on("touchstart",function(event){
 	downloadVoice()
-})
+})*/
 function downloadVoice(doId){
 	alert("开始下载");
 	wx.downloadVoice({
@@ -166,11 +166,11 @@ function uploadVoice(upId){
     });
 }
 //上传录音
-$(".ccc").on("touchstart",function(res){
+/*$(".ccc").on("touchstart",function(res){
 	alert("上传");
 	uploadVoice();
 })
-
+*/
 
 
 //注册微信播放录音结束事件【一定要放在wx.ready函数内】

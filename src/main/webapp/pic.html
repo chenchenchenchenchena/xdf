@@ -59,7 +59,7 @@
             }
         });
    $("#pic").click(function(){
-   	alert(111);
+   		alert(111);
    		var that = $(this);
    		wx.chooseImage({  
 	       count: 1,  
@@ -128,7 +128,10 @@ function wxuploadImage(e) {
     }
 });*/
 //预览图片接口
-
+/*wx.previewImage({
+    current: '', // 当前显示图片的http链接
+    urls: [] // 需要预览的图片http链接列表
+});*/
 //上传
 /*wx.uploadImage({
     localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
