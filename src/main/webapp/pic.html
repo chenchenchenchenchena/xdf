@@ -11,11 +11,15 @@
 		div{
 			width: 500px;
 			height: 500px;
+			border: 1px solid #000;
 		}
 	</style>
 </head>
 <body>
-	<div>图片</div>
+	<div id="pic">
+		<img src=""  />
+	</div>
+	<button>下一步</button>
 <script>
         var Wxconfig =  {"url" :location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
         var Wxconfig_h;
@@ -36,12 +40,12 @@
                     timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                     nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
                     signature: Wxconfig_h.signature, // 必填，签名
-                    jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"]
+                    jsApiList: ['chooseImage', 'uploadImage', 'downloadImage']
                 });
                 //调用成功
                 wx.ready(function(){
                     wx.checkJsApi({
-                        jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"],
+                        jsApiList: ['chooseImage', 'uploadImage', 'downloadImage'],
                         success:function(res){
                         }
                     })
@@ -54,114 +58,91 @@
 
             }
         });
-        
-        
-        
-wx.chooseImage({
+   $("#pic").click(function(){
+   		var that = $(this);
+   		wx.chooseImage({  
+	       count: 1,  
+	       needResult: 1,  
+	       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+	       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+	       success: function (data) {  
+	           var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片  
+	           $(that).find("img").attr('src', localIds)
+	           if (localIds) {  
+	               wxuploadImage(localIds);  
+	           }  
+	       },  
+	       fail: function (res) {  
+	           alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");  
+	        }  
+	  
+	    });  
+   })
+
+function wxuploadImage(e) {  
+             
+    wx.uploadImage({  
+        localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得  
+        isShowProgressTips: 1, // 默认为1，显示进度提示  
+        success: function (res) {  
+            serverId = res.serverId; // 返回图片的服务器端ID  
+  			$.ajax({  
+			    url: "http://dt.staff.xdf.cn/xdfdtmanager/upload/uploadFile.do",  
+			    data: {  
+			       serverId: serverId 
+			    },  
+			    type: "POST",  
+			    dataType: "json",  
+			    success: function (data) {  
+			       /* picPath = data;*/  //picPath 取得图片的路径  
+			       alert(data); 
+			    },  
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+			        alert("提交失败" + textStatus);  
+			                        }  
+			  
+			});  
+			wx.downloadImage({
+			    serverId:serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+			    isShowProgressTips: 1, // 默认为1，显示进度提示
+			    success: function (res) {
+			        var localId = res.localId; // 返回图片下载后的本地ID
+			    }
+			});
+
+        }
+      })
+}  
+
+
+
+//选择图片上传       
+/*wx.chooseImage({
     count: 1, // 默认9
     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
     }
-});
-//松手结束录音
-$('.aaa').on('touchend', function(event){
-    event.preventDefault();
-    END = new Date().getTime();
-    /*alert(END);*/
-    if((END - START) < 300){
-        END = 0;
-        START = 0;
-        //小于300ms，不录音
-        clearTimeout(recordTimer);
-    }else{
-        wx.stopRecord({
-          success: function (res) {
-            voice.localId = res.localId;
-            alert(voice.localId+"111111");
-            uploadVoice();
-            playVoice();
-           /* alert("结束录音");*/
-          },
-          fail: function (res) {
-           /* alert(JSON.stringify(res));
-            alert("录音结束失败");*/
-          }
-        });
-    }
-});
-//播放
-$('.ddd').on('touchstart', function(event){
-	 playVoice();
-});
-function playVoice(){
-	alert("开始播放");
-	//播放录音
-	wx.playVoice({
-	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-	});
-}
-//下载
-$(".bbb").on("touchstart",function(event){
-	downloadVoice()
-})
-function downloadVoice(){
-	alert("开始下载");
-	wx.downloadVoice({
-	    serverId:voice.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-	    isShowProgressTips: 1, // 默认为1，显示进度提示
-	    success: function (res) {
-	        var localId = res.localId; // 返回音频的本地ID
-	    }
-	});
-}
-function uploadVoice(){
-	alert("开始上传");
-	if(voice.localId==""){
-		alert("请先录制一段语音");
-		return;
-	}
-	//调用微信的上传录音接口把本地录音先上传到微信的服务器
-    //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
-    wx.uploadVoice({
-        localId: voice.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-        isShowProgressTips: 1, // 默认为1，显示进度提示
-        success: function (res) {
-            //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-            voice.serverId=res.serverId;
-            $.ajax({
-                url: 'http://dt.staff.xdf.cn/xdfdtmanager/upload/uploadFile.do',
-                type: 'post',
-                data: JSON.stringify(res),
-                dataType: "json",
-                success: function (data) {
-                	alert(data);
-                   /* alert('文件已经保存到七牛的服务器');*///这回，我使用七牛存储
-                },
-                error: function (xhr, errorType, error) {
-                    console.log(error);
-                }
-            });
-            downloadVoice();
-        }
-    });
-}
-//上传录音
-$(".ccc").on("touchstart",function(res){
-	alert("上传");
-	uploadVoice();
-})
+});*/
+//预览图片接口
 
-
-
-//注册微信播放录音结束事件【一定要放在wx.ready函数内】
-/*wx.onVoicePlayEnd({
+//上传
+/*wx.uploadImage({
+    localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
+    isShowProgressTips: 1, // 默认为1，显示进度提示
     success: function (res) {
-        stopWave();
+        var serverId = res.serverId; // 返回图片的服务器端ID
     }
 });*/
-</script>
+//下载图片接口
+/*wx.downloadImage({
+    serverId: '', // 需要下载的图片的服务器端ID，由uploadImage接口获得
+    isShowProgressTips: 1, // 默认为1，显示进度提示
+    success: function (res) {
+        var localId = res.localId; // 返回图片下载后的本地ID
+    }
+});*/
 
 </body>
 </html>
