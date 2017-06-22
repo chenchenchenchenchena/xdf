@@ -36,7 +36,7 @@ function showFunctionList(json) {
         functionIds = [];
         functionList = json.functionList;
         //获取functionIds
-        setFunctionList();
+        setFunctionList(functionList);
         localStorage.functionCheckedList = JSON.stringify(functionList);
         //保存功能列表functionIds
         setCookie("functionList", functionIds);
@@ -45,7 +45,7 @@ function showFunctionList(json) {
 }
 
 //获取functionIds
-function setFunctionList() {
+function setFunctionList(functionList) {
     if (functionList.length > 0) {
         for (var i = 0; i < functionList.length; i++) {
             var fun = functionList[i];
