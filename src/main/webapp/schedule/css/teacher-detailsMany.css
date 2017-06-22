@@ -173,6 +173,9 @@ html body .studentList li{
 .teacherList .swiper-container{
 	height:3.1rem;
 }
+.teacherList li span{
+	font-size:.2rem;
+}
 .teacherList ul li p{
 	border:none;
 }
