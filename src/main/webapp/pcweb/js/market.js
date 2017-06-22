@@ -13,7 +13,7 @@ function toLogin(serviceId) {
         url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
-        data: JSON.stringify(calbac),
+        data: JSON.stringify(param),
         success: function (e) {
             showFunctionList(e);
 
@@ -25,6 +25,7 @@ var functionIds = [];
 
 //显示功能列表
 function showFunctionList(json) {
+    alert(json.result);
     if (json.result == true) {
         setCookie("sid", json.sid, 1);
         setCookie("userName", json.userName, 1);
