@@ -89,14 +89,17 @@ $('.aaa').on('touchend', function(event){
     event.preventDefault();
     END = new Date().getTime();
     /*alert(END);*/
+  	 alert(1)
     if((END - START) < 300){
         END = 0;
         START = 0;
         //小于300ms，不录音
         clearTimeout(recordTimer);
     }else{
+    	alert(2);
         wx.stopRecord({
           success: function (res) {
+          	alert(res);
             voice.localId = res.localId;
             /*alert(voice.localId+"111111");*/
             uploadVoice(voice.localId);
