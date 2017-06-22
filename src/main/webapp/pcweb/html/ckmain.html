@@ -1,11 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>发布管理平台</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../css/p176.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="market.js"></script>
+    <script src="../../common/js/jquery.js"></script>
 </head>
-<body>
+<body onload="initMainPage('102');showList(1)">
+<!--<input type="text" id="loginId" hidden>
+<input type="text" id="userId" hidden>
+<input type="text" id="tokenId" hidden>
+<input type="text" id="schoolIdFinal" hidden>
+<input type="text" id="areaIdFinal" hidden>
+<input type="text" id="deptIdFinal" hidden>-->
 
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
+    <div class="p176-nav-left" id="schoolAuthority" style="display: none">
+        <ul>
+            <li class="dropdown js-ads-drop">
+                <a href="#" id="schoolName1" hidden>城市<i class="dropdown-white"></i></a>
+                <ul class="b-sub-menu" id="schoolName"></ul>
+            </li>
+            <li class="dropdown js-area-drop">
+                <a href="#" hidden id="areaName1">校区<i class="dropdown-white"></i></a>
+                <ul class="a-sub-menu" id="areaName"></ul>
+            </li>
+            <li class="dropdown js-item-drop">
+                <a href="#" hidden id="deptName1">部门<i class="dropdown-white"></i></a>
+                <ul class="p-sub-menu" id="deptName"></ul>
+            </li>
+        </ul>
+    </div>
+    <div class="p176-nav-right">
+        <ul>
+            <li>
+                <a href="#" class="p176-nav-usename js-userName"></a>
+                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
+                    <ul>
+                        <li><a href="#" onclick="toLogout('91411a1a05fd4571859044ed18892ac1')" class="">退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 
+<div class="p176-wrap-all">
+    <div class="p176-mainWrap">
+        <div class="p176-main">
+            <div class="inner">
+
+                <div class="xdf_special_title" id="tabs">
+                    <ul id="xdf_recommend">
+                        <!--<li class="xdf_border"><a href="javascript:void(0);" onclick="changeCkCenter(1)">筹课抽奖</a></li>-->
+                        <!--<li><a href="javascript:void(0);" onclick="changeCkCenter(2)">筹课</a></li>-->
+                        <li class="xdf_border">筹课抽奖</li>
+                        <li>筹课</li>
+                        <!--<li style="display: none;"><a href="javascript:void(0);" onclick="changeCkCenter(3)">点赞</a></li>-->
+                        <li style="display: none;">点赞</li>
+                    </ul>
+                </div>
+
+                <!--search-->
+                <div class="xdf_special_search">
+                    <span>
+                        <form action="javascript:search();">
+						<button></button>
+						<input type="search" id="nameText" placeholder="请输入名称搜索" />
+                         </form>
+                    </span>
+                    <input type="button" value="搜索" onclick="search()" class="search"/>
+                    <!--<a href="javascript:;" onclick="createCk()" data-functionId="10201" class="fr set-new"><i></i>筹课抽奖</a>-->
+                    筹课抽奖
+                </div>
+                <div class="clearfix"></div>
+                <!--   <div class="p176-btn-new clearfix">
+                       <a href="javascript:;" onclick="createCk()"
+                             class="js-addBtn" data-functionId="10201" style="width:100px;"><i class="p176-newImg"></i>新建筹课</a>
+                   </div>-->
+                <!--分类-->
+                <div class="hot-classes">
+                    <ul class="list1">
+                        <li>
+                            <span class="tit">地区：</span>
+                            <span class="xian-wid">
+                            </span>
+                            <span>
+                                <em class="open">展开<i class="ico-open"></i></em>
+                                <em class="shou">收起<i class="ico-shou"></i></em>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="tit">校区：</span>
+                            <span class="xian-wid2">
+                            </span>
+                            <span>
+                                <em class="open2">展开<i class="ico-open"></i></em>
+                                <em class="shou2">收起<i class="ico-shou"></i></em>
+                            </span>
+                        </li>
+                        <li class="last">
+                            <span class="tit">部门：</span>
+                            <span class="xian-wid3">
+                            </span>
+                            <span>
+                                <em class="open3">展开<i class="ico-open"></i></em>
+                                <em class="shou3">收起<i class="ico-shou"></i></em>
+                            </span>
+                        </li>
+                        <li class="last">
+                            <span class="tit">状态：</span>
+                            <span class="xian-wid4">
+                                <!-- 状态 0:未发布，1：未开始，2：进行中，3：已结束，4：提前结束 -->
+                                <!--<a href="#" class="cur" onclick="filterByStatus(this,'')">全部</a>-->
+                                <!--<a href="#" onclick="filterByStatus(this, 0)">未发布</a>-->
+                                <!--<a href="#" onclick="filterByStatus(this, 1)">未开始</a>-->
+                                <!--<a href="#" onclick="filterByStatus(this, 2)">进行中</a>-->
+                                <!--<a href="#" onclick="filterByStatus(this, 3)">已结束</a>-->
+                                <!--<a href="#" onclick="filterByStatus(this, 4)">提前结束</a>-->
+                                全部
+                                未发布
+                                未开始
+                                进行中
+                                已结束
+                                提前结束
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="botton" id="m1"></div>
+                </div>
+                <h2 class="p176-tit clearfix"><span class="p176-alresdy">已发布的筹课</span></h2>
+                <div class="p176-table-wrap">
+                    <table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
+                        <thead>
+                        <tr id="ckListHead">
+                            <!--
+                            <th style="width:20%;">名称</th>
+                            <th style="width:30%;">筹课时间</th>
+                            <th style="width:12%;">状态</th>
+                            <th style="width:10%;">分享设置</th>
+                            <th style="width:30%;">更多</th>
+                            -->
+                        </tr>
+                        </thead>
+                        <tbody id="ckListTbody">
+                        </tbody>
+                    </table>
+                    <div class="PublicPage" id="publicPage"></div>
+                </div>
+            </div>
+        </div>
+        <div class="p176-left">
+            <div class="p176-leftmenu">
+                <ul class="mtop10">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
