@@ -18,11 +18,11 @@
 	<button class="aaa">
 		录音
 	</button>
-	<button class="bbb">
-		保存
-	</button>
-	<button class="ccc" onclick="uploadVoice()">
+	<button class="ccc">
 		发送
+	</button>
+	<button class="bbb">
+		下载
 	</button>
 	<button class="ddd">
 		播放
@@ -42,7 +42,7 @@
                 // console.log(Wxconfig_h.timestamp);
                 //配置
                 wx.config({
-                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: Wxconfig.appid,   // 必填，公众号的唯一标识
                     timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                     nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
@@ -70,11 +70,12 @@ $('.aaa').on('touchstart', function(event){
 	/*alert(1);*/
     event.preventDefault();
     START = new Date().getTime();
-
+	/*alert(START);*/
     recordTimer = setTimeout(function(){
         wx.startRecord({
             success: function(){
                 localStorage.rainAllowRecord = 'true';
+               /* alert("开始录音");*/
             },
             cancel: function () {
                 alert('用户拒绝授权录音');
@@ -86,7 +87,7 @@ $('.aaa').on('touchstart', function(event){
 $('.aaa').on('touchend', function(event){
     event.preventDefault();
     END = new Date().getTime();
-    
+    /*alert(END);*/
     if((END - START) < 300){
         END = 0;
         START = 0;
@@ -96,56 +97,82 @@ $('.aaa').on('touchend', function(event){
         wx.stopRecord({
           success: function (res) {
             voice.localId = res.localId;
-            uploadVoice();
+            alert(voice.localId+"111111");
+            uploadVoice( voice.localId);
+            playVoice( voice.localId);
+           /* alert("结束录音");*/
           },
           fail: function (res) {
-            alert(JSON.stringify(res));
+           /* alert(JSON.stringify(res));
+            alert("录音结束失败");*/
           }
         });
     }
 });
-$('.ddd').on('touchend', function(event){
-	 //播放录音
-	wx.playVoice({
-	    localId: voice.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-	});
+//播放
+$('.ddd').on('touchstart', function(event){
+	 playVoice();
 });
-
-$(".bbb").on("touchend",function(event){
+function playVoice(plId){
+	alert("开始播放");
+	//播放录音
+	wx.playVoice({
+	    localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+	});
+}
+//下载
+$(".bbb").on("touchstart",function(event){
+	downloadVoice()
+})
+function downloadVoice(doId){
+	alert("开始下载");
 	wx.downloadVoice({
-	    serverId: localId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+	    serverId:doId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 	    isShowProgressTips: 1, // 默认为1，显示进度提示
 	    success: function (res) {
 	        var localId = res.localId; // 返回音频的本地ID
 	    }
 	});
-})
-
-
-//上传录音
-function uploadVoice(){
-    //调用微信的上传录音接口把本地录音先上传到微信的服务器
+}
+function uploadVoice(upId){
+	alert("开始上传");
+	if(voice.localId==""){
+		alert("请先录制一段语音");
+		return;
+	}
+	//调用微信的上传录音接口把本地录音先上传到微信的服务器
     //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
     wx.uploadVoice({
-        localId: voice.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+        localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
         isShowProgressTips: 1, // 默认为1，显示进度提示
         success: function (res) {
             //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+            voice.serverId=res.serverId;
             $.ajax({
-                url: '后端处理上传录音的接口',
+                url: 'http://dt.staff.xdf.cn/xdfdtmanager/upload/uploadFile.do',
                 type: 'post',
                 data: JSON.stringify(res),
                 dataType: "json",
                 success: function (data) {
-                    alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                	alert(data);
+                   /* alert('文件已经保存到七牛的服务器');*///这回，我使用七牛存储
                 },
                 error: function (xhr, errorType, error) {
                     console.log(error);
                 }
             });
+            downloadVoice(voice.serverId);
         }
     });
 }
+//上传录音
+$(".ccc").on("touchstart",function(res){
+	alert("上传");
+	uploadVoice();
+})
+
+
+
 //注册微信播放录音结束事件【一定要放在wx.ready函数内】
 /*wx.onVoicePlayEnd({
     success: function (res) {
