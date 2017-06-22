@@ -9,6 +9,7 @@ $(function(){
     //     wechatCode(location.href);
     //     return false;
     // }
+    sessionStorage.openid='ofZfFwlCe5Br7LEYIf16fO-di2O0'
     // 当前微信号
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -37,8 +38,8 @@ $(function(){
     //当月课程
     var menu_s = {
         'studentCode':sessionStorage.stuNum,
-        'beginDate':'2017-02-01',
-        'endDate':'2017-02-28'
+        'beginDate':new Date().format("yyyy-MM-01"),
+        'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
     ajax_S(url.s_seac,WXnum,stud);
@@ -63,23 +64,27 @@ $(function(){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
         }else{
-            location.href = 'schedule_t.html';
+            // location.href = 'schedule_t.html';
         }
     }
     //学生查询课程  整月查询
     function menufunc(e){
         console.log(e)
+        var arr = [];
+        dateH = [];
+        var moth = e.data.Data
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
         }else{
-            var arr = [];
-            var moth = e.data.Data;
             $('.month_hour i').html(moth.length);
             for(var i = 0;i<moth.length;i++){
                 arr.push( moth[i].SectBegin.split(' ')[0])
             }
+            // console.log(arr)
+            // console.log(moth)
+            $('.month_hour i').html('0');
             setTimeout(function(){
                 var html_s = $('.swiper-slide-active table').find('td');
                 var number = 0;
@@ -98,14 +103,19 @@ $(function(){
                         number++
                     }
                 }
-                for(var j = 0;j<dateH.length;j++){
-                    if(dateH[j]!=arr[j]){
-                        if(dateH[j]>time1.split(' ')[0]){
-                            html_s.eq(j+number).addClass('inter_S')
-                        }else{
-                            html_s.eq(j+number).addClass('innet_S')
+                for(var j = 0;j<arr.length;j++){
+
+                    for(var k = 0;k<dateH.length;k++){
+                        if(dateH[k]==arr[j]){
+                            if(arr[j]>new Date().format("yyyy-MM-dd")){
+                                html_s.eq(k+number).addClass('inter_S')
+
+                            }else{
+                                html_s.eq(k+number).addClass('innet_S')
+                            }
                         }
                     }
+
                 }
             },100)
         }

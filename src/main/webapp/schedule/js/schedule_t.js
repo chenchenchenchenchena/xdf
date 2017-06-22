@@ -1,6 +1,7 @@
 $(function(){
 // 本地测试数据
 // sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtsC5Wx5wZrA';
+    // localStorage.terEmail = 'hanqifan@xdf.cn'
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
 var WXnum  = {

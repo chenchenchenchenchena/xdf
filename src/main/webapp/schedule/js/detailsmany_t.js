@@ -56,7 +56,8 @@ $(function(){
 			if(BeginDate[regionindex[i]].AreaName==undefined){
 				BeginDate[regionindex[i]].AreaName='暂无数据'
 			}
-			$('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'</dt><dd>'+BeginDate[regionindex[i]].SchoolName+'</dd><dd class="name">(李晓明:'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
+			$('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">(李晓明:'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
+			$('.schoolCampus h3').html('上课校区('+(i+1)+')')
 			for(var j = 0;j<masterta.length;j++){
 				if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span>班主任</span><p>'+masterta[j]+'</p</li>')
