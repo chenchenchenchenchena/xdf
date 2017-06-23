@@ -211,6 +211,7 @@ $(function(){
                 if(day<10){
                     day = '0'+day
                 }
+                $('.CHour_s_title span').eq(1).html(month+'-'+day)
                 var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
                 // alert(time);
                 var  day = new Date($(this).attr('data_y'),month,'0');

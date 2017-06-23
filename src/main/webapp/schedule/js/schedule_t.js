@@ -29,9 +29,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-    // if(!sessionStorage.openid){
-    //         wechatCode(location.href)
-    // };
+    if(!sessionStorage.openid){
+            wechatCode(location.href)
+    };
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -207,8 +207,6 @@ function menufunc(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
-            $('.CHour_s_title span').eq(1).html(month+'-'+day)
-
             // alert(time);
             var  day = new Date($(this).attr('data_y'),month,'0');
             var daycount = day.getDate();
@@ -270,19 +268,19 @@ $(document).on('click','.H-data li',function(){
         $('.nbxs').css('margin-top','.9rem')
     }
 
-    // setInterval(function(){
-    //     var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
-    //     if(month<10){
-    //         month = '0'+month
-    //     }
-    //     var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-    //     var daycount = day.getDate();
-    //     var menu_s = {
-    //         'studentCode':sessionStorage.stuNum,
-    //         'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-    //         'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-    //     };
-    //     ajax_S(url.s_stud,menu_s,menufunc);
-    // },1000)
+    setInterval(function(){
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+    },1000)
 
 })
