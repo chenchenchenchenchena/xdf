@@ -69,7 +69,7 @@
 
             }
         });
-        var flag=0;
+       var flag=0;
    $("button").on("touchstart",function(event){
    
    		alert(111);
@@ -81,21 +81,9 @@
 	       success: function (res) {  
 	           var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片  
 	           alert("1111"+localIds);
-	      		
-	          
-	           		$(".img").eq(flag).attr('src', localIds);
-	           		alert($(".img").eq(flag).attr("src")+"img44444");
-	          		flag++;
-	         
-	           
-	         /*  if($(".img").eq(0).attr("src")!=""&&localId){
-	           		$(".img").eq(1).attr('src', localIds);
-	           }
-	           
-	          if($(".img").eq(0).attr("src")!=""&&$(".img").eq(1).attr("src")!=""&&localId){
-	           		$(".img").eq(2).attr('src', localIds);
-	           } */
-	           
+           		$(".img").eq(flag).attr('src', localIds);
+           		alert($(".img").eq(flag).attr("src")+"img44444");
+          		flag++;
 	           var imgSrc=$(".img").attr("src");
 	           	previewImage(imgSrc);
 	             wxuploadImage(localIds);
@@ -115,7 +103,6 @@ function previewImage(f){
 	});
 }
 function wxuploadImage(e) {  
-             
     wx.uploadImage({  
         localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得  
         isShowProgressTips: 1, // 默认为1，显示进度提示  
