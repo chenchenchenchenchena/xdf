@@ -30,7 +30,7 @@ function showFunctionList(json) {
     if (json.result == true) {
         setCookie("sid", json.sid, 1);
         setCookie("userName", json.userName, 1);
-        setCookie("loginId", json.loginId, 1);
+        // setCookie("loginId", json.loginId, 1);
         setCookie("userId", json.userId, 1);
 
         functionIds = [];
@@ -42,20 +42,26 @@ function showFunctionList(json) {
         localStorage.functionCheckedList = JSON.stringify(functionList);
         //保存功能列表functionIds
         setCookie("functionList", functionIds);
-        jumpPage(json.functionList);
+        jumpPage(functionList);
     }
 }
 
 //获取functionIds
 function setFunctionList(f) {
     if (f.length > 0) {
+        var children;
         for (var i = 0; i < f.length; i++) {
             var fun = f[i];
             var functionId = fun.id;
             var checked = fun.checked;
             if (checked) {
+                try {
+                    children = Array(fun.children);
+                } catch (e) {
+                    children = [];
+                }
                 functionIds.push(functionId);
-                // setFunctionList(fun.children);
+                setFunctionList(children);
             }
         }
     }
@@ -69,24 +75,26 @@ function jumpPage(functionList) {
                 var fun = functionList[i];
                 var checked = fun.checked;
                 if (checked) {
-                    // var children = fun.children;
-                    // for (var j = 0; j < children.length; j++) {
-                    //     var child = children[j];
-                    //     var childChecked = child.checked;
-                    //     var url = child.url.substring(1);
-                    //     if (childChecked) {
-                    //         window.location = url;
-                    //         break flag;
-                    //     }
-                    // }
                     try {
-                        // var parentId = fun.parentId;
-                        var url = fun.url;
-                        window.location = url;
-
-                    }catch (e){
+                        var children = Array(fun.children);
+                        for (var j = 0; j < children.length; j++) {
+                            var child = children[j];
+                            var childChecked = child.checked;
+                            try {
+                                var url = child.url.substring(1);
+                                if (childChecked) {
+                                    window.location = url;
+                                    break flag;
+                                }
+                            } catch (e) {
+                                break flag;
+                            }
+                        }
+                    } catch (e) {
                         break flag;
                     }
+
+
                 }
             }
     }
@@ -94,14 +102,14 @@ function jumpPage(functionList) {
 
 //初始化主页面
 function initMainPage(funcId) {
-    $("#loginId").val(getCookie("loginId"));
-    $("#userId").val(getCookie("userId"));
-    $("#tokenId").val(getCookie("access_token"));
-    $("#schoolIdFinal").val(getCookie("schoolId"));
-    $("#areaIdFinal").val(getCookie("areaId"));
-    $("#deptIdFinal").val(getCookie("deptId"));
+    // $("#loginId").val(getCookie("loginId"));
+    // $("#userId").val(getCookie("userId"));
+    // $("#tokenId").val(getCookie("access_token"));
+    // $("#schoolIdFinal").val(getCookie("schoolId"));
+    // $("#areaIdFinal").val(getCookie("areaId"));
+    // $("#deptIdFinal").val(getCookie("deptId"));
     $(".p176-nav-usename").html(getCookie("userName") + '<i class="p176-downIcon"></i>');
-    initNavigationBar();
+    // initNavigationBar();
     initMenu(funcId);
 }
 
@@ -115,11 +123,16 @@ function initMenu(funcId) {
         var checked = fun.checked;
         var functionName = fun.name;
         var className = fun.className;
-        var children = fun.children;
+        var children;
+        try {
+            children = fun.children;
+        } catch (e) {
+            children = null;
+        }
         if (checked) {
             menu += "<li>";
             menu += "<a href='javascript:;' title='" + functionName + "' data-functionId='" + functionId + "'>";
-            menu += "<i class='p176-class-icon " + className + "'></i>";
+            menu += "<i class='" + className + "'></i>";
             menu += "<span class='collapse-hide fz18'>" + functionName + "</span>";
             menu += "</a>";
             if (children != null && children.length > 0) {
@@ -127,11 +140,16 @@ function initMenu(funcId) {
                 for (var j = 0; j < children.length; j++) {
                     var funChild = children[j];
                     var funChildName = funChild.name;
-                    var funChildUrl = funChild.url;
+                    var funChildUrl;
+                    try {
+                        funChildUrl = funChild.url;
+                    } catch (e) {
+                        funChildUrl = null;
+                    }
                     var funChildChecked = funChild.checked;
                     if (funChildChecked) {
                         if (funChildUrl == null) {
-                            funChildUrl = "../system/404.html"
+                            // funChildUrl = "../system/404.html"
                         }
                         menu += "<li>";
                         if (funChild.id == funcId) {
