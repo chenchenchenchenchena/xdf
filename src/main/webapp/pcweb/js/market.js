@@ -69,11 +69,15 @@ function setFunctionList(f) {
 
 //如果checked== true，则跳转页面
 function jumpPage(functionList) {
+
+    console.log(functionList.length);
     if (functionList.length > 0) {
         flag:
             for (var i = 0; i < functionList.length; i++) {
                 var fun = functionList[i];
-                var checked = fun.checked;
+                console.log(functionList[i]);
+                console.log(functionList[i].checked);
+                var checked = functionList[i].checked;
                 if (checked) {
                     try {
                         var children = Array(fun.children);
