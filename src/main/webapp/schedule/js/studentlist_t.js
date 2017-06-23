@@ -35,7 +35,7 @@ for(var i = 1;i<teaname.length+1;i++){
 	// 		$('.studentList').eq(i).append('<li><i>'+(k+1)+'</i><span>'+stumore[k].substring(0,1)+'</span><span>'+stumore[k]+'</span></li>')
 	// 	}
 	// }
-    $('.slistTitle').html('课堂同学列表('+(stuname.length-1)*teaname.length+')')
+    $('.slistTitle').html('课堂同学列表('+(stuname.length-1)+')')
 }
 						
 

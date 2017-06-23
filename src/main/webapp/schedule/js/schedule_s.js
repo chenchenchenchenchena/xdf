@@ -144,7 +144,9 @@ $(function(){
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
+            $('.month_hour i').html('0');
         }else{
+            $('.month_hour i').html('0');
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
@@ -176,7 +178,7 @@ $(function(){
                        }
                     }
                 }
-                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p><p><i>班主任('+zteaname+')</i><span><i>主讲('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p><p><i>主讲('+zteaname+')</i><span><i>班主任('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
@@ -252,6 +254,7 @@ $(function(){
             if(day<10){
                 day = '0'+day
             }
+            $('.CHour_s_title span').eq(2).html(month+'-'+day)
             var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
             sessionStorage.timetoday = time_s;
             location.href = 'details_s.html'

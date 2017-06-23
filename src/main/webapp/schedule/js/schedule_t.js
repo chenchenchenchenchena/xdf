@@ -29,9 +29,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-if(!sessionStorage.openid){
-        wechatCode(location.href)
-};
+    // if(!sessionStorage.openid){
+    //         wechatCode(location.href)
+    // };
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -129,12 +129,12 @@ function stusea(e){
 function menufunc(e){
     var arr = [];
     dateH = [];
-    var moth = e.data.Data
     if(e.result==false){
         $('.H-data').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');
     }else{
+        var moth = e.data.Data;
         $('.month_hour i').html(moth.length);
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
@@ -221,7 +221,7 @@ function menufunc(e){
                 'beginDate':time.substring(0,7)+'-01',
                 'endDate':time.substring(0,7)+'-'+daycount
             };
-
+            $('.CHour_s_title span').eq(2).html(month+'-'+day)
             if(time1.split(' ')[0]>time){
                 $(this).addClass('xuanzhong')
             }else if(time1.split(' ')[0]==time){
@@ -269,6 +269,19 @@ $(document).on('click','.H-data li',function(){
         $('.nbxs').css('margin-top','.9rem')
     }
 
-
+    setInterval(function(){
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+    },1000)
 
 })
