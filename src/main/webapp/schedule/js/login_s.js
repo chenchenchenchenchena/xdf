@@ -41,10 +41,10 @@ function stuc(e){
 		$('.enter').show();
 		$('.searchTwo li').eq(0).html('关联结果');
 		$('.stuNum li').eq(1).remove();
-		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
-        $('.stuNum').append('<li class="new_S"><span>姓名:</span><span class="stu_num">'+e.data.studentName+'</span></li>');
-        $('.stuNum').append('<li class="new_S"><span>手机号:</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-        $('.search').css('margin-top','.2rem');
+		$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;">学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
+        $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;">姓名:</span><span class="stu_num">'+e.data.studentName+'</span></li>');
+        $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;">手机号:</span><span class="stu_num">'+e.data.mobile+'</span></li>');
+        $('.search').css('margin-top','.5rem');
         if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
@@ -103,7 +103,6 @@ function teac(e){
 			layer.msg('请输入正确格式学员号');
 			return false;
 		}
-		console.log(e)
 		if(e.result==true){
 			$('.noSearch').hide()
 			$('.card').hide()
@@ -119,8 +118,9 @@ function teac(e){
 				$('.deterAss').css('background','#fc1010')
 			}
 		}else{
-			$('.card').hide()
-			$('.noSearch').show()
+            $('.search').hide()
+            $('.card').hide();
+			$('.noSearch').show();
 			layer.msg('没有查到相关信息');
 		}
 	}
@@ -224,8 +224,9 @@ function telbind(e){
 	// alert(e.message.length!=0)
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
+		location.href = 'login_s.html'
 	}else if(e.result==false){
-	   layer.msg(e.message);
+	   		layer.msg(e.message);
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
@@ -248,7 +249,6 @@ $(document).on('click','.Relation',function(){
 		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}	
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
-
 	}
 	
 })
