@@ -42,7 +42,7 @@ function showFunctionList(json) {
         localStorage.functionCheckedList = JSON.stringify(functionList);
         //保存功能列表functionIds
         setCookie("functionList", functionIds);
-        jumpPage(functionList);
+        jumpPage(json.functionList);
     }
 }
 
@@ -70,6 +70,7 @@ function setFunctionList(f) {
 //如果checked== true，则跳转页面
 function jumpPage(functionList) {
 
+    console.log(functionList);
     console.log(functionList.length);
     if (functionList.length > 0) {
         flag:
