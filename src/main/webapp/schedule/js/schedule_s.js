@@ -71,12 +71,12 @@ $(function(){
     function menufunc(e){
         var arr = [];
         dateH = [];
-        var moth = e.data.Data;
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
         }else{
+            var moth = e.data.Data;
             $('.month_hour i').html(moth.length);
             for(var i = 0;i<moth.length;i++){
                 arr.push( moth[i].SectBegin.split(' ')[0])
