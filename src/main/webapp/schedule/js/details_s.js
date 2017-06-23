@@ -40,9 +40,9 @@ $(function(){
         }
         console.log(masterta);
         var begintime = BeginDate[timeindex].BeginDate.split(' ')[1].substring(0,BeginDate[timeindex].BeginDate.split(' ')[1].length-3)
-        var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace('-','/')
+        var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
         var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3)
-        var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace('-','/')
+        var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
         var LessonCount = BeginDate[timeindex].LessonCount
         var LessonNo = BeginDate[timeindex].LessonNo
         $('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+e.subject+')')
