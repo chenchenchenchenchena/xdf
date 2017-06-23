@@ -4,7 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    wechatCode(location.href);
+    // wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
@@ -64,12 +64,11 @@ $(function(){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
         }else{
-            location.href = 'schedule_t.html';
+            // location.href = 'schedule_t.html';
         }
     }
     //学生查询课程  整月查询
     function menufunc(e){
-        console.log(e)
         var arr = [];
         dateH = [];
         var moth = e.data.Data;
@@ -97,16 +96,22 @@ $(function(){
                     if(day<10){
                         day = '0'+day
                     }
-                    if(!html_s.eq(k).hasClass('not_this')){
+                    if(!html_s.eq(k).hasClass('not_this')&&!html_s.eq(k).hasClass('js_up')){
                         dateH.push(''+html_s.eq(k).attr('data_y')+'-'+month+'-'+day+'')
                     }else{
-                        number++
+                        if(k<20){
+                            number++
+                        }
                     }
                 }
+                console.log(arr);
+                console.log(dateH);
+                console.log(html_s)
                 for(var j = 0;j<arr.length;j++){
 
                     for(var k = 0;k<dateH.length;k++){
-                        if(dateH[k]==arr[j]){
+                        if(arr[j]==dateH[k]){
+                            console.log(k+number)
                             if(arr[j]>new Date().format("yyyy-MM-dd")){
                                 html_s.eq(k+number).addClass('inter_S')
 
@@ -143,7 +148,7 @@ $(function(){
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
-            console.log(curr_e)
+            console.log(curr_e);
             var time_old = [];
             var old;
             // 录入开始时间
@@ -230,7 +235,6 @@ $(function(){
                 ajax_S(url.s_stud,emailm,stusea);
                 ajax_S(url.s_stud,menu_s,menufunc);
             }
-
         });
     //点击查看详情
         $(document).on('click','.H-data li',function(){
@@ -253,4 +257,18 @@ $(function(){
             location.href = 'details_s.html'
 
         })
+    setInterval(function(){
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+    },1000)
 });

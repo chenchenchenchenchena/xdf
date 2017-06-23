@@ -254,7 +254,7 @@ $(document).on('click','.H-data li',function(){
         day = '0'+day
     }
     var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
-    alert(time_s)
+    // alert(time_s)
     sessionStorage.timetoday = time_s;
     location.href = 'detailsmany_t.html'
 

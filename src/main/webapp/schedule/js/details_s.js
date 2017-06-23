@@ -69,7 +69,7 @@ $(function(){
             var stuall = BeginDate[regionindex[i]].Students;
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
-                $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(0,2)+'<p>'+stuall[k].StudentName+'</p></li>')
+                $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
             }
         }
         $('.teacherList p span').html('('+$('.teacherList li').length+')')
