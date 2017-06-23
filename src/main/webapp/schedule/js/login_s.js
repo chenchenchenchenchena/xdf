@@ -240,13 +240,15 @@ function telbind(e){
 
 $(document).on('click','.Relation',function(){
 	if($(this).html()=='确认关联'){
-		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel}	
+		var stunum  = $(this).sibling('span').text()
+		alert(stunum)
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel}
 		ajax_S(url.s_bind,stumore,telbind)
 		// $(this).html('解除关联')
 	}else{
-		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}	
+		var stunum  = $(this).sibling('span').text()
+        alert(stunum)
+        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
         location.href = 'login_s.html'
