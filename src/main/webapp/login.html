@@ -115,32 +115,8 @@ $('.aaa').on('touchend', function(event){
         });
     }
 });
-	//播放
-/*$('.ddd').on('touchstart', function(event){
-	 playVoice();
-});*/
-	function playVoice(plId){
-	alert("开始播放");
-		//播放录音
-	wx.playVoice({
-	    localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-	});
-}
-//下载
-/*$(".bbb").on("touchstart",function(event){
-	downloadVoice()
-})*/
-	function downloadVoice(doId){
-	alert("开始下载");
-	wx.downloadVoice({
-	    serverId:doId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-	    isShowProgressTips: 1, // 默认为1，显示进度提示
-	    success: function (res) {
-	    	alert("1111"+JSON.stringify(res))
-	        var localId = res.localId; // 返回音频的本地ID
-	    }
-	});
-}
+
+
 function uploadVoice(upId){
 	alert("开始上传");
 	if(upId==""){
@@ -156,7 +132,29 @@ function uploadVoice(upId){
         	alert( JSON.stringify(res));
             //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
             serverId=res.serverId;
-            $.ajax({
+            downloadVoice(serverId); 
+        }
+    });
+}
+
+
+
+
+
+//下载
+/*$(".bbb").on("touchstart",function(event){
+	downloadVoice()
+})*/
+	function downloadVoice(doId){
+	alert("开始下载");
+	wx.downloadVoice({
+	    serverId:doId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+	    isShowProgressTips: 1, // 默认为1，显示进度提示
+	    async:false,
+	    success: function (res) {
+	    	alert("1111"+JSON.stringify(res))
+	        var localId = res.localId; // 返回音频的本地ID
+	         $.ajax({
                 url: 'http://10.73.81.189:8080/xdfdtmanager/upload/upload.do',
                 type: 'post',
                 data: JSON.stringify(res),
@@ -171,10 +169,26 @@ function uploadVoice(upId){
                     console.log(error);
                 }
             });
-            downloadVoice(serverId); 
-        }
-    });
+	    }
+	});
 }
+	
+	
+	
+	
+	//播放
+/*$('.ddd').on('touchstart', function(event){
+	 playVoice();
+});*/
+	function playVoice(plId){
+	alert("开始播放");
+		//播放录音
+	wx.playVoice({
+	    localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+	});
+}
+
+
 //上传录音
 /*$(".ccc").on("touchstart",function(res){
 	alert("上传");
