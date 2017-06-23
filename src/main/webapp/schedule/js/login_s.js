@@ -140,7 +140,7 @@ function teac(e){
 	//学员号查询点击
 	$('.numb_log').click(function(){
 		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
-		ajax_S(url.s_seac,'',stusea)
+		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
