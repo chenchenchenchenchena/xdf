@@ -59,7 +59,7 @@ $(function(){
                 BeginDate[regionindex[i]].AreaName='暂无数据'
             }
 
-            $('.schoolCampus h3').html('上课校区('+(i+1)+')')
+            $('#position').html(BeginDate[regionindex[i]].RoomName)
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
@@ -78,7 +78,8 @@ $(function(){
         }
         $('.teacherList p span').html('('+$('.teacherList li').length+')')
         $('.studentList p span').html('('+$('.studentList li').length+')')
-        $('.load_t').hide()
+        $('.load_t').hide();
+
         var swiper = new Swiper('.studentList .swiper-container', {
             pagination: '.swiper-pagination',
             slidesPerView: 5,

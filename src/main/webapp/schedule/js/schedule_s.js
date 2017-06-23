@@ -133,7 +133,14 @@ $(function(){
     });
     //按天查询课程
     //按天查询课程
+    var mastertae = [];
     function stusea(e){
+        ajax_S(url.data_s,'',function(e){
+            for(var i = 0;i<e.data.length;i++){
+                mastertae.push(e.data[i]);
+            }
+            console.log(e)
+        });
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if(e.result==false){
@@ -150,6 +157,16 @@ $(function(){
             var Index =[];
 
             var old;
+            var masterta = e.data.Data[0].Teachers.split(',');
+            var masteaname = '';
+            for(var j = 0;j<mastertae.length;j++){
+                for(var k = 0;k<masterta.length;k++){
+                    if(mastertae[j].teacherName==masterta[k]){
+                        jteaname = masterta[k]
+                        masterta[k] = ''
+                    }
+                }
+            }
             // 录入开始时间
             for(var i = 0;i<curr_e.length;i++){
                 var begtime = curr_e[i].BeginDate.split(' ');
@@ -197,7 +214,7 @@ $(function(){
                 }else{
                     old = 'activ_c'
                 }
-                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+zteaname+')</i><span><i>班主任('+jteaname+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+jteaname+')</i><span><i>班主任('+masterta+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
