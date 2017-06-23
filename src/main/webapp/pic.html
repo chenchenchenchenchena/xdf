@@ -14,6 +14,10 @@
 			border: 1px solid #000;
 			background: yellow;
 		}
+		#pic img{
+			width: 100%;
+			height: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -74,7 +78,7 @@
 	      		
 	           if (localIds) {  
 	           	that.find("img").attr('src', localIds);
-	           	 var imgSrc=that.find("img").attr("src");
+	           	var imgSrc=that.find("img").attr("src");
 	           	previewImage(imgSrc);
 	             wxuploadImage(localIds);  
 	           }  
