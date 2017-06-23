@@ -14,7 +14,7 @@ for(var i = 0;i<stuname.length;i++){
 		}
 		$('.studentList').append('<li><i>'+(i+1)+'</i><span>'+stuname[i].substring(0,1)+'</span><span>'+stuname[i]+'</span></li>')
 	}
-	$('.slistTitle').html('课堂学生列表('+(stuname.length-1)+')')
+	$('.slistTitle').html('课堂同学列表('+(stuname.length-1)+')')
 
 }
 

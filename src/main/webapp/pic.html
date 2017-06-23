@@ -62,6 +62,7 @@
    $("#pic").on("touchstart",function(event){
    		alert(111);
    		var that = $(this);
+   		
    		wx.chooseImage({  
 	       count: 1,  
 	       needResult: 1,  
@@ -69,10 +70,13 @@
 	       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
 	       success: function (res) {  
 	           var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片  
-	           alert(localIds);
-	           that.find("img").attr('src', localIds);
+	           alert("1111"+localIds);
+	      		
 	           if (localIds) {  
-	               wxuploadImage(localIds);  
+	           	that.find("img").attr('src', localIds);
+	           	 var imgSrc=that.find("img").attr("src");
+	           	previewImage(imgSrc);
+	             wxuploadImage(localIds);  
 	           }  
 	       },  
 	       fail: function (res) {  
@@ -81,7 +85,13 @@
 	  
 	    });  
    })
-
+//预览
+function previewImage(f){
+	wx.previewImage({
+	    current: imgSrc, // 当前显示图片的http链接
+	    urls: imgSrc // 需要预览的图片http链接列表
+	});
+}
 function wxuploadImage(e) {  
              
     wx.uploadImage({  

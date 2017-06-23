@@ -69,7 +69,6 @@ $(function(){
     }
     //学生查询课程  整月查询
     function menufunc(e){
-        console.log(e)
         var arr = [];
         dateH = [];
         var moth = e.data.Data;
@@ -97,16 +96,22 @@ $(function(){
                     if(day<10){
                         day = '0'+day
                     }
-                    if(!html_s.eq(k).hasClass('not_this')){
+                    if(!html_s.eq(k).hasClass('not_this')&&!html_s.eq(k).hasClass('js_up')){
                         dateH.push(''+html_s.eq(k).attr('data_y')+'-'+month+'-'+day+'')
                     }else{
-                        number++
+                        if(k<20){
+                            number++
+                        }
                     }
                 }
+                console.log(arr);
+                console.log(dateH);
+                console.log(html_s)
                 for(var j = 0;j<arr.length;j++){
 
                     for(var k = 0;k<dateH.length;k++){
-                        if(dateH[k]==arr[j]){
+                        if(arr[j]==dateH[k]){
+                            console.log(k+number)
                             if(arr[j]>new Date().format("yyyy-MM-dd")){
                                 html_s.eq(k+number).addClass('inter_S')
 
@@ -139,11 +144,13 @@ $(function(){
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
+            $('.month_hour i').html('0');
         }else{
+            $('.month_hour i').html('0');
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
-            console.log(curr_e)
+            console.log(curr_e);
             var time_old = [];
             var old;
             // 录入开始时间
@@ -171,7 +178,7 @@ $(function(){
                        }
                     }
                 }
-                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].CourseName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p><p><i>班主任('+zteaname+')</i><span><i>主讲('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p><p><i>主讲('+zteaname+')</i><span><i>班主任('+jteaname+')</i></span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
@@ -230,7 +237,6 @@ $(function(){
                 ajax_S(url.s_stud,emailm,stusea);
                 ajax_S(url.s_stud,menu_s,menufunc);
             }
-
         });
     //点击查看详情
         $(document).on('click','.H-data li',function(){
@@ -248,9 +254,24 @@ $(function(){
             if(day<10){
                 day = '0'+day
             }
+            $('.CHour_s_title span').eq(2).html(month+'-'+day)
             var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
             sessionStorage.timetoday = time_s;
             location.href = 'details_s.html'
 
         })
+    setInterval(function(){
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+    },1000)
 });

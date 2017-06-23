@@ -19,7 +19,6 @@ if(localStorage.terEmail){
 }else{
     ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};
-
 }
 function teac(e){
 	// var i = jQuery.parseJSON(e.data);
@@ -64,19 +63,14 @@ function logout(){
 
 // 退出登录
 function signOut(e) {
-    if (e.result == true) {
         var unlog = {
             'sid': localStorage.sid,
-            'returnUrl': ''
+            'returnUrl': url.t_back
         };
         //退出e2登录
         ajax_S(url.t_logi, unlog, function (a) {
             location.href = a.logoutUrl
         });
-        // location.href = 'login_s.html'
-    } else {
-        alert('解绑失败')
-    }
 }
     // 配置微信启动项
     var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
@@ -93,7 +87,7 @@ function signOut(e) {
             // console.log(Wxconfig_h.timestamp);
             //配置
             wx.config({
-                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: Wxconfig.appid,   // 必填，公众号的唯一标识
                 timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                 nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
@@ -118,8 +112,8 @@ function signOut(e) {
     });
 
 // 绑定点击事件
-    $(document).on('click',"#scanQRCode",function() {
-        alert(0)
+    $(document).on('touchend',"#scanQRCode",function() {
+        // alert(0)
         wx.scanQRCode({
             needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
             desc : 'scanQRCode desc',
