@@ -79,13 +79,18 @@
 	       success: function (res) {  
 	           var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片  
 	           alert("1111"+localIds);
-	      		
+	      		alert($(".img").eq(0).attr("src")+"img1");
+	      		alert($(".img").eq(1).attr("src")+"img1");
+	      		alert($(".img").eq(2).attr("src")+"img1");
 	           if ($(".img").eq(0).attr("src")=="") { 
 	           		$(".img").eq(0).attr('src', localIds);
+	           		alert($(".img").eq(0).attr("src")+"img1");
 	           }else if($(".img").eq(1).attr("src")==""){
 	           		$(".img").eq(1).attr('src', localIds);
+	           		alert($(".img").eq(1).attr("src")+"img2");
 	           }else{
 	           		$(".img").eq(2).attr('src', localIds);
+	           		alert($(".img").eq(2).attr("src")+"img3");
 	           }
 	           
 	         /*  if($(".img").eq(0).attr("src")!=""&&localId){
