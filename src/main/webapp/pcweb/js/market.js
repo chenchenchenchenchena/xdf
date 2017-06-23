@@ -76,7 +76,6 @@ function jumpPage(functionList) {
                 var checked = functionList[i].checked;
                 if (checked) {
                     try {
-                        // var children = Array(functionList[i].children);
                         console.log(functionList[i].children);
                         for (var j = 0; j < functionList[i].children.length; j++) {
                             var childChecked = functionList[i].children[j].checked;
