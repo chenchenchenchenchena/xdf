@@ -207,6 +207,8 @@ function menufunc(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
+            $('.CHour_s_title span').eq(1).html(month+'-'+day)
+
             // alert(time);
             var  day = new Date($(this).attr('data_y'),month,'0');
             var daycount = day.getDate();
@@ -221,7 +223,6 @@ function menufunc(e){
                 'beginDate':time.substring(0,7)+'-01',
                 'endDate':time.substring(0,7)+'-'+daycount
             };
-            $('.CHour_s_title span').eq(2).html(month+'-'+day)
             if(time1.split(' ')[0]>time){
                 $(this).addClass('xuanzhong')
             }else if(time1.split(' ')[0]==time){
@@ -269,19 +270,19 @@ $(document).on('click','.H-data li',function(){
         $('.nbxs').css('margin-top','.9rem')
     }
 
-    setInterval(function(){
-        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
-        if(month<10){
-            month = '0'+month
-        }
-        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-        var daycount = day.getDate();
-        var menu_s = {
-            'studentCode':sessionStorage.stuNum,
-            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-        };
-        ajax_S(url.s_stud,menu_s,menufunc);
-    },1000)
+    // setInterval(function(){
+    //     var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+    //     if(month<10){
+    //         month = '0'+month
+    //     }
+    //     var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+    //     var daycount = day.getDate();
+    //     var menu_s = {
+    //         'studentCode':sessionStorage.stuNum,
+    //         'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+    //         'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+    //     };
+    //     ajax_S(url.s_stud,menu_s,menufunc);
+    // },1000)
 
 })
