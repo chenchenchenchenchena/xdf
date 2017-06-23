@@ -158,9 +158,7 @@ function teac(e){
 		//解绑
 		else{
 			ajax_S(url.s_nobd,stumore,s_bind)
-            $('.studentTitle').hide();
-            $('.inputBox').hide()
-            $('.search').css('margin-top','.2rem');
+			location.href = 'login_s.html'
 		}
 	})
 	ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
