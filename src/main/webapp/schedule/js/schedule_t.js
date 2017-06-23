@@ -252,6 +252,7 @@ $(document).on('click','.H-data li',function(){
     if(day<10){
         day = '0'+day
     }
+    $('.CHour_s_title span').eq(1).html(month+'-'+day)
     var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
     // alert(time_s)
     sessionStorage.timetoday = time_s;
