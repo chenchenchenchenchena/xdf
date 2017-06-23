@@ -847,6 +847,8 @@ html body .CHour_s_more p .tx{
     display:block;
     padding-top:2.17rem;
     margin:0 auto;
+    width:3.8rem;
+    height:2.1rem;
 }
 .N-data h4{
     font-size:.4rem;
