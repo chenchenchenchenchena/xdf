@@ -6,7 +6,7 @@ $(function(){
         'endDate':sessionStorage.timetoday.split(' ')[0]
     };
     var mastertae = [];
-	sessionStorage.studen_s ='';
+	sessionStorage.s ='';
 	ajax_S(url.s_stud,emailm,stusea);
     ajax_S(url.data_s,'',function(e){
         for(var i = 0;i<e.data.length;i++){
