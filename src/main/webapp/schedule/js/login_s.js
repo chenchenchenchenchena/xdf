@@ -39,6 +39,7 @@ function stuc(e){
         $('.studentTitle').hide();
         $('.inputBox').hide();
 		$('.enter').show();
+		$('.searchTwo li').eq(0).html('关联结果')
 		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
         $('.stuNum').append('<li class="new_S"><span>姓名:</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.search').css('margin-top','.2rem')
