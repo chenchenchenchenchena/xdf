@@ -19,7 +19,6 @@ if(localStorage.terEmail){
 }else{
     ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};
-
 }
 function teac(e){
 	// var i = jQuery.parseJSON(e.data);
@@ -113,8 +112,8 @@ function signOut(e) {
     });
 
 // 绑定点击事件
-    $(document).on('click',"#scanQRCode",function() {
-        alert(0)
+    $(document).on('touchend',"#scanQRCode",function() {
+        // alert(0)
         wx.scanQRCode({
             needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
             desc : 'scanQRCode desc',
