@@ -1,5 +1,7 @@
 //判断正式环境
 var onlineUrl = 'dt.xdf.cn';
+var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
+var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 if (window.location.host == onlineUrl) {//正式环境
     // 接口路径
     var url_ = {
@@ -18,6 +20,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': 'http://dt.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
+        's_hwlist':url_online+'studentData/assingmentHomework.do',//待交作业学生列表查询
+        's_hwlistFinish':url_online+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
         't_logi': 'http://dt.xdf.cn/xdfdtmanager/logout/doLogout.do',//退出登录
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
@@ -47,6 +51,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': 'http://dt.staff.xdf.cn/xdfdtmanager/studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': 'http://dt.staff.xdf.cn/xdfdtmanager/studentData/queryStudentData.do',    //学生查询课程
+        's_hwlist':url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
+        's_hwlistFinish':url_test+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': 'http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryAllSpeakerTeachers.do', //主讲查询
         't_logi': 'http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do' ,//退出登录
         't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
@@ -155,6 +161,27 @@ function ajax_S(link,more,func){
                 }
         });
 }
+
+/** @brief  封装ajax请求 create by zsj
+ *  @param  targetUrl     请求接口
+ *  @param  requestData        请求接口传参
+ *  @param  successCallback     回调方法
+ *  @param  failureCallback     失败方法
+ */
+function ajaxRequest(typeIn, targetUrl, requestData, successCallback, failureCallback) {
+    $.ajax({
+        type: typeIn,
+        url: targetUrl,
+        data: requestData,
+        success: function (msg) {
+            successCallback(msg);
+        },
+        error: function (err) {
+            // failureCallback(msg);
+            console.log(err);
+        }
+    });
+};
 
 
 
