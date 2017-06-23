@@ -127,7 +127,8 @@ function teac(e){
 			layer.msg(e.message);
 			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
-			// location.reload()
+            location.href = 'login_s.html'
+            // location.reload()
 		}else{
             sessionStorage.stuNum = $('.stunum').val();
 			layer.msg('绑定成功');
@@ -158,7 +159,6 @@ function teac(e){
 		//解绑
 		else{
 			ajax_S(url.s_nobd,stumore,s_bind)
-			location.href = 'login_s.html'
 		}
 	})
 	ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
