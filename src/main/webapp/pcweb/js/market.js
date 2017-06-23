@@ -49,8 +49,8 @@ function showFunctionList(json) {
 //获取functionIds
 function setFunctionList(f) {
     if (f.length > 0) {
-        for (var i = 0; i < functionList.length; i++) {
-            var fun = functionList[i];
+        for (var i = 0; i < f.length; i++) {
+            var fun = f[i];
             var functionId = fun.id;
             var checked = fun.checked;
             if (checked) {
