@@ -81,7 +81,7 @@ function jumpPage(functionList) {
                             var child = children[j];
                             var childChecked = child.checked;
                             try {
-                                var url = child.url.substring(1);
+                                var url = child.url;
                                 if (childChecked) {
                                     window.location = url;
                                     break flag;
