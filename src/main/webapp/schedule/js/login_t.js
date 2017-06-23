@@ -22,7 +22,7 @@ if(localStorage.terEmail){
             ajax_S(url.s_nobd,stumore,telbind)
         }
     });
-    // ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
+    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};
