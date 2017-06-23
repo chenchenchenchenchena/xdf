@@ -69,15 +69,23 @@ function jumpPage(functionList) {
                 var fun = functionList[i];
                 var checked = fun.checked;
                 if (checked) {
-                    var children = fun.children;
-                    for (var j = 0; j < children.length; j++) {
-                        var child = children[j];
-                        var childChecked = child.checked;
-                        var url = child.url.substring(1);
-                        if (childChecked) {
-                            window.location = url;
-                            break flag;
-                        }
+                    // var children = fun.children;
+                    // for (var j = 0; j < children.length; j++) {
+                    //     var child = children[j];
+                    //     var childChecked = child.checked;
+                    //     var url = child.url.substring(1);
+                    //     if (childChecked) {
+                    //         window.location = url;
+                    //         break flag;
+                    //     }
+                    // }
+                    try {
+                        // var parentId = fun.parentId;
+                        var url = fun.url;
+                        window.location = url;
+
+                    }catch (e){
+                        break flag;
                     }
                 }
             }
