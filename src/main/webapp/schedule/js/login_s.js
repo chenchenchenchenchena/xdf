@@ -229,7 +229,7 @@ function telbind(e){
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
-        	// location.href = 'login_s.html'
+        	location.href = 'login_s.html'
 	}else{
 	   layer.msg('绑定成功');
 	   $('.deterAss').html('解除关联');
@@ -249,7 +249,6 @@ $(document).on('click','.Relation',function(){
         var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
-        location.href = 'login_s.html'
     }
 	
 })
