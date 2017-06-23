@@ -27,7 +27,7 @@ if (window.location.host == onlineUrl) {//正式环境
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': 'http://dt.xdf.cn/xdfdtmanager/teacherData/queryCourseRemind.do',  //老师课表提醒
         's_data': 'http://dt.xdf.cn/xdfdtmanager/studentData/queryCourseRemindStudent.do'  //学生课表提醒
-    }
+    };
     var Global = {
         "appid": 'wxab29a3e2000b8d2a',
         "secret": '60eb7eec2b7af5d74a704d3903e853dd',

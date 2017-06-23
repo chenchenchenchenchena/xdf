@@ -4,7 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    // wechatCode(location.href);
+    wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
@@ -64,7 +64,7 @@ $(function(){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
         }else{
-            // location.href = 'schedule_t.html';
+            location.href = 'schedule_t.html';
         }
     }
     //学生查询课程  整月查询
