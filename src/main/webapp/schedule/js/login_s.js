@@ -29,8 +29,9 @@ function stuc(e){
         //     $('.studentTitle').show();
         //     $('.inputBox').show()
         // }else{
-        //     $('.studentTitle').hide();
-        //     $('.inputBox').hide()
+            $('.studentTitle').hide();
+            $('.inputBox').hide()
+		$('.search').css('margin-top','.2rem')
         // }
 	}else{
 		$('.card').show();
@@ -64,12 +65,13 @@ function teac(e){
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
 			$('.card').hide();
-			// $('.search').hide();
+			$('.search').hide();
             $('.noSearch').hide();
+
         }else{
+			$('.card').show();
 			$('.searchTwo').hide();
-            $('.noSearch').hide();
-            $('.card').hide();
+			$('.noSearch').hide();
 		}
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
