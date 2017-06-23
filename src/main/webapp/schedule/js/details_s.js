@@ -74,9 +74,9 @@ $(function(){
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
-                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.2rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.2rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.2rem;">'+stuall[k].StudentName+'</p></li>')
                 }else{
-                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p  style="font-size:.2rem;">'+stuall[k].StudentName+'</p></li>')
                 }
 
             }

@@ -355,7 +355,7 @@ tr .not_this{
 	color: #ccc !important;
 }
 .today{
-    color:#fff;
+    color:#fff!important;
 }
 .inter_S:after{
     content:'';
@@ -408,7 +408,7 @@ tr .not_this{
     background:#ffbb37;
 }
 .xuanzhong,.xuanzhong_s{
-    color:#fff;
+    color:#fff!important;
 }
 td{position: relative;}
 td .fangjia{
