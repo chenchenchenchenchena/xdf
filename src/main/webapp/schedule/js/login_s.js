@@ -225,10 +225,11 @@ function telbind(e){
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
 	}else if(e.result==false){
-	   		layer.msg(e.message);
+        	layer.msg(e.message)
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
+        	location.href = 'login_s.html'
 	}else{
 	   layer.msg('绑定成功');
 	   $('.deterAss').html('解除关联');
