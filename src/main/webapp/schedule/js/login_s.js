@@ -21,7 +21,8 @@ function stuc(e){
 		$('.stutel').html('');
 		$('.deterAss').html('解除关联');
 		$('.deterAss').css('background','#fc1010');
-		sessionStorage.stuNumber = 	e.data.studentNo;
+        $('.searchTwo li').eq(0).html('关联结果');
+        sessionStorage.stuNumber = 	e.data.studentNo;
 		$('.enter').hide();
         //
         // //判断是否绑定
