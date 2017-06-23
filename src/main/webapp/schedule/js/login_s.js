@@ -29,20 +29,20 @@ function stuc(e){
         //     $('.studentTitle').show();
         //     $('.inputBox').show()
         // }else{
-            $('.studentTitle').hide();
-            $('.inputBox').hide()
+		$('.studentTitle').hide();
+		$('.inputBox').hide()
 		$('.search').css('margin-top','.2rem')
         // }
 	}else{
 		$('.searchTwo').show();
-		$('.studentLogin').eq(0).hide();
-		$('.studentLogin').eq(1).show();
 		$('.card').hide();
         $('.studentTitle').hide();
-        $('.inputBox').hide()
+        $('.inputBox').hide();
+		$('.enter').show();
 		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
-        $('.stuNum').append('<li class="new_S"><span>姓名:</span><span class="stu_num">'+e.data.studentName+'</span><button class="Relation"></button></li>');
-		if(e.data.relatedState=='1'){
+        $('.stuNum').append('<li class="new_S"><span>姓名:</span><span class="stu_num">'+e.data.studentName+'</span></li>');
+        $('.search').css('margin-top','.2rem')
+        if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
 			$('.Relation').html('确认关联')
@@ -229,7 +229,7 @@ function telbind(e){
 	}else{
 	   layer.msg('绑定成功');
 	   $('.deterAss').html('解除关联');
-	   location.href = 'login_s.html'
+	   ajax_S(url.s_seac,WXnum,stuc);
     }
 }
 
