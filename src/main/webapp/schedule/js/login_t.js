@@ -64,20 +64,14 @@ function logout(){
 
 // 退出登录
 function signOut(e) {
-    if (e.result == true) {
         var unlog = {
             'sid': localStorage.sid,
-            'returnUrl': ''
+            'returnUrl': url.t_back
         };
         //退出e2登录
         ajax_S(url.t_logi, unlog, function (a) {
             location.href = a.logoutUrl
         });
-        // location.href = 'login_s.html'
-    } else {
-        alert('解绑失败')
-        location.href = 'login_s.html'
-    }
 }
     // 配置微信启动项
     var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
