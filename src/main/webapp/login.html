@@ -132,6 +132,7 @@ function uploadVoice(upId){
         	alert( JSON.stringify(res));
             //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
             serverId=res.serverId;
+            alert("2222"+serverId);
             downloadVoice(serverId); 
         }
     });
@@ -161,7 +162,7 @@ function uploadVoice(upId){
                 data: {
                 	appid:Wxconfig.appid,
                 	secret:Wxconfig.secret,
-                	localId:localId
+                	localId:doId
                 },
                 dataType: "json",
                 success: function (data) {
