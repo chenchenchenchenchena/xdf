@@ -45,6 +45,7 @@ function binding(e){
 	if(e.result==false){
 		layer.msg(e.message)
 	}else{
+
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);

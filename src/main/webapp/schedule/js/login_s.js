@@ -140,7 +140,7 @@ function teac(e){
 	//学员号查询点击
 	$('.numb_log').click(function(){
 		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid}
-		ajax_S(url.s_seac,stumore,stusea)
+		ajax_S(url.s_seac,'',stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
@@ -166,10 +166,10 @@ function teac(e){
 
 	// 姓名手机号查询
 	function name_se(e){
-		$('.noSearch').hide()
-		$('.searchTwo').hide()
-		$('.new_S').remove()
-		console.log(e)
+		$('.noSearch').hide();
+		$('.searchTwo').hide();
+		$('.new_S').remove();
+		console.log(e);
 		var  studentNo =  e.data
 		var tel  = /^1[34578]\d{9}$/
 		if($('.phoneNumber').val()==''||$('.stname').val()==''){

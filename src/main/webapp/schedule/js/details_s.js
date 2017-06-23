@@ -50,21 +50,24 @@ $(function(){
         $('.date span').html(begindata+'-'+enddata)
         $('.classHour i').eq(0).html(LessonNo)
         $('.classHour i').eq(1).html(LessonCount)
-        $('.progressBar p').css('width',LessonNo/LessonCount*100+'%')
+        $('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
+
         var arr = [];
         for(var i = 0;i<regionindex.length;i++){
             if(BeginDate[regionindex[i]].AreaName==undefined){
                 BeginDate[regionindex[i]].AreaName='暂无数据'
             }
-            $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">(李晓明:'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
+
             $('.schoolCampus h3').html('上课校区('+(i+1)+')')
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
                 }else{
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')
+                    masteaname = mastertae[teacindex]
                 }
             }
+            $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masteaname+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
             arr.push(BeginDate[regionindex[i]].Students);
             var stuall = BeginDate[regionindex[i]].Students;
             for(var k = 0;k<stuall.length;k++){
