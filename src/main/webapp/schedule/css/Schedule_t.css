@@ -819,7 +819,7 @@ html body .CHour_s_more p .tx{
     font-size:.32rem;
     line-height:.5rem;
     background:#ff6966;
-    padding:.05rem .1rem;
+    padding:0;
     border-radius:.1rem;
     color:#fff !important;
     position: relative;

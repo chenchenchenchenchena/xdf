@@ -201,10 +201,9 @@ $(function(){
                         Index.push(htmltx);
                         //放作业提醒
                         for(var i =0;i<Index.length;i++){
-                            if(Index[i]==''){
-                                $('.tx').eq(i).css('padding','0');
-                            }else{
+                            if(Index[i]!=''){
                                 $('.tx').eq(i).html(Index[i]);
+                                $('.tx').eq(i).css('padding','.05rem .1rem');
                             }
                         }
                     }
@@ -309,5 +308,32 @@ $(function(){
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
         ajax_S(url.s_stud,menu_s,menufunc);
+
+
+        var month  = $('.today').attr('data_m');
+        var day = $('.today').attr('data_d');
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+
+        var html_s = $('.swiper-slide-active table').find('td');
+        for(var k = 0;k<html_s.length;k++){
+            var month  = $(html_s).eq(k).attr('data_m');
+            var day = $(html_s).eq(k).attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time2 = ''+$(html_s).eq(k).attr('data_y')+'-'+month+'-'+day+'';
+            if(time2<time){
+                $(html_s).eq(k).css('color','#ccc')
+            }
+        }
     },1000)
 });

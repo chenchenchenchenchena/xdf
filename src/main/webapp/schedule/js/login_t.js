@@ -15,7 +15,14 @@ if(localStorage.terEmail){
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
     // alert(bindingtea0)
-    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
+    ajax_S(url.s_seac,WXnum,function(e){
+        console.log(e)
+        if(e.data!=undefined){
+            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid}
+            ajax_S(url.s_nobd,stumore,telbind)
+        }
+    });
+    // ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     ajax_S(url.t_more,calbac,teac);
     var bindingtea0 = {};

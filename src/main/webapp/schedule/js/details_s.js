@@ -73,7 +73,12 @@ $(function(){
             var stuall = BeginDate[regionindex[i]].Students;
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
-                $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
+                if(stuall[k].StudentName.length>3){
+                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.2rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
+                }else{
+                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
+                }
+
             }
         }
         $('.teacherList p span').html('('+$('.teacherList li').length+')')

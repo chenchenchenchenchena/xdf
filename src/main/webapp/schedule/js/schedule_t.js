@@ -29,9 +29,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-    if(!sessionStorage.openid){
-            wechatCode(location.href)
-    };
+//     if(!sessionStorage.openid){
+//             wechatCode(location.href)
+//     };
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -51,7 +51,7 @@ function teac(e){
     // alert(e.data);
     // alert(WXnum);
     if(e.data=="goE2"){
-        location.href = 'login_s.html';
+        // location.href = 'login_s.html';
     }
 }
 //按天查课程
@@ -102,10 +102,9 @@ function stusea(e){
                     Index.push(htmltx);
                     //放作业提醒
                     for(var i =0;i<Index.length;i++){
-                        if(Index[i]==''){
-                            $('.tx').eq(i).css('padding','0');
-                        }else{
+                        if(Index[i]!=''){
                             $('.tx').eq(i).html(Index[i]);
+                            $('.tx').eq(i).css('padding','.05rem .1rem');
                         }
                     }
                 }
@@ -165,9 +164,8 @@ function menufunc(e){
                 if(dateH[k]==arr[j]){
                     if(arr[j]>new Date().format("yyyy-MM-dd")){
                             html_s.eq(k+number).addClass('inter_S')
-
                     }else{
-                            html_s.eq(k+number).addClass('innet_S')
+                        html_s.eq(k+number).addClass('innet_S');
                     }
               }
             }
@@ -282,6 +280,34 @@ $(document).on('click','.H-data li',function(){
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
         ajax_S(url.s_emai,menu_s,menufunc);
-    },1000)
+
+        var month  = $('.today').attr('data_m');
+        var day = $('.today').attr('data_d');
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+
+        var html_s = $('.swiper-slide-active table').find('td');
+        for(var k = 0;k<html_s.length;k++){
+            var month  = $(html_s).eq(k).attr('data_m');
+            var day = $(html_s).eq(k).attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time2 = ''+$(html_s).eq(k).attr('data_y')+'-'+month+'-'+day+'';
+            if(time2<time){
+                $(html_s).eq(k).css('color','#ccc')
+            }
+        }
+
+
+    },1000);
 
 })
