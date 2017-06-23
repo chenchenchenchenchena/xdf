@@ -15,7 +15,7 @@ $.ajax({
         //配置
         wx.config({
             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: Wxconfig.appid,   // 必填，公众号的唯一标识  
+            appId: Wxconfig.appid,   // 必填，公众号的唯一标识
             timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
             nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
             signature: Wxconfig_h.signature, // 必填，签名
@@ -43,7 +43,7 @@ $("#scanQRCode").click(function() {
         needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
         desc : 'scanQRCode desc',
         success : function(res) {
-            $('.Wxid').val(res.resultStr)
+            $('.Wxid').val(res.resultStr);
             more_s()
         }
     });
@@ -53,7 +53,7 @@ $("#scanQRCode").click(function() {
 if (!localStorage.terEmail) {
     var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
-    console.log(code_s+','+state_s)
+    console.log(code_s+','+state_s);
     var tname_config  = {
         'code':code_s,
         'e2State':state_s,
@@ -101,7 +101,7 @@ $.ajax({
     dataType: 'JSON',
     asyns:false,
     data:{'email':teacherid},
-    success:function(e){   
+    success:function(e){
         // alert(0)
         var more = e;
         console.log(more)
@@ -145,9 +145,9 @@ $.ajax({
                             'teacherName':teamore[j].sName
                         }
                     }
-                        
+
                     }
-                }    
+                }
             }
             // console.log(teachmore)
             teachjson = {
@@ -155,11 +155,11 @@ $.ajax({
                 'startDate':class_s.SectBegin,
                 'endDate':class_s.SectEnd,
                 'saveType':'flush',
-                'schoolId':class_s.SchoolId, 
-                'schoolName':class_s.SchoolName,   
-                'classId':class_s.ClassCode,  
+                'schoolId':class_s.SchoolId,
+                'schoolName':class_s.SchoolName,
+                'classId':class_s.ClassCode,
                 'className':class_s.ClassName,
-                'teacherId':teachmore.teacherId, 
+                'teacherId':teachmore.teacherId,
                 'teacherName':teachmore.teacherName,
                 'masterTeacherId':teachmore.masterTeacherId,
                 'masterTeacherName':teachmore.masterTeacherName,
@@ -176,7 +176,7 @@ $.ajax({
                 dataType: 'JSON',
                 asyns:false,
                 data:{'studentsData':JSON.stringify(teachjsonT)},
-                success:function(e){    
+                success:function(e){
                     console.log(e+'1111')
                     console.log(teachjsonT)
                     var r =e;

@@ -4,11 +4,12 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    // wechatCode(location.href);
+    wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
     // }
+    // sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
     // 当前微信号
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -37,8 +38,8 @@ $(function(){
     //当月课程
     var menu_s = {
         'studentCode':sessionStorage.stuNum,
-        'beginDate':'2017-02-01',
-        'endDate':'2017-02-28'
+        'beginDate':new Date().format("yyyy-MM-01"),
+        'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
     ajax_S(url.s_seac,WXnum,stud);
@@ -69,17 +70,21 @@ $(function(){
     //学生查询课程  整月查询
     function menufunc(e){
         console.log(e)
+        var arr = [];
+        dateH = [];
+        var moth = e.data.Data;
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
         }else{
-            var arr = [];
-            var moth = e.data.Data;
             $('.month_hour i').html(moth.length);
             for(var i = 0;i<moth.length;i++){
                 arr.push( moth[i].SectBegin.split(' ')[0])
             }
+            // console.log(arr)
+            // console.log(moth)
+            // $('.month_hour i').html('0');
             setTimeout(function(){
                 var html_s = $('.swiper-slide-active table').find('td');
                 var number = 0;
@@ -98,14 +103,19 @@ $(function(){
                         number++
                     }
                 }
-                for(var j = 0;j<dateH.length;j++){
-                    if(dateH[j]!=arr[j]){
-                        if(dateH[j]>time1.split(' ')[0]){
-                            html_s.eq(j+number).addClass('inter_S')
-                        }else{
-                            html_s.eq(j+number).addClass('innet_S')
+                for(var j = 0;j<arr.length;j++){
+
+                    for(var k = 0;k<dateH.length;k++){
+                        if(dateH[k]==arr[j]){
+                            if(arr[j]>new Date().format("yyyy-MM-dd")){
+                                html_s.eq(k+number).addClass('inter_S')
+
+                            }else{
+                                html_s.eq(k+number).addClass('innet_S')
+                            }
                         }
                     }
+
                 }
             },100)
         }
@@ -185,7 +195,7 @@ $(function(){
                 setTimeout(function(){
                     $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
                 },1000)
-                $('.content td').removeClass('today')
+                $('.content td').removeClass('today');
                 var month  = $(this).attr('data_m');
                 var day = $(this).attr('data_d');
                 if(month<10){
@@ -196,19 +206,29 @@ $(function(){
                 }
                 var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
                 // alert(time);
+                var  day = new Date($(this).attr('data_y'),month,'0');
+                var daycount = day.getDate();
                 var emailm = {
                     'studentCode':sessionStorage.stuNum,
                     'beginDate':time,
                     'endDate':time
                 };
+                //当月课程
+                var menu_s = {
+                    'studentCode':sessionStorage.stuNum,
+                    'beginDate':time.substring(0,7)+'-01',
+                    'endDate':time.substring(0,7)+'-'+daycount
+                };
 
                 if(time1.split(' ')[0]>time){
                     $(this).addClass('xuanzhong')
+                }else if(time1.split(' ')[0]==time){
+                    $(this).addClass('today')
                 }else{
                     $(this).addClass('xuanzhong_s')
                 }
                 ajax_S(url.s_stud,emailm,stusea);
-                ajax_S(url.s_stud,menu_s,menufunc)
+                ajax_S(url.s_stud,menu_s,menufunc);
             }
 
         });
@@ -222,7 +242,13 @@ $(function(){
                     day = $(this).find('i').html();
                 }
             });
-            var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+'-'+$(this).find('.CHour_s_more_left p').eq(1).html()+''
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
             sessionStorage.timetoday = time_s;
             location.href = 'details_s.html'
 
