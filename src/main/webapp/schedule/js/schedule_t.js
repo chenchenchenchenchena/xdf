@@ -207,6 +207,7 @@ function menufunc(e){
                 day = '0'+day
             }
             var time = ''+$(this).attr('data_y')+'-'+month+'-'+day+'';
+            $('.CHour_s_title span').eq(1).html(month+'-'+day)
             // alert(time);
             var  day = new Date($(this).attr('data_y'),month,'0');
             var daycount = day.getDate();
@@ -252,7 +253,6 @@ $(document).on('click','.H-data li',function(){
     if(day<10){
         day = '0'+day
     }
-    $('.CHour_s_title span').eq(1).html(month+'-'+day)
     var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
     // alert(time_s)
     sessionStorage.timetoday = time_s;
