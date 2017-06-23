@@ -44,7 +44,7 @@ function stuc(e){
 		$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号01</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-        $('.search').css('margin-top','.5rem');
+        $('.searchTwo').css('margin-top','.5rem');
         if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
@@ -229,7 +229,7 @@ function telbind(e){
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
-        	location.href = 'login_s.html'
+        	// location.href = 'login_s.html'
 	}else{
 	   layer.msg('绑定成功');
 	   $('.deterAss').html('解除关联');
@@ -240,14 +240,12 @@ function telbind(e){
 
 $(document).on('click','.Relation',function(){
 	if($(this).html()=='确认关联'){
-		var stunum  = $(this).sibling('span').text()
-		alert(stunum)
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
 		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel}
 		ajax_S(url.s_bind,stumore,telbind)
 		// $(this).html('解除关联')
 	}else{
-		var stunum  = $(this).sibling('span').text()
-        alert(stunum)
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
         var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid}
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
