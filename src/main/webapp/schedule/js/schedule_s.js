@@ -4,7 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    // wechatCode(location.href);
+    wechatCode(location.href);
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
