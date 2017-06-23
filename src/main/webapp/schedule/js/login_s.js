@@ -63,20 +63,13 @@ function teac(e){
 	// tab切换
 	$(".studentTitle li").on('touchend',function(){
 		if($(this).index()==1){
-
 			$('.card').hide();
-			$('.search').hide();
+			// $('.search').hide();
             $('.noSearch').hide();
-
         }else{
-            if($('.search').css('display')!='none'){
-                $('.search').show();
-            }else{
-                $('.card').show();
-
-            }
 			$('.searchTwo').hide();
-			$('.noSearch').hide();
+            $('.noSearch').hide();
+            $('.card').hide();
 		}
 		$(this).addClass("show").siblings().removeClass("show");
 		$(".inputBox p").eq($(this).index()).show().siblings("p").hide();
