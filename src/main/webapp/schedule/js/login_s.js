@@ -224,7 +224,8 @@ function telbind(e){
 	// alert(e.message.length!=0)
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
-	}else if(e.result==false){
+        location.href = 'login_s.html'
+    }else if(e.result==false){
         	layer.msg(e.message)
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
