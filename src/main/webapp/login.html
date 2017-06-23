@@ -157,7 +157,11 @@ function uploadVoice(upId){
 	         $.ajax({
                 url: 'http://10.73.81.189:8080/xdfdtmanager/upload/upload.do',
                 type: 'post',
-                data: localId,
+                data: {
+                	appid:Wxconfig.appid,
+                	secret:Wxconfig.secret,
+                	localId:localId
+                },
                 dataType: "json",
                 success: function (data) {
                 	if(data.success){
