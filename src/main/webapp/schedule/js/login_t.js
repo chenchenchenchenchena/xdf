@@ -76,6 +76,7 @@ function signOut(e) {
         // location.href = 'login_s.html'
     } else {
         alert('解绑失败')
+        location.href = 'login_s.html'
     }
 }
     // 配置微信启动项
