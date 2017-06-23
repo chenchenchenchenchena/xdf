@@ -70,25 +70,19 @@ function setFunctionList(f) {
 //如果checked== true，则跳转页面
 function jumpPage(functionList) {
 
-    console.log(functionList);
-    console.log(functionList.length);
     if (functionList.length > 0) {
         flag:
             for (var i = 0; i < functionList.length; i++) {
-                var fun = functionList[i];
-                console.log(functionList[i]);
-                console.log(functionList[i].checked);
                 var checked = functionList[i].checked;
                 if (checked) {
                     try {
-                        var children = Array(fun.children);
+                        var children = Array(functionList[i].children);
                         console.log(children);
                         for (var j = 0; j < children.length; j++) {
-                            var child = children[j];
-                            var childChecked = child.checked;
+                            var childChecked = children[j].checked;
                             try {
-                                var url = child.url;
-                                console.log(child.url);
+                                var url = children[j].url;
+                                console.log(url);
                                 if (childChecked) {
                                     window.location = url;
                                     break flag;
