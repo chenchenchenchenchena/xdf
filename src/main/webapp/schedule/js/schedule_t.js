@@ -276,11 +276,11 @@ $(document).on('click','.H-data li',function(){
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
         var menu_s = {
-            'studentCode':sessionStorage.stuNum,
+            'teacherEmail':localStorage.terEmail,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
-        ajax_S(url.s_stud,menu_s,menufunc);
+        ajax_S(url.s_emai,menu_s,menufunc);
     },1000)
 
 })
