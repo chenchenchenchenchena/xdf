@@ -77,11 +77,13 @@ function jumpPage(functionList) {
                 if (checked) {
                     try {
                         var children = Array(fun.children);
+                        console.log(children);
                         for (var j = 0; j < children.length; j++) {
                             var child = children[j];
                             var childChecked = child.checked;
                             try {
                                 var url = child.url;
+                                console.log(child.url);
                                 if (childChecked) {
                                     window.location = url;
                                     break flag;
