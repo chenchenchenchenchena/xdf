@@ -22,7 +22,7 @@ function stuc(e){
 		$('.deterAss').html('解除关联');
 		$('.deterAss').css('background','#fc1010');
 		sessionStorage.stuNumber = 	e.data.studentNo;
-		$('.enter').show();
+		$('.enter').hide();
         //
         // //判断是否绑定
         // if($('.stuname').html()==''){
@@ -49,7 +49,7 @@ function stuc(e){
 		// $('.')
 	}
 }
-ajax_S(url.t_wxmo,WXnum,teac)
+ajax_S(url.t_wxmo,WXnum,teac);
 function teac(e){
     console.log(e)
     if(e.data!="goE2"){
