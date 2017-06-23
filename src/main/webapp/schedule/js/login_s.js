@@ -39,11 +39,12 @@ function stuc(e){
         $('.studentTitle').hide();
         $('.inputBox').hide();
 		$('.enter').show();
-		$('.searchTwo li').eq(0).html('关联结果')
+		$('.searchTwo li').eq(0).html('关联结果');
+		$('.stuNum li').eq(1).remove();
 		$('.stuNum').append('<li class="new_S"><span>学员号01:</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
         $('.stuNum').append('<li class="new_S"><span>姓名:</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.stuNum').append('<li class="new_S"><span>手机号:</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-        $('.search').css('margin-top','.2rem')
+        $('.search').css('margin-top','.2rem');
         if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
