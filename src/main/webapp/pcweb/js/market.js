@@ -76,12 +76,12 @@ function jumpPage(functionList) {
                 var checked = functionList[i].checked;
                 if (checked) {
                     try {
-                        var children = Array(functionList[i].children);
-                        console.log(children);
-                        for (var j = 0; j < children.length; j++) {
-                            var childChecked = children[j].checked;
+                        // var children = Array(functionList[i].children);
+                        console.log(functionList[i].children);
+                        for (var j = 0; j < functionList[i].children.length; j++) {
+                            var childChecked = functionList[i].children[j].checked;
                             try {
-                                var url = children[j].url;
+                                var url = functionList[i].children[j].url;
                                 console.log(url);
                                 if (childChecked) {
                                     window.location = url;
