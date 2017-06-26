@@ -67,6 +67,8 @@ function stusea(e){
         }else{
             $('.N-data').hide();
             $('.H-data').show();
+            $('.loading_s').hide();
+
         }
         curr_e = e.data.Data;
         var time_old = [];
@@ -117,7 +119,6 @@ function stusea(e){
                 old = 'activ_c'
             }
             $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-            $('.loading_s').hide();
             $('.curriculum').show()
         }
 
@@ -126,6 +127,7 @@ function stusea(e){
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc);
 function menufunc(e){
+    console.log(e)
     var arr = [];
     dateH = [];
     if(e.result==false){
