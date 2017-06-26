@@ -258,7 +258,7 @@ $(document).on('click','.Relation',function(){
         "touser":"ofZfFwsBvoqZaBMFovXrJn6e9kEM",
 
         "template_id":"ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY",
-        "url":"http://weixin.qq.com/download",
+        "url":"",
 
         "topcolor":"#FF0000",
 
@@ -323,7 +323,7 @@ $(document).on('click','.Relation',function(){
         }
 
     };
-    ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN',json,function(e){
+    ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
     	console.log(e)
 	})
 

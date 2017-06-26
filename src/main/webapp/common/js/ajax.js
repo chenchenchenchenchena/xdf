@@ -39,6 +39,7 @@ if (window.location.host == onlineUrl) {//正式环境
         'e_elog': url_test+'e2Login/login.do',//e2登录
         'w_xmor': url_test+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
         'w_open': url_test+'wechatSignature/getUserInfo.do',//获取openid
+        'w_token':url_test+'wechatSignature/getWechatToken.do',//获取微信token
         'w_teac': url_test+'e2Login/doLogin.do',//查询老师邮箱
         'w_stum': url_test+'studentDataController/getClassDatas.do',// 获取班级信息
         'w_stor': url_test+'studentDataController/syncStudentsData.do',//获取学生信息
@@ -109,7 +110,14 @@ function wechatCode(url) {
         return false
     }
 }
+//获取微信token
 
+
+
+
+ajax_S(a.w_token,Global,function(e){
+    sessionStorage.access_token  = e.token
+})
 // function getwechatInfo(code){
 //     var businessP = {
 //         "appid": Global.appid,
