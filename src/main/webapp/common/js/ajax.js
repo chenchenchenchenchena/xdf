@@ -116,7 +116,7 @@ function wechatCode(url) {
 
 
 
-ajax_S(a.w_token,Global,function(e){
+ajax_S(ajax.w_token,Global,function(e){
     sessionStorage.access_token  = e.token
 })
 // function getwechatInfo(code){
