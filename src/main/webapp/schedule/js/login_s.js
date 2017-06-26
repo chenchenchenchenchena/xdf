@@ -253,11 +253,12 @@ $(document).on('click','.Relation',function(){
     }
 	
 })
+
 	var json = {
 
         "touser":"ofZfFwsBvoqZaBMFovXrJn6e9kEM",
 
-        "template_id":"ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY",
+        "template_id":"VP2e6EdXrmAZKnt-U_roWUuO7Tjyy6PY8wii3O6LiaQ",
         "url":"",
 
         "topcolor":"#FF0000",
@@ -323,6 +324,7 @@ $(document).on('click','.Relation',function(){
         }
 
     };
+
     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
     	console.log(e)
 	})
