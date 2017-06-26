@@ -63,7 +63,6 @@ function teac(e){
 //获取老师绑定信息
 function binding(e){
 	if(e.result==false){
-		layer.msg(e.message)
         ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
         var teacontent = JSON.parse(e.data);
