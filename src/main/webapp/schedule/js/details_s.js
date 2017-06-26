@@ -52,7 +52,6 @@ $(function(){
         $('.classHour i').eq(0).html(LessonNo)
         $('.classHour i').eq(1).html(LessonCount)
         $('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
-
         var arr = [];
         for(var i = 0;i<regionindex.length;i++){
             if(BeginDate[regionindex[i]].AreaName==undefined){

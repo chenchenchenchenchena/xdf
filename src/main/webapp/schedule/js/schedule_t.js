@@ -38,22 +38,13 @@ var touchtend;
 //微信查询是否绑定微信  参数：当前微信号 学生
 ajax_S(url.s_seac,WXnum,stud);
 function stud(e){
-    if(e.result==false){
-        ajax_S(url.t_wxmo,WXnum,teac);
-    }else{
+    if(e.result!=false){
         sessionStorage.stuNum = e.data.studentNo;
     }
 }
 
 
-ajax_S(url.t_wxmo,WXnum,teac);
-function teac(e){
-    // alert(e.data);
-    // alert(WXnum);
-    if(e.data=="goE2"){
-        // location.href = 'login_s.html';
-    }
-}
+
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
@@ -110,8 +101,6 @@ function stusea(e){
                     // }
                 }
             });
-
-            // console.log(begtime[1].substring(0,begtime[1].length-3))
             if(time1<curr_e[i].BeginDate){
                 old = ''
             }else{
@@ -125,7 +114,7 @@ function stusea(e){
 
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc);
-function menufunc(e){
+    function menufunc(e){
     console.log(e)
     var arr = [];
     dateH = [];
@@ -139,8 +128,6 @@ function menufunc(e){
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
     }
-    // console.log(arr)
-    // console.log(moth)
     setTimeout(function(){
     var html_s = $('.swiper-slide-active table').find('td');
     var number = 0;
@@ -176,7 +163,7 @@ function menufunc(e){
 }
 }
 //赋值今天是周几
-    setTimeout(function(){
+setTimeout(function(){
 	$('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
 },1000)
 
@@ -187,14 +174,7 @@ function menufunc(e){
             touchtend++
         },100)
     });
-
     $(document).on('touchend','.content td',function(){
-        // if($(this).hasClass('not_this')){
-        //     var clthis = $(this).find('i').html();
-        //     setTimeout(function(){
-        //         $('.swiper-slide-active').find('td[data_d=clthis]').addClass('xuanzhong')
-        //     },1000)
-        // }
         clearInterval(touchtime);
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
@@ -239,8 +219,6 @@ function menufunc(e){
         }
 
     });
-
-// <li class=""><a href="javascript:;"><div class="CHour_s_more_left"><p>13:00</p><span></span><p>13:00</p></div><div class="CHour_s_more"><h4>初中全科一对一</h4><p><i>8/16</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>
 //点击查看详情
 $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
@@ -263,16 +241,14 @@ $(document).on('click','.H-data li',function(){
     sessionStorage.timetoday = time_s;
     location.href = 'detailsmany_t.html'
 
-})
-
-
-
+});
+    //判断ios
     var u = navigator.userAgent;
-
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
         $('.nbxs').css('margin-top','.9rem')
     }
+    //存储今天时间
     var todaythis;
     setTimeout(function(){
         var month  = $('.today').attr('data_m');
@@ -285,9 +261,8 @@ $(document).on('click','.H-data li',function(){
         }
          todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
         $('.not_this').css('opacity','0')
-
-
     },100);
+    //月课时
     setInterval(function(){
         $('.not_this').css('opacity','0')
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));

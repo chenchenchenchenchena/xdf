@@ -110,35 +110,35 @@ function wechatCode(url) {
     }
 }
 
-function getwechatInfo(code){
-    var businessP = {
-        "appid": Global.appid,
-        "secret": Global.secret,
-        "code": code
-    }
-    alert('businessP:' + JSON.stringifY(businessP));
-    // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
-    jQuery.ajax({
-        type: "POST",
-        url: Global.actionURL,
-        async: false,//同步
-        dataType: 'json',
-        data: JSON.stringify(businessP),
-        success: function (json) {
-            alert('json:'+JSON.stringifY(json));
-            if (json.result == true) {
-                sessionStorage.openid = json.userInfo.openid;
-                sessionStorage.nickname = json.userInfo.nickname;
-                sessionStorage.headimgurl = json.userInfo.headimgurl;
-            } else {
-                layer.msg('获取用户信息失败')
-            }
-        },
-        error: function (json) {
-            layer.msg('获取用户信息失败')
-        }
-    })
-}
+// function getwechatInfo(code){
+//     var businessP = {
+//         "appid": Global.appid,
+//         "secret": Global.secret,
+//         "code": code
+//     }
+//     alert('businessP:' + JSON.stringifY(businessP));
+//     // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
+//     jQuery.ajax({
+//         type: "POST",
+//         url: Global.actionURL,
+//         async: false,//同步
+//         dataType: 'json',
+//         data: JSON.stringify(businessP),
+//         success: function (json) {
+//             alert('json:'+JSON.stringifY(json));
+//             if (json.result == true) {
+//                 sessionStorage.openid = json.userInfo.openid;
+//                 sessionStorage.nickname = json.userInfo.nickname;
+//                 sessionStorage.headimgurl = json.userInfo.headimgurl;
+//             } else {
+//                 layer.msg('获取用户信息失败')
+//             }
+//         },
+//         error: function (json) {
+//             layer.msg('获取用户信息失败')
+//         }
+//     })
+// }
 var Wxid = sessionStorage.openid
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
