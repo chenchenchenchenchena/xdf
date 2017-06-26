@@ -36,7 +36,7 @@ function Wxtea(e){
         $('.name_ema').html(teaname.teacherEmail);
         localStorage.terEmail = teaname.teacherEmail;
     }else{
-        etlogin('teacherWX')
+        // etlogin('teacherWX')
     }
 }
 function teac(e){
