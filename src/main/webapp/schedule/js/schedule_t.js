@@ -129,7 +129,7 @@ function menufunc(e){
     console.log(e)
     var arr = [];
     dateH = [];
-    if(e.result==false){
+    if(e.result==false||e.message!=undefined){
         $('.H-data').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');

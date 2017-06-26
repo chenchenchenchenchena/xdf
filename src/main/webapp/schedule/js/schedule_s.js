@@ -71,7 +71,7 @@ $(function(){
     function menufunc(e){
         var arr = [];
         dateH = [];
-        if(e.result==false||e.data==undefined){
+        if(e.result==false||e.message!=undefined){
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
