@@ -51,7 +51,7 @@ function teac(e){
         localStorage.sid = e.sid;
         bindingtea0['email'] = localStorage.terEmail;
         bindingtea0['wechatId'] = sessionStorage.openid;
-        bindingtea0['nickName'] = JSON.stringify(sessionStorage.nickname);
+        bindingtea0['nickName'] = encodeURI(sessionStorage.nickname);
         bindingtea0['headImg'] = sessionStorage.headimgurl;
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
