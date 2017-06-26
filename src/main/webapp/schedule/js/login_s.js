@@ -323,7 +323,9 @@ $(document).on('click','.Relation',function(){
         }
 
     };
-    ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN',)
+    ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN',json,function(e){
+    	console.log(e)
+	})
 
 
 
