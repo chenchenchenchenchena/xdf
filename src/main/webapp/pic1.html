@@ -98,9 +98,15 @@
    $(".img").click(function(event){
    		alert("图片开始预览");
 	   	var imgS=$(this).attr("src");
+	   	var imgList=$(".img");
+	   	var imgArr=[];
+	   	for(var i = 0;i<imgList.length;i++){
+	   		imgArr.push(imgList.eq(i).attr('src'));
+            
+	   	}
 	   	wx.previewImage({
 		    current: imgS, // 当前显示图片的http链接
-		    urls: imgS // 需要预览的图片http链接列表
+		    urls: imgArr // 需要预览的图片http链接列表
 		});
    })
 //预览
