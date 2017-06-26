@@ -17,7 +17,7 @@ if(localStorage.terEmail){
     // alert(bindingtea0)
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.data!=undefined){
-            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid}
+            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
             ajax_S(url.s_nobd,stumore,telbind)
         }
     });
@@ -44,11 +44,11 @@ function teac(e){
     if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
     }else{
-        var teaname = jQuery.parseJSON(e.data);
-        $('.name_s').html(teaname.userName);
-        $('.name_ema').html(teaname.userId);
-        localStorage.terEmail = teaname.userId;
-        localStorage.sid = teaname.sid;
+        // var teaname = jQuery.parseJSON(e.data);
+        $('.name_s').html(e.userName);
+        $('.name_ema').html(e.userId);
+        localStorage.terEmail = e.userId;
+        localStorage.sid = e.sid;
         bindingtea0['email'] = localStorage.terEmail;
         bindingtea0['wechatId'] = sessionStorage.openid;
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
@@ -78,7 +78,7 @@ function binding(e){
 
 
 function logout(){
-	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
+	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl};
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
 
