@@ -78,7 +78,7 @@ function binding(e){
 
 
 function logout(){
-	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl};
+	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
 
