@@ -56,10 +56,10 @@ $(function(){
         var arr = [];
         for(var i = 0;i<regionindex.length;i++){
             if(BeginDate[regionindex[i]].AreaName==undefined){
-                BeginDate[regionindex[i]].AreaName='暂无数据'
+                BeginDate[regionindex[i]].AreaName=''
             }
 
-            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].SchoolName+''+BeginDate[regionindex[i]].RoomName+''+BeginDate[regionindex[i]].ClassName)
+            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].RoomName+'教室')
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
