@@ -44,10 +44,19 @@ function getHwContentSuccess(msg) {
 		if(msg.data.length>0){
 			var datas = msg.data;
 			$.each(datas,function(i,item){
+				var classTitle = "";
+				//课程名称显示控制
+				if (item.className.length==8){
+					classTitle = item.className.substr(0,8)+'(第'+item.lessonNo+'课次)';
+				}else if (item.className.length>=10){
+					classTitle = item.className.substr(0,6)+'...(第'+item.lessonNo+'课次)';
+				}else{
+					classTitle = item.className+'(第'+item.lessonNo+'课次)';
+				}
 				var hwListHtml = '<div class="hwList">'
 					+'<div class="hwLeft">'+item.courseName+'</div>'
 					+'<div class="hwRight">'
-					+'<div class="hwTime"><span>'+item.className+'(第'+item.lessonNo+'次课)</span>'
+					+'<div class="hwTime"><span>'+classTitle+'</span>'
 					+'<span>'+item.lessonTime+'</span></div>'
 					+'<div class="hwKon"><span>'+item.description+'</span>'
 					+'<span>'+item.description+'</span></div></div></div>';
