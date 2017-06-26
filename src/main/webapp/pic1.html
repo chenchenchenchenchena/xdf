@@ -84,8 +84,8 @@
            		$(".img").eq(flag).attr('src', localIds);
            		alert($(".img").eq(flag).attr("src")+"img44444");
           		flag++;
-	           var imgSrc=$(".img").attr("src");
-	           	previewImage(imgSrc);
+	           /*var imgSrc=$(".img").attr("src");
+	           	previewImage(imgSrc);*/
 	             wxuploadImage(localIds);
 	       },  
 	       fail: function (res) {  
@@ -94,14 +94,22 @@
 	  
 	    });  
    })
+   
+   $(".img").click(function(){
+	   	var imgS=$(this).attr("src");
+	   	wx.previewImage({
+		    current: imgS, // 当前显示图片的http链接
+		    urls: imgS // 需要预览的图片http链接列表
+		});
+   })
 //预览
-function previewImage(f){
+/*function previewImage(f){
 	alert("开始预览");
 	wx.previewImage({
 	    current: imgSrc, // 当前显示图片的http链接
 	    urls: imgSrc // 需要预览的图片http链接列表
 	});
-}
+}*/
 function wxuploadImage(e) {  
     wx.uploadImage({  
         localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得  

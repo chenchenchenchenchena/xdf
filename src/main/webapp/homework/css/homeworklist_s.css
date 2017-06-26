@@ -57,14 +57,16 @@ body,html{
 	color: #333333;
 	margin-right: 8px;
 	display: inline-block;
-	max-width: 70%;
+	width: 67%;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	vertical-align: middle;
 }
 .hwTime>span:nth-child(2){
 	font-size: 20px;
 	color: #808080;
+	vertical-align: middle;
 }
 .hwKon{
 	margin-top: 15px;
