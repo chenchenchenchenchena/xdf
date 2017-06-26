@@ -381,7 +381,7 @@ tr .not_this{
     z-index:-2;
     color: #fff;
     position:absolute;
-    bottom:-.05rem;
+    bottom:-.2rem;
     left:45%;
 }
 .today:after,.xuanzhong:before,.xuanzhong_s:before{
