@@ -200,12 +200,12 @@ $(function(){
                         });
                         Index.push(htmltx);
                         //放作业提醒
-                        for(var i =0;i<Index.length;i++){
-                            if(Index[i]!=''){
-                                $('.tx').eq(i).html(Index[i]);
-                                $('.tx').eq(i).css('padding','.05rem .1rem');
-                            }
-                        }
+                        // for(var i =0;i<Index.length;i++){
+                        //     if(Index[i]!=''){
+                        //         $('.tx').eq(i).html(Index[i]);
+                        //         $('.tx').eq(i).css('padding','.05rem .1rem');
+                        //     }
+                        // }
                     }
                 });
                 if(time1<curr_e[i].BeginDate){
@@ -213,12 +213,12 @@ $(function(){
                 }else{
                     old = 'activ_c'
                 }
-                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+jteaname+')</i><span><i>班主任('+masterta+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+jteaname+')</i><span><i>班主任('+masterta+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
         }
-
+    // <span class="tx" index="'+i+'">'+htmltx+'</span>
     }
     // <span>12个带交作业</span>
     //日历点击事件

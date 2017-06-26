@@ -59,7 +59,7 @@ $(function(){
                 BeginDate[regionindex[i]].AreaName='暂无数据'
             }
 
-            $('#position').html(BeginDate[regionindex[i]].RoomName)
+            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].SchoolName+''+BeginDate[regionindex[i]].RoomName+''+BeginDate[regionindex[i]].ClassName)
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
@@ -74,9 +74,9 @@ $(function(){
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
-                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.25rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.25rem;">'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.4rem;">'+stuall[k].StudentName+'</p></li>')
                 }else{
-                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p  style="font-size:.2rem;">'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
                 }
 
             }

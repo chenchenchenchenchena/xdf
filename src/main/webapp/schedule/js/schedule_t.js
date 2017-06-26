@@ -102,12 +102,12 @@ function stusea(e){
                     });
                     Index.push(htmltx);
                     //放作业提醒
-                    for(var i =0;i<Index.length;i++){
-                        if(Index[i]!=''){
-                            $('.tx').eq(i).html(Index[i]);
-                            $('.tx').eq(i).css('padding','.05rem .1rem');
-                        }
-                    }
+                    // for(var i =0;i<Index.length;i++){
+                    //     if(Index[i]!=''){
+                    //         $('.tx').eq(i).html(Index[i]);
+                    //         $('.tx').eq(i).css('padding','.05rem .1rem');
+                    //     }
+                    // }
                 }
             });
 
@@ -117,10 +117,10 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.curriculum').show()
         }
-
+// <span class="tx" index="'+i+'">'+htmltx+'</span>
     }
 
     //按月查课程

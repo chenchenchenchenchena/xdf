@@ -41,7 +41,7 @@ function stuc(e){
 		$('.enter').show();
 		$('.searchTwo li').eq(0).html('关联结果：');
 		$('.stuNum li').eq(1).remove();
-		$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号01</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
+		$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
         $('.searchTwo').css('margin-top','.5rem');
