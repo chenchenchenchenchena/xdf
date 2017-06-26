@@ -350,6 +350,7 @@ body{
 }
 .swiper-slide table tr{
 	text-align: center;
+    padding:.1rem 0
 }
 tr .not_this{
 	color: #ccc !important;
