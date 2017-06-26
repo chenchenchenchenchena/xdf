@@ -306,8 +306,10 @@ $(function(){
             day = '0'+day
         }
         todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+        $('.not_this').css('opacity','0');
     },100);
     setInterval(function(){
+        $('.not_this').css('opacity','0')
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
