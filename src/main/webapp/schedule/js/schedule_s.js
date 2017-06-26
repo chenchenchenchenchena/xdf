@@ -334,7 +334,7 @@ $(function(){
                 day = '0'+day
             }
             var time2 = ''+$(html_s).eq(k).attr('data_y')+'-'+month+'-'+day+'';
-            if(time2<time){
+            if(time2<todaythis){
                 $(html_s).eq(k).css('color','#ccc')
             }
         }
