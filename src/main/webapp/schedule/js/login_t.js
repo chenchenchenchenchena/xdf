@@ -16,7 +16,6 @@ if(localStorage.terEmail){
     bindingtea0['wechatId'] = sessionStorage.openid;
     // alert(bindingtea0)
     ajax_S(url.s_seac,WXnum,function(e){
-        console.log(e)
         if(e.data!=undefined){
             var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid}
             ajax_S(url.s_nobd,stumore,telbind)
@@ -29,28 +28,30 @@ if(localStorage.terEmail){
 }
 function Wxtea(e){
     if(e.data!=undefined){
-        $('.name_s').html(e.userName);
-        localStorage.terEmail = e.userId;
-        localStorage.sid = e.sid;
-        $('.name_ema').html(e.userId);
+        var teaname = jQuery.parseJSON(e.data);
+        console.log(teaname)
+
+        $('.name_s').html(teaname.teacherName);
+        $('.name_ema').html(teaname.teacherEmail);
+        localStorage.terEmail = teaname.teacherEmail;
     }else{
         ajax_S(url.t_more,calbac,teac);
     }
 }
 function teac(e){
+    console.log(e)
     if(e.data==undefind){
         etlogin('teacherWX')
+    }else{
+        var teaname = jQuery.parseJSON(e.data);
+        $('.name_s').html(teaname.userName);
+        $('.name_ema').html(teaname.userId);
+        localStorage.terEmail = teaname.userId;
+        localStorage.sid = teaname.sid;
+        bindingtea0['email'] = localStorage.terEmail;
+        bindingtea0['wechatId'] = sessionStorage.openid;
+        ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
-	// var i = jQuery.parseJSON(e.data);
-    $('.name_s').html(e.userName);
-    $('.name_ema').html(e.userId);
-    localStorage.terEmail = e.userId;
-    localStorage.sid = e.sid;
-    bindingtea0['email'] = localStorage.terEmail;
-    bindingtea0['wechatId'] = sessionStorage.openid;
-    // alert(bindingtea0.email);
-    // alert(bindingtea0.email);
-    ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 
 }
 // s
@@ -63,8 +64,8 @@ function teac(e){
 function binding(e){
 	if(e.result==false){
 		layer.msg(e.message)
+        ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
-
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
@@ -148,7 +149,6 @@ function signOut(e) {
     if (!localStorage.terEmail) {
         var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
         var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
-        console.log(code_s+','+state_s)
         var tname_config  = {
             'code':code_s,
             'e2State':state_s,
