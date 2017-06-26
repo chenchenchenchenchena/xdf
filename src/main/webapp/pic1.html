@@ -95,7 +95,8 @@
 	    });  
    })
    
-   $(".img").click(function(){
+   $(".img").click(function(event){
+   		alert("图片开始预览");
 	   	var imgS=$(this).attr("src");
 	   	wx.previewImage({
 		    current: imgS, // 当前显示图片的http链接
