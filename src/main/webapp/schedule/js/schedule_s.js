@@ -71,7 +71,7 @@ $(function(){
     function menufunc(e){
         var arr = [];
         dateH = [];
-        if(e.result==false){
+        if(e.result==false||e.data==undefined){
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
@@ -294,7 +294,19 @@ $(function(){
         sessionStorage.timetoday = time_s;
         location.href = 'details_s.html'
 
-    })
+    });
+    var todaythis;
+    setTimeout(function(){
+        var month  = $('.today').attr('data_m');
+        var day = $('.today').attr('data_d');
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+    },100);
     setInterval(function(){
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
@@ -310,15 +322,6 @@ $(function(){
         ajax_S(url.s_stud,menu_s,menufunc);
 
 
-        var month  = $('.today').attr('data_m');
-        var day = $('.today').attr('data_d');
-        if(month<10){
-            month = '0'+month
-        }
-        if(day<10){
-            day = '0'+day
-        }
-        var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
 
         var html_s = $('.swiper-slide-active table').find('td');
         for(var k = 0;k<html_s.length;k++){

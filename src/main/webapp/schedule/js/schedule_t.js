@@ -59,7 +59,7 @@ ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
     console.log(e);
         $('.curriculum li').remove();
-        if(e.result==false){
+        if(e.result==false||e.data==undefined){
             $('.N-data').show();
             $('.H-data').hide();
             $('.loading_s').hide();
@@ -67,7 +67,6 @@ function stusea(e){
         }else{
             $('.N-data').hide();
             $('.H-data').show();
-            $('.loading_s').hide();
 
         }
         curr_e = e.data.Data;
@@ -280,6 +279,18 @@ $(document).on('click','.H-data li',function(){
         }
          todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
     },100);
+
+
+    var month  = $('.today').attr('data_m');
+    var day = $('.today').attr('data_d');
+    if(month<10){
+        month = '0'+month
+    }
+    if(day<10){
+        day = '0'+day
+    }
+    var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+
     setInterval(function(){
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
@@ -293,8 +304,6 @@ $(document).on('click','.H-data li',function(){
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
         ajax_S(url.s_emai,menu_s,menufunc);
-
-
 
         var html_s = $('.swiper-slide-active table').find('td');
         for(var k = 0;k<html_s.length;k++){
