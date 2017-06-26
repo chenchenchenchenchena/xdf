@@ -64,9 +64,6 @@ function teac(e){
 
 //获取老师绑定信息
 function binding(e){
-    var a = encodeURI(encodeURI(sessionStorage.nickname))
-    $('body').append('<h1>'+decodeURI(decodeURI(a))+'</h1>')
-    $('body').append('<h1>'+sessionStorage.nickname+'</h1>')
 	if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
