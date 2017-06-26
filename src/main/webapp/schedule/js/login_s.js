@@ -258,7 +258,7 @@ $(document).on('click','.Relation',function(){
 
         "touser":"ofZfFwsBvoqZaBMFovXrJn6e9kEM",
 
-        "template_id":"VP2e6EdXrmAZKnt-U_roWUuO7Tjyy6PY8wii3O6LiaQ",
+        "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
         "url":"",
 
         "topcolor":"#FF0000",
