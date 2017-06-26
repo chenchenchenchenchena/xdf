@@ -23,25 +23,26 @@ if(localStorage.terEmail){
     });
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
-    ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
+
+    ajax_S(url.t_more,calbac,teac);
+
     var bindingtea0 = {};
 }
 function Wxtea(e){
     if(e.data!=undefined){
         var teaname = jQuery.parseJSON(e.data);
         console.log(teaname)
-
         $('.name_s').html(teaname.teacherName);
         $('.name_ema').html(teaname.teacherEmail);
         localStorage.terEmail = teaname.teacherEmail;
     }else{
-        ajax_S(url.t_more,calbac,teac);
+        etlogin('teacherWX')
     }
 }
 function teac(e){
     console.log(e)
-    if(e.data==undefind){
-        etlogin('teacherWX')
+    if(e.result==false){
+        ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
     }else{
         var teaname = jQuery.parseJSON(e.data);
         $('.name_s').html(teaname.userName);
