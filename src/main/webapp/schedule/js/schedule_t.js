@@ -189,6 +189,12 @@ function menufunc(e){
     });
 
     $(document).on('touchend','.content td',function(){
+        // if($(this).hasClass('not_this')){
+        //     var clthis = $(this).find('i').html();
+        //     setTimeout(function(){
+        //         $('.swiper-slide-active').find('td[data_d=clthis]').addClass('xuanzhong')
+        //     },1000)
+        // }
         clearInterval(touchtime);
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
@@ -292,6 +298,7 @@ $(document).on('click','.H-data li',function(){
     var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
 
     setInterval(function(){
+        $('.not_this').css('opacity','0')
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
