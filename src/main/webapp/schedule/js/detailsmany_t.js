@@ -57,11 +57,12 @@ $(function(){
 				BeginDate[regionindex[i]].AreaName='暂无数据'
 			}
 			console.log(mastertae[teacindex])
-			$('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+mastertae[teacindex].teacherName+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
+
 			$('.schoolCampus h3').html('上课校区('+(i+1)+')')
 			for(var j = 0;j<masterta.length;j++){
 				if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
+                    $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masterta[j]+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
                 }else{
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')
                 }
@@ -74,10 +75,10 @@ $(function(){
 			for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
-                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.25' +
-                        'rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.25rem;">'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
+                        'rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.4rem;">'+stuall[k].StudentName+'</p></li>')
                 }else{
-                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.25rem;">'+stuall[k].StudentName+'</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p >'+stuall[k].StudentName+'</p></li>')
                 }
 			}
 		}

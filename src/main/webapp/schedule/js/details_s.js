@@ -68,13 +68,14 @@ $(function(){
                     masteaname = mastertae[teacindex]
                 }
             }
-            $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masteaname+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
+
             arr.push(BeginDate[regionindex[i]].Students);
             var stuall = BeginDate[regionindex[i]].Students;
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.4rem;">'+stuall[k].StudentName+'</p></li>')
+                    $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masteaname+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
                 }else{
                     $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
                 }
