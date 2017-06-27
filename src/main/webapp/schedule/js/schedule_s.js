@@ -57,6 +57,7 @@ $(function(){
             'endDate':time1
         };
         ajax_S(url.s_stud,emailm,stusea);
+        menu_int()
     })
     // 微信查询是否绑定微信  参数：当前微信号 学生
     function stud(e){
@@ -320,7 +321,7 @@ $(function(){
         todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
         $('.not_this').css('opacity','0');
     },100);
-    setInterval(function(){
+    function menu_int(){
         $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
@@ -352,5 +353,6 @@ $(function(){
                 $(html_s).eq(k).css('color','#ccc')
             }
         }
-    },1000)
+    }
+    setInterval(menu_int,1000)
 });

@@ -51,6 +51,7 @@ function stud(e){
             'endDate':time1
         };
         ajax_S(url.s_stud,emailm,stusea);
+        menu_int();
     })
 
 
@@ -279,8 +280,8 @@ $(document).on('click','.H-data li',function(){
         $('.not_this').css('opacity','0')
     },100);
     //月课时
-    setInterval(function(){
-        $('.not_this').css('opacity','0')
+    function menu_int(){
+        $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
@@ -316,8 +317,7 @@ $(document).on('click','.H-data li',function(){
                 $(html_s).eq(k).css('color','#000')
             }
         }
-
-
-    },10);
+    }
+    setInterval(menu_int,10);
 
 })
