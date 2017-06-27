@@ -10,8 +10,8 @@ function toLogin() {
     };
     alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
-        // url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
-        url: "http://10.73.81.106:8080/xdfdtmanager/e2Login/pcLogin.do",
+        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
+        // url: "http://10.73.81.106:8080/xdfdtmanager/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),

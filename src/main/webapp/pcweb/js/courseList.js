@@ -113,7 +113,8 @@ function showList(page) {
     };
     jQuery.ajax({
         type: "POST",
-        url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/getNewCkList.do",
+        // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/getNewCkList.do",
+        url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/getNewCkList.do",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
@@ -323,7 +324,8 @@ function ckDelete(id) {
         var businessP = {"ckId": id};
         jQuery.ajax({
             type: "POST",
-            url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkDelete.do",
+            // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkDelete.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/newCkDelete.do",
             async: false,//同步
             dataType: 'json',
             data: JSON.stringify(businessP),
@@ -395,7 +397,8 @@ function ckRollback(id) {
 
         jQuery.ajax({
             type: "POST",
-            url:"http://10.73.81.106:8080/xdfdtmanager/raiseClass/rollbackNewCk.do",
+            // url:"http://10.73.81.106:8080/xdfdtmanager/raiseClass/rollbackNewCk.do",
+            url:"http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/rollbackNewCk.do",
             async: false,//同步
             dataType: 'json',
             data: JSON.stringify(businessP),
@@ -421,7 +424,8 @@ function over(id) {
         var businessP = {"ckId": id};
         jQuery.ajax({
             type: "POST",
-            url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkOver.do",
+            // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkOver.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/newCkOver.do",
             async: false,//同步
             dataType: 'json',
             data: JSON.stringify(businessP),
