@@ -50,14 +50,21 @@ $(function(){
     // 微信查询是否绑定微信  参数：当前微信号 学生
     ajax_S(url.s_seac,WXnum,stud);
     $('.js_jin').click(function(){
-        var time1 = new Date().format("yyyy-MM-dd");
         var emailm = {
             'studentCode':sessionStorage.stuNum,
             'beginDate':time1,
             'endDate':time1
         };
         ajax_S(url.s_stud,emailm,stusea);
-        menu_int()
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+        monththis = month
     })
     // 微信查询是否绑定微信  参数：当前微信号 学生
     function stud(e){
