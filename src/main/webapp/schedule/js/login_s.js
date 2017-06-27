@@ -254,9 +254,9 @@ $(document).on('click','.Relation',function(){
 	
 })
 	var WXnumber = [
-		'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
-		'ofZfFwlCe5Br7LEYIf16fO-di2O0',
-        'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+		'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
+		// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
+        // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
 	];
 
 	for(var i = 0;i<WXnumber.length;i++){
