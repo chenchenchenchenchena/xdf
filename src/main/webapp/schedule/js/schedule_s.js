@@ -56,6 +56,7 @@ $(function(){
             'endDate':time1
         };
         ajax_S(url.s_stud,emailm,stusea);
+        var month  = $('.today').attr('data_m');
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
         var menu_s = {

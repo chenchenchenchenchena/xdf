@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" line="43" mnemonic="4" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,21 +18,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="51" column="4" lean-forward="true" selection-start-line="51" selection-start-column="4" selection-end-line="59" selection-end-column="6" />
+            <state relative-caret-position="323">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schedule_t.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="schedule_t.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+            <state relative-caret-position="323">
+              <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -108,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
       </list>
     </option>
   </component>
@@ -124,22 +120,6 @@
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>AngularJS</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -463,9 +443,6 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="" />
@@ -489,34 +466,6 @@
       <workItem from="1498526002964" duration="10594000" />
       <workItem from="1498543695724" duration="2818000" />
       <workItem from="1498549483310" duration="157000" />
-    </task>
-    <task id="LOCAL-00194" summary="提交">
-      <created>1498449111565</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1498449111565</updated>
-    </task>
-    <task id="LOCAL-00195" summary="提交">
-      <created>1498449192848</created>
-      <option name="number" value="00195" />
-      <option name="presentableId" value="LOCAL-00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1498449192848</updated>
-    </task>
-    <task id="LOCAL-00196" summary="提交">
-      <created>1498457921860</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1498457921861</updated>
-    </task>
-    <task id="LOCAL-00197" summary="提交">
-      <created>1498458330126</created>
-      <option name="number" value="00197" />
-      <option name="presentableId" value="LOCAL-00197" />
-      <option name="project" value="LOCAL" />
-      <updated>1498458330127</updated>
     </task>
     <task id="LOCAL-00198" summary="提交">
       <created>1498458681465</created>
@@ -833,11 +782,39 @@
       <option name="project" value="LOCAL" />
       <updated>1498551522168</updated>
     </task>
-    <option name="localTasksCounter" value="243" />
+    <task id="LOCAL-00243" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498551756123</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1498551756123</updated>
+    </task>
+    <task id="LOCAL-00244" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498551803364</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1498551803364</updated>
+    </task>
+    <task id="LOCAL-00245" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498552069016</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1498552069016</updated>
+    </task>
+    <task id="LOCAL-00246" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498552597322</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1498552597322</updated>
+    </task>
+    <option name="localTasksCounter" value="247" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200729000" />
+    <option name="totallyTimeSpent" value="201677000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1295,36 +1272,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="51" column="4" lean-forward="true" selection-start-line="51" selection-start-column="4" selection-end-line="59" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+        <state relative-caret-position="323">
+          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
