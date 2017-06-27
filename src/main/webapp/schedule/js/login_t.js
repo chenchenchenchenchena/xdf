@@ -17,7 +17,7 @@ if(localStorage.terEmail){
     // alert(bindingtea0)
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.data!=undefined){
-            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl};
+            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl};
             ajax_S(url.s_nobd,stumore,telbind)
         }
     });
@@ -51,7 +51,7 @@ function teac(e){
         localStorage.sid = e.sid;
         bindingtea0['email'] = localStorage.terEmail;
         bindingtea0['wechatId'] = sessionStorage.openid;
-        bindingtea0['nickName'] = encodeURI(sessionStorage.nickname);
+        bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
