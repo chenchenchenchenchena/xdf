@@ -78,6 +78,7 @@ function binding(e){
 
 
 
+
 function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
 	ajax_S(url.t_siot, bindingtea, signOut)
