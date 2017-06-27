@@ -45,13 +45,22 @@ function stud(e){
 
     $('.js_jin').click(function(){
         var time1 = new Date().format("yyyy-MM-dd");
-        var emailm = {
-            'studentCode':sessionStorage.stuNum,
-            'beginDate':time1,
-            'endDate':time1
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':new Date().format("yyyy-MM-01"),
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
         };
-        ajax_S(url.s_stud,emailm,stusea);
-        menu_int();
+        ajax_S(url.s_emai,emailm,stusea);
+        var month  = $('.today').attr('data_m');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_emai,menu_s,menufunc);
+        monththis = month
     })
 
 
