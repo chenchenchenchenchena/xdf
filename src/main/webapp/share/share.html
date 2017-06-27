@@ -57,8 +57,8 @@
             }
         });
         
-        
-        wx.onMenuShareTimeline({  
+    $(".aaa").on("touchstart",function(event){
+    	wx.onMenuShareTimeline({  
                  title: '1111111', // 分享标题  
                  link:window.location.href,  
                  imgUrl: "c2.png", // 分享图标  
@@ -91,7 +91,8 @@
                      alert(JSON.stringify(res));  
                  }  
              });  
-         });  
+    });
+        
  
 </script>
 
