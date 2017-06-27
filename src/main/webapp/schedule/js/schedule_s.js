@@ -321,7 +321,7 @@ $(function(){
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
-            ajax_S(url.s_emai,menu_s,menufunc);
+            ajax_S(url.s_stud,menu_s,menufunc);
             monththis = month
         }
         var html_s = $('.swiper-slide-active table').find('td');

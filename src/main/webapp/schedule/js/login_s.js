@@ -202,6 +202,7 @@ function teac(e){
 			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
 				sessionStorage.stuTel = $('.phoneNumber').val()
 		}
+		$('.enter').hide()
 	}
 
 
