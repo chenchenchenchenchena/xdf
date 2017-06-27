@@ -4,10 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" line="43" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="">
+    <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/homework/rankinglist_t.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/homework/sharedranking_t.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/learningSituation/rankinglist_t.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/learningSituation/sharedranking_t.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,8 +27,8 @@
       <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="324" column="29" lean-forward="true" selection-start-line="324" selection-start-column="29" selection-end-line="324" selection-end-column="29" />
+            <state relative-caret-position="529">
+              <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -35,8 +37,8 @@
       <file leaf-file-name="schedule_t.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="284" column="81" lean-forward="true" selection-start-line="283" selection-start-column="14" selection-end-line="284" selection-end-column="81" />
+            <state relative-caret-position="241">
+              <caret line="284" column="81" lean-forward="false" selection-start-line="283" selection-start-column="14" selection-end-line="284" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -55,7 +57,7 @@
       <file leaf-file-name="login_s.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1166">
+            <state relative-caret-position="1071">
               <caret line="199" column="25" lean-forward="false" selection-start-line="199" selection-start-column="25" selection-end-line="199" selection-end-column="25" />
               <folding>
                 <marker date="1498545501693" expanded="true" signature="1219:1251" ph="..." />
@@ -515,14 +517,7 @@
       <workItem from="1498457686799" duration="7232000" />
       <workItem from="1498475660335" duration="5998000" />
       <workItem from="1498526002964" duration="10594000" />
-      <workItem from="1498543695724" duration="1928000" />
-    </task>
-    <task id="LOCAL-00186" summary="提交">
-      <created>1498446202683</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1498446202683</updated>
+      <workItem from="1498543695724" duration="2016000" />
     </task>
     <task id="LOCAL-00187" summary="提交">
       <created>1498446281091</created>
@@ -860,11 +855,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498545057151</updated>
     </task>
-    <option name="localTasksCounter" value="235" />
+    <task id="LOCAL-00235" summary="提交">
+      <created>1498545652319</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1498545652319</updated>
+    </task>
+    <option name="localTasksCounter" value="236" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197937000" />
+    <option name="totallyTimeSpent" value="198025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -942,7 +944,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="提交" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1316,7 +1319,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1166">
+        <state relative-caret-position="1071">
           <caret line="199" column="25" lean-forward="false" selection-start-line="199" selection-start-column="25" selection-end-line="199" selection-end-column="25" />
           <folding>
             <marker date="1498545501693" expanded="true" signature="1219:1251" ph="..." />
@@ -1332,16 +1335,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="284" column="81" lean-forward="true" selection-start-line="283" selection-start-column="14" selection-end-line="284" selection-end-column="81" />
+        <state relative-caret-position="241">
+          <caret line="284" column="81" lean-forward="false" selection-start-line="283" selection-start-column="14" selection-end-line="284" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="324" column="29" lean-forward="true" selection-start-line="324" selection-start-column="29" selection-end-line="324" selection-end-column="29" />
+        <state relative-caret-position="529">
+          <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
           <folding />
         </state>
       </provider>
