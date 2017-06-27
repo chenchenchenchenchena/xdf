@@ -20,8 +20,7 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': url_online+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': url_online+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': url_online+'studentData/queryStudentData.do',    //学生查询课程
-        's_hwlt':url_online+'studentData/assingmentHomework.do',//待交作业学生列表查询
-        's_hwfl':url_online+'studentData/finishHomework.do',//已交作业学生列表查询
+        's_hwlt': url_online+'studentData/assingmentHomework.do',//待交作业学生列表查询
         'data_s': url_online+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
         't_logi': url_online+'logout/doLogout.do',//退出登录
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
@@ -52,8 +51,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_nafu': url_test+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
         's_emai': url_test+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
         's_stud': url_test+'studentData/queryStudentData.do',    //学生查询课程
-        's_hwlt':url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
-        's_hwfl':url_test+'studentData/finishHomework.do',//已交作业学生列表查询
+        's_hwlt': url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
+        's_hwfl': url_test+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': url_test+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
         't_logi': url_test+'logout/doLogout.do' ,//退出登录
         't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
