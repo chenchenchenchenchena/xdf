@@ -42,6 +42,7 @@ function stud(e){
         sessionStorage.stuNum = e.data.studentNo;
     }
 }
+
     $('.js_jin').click(function(){
         var time1 = new Date().format("yyyy-MM-dd");
         var emailm = {
