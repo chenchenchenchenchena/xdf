@@ -42,7 +42,15 @@ function stud(e){
         sessionStorage.stuNum = e.data.studentNo;
     }
 }
-
+    $('.js_jin').click(function(){
+        var time1 = new Date().format("yyyy-MM-dd");
+        var emailm = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':time1,
+            'endDate':time1
+        };
+        ajax_S(url.s_stud,emailm,stusea);
+    })
 
 
 //按天查课程

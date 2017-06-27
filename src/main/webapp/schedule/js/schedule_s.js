@@ -49,7 +49,15 @@ $(function(){
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
     ajax_S(url.s_seac,WXnum,stud);
-
+    $('.js_jin').click(function(){
+        var time1 = new Date().format("yyyy-MM-dd");
+        var emailm = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':time1,
+            'endDate':time1
+        };
+        ajax_S(url.s_stud,emailm,stusea);
+    })
     // 微信查询是否绑定微信  参数：当前微信号 学生
     function stud(e){
         if(e.result==false){
