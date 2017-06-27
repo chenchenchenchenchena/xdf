@@ -33,6 +33,7 @@ function stuc(e){
 		$('.studentTitle').hide();
 		$('.inputBox').hide()
 		$('.search').css('margin-top','.2rem')
+		$('.enter').hide()
 	}else{
 		$('.searchTwo').show();
 		$('.card').hide();
