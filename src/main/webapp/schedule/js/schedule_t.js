@@ -250,7 +250,7 @@ $(document).on('click','.H-data li',function(){
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
-        $('.nbxs').eq(0).css('margin-top','-.2rem')
+        $('.nbxs').eq(0).css('margin-top','-.25rem')
     }
     //存储今天时间
     var todaythis;
