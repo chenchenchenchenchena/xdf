@@ -52,7 +52,7 @@
 	<script src="../common/js/layer.js"></script>
 	<script src="../common/js/ajax.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-	<script src="../schedule/js/login_t.js"></script>
+	<!--<script src="../schedule/js/login_t.js"></script>-->
 </head>
 <body>
 <ul class="tab-title">
@@ -141,35 +141,130 @@
 			$('.main-content table').hide();
 			$('.main-content table').eq($(".tab-title li").index(this)).show();
 		});
+		//微信分享数据
+		function weChatData() {
+			var urlVal = window.location.href;
+			var businessP = {
+				"appid": 'wx559791e14e9ce521',
+				"secret": 'baa4373d5a8750c69b9d1655a2e31370',
+				"url": urlVal
+			}
+			var d = constructionParams(rsaEncryptedString(businessP), "6bd249db7c52440ab7462b6d298077d9");
+			jQuery.ajax({
+				type: "POST",
+				url: url.w_xmor,
+				async: true,
+				dataType: 'json',
+				data: JSON.stringify(d),
+				success: function (json) {
+					if (json.result == true) {//获取成功
+						var appId = json.appid;
+						var timestamp = json.timestamp;
+						var nonceStr = json.nonceStr;
+						var signature = json.signature;
+						wx.config({
+							debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+							appId: appId, // 必填，公众号的唯一标识
+							timestamp: timestamp, // 必填，生成签名的时间戳
+							nonceStr: nonceStr, // 必填，生成签名的随机串
+							signature: signature,// 必填，签名，见附录1
+							jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+						});
+						wx.ready(function () {
+							wx.onMenuShareTimeline({
+								title: "test", // 分享标题
+								desc: "test share", // 分享描述
+								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
+								success: function () {
+									// 用户确认分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+									alert("success！！！");
+									shareCmsFn();
+								},
+								cancel: function () {
+									// 用户取消分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+								}
+							});
+							wx.onMenuShareAppMessage({
+								title: "test", // 分享标题
+								desc: "test share", // 分享描述
+								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
+								type: '', // 分享类型,music、video或link，不填默认为link
+								dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+								success: function () {
+									// 用户确认分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+									alert("success！！！");
+									shareCmsFn();
+								},
+								cancel: function () {
+									// 用户取消分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+								}
+
+							});
+							//禁用部分分享按钮
+							wx.hideMenuItems({
+								menuList: ['menuItem:share:qq',         //分享到QQ
+									'menuItem:share:weiboApp',   //分享到微博
+									'menuItem:share:facebook',   //分享到Facebook
+									'menuItem:share:QZone',      //分享到QQ空间
+									'menuItem:openWithQQBrowser',//在QQ浏览器中打开
+									'menuItem:openWithSafari',   //在Safari中打开
+									'menuItem:share:email',
+									'menuItem:copyUrl',          //复制链接
+									'menuItem:readMode'          //阅读模式
+								],
+								success: function (msg) {
+									//alert("testing:ok");
+									alert("success！！！");
+									alert(JSON.stringify(msg));
+								},
+								error: function (msg) {
+									//alert("testing:error");
+									alert("error！！！");
+									alert(JSON.stringify(msg));
+								}
+							});
+						});
+					}
+				}
+			});
+
+		}
 //		微信分享
 		$(document).on('touchstart',"#wecharShare",function() {
-			alert("微信分享事件触发");
-			wx.onMenuShareAppMessage({
-				title: "test", // 分享标题
-				desc: "test share", // 分享描述
-				link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
-				imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
-				type: '', // 分享类型,music、video或link，不填默认为link
-				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				success: function (msg) {
-					// 用户确认分享后执行的回调函数
-					//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-					// shareCmsFn();
-					alert("success！！！");
-					alert(JSON.stringify(msg));
-					shareCmsFn();
-				},
-				cancel: function () {
-					alert("cancel");
-					// 用户取消分享后执行的回调函数
-					//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-				},
-				fail:function (msg) {
-					alert("fail！！！");
-					alert(JSON.stringify(msg));
-				}
-
-			});
+			alert("微信分享事件触发111");
+			weChatData();
+//			wx.onMenuShareAppMessage({
+//				title: "test", // 分享标题
+//				desc: "test share", // 分享描述
+//				link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+//				imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
+//				type: '', // 分享类型,music、video或link，不填默认为link
+//				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+//				success: function (msg) {
+//					// 用户确认分享后执行的回调函数
+//					//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+//					// shareCmsFn();
+//					alert("success！！！");
+//					alert(JSON.stringify(msg));
+//					shareCmsFn();
+//				},
+//				cancel: function () {
+//					alert("cancel");
+//					// 用户取消分享后执行的回调函数
+//					//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+//				},
+//				fail:function (msg) {
+//					alert("fail！！！");
+//					alert(JSON.stringify(msg));
+//				}
+//
+//			});
 		});
 
 
