@@ -246,16 +246,19 @@ $(document).on('click','.H-data li',function(){
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
-        // $('.nbxs').eq(0).css('margin-top','-.9rem')
+        $('.nbxs').eq(0).css('margin-top','-.2rem')
     }
     //存储今天时间
     var todaythis;
+    //储存当前月期
+    var monththis;
     setTimeout(function(){
         var month  = $('.today').attr('data_m');
         var day = $('.today').attr('data_d');
         if(month<10){
             month = '0'+month
         }
+        monththis = month
         if(day<10){
             day = '0'+day
         }
@@ -269,15 +272,16 @@ $(document).on('click','.H-data li',function(){
         if(month<10){
             month = '0'+month
         }
-        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-        var daycount = day.getDate();
-        var menu_s = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-        };
-        ajax_S(url.s_emai,menu_s,menufunc);
-
+        if(monththis!=month){
+            var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+            var daycount = day.getDate();
+            var menu_s = {
+                'teacherEmail':localStorage.terEmail,
+                'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+                'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+            };
+            ajax_S(url.s_emai,menu_s,menufunc);
+        }
         var html_s = $('.swiper-slide-active table').find('td');
         for(var k = 0;k<html_s.length;k++){
             var month  = $(html_s).eq(k).attr('data_m');
