@@ -17,7 +17,7 @@ if(localStorage.terEmail){
     // alert(bindingtea0)
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.data!=undefined){
-            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl};
             ajax_S(url.s_nobd,stumore,telbind)
         }
     });
