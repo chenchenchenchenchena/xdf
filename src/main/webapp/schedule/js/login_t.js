@@ -149,10 +149,10 @@ function signOut(e) {
 $(document).on('touchend',"#onMenuShareAppMessage",function() {
     alert("微信分享事件触发")
     wx.onMenuShareAppMessage({
-        title: "微信分享标题", // 分享标题
-        desc: "微信分享标题", // 分享描述
-        link: "http://dt.staff.xdf.cn/xdfdthome/yuyin/wechatTest.html", // 分享链接
-        imgUrl:"微信分享标题", // 分享图标
+        title: "onMenuShareAppMessagetest", // 分享标题
+        desc: "onMenuShareAppMessage", // 分享描述
+        link: window.location.href, // 分享链接
+        imgUrl:"", // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function () {
@@ -335,7 +335,7 @@ function shareCmsFn() {//分享统计
         dataType: 'json',
         data: JSON.stringify(d),
         success: function (json) {
-            //alert(JSON.stringify(json));
+            alert(JSON.stringify(json));
             if (json.result == true) {
             }
         }
