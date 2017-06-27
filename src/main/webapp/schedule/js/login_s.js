@@ -158,7 +158,7 @@ function teac(e){
 		// 关联点击
 		// alert($(this).html())
 		if($(this).html()=='立即关联'){
-
+			alert(JSON.stringify(stumore));
 			ajax_S(url.s_bind,stumore,s_bind)
 		}
 		//解绑
