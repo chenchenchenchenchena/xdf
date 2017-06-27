@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" afterPath="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ajax.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ajax.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/common/js/ajax.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+              <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -71,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schedule_t.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="schedule_t.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="393">
@@ -188,8 +188,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/details_s.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
       </list>
     </option>
   </component>
@@ -676,14 +676,7 @@
       <workItem from="1498439384742" duration="8904000" />
       <workItem from="1498457686799" duration="7232000" />
       <workItem from="1498475660335" duration="5998000" />
-      <workItem from="1498526002964" duration="8113000" />
-    </task>
-    <task id="LOCAL-00176" summary="提交">
-      <created>1498224779136</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1498224779137</updated>
+      <workItem from="1498526002964" duration="8169000" />
     </task>
     <task id="LOCAL-00177" summary="提交">
       <created>1498439464229</created>
@@ -1021,11 +1014,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498533503689</updated>
     </task>
-    <option name="localTasksCounter" value="225" />
+    <task id="LOCAL-00225" summary="提交">
+      <created>1498534588718</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1498534588718</updated>
+    </task>
+    <option name="localTasksCounter" value="226" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193528000" />
+    <option name="totallyTimeSpent" value="193584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1502,14 +1502,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/common/js/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -1522,6 +1514,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
           <caret line="284" column="0" lean-forward="false" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/common/js/ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="35" />
           <folding />
         </state>
       </provider>
