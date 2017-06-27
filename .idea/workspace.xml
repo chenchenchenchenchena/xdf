@@ -7,7 +7,6 @@
     <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" afterPath="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -55,8 +54,8 @@
       <file leaf-file-name="ajax.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/common/js/ajax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="46" lean-forward="false" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+            <state relative-caret-position="57">
+              <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -677,14 +676,7 @@
       <workItem from="1498439384742" duration="8904000" />
       <workItem from="1498457686799" duration="7232000" />
       <workItem from="1498475660335" duration="5998000" />
-      <workItem from="1498526002964" duration="6901000" />
-    </task>
-    <task id="LOCAL-00173" summary="提交">
-      <created>1498224220864</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1498224220864</updated>
+      <workItem from="1498526002964" duration="6950000" />
     </task>
     <task id="LOCAL-00174" summary="提交">
       <created>1498224363742</created>
@@ -1022,11 +1014,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498532959861</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="提交">
+      <created>1498533375984</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1498533375984</updated>
+    </task>
+    <option name="localTasksCounter" value="223" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="192316000" />
+    <option name="totallyTimeSpent" value="192365000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1521,8 +1520,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/common/js/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="46" lean-forward="false" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+        <state relative-caret-position="57">
+          <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
           <folding />
         </state>
       </provider>
