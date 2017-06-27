@@ -6,19 +6,17 @@
     <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../css/p176.css">
     <link rel="stylesheet" href="../css/index.css">
-    <script src="../js/layer-v2.1/layer/layer.js"></script>
-    <script src="../../common/js/jquery.js"></script>
-    <script src="../../common/js/etlogin.js"></script>
-    <script src="../../common/js/rem.js"></script>
-    <script src="../../common/js/scale.js"></script>
-    <script src="../../common/js/swiper.min.js"></script>
-    <script src="../../common/js/zepto.min.js"></script>
-    <script src="../js/jqPaginator.min.js"></script>
-    <script src="../js/util.js"></script>
     <script src="../js/market.js"></script>
-    <script src="../js/courseList.js"></script>
+    <script src="../../common/js/jquery.js"></script>
+    <script src ="../../common/js/layer.js"></script>
+    <script src ="../../common/js/etlogin.js"></script>
+    <script src ="../../common/js/rem.js"></script>
+    <script src ="../../common/js/scale.js"></script>
+    <script src ="../../common/js/swiper.min.js"></script>
+    <script src ="../../common/js/zepto.min.js"></script>
+    <script src ="../js/util.js"></script>
 </head>
-<body onload="initMainPage('101');showList(1)">
+<body onload="initMainPage('102');showList()">
 
 <div class="p176-nav clearfix">
     <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
@@ -56,31 +54,8 @@
     <div class="p176-mainWrap">
         <div class="p176-main">
             <div class="inner">
+                <p style="font-size: 18px">活动内容</p>
 
-                <div class="xdf_special_title" id="tabs">
-                    <ul id="xdf_recommend">
-                        <li class="xdf_border">筹课</li>
-                        <li style="display: none;">点赞</li>
-                    </ul>
-                </div>
-
-                <div class="clearfix"></div>
-                <div style="margin-top: 10px;margin-bottom: 10px">
-                    <a onclick="createCk()" style="color: #ffffff;background-color: #00b997;align-content: center;width: 60px;height: 50px;">新建筹课</a>
-                </div>
-
-                <h2 class="p176-tit clearfix"><span class="p176-alresdy">已发布的筹课</span></h2>
-                <div class="p176-table-wrap">
-                    <table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
-                        <thead>
-                        <tr id="ckListHead">
-                        </tr>
-                        </thead>
-                        <tbody id="ckListTbody">
-                        </tbody>
-                    </table>
-                    <div class="PublicPage" id="publicPage"></div>
-                </div>
             </div>
         </div>
         <div class="p176-left">
