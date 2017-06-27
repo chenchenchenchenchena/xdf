@@ -63,8 +63,10 @@ $(function(){
     function teac(e){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
-        }else{
+        }else if(localStorage.terEmail){
             location.href = 'schedule_t.html';
+        }else{
+            location.href = 'login_s.html';
         }
     }
     //学生查询课程  整月查询
