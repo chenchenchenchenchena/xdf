@@ -46,6 +46,7 @@ function stuc(e){
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
         $('.searchTwo').css('margin-top','.5rem');
+        $('.enter').hide()
         if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{

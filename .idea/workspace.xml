@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/homework/rankinglist_t.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/homework/sharedranking_t.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/learningSituation/rankinglist_t.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/learningSituation/sharedranking_t.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,11 +21,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
+            <state relative-caret-position="244">
+              <caret line="315" column="29" lean-forward="true" selection-start-line="315" selection-start-column="29" selection-end-line="315" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -47,26 +44,26 @@
       <file leaf-file-name="login_t.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="19" column="106" lean-forward="false" selection-start-line="19" selection-start-column="97" selection-end-line="19" selection-end-column="106" />
+            <state relative-caret-position="285">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login_s.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="login_s.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="199" column="25" lean-forward="false" selection-start-line="199" selection-start-column="25" selection-end-line="199" selection-end-column="25" />
+            <state relative-caret-position="304">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
-                <marker date="1498545501693" expanded="true" signature="1219:1251" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1219:1261" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1219:1268" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1433:1465" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1433:1482" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1614:1646" ph="..." />
-                <marker date="1498545501693" expanded="true" signature="1614:1663" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1219:1251" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1219:1261" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1219:1268" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1433:1465" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1433:1482" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1614:1646" ph="..." />
+                <marker date="1498546066185" expanded="true" signature="1614:1663" ph="..." />
               </folding>
             </state>
           </provider>
@@ -138,8 +135,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
       </list>
     </option>
   </component>
@@ -517,14 +514,7 @@
       <workItem from="1498457686799" duration="7232000" />
       <workItem from="1498475660335" duration="5998000" />
       <workItem from="1498526002964" duration="10594000" />
-      <workItem from="1498543695724" duration="2016000" />
-    </task>
-    <task id="LOCAL-00187" summary="提交">
-      <created>1498446281091</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1498446281091</updated>
+      <workItem from="1498543695724" duration="2352000" />
     </task>
     <task id="LOCAL-00188" summary="提交">
       <created>1498446673852</created>
@@ -862,11 +852,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498545652319</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498545753901</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1498545753901</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198025000" />
+    <option name="totallyTimeSpent" value="198361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1028,13 +1025,13 @@
         <state relative-caret-position="304">
           <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding>
-            <marker date="1498545501693" expanded="true" signature="1219:1251" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1219:1261" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1219:1268" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1433:1465" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1433:1482" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1614:1646" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1614:1663" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1219:1251" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1219:1261" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1219:1268" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1433:1465" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1433:1482" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1614:1646" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1614:1663" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1309,27 +1306,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="19" column="106" lean-forward="false" selection-start-line="19" selection-start-column="97" selection-end-line="19" selection-end-column="106" />
+        <state relative-caret-position="244">
+          <caret line="315" column="29" lean-forward="true" selection-start-line="315" selection-start-column="29" selection-end-line="315" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="199" column="25" lean-forward="false" selection-start-line="199" selection-start-column="25" selection-end-line="199" selection-end-column="25" />
-          <folding>
-            <marker date="1498545501693" expanded="true" signature="1219:1251" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1219:1261" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1219:1268" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1433:1465" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1433:1482" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1614:1646" ph="..." />
-            <marker date="1498545501693" expanded="true" signature="1614:1663" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1341,11 +1322,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
+        <state relative-caret-position="285">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <marker date="1498546066185" expanded="true" signature="1219:1251" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1219:1261" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1219:1268" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1433:1465" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1433:1482" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1614:1646" ph="..." />
+            <marker date="1498546066185" expanded="true" signature="1614:1663" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
