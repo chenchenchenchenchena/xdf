@@ -166,7 +166,8 @@ function classValidateNum(type) {
     // var param = constructionParams(rsaEncryptedString(businessP), "96d35fff0f7c46f8afa90430cb7d4fa9");
     jQuery.ajax({
         type: "POST",
-        url: Global.actionURL,
+        // url: Global.actionURL,
+        url:"http://api1.xdf.cn/SoukeRest/Class/GetClassByCode",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(businessP),
