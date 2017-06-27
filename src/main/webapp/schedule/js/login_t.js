@@ -109,7 +109,7 @@ function signOut(e) {
             // console.log(Wxconfig_h.timestamp);
             //配置
             wx.config({
-                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: Wxconfig.appid,   // 必填，公众号的唯一标识
                 timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                 nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
@@ -121,7 +121,7 @@ function signOut(e) {
                 wx.checkJsApi({
                     jsApiList:["checkJsApi",'scanQRCode','onMenuShareAppMessage'],
                     success:function(res){
-
+                        console.log("权限配置验证成功");
                     }
                 })
             });
@@ -147,7 +147,7 @@ function signOut(e) {
     });
 // 绑定微信分享点击事件
 $(document).on('touchend',"#onMenuShareAppMessage",function() {
-    console.log("微信分享")
+    alert("微信分享事件触发")
     wx.onMenuShareAppMessage({
         title: "微信分享标题", // 分享标题
         desc: "微信分享标题", // 分享描述
@@ -159,10 +159,11 @@ $(document).on('touchend',"#onMenuShareAppMessage",function() {
             // 用户确认分享后执行的回调函数
             //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
             // shareCmsFn();
-            alert("ok");
+            alert("success！！！");
             shareCmsFn();
         },
         cancel: function () {
+            alert("cancel");
             // 用户取消分享后执行的回调函数
             //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
         }
