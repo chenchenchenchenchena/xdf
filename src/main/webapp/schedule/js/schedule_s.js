@@ -300,7 +300,7 @@ $(function(){
         if(month<10){
             month = '0'+month
         }
-        monththis = month
+        monththis = month;
         if(day<10){
             day = '0'+day
         }
@@ -317,7 +317,7 @@ $(function(){
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
             var menu_s = {
-                'teacherEmail':localStorage.terEmail,
+                'studentCode':sessionStorage.stuNum,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
