@@ -46,6 +46,7 @@ function stuc(e){
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
         $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
         $('.searchTwo').css('margin-top','.5rem');
+        $('.enter').hide()
         if(e.data.relatedState=='1'){
 			$('.Relation').html('取消关联')
 		}else{
@@ -145,12 +146,12 @@ function teac(e){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		if($('.stunum').val()==''){
 			stumore.StudentCode = sessionStorage.stuNumber
 		}
@@ -202,6 +203,7 @@ function teac(e){
 			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
 				sessionStorage.stuTel = $('.phoneNumber').val()
 		}
+		$('.enter').hide()
 	}
 
 
@@ -209,7 +211,7 @@ function teac(e){
 
 
 $('.tel_log').click(function(){
-	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 	// var stuname = {};
 	// var name = $('.stname').val();
 	// var mobile  = $('.phoneNumber').val();
@@ -243,12 +245,12 @@ function telbind(e){
 $(document).on('click','.Relation',function(){
 	if($(this).html()=='确认关联'){
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_bind,stumore,telbind)
 		// $(this).html('解除关联')
 	}else{
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
     }

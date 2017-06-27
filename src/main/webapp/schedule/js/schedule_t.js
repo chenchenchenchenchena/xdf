@@ -43,6 +43,25 @@ function stud(e){
     }
 }
 
+    $('.js_jin').click(function(){
+        var time1 = new Date().format("yyyy-MM-dd");
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':new Date().format("yyyy-MM-01"),
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+        };
+        ajax_S(url.s_emai,emailm,stusea);
+        var month  = $('.today').attr('data_m');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_emai,menu_s,menufunc);
+        monththis = month
+    })
 
 
 //按天查课程
@@ -215,7 +234,7 @@ setTimeout(function(){
                 $(this).addClass('xuanzhong_s')
             }
             ajax_S(url.s_emai,emailm,stusea);
-            ajax_S(url.s_emai,menu_s,menufunc);
+            // ajax_S(url.s_emai,menu_s,menufunc);
         }
 
     });
@@ -250,7 +269,7 @@ $(document).on('click','.H-data li',function(){
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
-        $('.nbxs').eq(0).css('margin-top','-.2rem')
+        $('.nbxs').eq(0).css('margin-top','-.25rem')
     }
     //存储今天时间
     var todaythis;
@@ -270,8 +289,8 @@ $(document).on('click','.H-data li',function(){
         $('.not_this').css('opacity','0')
     },100);
     //月课时
-    setInterval(function(){
-        $('.not_this').css('opacity','0')
+    function menu_int(){
+        $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
@@ -307,8 +326,7 @@ $(document).on('click','.H-data li',function(){
                 $(html_s).eq(k).css('color','#000')
             }
         }
-
-
-    },10);
+    }
+    setInterval(menu_int,10);
 
 })

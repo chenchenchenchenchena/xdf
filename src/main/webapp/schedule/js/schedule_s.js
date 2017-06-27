@@ -5,6 +5,12 @@ $(function(){
     //    return false;
     //}
     wechatCode(location.href);
+    //判断ios
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS==true){
+        $('.nbxs').eq(0).css('margin-top','-.25rem')
+    }
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
@@ -43,7 +49,24 @@ $(function(){
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
     ajax_S(url.s_seac,WXnum,stud);
-
+    $('.js_jin').click(function(){
+        var emailm = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':time1,
+            'endDate':time1
+        };
+        ajax_S(url.s_stud,emailm,stusea);
+        var month  = $('.today').attr('data_m');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+        monththis = month
+    })
     // 微信查询是否绑定微信  参数：当前微信号 学生
     function stud(e){
         if(e.result==false){
@@ -144,9 +167,7 @@ $(function(){
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
-            $('.month_hour i').html('0');
         }else{
-            $('.month_hour i').html('0');
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
@@ -154,6 +175,7 @@ $(function(){
             var Index =[];
 
             var old;
+
             var masterta = e.data.Data[0].Teachers.split(',');
             var masteaname = '';
             for(var j = 0;j<mastertae.length;j++){
@@ -300,15 +322,15 @@ $(function(){
         if(month<10){
             month = '0'+month
         }
-        monththis = month
+        monththis = month;
         if(day<10){
             day = '0'+day
         }
         todaythis = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
         $('.not_this').css('opacity','0');
     },100);
-    setInterval(function(){
-        $('.not_this').css('opacity','0')
+    function menu_int(){
+        $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
@@ -317,11 +339,11 @@ $(function(){
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
             var menu_s = {
-                'teacherEmail':localStorage.terEmail,
+                'studentCode':sessionStorage.stuNum,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
-            ajax_S(url.s_emai,menu_s,menufunc);
+            ajax_S(url.s_stud,menu_s,menufunc);
             monththis = month
         }
         var html_s = $('.swiper-slide-active table').find('td');
@@ -339,5 +361,6 @@ $(function(){
                 $(html_s).eq(k).css('color','#ccc')
             }
         }
-    },1000)
+    }
+    setInterval(menu_int,1000)
 });
