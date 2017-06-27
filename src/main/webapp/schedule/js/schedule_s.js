@@ -150,9 +150,7 @@ $(function(){
         if(e.result==false){
             $('.H-data').hide();
             $('.N-data').show();
-            $('.month_hour i').html('0');
         }else{
-            $('.month_hour i').html('0');
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
@@ -272,7 +270,7 @@ $(function(){
                 $(this).addClass('xuanzhong_s')
             }
             ajax_S(url.s_stud,emailm,stusea);
-            // ajax_S(url.s_stud,menu_s,menufunc);
+            ajax_S(url.s_stud,menu_s,menufunc);
         }
     });
     //点击查看详情
