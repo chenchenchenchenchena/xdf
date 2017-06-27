@@ -33,6 +33,7 @@ function stuc(e){
 		$('.studentTitle').hide();
 		$('.inputBox').hide()
 		$('.search').css('margin-top','.2rem')
+		$('.enter').hide()
 	}else{
 		$('.searchTwo').show();
 		$('.card').hide();
@@ -144,12 +145,12 @@ function teac(e){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		if($('.stunum').val()==''){
 			stumore.StudentCode = sessionStorage.stuNumber
 		}
@@ -208,7 +209,7 @@ function teac(e){
 
 
 $('.tel_log').click(function(){
-	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+	var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 	// var stuname = {};
 	// var name = $('.stname').val();
 	// var mobile  = $('.phoneNumber').val();
@@ -242,21 +243,21 @@ function telbind(e){
 $(document).on('click','.Relation',function(){
 	if($(this).html()=='确认关联'){
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_bind,stumore,telbind)
 		// $(this).html('解除关联')
 	}else{
 		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':sessionStorage.nickname,'headImg': sessionStorage.headimgurl}
+        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl}
 		ajax_S(url.s_nobd,stumore,telbind)
 		$(this).html('确认关联')
     }
 	
 })
 	var WXnumber = [
-		'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
-		'ofZfFwlCe5Br7LEYIf16fO-di2O0',
-        'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+		'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
+		// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
+        // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
 	];
 
 	for(var i = 0;i<WXnumber.length;i++){
