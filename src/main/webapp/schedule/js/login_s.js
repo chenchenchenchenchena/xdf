@@ -55,13 +55,6 @@ function stuc(e){
 		// $('.')
 	}
 }
-ajax_S(url.t_wxmo,WXnum,teac);
-function teac(e){
-    console.log(e)
-    if(e.data!="goE2"){
-		// location.href='login_t.html'
-    }
-}
 
 
 
