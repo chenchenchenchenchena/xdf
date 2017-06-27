@@ -114,12 +114,12 @@ function signOut(e) {
                 timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                 nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
                 signature: Wxconfig_h.signature, // 必填，签名
-                jsApiList: ["checkJsApi","scanQRCode"]
+                jsApiList: ["checkJsApi","scanQRCode","onMenuShareAppMessage"]
             });
             //调用成功
             wx.ready(function(){
                 wx.checkJsApi({
-                    jsApiList:["checkJsApi",'scanQRCode'],
+                    jsApiList:["checkJsApi",'scanQRCode','onMenuShareAppMessage'],
                     success:function(res){
 
                     }
@@ -145,6 +145,30 @@ function signOut(e) {
             }
         });
     });
+// 绑定微信分享点击事件
+$(document).on('touchend',"#onMenuShareAppMessage",function() {
+    console.log("微信分享")
+    wx.onMenuShareAppMessage({
+        title: "微信分享标题", // 分享标题
+        desc: "微信分享标题", // 分享描述
+        link: "http://dt.staff.xdf.cn/xdfdthome/yuyin/wechatTest.html", // 分享链接
+        imgUrl:"微信分享标题", // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
+            // 用户确认分享后执行的回调函数
+            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+            // shareCmsFn();
+            alert("ok");
+            shareCmsFn();
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+        }
+
+    });
+});
 // alert(sessionStorage.e2state)
 // 请求用户登录信息
     if (!localStorage.terEmail) {
@@ -289,4 +313,30 @@ function signOut(e) {
         })
 
 
+}
+
+function shareCmsFn() {//分享统计
+    var activityId = Global.activityId;
+    var title = $('title').html();
+    var url = location.href;
+    var businessP = {
+        "activityId": activityId,
+        "type": 1,//分享
+        "url": url,
+        "title": title,
+        "userId": sessionStorage.openid
+    };
+    var d = constructionParams(rsaEncryptedString(businessP), "58b2b8ce80b44b10be8c67573073bd2d");//68
+    jQuery.ajax({
+        type: "POST",
+        url: Global.actionURL,
+        async: true,
+        dataType: 'json',
+        data: JSON.stringify(d),
+        success: function (json) {
+            //alert(JSON.stringify(json));
+            if (json.result == true) {
+            }
+        }
+    })
 }
