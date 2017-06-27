@@ -11,6 +11,7 @@ function toLogin() {
     alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
         url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
+        // url: "http://10.73.81.106:8080/xdfdtmanager/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -39,9 +40,7 @@ function showFunctionList(json) {
 
         //获取functionIds
         setFunctionList(functionList);
-        localStorage.functionCheckedList = JSON.stringify(functionList);
-        //保存功能列表functionIds
-        setCookie("functionList", functionIds);
+        localStorage.functionCheckedList = JSON.stringify(json.functionList);
         jumpPage(json.functionList);
     }
 }
@@ -49,21 +48,17 @@ function showFunctionList(json) {
 //获取functionIds
 function setFunctionList(f) {
     if (f.length > 0) {
-        var children;
         for (var i = 0; i < f.length; i++) {
-            var fun = f[i];
-            var functionId = fun.id;
-            var checked = fun.checked;
+            var functionId = f[i].id;
+            var checked = f[i].checked;
             if (checked) {
-                try {
-                    children = Array(fun.children);
-                } catch (e) {
-                    children = [];
-                }
                 functionIds.push(functionId);
-                setFunctionList(children);
+                setFunctionList(f[i].children);
             }
         }
+
+        //保存功能列表functionIds
+        setCookie("functionIds", functionIds);
     }
 }
 
@@ -109,7 +104,7 @@ function initMainPage(funcId) {
     // $("#areaIdFinal").val(getCookie("areaId"));
     // $("#deptIdFinal").val(getCookie("deptId"));
     $(".p176-nav-usename").html(getCookie("userName") + '<i class="p176-downIcon"></i>');
-    // initNavigationBar();
+    initNavigationBar();
     initMenu(funcId);
 }
 
@@ -118,14 +113,13 @@ function initMenu(funcId) {
     var functionList = JSON.parse(localStorage.functionCheckedList);
     var menu = "";
     for (var i = 0; i < functionList.length; i++) {
-        var fun = functionList[i];
-        var functionId = fun.id;
-        var checked = fun.checked;
-        var functionName = fun.name;
-        var className = fun.className;
+        var functionId = functionList[i].id;
+        var checked = functionList[i].checked;
+        var functionName = functionList[i].name;
+        var className = functionList[i].className;
         var children;
         try {
-            children = fun.children;
+            children = functionList[i].children;
         } catch (e) {
             children = null;
         }
@@ -135,27 +129,26 @@ function initMenu(funcId) {
             menu += "<i class='" + className + "'></i>";
             menu += "<span class='collapse-hide fz18'>" + functionName + "</span>";
             menu += "</a>";
-            if (children != null && children.length > 0) {
+            if (children != null && functionList[i].children.length > 0) {
                 menu += "<ul class='p176-expand-ul' style=''>";
-                for (var j = 0; j < children.length; j++) {
-                    var funChild = children[j];
-                    var funChildName = funChild.name;
+                for (var j = 0; j < functionList[i].children.length; j++) {
+                    var funChildName = functionList[i].children[j].name;
                     var funChildUrl;
                     try {
-                        funChildUrl = funChild.url;
+                        funChildUrl = functionList[i].children[j].url;
                     } catch (e) {
                         funChildUrl = null;
                     }
-                    var funChildChecked = funChild.checked;
+                    var funChildChecked = functionList[i].children[j].checked;
                     if (funChildChecked) {
                         if (funChildUrl == null) {
-                            // funChildUrl = "../system/404.html"
+                            // funChildUrl = "activity.html"
                         }
                         menu += "<li>";
-                        if (funChild.id == funcId) {
-                            menu += "<a href='#' title='" + funChildName + "' class='on' data-functionId='" + funChild.id + "' onclick='changeMenu(this)' data-url='" + funChildUrl + "'>";
+                        if (functionList[i].children[j].id == funcId) {
+                            menu += "<a href='#' title='" + funChildName + "' class='on' data-functionId='" + functionList[i].children[j].id + "' onclick='changeMenu(this)' data-url='" + funChildUrl + "'>";
                         } else {
-                            menu += "<a href='#' title='" + funChildName + "' class='' data-functionId='" + funChild.id + "' onclick='changeMenu(this)' data-url='" + funChildUrl + "'>";
+                            menu += "<a href='#' title='" + funChildName + "' class='' data-functionId='" + functionList[i].children[j].id + "' onclick='changeMenu(this)' data-url='" + funChildUrl + "'>";
                         }
                         menu += "<span class='collapse-hide' >" + funChildName + "</span>";
                         menu += "</a>";
@@ -172,11 +165,6 @@ function initMenu(funcId) {
 
 }
 
-
-//
-function showList() {
-
-}
 
 function initNavigationBar() {
     var navigationList = $("[data-functionId]");

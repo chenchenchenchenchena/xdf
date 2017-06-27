@@ -1,0 +1,355 @@
+
+body,html{
+	background: #F1F1F1;
+	font-size: 30px;
+	width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.hwHeader{
+	height: 88px;
+	background: #fff;
+	color: #959595;
+}
+.hwHeader ul{
+	height: 88px;
+}
+.hwHeader ul li{
+	text-align: center;
+	float: left;
+	width: 164px;
+	line-height: 86px;
+	
+}
+.hwHeader ul>li:first-child{
+	margin: 0 175px 0 129px;
+}
+.hwShow{
+	color:#67cdb4;
+	border-bottom: 2px solid #67cdb4;
+}
+.hwFinish{
+	background: #fff;
+	color: #333333;
+	padding: 0 30px;
+}
+.firstList{
+	/*height: 111px;*/
+	border-bottom: 1px solid #e1e1e1;
+	line-height: 111px;
+	background: url(../images/jiao22222.png) no-repeat right 55px;
+	position: relative;
+}
+.secul li>span:nth-child(1){
+	margin-right: 25px;
+}
+.greycolor{
+	color: #949494;
+}
+.secul li{
+	height: 105px;
+	border-top: 1px solid #e1e1e1;
+	font-size: 25px;
+}
+.secul li>span:nth-child(3){
+	display: inline-block;
+	
+	height: 40px;
+	
+	line-height: 40px;
+	
+	margin-left: 30px;
+}
+.blue{
+	background: #ccf1ea;
+	color: #02bb98;
+}
+.grey{
+	background: #f3f3f3;
+	color: #a1a1a1;
+}
+.redCircle{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: red;
+	position: absolute;
+	top:43px;
+	left: 357px;
+}
+.pendnum{
+	height: 72px;
+	line-height: 72px;
+	padding: 0 30px;
+}
+.empty{
+	width: 311px;
+	height: 157px;
+	margin: 110px 0 0 239px;
+}
+.empty img{
+	margin:0 0 22px 30px;
+}
+.empty p{
+	color: #aeadad;
+}
+/*reply*/
+.replyOne{
+	padding: 0 30px;
+	background: #fff;
+	margin-bottom: 20px;
+}
+.replyOneTitle{
+	height: 105px;
+	line-height: 105px;
+	font-weight: 700;
+}
+.replyOne li,.emptyOne,.emptyTwo,.emptyThree{
+	height: 120px;
+	border-top: 1px solid #e1e1e1;
+	line-height: 120px;
+}
+.emptyOne,.emptyTwo,.emptyThree{
+	color: #808080;
+}
+.yeCircle{
+	width: 80px;
+	height: 80px;
+	background: #ffbb37;
+	border-radius: 50%;
+	color: #fff;
+	display: inline-block;
+	line-height: 80px;
+	text-align: center;
+	margin-right: 20px;
+}
+.replyOne li>span:nth-child(3){
+	color: #808080;
+	margin-left: 333px;
+}
+.noreply{
+	background: #fff;
+	padding: 0 30px;
+}
+.noreplyTitle{
+	height: 83px;
+	line-height: 83px;
+}
+.noreplyTitle>span:nth-child(1){
+	margin-right: 488px;
+	font-weight: 700;
+}
+.noreplyTitle>span:nth-child(2){
+	width: 136px;
+	height: 56px;
+	border: 1px solid #00ba97;
+	display: inline-block;
+	line-height: 56px;
+	color: #00ba97;
+	text-align: center;
+	border-radius: 10px;
+}
+.noreply li{
+	height: 120px;
+	border-top: 1px solid #e1e1e1;
+	line-height: 120px;
+}
+.choose{
+	padding: 0 30px;
+	margin: 20px 0 10px;
+	background: #fff;
+}
+.choose li{
+	height: 105px;
+	border-bottom: 1px solid #e1e1e1;
+	color: #808080;
+	line-height: 105px;
+	
+}
+.choose li>span:nth-child(1){
+	display: inline-block;
+	float: left;
+}
+.choose li>span:nth-child(2){
+	display: inline-block;
+	background: url(../images/rightArrow.png) no-repeat right center;
+	float: right;
+	padding-right: 30px;
+}
+.choose li>span:nth-child(2) input{
+	height: 104px;
+	font-size: 30px;
+	border: none;
+	width: 70px;
+	outline: none;
+}
+.scoreList{
+	padding: 0 30px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+.scoreTitle{
+	padding: 0 30px;
+    height: 100px;
+    line-height: 100px;
+}
+/*.scoreTitle>span:nth-child(2){
+	display: inline-block;
+	height: 64px;
+    margin-left: 410px;
+   
+}*/
+.scoreTitle input{
+	height: 69px;
+    font-size: 30px;
+    float: right;
+    width: 200px;
+    margin-top: 13px;
+    outline: none;
+}
+.scoreList dl{
+	float: left;
+	margin:10px 19px;
+	text-align: center;
+}
+.scoreList dt{
+	width: 100px;
+	height: 100px;
+	background: #ccc;
+	border-radius: 50%;
+	line-height: 100px;
+	text-align: center;
+	margin-bottom: 7px;
+}
+.txt{
+	height: 104px;
+	background: #fff;
+	line-height: 104px;
+	padding: 0 30px;
+}
+.txt input{
+	width: 96%;
+	height: 100%;
+	font-size: 30px;
+	border: none;
+	outline: none;
+	color: #d4d3d3;
+	padding-left: 30px;
+}
+.txtbox{
+	width: 92%;
+	height: 370px;
+	background: #fff;
+	margin-top: 10px;
+	outline: none;
+	border: none;
+	line-height: 40px;
+	padding: 30px;
+	font-size: 30px;
+}
+.txtDiv{
+	position: relative;
+}
+.txtboxNum{
+	position: absolute;
+	bottom: 37px;
+	right: 76px;
+	color: #808080;
+}
+.imgs{
+	margin: 30px 0 209px;
+}
+.imgs img{
+	margin-left: 30px;
+}
+.subtn,.confirmBtn,.chooseBtn{
+	width: 690px;
+	height: 88px;
+	line-height: 88px;
+	color: #fff;
+	font-size: 30px;
+	background: #00ba97;
+	border: none;
+	outline: none;
+	margin-left: 30px;
+	border-radius: 10px;
+}
+.confirmBtn,.chooseBtn{
+	margin-left: 0;
+}
+.assignment{
+	position: relative;
+}
+.classNumTime,.chooseClass{
+	height: 400px;
+	position: absolute;
+	bottom:-440px;
+	left: 0;
+	background: #fff;
+	padding: 30px 30px 10px;
+}
+.classNumTime p,.chooseClass p{
+	margin-bottom: 40px;
+}
+.classNumTime p>span:nth-child(1){
+	margin-right: 78px;
+}
+.chooseClass p>span:nth-child(1){
+	margin-right: 428px;
+}
+.classNumTime ul li,.chooseClass ul li{
+	background:url(../images/c3.png) no-repeat left top ;
+	padding-left: 72px;
+	margin-bottom: 40px;
+	line-height: 40px;
+}
+/*.chooseClass{
+	animation: move 2000s linear;
+}*/
+.chooseClass ul li{
+	background:url(../images/c3.png) no-repeat left top ;
+}
+.chooseClass .chooseClassActive{
+	background:url(../images/c2.png) no-repeat left top ;
+}
+.picFail button,.homeworkSub button,.homeworkFail button,.homeworkSucc button,.submitHwFail button{
+	width: 175px;
+	height: 72px;
+	line-height: 72px;
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	background: #00ba97;
+	outline: none;
+	border: none;
+	margin: 40px 0 0 185px;
+	border-radius: 10px;
+}
+.picFail button,.homeworkFail button,.submitHwFail button{
+	margin: 40px 0 0 60px;
+}
+.picFail>button:nth-child(3),.homeworkFail>button:nth-child(3),.submitHwFail>button:nth-child(3){
+	background: #e4eaf1;
+	color: #aeb1b7;
+}
+.picFail img,.homeworkSub img,.homeworkFail img,.homeworkSucc img,.submitHwFail img{
+	margin: 38px 0 0 224px;
+}
+.picFail p,.homeworkSub p,.homeworkFail p,.homeworkSucc p,.submitHwFail p{
+	font-size: 30px;
+	color: #333333;
+	text-align: center;
+	margin-top: 30px;
+}
+#layui-layer1,#layui-layer2,#layui-layer3{
+	border-radius: 20px;
+}
+.hwShow{
+	color:#67cdb4;
+	border-bottom: 2px solid #67cdb4;
+}
+@keyframes move{
+	0%{bottom:-440px}
+	100%{bottom:0px}
+}
