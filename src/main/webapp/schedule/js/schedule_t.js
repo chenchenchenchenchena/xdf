@@ -48,7 +48,6 @@ function stud(e){
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
-    console.log(e);
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
@@ -115,7 +114,6 @@ function stusea(e){
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc);
     function menufunc(e){
-    console.log(e)
     var arr = [];
     dateH = [];
     if(e.result==false||e.message!=undefined){
@@ -143,7 +141,9 @@ function stusea(e){
         if(!html_s.eq(k).hasClass('not_this')){
             dateH.push(''+html_s.eq(k).attr('data_y')+'-'+month+'-'+day+'')
         }else{
-            number++
+            if(k<20){
+                number++
+            }
         }
     }
     for(var j = 0;j<arr.length;j++){
@@ -289,7 +289,6 @@ $(document).on('click','.H-data li',function(){
                 day = '0'+day
             }
             var time2 = ''+$(html_s).eq(k).attr('data_y')+'-'+month+'-'+day+'';
-            console.log(todaythis)
             if(time2<todaythis){
                 $(html_s).eq(k).css('color','#ccc')
             }else if(time2==todaythis){

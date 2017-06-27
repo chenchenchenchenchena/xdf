@@ -83,9 +83,6 @@ $(function(){
             for(var i = 0;i<moth.length;i++){
                 arr.push( moth[i].SectBegin.split(' ')[0])
             }
-            // console.log(arr)
-            // console.log(moth)
-            // $('.month_hour i').html('0');
             setTimeout(function(){
                 var html_s = $('.swiper-slide-active table').find('td');
                 var number = 0;
@@ -141,7 +138,6 @@ $(function(){
             for(var i = 0;i<e.data.length;i++){
                 mastertae.push(e.data[i]);
             }
-            console.log(e)
         });
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
@@ -154,7 +150,6 @@ $(function(){
             $('.H-data').show();
             $('.N-data').hide();
             curr_e = e.data.Data;
-            console.log(curr_e);
             var time_old = [];
             var Index =[];
 
@@ -184,7 +179,6 @@ $(function(){
                     'studentNo':sessionStorage.stuNum
                 };
                 var htmltx = '';
-                // console.log(begtime[1].substring(0,begtime[1].length-3))
                 ajax_S(url.s_data,remindedata,function(e){
                     if(e.result==false){
                         layer.msg('请求参数不可以为空')

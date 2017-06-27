@@ -11,11 +11,9 @@ $(function(){
     	for(var i = 0;i<e.data.length;i++){
             mastertae.push(e.data[i]);
         }
-		console.log(e)
 	});
 
     function stusea(e){
-		console.log(e)
 		var teacindex = 0;
 		var BeginDate =  e.data.Data
 		var timeindex = 0;
@@ -26,8 +24,6 @@ $(function(){
 					regionindex.push(i)
 			}
 		}
-		console.log(mastertae);
-        // e.data.Data[0].mastertae
 		var masterta = e.data.Data[0].Teachers.split(',');
 		var masteaname = '';
 		for(var j = 0;j<mastertae.length;j++){
@@ -38,7 +34,6 @@ $(function(){
 				}
             }
 		}
-		console.log(masterta);
 		var begintime = BeginDate[timeindex].BeginDate.split(' ')[1].substring(0,BeginDate[timeindex].BeginDate.split(' ')[1].length-3)
 		var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace('-','/')
 		var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3)
@@ -56,7 +51,6 @@ $(function(){
 			if(BeginDate[regionindex[i]].AreaName==undefined){
 				BeginDate[regionindex[i]].AreaName='暂无数据'
 			}
-			console.log(mastertae[teacindex])
 
 			$('.schoolCampus h3').html('上课校区('+(i+1)+')')
 			for(var j = 0;j<masterta.length;j++){

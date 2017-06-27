@@ -253,25 +253,20 @@ $(document).on('click','.Relation',function(){
     }
 	
 })
+	var WXnumber = [
+		'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
+		'ofZfFwlCe5Br7LEYIf16fO-di2O0',
+        'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+	];
 
-	var json = {
+	for(var i = 0;i<WXnumber.length;i++){
+    var json = {
 
-        "touser":'ofZfFwsBvoqZaBMFovXrJn6e9kEM | ofZfFwrZfm6zzyUCXsgpvE-0qH08',
+        "touser":WXnumber[i],
 
         "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
         "url":"",
-
-        "topcolor":"#FF0000",
-
         "data":{
-
-            "User": {
-
-                "value":"黄先生",
-
-                "color":"#173177"
-
-            },
 
             "Date":{
 
@@ -279,57 +274,15 @@ $(document).on('click','.Relation',function(){
 
                 "color":"#173177"
 
-            },
-
-            "CardNumber": {
-
-                "value":"0426",
-
-                "color":"#173177"
-
-            },
-
-            "Type":{
-
-                "value":"消费",
-
-                "color":"#173177"
-
-            },
-
-            "Money":{
-
-                "value":"人民币260.00元",
-
-                "color":"#173177"
-
-            },
-
-            "DeadTime":{
-
-                "value":"06月07日19时24分",
-
-                "color":"#173177"
-
-            },
-
-            "Left":{
-
-                "value":"6504.09",
-
-                "color":"#173177"
-
             }
-
         }
 
     };
-
     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
     	console.log(e)
 	})
 
-
+    }
 
 
 

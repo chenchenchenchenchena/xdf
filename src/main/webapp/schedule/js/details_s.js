@@ -1,5 +1,4 @@
 $(function(){
-	// console.log(sessionStorage.timetoday)
     var emailm = {
         'studentCode':sessionStorage.stuNum,
         'beginDate':sessionStorage.timetoday.split(' ')[0],
@@ -12,10 +11,8 @@ $(function(){
         for(var i = 0;i<e.data.length;i++){
             mastertae.push(e.data[i]);
         }
-        console.log(e)
     });
     function stusea(e){
-        console.log(e)
         var teacindex = 0;
         var BeginDate =  e.data.Data
         var timeindex = 0;
@@ -26,7 +23,6 @@ $(function(){
                 regionindex.push(i)
             }
         }
-        console.log(mastertae);
         // e.data.Data[0].mastertae
         var masterta = e.data.Data[0].Teachers.split(',');
         var masteaname = '';
@@ -38,7 +34,6 @@ $(function(){
                 }
             }
         }
-        console.log(masterta);
         var begintime = BeginDate[timeindex].BeginDate.split(' ')[1].substring(0,BeginDate[timeindex].BeginDate.split(' ')[1].length-3)
         var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(new RegExp('-', 'g'),'/');
         var endtime = BeginDate[timeindex].EndDate.split(' ')[1].substring(0,BeginDate[timeindex].EndDate.split(' ')[1].length-3)
@@ -58,12 +53,12 @@ $(function(){
                 BeginDate[regionindex[i]].AreaName=''
             }
 
-            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].RoomName+'教室')
+            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].RoomName+'教室');
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p></li>')
                 }else{
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>');
                     masteaname = mastertae[teacindex]
                 }
             }
@@ -73,7 +68,7 @@ $(function(){
             for(var k = 0;k<stuall.length;k++){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
-                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4rem;">'+stuall[k].StudentName.substring(2,stuall[k].StudentName.length)+'<p style="font-size:.3rem;">'+stuall[k].StudentName+'</p></li>')；
+                    $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4rem;">'+stuall[k].StudentName.substring(2,stuall[k].StudentName.length)+'<p style="font-size:.3rem;">'+stuall[k].StudentName+'</p></li>');
                     $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masteaname+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
                 }else{
                     $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p>'+stuall[k].StudentName+'</p></li>')
@@ -81,8 +76,8 @@ $(function(){
 
             }
         }
-        $('.teacherList p span').html('('+$('.teacherList li').length+')')
-        $('.studentList p span').html('('+$('.studentList li').length+')')
+        $('.teacherList p span').html('('+$('.teacherList li').length+')');
+        $('.studentList p span').html('('+$('.studentList li').length+')');
         $('.load_t').hide();
 
         var swiper = new Swiper('.studentList .swiper-container', {
