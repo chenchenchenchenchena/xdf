@@ -5,6 +5,12 @@ $(function(){
     //    return false;
     //}
     wechatCode(location.href);
+    //判断ios
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS==true){
+        $('.nbxs').eq(0).css('margin-top','-.2rem')
+    }
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);
     //     return false;
