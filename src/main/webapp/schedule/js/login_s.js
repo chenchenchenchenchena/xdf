@@ -79,7 +79,6 @@ function stuc(e){
 	
 	//判断教师是否绑定
 	function Wxtea(e){
-		// alert()
 		console.log(e);
 		if(e.data!='goE2'&&e.result!=false){
 			location.href = 'login_t.html'
@@ -120,7 +119,8 @@ function stuc(e){
 		}
 	}
 	function s_bind(e){
-		console.log(e);
+        alert(JSON.stringify(stumore));
+        console.log(e);
 		if(e.data==undefined){
 			layer.msg(e.message);
 			$('.deterAss').html('立即关联');
@@ -151,7 +151,6 @@ function stuc(e){
 		// 关联点击
 		// alert($(this).html())
 		if($(this).html()=='立即关联'){
-			alert(JSON.stringify(stumore));
 			ajax_S(url.s_bind,stumore,s_bind)
 		}
 		//解绑
