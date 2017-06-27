@@ -76,7 +76,7 @@ $(function(){
                 sessionStorage.s += stuall[k].StudentName+',';
                 if(stuall[k].StudentName.length>3){
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
-                        'rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.4rem;">'+stuall[k].StudentName+'</p></li>')
+                        'rem;">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p style="font-size:.3rem;">'+stuall[k].StudentName+'</p></li>')
                 }else{
                     $('.studentList ul').append('<li class="swiper-slide">'+stuall[k].StudentName.substring(1,stuall[k].StudentName.length)+'<p >'+stuall[k].StudentName+'</p></li>')
                 }
