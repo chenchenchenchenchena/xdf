@@ -242,6 +242,9 @@ $(document).on('click','.H-data li',function(){
     location.href = 'detailsmany_t.html'
 
 });
+    $('#ymym').change(function(){
+        alert(0)
+    })
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
