@@ -246,7 +246,7 @@ $(document).on('click','.H-data li',function(){
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if(isiOS==true){
-        $('.nbxs').css('margin-top','.9rem')
+        $('.nbxs').eq(0).css('margin-top','-.9rem')
     }
     //存储今天时间
     var todaythis;
