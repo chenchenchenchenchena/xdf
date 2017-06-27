@@ -1,7 +1,7 @@
 //判断正式环境
 var onlineUrl = 'dt.xdf.cn';
 var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
-var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+var url_test = 'http://10.200.80.212/xdfdtmanager/';
 if (window.location.host == onlineUrl) {//正式环境
     // 接口路径
     var url_ = {
