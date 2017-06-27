@@ -215,7 +215,7 @@ setTimeout(function(){
                 $(this).addClass('xuanzhong_s')
             }
             ajax_S(url.s_emai,emailm,stusea);
-            ajax_S(url.s_emai,menu_s,menufunc);
+            // ajax_S(url.s_emai,menu_s,menufunc);
         }
 
     });

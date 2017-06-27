@@ -272,7 +272,7 @@ $(function(){
                 $(this).addClass('xuanzhong_s')
             }
             ajax_S(url.s_stud,emailm,stusea);
-            ajax_S(url.s_stud,menu_s,menufunc);
+            // ajax_S(url.s_stud,menu_s,menufunc);
         }
     });
     //点击查看详情
@@ -314,7 +314,7 @@ $(function(){
         $('.not_this').css('opacity','0');
     },100);
     setInterval(function(){
-        $('.not_this').css('opacity','0')
+        $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         if(month<10){
             month = '0'+month
