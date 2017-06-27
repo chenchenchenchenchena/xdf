@@ -4,15 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" line="43" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/share/c2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/share/111.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/share/share.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/learningSituation/rankinglist_t.html" afterPath="$PROJECT_DIR$/src/main/webapp/learningSituation/rankinglist_t.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" afterPath="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
-    </list>
+    <list default="true" id="31b0e29c-87db-45ac-962a-583ec26812e5" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -29,8 +21,8 @@
       <file leaf-file-name="schedule_s.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="62" column="36" lean-forward="false" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="36" />
+            <state relative-caret-position="228">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -112,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/common/js/ajax.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_t.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/login_s.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_t.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js" />
       </list>
     </option>
   </component>
@@ -494,20 +486,6 @@
       <workItem from="1498543695724" duration="2818000" />
       <workItem from="1498549483310" duration="157000" />
     </task>
-    <task id="LOCAL-00189" summary="提交">
-      <created>1498447404257</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1498447404257</updated>
-    </task>
-    <task id="LOCAL-00190" summary="提交">
-      <created>1498448108143</created>
-      <option name="number" value="00190" />
-      <option name="presentableId" value="LOCAL-00190" />
-      <option name="project" value="LOCAL" />
-      <updated>1498448108143</updated>
-    </task>
     <task id="LOCAL-00191" summary="提交">
       <created>1498448180547</created>
       <option name="number" value="00191" />
@@ -837,20 +815,33 @@
       <option name="project" value="LOCAL" />
       <updated>1498546077314</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498550910838</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1498550910838</updated>
+    </task>
+    <task id="LOCAL-00239" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1498551026268</created>
+      <option name="number" value="00239" />
+      <option name="presentableId" value="LOCAL-00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1498551026268</updated>
+    </task>
+    <option name="localTasksCounter" value="240" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199855000" />
+    <option name="totallyTimeSpent" value="200040000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26860118" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1309,8 +1300,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/schedule/js/schedule_s.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="62" column="36" lean-forward="false" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="36" />
+        <state relative-caret-position="228">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
