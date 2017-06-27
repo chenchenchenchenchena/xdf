@@ -309,6 +309,6 @@ $(document).on('click','.H-data li',function(){
         }
 
 
-    },1000);
+    },10);
 
 })
