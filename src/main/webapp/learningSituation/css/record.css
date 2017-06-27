@@ -313,7 +313,7 @@ body,html{
 .chooseClass .chooseClassActive{
 	background:url(../images/c2.png) no-repeat left top ;
 }
-.picFail button,.homeworkSub button,.homeworkFail button,.homeworkSucc button,.submitHwFail button{
+.recordSub button,.recordSucc button,.noRecord button{
 	width: 175px;
 	height: 72px;
 	line-height: 72px;
@@ -326,17 +326,17 @@ body,html{
 	margin: 40px 0 0 185px;
 	border-radius: 10px;
 }
-.picFail button,.homeworkFail button,.submitHwFail button{
+.recordSub button,.noRecord button{
 	margin: 40px 0 0 60px;
 }
-.picFail>button:nth-child(3),.homeworkFail>button:nth-child(3),.submitHwFail>button:nth-child(3){
+.recordSub>button:nth-child(3),.noRecord>button:nth-child(3){
 	background: #e4eaf1;
 	color: #aeb1b7;
 }
-.picFail img,.homeworkSub img,.homeworkFail img,.homeworkSucc img,.submitHwFail img{
+.recordSub img,.recordSucc img,.noRecord img{
 	margin: 38px 0 0 224px;
 }
-.picFail p,.homeworkSub p,.homeworkFail p,.homeworkSucc p,.submitHwFail p{
+.recordSub p,.recordSucc p,.noRecord p{
 	font-size: 30px;
 	color: #333333;
 	text-align: center;

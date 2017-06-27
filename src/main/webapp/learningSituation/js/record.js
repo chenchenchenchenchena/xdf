@@ -44,8 +44,33 @@ $(function(){
 					$(".scoreList dl").eq(i).find("dt").html($(".scoreTitle input").val());
 				}
 			}
-			
 			$(".scoreTitle input").val("");
 		})
 	}*/
+	$(".subtn").click(function(){
+		for(var i = 0;i<$(".scoreList dl").length;i++){
+			if($(".scoreList dt").eq(i).html()==""){
+				layer.open({
+			        type: 1,
+			        area: ['548px', '345px'],
+			        shade:[0.2,'#000'],
+			        title:'',
+			        skin: '',
+			        content:$(".noRecord")
+			    })
+			}else{
+				layer.open({
+			        type: 1,
+			        area: ['548px', '345px'],
+			        shade:[0.2,'#000'],
+			        title:'',
+			        skin: '',
+			        content:$(".recordSub")
+			    })
+			}
+		}
+	})
+	$(".recordSub button").eq(1).click(function(){
+		$(".recordSub p").html("提交成功");
+	})
 })
