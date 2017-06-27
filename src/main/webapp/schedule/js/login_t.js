@@ -95,7 +95,7 @@ function signOut(e) {
         });
 }
     // 配置微信启动项
-    var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
+    var Wxconfig =  {"url" : location.href,"appid" : "wxab29a3e2000b8d2a","secret": "60eb7eec2b7af5d74a704d3903e853dd"};
     var Wxconfig_h;
     $.ajax({
         url: url.w_xmor,

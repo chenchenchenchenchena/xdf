@@ -256,36 +256,36 @@ $(document).on('click','.Relation',function(){
     }
 	
 })
-	var WXnumber = [
-		'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
-		// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
-        // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
-	];
+	// var WXnumber = [
+	// 	'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
+	// 	// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
+     //    // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+	// ];
+    //
+	// for(var i = 0;i<WXnumber.length;i++){
+    // var json = {
+    //
+     //    "touser":WXnumber[i],
+    //
+     //    "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
+     //    "url":"",
+     //    "data":{
+    //
+     //        "Date":{
+    //
+     //            "value":"06月07日 19时24分",
+    //
+     //            "color":"#173177"
+    //
+     //        }
+     //    }
+    //
+    // };
+    // ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+    	// console.log(e)
+	// })
 
-	for(var i = 0;i<WXnumber.length;i++){
-    var json = {
-
-        "touser":WXnumber[i],
-
-        "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-        "url":"",
-        "data":{
-
-            "Date":{
-
-                "value":"06月07日 19时24分",
-
-                "color":"#173177"
-
-            }
-        }
-
-    };
-    ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
-    	console.log(e)
-	})
-
-    }
+    // }
 
 
 
