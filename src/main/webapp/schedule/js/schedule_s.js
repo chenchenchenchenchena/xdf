@@ -158,6 +158,7 @@ $(function(){
             var Index =[];
 
             var old;
+
             var masterta = e.data.Data[0].Teachers.split(',');
             var masteaname = '';
             for(var j = 0;j<mastertae.length;j++){
