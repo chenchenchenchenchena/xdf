@@ -170,11 +170,11 @@
 							timestamp: timestamp, // 必填，生成签名的时间戳
 							nonceStr: nonceStr, // 必填，生成签名的随机串
 							signature: signature,// 必填，签名，见附录1
-							jsApiList: [ 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+							jsApiList: [ 'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 						});
 						wx.ready(function () {
 							wx.checkJsApi({
-								jsApiList:["checkJsApi",'onMenuShareAppMessage'],
+								jsApiList:["checkJsApi",'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'],
 								success:function(res){
 									console.log("权限配置验证成功");
 								},
@@ -182,10 +182,26 @@
 									console.log("err::"+JSON.stringify(err));
 								}
 							})
+//							分享到朋友圈
+							wx.onMenuShareTimeline({
+								title: "高中英语拔高班11", // 分享标题
+								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
+								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
+								success: function () {
+									// 用户确认分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+									shareCmsFn();
+								},
+								cancel: function () {
+									// 用户取消分享后执行的回调函数
+									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+								}
+							});
+//							分享给朋友
 							wx.onMenuShareAppMessage({
 								title: "高中英语拔高班", // 分享标题
 								desc: "test share", // 分享描述
-								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
 								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
 								type: '', // 分享类型,music、video或link，不填默认为link
 								dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -202,12 +218,30 @@
 								},
 								fail:function (msg) {
 									console.log("fail::"+JSON.stringify(msg));
-									alert("fail！！！");
 								}
 							});
 							wx.error(function(res){
 								// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 								alert("errorMSG:"+res);
+							});
+							//禁用部分分享按钮
+							wx.hideMenuItems({
+								menuList: ['menuItem:share:qq',         //分享到QQ
+									'menuItem:share:weiboApp',   //分享到微博
+									'menuItem:share:facebook',   //分享到Facebook
+									'menuItem:share:QZone',      //分享到QQ空间
+									'menuItem:openWithQQBrowser',//在QQ浏览器中打开
+									'menuItem:openWithSafari',   //在Safari中打开
+									'menuItem:share:email',
+//									'menuItem:copyUrl',          //复制链接
+									'menuItem:readMode'          //阅读模式
+								],
+								success: function () {
+									//alert("testing:ok");
+								},
+								error: function () {
+									//alert("testing:error");
+								}
 							});
 						});
 					}

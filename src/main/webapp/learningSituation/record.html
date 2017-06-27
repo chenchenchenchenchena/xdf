@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="../common/css/base.css"  />
 		<link rel="stylesheet" href="css/record.css"  />
 		<script src="../common/js/jquery.js"></script>
+		<script src="../common/js/ajax.js"></script>
 		<script src="../common/js/scale.js"></script>
 		<script src="../common/js/layer.js"></script>
 	</head>
@@ -90,21 +91,20 @@
 			</ul>
 			<button class="chooseBtn">确定</button>
 	</div>
-	<!--<div class="homeworkSub"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>-->
-	<!--<div class="picFail"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button>确定</button></div>-->
-	<!--<div class="homeworkFail"><img src="images/redtan.png" /><p>仍有同学未打分确认提交？</p><button>取消</button><button>确定</button></div>-->
+	<!--<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>-->
+	<!--<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button>确定</button></div>-->
+	<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分确认提交？</p><button>取消</button><button>确定</button></div>
 	</body>
 </html>
-<script src="../js/record.js"></script>
-<script src="js/homeworklist_t.js"></script>
-	<!--<script>
-		layer.open({
+<script src="js/record.js"></script>
+	<script>
+		/*layer.open({
 	        type: 1,
 	        area: ['548px', '345px'],
 	        shade:[0.2,'#000'],
 	        title:'',
 	        skin: '',
-	        content:$(".picFail")
+	        content:$(".recordSub")
 	    })
 		layer.open({
 	        type: 1,
@@ -112,14 +112,16 @@
 	        shade:[0.2,'#000'],
 	        title:'',
 	        skin: '',
-	        content:$(".homeworkSub")
-	    })
-		layer.open({
-	        type: 1,
-	        area: ['548px', '345px'],
-	        shade:[0.2,'#000'],
-	        title:'',
-	        skin: '',
-	        content:$(".homeworkFail")
-	    })
-	</script>-->
+	        content:$(".recordSucc")
+	    })*/
+	   /*$(".subtn").click(function(){
+			layer.open({
+		        type: 1,
+		        area: ['548px', '345px'],
+		        shade:[0.2,'#000'],
+		        title:'',
+		        skin: '',
+		        content:$(".noRecord")
+		    })
+		});*/
+	</script>
