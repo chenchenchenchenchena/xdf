@@ -24,7 +24,7 @@ $(function(){
 					regionindex.push(i)
 			}
 		}
-		var masterta = e.data.Data[0].Teachers.split(',');
+		var masterta = e.data.Data[timeindex].Teachers.split(',');
 		var masteaname = '';
 		for(var j = 0;j<mastertae.length;j++){
             for(var k = 0;k<masterta.length;k++){
