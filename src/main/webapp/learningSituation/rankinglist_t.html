@@ -9,35 +9,10 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/common.css"  />
 	<link rel="stylesheet" href="../homework/css/homeworklist_s.css"  />
 	<style>
-		body,html{
-			background: #f1f1f1;
-		}
-		.tab-title{
-			height: 88px;
-			margin-bottom: 18px;
-			background: #fff;
-			font-size: 30px;
-			color: #959595;
-		}
-		.tab-title li{
-			text-align: center;
-			float: left;
-			width: 164px;
-			line-height: 86px;
 
-		}
-		.tab-title li:first-child{
-			margin: 0 175px 0 129px;
-		}
-		.tab-active{
-			color:#67cdb4;
-			border-bottom: 2px solid #67cdb4;
-		}
-		.main-content{
-			background: #fff;
-		}
 		.main-content table{
 			width:100%;
 		}
@@ -45,6 +20,19 @@
 			text-align: center;
 			height: 60px;
 			font-size: 26px;
+		}
+		.change-state{
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+		.state-up{
+			background: url("images/upIcon.png") center center no-repeat;
+		}
+		.state-down{
+			background: url("images/downIcon.png") center center no-repeat;
 		}
 	</style>
 	<script src="../common/js/jquery.js"></script>
@@ -70,19 +58,19 @@
 				<th>上次分数</th>
 				<th>分数浮动</th>
 				<th>名次浮动</th>
-				<th><a href="#" id="wecharShare">分享</a></th>
+				<th><a href="sharedranking_t.html" id="wecharShare1">分享</a></th>
 			</tr>
 			<tr>
 				<td>1</td>
 				<td>张一山</td>
 				<td>100</td>
-				<td>7分</td>
-				<td>2名</td>
+				<td><i class="change-state state-up"></i>7分</td>
+				<td><i class="change-state state-down"></i>2名</td>
 				<td><a href="../homework/dohomework_t.html">&gt;</a></td>
 			</tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
+			<tr><td>1</td><td>张一山</td><td>100</td><td><i class="change-state state-up"></i>7分</td>	<td><i class="change-state state-up"></i>2名</td><td>></td></tr>
+			<tr><td>1</td><td>张一山</td><td>100</td><td><i class="change-state state-up"></i>7分</td>	<td><i class="change-state state-up"></i>2名</td><td>></td></tr>
+			<tr><td>1</td><td>张一山</td><td>100</td><td><i class="change-state state-up"></i>7分</td>	<td>2名</td><td>></td></tr>
 			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
 			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
 			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>

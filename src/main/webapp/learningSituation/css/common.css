@@ -1,0 +1,27 @@
+body,html{
+    background: #f1f1f1;
+}
+.tab-title{
+    height: 88px;
+    margin-bottom: 24px;
+    background: #fff;
+    font-size: 30px;
+    color: #959595;
+}
+.tab-title li{
+    text-align: center;
+    float: left;
+    width: 164px;
+    line-height: 86px;
+
+}
+.tab-title li:first-child{
+    margin: 0 175px 0 129px;
+}
+.tab-active{
+    color:#67cdb4;
+    border-bottom: 2px solid #67cdb4;
+}
+.main-content{
+    background: #fff;
+}
