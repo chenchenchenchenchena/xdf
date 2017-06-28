@@ -5,8 +5,8 @@ body,html{
     height: 88px;
     margin-bottom: 24px;
     background: #fff;
-    font-size: 30px;
-    color: #959595;
+    font-size: 32px;
+    color: #666666;
 }
 .tab-title li{
     text-align: center;
@@ -15,21 +15,24 @@ body,html{
     line-height: 86px;
 
 }
-.tab-title li a{
-    color:#000;
-}
 .tab-title li:first-child{
     margin: 0 175px 0 129px;
 }
 .tab-active{
-    color:#67cdb4;
-    border-bottom: 2px solid #67cdb4;
-}
-.tab-title .tab-active a{
-    color:#67cdb4;
+    color:#00bb97;
+    border-bottom: 2px solid #00bb97;
 }
 .main-content{
     background: #fff;
+}
+/*无数据*/
+.no-data{
+    margin: 126px 0 0 262px;
+}
+.no-data p{
+    font-size: 30px;
+    color: #aeadad;
+    margin: 22px 0 0 18px;
 }
 
 

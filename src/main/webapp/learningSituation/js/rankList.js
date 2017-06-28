@@ -13,7 +13,7 @@ $(function(){
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
-        $('.main-content table').hide();
+        $('.main-content,.no-data').hide();
         // alert($(".tab-title li").index(this));
         // $('.main-content table').eq($(".tab-title li").index(this)).show();
         getRankList($(".tab-title li").index(this)+1);
@@ -145,7 +145,7 @@ $(function(){
             'schoolId':'73', //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
-        ajaxRequest('POST', url.t_rankl, reqData, getRankListSuccess);
+        ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
     }
 
     function getRankListSuccess(msg){
@@ -183,9 +183,8 @@ $(function(){
                         +'<td><a class="link-to" href="../homework/dohomework_t.html"></a></td>'
                         +'</tr>';
                     $(".intro-test>tbody").append(rankListHtml);
-                    $(".main-content table").show();
-                    // $(".hwFinish .secul").hide();
-
+                    $(".no-data").hide();
+                    $(".main-content").show();
                 });
             }else{
                 // $('.hwEmpty p').html("您没有已交作业哦~");
