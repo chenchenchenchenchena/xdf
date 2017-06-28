@@ -68,6 +68,7 @@ function binding(e){
 	if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
+
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
