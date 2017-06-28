@@ -224,25 +224,29 @@
 								// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 								alert("errorMSG:"+res);
 							});
-							//禁用部分分享按钮
-							wx.hideMenuItems({
-								menuList: ['menuItem:share:qq',         //分享到QQ
-									'menuItem:share:weiboApp',   //分享到微博
-									'menuItem:share:facebook',   //分享到Facebook
-									'menuItem:share:QZone',      //分享到QQ空间
-									'menuItem:openWithQQBrowser',//在QQ浏览器中打开
-									'menuItem:openWithSafari',   //在Safari中打开
-									'menuItem:share:email',
-//									'menuItem:copyUrl',          //复制链接
-									'menuItem:readMode'          //阅读模式
-								],
-								success: function () {
-									//alert("testing:ok");
-								},
-								error: function () {
-									//alert("testing:error");
-								}
+							wx.hideAllNonBaseMenuItem();//隐藏所有非基础按钮接口
+							wx.showMenuItems({
+								menuList: ['menuItem:share:appMessage','menuItem:share:timeline','menuItem:copyUrl','menuItem:refresh'] // 要显示的菜单项，所有menu项见附录3
 							});
+							//禁用部分分享按钮
+//							wx.hideMenuItems({
+//								menuList: ['menuItem:share:qq',         //分享到QQ
+//									'menuItem:share:weiboApp',   //分享到微博
+//									'menuItem:share:facebook',   //分享到Facebook
+//									'menuItem:share:QZone',      //分享到QQ空间
+//									'menuItem:openWithQQBrowser',//在QQ浏览器中打开
+//									'menuItem:openWithSafari',   //在Safari中打开
+//									'menuItem:share:email',
+////									'menuItem:copyUrl',          //复制链接
+//									'menuItem:readMode'          //阅读模式
+//								],
+//								success: function () {
+//									//alert("testing:ok");
+//								},
+//								error: function () {
+//									//alert("testing:error");
+//								}
+//							});
 						});
 					}
 				}
