@@ -9,6 +9,7 @@
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="full-screen" content="yes"/>
 		<link rel="stylesheet" href="../common/css/base.css"  />
+		<link rel="stylesheet" href="css/common.css"  />
 		<link rel="stylesheet" href="css/record.css"  />
 		<script src="../common/js/jquery.js"></script>
 		<script src="../common/js/ajax.js"></script>
@@ -16,15 +17,16 @@
 		<script src="../common/js/layer.js"></script>
 	</head>
 	<body>
+		<div class="record">
 		<ul class="tab-title">
-		   <li class="tab-active">入门测</li>
-		   <li>出门测</li>
+		   <li>成绩报告</li>
+		   <li class="tab-active">录成绩</li>
 		</ul>
 		<div class="assignment">
 			<ul class="choose">
-				<li><span>成绩类型</span><span>入门测</span></li>
-				<li><span>班级</span><span>高中英语拔高版</span></li>
-				<li><span>课次及时间</span><span>第2课次(05.25 08:00-12:00)</span></li>
+				<li><span>成绩类型</span><span class="st">入门测</span></li>
+				<li><span>班级</span><span class="classrome"></span></li>
+				<li><span>课次及时间</span><span class="classTime"></span></li>
 				<li><span>满分</span><input type="text" class="totalScore" placeholder="请输入分数"/></li>
 			</ul>
 			<div class="txt">成绩录入</div>
@@ -32,8 +34,8 @@
 				<p class="scoreTitle"><span>高文生</span><input type="text" placeholder="请录入分数"/></p>
 				<div class="scoreList">
 					<dl>
-						<dt></dt>
-						<dd>小高小高</dd>
+						<dt>小高小</dt>
+						<dd>小高小</dd>
 					</dl>
 					<dl>
 						<dt></dt>
@@ -95,6 +97,7 @@
 			</div>
 			<button class="subtn">确认提交</button>
 	</div>
+	</div>
 	<div class="scoreType">
 		<p><span>成绩类型</span></p>
 		<ul>
@@ -115,15 +118,18 @@
 	<div class="chooseClass">
 			<p><span>选择班</span></p>
 			<ul>
-				<li class="chooseClassActive">班级名称英语二年级</li>
+				<li>班级名称英语二年级</li>
 				<li>班级名称英语二年级</li>
 				<li>班级名称英语二年级</li>
 			</ul>
 			<button class="chooseBtn">确定</button>
 	</div>
+	<div class="mask"></div>
 	<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>
 	<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button>确定</button></div>
-	<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分确认提交？</p><button>取消</button><button>确定</button></div>
+	<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分,确认提交？</p><button>取消</button><button>确定</button></div>
+	<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
+	<div class="classTimeEmpty"><img src="images/ce.png" /><p>请选择课次及时间</p></div>
 	</body>
 </html>
 <script src="js/record.js"></script>
