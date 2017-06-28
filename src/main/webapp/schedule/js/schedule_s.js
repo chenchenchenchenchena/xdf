@@ -4,7 +4,6 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    sessionStorage.callbackconfig = 'schedule'
     wechatCode(location.href);
     //判断ios
     var u = navigator.userAgent;
@@ -87,8 +86,10 @@ $(function(){
     function teac(e){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
+            sessionStorage.callbackconfig = 'schedule'
         }else if(localStorage.terEmail){
             location.href = 'schedule_t.html';
+            sessionStorage.removeItem('callbackconfig')
         }else{
             location.href = 'login_s.html';
         }
