@@ -1,17 +1,29 @@
 $(function(){
+	$(".scoreType").hide();
+	$(".chooseClass").hide();
+	$(".classNumTime").hide();
+	$(".mask").hide();
 	$(".choose li").click(function(){
+		$(".mask").show();
+		$("body,html").css({"width": "100%","height": "100%","overflow": "hidden"})
 		if($(this).index()==0){
+			$(".scoreType").show()
 			$(".scoreType").css("animation","move 0.5s linear");
 			$(".scoreType").css("bottom","0px");
+			$(".chooseClass").hide();
 			$(".chooseClass").css("animation","");
 			$(".chooseClass").css("bottom","-440px");
+			$(".classNumTime").hide();
 			$(".classNumTime").css("animation","");
 			$(".classNumTime").css("bottom","-440px");
 		}else if($(this).index()==1){
+			$(".chooseClass").show();
 			$(".chooseClass").css("animation","move 0.5s linear");
 			$(".chooseClass").css("bottom","0px");
+			$(".classNumTime").hide();
 			$(".classNumTime").css("animation","");
 			$(".classNumTime").css("bottom","-440px");
+			$(".scoreType").hide();
 			$(".scoreType").css("animation","");
 			$(".scoreType").css("bottom","-440px");
 			$.ajax({
@@ -24,26 +36,51 @@ $(function(){
 				}
 			});
 		}else if($(this).index()==2){
+			$(".classNumTime").show();
 			$(".classNumTime").css("animation","move 0.5s linear");
 			$(".classNumTime").css("bottom","0px");
+			$(".chooseClass").hide();
 			$(".chooseClass").css("animation","");
 			$(".chooseClass").css("bottom","-440px");
+			$(".scoreType").hide();
 			$(".scoreType").css("animation","");
 			$(".scoreType").css("bottom","-440px");
 		}
 		
 	})
 	$(".chooseBtn").click(function(){
+		$(".mask").hide();
+		$("body,html").css({"width": "","height": "","overflow": ""})
+		$(".chooseClass").hide();
 		$(".chooseClass").css("animation","");
 		$(".chooseClass").css("bottom","-440px");
 	})
 	$(".confirmBtn").click(function(){
+		$(".mask").hide();
+		$("body,html").css({"width": "","height": "","overflow": ""});
+		$(".classNumTime").hide();
 		$(".classNumTime").css("animation","");
 		$(".classNumTime").css("bottom","-440px");
 	})
 	$(".scoreTypeBtn").click(function(){
+		$(".mask").hide();
+		$("body,html").css({"width": "","height": "","overflow": ""})
+		$(".scoreType").hide();
 		$(".scoreType").css("animation","");
 		$(".scoreType").css("bottom","-440px");
+	})
+	//选中
+	$(".chooseClass li").click(function(){
+		$(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+		$(".classrome").html($(this).html());
+	})
+	$(".classNumTime li").click(function(){
+		$(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+		$(".classTime").html($(this).html());
+	})
+	$(".scoreType li").click(function(){
+		$(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+		$(".st").html($(this).html());
 	})
 	var scoreArr = [];
 	$(".scoreList dl").click(function(){
@@ -75,29 +112,54 @@ $(function(){
 	var layer2;
 	var layer3;
 	$(".subtn").click(function(){
-		for(var i = 0;i<$(".scoreList dt").length;i++){
+		if($(".classrome").html()==""){
+		 	layer.open({
+		        type: 1,
+		        area: ['312px', '194px'],
+		        shade:0,
+		        title:'',
+		        skin: '',
+		        time:2000,
+		        content:$(".classEmpty")
+			})
+		 }else if($(".classTime").html()==""){
+		 	layer.open({
+		        type: 1,
+		        area: ['312px', '194px'],
+		        shade:0,
+		        title:'',
+		        skin: '',
+		        time:2000,
+		        content:$(".classTimeEmpty")
+			})
+		 }else{
+		 	for(var i = 0;i<$(".scoreList dt").length;i++){
 			/*alert($(".scoreList dl dt").eq(i).html()=="")*/
-			if($(".scoreList dl dt").eq(i).html()==""){
-				 layer1=layer.open({
-			        type: 1,
-			        area: ['548px', '345px'],
-			        shade:[0.2,'#000'],
-			        title:'',
-			        skin: '',
-			        content:$(".noRecord")
-			    })
-				return false;
+				if($(".scoreList dl dt").eq(i).html()==""){
+					 layer1=layer.open({
+				        type: 1,
+				        area: ['548px', '345px'],
+				        shade:[0.2,'#000'],
+				        title:'',
+				        skin: '',
+				        content:$(".noRecord")
+				    })
+					return false;
+				}
+				
 			}
-			
-		}
-		 layer2 = layer.open({
-	        type: 1,
-	        area: ['548px', '345px'],
-	        shade:[0.2,'#000'],
-	        title:'',
-	        skin: '',
-	        content:$(".recordSub")
-		})
+		 	 layer2 = layer.open({
+		        type: 1,
+		        area: ['548px', '345px'],
+		        shade:[0.2,'#000'],
+		        title:'',
+		        skin: '',
+		        content:$(".recordSub")
+			})
+		 }
+		
+		
+		 
 	})
 	$(".recordSub button").eq(1).click(function(){
 		layer.close(layer2);
@@ -136,12 +198,17 @@ $(function(){
 	    return strlen;  
 	}
 	for(var i = 0;i<$(".scoreList dl").length;i++){
-		var str = $(".scoreList dd").eq(i);
+		var ddStr = $(".scoreList dd").eq(i);
+		var dtStr=$(".scoreList dt").eq(i);
 		/*console.log(str.html());*/
-		var strLen = lenStat(str);
+		var ddstrLen = lenStat(ddStr);
 		/*console.log(strLen);*/
-		if(lenStat(str)>8){
+		if(lenStat(ddStr)>8){
 			str.css("font-size","17px");
+		}
+		if(lenStat(dtStr)>4){
+			dtStr.html().substring(lenStat(dtStr)-5,lenStat(dtStr)-1);
+			dtStr.html(dtStr.html().substring(lenStat(dtStr)-5,lenStat(dtStr)-1));
 		}
 	}
 	

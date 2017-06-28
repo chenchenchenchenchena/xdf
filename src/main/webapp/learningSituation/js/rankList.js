@@ -8,6 +8,9 @@ $(function(){
         });
     }
     // tabCss('.tab-title li','tab-active');
+    console.log("title:"+GetRequest('title'));
+    console.log("title:"+decodeURI(encodeURI(GetRequest('title'))));
+    $('title').html(GetRequest('title'));//动态获取页面标题
     $('.departure-test').hide();
     getRankList("1");
     // 切换tab
@@ -90,7 +93,7 @@ $(function(){
                                 console.log("success::"+JSON.stringify(msg));
                                 // 用户确认分享后执行的回调函数
                                 //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-                                alert("success！！！");
+                                console.log("success！！！");
 //									shareCmsFn();
                             },
                             cancel: function () {
@@ -103,7 +106,7 @@ $(function(){
                         });
                         wx.error(function(res){
                             // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                            alert("errorMSG:"+res);
+                            console.log("errorMSG:"+res);
                         });
 
                         //禁用部分分享按钮

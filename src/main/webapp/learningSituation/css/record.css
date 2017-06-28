@@ -2,9 +2,13 @@
 body,html{
 	background: #F1F1F1;
 	font-size: 30px;
-	width: 100%;
+	/*width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden;*/
+    position: relative;
+}
+.record{
+	overflow: hidden;
 }
 .hwHeader{
 	height: 88px;
@@ -161,6 +165,7 @@ body,html{
 	height: 105px;
 	border-bottom: 1px solid #e1e1e1;
 	line-height: 105px;
+	background: url(../images/rightArrow.png) no-repeat right center;
 }
 .choose li>span:nth-child(1){
 	display: inline-block;
@@ -169,7 +174,7 @@ body,html{
 }
 .choose li>span:nth-child(2){
 	display: inline-block;
-	background: url(../images/rightArrow.png) no-repeat right center;
+	/*background: url(../images/rightArrow.png) no-repeat right center;*/
 	float: right;
 	padding-right: 30px;
 }
@@ -217,15 +222,19 @@ body,html{
 	text-align: center;
 	width: 138px;
 	margin-bottom: 20px;
-	height: 136px;
+	/*height: 136px;*/
 }
 .scoreList dt{
+	font-size: 28px;
 	width: 96px;
 	height: 96px;
 	background: #ffbb37;
 	border-radius: 50%;
 	line-height: 100px;
 	margin: 0 auto 14px;
+}
+.scoreList dd{
+	font-size: 32px;
 }
 .txt{
 	height: 90px;
@@ -298,6 +307,11 @@ body,html{
 	background: #fff;
 	padding: 30px 30px 10px;
 	width: 100%;
+	/*display: none;*/
+	z-index: 10;
+}
+.scoreType{
+	height: 347px;
 }
 .classNumTime p,.chooseClass p,.scoreType p{
 	margin-bottom: 40px;
@@ -320,7 +334,7 @@ body,html{
 .chooseClass ul li{
 	background:url(../images/c3.png) no-repeat left top ;
 }
-.chooseClass .chooseClassActive{
+.chooseClass .chooseClassActive,.scoreType .chooseClassActive,.classNumTime .chooseClassActive{
 	background:url(../images/c2.png) no-repeat left top ;
 }
 .recordSub button,.recordSucc button,.noRecord button{
@@ -362,4 +376,29 @@ body,html{
 @keyframes move{
 	0%{bottom:-440px}
 	100%{bottom:0px}
+}
+.mask{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top:0;
+	background: rgba(0,0,0,0.2);
+	/*display: none;*/
+	/*overflow: hidden;*/
+}
+.recordSucc,.recordSub,.noRecord{
+	display: none;
+}
+.classEmpty,.classTimeEmpty{
+	background: rgba(0,0,0,0.7);
+	text-align: center;
+	height: 194px;
+	border-radius: 20px;
+	color: #fff;
+	font-size: 34px;
+	display: none;
+}
+.classEmpty img,.classTimeEmpty img{
+	margin: 42px 0 15px 0;
 }
