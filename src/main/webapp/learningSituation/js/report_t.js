@@ -3,7 +3,12 @@ $(function(){
 
 
 
-
+//点击查看成绩排行
+$(document).on('touchend','.achievement_s>h4',function(){
+    var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
+    console.log(title);
+    window.location.href = 'rankinglist_t.html?title='+title;
+});
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
 	console.log($('#chart_S'))
