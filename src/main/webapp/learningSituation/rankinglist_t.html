@@ -170,11 +170,11 @@
 							timestamp: timestamp, // 必填，生成签名的时间戳
 							nonceStr: nonceStr, // 必填，生成签名的随机串
 							signature: signature,// 必填，签名，见附录1
-							jsApiList: [ 'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+							jsApiList: [ 'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems','showMenuItems','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 						});
 						wx.ready(function () {
 							wx.checkJsApi({
-								jsApiList:["checkJsApi",'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'],
+								jsApiList:["checkJsApi",'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems','showMenuItems','hideAllNonBaseMenuItem'],
 								success:function(res){
 									console.log("权限配置验证成功");
 								},
@@ -184,7 +184,7 @@
 							})
 //							分享到朋友圈
 							wx.onMenuShareTimeline({
-								title: "高中英语拔高班11", // 分享标题
+								title: "高中英语拔高班22", // 分享标题
 								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
 								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
 								success: function () {
