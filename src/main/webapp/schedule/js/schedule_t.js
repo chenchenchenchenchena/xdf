@@ -3,6 +3,7 @@ $(function(){
 // sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtsC5Wx5wZrA';
     // localStorage.terEmail = 'hanqifan@xdf.cn'
 // sessionStorage.stuNum= 'sy1';
+sessionStorage.callbackconfig = 'schedule_t'
 // 当前微信号
 var WXnum  = {
     'wechatId':sessionStorage.openid

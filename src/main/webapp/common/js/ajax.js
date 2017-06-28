@@ -4,7 +4,7 @@ var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
 var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 if (window.location.host == onlineUrl) {//正式环境
     // 接口路径
-    var url_ = {
+    var url = {
         'e_elog': url_online+'e2Login/login.do',//e2登录
         'w_xmor': url_online+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
         'w_open': url_online+'wechatSignature/getUserInfo.do',//获取openid

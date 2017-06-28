@@ -3,6 +3,7 @@
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
+
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
 var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
 var calbac = {
@@ -71,6 +72,9 @@ function binding(e){
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail;
+        if(sessionStorage.callbackconfig=='schedule_t'){
+            location.href = 'schedule_t.html'
+        }
 	}
 
 }

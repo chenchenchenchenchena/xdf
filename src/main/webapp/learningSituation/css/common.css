@@ -15,6 +15,9 @@ body,html{
     line-height: 86px;
 
 }
+.tab-title li a{
+    color:#000;
+}
 .tab-title li:first-child{
     margin: 0 175px 0 129px;
 }
@@ -22,6 +25,24 @@ body,html{
     color:#67cdb4;
     border-bottom: 2px solid #67cdb4;
 }
+.tab-title .tab-active a{
+    color:#67cdb4;
+}
 .main-content{
     background: #fff;
+}
+
+
+
+
+
+
+
+/*老师成绩报表*/
+.classroom_s{
+    width:690px;
+    height:112px;
+    margin:0 auto;
+    border-bottom:1px solid #e1e1e1;
+    background:#fff;
 }
