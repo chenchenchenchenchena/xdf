@@ -86,3 +86,6 @@ body,html{
     transform:rotate(0deg);
     margin-top:42px;
 }
+#chart_S canvas{
+    transform:scale(1.2);
+}
