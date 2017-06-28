@@ -32,6 +32,7 @@ $('.class_big').append('<div class="classroom_s"> <div class="title_s"> <h4>é«˜ä
 
 
 
+
 var myChart = echarts.init(document.getElementById("chart_S"));
 // ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/queryScoreReportByTeacherEmail.do',{'teaEmail':'caoxuefeng@xdf.cn'},		function(e){
 //         console.log(e)
