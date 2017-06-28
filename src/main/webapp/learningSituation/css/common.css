@@ -5,8 +5,8 @@ body,html{
     height: 88px;
     margin-bottom: 24px;
     background: #fff;
-    font-size: 30px;
-    color: #959595;
+    font-size: 32px;
+    color: #666666;
 }
 .tab-title li{
     text-align: center;
@@ -15,66 +15,22 @@ body,html{
     line-height: 86px;
 
 }
-.tab-title li a{
-    color:#000;
-}
 .tab-title li:first-child{
     margin: 0 175px 0 129px;
 }
 .tab-active{
-    color:#67cdb4;
-    border-bottom: 2px solid #67cdb4;
-}
-.tab-title .tab-active a{
-    color:#67cdb4;
+    color:#00bb97;
+    border-bottom: 2px solid #00bb97;
 }
 .main-content{
     background: #fff;
 }
-
-
-
-
-
-
-
-/*老师成绩报表*/
-.class_big{
-    background:#fff;
+/*无数据*/
+.no-data{
+    margin: 126px 0 0 262px;
 }
-.classroom_s{
-    width:690px;
-    height:auto;
-    margin:0 auto;
-    border-bottom:1px solid #e1e1e1;
-    background:#fff;
-    font-size:32px;
-    color:#333;
-    line-height:112px;
-}
-.classroom_s h4{
-    display: inline-block;
-}
-.classroom_s img{
-    float: right;
-    width:24px;
-    height:46px;
-    margin-top:33px;
-    transform:rotate(90deg);
-}
-#chart_S{
-    width:690px;
-    height:360px;
-}
-.achievement_s h4{
-    display: inline-block;
-    width:97%;
-    font-size:28px;
-    text-align: right;
-}
-.achievement_s img{
-    width:15px;
-    height:30px;
-    transform:rotate(0deg);
-    margin-top:42px;
+.no-data p{
+    font-size: 30px;
+    color: #aeadad;
+    margin: 22px 0 0 18px;
 }

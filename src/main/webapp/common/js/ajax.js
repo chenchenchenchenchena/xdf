@@ -25,7 +25,8 @@ if (window.location.host == onlineUrl) {//正式环境
         't_logi': url_online+'logout/doLogout.do',//退出登录
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_online+'teacherData/queryCourseRemind.do',  //老师课表提醒
-        's_data': url_online+'studentData/queryCourseRemindStudent.do'  //学生课表提醒
+        's_data': url_online+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
+        't_rankl':url_online+'studentData/queryCourseRemindStudent.do'  //老师入门测，出门测排行列表
     };
     var Global = {
         "appid": 'wxab29a3e2000b8d2a',
@@ -58,7 +59,9 @@ if (window.location.host == onlineUrl) {//正式环境
         'doLogout.do' ,//退出登录
         't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
-        's_data': url_test+'studentData/queryCourseRemindStudent.do'  //学生课表提醒
+        's_data': url_test+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
+        't_rankl': url_test+'studentData/queryCourseRemindStudent.do'  //老师入门测，出门测排行列表
+
     };
     var Global = {
         "appid": 'wx559791e14e9ce521',
