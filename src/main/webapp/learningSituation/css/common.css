@@ -39,10 +39,42 @@ body,html{
 
 
 /*老师成绩报表*/
+.class_big{
+    background:#fff;
+}
 .classroom_s{
     width:690px;
-    height:112px;
+    height:auto;
     margin:0 auto;
     border-bottom:1px solid #e1e1e1;
     background:#fff;
+    font-size:32px;
+    color:#333;
+    line-height:112px;
+}
+.classroom_s h4{
+    display: inline-block;
+}
+.classroom_s img{
+    float: right;
+    width:24px;
+    height:46px;
+    margin-top:33px;
+    transform:rotate(90deg);
+}
+#chart_S{
+    width:690px;
+    height:360px;
+}
+.achievement_s h4{
+    display: inline-block;
+    width:97%;
+    font-size:28px;
+    text-align: right;
+}
+.achievement_s img{
+    width:15px;
+    height:30px;
+    transform:rotate(0deg);
+    margin-top:42px;
 }

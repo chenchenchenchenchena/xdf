@@ -54,7 +54,8 @@ if (window.location.host == onlineUrl) {//正式环境
         's_hwlt': url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
         's_hwfl': url_test+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': url_test+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi': url_test+'logout/doLogout.do' ,//退出登录
+        't_logi': url_test+'logout/' +
+        'doLogout.do' ,//退出登录
         't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
         's_data': url_test+'studentData/queryCourseRemindStudent.do'  //学生课表提醒

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>学生成绩排行</title>
+	<title>XXXX老师</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -14,7 +14,9 @@
 	<script src="../common/js/scale.js"></script>
 	<script src="../common/js/layer.js"></script>
 	<script src="../common/js/ajax.js"></script>
+	<script src="../common/js/echarts.min.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="js/report_t.js"></script>
 </head>
 <body>
 <ul class="tab-title">
@@ -25,6 +27,11 @@
 	<div class="classroom_s">
 		<h4>高中英语拔高班</h4>
 		<img src="images/rightArrow.png" alt=""/>
+		<div id="chart_S"></div>
+		<div class="achievement_s">
+			<h4>查看成绩排行</h4>
+			<img src="images/rightArrow.png" alt="">
+		</div>
 	</div>
 </div>
 <script>
