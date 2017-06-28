@@ -4,6 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
+    sessionStorage.callbackconfig = 'schedule'
     wechatCode(location.href);
     //判断ios
     var u = navigator.userAgent;
