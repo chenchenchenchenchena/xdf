@@ -53,11 +53,8 @@ body,html{
 }
 .secul li>span:nth-child(3){
 	display: inline-block;
-	
 	height: 40px;
-	
 	line-height: 40px;
-	
 	margin-left: 30px;
 }
 .blue{
@@ -157,19 +154,18 @@ body,html{
 }
 .choose{
 	padding: 0 30px;
-	margin: 20px 0 10px;
+	/*margin: 20px 0 10px;*/
 	background: #fff;
 }
 .choose li{
 	height: 105px;
 	border-bottom: 1px solid #e1e1e1;
-	color: #808080;
 	line-height: 105px;
-	
 }
 .choose li>span:nth-child(1){
 	display: inline-block;
 	float: left;
+	color: #808080;
 }
 .choose li>span:nth-child(2){
 	display: inline-block;
@@ -184,15 +180,23 @@ body,html{
 	width: 70px;
 	outline: none;
 }
+.totalScore{
+	color: #d4d3d3;
+    float: right;
+    border: none;
+    font-size: 30px;
+    line-height: 105px;
+    width: 160px;
+    outline: none;
+}
 .scoreList{
-	padding: 0 30px;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-top: 20px;
 }
 .scoreTitle{
-	padding: 0 30px;
-    height: 100px;
-    line-height: 100px;
+    height: 104px;
+    line-height: 104px;
+    border-bottom: 1px solid #e1e1e1;
 }
 /*.scoreTitle>span:nth-child(2){
 	display: inline-block;
@@ -201,32 +205,34 @@ body,html{
    
 }*/
 .scoreTitle input{
-	height: 69px;
+	line-height: 104px;
     font-size: 30px;
     float: right;
-    width: 200px;
-    margin-top: 13px;
+    width: 153px;
     outline: none;
+    border: none;
 }
 .scoreList dl{
 	float: left;
-	margin:10px 19px;
 	text-align: center;
+	width: 138px;
+	margin-bottom: 20px;
+	height: 136px;
 }
 .scoreList dt{
-	width: 100px;
-	height: 100px;
-	background: #ccc;
+	width: 96px;
+	height: 96px;
+	background: #ffbb37;
 	border-radius: 50%;
 	line-height: 100px;
-	text-align: center;
-	margin-bottom: 7px;
+	margin: 0 auto 14px;
 }
 .txt{
-	height: 104px;
-	background: #fff;
-	line-height: 104px;
+	height: 90px;
+	line-height: 90px;
 	padding: 0 30px;
+	font-size: 30px;
+	font-weight: 700;
 }
 .txt input{
 	width: 96%;
@@ -250,6 +256,9 @@ body,html{
 }
 .txtDiv{
 	position: relative;
+	background: #fff;
+	padding: 0 30px;
+	margin-bottom: 30px;
 }
 .txtboxNum{
 	position: absolute;
@@ -263,7 +272,7 @@ body,html{
 .imgs img{
 	margin-left: 30px;
 }
-.subtn,.confirmBtn,.chooseBtn{
+.subtn,.confirmBtn,.chooseBtn,.scoreTypeBtn{
 	width: 690px;
 	height: 88px;
 	line-height: 88px;
@@ -275,30 +284,31 @@ body,html{
 	margin-left: 30px;
 	border-radius: 10px;
 }
-.confirmBtn,.chooseBtn{
+.confirmBtn,.chooseBtn,.scoreTypeBtn{
 	margin-left: 0;
 }
 .assignment{
 	position: relative;
 }
-.classNumTime,.chooseClass{
+.classNumTime,.chooseClass,.scoreType{
 	height: 400px;
 	position: absolute;
 	bottom:-440px;
 	left: 0;
 	background: #fff;
 	padding: 30px 30px 10px;
+	width: 100%;
 }
-.classNumTime p,.chooseClass p{
+.classNumTime p,.chooseClass p,.scoreType p{
 	margin-bottom: 40px;
 }
-.classNumTime p>span:nth-child(1){
+/*.classNumTime p>span:nth-child(1){
 	margin-right: 78px;
 }
 .chooseClass p>span:nth-child(1){
 	margin-right: 428px;
-}
-.classNumTime ul li,.chooseClass ul li{
+}*/
+.classNumTime ul li,.chooseClass ul li,.scoreType ul li{
 	background:url(../images/c3.png) no-repeat left top ;
 	padding-left: 72px;
 	margin-bottom: 40px;
