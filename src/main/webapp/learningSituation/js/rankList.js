@@ -11,19 +11,32 @@ $(function(){
     console.log("title:"+GetRequest('title'));
     console.log("title:"+decodeURI(encodeURI(GetRequest('title'))));
     $('title').html(GetRequest('title'));//动态获取页面标题
-    $('.departure-test').hide();
-    getRankList("1");
+    $('.shared-content').hide();//隐藏分享页
+    getRankList("1");//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
-        $('.main-content,.no-data').hide();
+        $('.main-content,.no-data,.shared-content').hide();
         // alert($(".tab-title li").index(this));
         // $('.main-content table').eq($(".tab-title li").index(this)).show();
         getRankList($(".tab-title li").index(this)+1);
+        $('.main-content').attr('testState',$(".tab-title li").index(this)+1);
     });
     //链接到分享页
     $(document).on('touchstart','.to-shared',function () {
-        window.location.href = "sharedranking_t.html";
+        // window.location.href = "sharedranking_t.html";
+        $('.tab-title,.main-content,.no-data').hide();
+        $('.shared-content').show();
+        var testState = $('.main-content').attr('testState');
+        var stateContent;
+        if(testState=="1"){
+            stateContent = "出门测";
+        }else{
+            stateContent = "入门测";
+        }
+        $('title').html(stateContent+"排行榜");//动态获取页面标题
+        $('.rankTitle>span').html(stateContent);
+        getRankList(testState,"shared");//
     });
     weChatData();
     //微信分享数据
@@ -49,7 +62,7 @@ $(function(){
                     var nonceStr = json.nonceStr;
                     var signature = json.signature;
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: 'wx559791e14e9ce521', // 必填，公众号的唯一标识
                         timestamp: timestamp, // 必填，生成签名的时间戳
                         nonceStr: nonceStr, // 必填，生成签名的随机串
@@ -145,14 +158,19 @@ $(function(){
     });
     
     // 获取入门测,出门测排行列表
-    function getRankList(testState) {
+    function getRankList(testState,pageState) {
         var reqData = {
             'teaEmail':'test@xdf.cn', //教师邮箱
             'classCode':'001', //班级编号
             'schoolId':'73', //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
-        ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
+        if(pageState=="shared"){
+            ajaxRequest('POST', url.t_rankl,reqData, getSharedListSuccess);
+        }else{
+            ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
+        }
+
     }
 
     function getRankListSuccess(msg){
@@ -205,3 +223,80 @@ $(function(){
 
 
 })
+
+/* 分享后排行榜 */
+function getSharedListSuccess(msg){
+    $(".main-content").hide();
+    $(".ranklist").html("");
+    if(msg.code==200){
+        if(msg.data!='undefined' && msg.data.length>0){
+            var datas = msg.data;
+            $.each(datas,function(i,items){
+                console.log(i);
+                if(i<1){
+                    $('.rankInfo>p:nth-of-type(1)').html(items.className);
+                    $('.rankInfo>p:nth-of-type(2)').html('<span>'+items.teacherName+'老师</span><span class="mg-l">满分:'+items.fullMarks+'</span>');
+                    $('.rankInfo>p:nth-of-type(3)').html('日期:'+items.lessonTime);
+                }
+                var rankCss,ranking,studentNo;
+                //名次样式
+                if(items.ranking==1){
+                    rankCss = "rankfirst";
+                    ranking = "";
+                }else{
+                    rankCss = "nofirst";
+                    ranking = items.ranking;
+                }
+                if(items.studentNo.length>8){
+                    studentNo = items.studentNo.substr(0,2)+'****'+items.studentNo.substr(-2,2);
+                }else{
+                    studentNo = items.studentNo;
+                }
+                var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
+                var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
+                var sharedListHtml='<li><span class="rankleft"><i class="rankfirst">'+ranking
+                    +'</i><i>'+items.studentName+'</i><i>'
+                    +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.lastGrade+'分</i></span></li>';
+                $(".ranklist").append(sharedListHtml);
+                $(".ranklist").show();
+
+            });
+            console.log("页面加载完毕，开始截图！！");
+            takeScreenshot();
+        }else{
+            // $('.hwEmpty p').html("您没有已交作业哦~");
+            $('.shared-content').hide();
+            $('.no-data').show();
+        }
+    }else{
+        console.log("err:"+JSON.stringify(msg));
+    }
+}
+// 转化html页面为canvas图像
+function takeScreenshot() {
+    console.log('test');
+    html2canvas($('body'), {
+        onrendered: function(canvas) {
+            document.body.appendChild(canvas);
+            $('.shared-content').hide();
+//				convertCanvasToImage();
+        },
+//			 width: '100%',
+//			 height: '100%'
+    });
+}
+//	canvas to images
+function convertCanvasToImage(){
+    console.log("canvas to images");
+//		var image = new Image();
+//		image.src = canvas.toDataURL("image/png");
+    var myCanvas = document.getElementsByTagName("canvas");
+//		var dataURL = myCanvas[0].toDataURL();
+
+    var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
+    console.log(image);
+//		window.location.href=image;
+
+    console.log(canvas.toDataURL("image/png"));
+    return image;
+}
