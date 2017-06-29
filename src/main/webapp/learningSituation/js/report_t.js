@@ -96,10 +96,8 @@ var option = {
         },
         legend: {
             data:['出门测','入门测'],
-            left:'20px',
-            top:'-5px',
             textStyle: {
-                fontSize: 18
+                fontSize: 24
             }
 
         },
