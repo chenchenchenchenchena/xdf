@@ -9,44 +9,8 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
-	<link rel="stylesheet" href="../homework/css/homeworklist_s.css"  />
-	<style>
-		body,html{
-			background: #f1f1f1;
-		}
-		.tab-title{
-			height: 88px;
-			margin-bottom: 18px;
-			background: #fff;
-			font-size: 30px;
-			color: #959595;
-		}
-		.tab-title li{
-			text-align: center;
-			float: left;
-			width: 164px;
-			line-height: 86px;
-
-		}
-		.tab-title li:first-child{
-			margin: 0 175px 0 129px;
-		}
-		.tab-active{
-			color:#67cdb4;
-			border-bottom: 2px solid #67cdb4;
-		}
-		.main-content{
-			background: #fff;
-		}
-		.main-content table{
-			width:100%;
-		}
-		.main-content table th,.main-content table td{
-			text-align: center;
-			height: 60px;
-			font-size: 26px;
-		}
-	</style>
+	<link rel="stylesheet" href="css/common.css"  />
+	<link rel="stylesheet" href="css/rankList.css"  />
 	<script src="../common/js/jquery.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="../common/js/layer.js"></script>
@@ -64,165 +28,33 @@
 	<table class="intro-test">
 		<!--<thead></thead>-->
 		<tbody>
-			<tr>
-				<th>排名11</th>
-				<th>姓名</th>
-				<th>上次分数</th>
-				<th>分数浮动</th>
-				<th>名次浮动</th>
-				<th><a href="#" id="wecharShare">分享</a></th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>张一山</td>
-				<td>100</td>
-				<td>7分</td>
-				<td>2名</td>
-				<td><a href="../homework/dohomework_t.html">&gt;</a></td>
-			</tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-			<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
+			<!--<tr>-->
+				<!--<th>排名</th>-->
+				<!--<th>姓名</th>-->
+				<!--<th>本次分数</th>-->
+				<!--<th>分数浮动</th>-->
+				<!--<th>名次浮动</th>-->
+				<!--&lt;!&ndash;<th><a href="sharedranking_t.html" id="wecharShare1">分享</a></th>&ndash;&gt;-->
+				<!--<th><img src="images/shareIcon.png" alt="分享"/></th>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><span class="first-num">1</span></td>-->
+				<!--<td>张一山</td>-->
+				<!--<td>100</td>-->
+				<!--<td><i class="change-state state-up"></i>7分</td>-->
+				<!--<td><i class="change-state state-down"></i>2名</td>-->
+				<!--&lt;!&ndash;<td><a href="../homework/dohomework_t.html">&gt;</a></td>&ndash;&gt;-->
+				<!--<td><a href="../homework/dohomework_t.html" class="link-to"></a></td>-->
+			<!--</tr>-->
 		</tbody>
 	</table>
 	<!--出门测-->
-	<table class="departure-test">
-		<!--<thead></thead>-->
-		<tbody>
-		<tr>
-			<th>排名</th>
-			<th>姓名</th>
-			<th>上次分数</th>
-			<th>分数浮动</th>
-			<th>名次浮动</th>
-			<th>分享</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>张一山</td>
-			<td>100</td>
-			<td>7分</td>
-			<td>2名</td>
-			<td>></td>
-		</tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		<tr><td>1</td><td>张一山</td><td>100</td><td>7分</td>	<td>2名</td><td>></td></tr>
-		</tbody>
-	</table>
+	<!--<table class="departure-test"></table>-->
 </div>
+<div class="no-data" style="display: none;">
+	<img src="images/noDatas.png"  />
+	<p>暂无排行信息</p>
+</div>
+<script src="js/rankList.js"></script>
 </body>
-<script>
-	$(function(){
-		function tabCss(tabObj, tabClass) {
-			$(document).on('touchend',tabObj, function () {
-				$(this).addClass(tabClass).siblings().removeClass(tabClass);
-			});
-		}
-//		tabCss('.tab-title li','tab-active');
-		$('.departure-test').hide();
-//		切换tab
-		$(document).on('touchend','.tab-title li', function () {
-			$(this).addClass('tab-active').siblings().removeClass('tab-active');
-			$('.main-content table').hide();
-			$('.main-content table').eq($(".tab-title li").index(this)).show();
-		});
-		weChatData();
-		//微信分享数据
-		function weChatData() {
-			var urlVal = window.location.href;
-			var businessP = {
-				"appid": 'wx559791e14e9ce521',
-				"secret": 'baa4373d5a8750c69b9d1655a2e31370',
-				"url": urlVal
-			}
-//			var d = constructionParams(rsaEncryptedString(businessP), "6bd249db7c52440ab7462b6d298077d9");
-			jQuery.ajax({
-				type: "POST",
-				url: url.w_xmor,
-				async: true,
-				dataType: 'json',
-				data: JSON.stringify(businessP),
-				success: function (json) {
-					console.log("注册11"+JSON.stringify(json));
-					if (json.result == true) {//获取成功
-//						var appId = json.appid;
-						var timestamp = json.timestamp;
-						var nonceStr = json.nonceStr;
-						var signature = json.signature;
-						wx.config({
-							debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-							appId: 'wx559791e14e9ce521', // 必填，公众号的唯一标识
-							timestamp: timestamp, // 必填，生成签名的时间戳
-							nonceStr: nonceStr, // 必填，生成签名的随机串
-							signature: signature,// 必填，签名，见附录1
-							jsApiList: [ 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-						});
-						wx.ready(function () {
-							wx.checkJsApi({
-								jsApiList:["checkJsApi",'onMenuShareAppMessage'],
-								success:function(res){
-									console.log("权限配置验证成功");
-								},
-								error:function(err){
-									console.log("err::"+JSON.stringify(err));
-								}
-							})
-							wx.onMenuShareAppMessage({
-								title: "高中英语拔高班", // 分享标题
-								desc: "test share", // 分享描述
-								link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
-								imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
-								type: '', // 分享类型,music、video或link，不填默认为link
-								dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-								success: function (msg) {
-									console.log("success::"+JSON.stringify(msg));
-									// 用户确认分享后执行的回调函数
-									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-									alert("success！！！");
-//									shareCmsFn();
-								},
-								cancel: function () {
-									// 用户取消分享后执行的回调函数
-									//$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-								},
-								fail:function (msg) {
-									console.log("fail::"+JSON.stringify(msg));
-									alert("fail！！！");
-								}
-							});
-							wx.error(function(res){
-								// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-								alert("errorMSG:"+res);
-							});
-						});
-					}
-				}
-			});
-
-		}
-//		微信分享
-		$(document).on('touchstart',"#wecharShare",function() {
-			alert("微信分享事件触发111");
-//			weChatData();
-		});
-
-
-
-	})
-</script>
 </html>

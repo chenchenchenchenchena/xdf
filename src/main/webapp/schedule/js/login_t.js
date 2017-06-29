@@ -3,6 +3,7 @@
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
+
 var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
 var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
 var calbac = {
@@ -17,7 +18,7 @@ if(localStorage.terEmail){
     // alert(bindingtea0)
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.data!=undefined){
-            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURI(sessionStorage.nickname),'headImg': sessionStorage.headimgurl};
+            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl};
             ajax_S(url.s_nobd,stumore,telbind)
         }
     });
@@ -51,7 +52,7 @@ function teac(e){
         localStorage.sid = e.sid;
         bindingtea0['email'] = localStorage.terEmail;
         bindingtea0['wechatId'] = sessionStorage.openid;
-        bindingtea0['nickName'] = encodeURI(sessionStorage.nickname);
+        bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
@@ -67,13 +68,19 @@ function binding(e){
 	if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
+
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail;
+        if(sessionStorage.callbackconfig=='schedule'){
+            location.href = 'schedule_s.html'
+            sessionStorage.removeItem('callbackconfig')
+        }
 	}
 
 }
+
 
 
 
@@ -94,8 +101,9 @@ function signOut(e) {
             location.href = a.logoutUrl
         });
 }
+
     // 配置微信启动项
-    var Wxconfig =  {"url" : location.href,"appid" : "wx559791e14e9ce521","secret": "baa4373d5a8750c69b9d1655a2e31370"};
+    var Wxconfig =  {"url" : location.href,"appid" : "wxab29a3e2000b8d2a","secret": "60eb7eec2b7af5d74a704d3903e853dd"};
     var Wxconfig_h;
     $.ajax({
         url: url.w_xmor,

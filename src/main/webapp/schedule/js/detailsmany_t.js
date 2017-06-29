@@ -19,12 +19,12 @@ $(function(){
 		var timeindex = 0;
 		var regionindex = [];
 		for(var i = 0;i<BeginDate.length;i++){
-			if(BeginDate[i].SectBegin==sessionStorage.timetoday){
+			if(BeginDate[i].SectBegin==sessionStorage.timetoday&&BeginDate[i].ClassCode==sessionStorage.classCode){
 					timeindex =i
 					regionindex.push(i)
 			}
 		}
-		var masterta = e.data.Data[0].Teachers.split(',');
+		var masterta = e.data.Data[timeindex].Teachers.split(',');
 		var masteaname = '';
 		for(var j = 0;j<mastertae.length;j++){
             for(var k = 0;k<masterta.length;k++){
@@ -55,7 +55,7 @@ $(function(){
 			$('.schoolCampus h3').html('上课校区('+(i+1)+')')
 			for(var j = 0;j<masterta.length;j++){
 				if(masterta[j]!=''){
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p</li>')
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p></li>')
                     $('.schoolCampus').append('<dl><dt>'+BeginDate[regionindex[i]].AreaName+'校区</dt><dd>'+BeginDate[regionindex[i]].RoomName+'教室</dd><dd class="name">('+masterta[j]+':'+BeginDate[regionindex[i]].ClassCode+')</dd></dl>');
                 }else{
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>')

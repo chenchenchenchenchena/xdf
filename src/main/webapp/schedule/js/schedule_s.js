@@ -86,8 +86,10 @@ $(function(){
     function teac(e){
         if(e.data=="goE2"){
             location.href = 'login_s.html';
+            sessionStorage.callbackconfig = 'schedule'
         }else if(localStorage.terEmail){
             location.href = 'schedule_t.html';
+            sessionStorage.removeItem('callbackconfig')
         }else{
             location.href = 'login_s.html';
         }

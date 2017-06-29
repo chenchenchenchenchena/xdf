@@ -4,7 +4,7 @@ var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
 var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 if (window.location.host == onlineUrl) {//正式环境
     // 接口路径
-    var url_ = {
+    var url = {
         'e_elog': url_online+'e2Login/login.do',//e2登录
         'w_xmor': url_online+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
         'w_open': url_online+'wechatSignature/getUserInfo.do',//获取openid
@@ -25,7 +25,8 @@ if (window.location.host == onlineUrl) {//正式环境
         't_logi': url_online+'logout/doLogout.do',//退出登录
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_online+'teacherData/queryCourseRemind.do',  //老师课表提醒
-        's_data': url_online+'studentData/queryCourseRemindStudent.do'  //学生课表提醒
+        's_data': url_online+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
+        't_rankl':url_online+'teacherAnalysis/studentFloatGrade.do'  //老师入门测，出门测排行列表
     };
     var Global = {
         "appid": 'wxab29a3e2000b8d2a',
@@ -54,10 +55,13 @@ if (window.location.host == onlineUrl) {//正式环境
         's_hwlt': url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
         's_hwfl': url_test+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': url_test+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi': url_test+'logout/doLogout.do' ,//退出登录
+        't_logi': url_test+'logout/' +
+        'doLogout.do' ,//退出登录
         't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
-        's_data': url_test+'studentData/queryCourseRemindStudent.do'  //学生课表提醒
+        's_data': url_test+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
+        't_rankl': url_test+'teacherAnalysis/studentFloatGrade.do'  //老师入门测，出门测排行列表
+
     };
     var Global = {
         "appid": 'wx559791e14e9ce521',
@@ -186,7 +190,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
         },
         error: function (err) {
             // failureCallback(msg);
-            console.log(err);
+            console.log("err:"+err);
         }
     });
 };
@@ -228,6 +232,15 @@ function getRequest() {
     }
     return theRequest;
 }
+/*获取参数*/
+function GetRequest(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return decodeURIComponent(r[2]);
+    }
+    return null;
+};
 
 
 // 本月多少天

@@ -124,7 +124,7 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.curriculum').show()
         }
 // <span class="tx" index="'+i+'">'+htmltx+'</span>
@@ -255,10 +255,10 @@ $(document).on('click','.H-data li',function(){
     if(day<10){
         day = '0'+day
     }
-    var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00'
+    var time_s =''+year+'-'+month+'-'+day+' '+$(this).find('.CHour_s_more_left p').eq(0).html()+':00';
     // alert(time_s)
     sessionStorage.timetoday = time_s;
-
+    sessionStorage.classCode = $(this).attr('classCode');
     location.href = 'detailsmany_t.html'
 
 });
