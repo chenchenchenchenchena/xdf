@@ -71,8 +71,9 @@ body,html{
     transform:rotate(90deg);
 }
 .classroom_s div:nth-child(2){
-    width:690px;
-    height:360px;
+    width: 690px;
+    height: 360px;
+
 }
 .achievement_s{
     display:none;
