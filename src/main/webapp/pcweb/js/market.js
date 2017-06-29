@@ -16,7 +16,12 @@ function toLogin() {
         dataType: 'json',
         data: JSON.stringify(calbac),
         success: function (e) {
-            showFunctionList(e);
+            console.log(e);
+            if(e.result == false){
+                alert(e.message);
+            }else {
+                showFunctionList(e);
+            }
 
         }
     });
@@ -36,12 +41,19 @@ function showFunctionList(json) {
 
         functionIds = [];
 
-        var functionList = Array(json.functionList);
+        var functionList = json.functionList;
+        if(functionList instanceof string){
+            alert(functionList);
+            window.top.location.href = getRootPath();
+        }else if(functionList instanceof Array){
 
-        //获取functionIds
-        setFunctionList(functionList);
-        localStorage.functionCheckedList = JSON.stringify(json.functionList);
-        jumpPage(json.functionList);
+            //获取functionIds
+            setFunctionList(json.functionList);
+            localStorage.functionCheckedList = JSON.stringify(json.functionList);
+            jumpPage(json.functionList);
+        }
+
+
     }
 }
 
@@ -223,4 +235,22 @@ var marketJs = {
             return false;
         }
     }
+}
+
+function toLogout() {
+    var businessP = {"returnUrl": getRootPath(), "sid": getCookie("sid")};
+    jQuery.ajax({
+        type: "POST",
+        // url: Global.actionURL,
+        url:"http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do",
+        async: false,//同步
+        dataType: 'json',
+        data: JSON.stringify(businessP),
+        success: function (json) {
+            if (json.result == true) {
+                clearCookie();
+                window.top.location.href = json.logoutUrl;
+            }
+        }
+    });
 }

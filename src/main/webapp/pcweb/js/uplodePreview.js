@@ -107,7 +107,7 @@ $(function () {
                     if (data.success == true) {
                         $("#submit-2 .filename").val(file);
                         $("#hidden2").val(data.fileUrl);
-                        $("#wechatpt").attr("src", data.previewUrl);
+                        $("#wechatpt").attr("src", data.thumbnail);
                         $("#m2").html(data.message);
                     } else {
                         $("#m2").html(data.message);
@@ -140,7 +140,7 @@ $(function () {
                     if (data.success == true) {
                         $("#submit-3 .filename").val(file);
                         $("#hidden3").val(data.fileUrl);
-                        $("#ercodept").attr("src", data.fileUrl);
+                        $("#ercodept").attr("src", data.thumbnail);
                         $("#m3").html(data.message);
                     } else {
                         $("#m3").html(data.message);
