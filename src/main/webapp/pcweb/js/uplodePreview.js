@@ -40,10 +40,11 @@ function lengthValidate(inputId, spanId, validLength) {
     });
 }
 
-var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/"
+var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+// var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 
 $(function () {
-    $("form[enctype]").attr("action",baseUrl+$("form[enctype]").attr("action"));
+    $("form[enctype]").attr("action", baseUrl + $("form[enctype]").attr("action"));
     $("input[type=file]").change(function () {
         $(this).parents(".uploader").find(".filename").val($(this).val());
 
@@ -57,23 +58,35 @@ $(function () {
 
     $('#up1').click(function () {
         if ($("#first1").val() != null & $("#first1").val() != "") {
-            if (!checkImgType($("#first1").val())) {
+            var file = $("#first1").val();
+            if (!checkImgType(file)) {
                 layer.msg("APP筹课配图类型必须是 gif,jpeg,jpg,png,bmp中的一种", {icon: 5});
                 return false;
             }
-            $("#submit-1").ajaxSubmit(function (data) {
-                if (data.success == true) {
-                    $("#hidden1").val(data.fileUrl);
-                    $("#ckpt").attr("src", data.fileUrl);
-                    $("#m1").html(data.message);
-                } else {
-                    $("#m1").html(data.message);
-                    setTimeout(function(){
-                        $("#m1").html("");
-                        $("#submit-1 .filename").val($("#hidden1").val());
-                    },4000);
+            //thumbnail／previewUrl／fileUrl
+
+            $("#submit-1").ajaxSubmit({
+                data: {"width": 750, "height": 527},
+                resetForm: "true",
+                success: function (data) {
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                        $("#submit-1 .filename").val(file);
+                        $("#hidden1").val(data.thumbnail);
+                        $("#ckpt").attr("src", data.thumbnail);
+                        $("#m1").html(data.message);
+                    } else {
+                        $("#m1").html(data.message);
+                        setTimeout(function () {
+                            $("#m1").html("");
+                            $("#submit-1 .filename").val($("#hidden1").val());
+                        }, 4000);
+                    }
+                },
+                error: function (jqxhr, errorMsg, errorThrown) {
                 }
             });
+
             return false;
         } else {
             layer.msg("请选择文件", {icon: 5});
@@ -81,21 +94,28 @@ $(function () {
     })
     $('#up2').click(function () {
         if ($("#first2").val() != null & $("#first2").val() != "") {
+            var file = $("#first2").val();
             if (!checkImgType($("#first2").val())) {
                 layer.msg("微信转发配图类型必须是 gif,jpeg,jpg,png,bmp中的一种", {icon: 5});
                 return false;
             }
-            $("#submit-2").ajaxSubmit(function (data) {
-                if (data.success == true) {
-                    $("#hidden2").val(data.fileUrl);
-                    $("#wechatpt").attr("src", data.fileUrl);
-                    $("#m2").html(data.message);
-                } else {
-                    $("#m2").html(data.message);
-                    setTimeout(function () {
-                        $("#m2").html("");
-                        $("#submit-2 .filename").val($("#hidden2").val());
-                    }, 4000);
+            $("#submit-2").ajaxSubmit({
+                data: {"width": 180, "height": 180},
+                resetForm: "true",
+                success: function (data) {
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                        $("#submit-2 .filename").val(file);
+                        $("#hidden2").val(data.fileUrl);
+                        $("#wechatpt").attr("src", data.previewUrl);
+                        $("#m2").html(data.message);
+                    } else {
+                        $("#m2").html(data.message);
+                        setTimeout(function () {
+                            $("#m2").html("");
+                            $("#submit-2 .filename").val($("#hidden2").val());
+                        }, 4000);
+                    }
                 }
             });
             return false;
@@ -106,22 +126,29 @@ $(function () {
 
     $('#up3').click(function () {
         if ($("#first3").val() != null & $("#first3").val() != "") {
+            var file = $("#first3").val();
             if (!checkImgType($("#first3").val())) {
                 layer.msg("公众号二维码图片类型必须是 gif,jpeg,jpg,png,bmp中的一种", {icon: 5});
                 return false;
             }
-            $("#submit-3").ajaxSubmit(function (data) {
-                // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
-                if (data.success == true) {
-                    $("#hidden3").val(data.fileUrl);
-                    $("#ercodept").attr("src", data.fileUrl);
-                    $("#m3").html(data.message);
-                } else {
-                    $("#m3").html(data.message);
-                    setTimeout(function () {
-                        $("#m3").html("");
-                        $("#submit-3 .filename").val($("#hidden3").val());
-                    }, 4000);
+            $("#submit-3").ajaxSubmit({
+                data: {"width": 160, "height": 160},
+                resetForm: "true",
+                success: function (data) {
+                    // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                        $("#submit-3 .filename").val(file);
+                        $("#hidden3").val(data.fileUrl);
+                        $("#ercodept").attr("src", data.fileUrl);
+                        $("#m3").html(data.message);
+                    } else {
+                        $("#m3").html(data.message);
+                        setTimeout(function () {
+                            $("#m3").html("");
+                            $("#submit-3 .filename").val($("#hidden3").val());
+                        }, 4000);
+                    }
                 }
             });
             return false;
@@ -131,6 +158,7 @@ $(function () {
     });
 
 });
+
 
 /*
  * 判断图片类型
@@ -145,6 +173,29 @@ function checkImgType(file) {
     }
     return true;
 }
+
+// function checkImgSize(file, size) {
+//     // var img = new Image();
+//     // img.src = file;
+//     //
+//     // alert(img.offsetHeight+"*"+img.offsetWidth);
+//
+//     if (window.FileReader) {
+//         var reader = new FileReader();
+//         var blob = new Blob([file],{type:"text/plain"});
+//         reader.readAsDataURL(blob);
+//         //监听文件读取结束后事件  
+//         reader.onloadend = function (e) {
+//             showXY(e.target.result);
+//         };
+//     }
+//
+// }
+// function showXY(source){
+//     var img = document.getElementById("ckpt");
+//     img.src = source;
+//     alert("Width:"+img.width+", Height:"+img.height);
+// }
 
 var classValidateNumByChange = false;
 
@@ -167,7 +218,7 @@ function classValidateNum(type) {
     jQuery.ajax({
         type: "POST",
         // url: Global.actionURL,
-        url:"http://api1.xdf.cn/SoukeRest/Class/GetClassByCode",
+        url: "http://api1.xdf.cn/SoukeRest/Class/GetClassByCode",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(businessP),
@@ -792,7 +843,7 @@ function previous(step) {
 }
 
 //保存一个新的课程
-function saveNewCk(step, isEmpty){
+function saveNewCk(step, isEmpty) {
     layer.load(2, {
         shade: [0.1, '#fff'] //0.1透明度的白色背景
     });
@@ -810,14 +861,14 @@ function saveNewCk(step, isEmpty){
 }
 
 //保存新筹课
-function saveOrUpdate(status){
+function saveOrUpdate(status) {
     //第一阶段
     var userId = $("#userId", window.parent.document).val();
     var classNum = $("#classNum").val();//班级编号
     var ckName = $("#ckName").val();//筹课名称
     var className = $("#className").val();//班级名称
     var usefulPerson = $("#usefulPerson").val();//适用人群
-    var courseAmount=$("#courseAmount").val();//课程金额
+    var courseAmount = $("#courseAmount").val();//课程金额
     var raiseMoney = $("#raiseMoney").val();//需筹金额
     var ckIntroduce = $("#ckIntroduce").val();//筹课说明
     var latitude = $("#latitude").val();//纬度
@@ -896,9 +947,9 @@ function saveOrUpdate(status){
         data: JSON.stringify(businessP),
         success: function (json) {
             if (json.result == true) {
-                if(status == 0){
+                if (status == 0) {
                     layer.msg(json.message, {icon: 6});
-                }else if(status == 1){
+                } else if (status == 1) {
                     layer.msg(json.message, {icon: 6});
                 }
                 //window.location.href = 'updateCourse.html?ckId=' + json.ckId + '&flag=1';
@@ -921,9 +972,9 @@ function saveOrUpdate(status){
 function viewPage(type) {
     if ($('#ckId').val()) {
         var previewURL = '';
-        if(type == 1){//老筹课
+        if (type == 1) {//老筹课
             previewURL = Global.previewURL;
-        }else if(type == 2) {//新筹课
+        } else if (type == 2) {//新筹课
             previewURL = Global.previewURL_new
         }
         layer.open({
