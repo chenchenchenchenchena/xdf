@@ -96,7 +96,10 @@ var option = {
         },
         legend: {
             data:['出门测','入门测'],
-            left:'20px'
+            textStyle: {
+                fontSize: 24
+            }
+
         },
         calculable : true,
         xAxis : [
@@ -105,6 +108,15 @@ var option = {
                 type : 'category',
                 boundaryGap : false,
                 data :x,
+                nameTextStyle:{
+                    fontSize:24
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
             }
         ],
         yAxis : [
@@ -112,6 +124,15 @@ var option = {
                 name:'分数',
                 type : 'value',
                 max : '10',
+                nameTextStyle:{
+                    fontSize:24
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
             }
         ],
         series : [
@@ -119,11 +140,29 @@ var option = {
                 name:'出门测',
                 type:'line',
                 data:y1,
+                nameTextStyle:{
+                    fontSize:24
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
             },
             {
                 name:'入门测',
                 type:'line',
                 data:y2,
+                nameTextStyle:{
+                    fontSize:24
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
             }
         ]
     };
