@@ -98,7 +98,7 @@ var option = {
             data:['出门测','入门测'],
             left:'20px',
             textStyle: {
-                fontSize: 24
+                fontSize: 20
             }
 
         },
