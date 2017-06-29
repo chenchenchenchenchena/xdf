@@ -279,7 +279,10 @@ function takeScreenshot() {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
             $('.shared-content').hide();
-//				convertCanvasToImage();
+            var myCanvas = document.getElementsByTagName("canvas");
+            // $('#imgs').appendChild(Canvas2Image.convertToImage($('canvas'), '800', '800', 'png'));
+
+				convertCanvasToImage();
         },
 //			 width: '100%',
 //			 height: '100%'
@@ -292,11 +295,11 @@ function convertCanvasToImage(){
 //		image.src = canvas.toDataURL("image/png");
     var myCanvas = document.getElementsByTagName("canvas");
 //		var dataURL = myCanvas[0].toDataURL();
-
+//     var base = new Base64();
     var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
-    console.log(image);
-//		window.location.href=image;
-
-    console.log(canvas.toDataURL("image/png"));
-    return image;
+    // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
+    // 把画布保存成100x100的png格式
+    // Canvas2Image.saveAsPNG(myCanvas[0], false, 100, 100);
+    $('#imgs>img').attr('src',image);
+//     return image;
 }
