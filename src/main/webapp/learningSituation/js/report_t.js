@@ -106,12 +106,12 @@ var option = {
                 boundaryGap : false,
                 data :x,
                 nameTextStyle:{
-                    fontSize:18
+                    fontSize:20
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 18
+                        fontSize: 20
                     }
                 }
             }
@@ -122,12 +122,12 @@ var option = {
                 type : 'value',
                 max : '10',
                 nameTextStyle:{
-                    fontSize:18
+                    fontSize:20
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 18
+                        fontSize: 20
                     }
                 }
             }
@@ -138,12 +138,12 @@ var option = {
                 type:'line',
                 data:y1,
                 nameTextStyle:{
-                    fontSize:18
+                    fontSize:20
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 18
+                        fontSize: 20
                     }
                 }
             },
@@ -152,12 +152,12 @@ var option = {
                 type:'line',
                 data:y2,
                 nameTextStyle:{
-                    fontSize:18
+                    fontSize:20
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 18
+                        fontSize: 20
                     }
                 }
             }
