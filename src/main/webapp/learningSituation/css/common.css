@@ -70,9 +70,12 @@ body,html{
     margin-top:33px;
     transform:rotate(90deg);
 }
-#chart_S{
+.classroom_s div:nth-child(2){
     width:690px;
     height:360px;
+}
+.achievement_s{
+    display:none;
 }
 .achievement_s h4{
     display: inline-block;
