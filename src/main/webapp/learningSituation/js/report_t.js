@@ -99,7 +99,7 @@ var option = {
             left:'20px',
             top:'-5px',
             textStyle: {
-                fontSize: 20
+                fontSize: 18
             }
 
         },
