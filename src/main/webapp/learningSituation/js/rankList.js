@@ -280,8 +280,6 @@ function takeScreenshot() {
             document.body.appendChild(canvas);
             $('.shared-content').hide();
             var myCanvas = document.getElementsByTagName("canvas");
-            // $('#imgs').appendChild(Canvas2Image.convertToImage($('canvas'), '800', '800', 'png'));
-
 				convertCanvasToImage();
         },
 //			 width: '100%',
@@ -301,5 +299,5 @@ function convertCanvasToImage(){
     // 把画布保存成100x100的png格式
     // Canvas2Image.saveAsPNG(myCanvas[0], false, 100, 100);
     $('#imgs>img').attr('src',image);
-//     return image;
+    $('canvas').hide();
 }
