@@ -96,7 +96,11 @@ var option = {
         },
         legend: {
             data:['出门测','入门测'],
-            left:'20px'
+            left:'20px',
+            textStyle: {
+                fontSize: 24
+            }
+
         },
         calculable : true,
         xAxis : [
@@ -106,12 +110,12 @@ var option = {
                 boundaryGap : false,
                 data :x,
                 nameTextStyle:{
-                    fontSize:20
+                    fontSize:24
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 20
+                        fontSize: 24
                     }
                 }
             }
@@ -122,12 +126,12 @@ var option = {
                 type : 'value',
                 max : '10',
                 nameTextStyle:{
-                    fontSize:20
+                    fontSize:24
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 20
+                        fontSize: 24
                     }
                 }
             }
@@ -138,12 +142,12 @@ var option = {
                 type:'line',
                 data:y1,
                 nameTextStyle:{
-                    fontSize:20
+                    fontSize:24
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 20
+                        fontSize: 24
                     }
                 }
             },
@@ -152,12 +156,12 @@ var option = {
                 type:'line',
                 data:y2,
                 nameTextStyle:{
-                    fontSize:20
+                    fontSize:24
                 },
                 axisLabel: {
                     show: true,
                     textStyle: {
-                        fontSize: 20
+                        fontSize: 24
                     }
                 }
             }
