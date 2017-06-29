@@ -105,6 +105,15 @@ var option = {
                 type : 'category',
                 boundaryGap : false,
                 data :x,
+                nameTextStyle:{
+                    fontSize:18
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 18
+                    }
+                }
             }
         ],
         yAxis : [
@@ -112,6 +121,15 @@ var option = {
                 name:'分数',
                 type : 'value',
                 max : '10',
+                nameTextStyle:{
+                    fontSize:18
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 18
+                    }
+                }
             }
         ],
         series : [
@@ -119,11 +137,29 @@ var option = {
                 name:'出门测',
                 type:'line',
                 data:y1,
+                nameTextStyle:{
+                    fontSize:18
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 18
+                    }
+                }
             },
             {
                 name:'入门测',
                 type:'line',
                 data:y2,
+                nameTextStyle:{
+                    fontSize:18
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 18
+                    }
+                }
             }
         ]
     };
