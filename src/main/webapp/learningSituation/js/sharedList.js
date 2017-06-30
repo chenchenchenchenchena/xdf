@@ -132,10 +132,7 @@ $(function(){
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
-            // 'teaEmail':'caoxuefeng@xdf.cn', //教师邮箱 localStorage.terEmail
-            // 'classCode':'CZ01UMHN2U121', //班级编号 sessionStorage.classcode
-            // 'schoolId':'73', //校区id sessionStorage.schoolid
-            'teaEmail':localStorage.terEmail, //教师邮箱
+            'teaEmail':'caoxuefeng@xdf.cn',//教师邮箱  localStorage.terEmail
             'classCode':sessionStorage.classcode, //班级编号
             'schoolId':sessionStorage.schoolid, //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
