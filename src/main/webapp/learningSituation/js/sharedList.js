@@ -3,36 +3,18 @@
  */
 $(function(){
     var loading,loading2;//loading效果
-    console.log("title:"+GetRequest('title'));
-    console.log("title:"+decodeURI(encodeURI(GetRequest('title'))));
-    $('title').html(GetRequest('title'));//动态获取页面标题
-    $('.shared-content').hide();//隐藏分享页
-    getRankList("1");//默认显示出门测排行榜
-    // 切换tab
-    $(document).on('touchend','.tab-title li', function () {
-        $(this).addClass('tab-active').siblings().removeClass('tab-active');
-        $('.main-content,.no-data,.shared-content').hide();
-        // alert($(".tab-title li").index(this));
-        // $('.main-content table').eq($(".tab-title li").index(this)).show();
-        getRankList($(".tab-title li").index(this)+1);
-        $('.main-content').attr('testState',$(".tab-title li").index(this)+1);
-    });
     //链接到分享页
-    $(document).on('touchstart','.to-shared',function () {
-        $('.tab-title,.main-content,.no-data').hide();
-        // $('.shared-content').show();
-        var testState = $('.main-content').attr('testState');
-        var stateContent;
-        if(testState=="1"){
-            stateContent = "入门测";
-        }else{
-            stateContent = "出门测";
-        }
-        window.location.href = "sharedranking_t.html?testState="+testState;
-        // $('title').html(stateContent+"排行榜");//动态获取页面标题
-        // $('.rankTitle>span').html(stateContent);
-        // getRankList(testState,"shared");//
-    });
+    var testState = GetRequest('testState');
+    var stateContent;
+    if(testState=="1"){
+        stateContent = "入门测";
+    }else{
+        stateContent = "出门测";
+    }
+    $('title').html(stateContent+"排行榜");//动态获取页面标题
+    $('.rankTitle>span').html(stateContent);
+    getRankList(testState,"shared");//
+
     weChatData();
     //微信分享数据
     function weChatData() {
@@ -156,82 +138,14 @@ $(function(){
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();
-
-        if(pageState=="shared"){
+        // if(pageState=="shared"){
             ajaxRequest('POST', url.t_rankl,reqData, getSharedListSuccess);
-        }else{
-            loading = layer.load();
-            ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
-        }
+        // }else{
+        //     loading = layer.load();
+        //     ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
+        // }
 
     }
-
-    function getRankListSuccess(msg){
-        var msg = {"code":"200","data":[
-            {"studentNo":"ddd","lastFullMarks":-1,"lastGrade":-1,"fullMarks":10,"lastRanking":-1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test4","lessonTime":"2017/06/29","studentName":"欧阳娜娜","grade":10,"className":"班班班数学尖子班","ranking":1},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"王思雨","grade":9,"className":"ffv","ranking":1},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"高圆圆","grade":9,"className":"英语提高班","ranking":1},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"陈晨","grade":9,"className":"ffv","ranking":3},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"王海峰","grade":9,"className":"ffv","ranking":4},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"侯军","grade":9,"className":"ffv","ranking":5},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"庞燕","grade":9,"className":"ffv","ranking":6},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"刘雷","grade":9,"className":"ffv","ranking":6},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"李红","grade":9,"className":"ffv","ranking":6},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"张彤彤","grade":9,"className":"ffv","ranking":6},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"刘冰","grade":9,"className":"ffv","ranking":10},
-            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"潘高洋","grade":9,"className":"ffv","ranking":11}
-        ],"status":"success"};
-        $(".main-content>table>tbody").html(" ");
-        if(msg.code==200){
-            if(msg.data!='undefined' && msg.data.length>0){
-                var datas = msg.data;
-                var rankTitleHtml = '<tr><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
-                    +'<th>名次浮动</th><th><img class="to-shared" src="images/shareIcon.png" alt="分享"/></th></tr>';
-                $(".intro-test>tbody").html(rankTitleHtml);
-                $.each(datas,function(i,items){
-                    var rankCss,floatGradeCss,floatRankCss;
-                    //名次样式
-                    if(items.ranking==1){
-                        rankCss = "first-num";
-                    }else{
-                        rankCss = "";
-                    }
-                    var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
-                    var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
-                    if (gradeFloat>=0){
-                        floatGradeCss = "state-up";
-                    }else{
-                        floatGradeCss = "state-down";
-                    }
-                    if (rankFloat<=0){
-                        floatRankCss = "state-up";
-                    }else{
-                        floatRankCss = "state-down";
-                    }
-                    var rankListHtml='<tr><td><span class="'+rankCss+'">'+items.ranking+'</span></td>'
-                        +'<td>'+items.studentName+'</td><td>'+items.grade+'</td>'
-                        +'<td><i class="change-state '+floatGradeCss+'"></i>'+parseInt(Math.abs(gradeFloat))+'分</td>'
-                        +'<td><i class="change-state '+floatRankCss+'"></i>'+parseInt(Math.abs(rankFloat))+'名</td>'
-                        +'<td><a class="link-to" href="reportstu_t.html?studentNo='+items.studentNo+'&tCode='+$('.main-content').attr('teststate')+'&studentName='+items.studentName+'"></a></td>'
-                        +'</tr>';
-                    $(".intro-test>tbody").append(rankListHtml);
-                    $(".no-data").hide();
-                    layer.close(loading);
-                    $(".main-content").show();
-                });
-            }else{
-                // $('.hwEmpty p').html("您没有已交作业哦~");
-                $('.main-content').hide();
-                layer.close(loading);
-                $('.no-data').show();
-            }
-        }else{
-            console.log("err:"+JSON.stringify(msg));
-        }
-        // layer.close(loading);
-    }
-
-
 })
 
 /* 分享后排行榜 */
@@ -284,7 +198,7 @@ function getSharedListSuccess(msg){
                     +'</i><i>'+items.studentName.substr(-2,2)+'</i><i>'
                     +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.lastGrade+'分</i></span></li>';
                 $(".ranklist").append(sharedListHtml);
-                $(".ranklist").show();
+                $(".ranklist,.shared-content").show();
                 layer.close(loading);
             });
             console.log("页面加载完毕，开始截图！！");
@@ -304,8 +218,10 @@ function takeScreenshot() {
     html2canvas($('body'), {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
-            $('.shared-content').hide();
-            convertCanvasToImage();
+            $('canvas').hide();
+            // $('.shared-content').hide();
+            // layer.msg('加载中...');
+                convertCanvasToImage();
         },
 //			 width: '100%',
 //			 height: '100%'
@@ -313,13 +229,14 @@ function takeScreenshot() {
 }
 //	canvas to images
 function convertCanvasToImage(){
-    loading = layer.load();
-    console.log("canvas to images");
-    var myCanvas = document.getElementsByTagName("canvas");
-    var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
-    // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
-    $('canvas').hide();
-    layer.close(loading);
-    $('#imgs>img').attr('src',image);
-
+    // loading = layer.load();
+    // setTimeout(function(){
+        console.log("canvas to images");
+        var myCanvas = document.getElementsByTagName("canvas");
+        var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
+        // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
+            $('canvas,.shared-content').hide();
+            layer.close(loading);
+            $('#imgs>img').attr('src',image);
+    // },1000);
 }

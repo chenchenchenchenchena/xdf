@@ -9,31 +9,24 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/common.css"  />
 	<link rel="stylesheet" href="css/rankList.css"  />
-	<style>
-		html{
-			background: #f1f1f1;
-		}
-		#view input{
-			width:100px;
-			height: 40px;
-			border-radius: 4px;
-			font-size:30px;
-			background: palegreen;
-		}
-	</style>
 	<script src="../common/js/jquery.js"></script>
 	<script src="../common/js/scale.js"></script>
-	<script src="../common/js/layer.js"></script>
+	<script src="../common/js/layer-v2.1/layer/layer.js"></script>
+	<script src="../common/js/ajax.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="js/jquery.base64.js"></script>
 	<script src="js/html2canvas.js"></script>
+	<script src="js/canvas2image.js"></script>
 </head>
 <body>
-<div class="html-content">
+<div class="shared-content none" >
 	<div class="rankImg">
 		<div class="rankInfo">
 			<div class="rankTitle">
 				<img src="images/rankFont.png"/>
-				<span>出门测</span>
+				<span>出门测111</span>
 			</div>
 			<p>六年级数学综合培优春季班（尖子班）</p>
 			<p>
@@ -48,65 +41,24 @@
 	</div>
 	<div class="ranklist-box">
 		<ul class="ranklist" style="">
-		<li>
-			<span class="rankleft"><i class="rankfirst"></i><i>奕宏</i><i>段奕宏</i></span>
-			<span class="rankright"><i>SS****12</i><i>10分</i></span>
-		</li>
-		<li>
-			<span class="rankleft"><i class="rankfirst"></i><i>奕宏</i><i>段奕宏</i></span>
-			<span class="rankright"><i>SS****12</i><i>10分</i></span>
-		</li>
-		<li>
-			<span class="rankleft"><i class="nofirst">3</i><i>奕宏</i><i>段奕宏</i></span>
-			<span class="rankright"><i>SS****12</i><i>10分</i></span>
-		</li>
-		<li>
-			<span class="rankleft"><i class="nofirst">23</i><i>奕宏</i><i>段奕宏</i></span>
-			<span class="rankright"><i>SS****12</i><i>10分</i></span>
-		</li>
-	</ul>
-	</div>
-	<div class="stuempty" style="display: none;">
-		<img src="../homework/images/B01_03.png"  />
-		<p>暂无排行信息</p>
+			<!--<li>-->
+			<!--<span class="rankleft"><i class="rankfirst"></i><i>奕宏</i><i>段奕宏</i></span>-->
+			<!--<span class="rankright"><i>SS****12</i><i>10分</i></span>-->
+			<!--</li>-->
+			<!--<li>-->
+			<!--<span class="rankleft"><i class="nofirst">3</i><i>奕宏</i><i>段奕宏</i></span>-->
+			<!--<span class="rankright"><i>SS****12</i><i>10分</i></span>-->
+			<!--</li>-->
+		</ul>
 	</div>
 </div>
-<img src="" class="share-image"/>
-<!--<div id="view" style="width: 700px; height: 500px;">-->
-	<!--<input type="button" value="截图" onclick="takeScreenshot()">-->
-<!--</div>-->
-<script type="text/javascript">
-	$(function () {
-		console.log("页面加载完毕，开始截图！！");
-//		takeScreenshot();
-	});
-	function takeScreenshot() {
-		console.log('test');
-		html2canvas($('body'), {
-			onrendered: function(canvas) {
-				document.body.appendChild(canvas);
-				$('.html-content').hide();
-//				convertCanvasToImage();
-			},
-//			 width: '100%',
-//			 height: '100%'
-		});
-	}
-	//	canvas to images
-	function convertCanvasToImage(){
-		console.log("canvas to images");
-//		var image = new Image();
-//		image.src = canvas.toDataURL("image/png");
-		var myCanvas = document.getElementsByTagName("canvas");
-//		var dataURL = myCanvas[0].toDataURL();
-
-		var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
-		console.log(image);
-//		window.location.href=image;
-
-		console.log(canvas.toDataURL("image/png"));
-		return image;
-	}
-</script>
+<div class="no-data none">
+	<img src="images/noDatas.png"  />
+	<p>暂无排行信息</p>
+</div>
+<div id="imgs">
+	<img src=""/>
+</div>
+<script src="js/sharedList.js"></script>
 </body>
 </html>
