@@ -2,15 +2,18 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>分享后排行榜</title>
+	<title>作业排行榜</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
-	<link rel="stylesheet" href="../homework/css/dohomework.css"  />
+	<link rel="stylesheet" href="css/rankList.css"  />
 	<style>
+		html{
+			background: #f1f1f1;
+		}
 		#view input{
 			width:100px;
 			height: 40px;
@@ -26,25 +29,56 @@
 </head>
 <body>
 <div class="html-content">
-	<div class="rankImg"></div>
-	<ul class="ranklist" style="">
-		<li><span class="rankleft"><i class="rankfirst">1</i><i>奕宏</i><i>段奕宏</i></span><span class="rankright"><i>2017/05/25</i><i>13:20</i></span></li>
-		<li><span class="rankleft"><i class="ranksecond">2</i><i>奕宏</i><i>段奕宏</i></span><span class="rankright"><i>2017/05/25</i><i>13:20</i></span></li>
-		<li><span class="rankleft"><i class="rankthird">3</i><i>奕宏</i><i>段奕宏</i></span><span class="rankright"><i>2017/05/25</i><i>13:20</i></span></li>
-		<li><span class="rankleft"><i class="rankcom">4</i><i>奕宏</i><i>段奕宏</i></span><span class="rankright"><i>2017/05/25</i><i>13:20</i></span></li>
+	<div class="rankImg">
+		<div class="rankInfo">
+			<div class="rankTitle">
+				<img src="images/rankFont.png"/>
+				<span>出门测</span>
+			</div>
+			<p>六年级数学综合培优春季班（尖子班）</p>
+			<p>
+				<span>王小龙老师</span>
+				<span>满分：100</span>
+			</p>
+			<p>日期：2017/06/29</p>
+			<div class="rank-cup"></div>
+		</div>
+		<img src="images/rankLink.png" class="linkL"/>
+		<img src="images/rankLink.png" class="linkR"/>
+	</div>
+	<div class="ranklist-box">
+		<ul class="ranklist" style="">
+		<li>
+			<span class="rankleft"><i class="rankfirst"></i><i>奕宏</i><i>段奕宏</i></span>
+			<span class="rankright"><i>SS****12</i><i>10分</i></span>
+		</li>
+		<li>
+			<span class="rankleft"><i class="rankfirst"></i><i>奕宏</i><i>段奕宏</i></span>
+			<span class="rankright"><i>SS****12</i><i>10分</i></span>
+		</li>
+		<li>
+			<span class="rankleft"><i class="nofirst">3</i><i>奕宏</i><i>段奕宏</i></span>
+			<span class="rankright"><i>SS****12</i><i>10分</i></span>
+		</li>
+		<li>
+			<span class="rankleft"><i class="nofirst">23</i><i>奕宏</i><i>段奕宏</i></span>
+			<span class="rankright"><i>SS****12</i><i>10分</i></span>
+		</li>
 	</ul>
+	</div>
 	<div class="stuempty" style="display: none;">
 		<img src="../homework/images/B01_03.png"  />
 		<p>暂无排行信息</p>
 	</div>
 </div>
+<img src="" class="share-image"/>
 <!--<div id="view" style="width: 700px; height: 500px;">-->
 	<!--<input type="button" value="截图" onclick="takeScreenshot()">-->
 <!--</div>-->
 <script type="text/javascript">
 	$(function () {
 		console.log("页面加载完毕，开始截图！！");
-		takeScreenshot();
+//		takeScreenshot();
 	});
 	function takeScreenshot() {
 		console.log('test');
@@ -52,10 +86,26 @@
 			onrendered: function(canvas) {
 				document.body.appendChild(canvas);
 				$('.html-content').hide();
+//				convertCanvasToImage();
 			},
-			// width: 300,
-			// height: 300
+//			 width: '100%',
+//			 height: '100%'
 		});
+	}
+	//	canvas to images
+	function convertCanvasToImage(){
+		console.log("canvas to images");
+//		var image = new Image();
+//		image.src = canvas.toDataURL("image/png");
+		var myCanvas = document.getElementsByTagName("canvas");
+//		var dataURL = myCanvas[0].toDataURL();
+
+		var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
+		console.log(image);
+//		window.location.href=image;
+
+		console.log(canvas.toDataURL("image/png"));
+		return image;
 	}
 </script>
 </body>
