@@ -4,7 +4,7 @@ $(function(){
 	var inputData={"sCode":"TC41","email":"caoxuefeng@xdf.cn"};
 	$.ajax({
 		type:"post",
-		url:"http://10.73.84.62:8080/teacherData/queryTeacherLesson.do",
+		url:"http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherLesson.do",
 		async:true,
 		dataType:"json",
 		data:JSON.stringify(inputData),
@@ -175,7 +175,7 @@ $(function(){
 		}
 		$.ajax({
 			type:"post",
-			url:"http://10.73.84.62:8080/teacherData/addTeacherAnalysis.do",
+			url:"http://dt.staff.xdf.cn/xdfdtmanager/teacherData/addTeacherAnalysis.do",
 			async:true,
 			data:JSON.stringify(saveInfo),
 			success:function(res){
