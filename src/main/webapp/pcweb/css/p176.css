@@ -291,7 +291,7 @@
 }
 
 .p176-downIcon {
-    background: #00bb97;
+    background: url(../images/dropdown-Icon.png) no-repeat left center;
     width: 16px;
     height: 16px;
     display: inline-block;
@@ -299,7 +299,7 @@
 }
 
 .p176-nav-usename.on .p176-downIcon {
-    background: #00bb97;) no-repeat left center;
+    background: url(../images/up-green-icon.png) no-repeat left center;
 }
 
 .p176-usename-menu {
@@ -1298,7 +1298,13 @@
     background: #01ac8c;
 }
 
-/*.p176-close{width:22px;height:22px;background:url(../images/closeIcon.png) no-repeat;margin:5px 0 0 20px;}*/
+.p176-close {
+    width: 22px;
+    height: 22px;
+    background: url(../images/closeIcon.png) no-repeat;
+    margin: 5px 0 0 20px;
+}
+
 .p176-checkTit {
     margin-left: 20px;
     color: #afafaf;

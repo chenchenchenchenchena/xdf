@@ -9,6 +9,8 @@ var switchFlag = false;
 var firstIn = true;
 var currentType = 2;
 var currentStatus = '';
+var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+// var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 
 $(function () {
     var request = getRequest();
@@ -52,19 +54,6 @@ function createCk() {
     changeCenter('./setPublishInfo.html?publish=' + publish);
 }
 
-function changeCkCenter(type) {
-    currentType = type;
-    changeTag();//切换tab，改变表格head
-    //查询数据
-    if (currentType == 1) {//筹课抽奖
-        showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-    } else if (currentType == 2) {//筹课
-        showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-    } else if (currentType == 3) {//点赞
-
-    }
-}
-
 
 function changeTag() {
     $(".xdf_border").removeClass("xdf_border");
@@ -105,6 +94,7 @@ function changeTag() {
 function pops(_this) {
     $(_this).find("div").first().toggle();
 }
+
 //状态 0:待发布，1：未开始，2：进行中，3：已结束，4：提前结束'
 function showList(page) {
     var requestJson = {
@@ -113,8 +103,7 @@ function showList(page) {
     };
     jQuery.ajax({
         type: "POST",
-        // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/getNewCkList.do",
-        url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/getNewCkList.do",
+        url: baseUrl + "raiseClass/getNewCkList.do",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
@@ -217,13 +206,13 @@ function showList(page) {
                     str += "<a href='#' class='p176-btn-copy'" +
                         " data-functionId='101'><i></i>复制模版</a>";
                     if (status == 0 || status == 1) {
-                        str += "<a href='#'class='p176-btn-edit'" +
-                            " data-functionId='101'><i></i>编辑</a>";
+                        str += "<a href='#' onclick='ckEdit(\"" + id + "\")' class='p176-btn-edit'" +
+                            " data-functionId='10202'><i></i>编辑</a>";
                     }
                     if (status == 0) {
                         var userId = getCookie("loginId");
                         str += "<a href='#' " +
-                            " class='p176-btn-release' data-functionId='101'><i></i>发布</a>";
+                            " class='p176-btn-release' onclick='ckPublish(\"" + id + "\")' data-functionId='101'><i></i>发布</a>";
                         str += "<a href='#' onclick='ckDelete(\"" + id + "\")' class='p176-btn-release'><i></i>删除</a>";
                     }
                     if (status == 1) {
@@ -246,6 +235,151 @@ function showList(page) {
         }
     });
 }
+
+//列表删除
+function ckDelete(id) {
+    layer.confirm("确认删除？", {
+        btn: ['删除', '取消'] //按钮
+    }, function () {
+        var businessP = {"ckId": id};
+        jQuery.ajax({
+            type: "POST",
+            url: baseUrl + "raiseClass/newCkDelete.do",
+            async: false,//同步
+            dataType: 'json',
+            data: JSON.stringify(businessP),
+            success: function (json) {
+                if (json.result == true) {
+                    layer.msg(json.message, {icon: 6});
+                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+                } else {
+                    layer.msg(json.message, {icon: 5});
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+
+//编辑
+function ckEdit(id) {
+
+    window.location.href = 'updateRaiseClassInfo.html?ckId=' + id;
+}
+
+//撤回
+function ckRollback(id) {
+    layer.confirm('确认撤回？', {
+        btn: ['撤回', '取消'] //按钮
+    }, function () {
+        var businessP = {"ckId": id};
+        var serviceId = '';
+
+        jQuery.ajax({
+            type: "POST",
+            url: baseUrl + "raiseClass/rollbackNewCk.do",
+            async: false,//同步
+            dataType: 'json',
+            data: JSON.stringify(businessP),
+            success: function (json) {
+                if (json.result == true) {
+                    layer.msg("撤回成功!", {icon: 6});
+                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+                } else {
+                    layer.msg("撤回失败!", {icon: 5});
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+
+//结束
+function over(id) {
+    layer.confirm('确认结束？', {
+        btn: ['结束', '取消'] //按钮
+    }, function () {
+        var businessP = {"ckId": id};
+        jQuery.ajax({
+            type: "POST",
+            url: baseUrl + "raiseClass/newCkOver.do",
+            async: false,//同步
+            dataType: 'json',
+            data: JSON.stringify(businessP),
+            success: function (json) {
+                if (json.result == true) {
+                    layer.msg("结束成功!", {icon: 6});
+                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+                } else {
+                    layer.msg("结束失败!", {icon: 5});
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+
+
+//列表发布
+function ckPublish(id) {
+    layer.confirm("确认发布？", {
+        btn: ['发布', '取消'] //按钮
+    }, function () {
+        var businessP = {"ckId": id};
+        jQuery.ajax({
+            type: "POST",
+            url:baseUrl+"raiseClass/newCkPublish.do",
+            async: false,//同步
+            dataType: 'json',
+            data: JSON.stringify(businessP),
+            success: function (json) {
+                if (json.result == true) {
+                    layer.msg(json.message, {icon: 6});
+                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+                } else {
+                    layer.msg(json.message, {icon: 5});
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+
+
+
+//复制模板
+function copyTemplate(id) {
+    var businessP = {"ckId": id, "userId": getCookie("loginId")};
+    var serverId = "";
+    if (currentType == 1) { //筹课抽奖
+        serverId = "6e276708fbab42e4bcde289f462ed290";
+    } else if (currentType == 2) {  //筹课
+        serverId = "f9fc5147c8144366958ee417581306d0";
+    }
+    // var d = constructionParams(rsaEncryptedString(businessP), serverId);
+    jQuery.ajax({
+        type: "POST",
+        url: Global.actionURL,
+        async: false,//同步
+        dataType: 'json',
+        data: JSON.stringify(businessP),
+        success: function (json) {
+            if (json.result == true) {
+                layer.msg("复制成功!", {icon: 6});
+                showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+            } else {
+                layer.msg("复制失败!", {icon: 5});
+            }
+        }
+    });
+}
+
+
+
 //关闭二维码
 function closeWeChat(_this) {
     weOpenFlag = 0;
@@ -282,165 +416,20 @@ function openWeChat(_this, id) {
     }
     weOpenFlag = 1;
 }
-//列表发布
-function ckPublish(id, userId) {
-    layer.confirm("确认发布？", {
-        btn: ['发布', '取消'] //按钮
-    }, function () {
-        var businessP = {"ckId": id, "userId": userId};
-        var serviceId = '';
-        if (currentType == 1) {
-            serviceId = '8db31205cb6141219b6d4917729d6b16';
-        } else if (currentType == 2) {
-            serviceId = 'c42d27bb48be4fcba9832338dab2f2c9';
-        }
-        // var d = constructionParams(rsaEncryptedString(businessP), serviceId);
-        jQuery.ajax({
-            type: "POST",
-            url: Global.actionURL,
-            // url:"http;//10.73.81.106:8080/xdfdtmanager/e2Login/pcLogin.do",
-            async: false,//同步
-            dataType: 'json',
-            data: JSON.stringify(businessP),
-            success: function (json) {
-                if (json.result == true) {
-                    layer.msg(json.message, {icon: 6});
-                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-                } else {
-                    layer.msg(json.message, {icon: 5});
-                }
-            }
-        });
-    }, function () {
-
-    });
-}
-
-//列表删除
-function ckDelete(id) {
-    layer.confirm("确认删除？", {
-        btn: ['删除', '取消'] //按钮
-    }, function () {
-        var businessP = {"ckId": id};
-        jQuery.ajax({
-            type: "POST",
-            // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkDelete.do",
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/newCkDelete.do",
-            async: false,//同步
-            dataType: 'json',
-            data: JSON.stringify(businessP),
-            success: function (json) {
-                if (json.result == true) {
-                    layer.msg(json.message, {icon: 6});
-                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-                } else {
-                    layer.msg(json.message, {icon: 5});
-                }
-            }
-        });
-    }, function () {
-
-    });
-}
 
 
-//复制模板
-function copyTemplate(id) {
-    var businessP = {"ckId": id, "userId": getCookie("loginId")};
-    var serverId = "";
-    if (currentType == 1) { //筹课抽奖
-        serverId = "6e276708fbab42e4bcde289f462ed290";
-    } else if (currentType == 2) {  //筹课
-        serverId = "f9fc5147c8144366958ee417581306d0";
-    }
-    // var d = constructionParams(rsaEncryptedString(businessP), serverId);
-    jQuery.ajax({
-        type: "POST",
-        url: Global.actionURL,
-        async: false,//同步
-        dataType: 'json',
-        data: JSON.stringify(businessP),
-        success: function (json) {
-            if (json.result == true) {
-                layer.msg("复制成功!", {icon: 6});
-                showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-            } else {
-                layer.msg("复制失败!", {icon: 5});
-            }
-        }
-    });
-}
 
-//编辑
-function ckEdit(id, areaId) {
-    if (areaId == "") {
-        layer.msg("请选择一个校区", {icon: 5});
-    } else {
-        if (currentType == 1) {
-            window.location.href = 'updateCourse.html?ckId=' + id;
-        } else if (currentType == 2) {
-            window.location.href = 'updateRaiseClassInfo.html?ckId=' + id;
-        } else if (currentType == 3) {
-
-        }
+function changeCkCenter(type) {
+    currentType = type;
+    changeTag();//切换tab，改变表格head
+    //查询数据
+    if (currentType == 1) {//筹课抽奖
+        showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+    } else if (currentType == 2) {//筹课
+        showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
+    } else if (currentType == 3) {//点赞
 
     }
-}
-
-//撤回
-function ckRollback(id) {
-    layer.confirm('确认撤回？', {
-        btn: ['撤回', '取消'] //按钮
-    }, function () {
-        var businessP = {"ckId": id};
-        var serviceId = '';
-
-        jQuery.ajax({
-            type: "POST",
-            // url:"http://10.73.81.106:8080/xdfdtmanager/raiseClass/rollbackNewCk.do",
-            url:"http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/rollbackNewCk.do",
-            async: false,//同步
-            dataType: 'json',
-            data: JSON.stringify(businessP),
-            success: function (json) {
-                if (json.result == true) {
-                    layer.msg("撤回成功!", {icon: 6});
-                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-                } else {
-                    layer.msg("撤回失败!", {icon: 5});
-                }
-            }
-        });
-    }, function () {
-
-    });
-}
-
-//结束
-function over(id) {
-    layer.confirm('确认结束？', {
-        btn: ['结束', '取消'] //按钮
-    }, function () {
-        var businessP = {"ckId": id};
-        jQuery.ajax({
-            type: "POST",
-            // url: "http://10.73.81.106:8080/xdfdtmanager/raiseClass/newCkOver.do",
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/raiseClass/newCkOver.do",
-            async: false,//同步
-            dataType: 'json',
-            data: JSON.stringify(businessP),
-            success: function (json) {
-                if (json.result == true) {
-                    layer.msg("结束成功!", {icon: 6});
-                    showList(1, currentCityId, currentAreaId, currentDeptId, currentStatus);
-                } else {
-                    layer.msg("结束失败!", {icon: 5});
-                }
-            }
-        });
-    }, function () {
-
-    });
 }
 
 

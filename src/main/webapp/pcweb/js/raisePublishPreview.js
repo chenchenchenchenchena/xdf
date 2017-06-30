@@ -42,6 +42,8 @@ function lengthValidate(inputId, spanId, validLength) {
 
 var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
+var cPage = 1;
+
 
 $(function () {
     $("form[enctype]").attr("action", baseUrl + $("form[enctype]").attr("action"));
@@ -106,8 +108,8 @@ $(function () {
                     data = $.parseJSON(data);
                     if (data.success == true) {
                         $("#submit-2 .filename").val(file);
-                        $("#hidden2").val(data.fileUrl);
-                        $("#wechatpt").attr("src", data.previewUrl);
+                        $("#hidden2").val(data.thumbnail);
+                        $("#wechatpt").attr("src", data.thumbnail);
                         $("#m2").html(data.message);
                     } else {
                         $("#m2").html(data.message);
@@ -139,8 +141,8 @@ $(function () {
                     data = $.parseJSON(data);
                     if (data.success == true) {
                         $("#submit-3 .filename").val(file);
-                        $("#hidden3").val(data.fileUrl);
-                        $("#ercodept").attr("src", data.fileUrl);
+                        $("#hidden3").val(data.thumbnail);
+                        $("#ercodept").attr("src", data.thumbnail);
                         $("#m3").html(data.message);
                     } else {
                         $("#m3").html(data.message);
@@ -173,29 +175,6 @@ function checkImgType(file) {
     }
     return true;
 }
-
-// function checkImgSize(file, size) {
-//     // var img = new Image();
-//     // img.src = file;
-//     //
-//     // alert(img.offsetHeight+"*"+img.offsetWidth);
-//
-//     if (window.FileReader) {
-//         var reader = new FileReader();
-//         var blob = new Blob([file],{type:"text/plain"});
-//         reader.readAsDataURL(blob);
-//         //监听文件读取结束后事件  
-//         reader.onloadend = function (e) {
-//             showXY(e.target.result);
-//         };
-//     }
-//
-// }
-// function showXY(source){
-//     var img = document.getElementById("ckpt");
-//     img.src = source;
-//     alert("Width:"+img.width+", Height:"+img.height);
-// }
 
 var classValidateNumByChange = false;
 
@@ -818,6 +797,7 @@ function next(step, isEmpty) {
         $("#fourth").hide();
     }
 }
+
 //上一步
 function previous(step) {
     if (step == 2) {
@@ -826,21 +806,81 @@ function previous(step) {
         //$("#centerIframeId", parent.document).css("height", "800px");
         $("#third").hide();
         $("#fourth").hide();
-    } else if (step == 3) {
-        $("#first").hide();
-        //$("#centerIframeId", parent.document).css("height", "900px");
-        $("#second").show();
-        $("#third").hide();
-        $("#fourth").hide();
-    } else if (step == 4) {
-        $("#first").hide();
-        $("#second").hide();
-        //$("#centerIframeId", parent.document).css("height", "700px");
-        $("#third").show();
-        $("#fourth").hide();
     }
     cPage = step - 1;
 }
+
+
+//预览
+function viewPage(type) {
+    if ($('#ckId').val()) {
+        var previewURL = '';
+        if (type == 1) {//老筹课
+            previewURL = Global.previewURL;
+        } else if (type == 2) {//新筹课
+            previewURL = Global.previewURL_new
+        }
+        layer.open({
+            type: 2,
+            title: '预览',
+            fix: false,
+            shadeClose: true,
+            offset: '50px',
+            maxmin: true,
+            area: ['414px', '736px'],
+            content: previewURL + $('#ckId').val()
+        });
+    } else {
+        layer.msg("请先保存信息,再预览!", {icon: 5})
+    }
+}
+
+//新筹课页面内发布
+function newCkEditPublish(type) {
+    layer.confirm("确认发布？", {
+        btn: ['发布', '取消'] //按钮
+    }, function () {
+        if (type == 2) {
+            publishCk(type, 'new');
+        } else {
+            publishCk(type, 'new');
+        }
+    }, function () {
+
+    });
+}
+
+//发布按钮的保存发布逻辑
+function publishCk(type,flag){
+    var status = $("#statusId").val();//筹课状态
+    if(status == '1'){
+        layer.msg("已经发布了,请不要重复发布!", {icon: 5});
+        $('.disableCss').removeAttr('onclick');
+        return;
+    }
+    //type= 1编辑页面   type=2  新建页面
+    layer.load(2, {
+        shade: [0.1, '#fff'] //0.1透明度的白色背景
+    });//遮罩加载
+    if (flag == "old") {
+        if (!validate(4, true)) {
+            layer.closeAll('loading');
+            return
+        }
+    } else {
+        if (!validate(2, true)) {
+            layer.closeAll('loading');
+            return
+        }
+    }
+
+    if (status == '0' || status == '') {
+        status = '1';//未开始（发布的意思）
+    }
+
+    saveEditNewCk(2, true, status);
+}
+
 
 //保存一个新的课程
 function saveNewCk(step, isEmpty) {
@@ -857,13 +897,25 @@ function saveNewCk(step, isEmpty) {
         layer.closeAll('loading');
         return;
     }
-    saveOrUpdate(0);
+    saveOrUpdate(0,"create");
+}
+
+function saveEditNewCk(step, isEmpty, status){
+    if (!validate(step, isEmpty)) {
+        layer.closeAll('loading');
+        return;
+    }
+    if(status == ''){
+        status = $("#statusId").val();
+    }
+    saveOrUpdate(status,"update");
 }
 
 //保存新筹课
-function saveOrUpdate(status) {
+function saveOrUpdate(status,type) {
     //第一阶段
-    var userId = $("#userId", window.parent.document).val();
+    // var userId = $("#userId", window.parent.document).val();
+    var userId = getCookie("userId");
     var classNum = $("#classNum").val();//班级编号
     var ckName = $("#ckName").val();//筹课名称
     var className = $("#className").val();//班级名称
@@ -871,18 +923,30 @@ function saveOrUpdate(status) {
     var courseAmount = $("#courseAmount").val();//课程金额
     var raiseMoney = $("#raiseMoney").val();//需筹金额
     var ckIntroduce = $("#ckIntroduce").val();//筹课说明
-    var latitude = $("#latitude").val();//纬度
-    var longitude = $("#longitude").val();//经度
-    var schoolId = $("#schoolId").val();
-    var areaCode = $("#areaCode").val();
-    var deptCode = $("#deptCode").val();
-    var classDate = $("#classDate").val();
-    var classTime = $("#classTime").val();
-    var classArea = $("#classArea").val();
+    // var latitude = $("#latitude").val();//纬度
+    // var longitude = $("#longitude").val();//经度
+    // var schoolId = $("#schoolId").val();
+    // var areaCode = $("#areaCode").val();
+    // var deptCode = $("#deptCode").val();
+    var latitude = "";//纬度
+    var longitude = "";//经度
+    var schoolId = "";
+    var areaCode = "";
+    var deptCode = "";
+    // var classDate = $("#classDate").val();
+    // var classTime = $("#classTime").val();
+    // var classArea = $("#classArea").val();
+
+    var classDate = "";
+    var classTime = "";
+    var classArea = "";
     var service = $("#service").val();//官方客服
-    var file1 = $("#hidden1").val();//筹课配图
-    var file2 = $("#hidden2").val();//微信转发小图尺寸
-    var file3 = $("#hidden3").val();//公众号二维码
+    // var file1 = $("#hidden1").val();//筹课配图
+    // var file2 = $("#hidden2").val();//微信转发小图尺寸
+    // var file3 = $("#hidden3").val();//公众号二维码
+    var file1 = "";//筹课配图
+    var file2 = "";//微信转发小图尺寸
+    var file3 = "";//公众号二维码
     var gzhname = $("#gzhname").val();//公众号名称
 
     //第二阶段
@@ -937,11 +1001,17 @@ function saveOrUpdate(status) {
         "count": count.join('=='),
         "perNum": perNum.join('==')
     };
+    var url = "";
+    if(type == "create"){
+        url = "raiseClass/createNewCk.do";
+    }else if(type == "update"){
+        url = "raiseClass/updateNewCk.do";
+    }
+    url = baseUrl+url;
     $('.disableCss').removeAttr('onclick');
-    // var d = constructionParams(rsaEncryptedString(businessP), serviceId);
     jQuery.ajax({
         type: "POST",
-        // url: Global.actionURL,
+        url: url,
         async: true,
         dataType: 'json',
         data: JSON.stringify(businessP),
@@ -968,26 +1038,37 @@ function saveOrUpdate(status) {
 
 }
 
-//预览
-function viewPage(type) {
-    if ($('#ckId').val()) {
-        var previewURL = '';
-        if (type == 1) {//老筹课
-            previewURL = Global.previewURL;
-        } else if (type == 2) {//新筹课
-            previewURL = Global.previewURL_new
-        }
-        layer.open({
-            type: 2,
-            title: '预览',
-            fix: false,
-            shadeClose: true,
-            offset: '50px',
-            maxmin: true,
-            area: ['414px', '736px'],
-            content: previewURL + $('#ckId').val()
-        });
-    } else {
-        layer.msg("请先保存信息,再预览!", {icon: 5})
+//添加帮筹人数布局
+function addBatch() {
+    var batchNum = parseInt($("#batchNum").val());
+    if (batchNum > 2) {
+        alert("最多只能添加3批名额");
+        return;
     }
+    $("#batchNum").val(parseInt($("#batchNum").val()) + 1);
+    $("#batchId").append('<div class="p176-setInfoCon clearfix">' +
+        '    <div class="p176-count-wrap clearfix">' +
+        '    <div class="p176-countBox">' +
+        '    <div class="p176-label-b" style="margin-left:0;">&nbsp;第' + $("#batchNum").val() + '批名额</div>' +
+        '    <div class="p176-filed-b">' +
+        '    <input name="count" type="text" class="p176-Cinput">' +
+        '    </div>' +
+        '    <div class="p176-label-b">帮筹人数</div>' +
+        '    <div class="p176-filed-b">' +
+        '    <input name="perNum" type="text" class="p176-Cinput">' +
+        '    </div>' +
+        '    </div>' +
+        '    <i class="p176-close" onclick="delBacth(this)"></i>' +
+        '    </div>' +
+        '    </div>');
+}
+
+//删除帮筹布局
+function delBacth(_this) {
+    var batchNum = parseInt($("#batchNum").val());
+    if (batchNum == 1) {
+        return;
+    }
+    $("#batchNum").val(batchNum - 1);
+    $(_this.parentNode.parentNode).remove();
 }
