@@ -79,7 +79,7 @@ $(function(){
                         wx.onMenuShareAppMessage({
                             title: "", // 分享标题
                             desc: "", // 分享描述
-                            link: "", // 分享链接
+                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
                             imgUrl:"", // 分享图标
                             type: '', // 分享类型,music、video或link，不填默认为link
                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
