@@ -67,7 +67,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                         }else{
                             maxIndex = classData[0].data[classData[0].data.length-1].lessonNO;
                         }
-                    }else if(classData[0].data.length>1&&classData[1].data.length<=1){
+                    }else if(classData[0].data.length>1&&classData[1].data.length<=1&&classData[1].data.length!=0){
                         if(classData[0].data[classData[0].data.length-1].lessonNO>classData[1].data[0].lessonNO){
                             maxIndex =classData[0].data[classData[0].data.length-1].lessonNO;
                         }else{
