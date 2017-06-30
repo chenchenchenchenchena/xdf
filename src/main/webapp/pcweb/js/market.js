@@ -1,3 +1,5 @@
+var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+// var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 //访问doLogin.do
 function toLogin() {
 
@@ -6,12 +8,13 @@ function toLogin() {
     var calbac = {
         'code': code_s,
         'e2State': state_s,
-        'state': state_s
+        'state': state_s,
+        'userId':"v_liwei8"
     };
     alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
-        url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/doLogin.do",
-        // url: "http://10.73.81.106:8080/xdfdtmanager/e2Login/pcLogin.do",
+        // url: baseUrl+"/e2Login/doLogin.do",
+        url: baseUrl+"/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -42,11 +45,11 @@ function showFunctionList(json) {
         functionIds = [];
 
         var functionList = json.functionList;
-        if(functionList instanceof string){
-            alert(functionList);
-            window.top.location.href = getRootPath();
-        }else if(functionList instanceof Array){
 
+        if(functionList == undefined){
+            alert("用户名不存在");
+            window.top.location.href = getRootPath();
+        }else{
             //获取functionIds
             setFunctionList(json.functionList);
             localStorage.functionCheckedList = JSON.stringify(json.functionList);
@@ -110,8 +113,8 @@ function jumpPage(functionList) {
 //初始化主页面
 function initMainPage(funcId) {
     // $("#loginId").val(getCookie("loginId"));
-    // $("#userId").val(getCookie("userId"));
-    // $("#tokenId").val(getCookie("access_token"));
+    $("#userId").val(getCookie("userId"));
+    $("#tokenId").val(getCookie("access_token"));
     // $("#schoolIdFinal").val(getCookie("schoolId"));
     // $("#areaIdFinal").val(getCookie("areaId"));
     // $("#deptIdFinal").val(getCookie("deptId"));
@@ -221,28 +224,12 @@ function getRequest() {
     return theRequest;
 }
 
-
-var marketJs = {
-    loginUserIsAdmin: function (loginId) {
-        if (loginId != '' && loginId != null && loginId != undefined) {
-            //判断登录人是否是超级管理员（目前超管userId是zsxdf）
-            if (loginId == 'zsxdf') {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
 function toLogout() {
     var businessP = {"returnUrl": getRootPath(), "sid": getCookie("sid")};
     jQuery.ajax({
         type: "POST",
         // url: Global.actionURL,
-        url:"http://dt.staff.xdf.cn/xdfdtmanager/logout/doLogout.do",
+        url:baseUrl+"logout/doLogout.do",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(businessP),

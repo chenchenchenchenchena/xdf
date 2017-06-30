@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>东方双师管理平台</title>
+    <title>发布管理平台</title>
     <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../css/p176.css">
     <link rel="stylesheet" href="../css/index.css">
@@ -21,8 +21,16 @@
     <script src="../js/market.js"></script>
     <script src="../js/courseList.js"></script>
     <script src="../js/uplodePreview.js"></script>
+    <script src="../js/updateRaiseClass.js"></script>
 </head>
-<body onload="initMainPage('101');courseInfoInit();">
+<body onload="initMainPage('101');init();">
+<!--<input type="text" id="loginId" hidden>-->
+<input type="text" id="userId" hidden>
+<input type="text" id="tokenId" hidden>
+<!--<input type="text" id="schoolIdFinal" hidden>-->
+<!--<input type="text" id="areaIdFinal" hidden>-->
+<!--<input type="text" id="deptIdFinal" hidden>-->
+<!--<input type="text" id="currentType" hidden>-->
 <div class="p176-nav clearfix">
     <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
     <div class="p176-nav-left" id="schoolAuthority" style="display: none">
@@ -55,15 +63,18 @@
     </div>
 </div>
 <div class="p176-wrap-all">
-    <div class="p176-mainWrap">
+    <div class="p176-mainWrap" style="position:relative;width:100%;min-height:100%;">
         <div class="p176-main">
             <div class="inner">
+
                 <div>
                     <h2 style="color: #00ba97;">
                         筹课平台 > 新建筹课信息
                     </h2>
                 </div>
-                <!--第一步-->
+                <!--<input type="hidden" id="ckId">-->
+                <!--<input type="hidden" id="statusId">-->
+                <!--第一阶段-->
                 <div id="first">
                     <div class="p176-setInfo-wrap clearfix">
                         <div class="p176-setInfo-main mtop20 mLeft13">
@@ -73,15 +84,15 @@
                                     <input type="text" class="p176-Sminput chouke-input" id="ckName"
                                            maxlength="12" onblur="validate(1, false)">
                                     <span class="p176-count01">
-                                            <span id="explainInformCnt1">0</span>/<span id="explainMaxCnt2">12</span>
-                                        </span>
+                                        <span id="explainInformCnt1">0</span>/<span id="explainMaxCnt2">12</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="p176-setInfoCon clearfix">
                                 <div class="p176-Slabel">班级编号</div>
                                 <div class="p176-Sfiled">
-                                    <input id="classNum" type="text" class="p176-Sminput"></div>
-                                <div class="p176-Sbtn"><a href="javascript:;"onclick="classValidateNum(2)">校验班级编号</a></div>
+                                    <input id="classNum" type="text" onchange="classValidateNum(1)" class="p176-Sminput"></div>
+                                <div class="p176-Sbtn"><a href="javascript:;" onclick="classValidateNum(2)">校验班级编号</a></div>
                             </div>
                             <div class="p176-setInfoConadd clearfix" style="display: none" id="classInfo-div">
                                 <div class="p176-setInfoConadd-money" id="courseAmount-div">课程金额:¥0</div>
@@ -93,7 +104,7 @@
                                 <div class="p176-Sfiled p176-SfiledWidth">
                                     <input type="text" class="p176-Sminput chouke-input" id="className"
                                            maxlength="20" onblur="validate(1, false)">
-                                    <span class="p176-count01">
+                                        <span class="p176-count01">
                                             <span id="explainInformCnt03">0</span>/<span id="explainMaxCnt04">20</span>
                                         </span>
                                 </div>
@@ -124,17 +135,15 @@
                                     <input id="service" type="text" class="p176-Sminput chouke-input"
                                            maxlength="15" placeholder="可输入联系电话，QQ群号等，例，QQ:100000">
                                     <span class="p176-count" style="right:5px;bottom:4px;">
-                                            <span id="explainServiceCntMin">0</span>/<span
-                                            id="explainServiceCntMax">15</span>
-                                        </span>
+                                        <span id="explainServiceCntMin">0</span>/<span id="explainServiceCntMax">15</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="p176-setInfoCon clearfix">
                                 <div class="p176-Slabel">课程说明</div>
                                 <div class="p176-Sfiled p176-SfiledWidth chou-wid-modify2">
-                                    <textarea class="p176-textarea" id="ckIntroduce"
-                                              onblur="validate(1, false)"></textarea>
-                                    <span class="p176-count">
+                                    <textarea class="p176-textarea" id="ckIntroduce" onblur="validate(1, false)"></textarea>
+                                        <span class="p176-count">
                                             <span id="explainInformCnt7">0</span>/<span id="explainMaxCnt8">200</span>
                                         </span>
                                 </div>
@@ -143,16 +152,16 @@
                                 <div class="p176-Slabel">筹课配图</div>
                                 <div class="p176-Sfiled clearfix">
                                     <dl>
-                                        <dt><img id="ckpt" src="../images/upfile-icon.png"
-                                                 style="width:52px;height:52px;" alt=""></dt>
+                                        <dt><img id="ckpt" src="../images/upfile-icon.png" style="width:52px;height:52px;"
+                                                 alt=""></dt>
                                         <dd>
                                             <p>APP筹课配图尺寸750*527</p>
-                                            <form action='upload/pcUploadFile.do' method='post' id="submit-1"
+
+                                            <form action='upload/uploadFile.do' method='post' id="submit-1"
                                                   enctype="multipart/form-data">
                                                 <div class="uploader white">
                                                     <input type="text" class="filename"/>
-                                                    <input type="file" name="file" id="first1"
-                                                           class="p176-uplodingBtn"/>
+                                                    <input type="file" name="file" id="first1" class="p176-uplodingBtn"/>
                                                     <input type="hidden" id="hidden1">
                                                     <input type="hidden" name="width" value="750">
                                                     <input type="hidden" name="height" value="527">
@@ -160,7 +169,7 @@
                                                 <div style="float:right;margin: 10px 0px;">
                                                     <input type="button" name="file" class="p176-uplodingBtn" value="上传"
                                                            id="up1"/>
-                                                    <span class="p176-count01">
+                                                <span class="p176-count01">
                                                     <span id="m1" style="color:red"></span>
                                                 </span>
                                                 </div>
@@ -184,8 +193,7 @@
                                 <div class="p176-Slabel">转发小图</div>
                                 <div class="p176-Sfiled clearfix">
                                     <dl>
-                                        <dt><img id="wechatpt" src="../images/upfile-icon.png"
-                                                 style="width:52px;height:52px;"
+                                        <dt><img id="wechatpt" src="../images/upfile-icon.png" style="width:52px;height:52px;"
                                                  alt=""></dt>
                                         <dd>
                                             <p>微信转发小图尺寸180*180</p>
@@ -194,8 +202,7 @@
                                                   enctype="multipart/form-data">
                                                 <div class="uploader white">
                                                     <input type="text" class="filename"/>
-                                                    <input id="first2" type="file" name="file"
-                                                           class="p176-uplodingBtn"/>
+                                                    <input id="first2" type="file" name="file" class="p176-uplodingBtn"/>
                                                     <input type="hidden" id="hidden2">
                                                     <input type="hidden" name="width" value="180">
                                                     <input type="hidden" name="height" value="180">
@@ -203,7 +210,7 @@
                                                 <div style="float:right;margin: 10px 0px;">
                                                     <input type="button" name="file" class="p176-uplodingBtn" value="上传"
                                                            id="up2"/>
-                                                    <span class="p176-count01">
+                                                <span class="p176-count01">
                                                     <span id="m2" style="color:red"></span>
                                                 </span>
                                                 </div>
@@ -215,8 +222,7 @@
                                     <div class="p176-Slabel">公众号二维码</div>
                                     <div class="p176-Sfiled clearfix" style="margin-left:24px;">
                                         <dl>
-                                            <dt><img id="ercodept" src="../images/wxcode.png"
-                                                     style="width:52px;height:52px;"
+                                            <dt><img id="ercodept" src="../images/wxcode.png" style="width:52px;height:52px;"
                                                      alt=""></dt>
                                             <dd>
                                                 <p>公众号二维码尺寸160*160</p>
@@ -224,17 +230,15 @@
                                                       enctype="multipart/form-data">
                                                     <div class="uploader white">
                                                         <input type="text" class="filename"/>
-                                                        <input id="first3" type="file" name="file"
-                                                               class="p176-uplodingBtn"/>
+                                                        <input id="first3" type="file" name="file" class="p176-uplodingBtn"/>
                                                         <input type="hidden" id="hidden3">
                                                         <input type="hidden" name="width" value="160">
                                                         <input type="hidden" name="height" value="160">
                                                     </div>
                                                     <div style="float:right;margin: 10px 0px;">
-                                                        <input type="button" name="file" class="p176-uplodingBtn"
-                                                               value="上传"
+                                                        <input type="button" name="file" class="p176-uplodingBtn" value="上传"
                                                                id="up3"/>
-                                                        <span class="p176-count01">
+                                                    <span class="p176-count01">
                                                         <span id="m3" style="color:red"></span>
                                                     </span>
                                                     </div>
@@ -250,8 +254,9 @@
                         <a href="javascript:;" onclick="next(1, true)" class="p176-nextStep-btn">下一步&gt; &gt;</a>
                     </div>
                 </div>
-                <!--第二步-->
-                <div id="second" style="display: none">
+
+                <!--第二阶段-->
+                <div id="second" style="display: none;">
                     <div class="p176-setInfo-wrap clearfix">
                         <div class="p176-setInfo-main mtop20 mLeft10">
                             <div class="p176-setInfoCon clearfix">
@@ -260,14 +265,12 @@
                                     <div class="p176-label">开始时间：</div>
                                     <div class="p176-filed-b">
                                         <div class="p176-Input-wrap">
-                                            <input id="startDate" type="text" class="p176-Input"
-                                                   placeholder="2016-01-20" onclick="laydate()"
-                                                   autocomplete="on">
+                                            <input id="startDate" type="text" class="p176-Input" placeholder="2016-01-20" onclick="laydate()"
+                                                   autocomplete="off">
                                             <i class="p176-input-data"></i>
                                         </div>
                                         <div class="p176-input-wrap">
-                                            <input id="startTime" type="text" class="p176-Hinput" placeholder="00:00"
-                                                   onclick="ModuleTimeMenu.init(this);" autocomplete="off">
+                                            <input id="startTime" type="text" class="p176-Hinput" placeholder="00:00" onclick="ModuleTimeMenu.init(this);" autocomplete="off">
                                             <i class="p176-input-hour"></i>
                                         </div>
                                     </div>
@@ -291,8 +294,7 @@
                             <div class="p176-setInfoCon clearfix">
                                 <div class="p176-label-b" style="margin-left:20px;">规则说明</div>
                                 <div class="p176-filed-b">
-                                    <textarea style="width:773px;padding:6px 7px 15px 7px;" class="p176-textarea"
-                                              id="ruleIntroduce" onblur="validate(2, false)"></textarea>
+                                    <textarea style="width:773px;padding:6px 7px 15px 7px;" class="p176-textarea" id="ruleIntroduce" onblur="validate(2, false)"></textarea>
                                     <span class="p176-count" style="bottom:5px;right:70px;">
                                         <span id="explainInformCnt9">0</span>/<span id="explainMaxCnt10">300</span>
                                     </span>
@@ -300,13 +302,10 @@
                             </div>
                             <div class="p176-setInfoCon clearfix">
                                 <div class="p176-label-b" style="margin-left:20px;">兑课地址</div>
-                                <div class="p176-filed-b"
-                                     style="border: 1px solid #dfdfdf;height:29px;width:469px;position:relative;">
-                                    <input id="address" type="text" class="p176-Sminput" onblur="validate(2, false)"
-                                           style="min-width:409px;border:0;">
+                                <div class="p176-filed-b" style="border: 1px solid #dfdfdf;height:29px;width:469px;position:relative;">
+                                    <input id="address" type="text" class="p176-Sminput" onblur="validate(2, false)" style="min-width:409px;border:0;">
                                     <span class="p176-count" style="top:1px;right:10px;position:absolute;">
-                                        <span id="explainaddressMinCnt">0</span>/<span
-                                            id="explainaddressMaxCnt">30</span>
+                                        <span id="explainaddressMinCnt">0</span>/<span id="explainaddressMaxCnt">30</span>
                                     </span>
                                 </div>
                             </div>
@@ -320,8 +319,7 @@
                                 <div class="p176-label-b" style="margin-left:-8px;">兑课截止日期</div>
                                 <div class="p176-filed-b">
                                     <div class="p176-Input-wrap">
-                                        <input id="effect" type="text" class="p176-Input" placeholder="2016-01-20"
-                                               onclick="laydate()"
+                                        <input id="effect" type="text" class="p176-Input" placeholder="2016-01-20" onclick="laydate()"
                                                autocomplete="off">
                                         <i class="p176-input-data"></i>
                                     </div>
@@ -330,39 +328,28 @@
                             <div class="p176-setInfoCon clearfix">
                                 <div class="p176-label-b" style="margin-left:0px;">帮课名额设置</div>
                                 <div class="p176-filed-b">
-                                    <i class="p176-queryImg"><img src="../images/queryIcon.png" alt=""></i>
-                                    <span class="p176-explain">名额指本课程获得上课资格的人员数量，帮筹人数指需要多少人帮忙才能成功。<div
-                                            class="p176-addBtn" style="float:right"><a href="javascript:void(0)" onclick="addBatch()"
-                                    >添加</a></div></span>
-                                    <input id="batchNum" value="1" type="hidden"/>
+                                    <i class="p176-queryImg"><img src="../../images/queryIcon.png" alt=""></i>
+                                    <span class="p176-explain">名额指本课程获得上课资格的人员数量，帮筹人数指需要多少人帮忙才能成功。<div class="p176-addBtn" style="float:right"><a href="javascript:void(0)" onclick="addBatch()">添加</a></div></span>
+                                    <input id="batchNum" value="1" type="hidden" />
                                 </div>
                             </div>
                             <div id="batchId">
-                                <div class="p176-setInfoCon clearfix">
-                                    <div class="p176-count-wrap clearfix">
-                                        <div class="p176-countBox">
-                                            <div class="p176-label-b" style="margin-left:9px;">&nbsp;第1批名额</div>
-                                            <div class="p176-filed-b">
-                                                <input name="count" type="text" class="p176-Cinput">
-                                            </div>
-                                            <div class="p176-label-b">帮筹人数</div>
-                                            <div class="p176-filed-b">
-                                                <input name="perNum" type="text" class="p176-Cinput">
-                                            </div>
-                                        </div>
-                                        <i class="p176-close" onclick="delBacth(this)"></i>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="p176-setInfo-nextStep mtop15 p176-tit-btnWrap">
                         <a href="javascript:;" onclick="previous(2)" class="p176-nextStep-btn">&lt; &lt;上一步</a>
                         <a href="javascript:;" onclick="viewPage(2)">预览</a>
-                        <a href="javascript:;" class="" onclick="saveNewCk(2, true)">保存</a>
-                        <a href="javascript:;" class="disabledBtn releaseBtn " onclick="newCkEditPublish(2)">发布</a>
+                        <a href="javascript:;" class="" onclick="saveEditNewCk(2, true, '')">保存</a>
+                        <a href="javascript:;" class="disabledBtn releaseBtn " onclick="newCkEditPublish(1)" >发布</a>
                     </div>
                 </div>
+
+                <!--第三阶段-->
+
+
+                <!--第四阶段-->
 
             </div>
         </div>
@@ -375,145 +362,69 @@
         </div>
     </div>
 </div>
-<div style="position:absolute;background:#fff;border:1px solid rgb(204, 204, 204);width:480px;z-index:29891017;display:none;"
-     class="J-inputAutoMenu">
+    <!--</form>-->
+<div style="position:absolute;background:#fff;border:1px solid rgb(204, 204, 204);width:480px;z-index:29891017;display:none;"class="J-inputAutoMenu">
     <div class="p176-hour">
         <dl>
             <dt>小时</dt>
             <dd class="p176-hour-table03 J-Hour-Box">
                 <table>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="on">0</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">1</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">2</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">3</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">4</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">5</a></div>
-                        </td>
+                    <tbody><tr>
+                        <td><div class="mExt"><a href="javascript:;" class="on">0</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">1</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">2</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">3</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">4</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">5</a></div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">6</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">7</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">8</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">9</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">10</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">11</a></div>
-                        </td>
+                        <td><div class="mExt"><a href="javascript:;">6</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">7</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">8</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">9</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">10</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">11</a></div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">12</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">13</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">14</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">15</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">16</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">17</a></div>
-                        </td>
+                        <td><div class="mExt"><a href="javascript:;">12</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">13</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">14</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">15</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">16</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">17</a></div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">18</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">19</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">20</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">21</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="">22</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">23</a></div>
-                        </td>
+                        <td><div class="mExt"><a href="javascript:;">18</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">19</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">20</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">21</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;" class="">22</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">23</a></div></td>
                     </tr>
-                    </tbody>
-                </table>
+                    </tbody></table>
             </dd>
         </dl>
         <dl>
             <dt>分钟</dt>
             <dd class="p176-hour-table03 J-Minute-Box">
                 <table>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;" class="on">0</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">5</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">10</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">15</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">20</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">25</a></div>
-                        </td>
+                    <tbody><tr>
+                        <td><div class="mExt"><a href="javascript:;" class="on">0</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">5</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">10</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">15</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">20</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">25</a></div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">30</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">35</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">40</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">45</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">50</a></div>
-                        </td>
-                        <td>
-                            <div class="mExt"><a href="javascript:;">55</a></div>
-                        </td>
+                        <td><div class="mExt"><a href="javascript:;">30</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">35</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">40</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">45</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">50</a></div></td>
+                        <td><div class="mExt"><a href="javascript:;">55</a></div></td>
                     </tr>
-                    </tbody>
-                </table>
+                    </tbody></table>
             </dd>
         </dl>
     </div>
