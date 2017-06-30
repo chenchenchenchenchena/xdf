@@ -167,6 +167,12 @@ body,html{
 	line-height: 105px;
 	background: url(../images/rightArrow.png) no-repeat right center;
 }
+.choose>li:last-child{
+	background:#fff;
+}
+.choose>li:last-child>span:nth-child(2){
+	padding-right: 0;
+}
 .choose li>span:nth-child(1){
 	display: inline-block;
 	float: left;
@@ -179,11 +185,17 @@ body,html{
 	padding-right: 30px;
 }
 .choose li>span:nth-child(2) input{
-	height: 104px;
+	/*height: 104px;*/	
 	font-size: 30px;
 	border: none;
-	width: 70px;
+	width:157px;
 	outline: none;
+	float: left;
+}
+.choose li>span:nth-child(2) i{
+	font-style: normal;
+	float: left;
+	display: none;
 }
 .totalScore{
 	/*color: #d4d3d3;*/
@@ -191,10 +203,11 @@ body,html{
     border: none;
     font-size: 30px;
    /* line-height: 105px;*/
-  margin-top: 31px;
+  margin-top: 32px;
     width: 160px;
     outline: none;
     text-align: right;
+   /* overflow:hidden;*/
 }
 .scoreList{
     overflow: hidden;

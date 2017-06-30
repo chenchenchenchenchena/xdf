@@ -131,6 +131,13 @@ $(function(){
 			})
 		}
 	});
+	//点击input
+	$(".totalScore").focus(function(){
+		$(".fen").show();
+	})
+	/*$(".totalScore").blur(function(){
+		$(".fen").hide();
+	})*/
 	//保存
 	var student=[];
 	$(".succ").click(function(){
@@ -139,7 +146,7 @@ $(function(){
 				"studentname":$(".scoreList dl").eq(i).find("dd").eq(0).html(),
 				"studentcode":$(".scoreList dl").eq(i).find("dd").eq(1).html(),
 				"invalid":$(".scoreList dl").eq(i).find("dd").eq(2).html(),
-				"score":$(".scoreList dl").eq(i).find("dt").html()
+				"realGrade":parseInt($(".scoreList dl").eq(i).find("dt").html())
 			}
 			student.push(studentinfo);
 		}
@@ -148,13 +155,17 @@ $(function(){
 		console.log($(".classTime").html());
 		console.log($(".totalScore").html());
 		console.log(student);
+		var classNo=$(".classTime").html().substring(1,2);
+		var classT=$(".classTime").html().substring(4,22);
 		var saveInfo={
 			"email":"caoxuefeng@xdf.cn",
+			"teacherName":"曹雪峰",
 			"gradeType":$(".st").html(),
 			"className":$(".classrome").html(),
 			"classCode":$(".class").html(),
-			"lessonNo":$(".classTime").html(),
-			"fullMarks":$(".totalScore").html(),
+			"lessonNo":classNo,
+			"lessonTime":classT,
+			"fullMarks":$(".totalScore").val(),
 			"student":student
 		}
 		if($(".st").html()=="入门侧"){
