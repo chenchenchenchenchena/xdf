@@ -8,7 +8,7 @@ var Xtwindex = [];
 
 
 var Xindex = '';
-ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStdReport.do',{'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZ01UMHN2U121','tCode':'2','studentNo':'SS1174'},		function(e){
+ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStdReport.do',{'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZSPP008','tCode':'1','studentNo':'SS2431'},		function(e){
             if(sessionStorage.tCode==1){
 
             }else{
@@ -31,7 +31,7 @@ ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStd
 
 });
 
-
+    Echart('')
 
 
 
