@@ -15,7 +15,7 @@ $(function(){
     $('.rankTitle>span').html(stateContent);
     getRankList(testState,"shared");//
 
-    weChatData();
+    // weChatData();
     //微信分享数据
     function weChatData() {
         var urlVal = window.location.href;
