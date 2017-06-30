@@ -63,7 +63,7 @@ $(function(){
 							// 分享到朋友圈
                         wx.onMenuShareTimeline({
                             title: "", // 分享标题
-                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+                            link: "", // 分享链接
                             imgUrl:"", // 分享图标
                             success: function () {
                                 // 用户确认分享后执行的回调函数
@@ -79,7 +79,7 @@ $(function(){
                         wx.onMenuShareAppMessage({
                             title: "", // 分享标题
                             desc: "", // 分享描述
-                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+                            link: "", // 分享链接
                             imgUrl:"", // 分享图标
                             type: '', // 分享类型,music、video或link，不填默认为link
                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -132,9 +132,12 @@ $(function(){
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
-            'teaEmail':'caoxuefeng@xdf.cn', //教师邮箱 localStorage.terEmail
-            'classCode':'CZ01UMHN2U121', //班级编号 sessionStorage.classcode
-            'schoolId':'73', //校区id sessionStorage.schoolid
+            // 'teaEmail':'caoxuefeng@xdf.cn', //教师邮箱 localStorage.terEmail
+            // 'classCode':'CZ01UMHN2U121', //班级编号 sessionStorage.classcode
+            // 'schoolId':'73', //校区id sessionStorage.schoolid
+            'teaEmail':localStorage.terEmail, //教师邮箱
+            'classCode':sessionStorage.classcode, //班级编号
+            'schoolId':sessionStorage.schoolid, //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();
@@ -150,20 +153,6 @@ $(function(){
 
 /* 分享后排行榜 */
 function getSharedListSuccess(msg){
-    var msg = {"code":"200","data":[
-        {"studentNo":"ddd","lastFullMarks":-1,"lastGrade":-1,"fullMarks":10,"lastRanking":-1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test4","lessonTime":"2017/06/29","studentName":"欧阳娜娜","grade":10,"className":"班班班数学尖子班","ranking":1},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"王思雨","grade":9,"className":"ffv","ranking":1},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"高圆圆","grade":9,"className":"英语提高班","ranking":1},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"陈晨","grade":9,"className":"ffv","ranking":3},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"王海峰","grade":9,"className":"ffv","ranking":4},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"侯军","grade":9,"className":"ffv","ranking":5},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"庞燕","grade":9,"className":"ffv","ranking":6},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"刘雷","grade":9,"className":"ffv","ranking":6},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"李红","grade":9,"className":"ffv","ranking":6},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"张彤彤","grade":9,"className":"ffv","ranking":6},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"刘冰","grade":9,"className":"ffv","ranking":10},
-        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"刘雷","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"2017/06/29","studentName":"潘高洋","grade":9,"className":"ffv","ranking":11}
-    ],"status":"success"};
     loading = layer.load();
     $(".main-content").hide();
     $(".ranklist").html("");
