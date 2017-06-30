@@ -62,11 +62,11 @@ $(function(){
                         timestamp: timestamp, // 必填，生成签名的时间戳
                         nonceStr: nonceStr, // 必填，生成签名的随机串
                         signature: signature,// 必填，签名，见附录1
-                        jsApiList: [ 'onMenuShareAppMessage','showMenuItems','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        jsApiList: [ 'onMenuShareAppMessage','onMenuShareTimeline','showMenuItems','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     wx.ready(function () {
                         wx.checkJsApi({
-                            jsApiList:["checkJsApi",'showMenuItems','hideAllNonBaseMenuItem'],
+                            jsApiList:["checkJsApi",'onMenuShareAppMessage','onMenuShareTimeline','showMenuItems','hideAllNonBaseMenuItem'],
                             success:function(res){
                                 console.log("权限配置验证成功");
                             },
@@ -78,44 +78,44 @@ $(function(){
                         wx.showMenuItems({
                             menuList: ['menuItem:share:appMessage','menuItem:share:timeline','menuItem:copyUrl','menuItem:refresh'] // 要显示的菜单项，所有menu项见附录3
                         });
-//							分享到朋友圈
-//                         wx.onMenuShareTimeline({
-//                             title: "", // 分享标题
-//                             link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
-//                             imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
-//                             success: function () {
-//                                 // 用户确认分享后执行的回调函数
-//                                 //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-//                                 shareCmsFn();
-//                             },
-//                             cancel: function () {
-//                                 // 用户取消分享后执行的回调函数
-//                                 //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-//                             }
-//                         });
-// //							分享给朋友
-//                         wx.onMenuShareAppMessage({
-//                             title: "", // 分享标题
-//                             desc: "", // 分享描述
-//                             link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
-//                             imgUrl:"http://dt.staff.xdf.cn/xdfdthome/schedule/images/search.png", // 分享图标
-//                             type: '', // 分享类型,music、video或link，不填默认为link
-//                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-//                             success: function (msg) {
-//                                 console.log("success::"+JSON.stringify(msg));
-//                                 // 用户确认分享后执行的回调函数
-//                                 //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-//                                 console.log("success！！！");
-// //									shareCmsFn();
-//                             },
-//                             cancel: function () {
-//                                 // 用户取消分享后执行的回调函数
-//                                 //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
-//                             },
-//                             fail:function (msg) {
-//                                 console.log("fail::"+JSON.stringify(msg));
-//                             }
-//                         });
+							// 分享到朋友圈
+                        wx.onMenuShareTimeline({
+                            title: "", // 分享标题
+                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+                            imgUrl:"", // 分享图标
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                                //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                                // shareCmsFn();
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                                //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                            }
+                        });
+//							分享给朋友
+                        wx.onMenuShareAppMessage({
+                            title: "", // 分享标题
+                            desc: "", // 分享描述
+                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/rankinglist_t.html", // 分享链接
+                            imgUrl:"", // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function (msg) {
+                                console.log("success::"+JSON.stringify(msg));
+                                // 用户确认分享后执行的回调函数
+                                //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                                console.log("success！！！");
+//									shareCmsFn();
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                                //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                            },
+                            fail:function (msg) {
+                                console.log("fail::"+JSON.stringify(msg));
+                            }
+                        });
                         wx.error(function(res){
                             // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
                             console.log("errorMSG:"+res);
@@ -167,6 +167,20 @@ $(function(){
     }
 
     function getRankListSuccess(msg){
+        var msg = {"code":"200","data":[
+            {"studentNo":"ddd","lastFullMarks":-1,"lastGrade":-1,"fullMarks":10,"lastRanking":-1,"teacherName":"***","lastLessonTime":-1,"lessonNO":2,"id":"test4","lessonTime":"","studentName":"欧阳娜娜","grade":10,"className":"班班班数学尖子班","ranking":1},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"王思雨","grade":9,"className":"ffv","ranking":1},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"高圆圆","grade":9,"className":"ffv","ranking":1},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"陈晨","grade":9,"className":"ffv","ranking":3},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"王海峰","grade":9,"className":"ffv","ranking":4},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"侯军","grade":9,"className":"ffv","ranking":5},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"庞燕","grade":9,"className":"ffv","ranking":6},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"习大大","grade":9,"className":"ffv","ranking":6},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"李红","grade":9,"className":"ffv","ranking":6},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"张彤彤","grade":9,"className":"ffv","ranking":6},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"刘冰","grade":9,"className":"ffv","ranking":10},
+            {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"潘高洋","grade":9,"className":"ffv","ranking":11}
+        ],"status":"success"};
         $(".main-content>table>tbody").html(" ");
         if(msg.code==200){
             if(msg.data!='undefined' && msg.data.length>0){
@@ -198,7 +212,7 @@ $(function(){
                         +'<td>'+items.studentName+'</td><td>'+items.grade+'</td>'
                         +'<td><i class="change-state '+floatGradeCss+'"></i>'+parseInt(Math.abs(gradeFloat))+'分</td>'
                         +'<td><i class="change-state '+floatRankCss+'"></i>'+parseInt(Math.abs(rankFloat))+'名</td>'
-                        +'<td><a class="link-to" href="../homework/dohomework_t.html"></a></td>'
+                        +'<td><a class="link-to" href="reportstu_t.html"></a></td>'
                         +'</tr>';
                     $(".intro-test>tbody").append(rankListHtml);
                     $(".no-data").hide();
@@ -222,6 +236,20 @@ $(function(){
 
 /* 分享后排行榜 */
 function getSharedListSuccess(msg){
+    var msg = {"code":"200","data":[
+        {"studentNo":"ddd","lastFullMarks":-1,"lastGrade":-1,"fullMarks":10,"lastRanking":-1,"teacherName":"***","lastLessonTime":-1,"lessonNO":2,"id":"test4","lessonTime":"","studentName":"欧阳娜娜","grade":10,"className":"班班班数学尖子班","ranking":1},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"王思雨","grade":9,"className":"ffv","ranking":1},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"高圆圆","grade":9,"className":"ffv","ranking":1},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"陈晨","grade":9,"className":"ffv","ranking":3},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"王海峰","grade":9,"className":"ffv","ranking":4},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"侯军","grade":9,"className":"ffv","ranking":5},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"庞燕","grade":9,"className":"ffv","ranking":6},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"习大大","grade":9,"className":"ffv","ranking":6},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"李红","grade":9,"className":"ffv","ranking":6},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"张彤彤","grade":9,"className":"ffv","ranking":6},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"刘冰","grade":9,"className":"ffv","ranking":10},
+        {"studentNo":"24124142124141213","lastFullMarks":10,"lastGrade":10,"fullMarks":10,"lastRanking":1,"teacherName":"","lastLessonTime":"","lessonNO":2,"id":"test5","lessonTime":"","studentName":"潘高洋","grade":9,"className":"ffv","ranking":11}
+    ],"status":"success"};
     loading = layer.load();
     $(".main-content").hide();
     $(".ranklist").html("");
