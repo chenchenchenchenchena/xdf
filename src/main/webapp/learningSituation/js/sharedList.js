@@ -15,7 +15,7 @@ $(function(){
     $('.rankTitle>span').html(stateContent);
     getRankList(testState,"shared");//
 
-    // weChatData();
+    weChatData();
     //微信分享数据
     function weChatData() {
         var urlVal = window.location.href;
@@ -177,11 +177,11 @@ function getSharedListSuccess(msg){
                     rankCss = "nofirst";
                     ranking = items.ranking;
                 }
-                if(items.studentNo.length>8){
-                    studentNo = items.studentNo.substr(0,2)+'****'+items.studentNo.substr(-2,2);
-                }else{
-                    studentNo = items.studentNo;
-                }
+                // if(items.studentNo.length>8){
+                    studentNo = items.studentNo.substr(0,items.studentNo.length-3)+'****';
+                // }else{
+                //     studentNo = items.studentNo;
+                // }
                 var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                 var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                 var sharedListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+ranking

@@ -181,12 +181,15 @@ i{
     font-size: 30px;
     float: right;
     color: #333333;
-    margin-right: 54px;
+    margin-right: 34px;
 }
 .rankright>i:nth-child(1){
     margin-right: 64px;
     font-size: 26px;
     color: #808080;
+}
+.rankright>i:nth-child(2){
+    width:90px;
 }
 #imgs>img{
     position: absolute;
