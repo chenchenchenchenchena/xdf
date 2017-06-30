@@ -2,12 +2,7 @@
  * Created by zsj on 2017-06-28.
  */
 $(function(){
-    function tabCss(tabObj, tabClass) {
-        $(document).on('touchend',tabObj, function () {
-            $(this).addClass(tabClass).siblings().removeClass(tabClass);
-        });
-    }
-    // tabCss('.tab-title li','tab-active');
+    var loading,loading2;//loading效果
     console.log("title:"+GetRequest('title'));
     console.log("title:"+decodeURI(encodeURI(GetRequest('title'))));
     $('title').html(GetRequest('title'));//动态获取页面标题
@@ -30,9 +25,9 @@ $(function(){
         var testState = $('.main-content').attr('testState');
         var stateContent;
         if(testState=="1"){
-            stateContent = "出门测";
-        }else{
             stateContent = "入门测";
+        }else{
+            stateContent = "出门测";
         }
         $('title').html(stateContent+"排行榜");//动态获取页面标题
         $('.rankTitle>span').html(stateContent);
@@ -160,14 +155,17 @@ $(function(){
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
-            'teaEmail':'test@xdf.cn', //教师邮箱
-            'classCode':'001', //班级编号
+            'teaEmail':'caoxuefeng@xdf.cn', //教师邮箱 session.
+            'classCode':'CZ01UMHN2U121', //班级编号
             'schoolId':'73', //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
+        $('.main-content,.no-data').hide();
+
         if(pageState=="shared"){
             ajaxRequest('POST', url.t_rankl,reqData, getSharedListSuccess);
         }else{
+            loading = layer.load();
             ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
         }
 
@@ -209,16 +207,19 @@ $(function(){
                         +'</tr>';
                     $(".intro-test>tbody").append(rankListHtml);
                     $(".no-data").hide();
+                    layer.close(loading);
                     $(".main-content").show();
                 });
             }else{
                 // $('.hwEmpty p').html("您没有已交作业哦~");
                 $('.main-content').hide();
+                layer.close(loading);
                 $('.no-data').show();
             }
         }else{
             console.log("err:"+JSON.stringify(msg));
         }
+        // layer.close(loading);
     }
 
 
@@ -226,6 +227,7 @@ $(function(){
 
 /* 分享后排行榜 */
 function getSharedListSuccess(msg){
+    loading = layer.load();
     $(".main-content").hide();
     $(".ranklist").html("");
     if(msg.code==200){
@@ -255,16 +257,16 @@ function getSharedListSuccess(msg){
                 var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                 var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                 var sharedListHtml='<li><span class="rankleft"><i class="rankfirst">'+ranking
-                    +'</i><i>'+items.studentName+'</i><i>'
+                    +'</i><i>'+items.studentName.substr(-2,2)+'</i><i>'
                     +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.lastGrade+'分</i></span></li>';
                 $(".ranklist").append(sharedListHtml);
                 $(".ranklist").show();
-
+                layer.close(loading);
             });
             console.log("页面加载完毕，开始截图！！");
             takeScreenshot();
         }else{
-            // $('.hwEmpty p').html("您没有已交作业哦~");
+            layer.close(loading);
             $('.shared-content').hide();
             $('.no-data').show();
         }
@@ -279,8 +281,7 @@ function takeScreenshot() {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
             $('.shared-content').hide();
-            var myCanvas = document.getElementsByTagName("canvas");
-				convertCanvasToImage();
+            convertCanvasToImage();
         },
 //			 width: '100%',
 //			 height: '100%'
@@ -288,16 +289,13 @@ function takeScreenshot() {
 }
 //	canvas to images
 function convertCanvasToImage(){
+    loading = layer.load();
     console.log("canvas to images");
-//		var image = new Image();
-//		image.src = canvas.toDataURL("image/png");
     var myCanvas = document.getElementsByTagName("canvas");
-//		var dataURL = myCanvas[0].toDataURL();
-//     var base = new Base64();
     var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
     // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
-    // 把画布保存成100x100的png格式
-    // Canvas2Image.saveAsPNG(myCanvas[0], false, 100, 100);
-    $('#imgs>img').attr('src',image);
     $('canvas').hide();
+    layer.close(loading);
+    $('#imgs>img').attr('src',image);
+
 }
