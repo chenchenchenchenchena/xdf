@@ -39,6 +39,11 @@ ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/querySco
                  Cindex = [];
                  Rindex = [];
 $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'"></div><div class="achievement_s"> <h4 classCode="'+e.data[i].classCode+'" schoolId="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
+                $('.title_s').eq(0).siblings().show();
+                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
+
+                Echart('chart_S'+i+'',[1,2,3,4,5,6],[6,8,9,10,6,8],[6,8,9,10,6,8])
+
             var class_ = e.data[i];
             var classData = class_.data;
 
@@ -101,7 +106,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                 //     Xindex = e.data[i].data[1].data.length
                 // }
             }
-                Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
+                // Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
 
             }
 
@@ -126,8 +131,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
 
 
 })
-
-
 
 
 
@@ -212,13 +215,13 @@ var option = {
             {
                 name:'日期',
                 type:'line',
-                data:['11:00','12:00','13:00']
+                data:['11:00','12:00','13:00','13:00','13:00','13:00']
 
             },
             {
                 name:'总分',
                 type:'line',
-                data:['10分','10分','10分']
+                data:['10分','10分','10分','10分','10分','10分']
             }
         ]
     };
