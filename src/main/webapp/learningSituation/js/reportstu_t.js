@@ -31,7 +31,7 @@ ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStd
 
 });
 
-    Echart('')
+    Echart('chart_S',[1,2,3,4],[7,9,8,10],[,9.4,8.4,   6.8])
 
 
 
