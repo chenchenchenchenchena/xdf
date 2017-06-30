@@ -62,11 +62,11 @@ $(function(){
                         timestamp: timestamp, // 必填，生成签名的时间戳
                         nonceStr: nonceStr, // 必填，生成签名的随机串
                         signature: signature,// 必填，签名，见附录1
-                        jsApiList: [ 'onMenuShareAppMessage','onMenuShareTimeline','showMenuItems','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        jsApiList: [ 'onMenuShareAppMessage','showMenuItems','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     wx.ready(function () {
                         wx.checkJsApi({
-                            jsApiList:["checkJsApi",'onMenuShareAppMessage','onMenuShareTimeline','showMenuItems','hideAllNonBaseMenuItem'],
+                            jsApiList:["checkJsApi",'showMenuItems','hideAllNonBaseMenuItem'],
                             success:function(res){
                                 console.log("权限配置验证成功");
                             },
@@ -237,6 +237,7 @@ function getSharedListSuccess(msg){
                 }
                 var rankCss,ranking,studentNo;
                 //名次样式
+                console.log(items.ranking==1);
                 if(items.ranking==1){
                     rankCss = "rankfirst";
                     ranking = "";
@@ -251,7 +252,7 @@ function getSharedListSuccess(msg){
                 }
                 var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                 var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
-                var sharedListHtml='<li><span class="rankleft"><i class="rankfirst">'+ranking
+                var sharedListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+ranking
                     +'</i><i>'+items.studentName.substr(-2,2)+'</i><i>'
                     +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.lastGrade+'分</i></span></li>';
                 $(".ranklist").append(sharedListHtml);
