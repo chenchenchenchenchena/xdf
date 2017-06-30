@@ -25,139 +25,40 @@
 		<div class="assignment">
 			<ul class="choose">
 				<li><span>成绩类型</span><span class="st">入门测</span></li>
-				<li><span>班级</span><span class="classrome"></span></li>
+				<li><span>班级</span><span class="classrome"></span><span class="class" style="display: none"></span></li>
 				<li><span>课次及时间</span><span class="classTime"></span></li>
-				<li><span>满分</span><input type="text" class="totalScore" placeholder="请输入分数"/></li>
+				<li><span>满分</span><input class="totalScore" placeholder="请输入分数" type="tel"/></li>
 			</ul>
 			<div class="txt">成绩录入</div>
 			<div class="txtDiv">
-				<p class="scoreTitle"><span>高文生</span><input type="text" placeholder="请录入分数"/></p>
-				<div class="scoreList">
-					<dl>
-						<dt>小高小</dt>
-						<dd>小高小</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高2</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高3</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高4</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高5</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高6</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高7</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高8</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高9</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高10</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高5</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高6</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高7</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高8</dd>
-					</dl>
-					<dl>
-						<dt></dt>
-						<dd>小高9</dd>
-					</dl>
-				</div>
+				<p class="scoreTitle"><span></span><input  placeholder="请录入分数" type="tel" /></p>
+				<div class="scoreList"></div>
 			</div>
 			<button class="subtn">确认提交</button>
 	</div>
 	</div>
 	<div class="scoreType">
 		<p><span>成绩类型</span></p>
-		<ul>
-			<li>入门测</li>
-			<li>出门侧</li>
-		</ul>
+		<ul></ul>
 		<button class="scoreTypeBtn">确定</button>
 	</div>
 	<div class="classNumTime">
 			<p><span>课次及时间</span></p>
-			<ul><!---->
-				<li>第10课次(05.25 8:00-10:00)</li>
-				<li>第10课次(05.25 8:00-10:00)</li>
-				<li>第10课次(05.25 8:00-10:00)</li>
-			</ul>
+			<ul></ul>
 			<button class="confirmBtn">确定</button>
 	</div>
 	<div class="chooseClass">
 			<p><span>选择班</span></p>
-			<ul>
-				<li>班级名称英语二年级</li>
-				<li>班级名称英语二年级</li>
-				<li>班级名称英语二年级</li>
-			</ul>
+			<ul></ul>
 			<button class="chooseBtn">确定</button>
 	</div>
 	<div class="mask"></div>
 	<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>
-	<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button>确定</button></div>
+	<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button class="succ">确定</button></div>
 	<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分,确认提交？</p><button>取消</button><button>确定</button></div>
 	<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
 	<div class="classTimeEmpty"><img src="images/ce.png" /><p>请选择课次及时间</p></div>
+	<div class="numFail"><img src="images/ce.png" /><p>数据格式不正确</p></div>
 	</body>
 </html>
 <script src="js/record.js"></script>
-	<script>
-		/*layer.open({
-	        type: 1,
-	        area: ['548px', '345px'],
-	        shade:[0.2,'#000'],
-	        title:'',
-	        skin: '',
-	        content:$(".recordSub")
-	    })
-		layer.open({
-	        type: 1,
-	        area: ['548px', '345px'],
-	        shade:[0.2,'#000'],
-	        title:'',
-	        skin: '',
-	        content:$(".recordSucc")
-	    })*/
-	   /*$(".subtn").click(function(){
-			layer.open({
-		        type: 1,
-		        area: ['548px', '345px'],
-		        shade:[0.2,'#000'],
-		        title:'',
-		        skin: '',
-		        content:$(".noRecord")
-		    })
-		});*/
-	</script>

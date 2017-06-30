@@ -186,43 +186,43 @@ body,html{
 	outline: none;
 }
 .totalScore{
-	color: #d4d3d3;
+	/*color: #d4d3d3;*/
     float: right;
     border: none;
     font-size: 30px;
-    line-height: 105px;
+   /* line-height: 105px;*/
+  margin-top: 31px;
     width: 160px;
     outline: none;
+    text-align: right;
 }
 .scoreList{
     overflow: hidden;
     margin-top: 20px;
+    height: 468px;
+    overflow: auto;
 }
 .scoreTitle{
     height: 104px;
     line-height: 104px;
     border-bottom: 1px solid #e1e1e1;
 }
-/*.scoreTitle>span:nth-child(2){
-	display: inline-block;
-	height: 64px;
-    margin-left: 410px;
-   
-}*/
 .scoreTitle input{
-	line-height: 104px;
+	/*line-height: 104px;*/
+	margin-top: 36px;
     font-size: 30px;
     float: right;
     width: 153px;
     outline: none;
     border: none;
+    text-align: right;
 }
 .scoreList dl{
 	float: left;
 	text-align: center;
 	width: 138px;
 	margin-bottom: 20px;
-	/*height: 136px;*/
+	height: 136px;
 }
 .scoreList dt{
 	font-size: 28px;
@@ -237,8 +237,8 @@ body,html{
 	font-size: 32px;
 }
 .txt{
-	height: 90px;
-	line-height: 90px;
+	height: 80px;
+	line-height: 80px;
 	padding: 0 30px;
 	font-size: 30px;
 	font-weight: 700;
@@ -267,7 +267,7 @@ body,html{
 	position: relative;
 	background: #fff;
 	padding: 0 30px;
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
 }
 .txtboxNum{
 	position: absolute;
@@ -293,6 +293,9 @@ body,html{
 	margin-left: 30px;
 	border-radius: 10px;
 }
+.subtn{
+	margin-top: 30px;
+}
 .confirmBtn,.chooseBtn,.scoreTypeBtn{
 	margin-left: 0;
 }
@@ -309,6 +312,14 @@ body,html{
 	width: 100%;
 	/*display: none;*/
 	z-index: 10;
+	
+}
+.classNumTime ul,.chooseClass ul{
+	overflow: auto;
+	height: 240px;
+}
+.scoreType ul{
+	height: 177px;
 }
 .scoreType{
 	height: 347px;
@@ -316,21 +327,14 @@ body,html{
 .classNumTime p,.chooseClass p,.scoreType p{
 	margin-bottom: 40px;
 }
-/*.classNumTime p>span:nth-child(1){
-	margin-right: 78px;
-}
-.chooseClass p>span:nth-child(1){
-	margin-right: 428px;
-}*/
+
 .classNumTime ul li,.chooseClass ul li,.scoreType ul li{
 	background:url(../images/c3.png) no-repeat left top ;
 	padding-left: 72px;
 	margin-bottom: 40px;
 	line-height: 40px;
 }
-/*.chooseClass{
-	animation: move 2000s linear;
-}*/
+
 .chooseClass ul li{
 	background:url(../images/c3.png) no-repeat left top ;
 }
@@ -390,7 +394,7 @@ body,html{
 .recordSucc,.recordSub,.noRecord{
 	display: none;
 }
-.classEmpty,.classTimeEmpty{
+.classEmpty,.classTimeEmpty,.numFail{
 	background: rgba(0,0,0,0.7);
 	text-align: center;
 	height: 194px;
@@ -399,6 +403,6 @@ body,html{
 	font-size: 34px;
 	display: none;
 }
-.classEmpty img,.classTimeEmpty img{
+.classEmpty img,.classTimeEmpty img,.numFail img{
 	margin: 42px 0 15px 0;
 }
