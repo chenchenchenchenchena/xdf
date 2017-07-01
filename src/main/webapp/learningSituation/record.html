@@ -18,47 +18,47 @@
 	</head>
 	<body>
 		<div class="record">
-		<ul class="tab-title">
-		   <li><a href="report_t.html">成绩报告</a></li>
-		   <li class="tab-active"><a href="record.html">录成绩</a></li>
-		</ul>
-		<div class="assignment">
-			<ul class="choose">
-				<li><span>成绩类型</span><span class="st">入门测</span></li>
-				<li><span>班级</span><span class="classrome"></span><span class="class" style="display: none"></span></li>
-				<li><span>课次及时间</span><span class="classTime"></span></li>
-				<li><span>满分</span><span><input class="totalScore" placeholder="请输入分数" type="tel"  onkeyup="value=value.replace(/[^1234567890-]+/g,'')" /><i class="fen">分</i></span></li>
+			<ul class="tab-title">
+			   <li><a href="report_t.html">成绩报告</a></li>
+			   <li class="tab-active"><a href="record.html">录成绩</a></li>
 			</ul>
-			<div class="txt">成绩录入</div>
-			<div class="txtDiv">
-				<p class="scoreTitle"><span></span><input  placeholder="请录入分数" type="tel" /></p>
-				<div class="scoreList"></div>
+			<div class="assignment">
+				<ul class="choose">
+					<li><span>成绩类型</span><span class="st">入门测</span></li>
+					<li><span>班级</span><span class="classrome"></span><span class="class" style="display: none"></span></li>
+					<li><span>课次及时间</span><span class="classTime"></span></li>
+					<li><span>满分</span><span><input class="totalScore" placeholder="10" type="tel"  onkeyup="value=value.replace(/[^1234567890-]+/g,'')" /><i class="fen">分</i></span></li>
+				</ul>
+				<div class="txt">成绩录入</div>
+				<div class="txtDiv">
+					<p class="scoreTitle"><span></span><input  placeholder="请录入分数" type="tel" /></p>
+					<div class="scoreList"></div>
+				</div>
+				<button class="subtn">确认提交</button>
 			</div>
-			<button class="subtn">确认提交</button>
-	</div>
-	</div>
-	<div class="scoreType">
-		<p><span>成绩类型</span></p>
-		<ul></ul>
-		<button class="scoreTypeBtn">确定</button>
-	</div>
-	<div class="classNumTime">
+		</div>
+		<div class="scoreType">
+			<p><span>成绩类型</span></p>
+			<ul></ul>
+			<button class="scoreTypeBtn">确定</button>
+		</div>
+		<div class="classNumTime">
 			<p><span>课次及时间</span></p>
 			<ul></ul>
 			<button class="confirmBtn">确定</button>
-	</div>
-	<div class="chooseClass">
+		</div>
+		<div class="chooseClass">
 			<p><span>选择班</span></p>
 			<ul></ul>
 			<button class="chooseBtn">确定</button>
-	</div>
-	<div class="mask"></div>
-	<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>
-	<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button class="succ">确定</button></div>
-	<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分,确认提交？</p><button>取消</button><button>确定</button></div>
-	<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
-	<div class="classTimeEmpty"><img src="images/ce.png" /><p>请选择课次及时间</p></div>
-	<div class="numFail"><img src="images/ce.png" /><p>数据格式不正确</p></div>
+		</div>
+		<div class="mask"></div>
+		<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>
+		<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button class="succ">确定</button></div>
+		<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分,确认提交？</p><button>取消</button><button>确定</button></div>
+		<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
+		<div class="classTimeEmpty"><img src="images/ce.png" /><p>请选择课次及时间</p></div>
+		<div class="subFail"><img src="images/redtan.png" /><p>提交失败？</p><button>取消</button><button class="succ">重试</button></div>
 	</body>
 </html>
 <script src="js/record.js"></script>

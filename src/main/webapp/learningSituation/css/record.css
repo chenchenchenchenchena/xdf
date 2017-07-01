@@ -10,7 +10,7 @@ body,html{
 .record{
 	overflow: hidden;
 }
-.hwHeader{
+/*.hwHeader{
 	height: 88px;
 	background: #fff;
 	color: #959595;
@@ -31,14 +31,13 @@ body,html{
 .hwShow{
 	color:#67cdb4;
 	border-bottom: 2px solid #67cdb4;
-}
-.hwFinish{
+}*/
+/*.hwFinish{
 	background: #fff;
 	color: #333333;
 	padding: 0 30px;
-}
-.firstList{
-	/*height: 111px;*/
+}*/
+/*.firstList{
 	border-bottom: 1px solid #e1e1e1;
 	line-height: 111px;
 	background: url(../images/jiao22222.png) no-repeat right 55px;
@@ -94,9 +93,9 @@ body,html{
 }
 .empty p{
 	color: #aeadad;
-}
+}*/
 /*reply*/
-.replyOne{
+/*.replyOne{
 	padding: 0 30px;
 	background: #fff;
 	margin-bottom: 20px;
@@ -155,7 +154,7 @@ body,html{
 	height: 120px;
 	border-top: 1px solid #e1e1e1;
 	line-height: 120px;
-}
+}*/
 .choose{
 	padding: 0 30px;
 	/*margin: 20px 0 10px;*/
@@ -195,7 +194,7 @@ body,html{
 .choose li>span:nth-child(2) i{
 	font-style: normal;
 	float: left;
-	display: none;
+	/*display: none;*/
 }
 .totalScore{
 	/*color: #d4d3d3;*/
@@ -307,7 +306,7 @@ body,html{
 	border-radius: 10px;
 }
 .subtn{
-	margin-top: 30px;
+	margin-top: 20px;
 }
 .confirmBtn,.chooseBtn,.scoreTypeBtn{
 	margin-left: 0;
@@ -338,7 +337,7 @@ body,html{
 	height: 347px;
 }
 .classNumTime p,.chooseClass p,.scoreType p{
-	margin-bottom: 40px;
+	margin-bottom: 35px;
 }
 
 .classNumTime ul li,.chooseClass ul li,.scoreType ul li{
@@ -354,7 +353,7 @@ body,html{
 .chooseClass .chooseClassActive,.scoreType .chooseClassActive,.classNumTime .chooseClassActive{
 	background:url(../images/c2.png) no-repeat left top ;
 }
-.recordSub button,.recordSucc button,.noRecord button{
+.recordSub button,.recordSucc button,.noRecord button,.subFail button{
 	width: 175px;
 	height: 72px;
 	line-height: 72px;
@@ -367,23 +366,23 @@ body,html{
 	margin: 40px 0 0 185px;
 	border-radius: 10px;
 }
-.recordSub button,.noRecord button{
+.recordSub button,.noRecord button,.subFail button{
 	margin: 40px 0 0 60px;
 }
-.recordSub>button:nth-child(3),.noRecord>button:nth-child(3){
+.recordSub>button:nth-child(3),.noRecord>button:nth-child(3),.subFail>button:nth-child(3){
 	background: #e4eaf1;
 	color: #aeb1b7;
 }
-.recordSub img,.recordSucc img,.noRecord img{
+.recordSub img,.recordSucc img,.noRecord img,.subFail img{
 	margin: 38px 0 0 224px;
 }
-.recordSub p,.recordSucc p,.noRecord p{
+.recordSub p,.recordSucc p,.noRecord p,.subFail p{
 	font-size: 30px;
 	color: #333333;
 	text-align: center;
 	margin-top: 30px;
 }
-#layui-layer1,#layui-layer2,#layui-layer3{
+#layui-layer1,#layui-layer2,#layui-layer3,#layui-layer6{
 	border-radius: 20px;
 }
 .hwShow{
@@ -404,7 +403,7 @@ body,html{
 	/*display: none;*/
 	/*overflow: hidden;*/
 }
-.recordSucc,.recordSub,.noRecord{
+.recordSucc,.recordSub,.noRecord,.subFail{
 	display: none;
 }
 .classEmpty,.classTimeEmpty,.numFail{
