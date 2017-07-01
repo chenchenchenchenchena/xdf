@@ -30,7 +30,7 @@ $(document).on('touchend','.title_s',function(){
     });
 
     var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
-    Studata();
+    Studata();  //调取
 
 // tab切换
 
