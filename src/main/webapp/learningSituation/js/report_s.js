@@ -34,6 +34,7 @@ $(document).on('touchend','.title_s',function(){
 
 // tab切换
 
+
     $('.tab-title li').on('touchend',function(){
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
             if($(this).index()==1){
