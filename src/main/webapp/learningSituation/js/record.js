@@ -97,8 +97,9 @@ $(function () {
                 $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
                 $(".st").html($(this).html());
             })
+            
 			
-			//录成绩
+			//点击录成绩
 			
 			$(".scoreList").on("click", "dl", function () {
                 var name = $(this).find("dd").html();
@@ -111,15 +112,13 @@ $(function () {
             })
         }
     });
+    
+    
     //点击input
     $(".totalScore").focus(function () {
         $(".fen").show();
     })
-    /*$(".totalScore").blur(function(){
-     $(".fen").hide();
-     })*/
-    
-    
+  
     
     
     //保存
@@ -135,6 +134,7 @@ $(function () {
         saveData();
     })
     function saveData(){
+    	 var load = layer.load({shade: [0.2, '#000']});
     	var student = [];
     	for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
@@ -174,14 +174,25 @@ $(function () {
             data: JSON.stringify(saveInfo),
             success: function (res) {
                 console.log(res)
+               layer.close(load);
                 if(res.result){
 	                 layer3 = layer.open({
-	                 type: 1,
-	                 area: ['548px', '345px'],
-	                 shade:[0.2,'#000'],
-	                 title:'',
-	                 skin: '',
-	                 content:$(".recordSucc")
+		                 type: 1,
+		                 area: ['548px', '345px'],
+		                 /*shade:[0.2,'#000'],*/
+		                 title:'',
+		                 skin: '',
+		                 content:$(".recordSucc")
+	                 })
+                 }else{
+                 	$(".recordSucc p").html(提交失败);
+                 	layer3 = layer.open({
+		                 type: 1,
+		                 area: ['548px', '345px'],
+		                 shade:[0.2,'#000'],
+		                 title:'',
+		                 skin: '',
+		                 content:$(".recordSucc")
 	                 })
                  }
                
@@ -254,48 +265,48 @@ $(function () {
         
         if($(".classrome").html()==""){
 	         layer.open({
-	         type: 1,
-	         area: ['312px', '194px'],
-	         shade:0,
-	         title:'',
-	         skin: '',
-	         time:2000,
-	         content:$(".classEmpty")
-         })
+		         type: 1,
+		         area: ['312px', '194px'],
+		         shade:0,
+		         title:'',
+		         skin: '',
+		         time:2000,
+		         content:$(".classEmpty")
+	         })
          }else if($(".classTime").html()==""){
 	         layer.open({
-	         type: 1,
-	         area: ['312px', '194px'],
-	         shade:0,
-	         title:'',
-	         skin: '',
-	         time:2000,
-	         content:$(".classTimeEmpty")
+		         type: 1,
+		         area: ['312px', '194px'],
+		         shade:0,
+		         title:'',
+		         skin: '',
+		         time:2000,
+		         content:$(".classTimeEmpty")
 	         })
          }else{
 	        for(var i = 0;i<$(".scoreList dt").length;i++){
 	        /*alert($(".scoreList dl dt").eq(i).html()=="")*/
 	        if($(".scoreList dl dt").eq(i).html()==""){
 		         layer1=layer.open({
-		         type: 1,
-		         area: ['548px', '345px'],
-		         shade:[0.2,'#000'],
-		         title:'',
-		         skin: '',
-		         content:$(".noRecord")
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".noRecord")
 		         })
 	        	 return false;
 	         }
 
          }
-        layer2 = layer.open({
-         type: 1,
-         area: ['548px', '345px'],
-         shade:[0.2,'#000'],
-         title:'',
-         skin: '',
-         content:$(".recordSub")
-         })
+        /*layer2 = layer.open({
+	         type: 1,
+	         area: ['548px', '345px'],
+	         shade:[0.2,'#000'],
+	         title:'',
+	         skin: '',
+	         content:$(".recordSub")
+	         })*/
          }
          
 
@@ -304,12 +315,12 @@ $(function () {
     $(".recordSub button").eq(1).click(function () {
         layer.close(layer2);
         layer3 = layer.open({
-         type: 1,
-         area: ['548px', '345px'],
-         shade:[0.2,'#000'],
-         title:'',
-         skin: '',
-         content:$(".recordSucc")
+	         type: 1,
+	         area: ['548px', '345px'],
+	         shade:[0.2,'#000'],
+	         title:'',
+	         skin: '',
+	         content:$(".recordSucc")
          })
     })
     $(".recordSucc button").click(function(){
@@ -406,9 +417,9 @@ $(function () {
 	    	}
     	})
     	
-    	$(".subtn").click(function(){
+    	/*$(".subtn").click(function(){
     		saveData();
-    	})
+    	})*/
     	
 	    /*var changeNum={"email": "caoxuefeng@xdf.cn"};
 	    $.ajax({
