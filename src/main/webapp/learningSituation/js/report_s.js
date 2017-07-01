@@ -20,7 +20,8 @@ $(document).on('touchend','.title_s',function(){
     }
 
 });
-
+    var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
+    Studata();  //调取
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
        if(!$(this).hasClass('tab_recorac')){
@@ -29,20 +30,20 @@ $(document).on('touchend','.title_s',function(){
        }
     });
 
-    var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
-    Studata();  //调取
+
 
 // tab切换
 
 
     $('.tab-title li').on('touchend',function(){
+        $('.no-data').hide()
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
             if($(this).index()==1){
-                var Stujson = {'studentNo':'SS2431','tCode':'2','schoolId':'73'};
+                Stujson = {'studentNo':'SS2431','tCode':'2','schoolId':'73'};
                 $('.class_big').find('.classroom_s').remove();
                 Studata()
             }else{
-                var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
+                Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
                 $('.class_big').find('.classroom_s').remove();
                 Studata()
             }
@@ -66,7 +67,7 @@ ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/studentAnalysis/scoreStd
             var Rindex = [];
             var class_ = e.data;
             for(var i = 0;i<class_.length;i++) {
-                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s"> <h4 classCode="' + class_[i][0].classCode + '" schoolId="' + class_[i][0].schoolId + '">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
+                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s"></div>');
 
 
                 for (var y = 0; y < class_[i].length; y++) {
