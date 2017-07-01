@@ -1,7 +1,14 @@
 $(function () {
     $(".txt").hide();
     $(".txtDiv").hide();
-    var inputData = {"sCode": "TC41", "email": "caoxuefeng@xdf.cn"};
+    localStorage.teacherEmail="caoxuefeng@xdf.cn";
+    localStorage.teacherId="TC41";
+    localStorage.schoolId="73";
+    localStorage.teacherName="曹雪峰";
+    
+    
+    //录入数据
+    var inputData = {"sCode": localStorage.teacherId, "email": localStorage.teacherEmail};
     $.ajax({
         type: "post",
         url: "http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryTeacherLesson.do",
@@ -55,7 +62,7 @@ $(function () {
 
                         stuArr.sort(asc); //升序排序
                         for (var r = 0; r < stuArr.length; r++) {
-                            stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none>" + stuArr[r].scode + "</dd><dd style=display:none>" + flag + "</dd></dl>";
+                            stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
                         }
 
 
@@ -90,8 +97,11 @@ $(function () {
                 $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
                 $(".st").html($(this).html());
             })
-
-            $(".scoreList").on("click", "dl", function () {
+            
+			
+			//点击录成绩
+			
+			$(".scoreList").on("click", "dl", function () {
                 var name = $(this).find("dd").html();
                 $(".scoreTitle span").html(name);
                 var totalScore = parseInt($(".totalScore").val());
@@ -102,17 +112,31 @@ $(function () {
             })
         }
     });
+    
+    
     //点击input
     $(".totalScore").focus(function () {
         $(".fen").show();
     })
-    /*$(".totalScore").blur(function(){
-     $(".fen").hide();
-     })*/
+  
+    
+    
     //保存
-    var student = [];
+    /*var student = [];*/
     $(".subtn").click(function () {
-        for (var i = 0; i < $(".scoreList dl").length; i++) {
+        
+        /*console.log(student);
+        console.log($(".classrome").html());
+        console.log($(".class").html());
+        console.log($(".classTime").html());
+        console.log($(".totalScore").html());
+        console.log(student);*/
+        saveData();
+    })
+    function saveData(){
+    	 var load = layer.load({shade: [0.2, '#000']});
+    	var student = [];
+    	for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
                 var studentinfo = {
                     "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
@@ -124,17 +148,12 @@ $(function () {
 
             student.push(studentinfo);
         }
-        console.log(student);
-        console.log($(".classrome").html());
-        console.log($(".class").html());
-        console.log($(".classTime").html());
-        console.log($(".totalScore").html());
-        console.log(student);
-        var classNo = $(".classTime").html().substring(1, 2);
-        var classT = $(".classTime").html().substring(4, 22);
+    	console.log(student);
+    	var classNo = $(".classTime").html().substring(1,2);
+        var classT = $(".classTime").html().substring(4,22);
         var saveInfo = {
-            "email": "caoxuefeng@xdf.cn",
-            "teacherName": "曹雪峰",
+            "email": localStorage.teacherEmail,
+            "teacherName": localStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
@@ -155,22 +174,31 @@ $(function () {
             data: JSON.stringify(saveInfo),
             success: function (res) {
                 console.log(res)
-                /*if(res.result){
-                 layer3 = layer.open({
-                 type: 1,
-                 area: ['548px', '345px'],
-                 shade:[0.2,'#000'],
-                 title:'',
-                 skin: '',
-                 content:$(".recordSucc")
-                 })
-                 }*/
-                if (res.result) {
-                    alert("提交成功");
-                }
+               layer.close(load);
+                if(res.result){
+	                 layer3 = layer.open({
+		                 type: 1,
+		                 area: ['548px', '345px'],
+		                 /*shade:[0.2,'#000'],*/
+		                 title:'',
+		                 skin: '',
+		                 content:$(".recordSucc")
+	                 })
+                 }else{
+                 	$(".recordSucc p").html(提交失败);
+                 	layer3 = layer.open({
+		                 type: 1,
+		                 area: ['548px', '345px'],
+		                 shade:[0.2,'#000'],
+		                 title:'',
+		                 skin: '',
+		                 content:$(".recordSucc")
+	                 })
+                 }
+               
             }
         });
-    })
+    }
     $(".scoreType").hide();
     $(".chooseClass").hide();
     $(".classNumTime").hide();
@@ -234,74 +262,179 @@ $(function () {
     var layer2;
     var layer3;
     $(".subtn").click(function () {
-        location.href = "report_t.html";
-        /*if($(".classrome").html()==""){
-         layer.open({
-         type: 1,
-         area: ['312px', '194px'],
-         shade:0,
-         title:'',
-         skin: '',
-         time:2000,
-         content:$(".classEmpty")
-         })
+        
+        if($(".classrome").html()==""){
+	         layer.open({
+		         type: 1,
+		         area: ['312px', '194px'],
+		         shade:0,
+		         title:'',
+		         skin: '',
+		         time:2000,
+		         content:$(".classEmpty")
+	         })
          }else if($(".classTime").html()==""){
-         layer.open({
-         type: 1,
-         area: ['312px', '194px'],
-         shade:0,
-         title:'',
-         skin: '',
-         time:2000,
-         content:$(".classTimeEmpty")
-         })
-         }else{*/
-        /*for(var i = 0;i<$(".scoreList dt").length;i++){*/
-        /*alert($(".scoreList dl dt").eq(i).html()=="")*/
-        /*if($(".scoreList dl dt").eq(i).html()==""){
-         layer1=layer.open({
-         type: 1,
-         area: ['548px', '345px'],
-         shade:[0.2,'#000'],
-         title:'',
-         skin: '',
-         content:$(".noRecord")
-         })
-         return false;
-         }
+	         layer.open({
+		         type: 1,
+		         area: ['312px', '194px'],
+		         shade:0,
+		         title:'',
+		         skin: '',
+		         time:2000,
+		         content:$(".classTimeEmpty")
+	         })
+         }else{
+	        for(var i = 0;i<$(".scoreList dt").length;i++){
+	        /*alert($(".scoreList dl dt").eq(i).html()=="")*/
+	        if($(".scoreList dl dt").eq(i).html()==""){
+		         layer1=layer.open({
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".noRecord")
+		         })
+	        	 return false;
+	         }
 
-         }*/
-        /*layer2 = layer.open({
-         type: 1,
-         area: ['548px', '345px'],
-         shade:[0.2,'#000'],
-         title:'',
-         skin: '',
-         content:$(".recordSub")
-         })
          }
-         */
+        /*layer2 = layer.open({
+	         type: 1,
+	         area: ['548px', '345px'],
+	         shade:[0.2,'#000'],
+	         title:'',
+	         skin: '',
+	         content:$(".recordSub")
+	         })*/
+         }
+         
 
 
     })
     $(".recordSub button").eq(1).click(function () {
-        /*layer.close(layer2);*/
-        /*layer3 = layer.open({
-         type: 1,
-         area: ['548px', '345px'],
-         shade:[0.2,'#000'],
-         title:'',
-         skin: '',
-         content:$(".recordSucc")
-         })*/
+        layer.close(layer2);
+        layer3 = layer.open({
+	         type: 1,
+	         area: ['548px', '345px'],
+	         shade:[0.2,'#000'],
+	         title:'',
+	         skin: '',
+	         content:$(".recordSucc")
+         })
     })
-    /*$(".recordSucc button").click(function(){
-     layer.close(layer3);
-     })*/
-    /*$(".noRecord button").click(function(){
-     layer.close(layer1);
+    $(".recordSucc button").click(function(){
+     	layer.close(layer3);
      })
-     */
+    $(".noRecord button").click(function(){
+     	layer.close(layer1);
+     })
+     
+    
+    
+    //查询数据
+    $(".confirmBtn").click(function(){
+    	query();
+    	changeData();
+    })
+    $(".scoreTypeBtn").click(function(){
+    	query();
+    	changeData();
+    })
+    $(".chooseBtn").click(function(){
+    	query();
+    	changeData();
+    })
+    function query(){
+  		console.log($(".st").html());
+	  	console.log($(".classTime").html());
+	  	console.log($(".class").html())
+	  	if($(".st").html()&&$(".classTime").html()&&$(".class").html()&&$(".scoreList").children()){
+	    		
+			    var queryData={
+			    	"teacherEmail":localStorage.teacherEmail,
+			    	"classCode":$(".class").html(),
+			    	"tCode":$(".st").html(),
+			    	"schoolId":localStorage.schoolId,
+			    	"lessonNo":$(".classTime").html().substring(1,2)
+			    };
+			    console.log(queryData.lessonNo)
+			     console.log(queryData.classCode)
+			     if ($(".st").html() == "入门测") {
+			        queryData.tCode = 1;
+			    } else {
+			        queryData.tCode = 2;
+			    }
+			    $.ajax({
+			    	type:"post",
+			    	url:"http://10.73.32.97:8080/xdfdtmanager/teacherAnalysis/teacherqueryLitimesdtGrade.do",
+			    	async:true,
+			    	dataType:"json",
+			    	data:queryData,
+			    	success:function(res){
+			    		console.log(res);
+			    		
+		    			if(res.code=="200"){
+		    				alert(111);
+		    				for(var j=0;j<$(".scoreList dl").length;j++){
+				    			for(var i=0;i<res.data.length;i++){
+				    				/*console.log(res.data[0].fullmarks);*/
+				    				$(".totalScore").val(res.data[0].fullmarks);
+				    				/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
+				    				if(res.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
+				    					console.log("sssss")
+				    					$(".scoreList dl").eq(j).find("dt").html(res.data[i].realgrade);
+				    				}
+				    			}
+			    			}
+		    			}
+			    		
+			    		if(res.data.length==0){
+			    			$(".totalScore").val("");
+			    		}
+			    		
+			    	}
+			    });
+			 } 
+    }
+    
+    
+    //修改数据
+    function changeData(){
+    	$(".scoreTitle input").keyup(function(){
+    		console.log($(".scoreTitle input").val());
+	    	if($(".scoreTitle input").val()){
+	    		console.log(222);
+	    		$(".scoreList dl").click(function(){
+		    		if(isNaN($(this).find("dt").html())){
+		    			console.log(333)
+		    			$(this).find(".flag").html(3);
+		    		}else{
+		    			$(this).find(".flag").html(2);
+		    		}
+			    	
+			    })
+	    	}
+    	})
+    	
+    	/*$(".subtn").click(function(){
+    		saveData();
+    	})*/
+    	
+	    /*var changeNum={"email": "caoxuefeng@xdf.cn"};
+	    $.ajax({
+	    	type:"post",
+	    	url:"http://10.73.33.63:8080/teacherData/updateTeacherAnalysis.do",
+	    	async:true,
+	    	data:JSON.stringify(changeNum),
+	    	dataType:"json",
+	    	success:function(res){
+	    		console.log(res);
+	    	}
+	    });*/
+    }
+    
+    
     //判断中文长度
     function isChinese(str) {  //判断是不是中文
         var reCh = /[u00-uff]/;

@@ -63,7 +63,7 @@ $(function(){
 							// 分享到朋友圈
                         wx.onMenuShareTimeline({
                             title: "", // 分享标题
-                            link: "", // 分享链接
+                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
                             imgUrl:"", // 分享图标
                             success: function () {
                                 // 用户确认分享后执行的回调函数
@@ -79,7 +79,7 @@ $(function(){
                         wx.onMenuShareAppMessage({
                             title: "", // 分享标题
                             desc: "", // 分享描述
-                            link: "", // 分享链接
+                            link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
                             imgUrl:"", // 分享图标
                             type: '', // 分享类型,music、video或link，不填默认为link
                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -177,11 +177,11 @@ function getSharedListSuccess(msg){
                     rankCss = "nofirst";
                     ranking = items.ranking;
                 }
-                if(items.studentNo.length>8){
-                    studentNo = items.studentNo.substr(0,2)+'****'+items.studentNo.substr(-2,2);
-                }else{
-                    studentNo = items.studentNo;
-                }
+                // if(items.studentNo.length>8){
+                    studentNo = items.studentNo.substr(0,items.studentNo.length-3)+'****';
+                // }else{
+                //     studentNo = items.studentNo;
+                // }
                 var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                 var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                 var sharedListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+ranking
