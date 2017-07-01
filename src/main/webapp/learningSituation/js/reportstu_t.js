@@ -29,7 +29,7 @@ var Xindex = '';
 
 
 
-ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStdReport.do',{'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZSPP008','tCode':'1','studentNo':'SS2431'},		function(e){
+ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/scoreStdReport.do',{'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZSPP008','tCode':'1','studentNo':'SS2431','schoolId':'73'},		function(e){
             console.log(e);
             maxindex = e.data[e.data.length-1].lessonNo
             for(var i = 0;i<e.data.length;i++) {

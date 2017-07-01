@@ -59,6 +59,7 @@ body,html{
     font-size:32px;
     color:#333;
     line-height:112px;
+    position: relative;
 }
 .classroom_s h4{
     display: inline-block;
@@ -70,7 +71,7 @@ body,html{
     margin-top:33px;
     transform:rotate(90deg);
 }
-.classroom_s>div:nth-child(2){
+.tab_sreport>div:nth-child(1){
     width: 690px;
     height: 360px;
     display:none;
@@ -125,3 +126,39 @@ body,html{
     left:0;
     background: #f1f1f1;
 }
+.tab_record{
+    width:160px;
+    height:50px;
+    border:1px solid #00ba97;
+    border-radius:8px;
+    overflow: hidden;
+    position: absolute;
+    top:91px;
+    right:0px;
+    display:none;
+    z-index:10;
+}
+.tab_record span{
+    display:block;
+    float:left;
+    width:50%;
+    height:100%;
+    font-size:22px;
+    color:#00ba97;
+    line-height:50px;
+    text-align: center;
+}
+html body .tab_recorac{
+    background: #00ba97;
+    color:#fff;
+}
+
+.tab_sreport .reportstu_S{
+    position: relative;
+    margin-top:60px;
+    display:none;
+}
+
+
+
+

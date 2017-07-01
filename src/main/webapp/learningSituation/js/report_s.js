@@ -12,6 +12,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
         $(this).siblings().show()
+        $(this).siblings('.tab_sreport').children('div').eq(0).show()
         $(this).find('img').css('transform','rotate(-90deg)')
     }else{
        $(this).siblings().hide()
@@ -20,112 +21,104 @@ $(document).on('touchend','.title_s',function(){
 
 });
 
+//切换显示方式
+    $(document).on('touchend','.tab_record span',function(){
+       if(!$(this).hasClass('tab_recorac')){
+           $(this).addClass('tab_recorac').siblings().removeClass('tab_recorac');
+           $(this).parent().prev().children('div').eq($(this).index()).show().siblings().hide()
+       }
+    });
 
+    var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
+    Studata();
 
+// tab切换
 
-
+    $('.tab-title li').on('touchend',function(){
+        $(this).addClass('tab-active').siblings().removeClass('tab-active')
+            if($(this).index()==1){
+                var Stujson = {'studentNo':'SS2431','tCode':'2','schoolId':'73'};
+                $('.class_big').find('.classroom_s').remove();
+                Studata()
+            }else{
+                var Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
+                $('.class_big').find('.classroom_s').remove();
+                Studata()
+            }
+    });
 
 
 
 var Xindex = '';
 var Thistime = [];
-ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/queryScoreReportByTeacherEmail.do',{'teaEmail':'caoxuefeng@xdf.cn'},		function(e){
+var Xtwindex = [];
+var pjIndex = [];
+var mfInedx = [];
+var timeIndex = [];
+function Studata(){
+
+ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/studentAnalysis/scoreStdIdlReportStatus.do',Stujson,function(e){
         console.log(e);
         if(e.data.length!=0){
             var Xtwindex = [];
             var Cindex = [];
             var Rindex = [];
-            var classLen = e.data.length;
-            for(var i = 0;i<classLen;i++){
-                 Cindex = [];
-                 Rindex = [];
-$('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'"></div><div class="achievement_s"> <h4 classCode="'+e.data[i].classCode+'" schoolId="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
-                $('.title_s').eq(0).siblings().show();
-                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
+            var class_ = e.data;
+            for(var i = 0;i<class_.length;i++) {
+                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s"> <h4 classCode="' + class_[i][0].classCode + '" schoolId="' + class_[i][0].schoolId + '">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
 
 
-            var class_ = e.data[i];
-            var classData = class_.data;
-
-            for(var k = 0;k<classData.length;k++){
+                for (var y = 0; y < class_[i].length; y++) {
+                Cindex = [];
+                Rindex = [];
                 Xtwindex = [];
-                // console.log(e.data[i].data[k].gradeType);
-                var crdata = classData[k].data;
-                if(crdata == '' || crdata == []){
-                    continue;
+
+                    $('.reportstu_S').eq(i).find('ul').eq(0).append('<li>' + (y+1) + '</li>')
+                    $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data[i][y].realGrade) + '</li>')
+                    $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName)
+                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGrade) + '</li>')
+                $('.tab_sreport').eq(0).find('div').eq(0).show();
+                $('.achievement_s').eq(0).show();
+                $('.tab_record').eq(0).show();
+                $('.title_s').eq(0).find('img').css('transform', 'rotate(-90deg)');
+
+                var Xindex = e.data[i][e.data[i].length - 1].lessonNO;
+                /*
+                 Xtwindex   //x轴
+                 Cindex     //出门测
+                 Rindex     //入门测
+                 */
                 }
-                var crdataLen = classData[k].data.length;
-                var maxIndex = 0;
-                if( crdataLen > 0){
-                    for(var u = 0;u<crdataLen;u++){
-                        if(classData[k].gradeType==1){
-                            Rindex.push(classData[k].data[u].avgGrade);
-                        }else{
-                            Cindex.push(classData[k].data[u].avgGrade);
-                        }
-                    }
-                    console.log(classData[1].data[0]);
-
-                    if(classData[0].data.length==1&&classData[1].data.length>1&&classData[0].data.length!=0){
-                        if(classData[0].data[classData[0].data.length-1].lessonNO>classData[0].data[classData[0].data.length-1].lessonNO){
-                            maxIndex = classData[0].data[classData[0].data.length].lessonNO;
-                            Thistime.push(classData[0].data[0].lessonTime)
-
-                        }else{
-                            maxIndex = classData[0].data[classData[0].data.length-1].lessonNO;
-                            Thistime.push(classData[0].data[0].lessonTime)
-
-                        }
-                    }else if(classData[0].data.length>1&&classData[1].data.length<=1&&classData[1].data.length!=0){
-                        if(classData[0].data[classData[0].data.length-1].lessonNO>classData[1].data[0].lessonNO){
-                            maxIndex =classData[0].data[classData[0].data.length-1].lessonNO;
-                        }else{
-                            maxIndex = classData[1].data[0].lessonNO
-                        }
-                    }else if(classData[0].data.length==0&&classData[1].data.length>1){
-                        maxIndex = classData[1].data[classData[1].data.length-1].lessonNO
-                    }else if(classData[1].data.length==0&&classData[0].data.length>1){
-                        maxIndex = classData[0].data[classData[0].data.length-1].lessonNO
-                    }else if(classData[0].data.length==0&&classData[1].data.length==1){
-                         maxIndex = classData[1].data[0].lessonNO
-                    }else if(classData[1].data.length==0&&classData[0].data.length==1){
-                        maxIndex = classData[0].data[0].lessonNO
-                    }
-                    // if(classData[0].data[classData[k].data.length-1].lessonNO>classData[1].data[classData[k].data.length-1].lessonNO){
-                    //
-                    // }
-
-                }
-                Thistime.push(classData[k].data[0].lessonTime)
-                console.log(Thistime)
-                for(var p = 0;p<maxIndex;p++){
-                    Xtwindex.push(p+1);
-                }
-                console.log(Xtwindex)
-                // for(y = 0;y<0;y++){
-                // }
-
-                // if(e.data[i].data[0].data.length>e.data[i].data[1].data.length){
-                //     Xindex = e.data[i].data[0].data.length
-                // }else{
-                //     Xindex = e.data[i].data[1].data.length
-                // }
-                console.log(Rindex)
-
-                Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
-
-            }
-                // Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
-
             }
 
-            /*
-             Xtwindex   //x轴
-             Cindex     //出门测
-             Rindex     //入门测
-             */
-
-
+            if(Xindex==e.data[0].length){
+                for(var j = 0;j<Xindex;j++){
+                    Xtwindex.push(j+1);
+                    Cindex.push(e.data[0][j].avgGrade);
+                    pjIndex.push(e.data[0][j].realGrade);
+                    mfInedx.push('满分:'+e.data[0][j].fullMarks);
+                    timeIndex.push(e.data[0][j].lessonTime.split(' ')[0]);
+                }
+            }else{
+                for(var j = 0;j<Xindex;j++){
+                    for(var k = 0;k<e.data[0].length;k++){
+                        if(j==e.data[0][k].lessonNO){
+                            Cindex.push(e.data[0][k].avgGrade);
+                            pjIndex.push(e.data[0][k].realGrade);
+                            mfInedx.push('满分:'+e.data[0][k].fullMarks);
+                            timeIndex.push(e.data[0][k].lessonTime.split(' ')[0]);
+                        }else{
+                            Cindex.push('0')
+                            pjIndex.push('0')
+                            mfInedx.push('0')
+                            timeIndex.push('0')
+                        }
+                    }
+                }
+            }
+            for(var p = 0;p<e.data.length;p++){
+                Echart('chart_S'+p+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx)
+            }
             $('.title_s').eq(0).siblings().show();
             $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
         }else{
@@ -139,21 +132,22 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
 
 
 
-})
+})};
 
 
 
 
-function Echart(id,x,y1,y2){
+
+    function Echart(id,x,y1,y2,y3,y4){
 var myChart = echarts.init(document.getElementById(id));
 var option = {
         tooltip : {
             trigger: 'axis',
             triggerOn:'click',
-            formatter: '{c1}<br />{a2}:{c2}<br />平均分:{c}',
+            formatter: '{c2}<br />得分：{c1}<br />平均分:{c}<br />{c3}',
         },
         legend: {
-            data:['出门测','入门测'],
+            data:['个人得分','平均分'],
             textStyle: {
                 fontSize: 24
             }
@@ -194,7 +188,7 @@ var option = {
         ],
         series : [
             {
-                name:'出门测',
+                name:'个人得分',
                 type:'line',
                 data:y1,
                 nameTextStyle:{
@@ -208,7 +202,7 @@ var option = {
                 }
             },
             {
-                name:'入门测',
+                name:'平均分',
                 type:'line',
                 data:y2,
                 nameTextStyle:{
@@ -224,13 +218,13 @@ var option = {
             {
                 name:'日期',
                 type:'line',
-                data:['11:00','12:00','13:00','13:00','13:00','13:00']
+                data:y3
 
             },
             {
                 name:'总分',
                 type:'line',
-                data:['10分','10分','10分','10分','10分','10分']
+                data:y4
             }
         ]
     };
