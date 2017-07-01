@@ -29,7 +29,7 @@ $(document).on('touchend','.title_s',function(){
 
 var Xindex = '';
 var Thistime = [];
-ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/queryScoreReportByTeacherEmail.do',{'teaEmail':'caoxuefeng@xdf.cn'},		function(e){
+ajaxRequest('post',Study.t_self,{'teaEmail':'caoxuefeng@xdf.cn'},		function(e){
         console.log(e);
         if(e.data.length!=0){
             var Xtwindex = [];
@@ -37,87 +37,101 @@ ajaxRequest('post','http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/querySco
             var Rindex = [];
             var classLen = e.data.length;
             for(var i = 0;i<classLen;i++){
-                 Cindex = [];
-                 Rindex = [];
-$('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'"></div><div class="achievement_s"> <h4 classCode="'+e.data[i].classCode+'" schoolId="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
+                var xzhou = [];
+                var yzhou_c = [];
+                var yzhou_r = [];
+                var mfInedx_r = [];
+                var mfInedx_c = [];
+                var timeIndex  = [];
+$('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s"> <h4 classCode="'+e.data[i].classCode+'" schoolId="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
                 $('.title_s').eq(0).siblings().show();
                 $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
-
-
-            var class_ = e.data[i];
-            var classData = class_.data;
-
-            for(var k = 0;k<classData.length;k++){
-                Xtwindex = [];
-                // console.log(e.data[i].data[k].gradeType);
-                var crdata = classData[k].data;
-                if(crdata == '' || crdata == []){
-                    continue;
-                }
-                var crdataLen = classData[k].data.length;
-                var maxIndex = 0;
-                if( crdataLen > 0){
-                    for(var u = 0;u<crdataLen;u++){
-                        if(classData[k].gradeType==1){
-                            Rindex.push(classData[k].data[u].avgGrade);
-                        }else{
-                            Cindex.push(classData[k].data[u].avgGrade);
+                var Cindex = e.data[i].data[0].data.length;
+                var Rindex = e.data[i].data[1].data.length;
+                if(Cindex==0&&Rindex!=0){
+                    var Cindex_max = 0;
+                    var Rindex_max = e.data[i].data[1].data[Rindex-1].lessonNO;
+                    if(Rindex_max!=Rindex) {
+                        for (var j = 0; j < Rindex_max; j++) {
+                            xzhou.push(j + 1);
+                            yzhou_r.push('0');
+                            var buer = false;
+                            for (var k = 0; k < Rindex; k++) {
+                                if ((j + 1) == e.data[i].data[1].data[k].lessonNO) {
+                                    yzhou_c.push(e.data[i].data[1].data[k].avgGrade);
+                                    mfInedx_r.push('满分：' + e.data[i].data[1].data[k].fullMarks);
+                                    timeIndex.push(e.data[i].data[1].data[k].lessonTime.split(' ')[0]);
+                                    buer = true;
+                                    break;
+                                }
+                                mfInedx_c.push('满分：0')
+                            }
+                            if (buer != true) {
+                                yzhou_c.push('0');
+                                mfInedx_r.push('满分：0');
+                                timeIndex.push('0');
+                            }
+                            mfInedx_c.push('满分：0')
+                        }
+                    }else {
+                        for (var j = 0; j < Rindex_max; j++) {
+                            xzhou.push(j + 1);
+                            yzhou_c.push('0');
+                            yzhou_r.push(e.data[i].data[1].data[j].avgGrade);
+                            mfInedx_r.push('满分：' + e.data[i].data[1].data[j].fullMarks);
+                            mfInedx_c.push('满分：0');
+                            timeIndex.push(e.data[i].data[1].data[j].lessonTime.split(' ')[0]);
                         }
                     }
-                    console.log(classData[1].data[0]);
-
-                    if(classData[0].data.length==1&&classData[1].data.length>1&&classData[0].data.length!=0){
-                        if(classData[0].data[classData[0].data.length-1].lessonNO>classData[0].data[classData[0].data.length-1].lessonNO){
-                            maxIndex = classData[0].data[classData[0].data.length].lessonNO;
-                            Thistime.push(classData[0].data[0].lessonTime)
-
-                        }else{
-                            maxIndex = classData[0].data[classData[0].data.length-1].lessonNO;
-                            Thistime.push(classData[0].data[0].lessonTime)
-
+                    Echart('chart_S' + i + '', xzhou, yzhou_c, yzhou_r, mfInedx_r, timeIndex, mfInedx_c)
+                    }else if(Cindex!=0&&Rindex==0){
+                    var Cindex_max = e.data[i].data[0].data[Cindex-1].lessonNO;
+                    var Rindex_max = 0;
+                    if(Cindex_max!=Cindex){
+                        for(var j = 0;j<Cindex_max;j++){
+                            xzhou.push(j+1);
+                            yzhou_r.push('0');
+                            var buer = false;
+                            for(var k = 0;k<Cindex;k++){
+                                if((j+1)==e.data[i].data[0].data[k].lessonNO){
+                                    yzhou_c.push(e.data[i].data[0].data[k].avgGrade);
+                                    mfInedx_r.push('满分:'+e.data[i].data[0].data[k].fullMarks);
+                                    timeIndex.push(e.data[i].data[0].data[k].lessonTime.split(' ')[0]);
+                                    buer = true;
+                                    break;
+                                }
+                                mfInedx_c.push('满分：0')
+                            }
+                            if(buer!=true){
+                                yzhou_c.push('0');
+                                mfInedx_r.push('满分：0');
+                                timeIndex.push('0');
+                            }
+                            mfInedx_c.push('满分：0')
                         }
-                    }else if(classData[0].data.length>1&&classData[1].data.length<=1&&classData[1].data.length!=0){
-                        if(classData[0].data[classData[0].data.length-1].lessonNO>classData[1].data[0].lessonNO){
-                            maxIndex =classData[0].data[classData[0].data.length-1].lessonNO;
-                        }else{
-                            maxIndex = classData[1].data[0].lessonNO
+                        console.log(yzhou_c);
+                        Echart('chart_S'+i+'',xzhou,yzhou_c,yzhou_r,mfInedx_r,timeIndex,mfInedx_c)
+                    }else{
+                        for(var j = 0;j<Cindex_max;j++){
+                            xzhou.push(j+1);
+                            yzhou_c.push('0');
+                            yzhou_r.push(e.data[i].data[0].data[j].avgGrade);
+                            mfInedx_r.push('满分：'+e.data[i].data[0].data[j].fullMarks);
+                            mfInedx_c.push('满分：0');
+                            timeIndex.push(e.data[i].data[0].data[j].lessonTime.split(' ')[0]);
                         }
-                    }else if(classData[0].data.length==0&&classData[1].data.length>1){
-                        maxIndex = classData[1].data[classData[1].data.length-1].lessonNO
-                    }else if(classData[1].data.length==0&&classData[0].data.length>1){
-                        maxIndex = classData[0].data[classData[0].data.length-1].lessonNO
-                    }else if(classData[0].data.length==0&&classData[1].data.length==1){
-                         maxIndex = classData[1].data[0].lessonNO
-                    }else if(classData[1].data.length==0&&classData[0].data.length==1){
-                        maxIndex = classData[0].data[0].lessonNO
+                        Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
                     }
-                    // if(classData[0].data[classData[k].data.length-1].lessonNO>classData[1].data[classData[k].data.length-1].lessonNO){
-                    //
-                    // }
-
+                }else if(Cindex==0&&Rindex==0){
+                    var Cindex_max = 0;
+                    var Rindex_max = 0;
+                }else{
+                    
                 }
-                Thistime.push(classData[k].data[0].lessonTime)
-                console.log(Thistime)
-                for(var p = 0;p<maxIndex;p++){
-                    Xtwindex.push(p+1);
-                }
-                console.log(Xtwindex)
-                // for(y = 0;y<0;y++){
-                // }
 
-                // if(e.data[i].data[0].data.length>e.data[i].data[1].data.length){
-                //     Xindex = e.data[i].data[0].data.length
-                // }else{
-                //     Xindex = e.data[i].data[1].data.length
-                // }
-                console.log(Rindex)
-
-                Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
 
             }
-                // Echart('chart_S'+i+'',Xtwindex,Cindex,Rindex)
 
-            }
 
             /*
              Xtwindex   //x轴
@@ -144,19 +158,20 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
 
 
 
-function Echart(id,x,y1,y2){
+function Echart(id,x,y1,y2,mf,time,mf_c){
 var myChart = echarts.init(document.getElementById(id));
 var option = {
         tooltip : {
             trigger: 'axis',
             triggerOn:'click',
-            formatter: '{c1}<br />{a2}:{c2}<br />平均分:{c}',
+            formatter: '{c2}<br />入门测：{c3},平均分：{c}<br />出门测：{c4},平均分：{c1}',
         },
         legend: {
-            data:['出门测','入门测'],
+            data:['入门测','出门测'],
             textStyle: {
                 fontSize: 24
-            }
+            },
+            selectedMode:false
         },
         calculable : true,
         xAxis : [
@@ -194,7 +209,7 @@ var option = {
         ],
         series : [
             {
-                name:'出门测',
+                name:'入门测',
                 type:'line',
                 data:y1,
                 nameTextStyle:{
@@ -208,7 +223,7 @@ var option = {
                 }
             },
             {
-                name:'入门测',
+                name:'出门测',
                 type:'line',
                 data:y2,
                 nameTextStyle:{
@@ -224,13 +239,18 @@ var option = {
             {
                 name:'日期',
                 type:'line',
-                data:['11:00','12:00','13:00','13:00','13:00','13:00']
+                data:time
 
             },
             {
                 name:'总分',
                 type:'line',
-                data:['10分','10分','10分','10分','10分','10分']
+                data:mf
+            },
+            {
+                name:'总分',
+                type:'line',
+                data:mf_c
             }
         ]
     };

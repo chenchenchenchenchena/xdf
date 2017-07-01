@@ -26,15 +26,16 @@ if (window.location.host == onlineUrl) {//正式环境
         't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
         't_data': url_online+'teacherData/queryCourseRemind.do',  //老师课表提醒
         's_data': url_online+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
-        't_rankl':url_online+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
-        't_record': url_online+'teacherData/queryTeacherLesson.do',//成绩录入
-		't_save':url_online+'teacherData/teacherData/addTeacherAnalysis.do',//成绩保存
-		't_modify':url_online+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
+        't_rankl':url_online+'teacherAnalysis/studentFloatGrade.do'  //老师入门测，出门测排行列表
     };
     var Global = {
         "appid": 'wxab29a3e2000b8d2a',
-        "secret": '60eb7eec2b7af5d74a704d3903e853dd',
+        "secret": '7739991fcce774c2281147eae3986ad9',
         "actionURL": url.w_open
+    }
+    var Study = {
+        's_study':url_online+'/studentAnalysis/scoreStdIdlReportStatus.do', //学生获取个人成绩
+        't_studt':url_online+'/teacherAnalysis/scoreStdReport.do'   //老师查看学生成绩
     }
 } else {//测试环境
 
@@ -58,20 +59,22 @@ if (window.location.host == onlineUrl) {//正式环境
         's_hwlt': url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
         's_hwfl': url_test+'studentData/finishHomework.do',//已交作业学生列表查询
         'data_s': url_test+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi': url_test+'logout/' +
-        'doLogout.do' ,//退出登录
-        't_back': 'http://dt.staff.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
+        't_logi': url_test+'logout/doLogout.do' ,//退出登录
+        't_back': url_test+'/schedule/login_s.html', //回调地址
         't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
         's_data': url_test+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
-        't_rankl': url_test+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
-		't_record': url_test+'teacherData/queryTeacherLesson.do',//成绩录入
-		't_save':url_test+'teacherData/teacherData/addTeacherAnalysis.do',//成绩保存
-		't_modify':url_test+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
+        't_rankl':url_test+'teacherAnalysis/studentFloatGrade.do'  //老师入门测，出门测排行列表
+
     };
     var Global = {
         "appid": 'wx559791e14e9ce521',
         "secret": 'baa4373d5a8750c69b9d1655a2e31370',
         "actionURL": url.w_open
+    }
+    var Study = {
+        's_study':url_test+'/studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
+        't_studt':url_test+'/teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
+        't_self':url_test+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
     }
 
 }
@@ -168,15 +171,15 @@ var calbac = {
 // ajax封装
 function ajax_S(link,more,func){
     $.ajax({
-                url:link,
-                type: 'post',
-                asyns:false,
-                dataType: 'json',
-                data:JSON.stringify(more),
-                success:function(e){
-                    func(e)
-                }
-        });
+        url:link,
+        type: 'post',
+        asyns:false,
+        dataType: 'json',
+        data:JSON.stringify(more),
+        success:function(e){
+            func(e)
+        }
+    });
 }
 
 /** @brief  封装ajax请求 create by zsj
@@ -203,8 +206,8 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
 
 
 //时间格式化
-Date.prototype.format = function(fmt) { 
-     var o = { 
+Date.prototype.format = function(fmt) {
+    var o = {
         "M+" : this.getMonth()+1,                 //月份 
         "d+" : this.getDate(),                    //日 
         "h+" : this.getHours(),                   //小时 
@@ -214,14 +217,14 @@ Date.prototype.format = function(fmt) {
         "S"  : this.getMilliseconds()             //毫秒
     };
     if(/(y+)/.test(fmt)) {
-            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
     }
-     for(var k in o) {
+    for(var k in o) {
         if(new RegExp("("+ k +")").test(fmt)){
-             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-         }
-     }
-    return fmt; 
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        }
+    }
+    return fmt;
 }
 
 // 获取路径的参数

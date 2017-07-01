@@ -103,7 +103,7 @@ function signOut(e) {
 }
 
     // 配置微信启动项
-    var Wxconfig =  {"url" : location.href,"appid" : "wxab29a3e2000b8d2a","secret": "60eb7eec2b7af5d74a704d3903e853dd"};
+    var Wxconfig =  {"url" : location.href,"appid" : "wxab29a3e2000b8d2a","secret": "7739991fcce774c2281147eae3986ad9"};
     var Wxconfig_h;
     $.ajax({
         url: url.w_xmor,
@@ -240,13 +240,19 @@ $(document).on('touchend',"#onMenuShareAppMessage",function() {
                 // for(var i = 0;i<class_s.length;i++){
                 var stumore = more.data.Students;
                 var teamore = more.data.teachers;
-                for(var k = 0;k<stumore.length;k++){
-                    stumodata.push({
-                        'studentName' :stumore[k].StudentName,
-                        'studentId':stumore[k].Id,
-                        'studentUserId':stumore[k].CardCode ,
-                    });
+                if(stumore!=''||stumore.length!=0){
+                    for(var k = 0;k<stumore.length;k++){
+                        stumodata.push({
+                            'studentName' :stumore[k].StudentName,
+                            'studentId':stumore[k].Id,
+                            'studentUserId':stumore[k].CardCode ,
+                        });
+                    }
+                }else{
+                    layer.msg('暂无学生')
+                    return false;
                 }
+
                 if(teamore.length==1){
                     teachmore = {
                         'masterTeacherId':teamore[0].Id,
