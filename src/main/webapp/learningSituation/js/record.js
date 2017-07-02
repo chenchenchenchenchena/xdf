@@ -198,8 +198,10 @@ $(function () {
     
     function saveAjax(e){
     	console.log(e)
-	   layer.close(load);
+    	var load = layer.load({shade: [0.8, '#000']});
+	   
 	    if(e.result){
+	    	layer.close(load);
 	         layer3 = layer.open({
 	             type: 1,
 	             area: ['548px', '345px'],
@@ -211,7 +213,7 @@ $(function () {
 	             content:$(".recordSucc")
 	         })
 	     }else{
-	   
+	   		layer.close(load);
 	     	layer4 = layer.open({
 	             type: 1,
 	             area: ['548px', '345px'],
@@ -223,7 +225,7 @@ $(function () {
 	     }
     }
     function saveData(){
-    	 var load = layer.load({shade: [0.8, '#000']});
+    	 
     	var student = [];
     	for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
@@ -416,43 +418,85 @@ $(function () {
     function queryAjax(msg){
     	if(msg.code=="200"){
 			alert("查询数据");
-			for(var j=0;j<$(".scoreList dl").length;j++){
-				for(var i=0;i<msg.data.length;i++){
-					/*console.log(res.data[0].fullmarks);*/
-					$(".totalScore").val(msg.data[0].fullmarks);
-					/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
-					if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
-						console.log("sssss")
-						$(".scoreList dl").eq(j).find("dt").html(msg.data[i].realgrade);
+			console.log(msg);
+			if(msg.data.length==0){
+				$(".totalScore").val("");
+				for(var j=0;j<$(".scoreList dl").length;j++){
+					
+	                var ddStr = $(".scoreList dl").eq(j).find("dd").eq(0);
+	                var dtStr = $(".scoreList dl").eq(j).find("dt");
+	                console.log(ddStr.html());
+	                console.log(dtStr.html());
+	                /*console.log(str.html());*/
+	                var ddstrLen = lenStat(ddStr);
+	                /*console.log(strLen);*/
+	                if (lenStat(ddStr) > 8) {
+	                    ddStr.css("font-size", "17px");
+	                }
+	                if (lenStat(ddStr) > 4) {
+	                   /* dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);*/
+	                    dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+	                }else{
+	                	 dtStr.html(ddStr.html());
+	                }
+            
+				}
+			}else{
+				for(var j=0;j<$(".scoreList dl").length;j++){
+					for(var i=0;i<msg.data.length;i++){
+						/*console.log(res.data[0].fullmarks);*/
+						$(".totalScore").val(msg.data[0].fullmarks);
+						/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
+						if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
+							console.log("sssss")
+							$(".scoreList dl").eq(j).find("dt").html(msg.data[i].realgrade);
+						}
 					}
 				}
+				 changeData();
 			}
-			 changeData();
+			
+			/* changeData();*/
 		}
 		
-		if(msg.data.length==0){
+		/*if(msg.data.length==0){
 			$(".totalScore").val("");
-		}
+		}*/
     }
     //0-数据不动   1-添加   2-修改
     
     //修改数据
     function changeData(){
-    	$(".scoreTitle input").keyup(function(){
+    	/*$(".scoreTitle input").keyup(function(){*/
+    		for(var i=0;i<$(".scoreList dl").length;i++){
+    			$(".scoreList dl").find(".flag").html(0);
+    			if(isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))){
+    				$(".scoreList dl").eq(i).attr("mark","add");
+    			}else{
+    				$(".scoreList dl").eq(i).attr("mark","update");
+    			}
+    			
+    		}
     		console.log($(".scoreTitle input").val());
-	    	if($(".scoreTitle input").val()){
+	    	/*if($(".scoreTitle input").val()){*/
 	    		console.log(222);
 	    		$(".scoreList dl").click(function(){
-		    		if(isNaN($(this).find("dt").html())){
+		    		/*if(isNaN($(this).find("dt").html())){
 		    			console.log(333)
 		    			$(this).find(".flag").html(1);
 		    		}else{
 		    			$(this).find(".flag").html(2);
+		    		}*/
+		    		if($(this).attr("mark")=="add"){
+		    			console.log(333)
+		    			$(this).find(".flag").html(1);
+		    		}else if($(this).attr("mark")=="update"){
+		    			$(this).find(".flag").html(2);
 		    		}
 			    })
-	    		$(".scoreList dl").find(".flag").html(0);
-	    	}
-    	})
+	    		
+	    	/*}*/
+    	/*})*/
     }
     
     

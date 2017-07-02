@@ -2,6 +2,7 @@
 var onlineUrl = 'dt.xdf.cn';
 var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
 var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+var aaa="http://10.73.33.63:8080/xdfdtmanager/";
 if (window.location.host == onlineUrl) {//正式环境
     // 接口路径
     var url = {
@@ -28,7 +29,7 @@ if (window.location.host == onlineUrl) {//正式环境
         's_data': url_online+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
         't_rankl':url_online+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
          't_record': url_online+'teacherData/queryTeacherLesson.do',//成绩录入
-		't_save':url_online+'teacherData/teacherData/addTeacherAnalysis.do',//成绩保存
+		't_save':url_online+'teacherData/addTeacherAnalysis.do',//成绩保存
 		't_modify':url_online+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
     };
     var Global = {
@@ -67,8 +68,8 @@ if (window.location.host == onlineUrl) {//正式环境
         't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
         's_data': url_test+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
         't_rankl':url_test+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
-         't_record': url_test+'teacherData/queryTeacherLesson.do',//成绩录入
-		't_save':url_test+'teacherData/teacherData/addTeacherAnalysis.do',//成绩保存
+        't_record': url_test+'teacherData/queryTeacherLesson.do',//成绩录入
+		't_save':url_test+'teacherData/addTeacherAnalysis.do',//成绩保存
 		't_modify':url_test+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
 
     };
