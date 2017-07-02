@@ -404,7 +404,7 @@ $(function () {
     }
     function queryAjax(msg){
     	if(msg.code=="200"){
-			alert("查询数据");
+			/*alert("查询数据");*/
 			console.log(msg);
 			if(msg.data.length==0){
 				$(".totalScore").val("");
