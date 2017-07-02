@@ -84,7 +84,7 @@ function stusea(e){
         var Index =[];
         // 录入开始时间
         for(var i = 0;i<curr_e.length;i++){
-            var begtime = curr_e[i].BeginDate.split(' ');
+            var begtime = curr_e[i].SectBegin.split(' ');
             var begtime2 = begtime[1].substring(0,begtime[1].length-3);
             var endtime = curr_e[i].SectEnd.split(' ');
             var endtime2 = endtime[1].substring(0,begtime[1].length-3);

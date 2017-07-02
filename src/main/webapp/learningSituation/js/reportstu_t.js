@@ -2,6 +2,9 @@ $(function(){
 
     var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':sessionStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':sessionStorage.schoolId};
     Studata();  //调取
+    if(GetRequest('tCode')=='2'){
+        $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
+    }
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
         if(!$(this).hasClass('tab_recorac')){
