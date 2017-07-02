@@ -418,3 +418,6 @@ body,html{
 .classEmpty img,.classTimeEmpty img,.numFail img{
 	margin: 42px 0 15px 0;
 }
+#layui-layer-shade2{
+	opacity: 0.2;
+}
