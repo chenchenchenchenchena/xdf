@@ -215,7 +215,7 @@ $(function () {
     	var classNo = $(".classTime").html().substring(1,2);
         var classT = $(".classTime").html().substring(4,22);
         var saveInfo = {
-            "email": sessionStorage.teacherEmail,
+            "email": localStorage.terEmail,
             "teacherName": sessionStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
