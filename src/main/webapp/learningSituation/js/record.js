@@ -6,14 +6,18 @@ $(function () {
     var flag = 1;
     $(".txt").hide();
     $(".txtDiv").hide();
-    sessionStorage.teacherEmail="caoxuefeng@xdf.cn";
+    localStorage.terEmail="caoxuefeng@xdf.cn";
     sessionStorage.teacherId="TC41";
     sessionStorage.schoolId="73";
     sessionStorage.teacherName="曹雪峰";
-    
+    sessionStorage.stuNumber = 'SS1508';
+    if(!localStorage.teacherEmail){
+            location.href = 'login_t.html';
+            sessionStorage.studayCanfig = 'studay';
+    }
     
     //录入数据
-    var inputData = {"sCode": sessionStorage.teacherId, "email": sessionStorage.teacherEmail,"schoolId":sessionStorage.schoolId};
+    var inputData = {"sCode": sessionStorage.teacherId, "email": localStorage.terEmail,"schoolId":sessionStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){

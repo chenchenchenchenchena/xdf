@@ -77,6 +77,10 @@ function binding(e){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')
         }
+        if(sessionStorage.studayCanfig=='studay'){
+            location.href = 'record.html'
+            sessionStorage.removeItem('studayCanfig')
+        }
 	}
 
 }

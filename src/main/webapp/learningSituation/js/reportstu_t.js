@@ -1,15 +1,6 @@
 $(function(){
 
-
-//点击查看成绩排行
-    $(document).on('touchend','.achievement_s>h4',function(){
-        var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
-        sessionStorage.classcode = $(this).attr('classcode')
-        sessionStorage.schoolid = $(this).attr('schoolid')
-        window.location.href = 'rankinglist_t.html?title='+title;
-    });
-
-    var Stujson = {'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZ01UMHN2U121','tCode':'1','studentNo':'SS1508','schoolId':'73'};
+    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':sessionStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':sessionStorage.schoolId};
     Studata();  //调取
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
@@ -28,11 +19,11 @@ $(function(){
         $('.no-data').hide()
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
-            Stujson = {'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZ01UMHN2U121','tCode':'2','studentNo':'SS1508','schoolId':'73'};
+            Stujson.tCode='2';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
         }else{
-            Stujson = {'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZ01UMHN2U121','tCode':'1','studentNo':'SS1508','schoolId':'73'};
+            Stujson.tCode='1';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
         }
@@ -100,6 +91,12 @@ $(function(){
                        pjIndex.push(e.data.AvgrealGrade[j].avgGrade);
                        mfInedx.push('满分:'+e.data.realGrade[j].fullMarks);
                        timeIndex.push(e.data.realGrade[j].lessonTime.split(' ')[0]);
+                   }
+                   for(var u = 0;u<stuSelf.length;u++){
+                       $('.reportstu_S ul').eq(0).append('<li>'+stuSelf[u].lessonNo+'</li>');
+                       $('.reportstu_S ul').eq(1).append('<li>'+stuSelf[u].realGrade+'</li>');
+                       $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
+                       $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                    }
                }
                console.log(pjIndex)

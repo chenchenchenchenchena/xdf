@@ -1,93 +1,64 @@
 //判断正式环境
 var onlineUrl = 'dt.xdf.cn';
-var url_online = 'http://dt.xdf.cn/xdfdtmanager/';
-var url_test = 'http://dt.staff.xdf.cn/xdfdtmanager/';
-var aaa="http://10.73.33.63:8080/xdfdtmanager/";
+var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+var url_o2 = 'http://dt.xdf.cn';
+var appId = ''
+var secreT = ''
 if (window.location.host == onlineUrl) {//正式环境
-    // 接口路径
-    var url = {
-        'e_elog': url_online+'e2Login/login.do',//e2登录
-        'w_xmor': url_online+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
-        'w_open': url_online+'wechatSignature/getUserInfo.do',//获取openid
-        'w_teac': url_online+'e2Login/doLogin.do',//查询老师邮箱
-        'w_stum': url_online+'studentDataController/getClassDatas.do',// 获取班级信息
-        'w_stor': url_online+'studentDataController/syncStudentsData.do',//获取学生信息
-        't_more': url_online+'e2Login/doLogin.do',   //老师登录页  查询老师信息
-        't_wxmo': url_online+'teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
-        't_siot': url_online+'teacherBind/unbindTeacherInfo.do',   //解绑
-        's_seac': url_online+'studentBind/queryStudentInfo.do',  //学员号查询
-        's_bind': url_online+'studentBind/bindWechatandStudent.do',   //学员号绑定微信
-        's_nobd': url_online+'studentBind/unbindStudentInfo.do',  //学员号解绑微信
-        's_nafu': url_online+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
-        's_emai': url_online+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
-        's_stud': url_online+'studentData/queryStudentData.do',    //学生查询课程
-        's_hwlt': url_online+'studentData/assingmentHomework.do',//待交作业学生列表查询
-        'data_s': url_online+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi': url_online+'logout/doLogout.do',//退出登录
-        't_back': 'http://dt.xdf.cn/xdfdthome/schedule/login_s.html', //回调地址
-        't_data': url_online+'teacherData/queryCourseRemind.do',  //老师课表提醒
-        's_data': url_online+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
-        't_rankl':url_online+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
-         't_record': url_online+'teacherData/queryTeacherLesson.do',//成绩录入
-        't_save':url_online+'teacherData/addTeacherAnalysis.do',//成绩保存
-        't_modify':url_online+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
-    };
-    var Global = {
-        "appid": 'wxab29a3e2000b8d2a',
-        "secret": '7739991fcce774c2281147eae3986ad9',
-        "actionURL": url.w_open
-    }
+    url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+    url_o2 = 'http://dt.xdf.cn';
+    appId =  'wxab29a3e2000b8d2a';
+    secreT = '7739991fcce774c2281147eae3986ad9';
     var Study = {
-        's_study':url_online+'/studentAnalysis/scoreStdIdlReportStatus.do', //学生获取个人成绩
-        't_studt':url_online+'/teacherAnalysis/scoreStdReport.do'   //老师查看学生成绩
+        's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do', //学生获取个人成绩
+        't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
+        't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
     }
 } else {//测试环境
-
-    var url = {
-        'e_elog': url_test+'e2Login/login.do',//e2登录
-        'w_xmor': url_test+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
-        'w_open': url_test+'wechatSignature/getUserInfo.do',//获取openid
-        'w_token':url_test+'wechatSignature/getWechatToken.do',//获取微信token
-        'w_teac': url_test+'e2Login/doLogin.do',//查询老师邮箱
-        'w_stum': url_test+'studentDataController/getClassDatas.do',// 获取班级信息
-        'w_stor': url_test+'studentDataController/syncStudentsData.do',//获取学生信息
-        't_more': url_test+'e2Login/doLogin.do',   //老师登录页  查询老师信息
-        't_wxmo': url_test+'teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
-        't_siot': url_test+'teacherBind/unbindTeacherInfo.do',   //解绑
-        's_seac': url_test+'studentBind/queryStudentInfo.do',  //学员号查询
-        's_bind': url_test+'studentBind/bindWechatandStudent.do',   //学员号绑定微信
-        's_nobd': url_test+'studentBind/unbindStudentInfo.do',  //学员号解绑微信
-        's_nafu': url_test+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
-        's_emai': url_test+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
-        's_stud': url_test+'studentData/queryStudentData.do',    //学生查询课程
-        's_hwlt': url_test+'studentData/assingmentHomework.do',//代交作业学生列表查询
-        's_hwfl': url_test+'studentData/finishHomework.do',//已交作业学生列表查询
-        'data_s': url_test+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
-        't_logi': url_test+'logout/doLogout.do' ,//退出登录
-        't_back': url_test+'/schedule/login_s.html', //回调地址
-        't_data': url_test+'teacherData/queryCourseRemind.do',   //老师课表提醒
-        's_data': url_test+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
-        't_rankl':url_test+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
-        't_record': url_test+'teacherData/queryTeacherLesson.do',//成绩录入
-        't_save': url_test + 'teacherData/addTeacherAnalysis.do',//成绩保存
-        't_modify':url_test+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
-    };
-    var Global = {
-        "appid": 'wx559791e14e9ce521',
-        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
-        "actionURL": url.w_open
-    }
-    var Study = {
-        's_study':url_test+'/studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
-        't_studt':url_test+'/teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
-        't_self':url_test+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
-    }
-
+    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o2 = 'http://dt.staff.xdf.cn';
+    appId =  'wx559791e14e9ce521';
+    secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
 
-
-
-
+// 接口路径
+var url = {
+    'e_elog': url_o+'e2Login/login.do',//e2登录
+    'w_xmor': url_o+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
+    'w_open': url_o+'wechatSignature/getUserInfo.do',//获取openid
+    'w_teac': url_o+'e2Login/doLogin.do',//查询老师邮箱
+    'w_stum': url_o+'studentDataController/getClassDatas.do',// 获取班级信息
+    'w_stor': url_o+'studentDataController/syncStudentsData.do',//获取学生信息
+    't_more': url_o+'e2Login/doLogin.do',   //老师登录页  查询老师信息
+    't_wxmo': url_o+'teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
+    't_siot': url_o+'teacherBind/unbindTeacherInfo.do',   //解绑
+    's_seac': url_o+'studentBind/queryStudentInfo.do',  //学员号查询
+    's_bind': url_o+'studentBind/bindWechatandStudent.do',   //学员号绑定微信
+    's_nobd': url_o+'studentBind/unbindStudentInfo.do',  //学员号解绑微信
+    's_nafu': url_o+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
+    's_emai': url_o+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
+    's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
+    's_hwlt': url_o+'studentData/assingmentHomework.do',//待交作业学生列表查询
+    'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
+    't_logi': url_o+'logout/doLogout.do',//退出登录
+    't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
+    't_data': url_o+'teacherData/queryCourseRemind.do',  //老师课表提醒
+    's_data': url_o+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
+    't_rankl':url_o+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
+    't_record': url_o+'teacherData/queryTeacherLesson.do',//成绩录入
+    't_save':url_o+'teacherData/addTeacherAnalysis.do',//成绩保存
+    't_modify':url_o+'teacherAnalysis/teacherqueryLitimesdtGrade.do'//修改成绩
+};
+var Study = {
+    's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
+    't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
+    't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
+};
+var Global = {
+    "appid": appId,
+    "secret": secreT,
+    "actionURL": url.w_open
+};
 
 function wechatCode(url) {
     var code = getRequest()['code'];
@@ -135,42 +106,13 @@ function wechatCode(url) {
 
 ajax_S(url.w_token,Global,function(e){
     sessionStorage.access_token  = e.token
-})
-// function getwechatInfo(code){
-//     var businessP = {
-//         "appid": Global.appid,
-//         "secret": Global.secret,
-//         "code": code
-//     }
-//     alert('businessP:' + JSON.stringifY(businessP));
-//     // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
-//     jQuery.ajax({
-//         type: "POST",
-//         url: Global.actionURL,
-//         async: false,//同步
-//         dataType: 'json',
-//         data: JSON.stringify(businessP),
-//         success: function (json) {
-//             alert('json:'+JSON.stringifY(json));
-//             if (json.result == true) {
-//                 sessionStorage.openid = json.userInfo.openid;
-//                 sessionStorage.nickname = json.userInfo.nickname;
-//                 sessionStorage.headimgurl = json.userInfo.headimgurl;
-//             } else {
-//                 layer.msg('获取用户信息失败')
-//             }
-//         },
-//         error: function (json) {
-//             layer.msg('获取用户信息失败')
-//         }
-//     })
-// }
+});
 var Wxid = sessionStorage.openid
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
     'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),
     'e2State':sessionStorage.e2state,
-}
+};
 //e2登陆回传的值
 
 

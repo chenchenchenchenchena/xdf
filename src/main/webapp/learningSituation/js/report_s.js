@@ -1,19 +1,12 @@
 $(function(){
 
-
-//点击查看成绩排行
-$(document).on('touchend','.achievement_s>h4',function(){
-    var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
-    sessionStorage.classcode = $(this).attr('classcode')
-    sessionStorage.schoolid = $(this).attr('schoolid')
-    window.location.href = 'rankinglist_t.html?title='+title;
-});
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
         $(this).siblings().show()
         $(this).siblings('.tab_sreport').children('div').eq(0).show()
         $(this).find('img').css('transform','rotate(-90deg)')
+        $(this).siblings('.tab_sreport').css('padding-bottom','40px');
     }else{
        $(this).siblings().hide()
         $(this).find('img').css('transform','rotate(90deg)')
@@ -22,7 +15,7 @@ $(document).on('touchend','.title_s',function(){
     }
 
 });
-    var Stujson = {'studentNo':'SS1508','tCode':'1','schoolId':'73'};
+    var Stujson = {'studentNo':sessionStorage.stuNumber,'tCode':'1','schoolId':sessionStorage.schoolId};
     Studata();  //调取
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
@@ -41,11 +34,11 @@ $(document).on('touchend','.title_s',function(){
         $('.no-data').hide()
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
             if($(this).index()==1){
-                Stujson = {'studentNo':'SS2431','tCode':'2','schoolId':'73'};
+                Stujson.tCode = '2';
                 $('.class_big').find('.classroom_s').remove();
                 Studata()
             }else{
-                Stujson = {'studentNo':'SS2431','tCode':'1','schoolId':'73'};
+                Stujson.tCode = '1';
                 $('.class_big').find('.classroom_s').remove();
                 Studata()
             }
@@ -58,10 +51,9 @@ var Thistime = [];
 var Xtwindex = [];
 var pjIndex = [];
 var mfInedx = [];
-    var timeIndex = [];
-    var Cindex = [];
+var timeIndex = [];
+var Cindex = [];
 function Studata(){
-
 ajaxRequest('post',Study.s_study,Stujson,function(e){
     console.log(e)
         if(e.data.length!=0){
@@ -83,6 +75,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName);
                     $('title').html(e.data[i][0].studentName+'同学');
                     $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGrade) + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').css('width',146.5* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
                 $('.tab_record').eq(0).show();
@@ -131,7 +124,8 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     Echart('chart_S'+i+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx)
             }
 
-
+            $('.tab_sreport').css('padding','0');
+            $('.tab_sreport').eq(0).css('padding-bottom','40px');
             $('.title_s').eq(0).siblings().show();
             $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
             $('.classroom_s').css('border-bottom','1px solid #e1e1e1')
