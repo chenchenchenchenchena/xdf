@@ -388,6 +388,7 @@ $(function () {
 			    	"schoolId":sessionStorage.schoolId,
 			    	"lessonNo":$(".classTime").html().substring(1,2)
 			    };
+			    alert(queryData.teacherEmail)
 			    console.log(queryData.lessonNo)
 			     console.log(queryData.classCode)
 			     if ($(".st").html() == "入门测") {
