@@ -109,7 +109,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             }
                             mfInedx_c.push('满分：0')
                         }
-                        console.log(yzhou_c);
                         Echart('chart_S'+i+'',xzhou,yzhou_c,yzhou_r,mfInedx_r,timeIndex,mfInedx_c)
                     }else{
                         for(var j = 0;j<Cindex_max;j++){
@@ -126,7 +125,66 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                     var Cindex_max = 0;
                     var Rindex_max = 0;
                 }else{
-                    
+                    var Cindex_max = e.data[i].data[0].data[Cindex-1].lessonNO;
+                    var Rindex_max = e.data[i].data[1].data[Rindex-1].lessonNO;
+                    if(Cindex==Rindex){
+                        if(Cindex_max<Rindex_max){
+                                var Rbuer = false;
+                                var Cbuer = false;
+                                var timejson = {};
+                                for(var m = 0;m<Rindex_max;m++){
+                                    xzhou.push(m+1);
+                                    //入门
+                                    for(var v = 0;v<Cindex;v++){
+                                        if(m+1==e.data[i].data[0].data[v].lessonNO){
+                                            yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
+                                            timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0]
+                                            break;
+                                        }else{
+                                            Rbuer = true;
+                                            break;
+                                        }
+                                    }
+
+                                    //出门
+                                    for(var v = 0;v<Cindex;v++){
+                                        if(m+1==e.data[i].data[1].data[v].lessonNO){
+                                            yzhou_c.push(e.data[i].data[1].data[v].avgGrade);
+                                            timejson[m+1] = e.data[i].data[1].data[v].lessonTime.split(' ')[0]
+                                            break;
+                                        }else{
+                                            Cbuer = true;
+                                            break;
+                                        }
+                                    }
+                                    if(Rbuer = true){
+                                        yzhou_r.push('0')
+                                    }
+                                    if(Cbuer = true){
+                                        yzhou_c.push('0')
+                                    }
+                                }
+
+                            for(var m = 0;m<Rindex_max;m++){
+                                var Tbuer = false;
+                                for(r in timejson){
+                                    console.log(r);
+                                    if(m != r){
+                                        Tbuer = true;
+                                        break;
+                                    }
+                                }
+                                if(Tbuer==true){
+                                    timeIndex.push(timejson[r])
+                                }
+                            }
+
+                            console.log(yzhou_r);
+                            console.log(yzhou_c);
+                            console.log(timeIndex);
+
+                        }
+                    } //
                 }
 
 

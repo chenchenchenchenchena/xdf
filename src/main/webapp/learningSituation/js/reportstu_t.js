@@ -8,20 +8,7 @@ $(function(){
         sessionStorage.schoolid = $(this).attr('schoolid')
         window.location.href = 'rankinglist_t.html?title='+title;
     });
-//点击显示图标
-    $(document).on('touchend','.title_s',function(){
-        if($(this).siblings('.achievement_s').css('display')=='none'){
-            $(this).siblings().show()
-            $(this).siblings('.tab_sreport').children('div').eq(0).show()
-            $(this).find('img').css('transform','rotate(-90deg)')
-        }else{
-            $(this).siblings().hide()
-            $(this).find('img').css('transform','rotate(90deg)')
-            $('.reportstu_S').hide()
-            $('.tab_record span').eq(0).addClass('tab_recorac').siblings().removeClass('tab_recorac')
-        }
 
-    });
     var Stujson = {'teacherEmail':'caoxuefeng@xdf.cn','classCode':'CZ01UMHN2U121','tCode':'1','studentNo':'SS1508','schoolId':'73'};
     Studata();  //调取
 //切换显示方式
