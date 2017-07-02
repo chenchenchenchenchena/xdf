@@ -6,14 +6,14 @@ $(function () {
     var flag = 1;
     $(".txt").hide();
     $(".txtDiv").hide();
-    localStorage.teacherEmail="caoxuefeng@xdf.cn";
-    localStorage.teacherId="TC41";
-    localStorage.schoolId="73";
-    localStorage.teacherName="曹雪峰";
+    sessionStorage.teacherEmail="caoxuefeng@xdf.cn";
+    sessionStorage.teacherId="TC41";
+    sessionStorage.schoolId="73";
+    sessionStorage.teacherName="曹雪峰";
     
     
     //录入数据
-    var inputData = {"sCode": localStorage.teacherId, "email": localStorage.teacherEmail,"schoolId":localStorage.schoolId};
+    var inputData = {"sCode": sessionStorage.teacherId, "email": sessionStorage.teacherEmail,"schoolId":sessionStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
@@ -52,7 +52,7 @@ $(function () {
                         stuArr.push(stuInfo);
 
                     }
-                    console.log(stuArr);
+                   /* console.log(stuArr);*/
 
                     var colId = "name";
                     //对json进行升序排序函数
@@ -113,23 +113,12 @@ $(function () {
 
         })
     }
-    /*$.ajax({
-        type: "post",
-        url: "http://10.73.33.63:8080/teacherData/queryTeacherLesson.do",
-        async: true,
-        dataType: "json",
-        data: JSON.stringify(inputData),
-        success: function (res) {
-            
-            console.log(res);
-            
-        }
-    });*/
+ 
     
     
-    $(".scoreTitle input").keyup(function(){
+    $(".scoreTitle input").blur(function(){
     	if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
-	    	$(".scoreTitle input").attr("readonly","readonly");
+	    	$(".scoreTitle input").val("");
 	    }
     })
     
@@ -196,34 +185,7 @@ $(function () {
        
     })
     
-    function saveAjax(e){
-    	console.log(e)
-    	var load = layer.load({shade: [0.8, '#000']});
-	   
-	    if(e.result){
-	    	layer.close(load);
-	         layer3 = layer.open({
-	             type: 1,
-	             area: ['548px', '345px'],
-	             /*shade:[0.2,'#000'],*/
-	            shade:0,
-	             title:'',
-	             skin: '',
-	             time:2000,
-	             content:$(".recordSucc")
-	         })
-	     }else{
-	   		layer.close(load);
-	     	layer4 = layer.open({
-	             type: 1,
-	             area: ['548px', '345px'],
-	             shade:[0.2,'#000'],
-	             title:'',
-	             skin: '',
-	             content:$(".subFail")
-	         })
-	     }
-    }
+    
     function saveData(){
     	 
     	var student = [];
@@ -244,15 +206,15 @@ $(function () {
     	var classNo = $(".classTime").html().substring(1,2);
         var classT = $(".classTime").html().substring(4,22);
         var saveInfo = {
-            "email": localStorage.teacherEmail,
-            "teacherName": localStorage.teacherName,
+            "email": sessionStorage.teacherEmail,
+            "teacherName": sessionStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
             "lessonNo": classNo,
             "lessonTime": classT,
             "fullMarks": $(".totalScore").val(),
-            "schoolId":localStorage.schoolId,
+            "schoolId":sessionStorage.schoolId,
             "student": student
         }
         if ($(".st").html() == "入门测") {
@@ -260,20 +222,38 @@ $(function () {
         } else {
             saveInfo.gradeType = 2;
         }
-        /*$.ajax({
-            type: "post",
-            url: "http://10.73.33.63:8080/teacherData/addTeacherAnalysis.do",
-            async: true,
-            data: JSON.stringify(saveInfo),
-            success: function (res) {
-                
-               
-            }
-        });*/
+       
        ajax_S(url.t_save,saveInfo,saveAjax)
         
     }
     
+    function saveAjax(e){
+    	console.log(e)
+    	var load = layer.load(0,{shade: [0.8, '#000']});
+	   
+	    if(e.result){
+	    	layer.close(load);
+	         layer3 = layer.open({
+	             type: 1,
+	             area: ['548px', '345px'],
+	             shade:[0.2,'#000'],
+	             title:'',
+	             skin: '',
+	             time:2000,
+	             content:$(".recordSucc")
+	         })
+	     }else{
+	   		layer.close(load);
+	     	layer4 = layer.open({
+	             type: 1,
+	             area: ['548px', '345px'],
+	             shade:[0.2,'#000'],
+	             title:'',
+	             skin: '',
+	             content:$(".subFail")
+	         })
+	     }
+    }
     
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
@@ -377,16 +357,16 @@ $(function () {
     	
     })
     function query(){
-  		console.log($(".st").html());
+  		/*console.log($(".st").html());
 	  	console.log($(".classTime").html());
-	  	console.log($(".class").html())
+	  	console.log($(".class").html())*/
 	  	if($(".st").html()&&$(".classTime").html()&&$(".class").html()&&$(".scoreList").children()){
 	    		
 			    var queryData={
-			    	"teacherEmail":localStorage.teacherEmail,
+			    	"teacherEmail":sessionStorage.teacherEmail,
 			    	"classCode":$(".class").html(),
 			    	"tCode":$(".st").html(),
-			    	"schoolId":localStorage.schoolId,
+			    	"schoolId":sessionStorage.schoolId,
 			    	"lessonNo":$(".classTime").html().substring(1,2)
 			    };
 			    console.log(queryData.lessonNo)
@@ -421,28 +401,11 @@ $(function () {
 			console.log(msg);
 			if(msg.data.length==0){
 				$(".totalScore").val("");
+				resetData();
+			}else{
+				resetData();
 				for(var j=0;j<$(".scoreList dl").length;j++){
 					
-	                var ddStr = $(".scoreList dl").eq(j).find("dd").eq(0);
-	                var dtStr = $(".scoreList dl").eq(j).find("dt");
-	                console.log(ddStr.html());
-	                console.log(dtStr.html());
-	                /*console.log(str.html());*/
-	                var ddstrLen = lenStat(ddStr);
-	                /*console.log(strLen);*/
-	                if (lenStat(ddStr) > 8) {
-	                    ddStr.css("font-size", "17px");
-	                }
-	                if (lenStat(ddStr) > 4) {
-	                   /* dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);*/
-	                    dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
-	                }else{
-	                	 dtStr.html(ddStr.html());
-	                }
-            
-				}
-			}else{
-				for(var j=0;j<$(".scoreList dl").length;j++){
 					for(var i=0;i<msg.data.length;i++){
 						/*console.log(res.data[0].fullmarks);*/
 						$(".totalScore").val(msg.data[0].fullmarks);
@@ -462,6 +425,30 @@ $(function () {
 		/*if(msg.data.length==0){
 			$(".totalScore").val("");
 		}*/
+    }
+    
+    
+    //重置数据
+    function resetData(){
+    	for(var j=0;j<$(".scoreList dl").length;j++){
+            var ddStr = $(".scoreList dl").eq(j).find("dd").eq(0);
+            var dtStr = $(".scoreList dl").eq(j).find("dt");
+            /*console.log(ddStr.html());
+            console.log(dtStr.html());*/
+            /*console.log(str.html());*/
+            var ddstrLen = lenStat(ddStr);
+            /*console.log(strLen);*/
+            if (lenStat(ddStr) > 8) {
+                ddStr.css("font-size", "17px");
+            }
+            if (lenStat(ddStr) > 4) {
+               /* dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);*/
+                dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+            }else{
+            	 dtStr.html(ddStr.html());
+            }
+    
+		}
     }
     //0-数据不动   1-添加   2-修改
     
