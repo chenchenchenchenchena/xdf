@@ -191,12 +191,6 @@ $(function () {
 		         	 
 		      
 	    }
-        /*console.log(student);
-        console.log($(".classrome").html());
-        console.log($(".class").html());
-        console.log($(".classTime").html());
-        console.log($(".totalScore").html());
-        console.log(student);*/
        
     })
     
@@ -343,11 +337,7 @@ $(function () {
  			$(".classNumTime").hide();
  		}
  	})
-    /*$(".totalScore").focus(function(){
-     if(isNaN($(".totalScore").val())){
-     $(".totalScore").attr("disabled","disabled");
-     }
-     })*/
+    
 
     $(".chooseBtn").click(function () {
         $(".mask").hide();
@@ -407,19 +397,7 @@ $(function () {
 			    }
 			    ajaxRequest("post",url.t_modify,queryData,queryAjax);
 			    
-			    /*$.ajax({
-			    	type:"post",
-			    	url:"http://dt.staff.xdf.cn/teacherAnalysis/teacherqueryLitimesdtGrade.do",
-			    	async:true,
-			    	dataType:"json",
-			    	data:queryData,
-			    	success:function(res){
-			    		console.log(res);
-			    		
-		    			
-			    		
-			    	}
-			    });*/
+			   
 			    
 			 } 
 			
@@ -451,9 +429,7 @@ $(function () {
 			/* changeData();*/
 		}
 		
-		/*if(msg.data.length==0){
-			$(".totalScore").val("");
-		}*/
+		
     }
     
     
@@ -497,12 +473,6 @@ $(function () {
 	    	/*if($(".scoreTitle input").val()){*/
 	    		console.log(222);
 	    		$(".scoreList dl").click(function(){
-		    		/*if(isNaN($(this).find("dt").html())){
-		    			console.log(333)
-		    			$(this).find(".flag").html(1);
-		    		}else{
-		    			$(this).find(".flag").html(2);
-		    		}*/
 		    		if($(this).attr("mark")=="add"){
 		    			console.log(333)
 		    			$(this).find(".flag").html(1);
