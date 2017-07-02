@@ -382,7 +382,7 @@ $(function () {
 	  	if($(".st").html()&&$(".classTime").html()&&$(".class").html()&&$(".scoreList").children()){
 	    		
 			    var queryData={
-			    	"teacherEmail":sessionStorage.terEmail,
+			    	"teacherEmail":localStorage.terEmail,
 			    	"classCode":$(".class").html(),
 			    	"tCode":$(".st").html(),
 			    	"schoolId":sessionStorage.schoolId,
