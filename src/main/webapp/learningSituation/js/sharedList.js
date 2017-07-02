@@ -186,7 +186,7 @@ function getSharedListSuccess(msg){
                 var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                 var sharedListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+ranking
                     +'</i><i>'+items.studentName.substr(-2,2)+'</i><i>'
-                    +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.lastGrade+'分</i></span></li>';
+                    +items.studentName+'</i></span><span class="rankright"><i>'+studentNo+'</i><i>'+items.grade+'分</i></span></li>';
                 $(".ranklist").append(sharedListHtml);
                 $(".ranklist,.shared-content").show();
                 layer.close(loading);
