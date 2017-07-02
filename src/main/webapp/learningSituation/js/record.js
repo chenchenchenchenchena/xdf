@@ -48,6 +48,7 @@ $(function () {
             $(".classrome").html($(this).html());
             var spanObj = $(this).next();
             $(".class").html(spanObj.html());
+            $(".classTime").html("");
             //课次及时间
             for (var i = 0; i < e.Data.length; i++) {
                 if ($(".classrome").html() == e.Data[i].className) {
@@ -102,6 +103,8 @@ $(function () {
         $(".scoreType ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".st").html($(this).html());
+            $(".classTime").html("");
+             $(".classrome").html("");
         })
         
 		
@@ -120,12 +123,20 @@ $(function () {
  
     
     
-    $(".scoreTitle input").blur(function(){
+    $(".scoreTitle input").keyup(function(){
     	if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
 	    	$(".scoreTitle input").val("");
 	    }
+    	if($(".scoreTitle input").val().length>=4){
+    		$(".scoreTitle input").val("");
+    	}
     })
     
+    $(".totalScore").keyup(function(){
+    	if($(".totalScore").val().length>=4){
+    		$(".totalScore").val("");
+    	}
+    })
     
     
     //保存
@@ -318,6 +329,20 @@ $(function () {
         }
 
     })
+    
+    
+ 	$(".mask").click(function(){
+ 		$(".mask").hide();
+ 		if($(".chooseClass").show()){
+ 			$(".chooseClass").hide();
+ 		}
+ 		if($(".scoreType").show()){
+ 			$(".scoreType").hide();
+ 		}
+ 		if($(".classNumTime").show()){
+ 			$(".classNumTime").hide();
+ 		}
+ 	})
     /*$(".totalScore").focus(function(){
      if(isNaN($(".totalScore").val())){
      $(".totalScore").attr("disabled","disabled");
