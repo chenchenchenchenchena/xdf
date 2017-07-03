@@ -106,6 +106,7 @@ $(function () {
             $(".st").html($(this).html());
             $(".classTime").html("");
              $(".classrome").html("");
+             $(".scoreTitle input").val("");
         })
         
 		
