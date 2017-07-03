@@ -15,13 +15,13 @@ $(function(){
     $('.rankTitle>span').html(stateContent);
     getRankList(testState,"shared");//
 
-    // weChatData();
+    weChatData();
     //微信分享数据
     function weChatData() {
         var urlVal = window.location.href;
         var businessP = {
-            "appid": 'wx559791e14e9ce521',
-            "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+            "appid": appId,
+            "secret": secreT,
             "url": urlVal
         }
 //			var d = constructionParams(rsaEncryptedString(businessP), "6bd249db7c52440ab7462b6d298077d9");
@@ -63,7 +63,7 @@ $(function(){
 							// 分享到朋友圈
                         // wx.onMenuShareTimeline({
                         //     title: "", // 分享标题
-                        //     link: "http://dt.staff.xdf.cn/xdfdthome/learningSituation/sharedranking_t.html", // 分享链接
+                        //     link: "http://dt.staff.xdf.cn", // 分享链接
                         //     imgUrl:"", // 分享图标
                         //     success: function () {
                         //         // 用户确认分享后执行的回调函数
