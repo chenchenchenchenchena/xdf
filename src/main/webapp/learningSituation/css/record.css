@@ -76,6 +76,7 @@ body,html{
 }
 .scoreTitle i{
 	float: right;
+	font-style: normal;
 }
 .scoreTitle input{
 	/*line-height: 104px;*/

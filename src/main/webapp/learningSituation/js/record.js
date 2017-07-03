@@ -285,7 +285,7 @@ $(function () {
     
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
-     	/*location.href="report_t.html";*/
+     	location.href="report_t.html";
      })
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
