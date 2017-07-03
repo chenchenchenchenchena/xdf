@@ -97,21 +97,21 @@ $(function(){
 			layer.msg('请输入正确格式学员号');
 			return false;
 		}
-		window.location.href = "../main_list.html";
 		if(e.result==true){
 			$('.noSearch').hide()
 			$('.card').hide()
 			$('.search').show()
 			$('.stuname').html(e.data.studentName)
 			$('.stutel').html('')
-			sessionStorage.stuNum = $('.studentLogin input').val()
-			if(e.data.relatedState=='0'){
-				$('.deterAss').html('立即关联')
-				$('.deterAss').css('background','#00ba97')
-			}else{
-				$('.deterAss').html('解除关联')
-				$('.deterAss').css('background','#fc1010')
-			}
+			sessionStorage.stuNum = $('.studentLogin input').val();
+			window.location.href = "../main_list.html";
+			// if(e.data.relatedState=='0'){
+			// 	$('.deterAss').html('立即关联')
+			// 	$('.deterAss').css('background','#00ba97')
+			// }else{
+			// 	$('.deterAss').html('解除关联')
+			// 	$('.deterAss').css('background','#fc1010')
+			// }
 
 		}else{
 			$('.search').hide()
@@ -140,7 +140,9 @@ $(function(){
 
 	//学员号查询点击
 	$('.numb_log').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+		var stumore  = {
+			'StudentCode':$('.stunum').val()
+		}
 		ajax_S(url.s_seac,stumore,stusea)
 	})
 	//关联点击
@@ -159,7 +161,7 @@ $(function(){
 			ajax_S(url.s_nobd,stumore,s_bind)
 		}
 	})
-	ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
+	// ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
 
 
 
@@ -204,7 +206,10 @@ $(function(){
 
 
 	$('.tel_log').click(function(){
-		var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+		var stuname = {
+			'name':$('.stname').val(),
+			'mobile':$('.phoneNumber').val()
+		}
 		// var stuname = {};
 		// var name = $('.stname').val();
 		// var mobile  = $('.phoneNumber').val();
