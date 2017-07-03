@@ -100,6 +100,7 @@ $(function () {
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classTime").html($(this).html());
+            $(".scoreTitle input").val("");
         })
         //点击成绩类型
         $(".scoreType ul").on("click", "li", function () {
