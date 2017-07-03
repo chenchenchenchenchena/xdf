@@ -94,31 +94,31 @@ function stusea(e){
                 'email':localStorage.terEmail
             };
             var htmltx = '';
-            ajax_S(url.t_data,remindedata,function(e){
-                if(e.result==false){
-                    layer.msg('请求参数不可以为空')
-                }else{
-                    if(e.remindstatus==1){
-                        htmltx = '去布置作业'
-                    }else if(e.remindstatus==2){
-                        htmltx = ''+e.data[0].nostudentNum+'份作业待批改'
-                    }
-                    else if(e.remindstatus==3){
-                        htmltx = ''
-                    }
-                    $('.tx').each(function(){
-                        $('.tx').eq($(this).attr('index')).html(htmltx)
-                    });
-                    Index.push(htmltx);
-                    //放作业提醒
-                    // for(var i =0;i<Index.length;i++){
-                    //     if(Index[i]!=''){
-                    //         $('.tx').eq(i).html(Index[i]);
-                    //         $('.tx').eq(i).css('padding','.05rem .1rem');
-                    //     }
-                    // }
-                }
-            });
+            // ajax_S(url.t_data,remindedata,function(e){
+            //     if(e.result==false){
+            //         layer.msg('请求参数不可以为空')
+            //     }else{
+            //         if(e.remindstatus==1){
+            //             htmltx = '去布置作业'
+            //         }else if(e.remindstatus==2){
+            //             htmltx = ''+e.data[0].nostudentNum+'份作业待批改'
+            //         }
+            //         else if(e.remindstatus==3){
+            //             htmltx = ''
+            //         }
+            //         $('.tx').each(function(){
+            //             $('.tx').eq($(this).attr('index')).html(htmltx)
+            //         });
+            //         Index.push(htmltx);
+            //         //放作业提醒
+            //         // for(var i =0;i<Index.length;i++){
+            //         //     if(Index[i]!=''){
+            //         //         $('.tx').eq(i).html(Index[i]);
+            //         //         $('.tx').eq(i).css('padding','.05rem .1rem');
+            //         //     }
+            //         // }
+            //     }
+            // });
             if(time1<curr_e[i].BeginDate){
                 old = ''
             }else{
