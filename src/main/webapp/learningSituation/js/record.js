@@ -49,6 +49,7 @@ $(function () {
             var spanObj = $(this).next();
             $(".class").html(spanObj.html());
             $(".classTime").html("");
+            $(".scoreTitle input").val("");
             //课次及时间
             for (var i = 0; i < e.Data.length; i++) {
                 if ($(".classrome").html() == e.Data[i].className) {

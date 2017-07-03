@@ -74,11 +74,14 @@ body,html{
     line-height: 104px;
     border-bottom: 1px solid #e1e1e1;
 }
+.scoreTitle>span:nth-child(2){
+	float: right;
+}
 .scoreTitle input{
 	/*line-height: 104px;*/
 	margin-top: 36px;
     font-size: 30px;
-    float: right;
+   /* float: right;*/
     width: 153px;
     outline: none;
     border: none;
