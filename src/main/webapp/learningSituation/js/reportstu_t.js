@@ -1,5 +1,6 @@
 $(function(){
-
+//禁止浏览器拖动
+    ontouchmove,function(e){e.preventDefault();}
     var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':sessionStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':sessionStorage.schoolId};
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
