@@ -443,7 +443,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
