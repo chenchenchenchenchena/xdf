@@ -97,7 +97,7 @@ $(function(){
 			layer.msg('请输入正确格式学员号');
 			return false;
 		}
-		window.location.href = "../dtweb/main_list.html";
+		window.location.href = "../main_list.html";
 		if(e.result==true){
 			$('.noSearch').hide()
 			$('.card').hide()
