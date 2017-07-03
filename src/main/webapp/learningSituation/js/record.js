@@ -3,9 +3,8 @@ $(function () {
     var layer2;
     var layer3;
     var layer4;
+    var load;
     var flag = 1;
-    $(".txt").hide();
-    $(".txtDiv").hide();
     localStorage.terEmail="caoxuefeng@xdf.cn";
     sessionStorage.teacherId="TC41";
     sessionStorage.schoolId="73";
@@ -15,7 +14,8 @@ $(function () {
             location.href = 'login_t.html';
             sessionStorage.studayCanfig = 'studay';
     }
-    
+     $(".txt").hide();
+    $(".txtDiv").hide();
     //录入数据
     var inputData = {"sCode": sessionStorage.teacherId, "email": localStorage.terEmail,"schoolId":sessionStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
@@ -96,11 +96,12 @@ $(function () {
             }
         })
             
-            
+        //点击课次    
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classTime").html($(this).html());
         })
+        //点击成绩类型
         $(".scoreType ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".st").html($(this).html());
@@ -109,10 +110,7 @@ $(function () {
              $(".scoreTitle input").val("");
              $(".totalScore").val(10);
         })
-        
-		
 		//点击录成绩
-		
 		$(".scoreList").on("click", "dl", function () {
             var name = $(this).find("dd").html();
             $(".scoreTitle span").html(name);
@@ -125,7 +123,7 @@ $(function () {
     }
  
     
-    
+    //录入表单
     $(".scoreTitle input").keyup(function(){
     	if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
 	    	$(".scoreTitle input").val("");
@@ -134,13 +132,82 @@ $(function () {
     		$(".scoreTitle input").val("");
     	}
     })
-    
+    //满分表单
     $(".totalScore").blur(function(){
     	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
     		$(".totalScore").val("");
     	}
     })
     
+    
+    function saveData(){
+    	load = layer.load(0,{shade: [0.8, '#000']});
+    	var student = [];
+    	for (var i = 0; i < $(".scoreList dl").length; i++) {
+            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
+                var studentinfo = {
+                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
+                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+                }
+                 student.push(studentinfo);
+            }
+
+           
+        }
+    	console.log(student);
+    	var classNo = $(".classTime").html().substring(1,2);
+        var classT = $(".classTime").html().substring(4,22);
+        var saveInfo = {
+            "email": localStorage.terEmail,
+            "teacherName": sessionStorage.teacherName,
+            "gradeType": $(".st").html(),
+            "className": $(".classrome").html(),
+            "classCode": $(".class").html(),
+            "lessonNo": classNo,
+            "lessonTime": classT,
+            "fullMarks": $(".totalScore").val(),
+            "schoolId":sessionStorage.schoolId,
+            "student": student
+        }
+        if ($(".st").html() == "入门测") {
+            saveInfo.gradeType = 1;
+        } else {
+            saveInfo.gradeType = 2;
+        }
+       
+       ajax_S(url.t_save,saveInfo,saveAjax)
+        
+    }
+    
+    function saveAjax(e){
+    	console.log(e)
+    	
+	   
+	    if(e.result){
+	    	layer.close(load);
+	         layer3 = layer.open({
+	             type: 1,
+	             area: ['548px', '345px'],
+	             shade:[0.2,'#000'],
+	             title:'',
+	             skin: '',
+	             time:2000,
+	             content:$(".recordSucc")
+	         })
+	     }else{
+	   		layer.close(load);
+	     	layer4 = layer.open({
+	             type: 1,
+	             area: ['548px', '345px'],
+	             shade:[0.2,'#000'],
+	             title:'',
+	             skin: '',
+	             content:$(".subFail")
+	         })
+	     }
+    }
     
     //保存
     /*var student = [];*/
@@ -196,76 +263,6 @@ $(function () {
 	    }
        
     })
-    
-    
-    function saveData(){
-    	 
-    	var student = [];
-    	for (var i = 0; i < $(".scoreList dl").length; i++) {
-            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
-                var studentinfo = {
-                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
-                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
-                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
-                }
-                 student.push(studentinfo);
-            }
-
-           
-        }
-    	console.log(student);
-    	var classNo = $(".classTime").html().substring(1,2);
-        var classT = $(".classTime").html().substring(4,22);
-        var saveInfo = {
-            "email": localStorage.terEmail,
-            "teacherName": sessionStorage.teacherName,
-            "gradeType": $(".st").html(),
-            "className": $(".classrome").html(),
-            "classCode": $(".class").html(),
-            "lessonNo": classNo,
-            "lessonTime": classT,
-            "fullMarks": $(".totalScore").val(),
-            "schoolId":sessionStorage.schoolId,
-            "student": student
-        }
-        if ($(".st").html() == "入门测") {
-            saveInfo.gradeType = 1;
-        } else {
-            saveInfo.gradeType = 2;
-        }
-       
-       ajax_S(url.t_save,saveInfo,saveAjax)
-        
-    }
-    
-    function saveAjax(e){
-    	console.log(e)
-    	var load = layer.load(0,{shade: [0.8, '#000']});
-	   
-	    if(e.result){
-	    	layer.close(load);
-	         layer3 = layer.open({
-	             type: 1,
-	             area: ['548px', '345px'],
-	             shade:[0.2,'#000'],
-	             title:'',
-	             skin: '',
-	             time:2000,
-	             content:$(".recordSucc")
-	         })
-	     }else{
-	   		layer.close(load);
-	     	layer4 = layer.open({
-	             type: 1,
-	             area: ['548px', '345px'],
-	             shade:[0.2,'#000'],
-	             title:'',
-	             skin: '',
-	             content:$(".subFail")
-	         })
-	     }
-    }
     
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
@@ -411,7 +408,7 @@ $(function () {
 			/*alert("查询数据");*/
 			console.log(msg);
 			if(msg.data.length==0){
-				$(".totalScore").val("");
+				$(".totalScore").val(10);
 				resetData();
 			}else{
 				resetData();
