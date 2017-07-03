@@ -184,9 +184,12 @@ i{
     margin-right: 34px;
 }
 .rankright>i:nth-child(1){
-    margin-right: 64px;
+    margin-right: 24px;
     font-size: 26px;
     color: #808080;
+    text-align: left;
+    width: 160px;
+    padding-left: 10px;
 }
 .rankright>i:nth-child(2){
     width:90px;
