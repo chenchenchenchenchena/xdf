@@ -74,7 +74,7 @@ $(function () {
 
                     $(".scoreList").html(stu);
                     for (var h = 0; h < e.Data[i].LessonData.length; h++) {
-                        str1 += "<li>第" + e.Data[i].LessonData[h].lessonNo + "课次" + e.Data[i].LessonData[h].sectTime + "</li>";
+                        str1 += "<li>第" + e.Data[i].LessonData[h].lessonNo + "课次(" + e.Data[i].LessonData[h].sectTime + ")</li>";
                     }
                     $(".classNumTime ul").html(str1);
                 }
@@ -134,8 +134,8 @@ $(function () {
     	}
     })
     
-    $(".totalScore").keyup(function(){
-    	if($(".totalScore").val().length>=4){
+    $(".totalScore").blur(function(){
+    	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
     		$(".totalScore").val("");
     	}
     })
@@ -284,6 +284,7 @@ $(function () {
     
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
+     	location.href="report_t.html";
      })
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
