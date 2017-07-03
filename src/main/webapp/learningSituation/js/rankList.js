@@ -103,6 +103,9 @@ $(function(){
             }
         }else{
             console.log("err:"+JSON.stringify(msg));
+            $('.main-content').hide();
+            layer.close(loading);
+            $('.no-data').show();
         }
         // layer.close(loading);
     }
