@@ -123,16 +123,30 @@ $(function () {
         })
     }
  
-    
+   
     //录入表单
-    $(".scoreTitle input").keyup(function(){
-    	if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
+    /*alert(re.test($(".scoreTitle input").val()))*/
+    
+	$(".scoreTitle input").keyup(function(){
+    	
+		if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
 	    	$(".scoreTitle input").val("");
 	    }
     	if($(".scoreTitle input").val().length>=4){
     		$(".scoreTitle input").val("");
+    	} 
+		var slength=$(".scoreTitle input").val().length;
+    	if(slength>=2){
+    		var r=$(".scoreTitle input").val().substring(0,1);
+    		if(r==0){
+    			var	m =$(".scoreTitle input").val().substring(1,slength);
+				$(".scoreTitle input").val(m);
+    		}
     	}
-    })
+    	
+    })	
+   
+    
     //满分表单
     $(".totalScore").blur(function(){
     	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){

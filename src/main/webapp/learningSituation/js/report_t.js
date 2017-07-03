@@ -148,7 +148,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                             break;
                                         }else{
                                             Rbuer = true;
-                                            break;
+                                            // break;
                                         }
                                     }
 
@@ -162,7 +162,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                             break;
                                         }else{
                                             Cbuer = true;
-                                            break;
+                                            // break;
                                         }
                                     }
                                     if(Rbuer == true){
@@ -219,7 +219,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -233,7 +233,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -290,7 +290,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -304,7 +304,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -363,7 +363,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -377,7 +377,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -434,7 +434,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -448,7 +448,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -505,7 +505,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -519,7 +519,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -578,7 +578,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -592,7 +592,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -649,7 +649,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -663,7 +663,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
@@ -720,7 +720,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Rbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
 
@@ -734,7 +734,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                         break;
                                     }else{
                                         Cbuer = true;
-                                        break;
+                                        // break;
                                     }
                                 }
                                 if(Rbuer == true){
