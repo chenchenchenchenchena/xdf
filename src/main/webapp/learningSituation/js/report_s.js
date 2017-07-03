@@ -183,7 +183,6 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'分数',
                 type : 'value',
-                max : '10',
                 nameTextStyle:{
                     fontSize:24
                 },

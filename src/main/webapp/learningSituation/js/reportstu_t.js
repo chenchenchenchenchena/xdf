@@ -164,7 +164,6 @@ $(function(){
                 {
                     name:'分数',
                     type : 'value',
-                    max : '10',
                     nameTextStyle:{
                         fontSize:24
                     },
