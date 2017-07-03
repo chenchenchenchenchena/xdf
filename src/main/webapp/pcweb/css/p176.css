@@ -746,7 +746,15 @@
     position: relative;
 }
 
-/*.p176-share-icon{width:16px;height:16px;background: url(../images/shareIcon.png) no-repeat;display:inline-block;vertical-align:middle;text-align:center;}*/
+.p176-share-icon {
+    width: 16px;
+    height: 16px;
+    background: url(../images/shareIcon.png) no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .p176-share .p176-share-wrap {
     display: none;
     width: 240px;
@@ -776,8 +784,28 @@
     padding-left: 10px;
 }
 
-/*.p176-wx-icon i{width:22px;height:22px;background:url(../images/weixin.png) no-repeat;display:inline-block;text-align:center;vertical-align:middle;margin-right:5px;}*/
-/*.p176-circle-icon i{width:22px;height:22px;display:inline-block;background-image:url(../images/share-icon.png);background-repeat:no-repeat;text-align:center;vertical-align:middle;margin-right:5px;background-size:100%;}*/
+.p176-wx-icon i {
+    width: 22px;
+    height: 22px;
+    background: url(../images/wxcode.png) no-repeat;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.p176-circle-icon i {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    background-image: url(../images/shareIcon.png);
+    background-repeat: no-repeat;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 5px;
+    background-size: 100%;
+}
+
 .p176-circle-icon01 i {
     background-position: 0px -14px;
 }

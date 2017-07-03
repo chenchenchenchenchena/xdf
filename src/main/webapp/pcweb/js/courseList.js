@@ -118,14 +118,14 @@ function showList(page) {
                     var id = ckList[i]["id"];
                     var name = ckList[i]["name"];
                     if (currentType == 1) {//筹课抽奖
-                        var time = ckList[i]["time"];
-                        var rewardTime = ckList[i]["rewardTime"];
-                        if (rewardTime != null && rewardTime != "") {
-                            if (timeText != "") {
-                                timeText += "</br>";
-                            }
-                            timeText += "奖品已抽完:历时" + rewardTime + "小时";
-                        }
+                        // var time = ckList[i]["time"];
+                        // var rewardTime = ckList[i]["rewardTime"];
+                        // if (rewardTime != null && rewardTime != "") {
+                        //     if (timeText != "") {
+                        //         timeText += "</br>";
+                        //     }
+                        //     timeText += "奖品已抽完:历时" + rewardTime + "小时";
+                        // }
                     } else if (currentType == 2) {  //筹课
                         var time = ckList[i]["r_time"];
                     }
@@ -179,27 +179,27 @@ function showList(page) {
                     }
 
                     str += "<td>";
-                    // str += "<div class='p176-share'>";
-                    // str += "<a href='javascript:;' onclick='openWeChat(this,\"" + id + "\")' class='p176-share-icon" +
-                    //     " js-share-drop' ></a>";
-                    // str += "<div class='p176-share-wrap'>";
-                    // str += "<div class='p176-share-con clearfix'>";
-                    // str += "<ul class='p176-share-left'>";
-                    // str += "<li class='p176-wx'><a href='javascript:;'><i></i>微信扫描二维码</a></li>";
-                    // str += "<li class='mLeft20 mtop10'><img style='width:150px;height:150px' alt=''></li>";
-                    // str += "</ul>";
-                    // str += "</div>";
-                    //str += "<div class='p176-share-con clearfix'>";
-                    //str += "<a" +
-                    //    " href='http://xytest.staff.xdf.cn/wechat_v1.5/activity/activityInfo.aspx?channel=Wechat&activityId=" + id
-                    //str += "' >分享链接</a>";
-                    //str += "</div>"
-                    str += "<div class='p176-share-bottom'>";
-                    // str += "<a href='javascript:;' onclick='closeWeChat(this)' style='padding:6px" +
-                    //     " 22px;background:red;color:#fff;margin-left:10px;line-height:32px;' >关闭</a>";
+                    str += "<div class='p176-share'>";
+                    str += "<a href='javascript:;' onclick='openWeChat(this,\"" + id + "\")' class='p176-share-icon" +
+                        " js-share-drop' ></a>";
+                    str += "<div class='p176-share-wrap'>";
+                    str += "<div class='p176-share-con clearfix'>";
+                    str += "<ul class='p176-share-left'>";
+                    str += "<li class='p176-wx'><a href='javascript:;'><i></i>微信扫描二维码</a></li>";
+                    str += "<li class='mLeft20 mtop10'><img style='width:150px;height:150px' alt=''></li>";
+                    str += "</ul>";
                     str += "</div>";
-                    // str += "</div>";
-                    // str += "</div>";
+                    str += "<div class='p176-share-con clearfix'>";
+                    str += "<a" +
+                       " href='http://xytest.staff.xdf.cn/wechat_v1.5/activity/activityInfo.aspx?channel=Wechat&activityId=" + id
+                    str += "' >分享链接</a>";
+                    str += "</div>"
+                    str += "<div class='p176-share-bottom'>";
+                    str += "<a href='javascript:;' onclick='closeWeChat(this)' style='padding:6px" +
+                        " 22px;background:red;color:#fff;margin-left:10px;line-height:32px;' >关闭</a>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "</div>";
                     str += "</td>";
                     str += "<td>";
                     str += "<div class='p176-table-btnGroup'>";
@@ -389,12 +389,12 @@ function closeWeChat(_this) {
 function openWeChat(_this, id) {
     if (weOpenFlag == 0) {
         var businessP = {"ckId": id};
-        var serverId = "";
-        if (currentType == 1) { //筹课抽奖
-            serverId = "364f6dfe304b49cb8066af354b1be7d8";
-        } else if (currentType == 2) {  //筹课
-            serverId = "59e82e08ab9745cca3f952e3b7e8603d";
-        }
+        // var serverId = "";
+        // if (currentType == 1) { //筹课抽奖
+        //     serverId = "364f6dfe304b49cb8066af354b1be7d8";
+        // } else if (currentType == 2) {  //筹课
+        //     serverId = "59e82e08ab9745cca3f952e3b7e8603d";
+        // }
         // var d = constructionParams(rsaEncryptedString(businessP), serverId);
         jQuery.ajax({
             type: "POST",

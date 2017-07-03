@@ -9,7 +9,6 @@ function toLogin() {
         'code': code_s,
         'e2State': state_s,
         'state': state_s
-        // 'userId':"v_liwei8"
     };
     alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({

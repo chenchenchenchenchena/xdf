@@ -1024,7 +1024,7 @@ function saveOrUpdate(status,type) {
                 }
                 //window.location.href = 'updateCourse.html?ckId=' + json.ckId + '&flag=1';
                 layer.closeAll('loading');
-                changeCenter("./ckMain.html?type=2");
+                changeCenter("./raiseMain.html?type=2");
             } else {
                 if (status == 0) {
                     layer.msg(json.message, {icon: 5});
