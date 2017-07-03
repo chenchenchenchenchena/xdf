@@ -1,6 +1,8 @@
 $(function(){
 //禁止浏览器拖动
-    ontouchmove,function(e){e.preventDefault();}
+    addEventListener("touchmove", function (event) {
+        event.preventDefault();
+    }, false);
     localStorage.terEmail="caoxuefeng@xdf.cn";
     sessionStorage.teacherId="TC41";
     sessionStorage.schoolId="73";
@@ -59,12 +61,18 @@ var pjIndex = [];
 var mfInedx = [];
 var timeIndex = [];
 var Cindex = [];
+var maxNumber = 0;
 function Studata(){
 ajaxRequest('post',Study.s_study,Stujson,function(e){
     console.log(e)
         if(e.data.length!=0){
             var class_ = e.data;
-            for(var i = 0;i<class_.length;i++) {
+            for(var s = 0;s<class_[0].length;s++){
+                if(class_[0][s].fullMarks>maxNumber){
+                    maxNumber = class_[s][0].fullMarks
+                }
+            }
+                for(var i = 0;i<class_.length;i++) {
                   Xindex = '0';
                   Thistime = [];
                   Xtwindex = [];
@@ -127,7 +135,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 
                 }
                 console.log(Cindex);
-                    Echart('chart_S'+i+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx)
+                    Echart('chart_S'+i+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxNumber)
             }
 
             $('.tab_sreport').css('padding','0');
@@ -153,7 +161,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 
 
 
-    function Echart(id,x,y1,y2,y3,y4){
+    function Echart(id,x,y1,y2,y3,y4,max){
         var myChart = echarts.init(document.getElementById(id));
         var option = {
         tooltip : {
@@ -189,6 +197,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'分数',
                 type : 'value',
+                max:max,
                 nameTextStyle:{
                     fontSize:24
                 },

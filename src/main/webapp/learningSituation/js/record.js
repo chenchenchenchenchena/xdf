@@ -10,10 +10,7 @@ $(function () {
     sessionStorage.schoolId="73";
     sessionStorage.teacherName="曹雪峰";
     sessionStorage.stuNumber = 'SS1508';
-    if(!localStorage.terEmail){
-            location.href = 'login_t.html';
-            sessionStorage.studayCanfig = 'studay';
-    }
+
      $(".txt").hide();
     $(".txtDiv").hide();
     //录入数据

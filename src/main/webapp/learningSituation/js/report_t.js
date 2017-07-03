@@ -1,4 +1,12 @@
 $(function(){
+    if(!localStorage.terEmail){
+        if(!sessionStorage.stuNumber){
+            location.href = '../schedule/login_s.html';
+            sessionStorage.studayCanfig = 'studay';
+        }else{
+            location.href = 'report_s.html';
+        }
+    }
 
 
 //点击查看成绩排行
@@ -28,7 +36,7 @@ $(document).on('touchend','.title_s',function(){
 
 
 
-
+var maxNumber;
 var Xindex = '';
 var Thistime = [];
 ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
@@ -39,6 +47,7 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
             var Rindex = [];
             var classLen = e.data.length;
             for(var i = 0;i<classLen;i++){
+                maxNumber = e.data[i].fullMarksMaxOne;
                 var xzhou = [];
                 var yzhou_c = [];
                 var yzhou_r = [];
@@ -85,7 +94,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             timeIndex.push(e.data[i].data[1].data[j].lessonTime.split(' ')[0]);
                         }
                     }
-                    Echart('chart_S' + i + '', xzhou, yzhou_c, yzhou_r, mfInedx_r, timeIndex, mfInedx_c)
+                    Echart('chart_S' + i + '', xzhou, yzhou_c, yzhou_r, mfInedx_r, timeIndex, mfInedx_c,maxNumber)
                     }else if(Cindex!=0&&Rindex==0){
                     var Cindex_max = e.data[i].data[0].data[Cindex-1].lessonNO;
                     var Rindex_max = 0;
@@ -111,7 +120,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             }
                             mfInedx_c.push('满分：0')
                         }
-                        Echart('chart_S'+i+'',xzhou,yzhou_c,yzhou_r,mfInedx_r,timeIndex,mfInedx_c)
+                        Echart('chart_S'+i+'',xzhou,yzhou_c,yzhou_r,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                     }else{
                         for(var j = 0;j<Cindex_max;j++){
                             xzhou.push(j+1);
@@ -121,7 +130,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             mfInedx_c.push('满分：0');
                             timeIndex.push(e.data[i].data[0].data[j].lessonTime.split(' ')[0]);
                         }
-                        Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                        Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                     }
                 }else if(Cindex==0&&Rindex==0){
                     var Cindex_max = 0;
@@ -199,7 +208,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
                             var Rbuer = false;
@@ -228,7 +237,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -270,7 +279,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
                             var Rbuer = false;
@@ -299,7 +308,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -341,7 +350,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }
                     if(Cindex>Rindex){
@@ -414,7 +423,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
                             var Rbuer = false;
@@ -485,7 +494,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
                             var Rbuer = false;
@@ -514,7 +523,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -556,7 +565,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }
                     if(Cindex<Rindex){
@@ -587,7 +596,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -629,7 +638,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
                             var Rbuer = false;
@@ -658,7 +667,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -700,7 +709,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
                             var Rbuer = false;
@@ -729,7 +738,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(m+1==e.data[i].data[1].data[E].lessonNO){
                                         yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
                                         timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[v].fullMarks;
+                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
                                         Cbuer = false;
                                         break;
                                     }else{
@@ -771,7 +780,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
                             console.log(mfInedx_r)
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c)
+                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }
                 }
@@ -790,7 +799,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
 
 
 
-function Echart(id,x,y1,y2,mf,time,mf_c){
+function Echart(id,x,y1,y2,mf,time,mf_c,max){
 var myChart = echarts.init(document.getElementById(id));
 var option = {
         tooltip : {
@@ -827,6 +836,7 @@ var option = {
             {
                 name:'分数',
                 type : 'value',
+                max:max,
                 nameTextStyle:{
                     fontSize:24
                 },
