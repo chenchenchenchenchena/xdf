@@ -1,10 +1,33 @@
 $(function(){
+
     if(!localStorage.terEmail){
         if(!sessionStorage.stuNumber){
             location.href = '../schedule/login_s.html';
             sessionStorage.studayCanfig = 'studay';
         }else{
             location.href = 'report_s.html';
+        }
+    }else{
+        if(localStorage.terEmail){
+            if(localStorage.terEmail!='hanqifan@xdf.cn'){
+                alert('嘻嘻~  功能还在开发阶段欧');
+                $('body').hide()
+            }
+        }else{
+            var WXnum  = {
+                'wechatId':sessionStorage.openid
+            };
+            ajax_S(url.s_seac,WXnum,function(){
+                if(e.data.relatedState=='1'){
+
+                    if(e.data.studentNo=='SS6033'||e.data.studentNo=='SS6034'||e.data.studentNo=='SS5102'){
+
+                    }else{
+                        alert('嘻嘻~  功能还在开发阶段欧');
+                        $('body').hide()
+                    }
+                }
+            });
         }
     }
 

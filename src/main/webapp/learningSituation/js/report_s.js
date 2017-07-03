@@ -3,11 +3,11 @@ $(function(){
     addEventListener("touchmove", function (event) {
         event.preventDefault();
     }, false);
-    localStorage.terEmail="caoxuefeng@xdf.cn";
-    sessionStorage.teacherId="TC41";
-    sessionStorage.schoolId="73";
-    sessionStorage.teacherName="曹雪峰";
-    sessionStorage.stuNumber = 'SS1508';
+    // localStorage.terEmail="caoxuefeng@xdf.cn";
+    // sessionStorage.teacherId="TC41";
+    // sessionStorage.schoolId="73";
+    // sessionStorage.teacherName="曹雪峰";
+    // sessionStorage.stuNumber = 'SS1508';
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){

@@ -50,10 +50,12 @@ function teac(e){
         $('.name_ema').html(e.userId);
         localStorage.terEmail = e.userId;
         localStorage.sid = e.sid;
+        localStorage.teacherName = e.userName;
         bindingtea0['email'] = localStorage.terEmail;
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
+
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
 }
@@ -73,6 +75,7 @@ function binding(e){
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail;
+        localStorage.teacherId = teacontent.teacherNo;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')

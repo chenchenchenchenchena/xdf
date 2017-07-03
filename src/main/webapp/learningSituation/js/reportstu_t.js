@@ -4,7 +4,7 @@ $(function(){
         event.preventDefault();
     }, false);
 
-    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':sessionStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':sessionStorage.schoolId};
+    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.schoolId};
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
         $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
