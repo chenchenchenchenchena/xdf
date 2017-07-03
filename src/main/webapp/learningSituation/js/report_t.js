@@ -193,7 +193,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
-                                    imeIndex.push('0');
+                                    timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
                                     mfInedx_c.push('满分：0');
                                 }
@@ -264,7 +264,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
-                                    imeIndex.push('0');
+                                    timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
                                     mfInedx_c.push('满分：0');
                                 }
@@ -335,7 +335,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
-                                    imeIndex.push('0');
+                                    timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
                                     mfInedx_c.push('满分：0');
                                 }
@@ -408,7 +408,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
-                                    imeIndex.push('0');
+                                    timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
                                     mfInedx_c.push('满分：0');
                                 }
