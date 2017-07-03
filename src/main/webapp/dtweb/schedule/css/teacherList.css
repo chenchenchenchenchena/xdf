@@ -1,0 +1,108 @@
+body{
+	padding: 0 0.4rem;
+}
+.listTitle,.slistTitle{
+	height: 1.25rem;
+	font-size: 0.43rem;
+	line-height: 1.25rem;
+	font-weight: 700;
+}
+.list li,.studentList li{
+	height: 1.2rem;
+	border-top: 1px solid #e1e1e1;
+	width:100%;
+	line-height: 1.2rem;
+}
+.slist>li{
+	border-top: 1px solid #e1e1e1;
+	width:100%;
+	line-height: 1.2rem;
+}
+.studentList li i{
+	display:inline-block;
+	width:.5rem;
+}
+.list li>span:nth-child(3){
+	font-size: 0.4rem;
+	margin-left: 0.4rem;
+	float: left;
+	min-width:54%
+}
+.list li>span:nth-child(2){
+	font-size: 0.36rem;
+	display: inline-block;
+	width:1.07rem;
+	height: 1.07rem;
+	background: #ffbb37;
+	border-radius: 50%;
+	line-height: 1.07rem;
+	text-align: center;
+	margin-left: 0.4rem;
+	float: left;
+	margin-top: 0.06rem;
+}
+.list li>span:nth-child(3) span{
+	display:inline-block;
+	min-width:1.3rem
+}
+.list li>i:nth-child(1){
+	font-size: 0.4rem;
+	float: left;
+}
+.list li>span:nth-child(4){
+	display: inline-block;
+	font-size: 0.3rem;
+	width:1.5rem;
+	height: 0.7rem;
+	border: 1px solid #ccc;
+	line-height: 0.7rem;
+	text-align: center;
+	border-radius: 0.13rem;
+	margin-left: 0.4rem;
+	float: left;
+	margin-top: 0.22rem;
+}
+
+.teClass{
+	overflow: hidden;
+}
+.teClass li:first-child{
+	font-size: 0.4rem;
+	color:#333333;
+	float: left;
+}
+.teClass li:last-child{
+	background: url(../images/belowArrow.png) no-repeat;
+	display: inline-block;
+	width:0.31rem;
+	height: 0.17rem;
+	background-size: 0.31rem 0.17rem;
+	float: right;
+	margin-top: 0.54rem;
+}
+.studentList{
+	width: 100%;
+	font-size: 0.37rem;
+}
+.studentList li>span:nth-child(3){
+	font-size: 0.37rem;
+}
+.studentList li>span:nth-child(2){
+	display: inline-block;
+	text-align: center;
+	line-height: 1.07rem;
+	font-size: 0.37rem;
+	height: 1.07rem;
+	width:1.07rem;
+	background: #ffbb37;
+	border-radius: 50%;
+	color:#fff;
+	margin: 0 0.27rem 0 0.4rem;
+}
+.studentList li{
+	height: 1.6rem;
+	/*border-bottom: 1px solid #e1e1e1;*/
+	line-height: 1.6rem;
+}
+
+

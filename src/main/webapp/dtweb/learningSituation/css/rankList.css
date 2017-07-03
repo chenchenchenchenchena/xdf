@@ -1,0 +1,202 @@
+.main-content{
+    /*padding: 0 20px;*/
+}
+.main-content table{
+    width:100%;
+}
+.main-content table th,.main-content table td{
+    text-align: center;
+    height: 96px;
+    font-size: 30px;
+    color:#333333;
+}
+.main-content table th{
+    color:#808080;
+    font-size: 28px;
+    font-weight: normal;
+}
+.main-content table tr td:nth-of-type(1),
+.main-content table tr th:nth-of-type(1){
+    padding-left: 20px;
+}
+.main-content table tr td:nth-last-of-type(1),
+.main-content table tr th:nth-last-of-type(1){
+    padding-right: 20px;
+}
+.main-content table tr:nth-child(2n){
+    background: #fafafa;
+}
+.change-state{
+    display: inline-block;
+    width: 17px;
+    height: 24px;
+    margin-right: 10px;
+}
+.state-up{
+    background: url("../images/upIcon.png") center center no-repeat;
+}
+.state-down{
+    background: url("../images/downIcon.png") center center no-repeat;
+}
+.first-num{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 47px;
+    color:#fff;
+    background: #00bb97;
+    border-radius: 50%;
+}
+.link-to{
+    display: inline-block;
+    width: 13px;
+    height: 23px;
+    background: url("../images/linkIcon.png") center center no-repeat;
+}
+.none{display: none;}
+.mg-l{margin-left: 20px;}
+/*分享排行榜*/
+.rankImg {
+    height: 314px;
+    padding: 30px 0;
+    background: #00bb97;
+    position: relative;
+}
+.rankInfo{
+    height:268px;
+    width: 660px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding-left: 36px;
+    position: relative;
+}
+.rank-cup{
+    width: 182px;
+    height: 268px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background:url("../images/rankCup.png") left center no-repeat;
+}
+.linkL{
+    position: absolute;
+    bottom: 22px;
+    left: 70px;
+    z-index: 2;
+}
+.linkR{
+    position: absolute;
+    bottom: 22px;
+    right: 70px;
+    z-index: 2;
+}
+.rankTitle{
+    padding-top:48px;
+    margin-bottom: 16px;
+}
+.rankTitle img{
+    vertical-align: bottom;
+}
+
+.rankTitle span{
+    display: inline-block;
+    width:124px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    background:#cbf1ea;
+    color:#00bb97;
+    font-size: 26px;
+    text-align: center;
+
+}
+.rankInfo>p{
+    font-size: 24px;
+    color:#808080;
+    line-height: 34px;
+}
+.rankInfo>p:nth-of-type(1){
+    font-size: 26px;
+    color:#311c25;
+    font-weight: bold;
+}
+.ranklist-box{
+    width:100%;
+    background: #f1f1f1;
+    position: relative;
+}
+.ranklist{
+    width: 696px;
+    margin: 0 30px;
+    background: #ffffff;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -52px;
+    left: 0;
+    padding-top: 30px;
+}
+.ranklist li{
+    height: 80px;
+    /* border-bottom: 1px solid #e1e1e1; */
+    line-height: 80px;
+    padding: 10px 0 30px;
+}
+i{
+    font-style: normal;
+    display: inline-block;
+}
+.rankleft{
+    font-size: 30px;
+    float: left;
+}
+.rankleft>i:nth-child(1){
+    color: #808080;
+    width: 66px;
+    height: 74px;
+    margin-left: 44px;
+    vertical-align: middle;
+}
+.rankfirst{
+    background: url("../images/theFirstIcon.png") left center no-repeat;
+}
+.nofirst{
+    color:#808080;
+    text-align: center;
+}
+.rankleft>i:nth-child(2){
+    height: 80px;
+    width: 80px;
+    background: #ffbc1f;
+    color: #fff;
+    line-height: 80px;
+    /*border-radius: 50%;*/
+    border-radius: 40px;
+    text-align: center;
+    margin: 0 32px 0 20px;
+    vertical-align: middle;
+    font-size: 28px;
+}
+.rankright{
+    font-size: 30px;
+    float: right;
+    color: #333333;
+    margin-right: 34px;
+}
+.rankright>i:nth-child(1){
+    margin-right: 24px;
+    font-size: 26px;
+    color: #808080;
+    width: 160px;
+    text-align: left;
+    padding-left: 10px;
+}
+.rankright>i:nth-child(2){
+    width:90px;
+}
+#imgs>img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 10;
+}

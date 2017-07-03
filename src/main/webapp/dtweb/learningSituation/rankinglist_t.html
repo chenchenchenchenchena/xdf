@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>学生成绩排行</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="full-screen" content="yes"/>
+	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/common.css"  />
+	<link rel="stylesheet" href="css/rankList.css"  />
+	<script src="../common/js/jquery.js"></script>
+	<script src="../common/js/scale.js"></script>
+	<script src="../common/js/layer.js"></script>
+	<script src="../common/js/ajax.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<!--<script src="js/jquery.base64.js"></script>-->
+	<!--<script src="js/html2canvas.js"></script>-->
+	<!--<script src="js/canvas2image.js"></script>-->
+
+</head>
+<body>
+<ul class="tab-title">
+	<li class="tab-active">入门测</li>
+	<li>出门测</li>
+</ul>
+<div class="main-content" teststate="1">
+	<!--入门测-->
+	<table class="intro-test">
+		<!--<thead></thead>-->
+		<tbody>
+			<!--<tr>-->
+				<!--<th>排名</th>-->
+				<!--<th>姓名</th>-->
+				<!--<th>本次分数</th>-->
+				<!--<th>分数浮动</th>-->
+				<!--<th>名次浮动</th>-->
+				<!--&lt;!&ndash;<th><a href="sharedranking_t.html" id="wecharShare1">分享</a></th>&ndash;&gt;-->
+				<!--<th><img src="images/shareIcon.png" alt="分享"/></th>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><span class="first-num">1</span></td>-->
+				<!--<td>张一山</td>-->
+				<!--<td>100</td>-->
+				<!--<td><i class="change-state state-up"></i>7分</td>-->
+				<!--<td><i class="change-state state-down"></i>2名</td>-->
+				<!--&lt;!&ndash;<td><a href="../homework/dohomework_t.html">&gt;</a></td>&ndash;&gt;-->
+				<!--<td><a href="../homework/dohomework_t.html" class="link-to"></a></td>-->
+			<!--</tr>-->
+		</tbody>
+	</table>
+	<!--出门测-->
+	<!--<table class="departure-test"></table>-->
+</div>
+<div class="no-data none">
+	<img src="images/noDatas.png"  />
+	<p>暂无排行信息</p>
+</div>
+<script src="js/rankList.js"></script>
+</body>
+</html>
