@@ -134,6 +134,7 @@ function stuc(e){
 			layer.msg('绑定成功');
 			if(sessionStorage.studayCanfig=='studay'){
 				location.href = '../learningSituation/report_s.html'
+                sessionStorage.removeItem('studayCanfig')
 			}else{
                 location.href = 'schedule_s.html';
 			}

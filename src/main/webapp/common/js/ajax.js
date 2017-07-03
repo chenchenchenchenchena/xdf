@@ -32,10 +32,10 @@ var url = {
     't_more': url_o+'e2Login/doLogin.do',   //老师登录页  查询老师信息
     't_wxmo': url_o+'teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
     't_siot': url_o+'teacherBind/unbindTeacherInfo.do',   //解绑
-    's_seac': url_o+'studentBind/webQueryStudentInfo.do',  //学员号查询
+    's_seac': url_o+'studentBind/queryStudentInfo.do',  //学员号查询
     's_bind': url_o+'studentBind/bindWechatandStudent.do',   //学员号绑定微信
     's_nobd': url_o+'studentBind/unbindStudentInfo.do',  //学员号解绑微信
-    's_nafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do',   //姓名手机号查询
+    's_nafu': url_o+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
     's_emai': url_o+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
     's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
     's_hwlt': url_o+'studentData/assingmentHomework.do',//待交作业学生列表查询

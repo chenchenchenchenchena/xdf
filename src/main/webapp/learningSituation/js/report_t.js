@@ -1,11 +1,30 @@
 $(function(){
-        $('header').before('111')
+        $('header').before('<title>111</title>')
     if(!localStorage.terEmail){
         if(!sessionStorage.stuNumber){
             location.href = '../schedule/login_s.html';
             sessionStorage.studayCanfig = 'studay';
         }else{
-            location.href = 'report_s.html';
+            if(sessionStorage.stuNumber=='ss3504'||sessionStorage.stuNumber=='ss6034'||sessionStorage.stuNumber=='ss5102'){
+                            location.href = 'report_s.html';
+                        }else{
+                            $('body').hide();
+                            alert('嘻嘻~  功能还在开发阶段欧');
+                        }
+            var WXnum  = {
+                'wechatId':sessionStorage.openid
+            };
+            // ajax_S(url.s_seac,WXnum,function(){
+            //     if(e.data.relatedState=='1'){
+            //
+            //         if(e.data.studentNo=='ss3504'||e.data.studentNo=='ss6034'||e.data.studentNo=='ss5102'){
+            //             location.href = 'report_s.html';
+            //         }else{
+            //             $('body').hide();
+            //             alert('嘻嘻~  功能还在开发阶段欧');
+            //         }
+            //     }
+            // });
         }
     }else{
         if(localStorage.terEmail){
@@ -13,21 +32,6 @@ $(function(){
                 alert('嘻嘻~  功能还在开发阶段欧');
                 $('body').hide()
             }
-        }else{
-            var WXnum  = {
-                'wechatId':sessionStorage.openid
-            };
-            ajax_S(url.s_seac,WXnum,function(){
-                if(e.data.relatedState=='1'){
-
-                    if(e.data.studentNo=='SS6033'||e.data.studentNo=='SS6034'||e.data.studentNo=='SS5102'){
-
-                    }else{
-                        alert('嘻嘻~  功能还在开发阶段欧');
-                        $('body').hide()
-                    }
-                }
-            });
         }
     }
 
