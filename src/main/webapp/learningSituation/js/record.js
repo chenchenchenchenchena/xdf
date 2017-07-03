@@ -107,6 +107,7 @@ $(function () {
             $(".classTime").html("");
              $(".classrome").html("");
              $(".scoreTitle input").val("");
+             $(".totalScore").val(10);
         })
         
 		
@@ -284,7 +285,7 @@ $(function () {
     
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
-     	location.href="report_t.html";
+     	/*location.href="report_t.html";*/
      })
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
