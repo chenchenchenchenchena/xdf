@@ -1,5 +1,6 @@
 $(function(){
-
+//禁止浏览器拖动
+    ontouchmove,function(e){e.preventDefault();}
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
