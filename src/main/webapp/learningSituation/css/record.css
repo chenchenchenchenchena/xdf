@@ -74,7 +74,7 @@ body,html{
     line-height: 104px;
     border-bottom: 1px solid #e1e1e1;
 }
-.scoreTitle>span:nth-child(2){
+.scoreTitle i{
 	float: right;
 }
 .scoreTitle input{
