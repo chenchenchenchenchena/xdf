@@ -1,13 +1,13 @@
 $(function(){
-	if(!sessionStorage.openid){
-		wechatCode(location.href)
-	}
-    // sessionStorage.openid = '111';
-var WXnum  = {
-    'wechatId':sessionStorage.openid
-}
+// 	if(!sessionStorage.openid){
+// 		wechatCode(location.href)
+// 	}
+//     // sessionStorage.openid = '111';
+// var WXnum  = {
+//     'wechatId':sessionStorage.openid
+// }
 var teacherlogin=true;
-ajax_S(url.s_seac,WXnum,stuc);
+// ajax_S(url.s_seac,WXnum,stuc);
 
 function stuc(e){
 	console.log(e)
@@ -97,6 +97,7 @@ function stuc(e){
 			layer.msg('请输入正确格式学员号');
 			return false;
 		}
+		window.location.href = "../dtweb/main_list.html";
 		if(e.result==true){
 			$('.noSearch').hide()
 			$('.card').hide()
@@ -111,6 +112,7 @@ function stuc(e){
 				$('.deterAss').html('解除关联')
 				$('.deterAss').css('background','#fc1010')
 			}
+
 		}else{
             $('.search').hide()
             $('.card').hide();
