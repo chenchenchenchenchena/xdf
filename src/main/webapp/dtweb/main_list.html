@@ -28,7 +28,7 @@
 <ul class="mainLink">
     <li><a id="schedule" href="#">课表</a></li>
     <li><a id="learn" href="#">学情</a></li>
-    <!--<li>账号</li>-->
+    <li><a id="account" href="account/account.html">账号</a></li>
 </ul>
 <script>
     $(function () {
@@ -60,6 +60,7 @@
         localStorage.terEmail = e.userId;
         localStorage.sid = e.sid;
         sessionStorage.terEmail = e.userId;
+        localStorage.terName = e.userName;
     }
 </script>
 </body>

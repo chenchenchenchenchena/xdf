@@ -49,7 +49,8 @@ var url = {
     't_save':url_o+'teacherData/addTeacherAnalysis.do',//成绩保存
     't_modify':url_o+'teacherAnalysis/teacherqueryLitimesdtGrade.do',//修改成绩
     's_webseac': url_o+'studentBind/webQueryStudentInfo.do',  //web学员号查询
-    's_webnafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do' //web姓名手机号查询
+    's_webnafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do', //web姓名手机号查询
+    't_webback':url_o2+'/xdfdthome/dtweb/schedule/login_s.html' //回调地址
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
