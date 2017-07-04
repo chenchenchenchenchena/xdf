@@ -5,9 +5,9 @@ $(function () {
     var layer4;
     var load;
     var flag = 1;
-    if(!sessionStorage.openid){
-        wechatCode(location.href)
-    }
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href)
+    // }
     // localStorage.terEmail="caoxuefeng@xdf.cn";  //
     // sessionStorage.teacherId="TC41"; //
     // sessionStorage.schoolId="73";   //

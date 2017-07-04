@@ -36,13 +36,13 @@ $(function(){
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
-            // 'teaEmail':'undefined',
-            // 'classCode':'',
-            // 'schoolId':'',
-            // 'gradeType':testState
+            // 'teaEmail':'caoxuefeng@xdf.cn',
+            // 'classCode':'CZSPP008',
+            // 'schoolId':'73',
+            // 'gradeType':'1'
             'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
-            'classCode':sessionStorage.classcode, //班级编号
-            'schoolId':sessionStorage.schoolId, //校区id
+            'classCode':localStorage.getItem('CLASSCODE'), //班级编号
+            'schoolId':localStorage.getItem('SCHOOLID'), //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();
