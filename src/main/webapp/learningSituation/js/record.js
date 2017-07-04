@@ -5,6 +5,7 @@ $(function () {
     var layer4;
     var load;
     var flag = 1;
+    /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
@@ -275,6 +276,7 @@ $(function () {
 		         skin: '',
 		         content:$(".recordSub")
 	         })*/
+	        var student = [];
 	        for (var i = 0; i < $(".scoreList dl").length; i++) {
 	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
 	                var studentinfo = {
@@ -314,8 +316,6 @@ $(function () {
 		         	})
 		    		
 	    		}
-		         	 
-		      
 	    }
        
     })
