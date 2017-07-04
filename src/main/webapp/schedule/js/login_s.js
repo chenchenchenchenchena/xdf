@@ -15,6 +15,7 @@ function stuc(e){
 	if(e.result==false){
 		$('.card').show();
 		$('.enter').show();
+		return false;
 	}
 	if(e.data.relatedState=='1'&&e.data.mobile==''){
 		$('.search').show();
