@@ -4,7 +4,13 @@ $(function(){
         event.preventDefault();
     }, false);
 
-    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.schoolId};
+    var Stujson = {
+        'teacherEmail':localStorage.terEmail,
+        'classCode':localStorage.getItem('CLASSCODE'),
+        'tCode':GetRequest('tCode'),
+        'studentNo':GetRequest('studentNo'),
+        'schoolId':localStorage.getItem('SCHOOLID')
+    };
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
         $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
@@ -23,15 +29,15 @@ var maxnumber = 0;
 
 
     $('.tab-title li').on('touchend',function(){
-        $('.no-data').hide()
+        $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
             Stujson.tCode='2';
-            $('.class_big').find('.classroom_s').remove();
+            // $('.class_big').find('.classroom_s').remove();
             Studata()
         }else{
             Stujson.tCode='1';
-            $('.class_big').find('.classroom_s').remove();
+            // $('.class_big').find('.classroom_s').remove();
             Studata()
         }
     });
@@ -40,7 +46,6 @@ var maxnumber = 0;
 
 
     function Studata(){
-
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
             console.log(e);
             var Xindex = '';
@@ -53,6 +58,7 @@ var maxnumber = 0;
             if(e.data.AvgrealGrade!=undefined){
                 var stuSelf = e.data.realGrade;
                 for(var s = 0;s<e.data.AvgrealGrade.length;s++){
+                    // TODO
                     if(parseInt(e.data.AvgrealGrade[s].fullMarks)>maxnumber){
                         maxnumber =parseInt(e.data.AvgrealGrade[s].fullMarks)
                     }
@@ -111,7 +117,7 @@ var maxnumber = 0;
                        $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                    }
                }
-               console.log(pjIndex)
+               console.log(pjIndex);
                 Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
                 $('.class_big').show();
                 $('.title_s').eq(0).siblings().show();
@@ -137,6 +143,7 @@ var maxnumber = 0;
 
 
     function Echart(id,x,y1,y2,y3,y4,max){
+        console.log(id+"---"+x+"---"+y1+"---"+y2+"---"+y3+"---"+y4+"---"+max);
         var myChart = echarts.init(document.getElementById(id));
         var option = {
             tooltip : {

@@ -69,7 +69,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             var class_ = e.data;
             for(var s = 0;s<class_[0].length;s++){
                 if(class_[0][s].fullMarks>maxNumber){
-                    maxNumber = class_[s][0].fullMarks
+                    maxNumber = class_[0][s].fullMarks
                 }
             }
                 for(var i = 0;i<class_.length;i++) {
