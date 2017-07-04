@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>双师平台</title>
-    <link rel="stylesheet" href="../common/css/base.css"  />
+    <link rel="stylesheet" href="../common/css/base.css"/>
     <style>
-        .mainLink li{
+        .mainLink li {
             width: 400px;
             height: 120px;
             line-height: 120px;
@@ -15,17 +15,50 @@
             color: #fff;
             margin: 45px auto;
         }
-        .mainLink li a{
+
+        .mainLink li a {
             color: #fff;
         }
     </style>
+    <script src="../common/js/ajax.js"></script>
 </head>
 <body>
 
- <ul class="mainLink">
-     <li><a href="schedule/schedule_s.html">课表</a></li>
-      <li><a href="learningSituation/report_s.html">学情</a></li>
-     <!--<li>账号</li>-->
- </ul>
+<ul class="mainLink">
+    <li><a id="schedule" href="#">课表</a></li>
+    <li><a id="learn" href="#">学情</a></li>
+    <!--<li>账号</li>-->
+</ul>
+<script>
+    $(function () {
+        if (localStorage.getItem("statusFlag") == "student") {
+            $('#schedule').attr('href', "schedule/schedule_s.html");
+            $('#learn').attr('href', "learningSituation/report_s.html");
+            getTeacherInfo();
+        } else {
+            $('#schedule').attr('href', "schedule/schedule_t.html");
+            $('#learn').attr('href', "learningSituation/report_t.html");
+        }
+        localStorage.removeItem("statusFlag");
+    });
+    //获取教师信息
+    function getTeacherInfo() {
+        var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+        var calbac = {
+            'code': code_s,
+            'e2State': state_s,
+            'state': state_s
+        };
+        ajax_S(url.t_more, calbac, teac);
+    }
+
+    //返回数据解析
+    function teac(e) {
+        console.log(e);
+        localStorage.terEmail = e.userId;
+        localStorage.sid = e.sid;
+        sessionStorage.terEmail = e.userId;
+    }
+</script>
 </body>
 </html>
