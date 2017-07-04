@@ -107,6 +107,7 @@ $(function(){
 			sessionStorage.stuNumber = $('.studentLogin input').val();
 			sessionStorage.schoolId = e.data.schoolId;
 			window.location.href = "../main_list.html";
+			localStorage.setItem('statusFlag','student');//学生身份标识
 			if(e.data.relatedState=='0'){
 				$('.deterAss').html('立即关联')
 				$('.deterAss').css('background','#00ba97')
@@ -195,6 +196,7 @@ $(function(){
 		}
 		$('.searchTwo').show();
 		window.location.href = "../main_list.html";
+		localStorage.setItem('statusFlag','student');//学生身份标识
 		var  num = 0;
 		var  bindz = ''
 		for(var i = 0;i<studentNo.length;i++){

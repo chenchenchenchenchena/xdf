@@ -72,8 +72,17 @@ $(function(){
                     }else{
                         rankCss = "";
                     }
-                    var gradeFloat = items.grade -  items.lastGrade;// 分数浮动
-                    var rankFloat = items.ranking -  items.lastRanking;// 名次浮动
+                    var gradeFloat,rankFloat;
+                    if(items.lastGrade<=0){
+                        gradeFloat = items.grade;
+                    }else{
+                        gradeFloat = items.grade -  items.lastGrade;// 分数浮动
+                    }
+                    if(items.lastRanking<=0){
+                        rankFloat = items.ranking;
+                    }else{
+                        rankFloat = items.ranking -  items.lastRanking;// 名次浮动
+                    }
                     if (gradeFloat>=0){
                         floatGradeCss = "state-up";
                     }else{
