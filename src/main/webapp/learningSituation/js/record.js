@@ -76,7 +76,12 @@ $(function () {
 
                     $(".scoreList").html(stu);
                     for (var h = 0; h < e.Data[i].LessonData.length; h++) {
-                        str1 += "<li>第" + e.Data[i].LessonData[h].lessonNo + "课次(" + e.Data[i].LessonData[h].sectTime + ")</li>";
+                    	if(e.Data[i].LessonData.length==0){
+                    		str1="<span>暂无课次</span>";
+                    	}else{
+                    		str1 += "<li>第<span class=lessonNo>" + e.Data[i].LessonData[h].lessonNo + "</span>课次(<span class=sectTime>" + e.Data[i].LessonData[h].sectTime + "</span>)</li>";
+                    	}
+                        
                     }
                     $(".classNumTime ul").html(str1);
                 }
@@ -101,7 +106,7 @@ $(function () {
         //点击课次    
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-            $(".classTime").html($(this).html());
+            $(".classTime").html("第<span class=classnum>"+$(this).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(this).find(".sectTime").html()+"</span>)");
             $(".scoreTitle input").val("");
         })
         //点击成绩类型
@@ -150,10 +155,13 @@ $(function () {
    
     
     //满分表单
-    $(".totalScore").keyup(function(){
-    	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
-    		$(".totalScore").val("");
+    $(".totalScore").keypress(function(e){
+    	if(e.keyCode==13){
+    		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
+	    		$(".totalScore").val("");
+	    	}
     	}
+    	
     })
     $(".totalScore").keyup(function(){
 		resetData();
@@ -177,16 +185,16 @@ $(function () {
            
         }*/
     	console.log(student);
-    	var classNo = $(".classTime").html().substring(1,2);
-        var classT = $(".classTime").html().substring(4,22);
+    	/*var classNo = $(".lessonNo").html().substring(1,2);
+        var classT = $(".sectTime").html().substring(4,22);*/
         var saveInfo = {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
-            "lessonNo": classNo,
-            "lessonTime": classT,
+            "lessonNo": $(".classTime").find(".classnum").html(),
+            "lessonTime": $(".classTime").find(".lestime").html(),
             "fullMarks": $(".totalScore").val(),
             "schoolId":localStorage.schoolId,
             "student": student
@@ -455,7 +463,7 @@ $(function () {
 			    	"classCode":$(".class").html(),
 			    	"tCode":$(".st").html(),
 			    	"schoolId":localStorage.schoolId,
-			    	"lessonNo":$(".classTime").html().substring(1,2)
+			    	"lessonNo":$(".classTime").find(".classnum").html()
 			    };
 			    console.log(queryData.lessonNo)
 			     console.log(queryData.classCode)
