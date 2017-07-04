@@ -41,6 +41,8 @@ $(document).on('touchend','.achievement_s>h4',function(){
     var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
     sessionStorage.classcode = $(this).attr('classcode');
     sessionStorage.schoolid = $(this).attr('schoolid');
+    localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
+    localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
     window.location.href = 'rankinglist_t.html?title='+title;
 });
 

@@ -104,7 +104,7 @@ body{
 .stuInfo .address{
 	border: none;
 }
-.deterAss{
+.deterAss,.loginbtn{
 	width:9.2rem;
 	height: 1.17rem;
 	background: #00ba97;
