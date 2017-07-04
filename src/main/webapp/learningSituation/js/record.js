@@ -55,10 +55,13 @@ $(function () {
             //课次及时间
             for (var i = 0; i < e.Data.length; i++) {
                 if ($(".classrome").html() == e.Data[i].className) {
-                    for (var j = 0; j < e.Data[i].studentData.length; j++) {
-                        var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
-                        stuArr.push(stuInfo);
-
+                	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
+                    	for (var j = 0; j < e.Data[i].studentData.length; j++) {
+                    		var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
+                        	stuArr.push(stuInfo);
+                    	}
+                    }else{
+                    	$(".scoreList").html("暂无学生成绩信息");
                     }
                    /* console.log(stuArr);*/
 
@@ -75,14 +78,14 @@ $(function () {
 
 
                     $(".scoreList").html(stu);
-                    for (var h = 0; h < e.Data[i].LessonData.length; h++) {
-                    	if(e.Data[i].LessonData.length==0){
-                    		str1="<span>暂无课次</span>";
-                    	}else{
-                    		str1 += "<li>第<span class=lessonNo>" + e.Data[i].LessonData[h].lessonNo + "</span>课次(<span class=sectTime>" + e.Data[i].LessonData[h].sectTime + "</span>)</li>";
-                    	}
-                        
+                    if(e.Data[i].LessonData.length==0){
+                    	str1="<span>暂无课次</span>";
+                    }else{
+                		for (var h = 0; h < e.Data[i].LessonData.length; h++) {
+                			str1 += "<li>第<span class=lessonNo>" + e.Data[i].LessonData[h].lessonNo + "</span>课次(<span class=sectTime>" + e.Data[i].LessonData[h].sectTime + "</span>)</li>";
+                		}
                     }
+                   
                     $(".classNumTime ul").html(str1);
                 }
 
