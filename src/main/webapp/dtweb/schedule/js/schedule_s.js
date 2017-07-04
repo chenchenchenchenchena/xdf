@@ -35,7 +35,7 @@ $(function () {
 
     //存储主讲老师
     var masterteacher = '';
-    // sessionStorage.stuNumber = "SS3304";
+    // sessionStorage.stuNum = "SS3304";
     //当天课程
     var emailm = {
         'studentCode': sessionStorage.stuNum,
