@@ -5,8 +5,9 @@ $(function(){
     // sessionStorage.openid = '111';
 var WXnum  = {
     'wechatId':sessionStorage.openid
-}
+};
 var teacherlogin=true;
+
 ajax_S(url.s_seac,WXnum,stuc);
 
 function stuc(e){
@@ -98,12 +99,13 @@ function stuc(e){
 			return false;
 		}
 		if(e.result==true){
-			$('.noSearch').hide()
-			$('.card').hide()
-			$('.search').show()
-			$('.stuname').html(e.data.studentName)
-			$('.stutel').html('')
-			sessionStorage.stuNum = $('.studentLogin input').val()
+			$('.noSearch').hide();
+			$('.card').hide();
+			$('.search').show();
+			$('.stuname').html(e.data.studentName);
+			$('.stutel').html('');
+            sessionStorage.stuNumber = $('.studentLogin input').val();
+            sessionStorage.schoolId = e.data.schoolId;
 			if(e.data.relatedState=='0'){
 				$('.deterAss').html('立即关联')
 				$('.deterAss').css('background','#00ba97')
@@ -130,7 +132,12 @@ function stuc(e){
 		}else{
             sessionStorage.stuNum = $('.stunum').val();
 			layer.msg('绑定成功');
-			location.href = 'schedule_s.html';
+			if(sessionStorage.studayCanfig=='studay'){
+				location.href = '../learningSituation/report_s.html'
+                sessionStorage.removeItem('studayCanfig')
+			}else{
+                location.href = 'schedule_s.html';
+			}
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010');
 		}
@@ -144,7 +151,7 @@ function stuc(e){
 	})
 	//关联点击
 	$('.deterAss').click(function(){
-		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+		var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl};
 		if($('.stunum').val()==''){
 			stumore.StudentCode = sessionStorage.stuNumber
 		}

@@ -1,7 +1,10 @@
 $(function(){
 //禁止浏览器拖动
-    ontouchmove,function(e){e.preventDefault();}
-    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':sessionStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':sessionStorage.schoolId};
+    addEventListener("touchmove", function (event) {
+        event.preventDefault();
+    }, false);
+
+    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.schoolId};
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
         $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
@@ -15,7 +18,7 @@ $(function(){
     });
 
 
-
+var maxnumber = 0;
 // tab切换
 
 
@@ -24,11 +27,11 @@ $(function(){
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
             Stujson.tCode='2';
-            // $('.class_big').find('.classroom_s').remove();
+            $('.class_big').find('.classroom_s').remove();
             Studata()
         }else{
             Stujson.tCode='1';
-            // $('.class_big').find('.classroom_s').remove();
+            $('.class_big').find('.classroom_s').remove();
             Studata()
         }
     });
@@ -49,6 +52,11 @@ $(function(){
             var Cindex = [];
             if(e.data.AvgrealGrade!=undefined){
                 var stuSelf = e.data.realGrade;
+                for(var s = 0;s<e.data.AvgrealGrade.length;s++){
+                    if(parseInt(e.data.AvgrealGrade[s].fullMarks)>maxnumber){
+                        maxnumber =parseInt(e.data.AvgrealGrade[s].fullMarks)
+                    }
+                }
                if( stuSelf.length!=stuSelf[stuSelf.length-1].lessonNo){
                    for(var j = 0;j<e.data.AvgrealGrade.length;j++){
                        Xtwindex.push(j+1);
@@ -104,7 +112,7 @@ $(function(){
                    }
                }
                console.log(pjIndex)
-                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx)
+                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
                 $('.class_big').show();
                 $('.title_s').eq(0).siblings().show();
                 $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
@@ -128,7 +136,7 @@ $(function(){
 
 
 
-    function Echart(id,x,y1,y2,y3,y4){
+    function Echart(id,x,y1,y2,y3,y4,max){
         var myChart = echarts.init(document.getElementById(id));
         var option = {
             tooltip : {
@@ -165,6 +173,7 @@ $(function(){
                 {
                     name:'分数',
                     type : 'value',
+                    max:max,
                     nameTextStyle:{
                         fontSize:24
                     },

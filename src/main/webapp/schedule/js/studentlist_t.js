@@ -9,7 +9,7 @@ $(function(){
 
 var stuname = sessionStorage.s.split(',');
 var teaname = sessionStorage.t.split(',');
-for(var i = 1;i<teaname.length+1;i++){
+for(var i = 0;i<teaname.length;i++){
 	if(teaname[i]!=''&&teaname[i]!=undefined){
 		$('.slist').append('<li class="listCon"><ul class="teClass"><li>'+teaname[i]+'老师班('+sessionStorage.cc+')</li><li class="arrow"></li></ul><ul class="studentList"></ul></li>')
         for(var k = 0;k<stuname.length;k++){
