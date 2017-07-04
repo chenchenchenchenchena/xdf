@@ -135,7 +135,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 
                 }
                 console.log(Cindex);
-                    Echart('chart_S'+i+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxNumber)
+                Echart('chart_S'+i+'',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxNumber)
             }
 
             $('.tab_sreport').css('padding','0');

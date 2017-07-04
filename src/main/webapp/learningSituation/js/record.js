@@ -287,7 +287,7 @@ $(function () {
 		         skin: '',
 		         content:$(".recordSub")
 	         })*/
-	       
+	       	/*student=[];*/
 	        for (var i = 0; i < $(".scoreList dl").length; i++) {
 	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
 	                var studentinfo = {
@@ -330,6 +330,7 @@ $(function () {
     
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
+        student=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
@@ -338,6 +339,7 @@ $(function () {
      
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
+    	student=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
@@ -365,6 +367,7 @@ $(function () {
      $(".noRecord button").eq(1).click(function(){
      	layer.close(layer1);
      	saveData();
+     	
      }) 
     
     
