@@ -32,6 +32,7 @@
 </ul>
 <script>
     $(function () {
+//        localStorage.setItem("statusFlag","student");
         if (localStorage.getItem("statusFlag") == "student") {
             $('#schedule').attr('href', "schedule/schedule_s.html");
             $('#learn').attr('href', "learningSituation/report_s.html");
