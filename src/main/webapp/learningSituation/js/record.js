@@ -148,16 +148,19 @@ $(function () {
    
     
     //满分表单
-    $(".totalScore").blur(function(){
+    $(".totalScore").keyup(function(){
     	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
     		$(".totalScore").val("");
     	}
     })
-    
+    $(".totalScore").keyup(function(){
+		resetData();
+		$(".scoreTitle input").val("");
+	})
     
     function saveData(){
     	load = layer.load(0,{shade: [0.8, '#000']});
-    	var student = [];
+    	/*var student = [];
     	for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
                 var studentinfo = {
@@ -170,7 +173,7 @@ $(function () {
             }
 
            
-        }
+        }*/
     	console.log(student);
     	var classNo = $(".classTime").html().substring(1,2);
         var classT = $(".classTime").html().substring(4,22);
@@ -248,8 +251,7 @@ $(function () {
 		         content:$(".classTimeEmpty")
 	         })
          }else{
-	        for(var i = 0;i<$(".scoreList dt").length;i++){
-	        /*alert($(".scoreList dl dt").eq(i).html()=="")*/
+	        /*for(var i = 0;i<$(".scoreList dt").length;i++){
 		        if(isNaN(parseInt($(".scoreList dl dt").eq(i).html()))){
 			         layer1=layer.open({
 				         type: 1,
@@ -272,7 +274,46 @@ $(function () {
 		         title:'',
 		         skin: '',
 		         content:$(".recordSub")
-	         })
+	         })*/
+	        for (var i = 0; i < $(".scoreList dl").length; i++) {
+	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
+	                var studentinfo = {
+	                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+	                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
+	                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+	                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+	                }
+	                 student.push(studentinfo);
+	            }
+	
+	           
+	        }
+	        var dtlength=$(".scoreList dt").length;
+		       	if(student==""){
+		       		layer.msg("没有录入成绩");
+		       	}else if(student.length<dtlength){
+		       		
+			         layer1=layer.open({
+				         type: 1,
+				         area: ['548px', '345px'],
+				         shade:[0.2,'#000'],
+				         title:'',
+				         skin: '',
+				         content:$(".noRecord")
+			         })
+				     
+		       	}else{
+		       		
+	       			layer2=layer.open({
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".recordSub")
+		         	})
+		    		
+	    		}
 		         	 
 		      
 	    }
@@ -292,6 +333,17 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
+    	for (var i = 0; i < $(".scoreList dl").length; i++) {
+            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
+                var studentinfo = {
+                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
+                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+                }
+                 student.push(studentinfo);
+            }
+	    }
     	saveData();
     })
     
@@ -424,6 +476,7 @@ $(function () {
 			console.log(msg);
 			if(msg.data.length==0){
 				$(".totalScore").val(10);
+				$(".totalScore").attr("readonly",false);
 				resetData();
 			}else{
 				resetData();
@@ -432,6 +485,7 @@ $(function () {
 					for(var i=0;i<msg.data.length;i++){
 						/*console.log(res.data[0].fullmarks);*/
 						$(".totalScore").val(msg.data[0].fullmarks);
+						$(".totalScore").attr("readonly","readonly");
 						/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
 						if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
 							console.log("sssss")
