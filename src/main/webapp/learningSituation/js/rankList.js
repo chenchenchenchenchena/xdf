@@ -41,8 +41,8 @@ $(function(){
             // 'schoolId':'73',
             // 'gradeType':testState
             'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
-            'classCode':sessionStorage.classcode, //班级编号
-            'schoolId':sessionStorage.schoolId, //校区id
+            'classCode':localStorage.getItem('CLASSCODE'), //班级编号
+            'schoolId':localStorage.getItem('SCHOOLID'), //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();

@@ -36,9 +36,9 @@ $(function(){
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
-            // 'teaEmail':'caoxuefeng@xdf.cn',
-            // 'classCode':'CZSPP008',
-            // 'schoolId':'73',
+            // 'teaEmail':'undefined',
+            // 'classCode':'',
+            // 'schoolId':'',
             // 'gradeType':testState
             'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
             'classCode':sessionStorage.classcode, //班级编号

@@ -135,10 +135,10 @@ $(function(){
             // 'teaEmail':'caoxuefeng@xdf.cn',
             // 'classCode':'CZSPP008',
             // 'schoolId':'73',
-            // 'gradeType':testState
+            // 'gradeType':'1'
             'teaEmail':localStorage.terEmail,//教师邮箱  localStorage.terEmail
-            'classCode':sessionStorage.classcode, //班级编号
-            'schoolId':sessionStorage.schoolId, //校区id
+            'classCode':localStorage.getItem('CLASSCODE'), //班级编号
+            'schoolId':localStorage.getItem('SCHOOLID'), //校区id
             'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();
@@ -213,8 +213,8 @@ function takeScreenshot() {
             // layer.msg('加载中...');
                 convertCanvasToImage();
         },
-//			 width: '100%',
-//			 height: '100%'
+         width: $('body').width(),
+         height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
     });
 }
 //	canvas to images

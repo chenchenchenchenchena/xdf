@@ -106,15 +106,15 @@ $(function(){
 			$('.stutel').html('');
 			sessionStorage.stuNumber = $('.studentLogin input').val();
 			sessionStorage.schoolId = e.data.schoolId;
-			window.location.href = "../main_list.html";
 			localStorage.setItem('statusFlag','student');//学生身份标识
-			if(e.data.relatedState=='0'){
-				$('.deterAss').html('立即关联')
-				$('.deterAss').css('background','#00ba97')
-			}else{
-				$('.deterAss').html('解除关联')
-				$('.deterAss').css('background','#fc1010')
-			}
+			// window.location.href = "../main_list.html";
+			// if(e.data.relatedState=='0'){
+			// 	$('.deterAss').html('立即关联')
+			// 	$('.deterAss').css('background','#00ba97')
+			// }else{
+			// 	$('.deterAss').html('解除关联')
+			// 	$('.deterAss').css('background','#fc1010')
+			// }
 
 		}else{
 			$('.search').hide()
@@ -195,17 +195,17 @@ $(function(){
 			return false;
 		}
 		$('.searchTwo').show();
-		window.location.href = "../main_list.html";
+		// window.location.href = "../main_list.html";
 		localStorage.setItem('statusFlag','student');//学生身份标识
 		var  num = 0;
-		var  bindz = ''
+		var  bindz = '登录';
 		for(var i = 0;i<studentNo.length;i++){
-			if(studentNo[i].state=='0'){
-				bindz = '确认关联'
-			}else{
-				bindz = '取消关联'
-			}
-			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
+		// 	if(studentNo[i].state=='0'){
+		// 		bindz = '确认关联'
+		// 	}else{
+		// 		bindz = '取消关联'
+		// 	}
+			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="loginbtn">'+bindz+'</button></li>')
 			sessionStorage.stuTel = $('.phoneNumber').val()
 		}
 		$('.enter').hide()
@@ -291,7 +291,10 @@ $(function(){
 	// }
 
 
-
+//登录
+	$(document).on('touchend','.loginbtn',function () {
+		window.location.href = "../main_list.html";
+	});
 
 
 })
