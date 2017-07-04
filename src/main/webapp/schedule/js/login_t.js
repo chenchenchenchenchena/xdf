@@ -75,7 +75,7 @@ function binding(e){
         sessionStorage.terEmail = teacontent.teacherEmail;
         localStorage.teacherId = teacontent.teacherNo;
         localStorage.schoolId = teacontent.schoolId;
-        localStorage.teacherName = e.userName;
+        localStorage.teacherName = teacontent.teacherName;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')
