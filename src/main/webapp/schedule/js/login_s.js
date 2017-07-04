@@ -9,6 +9,13 @@ var WXnum  = {
 var teacherlogin=true;
 
 ajax_S(url.s_seac,WXnum,stuc);
+function clear(){
+	sessionStorage.removeItem("schoolId");
+	sessionStorage.removeItem("stuNum");
+	sessionStorage.removeItem("studentName");
+	sessionStorage.removeItem("stuNumber");
+	sessionStorage.removeItem("mobile");
+}
 
 function stuc(e){
 	console.log(e)
@@ -25,6 +32,7 @@ function stuc(e){
 		$('.deterAss').css('background','#fc1010');
         $('.stuInfo li').eq(0).html('关联结果：');
         sessionStorage.stuNumber = 	e.data.studentNo;
+        sessionStorage.studentName=e.data.studentName;
 		$('.enter').hide();
         //
         // //判断是否绑定
@@ -53,6 +61,7 @@ function stuc(e){
 			$('.Relation').html('取消关联')
 		}else{
 			$('.Relation').html('确认关联')
+			
 		}
 		// $('.')
 	}
@@ -110,6 +119,7 @@ function stuc(e){
 			if(e.data.relatedState=='0'){
 				$('.deterAss').html('立即关联')
 				$('.deterAss').css('background','#00ba97')
+				
 			}else{
 				$('.deterAss').html('解除关联')
 				$('.deterAss').css('background','#fc1010')
@@ -126,12 +136,18 @@ function stuc(e){
 		console.log(e);
 		if(e.data==undefined){
 			layer.msg(e.message);
+			clear();
 			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
             location.href = 'login_s.html'
+            
             // location.reload()
 		}else{
             sessionStorage.stuNum = $('.stunum').val();
+            sessionStorage.stuNumber=$('.stunum').val();
+            sessionStorage.studentName=$(".stname").val();
+            sessionStorage.mobile=e.data.mobile;
+            sessionStorage.schoolId=e.data.schoolId;
 			layer.msg('绑定成功');
 			if(sessionStorage.studayCanfig=='studay'){
 				location.href = '../learningSituation/report_s.html'
@@ -164,6 +180,7 @@ function stuc(e){
 		//解绑
 		else{
 			ajax_S(url.s_nobd,stumore,s_bind)
+			
 		}
 	})
 	ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
@@ -228,12 +245,14 @@ function telbind(e){
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
         location.href = 'login_s.html'
+        clear();
     }else if(e.result==false){
         	layer.msg(e.message)
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
-        	location.href = 'login_s.html'
+        	location.href = 'login_s.html';
+        	clear();
 	}else{
 	   layer.msg('绑定成功');
 	   $('.deterAss').html('解除关联');
