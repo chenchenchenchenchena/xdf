@@ -156,12 +156,12 @@ $(function () {
    
     
     //满分表单
-    $(".totalScore").keypress(function(e){
-    	if(e.keyCode==13){
+    $(".totalScore").blur(function(){
+    	/*if(e.keyCode==13){*/
     		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
 	    		$(".totalScore").val("");
 	    	}
-    	}
+    	/*}*/
     	
     })
     $(".totalScore").keyup(function(){
