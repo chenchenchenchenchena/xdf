@@ -143,7 +143,7 @@ $(function(){
 		var stumore  = {
 			'StudentCode':$('.stunum').val()
 		}
-		ajax_S(url.s_seac,stumore,stusea)
+		ajax_S(url.s_webseac,stumore,stusea)
 	})
 	//关联点击
 	$('.deterAss').click(function(){
@@ -216,7 +216,7 @@ $(function(){
 		// stuname['name'] = name;
 		// stuname['mobile'] = mobile;
 		// var stuname = {'name':'常效新','mobile':'13739607950','wechatId':sessionStorage.openid}
-		ajax_S(url.s_nafu,stuname,name_se)//ajax请求
+		ajax_S(url.s_webnafu,stuname,name_se)//ajax请求
 	})
 
 
