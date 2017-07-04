@@ -1,10 +1,11 @@
 $(function(){
+
 //禁止浏览器拖动
     addEventListener("touchmove", function (event) {
         event.preventDefault();
     }, false);
 
-    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.classcode,'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.schoolId};
+    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.getItem("CLASSCODE"),'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.getItem("SCHOOLID")};
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
         $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
@@ -27,11 +28,12 @@ var maxnumber = 0;
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
             Stujson.tCode='2';
-            $('.class_big').find('.classroom_s').remove();
+            // $('.class_big').find('.classroom_s').remove();
             Studata()
         }else{
+            // myChart = echarts.init(document.getElementById('chart_S'));
             Stujson.tCode='1';
-            $('.class_big').find('.classroom_s').remove();
+            // $('.class_big').find('.classroom_s').remove();
             Studata()
         }
     });
@@ -111,16 +113,16 @@ var maxnumber = 0;
                        $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                    }
                }
-               console.log(pjIndex)
-                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
+               console.log(pjIndex);
                 $('.class_big').show();
                 $('.title_s').eq(0).siblings().show();
-                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
-                $('.classroom_s').css('border-bottom','1px solid #e1e1e1')
+                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)');
+                $('.classroom_s').css('border-bottom','1px solid #e1e1e1');
+
+                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
             }else{
                 $('.class_big').hide();
                 $('.no-data').show();
-                $('.class_big').hide();
                 $('.classroom_s').css('border','none')
             }
 
