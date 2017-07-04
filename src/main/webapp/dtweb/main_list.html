@@ -44,6 +44,7 @@
     //获取教师信息
     function getTeacherInfo() {
         var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+        var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
         var calbac = {
             'code': code_s,
             'e2State': state_s,
