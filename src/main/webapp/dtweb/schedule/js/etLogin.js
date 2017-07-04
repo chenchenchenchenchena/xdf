@@ -13,7 +13,7 @@ function etlogin(callback){
         data:JSON.stringify(cbconfig),
         success:function(e){
             if (e.result == true) {
-
+                localStorage.setItem("statusFlag","teacher");
                 location.href = e.url;
 
             } else {

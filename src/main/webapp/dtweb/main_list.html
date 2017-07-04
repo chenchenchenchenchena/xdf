@@ -36,7 +36,7 @@
             $('#schedule').attr('href', "schedule/schedule_s.html");
             $('#learn').attr('href', "learningSituation/report_s.html");
             getTeacherInfo();
-        } else {
+        } else if (localStorage.getItem("statusFlag") == "teacher"){
             $('#schedule').attr('href', "schedule/schedule_t.html");
             $('#learn').attr('href', "learningSituation/report_t.html");
         }
