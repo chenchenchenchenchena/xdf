@@ -35,10 +35,10 @@
         if (localStorage.getItem("statusFlag") == "student") {
             $('#schedule').attr('href', "schedule/schedule_s.html");
             $('#learn').attr('href', "learningSituation/report_s.html");
-            getTeacherInfo();
         } else if (localStorage.getItem("statusFlag") == "teacher"){
             $('#schedule').attr('href', "schedule/schedule_t.html");
             $('#learn').attr('href', "learningSituation/report_t.html");
+            getTeacherInfo();
         }
         localStorage.removeItem("statusFlag");
     });
