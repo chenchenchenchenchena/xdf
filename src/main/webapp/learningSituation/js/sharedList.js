@@ -135,7 +135,7 @@ $(function(){
             // 'teaEmail':'caoxuefeng@xdf.cn',
             // 'classCode':'CZSPP008',
             // 'schoolId':'73',
-            // 'gradeType':testState
+            // 'gradeType':'1'
             'teaEmail':localStorage.terEmail,//教师邮箱  localStorage.terEmail
             'classCode':localStorage.getItem('CLASSCODE'), //班级编号
             'schoolId':localStorage.getItem('SCHOOLID'), //校区id
@@ -213,8 +213,8 @@ function takeScreenshot() {
             // layer.msg('加载中...');
                 convertCanvasToImage();
         },
-//			 width: '100%',
-//			 height: '100%'
+         width: $('body').width(),
+         height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
     });
 }
 //	canvas to images

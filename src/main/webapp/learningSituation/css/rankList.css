@@ -1,3 +1,6 @@
+body, html{
+    height: 98%;
+}
 .main-content{
     /*padding: 0 20px;*/
 }
