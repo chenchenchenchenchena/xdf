@@ -54,6 +54,7 @@ function teac(e){
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
+
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
 }
@@ -68,11 +69,13 @@ function binding(e){
 	if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)
 	}else{
-
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
         sessionStorage.terEmail = teacontent.teacherEmail;
+        localStorage.teacherId = teacontent.teacherNo;
+        localStorage.schoolId = teacontent.schoolId;
+        localStorage.teacherName = e.userName;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')

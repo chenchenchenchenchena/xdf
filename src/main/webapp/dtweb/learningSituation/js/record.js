@@ -5,19 +5,19 @@ $(function () {
     var layer4;
     var load;
     var flag = 1;
-    localStorage.terEmail="caoxuefeng@xdf.cn";
-    sessionStorage.teacherId="TC41";
-    sessionStorage.schoolId="73";
-    sessionStorage.teacherName="曹雪峰";
-    sessionStorage.stuNumber = 'SS1508';
-    if(!localStorage.terEmail){
-            location.href = 'login_t.html';
-            sessionStorage.studayCanfig = 'studay';
+    if(!sessionStorage.openid){
+        wechatCode(location.href)
     }
+    // localStorage.terEmail="caoxuefeng@xdf.cn";  //
+    // sessionStorage.teacherId="TC41"; //
+    // sessionStorage.schoolId="73";   //
+    // sessionStorage.teacherName="曹雪峰";  //
+    // sessionStorage.stuNumber = 'SS1508';  //
+
      $(".txt").hide();
     $(".txtDiv").hide();
     //录入数据
-    var inputData = {"sCode": sessionStorage.teacherId, "email": localStorage.terEmail,"schoolId":sessionStorage.schoolId};
+    var inputData = {"sCode": localStorage.teacherId, "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
@@ -123,16 +123,30 @@ $(function () {
         })
     }
  
-    
+   
     //录入表单
-    $(".scoreTitle input").keyup(function(){
-    	if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
+    /*alert(re.test($(".scoreTitle input").val()))*/
+    
+	$(".scoreTitle input").keyup(function(){
+    	
+		if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
 	    	$(".scoreTitle input").val("");
 	    }
     	if($(".scoreTitle input").val().length>=4){
     		$(".scoreTitle input").val("");
+    	} 
+		var slength=$(".scoreTitle input").val().length;
+    	if(slength>=2){
+    		var r=$(".scoreTitle input").val().substring(0,1);
+    		if(r==0){
+    			var	m =$(".scoreTitle input").val().substring(1,slength);
+				$(".scoreTitle input").val(m);
+    		}
     	}
-    })
+    	
+    })	
+   
+    
     //满分表单
     $(".totalScore").blur(function(){
     	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
@@ -162,14 +176,14 @@ $(function () {
         var classT = $(".classTime").html().substring(4,22);
         var saveInfo = {
             "email": localStorage.terEmail,
-            "teacherName": sessionStorage.teacherName,
+            "teacherName": localStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
             "lessonNo": classNo,
             "lessonTime": classT,
             "fullMarks": $(".totalScore").val(),
-            "schoolId":sessionStorage.schoolId,
+            "schoolId":localStorage.schoolId,
             "student": student
         }
         if ($(".st").html() == "入门测") {
@@ -387,7 +401,7 @@ $(function () {
 			    	"teacherEmail":localStorage.terEmail,
 			    	"classCode":$(".class").html(),
 			    	"tCode":$(".st").html(),
-			    	"schoolId":sessionStorage.schoolId,
+			    	"schoolId":localStorage.schoolId,
 			    	"lessonNo":$(".classTime").html().substring(1,2)
 			    };
 			    console.log(queryData.lessonNo)

@@ -4,7 +4,7 @@ $(function(){
     //    wechatCode(location.href)
     //    return false;
     //}
-    // wechatCode(location.href);
+    wechatCode(location.href);
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -48,52 +48,52 @@ $(function(){
         'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
-    // ajax_S(url.s_seac,WXnum,stud);
-    // $('.js_jin').click(function(){
-    //     var emailm = {
-    //         'studentCode':sessionStorage.stuNum,
-    //         'beginDate':time1,
-    //         'endDate':time1
-    //     };
-    //     ajax_S(url.s_stud,emailm,stusea);
-    //     var month  = $('.today').attr('data_m');
-    //     var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-    //     var daycount = day.getDate();
-    //     var menu_s = {
-    //         'studentCode':sessionStorage.stuNum,
-    //         'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-    //         'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-    //     };
-    //     ajax_S(url.s_stud,menu_s,menufunc);
-    //     monththis = month
-    // })
+    ajax_S(url.s_seac,WXnum,stud);
+    $('.js_jin').click(function(){
+        var emailm = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':time1,
+            'endDate':time1
+        };
+        ajax_S(url.s_stud,emailm,stusea);
+        var month  = $('.today').attr('data_m');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'studentCode':sessionStorage.stuNum,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_stud,menu_s,menufunc);
+        monththis = month
+    })
     // 微信查询是否绑定微信  参数：当前微信号 学生
-    // function stud(e){
-    //     if(e.result==false){
-    //         // 微信查询是否绑定微信  参数：当前微信号 老师
-    //         ajax_S(url.t_wxmo,WXnum,teac);
-    //     }else{
-    //         //存储学员号
-    //         sessionStorage.stuNum = e.data.studentNo;
-    //         emailm.studentCode=sessionStorage.stuNum;
-    //         menu_s.studentCode=sessionStorage.stuNum;
-    //         ajax_S(url.s_stud,menu_s,menufunc);
-    //         ajax_S(url.s_stud,emailm,stusea);
-    //     }
-    // }
+    function stud(e){
+        if(e.result==false){
+            // 微信查询是否绑定微信  参数：当前微信号 老师
+            ajax_S(url.t_wxmo,WXnum,teac);
+        }else{
+            //存储学员号
+            sessionStorage.stuNum = e.data.studentNo;
+            emailm.studentCode=sessionStorage.stuNum;
+            menu_s.studentCode=sessionStorage.stuNum;
+            ajax_S(url.s_stud,menu_s,menufunc);
+            ajax_S(url.s_stud,emailm,stusea);
+        }
+    }
 
     // 微信查询是否绑定微信  参数：当前微信号 老师
-    // function teac(e){
-    //     if(e.data=="goE2"){
-    //         location.href = 'login_s.html';
-    //         sessionStorage.callbackconfig = 'schedule'
-    //     }else if(localStorage.terEmail){
-    //         location.href = 'schedule_t.html';
-    //         sessionStorage.removeItem('callbackconfig')
-    //     }else{
-    //         location.href = 'login_s.html';
-    //     }
-    // }
+    function teac(e){
+        if(e.data=="goE2"){
+            location.href = 'login_s.html';
+            sessionStorage.callbackconfig = 'schedule'
+        }else if(localStorage.terEmail){
+            location.href = 'schedule_t.html';
+            sessionStorage.removeItem('callbackconfig')
+        }else{
+            location.href = 'login_s.html';
+        }
+    }
     //学生查询课程  整月查询
     function menufunc(e){
         var arr = [];
@@ -203,31 +203,31 @@ $(function(){
                     'studentNo':sessionStorage.stuNum
                 };
                 var htmltx = '';
-                ajax_S(url.s_data,remindedata,function(e){
-                    if(e.result==false){
-                        layer.msg('请求参数不可以为空')
-                    }else{
-                        if(e.remindstatus==1){
-                            htmltx = '有新作业'
-                        }else if(e.remindstatus==2){
-                            htmltx = ''
-                        }
-                        else if(e.remindstatus==3){
-                            htmltx = '查看批复'
-                        }
-                        $('.tx').each(function(){
-                            $('.tx').eq($(this).attr('index')).html(htmltx)
-                        });
-                        Index.push(htmltx);
-                        //放作业提醒
-                        // for(var i =0;i<Index.length;i++){
-                        //     if(Index[i]!=''){
-                        //         $('.tx').eq(i).html(Index[i]);
-                        //         $('.tx').eq(i).css('padding','.05rem .1rem');
-                        //     }
-                        // }
-                    }
-                });
+                // ajax_S(url.s_data,remindedata,function(e){
+                //     if(e.result==false){
+                //         layer.msg('请求参数不可以为空')
+                //     }else{
+                //         if(e.remindstatus==1){
+                //             htmltx = '有新作业'
+                //         }else if(e.remindstatus==2){
+                //             htmltx = ''
+                //         }
+                //         else if(e.remindstatus==3){
+                //             htmltx = '查看批复'
+                //         }
+                //         $('.tx').each(function(){
+                //             $('.tx').eq($(this).attr('index')).html(htmltx)
+                //         });
+                //         Index.push(htmltx);
+                //         //放作业提醒
+                //         // for(var i =0;i<Index.length;i++){
+                //         //     if(Index[i]!=''){
+                //         //         $('.tx').eq(i).html(Index[i]);
+                //         //         $('.tx').eq(i).css('padding','.05rem .1rem');
+                //         //     }
+                //         // }
+                //     }
+                // });
                 if(time1<curr_e[i].BeginDate){
                     old = ''
                 }else{
