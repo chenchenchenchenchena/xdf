@@ -5,6 +5,7 @@ $(function () {
     var layer4;
     var load;
     var flag = 1;
+    var student = [];
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     if(!sessionStorage.openid){
         wechatCode(location.href)
@@ -107,8 +108,8 @@ $(function () {
         $(".scoreType ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".st").html($(this).html());
-            $(".classTime").html("");
-             $(".classrome").html("");
+            /*$(".classTime").html("");
+             $(".classrome").html("");*/
              $(".scoreTitle input").val("");
              $(".totalScore").val(10);
         })
@@ -276,7 +277,7 @@ $(function () {
 		         skin: '',
 		         content:$(".recordSub")
 	         })*/
-	        var student = [];
+	       
 	        for (var i = 0; i < $(".scoreList dl").length; i++) {
 	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
 	                var studentinfo = {
@@ -291,31 +292,31 @@ $(function () {
 	           
 	        }
 	        var dtlength=$(".scoreList dt").length;
-		       	if(student==""){
-		       		layer.msg("没有录入成绩");
-		       	}else if(student.length<dtlength){
-		       		
-			         layer1=layer.open({
-				         type: 1,
-				         area: ['548px', '345px'],
-				         shade:[0.2,'#000'],
-				         title:'',
-				         skin: '',
-				         content:$(".noRecord")
-			         })
-				     
-		       	}else{
-		       		
-	       			layer2=layer.open({
+	       	if(student==""){
+	       		layer.msg("没有录入成绩");
+	       	}else if(student.length<dtlength){
+	       		
+		         layer1=layer.open({
 			         type: 1,
 			         area: ['548px', '345px'],
 			         shade:[0.2,'#000'],
 			         title:'',
 			         skin: '',
-			         content:$(".recordSub")
-		         	})
-		    		
-	    		}
+			         content:$(".noRecord")
+		         })
+			     
+	       	}else{
+	       		
+       			layer2=layer.open({
+		         type: 1,
+		         area: ['548px', '345px'],
+		         shade:[0.2,'#000'],
+		         title:'',
+		         skin: '',
+		         content:$(".recordSub")
+	         	})
+	    		
+    		}
 	    }
        
     })
