@@ -168,81 +168,82 @@ $(function(){
             for(var i = 0;i<e.data.length;i++){
                 mastertae.push(e.data[i]);
             }
-        });
-        var teacherr_m = masterteacher.split(',');
-        $('.stu_data li').remove();
-        if(e.result==false){
-            $('.H-data').hide();
-            $('.N-data').show();
-        }else{
-            $('.H-data').show();
-            $('.N-data').hide();
-            curr_e = e.data.Data;
-            var time_old = [];
-            var Index =[];
+            var teacherr_m = masterteacher.split(',');
+            $('.stu_data li').remove();
+            if(e.result==false){
+                $('.H-data').hide();
+                $('.N-data').show();
+            }else{
+                $('.H-data').show();
+                $('.N-data').hide();
+                curr_e = e.data.Data;
+                var time_old = [];
+                var Index =[];
 
-            var old;
+                var old;
 
-            var masterta = e.data.Data[0].Teachers.split(',');
-            var masteaname = '';
-            for(var j = 0;j<mastertae.length;j++){
-                for(var k = 0;k<masterta.length;k++){
-                    if(mastertae[j].teacherName==masterta[k]){
-                        jteaname = masterta[k]
-                        masterta[k] = ''
+                var masterta = e.data.Data[0].Teachers.split(',');
+                var masteaname = '';
+                for(var j = 0;j<mastertae.length;j++){
+                    for(var k = 0;k<masterta.length;k++){
+                        if(mastertae[j].teacherName==masterta[k]){
+                            jteaname = masterta[k]
+                            masterta[k] = ''
+                        }
                     }
                 }
-            }
-            // 录入开始时间
-            for(var i = 0;i<curr_e.length;i++){
-                var begtime = curr_e[i].SectBegin.split(' ');
-                var begtime2 = begtime[1].substring(0,begtime[1].length-3);
-                var endtime = curr_e[i].SectEnd.split(' ');
-                var endtime2 = endtime[1].substring(0,begtime[1].length-3);
-                var teaname = curr_e[i].Teachers.split(',');
-                var zteaname;
-                var jteaname;
-                var remindedata = {
-                    'classCode':curr_e[i].ClassCode,
-                    'courseCode':curr_e[i].CourseCode,
-                    'studentNo':sessionStorage.stuNum
-                };
-                var htmltx = '';
-                // ajax_S(url.s_data,remindedata,function(e){
-                //     if(e.result==false){
-                //         layer.msg('请求参数不可以为空')
-                //     }else{
-                //         if(e.remindstatus==1){
-                //             htmltx = '有新作业'
-                //         }else if(e.remindstatus==2){
-                //             htmltx = ''
-                //         }
-                //         else if(e.remindstatus==3){
-                //             htmltx = '查看批复'
-                //         }
-                //         $('.tx').each(function(){
-                //             $('.tx').eq($(this).attr('index')).html(htmltx)
-                //         });
-                //         Index.push(htmltx);
-                //         //放作业提醒
-                //         // for(var i =0;i<Index.length;i++){
-                //         //     if(Index[i]!=''){
-                //         //         $('.tx').eq(i).html(Index[i]);
-                //         //         $('.tx').eq(i).css('padding','.05rem .1rem');
-                //         //     }
-                //         // }
-                //     }
-                // });
-                if(time1<curr_e[i].BeginDate){
-                    old = ''
-                }else{
-                    old = 'activ_c'
+                // 录入开始时间
+                for(var i = 0;i<curr_e.length;i++){
+                    var begtime = curr_e[i].SectBegin.split(' ');
+                    var begtime2 = begtime[1].substring(0,begtime[1].length-3);
+                    var endtime = curr_e[i].SectEnd.split(' ');
+                    var endtime2 = endtime[1].substring(0,begtime[1].length-3);
+                    var teaname = curr_e[i].Teachers.split(',');
+                    var zteaname;
+                    var jteaname;
+                    var remindedata = {
+                        'classCode':curr_e[i].ClassCode,
+                        'courseCode':curr_e[i].CourseCode,
+                        'studentNo':sessionStorage.stuNum
+                    };
+                    var htmltx = '';
+                    // ajax_S(url.s_data,remindedata,function(e){
+                    //     if(e.result==false){
+                    //         layer.msg('请求参数不可以为空')
+                    //     }else{
+                    //         if(e.remindstatus==1){
+                    //             htmltx = '有新作业'
+                    //         }else if(e.remindstatus==2){
+                    //             htmltx = ''
+                    //         }
+                    //         else if(e.remindstatus==3){
+                    //             htmltx = '查看批复'
+                    //         }
+                    //         $('.tx').each(function(){
+                    //             $('.tx').eq($(this).attr('index')).html(htmltx)
+                    //         });
+                    //         Index.push(htmltx);
+                    //         //放作业提醒
+                    //         // for(var i =0;i<Index.length;i++){
+                    //         //     if(Index[i]!=''){
+                    //         //         $('.tx').eq(i).html(Index[i]);
+                    //         //         $('.tx').eq(i).css('padding','.05rem .1rem');
+                    //         //     }
+                    //         // }
+                    //     }
+                    // });
+                    if(time1<curr_e[i].BeginDate){
+                        old = ''
+                    }else{
+                        old = 'activ_c'
+                    }
+                    $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+jteaname+')</i><span><i>班主任('+masterta+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                    $('.loading_s').hide();
+                    $('.curriculum').show()
                 }
-                $('.curriculum').append('<li class="'+old+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>主讲('+jteaname+')</i><span><i>班主任('+masterta+')</i></span></p><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-                $('.loading_s').hide();
-                $('.curriculum').show()
             }
-        }
+        });
+
     // <span class="tx" index="'+i+'">'+htmltx+'</span>
     }
     // <span>12个带交作业</span>
