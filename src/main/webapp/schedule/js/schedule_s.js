@@ -164,9 +164,9 @@ $(function(){
     //按天查询课程
     var mastertae = [];
     function stusea(e){
-        ajax_S(url.data_s,'1',function(e){
-            for(var i = 0;i<e.data.length;i++){
-                mastertae.push(e.data[i]);
+        ajax_S(url.data_s,'1',function(c){
+            for(var i = 0;i<c.data.length;i++){
+                mastertae.push(c.data[i]);
             }
             var teacherr_m = masterteacher.split(',');
             $('.stu_data li').remove();
@@ -232,7 +232,7 @@ $(function(){
                     //         // }
                     //     }
                     // });
-                    if(time1<curr_e[i].BeginDate){
+                    if(time1<curr_e[i].SectEnd){
                         old = ''
                     }else{
                         old = 'activ_c'

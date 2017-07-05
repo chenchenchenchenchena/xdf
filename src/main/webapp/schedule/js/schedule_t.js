@@ -119,7 +119,7 @@ function stusea(e){
             //         // }
             //     }
             // });
-            if(time1<curr_e[i].BeginDate){
+            if(time1<curr_e[i].SectEnd){
                 old = ''
             }else{
                 old = 'activ_c'
