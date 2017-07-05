@@ -46,7 +46,6 @@ var maxnumber = 0;
 
 
     function Studata(){
-        alert(0)
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
 
             console.log(e);
