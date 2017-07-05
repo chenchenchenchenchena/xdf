@@ -368,7 +368,7 @@ tr .not_this{
     z-index: 2;
     color: #fff;
     position:absolute;
-    bottom:0;
+    bottom:-.2rem;
     left:45%;
 }
 .innet_S:after{

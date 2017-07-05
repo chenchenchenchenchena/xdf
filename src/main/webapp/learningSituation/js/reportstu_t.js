@@ -49,6 +49,7 @@ var maxnumber = 0;
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
 
             console.log(e);
+
             var Xindex = '';
             var Thistime = [];
             var Xtwindex = [];
@@ -57,7 +58,7 @@ var maxnumber = 0;
             var timeIndex = [];
             var Cindex = [];
             if(e.data.AvgrealGrade!=undefined){
-
+                $('title').html(e.data.realGrade[0].studentName);
                 var stuSelf = e.data.realGrade;
                 for(var s = 0;s<e.data.AvgrealGrade.length;s++){
                     // TODO
@@ -98,7 +99,6 @@ var maxnumber = 0;
                    }else{
                        for(var u = 0;u<stuSelf.length;u++){
                            $('.reportstu_S ul').eq(0).append('<li>'+stuSelf[u].lessonNo+'</li>');
-                           $('.reportstu_S ul').eq(1).append('<li>'+stuSelf[u].realGrade+'</li>');
                            $('.reportstu_S ul').eq(1).append('<li>'+stuSelf[u].realGrade+'</li>');
                            $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                            $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
