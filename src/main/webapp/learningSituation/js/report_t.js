@@ -1,37 +1,29 @@
 $(function(){
-    $('header').before('<title>111</title>')
+    $('header').before('<title>111</title>');
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
     if(!localStorage.terEmail){
-        if(!sessionStorage.stuNumber){
-            location.href = '../schedule/login_s.html';
-            sessionStorage.studayCanfig = 'studay';
-        }else{
-            if(sessionStorage.stuNumber=='ss5134'
-            	||sessionStorage.stuNumber=='ss6083'
-            	||sessionStorage.stuNumber=='ss6092'){
-                            location.href = 'report_s.html';
-           	}else{
-                $('body').hide();
-                alert('嘻嘻~  功能还在开发阶段欧');
-            }
             var WXnum  = {
                 'wechatId':sessionStorage.openid
             };
-            // ajax_S(url.s_seac,WXnum,function(){
-            //     if(e.data.relatedState=='1'){
-            //
-            //         if(e.data.studentNo=='ss3504'||e.data.studentNo=='ss6034'||e.data.studentNo=='ss5102'){
-            //             location.href = 'report_s.html';
-            //         }else{
-            //             $('body').hide();
-            //             alert('嘻嘻~  功能还在开发阶段欧');
-            //         }
-            //     }
-            // });
-        }
+            ajax_S(url.s_seac,WXnum,function(e){
+                if(e.result==true){
+                    sessionStorage.stuNumber = e.data.studentNo;
+                    if(e.data.studentNo=='SS5134'||e.data.studentNo=='SS5102'||e.data.studentNo=='SS5094'){
+                        location.href = 'report_s.html';
+                    }else{
+                        $('body').hide();
+                        alert('嘻嘻~  功能还在开发阶段');
+                    }
+                }else{
+                   location.href = '../schedule/login_s.html'
+                }
+            });
     }else{
         if(localStorage.terEmail){
             if(localStorage.terEmail!='hanqifan@xdf.cn'){
-                alert('嘻嘻~  功能还在开发阶段欧');
+                alert('嘻嘻~  功能还在开发阶段');
                 $('body').hide()
             }
         }
