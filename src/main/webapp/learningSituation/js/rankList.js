@@ -39,7 +39,7 @@ $(function(){
             // 'teaEmail':'caoxuefeng@xdf.cn',
             // 'classCode':'CZSPP008',
             // 'schoolId':'73',
-            // 'gradeType':testState
+            // 'gradeType':'1'
             'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
             'classCode':localStorage.getItem('CLASSCODE'), //班级编号
             'schoolId':localStorage.getItem('SCHOOLID'), //校区id
@@ -79,7 +79,7 @@ $(function(){
                         gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                     }
                     if(items.lastRanking<=0){
-                        rankFloat = items.ranking;
+                        rankFloat = 0;
                     }else{
                         rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                     }

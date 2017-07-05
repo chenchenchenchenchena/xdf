@@ -79,7 +79,7 @@ $(function(){
                         gradeFloat = items.grade -  items.lastGrade;// 分数浮动
                     }
                     if(items.lastRanking<=0){
-                        rankFloat = items.ranking;
+                        rankFloat = 0;
                     }else{
                         rankFloat = items.ranking -  items.lastRanking;// 名次浮动
                     }
