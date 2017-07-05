@@ -81,7 +81,7 @@ function binding(e){
             sessionStorage.removeItem('callbackconfig')
         }
         if(sessionStorage.studayCanfig=='studay'){
-            location.href = 'record.html'
+            location.href = '../learningSituation/report_t.html'
             sessionStorage.removeItem('studayCanfig')
         }
 	}
