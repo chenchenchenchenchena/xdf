@@ -207,9 +207,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
-                                    }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
@@ -278,9 +275,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
-                                    }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
@@ -348,9 +342,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     timeIndex.push(timejson[r])
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
                                     }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
@@ -421,9 +412,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     timeIndex.push(timejson[r])
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
                                     }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
@@ -561,9 +549,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
-                                    }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
@@ -634,9 +619,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
-                                    }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
@@ -705,9 +687,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
-                                    }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
@@ -775,9 +754,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     timeIndex.push(timejson[r])
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        manfjsont[r] = '0'
                                     }
                                     mfInedx_r.push('满分：'+manfjson[r]);
                                     mfInedx_c.push('满分：'+manfjsont[r])
