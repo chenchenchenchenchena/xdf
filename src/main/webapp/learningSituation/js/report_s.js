@@ -9,6 +9,14 @@ $(function(){
     // sessionStorage.teacherName="曹雪峰";
     // sessionStorage.stuNumber = 'SS1508';
 //点击显示图标
+    if(sessionStorage.stuNumber=='ss5134'
+        ||sessionStorage.stuNumber=='ss6083'
+        ||sessionStorage.stuNumber=='ss6092'){
+        location.href = 'report_s.html';
+    }else{
+        $('body').hide();
+        alert('嘻嘻~  功能还在开发阶段欧');
+    }
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
         $(this).siblings().show()
