@@ -16,17 +16,17 @@ $(function(){
             var WXnum  = {
                 'wechatId':sessionStorage.openid
             };
-            // ajax_S(url.s_seac,WXnum,function(){
-            //     if(e.data.relatedState=='1'){
-            //
-            //         if(e.data.studentNo=='ss3504'||e.data.studentNo=='ss6034'||e.data.studentNo=='ss5102'){
-            //             location.href = 'report_s.html';
-            //         }else{
-            //             $('body').hide();
-            //             alert('嘻嘻~  功能还在开发阶段欧');
-            //         }
-            //     }
-            // });
+            ajax_S(url.s_seac,WXnum,function(){
+                if(e.result==true){
+                    sessionStorage.stuNumber = e.data.studentNo;
+                    if(e.data.stuNumber.toLocaleLowerCase()=='ss3504'||e.data.stuNumber.toLocaleLowerCase()=='ss6034'||e.data.stuNumber.toLocaleLowerCase()=='ss5102'){
+                        location.href = 'report_s.html';
+                    }else{
+                        $('body').hide();
+                        alert('嘻嘻~  功能还在开发阶段欧');
+                    }
+                }
+            });
         }
     }else{
         if(localStorage.terEmail){

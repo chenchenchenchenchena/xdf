@@ -150,7 +150,7 @@ function stuc(e){
             sessionStorage.schoolId=e.data.schoolId;
 			layer.msg('绑定成功');
 			if(sessionStorage.studayCanfig=='studay'){
-				location.href = '../learningSituation/report_s.html'
+				location.href = '../learningSituation/report_t.html'
                 sessionStorage.removeItem('studayCanfig')
 			}else{
                 location.href = 'schedule_s.html';
