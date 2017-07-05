@@ -72,7 +72,7 @@ function binding(e){
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
-        sessionStorage.terEmail = teacontent.teacherEmail;
+        localStorage.terEmail = teacontent.teacherEmail;
         localStorage.teacherId = teacontent.teacherNo;
         localStorage.schoolId = teacontent.schoolId;
         localStorage.teacherName = teacontent.teacherName;

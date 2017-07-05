@@ -10,6 +10,7 @@ $(function(){
             ajax_S(url.s_seac,WXnum,function(e){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
+                    sessionStorage.schoolId = e.data.schoolId;
                     if(e.data.studentNo=='SS5134'||e.data.studentNo=='SS5102'||e.data.studentNo=='SS5094'){
                         location.href = 'report_s.html';
                     }else{
