@@ -67,12 +67,13 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
     console.log(e)
         if(e.data.length!=0){
             var class_ = e.data;
-            for(var s = 0;s<class_[0].length;s++){
-                if(class_[0][s].fullMarks>maxNumber){
-                    maxNumber = class_[0][s].fullMarks
-                }
-            }
+
                 for(var i = 0;i<class_.length;i++) {
+                    for(var s = 0;s<class_[i].length;s++){
+                        if(class_[i][s].fullMarks>maxNumber){
+                            maxNumber = class_[0][s].fullMarks
+                        }
+                    }
                   Xindex = '0';
                   Thistime = [];
                   Xtwindex = [];
@@ -190,6 +191,13 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     textStyle: {
                         fontSize: 24
                     }
+                },
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
                 }
             }
         ],
@@ -206,6 +214,13 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     textStyle: {
                         fontSize: 24
                     }
+                },
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
                 }
             }
         ],
@@ -214,13 +229,18 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 name:'个人得分',
                 type:'line',
                 data:y1,
+                symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
                 },
                 axisLabel: {
                     show: true,
-                    textStyle: {
-                        fontSize: 24
+                },
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
                     }
                 }
             },
@@ -228,6 +248,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 name:'平均分',
                 type:'line',
                 data:y2,
+                symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
                 },
@@ -236,18 +257,38 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     textStyle: {
                         fontSize: 24
                     }
+                },lable:{
+                normal:{
+                    textStyle:{
+                        fontSize:24
+                    }
                 }
+            }
             },
             {
                 name:'日期',
                 type:'line',
-                data:y3
+                data:y3,
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
+                }
 
             },
             {
                 name:'总分',
                 type:'line',
-                data:y4
+                data:y4,
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
+                }
             }
         ]
     };

@@ -201,6 +201,7 @@ var maxnumber = 0;
                     name:'个人得分',
                     type:'line',
                     data:y1,
+                    symbolSize:14,
                     nameTextStyle:{
                         fontSize:24
                     },
@@ -208,6 +209,13 @@ var maxnumber = 0;
                         show: true,
                         textStyle: {
                             fontSize: 24
+                        }
+                    },
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
                         }
                     }
                 },
@@ -215,6 +223,7 @@ var maxnumber = 0;
                     name:'平均分',
                     type:'line',
                     data:y2,
+                    symbolSize:14,
                     nameTextStyle:{
                         fontSize:24
                     },
@@ -223,18 +232,39 @@ var maxnumber = 0;
                         textStyle: {
                             fontSize: 24
                         }
+                    },
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
                     }
                 },
                 {
                     name:'日期',
                     type:'line',
-                    data:y3
+                    data:y3,
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
+                    }
 
                 },
                 {
                     name:'总分',
                     type:'line',
-                    data:y4
+                    data:y4,
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
+                    }
                 }
             ]
         };

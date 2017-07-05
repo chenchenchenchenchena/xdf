@@ -876,6 +876,7 @@ var option = {
                 name:'入门测',
                 type:'line',
                 data:y1,
+                symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
                 },
@@ -883,6 +884,13 @@ var option = {
                     show: true,
                     textStyle: {
                         fontSize: 24
+                    }
+                },
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
                     }
                 }
             },
@@ -890,6 +898,7 @@ var option = {
                 name:'出门测',
                 type:'line',
                 data:y2,
+                symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
                 },
@@ -898,23 +907,51 @@ var option = {
                     textStyle: {
                         fontSize: 24
                     }
+                },
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
                 }
             },
             {
                 name:'日期',
                 type:'line',
-                data:time
+                data:time,
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
+                }
 
             },
             {
                 name:'总分',
                 type:'line',
-                data:mf
+                data:mf,
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
+                }
             },
             {
                 name:'总分',
                 type:'line',
-                data:mf_c
+                data:mf_c,
+                lable:{
+                    normal:{
+                        textStyle:{
+                            fontSize:24
+                        }
+                    }
+                }
             }
         ]
     };
