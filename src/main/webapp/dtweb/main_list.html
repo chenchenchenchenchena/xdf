@@ -32,14 +32,17 @@
 </ul>
 <script>
     $(function () {
-//        localStorage.setItem("statusFlag","student");
+        localStorage.setItem("statusFlag","teacher");
         if (localStorage.getItem("statusFlag") == "student") {
             $('#schedule').attr('href', "schedule/schedule_s.html");
             $('#learn').attr('href', "learningSituation/report_s.html");
         } else if (localStorage.getItem("statusFlag") == "teacher"){
             $('#schedule').attr('href', "schedule/schedule_t.html");
             $('#learn').attr('href', "learningSituation/report_t.html");
-            getTeacherInfo();
+            if(localStorage.terEmail == undefined){
+
+                getTeacherInfo();
+            }
         }
     });
     //获取教师信息
