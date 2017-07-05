@@ -1,5 +1,4 @@
 $(function(){
-    $('header').before('<title>111</title>');
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };

@@ -127,7 +127,7 @@ var maxnumber = 0;
                 $('.class_big').hide();
                 $('.no-data').show();
                 $('.class_big').hide();
-                $('.classroom_s').css('border','none')
+                $('.classroom_s').css('bosrder','none')
             }
 
 
