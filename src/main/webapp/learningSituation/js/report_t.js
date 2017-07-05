@@ -10,23 +10,11 @@ $(function(){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
-                    if(e.data.studentNo=='SS5134'||e.data.studentNo=='SS5102'||e.data.studentNo=='SS5094'){
-                        location.href = 'report_s.html';
-                    }else{
-                        $('body').hide();
-                        alert('嘻嘻~  功能还在开发阶段');
-                    }
+                    location.href = 'report_s.html';
                 }else{
                    location.href = '../schedule/login_s.html'
                 }
             });
-    }else{
-        if(localStorage.terEmail){
-            if(localStorage.terEmail!='hanqifan@xdf.cn'){
-                alert('嘻嘻~  功能还在开发阶段');
-                $('body').hide()
-            }
-        }
     }
 
 
