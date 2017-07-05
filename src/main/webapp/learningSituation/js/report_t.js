@@ -10,15 +10,14 @@ $(function(){
             ajax_S(url.s_seac,WXnum,function(e){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
-                    if(e.data.stuNumber.toLocaleLowerCase()=='ss5134'||e.data.stuNumber.toLocaleLowerCase()=='ss5102'||e.data.stuNumber.toLocaleLowerCase()=='ss5094'){
+                    if(e.data.stuNumber=='ss5134'||e.data.stuNumber=='ss5102'||e.data.stuNumber=='ss5094'){
                         location.href = 'report_s.html';
                     }else{
                         $('body').hide();
                         alert('嘻嘻~  功能还在开发阶段');
                     }
                 }else{
-                    $('body').hide();
-                    alert('嘻嘻~  功能还在开发阶段');
+                   location.href = '../schedule/login_s.html'
                 }
             });
     }else{

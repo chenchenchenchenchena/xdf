@@ -1,9 +1,9 @@
 $(function(){
     //微信是否授权
-    //if (!sessionStorage.openid) {
-    //    wechatCode(location.href)
-    //    return false;
-    //}
+    if (!sessionStorage.openid) {
+       wechatCode(location.href)
+       return false;
+    }
     wechatCode(location.href);
     //判断ios
     var u = navigator.userAgent;
