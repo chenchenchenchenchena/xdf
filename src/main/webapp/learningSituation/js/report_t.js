@@ -1,5 +1,8 @@
 $(function(){
-    $('header').before('<title>111</title>')
+    $('header').before('<title>111</title>');
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
     if(!localStorage.terEmail){
             var WXnum  = {
                 'wechatId':sessionStorage.openid
@@ -11,17 +14,17 @@ $(function(){
                         location.href = 'report_s.html';
                     }else{
                         $('body').hide();
-                        alert('嘻嘻~  功能还在开发阶段欧');
+                        alert('嘻嘻~  功能还在开发阶段');
                     }
                 }else{
                     $('body').hide();
-                    alert('嘻嘻~  功能还在开发阶段欧');
+                    alert('嘻嘻~  功能还在开发阶段');
                 }
             });
     }else{
         if(localStorage.terEmail){
             if(localStorage.terEmail!='hanqifan@xdf.cn'){
-                alert('嘻嘻~  功能还在开发阶段欧');
+                alert('嘻嘻~  功能还在开发阶段');
                 $('body').hide()
             }
         }
