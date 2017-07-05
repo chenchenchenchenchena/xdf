@@ -76,7 +76,7 @@ function stusea(e){
         }else{
             $('.N-data').hide();
             $('.H-data').show();
-
+            $('.loading_s').hide();
         }
         curr_e = e.data.Data;
         var time_old = [];
@@ -88,12 +88,12 @@ function stusea(e){
             var begtime2 = begtime[1].substring(0,begtime[1].length-3);
             var endtime = curr_e[i].SectEnd.split(' ');
             var endtime2 = endtime[1].substring(0,begtime[1].length-3);
-            var remindedata = {
-               'classCode':curr_e[i].ClassCode,
-                'courseCode':curr_e[i].CourseCode,
-                'email':localStorage.terEmail
-            };
-            var htmltx = '';
+            // var remindedata = {
+            //    'classCode':curr_e[i].ClassCode,
+            //     'courseCode':curr_e[i].CourseCode,
+            //     'email':localStorage.terEmail
+            // };
+            // var htmltx = '';
             // ajax_S(url.t_data,remindedata,function(e){
             //     if(e.result==false){
             //         layer.msg('请求参数不可以为空')
