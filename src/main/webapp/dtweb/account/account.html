@@ -36,10 +36,7 @@
         $('.name_ema').html(localStorage.terEmail);
     });
     function logout(){
-        if (localStorage.getItem("statusFlag") == "student") {
-
-            localStorage.removeItem("statusFlag");
-        }else {
+        if (localStorage.getItem("statusFlag") == "teacher") {
             var unlog = {
                 'sid': localStorage.sid,
                 'returnUrl': url.t_webback
@@ -47,12 +44,15 @@
             //退出e2登录
             ajax_S(url.t_logi, unlog, function (a) {
                 location.href = a.logoutUrl;
-                localStorage.removeItem("statusFlag");
                 localStorage.removeItem("terName");
                 localStorage.removeItem("terEmail");
                 localStorage.removeItem("sid");
             });
         }
+
+        localStorage.removeItem("statusFlag");
+        sessionStorage.clear();
+
 
     }
 </script>
