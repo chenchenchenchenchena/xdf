@@ -32,7 +32,7 @@ $(function() {
     var touchtime;
     var touchtend;
     var mastertae = [];
-
+    var color = ''
     //存储主讲老师
     var masterteacher = '';
     //当天课程
@@ -90,7 +90,6 @@ $(function() {
 
     // 微信查询是否绑定微信  参数：当前微信号 老师
     function teac(e) {
-        alert(0)
         if (e.data == "goE2") {
             location.href = 'login_s.html';
             sessionStorage.callbackconfig = 'schedule'
@@ -232,10 +231,12 @@ $(function() {
                 // });
                 if (time1 < curr_e[i].SectEnd) {
                     old = ''
+                    color = '#000'
                 } else {
                     old = 'activ_c'
+                    color = '#ccc'
                 }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i>主讲(' + jteaname + ')</i><span><i>班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }

@@ -88,7 +88,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data[i][y].realGrade) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName);
                     $('title').html(e.data[i][0].studentName+'同学');
-                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGrade) + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGradeView) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').css('width',146.5* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
@@ -105,7 +105,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 if(Xindex==e.data[0].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
-                        Cindex.push(e.data[0][j].avgGrade);
+                        Cindex.push(e.data[0][j].avgGradeView);
                         pjIndex.push(e.data[0][j].realGrade);
                         mfInedx.push('满分:'+e.data[0][j].fullMarks);
                         timeIndex.push(e.data[0][j].lessonTime.split(' ')[0]);
@@ -117,7 +117,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                             var buer = false;
                             for(var k = 0;k<e.data[i].length;k++){
                                 if((j+1)==e.data[i][k].lessonNO){
-                                    Cindex.push(e.data[i][k].avgGrade);
+                                    Cindex.push(e.data[i][k].avgGradeView);
                                     pjIndex.push(e.data[i][k].realGrade);
                                     mfInedx.push('满分:'+e.data[i][k].fullMarks);
                                     timeIndex.push(e.data[i][k].lessonTime.split(' ')[0]);
@@ -141,7 +141,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             $('.tab_sreport').css('padding','0');
             $('.tab_sreport').eq(0).css('padding-bottom','40px');
             $('.title_s').eq(0).siblings().show();
-            $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
+            $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)');
             $('.classroom_s').css('border-bottom','1px solid #e1e1e1')
         }else{
             $('.no-data').show();

@@ -8,6 +8,7 @@ var WXnum  = {
     'wechatId':sessionStorage.openid
 };
 var time1 = new Date().format("yyyy-MM-dd");
+var time_b = new Date().format("yyyy-MM-dd ");
 //当天课程
 var emailm = {
         'teacherEmail':localStorage.terEmail,

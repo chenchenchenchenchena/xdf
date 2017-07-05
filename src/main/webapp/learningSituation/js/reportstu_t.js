@@ -46,10 +46,9 @@ var maxnumber = 0;
 
 
     function Studata(){
+        alert(0)
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
-            $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove()
-            $('.reportstu_S ul').eq(1).find('li').remove()
-            $('.reportstu_S ul').eq(2).find('li').eq(0).siblings().remove()
+
             console.log(e);
             var Xindex = '';
             var Thistime = [];
@@ -59,6 +58,7 @@ var maxnumber = 0;
             var timeIndex = [];
             var Cindex = [];
             if(e.data.AvgrealGrade!=undefined){
+
                 var stuSelf = e.data.realGrade;
                 for(var s = 0;s<e.data.AvgrealGrade.length;s++){
                     // TODO
@@ -99,6 +99,7 @@ var maxnumber = 0;
                    }else{
                        for(var u = 0;u<stuSelf.length;u++){
                            $('.reportstu_S ul').eq(0).append('<li>'+stuSelf[u].lessonNo+'</li>');
+                           $('.reportstu_S ul').eq(1).append('<li>'+stuSelf[u].realGrade+'</li>');
                            $('.reportstu_S ul').eq(1).append('<li>'+stuSelf[u].realGrade+'</li>');
                            $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                            $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
