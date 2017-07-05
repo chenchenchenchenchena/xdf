@@ -217,8 +217,8 @@ function takeScreenshot() {
             // layer.msg('加载中...');
                 convertCanvasToImage();
         },
-//			 width: '100%',
-//			 height: '100%'
+        width: $('body').width(),
+        height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
     });
 }
 //	canvas to images
