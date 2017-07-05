@@ -1,6 +1,9 @@
 $(function() {
-    //微信是否授权
-    wechatCode(location.href);
+    if (!sessionStorage.openid) {
+        //微信授权判断
+        wechatCode(location.href);
+    }
+    ;
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
