@@ -10,7 +10,7 @@ $(function(){
             ajax_S(url.s_seac,WXnum,function(e){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
-                    if(e.data.stuNumber=='SS5134'||e.data.stuNumber=='SS5102'||e.data.stuNumber=='SS5094'){
+                    if(e.data.studentNo=='SS5134'||e.data.studentNo=='SS5102'||e.data.studentNo=='SS5094'){
                         location.href = 'report_s.html';
                     }else{
                         $('body').hide();

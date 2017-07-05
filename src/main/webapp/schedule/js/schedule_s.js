@@ -78,7 +78,12 @@ $(function(){
             emailm.studentCode=sessionStorage.stuNum;
             menu_s.studentCode=sessionStorage.stuNum;
             ajax_S(url.s_stud,menu_s,menufunc);
-            ajax_S(url.s_stud,emailm,stusea);
+            ajax_S(url.data_s,'1',function(e){
+                for(var i = 0;i<e.data.length;i++){
+                    masterteacher+=e.data[i].teacherName+','
+                }
+                ajax_S(url.s_stud,emailm,stusea);
+            });
         }
     }
 
@@ -150,16 +155,16 @@ $(function(){
     setTimeout(function(){
         $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
     },1000);
-    ajax_S(url.data_s,'1',function(e){
-        for(var i = 0;i<e.data.length;i++){
-            masterteacher+=e.data[i].teacherName+','
-        }
-    });
+    // ajax_S(url.data_s,'1',function(e){
+    //     for(var i = 0;i<e.data.length;i++){
+    //         masterteacher+=e.data[i].teacherName+','
+    //     }
+    // });
     //按天查询课程
     //按天查询课程
     var mastertae = [];
     function stusea(e){
-        ajax_S(url.data_s,'',function(e){
+        ajax_S(url.data_s,'1',function(e){
             for(var i = 0;i<e.data.length;i++){
                 mastertae.push(e.data[i]);
             }
