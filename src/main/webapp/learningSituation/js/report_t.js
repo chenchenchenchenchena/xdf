@@ -4,7 +4,7 @@ $(function(){
             var WXnum  = {
                 'wechatId':sessionStorage.openid
             };
-            ajax_S(url.s_seac,WXnum,function(){
+            ajax_S(url.s_seac,WXnum,function(e){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
                     if(e.data.stuNumber.toLocaleLowerCase()=='ss3504'||e.data.stuNumber.toLocaleLowerCase()=='ss6034'||e.data.stuNumber.toLocaleLowerCase()=='ss5102'){
@@ -13,6 +13,9 @@ $(function(){
                         $('body').hide();
                         alert('嘻嘻~  功能还在开发阶段欧');
                     }
+                }else{
+                    $('body').hide();
+                    alert('嘻嘻~  功能还在开发阶段欧');
                 }
             });
     }else{
