@@ -60,24 +60,21 @@ $(function () {
                     		var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
                         	stuArr.push(stuInfo);
                     	}
+                    	var colId = "name";
+	                    //对json进行升序排序函数
+	                    var asc = function (x, y) {
+	                        return x[colId].localeCompare(y[colId])
+	                    }
+	
+	                    stuArr.sort(asc); //升序排序
+	                    
+                    	for (var r = 0; r < stuArr.length; r++) {
+	                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+	                    }
+                    	$(".scoreList").html(stu);
                     }else{
                     	$(".scoreList").html("暂无学生成绩信息");
                     }
-                   /* console.log(stuArr);*/
-
-                    var colId = "name";
-                    //对json进行升序排序函数
-                    var asc = function (x, y) {
-                        return x[colId].localeCompare(y[colId])
-                    }
-
-                    stuArr.sort(asc); //升序排序
-                    for (var r = 0; r < stuArr.length; r++) {
-                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
-                    }
-
-
-                    $(".scoreList").html(stu);
                     if(e.Data[i].LessonData.length==0){
                     	str1="<span>暂无课次</span>";
                     }else{
@@ -95,14 +92,15 @@ $(function () {
                 var dtStr = $(".scoreList dt").eq(i);
                 /*console.log(str.html());*/
                 var ddstrLen = lenStat(ddStr);
+                dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
                 /*console.log(strLen);*/
                 if (lenStat(ddStr) > 8) {
                     ddStr.css("font-size", "17px");
                 }
-                if (lenStat(dtStr) > 4) {
+                /*if (lenStat(dtStr) < 8) {
                     dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);
                     dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
-                }
+                }*/
             }
         })
             
@@ -158,12 +156,12 @@ $(function () {
    
     
     //满分表单
-    $(".totalScore").keypress(function(e){
-    	if(e.keyCode==13){
+    $(".totalScore").blur(function(){
+    	/*if(e.keyCode==13){*/
     		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
 	    		$(".totalScore").val("");
 	    	}
-    	}
+    	/*}*/
     	
     })
     $(".totalScore").keyup(function(){
@@ -227,6 +225,7 @@ $(function () {
 	             time:2000,
 	             content:$(".recordSucc")
 	         })
+	         student=[];
 	     }else{
 	   		layer.close(load);
 	     	layer4 = layer.open({
@@ -288,7 +287,7 @@ $(function () {
 		         skin: '',
 		         content:$(".recordSub")
 	         })*/
-	       
+	       	/*student=[];*/
 	        for (var i = 0; i < $(".scoreList dl").length; i++) {
 	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
 	                var studentinfo = {
@@ -299,8 +298,6 @@ $(function () {
 	                }
 	                 student.push(studentinfo);
 	            }
-	
-	           
 	        }
 	        var dtlength=$(".scoreList dt").length;
 	       	if(student==""){
@@ -317,14 +314,13 @@ $(function () {
 		         })
 			     
 	       	}else{
-	       		
        			layer2=layer.open({
-		         type: 1,
-		         area: ['548px', '345px'],
-		         shade:[0.2,'#000'],
-		         title:'',
-		         skin: '',
-		         content:$(".recordSub")
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".recordSub")
 	         	})
 	    		
     		}
@@ -334,6 +330,7 @@ $(function () {
     
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
+        student=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
@@ -342,6 +339,7 @@ $(function () {
      
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
+    	student=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
@@ -369,6 +367,7 @@ $(function () {
      $(".noRecord button").eq(1).click(function(){
      	layer.close(layer1);
      	saveData();
+     	
      }) 
     
     

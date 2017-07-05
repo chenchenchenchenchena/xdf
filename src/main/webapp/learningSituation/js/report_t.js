@@ -1,16 +1,18 @@
 $(function(){
-        $('header').before('<title>111</title>')
+    $('header').before('<title>111</title>')
     if(!localStorage.terEmail){
         if(!sessionStorage.stuNumber){
             location.href = '../schedule/login_s.html';
             sessionStorage.studayCanfig = 'studay';
         }else{
-            if(sessionStorage.stuNumber=='ss3504'||sessionStorage.stuNumber=='ss6034'||sessionStorage.stuNumber=='ss5102'){
+            if(sessionStorage.stuNumber=='ss5134'
+            	||sessionStorage.stuNumber=='ss6083'
+            	||sessionStorage.stuNumber=='ss6092'){
                             location.href = 'report_s.html';
-                        }else{
-                            $('body').hide();
-                            alert('嘻嘻~  功能还在开发阶段欧');
-                        }
+           	}else{
+                $('body').hide();
+                alert('嘻嘻~  功能还在开发阶段欧');
+            }
             var WXnum  = {
                 'wechatId':sessionStorage.openid
             };

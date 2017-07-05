@@ -96,13 +96,19 @@ function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
-
+function clear(){
+	localStorage.removeItem("teacherId");
+	localStorage.removeItem("terEmail");
+	localStorage.removeItem("schoolId");
+	localStorage.removeItem("teacherName");
+}
 // 退出登录
 function signOut(e) {
         var unlog = {
             'sid': localStorage.sid,
             'returnUrl': url.t_back
         };
+        clear();
         //退出e2登录
         ajax_S(url.t_logi, unlog, function (a) {
             location.href = a.logoutUrl
