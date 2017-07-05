@@ -92,7 +92,12 @@ $(function () {
                 var dtStr = $(".scoreList dt").eq(i);
                 /*console.log(str.html());*/
                 var ddstrLen = lenStat(ddStr);
-                dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+               
+                if(lenStat(ddStr) >= 8){
+                	 dtStr.html(dtStr.html().substring(lenStat(dtStr) - 6, lenStat(dtStr) - 1));
+                }else{
+                	 dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+                }
                 /*console.log(strLen);*/
                 if (lenStat(ddStr) > 8) {
                     ddStr.css("font-size", "17px");
