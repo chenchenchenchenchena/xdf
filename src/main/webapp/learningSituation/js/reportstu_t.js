@@ -59,7 +59,7 @@ var maxnumber = 0;
             var Cindex = [];
             if(e.data.AvgrealGrade!=undefined){
                 $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove();
-                $('.reportstu_S ul').eq(1).find('li').eq(1).sinlings().remove();
+                $('.reportstu_S ul').eq(1).find('li').eq(1).siblings().remove();
                 $('.reportstu_S ul').eq(2).find('li').eq(0).siblings().remove();
                 $('title').html(e.data.realGrade[0].studentName);
                 var stuSelf = e.data.realGrade;
