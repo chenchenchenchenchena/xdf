@@ -1,18 +1,6 @@
 $(function(){
     $('header').before('<title>111</title>')
     if(!localStorage.terEmail){
-        if(!sessionStorage.stuNumber){
-            location.href = '../schedule/login_s.html';
-            sessionStorage.studayCanfig = 'studay';
-        }else{
-            if(sessionStorage.stuNumber.toLocaleLowerCase()=='ss5134'
-            	||sessionStorage.stuNumber.toLocaleLowerCase()=='ss6083'
-            	||sessionStorage.stuNumber.toLocaleLowerCase()=='ss6092'){
-                            location.href = 'report_s.html';
-           	}else{
-                $('body').hide();
-                alert('嘻嘻~  功能还在开发阶段欧');
-            }
             var WXnum  = {
                 'wechatId':sessionStorage.openid
             };
@@ -27,7 +15,6 @@ $(function(){
                     }
                 }
             });
-        }
     }else{
         if(localStorage.terEmail){
             if(localStorage.terEmail!='hanqifan@xdf.cn'){
