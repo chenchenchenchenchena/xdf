@@ -35,7 +35,7 @@ $(function () {
 
     //存储主讲老师
     var masterteacher = '';
-    // sessionStorage.stuNum = "SS3304";
+    sessionStorage.stuNum = "SS3304";
     //当天课程
     var emailm = {
         'studentCode': sessionStorage.stuNum,
@@ -173,6 +173,7 @@ $(function () {
                 mastertae.push(e.data[i]);
             }
         });
+        var jteaname,masterta;
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if (e.result == false) {
@@ -187,20 +188,27 @@ $(function () {
 
             var old;
 
-
+            console.log(e.data.Data[0].Teachers);
             if(e.data.Data[0].Teachers!=undefined){
-                var masterta = e.data.Data[0].Teachers.split(',');
+                masterta = e.data.Data[0].Teachers.split(',');
                 for (var j = 0; j < mastertae.length; j++) {
                     for (var k = 0; k < masterta.length; k++) {
-                        if (mastertae[j].teacherName == masterta[k]) {
-                            jteaname = masterta[k];
-                            masterta[k] = '';
+                        if(mastertae[j].teacherName!=undefined && mastertae[j].teacherName!=""&&mastertae[j].teacherName!=null){
+                            if (mastertae[j].teacherName == masterta[k]) {
+                                jteaname = masterta[k];
+                                masterta[k] = '';
+                            } else {
+                                jteaname = masterta[k];
+                            }
+                        }else{
+                            jteaname = "暂无";
                         }
                     }
                 }
             }else{
-                jteaname = "无";
+                masterta = "暂无";
             }
+            console.log("主讲老师："+jteaname);
             var masteaname = '';
 
             // 录入开始时间
@@ -211,7 +219,7 @@ $(function () {
                 var endtime2 = endtime[1].substring(0, begtime[1].length - 3);
                 var teaname = curr_e[i].Teachers.split(',');
                 var zteaname;
-                var jteaname;
+                // var jteaname;
                 var remindedata = {
                     'classCode': curr_e[i].ClassCode,
                     'courseCode': curr_e[i].CourseCode,
