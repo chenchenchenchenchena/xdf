@@ -227,7 +227,6 @@ $(function () {
 	             shade:[0.2,'#000'],
 	             title:'',
 	             skin: '',
-	             time:2000,
 	             content:$(".recordSucc")
 	         })
 	         student=[];
