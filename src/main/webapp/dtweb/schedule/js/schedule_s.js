@@ -187,16 +187,22 @@ $(function () {
 
             var old;
 
-            var masterta = e.data.Data[0].Teachers.split(',');
-            var masteaname = '';
-            for (var j = 0; j < mastertae.length; j++) {
-                for (var k = 0; k < masterta.length; k++) {
-                    if (mastertae[j].teacherName == masterta[k]) {
-                        jteaname = masterta[k]
-                        masterta[k] = ''
+
+            if(e.data.Data[0].Teachers!=undefined){
+                var masterta = e.data.Data[0].Teachers.split(',');
+                for (var j = 0; j < mastertae.length; j++) {
+                    for (var k = 0; k < masterta.length; k++) {
+                        if (mastertae[j].teacherName == masterta[k]) {
+                            jteaname = masterta[k];
+                            masterta[k] = '';
+                        }
                     }
                 }
+            }else{
+                jteaname = "无";
             }
+            var masteaname = '';
+
             // 录入开始时间
             for (var i = 0; i < curr_e.length; i++) {
                 var begtime = curr_e[i].SectBegin.split(' ');
