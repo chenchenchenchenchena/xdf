@@ -208,7 +208,7 @@ function takeScreenshot() {
     html2canvas($('body'), {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
-            $('canvas').hide();
+            // $('canvas').hide();
             // $('.shared-content').hide();
             // layer.msg('加载中...');
                 convertCanvasToImage();
@@ -220,13 +220,16 @@ function takeScreenshot() {
 //	canvas to images
 function convertCanvasToImage(){
     // loading = layer.load();
-    // setTimeout(function(){
         console.log("canvas to images");
         var myCanvas = document.getElementsByTagName("canvas");
         var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
         // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
         //     $('canvas,.shared-content').hide();
-            layer.close(loading);
-            $('#imgs>img').attr('src',image);
-    // },1000);
+    layer.close(loading);
+    $('#imgs>img').attr('src',image);
+    setTimeout(function(){
+        $('canvas,.shared-content').hide();
+    },200);
+
+
 }
