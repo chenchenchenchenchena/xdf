@@ -5,9 +5,9 @@ $(function(){
             location.href = '../schedule/login_s.html';
             sessionStorage.studayCanfig = 'studay';
         }else{
-            if(sessionStorage.stuNumber=='ss5134'
-            	||sessionStorage.stuNumber=='ss6083'
-            	||sessionStorage.stuNumber=='ss6092'){
+            if(sessionStorage.stuNumber.toLocaleLowerCase()=='ss5134'
+            	||sessionStorage.stuNumber.toLocaleLowerCase()=='ss6083'
+            	||sessionStorage.stuNumber.toLocaleLowerCase()=='ss6092'){
                             location.href = 'report_s.html';
            	}else{
                 $('body').hide();
