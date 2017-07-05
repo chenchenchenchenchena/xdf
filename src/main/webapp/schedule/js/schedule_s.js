@@ -87,6 +87,7 @@ $(function() {
 
     // 微信查询是否绑定微信  参数：当前微信号 老师
     function teac(e) {
+        alert(0)
         if (e.data == "goE2") {
             location.href = 'login_s.html';
             sessionStorage.callbackconfig = 'schedule'

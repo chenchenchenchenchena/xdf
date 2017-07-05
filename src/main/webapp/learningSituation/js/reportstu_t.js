@@ -47,6 +47,9 @@ var maxnumber = 0;
 
     function Studata(){
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
+            $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove()
+            $('.reportstu_S ul').eq(1).find('li').remove()
+            $('.reportstu_S ul').eq(2).find('li').eq(0).siblings().remove()
             console.log(e);
             var Xindex = '';
             var Thistime = [];
