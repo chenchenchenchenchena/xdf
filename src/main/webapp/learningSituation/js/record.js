@@ -94,7 +94,7 @@ $(function () {
                 var ddstrLen = lenStat(ddStr);
                
                 if(lenStat(ddStr) >= 8){
-                	 dtStr.html(dtStr.html().substring(lenStat(dtStr) - 6, lenStat(dtStr) - 1));
+                	 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
                 }else{
                 	 dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
                 }
@@ -163,9 +163,9 @@ $(function () {
     //满分表单
     $(".totalScore").blur(function(){
     	/*if(e.keyCode==13){*/
-    		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
-	    		$(".totalScore").val("");
-	    	}
+		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
+    		$(".totalScore").val("");
+    	}
     	/*}*/
     	
     })
@@ -545,29 +545,25 @@ $(function () {
     //修改数据
     function changeData(){
     	/*$(".scoreTitle input").keyup(function(){*/
-    		for(var i=0;i<$(".scoreList dl").length;i++){
-    			$(".scoreList dl").find(".flag").html(0);
-    			if(isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))){
-    				$(".scoreList dl").eq(i).attr("mark","add");
-    			}else{
-    				$(".scoreList dl").eq(i).attr("mark","update");
-    			}
-    			
+		for(var i=0;i<$(".scoreList dl").length;i++){
+			$(".scoreList dl").find(".flag").html(0);
+			if(isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))){
+				$(".scoreList dl").eq(i).attr("mark","add");
+			}else{
+				$(".scoreList dl").eq(i).attr("mark","update");
+			}
+			
+		}
+		/*console.log($(".scoreTitle input").val());
+		console.log(222);*/
+		$(".scoreList dl").click(function(){
+    		if($(this).attr("mark")=="add"){
+    			console.log(333)
+    			$(this).find(".flag").html(1);
+    		}else if($(this).attr("mark")=="update"){
+    			$(this).find(".flag").html(2);
     		}
-    		console.log($(".scoreTitle input").val());
-	    	/*if($(".scoreTitle input").val()){*/
-	    		console.log(222);
-	    		$(".scoreList dl").click(function(){
-		    		if($(this).attr("mark")=="add"){
-		    			console.log(333)
-		    			$(this).find(".flag").html(1);
-		    		}else if($(this).attr("mark")=="update"){
-		    			$(this).find(".flag").html(2);
-		    		}
-			    })
-	    		
-	    	/*}*/
-    	/*})*/
+	    })
     }
     
     
