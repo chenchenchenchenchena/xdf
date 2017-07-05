@@ -16,13 +16,15 @@ $(function () {
     // sessionStorage.teacherName="曹雪峰";  //
     // sessionStorage.stuNumber = 'SS1508';  //
 
-     $(".txt").hide();
+    $(".txt").hide();
     $(".txtDiv").hide();
+    var firstLoad = layer.load();
     //录入数据
     var inputData = {"sCode": localStorage.teacherId, "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
+            layer.close(firstLoad);
         	if(e.resultMessage=="false"){
             	layer.msg("该班级已结课");
             	return false;
@@ -36,6 +38,8 @@ $(function () {
                 var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li>";
                 $(".scoreType ul").append(str2);
             }
+        }else{
+            layer.close(firstLoad);
         }
             
            /* console.log(inputData)*/
