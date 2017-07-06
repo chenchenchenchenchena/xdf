@@ -89,7 +89,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data[i][y].realGrade) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName);
                     $('title').html(e.data[i][0].studentName+'同学');
-                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGradeView) + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].AvgGradeView) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').css('width',146.5* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
@@ -106,7 +106,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 if(Xindex==e.data[0].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
-                        Cindex.push(e.data[0][j].avgGradeView);
+                        Cindex.push(e.data[0][j].AvgGradeView);
                         pjIndex.push(e.data[0][j].realGrade);
                         mfInedx.push('满分:'+e.data[0][j].fullMarks);
                         timeIndex.push(e.data[0][j].lessonTime.split(' ')[0]);
@@ -118,7 +118,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                             var buer = false;
                             for(var k = 0;k<e.data[i].length;k++){
                                 if((j+1)==e.data[i][k].lessonNO){
-                                    Cindex.push(e.data[i][k].avgGradeView);
+                                    Cindex.push(e.data[i][k].AvgGradeView);
                                     pjIndex.push(e.data[i][k].realGrade);
                                     mfInedx.push('满分:'+e.data[i][k].fullMarks);
                                     timeIndex.push(e.data[i][k].lessonTime.split(' ')[0]);

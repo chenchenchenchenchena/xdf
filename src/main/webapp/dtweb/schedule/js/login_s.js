@@ -1,61 +1,71 @@
 $(function(){
-	// if(!sessionStorage.openid){
-	// 	wechatCode(location.href)
-	// }
-	// // sessionStorage.openid = '111';
-	// var WXnum  = {
-	// 	'wechatId':sessionStorage.openid
-	// };
-	// var teacherlogin=true;
-    //
-	// ajax_S(url.s_seac,WXnum,stuc);
+// 	if(!sessionStorage.openid){
+// 		wechatCode(location.href)
+// 	}
+//     // sessionStorage.openid = '111';
+// var WXnum  = {
+//     'wechatId':sessionStorage.openid
+// };
+// var teacherlogin=true;
+//
+// ajax_S(url.s_seac,WXnum,stuc);
+function clear(){
+	sessionStorage.removeItem("schoolId");
+	sessionStorage.removeItem("stuNum");
+	sessionStorage.removeItem("studentName");
+	sessionStorage.removeItem("stuNumber");
+	sessionStorage.removeItem("mobile");
+}
 
-	function stuc(e){
-		console.log(e)
-		if(e.result==false){
-			$('.card').show();
-			$('.enter').show();
-		}
-		if(e.data.relatedState=='1'&&e.data.mobile==''){
-			$('.search').show();
-			$('.stuname').html(e.data.studentName);
-			$('.stutel').html('');
-			$('.deterAss').html('解除关联');
-			$('.deterAss').css('background','#fc1010');
-			$('.stuInfo li').eq(0).html('关联结果：');
-			sessionStorage.stuNumber = 	e.data.studentNo;
-			$('.enter').hide();
-			//
-			// //判断是否绑定
-			// if($('.stuname').html()==''){
-			//     $('.studentTitle').show();
-			//     $('.inputBox').show()
-			// }else{
-			$('.studentTitle').hide();
-			$('.inputBox').hide()
-			$('.search').css('margin-top','.2rem')
-			$('.enter').hide()
-		}else{
-			$('.searchTwo').show();
-			$('.card').hide();
-			$('.studentTitle').hide();
-			$('.inputBox').hide();
-			$('.enter').show();
-			$('.searchTwo li').eq(0).html('关联结果：');
-			$('.stuNum li').eq(1).remove();
-			$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
-			$('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
-			$('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-			$('.searchTwo').css('margin-top','.5rem');
-			$('.enter').hide()
-			if(e.data.relatedState=='1'){
-				$('.Relation').html('取消关联')
-			}else{
-				$('.Relation').html('确认关联')
-			}
-			// $('.')
-		}
+function stuc(e){
+	console.log(e)
+	if(e.result==false){
+		$('.card').show();
+		$('.enter').show();
+		return false;
 	}
+	if(e.data.relatedState=='1'&&e.data.mobile==''){
+		$('.search').show();
+		$('.stuname').html(e.data.studentName);
+		$('.stutel').html('');
+		$('.deterAss').html('解除关联');
+		$('.deterAss').css('background','#fc1010');
+        $('.stuInfo li').eq(0).html('关联结果：');
+        sessionStorage.stuNumber = 	e.data.studentNo;
+        sessionStorage.studentName=e.data.studentName;
+		$('.enter').hide();
+        //
+        // //判断是否绑定
+        // if($('.stuname').html()==''){
+        //     $('.studentTitle').show();
+        //     $('.inputBox').show()
+        // }else{
+		$('.studentTitle').hide();
+		$('.inputBox').hide()
+		$('.search').css('margin-top','.2rem')
+		$('.enter').hide()
+	}else{
+		$('.searchTwo').show();
+		$('.card').hide();
+        $('.studentTitle').hide();
+        $('.inputBox').hide();
+		$('.enter').show();
+		$('.searchTwo li').eq(0).html('关联结果：');
+		$('.stuNum li').eq(1).remove();
+		$('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
+        $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
+        $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
+        $('.searchTwo').css('margin-top','.5rem');
+        $('.enter').hide()
+        if(e.data.relatedState=='1'){
+			$('.Relation').html('取消关联')
+		}else{
+			$('.Relation').html('确认关联')
+			
+		}
+		// $('.')
+	}
+}
 
 
 
@@ -65,9 +75,9 @@ $(function(){
 		if($(this).index()==1){
 			$('.card').hide();
 			$('.search').hide();
-			$('.noSearch').hide();
+            $('.noSearch').hide();
 
-		}else{
+        }else{
 			$('.card').show();
 			$('.searchTwo').hide();
 			$('.noSearch').hide();
@@ -77,7 +87,7 @@ $(function(){
 		$('input').val('')
 	})
 	var wxnumber = {'email':'','wechatId':sessionStorage.openid}
-
+	
 	//判断教师是否绑定
 	function Wxtea(e){
 		console.log(e);
@@ -104,21 +114,21 @@ $(function(){
 			$('.search').show();
 			$('.stuname').html(e.data.studentName);
 			$('.stutel').html('');
-			sessionStorage.stuNumber = $('.studentLogin input').val();
-			sessionStorage.schoolId = e.data.schoolId;
+            sessionStorage.stuNumber = $('.studentLogin input').val();
+            sessionStorage.schoolId = e.data.schoolId;
 			localStorage.setItem('statusFlag','student');//学生身份标识
-			// window.location.href = "../main_list.html";
 			// if(e.data.relatedState=='0'){
 			// 	$('.deterAss').html('立即关联')
 			// 	$('.deterAss').css('background','#00ba97')
+			//	
 			// }else{
 			// 	$('.deterAss').html('解除关联')
 			// 	$('.deterAss').css('background','#fc1010')
 			// }
 
 		}else{
-			$('.search').hide()
-			$('.card').hide();
+            $('.search').hide()
+            $('.card').hide();
 			$('.noSearch').show();
 			layer.msg('没有查到相关信息');
 		}
@@ -127,18 +137,24 @@ $(function(){
 		console.log(e);
 		if(e.data==undefined){
 			layer.msg(e.message);
+			clear();
 			$('.deterAss').html('立即关联');
 			$('.deterAss').css('background','#00ba97')
-			location.href = 'login_s.html'
-			// location.reload()
+            location.href = 'login_s.html'
+            
+            // location.reload()
 		}else{
-			sessionStorage.stuNum = $('.stunum').val();
+            sessionStorage.stuNum = $('.stunum').val();
+            sessionStorage.stuNumber=$('.stunum').val();
+            sessionStorage.studentName=$(".stname").val();
+            sessionStorage.mobile=e.data.mobile;
+            sessionStorage.schoolId=e.data.schoolId;
 			layer.msg('绑定成功');
 			if(sessionStorage.studayCanfig=='studay'){
-				location.href = '../learningSituation/report_s.html'
-				sessionStorage.removeItem('studayCanfig')
+				location.href = '../learningSituation/report_t.html';
+                sessionStorage.removeItem('studayCanfig')
 			}else{
-				location.href = 'schedule_s.html';
+                location.href = 'schedule_s.html';
 			}
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010');
@@ -167,6 +183,7 @@ $(function(){
 		//解绑
 		else{
 			ajax_S(url.s_nobd,stumore,s_bind)
+			
 		}
 	})
 	// ajax_S(url.t_wxmo,wxnumber,Wxtea)//ajax请求
@@ -189,13 +206,12 @@ $(function(){
 		if(!tel.test($('.phoneNumber').val())){
 			layer.msg('请输入正确格式手机号');
 			return false;
-		}
+		}	
 		if(e.result==false){
 			$('.noSearch').show()
 			return false;
 		}
-		$('.searchTwo').show();
-		// window.location.href = "../main_list.html";
+		$('.searchTwo').show()
 		localStorage.setItem('statusFlag','student');//学生身份标识
 		var  num = 0;
 		var  bindz = '登录';
@@ -225,70 +241,72 @@ $(function(){
 	})
 
 
-	function telbind(e){
-		console.log(e);
-		// alert(e.message.length!=0)
-		if(e.result==true&&e.data==undefined){
-			layer.msg(e.message)
-			location.href = 'login_s.html'
-		}else if(e.result==false){
-			layer.msg(e.message)
+function telbind(e){
+	console.log(e);
+	// alert(e.message.length!=0)
+	if(e.result==true&&e.data==undefined){
+	   layer.msg(e.message)
+        location.href = 'login_s.html'
+        clear();
+    }else if(e.result==false){
+        	layer.msg(e.message)
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
-			location.href = 'login_s.html'
-		}else{
-			layer.msg('绑定成功');
-			$('.deterAss').html('解除关联');
-			ajax_S(url.s_seac,WXnum,stuc);
-		}
-	}
+        	location.href = 'login_s.html';
+        	clear();
+	}else{
+	   layer.msg('绑定成功');
+	   $('.deterAss').html('解除关联');
+	   ajax_S(url.s_seac,WXnum,stuc);
+    }
+}
 
 
-	$(document).on('click','.Relation',function(){
-		if($(this).html()=='确认关联'){
-			var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-			var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
-			ajax_S(url.s_bind,stumore,telbind)
-			// $(this).html('解除关联')
-		}else{
-			var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
-			var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
-			ajax_S(url.s_nobd,stumore,telbind)
-			$(this).html('确认关联')
-		}
-
-	})
+$(document).on('click','.Relation',function(){
+	if($(this).html()=='确认关联'){
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+		var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+		ajax_S(url.s_bind,stumore,telbind)
+		// $(this).html('解除关联')
+	}else{
+		var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+        var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+		ajax_S(url.s_nobd,stumore,telbind)
+		$(this).html('确认关联')
+    }
+	
+})
 	// var WXnumber = [
 	// 	'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
 	// 	// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
-	//    // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+     //    // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
 	// ];
-	//
+    //
 	// for(var i = 0;i<WXnumber.length;i++){
-	// var json = {
-	//
-	//    "touser":WXnumber[i],
-	//
-	//    "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-	//    "url":"",
-	//    "data":{
-	//
-	//        "Date":{
-	//
-	//            "value":"06月07日 19时24分",
-	//
-	//            "color":"#173177"
-	//
-	//        }
-	//    }
-	//
-	// };
-	// ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
-	// console.log(e)
+    // var json = {
+    //
+     //    "touser":WXnumber[i],
+    //
+     //    "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
+     //    "url":"",
+     //    "data":{
+    //
+     //        "Date":{
+    //
+     //            "value":"06月07日 19时24分",
+    //
+     //            "color":"#173177"
+    //
+     //        }
+     //    }
+    //
+    // };
+    // ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+    	// console.log(e)
 	// })
 
-	// }
+    // }
 
 
 //登录
