@@ -72,9 +72,9 @@
             //获取教师schoolId
             ajaxRequest('POST',url.t_webmore,calbac, function (e) {
                 if(e.code == 200){
-                    localStorage.schoolId = e.nSchoolId;
-                    localStorage.terName = e.sName;
-                    localStorage.teacherId = e.sCode;
+                    localStorage.schoolId = e.data.nSchoolId;
+                    localStorage.terName = e.data.sName;
+                    localStorage.teacherId = e.data.sCode;
                 }
 
             });
