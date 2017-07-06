@@ -5,6 +5,8 @@ $(function () {
     var layer4;
     var load;
     var flag = 1;
+    var student = [];
+    /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     // if(!sessionStorage.openid){
     //     wechatCode(location.href)
     // }
@@ -14,13 +16,15 @@ $(function () {
     // sessionStorage.teacherName="曹雪峰";  //
     // sessionStorage.stuNumber = 'SS1508';  //
 
-     $(".txt").hide();
+    $(".txt").hide();
     $(".txtDiv").hide();
+    var firstLoad = layer.load();
     //录入数据
     var inputData = {"sCode": localStorage.teacherId, "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
+            layer.close(firstLoad);
         	if(e.resultMessage=="false"){
             	layer.msg("该班级已结课");
             	return false;
@@ -34,6 +38,8 @@ $(function () {
                 var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li>";
                 $(".scoreType ul").append(str2);
             }
+        }else{
+            layer.close(firstLoad);
         }
             
            /* console.log(inputData)*/
@@ -53,29 +59,34 @@ $(function () {
             //课次及时间
             for (var i = 0; i < e.Data.length; i++) {
                 if ($(".classrome").html() == e.Data[i].className) {
-                    for (var j = 0; j < e.Data[i].studentData.length; j++) {
-                        var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
-                        stuArr.push(stuInfo);
-
+                	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
+                    	for (var j = 0; j < e.Data[i].studentData.length; j++) {
+                    		var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
+                        	stuArr.push(stuInfo);
+                    	}
+                    	var colId = "name";
+	                    //对json进行升序排序函数
+	                    var asc = function (x, y) {
+	                        return x[colId].localeCompare(y[colId])
+	                    }
+	
+	                    stuArr.sort(asc); //升序排序
+	                    
+                    	for (var r = 0; r < stuArr.length; r++) {
+	                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+	                    }
+                    	$(".scoreList").html(stu);
+                    }else{
+                    	$(".scoreList").html("暂无学生成绩信息");
                     }
-                   /* console.log(stuArr);*/
-
-                    var colId = "name";
-                    //对json进行升序排序函数
-                    var asc = function (x, y) {
-                        return x[colId].localeCompare(y[colId])
+                    if(e.Data[i].LessonData.length==0){
+                    	str1="<span>暂无课次</span>";
+                    }else{
+                		for (var h = 0; h < e.Data[i].LessonData.length; h++) {
+                			str1 += "<li>第<span class=lessonNo>" + e.Data[i].LessonData[h].lessonNo + "</span>课次(<span class=sectTime>" + e.Data[i].LessonData[h].sectTime + "</span>)</li>";
+                		}
                     }
-
-                    stuArr.sort(asc); //升序排序
-                    for (var r = 0; r < stuArr.length; r++) {
-                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
-                    }
-
-
-                    $(".scoreList").html(stu);
-                    for (var h = 0; h < e.Data[i].LessonData.length; h++) {
-                        str1 += "<li>第" + e.Data[i].LessonData[h].lessonNo + "课次(" + e.Data[i].LessonData[h].sectTime + ")</li>";
-                    }
+                   
                     $(".classNumTime ul").html(str1);
                 }
 
@@ -85,29 +96,35 @@ $(function () {
                 var dtStr = $(".scoreList dt").eq(i);
                 /*console.log(str.html());*/
                 var ddstrLen = lenStat(ddStr);
+               
+                if(lenStat(ddStr) >= 8){
+                	 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+                }else{
+                	 dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+                }
                 /*console.log(strLen);*/
                 if (lenStat(ddStr) > 8) {
                     ddStr.css("font-size", "17px");
                 }
-                if (lenStat(dtStr) > 4) {
+                /*if (lenStat(dtStr) < 8) {
                     dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);
                     dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
-                }
+                }*/
             }
         })
             
         //点击课次    
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-            $(".classTime").html($(this).html());
+            $(".classTime").html("第<span class=classnum>"+$(this).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(this).find(".sectTime").html()+"</span>)");
             $(".scoreTitle input").val("");
         })
         //点击成绩类型
         $(".scoreType ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".st").html($(this).html());
-            $(".classTime").html("");
-             $(".classrome").html("");
+            /*$(".classTime").html("");
+             $(".classrome").html("");*/
              $(".scoreTitle input").val("");
              $(".totalScore").val(10);
         })
@@ -149,15 +166,21 @@ $(function () {
     
     //满分表单
     $(".totalScore").blur(function(){
-    	if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
+    	/*if(e.keyCode==13){*/
+		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
     		$(".totalScore").val("");
     	}
+    	/*}*/
+    	
     })
-    
+    $(".totalScore").keyup(function(){
+		resetData();
+		$(".scoreTitle input").val("");
+	})
     
     function saveData(){
     	load = layer.load(0,{shade: [0.8, '#000']});
-    	var student = [];
+    	/*var student = [];
     	for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
                 var studentinfo = {
@@ -170,18 +193,18 @@ $(function () {
             }
 
            
-        }
+        }*/
     	console.log(student);
-    	var classNo = $(".classTime").html().substring(1,2);
-        var classT = $(".classTime").html().substring(4,22);
+    	/*var classNo = $(".lessonNo").html().substring(1,2);
+        var classT = $(".sectTime").html().substring(4,22);*/
         var saveInfo = {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
             "gradeType": $(".st").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
-            "lessonNo": classNo,
-            "lessonTime": classT,
+            "lessonNo": $(".classTime").find(".classnum").html(),
+            "lessonTime": $(".classTime").find(".lestime").html(),
             "fullMarks": $(".totalScore").val(),
             "schoolId":localStorage.schoolId,
             "student": student
@@ -208,9 +231,9 @@ $(function () {
 	             shade:[0.2,'#000'],
 	             title:'',
 	             skin: '',
-	             time:2000,
 	             content:$(".recordSucc")
 	         })
+	         student=[];
 	     }else{
 	   		layer.close(load);
 	     	layer4 = layer.open({
@@ -248,8 +271,7 @@ $(function () {
 		         content:$(".classTimeEmpty")
 	         })
          }else{
-	        for(var i = 0;i<$(".scoreList dt").length;i++){
-	        /*alert($(".scoreList dl dt").eq(i).html()=="")*/
+	        /*for(var i = 0;i<$(".scoreList dt").length;i++){
 		        if(isNaN(parseInt($(".scoreList dl dt").eq(i).html()))){
 			         layer1=layer.open({
 				         type: 1,
@@ -272,15 +294,51 @@ $(function () {
 		         title:'',
 		         skin: '',
 		         content:$(".recordSub")
-	         })
-		         	 
-		      
+	         })*/
+	       	/*student=[];*/
+	        for (var i = 0; i < $(".scoreList dl").length; i++) {
+	            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
+	                var studentinfo = {
+	                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+	                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
+	                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+	                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+	                }
+	                 student.push(studentinfo);
+	            }
+	        }
+	        var dtlength=$(".scoreList dt").length;
+	       	if(student==""){
+	       		layer.msg("没有录入成绩");
+	       	}else if(student.length<dtlength){
+	       		
+		         layer1=layer.open({
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".noRecord")
+		         })
+			     
+	       	}else{
+       			layer2=layer.open({
+			         type: 1,
+			         area: ['548px', '345px'],
+			         shade:[0.2,'#000'],
+			         title:'',
+			         skin: '',
+			         content:$(".recordSub")
+	         	})
+	    		
+    		}
 	    }
        
     })
     
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
+        student=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
@@ -289,9 +347,21 @@ $(function () {
      
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
+    	student=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
+    	for (var i = 0; i < $(".scoreList dl").length; i++) {
+            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
+                var studentinfo = {
+                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
+                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+                }
+                 student.push(studentinfo);
+            }
+	    }
     	saveData();
     })
     
@@ -305,6 +375,7 @@ $(function () {
      $(".noRecord button").eq(1).click(function(){
      	layer.close(layer1);
      	saveData();
+     	
      }) 
     
     
@@ -402,7 +473,7 @@ $(function () {
 			    	"classCode":$(".class").html(),
 			    	"tCode":$(".st").html(),
 			    	"schoolId":localStorage.schoolId,
-			    	"lessonNo":$(".classTime").html().substring(1,2)
+			    	"lessonNo":$(".classTime").find(".classnum").html()
 			    };
 			    console.log(queryData.lessonNo)
 			     console.log(queryData.classCode)
@@ -424,6 +495,7 @@ $(function () {
 			console.log(msg);
 			if(msg.data.length==0){
 				$(".totalScore").val(10);
+				$(".totalScore").attr("readonly",false);
 				resetData();
 			}else{
 				resetData();
@@ -432,6 +504,7 @@ $(function () {
 					for(var i=0;i<msg.data.length;i++){
 						/*console.log(res.data[0].fullmarks);*/
 						$(".totalScore").val(msg.data[0].fullmarks);
+						$(".totalScore").attr("readonly","readonly");
 						/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
 						if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
 							console.log("sssss")
@@ -476,29 +549,25 @@ $(function () {
     //修改数据
     function changeData(){
     	/*$(".scoreTitle input").keyup(function(){*/
-    		for(var i=0;i<$(".scoreList dl").length;i++){
-    			$(".scoreList dl").find(".flag").html(0);
-    			if(isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))){
-    				$(".scoreList dl").eq(i).attr("mark","add");
-    			}else{
-    				$(".scoreList dl").eq(i).attr("mark","update");
-    			}
-    			
+		for(var i=0;i<$(".scoreList dl").length;i++){
+			$(".scoreList dl").find(".flag").html(0);
+			if(isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))){
+				$(".scoreList dl").eq(i).attr("mark","add");
+			}else{
+				$(".scoreList dl").eq(i).attr("mark","update");
+			}
+			
+		}
+		/*console.log($(".scoreTitle input").val());
+		console.log(222);*/
+		$(".scoreList dl").click(function(){
+    		if($(this).attr("mark")=="add"){
+    			console.log(333)
+    			$(this).find(".flag").html(1);
+    		}else if($(this).attr("mark")=="update"){
+    			$(this).find(".flag").html(2);
     		}
-    		console.log($(".scoreTitle input").val());
-	    	/*if($(".scoreTitle input").val()){*/
-	    		console.log(222);
-	    		$(".scoreList dl").click(function(){
-		    		if($(this).attr("mark")=="add"){
-		    			console.log(333)
-		    			$(this).find(".flag").html(1);
-		    		}else if($(this).attr("mark")=="update"){
-		    			$(this).find(".flag").html(2);
-		    		}
-			    })
-	    		
-	    	/*}*/
-    	/*})*/
+	    })
     }
     
     

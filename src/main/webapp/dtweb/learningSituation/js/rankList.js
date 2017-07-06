@@ -62,7 +62,7 @@ $(function(){
             if(msg.data!='undefined' && msg.data.length>0){
                 var datas = msg.data;
                 var rankTitleHtml = '<tr><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
-                    +'<th>名次浮动</th><th class="to-shared"><img src="images/shareIcon.png" alt="分享"/></th></tr>';
+                    +'<th>名次浮动</th><th class="to-shared"><img  src="images/shareIcon.png" alt="分享"/></th></tr>';
                 $(".intro-test>tbody").html(rankTitleHtml);
                 $.each(datas,function(i,items){
                     var rankCss,floatGradeCss,floatRankCss;

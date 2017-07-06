@@ -1,11 +1,16 @@
 $(function(){
-
 //禁止浏览器拖动
     addEventListener("touchmove", function (event) {
         event.preventDefault();
     }, false);
 
-    var Stujson = {'teacherEmail':localStorage.terEmail,'classCode':localStorage.getItem("CLASSCODE"),'tCode':GetRequest('tCode'),'studentNo':GetRequest('studentNo'),'schoolId':localStorage.getItem("SCHOOLID")};
+    var Stujson = {
+        'teacherEmail':localStorage.terEmail,
+        'classCode':localStorage.getItem('CLASSCODE'),
+        'tCode':GetRequest('tCode'),
+        'studentNo':GetRequest('studentNo'),
+        'schoolId':localStorage.getItem('SCHOOLID')
+    };
     Studata();  //调取
     if(GetRequest('tCode')=='2'){
         $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
@@ -24,14 +29,13 @@ var maxnumber = 0;
 
 
     $('.tab-title li').on('touchend',function(){
-        $('.no-data').hide()
+        $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
             Stujson.tCode='2';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
         }else{
-            // myChart = echarts.init(document.getElementById('chart_S'));
             Stujson.tCode='1';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
@@ -42,9 +46,10 @@ var maxnumber = 0;
 
 
     function Studata(){
-
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
+
             console.log(e);
+
             var Xindex = '';
             var Thistime = [];
             var Xtwindex = [];
@@ -53,8 +58,13 @@ var maxnumber = 0;
             var timeIndex = [];
             var Cindex = [];
             if(e.data.AvgrealGrade!=undefined){
+                $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove();
+                $('.reportstu_S ul').eq(1).find('li').eq(1).siblings().remove();
+                $('.reportstu_S ul').eq(2).find('li').eq(0).siblings().remove();
+                $('title').html(e.data.realGrade[0].studentName);
                 var stuSelf = e.data.realGrade;
                 for(var s = 0;s<e.data.AvgrealGrade.length;s++){
+                    // TODO
                     if(parseInt(e.data.AvgrealGrade[s].fullMarks)>maxnumber){
                         maxnumber =parseInt(e.data.AvgrealGrade[s].fullMarks)
                     }
@@ -114,16 +124,16 @@ var maxnumber = 0;
                    }
                }
                console.log(pjIndex);
+                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
                 $('.class_big').show();
                 $('.title_s').eq(0).siblings().show();
-                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)');
-                $('.classroom_s').css('border-bottom','1px solid #e1e1e1');
-
-                Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
+                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
+                $('.classroom_s').css('border-bottom','1px solid #e1e1e1')
             }else{
                 $('.class_big').hide();
                 $('.no-data').show();
-                $('.classroom_s').css('border','none')
+                $('.class_big').hide();
+                $('.classroom_s').css('bosrder','none')
             }
 
 
@@ -139,6 +149,7 @@ var maxnumber = 0;
 
 
     function Echart(id,x,y1,y2,y3,y4,max){
+        console.log(id+"---"+x+"---"+y1+"---"+y2+"---"+y3+"---"+y4+"---"+max);
         var myChart = echarts.init(document.getElementById(id));
         var option = {
             tooltip : {
@@ -192,6 +203,7 @@ var maxnumber = 0;
                     name:'个人得分',
                     type:'line',
                     data:y1,
+                    symbolSize:14,
                     nameTextStyle:{
                         fontSize:24
                     },
@@ -199,6 +211,13 @@ var maxnumber = 0;
                         show: true,
                         textStyle: {
                             fontSize: 24
+                        }
+                    },
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
                         }
                     }
                 },
@@ -206,6 +225,7 @@ var maxnumber = 0;
                     name:'平均分',
                     type:'line',
                     data:y2,
+                    symbolSize:14,
                     nameTextStyle:{
                         fontSize:24
                     },
@@ -214,18 +234,39 @@ var maxnumber = 0;
                         textStyle: {
                             fontSize: 24
                         }
+                    },
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
                     }
                 },
                 {
                     name:'日期',
                     type:'line',
-                    data:y3
+                    data:y3,
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
+                    }
 
                 },
                 {
                     name:'总分',
                     type:'line',
-                    data:y4
+                    data:y4,
+                    lable:{
+                        normal:{
+                            textStyle:{
+                                fontSize:24
+                            }
+                        }
+                    }
                 }
             ]
         };
