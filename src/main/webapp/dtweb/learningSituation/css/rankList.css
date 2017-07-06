@@ -1,5 +1,6 @@
 body, html{
     height: 98%;
+	max-width:1024px;
 }
 .main-content{
     /*padding: 0 20px;*/
@@ -196,6 +197,12 @@ i{
 }
 .rankright>i:nth-child(2){
     width:90px;
+}
+canvas{
+    position: absolute;
+    bottom:0;
+    left:0;
+    z-index: -1;
 }
 #imgs>img{
     position: absolute;
