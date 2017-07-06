@@ -36,10 +36,10 @@
         if (localStorage.getItem("statusFlag") == "student") {
             $('#schedule').attr('href', "schedule/schedule_s.html");
             $('#learn').attr('href', "learningSituation/report_s.html");
-        } else if (localStorage.getItem("statusFlag") == "teacher"){
+        } else if (localStorage.getItem("statusFlag") == "teacher") {
             $('#schedule').attr('href', "schedule/schedule_t.html");
             $('#learn').attr('href', "learningSituation/report_t.html");
-            if(localStorage.terEmail == undefined){
+            if (localStorage.terEmail == undefined) {
 
                 getTeacherInfo();
             }
@@ -48,7 +48,7 @@
     //获取教师信息
     function getTeacherInfo() {
         var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
-        var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+        var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
         var calbac = {
             'code': code_s,
             'e2State': state_s,
@@ -59,11 +59,28 @@
 
     //返回数据解析
     function teac(e) {
+
         console.log(e);
-        localStorage.terEmail = e.userId;
-        localStorage.sid = e.sid;
-        sessionStorage.terEmail = e.userId;
-        localStorage.terName = e.userName;
+        if (e.result == true) {
+            localStorage.terEmail = e.userId;
+            localStorage.sid = e.sid;
+            sessionStorage.terEmail = e.userId;
+            localStorage.terName = e.userName;
+            var calbac = {
+                'teaEmail': localStorage.terEmail
+            };
+            //获取教师schoolId
+            ajax_S(url.t_webmore, calbac, function (e) {
+                if(e.code == 200){
+                    localStorage.schoolId = e.nSchoolId;
+                    localStorage.terName = e.sName;
+                    localStorage.teacherId = e.sCode;
+
+                }
+
+            });
+        }
+
     }
 </script>
 </body>
