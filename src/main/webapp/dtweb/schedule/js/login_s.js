@@ -320,6 +320,7 @@ $(document).on('click','.Relation',function(){
 		localStorage.removeItem("sid");
 
 		sessionStorage.stuNumber = $('.studentLogin input').val();//学号
+		sessionStorage.stuNum = $('.studentLogin input').val();//学号
 		sessionStorage.schoolId = $('.res').attr('data-schoolid');//学校id
 		sessionStorage.studentName = $('.stuname').html();//学生姓名
 		localStorage.setItem('statusFlag','student');//学生身份标识
@@ -328,6 +329,7 @@ $(document).on('click','.Relation',function(){
 	//姓名+手机号登录
 	$(document).on('touchend','.mobileloginbtn',function () {
 		sessionStorage.stuNumber = $('.stu_num').html();//学号
+		sessionStorage.stuNum = $('.stu_num').html();//学号
 		sessionStorage.studentName = $('.stname').val();//学生姓名
 		sessionStorage.stuTel = $('.phoneNumber').val();
 		var stumore  = {
