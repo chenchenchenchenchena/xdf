@@ -25,15 +25,22 @@
         <ul class="stuInfo">
             <li class="res">查询结果</li>
             <li><span>姓名</span><span class="name_s"></span></li>
-            <li><span>邮箱</span><span class="name_ema"></span></li>
+            <li id="email"><span>邮箱</span><span class="name_ema"></span></li>
         </ul>
         <button class="deterAss" style="background:#fd4116;" onclick="logout();">退出登录</button>
     </div>
 </section>
 <script>
     $(function(){
-        $('.name_s').html(localStorage.terName);
-        $('.name_ema').html(localStorage.terEmail);
+        if (localStorage.getItem("statusFlag") == "teacher") {
+            $('.name_s').html(localStorage.terName);
+            $('#email').show();
+            $('.name_ema').html(localStorage.terEmail);
+        }else if (localStorage.getItem("statusFlag") == "student"){
+            $('.name_s').html(sessionStorage.studentName);
+            $('#email').hide();
+        }
+
     });
     function logout(){
         if (localStorage.getItem("statusFlag") == "teacher") {
