@@ -43,8 +43,6 @@ var touchtend;
 //         sessionStorage.stuNum = e.data.studentNo;
 //     }
 // }
-    sessionStorage.stuNum = "";
-
     $('.js_jin').click(function(){
         var time1 = new Date().format("yyyy-MM-dd");
         var menu_s = {
