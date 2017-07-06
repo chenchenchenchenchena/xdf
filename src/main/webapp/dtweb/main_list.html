@@ -67,15 +67,14 @@
             sessionStorage.terEmail = e.userId;
             localStorage.terName = e.userName;
             var calbac = {
-                'teaEmail': localStorage.terEmail
+                'teaEmail':localStorage.terEmail
             };
             //获取教师schoolId
-            ajax_S(url.t_webmore, calbac, function (e) {
+            ajax_S(url.t_webmore,JSON.stringify(calbac), function (e) {
                 if(e.code == 200){
                     localStorage.schoolId = e.nSchoolId;
                     localStorage.terName = e.sName;
                     localStorage.teacherId = e.sCode;
-
                 }
 
             });
