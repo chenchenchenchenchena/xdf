@@ -1,4 +1,6 @@
 $(function () {
+
+    // sessionStorage.stuNum = "ss6104";
     //微信是否授权
     //if (!sessionStorage.openid) {
     //    wechatCode(location.href)
@@ -48,10 +50,9 @@ $(function () {
         'beginDate': new Date().format("yyyy-MM-01"),
         'endDate': new Date().format("yyyy-MM") + '-' + getCountDays()
     };
-    sessionStorage.stuNum = "ss6104";
     emailm.studentCode = sessionStorage.stuNum;
     menu_s.studentCode = sessionStorage.stuNum;
-    ajax_S(url.s_stud,menu_s,menufunc);
+    ajax_S(url.s_stud, menu_s, menufunc);
     ajax_S(url.data_s, '1', function (e) {
         for (var i = 0; i < e.data.length; i++) {
             masterteacher += e.data[i].teacherName + ','
@@ -89,10 +90,16 @@ $(function () {
     //     }else{
     //         //存储学员号
     //         // sessionStorage.stuNum = e.data.studentNo;
-    //         emailm.studentCode=sessionStorage.stuNumber;
-    //         menu_s.studentCode=sessionStorage.stuNumber;
+    //         emailm.studentCode=sessionStorage.stuNum;
+    //         menu_s.studentCode=sessionStorage.stuNum;
     //         ajax_S(url.s_stud,menu_s,menufunc);
-    //         ajax_S(url.s_stud,emailm,stusea);
+    //         ajax_S(url.data_s, '1', function (e) {
+    //              for (var i = 0; i < e.data.length; i++) {
+    //                  masterteacher += e.data[i].teacherName + ','
+    //                  mastertae.push(e.data[i]);
+    //              }
+    //              ajax_S(url.s_stud, emailm, stusea);
+    //          });
     //     }
     // }
 
@@ -112,7 +119,7 @@ $(function () {
     function menufunc(e) {
         var arr = [];
         dateH = [];
-        if (e.result == false || e.message!=undefined) {
+        if (e.result == false || e.message != undefined) {
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
@@ -243,10 +250,10 @@ $(function () {
                     old = 'activ_c'
                     color = '#ccc'
                 }
-                if(jteaname==undefined){
+                if (jteaname == undefined) {
                     jteaname = '暂无'
                 }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:' + color + '" >主讲(' + jteaname + ')</i><span><i style="color:' + color + '" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
