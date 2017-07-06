@@ -61,7 +61,7 @@ $(function () {
                 if ($(".classrome").html() == e.Data[i].className) {
                 	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
                     	for (var j = 0; j < e.Data[i].studentData.length; j++) {
-                    		var stuInfo = {name: e.Data[i].studentData[j].stuName, scode: e.Data[i].studentData[j].stuCode};
+                    		var stuInfo = {name: e.Data[i].studentData[j].StudentName, scode: e.Data[i].studentData[j].StudentCode};
                         	stuArr.push(stuInfo);
                     	}
                     	var colId = "name";
