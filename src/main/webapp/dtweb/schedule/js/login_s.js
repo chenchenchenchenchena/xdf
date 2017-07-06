@@ -114,9 +114,11 @@ function stuc(e){
 			$('.search').show();
 			$('.stuname').html(e.data.studentName);
 			$('.stutel').html('');
-            sessionStorage.stuNumber = $('.studentLogin input').val();
-            sessionStorage.schoolId = e.data.schoolId;
-			localStorage.setItem('statusFlag','student');//学生身份标识
+			$('.res').attr('data-schoolid',e.data.schoolId);
+            // sessionStorage.stuNumber = $('.studentLogin input').val();//学号
+            // sessionStorage.schoolId = e.data.schoolId;//学校id
+            // sessionStorage.studentName = e.data.studentName;//学生姓名
+			// localStorage.setItem('statusFlag','student');//学生身份标识
 			// if(e.data.relatedState=='0'){
 			// 	$('.deterAss').html('立即关联')
 			// 	$('.deterAss').css('background','#00ba97')
@@ -211,8 +213,8 @@ function stuc(e){
 			$('.noSearch').show()
 			return false;
 		}
-		$('.searchTwo').show()
-		localStorage.setItem('statusFlag','student');//学生身份标识
+		$('.searchTwo').show();
+
 		var  num = 0;
 		var  bindz = '登录';
 		for(var i = 0;i<studentNo.length;i++){
@@ -221,8 +223,8 @@ function stuc(e){
 		// 	}else{
 		// 		bindz = '取消关联'
 		// 	}
-			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="loginbtn">'+bindz+'</button></li>')
-			sessionStorage.stuTel = $('.phoneNumber').val()
+			$('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="mobileloginbtn">'+bindz+'</button></li>');
+			// sessionStorage.stuTel = $('.phoneNumber').val();
 		}
 		$('.enter').hide()
 	}
@@ -309,8 +311,32 @@ $(document).on('click','.Relation',function(){
     // }
 
 
-//登录
+	//学号登录
 	$(document).on('touchend','.loginbtn',function () {
+		// $('.res').attr('data-schoolid',e.data.schoolId);
+		sessionStorage.stuNumber = $('.studentLogin input').val();//学号
+		sessionStorage.schoolId = $('.res').attr('data-schoolid');//学校id
+		sessionStorage.studentName = $('.stuname').html();//学生姓名
+		localStorage.setItem('statusFlag','student');//学生身份标识
+		window.location.href = "../main_list.html";
+	});
+	//姓名+手机号登录
+	$(document).on('touchend','.mobileloginbtn',function () {
+		sessionStorage.stuNumber = $('.stu_num').html();//学号
+		sessionStorage.studentName = $('.stname').val();//学生姓名
+		sessionStorage.stuTel = $('.phoneNumber').val();
+		var stumore  = {
+			'StudentCode':$('.stu_num').html()
+		}
+		ajax_S(url.s_webseac,stumore,function(e){
+			if(e.result==true){
+				// $('.res').attr('data-schoolid',e.data.schoolId);
+				sessionStorage.schoolId = e.data.schoolId;//学校id
+			}else{
+				console.log('没有查到相关信息');
+			}
+		})
+		localStorage.setItem('statusFlag','student');//学生身份标识
 		window.location.href = "../main_list.html";
 	});
 
