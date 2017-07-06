@@ -70,7 +70,7 @@
                 'teaEmail':localStorage.terEmail
             };
             //获取教师schoolId
-            ajax_S(url.t_webmore,JSON.stringify(calbac), function (e) {
+            ajaxRequest('POST',url.t_webmore,calbac, function (e) {
                 if(e.code == 200){
                     localStorage.schoolId = e.nSchoolId;
                     localStorage.terName = e.sName;
