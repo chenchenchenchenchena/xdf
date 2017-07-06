@@ -8,7 +8,6 @@ var WXnum  = {
     'wechatId':sessionStorage.openid
 };
 var time1 = new Date().format("yyyy-MM-dd");
-var time_b = new Date().format("yyyy-MM-dd ");
 //当天课程
 var emailm = {
         'teacherEmail':localStorage.terEmail,
@@ -62,8 +61,26 @@ function stud(e){
         };
         ajax_S(url.s_emai,menu_s,menufunc);
         monththis = month
-    })
-
+    });
+    $(document).on('touchstart','.tc-bot-right',function(){
+        var time1 = new Date().format("yyyy-MM-dd");
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':new Date().format("yyyy-MM-01"),
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+        };
+        ajax_S(url.s_emai,emailm,stusea);
+        var month  = $('.today').attr('data_m');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        ajax_S(url.s_emai,menu_s,menufunc);
+        monththis = month
+    });
 
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
