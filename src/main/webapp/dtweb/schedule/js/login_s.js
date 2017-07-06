@@ -335,9 +335,10 @@ $(document).on('click','.Relation',function(){
 			}else{
 				console.log('没有查到相关信息');
 			}
+			localStorage.setItem('statusFlag','student');//学生身份标识
+			window.location.href = "../main_list.html";
 		})
-		localStorage.setItem('statusFlag','student');//学生身份标识
-		window.location.href = "../main_list.html";
+
 	});
 
 
