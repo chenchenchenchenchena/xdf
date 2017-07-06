@@ -43,13 +43,13 @@
             };
             //退出e2登录
             ajax_S(url.t_logi, unlog, function (a) {
-                location.href = a.logoutUrl;
                 localStorage.removeItem("terName");
                 localStorage.removeItem("terEmail");
                 localStorage.removeItem("sid");
             });
         }
 
+        location.href = a.logoutUrl;
         localStorage.removeItem("statusFlag");
         sessionStorage.clear();
 

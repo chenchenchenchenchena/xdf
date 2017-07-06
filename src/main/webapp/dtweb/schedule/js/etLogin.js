@@ -14,6 +14,8 @@ function etlogin(callback){
         success:function(e){
             if (e.result == true) {
                 localStorage.setItem("statusFlag","teacher");
+                //清除学生信息
+                sessionStorage.clear();
                 location.href = e.url;
 
             } else {

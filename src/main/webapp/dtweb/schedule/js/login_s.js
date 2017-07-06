@@ -314,6 +314,11 @@ $(document).on('click','.Relation',function(){
 	//学号登录
 	$(document).on('touchend','.loginbtn',function () {
 		// $('.res').attr('data-schoolid',e.data.schoolId);
+		//清除教师信息
+		localStorage.removeItem("terName");
+		localStorage.removeItem("terEmail");
+		localStorage.removeItem("sid");
+
 		sessionStorage.stuNumber = $('.studentLogin input').val();//学号
 		sessionStorage.schoolId = $('.res').attr('data-schoolid');//学校id
 		sessionStorage.studentName = $('.stuname').html();//学生姓名
@@ -335,6 +340,11 @@ $(document).on('click','.Relation',function(){
 			}else{
 				console.log('没有查到相关信息');
 			}
+			//清除教师信息
+			localStorage.removeItem("terName");
+			localStorage.removeItem("terEmail");
+			localStorage.removeItem("sid");
+
 			localStorage.setItem('statusFlag','student');//学生身份标识
 			window.location.href = "../main_list.html";
 		})
