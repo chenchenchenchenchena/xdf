@@ -4,13 +4,13 @@ body,html{
 	font-size: 30px;
 	width: 100%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: relative;
 	max-width:1024px;
 }
 .record{
-	overflow: hidden;
-	height:100%;
+	/*overflow: hidden;*/
+	/*height:100%;*/
 }
 .choose{
 	padding: 0 30px;
