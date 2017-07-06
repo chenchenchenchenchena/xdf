@@ -49,11 +49,15 @@ $(function(){
         $('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
         var arr = [];
         for(var i = 0;i<regionindex.length;i++){
-            if(BeginDate[regionindex[i]].AreaName==undefined){
-                BeginDate[regionindex[i]].AreaName=''
+            var room_html = '';
+            if(BeginDate[regionindex[i]].RoomName!=undefined&&BeginDate[regionindex[i]].AreaName!=undefined){
+                room_html = BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].RoomName+'教室'
+            }else if(BeginDate[regionindex[i]].AreaName==undefined&&BeginDate[regionindex[i]].RoomName!=undefined){
+                room_html  = BeginDate[regionindex[i]].RoomName+'教室'
+            }else{
+                room_html = '暂无数据'
             }
-
-            $('#position').html(BeginDate[regionindex[i]].AreaName+''+BeginDate[regionindex[i]].RoomName+'教室');
+            $('#position').html(room_html);
             for(var j = 0;j<masterta.length;j++){
                 if(masterta[j]!=''){
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p></li>')

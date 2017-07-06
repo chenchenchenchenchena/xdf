@@ -368,7 +368,7 @@ tr .not_this{
     z-index: 2;
     color: #fff;
     position:absolute;
-    bottom:0;
+    bottom:-.2rem;
     left:45%;
 }
 .innet_S:after{
@@ -384,7 +384,7 @@ tr .not_this{
     bottom:-.2rem;
     left:45%;
 }
-.today:after,.xuanzhong:before,.xuanzhong_s:before{
+.today:before,.xuanzhong:before,.xuanzhong_s:before{
     content:'';
     display:block;
     width:.7rem;

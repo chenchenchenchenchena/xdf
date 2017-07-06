@@ -1,4 +1,4 @@
-// sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
+//sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 var WXnum  = {
     'wechatId':sessionStorage.openid
@@ -72,16 +72,16 @@ function binding(e){
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
-        sessionStorage.terEmail = teacontent.teacherEmail;
+        localStorage.terEmail = teacontent.teacherEmail;
         localStorage.teacherId = teacontent.teacherNo;
         localStorage.schoolId = teacontent.schoolId;
-        localStorage.teacherName = e.userName;
+        localStorage.teacherName = teacontent.teacherName;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')
         }
         if(sessionStorage.studayCanfig=='studay'){
-            location.href = 'record.html'
+            location.href = '../learningSituation/report_t.html'
             sessionStorage.removeItem('studayCanfig')
         }
 	}
@@ -96,13 +96,19 @@ function logout(){
 	var bindingtea = {'email': $(".name_ema").html(), 'wechatId': sessionStorage.openid};
 	ajax_S(url.t_siot, bindingtea, signOut)
 }
-
+function clear(){
+	localStorage.removeItem("teacherId");
+	localStorage.removeItem("terEmail");
+	localStorage.removeItem("schoolId");
+	localStorage.removeItem("teacherName");
+}
 // 退出登录
 function signOut(e) {
         var unlog = {
             'sid': localStorage.sid,
             'returnUrl': url.t_back
         };
+        clear();
         //退出e2登录
         ajax_S(url.t_logi, unlog, function (a) {
             location.href = a.logoutUrl

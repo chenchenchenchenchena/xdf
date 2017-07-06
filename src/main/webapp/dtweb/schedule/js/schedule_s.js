@@ -32,10 +32,10 @@ $(function () {
     //判断长按的定时器
     var touchtime;
     var touchtend;
-
+    var mastertae = [];
+    var color = ''
     //存储主讲老师
     var masterteacher = '';
-    sessionStorage.stuNum = "SS3304";
     //当天课程
     var emailm = {
         'studentCode': sessionStorage.stuNum,
@@ -48,11 +48,17 @@ $(function () {
         'beginDate': new Date().format("yyyy-MM-01"),
         'endDate': new Date().format("yyyy-MM") + '-' + getCountDays()
     };
-
-    emailm.studentCode = sessionStorage.stuNumber;
-    menu_s.studentCode = sessionStorage.stuNumber;
+    sessionStorage.stuNum = "ss6104";
+    emailm.studentCode = sessionStorage.stuNum;
+    menu_s.studentCode = sessionStorage.stuNum;
     ajax_S(url.s_stud,menu_s,menufunc);
-    ajax_S(url.s_stud,emailm,stusea);
+    ajax_S(url.data_s, '1', function (e) {
+        for (var i = 0; i < e.data.length; i++) {
+            masterteacher += e.data[i].teacherName + ','
+            mastertae.push(e.data[i]);
+        }
+        ajax_S(url.s_stud, emailm, stusea);
+    });
 
     // // 微信查询是否绑定微信  参数：当前微信号 学生
     // ajax_S(url.s_seac,WXnum,stud);
@@ -73,7 +79,7 @@ $(function () {
             'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount
         };
         ajax_S(url.s_stud, menu_s, menufunc);
-        monththis = month;
+        monththis = month
     })
     // // 微信查询是否绑定微信  参数：当前微信号 学生
     // function stud(e){
@@ -106,7 +112,7 @@ $(function () {
     function menufunc(e) {
         var arr = [];
         dateH = [];
-        if (e.result == false || e.message != undefined) {
+        if (e.result == false || e.message!=undefined) {
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
@@ -158,22 +164,15 @@ $(function () {
     setTimeout(function () {
         $('.CHour_s_title span:last-of-type').html('周' + $('#top_week').html().substring(2, 3))
     }, 1000);
-    ajax_S(url.data_s, '1', function (e) {
-        for (var i = 0; i < e.data.length; i++) {
-            masterteacher += e.data[i].teacherName + ','
-        }
-    });
+    // ajax_S(url.data_s,'1',function(e){
+    //     for(var i = 0;i<e.data.length;i++){
+    //         masterteacher+=e.data[i].teacherName+','
+    //     }
+    // });
     //按天查询课程
     //按天查询课程
-    var mastertae = [];
 
     function stusea(e) {
-        ajax_S(url.data_s, '', function (e) {
-            for (var i = 0; i < e.data.length; i++) {
-                mastertae.push(e.data[i]);
-            }
-        });
-        var jteaname,masterta;
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if (e.result == false) {
@@ -187,30 +186,16 @@ $(function () {
             var Index = [];
 
             var old;
-
-            console.log(e.data.Data[0].Teachers);
-            if(e.data.Data[0].Teachers!=undefined){
-                masterta = e.data.Data[0].Teachers.split(',');
-                for (var j = 0; j < mastertae.length; j++) {
-                    for (var k = 0; k < masterta.length; k++) {
-                        if(mastertae[j].teacherName!=undefined && mastertae[j].teacherName!=""&&mastertae[j].teacherName!=null){
-                            if (mastertae[j].teacherName == masterta[k]) {
-                                jteaname = masterta[k];
-                                masterta[k] = '';
-                            } else {
-                                jteaname = masterta[k];
-                            }
-                        }else{
-                            jteaname = "暂无";
-                        }
+            var masterta = e.data.Data[0].Teachers.split(',');
+            var masteaname = '';
+            for (var j = 0; j < mastertae.length; j++) {
+                for (var k = 0; k < masterta.length; k++) {
+                    if (mastertae[j].teacherName == masterta[k]) {
+                        jteaname = masterta[k]
+                        masterta[k] = ''
                     }
                 }
-            }else{
-                masterta = "暂无";
             }
-            console.log("主讲老师："+jteaname);
-            var masteaname = '';
-
             // 录入开始时间
             for (var i = 0; i < curr_e.length; i++) {
                 var begtime = curr_e[i].SectBegin.split(' ');
@@ -219,7 +204,7 @@ $(function () {
                 var endtime2 = endtime[1].substring(0, begtime[1].length - 3);
                 var teaname = curr_e[i].Teachers.split(',');
                 var zteaname;
-                // var jteaname;
+                var jteaname;
                 var remindedata = {
                     'classCode': curr_e[i].ClassCode,
                     'courseCode': curr_e[i].CourseCode,
@@ -251,19 +236,25 @@ $(function () {
                 //         // }
                 //     }
                 // });
-                if (time1 < curr_e[i].BeginDate) {
+                if (time1 < curr_e[i].SectEnd) {
                     old = ''
+                    color = '#000'
                 } else {
                     old = 'activ_c'
+                    color = '#ccc'
                 }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i>主讲(' + jteaname + ')</i><span><i>班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                if(jteaname==undefined){
+                    jteaname = '暂无'
+                }
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
         }
-        // <span class="tx" index="'+i+'">'+htmltx+'</span>
-    }
 
+
+        // <span class="tx" index="'+i+'">'+htmltx+'</span>
+    };
     // <span>12个带交作业</span>
     //日历点击事件
     $(document).on('touchstart', '.content td', function () {
