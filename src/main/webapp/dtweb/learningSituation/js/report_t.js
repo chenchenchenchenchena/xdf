@@ -52,7 +52,7 @@ var Xindex = '';
 var Thistime = [];
 ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
         if(e.data.length!=0){
-            $('title').html(e.data[0].teacherName+'老师');
+            $('title').html(localStorage.teacherName+'老师');
             var Xtwindex = [];
             var Cindex = [];
             var Rindex = [];
