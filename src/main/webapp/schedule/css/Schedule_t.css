@@ -310,7 +310,7 @@ body{
     width: 100%;
 }
 .tables tbody tr{
-    width: 98%;
+    width: 100%;
     padding: 0 1%;
     display: flex;
     display: -webkit-flex;
@@ -319,6 +319,7 @@ body{
     -webkit-flex-wrap: wrap;
 }
 .tables tbody tr td{
+    display: inline-block;
     flex: 0;
     flex-grow: 0;
     flex-shrink: 0;
@@ -326,7 +327,7 @@ body{
     justify-content: center;
     padding: .04rem .06rem;
     position: relative;
-    line-height: .4rem;
+    height: 1rem;
 }
 .tables .list i{
 	display: flex;
@@ -334,11 +335,12 @@ body{
     display: -ms-flexbox;
     font-size: .4rem;   
     justify-content: center;
-    display:block;
-    width:.7rem;
-    height:.7rem;
-    line-height:.8rem;
+    display: block;
+    width: .9rem;
+    height: .9rem;
+    line-height: .9rem;
     margin:0 auto;
+    border-radius: 50%;
 }
 .tables .list em{
 	display: none!important;
@@ -365,47 +367,22 @@ tr .not_this{
     height:.1rem;
     background:red;
     border-radius:50%;
-    z-index: 2;
+    z-index: -.1rem;
     color: #fff;
     position:absolute;
     bottom:-.2rem;
-    left:45%;
+    left:46%;
 }
-.innet_S:after{
-    content:'';
-    display:block;
-    width:.1rem;
-    height:.1rem;
-    background:#ccc;
-    border-radius:50%;
-    z-index:-2;
-    color: #fff;
-    position:absolute;
-    bottom:-.2rem;
-    left:45%;
-}
-.today:before,.xuanzhong:before,.xuanzhong_s:before{
-    content:'';
-    display:block;
-    width:.7rem;
-    height:.7rem;
+.today>i{
     background:#00ba97;
-    position:absolute;
-    left:50%;
-    margin-left:-.33rem;
-    top:50%;
-    margin-top:-.33rem;
-    border-radius:50%;
-    z-index:-1;
-    color: #fff;
 }
 .month_hour i{
     margin-left:.2rem;
 }
-.xuanzhong:before{
+.xuanzhong>i{
     background:#ccc;
 }
-.xuanzhong_s:before{
+.xuanzhong_s>i{
     background:#ffbb37;
 }
 .xuanzhong,.xuanzhong_s{

@@ -6,25 +6,34 @@
     <script src="common/js/jquery.js"></script>
 </head>
 <script>
-    $(function() {
-        var  cbconfig = {'callbackFlag':'webBackground'};
-        $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do",
-            type: 'post',
-            dataType: 'json',
-            data:JSON.stringify(cbconfig),
-            success:function(e){
-                if (e.result == true) {
+     var WXnumber = [
+     	'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
+     	 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
+         'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
+     ];
 
-                    location.href = e.url;
+     var json = {
 
-                } else {
-                    layer.msg("登陆失败,请稍候再试!", {icon: 5});
-                }
+        "touser":{'ofZfFwrZfm6zzyUCXsgpvE-0qH08'}
+
+        "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
+        "url":"",
+        "data":{
+
+            "Date":{
+
+                "value":"06月07日 19时24分",
+
+                "color":"#173177"
 
             }
-        });
-    })
+        }
+
+     };
+     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+     console.log(e)
+     })
+
 </script>
 <body>
 </body>
