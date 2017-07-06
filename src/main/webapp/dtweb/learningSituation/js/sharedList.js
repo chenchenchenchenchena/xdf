@@ -135,15 +135,11 @@ $(function(){
             // 'teaEmail':'caoxuefeng@xdf.cn',
             // 'classCode':'CZSPP008',
             // 'schoolId':'73',
-            // 'gradeType':testState
-            // 'teaEmail':localStorage.terEmail,//教师邮箱  localStorage.terEmail
-            // 'classCode':sessionStorage.classcode, //班级编号
-            // 'schoolId':sessionStorage.schoolId, //校区id
-            // 'gradeType':testState // 成绩类型 1 入门测 2 出门测
-            'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
+            // 'gradeType':'1'
+            'teaEmail':localStorage.terEmail,//教师邮箱  localStorage.terEmail
             'classCode':localStorage.getItem('CLASSCODE'), //班级编号
             'schoolId':localStorage.getItem('SCHOOLID'), //校区id
-            'gradeType':testState // 成绩类型 1 入门测 2 出门测s
+            'gradeType':testState // 成绩类型 1 入门测 2 出门测
         };
         $('.main-content,.no-data').hide();
         // if(pageState=="shared"){
@@ -212,25 +208,28 @@ function takeScreenshot() {
     html2canvas($('body'), {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
-            $('canvas').hide();
+            // $('canvas').hide();
             // $('.shared-content').hide();
             // layer.msg('加载中...');
                 convertCanvasToImage();
         },
-        width: $('body').width(),
-        height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
+         width: $('body').width(),
+         height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
     });
 }
 //	canvas to images
 function convertCanvasToImage(){
     // loading = layer.load();
-    // setTimeout(function(){
         console.log("canvas to images");
         var myCanvas = document.getElementsByTagName("canvas");
         var image = myCanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
         // var oImgPNG = Canvas2Image.saveAsPNG(myCanvas[0], true);
         //     $('canvas,.shared-content').hide();
-            layer.close(loading);
-            $('#imgs>img').attr('src',image);
-    // },1000);
+    layer.close(loading);
+    $('#imgs>img').attr('src',image);
+    setTimeout(function(){
+        $('canvas,.shared-content').hide();
+    },200);
+
+
 }
