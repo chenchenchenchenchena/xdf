@@ -33,7 +33,7 @@
 <script>
     $(function(){
         if (localStorage.getItem("statusFlag") == "teacher") {
-            $('.name_s').html(localStorage.terName);
+            $('.name_s').html(localStorage.teacherName);
             $('#email').show();
             $('.name_ema').html(localStorage.terEmail);
         }else if (localStorage.getItem("statusFlag") == "student"){
@@ -51,7 +51,7 @@
             //退出e2登录
             ajax_S(url.t_logi, unlog, function (a) {
                 location.href = a.logoutUrl;
-                localStorage.removeItem("terName");
+                localStorage.removeItem("teacherName");
                 localStorage.removeItem("terEmail");
                 localStorage.removeItem("sid");
             });

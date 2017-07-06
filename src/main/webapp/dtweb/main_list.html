@@ -65,7 +65,7 @@
             localStorage.terEmail = e.userId;
             localStorage.sid = e.sid;
             sessionStorage.terEmail = e.userId;
-            localStorage.terName = e.userName;
+            localStorage.teacherName = e.userName;
             var calbac = {
                 'teaEmail':localStorage.terEmail
             };
@@ -73,7 +73,7 @@
             ajaxRequest('POST',url.t_webmore,calbac, function (e) {
                 if(e.code == 200){
                     localStorage.schoolId = e.data.nSchoolId;
-                    localStorage.terName = e.data.sName;
+                    localStorage.teacherName = e.data.sName;
                     localStorage.teacherId = e.data.sCode;
                 }
 

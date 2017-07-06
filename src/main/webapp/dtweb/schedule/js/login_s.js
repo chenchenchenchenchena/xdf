@@ -315,7 +315,7 @@ $(document).on('click','.Relation',function(){
 	$(document).on('touchend','.loginbtn',function () {
 		// $('.res').attr('data-schoolid',e.data.schoolId);
 		//清除教师信息
-		localStorage.removeItem("terName");
+		localStorage.removeItem("teacherName");
 		localStorage.removeItem("terEmail");
 		localStorage.removeItem("sid");
 
@@ -341,7 +341,7 @@ $(document).on('click','.Relation',function(){
 				console.log('没有查到相关信息');
 			}
 			//清除教师信息
-			localStorage.removeItem("terName");
+			localStorage.removeItem("teacherName");
 			localStorage.removeItem("terEmail");
 			localStorage.removeItem("sid");
 
