@@ -36,8 +36,8 @@ if (window.location.host == onlineUrl) {//正式环境
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
-    appId =  'wxab29a3e2000b8d2a';
-    secreT = '7739991fcce774c2281147eae3986ad9';
+    appId =  'wx559791e14e9ce521';
+    secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
 
 // 接口路径
@@ -71,8 +71,7 @@ var url = {
     's_webnafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do', //web姓名手机号查询
     't_webback':url_o2+'/xdfdthome/dtweb/schedule/login_s.html', //回调地址
     't_webmore':url_o+'teacherBind/pcqueryTeacherInfo.do', //查询教师信息
-    'w_token':url_o+'/wechatSignature/getWechatToken.do',
-    'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do'
+    'w_token':url_o+'/wechatSignature/getWechatToken.do'
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
