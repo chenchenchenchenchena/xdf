@@ -14,21 +14,10 @@
      ];
 
      var json = {
-
-        "touser":'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
-
-        "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-        "url":"www.baidu.com",
-        "data":{
-
-            "Date":{
-
-                "value":"06月07日 19时24分",
-
-                "color":"#173177"
-
-            }
-        }
+         "touser":WXnumber,
+         "msgtype": "text",
+         'url':'www.baidu.com',
+         "text": { "content": "hello from boxer."}
      }
      ajax_S('https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='+sessionStorage.access_token+'',json,function(e){
      console.log(e)
