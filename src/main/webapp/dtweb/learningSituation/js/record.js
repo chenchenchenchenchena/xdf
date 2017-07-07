@@ -558,9 +558,9 @@ $(function () {
 			"stuInfomation":pushStuent
 			
 		}
-		for(var i=0;i<pushinfo.stuInfomation.pushStuent.length;i++){
-			if(pushinfo.stuInfomation.pushStuent[i].sNo==stuOpenId[i].stuNo){
-				pushinfo.stuInfomation.pushStuent[i].push(stuOpenId[i].openId);
+		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
+				pushinfo.stuInfomation[i].push(stuOpenId[i].openId);
 			}
 	 		
 	 	}
