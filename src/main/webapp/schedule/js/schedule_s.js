@@ -179,7 +179,7 @@ $(function() {
             var Index = [];
 
             var old;
-            var masterta = e.data.Data[0].Teachers.split(',');
+            var masterta = e.data.Data[i].Teachers.split(',');
             var masteaname = '';
             for (var j = 0; j < mastertae.length; j++) {
                 for (var k = 0; k < masterta.length; k++) {
