@@ -30,6 +30,9 @@ $(function () {
             	return false;
             }
         	for (var i = 0; i < e.Data.length; i++) {
+        		if(e.Data[i].classCode=="HDXP6EB01"){
+        			e.Data[i].className="六年级英语综合培优暑假班";
+        		}
                 var str = "<li>" + e.Data[i].className + "</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
                 $(".chooseClass ul").append(str);
             }
@@ -351,7 +354,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	for (var i = 0; i < $(".scoreList dl").length; i++) {
+    	/*for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
                 var studentinfo = {
                     "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
@@ -361,7 +364,7 @@ $(function () {
                 }
                  student.push(studentinfo);
             }
-	    }
+	    }*/
     	saveData();
     })
     
