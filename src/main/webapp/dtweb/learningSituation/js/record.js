@@ -341,7 +341,8 @@ $(function () {
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
      	var push=pushInfo();
-     	location.href="report_t.html?pushMsg="+push;
+     	console.log(push);
+//   	location.href="report_t.html?pushMsg="+push;
      })
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
