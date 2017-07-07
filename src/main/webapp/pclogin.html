@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>发布管理平台</title>
     <script src="common/js/jquery.js"></script>
-
-
     <script src="common/js/ajax.js"></script>
 </head>
 <script>
@@ -15,12 +13,12 @@
          'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
      ];
 
-     var json = [{
+     var json = {
 
         "touser":'ofZfFwrZfm6zzyUCXsgpvE-0qH08',
 
         "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-        "url":"",
+        "url":"www.baidu.com",
         "data":{
 
             "Date":{
@@ -31,24 +29,8 @@
 
             }
         }
-     },{
-
-         "touser":'ofZfFwsBvoqZaBMFovXrJn6e9kEM',
-
-         "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-         "url":"",
-         "data":{
-
-             "Date":{
-
-                 "value":"06月07日 19时24分",
-
-                 "color":"#173177"
-
-             }
-         }
-     }]
-     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+     }
+     ajax_S('https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='+sessionStorage.access_token+'',json,function(e){
      console.log(e)
      })
 
