@@ -30,15 +30,165 @@ $(function(){
 			flag=true;
 		}
 		$(this).find(".secul").toggle();
-	})
-	//点击作业排行榜
-	$(".hwRankTitle").click(function(){
-		location.href="studentrank_s.html";
-	})
+	});
+	// 跳转到做作业页面
+	$(document).on('touchend','.hwContent .hwList',function(){
+		window.location.href = 'dohomework_s.html';
+	});
+	// 跳转到已完成作业页面
+	$(document).on('touchend','.hwContent .hwList',function(){
+		window.location.href = 'finishedhomework_s.html';
+	});
 })
 
 //获取待交作业列表
 function getHwContentSuccess(msg) {
+	var msg = {
+		"code":"200",
+		"data":[
+			{
+				"id":"scscsc",
+				"lessonNo":0,
+				"lessonTime":"10:00-12:00",
+				"className":"三年级英语综合培优寒假班",
+				"courseName":"双师",
+				"homeworkTId":"07dc6bc9a1f14c44a2fc67567a036c98",
+				"description":"高数",
+				"status":0,
+				"readStatus":0,
+				"fileContents":[
+					{
+						"fileName":"cxcc",
+						"fileSize":"0.1MB",
+						"fileType":"jpg",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"2"
+					},
+					{
+						"fileName":"3b7b2d2e503740f3ba48c299e59e3fa7.png",
+						"fileSize":"0.2MB",
+						"fileType":"png",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"652338c684914a59b6a6181b32065858",
+						"url":"http://192.168.23.1:8080\null\3b7b2d2e503740f3ba48c299e59e3fa7.png"
+					}
+				]
+			},
+			{
+				"id":"scscsc",
+				"lessonNo":0,
+				"lessonTime":"10:00-12:00",
+				"className":"三年级英语综合培优寒假班",
+				"courseName":"双师",
+				"homeworkTId":"07dc6bc9a1f14c44a2fc67567a036c98",
+				"description":"高数",
+				"status":0,
+				"readStatus":0,
+				"fileContents":[
+					{
+						"fileName":"cxcc",
+						"fileSize":"0.1MB",
+						"fileType":"jpg",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"2"
+					},
+					{
+						"fileName":"3b7b2d2e503740f3ba48c299e59e3fa7.png",
+						"fileSize":"0.2MB",
+						"fileType":"png",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"652338c684914a59b6a6181b32065858",
+						"url":"http://192.168.23.1:8080\null\3b7b2d2e503740f3ba48c299e59e3fa7.png"
+					}
+				]
+			},
+			{
+				"id":"scscsc",
+				"lessonNo":0,
+				"lessonTime":"10:00-12:00",
+				"className":"三年级英语综合培优寒假班",
+				"courseName":"双师",
+				"homeworkTId":"07dc6bc9a1f14c44a2fc67567a036c98",
+				"description":"高数",
+				"status":0,
+				"readStatus":0,
+				"fileContents":[
+					{
+						"fileName":"cxcc",
+						"fileSize":"0.1MB",
+						"fileType":"jpg",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"2"
+					},
+					{
+						"fileName":"3b7b2d2e503740f3ba48c299e59e3fa7.png",
+						"fileSize":"0.2MB",
+						"fileType":"png",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"652338c684914a59b6a6181b32065858",
+						"url":"http://192.168.23.1:8080\null\3b7b2d2e503740f3ba48c299e59e3fa7.png"
+					}
+				]
+			},
+			{
+				"id":"scscsc",
+				"lessonNo":0,
+				"lessonTime":"10:00-12:00",
+				"className":"三年级英语综合培优寒假班",
+				"courseName":"双师",
+				"homeworkTId":"07dc6bc9a1f14c44a2fc67567a036c98",
+				"description":"高数",
+				"status":0,
+				"readStatus":0,
+				"fileContents":[
+					{
+						"fileName":"cxcc",
+						"fileSize":"0.1MB",
+						"fileType":"jpg",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"2"
+					},
+					{
+						"fileName":"3b7b2d2e503740f3ba48c299e59e3fa7.png",
+						"fileSize":"0.2MB",
+						"fileType":"png",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"652338c684914a59b6a6181b32065858",
+						"url":"http://192.168.23.1:8080\null\3b7b2d2e503740f3ba48c299e59e3fa7.png"
+					}
+				]
+			},
+			{
+				"id":"scscsc",
+				"lessonNo":0,
+				"lessonTime":"10:00-12:00",
+				"className":"三年级英语综合培优寒假班",
+				"courseName":"双师",
+				"homeworkTId":"07dc6bc9a1f14c44a2fc67567a036c98",
+				"description":"高数",
+				"status":0,
+				"readStatus":0,
+				"fileContents":[
+					{
+						"fileName":"cxcc",
+						"fileSize":"0.1MB",
+						"fileType":"jpg",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"2"
+					},
+					{
+						"fileName":"3b7b2d2e503740f3ba48c299e59e3fa7.png",
+						"fileSize":"0.2MB",
+						"fileType":"png",
+						"homeworkTinfoId":"07dc6bc9a1f14c44a2fc67567a036c98",
+						"id":"652338c684914a59b6a6181b32065858",
+						"url":"http://192.168.23.1:8080\null\3b7b2d2e503740f3ba48c299e59e3fa7.png"
+					}
+				]
+			}
+		],
+		"status":"success"
+	};
 	$(".hwContent").html(" ");
 	if(msg.code==200){
 		if(msg.data.length>0){
@@ -67,6 +217,9 @@ function getHwContentSuccess(msg) {
 			$('.hwEmpty p').html("您没有待交作业哦~");
 			$('.hwEmpty').show();
 		}
+	}else{
+		$('.hwEmpty p').html("您没有待交作业哦~");
+		$('.hwEmpty').show();
 	}
 
 }
