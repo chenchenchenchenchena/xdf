@@ -21,8 +21,8 @@
          "msgtype":"mpnews",
          "send_ignore_reprint":0,
          'url':'www.baidu.com',
-         "data": { "DeadTime": "hello from boxer."}
-     }
+         "data":{ 'DATA':{ "DeadTime": "hello from boxer."}}
+     };
      ajax_S('https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='+sessionStorage.access_token+'',json,function(e){
      console.log(e)
      })
