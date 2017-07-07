@@ -222,7 +222,7 @@ $(function () {
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
     	}
-    	ajax_S(w_openId,queryOpenid,openIdAjax);
+    	ajax_S(url.w_openId,queryOpenid,openIdAjax);
     }
     function openIdAjax(e){
     	if(e==null){
