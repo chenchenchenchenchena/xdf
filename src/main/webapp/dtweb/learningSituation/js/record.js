@@ -558,7 +558,7 @@ $(function () {
 			"stuInfomation":pushStuent
 			
 		}
-		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+		for(var i=0;i<pushinfo.stuInfomation.pushStuent.length;i++){
 			if(pushinfo.stuInfomation.pushStuent[i].sNo==stuOpenId[i].stuNo){
 				pushinfo.stuInfomation.pushStuent[i].push(stuOpenId[i].openId);
 			}
