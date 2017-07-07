@@ -15,9 +15,13 @@
 
      var json = {
          "touser":WXnumber,
-         "msgtype": "text",
+         "mpnews":{
+             "media_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4"
+         },
+         "msgtype":"mpnews",
+         "send_ignore_reprint":0,
          'url':'www.baidu.com',
-         "text": { "content": "hello from boxer."}
+         "data": { "DeadTime": "hello from boxer."}
      }
      ajax_S('https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='+sessionStorage.access_token+'',json,function(e){
      console.log(e)
