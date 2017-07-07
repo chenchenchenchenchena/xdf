@@ -14,16 +14,37 @@
      ];
 
      var json = {
-         "touser":WXnumber,
-         "mpnews":{
-             "media_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4"
+         "touser":"ofZfFwsBvoqZaBMFovXrJn6e9kEM",
+         "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
+         "url":"http://weixin.qq.com/download",
+         "miniprogram":{
+             "appid":"xiaochengxuappid12345",
+             "pagepath":"index?foo=bar"
          },
-         "msgtype":"mpnews",
-         "send_ignore_reprint":0,
-         'url':'www.baidu.com',
-         "data":{ 'DATA':{ "DeadTime": "hello from boxer."}}
+         "data":{
+             "DeadTime": {
+                 "value":"恭喜你购买成功！",
+                 "color":"#173177"
+             },
+             "keynote1":{
+                 "value":"巧克力",
+                 "color":"#173177"
+             },
+             "keynote2": {
+                 "value":"39.8元",
+                 "color":"#173177"
+             },
+             "keynote3": {
+                 "value":"2014年9月22日",
+                 "color":"#173177"
+             },
+             "remark":{
+                 "value":"欢迎再次购买！",
+                 "color":"#173177"
+             }
+         }
      };
-     ajax_S('https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='+sessionStorage.access_token+'',json,function(e){
+     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
      console.log(e)
      })
 
