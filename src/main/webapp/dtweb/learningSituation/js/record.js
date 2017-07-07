@@ -278,7 +278,8 @@ $(function () {
 	                var pushStu={
 	                	"title":"亲爱的"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"家长，"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"同学本次考试成绩如下：",
 	                	"studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分"
+	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分",
+	                	"sNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
 	                }
 	                pushStuent.push(pushStu);
 	                stuQuery.push(studentid);
@@ -550,15 +551,19 @@ $(function () {
     }
 //传推送数据
 	function pushInfo(){
-	 	for(var i=0;i<stuOpenId.length;i++){
-	 		pushStuent.push(stuOpenId[i].openId);
-	 	}
+	 	
 		var pushinfo={
 			"courseName":$(".st").html(),
 			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
 			"stuInfomation":pushStuent
 			
 		}
+		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
+				pushStuent.stuInfomation[i].push(stuOpenId[i].openId);
+			}
+	 		
+	 	}
 		return pushinfo;
 	}
 
