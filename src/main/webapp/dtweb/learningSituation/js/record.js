@@ -236,7 +236,7 @@ $(function () {
 				}
 				stuOpenId.push(stuid);
 			}
-			console.log(queryOpenId);
+			console.log(stuOpenId);
 		}
     }
     //保存
@@ -316,7 +316,7 @@ $(function () {
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
         student=[];
-        queryOpenid=[];
+        stuOpenId=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
@@ -327,7 +327,7 @@ $(function () {
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
     	student=[];
-    	queryOpenid=[];
+    	stuOpenId=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
