@@ -560,7 +560,7 @@ $(function () {
 		}
 		for(var i=0;i<pushinfo.stuInfomation.length;i++){
 			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
-				pushinfo.stuInfomation[i].push(stuOpenId[i].openId);
+				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
 			}
 	 		
 	 	}
