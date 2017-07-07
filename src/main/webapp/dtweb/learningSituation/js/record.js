@@ -225,6 +225,7 @@ $(function () {
     	ajax_S(url.w_openId,queryOpenid,openIdAjax);
     }
     function openIdAjax(e){
+    	console.log(e);
     	if(e==null){
 			return false;
 		}else{
