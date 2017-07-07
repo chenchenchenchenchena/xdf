@@ -559,8 +559,8 @@ $(function () {
 			
 		}
 		for(var i=0;i<pushinfo.stuInfomation.length;i++){
-			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
-				pushStuent.stuInfomation[i].push(stuOpenId[i].openId);
+			if(pushinfo.stuInfomation.pushStuent[i].sNo==stuOpenId[i].stuNo){
+				pushinfo.stuInfomation.pushStuent[i].push(stuOpenId[i].openId);
 			}
 	 		
 	 	}
