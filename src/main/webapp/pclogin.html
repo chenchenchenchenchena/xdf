@@ -40,9 +40,13 @@
              }
          }
      };
-     ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
-     console.log(e)
-     })
+     for(var a = ;a<WXnumber.length;a++){
+         json.touser =  WXnumber[a];
+         ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+             console.log(e)
+         })
+     }
+
 
 </script>
 <body>
