@@ -22,12 +22,12 @@
                  "value":"恭喜你购买成功！",
                  "color":"#173177"
              },
-             "childName":{
-                 "value":"巧克力",
-                 "color":"#173177"
-             },
              "courseName":{
                  "value":"什么鬼",
+                 "color":"#173177"
+             },
+             "childName":{
+                 "value":"巧克力",
                  "color":"#173177"
              },
              "time": {
@@ -36,7 +36,7 @@
              },
              "score": {
                  "value":"2014年9月22日",
-                 "color":"#173177"
+                 "color":"#397743"
              },
              "remark":{
                  "value":"欢迎再次购买！",
@@ -46,12 +46,12 @@
      };
      for(var a = 0;a<WXnumber.length;a++){
          json.touser =  WXnumber[a];
-         ajaxRequest('post','https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+         ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
 
              console.log(e)
 
 
-         })
+         });
      }
 </script>
 <body>
