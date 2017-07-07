@@ -215,13 +215,14 @@ $(function () {
     //获取openId
    
     function queryOpenid(){
+    	alert("1111");
     	 var queryOpenid={
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
     	}
     	$.ajax({
     		type:"post",
-    		url:"10.73.33.63:8080/xdfdtmanager/teacherAnalysis/queryStudentWechat.do",
+    		url:"http://10.73.84.62:8080/xdfdtmanager/teacherAnalysis/queryStudentWechat.do",
     		async:true,
     		dataType:"json",
     		data:JSON.stringify(queryOpenid),
