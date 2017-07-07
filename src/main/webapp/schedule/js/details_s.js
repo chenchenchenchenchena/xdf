@@ -48,7 +48,7 @@ $(function(){
 
         var LessonCount = BeginDate[timeindex].LessonCount
         var LessonNo = BeginDate[timeindex].LessonNo
-        $('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+e.subject_s+')')
+        $('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+subject_s+')')
         $('.time span').html(begintime+'-'+endtime)
         $('.date span').html(begindata+'-'+enddata)
         $('.classHour i').eq(0).html(LessonNo)
