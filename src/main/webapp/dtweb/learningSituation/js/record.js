@@ -8,6 +8,7 @@ $(function () {
     var student = [];
     var stuQuery=[];
     var pushStuent=[];
+    var queryOpenId=[];
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     // if(!sessionStorage.openid){
     //     wechatCode(location.href)
@@ -221,19 +222,23 @@ $(function () {
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
     	}
-    	$.ajax({
-    		type:"post",
-    		url:"http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/queryStudentWechat.do",
-    		async:true,
-    		dataType:"json",
-    		data:JSON.stringify(queryOpenid),
-    		success:function(e){
-    			console.log(e);
-    			
-    		}
-    	});
+    	ajax_S(w_openId,queryOpenid,openIdAjax);
     }
-    
+    function openIdAjax(e){
+    	if(e==null){
+			return false;
+		}else{
+			for(var i=0;i<e.studentInfo.length;i++){
+				var stuid={
+					"stuNo":e.studentInfo[i].studentNo,
+					"openId":e.studentInfo[i].wechatId
+				}
+				queryOpenId.push(stuid);
+			}
+			console.log(queryOpenId);
+			
+		}
+    }
     //保存
     /*var student = [];*/
     $(".subtn").click(function () {

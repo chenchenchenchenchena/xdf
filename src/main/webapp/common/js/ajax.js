@@ -71,7 +71,8 @@ var url = {
     's_webnafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do', //web姓名手机号查询
     't_webback':url_o2+'/xdfdthome/dtweb/schedule/login_s.html', //回调地址
     't_webmore':url_o+'teacherBind/pcqueryTeacherInfo.do', //查询教师信息
-    'w_token':url_o+'/wechatSignature/getWechatToken.do'
+    'w_token':url_o+'/wechatSignature/getWechatToken.do',
+    'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do'
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
