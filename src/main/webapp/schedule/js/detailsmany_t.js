@@ -28,7 +28,7 @@ $(function(){
 		var subject = e.data.Data[timeindex].CourseCode;
 		for(var v = 0;v<e.subject.length;v++){
 			if(subject[v].courseName==subject){
-                subject_s = subject[v].subject
+                subject_s = e.subject[v].subject
 			}
 		}
 		var masteaname = '';
