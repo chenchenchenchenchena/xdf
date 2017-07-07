@@ -7,6 +7,7 @@ $(function () {
     var flag = 1;
     var student = [];
     var stuQuery=[];
+    var pushStuent=[];
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     // if(!sessionStorage.openid){
     //     wechatCode(location.href)
@@ -222,12 +223,13 @@ $(function () {
     	}
     	$.ajax({
     		type:"post",
-    		url:"http://10.73.84.62:8080/xdfdtmanager/teacherAnalysis/queryStudentWechat.do",
+    		url:"http://dt.staff.xdf.cn/xdfdtmanager/teacherAnalysis/queryStudentWechat.do",
     		async:true,
     		dataType:"json",
     		data:JSON.stringify(queryOpenid),
     		success:function(e){
     			console.log(e);
+    			
     		}
     	});
     }
@@ -268,8 +270,13 @@ $(function () {
 	                	"flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
 	                	"studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
 	                }
-	                 stuQuery.push(studentid);
-	                 student.push(studentinfo);
+	               /* var pushStu={
+	                	"studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分"
+	                }
+	                pushStuent.push(pushStu);*/
+	                stuQuery.push(studentid);
+	                student.push(studentinfo);
 	            }
 	        }
 	        var dtlength=$(".scoreList dt").length;
@@ -547,3 +554,12 @@ $(function () {
 
 
 })
+/*function pushInfo(){
+	var pushinfo={
+		"courseName":$(".st").html(),
+		"time":$(".classTime").html(),
+		"stuInfomation":pushStuent,
+		
+	}
+}
+*/
