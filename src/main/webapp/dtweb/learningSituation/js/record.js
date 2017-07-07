@@ -555,7 +555,7 @@ $(function () {
 	 	}
 		var pushinfo={
 			"courseName":$(".st").html(),
-			"time":$(".classTime").html(),
+			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
 			"stuInfomation":pushStuent
 			
 		}
