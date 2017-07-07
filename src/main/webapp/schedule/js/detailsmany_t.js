@@ -25,7 +25,7 @@ $(function(){
 			}
 		}
 		var masterta = e.data.Data[timeindex].Teachers.split(',');
-		var subject = e.data.Data[timeindex].CourseCode;
+		var subject = e.data.Data[timeindex].ClassCode;
 		for(var v = 0;v<e.subject.length;v++){
 			if(e.subject[v].courseName==subject){
                 subject_s = e.subject[v].subject
