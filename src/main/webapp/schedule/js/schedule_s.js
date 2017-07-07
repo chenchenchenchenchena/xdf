@@ -179,18 +179,19 @@ $(function() {
             var Index = [];
 
             var old;
-            var masterta = e.data.Data[i].Teachers.split(',');
-            var masteaname = '';
-            for (var j = 0; j < mastertae.length; j++) {
-                for (var k = 0; k < masterta.length; k++) {
-                    if (mastertae[j].teacherName == masterta[k]) {
-                        jteaname = masterta[k]
-                        masterta[k] = ''
-                    }
-                }
-            }
+
             // 录入开始时间
             for (var i = 0; i < curr_e.length; i++) {
+                var masterta = e.data.Data[i].Teachers.split(',');
+                var masteaname = '';
+                for (var j = 0; j < mastertae.length; j++) {
+                    for (var k = 0; k < masterta.length; k++) {
+                        if (mastertae[j].teacherName == masterta[k]) {
+                            jteaname = masterta[k]
+                            masterta[k] = ''
+                        }
+                    }
+                }
                 var begtime = curr_e[i].SectBegin.split(' ');
                 var begtime2 = begtime[1].substring(0, begtime[1].length - 3);
                 var endtime = curr_e[i].SectEnd.split(' ');
