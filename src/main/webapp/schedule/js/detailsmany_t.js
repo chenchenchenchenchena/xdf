@@ -27,7 +27,7 @@ $(function(){
 		var masterta = e.data.Data[timeindex].Teachers.split(',');
 		var subject = e.data.Data[timeindex].CourseCode;
 		for(var v = 0;v<e.subject.length;v++){
-			if(subject[v].courseName==subject){
+			if(e.subject[v].courseName==subject){
                 subject_s = e.subject[v].subject
 			}
 		}
