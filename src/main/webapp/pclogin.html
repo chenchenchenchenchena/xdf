@@ -42,8 +42,11 @@
      };
      for(var a = 0;a<WXnumber.length;a++){
          json.touser =  WXnumber[a];
-         ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+         ajaxRequest('post','https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
+
              console.log(e)
+
+
          })
      }
 </script>
