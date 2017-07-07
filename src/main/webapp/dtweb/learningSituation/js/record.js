@@ -8,7 +8,7 @@ $(function () {
     var student = [];
     var stuQuery=[];
     var pushStuent=[];
-    var queryOpenId=[];
+    var stuOpenId=[];
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
     // if(!sessionStorage.openid){
     //     wechatCode(location.href)
@@ -234,10 +234,9 @@ $(function () {
 					"stuNo":e.studentInfo[i].studentNo,
 					"openId":e.studentInfo[i].wechatId
 				}
-				queryOpenId.push(stuid);
+				stuOpenId.push(stuid);
 			}
 			console.log(queryOpenId);
-			
 		}
     }
     //保存
@@ -317,6 +316,7 @@ $(function () {
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
         student=[];
+        queryOpenid=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
@@ -327,6 +327,7 @@ $(function () {
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
     	student=[];
+    	queryOpenid=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
