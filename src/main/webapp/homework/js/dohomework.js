@@ -6,6 +6,70 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     })
+    //点击录制语音
+    //按下开始录音
+    $('#record').on('touchstart', function (event) {
+        /*alert(1);*/
+        event.preventDefault();
+        START = new Date().getTime();
+        /*alert(START);*/
+        recordTimer = setTimeout(function () {
+            wx.startRecord({
+                success: function () {
+                    localStorage.rainAllowRecord = 'true';
+                    /* alert("开始录音");*/
+                },
+                cancel: function () {
+                    alert('用户拒绝授权录音');
+                }
+            });
+        }, 300);
+    });
+    //松手结束录音
+    $('.aaa').on('touchend', function (event) {
+        event.preventDefault();
+        END = new Date().getTime();
+        /*alert(END);*/
+        alert(1)
+        if ((END - START) < 300) {
+            END = 0;
+            START = 0;
+            //小于300ms，不录音
+            clearTimeout(recordTimer);
+        } else {
+            alert(2);
+            wx.stopRecord({
+                success: function (res) {
+
+                    //var data=JSON.stringify(res);
+                    localId = res.localId;
+                    alert(localId);
+                    /*alert(voice.localId+"111111");*/
+                    uploadVoice(localId);
+
+                    /* alert("结束录音");*/
+                },
+                fail: function (res) {
+                    /* alert(JSON.stringify(res));
+                     alert("录音结束失败");*/
+                }
+            });
+        }
+    });
+    //上传云盘
+    function uploadVoice(localId) {
+        var cbconfig = {'appId': "wx559791e14e9ce521", 'appSecret': "baa4373d5a8750c69b9d1655a2e31370",'mediaId':localId};
+        $.ajax({
+            url: url_o+"upload/uploadAudio.do",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(cbconfig),
+            success: function (e) {
+                console.log(e);
+
+            }
+        });
+    }
     //点击选择图片
     $('#chooseImage').click(function () {
         wx.chooseImage({
