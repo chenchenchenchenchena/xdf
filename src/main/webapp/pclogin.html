@@ -49,7 +49,7 @@
          $.ajax({
              url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',
              type: 'post',
-             dataType: 'json',
+             dataType: 'jsonp',
              data:json,
              success:function (e) {
                  console.log(e)
