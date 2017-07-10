@@ -106,7 +106,7 @@ $(function () {
         });
     });
     // 播放语音
-    voiceCheck('audio');
+    // voiceCheck('audio');
     function voiceCheck(voiceId) {
         var audio = document.getElementById(voiceId);
         if (audio !== null) {
