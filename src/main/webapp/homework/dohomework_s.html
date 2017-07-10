@@ -35,7 +35,9 @@
         <div>
             <div class="audio_box">
                 <div>
-                    <audio id="audio" preload="auto"><source src="../yuyin/ttt.mp3" type="audio/mpeg"></audio>
+                    <audio id="audio" preload="auto">
+                        <source src="../yuyin/ttt.mp3" type="audio/mpeg">
+                    </audio>
                     <i class="play-icon"></i>
                 </div>
                 <span>16''</span>
@@ -56,11 +58,19 @@
             <img id="chooseImage" src="images/B02-2_10.png"/><img id="record" src="images/B02-2_12.png"/>
         </div>
         <div class="notsubmit" style="display: none;">
-            <div style="display: none;" id="audio_record" src=""></div>
+            <div class="audio_box" style="display: none;">
+                <div>
+                    <audio id="audio_record" preload="auto">
+                        <source src="../yuyin/ttt.mp3" type="audio/mpeg">
+                    </audio>
+                    <i class="play-icon"></i>
+                </div>
+                <span>16''</span>
+            </div>
             <!--<div class="imgBox">-->
-                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
-                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
-                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
             <!--</div>-->
         </div>
         <button class="btn">提交</button>
@@ -91,8 +101,15 @@
     </div>
 </div>
 <div id="alert" class="none">超出字符上限！</div>
-<div class="submitBox none"><img src="images/tan.png" /><p>作业提交成功</p><button>确定</button></div>
-<div class="submitFail none"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>
+<div class="submitBox none"><img src="images/tan.png"/>
+    <p>作业提交成功</p>
+    <button>确定</button>
+</div>
+<div class="submitFail none"><img src="images/redtan.png"/>
+    <p>作业提交失败</p>
+    <button>取消</button>
+    <button>重试</button>
+</div>
 </body>
 <script src="js/dohomework.js"></script>
 </html>

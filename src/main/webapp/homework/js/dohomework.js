@@ -38,30 +38,44 @@ $(function () {
             wx.stopRecord({
                 success: function (res) {
 
-                    //var data=JSON.stringify(res);
                     localId = res.localId;
-                    alert(localId+"++++");
+
                     //显示语音布局
                     $('.notsubmit').show();
-                    $('#audio_record').show();
-                    /*alert(voice.localId+"111111");*/
-                    uploadVoice(localId);
+                    $('.audio_box').show();
 
-                    /* alert("结束录音");*/
+                    uploadVoiceWX(localId);
+
                 },
                 fail: function (res) {
-                    /* alert(JSON.stringify(res));
-                     alert("录音结束失败");*/
                 }
             });
         }
     });
+    // $('#record').click(function () {
+    //     uploadVoice("weixin://resourceid/4aeb03eb4663cf4fa1e990a82485a653");
+    // });
+    function uploadVoiceWX(upId) {
+        //调用微信的上传录音接口把本地录音先上传到微信的服务器
+        //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+        wx.uploadVoice({
+            localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
+            isShowProgressTips: 1, // 默认为1，显示进度提示
+            success: function (res) {
+                // alert(JSON.stringify(res));
+                //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+                serverId = res.serverId;
+                alert("2222" + serverId);
+                uploadVoice(serverId);
+            }
+        });
+    }
     //上传云盘
-    function uploadVoice(localId) {
+    function uploadVoice(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
-            'mediaId': localId
+            'mediaId': serverId
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -70,6 +84,7 @@ $(function () {
             data: JSON.stringify(cbconfig),
             success: function (e) {
                 console.log(e);
+                $('#audio_record').attr('src',"");
                 alert(JSON.stringify(e));
 
             }
