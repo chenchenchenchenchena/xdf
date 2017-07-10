@@ -33,6 +33,21 @@ $(function () {
             }
         });
     });
+    // 播放语音
+    voiceCheck('audio');
+    function voiceCheck(voiceId) {
+        var audio = document.getElementById(voiceId);
+        if(audio!==null){
+            //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+            alert(audio.paused);
+            if(audio.paused){
+                audio.play();//audio.play();// 这个就是播放
+            }else{
+                audio.pause();// 这个就是暂停
+            }
+        }
+    }
+
 });
 /* //超出字数
  layer.open({

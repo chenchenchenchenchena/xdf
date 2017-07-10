@@ -60,13 +60,47 @@ body,html{
 .des{
 	border-bottom: 1px solid #e1e1e1;
 }
-#audio{
+.audio_box{
+	height: 78px;
+	width: 100%;
+	margin: 30px 0;
+}
+.audio_box div{
+	display: inline-block;
 	width: 274px;
+	max-width: 620px;
 	height: 78px;
 	border: 1px solid #82be66;
 	background: #a0e75a;
 	border-radius: 10px;
-	margin: 30px 0;
+	float: left;
+	position: relative;
+}
+.audio_box span{
+	display: inline-block;
+	height: 78px;
+	line-height: 78px;
+}
+.play-icon{
+	background: url("../images/voice_playing.png") 0 0 no-repeat;
+	display: inline-block;
+	width: 27px;
+	height: 33px;
+	position: absolute;
+	top: 22px;
+	left: 22px;
+	-webkit-animation: playvoice_1 2s infinite ease-in-out;
+}
+@keyframes playvoice_1 {
+	0% {
+		background: url("../images/voice_playing_f1.png") 0 0 no-repeat;
+	}
+	50% {
+		background: url("../images/voice_playing_f2.png") 0 0 no-repeat;
+	}
+	100% {
+		 background: url("../images/voice_playing_f3.png") 0 0 no-repeat;
+	 }
 }
 .imgBox{
 	margin-bottom: 20px;
