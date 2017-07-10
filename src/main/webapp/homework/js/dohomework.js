@@ -66,6 +66,7 @@ $(function () {
             data: JSON.stringify(cbconfig),
             success: function (e) {
                 console.log(e);
+                alert(JSON.stringify(e));
 
             }
         });
