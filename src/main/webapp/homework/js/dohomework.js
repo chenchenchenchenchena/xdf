@@ -17,7 +17,7 @@ $(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    /* alert("开始录音");*/
+                    alert("开始录音");
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
