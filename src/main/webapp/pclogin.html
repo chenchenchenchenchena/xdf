@@ -4,59 +4,21 @@
     <meta charset="UTF-8">
     <title>发布管理平台</title>
     <script src="common/js/jquery.js"></script>
-    <script src="common/js/ajax.js"></script>
 </head>
 <script>
-     var WXnumber = [
-     	'or2E7wXQqLPoNHoXcPQFu93lArDI',
-     	 'or2E7wXQqLPoNHoXcPQFu93lArDI',
-         'or2E7wXQqLPoNHoXcPQFu93lArDI'
-     ];
+    $(function() {
+        var  cbconfig = {'callbackFlag':'webBackground'};
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do",
+            type: 'post',
+            dataType: 'json',
+            data:JSON.stringify(cbconfig),
+            success:function(e){
+                location.href = e.url;
 
-         var json = {
-             "touser":"or2E7wXQqLPoNHoXcPQFu93lArDI",
-             "template_id":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-             "url":"http://www.baidu.com",
-             "data":{
-                 "first": {
-                     "value":"恭喜你购买成功！",
-                     "color":"#173177"
-                 },
-                 "courseName":{
-                     "value":"什么鬼",
-                     "color":"#173177"
-                 },
-                 "childName":{
-                     "value":"巧克力",
-                     "color":"#173177"
-                 },
-                 "time": {
-                     "value":"39.8元",
-                     "color":"#173177"
-                 },
-                 "score": {
-                     "value":"2014年9月22日",
-                     "color":"#173177"
-                 },
-                 "remark":{
-                     "value":"欢迎再次购买！",
-                     "color":"#173177"
-                 }
-             }
-         };
-     for(var a = 0;a<WXnumber.length;a++){
-         json.touser =  WXnumber[a];
-         $.ajax({
-             url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',
-             type: 'post',
-             dataType: 'json',
-             data:json,
-             success:function (e) {
-                 console.log(e)
-             }
-         });
-
-     }
+            }
+        });
+    })
 </script>
 <body>
 </body>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>保存</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../css/p176.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../../common/js/jquery.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+<body onload="initMainPage('101')">
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
+    <div class="p176-nav-right">
+        <ul>
+            <li>
+                <a href="#" class="p176-nav-usename js-userName"></a>
+                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
+                    <ul>
+                        <li><a href="#" onclick="toLogout()" class="">退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<form id="form">
+    <div style="margin-top: 100px;margin-left: 100px;">
+        <span style="size: 20px">文件名：</span>
+        <input id="fileName" type="text">
+        <span style="size: 20px">文件地址：</span>
+        <input id="fileUrl" type="text">
+        <span style="margin-left: 10px;display:inline-block;color: #ffffff;background-color: #00b997;text-align: center;width: 100px;line-height:38px;height: 38px;"
+              onclick="save()">保存</span>
+    </div>
+</form>
+<h2 style="margin-left: 100px;" class="p176-tit clearfix"><span class="p176-alresdy">已保存的文件</span></h2>
+<div style="margin-left: 100px;" class="p176-table-wrap" >
+    <table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
+        <thead>
+        <tr id="ckListHead">
+            <th style="width:20%;">文件名</th>
+            <th style="width:30%;">地址</th>
+        </tr>
+        </thead>
+        <tbody id="ckListTbody">
+        </tbody>
+    </table>
+    <div class="PublicPage" id="publicPage"></div>
+</div>
+</body>
+<script>
+    $(function () {
+        showList();
+    })
+
+    //文件保存接口
+    function save() {
+        var fileName = $('#fileName').val();
+        var fileUrl = $('#fileUrl').val();
+        var cbconfig = {'fileName': fileName, 'fileUrl': fileUrl};
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/saveVideoFileInfo.do",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(cbconfig),
+            success: function (e) {
+                console.log(e)
+                showList();
+
+            }
+        });
+    }
+    //显示已经录入的数据
+    function showList() {
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            type: 'post',
+            dataType: 'json',
+            success: function (e) {
+                console.log(e)
+                var dataList = e.dataList;
+                var str = "";
+                for (var i = 0; i < dataList.length; i++) {
+                    var fileName = dataList[i]["fileName"];
+                    var fileUrl = dataList[i]["fileUrl"];
+
+                    if (i % 2 == 1) {
+                        str += "<tr class='table-tr-odd'>"
+                    } else {
+                        str += "<tr class='table-tr-even'>"
+                    }
+
+                    str += "<td id='name'>" + fileName + "</td>";
+                    str += "<td id='fileUrl'>" + fileUrl + "</td>";
+
+
+                    str += "</tr>";
+                }
+                $("#ckListTbody").html(str);
+
+            }
+        });
+    }
+
+</script>
+</html>
