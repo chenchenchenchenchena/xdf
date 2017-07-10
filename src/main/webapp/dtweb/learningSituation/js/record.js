@@ -217,7 +217,6 @@ $(function () {
     //获取openId
    
     function queryOpenid(){
-    	alert("1111");
     	var queryOpenid={
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
