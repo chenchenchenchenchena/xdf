@@ -53,7 +53,7 @@ $(function () {
         }
     });
     // $('#record').click(function () {
-    //     uploadVoice("weixin://resourceid/4aeb03eb4663cf4fa1e990a82485a653");
+    //     uploadVoice("2222vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
     // });
     function uploadVoiceWX(upId) {
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
@@ -78,13 +78,14 @@ $(function () {
             'mediaId': serverId
         };
         $.ajax({
-            url: url_o + "upload/uploadAudio.do",
+            // url: url_o + "upload/uploadAudio.do",
+            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
-            data: JSON.stringify(cbconfig),
+            data: cbconfig,
             success: function (e) {
                 console.log(e);
-                $('#audio_record').attr('src',"");
+                $('#audio_record').attr('src',e.data.message);
                 alert(JSON.stringify(e));
 
             }
