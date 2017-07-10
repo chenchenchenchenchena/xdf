@@ -47,7 +47,7 @@
      for(var a = 0;a<WXnumber.length;a++){
          json.touser =  WXnumber[a];
          $.ajax({
-             url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'?data'+jsn+'',
+             url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'?data'+json+'',
              type: 'get',
              dataType:'jsonp',
              jsonp:'jsoncallback',
