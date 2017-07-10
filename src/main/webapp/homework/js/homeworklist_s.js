@@ -3,7 +3,7 @@ $(function(){
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
-	var reqData = 'stuNum=ss58';
+	var reqData = 'stuNum=s40';
 	ajaxRequest('GET', url.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
@@ -13,7 +13,7 @@ $(function(){
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
-				'stuNum':'SS1872' //学生编号
+				'stuNum':'SS893' //学生编号
 			};
 			ajaxRequest('POST', url.s_hwfl, reqData, getHwFinishSuccess);
 

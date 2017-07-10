@@ -1,114 +1,91 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>已完成作业</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="full-screen" content="yes"/>
-		<link rel="stylesheet" href="../common/css/base.css"  />
-		<link rel="stylesheet" href="css/dohomework_s.css"  />
-		<script src="../common/js/jquery.js"></script>
-		<script src="../common/js/scale.js"></script>
-		<script src="../common/js/layer.js"></script>
-	</head>
-	<body>
-		<div class="doHomework">
-			<div class="hwRankTitle">作业排行榜</div>
-			<div class="hwInfo">
-				<div class="infoTitle">作业信息</div>
-				<div class="kon">
-					<p class="sTitle">知识点</p>
-					<p>等腰直角三角形</p>
-				</div>
-				<div class="des">
-					<p class="sTitle">作业描述</p>
-					<p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
-				</div>
-				<div>
-					<div id="audio" src=""></div>
-					<div class="imgBox">
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-					</div>
-				</div>
-			</div>
-			<div class="answer">
-				<div class="infoTitle">我的答案</div>
-				<p class="sTitle dh">写作业</p>
-				<textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200"></textarea>
-				<p class="word"><span>0</span>/<span>200</span>
-				<div class="clickImg">
-					<img src="images/B02-2_10.png"  /><img src="images/B02-2_12.png"  />
-				</div>
-				<div style="display: none;">
-					<div id="audio" src=""></div>
-					<div class="imgBox">
-						<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-						<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-						<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-					</div>
-				</div>
-				<button class="btn">提交</button>
-			</div>
-			<div class="hmAnswer" style="display: none;">
-				<div class="infoTitle">作业答案</div>
-				<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
-				<div>
-					<div id="audio" src=""></div>
-					<div class="imgBox">
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-					</div>
-				</div>	
-			</div>
-			<div class="comment" style="display: none;">
-				<div class="infoTitle">老师批注</div>
-				<div class="anDes">点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
-				<div>
-					<div id="audio" src=""></div>
-					<div class="imgBox">
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-						<div><img src="images/B02-23_03.png" alt="" /></div>
-					</div>
-				</div>	
+<head>
+	<meta charset="UTF-8">
+	<title>已完成作业</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="full-screen" content="yes"/>
+	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/dohomework_s.css"  />
+	<script src="../common/js/jquery.js"></script>
+	<script src="../common/js/scale.js"></script>
+	<script src="../common/js/layer.js"></script>
+</head>
+<body>
+<div class="doHomework">
+	<div class="hwRankTitle">作业排行榜</div>
+	<div class="hwInfo">
+		<div class="infoTitle">作业信息</div>
+		<div class="kon">
+			<p class="sTitle">知识点</p>
+			<p>等腰直角三角形</p>
+		</div>
+		<div class="des">
+			<p class="sTitle">作业描述</p>
+			<p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
+		</div>
+		<div>
+			<div id="audio" src=""></div>
+			<div class="imgBox">
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
 			</div>
 		</div>
-		<!--<div id="alert">超出字符上限！</div>-->
-		<!--<div class="submitBox"><img src="images/tan.png" /><p>作业提交成功</p><button>确定</button></div>-->
-		<!--<div class="submitFail"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>-->
-	</body>
-	<script src="js/homeworklist_s.js"></script>
+	</div>
+	<div class="answer" style="display: none;">
+		<div class="infoTitle">我的答案</div>
+		<p class="sTitle dh">写作业</p>
+		<textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200"></textarea>
+		<p class="word"><span>0</span>/<span>200</span>
+		<div class="clickImg">
+			<img src="images/B02-2_10.png"  /><img src="images/B02-2_12.png"  />
+		</div>
+		<div style="display: block;">
+			<div id="audio" src=""></div>
+			<div class="imgBox">
+				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
+				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
+				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
+			</div>
+		</div>
+		<button class="btn">提交</button>
+	</div>
+	<div class="hmAnswer" style="display: block;">
+		<div class="infoTitle">作业答案</div>
+		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
+		<div>
+			<div id="audio" src=""></div>
+			<div class="imgBox">
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+			</div>
+		</div>
+		<img class="hw_status_s" src="images/excellent_icon.png"/>
+	</div>
+	<div class="comment" style="display: block;">
+		<div class="infoTitle">老师批注</div>
+		<div class="anDes">点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
+		<div>
+			<div id="audio" src=""></div>
+			<div class="imgBox">
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+				<div><img src="images/B02-23_03.png" alt="" /></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div class="mask-transparent" style="display:none;"></div>-->
+<!--<div class="mask" style="display:none;"></div>-->
+<div class="tips" id="alert" style="display: none;">超出字符上限！</div>
+<div class="submitBox" style="display: none;"><img src="images/7.png" /><p>作业提交成功</p><button>确定</button></div>
+<div class="submitFail" style="display: none;"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>
+</body>
+<script src="js/dohomework.js"></script>
 </html>
-<script type="text/javascript">
-   /*layer.open({
-        type: 1,
-        area: ['310px', '195px'],
-        shade: false,
-        title: false,
-        skin: 'yourclass',
-        content:$("#alert")
-    });
-    layer.open({
-        type: 1,
-        area: ['548px', '345px'],
-        shade:[0.2,'#000'],
-        title:'',
-        skin: '',
-        content:$(".submitBox")
-    });*/
-   /*layer.open({
-        type: 1,
-        area: ['548px', '345px'],
-        shade:[0.2,'#000'],
-        title:'',
-        skin: '',
-        content:$(".submitFail")
-    })*/
-</script>
 
