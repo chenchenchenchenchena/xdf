@@ -351,7 +351,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	for (var i = 0; i < $(".scoreList dl").length; i++) {
+    	/*for (var i = 0; i < $(".scoreList dl").length; i++) {
             if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
                 var studentinfo = {
                     "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
@@ -361,7 +361,7 @@ $(function () {
                 }
                  student.push(studentinfo);
             }
-	    }
+	    }*/
     	saveData();
     })
     

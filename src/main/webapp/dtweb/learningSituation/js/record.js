@@ -275,11 +275,13 @@ $(function () {
 	                	"flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
 	                	"studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
 	                }
-	               /* var pushStu={
+	                var pushStu={
+	                	"title":"亲爱的"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"家长，"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"同学本次考试成绩如下：",
 	                	"studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分"
+	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分",
+	                	"sNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
 	                }
-	                pushStuent.push(pushStu);*/
+	                pushStuent.push(pushStu);
 	                stuQuery.push(studentid);
 	                student.push(studentinfo);
 	            }
@@ -322,6 +324,7 @@ $(function () {
      	layer.close(layer2);
      	saveData();
      	queryOpenid();
+     	
      })
      
      $(".subFail button").eq(0).click(function(){
@@ -331,29 +334,16 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	for (var i = 0; i < $(".scoreList dl").length; i++) {
-            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
-                var studentinfo = {
-                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
-                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
-                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
-                }
-                var studentid={
-                	"flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
-                	"studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
-                }
-	             stuQuery.push(studentid);
-                 student.push(studentinfo);
-            }
-	    }
     	saveData();
     	queryOpenid();
+    	
     })
     
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
-     	/*location.href="report_t.html";*/
+     	var push=pushInfo();
+     	console.log(push);
+//   	location.href="report_t.html?pushMsg="+push;
      })
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
@@ -362,6 +352,7 @@ $(function () {
      	layer.close(layer1);
      	saveData();
      	queryOpenid();
+     	
      }) 
     
     
@@ -558,15 +549,23 @@ $(function () {
         /*strlen=Math.ceil(strlen/2);*///中英文相加除2取整数
         return strlen;
     }
+//传推送数据
+	function pushInfo(){
+	 	
+		var pushinfo={
+			"courseName":$(".st").html(),
+			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
+			"stuInfomation":pushStuent
+			
+		}
+		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
+				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
+			}
+	 		
+	 	}
+		return pushinfo;
+	}
 
 
 })
-/*function pushInfo(){
-	var pushinfo={
-		"courseName":$(".st").html(),
-		"time":$(".classTime").html(),
-		"stuInfomation":pushStuent,
-		
-	}
-}
-*/

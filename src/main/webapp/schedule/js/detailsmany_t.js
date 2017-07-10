@@ -12,7 +12,7 @@ $(function(){
             mastertae.push(e.data[i]);
         }
 	});
-
+	var subject_s = '';
     function stusea(e){
 		var teacindex = 0;
 		var BeginDate =  e.data.Data
@@ -25,6 +25,12 @@ $(function(){
 			}
 		}
 		var masterta = e.data.Data[timeindex].Teachers.split(',');
+		var subject = e.data.Data[timeindex].ClassCode;
+		for(var v = 0;v<e.subject.length;v++){
+				if(e.subject[v].classCode==subject){
+                subject_s = e.subject[v].subject
+			}
+		}
 		var masteaname = '';
 		for(var j = 0;j<mastertae.length;j++){
             for(var k = 0;k<masterta.length;k++){
@@ -40,7 +46,7 @@ $(function(){
 		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/')
 		var LessonCount = BeginDate[timeindex].LessonCount
 		var LessonNo = BeginDate[timeindex].LessonNo
-		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+e.subject+')')
+		$('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+subject_s+')')
 		$('.time span').html(begintime+'-'+endtime)
 		$('.date span').html(begindata+'-'+enddata)
 		$('.classHour i').eq(0).html(LessonNo)
