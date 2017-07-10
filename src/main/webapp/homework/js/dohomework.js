@@ -26,7 +26,7 @@ $(function () {
         }, 300);
     });
     //松手结束录音
-    $('.aaa').on('touchend', function (event) {
+    $('#record').on('touchend', function (event) {
         event.preventDefault();
         END = new Date().getTime();
         /*alert(END);*/
@@ -44,6 +44,8 @@ $(function () {
                     //var data=JSON.stringify(res);
                     localId = res.localId;
                     alert(localId);
+                    //显示语音布局
+                    $('#audio_record').show();
                     /*alert(voice.localId+"111111");*/
                     uploadVoice(localId);
 
@@ -58,9 +60,13 @@ $(function () {
     });
     //上传云盘
     function uploadVoice(localId) {
-        var cbconfig = {'appId': "wx559791e14e9ce521", 'appSecret': "baa4373d5a8750c69b9d1655a2e31370",'mediaId':localId};
+        var cbconfig = {
+            'appId': "wx559791e14e9ce521",
+            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'mediaId': localId
+        };
         $.ajax({
-            url: url_o+"upload/uploadAudio.do",
+            url: url_o + "upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(cbconfig),
@@ -71,14 +77,15 @@ $(function () {
             }
         });
     }
+
     //点击选择图片
     $('#chooseImage').click(function () {
         wx.chooseImage({
             success: function (res) {
                 $('.notsubmit').show();
-//                    if ($('#audio').attr("src") == "" || $('#audio').attr("src") == null) {
-//                        $('#audio').hide();
-//                    }
+                if ($('#audio_record').attr("src") == "" || $('#audio_record').attr("src") == null) {
+                    $('#audio_record').hide();
+                }
                 var str = "";
                 if (res.localIds.length > 0) {
 
@@ -102,12 +109,12 @@ $(function () {
     voiceCheck('audio');
     function voiceCheck(voiceId) {
         var audio = document.getElementById(voiceId);
-        if(audio!==null){
+        if (audio !== null) {
             //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
             alert(audio.paused);
-            if(audio.paused){
+            if (audio.paused) {
                 audio.play();//audio.play();// 这个就是播放
-            }else{
+            } else {
                 audio.pause();// 这个就是暂停
             }
         }
