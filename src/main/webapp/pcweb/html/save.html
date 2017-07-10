@@ -9,21 +9,9 @@
     <script src="../../common/js/jquery.js"></script>
     <script src="../js/main.js"></script>
 </head>
-<body onload="initMainPage('101')">
+<body>
 <div class="p176-nav clearfix">
-    <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
-    <div class="p176-nav-right">
-        <ul>
-            <li>
-                <a href="#" class="p176-nav-usename js-userName"></a>
-                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
-                    <ul>
-                        <li><a href="#" onclick="toLogout()" class="">退出登录</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <div class="p176-logo-left"></div>
 </div>
 
 <form id="form">
@@ -31,7 +19,7 @@
         <span style="size: 20px">文件名：</span>
         <input id="fileName" type="text">
         <span style="size: 20px">文件地址：</span>
-        <input id="fileUrl" type="text">
+        <input style="width:500px;" id="fileUrl" type="text">
         <span style="margin-left: 10px;display:inline-block;color: #ffffff;background-color: #00b997;text-align: center;width: 100px;line-height:38px;height: 38px;"
               onclick="save()">保存</span>
     </div>
