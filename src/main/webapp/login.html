@@ -48,12 +48,12 @@
                     timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
                     nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
                     signature: Wxconfig_h.signature, // 必填，签名
-                    jsApiList: ["startRecord","chooseImage","stopRecord","uploadVoice","playVoice","downloadVoice"]
+                    jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"]
                 });
                 //调用成功
                 wx.ready(function(){
                     wx.checkJsApi({
-                        jsApiList: ["startRecord","chooseImage","stopRecord","uploadVoice","playVoice","downloadVoice"],
+                        jsApiList: ["startRecord","stopRecord","uploadVoice","playVoice","downloadVoice"],
                         success:function(res){
                         }
                     })
