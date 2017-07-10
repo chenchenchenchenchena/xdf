@@ -45,6 +45,7 @@ $(function () {
                     localId = res.localId;
                     alert(localId);
                     //显示语音布局
+                    $('.notsubmit').show();
                     $('#audio_record').show();
                     /*alert(voice.localId+"111111");*/
                     uploadVoice(localId);
