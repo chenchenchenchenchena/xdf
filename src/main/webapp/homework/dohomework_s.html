@@ -49,12 +49,12 @@
             <img id="chooseImage" src="images/B02-2_10.png"/><img id="record" src="images/B02-2_12.png"/>
         </div>
         <div class="notsubmit" style="display: none;">
-            <div id="audio" src=""></div>
-            <div class="imgBox">
-                <div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>
-                <div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>
-                <div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>
-            </div>
+            <!--<div id="audio" src=""></div>-->
+            <!--<div class="imgBox">-->
+                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+                <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
+            <!--</div>-->
         </div>
         <button class="btn">提交</button>
     </div>
@@ -135,9 +135,9 @@
             wx.chooseImage({
                 success: function (res) {
                     $('.notsubmit').show();
-                    if ($('#audio').attr("src") == "" || $('#audio').attr("src") == null) {
-                        $('#audio').hide();
-                    }
+//                    if ($('#audio').attr("src") == "" || $('#audio').attr("src") == null) {
+//                        $('#audio').hide();
+//                    }
                     var str = "";
                     if (res.localIds.length > 0) {
 
