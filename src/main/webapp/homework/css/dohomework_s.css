@@ -80,6 +80,10 @@ body,html{
 .imgBox>div:last-child{
 	margin-right: 0;
 }
+.imgBox div img{
+	width:216px;
+	height: 216px;
+}
 .answer{
 	background:#fff;
 	font-size: 30px;
