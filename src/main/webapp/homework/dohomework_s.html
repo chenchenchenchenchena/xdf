@@ -83,9 +83,9 @@
         </div>
     </div>
 </div>
-<!--<div id="alert">超出字符上限！</div>-->
-<!--<div class="submitBox"><img src="images/tan.png" /><p>作业提交成功</p><button>确定</button></div>-->
-<!--<div class="submitFail"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>-->
+<div id="alert" class="none">超出字符上限！</div>
+<div class="submitBox none"><img src="images/tan.png" /><p>作业提交成功</p><button>确定</button></div>
+<div class="submitFail none"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>
 </body>
 <!--<script src="js/homeworklist_s.js"></script>-->
 </html>
@@ -158,14 +158,17 @@
             });
         });
     });
-    /*layer.open({
+    /* //超出字数
+     layer.open({
      type: 1,
      area: ['310px', '195px'],
-     shade: false,
+     shade: [0.1, '#fff'],
      title: false,
-     skin: 'yourclass',
+     skin: 'tips',
      content:$("#alert")
-     });
+     });*/
+
+    /* //提交成功
      layer.open({
      type: 1,
      area: ['548px', '345px'],
@@ -174,7 +177,9 @@
      skin: '',
      content:$(".submitBox")
      });*/
-    /*layer.open({
+
+    /* //提交失败
+     layer.open({
      type: 1,
      area: ['548px', '345px'],
      shade:[0.2,'#000'],
