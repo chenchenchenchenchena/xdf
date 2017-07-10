@@ -37,7 +37,7 @@ $(function () {
             alert(2);
             wx.stopRecord({
                 success: function (res) {
-
+                    alert(res);
                     localId = res.localId;
 
                     //显示语音布局
@@ -45,6 +45,7 @@ $(function () {
                     $('.audio_box').show();
 
                     uploadVoiceWX(localId);
+                    playVoice(localId);
 
                 },
                 fail: function (res) {
@@ -52,8 +53,16 @@ $(function () {
             });
         }
     });
+    function playVoice(plId) {
+        alert("开始播放");
+        //播放录音
+        wx.playVoice({
+            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+        });
+    }
     // $('#record').click(function () {
-    //     uploadVoice("2222vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
+    //     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
+    //     uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
     // });
     function uploadVoiceWX(upId) {
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
@@ -62,7 +71,7 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                // alert(JSON.stringify(res));
+                alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
                 alert("2222" + serverId);
@@ -78,13 +87,16 @@ $(function () {
             'mediaId': serverId
         };
         $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            // url: url_o + "upload/uploadAudio.do",
+            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
                 console.log(e);
+                // if(){
+                //
+                // }
                 $('#audio_record').attr('src',e.data.message);
                 alert(JSON.stringify(e));
 
