@@ -135,7 +135,7 @@
             wx.chooseImage({
                 success: function (res) {
                     $('.notsubmit').show();
-                    if ($('#audio').attr("src") == undefined) {
+                    if ($('#audio').attr("src") == "" || $('#audio').attr("src") == null) {
                         $('#audio').hide();
                     }
                     var str = "";
@@ -146,12 +146,13 @@
                             if (i % 3 == 0) {
                                 str += " <div class = 'imgBox'>";
                             }
-                            str += "<div><span class='stuImg'>" + "</span><img src=" + res.localIds[i] + "/></div>";
+                            str += "<div><span class='stuImg'>" + "</span><img src='" + res.localIds[i] + "'/></div>";
                             if ((i + 1) % 3 == 0 || i == res.localIds.length - 1) {
                                 str += "</div>";
                             }
                         }
                     }
+                    $(".notsubmit").html(str);
                     alert('已选择 ' + res.localIds.length + ' 张图片');
                 }
             });
