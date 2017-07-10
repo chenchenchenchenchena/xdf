@@ -9,15 +9,13 @@ $(function () {
     //点击录制语音
     //按下开始录音
     $('#record').on('touchstart', function (event) {
-        /*alert(1);*/
         event.preventDefault();
         START = new Date().getTime();
-        /*alert(START);*/
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    alert("开始录音");
+                    // alert("开始录音");
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -29,7 +27,6 @@ $(function () {
     $('#record').on('touchend', function (event) {
         event.preventDefault();
         END = new Date().getTime();
-        /*alert(END);*/
         alert(1)
         if ((END - START) < 300) {
             END = 0;
@@ -43,7 +40,7 @@ $(function () {
 
                     //var data=JSON.stringify(res);
                     localId = res.localId;
-                    alert(localId);
+                    alert(localId+"++++");
                     //显示语音布局
                     $('.notsubmit').show();
                     $('#audio_record').show();
