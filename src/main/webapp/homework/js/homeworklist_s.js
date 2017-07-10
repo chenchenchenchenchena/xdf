@@ -35,32 +35,6 @@ $(function(){
 	$(".hwRankTitle").click(function(){
 		location.href="studentrank_s.html";
 	})
-	//点击选择图片
-	$('#chooseImage').click(function () {
-		wx.chooseImage({
-			success: function (res) {
-				$('.notsubmit').show();
-				if ($('#audio').attr("src") == undefined) {
-					$('#audio').hide();
-				}
-				var str = "";
-				if (res.localIds.length > 0) {
-
-					for (var i = 0; i < res.localIds.length; i++) {
-
-						if (i % 3 == 0) {
-							str += " <div class = 'imgBox'>";
-						}
-						str += "<div><span class='stuImg'>" + "</span><img src=" + res.localIds[i] + "/></div>";
-						if ((i + 1) % 3 == 0 || i == res.localIds.length - 1) {
-							str += "</div>";
-						}
-					}
-				}
-				alert('已选择 ' + res.localIds.length + ' 张图片');
-			}
-		});
-	});
 })
 
 //获取待交作业列表
