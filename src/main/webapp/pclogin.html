@@ -47,10 +47,10 @@
      for(var a = 0;a<WXnumber.length;a++){
          json.touser =  WXnumber[a];
          $.ajax({
-             url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',
-             type: 'post',
-             dataType: 'jsonp',
-             data:json,
+             url:'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'?data'+jsn+'',
+             type: 'get',
+             dataType:'jsonp',
+             jsonp:'jsoncallback',
              success:function (e) {
                  console.log(e)
              }
