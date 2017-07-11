@@ -286,6 +286,14 @@ $(function () {
         },3000);
     }
 
+    // 图片预览
+    $(document).on('touchend', '.imgBox>div>img', function (){
+        alert("预览图片");
+        wx.previewImage({
+            current: 'http://dt.staff.xdf.cn/xdfdthome/homework/images/B02-23_03.png', // 当前显示图片的http链接
+            urls: ['http://dt.staff.xdf.cn/xdfdthome/homework/images/B02-23_03.png'] // 需要预览的图片http链接列表
+        });
+    });
 
 
 });
