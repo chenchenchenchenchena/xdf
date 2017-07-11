@@ -4,18 +4,18 @@ $(function(){
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	var reqData = 'stuNum=s40';
-	ajaxRequest('GET', url.s_hwlt, reqData, getHwContentSuccess);
+	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
-			ajaxRequest('GET', url.s_hwlt, 'stuNum=ss58', getHwContentSuccess);
+			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum=ss58', getHwContentSuccess);
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
 				'stuNum':'SS893' //学生编号
 			};
-			ajaxRequest('POST', url.s_hwfl, reqData, getHwFinishSuccess);
+			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 
 		}
 	})

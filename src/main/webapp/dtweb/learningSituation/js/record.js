@@ -238,6 +238,8 @@ $(function () {
 	             content:$(".recordSucc")
 	         })
 	         student=[];
+
+
 	     }else{
 	   		layer.close(load);
 	     	layer4 = layer.open({
@@ -395,7 +397,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	saveData();
+    	saveData();main-list.html
     	queryOpenid();
 
     })
@@ -404,7 +406,7 @@ $(function () {
      	layer.close(layer3);
      	var push=pushInfo();
      	var pushwei={
-					  "appId":"wxab29a3e2000b8d2a",
+					  "appid":"wxab29a3e2000b8d2a",
 					  "secret":"7739991fcce774c2281147eae3986ad9",
 					  "remark":"发送人:新小三拐点提速班 王明老师感谢您对我们的支持。",
 					  "courseName":push.courseName,
@@ -412,23 +414,24 @@ $(function () {
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
 					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
 					  "info":[
-					  {"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
+					  	{"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
 					  ]
 					};
      	console.log(push);
      	console.log(pushwei);
      	
 	    $.ajax({
-	        url:"http://dt.xdf.cn/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
+	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
 	        dataType: 'json',
 	        data:JSON.stringify(pushwei),
 	        success:function(e){
+	        	console.log(e);
 	           if(e.result){
-		    		console.log(e)
+		    		console.log(e.result);
 		    	}else{
-		    		console.log(message);
+		    		console.log(e.message);
 		    	}
 	        }
 	    });
@@ -659,12 +662,24 @@ $(function () {
 			"stuInfomation":pushStuent
 
 		}
-		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+		/*for(var i=0;i<pushinfo.stuInfomation.length;i++){
 			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
 				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
 			}
 
+	 	}*/
+		for(var i=0;i<stuOpenId.length;i++){
+			for(var j=0;j<pushinfo.stuInfomation.length;j++){
+				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
+					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
+				}
+			}
 	 	}
+		for(var j=0;j<pushinfo.stuInfomation.length;j++){
+			if(!pushinfo.stuInfomation[j].openId){
+				pushinfo.stuInfomation.splice(j,1);
+			}
+		}
 		return pushinfo;
 	}
 
