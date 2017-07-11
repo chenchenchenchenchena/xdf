@@ -88,6 +88,8 @@ var homework_s = {
     't_list': url_o+'teacherData/queryHomeWorkListInfo.do',   //老师作业列表
     's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
+    's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
+
 };
 //百度统计
 function wechatCode(url) {

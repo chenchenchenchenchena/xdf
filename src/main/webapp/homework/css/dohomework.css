@@ -194,6 +194,7 @@ body,html{
 	height: 120px;
 	border-bottom: 1px solid #e1e1e1;
 	line-height: 120px;
+	clear: both;
 }
 .rankleft{
 	font-size: 27px;
@@ -201,12 +202,15 @@ body,html{
 }
 .rankfirst{
 	color: #ffc600;
+	font-size: 30px;
 }
 .ranksecond{
 	color: #d1d1d1;
+	font-size: 30px;
 }
 .rankthird{
 	color: #e1a570;
+	font-size: 30px;
 }
 .rankleft>i:nth-child(2){
 	display: inline-block;

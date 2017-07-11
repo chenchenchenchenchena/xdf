@@ -61,7 +61,6 @@ $(function () {
             localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
         });
     }
-
     // $('#record').click(function () {
     //     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
     //     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
@@ -82,7 +81,6 @@ $(function () {
             }
         });
     }
-
     //上传云盘
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -203,36 +201,40 @@ $(function () {
     }
 
     function stop() {
-        $('audio')[0].pause();
-        $('audio')[0].currentTime = 0;
+        $(audioCur)[0].pause();
+        // $(audioCur)[0].currentTime = 0;
+        audioCur.currentTime = 0;
         clearTimeout(playTimer);
-        audio.currentTime = 0;
-        $(audio).siblings('.play-icon').removeClass('playing');
+        $(audioCur).siblings('.play-icon').removeClass('playing');
     }
 
     function play() {
-        var second = 10;//parseInt($(audio).siblings('span').html());//获取音频秒数
-        audio.currentTime = 0;
-        audio.play();//audio.play();// 这个就是播放
+        var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
+        audioCur.currentTime = 0;
+        audioCur.play();//audio.play();// 这个就是播放
         //播放动画
         $(audio).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function () {
             $(audio).siblings('.play-icon').removeClass('playing');
         }, second * 1000);
+        $(audioCur).siblings('.play-icon').addClass('playing');
+        playTimer = setTimeout(function(){
+            $(audioCur).siblings('.play-icon').removeClass('playing');
+        },second*1000);
     }
 
 
     // 播放作业描述语音
     $(document).on('touchend', '.audio_box>div', function () {
-        console.log('oooo' + $(this).find('audio')[0]);
-        // voiceCheck($(this).find('audio')[0]);
+        console.log('oooo'+$(this).find('audio')[0]);
+        voiceCheck($(this).find('audio')[0]);
     });
 
     // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        if ($(this).parents('.imgBox').find('div').length <= 1) {
+        if($(this).parents('.imgBox').find('div').length<=1){
             $(this).parents('.imgBox').remove();
-        } else {
+        }else{
             $(this).parent('div').remove();
         }
     });
@@ -240,28 +242,28 @@ $(function () {
     $(document).on('touchend', '#HWsubmit', function () {
         var answerVal = $('.teBox').val().trim();
         // 答案不能为空
-        if (answerVal == "" || answerVal == null) {
+        if(answerVal==""||answerVal==null){
             layer1 = layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                content: '<div class="layer-tips">答案不能为空！</div>'
+                content:'<div class="layer-tips">答案不能为空！</div>'
             });
             closeLayer(layer1);
             return;
         }
         // 超出字数
         console.log(answerVal.length)
-        if (answerVal.length > 200) {
+        if(answerVal.length > 200){
             layer1 = layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                content: '<div class="layer-tips">超出字符上限！</div>'
+                content:'<div class="layer-tips">超出字符上限！</div>'
             });
             closeLayer(layer1);
             return;
@@ -270,10 +272,11 @@ $(function () {
     });
     // 关闭消息提示
     function closeLayer(layerName) {
-        setTimeout(function () {
+        setTimeout(function(){
             layer.close(layerName);
-        }, 3000);
+        },3000);
     }
+
 
 
 });
