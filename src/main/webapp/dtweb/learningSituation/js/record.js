@@ -197,7 +197,8 @@ $(function () {
 
            
         }*/
-    	console.log(student);
+    	console.log(student);   
+    	
     	/*var classNo = $(".lessonNo").html().substring(1,2);
         var classT = $(".sectTime").html().substring(4,22);*/
         var saveInfo = {
@@ -402,9 +403,46 @@ $(function () {
     $(".recordSucc button").click(function(){
      	layer.close(layer3);
      	var push=pushInfo();
+     	var pushwei={
+					  "appId":"wxab29a3e2000b8d2a",
+					  "secret":"7739991fcce774c2281147eae3986ad9",
+					  "remark":"发送人:新小三拐点提速班 王明老师感谢您对我们的支持。",
+					  "courseName":push.courseName,
+					  "time":push.time,
+					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
+					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
+					  "info":[
+					  {"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
+					  ]
+					};
      	console.log(push);
+     	console.log(pushwei);
+     	
+	    $.ajax({
+	        url:"http://dt.xdf.cn/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
+	        type: 'post',
+	        asyns:false,
+	        dataType: 'json',
+	        data:JSON.stringify(pushwei),
+	        success:function(e){
+	           if(e.result){
+		    		console.log(e)
+		    	}else{
+		    		console.log(message);
+		    	}
+	        }
+	    });
+		
+     	/*ajax_S(url.w_push,pushwei,pushMsg);*/
 //   	location.href="report_t.html?pushMsg="+push;
      })
+    /*function pushMsg(e){
+    	if(e.result){
+    		console.log(e)
+    	}else{
+    		console.log(message);
+    	}
+    }*/
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
      })
@@ -632,3 +670,17 @@ $(function () {
 
 
 })
+
+
+/*{
+  "appId":"wxab29a3e2000b8d2a",
+  "secret":"7739991fcce774c2281147eae3986ad9",
+  "remark":"发送人:新小三拐点提速班 王明老师感谢您对我们的支持。",
+  "courseName":"####",
+  "time":"time",
+  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
+  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
+  "info":[
+  {"childName":"####","first":"####","score":"####","openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
+  ]
+}*/

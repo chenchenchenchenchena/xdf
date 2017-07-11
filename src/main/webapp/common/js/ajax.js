@@ -73,7 +73,8 @@ var url = {
     't_webback':url_o2+'/xdfdthome/dtweb/schedule/login_s.html', //回调地址
     't_webmore':url_o+'teacherBind/pcqueryTeacherInfo.do', //查询教师信息
     'w_token':url_o+'/wechatSignature/getWechatToken.do',
-    'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do'
+    'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do',
+    'w_push':url_o+'wechatSignature/sendTemplateMsg.do'//微信推送成绩信息
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
@@ -84,6 +85,9 @@ var Global = {
     "appid": appId,
     "secret": secreT,
     "actionURL": url.w_open
+};
+var homework_s = {
+    't_list': url_o+'teacherData/queryHomeWorkListInfo.do',   //老师作业列表
 };
 //百度统计
 function wechatCode(url) {
@@ -124,6 +128,7 @@ function wechatCode(url) {
         return false
     }
 }
+
 var Wxid = sessionStorage.openid
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
