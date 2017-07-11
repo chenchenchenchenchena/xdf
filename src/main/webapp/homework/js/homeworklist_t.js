@@ -1,67 +1,87 @@
 $(function(){
-	var flagOne=true;
-	$(".hwTeacherRankTitle").click(function(){
-		if(flagOne){
-			$(".hwInfo").show();
-			$(this).css("background","url(images/jiao11.png) no-repeat 708px 38px #fff");
-			flagOne=false;
-		}else{
-			$(".hwInfo").hide();
-			$(this).css("background","url(images/jiao22222.png) no-repeat 708px 38px #fff");
-			flagOne=true;
+	$('.firstList')
+
+
+
+
+
+
+	//滑动事件
+	$(document).on('touchstart','.tealist_s',function(){
+        if(event.targetTouches[0].pageX){
+        }else{
+        	alert(1)
 		}
-		
+		var begin_s = parseInt(event.targetTouches[0].pageX);
+
+        $(document).on('touchmove','.tealist_s li',function(){
+            var move_s = parseInt(event.targetTouches[0].pageX);
+            if(begin_s-move_s>=50){
+                $(this).css('margin-left','-181px');
+                $(this).find('.remove_s').css('right','-30px');
+                return false;
+			}
+			if(begin_s-move_s<=-50){
+                $(this).css('margin-left','0px');
+                $(this).find('.remove_s').css('right','-270px');
+                return false;
+            }
+			// console.log(begin_s+'，'+move_s);
+			$(this).css('margin-left',move_s-begin_s+'px');
+        })
+
+
+
+
+
 	})
-	//点击布置作业列表
-	$(".hwHeader ul li").click(function(){
-		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
-		if($(this).index()==0){
-			$(".thwList").show();
-			$(".assignment").hide();
-		}else{
-			$(".thwList").hide();
-			$(".assignment").show();
-		}
-	})
-	//点击班级
-	var flag=true;
-	$(".secul").hide();
-	$(".firstList p").click(function(){
-		if(flag){
-			$(this).parent().css("background","url(images/jiao11.png) no-repeat right 55px");
-			flag=false;
-		}else{
-			$(this).parent().css("background","url(images/jiao22222.png) no-repeat right 55px");
-			flag=true;
-		}
-		$(this).parent().find(".secul").toggle();
-	})
-	//点击secul跳到reply_t
-	$(".secul li").click(function(){
-		location.href="reply_t.html";
-	})
-	//选择班
-	$(".choose li").click(function(){
-		if($(this).index()==0){
-			$(".chooseClass").css("animation","move 1s linear");
-			$(".chooseClass").css("bottom","0px");
-		}else{
-			$(".classNumTime").css("animation","move 1s linear");
-			$(".classNumTime").css("bottom","0px");
-		}
-		
-	})
-	$(".chooseBtn").click(function(){
-		$(".chooseClass").css("bottom","-440px");
-	})
-	$(".confirmBtn").click(function(){
-		$(".classNumTime").css("bottom","-440px");
-	})
-	//点击待批复
-	$(".replyOne:eq(0) ul li").click(function(){
-		location.href="dohomework_t.html";
-	})
-	$(".replyOne:eq(1) ul li").click(function(){
-		location.href="replydetail_t.html";
-	})
+
+
+
+
+
+
+
+    // {
+    //     "appid":"wxab29a3e2000b8d2a",
+    //     "secret":"7739991fcce774c2281147eae3986ad9",
+    //     "remark":"发送人",
+    //     "courseName":"我是班级名字",
+    //     "time":"2017年",
+    //     "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
+    //     "url":"http://www.baidu.com",
+    //     "info":[
+    //     {"childName":"我是测试","first":"我是测试标题","score":"100000分","openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"},
+    // ]
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })

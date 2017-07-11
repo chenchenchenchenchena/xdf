@@ -7,9 +7,9 @@ var secreT = '';
 
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-20005525-5', 'auto');
 ga('send', 'pageview');
 
@@ -36,8 +36,8 @@ if (window.location.host == onlineUrl) {//正式环境
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
-    appId =  'wxab29a3e2000b8d2a';
-    secreT = '7739991fcce774c2281147eae3986ad9';
+    appId =  'wx559791e14e9ce521';
+    secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
 
 // 接口路径
@@ -57,8 +57,7 @@ var url = {
     's_nafu': url_o+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
     's_emai': url_o+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
     's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
-    's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
-    's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
+    's_hwlt': url_o+'studentData/assingmentHomework.do',//待交作业学生列表查询
     'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
     't_logi': url_o+'logout/doLogout.do',//退出登录
     't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
