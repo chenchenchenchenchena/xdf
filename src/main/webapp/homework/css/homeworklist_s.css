@@ -210,3 +210,22 @@ body{
 	position:relative;
 	transition:1s all ease;
 }
+.state_st{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: red;
+	position: absolute;
+	margin-top:40px;
+	margin-left:10px;
+}
+
+html body .tealist_s .more_so{
+	float:right;
+	width:auto;
+	margin-top:35px;
+}
+.more_so img{
+	margin-left:10px;
+}
