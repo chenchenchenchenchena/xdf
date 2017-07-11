@@ -145,3 +145,64 @@ body,html{
 	left: 357px;
 }
 
+
+
+
+
+
+
+/*老师列表*/
+body{
+	overflow-x:hidden;
+}
+.list_t .hwHeader{
+	margin-bottom:0;
+}
+.Prompt_s{
+	height:70px;
+	background:#f1f1f1;
+	line-height:70px;
+	font-size:32px;
+	color:#333
+}
+.Prompt_s p{
+	padding-left:30px;
+	font-size:32px;
+}
+.Prompt_s p i {
+	font-style: normal;
+	margin:0 8px;
+}
+.hwHeader a{
+	color:#000;
+}
+.state_s{
+	display: inline;
+}
+.remove_s{
+	transition:1s all ease;
+	width:240px;
+	height:105px;
+	position: absolute;
+	top:0px;
+	right:-270px;
+}
+.remove_s span{
+	display: block;
+	float:left;
+	width:50%;
+	height:105px;
+	background:#cecece;
+	color:#fff;
+	font-size:30px;
+	line-height:105px;
+	text-align:center;
+	border:none;
+}
+.remove_s .delete_s{
+	background:#fe6464;
+}
+.tealist_s li{
+	position:relative;
+	transition:1s all ease;
+}
