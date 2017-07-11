@@ -425,8 +425,9 @@ $(function () {
 	        dataType: 'json',
 	        data:JSON.stringify(pushwei),
 	        success:function(e){
+	        	console.log(e);
 	           if(e.result){
-		    		console.log(e)
+		    		console.log(e.result);
 		    	}else{
 		    		console.log(message);
 		    	}
