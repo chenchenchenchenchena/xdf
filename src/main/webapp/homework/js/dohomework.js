@@ -15,7 +15,7 @@ $(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    /* alert("开始录音");*/
+                    // alert("开始录音");
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -42,10 +42,10 @@ $(function () {
 
                     //显示语音布局
                     $('.notsubmit').show();
-                    $('.notsubmit .audio_box').show();
+                    $('.audio_box').show();
 
                     uploadVoiceWX(localId);
-                    // playVoice(localId);
+                    playVoice(localId);
 
                 },
                 fail: function (res) {
@@ -72,7 +72,7 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                alert(JSON.stringify(res));
+                // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
                 alert("2222" + serverId);
@@ -88,8 +88,8 @@ $(function () {
             'mediaId': serverId
         };
         $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            // url: url_o + "upload/uploadAudio.do",
+            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
