@@ -100,7 +100,9 @@ $(function () {
                 }else {
                     alert(e.data.previewUrl);
                     $('#audio_record source').attr('src',e.data.previewUrl);
+                    // $('#audio_record source').attr('src',e.data.diskFilePatn);
                     alert($('#audio_record source').attr('src'));
+                    $('.teBox').val($('#audio_record source').attr('src'));
                 }
 
 
