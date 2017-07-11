@@ -255,7 +255,7 @@ $(function () {
     //获取openId
 
     function queryOpenid(){
-    	alert("1111");
+    	/*alert("1111");*/
     	var queryOpenid={
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
@@ -428,7 +428,7 @@ $(function () {
      	console.log(push);
      	console.log(pushwei);
      	
-	    $.ajax({
+	    /*$.ajax({
 	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
@@ -442,18 +442,18 @@ $(function () {
 		    		console.log(e.message);
 		    	}
 	        }
-	    });
+	    });*/
 		
-     	/*ajax_S(url.w_push,pushwei,pushMsg);*/
+     	ajax_S(url.w_push,pushwei,pushMsg);
 //   	location.href="report_t.html?pushMsg="+push;
      })
-    /*function pushMsg(e){
+    function pushMsg(e){
     	if(e.result){
     		console.log(e)
     	}else{
     		console.log(message);
     	}
-    }*/
+    }
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
      })
