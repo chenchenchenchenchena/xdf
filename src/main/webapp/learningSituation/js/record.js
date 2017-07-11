@@ -6,10 +6,13 @@ $(function () {
     var load;
     var flag = 1;
     var student = [];
+    var stuQuery=[];
+    var pushStuent=[];
+    var stuOpenId=[];
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
-    if(!sessionStorage.openid){
-        wechatCode(location.href)
-    }
+     if(!sessionStorage.openid){
+         wechatCode(location.href)
+     }
     // localStorage.terEmail="caoxuefeng@xdf.cn";  //
     // sessionStorage.teacherId="TC41"; //
     // sessionStorage.schoolId="73";   //
@@ -194,7 +197,8 @@ $(function () {
 
            
         }*/
-    	console.log(student);
+    	console.log(student);   
+    	
     	/*var classNo = $(".lessonNo").html().substring(1,2);
         var classT = $(".sectTime").html().substring(4,22);*/
         var saveInfo = {
@@ -234,6 +238,8 @@ $(function () {
 	             content:$(".recordSucc")
 	         })
 	         student=[];
+
+
 	     }else{
 	   		layer.close(load);
 	     	layer4 = layer.open({
@@ -246,7 +252,31 @@ $(function () {
 	         })
 	     }
     }
-    
+    //获取openId
+
+    function queryOpenid(){
+    	/*alert("1111");*/
+    	var queryOpenid={
+    		"schoolId":localStorage.schoolId,
+    		"stuQuery":stuQuery
+    	}
+    	ajax_S(url.w_openId,queryOpenid,openIdAjax);
+    }
+    function openIdAjax(e){
+    	console.log(e);
+    	if(e==null){
+			return false;
+		}else{
+			for(var i=0;i<e.studentInfo.length;i++){
+				var stuid={
+					"stuNo":e.studentInfo[i].studentNo,
+					"openId":e.studentInfo[i].wechatId
+				}
+				stuOpenId.push(stuid);
+			}
+			console.log(stuOpenId);
+		}
+    }
     //保存
     /*var student = [];*/
     $(".subtn").click(function () {
@@ -304,7 +334,19 @@ $(function () {
 	                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
 	                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
 	                }
-	                 student.push(studentinfo);
+	                var studentid={
+	                	"flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
+	                	"studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
+	                }
+	                var pushStu={
+	                	"title":"亲爱的"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"家长，"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"同学本次考试成绩如下：",
+	                	"studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
+	                	"realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分",
+	                	"sNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
+	                }
+	                pushStuent.push(pushStu);
+	                stuQuery.push(studentid);
+	                student.push(studentinfo);
 	            }
 	        }
 	        var dtlength=$(".scoreList dt").length;
@@ -339,43 +381,70 @@ $(function () {
      $(".recordSub button").eq(0).click(function () {
         layer.close(layer2);
         student=[];
+        stuOpenId=[];
     })
      $(".recordSub button").eq(1).click(function(){
      	layer.close(layer2);
      	saveData();
+     	queryOpenid();
+
      })
      
      $(".subFail button").eq(0).click(function(){
     	layer.close(layer4);
     	student=[];
+    	stuOpenId=[];
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	/*for (var i = 0; i < $(".scoreList dl").length; i++) {
-            if (!isNaN(parseInt($(".scoreList dl").eq(i).find("dt").html()))) {
-                var studentinfo = {
-                    "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-                    "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
-                    "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
-                    "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
-                }
-                 student.push(studentinfo);
-            }
-	    }*/
-    	saveData();
+    	saveData();main-list.html
+    	queryOpenid();
+
     })
     
     $(".recordSucc button").click(function(){
+    	var classmate=[];
      	layer.close(layer3);
-     	location.href="report_t.html";
+     	var push=pushInfo();
+     	for(var i=0;i<push.stuInfomation.length;i++){
+     		var classmateInfo={
+     			"childName":push.stuInfomation[i].studentName,
+     			"first":push.stuInfomation[i].title,
+     			"score":push.stuInfomation[i].realGrade,
+     			"openId":push.stuInfomation[i].openId
+     			}
+     		classmate.push(classmateInfo);
+     	}
+     	var pushwei={
+					  "appid":"wxab29a3e2000b8d2a",
+					  "secret":"7739991fcce774c2281147eae3986ad9",
+					  "remark":"发送人:新小三拐点提速班 "+localStorage.teacherName+"老师感谢您对我们的支持。",
+					  "courseName":push.courseName,
+					  "time":push.time,
+					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
+					  "url":"report_t.html",
+					  "info":classmate
+					};
+     	/*console.log(push);
+     	console.log(pushwei);*/
+     	ajax_S(url.w_push,pushwei,pushMsg);
+   		location.href="report_t.html";
      })
+    function pushMsg(e){
+    	if(e.result){
+    		console.log(e)
+    	}else{
+    		console.log(message);
+    	}
+    }
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
      })
      $(".noRecord button").eq(1).click(function(){
      	layer.close(layer1);
      	saveData();
-     	
+     	queryOpenid();
+
      }) 
     
     
@@ -468,25 +537,22 @@ $(function () {
 	  	console.log($(".class").html())*/
 	  	if($(".st").html()&&$(".classTime").html()&&$(".class").html()&&$(".scoreList").children()){
 	    		
-			    var queryData={
-			    	"teacherEmail":localStorage.terEmail,
-			    	"classCode":$(".class").html(),
-			    	"tCode":$(".st").html(),
-			    	"schoolId":localStorage.schoolId,
-			    	"lessonNo":$(".classTime").find(".classnum").html()
-			    };
-			    console.log(queryData.lessonNo)
-			     console.log(queryData.classCode)
-			     if ($(".st").html() == "入门测") {
-			        queryData.tCode = 1;
-			    } else {
-			        queryData.tCode = 2;
-			    }
-			    ajaxRequest("post",url.t_modify,queryData,queryAjax);
-			    
-			   
-			    
-			 } 
+		    var queryData={
+		    	"teacherEmail":localStorage.terEmail,
+		    	"classCode":$(".class").html(),
+		    	"tCode":$(".st").html(),
+		    	"schoolId":localStorage.schoolId,
+		    	"lessonNo":$(".classTime").find(".classnum").html()
+		    };
+		    console.log(queryData.lessonNo)
+		     console.log(queryData.classCode)
+		     if ($(".st").html() == "入门测") {
+		        queryData.tCode = 1;
+		    } else {
+		        queryData.tCode = 2;
+		    }
+		    ajaxRequest("post",url.t_modify,queryData,queryAjax);
+		 }
 			
     }
     function queryAjax(msg){
@@ -500,12 +566,9 @@ $(function () {
 			}else{
 				resetData();
 				for(var j=0;j<$(".scoreList dl").length;j++){
-					
 					for(var i=0;i<msg.data.length;i++){
-						/*console.log(res.data[0].fullmarks);*/
 						$(".totalScore").val(msg.data[0].fullmarks);
 						$(".totalScore").attr("readonly","readonly");
-						/*alert($(".scoreList dl").eq(j).find("dd").eq(2).html());*/
 						if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
 							console.log("sssss")
 							$(".scoreList dl").eq(j).find("dt").html(msg.data[i].realgrade);
@@ -514,11 +577,7 @@ $(function () {
 				}
 				 changeData();
 			}
-			
-			/* changeData();*/
 		}
-		
-		
     }
     
     
@@ -527,9 +586,6 @@ $(function () {
     	for(var j=0;j<$(".scoreList dl").length;j++){
             var ddStr = $(".scoreList dl").eq(j).find("dd").eq(0);
             var dtStr = $(".scoreList dl").eq(j).find("dt");
-            /*console.log(ddStr.html());
-            console.log(dtStr.html());*/
-            /*console.log(str.html());*/
             var ddstrLen = lenStat(ddStr);
             /*console.log(strLen);*/
             if (lenStat(ddStr) > 8) {
@@ -558,8 +614,6 @@ $(function () {
 			}
 			
 		}
-		/*console.log($(".scoreTitle input").val());
-		console.log(222);*/
 		$(".scoreList dl").click(function(){
     		if($(this).attr("mark")=="add"){
     			console.log(333)
@@ -590,6 +644,32 @@ $(function () {
         /*strlen=Math.ceil(strlen/2);*///中英文相加除2取整数
         return strlen;
     }
+//传推送数据
+	function pushInfo(){
+
+		var pushinfo={
+			"courseName":$(".st").html(),
+			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
+			"stuInfomation":pushStuent
+
+		}
+		for(var i=0;i<stuOpenId.length;i++){
+			for(var j=0;j<pushinfo.stuInfomation.length;j++){
+				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
+					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
+				}
+			}
+	 	}
+		console.log(pushinfo.stuInfomation);
+		for(var j=0;j<pushinfo.stuInfomation.length;j++){
+			if(!pushinfo.stuInfomation[j].openId){
+				pushinfo.stuInfomation.splice(j,1);
+				j--;
+			}
+		}
+		return pushinfo;
+	}
 
 
 })
+

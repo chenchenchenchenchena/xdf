@@ -255,7 +255,7 @@ $(function () {
     //获取openId
 
     function queryOpenid(){
-    	alert("1111");
+    	/*alert("1111");*/
     	var queryOpenid={
     		"schoolId":localStorage.schoolId,
     		"stuQuery":stuQuery
@@ -422,13 +422,13 @@ $(function () {
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
+					  "url":"report_t.html",
 					  "info":classmate
 					};
      	console.log(push);
      	console.log(pushwei);
      	
-	    $.ajax({
+	    /*$.ajax({
 	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
@@ -442,18 +442,18 @@ $(function () {
 		    		console.log(e.message);
 		    	}
 	        }
-	    });
+	    });*/
 		
-     	/*ajax_S(url.w_push,pushwei,pushMsg);*/
-//   	location.href="report_t.html?pushMsg="+push;
+     	ajax_S(url.w_push,pushwei,pushMsg);
+	   	location.href="report_t.html";
      })
-    /*function pushMsg(e){
+    function pushMsg(e){
     	if(e.result){
     		console.log(e)
     	}else{
     		console.log(message);
     	}
-    }*/
+    }
     $(".noRecord button").eq(0).click(function(){
      	layer.close(layer1);
      })
@@ -670,12 +670,6 @@ $(function () {
 			"stuInfomation":pushStuent
 
 		}
-		/*for(var i=0;i<pushinfo.stuInfomation.length;i++){
-			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
-				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
-			}
-
-	 	}*/
 		for(var i=0;i<stuOpenId.length;i++){
 			for(var j=0;j<pushinfo.stuInfomation.length;j++){
 				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
@@ -683,9 +677,11 @@ $(function () {
 				}
 			}
 	 	}
+		console.log(pushinfo.stuInfomation);
 		for(var j=0;j<pushinfo.stuInfomation.length;j++){
 			if(!pushinfo.stuInfomation[j].openId){
 				pushinfo.stuInfomation.splice(j,1);
+				j--;
 			}
 		}
 		return pushinfo;
