@@ -659,11 +659,18 @@ $(function () {
 			"stuInfomation":pushStuent
 
 		}
-		for(var i=0;i<pushinfo.stuInfomation.length;i++){
+		/*for(var i=0;i<pushinfo.stuInfomation.length;i++){
 			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
 				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
 			}
 
+	 	}*/
+		for(var i=0;i<stuOpenId.length;i++){
+			for(var j=0;j<pushinfo.stuInfomation.length;j++){
+				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
+					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
+				}
+			}
 	 	}
 		return pushinfo;
 	}
