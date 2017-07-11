@@ -98,6 +98,7 @@ $(function () {
                 //
                 // }
                 $('#audio_record').attr('src',e.data.previewUrl);
+                voiceCheck($('#audio_record'));
                 alert(JSON.stringify(e));
 
             }
@@ -202,7 +203,7 @@ $(function () {
     // 播放作业描述语音
     $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo'+$(this).find('audio')[0]);
-        voiceCheck($(this).find('audio')[0]);
+        // voiceCheck($(this).find('audio')[0]);
     });
 
 });
