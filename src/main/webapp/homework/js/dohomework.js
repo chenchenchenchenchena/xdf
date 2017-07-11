@@ -9,51 +9,51 @@ $(function () {
     })
     //点击录制语音
     //按下开始录音
-    $('#record').on('touchstart', function (event) {
-        event.preventDefault();
-        START = new Date().getTime();
-        recordTimer = setTimeout(function () {
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        }, 300);
-    });
-    //松手结束录音
-    $('#record').on('touchend', function (event) {
-        event.preventDefault();
-        END = new Date().getTime();
-        alert(1)
-        if ((END - START) < 300) {
-            END = 0;
-            START = 0;
-            //小于300ms，不录音
-            clearTimeout(recordTimer);
-        } else {
-            alert(2);
-            wx.stopRecord({
-                success: function (res) {
-                    alert(res);
-                    localId = res.localId;
-
-                    //显示语音布局
-                    $('.notsubmit').show();
-                    $('.audio_box').show();
-
-                    uploadVoiceWX(localId);
-                    playVoice(localId);
-
-                },
-                fail: function (res) {
-                }
-            });
-        }
-    });
+    // $('#record').on('touchstart', function (event) {
+    //     event.preventDefault();
+    //     START = new Date().getTime();
+    //     recordTimer = setTimeout(function () {
+    //         wx.startRecord({
+    //             success: function () {
+    //                 localStorage.rainAllowRecord = 'true';
+    //                 // alert("开始录音");
+    //             },
+    //             cancel: function () {
+    //                 alert('用户拒绝授权录音');
+    //             }
+    //         });
+    //     }, 300);
+    // });
+    // //松手结束录音
+    // $('#record').on('touchend', function (event) {
+    //     event.preventDefault();
+    //     END = new Date().getTime();
+    //     alert(1)
+    //     if ((END - START) < 300) {
+    //         END = 0;
+    //         START = 0;
+    //         //小于300ms，不录音
+    //         clearTimeout(recordTimer);
+    //     } else {
+    //         alert(2);
+    //         wx.stopRecord({
+    //             success: function (res) {
+    //                 alert(res);
+    //                 localId = res.localId;
+    //
+    //                 //显示语音布局
+    //                 $('.notsubmit').show();
+    //                 $('.audio_box').show();
+    //
+    //                 uploadVoiceWX(localId);
+    //                 playVoice(localId);
+    //
+    //             },
+    //             fail: function (res) {
+    //             }
+    //         });
+    //     }
+    // });
     function playVoice(plId) {
         alert("开始播放");
         //播放录音
@@ -61,6 +61,7 @@ $(function () {
             localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
         });
     }
+
     // $('#record').click(function () {
     //     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
     //     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
@@ -81,6 +82,7 @@ $(function () {
             }
         });
     }
+
     //上传云盘
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -96,12 +98,12 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 alert(JSON.stringify(e));
-                if(e.status == "failure"){
+                if (e.status == "failure") {
                     alert(e.message);
-                }else {
+                } else {
                     alert(e.data.previewUrl);
                     // $('#audio_record source').attr('src',e.data.previewUrl);
-                    $('#audio_record source').attr('src',e.data.fileUrl);
+                    $('#audio_record source').attr('src', e.data.fileUrl);
                     alert($('#audio_record source').attr('src'));
                     $('.teBox').val($('#audio_record source').attr('src'));
                 }
@@ -109,6 +111,39 @@ $(function () {
 
             }
         });
+    }
+
+    $('#record').click(function () {
+
+        // voiceCheck($('#audio_record'));
+        loadDogSound($('#audio_record source').attr('src'));
+    });
+    var dogBarkingBuffer = null;
+// Fix up prefixing
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var context = new AudioContext();
+
+    function loadDogSound(url) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        // Decode asynchronously
+        request.onload = function () {
+            context.decodeAudioData(request.response, function (buffer) {
+                alert(buffer)
+                dogBarkingBuffer = buffer;
+                playSound(buffer);
+            }, onError);
+        }
+        request.send();
+    }
+    function playSound(buffer) {
+        var source = context.createBufferSource(); // creates a sound source
+        source.buffer = buffer;                    // tell the source which sound to play
+        source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+        source.start(0);                           // play the source now
+                                                   // note: on older systems, may have to use deprecated noteOn(time);
     }
 
     //点击选择图片
@@ -139,21 +174,22 @@ $(function () {
         });
     });
     // 播放语音
-    var playTimer = "",playId="";
+    var playTimer = "", playId = "";
     var audio = null;
+
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
         var oldId = $(audio).attr('id');
-        if(audio != null){
+        if (audio != null) {
             stop();
             audio = null;
         }
         audio = voiceId;
-        if(newID!=oldId){
+        if (newID != oldId) {
 
             play();
-        }else{
+        } else {
             stop();
             // $('audio')[0].pause();
         }
@@ -194,29 +230,30 @@ $(function () {
         audio.currentTime = 0;
         $(audio).siblings('.play-icon').removeClass('playing');
     }
+
     function play() {
         var second = 10;//parseInt($(audio).siblings('span').html());//获取音频秒数
         audio.currentTime = 0;
         audio.play();//audio.play();// 这个就是播放
         //播放动画
         $(audio).siblings('.play-icon').addClass('playing');
-        playTimer = setTimeout(function(){
+        playTimer = setTimeout(function () {
             $(audio).siblings('.play-icon').removeClass('playing');
-        },second*1000);
+        }, second * 1000);
     }
 
 
     // 播放作业描述语音
     $(document).on('touchend', '.audio_box>div', function () {
-        console.log('oooo'+$(this).find('audio')[0]);
-        voiceCheck($(this).find('audio')[0]);
+        console.log('oooo' + $(this).find('audio')[0]);
+        // voiceCheck($(this).find('audio')[0]);
     });
 
     // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        if($(this).parents('.imgBox').find('div').length<=1){
+        if ($(this).parents('.imgBox').find('div').length <= 1) {
             $(this).parents('.imgBox').remove();
-        }else{
+        } else {
             $(this).parent('div').remove();
         }
     });
@@ -224,28 +261,28 @@ $(function () {
     $(document).on('touchend', '#HWsubmit', function () {
         var answerVal = $('.teBox').val().trim();
         // 答案不能为空
-        if(answerVal==""||answerVal==null){
+        if (answerVal == "" || answerVal == null) {
             layer1 = layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                content:'<div class="layer-tips">答案不能为空！</div>'
+                content: '<div class="layer-tips">答案不能为空！</div>'
             });
             closeLayer(layer1);
             return;
         }
         // 超出字数
         console.log(answerVal.length)
-        if(answerVal.length > 200){
+        if (answerVal.length > 200) {
             layer1 = layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                content:'<div class="layer-tips">超出字符上限！</div>'
+                content: '<div class="layer-tips">超出字符上限！</div>'
             });
             closeLayer(layer1);
             return;
@@ -254,11 +291,10 @@ $(function () {
     });
     // 关闭消息提示
     function closeLayer(layerName) {
-        setTimeout(function(){
+        setTimeout(function () {
             layer.close(layerName);
-        },3000);
+        }, 3000);
     }
-
 
 
 });
