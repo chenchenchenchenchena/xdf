@@ -422,7 +422,7 @@ $(function () {
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
+					  "url":"report_t.html",
 					  "info":classmate
 					};
      	console.log(push);
@@ -445,7 +445,7 @@ $(function () {
 	    });*/
 		
      	ajax_S(url.w_push,pushwei,pushMsg);
-//   	location.href="report_t.html?pushMsg="+push;
+	   	location.href="report_t.html";
      })
     function pushMsg(e){
     	if(e.result){
