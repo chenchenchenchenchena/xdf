@@ -412,7 +412,7 @@ $(function () {
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
 					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
 					  "info":[
-					  {"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
+					  	{"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
 					  ]
 					};
      	console.log(push);
