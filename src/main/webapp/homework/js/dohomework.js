@@ -98,7 +98,9 @@ $(function () {
                 if(e.status == "failure"){
                     alert(e.message);
                 }else {
+                    alert(e.data.previewUrl);
                     $('#audio_record source').attr('src',e.data.previewUrl);
+                    alert($('#audio_record source').attr('src'));
                 }
 
 
