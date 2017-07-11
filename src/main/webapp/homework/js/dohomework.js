@@ -42,7 +42,7 @@ $(function () {
 
                     //显示语音布局
                     $('.notsubmit').show();
-                    $('.audio_box').show();
+                    $('.notsubmit .audio_box').show();
 
                     uploadVoiceWX(localId);
                     playVoice(localId);
@@ -87,8 +87,8 @@ $(function () {
             'mediaId': serverId
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadAudio.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
@@ -97,7 +97,7 @@ $(function () {
                 // if(){
                 //
                 // }
-                $('#audio_record').attr('src',e.data.message);
+                $('#audio_record').attr('src',e.data.previewUrl);
                 alert(JSON.stringify(e));
 
             }
