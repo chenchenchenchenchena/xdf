@@ -403,8 +403,18 @@ $(function () {
     })
     
     $(".recordSucc button").click(function(){
+    	var classmate=[];
      	layer.close(layer3);
      	var push=pushInfo();
+     	for(var i=0;i<push.stuInfomation.length;i++){
+     		var classmateInfo={
+     			"childName":push.stuInfomation[i].studentName,
+     			"first":push.stuInfomation[i].title,
+     			"score":push.stuInfomation[i].realGrade,
+     			"openId":push.stuInfomation[i].openId
+     			}
+     		classmate.push(classmateInfo);
+     	}
      	var pushwei={
 					  "appid":"wxab29a3e2000b8d2a",
 					  "secret":"7739991fcce774c2281147eae3986ad9",
@@ -413,9 +423,7 @@ $(function () {
 					  "time":push.time,
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
 					  "url":"http://dt.staff.xdf.cn/xdfdthome/dtweb/learningSituation/report_s.html",
-					  "info":[
-					  	{"childName":push.stuInfomation[0].studentName,"first":push.stuInfomation[0].title,"score":push.stuInfomation[0].realGrade,"openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"}
-					  ]
+					  "info":classmate
 					};
      	console.log(push);
      	console.log(pushwei);
