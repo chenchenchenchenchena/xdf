@@ -670,12 +670,6 @@ $(function () {
 			"stuInfomation":pushStuent
 
 		}
-		/*for(var i=0;i<pushinfo.stuInfomation.length;i++){
-			if(pushinfo.stuInfomation[i].sNo==stuOpenId[i].stuNo){
-				pushinfo.stuInfomation[i].openId=stuOpenId[i].openId;
-			}
-
-	 	}*/
 		for(var i=0;i<stuOpenId.length;i++){
 			for(var j=0;j<pushinfo.stuInfomation.length;j++){
 				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
@@ -683,9 +677,11 @@ $(function () {
 				}
 			}
 	 	}
+		console.log(pushinfo.stuInfomation);
 		for(var j=0;j<pushinfo.stuInfomation.length;j++){
 			if(!pushinfo.stuInfomation[j].openId){
 				pushinfo.stuInfomation.splice(j,1);
+				j--;
 			}
 		}
 		return pushinfo;
