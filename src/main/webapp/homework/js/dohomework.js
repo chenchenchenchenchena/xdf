@@ -45,7 +45,7 @@ $(function () {
                     $('.notsubmit .audio_box').show();
 
                     uploadVoiceWX(localId);
-                    playVoice(localId);
+                    // playVoice(localId);
 
                 },
                 fail: function (res) {
@@ -62,7 +62,8 @@ $(function () {
     }
     // $('#record').click(function () {
     //     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
-    //     uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
+    //     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
+    //     uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
     // });
     function uploadVoiceWX(upId) {
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
@@ -93,12 +94,13 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                console.log(e);
-                // if(){
-                //
-                // }
-                $('#audio_record source').attr('src',e.data.previewUrl);
                 alert(JSON.stringify(e));
+                if(e.status == "failure"){
+                    alert(e.message);
+                }else {
+                    $('#audio_record source').attr('src',e.data.previewUrl);
+                }
+
 
             }
         });
