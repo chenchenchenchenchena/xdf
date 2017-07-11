@@ -55,9 +55,9 @@ body,html{
 .hwTime>span:first-child{
 	font-size: 30px;
 	color: #333333;
-	margin-right: 8px;
+	margin-right: 20px;
 	display: inline-block;
-	width: 67%;
+	/*width: 67%;*/
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -140,9 +140,11 @@ body,html{
 	height: 14px;
 	border-radius: 50%;
 	background: red;
-	position: absolute;
-	top:43px;
-	left: 357px;
+	vertical-align: super;
+	margin-left: 10px;
+	/* position: absolute; */
+	/* top: 43px; */
+	/* left: 357px; */
 }
 
 

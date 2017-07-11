@@ -3,13 +3,13 @@ $(function(){
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
-	var reqData = 'stuNum=s40';
+	var reqData = 'stuNum=SS893';
 	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
-			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum=ss58', getHwContentSuccess);
+			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum=SS893', getHwContentSuccess);
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
@@ -44,15 +44,15 @@ function getHwContentSuccess(msg) {
 		if(msg.data.length>0){
 			var datas = msg.data;
 			$.each(datas,function(i,item){
-				var classTitle = "";
+				var classTitle = item.className;
 				//课程名称显示控制
-				if (item.className.length==8){
-					classTitle = item.className.substr(0,8)+'(第'+item.lessonNo+'课次)';
-				}else if (item.className.length>=10){
-					classTitle = item.className.substr(0,6)+'...(第'+item.lessonNo+'课次)';
-				}else{
-					classTitle = item.className+'(第'+item.lessonNo+'课次)';
-				}
+				// if (item.className.length==8){
+				// 	classTitle = item.className.substr(0,8)+'(第'+item.lessonNo+'课次)';
+				// }else if (item.className.length>=10){
+				// 	classTitle = item.className.substr(0,6)+'...(第'+item.lessonNo+'课次)';
+				// }else{
+				// 	classTitle = item.className+'(第'+item.lessonNo+'课次)';
+				// }
 				var hwListHtml = '<div class="hwList">'
 					+'<div class="hwLeft">'+item.courseName+'</div>'
 					+'<div class="hwRight">'
@@ -88,20 +88,22 @@ function getHwFinishSuccess(msg){
 					readStatus = "redCircle";
 				}
 				$.each(lessNos,function(i,item){
-					var replyStatus = "";
+					var replyStatus = "",statusCss="";
 					switch (item.replyStatus){
 						case 0:
 							replyStatus = '未批';
+							statusCss = 'grey';
 							break;
 						case 1:
 							replyStatus = '已批';
+							statusCss = 'blue';
 							break;
 					}
-					hwLessNosHtml +='<li><span>第'+item.lessonNo+'课次</span><span>'+item.lessonTime+'</span><span class="blue">'+replyStatus+'</span></li>';
+					hwLessNosHtml +='<li><span>第'+item.lessonNo+'课次</span><span>'+item.lessonTime+'</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 				});
 				console.log(hwLessNosHtml);
 				var hwListFinishHtml = '<li class="firstList">'
-					+'<p>'+items.className+'('+items.teacherName+')</p><span class="'+readStatus+'"></span>'
+					+'<p>'+items.className+'('+items.teacherName+')<span class="'+readStatus+'"></span></p>'
 					+'<ul class="secul">'+hwLessNosHtml+'</ul>'
 					+'</li>';
 				$(".hwFinish>ul").append(hwListFinishHtml);
