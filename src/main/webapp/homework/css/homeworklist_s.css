@@ -202,6 +202,10 @@ body{
 .remove_s .delete_s{
 	background:#fe6464;
 }
+.tealist_s{
+	overflow-x:hidden;
+	display: none;
+}
 .tealist_s li{
 	position:relative;
 	transition:1s all ease;

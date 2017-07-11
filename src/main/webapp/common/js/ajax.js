@@ -85,6 +85,9 @@ var Global = {
     "secret": secreT,
     "actionURL": url.w_open
 };
+var homework_s = {
+    't_list': url_o+'teacherData/queryHomeWorkListInfo.do',   //老师作业列表
+};
 //百度统计
 function wechatCode(url) {
     var code = getRequest()['code'];
@@ -124,6 +127,7 @@ function wechatCode(url) {
         return false
     }
 }
+
 var Wxid = sessionStorage.openid
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
