@@ -197,7 +197,8 @@ $(function () {
 
            
         }*/
-    	console.log(student);
+    	console.log(student);   
+    	
     	/*var classNo = $(".lessonNo").html().substring(1,2);
         var classT = $(".sectTime").html().substring(4,22);*/
         var saveInfo = {
