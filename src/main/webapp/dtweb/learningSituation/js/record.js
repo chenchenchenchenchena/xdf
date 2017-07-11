@@ -406,7 +406,7 @@ $(function () {
      	layer.close(layer3);
      	var push=pushInfo();
      	var pushwei={
-					  "appId":"wxab29a3e2000b8d2a",
+					  "appid":"wxab29a3e2000b8d2a",
 					  "secret":"7739991fcce774c2281147eae3986ad9",
 					  "remark":"发送人:新小三拐点提速班 王明老师感谢您对我们的支持。",
 					  "courseName":push.courseName,
@@ -421,7 +421,7 @@ $(function () {
      	console.log(pushwei);
      	
 	    $.ajax({
-	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
+	        url:"http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
 	        dataType: 'json',
