@@ -148,7 +148,17 @@ body,html{
 	color: #c6c6c6;
 }
 .clickImg{
-	margin: 20px 0 40px 0;
+	/*padding: 20px 0 40px 0;*/
+}
+.clickImg a{
+	display: inline-block;
+	width: 80px;
+	text-align: center;
+	padding: 20px 0px 40px 0;
+	/*background: palegreen;*/
+}
+.clickImg a:first-child{
+	text-align: left;
 }
 .clickImg>img:first-child{
 	margin-right: 40px;
@@ -175,7 +185,7 @@ body,html{
 	left: 176px;
 	top:0;
 }
-#alert{
+.layer-tips{
 	/*width: 310px;
 	height: 195px;*/
 	height: 75px;

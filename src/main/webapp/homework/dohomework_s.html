@@ -64,10 +64,12 @@
     <div class="answer">
         <div class="infoTitle">我的答案</div>
         <p class="sTitle dh">写作业</p>
-        <textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200"></textarea>
+        <textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" ></textarea>
+        <!--TODO 字数限制-->
         <p class="word"><span>0</span>/<span>200</span>
         <div class="clickImg">
-            <img id="chooseImage" src="images/B02-2_10.png"/><img id="record" src="images/B02-2_12.png"/>
+            <a id="chooseImage"><img src="images/B02-2_10.png"/></a>
+            <a id="record"><img src="images/B02-2_12.png"/></a>
         </div>
         <div class="notsubmit" style="display: none;">
             <div class="audio_box" style="display: none;">
@@ -85,7 +87,7 @@
             <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
             <!--</div>-->
         </div>
-        <button class="btn">提交</button>
+        <button id="HWsubmit" class="btn">提交</button>
     </div>
     <div class="hmAnswer" style="display: none;">
         <div class="infoTitle">作业答案</div>
@@ -112,7 +114,7 @@
         </div>
     </div>
 </div>
-<div id="alert" class="none">超出字符上限！</div>
+<!--<div class="layer-tips none">超出字符上限！</div>-->
 <div class="submitBox none"><img src="images/tan.png"/>
     <p>作业提交成功</p>
     <button>确定</button>
