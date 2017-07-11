@@ -123,12 +123,6 @@ function wechatCode(url) {
         return false
     }
 }
-//获取微信token
-
-
-ajax_S(url.w_token,Global,function(e){
-    sessionStorage.access_token  = e.token
-});
 var Wxid = sessionStorage.openid
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
