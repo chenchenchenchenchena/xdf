@@ -57,7 +57,8 @@ var url = {
     's_nafu': url_o+'studentBind/queryStuInfoByNameMobile.do',   //姓名手机号查询
     's_emai': url_o+'teacherData/queryTeacherData.do',   //邮箱按月获取课程
     's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
-    's_hwlt': url_o+'studentData/assingmentHomework.do',//待交作业学生列表查询
+    's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
+    's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
     't_logi': url_o+'logout/doLogout.do',//退出登录
     't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
