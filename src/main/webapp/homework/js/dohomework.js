@@ -107,7 +107,7 @@ $(function () {
                     alert($('#audio_record source').attr('src'));
                     alert(e.data.fileName);
                     $('.teBox').val($('#audio_record source').attr('src'));
-                    $('.mp3').val(e.data.fileName);
+                    $('.mp3').text(e.data.fileName);
                 }
 
 
