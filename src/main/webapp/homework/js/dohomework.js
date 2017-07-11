@@ -2,6 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
+    var layer1;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -210,6 +211,55 @@ $(function () {
         console.log('oooo'+$(this).find('audio')[0]);
         voiceCheck($(this).find('audio')[0]);
     });
+
+    // 删除图片
+    $(document).on('touchend', '.stuImg', function () {
+        if($(this).parents('.imgBox').find('div').length<=1){
+            $(this).parents('.imgBox').remove();
+        }else{
+            $(this).parent('div').remove();
+        }
+    });
+    //提交作业
+    $(document).on('touchend', '#HWsubmit', function () {
+        var answerVal = $('.teBox').val().trim();
+        // 答案不能为空
+        if(answerVal==""||answerVal==null){
+            layer1 = layer.open({
+                type: 1,
+                area: ['310px', '195px'],
+                shade: [0.1, '#fff'],
+                title: false,
+                skin: 'tips',
+                content:'<div class="layer-tips">答案不能为空！</div>'
+            });
+            closeLayer(layer1);
+            return;
+        }
+        // 超出字数
+        console.log(answerVal.length)
+        if(answerVal.length > 200){
+            layer1 = layer.open({
+                type: 1,
+                area: ['310px', '195px'],
+                shade: [0.1, '#fff'],
+                title: false,
+                skin: 'tips',
+                content:'<div class="layer-tips">超出字符上限！</div>'
+            });
+            closeLayer(layer1);
+            return;
+        }
+        // 语音最多可上传*个，图片最多可上传*个 TODO
+    });
+    // 关闭消息提示
+    function closeLayer(layerName) {
+        setTimeout(function(){
+            layer.close(layerName);
+        },3000);
+    }
+
+
 
 });
 /* //超出字数
