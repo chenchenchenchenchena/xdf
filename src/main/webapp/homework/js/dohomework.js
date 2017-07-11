@@ -151,25 +151,39 @@ $(function () {
         });
     });
     // 播放语音
-    var playTimer = "", playId = "";
-    var audio = null;
-
+    var playTimer = "",playFlag=false;
+    var audioCur = null;
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        var oldId = $(audio).attr('id');
-        if (audio != null) {
+        var oldId = $(audioCur).attr('id');
+        if(audioCur != null){
             stop();
-            audio = null;
+            audioCur = null;
         }
-        audio = voiceId;
-        if (newID != oldId) {
-
+        audioCur = voiceId;
+        if(newID!=oldId){
             play();
-        } else {
+        }else{
             stop();
-            // $('audio')[0].pause();
         }
+        // if(audioCur != null){
+        //     if(newID!=oldId){
+        //         audioCur = voiceId;
+        //         play();
+        //     }else{
+        //         alert(audioCur.paused);
+        //         if(audioCur.paused){
+        //             play();
+        //         }else{
+        //             stop();
+        //         }
+        //     }
+        //     audioCur = null;
+        // }else{
+        //     audioCur = voiceId;
+        //     play();
+        // }
 
         // alert($(audio).attr('id'));
         // // var audio = document.getElementById(voiceId);
@@ -207,16 +221,11 @@ $(function () {
         clearTimeout(playTimer);
         $(audioCur).siblings('.play-icon').removeClass('playing');
     }
-
     function play() {
         var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
         audioCur.currentTime = 0;
         audioCur.play();//audio.play();// 这个就是播放
         //播放动画
-        $(audio).siblings('.play-icon').addClass('playing');
-        playTimer = setTimeout(function () {
-            $(audio).siblings('.play-icon').removeClass('playing');
-        }, second * 1000);
         $(audioCur).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function(){
             $(audioCur).siblings('.play-icon').removeClass('playing');
