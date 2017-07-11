@@ -421,7 +421,7 @@ $(function () {
      	console.log(pushwei);
      	
 	    $.ajax({
-	        url:"http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
+	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
 	        dataType: 'json',
