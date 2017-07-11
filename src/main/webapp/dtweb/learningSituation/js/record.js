@@ -238,6 +238,8 @@ $(function () {
 	             content:$(".recordSucc")
 	         })
 	         student=[];
+
+
 	     }else{
 	   		layer.close(load);
 	     	layer4 = layer.open({
@@ -395,7 +397,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	saveData();
+    	saveData();main-list.html
     	queryOpenid();
 
     })
@@ -419,7 +421,7 @@ $(function () {
      	console.log(pushwei);
      	
 	    $.ajax({
-	        url:"http://dt.staff.xdf.cn/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
+	        url:"http://10.200.80.120:8080/xdfdtmanager/wechatSignature/sendTemplateMsg.do",
 	        type: 'post',
 	        asyns:false,
 	        dataType: 'json',
