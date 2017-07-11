@@ -429,7 +429,7 @@ $(function () {
 	           if(e.result){
 		    		console.log(e.result);
 		    	}else{
-		    		console.log(message);
+		    		console.log(e.message);
 		    	}
 	        }
 	    });
