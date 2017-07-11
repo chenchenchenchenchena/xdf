@@ -684,7 +684,7 @@ $(function () {
 			}
 	 	}
 		for(var j=0;j<pushinfo.stuInfomation.length;j++){
-			if(pushinfo.stuInfomation[j].openId==undefined||!pushinfo.stuInfomation[j].openId){
+			if(!pushinfo.stuInfomation[j].openId){
 				pushinfo.stuInfomation.splice(j,1);
 			}
 		}
