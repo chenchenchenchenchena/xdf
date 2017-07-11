@@ -1,5 +1,14 @@
 $(function(){
-	$('.firstList')
+	$(document).on('touchstart','.hwFinish .firstList',function(){
+	    if($(this).find('ul').css('display')=='none'){
+	       $(this).find('ul').show();
+           $(this).css("background","url(images/jiao11.png) no-repeat right 55px");
+        }else{
+            $(this).find('ul').hide();
+            $(this).css("background","url(images/jiao22222.png) no-repeat right 55px");
+        }
+
+    });
 
 
 
@@ -8,10 +17,6 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart','.tealist_s',function(){
-        if(event.targetTouches[0].pageX){
-        }else{
-        	alert(1)
-		}
 		var begin_s = parseInt(event.targetTouches[0].pageX);
 
         $(document).on('touchmove','.tealist_s li',function(){
@@ -29,14 +34,8 @@ $(function(){
 			// console.log(begin_s+'，'+move_s);
 			$(this).css('margin-left',move_s-begin_s+'px');
         })
-
-
-
-
-
 	})
-
-
+    // ajax_S(homework_s.t_list,)
 
 
 
@@ -84,4 +83,4 @@ $(function(){
 
 
 
-})
+});
