@@ -9,51 +9,51 @@ $(function () {
     })
     //点击录制语音
     //按下开始录音
-    // $('#record').on('touchstart', function (event) {
-    //     event.preventDefault();
-    //     START = new Date().getTime();
-    //     recordTimer = setTimeout(function () {
-    //         wx.startRecord({
-    //             success: function () {
-    //                 localStorage.rainAllowRecord = 'true';
-    //                 // alert("开始录音");
-    //             },
-    //             cancel: function () {
-    //                 alert('用户拒绝授权录音');
-    //             }
-    //         });
-    //     }, 300);
-    // });
-    // //松手结束录音
-    // $('#record').on('touchend', function (event) {
-    //     event.preventDefault();
-    //     END = new Date().getTime();
-    //     alert(1)
-    //     if ((END - START) < 300) {
-    //         END = 0;
-    //         START = 0;
-    //         //小于300ms，不录音
-    //         clearTimeout(recordTimer);
-    //     } else {
-    //         alert(2);
-    //         wx.stopRecord({
-    //             success: function (res) {
-    //                 alert(res);
-    //                 localId = res.localId;
-    //
-    //                 //显示语音布局
-    //                 $('.notsubmit').show();
-    //                 $('.audio_box').show();
-    //
-    //                 uploadVoiceWX(localId);
-    //                 playVoice(localId);
-    //
-    //             },
-    //             fail: function (res) {
-    //             }
-    //         });
-    //     }
-    // });
+    $('#record').on('touchstart', function (event) {
+        event.preventDefault();
+        START = new Date().getTime();
+        recordTimer = setTimeout(function () {
+            wx.startRecord({
+                success: function () {
+                    localStorage.rainAllowRecord = 'true';
+                    // alert("开始录音");
+                },
+                cancel: function () {
+                    alert('用户拒绝授权录音');
+                }
+            });
+        }, 300);
+    });
+    //松手结束录音
+    $('#record').on('touchend', function (event) {
+        event.preventDefault();
+        END = new Date().getTime();
+        alert(1)
+        if ((END - START) < 300) {
+            END = 0;
+            START = 0;
+            //小于300ms，不录音
+            clearTimeout(recordTimer);
+        } else {
+            alert(2);
+            wx.stopRecord({
+                success: function (res) {
+                    alert(res);
+                    localId = res.localId;
+
+                    //显示语音布局
+                    $('.notsubmit').show();
+                    $('.audio_box').show();
+
+                    uploadVoiceWX(localId);
+                    playVoice(localId);
+
+                },
+                fail: function (res) {
+                }
+            });
+        }
+    });
     function playVoice(plId) {
         alert("开始播放");
         //播放录音
@@ -101,50 +101,27 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    alert(e.data.previewUrl);
+                    // alert(e.data.previewUrl);
                     // $('#audio_record source').attr('src',e.data.previewUrl);
                     $('#audio_record source').attr('src', e.data.fileUrl);
                     alert($('#audio_record source').attr('src'));
+                    alert(e.data.fileName);
                     $('.teBox').val($('#audio_record source').attr('src'));
+                    $('.mp3').val(e.data.fileName);
                 }
 
 
             }
         });
     }
-
-    $('#record').click(function () {
-
-        // voiceCheck($('#audio_record'));
-        loadDogSound($('#audio_record source').attr('src'));
+    $(".mp3").jmp3({
+        filepath:$('#audio_record source').attr('src'),
+        showfilename: "false",
+        backcolor: "000000",
+        forecolor: "00ff00",
+        width: 150,
+        showdownload: "false"
     });
-    var dogBarkingBuffer = null;
-// Fix up prefixing
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var context = new AudioContext();
-
-    function loadDogSound(url) {
-        var request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.responseType = 'arraybuffer';
-
-        // Decode asynchronously
-        request.onload = function () {
-            context.decodeAudioData(request.response, function (buffer) {
-                alert(buffer)
-                dogBarkingBuffer = buffer;
-                playSound(buffer);
-            }, onError);
-        }
-        request.send();
-    }
-    function playSound(buffer) {
-        var source = context.createBufferSource(); // creates a sound source
-        source.buffer = buffer;                    // tell the source which sound to play
-        source.connect(context.destination);       // connect the source to the context's destination (the speakers)
-        source.start(0);                           // play the source now
-                                                   // note: on older systems, may have to use deprecated noteOn(time);
-    }
 
     //点击选择图片
     $('#chooseImage').click(function () {
