@@ -89,6 +89,8 @@ body,html{
 	position: absolute;
 	top: 22px;
 	left: 22px;
+}
+.playing{
 	-webkit-animation: playvoice_1 2s infinite ease-in-out;
 }
 @keyframes playvoice_1 {

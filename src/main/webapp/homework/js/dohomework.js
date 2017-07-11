@@ -15,7 +15,7 @@ $(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
+                    /* alert("开始录音");*/
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -132,19 +132,78 @@ $(function () {
         });
     });
     // 播放语音
-    // voiceCheck('audio');
+    var playTimer = "",playId="";
+    var audio = null;
     function voiceCheck(voiceId) {
-        var audio = document.getElementById(voiceId);
-        if (audio !== null) {
-            //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
-            alert(audio.paused);
-            if (audio.paused) {
-                audio.play();//audio.play();// 这个就是播放
-            } else {
-                audio.pause();// 这个就是暂停
-            }
+
+        var newID = $(voiceId).attr('id');
+        var oldId = $(audio).attr('id');
+        if(audio != null){
+            stop();
+            audio = null;
         }
+        audio = voiceId;
+        if(newID!=oldId){
+
+            play();
+        }else{
+            stop();
+            // $('audio')[0].pause();
+        }
+
+        // alert($(audio).attr('id'));
+        // // var audio = document.getElementById(voiceId);
+        // clearTimeout(playTimer);
+        // if(playId!=$(audio).attr('id')){
+        //     $('audio')[0].pause();
+        //     $('audio')[0].currentTime = 0;
+        // }
+        // $('.play-icon').removeClass('playing');
+        // if(audio!==null){
+        //     //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+        //     alert(audio.paused);
+        //     if(audio.paused){
+        //         var second = 10;//parseInt($(audio).siblings('span').html());//获取音频秒数
+        //         $(audio).siblings('.play-icon').addClass('playing');
+        //         audio.currentTime = 0;
+        //         audio.play();//audio.play();// 这个就是播放
+        //         playTimer = setTimeout(function(){
+        //             $(audio).siblings('.play-icon').removeClass('playing');
+        //         },second*1000);
+        //     }else{
+        //         audio.pause();// 这个就是暂停
+        //         audio.currentTime = 0;
+        //         $(audio).siblings('.play-icon').removeClass('playing');
+        //     }
+        //     // audio = null;
+        //     playId = $(audio).attr('id');
+        // }
     }
+
+    function stop() {
+        $('audio')[0].pause();
+        $('audio')[0].currentTime = 0;
+        clearTimeout(playTimer);
+        audio.currentTime = 0;
+        $(audio).siblings('.play-icon').removeClass('playing');
+    }
+    function play() {
+        var second = 10;//parseInt($(audio).siblings('span').html());//获取音频秒数
+        audio.currentTime = 0;
+        audio.play();//audio.play();// 这个就是播放
+        //播放动画
+        $(audio).siblings('.play-icon').addClass('playing');
+        playTimer = setTimeout(function(){
+            $(audio).siblings('.play-icon').removeClass('playing');
+        },second*1000);
+    }
+
+
+    // 播放作业描述语音
+    $(document).on('touchend', '.audio_box>div', function () {
+        console.log('oooo'+$(this).find('audio')[0]);
+        voiceCheck($(this).find('audio')[0]);
+    });
 
 });
 /* //超出字数
