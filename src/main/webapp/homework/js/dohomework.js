@@ -95,8 +95,8 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            // url: url_o + "upload/uploadAudio.do",
+            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
