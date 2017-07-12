@@ -65,7 +65,7 @@ $(function () {
     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
     // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    showAudio("http://dn-storage-xdf.gokuai.com/b4/b483cd4d0dd379a78c0eafc526934438384e5098.dat?response-content-disposition=attachment%3B%20filename%3D%2222fd4e90fee34324a95546a301c7ee0a.mp3%22%3B%20filename%2A%3Dutf-8%27%2722fd4e90fee34324a95546a301c7ee0a.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499850527&Signature=ACQ8VBMo5X21tfVbQX887vAq28s%3D", 19);
+    showAudio("http://dn-storage-xdf.gokuai.com/c3/c3a2752f06713897a5f216786b3e2f214e776a5b.dat?response-content-disposition=attachment%3B%20filename%3D%227766bae1a7974a5ebc056ae9db1bb35d.mp3%22%3B%20filename%2A%3Dutf-8%27%277766bae1a7974a5ebc056ae9db1bb35d.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499852562&Signature=Uk5pSFpjHYoIc6%2F0hrdeHZ5Cu1s%3D", 19);
     });
 
     //上传微信服务器，获取保存的serverId
@@ -119,17 +119,15 @@ $(function () {
     //显示语音布局
     function showAudio(url, length) {
 
+        alert("00000");
         $('.audio_box').show();
-        var m = length / 1000;
-        if (length % 1000 > 500) {
-            m++;
-        }
+        length = 9;
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
             "</div><span>" + length + "''</span>";
         $(".audio_box").html(strVoice);
-        $()
+        alert($('.audio_box #audio_record source').attr("src"));
     }
 
     //点击选择图片
@@ -171,6 +169,7 @@ $(function () {
     //图片上传到自己服务器
     function uploadImag(images) {
 
+        alert("9999999")
         for (var i = 0; i < images.length; i++) {
             var strImag = "<form id='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
