@@ -13,6 +13,7 @@
 	<script src="../common/js/jquery.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="../common/js/layer.js"></script>
+	<script src="../common/js/ajax.js"></script>
 </head>
 <body>
 <div class="doHomework">
@@ -21,7 +22,7 @@
 		<div class="infoTitle">作业信息</div>
 		<div class="kon">
 			<p class="sTitle">知识点</p>
-			<p>等腰直角三角形</p>
+			<p class="knowPoint"></p>
 		</div>
 		<div class="des">
 			<p class="sTitle">作业描述</p>
@@ -71,7 +72,13 @@
 		<div class="infoTitle">老师批注</div>
 		<div class="anDes">点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div id="audio" src=""></div>
+			<div class="audio_box">
+				<div>
+					<audio id="audio1" preload="auto"><source src="" type="audio/mpeg"></audio>
+					<i class="play-icon"></i>
+				</div>
+				<span>16''</span>
+			</div>
 			<div class="imgBox">
 				<div><img src="images/B02-23_03.png" alt="" /></div>
 				<div><img src="images/B02-23_03.png" alt="" /></div>
@@ -86,6 +93,6 @@
 <div class="submitBox" style="display: none;"><img src="images/7.png" /><p>作业提交成功</p><button>确定</button></div>
 <div class="submitFail" style="display: none;"><img src="images/redtan.png" /><p>作业提交失败</p><button>取消</button><button>重试</button></div>
 </body>
-<script src="js/dohomework.js"></script>
+<script src="js/finishedhomework.js"></script>
 </html>
 

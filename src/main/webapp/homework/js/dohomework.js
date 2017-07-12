@@ -7,6 +7,25 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
+    // 显示作业信息
+    var hwInfos = JSON.parse(localStorage.homeworkInfos);
+    gethwInfos();
+    function gethwInfos() {
+        var knowledgePoint,kpHtml;
+        //知识点
+        if(hwInfos.knowledgePoint!="" && hwInfos.knowledgePoint!=null && hwInfos.knowledgePoint!=undefined){
+            knowledgePoint = hwInfos.knowledgePoint.split(',');
+            for(var i = 0;i<knowledgePoint.length;i++){
+                kpHtml = '<span>'+knowledgePoint[i]+'</span>';
+                $('.knowPoint').append(kpHtml);
+            }
+        }
+        //作业描述
+        $('.hwCon').html(hwInfos.description);
+        //语音，图片 TODO
+
+    }
+
 
     //按下开始录音
     $('#record').on('touchstart', function (event) {
