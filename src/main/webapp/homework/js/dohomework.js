@@ -28,25 +28,31 @@ $(function () {
 
 
     //按下开始录音
-    $('#record').on('touchstart', function (event) {
-        event.preventDefault();
-        START = new Date().getTime();
-        recordTimer = setTimeout(function () {
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        }, 300);
-    });
+    // $('#record').on('touchstart', function (event) {
+    $('document').on('touchstart','#record',function (event) {
+
+            event.preventDefault();
+            START = new Date().getTime();
+            recordTimer = setTimeout(function () {
+                wx.startRecord({
+                    success: function () {
+                        localStorage.rainAllowRecord = 'true';
+                        // alert("开始录音");
+                    },
+                    cancel: function () {
+                        alert('用户拒绝授权录音');
+                    }
+                });
+            }, 300);
+        });
+    }
 
     //松手结束录音
-    $('#record').on('touchend', function (event) {
-        event.preventDefault();
+    // $('#record').on('touchend', function (event) {
+    $('document').on('touchend','#record',function (event) {
+
+
+            event.preventDefault();
         END = new Date().getTime();
         alert(1)
         if ((END - START) < 300) {
@@ -150,7 +156,8 @@ $(function () {
     }
 
     //点击选择图片
-    $('#chooseImage').click(function () {
+    // $('#chooseImage').click(function () {
+    $('document').on('touchend','#chooseImage',function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
