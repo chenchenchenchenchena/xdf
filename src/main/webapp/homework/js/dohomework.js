@@ -153,7 +153,7 @@ $(function () {
 
                     $(".imgBox").show();
 
-                    $("#notsubmit .imgBox").html(str);
+                    $(".notsubmit .imgBox").html(str);
                     //上传服务器
                     uploadImag(res.localIds);
                     //界面样式控制
