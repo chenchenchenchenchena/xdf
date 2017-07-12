@@ -146,9 +146,10 @@ $(function () {
                     }
                 }
                 $(".notsubmit").html(str);
-                alert('已选择 ' + res.localIds.length + ' 张图片');
+                alert('已选择了 ' + res.localIds.length + ' 张图片');
                 // 图片大于三张，添加图片按钮隐藏
-                if($('.notsubmit .imgBox').children('div').length>=3){
+                // if($('.notsubmit .imgBox').children('div').length>=3){
+                if(res.localIds.length>=3){
                     $('#chooseImage').hide();
                 }
             }
