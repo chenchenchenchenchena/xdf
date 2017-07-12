@@ -147,6 +147,10 @@ $(function () {
                 }
                 $(".notsubmit").html(str);
                 alert('已选择 ' + res.localIds.length + ' 张图片');
+                // 图片大于三张，添加图片按钮隐藏
+                if($('.notsubmit .imgBox').children('div').length>=3){
+                    $('#chooseImage').hide();
+                }
             }
         });
     });
@@ -246,9 +250,14 @@ $(function () {
         }else{
             $(this).parent('div').remove();
         }
+        // 图片小于三张，显示添加图片按钮
+        if($('.notsubmit .imgBox').children('div').length<3){
+            $('#chooseImage').show();
+        }
     });
     //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
+        console.log($('.notsubmit .imgBox').children('div').length);
         var answerVal = $('.teBox').val().trim();
         // 答案不能为空
         if(answerVal==""||answerVal==null){
@@ -278,6 +287,8 @@ $(function () {
             return;
         }
         // 语音最多可上传*个，图片最多可上传*个 TODO
+
+
     });
     // 关闭消息提示
     function closeLayer(layerName) {
