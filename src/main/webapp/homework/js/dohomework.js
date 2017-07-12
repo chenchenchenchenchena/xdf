@@ -9,47 +9,47 @@ $(function () {
     });
 
     //按下开始录音
-    $('#record').on('touchstart', function (event) {
-        event.preventDefault();
-        START = new Date().getTime();
-        recordTimer = setTimeout(function () {
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        }, 300);
-    });
+    // $('#record').on('touchstart', function (event) {
+    //     event.preventDefault();
+    //     START = new Date().getTime();
+    //     recordTimer = setTimeout(function () {
+    //         wx.startRecord({
+    //             success: function () {
+    //                 localStorage.rainAllowRecord = 'true';
+    //                 // alert("开始录音");
+    //             },
+    //             cancel: function () {
+    //                 alert('用户拒绝授权录音');
+    //             }
+    //         });
+    //     }, 300);
+    // });
 
     //松手结束录音
-    $('#record').on('touchend', function (event) {
-        event.preventDefault();
-        END = new Date().getTime();
-        alert(1)
-        if ((END - START) < 300) {
-            END = 0;
-            START = 0;
-            //小于300ms，不录音
-            clearTimeout(recordTimer);
-        } else {
-            alert(2);
-            wx.stopRecord({
-                success: function (res) {
-                    alert(res);
-                    localId = res.localId;
-                    uploadVoiceWX(localId);
-                    // playVoice(localId);
-
-                },
-                fail: function (res) {
-                }
-            });
-        }
-    });
+    // $('#record').on('touchend', function (event) {
+    //     event.preventDefault();
+    //     END = new Date().getTime();
+    //     alert(1)
+    //     if ((END - START) < 300) {
+    //         END = 0;
+    //         START = 0;
+    //         //小于300ms，不录音
+    //         clearTimeout(recordTimer);
+    //     } else {
+    //         alert(2);
+    //         wx.stopRecord({
+    //             success: function (res) {
+    //                 alert(res);
+    //                 localId = res.localId;
+    //                 uploadVoiceWX(localId);
+    //                 // playVoice(localId);
+    //
+    //             },
+    //             fail: function (res) {
+    //             }
+    //         });
+    //     }
+    // });
 
     //播放微信录制后的本地语音文件
     function playVoice(plId) {
@@ -61,12 +61,12 @@ $(function () {
     }
 
     //测试数据
-    // $('#record').click(function () {
+    $('#record').click(function () {
     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
     // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    // showAudio("http://dn-storage-xdf.gokuai.com/61/6163abf436bbf2adc342065ec2199d041ca62ba9.dat?response-content-disposition=attachment%3B%20filename%3D%222c3af1cbf8024f87b37e8c82f616e66b.mp3%22%3B%20filename%2A%3Dutf-8%27%272c3af1cbf8024f87b37e8c82f616e66b.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499831269&Signature=HuD4nfbIK6FPFX4zSrAkURCzDzA%3D", 19);
-    // });
+    showAudio("http://dn-storage-xdf.gokuai.com/b4/b483cd4d0dd379a78c0eafc526934438384e5098.dat?response-content-disposition=attachment%3B%20filename%3D%2222fd4e90fee34324a95546a301c7ee0a.mp3%22%3B%20filename%2A%3Dutf-8%27%2722fd4e90fee34324a95546a301c7ee0a.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499850527&Signature=ACQ8VBMo5X21tfVbQX887vAq28s%3D", 19);
+    });
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
@@ -129,6 +129,7 @@ $(function () {
             "<i class='play-icon'></i>" +
             "</div><span>" + length + "''</span>";
         $(".audio_box").html(strVoice);
+        $()
     }
 
     //点击选择图片
@@ -180,7 +181,7 @@ $(function () {
             $('#classId_image').val("hx001");
             $('#image_file').val(images[i]);
 
-            $("form[enctype]").attr("action", baseUrl + $("form[enctype]").attr("action"));
+            $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
 
             $("#submit_image").ajaxSubmit({
                 resetForm: "true",
