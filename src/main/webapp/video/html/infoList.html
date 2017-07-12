@@ -17,7 +17,7 @@
 		<div class="p176-nav clearfix">
 			<div class="p176-logo-left"></div>
 		</div>
-        <select style="margin-left: 460px;margin-top: 25px;">
+        <select style="margin-left: 460px;margin-top: 25px;width: 100px;">
             <option>海口</option>
             <option>东莞</option>
             <option>银川</option>
@@ -44,20 +44,20 @@
 </body>
 <script>
     $(function () {
-		$(".listData").hide();
+		/*$(".listData").hide();*/
 
     })
     //显示已经录入的数据
 
     function showList() {
-        var schoolName=$("select").val();
-        var school={
-            "schoolName":schoolName
+        var school=$("select").val();
+        var schoolName={
+            "schoolName":school
         }
         $.ajax({
             url: "http://10.73.33.63:8080/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
-            data:JSON.stringify(school),
+            data:schoolName,
             dataType: 'json',
             success: function (e) {
                 console.log(e)
@@ -70,7 +70,10 @@
 					var lessonNo = dataList[i]["lessonNo"];
 					var subject = dataList[i]["subject"];
 					var teacherName = dataList[i]["teacherName"];
-					var schoolName = dataList[i]["schoolName"];
+					/*var schoolName = dataList[i]["schoolName"];*/
+                    var studioNo=dataList[i]["studioNo"];
+                    var learningPeriod=dataList[i]["learningPeriod"];
+                    var courseName=dataList[i]["courseName"];
                    /* var fileUrl = dataList[i]["fileUrl"];*/
 
                     if (i % 2 == 1) {
@@ -79,7 +82,7 @@
                         str += "<tr class='table-tr-even'>"
                     }
 
-                    str += "<td id='name'>"+schoolName+"_" + subject + "_"+grade+"_"+teacherName+"_第"+lessonNo+"课次</td>";
+                    str += "<td id='name'>"+studioNo+"/"+teacherName+"/" + learningPeriod + "/"+grade+"/"+courseName+"/"+subject+"/"+lessonNo+"讲</td>";
                     str += "<td id='fileUrl'><button>播放</button></td>";
 
 
