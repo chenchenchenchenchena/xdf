@@ -458,3 +458,27 @@ html body .tealist_s .more_so{
 	margin:40px 0 0;
 	border-radius:8px;
 }
+.song_s{
+	width:100%;
+	height:290px;
+	background:#fff;
+	position: fixed;
+	bottom:0;
+	text-align:center;
+	display:none;
+}
+.song_s img{
+	margin-top:40px;
+	margin-bottom:18px;
+}
+.song_s p{
+	font-size:32px;
+	color:#333;
+}
+.song_s div{
+	width:100%;
+	height:290px;
+	position:absolute;
+	top:0;
+	opcaticty:0;
+}

@@ -261,7 +261,10 @@ $(function(){
     });
 
 
-
+        $('.Voice').on('touchend',function(){
+            // $('.big_back').show();
+            $('.song_s').show();
+    })
 
 
 
