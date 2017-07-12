@@ -370,7 +370,12 @@ html body .tealist_s .more_so{
 	text-overflow: ellipsis;
 	margin-right:38px;
 }
-.classEmpty,.classTimeEmpty,.numFail{
+.time_S i{
+	font-style:normal;
+	float:right;
+	margin-right:20px;
+}
+.classEmpty,.classTime,.classKnow,.classHome,.classText{
 	background: rgba(0,0,0,0.7);
 	text-align: center;
 	height: 194px;
@@ -379,14 +384,77 @@ html body .tealist_s .more_so{
 	font-size: 34px;
 	display: none;
 }
-.classEmpty img,.classTimeEmpty img,.numFail img{
+.classEmpty img,.classTime img,.classKnow img,.classHome img,.classText img{
 	margin: 42px 0 15px 0;
 }
 
 .Choice_s input{
 	position: absolute;
 	margin-top: -90px;
-	width: 100%;
+	width: 95%;
 	height: 90px;
 	opacity: 0;
+}
+.succ,.erro{
+	width:542px;
+	height:364px;
+	background:#fff;
+	border-radius:20px;
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin-top:-182px;
+	margin-left:-271px;
+	text-align:center;
+	display:none;
+}
+.succ img,.erro img{
+	padding-top:50px;
+}
+.succ p,.erro p{
+	padding-top:30px;
+	font-size:32px;
+	color:#333;
+}
+.succ input{
+	display: block;
+	outline:none;
+	border:none;
+	background:#00ba97;
+	width:175px;
+	height:70px;
+	font-size:32px;
+	color:#fff;
+	text-align: center;
+	line-height:70px;
+	margin:40px auto 0;
+	border-radius:8px;
+}
+.erro input:first-of-type{
+	display: inline-block;
+	outline:none;
+	border:none;
+	background:#e4eaf1;
+	width:175px;
+	height:70px;
+	font-size:32px;
+	color:#aeb1b7;
+	text-align: center;
+	line-height:70px;
+	margin:40px 60px 0;
+	border-radius:8px;
+}
+.erro input:last-of-type{
+	display: inline-block;
+	outline:none;
+	border:none;
+	background:#00ba97;
+	width:175px;
+	height:70px;
+	font-size:32px;
+	color:#fff;
+	text-align: center;
+	line-height:70px;
+	margin:40px 0 0;
+	border-radius:8px;
 }
