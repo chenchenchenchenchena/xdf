@@ -119,17 +119,19 @@ $(function () {
     //显示语音布局
     function showAudio(url, length) {
 
+        alert("00000");
         $('.audio_box').show();
-        var m = length / 1000;
-        if (length % 1000 > 500) {
-            m++;
-        }
+        // var m = length / 1000;
+        // if (length % 1000 > 500) {
+        //     m++;
+        // }
+        length = 9;
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
             "</div><span>" + length + "''</span>";
         $(".audio_box").html(strVoice);
-        alert($('.audio_box source').attr("src"));
+        alert($('.audio_box .audio_record source').attr("src"));
     }
 
     //点击选择图片
