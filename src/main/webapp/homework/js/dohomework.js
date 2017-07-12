@@ -153,7 +153,7 @@ $(function () {
 
                     $(".imgBox").show();
 
-                    $(".imgBox").html(str);
+                    $("#notsubmit .imgBox").html(str);
                     //上传服务器
                     uploadImag(res.localIds);
                     //界面样式控制
@@ -174,7 +174,7 @@ $(function () {
             var strImag = "<form action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
                 "<input type='image_file' name='file'/></form>";
-            $('#form').html(strImag);
+            $('#image_form').html(strImag);
 
             $('#schoolId_image').val("73");
             $('#classId_image').val("hx001");
