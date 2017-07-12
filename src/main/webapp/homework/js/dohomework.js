@@ -171,7 +171,7 @@ $(function () {
     function uploadImag(images) {
 
         for (var i = 0; i < images.length; i++) {
-            var strImag = "<form action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+            var strImag = "<form id='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
                 "<input type='image_file' name='file'/></form>";
             $('#image_form').html(strImag);
@@ -182,7 +182,7 @@ $(function () {
 
             $("form[enctype]").attr("action", baseUrl + $("form[enctype]").attr("action"));
 
-            $("#submit-1").ajaxSubmit({
+            $("#submit_image").ajaxSubmit({
                 resetForm: "true",
                 success: function (data) {
                     alert(data);
