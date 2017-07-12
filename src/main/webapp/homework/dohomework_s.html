@@ -19,7 +19,6 @@
     <script src="../common/js/scale.js"></script>
     <script src="../common/js/layer.js"></script>
     <script src="js/wx.js"></script>
-    <script src="js/jquery.jmp3.js"></script>
 </head>
 <body>
 <div class="doHomework">
@@ -73,23 +72,12 @@
             <a id="chooseImage"><img src="images/B02-2_10.png"/></a>
             <a id="record"><img src="images/B02-2_12.png"/></a>
         </div>
-        <div class="notsubmit" style="display: none;">
+        <div class="notsubmit" style="display: block;">
             <div class="audio_box" style="display: none;">
-                <!--<div>-->
-                    <!--<audio id="audio_record" preload="auto">-->
-                        <!--<source src="" type="audio/mpeg">-->
-                    <!--</audio>-->
-                    <!--<i class="play-icon"></i>-->
-                <!--</div>-->
-                <!--<span>16''</span>-->
-                <!--<a class="mp3" href="#"><span>mp3</span></a>-->
-
             </div>
-            <!--<div class="imgBox">-->
-            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
-            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
-            <!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt=""/></div>-->
-            <!--</div>-->
+            <div class="imgBox" style="display: none">
+            </div>
+            <div id="image_form" style="width: 0px;height: 0px;"></div>
         </div>
         <button id="HWsubmit" class="btn">提交</button>
     </div>

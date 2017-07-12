@@ -62,10 +62,10 @@ $(function () {
 
     //测试数据
     // $('#record').click(function () {
-    //     // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
-    //     // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
-    //     // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    //     showAudio();
+    // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
+    // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
+    // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
+    // showAudio("http://dn-storage-xdf.gokuai.com/61/6163abf436bbf2adc342065ec2199d041ca62ba9.dat?response-content-disposition=attachment%3B%20filename%3D%222c3af1cbf8024f87b37e8c82f616e66b.mp3%22%3B%20filename%2A%3Dutf-8%27%272c3af1cbf8024f87b37e8c82f616e66b.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499831269&Signature=HuD4nfbIK6FPFX4zSrAkURCzDzA%3D", 19);
     // });
 
     //上传微信服务器，获取保存的serverId
@@ -108,7 +108,7 @@ $(function () {
                     $('.teBox').val(e.data.fileUrl);
 
                     //显示语音布局
-                    showAudio(e.data.fileUrl,e.data.fileSize);
+                    showAudio(e.data.fileUrl, e.data.fileSize);
                 }
 
 
@@ -117,14 +117,17 @@ $(function () {
     }
 
     //显示语音布局
-    function showAudio(url,length) {
+    function showAudio(url, length) {
 
-        $('.notsubmit').show();
         $('.audio_box').show();
+        var m = length / 1000;
+        if (length % 1000 > 500) {
+            m++;
+        }
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
-            "</div><span>"+length+"''</span>";
+            "</div><span>" + length + "''</span>";
         $(".audio_box").html(strVoice);
     }
 
@@ -133,10 +136,10 @@ $(function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
-                $('.notsubmit').show();
-                var str = "";
+
                 if (res.localIds.length > 0) {
 
+                    var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
 
                         if (i % 3 == 0) {
@@ -147,18 +150,54 @@ $(function () {
                             str += "</div>";
                         }
                     }
+
+                    $(".imgBox").show();
+
+                    $(".imgBox").html(str);
+                    //上传服务器
+                    uploadImag(res.localIds);
+                    //界面样式控制
+                    if (res.localIds.length >= 3) {
+                        $('#chooseImage').hide();
+                    }
                 }
-                $(".notsubmit").html(str);
-                alert('已选择了 ' + res.localIds.length + ' 张图片');
-                // 图片大于三张，添加图片按钮隐藏
-                // if($('.notsubmit .imgBox').children('div').length>=3){
-                if(res.localIds.length>=3){
-                    $('#chooseImage').hide();
-                }
+
 
             }
         });
     });
+
+    //图片上传到自己服务器
+    function uploadImag(images) {
+
+        for (var i = 0; i < images.length; i++) {
+            var strImag = "<form action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+                "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
+                "<input type='image_file' name='file'/></form>";
+            $('#form').html(strImag);
+
+            $('#schoolId_image').val("73");
+            $('#classId_image').val("hx001");
+            $('#image_file').val(images[i]);
+
+            $("form[enctype]").attr("action", baseUrl + $("form[enctype]").attr("action"));
+
+            $("#submit-1").ajaxSubmit({
+                resetForm: "true",
+                success: function (data) {
+                    alert(data);
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (jqxhr, errorMsg, errorThrown) {
+                }
+            });
+
+        }
+    }
 
     // 播放语音
     var playTimer = "", playFlag = false;
@@ -261,7 +300,7 @@ $(function () {
             $(this).parent('div').remove();
         }
         // 图片小于三张，显示添加图片按钮
-        if($('.notsubmit .imgBox').children('div').length<3){
+        if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
     });
@@ -308,13 +347,13 @@ $(function () {
     }
 
     // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function (){
-        alert("预览图片"+$(this).attr('src'));
+    $(document).on('touchend', '.imgBox>div>img', function () {
+        alert("预览图片" + $(this).attr('src'));
         var previewUrl = "";
-        if($(this).attr('src').indexOf('weixin://')!= -1){
+        if ($(this).attr('src').indexOf('weixin://') != -1) {
             previewUrl = $(this).attr('src');
-        }else{
-            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/'+$(this).attr('src');
+        } else {
+            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
         }
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
