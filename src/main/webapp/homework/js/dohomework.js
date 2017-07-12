@@ -173,6 +173,7 @@ $(function () {
     //图片上传到自己服务器
     function uploadImag(images) {
 
+        alert("9999999")
         for (var i = 0; i < images.length; i++) {
             var strImag = "<form id='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
