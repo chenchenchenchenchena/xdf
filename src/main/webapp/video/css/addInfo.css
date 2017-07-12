@@ -1,7 +1,16 @@
 html,body{
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
+}
+.startImg{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+.startImg img{
+    width:100%;
+    height:100%;
 }
 .p176-nav {
     height: 52px;
@@ -25,6 +34,11 @@ html,body{
 	width: 250px;
 	height: 30px;
 	margin-bottom: 30px;
+}
+#form select{
+    width: 250px;
+    height: 30px;
+    margin-bottom: 30px;
 }
 #btn{
 	margin-left: 140px;
@@ -63,18 +77,26 @@ html,body{
 }
 
 .p176-table thead th, .p176-table tbody td {
-    text-align: left;
+    text-align: center;
     line-height: 24px;
     border-bottom: 1px solid #e6e7ed;
     padding: 8px 0px 8px 15px;
 }
 
 .p176-table thead th {
-    color: #c5c5c5;
+    /*color: #c5c5c5;*/
 }
 
 /*.p176-table-wrap .p176-table tr:hover{background:#f5fbfa;}*/
 
 .p176-table02 tbody tr:hover td, .p176-table02 tbody tr.on td {
     background: #e5f8f4;
+}
+.video{
+    width:100%;
+    height:100%;
+}
+.video video{
+    width:100%;
+    height:99%;
 }
