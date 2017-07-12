@@ -12,11 +12,19 @@
    <!-- <script src="../js/main.js"></script>-->
 </head>
 <body>
-	<div class="startImg"><img src="../images/01.png"  /></div>
-	<div class="listData" style="display: none;">
+	<!--<div class="startImg"><img src="../images/01.png"  /></div>-->
+	<div class="listData">
 		<div class="p176-nav clearfix">
 			<div class="p176-logo-left"></div>
 		</div>
+        <select style="margin-left: 460px;margin-top: 25px;">
+            <option>海口</option>
+            <option>东莞</option>
+            <option>银川</option>
+            <option>中山</option>
+            <option>焦作</option>
+        </select>
+        <span id="btn" onclick="showList()">查询</span>
 		<h2 style="width: 1000px;margin: 20px auto 0;text-align: center" class="p176-tit clearfix"><span class="p176-alresdy" style="font-size: 20px;">文件播放列表</span></h2>
 		<div style="width: 1000px;margin: 0px auto;" class="p176-table-wrap" >
 			<table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
@@ -37,19 +45,24 @@
 <script>
     $(function () {
 		$(".listData").hide();
-        showList();
+
     })
     //显示已经录入的数据
 
     function showList() {
+        var schoolName=$("select").val();
+        var school={
+            "schoolName":schoolName
+        }
         $.ajax({
             url: "http://10.73.33.63:8080/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
+            data:JSON.stringify(school),
             dataType: 'json',
             success: function (e) {
                 console.log(e)
-				$(".listData").show();
-				$(".startImg").hide();
+				/*$(".listData").show();
+				$(".startImg").hide();*/
                 var dataList = e.dataList;
                 var str = "";
                 for (var i = 0; i < dataList.length; i++) {
