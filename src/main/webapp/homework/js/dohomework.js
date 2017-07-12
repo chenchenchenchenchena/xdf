@@ -3,33 +3,33 @@
  */
 $(function () {
     var layer1;
-    //点击作业排行榜
-    $(document).on('touchend', '.hwRankTitle', function () {
-        window.location.href = "studentrank_s.html";
-    });
-    // 显示作业信息
-    var hwInfos = JSON.parse(localStorage.homeworkInfos);
-    gethwInfos();
-    function gethwInfos() {
-        var knowledgePoint, kpHtml;
-        //知识点
-        if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
-            knowledgePoint = hwInfos.knowledgePoint.split(',');
-            for (var i = 0; i < knowledgePoint.length; i++) {
-                kpHtml = '<span>' + knowledgePoint[i] + '</span>';
-                $('.knowPoint').append(kpHtml);
-            }
-        }
-        //作业描述
-        $('.hwCon').html(hwInfos.description);
-        //语音，图片 TODO
-
-    }
+    // //点击作业排行榜
+    // $(document).on('touchend', '.hwRankTitle', function () {
+    //     window.location.href = "studentrank_s.html";
+    // });
+    // // 显示作业信息
+    // var hwInfos = JSON.parse(localStorage.homeworkInfos);
+    // gethwInfos();
+    // function gethwInfos() {
+    //     var knowledgePoint, kpHtml;
+    //     //知识点
+    //     if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
+    //         knowledgePoint = hwInfos.knowledgePoint.split(',');
+    //         for (var i = 0; i < knowledgePoint.length; i++) {
+    //             kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+    //             $('.knowPoint').append(kpHtml);
+    //         }
+    //     }
+    //     //作业描述
+    //     $('.hwCon').html(hwInfos.description);
+    //     //语音，图片 TODO
+    //
+    // }
 
 
     //按下开始录音
-    // $('#record').on('touchstart', function (event) {
-    $('document').on('touchstart', '#record', function (event) {
+    $('#record').on('touchstart', function (event) {
+    // $('document').on('touchstart', '#record', function (event) {
 
         event.preventDefault();
         START = new Date().getTime();
@@ -47,8 +47,8 @@ $(function () {
     });
 
     //松手结束录音
-    // $('#record').on('touchend', function (event) {
-    $('document').on('touchend', '#record', function (event) {
+    $('#record').on('touchend', function (event) {
+    // $('document').on('touchend', '#record', function (event) {
 
 
         event.preventDefault();
@@ -155,8 +155,9 @@ $(function () {
     }
 
     //点击选择图片
-    // $('#chooseImage').click(function () {
-    $('document').on('touchend', '#chooseImage', function () {
+    $('#chooseImage').click(function () {
+        alert("jlk;l");
+    // $('document').on('touchend', '#chooseImage', function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
