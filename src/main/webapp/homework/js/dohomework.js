@@ -149,7 +149,12 @@ $(function () {
                     }
                 }
                 $(".notsubmit").html(str);
-                alert('已选择 ' + res.localIds.length + ' 张图片');
+                alert('已选择了 ' + res.localIds.length + ' 张图片');
+                // 图片大于三张，添加图片按钮隐藏
+                // if($('.notsubmit .imgBox').children('div').length>=3){
+                if(res.localIds.length>=3){
+                    $('#chooseImage').hide();
+                }
             }
         });
     });
@@ -254,9 +259,14 @@ $(function () {
         } else {
             $(this).parent('div').remove();
         }
+        // 图片小于三张，显示添加图片按钮
+        if($('.notsubmit .imgBox').children('div').length<3){
+            $('#chooseImage').show();
+        }
     });
     //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
+        console.log($('.notsubmit .imgBox').children('div').length);
         var answerVal = $('.teBox').val().trim();
         // 答案不能为空
         if (answerVal == "" || answerVal == null) {
@@ -286,6 +296,8 @@ $(function () {
             return;
         }
         // 语音最多可上传*个，图片最多可上传*个 TODO
+
+
     });
     // 关闭消息提示
     function closeLayer(layerName) {
@@ -294,6 +306,20 @@ $(function () {
         }, 3000);
     }
 
+    // 图片预览
+    $(document).on('touchend', '.imgBox>div>img', function (){
+        alert("预览图片"+$(this).attr('src'));
+        var previewUrl = "";
+        if($(this).attr('src').indexOf('weixin://')!= -1){
+            previewUrl = $(this).attr('src');
+        }else{
+            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/'+$(this).attr('src');
+        }
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
 
 });
 /* //超出字数
