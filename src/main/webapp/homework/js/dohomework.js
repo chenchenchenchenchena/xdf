@@ -105,7 +105,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    $('.teBox').val(e.data);
+                    $('.teBox').val(e.data.fileUrl);
 
                     //显示语音布局
                     showAudio(e.data.fileUrl,e.data.fileSize);
