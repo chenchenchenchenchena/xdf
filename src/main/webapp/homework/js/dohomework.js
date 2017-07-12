@@ -11,12 +11,12 @@ $(function () {
     var hwInfos = JSON.parse(localStorage.homeworkInfos);
     gethwInfos();
     function gethwInfos() {
-        var knowledgePoint,kpHtml;
+        var knowledgePoint, kpHtml;
         //知识点
-        if(hwInfos.knowledgePoint!="" && hwInfos.knowledgePoint!=null && hwInfos.knowledgePoint!=undefined){
+        if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
             knowledgePoint = hwInfos.knowledgePoint.split(',');
-            for(var i = 0;i<knowledgePoint.length;i++){
-                kpHtml = '<span>'+knowledgePoint[i]+'</span>';
+            for (var i = 0; i < knowledgePoint.length; i++) {
+                kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                 $('.knowPoint').append(kpHtml);
             }
         }
@@ -29,30 +29,29 @@ $(function () {
 
     //按下开始录音
     // $('#record').on('touchstart', function (event) {
-    $('document').on('touchstart','#record',function (event) {
+    $('document').on('touchstart', '#record', function (event) {
 
-            event.preventDefault();
-            START = new Date().getTime();
-            recordTimer = setTimeout(function () {
-                wx.startRecord({
-                    success: function () {
-                        localStorage.rainAllowRecord = 'true';
-                        // alert("开始录音");
-                    },
-                    cancel: function () {
-                        alert('用户拒绝授权录音');
-                    }
-                });
-            }, 300);
-        });
-    }
+        event.preventDefault();
+        START = new Date().getTime();
+        recordTimer = setTimeout(function () {
+            wx.startRecord({
+                success: function () {
+                    localStorage.rainAllowRecord = 'true';
+                    // alert("开始录音");
+                },
+                cancel: function () {
+                    alert('用户拒绝授权录音');
+                }
+            });
+        }, 300);
+    });
 
     //松手结束录音
     // $('#record').on('touchend', function (event) {
-    $('document').on('touchend','#record',function (event) {
+    $('document').on('touchend', '#record', function (event) {
 
 
-            event.preventDefault();
+        event.preventDefault();
         END = new Date().getTime();
         alert(1)
         if ((END - START) < 300) {
@@ -157,7 +156,7 @@ $(function () {
 
     //点击选择图片
     // $('#chooseImage').click(function () {
-    $('document').on('touchend','#chooseImage',function () {
+    $('document').on('touchend', '#chooseImage', function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
