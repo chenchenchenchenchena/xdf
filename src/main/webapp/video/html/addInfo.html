@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../js/layer-v2.1/layer/skin/layer.css"  />
+    <link rel="stylesheet" href="../css/addInfo.css"  />
+    <script src="../../common/js/jquery.js"></script>
+    <script src="../js/layer-v2.1/layer/layer.js"></script>
+    <!--<script src="../js/main.js"></script>-->
+</head>
+<body>
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"></div>
+</div>
+
+<form id="form">
+    <div class="formInfo">
+        <span>科目：</span>
+        <input id="subject" type="text"><br  />
+        <span>年级：</span>
+        <input id="grade" type="text"><br  />
+        <span>老师：</span>
+        <input id="teacherName" type="text"><br  />
+        <!--<span>名称：</span>
+        <input id="name" type="text"><br  />-->
+        <span>课次：</span>
+        <input id="classTime" type="text"><br  />
+        <span>时间:</span>
+        <input type="datetime-local"  id="time1" />----<input type="datetime-local"  id="time2"/><br  />
+        <span id="btn" onclick="save()">增加</span>
+    </div>
+</form>
+<!--<h2 style="margin-left: 100px;" class="p176-tit clearfix"><span class="p176-alresdy">已保存的文件</span></h2>
+<div style="margin-left: 100px;" class="p176-table-wrap" >
+    <table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
+        <thead>
+        <tr id="ckListHead">
+            <th style="width:20%;">文件名</th>
+            <th style="width:30%;">地址</th>
+        </tr>
+        </thead>
+        <tbody id="ckListTbody">
+        </tbody>
+    </table>
+    <div class="PublicPage" id="publicPage"></div>
+</div>-->
+</body>
+<script>
+   /* $(function () {
+        showList();
+    })*/
+    
+
+    //文件保存接口
+    function save() {
+        var subject = $('#subject').val();
+        var grade = $('#grade').val();
+        var teacherName = $('#teacherName').val();
+       /* var name = $('#name').val();*/
+        var classTime = $('#classTime').val();
+        var time1=$("#time1").val();
+        var time2=$("#time2").val();
+        if(subject!=""&&grade!=""&&teacherName!=""&&classTime!=""&&time1!=""&&time2!=""){
+        	var cbconfig = {
+        		'subject': subject,
+        		'grade': grade,
+        		'teacherName':teacherName,
+        		/*'name':name,*/
+        		'lessonNo':classTime,
+        		'videoBeginTime':time1,
+        		'videoEndTime':time2
+        	};
+	        $.ajax({
+	            url: "http://10.73.33.63:8080/xdfdtmanager/videofile/saveVideoFileInfo.do",
+	            type: 'post',
+	            dataType: 'json',
+	            data: JSON.stringify(cbconfig),
+	            success: function (e) {
+	                console.log(e);
+	                $('#fileName').val("");
+	                $('#fileUrl').val("");
+	               /* showList();*/
+	
+	            }
+	        });
+        }else{
+        	layer.msg("字段不能为空");
+        }
+        
+    }
+    //显示已经录入的数据
+    /*function showList() {
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            type: 'post',
+            dataType: 'json',
+            success: function (e) {
+                console.log(e)
+                var dataList = e.dataList;
+                var str = "";
+                for (var i = 0; i < dataList.length; i++) {
+                    var fileName = dataList[i]["fileName"];
+                    var fileUrl = dataList[i]["fileUrl"];
+
+                    if (i % 2 == 1) {
+                        str += "<tr class='table-tr-odd'>"
+                    } else {
+                        str += "<tr class='table-tr-even'>"
+                    }
+
+                    str += "<td id='name'>" + fileName + "</td>";
+                    str += "<td id='fileUrl'>" + fileUrl + "</td>";
+
+
+                    str += "</tr>";
+                }
+                $("#ckListTbody").html(str);
+
+            }
+        });
+    }*/
+
+</script>
+</html>
