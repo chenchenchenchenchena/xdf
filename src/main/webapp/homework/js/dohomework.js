@@ -7,49 +7,74 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
+    // // 显示作业信息
+    localStorage.homeworkInfos=JSON.stringify({"knowledgePoint":"知识点1,知识点2","description":"如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.","fileContents":[{"diskFilePath":"homework/73/HDXP5MB01/0711","fileName":"文件1","fileSize":"12345","fileType":"jpg","id":"c572b982b22149a5ab2e5d98650a3e3c","uploadTime":1499773427000},{"diskFilePath":"homework/73/HDXU3PB01/0711","fileName":"文件1","fileSize":"23564","fileType":"MP3","id":"c84c4da06da9470283588366812f7d01","uploadTime":1499773427000}]});
+    gethwInfos();
+    function gethwInfos() {
+        var hwInfos = JSON.parse(localStorage.homeworkInfos);
+        var knowledgePoint, kpHtml;
+        //知识点
+        if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
+            knowledgePoint = hwInfos.knowledgePoint.split(',');
+            for (var i = 0; i < knowledgePoint.length; i++) {
+                kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                $('.knowPoint').append(kpHtml);
+            }
+        }
+        //作业描述
+        $('.hwCon').html(hwInfos.description);
+        //语音，图片 TODO
+
+    }
+
 
     //按下开始录音
-    // $('#record').on('touchstart', function (event) {
-    //     event.preventDefault();
-    //     START = new Date().getTime();
-    //     recordTimer = setTimeout(function () {
-    //         wx.startRecord({
-    //             success: function () {
-    //                 localStorage.rainAllowRecord = 'true';
-    //                 // alert("开始录音");
-    //             },
-    //             cancel: function () {
-    //                 alert('用户拒绝授权录音');
-    //             }
-    //         });
-    //     }, 300);
-    // });
+    $('#record').on('touchstart', function (event) {
+    // $('document').on('touchstart', '#record', function (event) {
+
+        event.preventDefault();
+        START = new Date().getTime();
+        recordTimer = setTimeout(function () {
+            wx.startRecord({
+                success: function () {
+                    localStorage.rainAllowRecord = 'true';
+                    // alert("开始录音");
+                },
+                cancel: function () {
+                    alert('用户拒绝授权录音');
+                }
+            });
+        }, 300);
+    });
 
     //松手结束录音
-    // $('#record').on('touchend', function (event) {
-    //     event.preventDefault();
-    //     END = new Date().getTime();
-    //     alert(1)
-    //     if ((END - START) < 300) {
-    //         END = 0;
-    //         START = 0;
-    //         //小于300ms，不录音
-    //         clearTimeout(recordTimer);
-    //     } else {
-    //         alert(2);
-    //         wx.stopRecord({
-    //             success: function (res) {
-    //                 alert(res);
-    //                 localId = res.localId;
-    //                 uploadVoiceWX(localId);
-    //                 // playVoice(localId);
-    //
-    //             },
-    //             fail: function (res) {
-    //             }
-    //         });
-    //     }
-    // });
+    $('#record').on('touchend', function (event) {
+    // $('document').on('touchend', '#record', function (event) {
+
+
+        event.preventDefault();
+        END = new Date().getTime();
+        alert(1)
+        if ((END - START) < 300) {
+            END = 0;
+            START = 0;
+            //小于300ms，不录音
+            clearTimeout(recordTimer);
+        } else {
+            alert(2);
+            wx.stopRecord({
+                success: function (res) {
+                    alert(res);
+                    localId = res.localId;
+                    uploadVoiceWX(localId);
+                    // playVoice(localId);
+
+                },
+                fail: function (res) {
+                }
+            });
+        }
+    });
 
     //播放微信录制后的本地语音文件
     function playVoice(plId) {
@@ -61,12 +86,12 @@ $(function () {
     }
 
     //测试数据
-    $('#record').click(function () {
-    // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
-    // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
-    // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    showAudio("http://dn-storage-xdf.gokuai.com/c3/c3a2752f06713897a5f216786b3e2f214e776a5b.dat?response-content-disposition=attachment%3B%20filename%3D%227766bae1a7974a5ebc056ae9db1bb35d.mp3%22%3B%20filename%2A%3Dutf-8%27%277766bae1a7974a5ebc056ae9db1bb35d.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499852562&Signature=Uk5pSFpjHYoIc6%2F0hrdeHZ5Cu1s%3D", 19);
-    });
+    // $('#record').click(function () {
+    // // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
+    // // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
+    // // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
+    // showAudio("http://dn-storage-xdf.gokuai.com/c3/c3a2752f06713897a5f216786b3e2f214e776a5b.dat?response-content-disposition=attachment%3B%20filename%3D%227766bae1a7974a5ebc056ae9db1bb35d.mp3%22%3B%20filename%2A%3Dutf-8%27%277766bae1a7974a5ebc056ae9db1bb35d.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499852562&Signature=Uk5pSFpjHYoIc6%2F0hrdeHZ5Cu1s%3D", 19);
+    // });
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
@@ -132,6 +157,8 @@ $(function () {
 
     //点击选择图片
     $('#chooseImage').click(function () {
+        alert("jlk;l");
+    // $('document').on('touchend', '#chooseImage', function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -151,7 +178,6 @@ $(function () {
                     }
 
                     $(".imgBox").show();
-
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
                     uploadImag(res.localIds);
@@ -180,7 +206,7 @@ $(function () {
             $('#classId_image').val("hx001");
             $('#image_file').val(images[i]);
 
-            $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
+            $("form[enctype]").attr("action", "http://10.200.80.235:8080/xdfdtmanager/" + $("form[enctype]").attr("action"));
 
             $("#submit_image").ajaxSubmit({
                 resetForm: "true",
@@ -193,6 +219,7 @@ $(function () {
                     }
                 },
                 error: function (jqxhr, errorMsg, errorThrown) {
+                    alert("3456789")
                 }
             });
 
@@ -202,67 +229,24 @@ $(function () {
     // 播放语音
     var playTimer = "", playFlag = false;
     var audioCur = null;
+    var oldId = undefined;
 
     //语音播放方法
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        var oldId = $(audioCur).attr('id');
-        if (audioCur != null) {
-            stop();
-            audioCur = null;
-        }
-        audioCur = voiceId;
         if (newID != oldId) {
+            if (audioCur != null) {
+                stop();
+                audioCur = null;
+            }
+            audioCur = voiceId;
+            oldId = $(audioCur).attr('id');
             play();
         } else {
+            oldId = undefined;
             stop();
         }
-        // if(audioCur != null){
-        //     if(newID!=oldId){
-        //         audioCur = voiceId;
-        //         play();
-        //     }else{
-        //         alert(audioCur.paused);
-        //         if(audioCur.paused){
-        //             play();
-        //         }else{
-        //             stop();
-        //         }
-        //     }
-        //     audioCur = null;
-        // }else{
-        //     audioCur = voiceId;
-        //     play();
-        // }
-
-        // alert($(audio).attr('id'));
-        // // var audio = document.getElementById(voiceId);
-        // clearTimeout(playTimer);
-        // if(playId!=$(audio).attr('id')){
-        //     $('audio')[0].pause();
-        //     $('audio')[0].currentTime = 0;
-        // }
-        // $('.play-icon').removeClass('playing');
-        // if(audio!==null){
-        //     //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
-        //     alert(audio.paused);
-        //     if(audio.paused){
-        //         var second = 10;//parseInt($(audio).siblings('span').html());//获取音频秒数
-        //         $(audio).siblings('.play-icon').addClass('playing');
-        //         audio.currentTime = 0;
-        //         audio.play();//audio.play();// 这个就是播放
-        //         playTimer = setTimeout(function(){
-        //             $(audio).siblings('.play-icon').removeClass('playing');
-        //         },second*1000);
-        //     }else{
-        //         audio.pause();// 这个就是暂停
-        //         audio.currentTime = 0;
-        //         $(audio).siblings('.play-icon').removeClass('playing');
-        //     }
-        //     // audio = null;
-        //     playId = $(audio).attr('id');
-        // }
     }
 
     //停止播放方法

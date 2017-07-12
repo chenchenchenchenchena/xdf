@@ -1,4 +1,8 @@
 $(function(){
+        var trardata = {
+            'teacherCode':'TC41',
+            'schoolId':'73'
+        };
 
 
 
@@ -7,7 +11,13 @@ $(function(){
 
 
 
-
+        //获取班级信息
+        ajax_S(homework_s.t_clas,trardata,function(e){
+            var className = e.data.Data;
+            for(var a = 0;a<className.length;a++){
+                $('.class_name ul').append('<li><img src="images/C05_06.png" alt="">'+className[a].ClassName+'</li>')
+            }
+        });
 
 
 

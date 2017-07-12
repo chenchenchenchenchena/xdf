@@ -382,3 +382,11 @@ html body .tealist_s .more_so{
 .classEmpty img,.classTimeEmpty img,.numFail img{
 	margin: 42px 0 15px 0;
 }
+
+.Choice_s input{
+	position: absolute;
+	margin-top: -90px;
+	width: 100%;
+	height: 90px;
+	opacity: 0;
+}
