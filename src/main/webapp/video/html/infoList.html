@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../js/layer-v2.1/layer/skin/layer.css"  />
+    <link rel="stylesheet" href="../css/addInfo.css"  />
+   <!-- <link rel="stylesheet" href="../css/p176.css"  />-->
+    <script src="../../common/js/jquery.js"></script>
+    <script src="../js/layer-v2.1/layer/layer.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+	<div class="p176-nav clearfix">
+	    <div class="p176-logo-left"></div>
+	</div>
+	<h2 style="width: 1000px;margin: 20px auto 0;" class="p176-tit clearfix"><span class="p176-alresdy" style="font-size: 20px;">文件播放列表</span></h2>
+	<div style="width: 1000px;margin: 0px auto;" class="p176-table-wrap" >
+	    <table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
+	        <thead>
+		        <tr id="ckListHead">
+		            <th style="width:40%;">文件名</th>
+		            <th style="width:30%;">播放按钮</th>
+		        </tr>
+	        </thead>
+	        <tbody id="ckListTbody">
+	        </tbody>
+	    </table>
+	    <div class="PublicPage" id="publicPage"></div>
+	</div>
+</body>
+<script>
+   /* $(function () {
+        showList();
+    })*/
+    //显示已经录入的数据
+    /*function showList() {
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            type: 'post',
+            dataType: 'json',
+            success: function (e) {
+                console.log(e)
+                var dataList = e.dataList;
+                var str = "";
+                for (var i = 0; i < dataList.length; i++) {
+                    var fileName = dataList[i]["fileName"];
+                    var fileUrl = dataList[i]["fileUrl"];
+
+                    if (i % 2 == 1) {
+                        str += "<tr class='table-tr-odd'>"
+                    } else {
+                        str += "<tr class='table-tr-even'>"
+                    }
+
+                    str += "<td id='name'>" + fileName + "</td>";
+                    str += "<td id='fileUrl'>" + fileUrl + "</td>";
+
+
+                    str += "</tr>";
+                }
+                $("#ckListTbody").html(str);
+
+            }
+        });
+    }*/
+
+</script>
+</html>

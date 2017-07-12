@@ -1,0 +1,80 @@
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.p176-nav {
+    height: 52px;
+    width: 100%;
+    background: #00ba97;
+    position: relative;
+    z-index: 1;
+    min-width: 1042px;
+}
+
+.p176-logo-left {
+    display: inline;
+    width: 200px;
+    float: left;
+}
+#form div{
+	width: 450px;
+	margin: 70px auto;
+}
+#form input{
+	width: 250px;
+	height: 30px;
+	margin-bottom: 30px;
+}
+#btn{
+	margin-left: 140px;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #00b997;
+    text-align: center;
+    width: 100px;
+    line-height: 38px;
+    height: 38px;
+    cursor: pointer;
+}
+#form span{
+	font-size: 20px;
+}
+#time1,#time2{
+	width: 180px!important;
+	height: 20px!important;
+}
+.p176-tit {
+    border-bottom: 2px solid #ccf1ea;
+    line-height: 35px;
+    padding-top: 5px;
+}
+
+.p176-tit a {
+    color: #8bd7c4;
+}
+
+/*表格*/
+.p176-table-wrap .p176-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    z-index: 1;
+}
+
+.p176-table thead th, .p176-table tbody td {
+    text-align: left;
+    line-height: 24px;
+    border-bottom: 1px solid #e6e7ed;
+    padding: 8px 0px 8px 15px;
+}
+
+.p176-table thead th {
+    color: #c5c5c5;
+}
+
+/*.p176-table-wrap .p176-table tr:hover{background:#f5fbfa;}*/
+
+.p176-table02 tbody tr:hover td, .p176-table02 tbody tr.on td {
+    background: #e5f8f4;
+}
