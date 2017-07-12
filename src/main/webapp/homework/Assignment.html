@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="css/homeworklist_s.css"  />
 		<script src="../common/js/jquery.js"></script>
 		<script src="../common/js/scale.js"></script>
+		<script src="../common/js/ajax.js"></script>
 		<script src="../common/js/layer-v2.1/layer/layer.js"></script>
 		<script src="js/Assignment.js"></script>
 	</head>
@@ -25,6 +26,7 @@
 	<div class="Choice_s">
 		<h4 class="class_s">选择班<span><img src="images/B02-2_03.png" alt=""></span> <i></i></h4>
 		<h4 class="time_S">选择作业时间 <span><img src="images/B02-2_03.png" alt=""></span></h4>
+		<input type="date"/>
 	</div>
 	<div class="Knowledge">
 		<input type="text" placeholder="知识点(只能添加2个,以分号、逗号分割)">
@@ -43,10 +45,7 @@
 	<div class="class_name">
 		<p>选择班<span>已选择<i>0</i>个班</span></p>
 		<ul>
-			<li><img src="images/C05_06.png" alt="">达瓦大无打完打完</li>
-			<li><img src="images/C05_06.png" alt="">达瓦大无打完打完</li>
-			<li><img src="images/C05_06.png" alt="">达瓦大无打完打完</li>
-			<li><img src="images/C05_06.png" alt="">达瓦大无打完打完</li>
+
 		</ul>
 		<input type="button" class="class_sub" value="确    定">
 	</div>
@@ -54,6 +53,6 @@
 
 
 	<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
-
+	<div id="datePlugin"></div>
 	</body>
 </html>

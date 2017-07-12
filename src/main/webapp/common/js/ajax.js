@@ -87,7 +87,8 @@ var Global = {
 var homework_s = {
     't_list': url_o+'teacherData/queryHomeWorkListInfo.do',   //老师作业列表
     't_stat': url_o+'teacherData/TeacherupdateReadstatus.do',//老师未读已读状态
-    't_more': 'http://10.73.32.97:8080/xdfdtmanager/teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
+    't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
+    't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
     's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
