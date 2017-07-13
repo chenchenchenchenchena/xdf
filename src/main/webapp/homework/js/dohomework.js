@@ -249,14 +249,15 @@ $(function () {
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+
+
+                        alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
                     // uploadImage(res.localIds);
-
-                    alert(res.localIds[i]);
                     upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
