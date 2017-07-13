@@ -332,6 +332,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     //将文件显示到布局中
+                    var fileType = e.fileType;
                     if (fileType == "mp3") {
                         showAudio(e.fileUrl, e.fileSize, $('#audio_1'), "audio1");
                     } else {
