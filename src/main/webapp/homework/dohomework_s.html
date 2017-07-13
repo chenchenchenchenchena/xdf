@@ -11,14 +11,15 @@
     <meta name="full-screen" content="yes"/>
     <link rel="stylesheet" href="../common/css/base.css"/>
     <link rel="stylesheet" href="css/dohomework_s.css"/>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>-->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="../common/js/zepto.min.js"></script>
-    <script src="../js/jquery-form.js"></script>
-    <script src="../common/js/ajax.js"></script>
     <script src="../common/js/jquery.js"></script>
+    <script src="js/jquery-form.js"></script>
     <script src="../common/js/scale.js"></script>
     <script src="../common/js/layer.js"></script>
     <script src="js/wx.js"></script>
+    <script src="../common/js/ajax.js"></script>
 </head>
 <body>
 <div class="doHomework">
@@ -36,31 +37,31 @@
             <p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
         </div>
         <div>
-            <div class="audio_box">
-                <div>
-                    <audio id="audio1" preload="auto"><source src="../yuyin/ttt.mp3" type="audio/mpeg"></audio>
-                    <i class="play-icon"></i>
-                </div>
-                <span>16''</span>
+            <div class="audio_box" id="audio_1" style="display:none;">
+                <!--<div>-->
+                    <!--<audio id="audio1" preload="auto" ><source src="http://yunku.gokuai.com/file/ybvupnym#" type="audio/mpeg"></audio>-->
+                    <!--<i class="play-icon"></i>-->
+                <!--</div>-->
+                <!--<span>16''</span>-->
             </div>
-            <div class="audio_box">
-                <div>
-                    <audio id="audio2" preload="auto"><source src="../yuyin/Gkk2x4ZXGB3ViCT2mqeXw98HkwrXxQRiBuss4t6ii7nmDU1xdoeWLu_ER_sqotDz.mp3" type="audio/mpeg"></audio>
-                    <i class="play-icon"></i>
-                </div>
-                <span>16''</span>
-            </div>
-            <div class="audio_box">
-                <div>
-                    <audio id="audio3" preload="auto"><source src="../yuyin/ttt.mp3" type="audio/mpeg"></audio>
-                    <i class="play-icon"></i>
-                </div>
-                <span>16''</span>
-            </div>
-            <div class="imgBox">
-                <div><img src="images/B02-23_03.png" alt=""/></div>
-                <div><img src="images/B02-2_10.png" alt=""/></div>
-                <div><img src="images/C02_02.png" alt=""/></div>
+            <!--<div class="audio_box">-->
+                <!--<div>-->
+                    <!--<audio id="audio2" preload="auto"><source src="http://www.w3school.com.cn/i/song.mp3" type="audio/mpeg"></audio>-->
+                    <!--<i class="play-icon"></i>-->
+                <!--</div>-->
+                <!--<span>16''</span>-->
+            <!--</div>-->
+            <!--<div class="audio_box">-->
+                <!--<div>-->
+                    <!--<audio id="audio3" preload="auto"><source src="http://www.w3school.com.cn/i/song.mp3" type="audio/mpeg"></audio>-->
+                    <!--<i class="play-icon"></i>-->
+                <!--</div>-->
+                <!--<span>16''</span>-->
+            <!--</div>-->
+            <div class="imgBox" id="imgBox_1" style="display:none;">
+                <!--<div><img src="images/B02-23_03.png" alt=""/></div>-->
+                <!--<div><img src="images/B02-2_10.png" alt=""/></div>-->
+                <!--<div><img src="images/C02_02.png" alt=""/></div>-->
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
             <a id="record"><img src="images/B02-2_12.png"/></a>
         </div>
         <div class="notsubmit" style="display: block;">
-            <div class="audio_box" style="display: none;">
+            <div id="record_audio_box" class="audio_box" style="display: none;">
             </div>
             <div class="imgBox" style="display: none">
             </div>
@@ -87,7 +88,7 @@
         <div class="infoTitle">作业答案</div>
         <div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
         <div>
-            <div id="audio" src=""></div>
+            <div id="audio_2" class="audio_box" style="display: none;"></div>
             <div class="imgBox">
                 <div><img src="images/B02-23_03.png" alt=""/></div>
                 <div><img src="images/B02-2_07.png" alt=""/></div>
@@ -99,7 +100,7 @@
         <div class="infoTitle">老师批注</div>
         <div class="anDes">点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
         <div>
-            <div id="audio" src=""></div>
+            <div id="audio_3" class="audio_box" style="display: none;"></div>
             <div class="imgBox">
                 <div><img src="images/B02-23_03.png" alt=""/></div>
                 <div><img src="images/B02-2_07.png" alt=""/></div>
