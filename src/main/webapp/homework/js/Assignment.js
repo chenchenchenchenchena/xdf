@@ -305,7 +305,9 @@ $(function(){
                     localId = res.localId;
                     song_s  = localId;
                     uploadVoiceWX(localId);
-                    showAudio()
+                    showAudio();
+                    $('.song_s').hide();
+                    $('.big_whit').hide();
                 }
         });
     });
@@ -367,7 +369,7 @@ $(function(){
 
     //显示语音布局
     function showAudio(url, length) {
-        $('.music_s').css('width',timeInedex/60+'%');
+        $('.music_s').css('width',timeInedex/0.6);
         $('.music_s span').html(timeInedex+'"');
     }
 
