@@ -95,7 +95,7 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                // alert(JSON.stringify(res));
+                alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
                 uploadVoice(serverId);
@@ -126,7 +126,6 @@ $(function () {
                     alert(e.message);
                 } else {
                     $('.teBox').val(e.data.fileUrl);
-
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
