@@ -168,7 +168,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
         tooltip : {
             trigger: 'axis',
             triggerOn:'click',
-            formatter: '{c2}<br />得分：{c1}<br />平均分:{c}<br />{c3}',
+            formatter: '{c2}<br />得分：{c}<br />平均分:{c1}<br />{c3}',
         },
         legend: {
             data:['个人得分','平均分'],
