@@ -256,7 +256,7 @@ $(function () {
                     //上传服务器
                     // uploadImage(res.localIds);
 
-                    alert(res.localId[i]);
+                    alert(res.localIds[i]);
                     upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
