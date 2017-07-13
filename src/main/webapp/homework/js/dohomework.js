@@ -198,7 +198,26 @@ $(function () {
                 "<input type='file' class='image_file' name='file' value='"+images[i]+"'/><button id='submitBtn'>提交表单</button></form>";
             alert(strImag);
             $('#image_form').html(strImag);
-
+            $('#submitBtn').on('touchend',function () {
+                alert("提交表单");
+                $("#submit_image").ajaxSubmit({
+                    resetForm: "true",
+                    type: 'post', // 提交方式 get/post
+                    url: url_o+'upload/uploadFiles.do', // 需要提交的 url
+                    data: {
+                        'schoolId': '73',
+                        'classId': 'hx001',
+                        'file':images[i]
+                    },
+                    success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                        // 此处可对 data 作相关处理
+                        alert('提交成功！'+data);
+                    },
+                    error: function (jqxhr, errorMsg, errorThrown) {
+                        alert("提交失败")
+                    }
+                });
+            })
             // $('.schoolId_image').val("73");
             // $('.classId_image').val("hx001");
             // $('.image_file').val(images[i]);
@@ -220,26 +239,7 @@ $(function () {
             });
 
         }
-        $('#submitBtn').on('touchend',function () {
-            alert("提交表单");
-            $("#submit_image").ajaxSubmit({
-                resetForm: "true",
-                type: 'post', // 提交方式 get/post
-                url: url_o+'upload/uploadFiles.do', // 需要提交的 url
-                data: {
-                    'schoolId': '73',
-                    'classId': 'hx001',
-                    'file':images[i]
-                },
-                success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
-                    // 此处可对 data 作相关处理
-                    alert('提交成功！'+data);
-                },
-                error: function (jqxhr, errorMsg, errorThrown) {
-                    alert("提交失败")
-                }
-            });
-        })
+
     }
 
     /*------------------------------------------------------*/
