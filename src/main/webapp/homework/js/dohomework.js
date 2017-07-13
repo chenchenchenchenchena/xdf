@@ -195,7 +195,7 @@ $(function () {
             alert(images[i]);
             var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='"+url_o+"upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
-                "<input type='file' class='image_file' name='file' value='"+images[i]+"'/></form>";
+                "<input type='file' class='image_file' name='file' value='"+images[i]+"'/><button id='submitBtn'>提交表单</button></button></form>";
             alert(strImag);
             $('#image_form').html(strImag);
 
@@ -204,7 +204,24 @@ $(function () {
             // $('.image_file').val(images[i]);
             //
             // $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
-            alert($('.image_file').html());
+            $("#submit_image").ajaxSubmit({
+                resetForm: "true",
+                success: function (data) {
+                    alert("ok:"+data);
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (jqxhr, errorMsg, errorThrown) {
+                    alert("3456789")
+                }
+            });
+
+        }
+        $('#submitBtn').on('touchend',function () {
+            alert("提交表单");
             $("#submit_image").ajaxSubmit({
                 resetForm: "true",
                 success: function (data) {
@@ -219,8 +236,7 @@ $(function () {
                     alert("3456789")
                 }
             });
-
-        }
+        })
     }
 
     /*------------------------------------------------------*/
