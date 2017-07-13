@@ -133,8 +133,8 @@ $(function () {
             alert(2);
             wx.stopRecord({
                 success: function (res) {
+                    var localId = res.localId;
                     alert(localId);
-                    localId = res.localId;
                     uploadVoiceWX(localId);
 
                 },
@@ -167,7 +167,7 @@ $(function () {
             success: function (res) {
                 alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-                serverId = res.serverId;
+                var serverId = res.serverId;
                 uploadVoice(serverId);
             }
         });
