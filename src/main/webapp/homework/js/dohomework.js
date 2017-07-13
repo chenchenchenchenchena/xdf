@@ -29,7 +29,6 @@ $(function () {
 
     //按下开始录音
     $('#record').on('touchstart', function (event) {
-    // $('document').on('touchstart', '#record', function (event) {
 
         event.preventDefault();
         START = new Date().getTime();
@@ -48,7 +47,6 @@ $(function () {
 
     //松手结束录音
     $('#record').on('touchend', function (event) {
-    // $('document').on('touchend', '#record', function (event) {
 
 
         event.preventDefault();
@@ -156,8 +154,6 @@ $(function () {
 
     //点击选择图片
     $('#chooseImage').click(function () {
-        alert("jlk;l");
-    // $('document').on('touchend', '#chooseImage', function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -179,7 +175,7 @@ $(function () {
                     $(".imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
-                    uploadImag(res.localIds);
+                    uploadImage(res.localIds);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
@@ -192,7 +188,7 @@ $(function () {
     });
 
     //图片上传到自己服务器
-    function uploadImag(images) {
+    function uploadImage(images) {
 
         alert("9999999")
         for (var i = 0; i < images.length; i++) {
