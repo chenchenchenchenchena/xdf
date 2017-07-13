@@ -243,7 +243,6 @@ $(function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
-                alert(res);
 
                 if (res.localIds.length > 0) {
 
@@ -256,6 +255,8 @@ $(function () {
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
                     // uploadImage(res.localIds);
+
+                    alert(res.localId[i]);
                     upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
