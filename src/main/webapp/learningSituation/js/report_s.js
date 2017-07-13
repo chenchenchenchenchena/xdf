@@ -71,7 +71,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 for(var i = 0;i<class_.length;i++) {
                     for(var s = 0;s<class_[i].length;s++){
                         if(class_[i][s].fullMarks>maxNumber){
-                            maxNumber = class_[0][s].fullMarks
+                            maxNumber = class_[i][s].fullMarks
                         }
                     }
                   Xindex = '0';
