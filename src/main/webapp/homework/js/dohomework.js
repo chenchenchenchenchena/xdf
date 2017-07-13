@@ -268,7 +268,6 @@ $(function () {
         });
     });
 
-    // var serverIds = [];
     /**
      * 上传微信服务器
      * @param images
@@ -322,7 +321,7 @@ $(function () {
             data: cbconfig,
             success: function (data) {
                 alert(JSON.stringify(data));
-                if (e.status == "failure") {
+                if (data.status == "failure") {
                     alert(e.message);
                 } else {
                     fileName = data.fileName;
@@ -468,13 +467,13 @@ $(function () {
         }
     });
     //作业描述验证
-    $('.teBox').on('keyup',function(){
-        if($(this).val().length>200){
-            $('.word').css('color','red');
-        }else{
-            $('.word').css('color','#808080');
+    $('.teBox').on('keyup', function () {
+        if ($(this).val().length > 200) {
+            $('.word').css('color', 'red');
+        } else {
+            $('.word').css('color', '#808080');
         }
-        $('.word').html(''+$(this).val().length+'/200')
+        $('.word').html('' + $(this).val().length + '/200')
     });
 //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
