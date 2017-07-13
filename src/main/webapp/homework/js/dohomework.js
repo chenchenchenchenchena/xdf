@@ -190,19 +190,20 @@ $(function () {
     //图片上传到自己服务器
     function uploadImage(images) {
 
-        alert("9999999"+images.length+"---"+images[i]);
+        alert("9999999"+images.length+"---");
         for (var i = 0; i < images.length; i++) {
-            var strImag = "<form class='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
-                "<input class='schoolId_image' type='text' name='schoolId' /><input class='classId_image' type='text' name='classId' />" +
+            alert(images[i]);
+            var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='"+url_o+"upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+                "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
                 "<input type='file' class='image_file' name='file'/></form>";
             alert(strImag);
             $('#image_form').html(strImag);
 
-            $('.schoolId_image').val("73");
-            $('.classId_image').val("hx001");
-            $('.image_file').val(images[i]);
-
-            $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
+            // $('.schoolId_image').val("73");
+            // $('.classId_image').val("hx001");
+            // $('.image_file').val(images[i]);
+            //
+            // $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
             alert($('.image_file').html());
             $(".submit_image").ajaxSubmit({
                 resetForm: "true",
