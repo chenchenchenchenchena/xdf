@@ -182,7 +182,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 name:'课次',
                 type : 'category',
                 boundaryGap : false,
-                data :s,
+                data :x,
                 nameTextStyle:{
                     fontSize:24
                 },
