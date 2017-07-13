@@ -327,7 +327,7 @@ $(function () {
             dataType: 'json',
             data: optionFile,
             success: function (e) {
-                // alert(JSON.stringify(e));
+                alert(JSON.stringify(e));
                 if (e.success == false) {
                     alert(e.message);
                 } else {
