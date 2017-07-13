@@ -81,10 +81,31 @@ $(function(){
     });
     // 删除
     $(document).on('touchend','.delete_s',function(){
-        var id = $(this).attr('id')
-        ajaxRequest('post',homework_s.t_dele,{'Tcid':id},function(e){
-            console.log(e)
-        })
+        $('.erro').show();
+        $('.big_back').show();
+        var id = $(this).attr('id');
+        var smal = $(this).parents('li').index();
+        var big  = $(this).parents('li').parents('li').index();
+        $('.erro input:last-of-type').on('touchend',function(){
+            $('.erro').hide();
+            $('.big_back').hide();
+            ajaxRequest('post',homework_s.t_dele,{'Tcid':id},function(e){
+                console.log(e)
+                if(e.code=='200'){
+                    if($('.firstList').eq(big).find('li').length==1){
+                        $('.firstList').eq(big).remove();
+                    }else{
+                        $('.firstList').eq(big).find('li').eq(smal).remove();
+                    }
+                }else{
+                    layer.msg('删除失败')
+                }
+            })
+        });
+        $('.erro input:first-of-type').on('touchend',function(){
+            $('.erro').hide();
+            $('.big_back').hide();
+        });
     });
 
 
