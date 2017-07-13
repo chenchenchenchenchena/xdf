@@ -221,6 +221,24 @@ $(function () {
         }
     }
 
+    /*------------------------------------------------------*/
+    //播放语音
+    function audioAutoPlay(voiceId) {
+        wx.ready(function() {
+            document.getElementById('voiceId').play();
+        });
+
+    }
+    function audioAutoPause(voiceId) {
+        wx.ready(function() {
+            document.getElementById('voiceId').pause();
+        });
+
+    }
+
+    /*------------------------------------------------------*/
+
+
     // 播放语音
     var playTimer = "", playFlag = false;
     var audioCur = null;
@@ -237,10 +255,12 @@ $(function () {
             }
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
-            play();
+            // play();
+            audioAutoPlay(voiceId);
         } else {
             oldId = undefined;
-            stop();
+            // stop();
+            audioAutoPause();
         }
     }
 
