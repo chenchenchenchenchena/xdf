@@ -287,6 +287,7 @@ $(function(){
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
+                    alert('00000')
                     localStorage.rainAllowRecord = 'true';
                     timeds = setInterval(function(){
                         timeInedex++
