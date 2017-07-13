@@ -5,27 +5,49 @@
     <title>视频</title>
     <link rel="stylesheet" href="../css/core.css" />
     <link rel="stylesheet" href="../css/addInfo.css" />
+    <script src="../../common/js/jquery.js"></script>
+    <script src="../js/layer-v2.1/layer/layer.js"></script>
 </head>
 <body>
-<!--<div class="startImg"><img src="../images/01.png"  /></div>-->
-<div class="video">
+<div class="startImg"><img src="../images/01.png"  /></div>
+<div class="video" style="display:none">
     <video src="" autoplay></video>
 </div>
 <script>
-    setInterval(function () {
+    var str = "";
+   /* setInterval(function () {*/
+        /* str = "";*/
         $.ajax({
-            url: "",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
             type: 'get',
             dataType: 'json',
             success:function (e) {
                 if(e.result){
-                    layer.msg(e.message,{icon:1});
+                    $(".startImg").hide();
+                    $(".video").show();
+                    var dataList = e.dataList;
+                    for (var i = 0; i < dataList.length; i++) {
+                        var grade = dataList[i]["grade"];
+                        var lessonNo = dataList[i]["lessonNo"];
+                        var subject = dataList[i]["subject"];
+                        var teacherName = dataList[i]["teacherName"];
+                        /*var schoolName = dataList[i]["schoolName"];*/
+                        var studioNo = dataList[i]["studioNo"];
+                        var learningPeriod = dataList[i]["learningPeriod"];
+                        var courseName = dataList[i]["courseName"];
+                        /* var fileUrl = dataList[i]["fileUrl"];*/
+
+                        str += "直播间" + studioNo + "/" + teacherName + "/" + learningPeriod + "/" + grade + "/" + courseName + "/" + subject + "/" + lessonNo + "讲---";
+
+                    }
+                    console.log(str);
                 }else{
                     layer.msg(e.message,{icon:1});
                 }
+
             }
         })
-    },10000);
+  /*  },10000);*/
 </script>
 </body>
 </html>
