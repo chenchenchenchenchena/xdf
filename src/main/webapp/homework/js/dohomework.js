@@ -190,11 +190,12 @@ $(function () {
     //图片上传到自己服务器
     function uploadImage(images) {
 
-        alert("9999999")
+        alert("9999999"+images.length+"---"+images[i]);
         for (var i = 0; i < images.length; i++) {
             var strImag = "<form class='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input class='schoolId_image' type='text' name='schoolId' /><input class='classId_image' type='text' name='classId' />" +
                 "<input type='file' class='image_file' name='file'/></form>";
+            alert(strImag);
             $('#image_form').html(strImag);
 
             $('.schoolId_image').val("73");
