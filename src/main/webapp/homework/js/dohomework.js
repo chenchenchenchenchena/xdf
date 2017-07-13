@@ -224,7 +224,7 @@ $(function () {
 
         idParent.show();
         length = 9;
-        url = "http://www.w3school.com.cn/i/song.mp3";
+        // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
