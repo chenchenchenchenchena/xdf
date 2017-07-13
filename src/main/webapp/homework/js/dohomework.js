@@ -144,6 +144,7 @@ $(function () {
         alert("00000");
         $('.audio_box').show();
         length = 9;
+        url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
@@ -249,30 +250,30 @@ $(function () {
     var playTimer = "", playFlag = false;
     var audioCur = null;
     var oldId = undefined;
-    //播放语音
-    function audioAutoPlay(voiceId) {
-
-        var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
-        audioCur.currentTime = 0;
-        //播放动画
-        $(audioCur).siblings('.play-icon').addClass('playing');
-        playTimer = setTimeout(function () {
-            $(audioCur).siblings('.play-icon').removeClass('playing');
-        }, second * 1000);
-        // wx.ready(function() {
-            document.getElementById('voiceId').play();
-        // });
-
-    }
-    function audioAutoPause(voiceId) {
-        audioCur.currentTime = 0;
-        clearTimeout(playTimer);
-        $(audioCur).siblings('.play-icon').removeClass('playing');
-        // wx.ready(function() {
-            document.getElementById('voiceId').pause();
-        // });
-
-    }
+    // //播放语音
+    // function audioAutoPlay(voiceId) {
+    //
+    //     var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
+    //     audioCur.currentTime = 0;
+    //     //播放动画
+    //     $(audioCur).siblings('.play-icon').addClass('playing');
+    //     playTimer = setTimeout(function () {
+    //         $(audioCur).siblings('.play-icon').removeClass('playing');
+    //     }, second * 1000);
+    //     // wx.ready(function() {
+    //         document.getElementById('voiceId').play();
+    //     // });
+    //
+    // }
+    // function audioAutoPause(voiceId) {
+    //     audioCur.currentTime = 0;
+    //     clearTimeout(playTimer);
+    //     $(audioCur).siblings('.play-icon').removeClass('playing');
+    //     // wx.ready(function() {
+    //         document.getElementById('voiceId').pause();
+    //     // });
+    //
+    // }
 
     /*------------------------------------------------------*/
 
