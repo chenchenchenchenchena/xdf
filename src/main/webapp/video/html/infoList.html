@@ -95,6 +95,7 @@
         });
     }
     $("#ckListTbody").on("click","#playBtn button",function () {
+        $("#playBtn button").attr("disabled",true);
         var fileName=$(this).parent().prev().html();
         var fileN=fileName.split("/");
         /*fileN[0]=fileN[0].substring(3,7);
@@ -115,14 +116,16 @@
         }
         console.log(file);
         $.ajax({
-            url: "http://10.73.33.63:8080/xdfdtmanager/videofile/updatePlayStatus.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',
-            data:file,
+            data:JSON.stringify(file),
             dataType: 'json',
             success:function (e) {
                 if(e.result){
+                    $("#playBtn button").attr("disabled",false);
                     layer.msg(e.message,{icon:1});
                 }else{
+                    $("#playBtn button").attr("disabled",false);
                     layer.msg(e.message,{icon:1});
                 }
             }
