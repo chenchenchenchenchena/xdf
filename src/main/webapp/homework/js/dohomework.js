@@ -26,8 +26,10 @@ $(function () {
     //
     // }
 
-
-    //按下开始录音
+    /*------------------录制语音开始------------------------------------*/
+    /**
+     * 按下开始录音
+     */
     $('#record').on('touchstart', function (event) {
 
         event.preventDefault();
@@ -44,7 +46,9 @@ $(function () {
         }, 300);
     });
 
-    //松手结束录音
+    /**
+     * 松手结束录音
+     */
     $('#record').on('touchend', function (event) {
 
         event.preventDefault();
@@ -70,7 +74,9 @@ $(function () {
         }
     });
 
-    //播放微信录制后的本地语音文件
+    /**
+     * 播放微信录制后的本地语音文件
+     */
     function playVoice(plId) {
         alert("开始播放");
         //播放录音
@@ -79,7 +85,9 @@ $(function () {
         });
     }
 
-    //上传微信服务器，获取保存的serverId
+    /**
+     * 上传微信服务器，获取保存的serverId
+     */
     function uploadVoiceWX(upId) {
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
         //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
@@ -95,7 +103,9 @@ $(function () {
         });
     }
 
-    //将serverId上传到自己服务器
+    /**
+     *将serverId上传到自己服务器
+     */
     function uploadVoice(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
@@ -126,7 +136,9 @@ $(function () {
         });
     }
 
-    //显示语音布局
+    /**
+     * 显示语音布局
+     */
     function showAudio(url, length) {
 
         $('.audio_box').show();
@@ -139,8 +151,12 @@ $(function () {
         $(".audio_box").html(strVoice);
         alert($('.audio_box #audio_record source').attr("src"));
     }
+    /*------------------录制语音结束------------------------------------*/
 
-    //点击选择图片
+    /*------------------图片选择开始------------------------------------*/
+    /**
+     *点击选择图片
+     */
     $('#chooseImage').click(function () {
         wx.chooseImage({
             count: 3,
@@ -175,7 +191,9 @@ $(function () {
         });
     });
 
-    //图片上传到自己服务器
+    /**
+     * 图片上传到自己服务器
+     */
     function uploadImage(images) {
 
         alert("9999999" + images.length + "---");
@@ -229,20 +247,27 @@ $(function () {
         }
 
     }
+    /*----------------图片选择结束--------------------------------------*/
 
-    /*------------------------------------------------------*/
-    //播放作业描述语音
+    /*----------------语音播放开始--------------------------------------*/
+    /**
+     * 播放作业描述语音
+     */
     $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
         voiceCheck($(this).find('audio')[0]);
     });
 
-    // 播放语音
+    /**
+     *播放语音
+     */
     var playTimer = "", playFlag = false;
     var audioCur = null;
     var oldId = undefined;
 
-    //语音播放方法
+    /**
+     *语音播放方法
+     */
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
@@ -260,7 +285,9 @@ $(function () {
         }
     }
 
-    //停止播放方法
+    /**
+     *停止播放方法
+     */
     function stop() {
         audioCur.pause();
         audioCur.currentTime = 0;
@@ -268,7 +295,9 @@ $(function () {
         $(audioCur).siblings('.play-icon').removeClass('playing');
     }
 
-    //开始播放方法
+    /**
+     *开始播放方法
+     */
     function play() {
         var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
         audioCur.currentTime = 0;
@@ -280,7 +309,7 @@ $(function () {
         }, second * 1000);
     }
 
-    /*------------------------------------------------------*/
+    /*--------------------语音播放结束----------------------------------*/
 
 
     // 删除图片
