@@ -248,20 +248,14 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-
-                        if (i % 3 == 0) {
-                            str += " <div class = 'imgBox'>";
-                        }
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
-                        if ((i + 1) % 3 == 0 || i == res.localIds.length - 1) {
-                            str += "</div>";
-                        }
                     }
 
-                    $(".imgBox").show();
+                    $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
-                    uploadImage(res.localIds);
+                    // uploadImage(res.localIds);
+                    upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
@@ -272,6 +266,31 @@ $(function () {
             }
         });
     });
+
+    function upLoadWxImage(images) {
+
+        if (images.localId.length == 0) {
+            alert('请先使用 chooseImage 接口选择图片');
+            return;
+        }
+        var i = 0, length = images.localId.length;
+        images.serverId = [];
+        wx.uploadImage({
+            localId: images.localId[i],
+            success: function (res) {
+                i++;
+                alert('已上传：' + i + '/' + length);
+                images.serverId.push(res.serverId);
+                $('.teBox').val(res.serverId);
+                if (i < length) {
+                    upload();
+                }
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+    }
 
     /**
      * 图片上传到自己服务器
@@ -286,7 +305,7 @@ $(function () {
                 "<input type='file' class='image_file' name='file' value='" + images[i] + "'/></form>";
             alert(strImag);
             $('#image_form').html(strImag);
-            ajaxSubmit({
+            $("#submit_image").ajaxSubmit({
                 data: {
                     'schoolId': '73',
                     'classId': 'hx001',
