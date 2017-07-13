@@ -249,9 +249,6 @@ $(function () {
     //播放语音
     function audioAutoPlay(voiceId) {
 
-        wx.ready(function() {
-            document.getElementById('voiceId').play();
-        });
         var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
         audioCur.currentTime = 0;
         //播放动画
@@ -259,6 +256,9 @@ $(function () {
         playTimer = setTimeout(function () {
             $(audioCur).siblings('.play-icon').removeClass('playing');
         }, second * 1000);
+        wx.ready(function() {
+            document.getElementById('voiceId').play();
+        });
 
     }
     function audioAutoPause(voiceId) {
