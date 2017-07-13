@@ -1,19 +1,23 @@
 $(function(){
+	//缓存数据 TODO
+	sessionStorage.stuNumber = 'SS2522';
+	sessionStorage.studentName = '刘契萱';
+
 	//点击待交作业
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
-	var reqData = 'stuNum=SS5702';
+	var reqData = 'stuNum='+sessionStorage.stuNumber;
 	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
-			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum=SS893', getHwContentSuccess);
+			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum='+sessionStorage.stuNumber, getHwContentSuccess);
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
-				'stuNum':'SS5702' //学生编号
+				'stuNum':sessionStorage.stuNumber //学生编号
 			};
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 
@@ -51,7 +55,7 @@ $(function(){
 //获取待交作业列表
 var homeworkInfosArray=[];
 function getHwContentSuccess(msg) {
-	var msg = {
+	var msg1 = {
 		"code": "200",
 		"data": [
 			{
@@ -68,7 +72,7 @@ function getHwContentSuccess(msg) {
 				"readStatus": 0,
 				"fileContents": [
 					{
-						"diskFilePath": "homework/73/HDXP5MB01/0711",
+						"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 						"fileName": "文件1",
 						"fileSize": "12345",
 						"fileType": "jpg",
@@ -76,7 +80,7 @@ function getHwContentSuccess(msg) {
 						"uploadTime": 1499773427000
 					},
 					{
-						"diskFilePath": "homework/73/HDXU3PB01/0711",
+						"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 						"fileName": "文件1",
 						"fileSize": "23564",
 						"fileType": "MP3",
@@ -99,7 +103,7 @@ function getHwContentSuccess(msg) {
 				"readStatus": 0,
 				"fileContents": [
 					{
-						"diskFilePath": "homework/73/HDXP5MB01/0711",
+						"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 						"fileName": "文件1",
 						"fileSize": "12345",
 						"fileType": "jpg",
@@ -107,7 +111,7 @@ function getHwContentSuccess(msg) {
 						"uploadTime": 1499773427000
 					},
 					{
-						"diskFilePath": "homework/73/HDXU3PB01/0711",
+						"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 						"fileName": "文件1",
 						"fileSize": "23564",
 						"fileType": "MP3",
@@ -172,7 +176,7 @@ function getHwContentSuccess(msg) {
 }
 //获取已完成作业列表
 function getHwFinishSuccess(msg){
-	var msg = {
+	var msg1 = {
 		"code": "200",
 		"data": [
 			{
@@ -182,7 +186,7 @@ function getHwFinishSuccess(msg){
 						"id": "022765ae376a4feab2ce64777050474f",
 						"teaHomeworkReplyFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -190,7 +194,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -214,7 +218,7 @@ function getHwFinishSuccess(msg){
 						"replyStatus": 0,
 						"teaHomeworkFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -222,7 +226,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -246,7 +250,7 @@ function getHwFinishSuccess(msg){
 						"id": "022765ae376a4feab2ce64777050474f",
 						"teaHomeworkReplyFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -254,7 +258,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -278,7 +282,7 @@ function getHwFinishSuccess(msg){
 						"replyStatus": 0,
 						"teaHomeworkFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -286,7 +290,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -302,7 +306,7 @@ function getHwFinishSuccess(msg){
 						"id": "022765ae376a4feab2ce64777050474f",
 						"teaHomeworkReplyFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -310,7 +314,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -334,7 +338,7 @@ function getHwFinishSuccess(msg){
 						"replyStatus": 0,
 						"teaHomeworkFiles": [
 							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711",
+								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
 								"fileName": "文件1",
 								"fileSize": "12345",
 								"fileType": "jpg",
@@ -342,7 +346,7 @@ function getHwFinishSuccess(msg){
 								"uploadTime": 1499773427000
 							},
 							{
-								"diskFilePath": "homework/73/HDXU3PB01/0711",
+								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
 								"fileName": "文件1",
 								"fileSize": "23564",
 								"fileType": "MP3",
@@ -372,6 +376,9 @@ function getHwFinishSuccess(msg){
 		if(msg.data.length>0){
 			var datas = msg.data;
 			// localStorage.finishhwInfos = JSON.stringify(datas);
+			localStorage.finishhwInfos = JSON.stringify({
+				'data':datas
+			});
 			$.each(datas,function(i,items){
 				var lessNos = items.lessNos;
 				var hwLessNosHtml='',readStatus='';

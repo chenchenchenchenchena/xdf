@@ -69,9 +69,10 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             var class_ = e.data;
 
                 for(var i = 0;i<class_.length;i++) {
+                    maxNumber = 0;
                     for(var s = 0;s<class_[i].length;s++){
                         if(class_[i][s].fullMarks>maxNumber){
-                            maxNumber = class_[0][s].fullMarks
+                            maxNumber = class_[i][s].fullMarks
                         }
                     }
                   Xindex = '0';
@@ -168,7 +169,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
         tooltip : {
             trigger: 'axis',
             triggerOn:'click',
-            formatter: '{c2}<br />得分：{c1}<br />平均分:{c}<br />{c3}',
+            formatter: '{c2}<br />得分：{c}<br />平均分:{c1}<br />{c3}',
         },
         legend: {
             data:['个人得分','平均分'],
@@ -228,7 +229,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'个人得分',
                 type:'line',
-                data:y1,
+                data:y2,
                 symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
@@ -247,7 +248,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'平均分',
                 type:'line',
-                data:y2,
+                data:y1,
                 symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
