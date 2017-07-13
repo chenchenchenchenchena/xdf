@@ -252,17 +252,18 @@ $(function () {
         var newID = $(voiceId).attr('id');
         if (newID != oldId) {
             if (audioCur != null) {
-                stop();
+                // stop();
+                audioAutoPause($(audioCur).attr('id'));
                 audioCur = null;
             }
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
             // play();
-            audioAutoPlay(voiceId);
+            audioAutoPlay(newID);
         } else {
             oldId = undefined;
             // stop();
-            audioAutoPause();
+            audioAutoPause(newID);
         }
     }
 
