@@ -195,7 +195,7 @@ $(function () {
         for (var i = 0; i < images.length; i++) {
             var strImag = "<form id='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
-                "<input type='image_file' name='file'/></form>";
+                "<input type='file' id='image_file' name='file'/></form>";
             $('#image_form').html(strImag);
 
             $('#schoolId_image').val("73");
