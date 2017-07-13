@@ -240,10 +240,12 @@ $(function(){
             })
         });
 
-        $('.big_back').on('touchend',function(){
+        $('.big_back').on('touchstart',function(){
         if($('.class_name').css('display')=='block'){
             $('.class_name').animate({'bottom':'-438px'});
-            $(this).hide();
+            setTimeout(function(){
+                $('.big_back').hide();
+            },300);
             $('.class_name i').html('0');
             $('.class_name img').attr('src','images/C05_06.png');
             if($('.class_name i').html()=='0'){
@@ -251,16 +253,22 @@ $(function(){
             }
         }
         if($('.succ').css('display')=='block'){
-            $(this).hide();
+            setTimeout(function(){
+                $('.big_back').hide();
+            },300);
             $('.succ').hide();
         }
         if($('.erro').css('display')=='block'){
-            $(this).hide();
+            setTimeout(function(){
+                $('.big_back').hide();
+            },300);
             $('.erro').hide();
         }
     });
         $('.big_whit').on('touchend',function(){
-        $(this).hide();
+            setTimeout(function(){
+                $('.big_whit').hide();
+            },300);
         $('.song_s').hide();
     });
 
@@ -272,15 +280,12 @@ $(function(){
 
 //按下开始录音
     $('#record').on('touchstart', function (event) {
-        // $('document').on('touchstart', '#record', function (event) {
-
         event.preventDefault();
         START = new Date().getTime();
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -291,12 +296,9 @@ $(function(){
 
     //松手结束录音
     $('#record').on('touchend', function (event) {
-        // $('document').on('touchend', '#record', function (event) {
-
-
         event.preventDefault();
         END = new Date().getTime();
-        alert(1)
+        alert(1);
         if ((END - START) < 300) {
             END = 0;
             START = 0;
@@ -309,7 +311,7 @@ $(function(){
                     alert(res);
                     localId = res.localId;
                     uploadVoiceWX(localId);
-                    // playVoice(localId);
+                    playVoice(localId);
 
                 },
                 fail: function (res) {
@@ -326,14 +328,6 @@ $(function(){
             localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
         });
     }
-
-    //测试数据
-    // $('#record').click(function () {
-    // // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
-    // // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
-    // // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    // showAudio("http://dn-storage-xdf.gokuai.com/c3/c3a2752f06713897a5f216786b3e2f214e776a5b.dat?response-content-disposition=attachment%3B%20filename%3D%227766bae1a7974a5ebc056ae9db1bb35d.mp3%22%3B%20filename%2A%3Dutf-8%27%277766bae1a7974a5ebc056ae9db1bb35d.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499852562&Signature=Uk5pSFpjHYoIc6%2F0hrdeHZ5Cu1s%3D", 19);
-    // });
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
@@ -360,6 +354,7 @@ $(function(){
             'mediaId': serverId,
             'schoolId': "73",
             'classId': "hx001"
+
         };
         $.ajax({
             // url: url_o + "upload/uploadAudio.do",
