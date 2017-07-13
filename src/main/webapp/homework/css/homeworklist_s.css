@@ -1,6 +1,15 @@
 body,html{
 	background: #f1f1f1;
 }
+.stuImg{
+	display: inline-block;
+	width:42px;
+	height: 42px;
+	background: url(../images/121.png) no-repeat;
+	position: absolute;
+	left: 176px;
+	top:0;
+}
 .hwHeader{
 	height: 88px;
 	margin-bottom: 18px;
