@@ -143,7 +143,7 @@ $(function () {
 
         $('.audio_box').show();
         length = 9;
-        // url = "http://www.w3school.com.cn/i/song.mp3";
+        url = "http://yunku.gokuai.com/file/ybvupnym#";
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
@@ -151,6 +151,7 @@ $(function () {
         $(".audio_box").html(strVoice);
         alert($('.audio_box #audio_record source').attr("src"));
     }
+
     /*------------------录制语音结束------------------------------------*/
 
     /*------------------图片选择开始------------------------------------*/
@@ -229,24 +230,25 @@ $(function () {
             // $('.image_file').val(images[i]);
             //
             // $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
-            $("#submit_image").ajaxSubmit({
-                resetForm: "true",
-                success: function (data) {
-                    alert("ok:" + data);
-                    data = $.parseJSON(data);
-                    if (data.success == true) {
-                    } else {
-                        alert(data.message);
-                    }
-                },
-                error: function (jqxhr, errorMsg, errorThrown) {
-                    alert("error");
+            $("#submit_image").ajaxSubmit(function (data) {
+                alert("ok:" + data);
+                data = $.parseJSON(data);
+                if (data.success == true) {
+                } else {
+                    alert(data.message);
                 }
+
+                // error: function (jqxhr, errorMsg, errorThrown) {
+                //     alert(errorMsg);
+                //     alert(jqxhr);
+                //     alert(errorThrown);
+                // }
             });
 
         }
 
     }
+
     /*----------------图片选择结束--------------------------------------*/
 
     /*----------------语音播放开始--------------------------------------*/
