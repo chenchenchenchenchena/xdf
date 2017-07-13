@@ -3,34 +3,32 @@
  */
 $(function () {
     var layer1;
-    //点击作业排行榜
-    $(document).on('touchend', '.hwRankTitle', function () {
-        window.location.href = "studentrank_s.html";
-    });
+    // //点击作业排行榜
+    // $(document).on('touchend', '.hwRankTitle', function () {
+    //     window.location.href = "studentrank_s.html";
+    // });
     // // 显示作业信息
-    localStorage.homeworkInfos=JSON.stringify({"knowledgePoint":"知识点1,知识点2","description":"如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.","fileContents":[{"diskFilePath":"homework/73/HDXP5MB01/0711","fileName":"文件1","fileSize":"12345","fileType":"jpg","id":"c572b982b22149a5ab2e5d98650a3e3c","uploadTime":1499773427000},{"diskFilePath":"homework/73/HDXU3PB01/0711","fileName":"文件1","fileSize":"23564","fileType":"MP3","id":"c84c4da06da9470283588366812f7d01","uploadTime":1499773427000}]});
-    gethwInfos();
-    function gethwInfos() {
-        var hwInfos = JSON.parse(localStorage.homeworkInfos);
-        var knowledgePoint, kpHtml;
-        //知识点
-        if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
-            knowledgePoint = hwInfos.knowledgePoint.split(',');
-            for (var i = 0; i < knowledgePoint.length; i++) {
-                kpHtml = '<span>' + knowledgePoint[i] + '</span>';
-                $('.knowPoint').append(kpHtml);
-            }
-        }
-        //作业描述
-        $('.hwCon').html(hwInfos.description);
-        //语音，图片 TODO
-
-    }
+    // var hwInfos = JSON.parse(localStorage.homeworkInfos);
+    // gethwInfos();
+    // function gethwInfos() {
+    //     var knowledgePoint, kpHtml;
+    //     //知识点
+    //     if (hwInfos.knowledgePoint != "" && hwInfos.knowledgePoint != null && hwInfos.knowledgePoint != undefined) {
+    //         knowledgePoint = hwInfos.knowledgePoint.split(',');
+    //         for (var i = 0; i < knowledgePoint.length; i++) {
+    //             kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+    //             $('.knowPoint').append(kpHtml);
+    //         }
+    //     }
+    //     //作业描述
+    //     $('.hwCon').html(hwInfos.description);
+    //     //语音，图片 TODO
+    //
+    // }
 
 
     //按下开始录音
     $('#record').on('touchstart', function (event) {
-    // $('document').on('touchstart', '#record', function (event) {
 
         event.preventDefault();
         START = new Date().getTime();
@@ -49,7 +47,6 @@ $(function () {
 
     //松手结束录音
     $('#record').on('touchend', function (event) {
-    // $('document').on('touchend', '#record', function (event) {
 
 
         event.preventDefault();
@@ -157,8 +154,6 @@ $(function () {
 
     //点击选择图片
     $('#chooseImage').click(function () {
-        alert("jlk;l");
-    // $('document').on('touchend', '#chooseImage', function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -180,7 +175,7 @@ $(function () {
                     $(".imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
-                    uploadImag(res.localIds);
+                    uploadImage(res.localIds);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
@@ -193,22 +188,22 @@ $(function () {
     });
 
     //图片上传到自己服务器
-    function uploadImag(images) {
+    function uploadImage(images) {
 
         alert("9999999")
         for (var i = 0; i < images.length; i++) {
-            var strImag = "<form id='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
-                "<input id='schoolId_image' type='text' name='schoolId' /><input id='classId_image' type='text' name='classId' />" +
-                "<input type='image_file' name='file'/></form>";
+            var strImag = "<form class='submit_image' action='upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+                "<input class='schoolId_image' type='text' name='schoolId' /><input class='classId_image' type='text' name='classId' />" +
+                "<input type='file' class='image_file' name='file'/></form>";
             $('#image_form').html(strImag);
 
-            $('#schoolId_image').val("73");
-            $('#classId_image').val("hx001");
-            $('#image_file').val(images[i]);
+            $('.schoolId_image').val("73");
+            $('.classId_image').val("hx001");
+            $('.image_file').val(images[i]);
 
             $("form[enctype]").attr("action", "http://10.200.80.235:8080/xdfdtmanager/" + $("form[enctype]").attr("action"));
-
-            $("#submit_image").ajaxSubmit({
+            alert($('.image_file').html());
+            $(".submit_image").ajaxSubmit({
                 resetForm: "true",
                 success: function (data) {
                     alert(data);
