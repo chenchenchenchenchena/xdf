@@ -332,7 +332,7 @@ $(function () {
         $('#'+imageId).show();
         var str = "";
         str += "<div class = 'imgBox'>";
-        str += "<div><span class='stuImg'></span><img src='" + previewUrl + "'/></div>";
+        str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
         $('#'+imageId).html(str);
     }

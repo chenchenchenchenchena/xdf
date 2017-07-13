@@ -38,7 +38,7 @@ $(function(){
 	// 点击待交作业列表
 	$(document).on('touchend','.hwList',function(){
 		sessionStorage.removeItem('homeworkInfos');
-		window.location.href = 'dohomework_s.html';
+		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
 	});
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
@@ -49,6 +49,7 @@ $(function(){
 })
 
 //获取待交作业列表
+var homeworkInfosArray=[];
 function getHwContentSuccess(msg) {
 	var msg = {
 		"code": "200",
@@ -134,12 +135,14 @@ function getHwContentSuccess(msg) {
 				// }
 				var knowledgePoint, kpHtml = "";
 				var homeworkInfos ={//作业信息：知识点，描述，图片，语音
+					'id':item.id,
 					'knowledgePoint':item.knowledgePoint,
 					'description':item.description,
 					'fileContents':item.fileContents
 				};
-				localStorage.homeworkInfos = JSON.stringify(homeworkInfos);
-				console.log(knowledgePoint);
+				homeworkInfosArray.push(homeworkInfos);
+				// localStorage.homeworkInfos = JSON.stringify(homeworkInfos);
+				console.log(typeof homeworkInfosArray);
 				if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
 					knowledgePoint = item.knowledgePoint.split(',');
 					for(var i = 0;i<knowledgePoint.length;i++){
@@ -148,7 +151,7 @@ function getHwContentSuccess(msg) {
 				}
 
 				console.log(kpHtml);
-				var hwListHtml = '<div class="hwList">'
+				var hwListHtml = '<div class="hwList" data-id="'+item.id+'">'
 					+'<div class="hwLeft">'+item.courseName+'</div>'
 					+'<div class="hwRight">'
 					+'<div class="hwTime"><span>'+classTitle+'</span>'
@@ -156,6 +159,9 @@ function getHwContentSuccess(msg) {
 					+'<div class="hwKon">'+kpHtml+'</div></div></div>';
 				$(".hwContent").append(hwListHtml);
 				$(".hwContent").show();
+			});
+			localStorage.homeworkInfos = JSON.stringify({
+				'data':homeworkInfosArray
 			});
 		}else{
 			$('.hwEmpty p').html("您没有待交作业哦~");
