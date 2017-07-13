@@ -195,7 +195,7 @@ $(function () {
             alert(images[i]);
             var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='"+url_o+"upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
-                "<input type='file' class='image_file' name='file'/></form>";
+                "<input type='file' class='image_file' name='file' value='"+images[i]+"'/></form>";
             alert(strImag);
             $('#image_form').html(strImag);
 
@@ -205,7 +205,7 @@ $(function () {
             //
             // $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
             alert($('.image_file').html());
-            $(".submit_image").ajaxSubmit({
+            $("#submit_image").ajaxSubmit({
                 resetForm: "true",
                 success: function (data) {
                     alert(data);
