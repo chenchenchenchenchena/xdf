@@ -259,18 +259,18 @@ $(function () {
         playTimer = setTimeout(function () {
             $(audioCur).siblings('.play-icon').removeClass('playing');
         }, second * 1000);
-        wx.ready(function() {
+        // wx.ready(function() {
             document.getElementById('voiceId').play();
-        });
+        // });
 
     }
     function audioAutoPause(voiceId) {
         audioCur.currentTime = 0;
         clearTimeout(playTimer);
         $(audioCur).siblings('.play-icon').removeClass('playing');
-        wx.ready(function() {
+        // wx.ready(function() {
             document.getElementById('voiceId').pause();
-        });
+        // });
 
     }
 
@@ -283,18 +283,18 @@ $(function () {
         var newID = $(voiceId).attr('id');
         if (newID != oldId) {
             if (audioCur != null) {
-                // stop();
-                audioAutoPause($(audioCur).attr('id'));
+                stop();
+                // audioAutoPause($(audioCur).attr('id'));
                 audioCur = null;
             }
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
-            // play();
-            audioAutoPlay(newID);
+            play();
+            // audioAutoPlay(newID);
         } else {
             oldId = undefined;
-            // stop();
-            audioAutoPause(newID);
+            stop();
+            // audioAutoPause(newID);
         }
     }
 
