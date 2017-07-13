@@ -149,6 +149,7 @@ function getHwContentSuccess(msg) {
 				console.log(typeof homeworkInfosArray);
 				if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
 					knowledgePoint = item.knowledgePoint.split(',');
+					console.log(knowledgePoint+"----"+knowledgePoint.length);
 					for(var i = 0;i<knowledgePoint.length;i++){
 						kpHtml += '<span>'+knowledgePoint[i]+'</span>';
 					}

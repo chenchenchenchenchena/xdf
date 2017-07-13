@@ -495,6 +495,15 @@ $(function () {
             $('#chooseImage').show();
         }
     });
+    //作业描述验证
+    $('.teBox').on('keyup',function(){
+        if($(this).val().length>200){
+            $('.word').css('color','red');
+        }else{
+            $('.word').css('color','#808080');
+        }
+        $('.word').html(''+$(this).val().length+'/200')
+    });
 //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
         console.log($('.notsubmit .imgBox').children('div').length);
