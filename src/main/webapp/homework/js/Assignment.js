@@ -305,6 +305,7 @@ $(function(){
                     localId = res.localId;
                     song_s  = localId;
                     uploadVoiceWX(localId);
+                    showAudio()
                 }
         });
     });
