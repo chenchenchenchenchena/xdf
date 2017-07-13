@@ -182,7 +182,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                 name:'课次',
                 type : 'category',
                 boundaryGap : false,
-                data :x,
+                data :s,
                 nameTextStyle:{
                     fontSize:24
                 },
@@ -228,7 +228,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'个人得分',
                 type:'line',
-                data:y1,
+                data:y2,
                 symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
@@ -247,7 +247,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             {
                 name:'平均分',
                 type:'line',
-                data:y2,
+                data:y1,
                 symbolSize:14,
                 nameTextStyle:{
                     fontSize:24
