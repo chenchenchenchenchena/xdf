@@ -485,6 +485,7 @@ html body .tealist_s .more_so{
 	top:0;
 	opcaticty:0;
 }
+
 .music_s{
 	width:50%;
 	height:80px;
@@ -519,4 +520,23 @@ html body .tealist_s .more_so{
 	100% {
 		background-image: url("../images/voice_playing_f3.png");
 	}
+}
+
+
+
+.imgBox{
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+.imgBox div{
+	margin:0 20px 30px 0;
+	float: left;
+	position: relative;
+}
+.imgBox>div:last-child{
+	margin-right: 0;
+}
+.imgBox div img{
+	width:216px;
+	height: 216px;
 }

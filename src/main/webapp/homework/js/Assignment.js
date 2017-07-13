@@ -278,108 +278,196 @@ $(function(){
             $('.song_s').show();
         });
 
-//按下开始录音
-    var timeInedex = 0;
-    var timeds;
-    $('#record').on('touchstart', function (event) {
-        event.preventDefault();
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    timeds = setInterval(function(){
-                        timeInedex++
-                    },1000);
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
+        //按下开始录音
+        var timeInedex = 0;
+        var timeds;
+        $('#record').on('touchstart', function (event) {
+            event.preventDefault();
+                wx.startRecord({
+                    success: function () {
+                        localStorage.rainAllowRecord = 'true';
+                        timeds = setInterval(function(){
+                            timeInedex++
+                        },1000);
+                    },
+                    cancel: function () {
+                        alert('用户拒绝授权录音');
+                    }
+                });
+        });
+        var song_s = '';
+        //松手结束录音
+        $('#record').on('touchend', function (event) {
+            event.preventDefault();
+            wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        localId = res.localId;
+                        song_s  = localId;
+                        uploadVoiceWX(localId);
+                        showAudio();
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                    }
+            });
+        });
+
+        //播放微信录制后的本地语音文件
+        function playVoice(plId) {
+            //播放录音
+            wx.playVoice({
+                localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+            });
+        }
+
+        //上传微信服务器，获取保存的serverId
+        function uploadVoiceWX(upId) {
+            //调用微信的上传录音接口把本地录音先上传到微信的服务器
+            //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+            wx.uploadVoice({
+                localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+                    // alert(JSON.stringify(res));
+                    //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
+                    serverId = res.serverId;
+                    uploadVoice(serverId);
                 }
             });
-    });
-    var song_s = '';
-    //松手结束录音
-    $('#record').on('touchend', function (event) {
-        event.preventDefault();
-        wx.stopRecord({
-                success: function (res) {
-                    clearInterval(timeds);
-                    localId = res.localId;
-                    song_s  = localId;
-                    uploadVoiceWX(localId);
-                    showAudio();
-                    $('.song_s').hide();
-                    $('.big_whit').hide();
+        }
+
+        //将serverId上传到自己服务器
+        function uploadVoice(serverId) {
+            var cbconfig = {
+                'appId': "wx559791e14e9ce521",
+                'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+                'mediaId': serverId,
+                'schoolId': "73",
+                'classId': "hx001"
+
+            };
+            $.ajax({
+                // url: url_o + "upload/uploadAudio.do",
+                url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+                type: 'post',
+                dataType: 'json',
+                data: cbconfig,
+                success: function (e) {
+                    alert(JSON.stringify(e));
+                    if (e.status == "failure") {
+                        alert(e.message);
+                    } else {
+                        $('.teBox').val(e.data.fileUrl);
+                        //显示语音布局
+                        showAudio(e.data.fileUrl, e.data.fileSize);
+                    }
+
+
                 }
-        });
-    });
+            });
+        }
 
-    //播放微信录制后的本地语音文件
-    function playVoice(plId) {
-        //播放录音
-        wx.playVoice({
-            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-        });
-    }
+        //显示语音布局
+        function showAudio(url, length) {
+            // $('.music_s').css('width',timeInedex/0.6+'%');
+            $('.music_s span').html(timeInedex+'"');
+        }
 
-    //上传微信服务器，获取保存的serverId
-    function uploadVoiceWX(upId) {
-        //调用微信的上传录音接口把本地录音先上传到微信的服务器
-        //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
-        wx.uploadVoice({
-            localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
-            isShowProgressTips: 1, // 默认为1，显示进度提示
+
+        $('.music_s ').on('touchend',function(){
+            $(this).addClass('playing_s');
+            playVoice(song_s);
+        })
+
+        //图片上传
+        $('.image_s').click(function () {
+        wx.chooseImage({
+            count: 3,
             success: function (res) {
-                // alert(JSON.stringify(res));
-                //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-                serverId = res.serverId;
-                uploadVoice(serverId);
-            }
-        });
-    }
 
-    //将serverId上传到自己服务器
-    function uploadVoice(serverId) {
-        var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
-            'mediaId': serverId,
-            'schoolId': "73",
-            'classId': "hx001"
+                if (res.localIds.length > 0) {
 
-        };
-        $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
-                alert(JSON.stringify(e));
-                if (e.status == "failure") {
-                    alert(e.message);
-                } else {
-                    $('.teBox').val(e.data.fileUrl);
-                    //显示语音布局
-                    showAudio(e.data.fileUrl, e.data.fileSize);
+                    var str = "";
+                    for (var i = 0; i < res.localIds.length; i++) {
+
+                        if (i % 3 == 0) {
+                            str += " <div class = 'imgBox'>";
+                        }
+                        str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+                        if ((i + 1) % 3 == 0 || i == res.localIds.length - 1) {
+                            str += "</div>";
+                        }
+                    }
+
+                    $(".imgBox").show();
+                    $(".notsubmit .imgBox").html(str);
+                    //上传服务器
+                    uploadImage(res.localIds);
+                    //界面样式控制
+                    if (res.localIds.length >= 3) {
+                        $('#chooseImage').hide();
+                    }
                 }
 
 
             }
         });
-    }
+    });
 
-    //显示语音布局
-    function showAudio(url, length) {
-        $('.music_s').css('width',timeInedex/0.6+'%');
-        $('.music_s span').html(timeInedex+'"');
-    }
+         // 图片上传到自己服务器
+        function uploadImage(images) {
 
+            alert("9999999" + images.length + "---");
+            for (var i = 0; i < images.length; i++) {
+                alert(images[i]);
+                var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='" + url_o + "upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+                    "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
+                    "<input type='file' class='image_file' name='file' value='" + images[i] + "'/></form>";
+                alert(strImag);
+                $('#image_form').html(strImag);
+                // $('#submitBtn').on('touchend',function () {
+                //     alert("提交表单");
+                //     $("#submit_image").ajaxSubmit({
+                //         resetForm: "true",
+                //         type: 'post', // 提交方式 get/post
+                //         url: url_o+'upload/uploadFiles.do', // 需要提交的 url
+                //         data: {
+                //             'schoolId': '73',
+                //             'classId': 'hx001',
+                //             'file':images[i]
+                //         },
+                //         success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                //             // 此处可对 data 作相关处理
+                //             alert('提交成功！'+data);
+                //         },
+                //         error: function (jqxhr, errorMsg, errorThrown) {
+                //             alert("提交失败")
+                //         }
+                //     });
+                // })
+                // $('.schoolId_image').val("73");
+                // $('.classId_image').val("hx001");
+                // $('.image_file').val(images[i]);
+                //
+                // $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
+                $("#submit_image").ajaxSubmit(function (data) {
+                    alert("ok:" + data);
+                    data = $.parseJSON(data);
+                    if (data.success == true) {
+                    } else {
+                        alert(data.message);
+                    }
 
-    $('.music_s ').on('touchend',function(){
-        $(this).addClass('playing_s');
-        playVoice(song_s);
-    })
+                    // error: function (jqxhr, errorMsg, errorThrown) {
+                    //     alert(errorMsg);
+                    //     alert(jqxhr);
+                    //     alert(errorThrown);
+                    // }
+                });
 
+            }
 
+        }
 
 
 
