@@ -51,8 +51,8 @@ $(function () {
         var pizhuHtml = "";
         if (datas.replyStatus=="0"){
             pizhuHtml = "暂无批注"
-        }else{//TODO
-
+        }else{
+            pizhuHtml = datas.replyDesc;
         }
         $('.comment .anDes').html(pizhuHtml);
         //语音，图片
