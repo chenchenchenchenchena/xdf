@@ -224,7 +224,7 @@ $(function () {
 
         idParent.show();
         length = 9;
-        // url = "http://yunku.gokuai.com/file/ybvupnym#";
+        url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
@@ -250,14 +250,12 @@ $(function () {
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
 
-
                         alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
-                    // uploadImage(res.localIds);
                     upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
@@ -270,6 +268,11 @@ $(function () {
         });
     });
 
+    // var serverIds = [];
+    /**
+     * 上传微信服务器
+     * @param images
+     */
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
@@ -278,7 +281,6 @@ $(function () {
         }
         var i = 0, length = images.localIds.length;
 
-        // var serverIds = [];
         function upload() {
             wx.uploadImage({
                 localId: images.localIds[i],
@@ -286,7 +288,8 @@ $(function () {
                     i++;
                     alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
-                    $('.teBox').val(res.serverId +"$"+images.localIds[i]);
+                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
@@ -296,80 +299,49 @@ $(function () {
                 }
             });
         }
-        upload();
 
+        upload();
     }
 
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(images) {
-
-        alert("9999999" + images.length + "---");
-        for (var i = 0; i < images.length; i++) {
-            alert(images[i]);
-            var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='" + url_o + "upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
-                "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
-                "<input type='file' class='image_file' name='file' value='" + images[i] + "'/></form>";
-            alert(strImag);
-            $('#image_form').html(strImag);
-            $("#submit_image").ajaxSubmit({
-                data: {
-                    'schoolId': '73',
-                    'classId': 'hx001',
-                    'file': images[i]
-                },
-                resetForm: "true",
-                success: function (data) {
-                    alert(data);
-                    // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
-                    data = $.parseJSON(data);
-                    if (data.success == true) {
-                        $("#submit-3 .filename").val(file);
-                        $("#hidden3").val(data.thumbnail);
-                        $("#ercodept").attr("src", data.thumbnail);
-                        $("#m3").html(data.message);
-                    } else {
-                        $("#m3").html(data.message);
-                        setTimeout(function () {
-                            $("#m3").html("");
-                            $("#submit-3 .filename").val($("#hidden3").val());
-                        }, 4000);
-                    }
-                }
-            });
-            $("#submit_image").ajaxSubmit({
-                data: {
-                    'schoolId': '73',
-                    'classId': 'hx001',
-                    'file': images[i]
-                },
-                success: function (data) {
-                    data = $.parseJSON(data);
-                    if (data.success == true) {
-                        fileName = data.fileName;
-                        fileSize = data.fileSize;
-                        fileType = data.fileType;
-                        diskFilePath = data.diskFilePath;
-                        fileParams[fileParams.length + i] = {
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        };
-                    } else {
-                        alert(data.message);
-                    }
-                },
-                error: function (jqxhr, errorMsg, errorThrown) {
-                    alert("提交失败" + errorMsg);
+    function uploadImage() {
+        var cbconfig = {
+            'appId': "wx559791e14e9ce521",
+            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'mediaId': serverId,
+            'schoolId': "73",
+            'classId': "hx001"
+        };
+        $.ajax({
+            // url: url_o + "upload/uploadAudio.do",
+            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            type: 'post',
+            dataType: 'json',
+            data: cbconfig,
+            success: function (data) {
+                alert(JSON.stringify(data));
+                if (e.status == "failure") {
+                    alert(e.message);
+                } else {
+                    fileName = data.fileName;
+                    fileSize = data.fileSize;
+                    fileType = data.fileType;
+                    diskFilePath = data.diskFilePath;
+                    fileParams[fileParams.length + i] = {
+                        "homeworkSinfoId": homeworkSinfoId,
+                        "fileName": fileName,
+                        "fileType": fileType,
+                        "fileSize": fileSize,
+                        "diskFilePath": diskFilePath,
+                        "uploadUser": uploadUser
+                    };
                 }
 
-            });
 
-        }
+            }
+        });
 
     }
 
