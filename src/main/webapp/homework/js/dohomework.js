@@ -63,7 +63,7 @@ $(function () {
             alert(2);
             wx.stopRecord({
                 success: function (res) {
-                    alert(res);
+                    alert(localId);
                     localId = res.localId;
                     uploadVoiceWX(localId);
 
@@ -127,7 +127,7 @@ $(function () {
                 } else {
                     $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
-                    showAudio(e.data.fileUrl, e.data.fileSize);
+                    showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
                 }
 
 
@@ -138,16 +138,16 @@ $(function () {
     /**
      * 显示语音布局
      */
-    function showAudio(url, length) {
+    function showAudio(url, length, idParent, idChildren) {
 
-        $('.audio_box').show();
+        idParent.show();
         length = 9;
         // url = "http://yunku.gokuai.com/file/ybvupnym#";
 
-        var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+        var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
             "</div><span>" + length + "''</span>";
-        $(".audio_box").html(strVoice);
+        idParent.html(strVoice);
         alert($('.audio_box #audio_record source').attr("src"));
     }
 
@@ -312,6 +312,51 @@ $(function () {
 
     /*--------------------语音播放结束----------------------------------*/
 
+    /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
+    getFileInfo();
+    /**
+     * 获取文件信息
+     */
+    function getFileInfo(diskFileUrl) {
+        diskFileUrl = "homework/b479a873299649a48d9741582a735450.jpg";
+        var netConfig = "IN";//DEFAULT/IN
+        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
+        $.ajax({
+            url: url_o + "upload/viewFileDetail.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                alert(JSON.stringify(e));
+                if (e.success == false) {
+                    alert(e.message);
+                } else {
+                    //将文件显示到布局中
+                    if (fileType == "mp3") {
+                        showAudio(e.fileUrl, e.fileSize, $('#audio_1'), "audio1");
+                    } else {
+                        showImage(e.previewUrl);
+                    }
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 显示获取到的图片
+     */
+    function showImage(previewUrl) {
+        $('#imagBox_1').show();
+        var str = "";
+        str += "<div class = 'imgBox'>";
+        str += "<div><span class='stuImg'></span><img src='" + previewUrl + "'/></div>";
+        str += "</div>";
+        $('#imagBox_1').html(str);
+
+    }
+
+    /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
 
     // 删除图片
     $(document).on('touchend', '.stuImg', function () {

@@ -12,11 +12,11 @@ $(function () {
     var classIndex = GetRequest("classIndex");//课次index
     // alert(curIndex+"---"+classIndex);
     var reqData = {
-        'stuNum':'SS5702' //学生编号
+        'stuNum': 'SS5702' //学生编号
     };
     ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishInfosSuccess);
 
-    function getHwFinishInfosSuccess(msg){
+    function getHwFinishInfosSuccess(msg) {
         var msg = {
             "code": "200",
             "data": [
@@ -207,15 +207,15 @@ $(function () {
             ],
             "status": "success"
         };
-        if(msg.code==200){
-            if(msg.data.length>0){
+        if (msg.code == 200) {
+            if (msg.data.length > 0) {
                 var datas = msg.data[curIndex].lessNos[classIndex];
                 /*作业信息*/
                 //知识点
-                if(datas.teacherKnowledgePoint!="" && datas.teacherKnowledgePoint!=null && datas.teacherKnowledgePoint!=undefined){
+                if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
                     knowledgePoint = datas.teacherKnowledgePoint.split(',');
-                    for(var i = 0;i<knowledgePoint.length;i++){
-                        kpHtml = '<span>'+knowledgePoint[i]+'</span>';
+                    for (var i = 0; i < knowledgePoint.length; i++) {
+                        kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                         $('.knowPoint').append(kpHtml);
                     }
                 }
@@ -229,13 +229,13 @@ $(function () {
                 $('.comment .anDes').html(datas.teaHomeworkFiles.description);
 
 
-
-            }else{
+            } else {
                 $('.hwEmpty p').html("您没有已交作业哦~");
                 $('.hwEmpty').show();
             }
         }
     }
+
     // 显示作业信息
 
     // getfinishhwInfos();
@@ -243,14 +243,14 @@ $(function () {
         console.log(localStorage.finishhwInfos);
         var hwfinishInfos = JSON.parse(localStorage.finishhwInfos)[idIndex];
         console.log(hwfinishInfos);
-        var knowledgePoint,kpHtml;
-        $.each(hwfinishInfos,function (i,items) {
+        var knowledgePoint, kpHtml;
+        $.each(hwfinishInfos, function (i, items) {
             console.log(items.description)
             //知识点
-            if(items.teacherKnowledgePoint!="" && items.teacherKnowledgePoint!=null && items.teacherKnowledgePoint!=undefined){
+            if (items.teacherKnowledgePoint != "" && items.teacherKnowledgePoint != null && items.teacherKnowledgePoint != undefined) {
                 knowledgePoint = items.teacherKnowledgePoint.split(',');
-                for(var i = 0;i<knowledgePoint.length;i++){
-                    kpHtml = '<span>'+knowledgePoint[i]+'</span>';
+                for (var i = 0; i < knowledgePoint.length; i++) {
+                    kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                     $('.knowPoint').append(kpHtml);
                 }
             }
@@ -260,22 +260,82 @@ $(function () {
         });
 
 
-
     }
+
     // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function (){
-        alert("预览图片"+$(this).attr('src'));
+    $(document).on('touchend', '.imgBox>div>img', function () {
+        alert("预览图片" + $(this).attr('src'));
         var previewUrl = "";
-        if($(this).attr('src').indexOf('weixin://')!= -1){
+        if ($(this).attr('src').indexOf('weixin://') != -1) {
             previewUrl = $(this).attr('src');
-        }else{
-            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/'+$(this).attr('src');
+        } else {
+            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
         }
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
+
+    /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
+    getFileInfo();
+    /**
+     * 获取文件信息
+     */
+    function getFileInfo(fileArray) {
+        fileArray = ["1", "homework/b479a873299649a48d9741582a735450.jpg", "jpg"];
+        var flag = fileArray[0];
+        var fileType = fileArray[2];
+        var diskFileUrl = fileArray[1];
+        var netConfig = "IN";//DEFAULT/IN
+        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
+        $.ajax({
+            url: url_o + "upload/viewFileDetail.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                alert(JSON.stringify(e));
+                if (e.success == false) {
+                    alert(e.message);
+                } else {
+                    //将文件显示到布局中
+                    if (fileType == "mp3") {
+                        showAudio(e.fileUrl, e.fileSize, "audio_" + flag, "audio" + flag);
+                    } else {
+                        showImage(e.previewUrl, "imagBox_" + flag);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 显示语音布局
+     */
+    function showAudio(url, length, idParent, idChildren) {
+
+        // document.getElementById(idParent).show();
+        $('#'+idParent).show();
+        length = 9;
+        var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i>" +
+            "</div><span>" + length + "''</span>";
+        $('#'+idParent).html(strVoice);
+    }
+
+
+    /**
+     * 显示获取到的图片
+     */
+    function showImage(previewUrl, imageId) {
+        $('#'+imageId).show();
+        var str = "";
+        str += "<div class = 'imgBox'>";
+        str += "<div><span class='stuImg'></span><img src='" + previewUrl + "'/></div>";
+        str += "</div>";
+        $('#'+imageId).html(str);
+    }
 
 });
 /* //超出字数
