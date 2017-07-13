@@ -294,6 +294,7 @@ $(function () {
                 },
                 resetForm: "true",
                 success: function (data) {
+                    alert(data);
                     // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
                     data = $.parseJSON(data);
                     if (data.success == true) {
