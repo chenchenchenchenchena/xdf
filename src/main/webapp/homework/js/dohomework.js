@@ -143,7 +143,7 @@ $(function () {
 
         $('.audio_box').show();
         length = 9;
-        url = "http://yunku.gokuai.com/file/ybvupnym#";
+        // url = "http://yunku.gokuai.com/file/ybvupnym#";
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
