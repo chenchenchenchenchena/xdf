@@ -1,6 +1,7 @@
 $(function(){
-var a = { "classCode":sessionStorage.classCode_s,"homeworkTime":sessionStorage.homeworkTime_s ,"courseCode":sessionStorage.courseCode_s ,"teacherEmail":"caoxuefeng@xdf.cn","schoolId":"73"};
-    ajax_S(homework_s.t_more,a,function(e){
+    var need = { "classCode":sessionStorage.classCode_s,"homeworkTime":sessionStorage.homeworkTime_s ,"courseCode":sessionStorage.courseCode_s ,"teacherEmail":"caoxuefeng@xdf.cn","schoolId":"73"};
+
+    ajax_S(homework_s.t_more,need,function(e){
              console.log(e);
             var data = e.data
             if(data.notCommit.length==0){
@@ -14,7 +15,7 @@ var a = { "classCode":sessionStorage.classCode_s,"homeworkTime":sessionStorage.h
                 $('.emptyOne').show()
             }else{
                 for(var c = 0;c<data.notCorrect.length;c++){
-                    $('.Pending').eq(0).append('<li><span class="yeCircle">'+data.notCorrect[c].studentName.substr(1,2)+'</span><span>'+data.notCorrect[c].studentName+'</span><span>05.25 13:20</span></li>')
+                    $('.Pending').eq(0).append('<li Id="'+data.notCorrect[c].id+'" text="'+data.notCorrect[c].knowledgePoint+'"><span class="yeCircle">'+data.notCorrect[c].studentName.substr(1,2)+'</span><span>'+data.notCorrect[c].studentName+'</span><span>'+data.notCorrect[c].homeworkTime+'</span></li>')
                 }
             }
             if(data.yesCorrect.length==0){
@@ -43,8 +44,11 @@ var a = { "classCode":sessionStorage.classCode_s,"homeworkTime":sessionStorage.h
 
 
 
-
-
+    $(document).on('touchend','.home_t li',function(){
+        sessionStorage.TeacherId = $(this).attr('Id');
+        sessionStorage.stutext = $(this).attr('text');
+        location.href = 'replydetail_t.html';
+    })
 
 
 

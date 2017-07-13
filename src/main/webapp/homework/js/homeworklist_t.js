@@ -108,7 +108,10 @@ $(function(){
         });
     });
 
+    //修改
+    $(document).on('touchend','.remove_s span:first-of-type',function(){
 
+    });
     // {
     //     "appid":"wxab29a3e2000b8d2a",
     //     "secret":"7739991fcce774c2281147eae3986ad9",

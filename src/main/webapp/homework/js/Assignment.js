@@ -12,7 +12,7 @@ $(function () {
 
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
-        console.log(e)
+        console.log(e);
         var className = e.data.Data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
@@ -374,7 +374,10 @@ $(function () {
     $('.music_s ').on('touchend', function () {
         $(this).addClass('playing_s');
         playVoice(song_s);
-    })
+        setTimeout(function(){
+         $('.music_s').removeClass('playing_s');
+        },$('.music_s span').html().substr(0,$('.music_s span').html().length-1));
+    });
 
     //图片上传
     $('.image_s').click(function () {

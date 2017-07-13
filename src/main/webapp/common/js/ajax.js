@@ -92,6 +92,7 @@ var homework_s = {
     't_sbim': url_o+'teacherData/addHomeWork.do',    //提交老师作业
     't_modi': url_o+'teacherData/teacherReplyHomeWork.do',//老师批改作业
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
+    't_seac': url_o+'teacherData/gainHomeworkFileData.do', // 老师获取学生文件
     's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
