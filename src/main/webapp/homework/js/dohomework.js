@@ -281,7 +281,7 @@ $(function () {
                 i++;
                 alert('已上传：' + i + '/' + length);
                 images.serverId.push(res.serverId);
-                $('.teBox').val(res.serverId);
+                $('.teBox').val(res.serverId +"$"+images.localId[i]);
                 if (i < length) {
                     upload();
                 }
