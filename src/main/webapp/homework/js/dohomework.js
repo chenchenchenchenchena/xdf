@@ -224,14 +224,31 @@ $(function () {
     }
 
     /*------------------------------------------------------*/
+
+
+    // 播放语音
+    var playTimer = "", playFlag = false;
+    var audioCur = null;
+    var oldId = undefined;
     //播放语音
     function audioAutoPlay(voiceId) {
+
         wx.ready(function() {
             document.getElementById('voiceId').play();
         });
+        var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
+        audioCur.currentTime = 0;
+        //播放动画
+        $(audioCur).siblings('.play-icon').addClass('playing');
+        playTimer = setTimeout(function () {
+            $(audioCur).siblings('.play-icon').removeClass('playing');
+        }, second * 1000);
 
     }
     function audioAutoPause(voiceId) {
+        audioCur.currentTime = 0;
+        clearTimeout(playTimer);
+        $(audioCur).siblings('.play-icon').removeClass('playing');
         wx.ready(function() {
             document.getElementById('voiceId').pause();
         });
@@ -240,11 +257,6 @@ $(function () {
 
     /*------------------------------------------------------*/
 
-
-    // 播放语音
-    var playTimer = "", playFlag = false;
-    var audioCur = null;
-    var oldId = undefined;
 
     //语音播放方法
     function voiceCheck(voiceId) {
