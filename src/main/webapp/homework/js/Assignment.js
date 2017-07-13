@@ -279,13 +279,20 @@ $(function(){
         });
 
 //按下开始录音
+    var timeInedex = 0;
+    var timeds;
     $('#record').on('touchstart', function (event) {
         event.preventDefault();
         START = new Date().getTime();
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
+                    alert('00000')
                     localStorage.rainAllowRecord = 'true';
+                    timeds = setInterval(function(){
+                        timeInedex++
+                    },1000)
+                    console.log(timeInedex)
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -296,23 +303,21 @@ $(function(){
 
     //松手结束录音
     $('#record').on('touchend', function (event) {
+        alert(timeInedex);
+
         event.preventDefault();
         END = new Date().getTime();
-        alert(1);
         if ((END - START) < 300) {
             END = 0;
             START = 0;
             //小于300ms，不录音
             clearTimeout(recordTimer);
         } else {
-            alert(2);
             wx.stopRecord({
                 success: function (res) {
-                    alert(res);
                     localId = res.localId;
                     uploadVoiceWX(localId);
                     playVoice(localId);
-
                 },
                 fail: function (res) {
                 }
@@ -381,7 +386,6 @@ $(function(){
     //显示语音布局
     function showAudio(url, length) {
 
-        alert("00000");
         $('.audio_box').show();
         length = 9;
 
