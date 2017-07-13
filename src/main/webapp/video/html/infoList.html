@@ -55,7 +55,7 @@
             "schoolName":school
         }
         $.ajax({
-            url: "http://10.73.33.63:8080/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
             data:schoolName,
             dataType: 'json',
@@ -82,7 +82,7 @@
                         str += "<tr class='table-tr-even'>"
                     }
 
-                    str += "<td id='name'>"+studioNo+"/"+teacherName+"/" + learningPeriod + "/"+grade+"/"+courseName+"/"+subject+"/"+lessonNo+"讲</td>";
+                    str += "<td id='name'>直播间"+studioNo+"/"+teacherName+"/" + learningPeriod + "/"+grade+"/"+courseName+"/"+subject+"/"+lessonNo+"讲</td>";
                     str += "<td id='fileUrl'><button>播放</button></td>";
 
 

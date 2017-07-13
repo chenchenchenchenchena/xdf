@@ -28,12 +28,12 @@ html,body{
 }
 #form div{
 	width: 450px;
-	margin: 70px auto;
+	margin:50px auto;
 }
 #form input{
 	width: 250px;
 	height: 30px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 #form select{
     width: 250px;

@@ -17,20 +17,20 @@
 <form id="form">
     <div class="formInfo">
         <span>直播间编号：</span>
-        <input id="subject" type="text" placeholder="请输入科目"><br  />
-        <span>教师姓名：</span>
+        <input id="roomNum" type="text" placeholder="请输入科目"><br  />
+        <span style="margin-left: 20px">教师姓名：</span>
         <input id="teacherName" type="text" placeholder="请输入老师名字"><br  />
-        <span>学段：</span>
-        <input id="name" type="text"><br  />
-        <span>年级：</span>
+        <span style="margin-left: 56px">学段：</span>
+        <input id="period" type="text" placeholder="请输入学段"><br  />
+        <span style="margin-left: 56px">年级：</span>
         <input id="grade" type="text" placeholder="请输入年级"><br  />
-        <span>科目：</span>
+        <span style="margin-left: 56px">科目：</span>
         <input id="subject" type="text" placeholder="请输入科目"><br  />
-        <span>课程名称：</span>
-        <input id="name" type="text"><br  />
-        <span>课次：</span>
+        <span style="margin-left: 20px">课程名称：</span>
+        <input id="subjectName" type="text" placeholder="请输入课程名称"><br  />
+        <span style="margin-left: 56px">课次：</span>
         <input id="classTime" type="number" placeholder="请输入课次"><br  />
-        <span>校区：</span>
+        <span style="margin-left: 56px">校区：</span>
         <select>
             <option>海口</option>
             <option>东莞</option>
@@ -48,24 +48,24 @@
         var subject = $('#subject').val();
         var grade = $('#grade').val();
         var teacherName = $('#teacherName').val();
-       /* var name = $('#name').val();*/
+        var subjectName = $('#subjectName').val();
         var classTime = $('#classTime').val();
-       /* var time1=$("#time1").val();
-        var time2=$("#time2").val();*/
+        var period=$("#period").val();
+        var roomNum=$("#roomNum").val();
         var school=$("select").val();
-        if(subject!=""&&grade!=""&&teacherName!=""&&classTime!=""&&school!=""){
+        if(subject!=""&&grade!=""&&teacherName!=""&&classTime!=""&&school!=""&&roomNum!=""&&period!=""&&subjectName!=""){
         	var cbconfig = {
         		'subject': subject,
         		'grade': grade,
         		'teacherName':teacherName,
-        		/*'name':name,*/
+        		'courseName':subjectName,
         		'lessonNo':classTime,
-        		/*'videoBeginTime':time1,
-        		'videoEndTime':time2*/
+        		'studioNo':roomNum,
+        		'learningPeriod':period,
                 'schoolName':school
         	};
 	        $.ajax({
-	            url: "http://10.73.33.63:8080/xdfdtmanager/videofile/saveVideoFileInfo.do",
+	            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/saveVideoFileInfo.do",
 	            type: 'post',
 	            dataType: 'json',
 	            data: JSON.stringify(cbconfig),
@@ -81,6 +81,9 @@
                     $('#teacherName').val("");
                     $('#classTime').val("");
                     $("select").val("");
+                    $("#period").val("");
+                    $("#subjectName").val("");
+                    $("#roomNum").val("");
 	               /* showList();*/
 	
 	            }
