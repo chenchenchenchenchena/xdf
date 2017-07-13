@@ -202,7 +202,7 @@ $(function () {
             $('.classId_image').val("hx001");
             $('.image_file').val(images[i]);
 
-            $("form[enctype]").attr("action", "http://10.200.80.235:8080/xdfdtmanager/" + $("form[enctype]").attr("action"));
+            $("form[enctype]").attr("action", url_o + $("form[enctype]").attr("action"));
             alert($('.image_file').html());
             $(".submit_image").ajaxSubmit({
                 resetForm: "true",
