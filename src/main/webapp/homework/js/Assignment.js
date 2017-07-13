@@ -373,9 +373,11 @@ $(function () {
     $('.music_s ').on('touchend', function () {
         $(this).addClass('playing_s');
         playVoice(song_s);
+        alert($('.teBox').val());
+        alert($('.music_s span').html().substr(0,$('.music_s span').html().length-1));
         setTimeout(function(){
          $('.music_s').removeClass('playing_s');
-        },$('.music_s span').html().substr(0,$('.music_s span').html().length-1));
+        },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');
     });
 
     //图片上传
