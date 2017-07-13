@@ -272,27 +272,32 @@ $(function () {
 
     function upLoadWxImage(images) {
 
-        if (images.localId.length == 0) {
+        if (images.localIds.length == 0) {
             alert('请先使用 chooseImage 接口选择图片');
             return;
         }
-        var i = 0, length = images.localId.length;
-        images.serverId = [];
-        wx.uploadImage({
-            localId: images.localId[i],
-            success: function (res) {
-                i++;
-                alert('已上传：' + i + '/' + length);
-                images.serverId.push(res.serverId);
-                $('.teBox').val(res.serverId +"$"+images.localId[i]);
-                if (i < length) {
-                    upload();
+        var i = 0, length = images.localIds.length;
+
+        // var serverIds = [];
+        function upload() {
+            wx.uploadImage({
+                localId: images.localIds[i],
+                success: function (res) {
+                    i++;
+                    alert('已上传：' + i + '/' + length);
+                    // serverIds.push(res.serverId);
+                    $('.teBox').val(res.serverId +"$"+images.localIds[i]);
+                    if (i < length) {
+                        upload();
+                    }
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
                 }
-            },
-            fail: function (res) {
-                alert(JSON.stringify(res));
-            }
-        });
+            });
+        }
+        upload();
+
     }
 
     /**
