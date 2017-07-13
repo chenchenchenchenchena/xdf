@@ -7,12 +7,12 @@ $(function () {
      */
     var commitParams;
     var fileParams = [];
-    var homeworkSinfoId = "";
+    var homeworkSinfoId = GetRequest('id');
     var fileName;
     var fileType;
     var fileSize;
     var diskFilePath;
-    var uploadUser = "xiaofang";
+    var uploadUser = sessionStorage.studentName;
 
     var layer1, layer2;
     // //点击作业排行榜
@@ -21,47 +21,47 @@ $(function () {
     });
     // // 显示作业信息
     // alert(JSON.parse(localStorage.homeworkInfos).data[0].id);
-    localStorage.homeworkInfos = JSON.stringify({
-        "data": [{
-            "id": "022765ae376a4feab2ce64777050474f",
-            "knowledgePoint": "知识点1,知识点2",
-            "description": "这是测试数据",
-            "fileContents": [{
-                "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-                "fileName": "文件1",
-                "fileSize": "12345",
-                "fileType": "jpg",
-                "id": "c572b982b22149a5ab2e5d98650a3e3c",
-                "uploadTime": 1499773427000
-            }, {
-                "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-                "fileName": "文件1",
-                "fileSize": "23564",
-                "fileType": "MP3",
-                "id": "c84c4da06da9470283588366812f7d01",
-                "uploadTime": 1499773427000
-            }]
-        }, {
-            "id": "022765ae376a4feab2ce64777050474f",
-            "knowledgePoint": "知识点1,知识点2",
-            "description": "如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.",
-            "fileContents": [{
-                "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-                "fileName": "文件1",
-                "fileSize": "12345",
-                "fileType": "jpg",
-                "id": "c572b982b22149a5ab2e5d98650a3e3c",
-                "uploadTime": 1499773427000
-            }, {
-                "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-                "fileName": "文件1",
-                "fileSize": "23564",
-                "fileType": "MP3",
-                "id": "c84c4da06da9470283588366812f7d01",
-                "uploadTime": 1499773427000
-            }]
-        }]
-    });
+    // localStorage.homeworkInfos = JSON.stringify({
+    //     "data": [{
+    //         "id": "022765ae376a4feab2ce64777050474f",
+    //         "knowledgePoint": "知识点1,知识点2",
+    //         "description": "这是测试数据",
+    //         "fileContents": [{
+    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
+    //             "fileName": "文件1",
+    //             "fileSize": "12345",
+    //             "fileType": "jpg",
+    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
+    //             "uploadTime": 1499773427000
+    //         }, {
+    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
+    //             "fileName": "文件1",
+    //             "fileSize": "23564",
+    //             "fileType": "MP3",
+    //             "id": "c84c4da06da9470283588366812f7d01",
+    //             "uploadTime": 1499773427000
+    //         }]
+    //     }, {
+    //         "id": "022765ae376a4feab2ce64777050474f",
+    //         "knowledgePoint": "知识点1,知识点2",
+    //         "description": "如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.",
+    //         "fileContents": [{
+    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
+    //             "fileName": "文件1",
+    //             "fileSize": "12345",
+    //             "fileType": "jpg",
+    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
+    //             "uploadTime": 1499773427000
+    //         }, {
+    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
+    //             "fileName": "文件1",
+    //             "fileSize": "23564",
+    //             "fileType": "MP3",
+    //             "id": "c84c4da06da9470283588366812f7d01",
+    //             "uploadTime": 1499773427000
+    //         }]
+    //     }]
+    // });
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
@@ -466,6 +466,15 @@ $(function () {
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+    });
+    //作业描述验证
+    $('.teBox').on('keyup',function(){
+        if($(this).val().length>200){
+            $('.word').css('color','red');
+        }else{
+            $('.word').css('color','#808080');
+        }
+        $('.word').html(''+$(this).val().length+'/200')
     });
 //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
