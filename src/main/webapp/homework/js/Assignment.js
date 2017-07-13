@@ -289,33 +289,29 @@ $(function(){
                     timeds = setInterval(function(){
                         timeInedex++
                     },1000);
-                    console.log(timeInedex)
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
                 }
             });
     });
-
+    var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
         event.preventDefault();
         wx.stopRecord({
                 success: function (res) {
-                    console.log(timeInedex);
                     clearInterval(timeds);
                     localId = res.localId;
+                    song_s  = localId;
                     uploadVoiceWX(localId);
-                    playVoice(localId);
-                },
-                fail: function (res) {
+                    showAudio()
                 }
         });
     });
 
     //播放微信录制后的本地语音文件
     function playVoice(plId) {
-        alert("开始播放");
         //播放录音
         wx.playVoice({
             localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
@@ -333,7 +329,6 @@ $(function(){
                 // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
-                alert("2222" + serverId);
                 uploadVoice(serverId);
             }
         });
@@ -361,7 +356,6 @@ $(function(){
                     alert(e.message);
                 } else {
                     $('.teBox').val(e.data.fileUrl);
-
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -373,19 +367,15 @@ $(function(){
 
     //显示语音布局
     function showAudio(url, length) {
-
-        $('.audio_box').show();
-        length = 9;
-
-        var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i>" +
-            "</div><span>" + length + "''</span>";
-        $(".audio_box").html(strVoice);
-        alert($('.audio_box #audio_record source').attr("src"));
+        $('.music_s').css('width',timeInedex/60+'%');
+        $('.music_s span').html(timeInedex+'"');
     }
 
 
-
+    $('.music_s ').on('touchend',function(){
+        $(this).addClass('playing_s');
+        playVoice(song_s);
+    })
 
 
 
