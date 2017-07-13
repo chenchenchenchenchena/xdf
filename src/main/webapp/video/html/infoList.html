@@ -49,6 +49,7 @@
     })
     //显示已经录入的数据
 
+
     function showList() {
         var school=$("select").val();
         var schoolName={
@@ -83,7 +84,7 @@
                     }
 
                     str += "<td id='name'>直播间"+studioNo+"/"+teacherName+"/" + learningPeriod + "/"+grade+"/"+courseName+"/"+subject+"/"+lessonNo+"讲</td>";
-                    str += "<td id='fileUrl'><button>播放</button></td>";
+                    str += "<td id='playBtn'><button>播放</button></td>";
 
 
                     str += "</tr>";
@@ -93,6 +94,40 @@
             }
         });
     }
+    $("#ckListTbody").on("click","#playBtn button",function () {
+        var fileName=$(this).parent().prev().html();
+        var fileN=fileName.split("/");
+        /*fileN[0]=fileN[0].substring(3,7);
+        fileN[6]=fileN[6].substring(0,1);*/
+        console.log(fileName.split("/"));
+        console.log(fileN);
+
+        var file={
+            "studioNo":fileN[0].substring(3,7),
+            "teacherName":fileN[1],
+            "learningPeriod":fileN[2],
+            "grade":fileN[3],
+            "courseName":fileN[4],
+            "subject":fileN[5],
+            "lessonNo":fileN[6].substring(0,1),
+            "schoolName":$("select").val(),
+            "status":1
+        }
+        console.log(file);
+        $.ajax({
+            url: "http://10.73.33.63:8080/xdfdtmanager/videofile/updatePlayStatus.do",
+            type: 'post',
+            data:file,
+            dataType: 'json',
+            success:function (e) {
+                if(e.result){
+                    layer.msg(e.message,{icon:1});
+                }else{
+                    layer.msg(e.message,{icon:1});
+                }
+            }
+        })
+    })
 
 </script>
 </html>

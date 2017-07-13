@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="../css/addInfo.css" />
 </head>
 <body>
-<div class="startImg"><img src="../images/01.png"  /></div>
-<div class="video" style="display: none;">
-    <video controls src=""></video>
+<!--<div class="startImg"><img src="../images/01.png"  /></div>-->
+<div class="video">
+    <video src="" autoplay></video>
 </div>
+<script>
+    setInterval(function () {
+        $.ajax({
+            url: "",
+            type: 'get',
+            dataType: 'json',
+            success:function (e) {
+                if(e.result){
+                    layer.msg(e.message,{icon:1});
+                }else{
+                    layer.msg(e.message,{icon:1});
+                }
+            }
+        })
+    },10000);
+</script>
 </body>
 </html>
