@@ -303,7 +303,7 @@ $(function () {
                     if (fileType == "mp3") {
                         showAudio(e.fileUrl, e.fileSize, "audio_" + flag, "audio" + flag);
                     } else {
-                        showImage(e.previewUrl, "imagBox_" + flag);
+                        showImage(e.thumbnail, "imagBox_" + flag);
                     }
                 }
             }

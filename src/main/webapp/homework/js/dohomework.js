@@ -336,7 +336,7 @@ $(function () {
                     if (fileType == "mp3") {
                         showAudio(e.fileUrl, e.fileSize, $('#audio_1'), "audio1");
                     } else {
-                        showImage(e.previewUrl);
+                        showImage(e.thumbnail);
                     }
                 }
             }
