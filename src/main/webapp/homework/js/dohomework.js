@@ -36,7 +36,6 @@ $(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
-                    // alert("开始录音");
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -47,7 +46,6 @@ $(function () {
 
     //松手结束录音
     $('#record').on('touchend', function (event) {
-
 
         event.preventDefault();
         END = new Date().getTime();
@@ -64,7 +62,6 @@ $(function () {
                     alert(res);
                     localId = res.localId;
                     uploadVoiceWX(localId);
-                    // playVoice(localId);
 
                 },
                 fail: function (res) {
@@ -82,14 +79,6 @@ $(function () {
         });
     }
 
-    //测试数据
-    // $('#record').click(function () {
-    // // uploadVoice("hMC05XthkxWBjgHNbbh1X3mheuBeua0JWPcEbdStrOw1Gxqks2k5n7BHgt5VYpJ");
-    // // uploadVoice("vvCBGtvWnpWChiXZnOcyVuljzy5CgHASAcgKehDWWOqj5ITOezW7KziODYOQ4cwW");
-    // // uploadVoice("Lcc4kpav4pq15Epsjgp46Lk52tPTDTKaWMTnsSCKcto2RfHbKs7Ct3yvmIe93Rmm");
-    // showAudio("http://dn-storage-xdf.gokuai.com/c3/c3a2752f06713897a5f216786b3e2f214e776a5b.dat?response-content-disposition=attachment%3B%20filename%3D%227766bae1a7974a5ebc056ae9db1bb35d.mp3%22%3B%20filename%2A%3Dutf-8%27%277766bae1a7974a5ebc056ae9db1bb35d.mp3&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1499852562&Signature=Uk5pSFpjHYoIc6%2F0hrdeHZ5Cu1s%3D", 19);
-    // });
-
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
@@ -101,7 +90,6 @@ $(function () {
                 // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
-                alert("2222" + serverId);
                 uploadVoice(serverId);
             }
         });
@@ -141,10 +129,9 @@ $(function () {
     //显示语音布局
     function showAudio(url, length) {
 
-        alert("00000");
         $('.audio_box').show();
         length = 9;
-        url = "http://www.w3school.com.cn/i/song.mp3";
+        // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='audio_record'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
@@ -191,12 +178,12 @@ $(function () {
     //图片上传到自己服务器
     function uploadImage(images) {
 
-        alert("9999999"+images.length+"---");
+        alert("9999999" + images.length + "---");
         for (var i = 0; i < images.length; i++) {
             alert(images[i]);
-            var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='"+url_o+"upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
+            var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='" + url_o + "upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
                 "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
-                "<input type='file' class='image_file' name='file' value='"+images[i]+"'/></form>";
+                "<input type='file' class='image_file' name='file' value='" + images[i] + "'/></form>";
             alert(strImag);
             $('#image_form').html(strImag);
             // $('#submitBtn').on('touchend',function () {
@@ -227,7 +214,7 @@ $(function () {
             $("#submit_image").ajaxSubmit({
                 resetForm: "true",
                 success: function (data) {
-                    alert("ok:"+data);
+                    alert("ok:" + data);
                     data = $.parseJSON(data);
                     if (data.success == true) {
                     } else {
@@ -235,7 +222,7 @@ $(function () {
                     }
                 },
                 error: function (jqxhr, errorMsg, errorThrown) {
-                    alert("3456789")
+                    alert("error");
                 }
             });
 
@@ -244,39 +231,16 @@ $(function () {
     }
 
     /*------------------------------------------------------*/
-
+    //播放作业描述语音
+    $(document).on('touchend', '.audio_box>div', function () {
+        console.log('oooo' + $(this).find('audio')[0]);
+        voiceCheck($(this).find('audio')[0]);
+    });
 
     // 播放语音
     var playTimer = "", playFlag = false;
     var audioCur = null;
     var oldId = undefined;
-    // //播放语音
-    // function audioAutoPlay(voiceId) {
-    //
-    //     var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
-    //     audioCur.currentTime = 0;
-    //     //播放动画
-    //     $(audioCur).siblings('.play-icon').addClass('playing');
-    //     playTimer = setTimeout(function () {
-    //         $(audioCur).siblings('.play-icon').removeClass('playing');
-    //     }, second * 1000);
-    //     // wx.ready(function() {
-    //         document.getElementById('voiceId').play();
-    //     // });
-    //
-    // }
-    // function audioAutoPause(voiceId) {
-    //     audioCur.currentTime = 0;
-    //     clearTimeout(playTimer);
-    //     $(audioCur).siblings('.play-icon').removeClass('playing');
-    //     // wx.ready(function() {
-    //         document.getElementById('voiceId').pause();
-    //     // });
-    //
-    // }
-
-    /*------------------------------------------------------*/
-
 
     //语音播放方法
     function voiceCheck(voiceId) {
@@ -285,24 +249,20 @@ $(function () {
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
-                // audioAutoPause($(audioCur).attr('id'));
                 audioCur = null;
             }
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
             play();
-            // audioAutoPlay(newID);
         } else {
             oldId = undefined;
             stop();
-            // audioAutoPause(newID);
         }
     }
 
     //停止播放方法
     function stop() {
         audioCur.pause();
-        // $(audioCur)[0].currentTime = 0;
         audioCur.currentTime = 0;
         clearTimeout(playTimer);
         $(audioCur).siblings('.play-icon').removeClass('playing');
@@ -312,7 +272,7 @@ $(function () {
     function play() {
         var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
         audioCur.currentTime = 0;
-        audioCur.play();//audio.play();// 这个就是播放
+        audioCur.play();
         //播放动画
         $(audioCur).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function () {
@@ -320,11 +280,8 @@ $(function () {
         }, second * 1000);
     }
 
-    // 播放作业描述语音
-    $(document).on('touchend', '.audio_box>div', function () {
-        console.log('oooo' + $(this).find('audio')[0]);
-        voiceCheck($(this).find('audio')[0]);
-    });
+    /*------------------------------------------------------*/
+
 
     // 删除图片
     $(document).on('touchend', '.stuImg', function () {
