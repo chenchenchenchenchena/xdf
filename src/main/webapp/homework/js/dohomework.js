@@ -243,6 +243,7 @@ $(function () {
         wx.chooseImage({
             count: 3,
             success: function (res) {
+                alert(res);
 
                 if (res.localIds.length > 0) {
 
