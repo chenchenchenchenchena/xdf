@@ -156,7 +156,8 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    // $('.teBox').val(e.data.fileUrl);
+                    alert("语音提交成功");
+                    $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
@@ -196,6 +197,7 @@ $(function () {
         setTimeout(function(){
             var len = $('#'+idChildren)[0].duration;
             len = parseInt(len);
+            alert(len);
             var hh = parseInt(len/3600);
             var mm = parseInt((len%3600)/60);
             var ss = parseInt((len%3600)%60);
