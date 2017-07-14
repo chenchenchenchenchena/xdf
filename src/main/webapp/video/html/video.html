@@ -41,7 +41,7 @@
         });
     }
    setInterval(function () {
-        /* str = "";*/
+       /*  str = "";*/
         $.ajax({
             url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
             type: 'get',
@@ -51,6 +51,7 @@
                     $(".startImg").hide();
                     $(".video").show();
                     if(e.dataList){
+                        str="";
                         var dataList = e.dataList;
                         for (var i = 0; i < dataList.length; i++) {
                             var grade = dataList[i]["grade"];
@@ -63,7 +64,7 @@
                             var courseName = dataList[i]["courseName"];
                             /* var fileUrl = dataList[i]["fileUrl"];*/
 
-                            str += "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
+                            str = "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
 
                         }
                         getVideoDemandPath();
