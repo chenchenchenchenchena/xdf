@@ -24,6 +24,10 @@ $(function () {
         var knowledgePoint, kpHtml;
         $.each(hwInfos, function (i, item) {
             if (item.id == GetRequest('id')) {
+                localStorage.hwteacherId = item.homeworkTId;//老师主键id
+                localStorage.hwstudentId = item.id;//学生主键id
+                localStorage.classCode = item.classCode;//学生code
+
                 //知识点
                 if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
                     knowledgePoint = splitStrs(item.knowledgePoint);
@@ -143,7 +147,7 @@ $(function () {
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'classId': localStorage.classCode
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -180,7 +184,6 @@ $(function () {
             }
         });
     }
-
 
     /**
      * 显示语音布局
@@ -292,7 +295,7 @@ $(function () {
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'classId': localStorage.classCode
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",

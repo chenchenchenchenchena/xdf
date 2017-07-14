@@ -3,7 +3,8 @@ $(function(){
 	sessionStorage.stuNumber = 'SS2522';
 	sessionStorage.studentName = '刘契萱';
 	sessionStorage.schoolId = '73';
-	sessionStorage.classId = 'hx001';
+	// localStorage.classCode = 'hx001';
+
 
 	//点击待交作业
 	$(".secul").hide();
@@ -141,7 +142,9 @@ function getHwContentSuccess(msg) {
 				// }
 				var knowledgePoint, kpHtml = "";
 				var homeworkInfos ={//作业信息：知识点，描述，图片，语音
-					'id':item.id,
+					'id':item.id,//学生作业主键id
+					'homeworkTId':item.homeworkTId,//老师作业主键id
+					'classCode':item.classCode,
 					'knowledgePoint':item.knowledgePoint,
 					'description':item.description,
 					'fileContents':item.fileContents
@@ -401,7 +404,7 @@ function getHwFinishSuccess(msg){
 							statusCss = 'blue';
 							break;
 					}
-					hwLessNosHtml +='<li><span>第'+item.lessonNo+'课次</span><span>'+item.homeworkTime+'</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
+					hwLessNosHtml +='<li><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 				});
 				console.log(hwLessNosHtml);
 				var hwListFinishHtml = '<li class="firstList">'
