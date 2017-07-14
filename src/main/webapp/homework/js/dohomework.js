@@ -5,7 +5,6 @@ $(function () {
     /**
      * 作业提交需要的参数
      */
-    var commitParams;
     var fileParams = [];
     var homeworkSinfoId = GetRequest('id');
     var fileName;
@@ -66,6 +65,9 @@ $(function () {
     var timeInedex = 0;
     var timeds;
     var localId;
+    var START;
+    var END;
+    var recordTimer;
     /**
      * 按下开始录音
      */
@@ -95,19 +97,16 @@ $(function () {
 
         event.preventDefault();
         END = new Date().getTime();
-        alert(1)
         if ((END - START) < 300) {
             END = 0;
             START = 0;
             //小于300ms，不录音
             clearTimeout(recordTimer);
         } else {
-            alert(2);
             wx.stopRecord({
                 success: function (res) {
                     clearInterval(timeds);
                     localId = res.localId;
-                    // alert(localId);
                     $('.song_s').hide();
                     uploadVoiceWX(localId);
 
@@ -128,7 +127,6 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
                 uploadVoice(serverId);
@@ -145,7 +143,7 @@ $(function () {
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': "hx001"
+            'classId': sessionStorage.classId
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -154,7 +152,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                alert(JSON.stringify(e));
+                // alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
@@ -275,7 +273,7 @@ $(function () {
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': "hx001"
+            'classId': sessionStorage.classId
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",

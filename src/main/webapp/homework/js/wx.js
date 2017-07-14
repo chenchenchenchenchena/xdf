@@ -28,7 +28,7 @@ $(function () {
                 wx.checkJsApi({
                     jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage", "stopRecord", "uploadVoice", "playVoice", "downloadVoice"],
                     success: function (res) {
-                        alert(JSON.stringify(res));
+                        // alert(JSON.stringify(res));
                     }
                 })
 
