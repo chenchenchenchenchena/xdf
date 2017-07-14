@@ -244,3 +244,72 @@ body,html{
 	color: #aeadad;
 	margin: 22px 0 0 18px;
 }
+/*分享*/
+.title_s{
+	width:100%;
+	height:224px;
+	padding-top:108px;
+	background:url(../images/last_bg.png) no-repeat center center;
+	font-size:24px;
+	color:#fff;
+}
+.title_s p{
+	padding-left:243px;
+	margin-top:8px;
+	line-height:38px;
+}
+.title_s p:first-of-type{
+	display:inline-block;
+	font-size:26px;
+}
+.title_s p:last-of-type{
+	margin-top:4px;
+	line-height:30px;
+}
+.title_s p i{
+	background:#33c8ac;
+	border-radius:20px;
+	font-style:normal;
+	padding:2px 18px;
+	margin-top:5px;
+}
+.homework_big{
+	margin-top:-82px;
+	padding:0 30px;
+}
+.homework_small{
+	padding:20px 30px;
+	background:#fff;
+	border-radius:10px;
+	margin-bottom:18px;
+}
+.homework_small:last-of-type{
+	margin-bottom:0;
+}
+.homework_small_title{
+	height:87px;
+	line-height:87px;
+	border-bottom:1px solid #e1e1e1;
+	font-size:32px;
+	color:#333;
+	margin-bottom:20px;
+	margin-top:-20px;
+}
+.answer_s{
+	font-size:30px;
+	color:#333;
+	line-height:40px;
+	border-bottom:1px solid #e1e1e1;
+	padding-bottom:20px;
+}
+html body .imgBox_s{
+	margin-bottom:0;
+}
+html body .imgBox_s div{
+	margin-right:16px;
+	margin-bottom:0;
+}
+html body .imgBox_s>div>img{
+	width:199px;
+	height:199px;
+}

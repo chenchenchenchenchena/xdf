@@ -1,8 +1,8 @@
 $(function(){
 
         var need = {
-            'stuHomeworkId':'2df7851f933b41948a3c5c93270aeaf5',
-            'homeworkTinfoId':'1452851f933b41948a3c5c9327897'
+            'stuHomeworkId': sessionStorage.stuid,
+            'homeworkTinfoId':sessionStorage.Tid
 
         };
         $('.anDes').html(sessionStorage.stutext);
@@ -66,7 +66,7 @@ $(function(){
         });
 
 
-            $('.music_s ').on('touchend', function () {
+        $('.music_s ').on('touchend', function () {
                 $(this).addClass('playing_s');
                 var audio = document.getElementById("bgMusic");
                 audio.play();
@@ -83,7 +83,22 @@ $(function(){
             });
 
 
-
+        //批改作业提交
+        $('.sub_p').on('touchend',function(){
+            if($('.teBox').val()==''){
+                layer.msg('批复内容不能为空');
+            }
+            need.replyDesc = $('.teBox').html();
+            if($('.infoTitle span').css('color')=='rgb(255, 106, 106)'){
+                need.tag = '0'
+            }else{
+                need.tag = '1'
+            }
+            need.fileInfo = [];
+            ajax_S(homework_s.t_succ,need,function(e){
+                console.log(e)
+            })
+        })
 
 
 
