@@ -64,8 +64,6 @@ $(function () {
      */
     function play() {
         var second = audioCur.duration;//获取音频秒数
-
-        alert(second);
         audioCur.currentTime = 0;
         audioCur.play();
         //播放动画

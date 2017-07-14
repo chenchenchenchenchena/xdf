@@ -26,7 +26,7 @@ $(function () {
             if (item.id == GetRequest('id')) {
                 //知识点
                 if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
-                    knowledgePoint =splitStrs(item.knowledgePoint);
+                    knowledgePoint = splitStrs(item.knowledgePoint);
                     for (var i = 0; i < knowledgePoint.length; i++) {
                         kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                         $('.knowPoint').append(kpHtml);
@@ -157,7 +157,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    $('.teBox').val(e.data.fileUrl);
+                    // $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
@@ -181,6 +181,7 @@ $(function () {
         });
     }
 
+
     /**
      * 显示语音布局
      */
@@ -191,31 +192,27 @@ $(function () {
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i></div><span class='voice_lenth'>"+length+"</span>";
+            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
         idParent.html(strVoice);
-        // function getVoiceLen() {
-            setTimeout(function(){
-                var len = $('#'+idChildren)[0].duration;
-                len = parseInt(len);
-                alert(len);
-                var hh = parseInt(len/3600);
-                var mm = parseInt((len%3600)/60);
-                var ss = parseInt((len%3600)%60);
-                var voiceLen = "";
-                if(hh >0){
-                    voiceLen = hh+"'"+mm+"'"+ss+"''";
-                }else if(mm>0){
-                    voiceLen = mm+"'"+ss+"''";
-                }else {
-                    voiceLen = ss+"''";
-                }
-                $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
-            },1000);
-        // }
-
-        window.onload = getVoiceLen();
-
+        var audioElem = document.getElementById(idChildren);
+        audioElem.onloadedmetadata = getVoiceLen;
+        function getVoiceLen() {
+            var len = audioElem.duration;
+            len = parseInt(len);
+            var hh = parseInt(len / 3600);
+            var mm = parseInt((len % 3600) / 60);
+            var ss = parseInt((len % 3600) % 60);
+            var voiceLen = "";
+            if (hh > 0) {
+                voiceLen = hh + "'" + mm + "'" + ss + "''";
+            } else if (mm > 0) {
+                voiceLen = mm + "'" + ss + "''";
+            } else {
+                voiceLen = ss + "''";
+            }
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        }
 
     }
 
@@ -458,7 +455,7 @@ $(function () {
     });
     //提交作业--失败--取消
     $(document).on('touchend', '.cancelBtn', function () {
-    layer.close(layer2);
+        layer.close(layer2);
     });
     //提交作业--失败--重试
     $(document).on('touchend', '.retryBtn', function () {
@@ -492,7 +489,7 @@ $(function () {
 
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
-        $('#HWsubmit').attr('disabled',"true");//禁用按钮
+        $('#HWsubmit').attr('disabled', "true");//禁用按钮
         console.log("提交成功：" + JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
