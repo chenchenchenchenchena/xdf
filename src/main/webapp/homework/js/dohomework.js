@@ -54,10 +54,13 @@ $(function () {
     }
 
     /*------------------录制语音开始------------------------------------*/
+    $('#record').click(function () {
+        $('.song_s').show();
+    });
     /**
      * 按下开始录音
      */
-    $('#record').on('touchstart', function (event) {
+    $('#record_btn').on('touchstart', function (event) {
 
         event.preventDefault();
         START = new Date().getTime();
@@ -76,7 +79,7 @@ $(function () {
     /**
      * 松手结束录音
      */
-    $('#record').on('touchend', function (event) {
+    $('#record_btn').on('touchend', function (event) {
 
         event.preventDefault();
         END = new Date().getTime();
@@ -156,6 +159,7 @@ $(function () {
                 } else {
                     $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
+                    $('.song_s').hide();
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
