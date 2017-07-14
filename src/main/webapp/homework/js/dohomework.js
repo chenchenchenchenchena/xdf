@@ -186,15 +186,31 @@ $(function () {
     function showAudio(url, length, idParent, idChildren) {
 
         idParent.show();
+        length = "";
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i>";
-        length = $('#'+idChildren).duration;
-        var lengthStr = "</div><span>" + length + "''</span>";
+            "<i class='play-icon'></i></div><span class='voice_lenth'>"+length+"</span>";
 
-        idParent.html(strVoice+lengthStr);
-        // alert($('.audio_box #audio_record source').attr("src"));
+        idParent.html(strVoice);
+        setTimeout(function(){
+            var len = $('#'+idChildren)[0].duration;
+            len = parseInt(len);
+            var hh = parseInt(len/3600);
+            var mm = parseInt((len%3600)/60);
+            var ss = parseInt((len%3600)%60);
+            var voiceLen = "";
+            if(hh >0){
+                voiceLen = hh+"'"+mm+"'"+ss+"''";
+            }else if(mm>0){
+                voiceLen = mm+"'"+ss+"''";
+            }else {
+                voiceLen = ss+"''";
+            }
+            $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        },200);
+
+
     }
 
     /*------------------录制语音结束------------------------------------*/
