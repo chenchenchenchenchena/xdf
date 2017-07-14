@@ -27,7 +27,7 @@ $(function () {
             if (item.id == GetRequest('id')) {
                 //知识点
                 if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
-                    knowledgePoint = item.knowledgePoint.split(',');
+                    knowledgePoint =splitStrs(item.knowledgePoint);
                     for (var i = 0; i < knowledgePoint.length; i++) {
                         kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                         $('.knowPoint').append(kpHtml);
@@ -430,11 +430,16 @@ $(function () {
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
-//提交作业--成功--确定,提交作业--失败--取消
-    $(document).on('touchend', '.confirmBtn,.cancelBtn', function () {
+    //提交作业--成功--确定
+    $(document).on('touchend', '.confirmBtn', function () {
         layer.close(layer2);
+        window.location.href = 'homeworklist_s.html';
     });
-//提交作业--失败--重试
+    //提交作业--失败--取消
+    $(document).on('touchend', '.cancelBtn', function () {
+    layer.close(layer2);
+    });
+    //提交作业--失败--重试
     $(document).on('touchend', '.retryBtn', function () {
         layer.close(layer2);
         layer.close(layer1);
@@ -466,6 +471,7 @@ $(function () {
 
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
+        $('#HWsubmit').attr('disabled',"true");//禁用按钮
         console.log("提交成功：" + JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
@@ -491,6 +497,7 @@ $(function () {
                 content: $(".submitFail")
             })
         }
+        $('#HWsubmit').removeAttr("disabled");
     }
 })
 ;

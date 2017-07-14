@@ -243,3 +243,24 @@ function getCountDays() {
     /* 返回当月的天数 */
     return curDate.getDate();
 }
+
+// 去除字符串中所有空格
+function removeAllSpace(str) {
+    return str.replace(/\s+/g, "");
+}
+// 分隔成数组
+function splitStrs(strs) {
+    strs = removeAllSpace(strs);
+    if(strs.indexOf(',')!=-1){
+        strs = strs.split(',');
+    }else if(strs.indexOf('，')!=-1){
+        strs = strs.split('，');
+    }else if(strs.indexOf(';')!=-1){
+        strs = strs.split(';');
+    }else if(strs.indexOf('；')!=-1){
+        strs = strs.split('；');
+    }else{
+        strs = strs.split(',');
+    }
+    return strs;
+};

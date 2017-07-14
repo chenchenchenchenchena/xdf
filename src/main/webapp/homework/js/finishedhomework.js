@@ -23,7 +23,7 @@ $(function () {
         /*******作业信息*******/
         //知识点
         if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-            knowledgePoint = datas.teacherKnowledgePoint.split(',');
+            knowledgePoint =splitStrs(datas.teacherKnowledgePoint);
             for (var i = 0; i < knowledgePoint.length; i++) {
                 kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                 $('.knowPoint').append(kpHtml);
