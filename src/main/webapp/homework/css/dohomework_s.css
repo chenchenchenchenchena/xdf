@@ -56,7 +56,7 @@ body,html{
 	padding-left: 27px;
 }
 .hwCon{
-	margin:0 0 22px 0px;
+	margin:0 0 22px 27px;
 }
 .des{
 	border-bottom: 1px solid #e1e1e1;
@@ -81,6 +81,8 @@ body,html{
 	display: inline-block;
 	height: 78px;
 	line-height: 78px;
+	font-size: 30px;
+	margin-left: 20px;
 }
 .play-icon{
 	background: url("../images/voice_playing.png") 0 0 no-repeat;
@@ -332,13 +334,14 @@ body,html{
 	margin: 20px 0 40px;
 }
 
-.mask,.mask-transparent{
+.mask{
 	position: fixed;
 	top: 0;
 	left: 0;
 	width:100%;
 	height: 100%;
 	overflow: hidden;
+	background: rgba(0,0,0,0.2);
 	z-index: 2;
 }
 .tips{
@@ -354,6 +357,24 @@ body,html{
 }
 .none{
 	display: none;
+}
+.song_s{
+	width:100%;
+	height:300px;
+	background:#fff;
+	position: fixed;
+	bottom:-300px;
+	text-align:center;
+	display:none;
+	z-index:10;
+}
+.song_s img{
+	margin-top:40px;
+	margin-bottom:18px;
+}
+.song_s p{
+	font-size:32px;
+	color:#333;
 }
 
 .infoTitle span{
