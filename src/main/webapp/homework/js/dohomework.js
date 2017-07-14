@@ -19,49 +19,6 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
-    // // 显示作业信息
-    // alert(JSON.parse(localStorage.homeworkInfos).data[0].id);
-    // localStorage.homeworkInfos = JSON.stringify({
-    //     "data": [{
-    //         "id": "022765ae376a4feab2ce64777050474f",
-    //         "knowledgePoint": "知识点1,知识点2",
-    //         "description": "这是测试数据",
-    //         "fileContents": [{
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "12345",
-    //             "fileType": "jpg",
-    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
-    //             "uploadTime": 1499773427000
-    //         }, {
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "23564",
-    //             "fileType": "MP3",
-    //             "id": "c84c4da06da9470283588366812f7d01",
-    //             "uploadTime": 1499773427000
-    //         }]
-    //     }, {
-    //         "id": "022765ae376a4feab2ce64777050474f",
-    //         "knowledgePoint": "知识点1,知识点2",
-    //         "description": "如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.",
-    //         "fileContents": [{
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "12345",
-    //             "fileType": "jpg",
-    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
-    //             "uploadTime": 1499773427000
-    //         }, {
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "23564",
-    //             "fileType": "MP3",
-    //             "id": "c84c4da06da9470283588366812f7d01",
-    //             "uploadTime": 1499773427000
-    //         }]
-    //     }]
-    // });
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
@@ -185,8 +142,8 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadAudio.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
@@ -288,7 +245,7 @@ $(function () {
                     alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
                     $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
+                    // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
@@ -314,8 +271,8 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadAudio.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
