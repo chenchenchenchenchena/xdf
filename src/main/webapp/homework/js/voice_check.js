@@ -63,7 +63,9 @@ $(function () {
      *开始播放方法
      */
     function play() {
-        var second = parseInt($(audioCur).siblings('span').html());//获取音频秒数
+        var second = audioCur.duration;//获取音频秒数
+
+        alert(second);
         audioCur.currentTime = 0;
         audioCur.play();
         //播放动画

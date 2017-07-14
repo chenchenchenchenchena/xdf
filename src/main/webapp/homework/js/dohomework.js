@@ -156,7 +156,8 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    // $('.teBox').val(e.data.fileUrl);
+                    alert("语音提交成功");
+                    $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
@@ -186,15 +187,36 @@ $(function () {
     function showAudio(url, length, idParent, idChildren) {
 
         idParent.show();
+        length = "";
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i>";
-        length = $('#'+idChildren).duration;
-        var lengthStr = "</div><span>" + length + "''</span>";
+            "<i class='play-icon'></i></div><span class='voice_lenth'>"+length+"</span>";
 
-        idParent.html(strVoice+lengthStr);
-        // alert($('.audio_box #audio_record source').attr("src"));
+        idParent.html(strVoice);
+        // function getVoiceLen() {
+            setTimeout(function(){
+                var len = $('#'+idChildren)[0].duration;
+                len = parseInt(len);
+                alert(len);
+                var hh = parseInt(len/3600);
+                var mm = parseInt((len%3600)/60);
+                var ss = parseInt((len%3600)%60);
+                var voiceLen = "";
+                if(hh >0){
+                    voiceLen = hh+"'"+mm+"'"+ss+"''";
+                }else if(mm>0){
+                    voiceLen = mm+"'"+ss+"''";
+                }else {
+                    voiceLen = ss+"''";
+                }
+                $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+            },1000);
+        // }
+
+        window.onload = getVoiceLen();
+
+
     }
 
     /*------------------录制语音结束------------------------------------*/
