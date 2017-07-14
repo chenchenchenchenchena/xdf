@@ -194,23 +194,27 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>"+length+"</span>";
 
         idParent.html(strVoice);
-        setTimeout(function(){
-            var len = $('#'+idChildren)[0].duration;
-            len = parseInt(len);
-            alert(len);
-            var hh = parseInt(len/3600);
-            var mm = parseInt((len%3600)/60);
-            var ss = parseInt((len%3600)%60);
-            var voiceLen = "";
-            if(hh >0){
-                voiceLen = hh+"'"+mm+"'"+ss+"''";
-            }else if(mm>0){
-                voiceLen = mm+"'"+ss+"''";
-            }else {
-                voiceLen = ss+"''";
-            }
-            $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
-        },200);
+        function getVoiceLen() {
+            setTimeout(function(){
+                var len = $('#'+idChildren)[0].duration;
+                len = parseInt(len);
+                alert(len);
+                var hh = parseInt(len/3600);
+                var mm = parseInt((len%3600)/60);
+                var ss = parseInt((len%3600)%60);
+                var voiceLen = "";
+                if(hh >0){
+                    voiceLen = hh+"'"+mm+"'"+ss+"''";
+                }else if(mm>0){
+                    voiceLen = mm+"'"+ss+"''";
+                }else {
+                    voiceLen = ss+"''";
+                }
+                $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+            },200);
+        }
+
+        window.onload = getVoiceLen();
 
 
     }

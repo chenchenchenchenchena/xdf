@@ -63,10 +63,9 @@ $(function () {
      *开始播放方法
      */
     function play() {
-        var len = $('#'+idChildren)[0].duration;
-        len = parseInt(len);
-        alert(len);
         var second = audioCur.duration;//获取音频秒数
+
+        alert(second);
         audioCur.currentTime = 0;
         audioCur.play();
         //播放动画
