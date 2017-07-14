@@ -2,6 +2,8 @@ $(function(){
 	//缓存数据 TODO
 	sessionStorage.stuNumber = 'SS2522';
 	sessionStorage.studentName = '刘契萱';
+	sessionStorage.schoolId = '73';
+	sessionStorage.classId = 'hx001';
 
 	//点击待交作业
 	$(".secul").hide();
