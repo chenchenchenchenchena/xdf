@@ -69,6 +69,14 @@
                         }
                         getVideoDemandPath();
                         console.log(str);
+                    }else{
+                        if($("video").attr("src")==""){
+                            $("body,html").css({
+                                "background":"#000",
+                                "position":'reltive'
+                            });
+                            $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
+                        }
                     }
 
                 }else{
@@ -83,7 +91,6 @@
 
 
     function myLog(log) {
-       /* document.getElementById("txt-area").value += log + "\n";*/
         console.log(log);
     }
 
