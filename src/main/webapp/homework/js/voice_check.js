@@ -13,6 +13,16 @@ $(function () {
     });
 
     /**
+     * 播放微信录制后的本地语音文件
+     */
+    function playVoice(plId) {
+        //播放录音
+        wx.playVoice({
+            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+        });
+    }
+
+    /**
      *播放语音
      */
     var playTimer = "", playFlag = false;
@@ -53,7 +63,7 @@ $(function () {
      *开始播放方法
      */
     function play() {
-        var second = 20;//parseInt($(audio).siblings('span').html());//获取音频秒数
+        var second = parseInt($(audioCur).siblings('span').html());//获取音频秒数
         audioCur.currentTime = 0;
         audioCur.play();
         //播放动画
