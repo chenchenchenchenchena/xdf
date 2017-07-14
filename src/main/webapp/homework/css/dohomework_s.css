@@ -56,7 +56,7 @@ body,html{
 	padding-left: 27px;
 }
 .hwCon{
-	margin:0 0 22px 27px;
+	margin:0 0 22px 0px;
 }
 .des{
 	border-bottom: 1px solid #e1e1e1;
@@ -355,12 +355,65 @@ body,html{
 .none{
 	display: none;
 }
-.song_s{
-	width:100%;
-	height:300px;
-	background:#fff;
-	position: fixed;
-	bottom:0;
+
+.infoTitle span{
+	display:block;
+	float:right;
+	width:72px;
+	height:38px;
+	margin-top:21px;
+	border-radius:20px;
+	border:1px solid #ff6a6a;
+	color:#ff6a6a;
+	font-size:22px;
+	line-height:38px;
 	text-align:center;
+	font-weight:normal;
+}
+.excellent{
+	width:400px;
+	height:700px;
+	position: fixed;
+	top:50%;
+	left:50%;
+	margin-top:-200px;
+	margin-left:-200px;
 	display:none;
+}
+.excellent img{
+	width:400px;
+	height:700px;
+}
+.music_s{
+	width:50%;
+	height:80px;
+	margin:20px 0;
+	background-color:#a0e75a;
+	border-radius:8px;
+	background-image:url(../images/voice_playing.png);
+	background-repeat:no-repeat;
+	background-position:20px center ;
+	position: relative;
+}
+.music_s span{
+	position:absolute;
+	right:-65px;
+	font-size:28px;
+	color:#999;
+	top: 18px;
+}
+.playing_s{
+	-webkit-animation: playing_s2 1s infinite ease-in-out;
+
+}
+@keyframes playing_s2 {
+	0% {
+		background-image: url("../images/voice_playing_f1.png");
+	}
+	50% {
+		background-image: url("../images/voice_playing_f2.png");
+	}
+	100% {
+		background-image: url("../images/voice_playing_f3.png");
+	}
 }

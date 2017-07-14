@@ -5,9 +5,9 @@ $(function(){
             'homeworkTinfoId':'1452851f933b41948a3c5c9327897'
 
         };
-
-
-
+        $('.anDes').html(sessionStorage.stutext);
+        $('.kon p:last-of-type').html(sessionStorage.knowledgePoint);
+        $('.hwCon').html(sessionStorage.description);
         $('.hwTeacherRankTitle').on('touchend',function(){
             if($('.hwInfo').css('display')=='none'){
                 $('.hwInfo').show();
@@ -21,10 +21,6 @@ $(function(){
             }
         })
 
-            $('.anDes').html(sessionStorage.stutext);
-            ajaxRequest('post',homework_s.t_seac,{Tcid:sessionStorage.TeacherId},function(e){
-                        console.log(e)
-            })
 
 
         //输入验证
@@ -32,13 +28,51 @@ $(function(){
             $('.teacherword').html(''+$(this).val().length+'/200')
         });
 
+        //优秀作业
+
+        $('.infoTitle span').on('touchend',function(){
+            if($(this).css('color')=='rgb(255, 106, 106)'){
+                $(this).css({
+                    'color':'#ccc',
+                    'border':'1px solid #ccc'
+                });
+                $('.excellent').show();
+                $('.excellent').append('<img src="images/excellent.gif" alt="">')
+                setTimeout(function(){
+                    $('.excellent').html('  ')
+                },1000)
+            }else{
+                $(this).css({
+                    'color':'#ff6a6a',
+                    'border':'1px solid #ff6a6a'
+                });
+            }
+        });
 
 
 
+        ajaxRequest('post',homework_s.t_modi,{Tcid:sessionStorage.Tid,Sdtid:sessionStorage.stuid},function(e){
+            console.log(e);
+            var stu = e.data.StudentHomeworkFile;
+            var tea = e.data.TeacherHomeworkFile
+            for(var a  = 0;a<stu.length;a++){
+                if(stu[a].fileType=='.mp3'||stu[a].fileType=='mp3'){
+                    $('#bgMusic').attr('src',stu[a].url)
+                }
+            }
+            for(var b  = 0;b<tea.length;b++){
 
+            }
+        });
 
-
-
+            $('.music_s ').on('touchend', function () {
+                $(this).addClass('playing_s');
+                var audio = document.getElementById("bgMusic");
+                audio.play()
+                setTimeout(function(){
+                    $('.music_s').removeClass('playing_s');
+                },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');
+            });
 
 
 

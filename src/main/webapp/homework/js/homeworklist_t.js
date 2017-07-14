@@ -61,10 +61,12 @@ $(function(){
         var list_s = e.data;
         $('.Prompt_s i').html(e.SumUpnotCorrect);
         for(var a = 0;a<list_s.length;a++){
-            list_s[a][0].readStatus==0?Read='state_st':Read='';
-            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display:inline;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>')
+            for(var c = 0;c<list_s[a].length;c++){
+                list_s[a][c].readStatus==0?Read='state_st':Read='';
+            }
+            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display:inline;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
             for(var b = 0;b<list_s[a].length;b++){
-                $('.tealist_s').eq(a).append(' <li><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescommit+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span>修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
+                $('.tealist_s').eq(a).append(' <li><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescommit+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span>修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
             }
         }
     });
@@ -77,6 +79,7 @@ $(function(){
         sessionStorage.classCode_s = $(this).attr('classCode');
         sessionStorage.courseCode_s = $(this).attr('courseCode');
         sessionStorage.homeworkTime_s = $(this).attr('homeworkTime');
+        sessionStorage.Tid = $(this).attr('tid');
         location.href = 'reply_t.html';
     });
     // 删除
