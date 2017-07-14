@@ -75,6 +75,7 @@
                     var studioNo=dataList[i]["studioNo"];
                     var learningPeriod=dataList[i]["learningPeriod"];
                     var courseName=dataList[i]["courseName"];
+                    var id=dataList[i]["id"];
                    /* var fileUrl = dataList[i]["fileUrl"];*/
 
                     if (i % 2 == 1) {
@@ -83,7 +84,7 @@
                         str += "<tr class='table-tr-even'>"
                     }
 
-                    str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+subject+"_"+courseName+"_"+lessonNo+"讲</td>";
+                    str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+subject+"_"+courseName+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
                     str += "<td id='playBtn'><button>播放</button></td>";
 
 
@@ -96,14 +97,14 @@
     }
     $("#ckListTbody").on("click","#playBtn button",function () {
         $("#playBtn button").attr("disabled",true);
-        var fileName=$(this).parent().prev().html();
-        var fileN=fileName.split("_");
+        /*var fileName=$(this).parent().prev().html();
+        var fileN=fileName.split("_");*/
         /*fileN[0]=fileN[0].substring(3,7);
         fileN[6]=fileN[6].substring(0,1);*/
-        console.log(fileName.split("_"));
-        console.log(fileN);
+        /*console.log(fileName.split("_"));
+        console.log(fileN);*/
 
-        var file={
+        /*var file={
             "studioNo":fileN[0].substring(3,7),
             "teacherName":fileN[1],
             "learningPeriod":fileN[2],
@@ -114,7 +115,10 @@
             "schoolName":$("select").val(),
             "status":1
         }
-        console.log(file);
+        console.log(file);*/
+        var file={
+            "id":$(this).parent().prev().find("span").html()
+        }
         $.ajax({
             url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',

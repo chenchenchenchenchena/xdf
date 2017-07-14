@@ -95,14 +95,14 @@
     }
     $("#ckListTbody").on("click","#playBtn button",function () {
         $("#playBtn button").attr("disabled",true);
-        var fileName=$(this).parent().prev().html();
-        var fileN=fileName.split("_");
+      /*  var fileName=$(this).parent().prev().html();
+        var fileN=fileName.split("_");*/
         /*fileN[0]=fileN[0].substring(3,7);
         fileN[6]=fileN[6].substring(0,1);*/
-        console.log(fileName.split("_"));
-        console.log(fileN);
+        /*console.log(fileName.split("_"));
+        console.log(fileN);*/
 
-        var file={
+        /*var file={
             "studioNo":fileN[0].substring(3,7),
             "teacherName":fileN[1],
             "learningPeriod":fileN[2],
@@ -112,6 +112,9 @@
             "lessonNo":fileN[6].substring(0,1),
             "schoolName":$("select").val(),
             "status":1
+        }*/
+        var file={
+            "id":$(this).parent().prev().find("span").html()
         }
         console.log(file);
         $.ajax({

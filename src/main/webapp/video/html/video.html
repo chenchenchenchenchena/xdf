@@ -52,6 +52,7 @@
                     $(".video").show();
                     if(e.dataList){
                         str="";
+                        $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'></div>").appendTo("body,html");
                         var dataList = e.dataList;
                         for (var i = 0; i < dataList.length; i++) {
                             var grade = dataList[i]["grade"];
