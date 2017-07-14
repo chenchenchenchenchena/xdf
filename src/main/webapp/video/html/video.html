@@ -15,6 +15,31 @@
 </div>
 <script>
     var str = "";
+    var playerId = 0;
+    createNativeBridge(function (bridge) {
+        window.nativeBridge = bridge;
+        getVideoDemandPath();
+        nativeBridge.attachCloseEventObserver(function () {
+            myLog("close event");
+            nativeBridge.closeWindow();
+        });
+    })
+    function getVideoDemandPath() {
+        var data= new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate();
+        nativeBridge.getVideoDemandPath(str, function (args) {
+            myLog(JSON.stringify(args));
+            if(args.filepath=="-1"){
+                layer.msg("路径为空",{icon: 1});
+            }else if(args.filepath=="-2"){
+                layer.msg("目录不存在",{icon: 1});
+            }else if(args.filepath=="0"){
+                layer.msg("没有找到匹配的文件",{icon: 1});
+            }else{
+                $("video").attr("src","D:/download/"+data+"/"+str+".MP4");
+            }
+
+        });
+    }
    setInterval(function () {
         /* str = "";*/
         $.ajax({
@@ -38,7 +63,7 @@
                             var courseName = dataList[i]["courseName"];
                             /* var fileUrl = dataList[i]["fileUrl"];*/
 
-                            str += "直播间" + studioNo + "/" + teacherName + "/" + learningPeriod + "/" + grade + "/" + courseName + "/" + subject + "/" + lessonNo + "讲---";
+                            str += "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
 
                         }
                         console.log(str);
@@ -50,34 +75,10 @@
 
             }
         })
+       getVideoDemandPath();
      },10000);
 
-    var playerId = 0;
-        createNativeBridge(function (bridge) {
-            window.nativeBridge = bridge;
-            var data= new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate();
-            nativeBridge.getVideoDemandPath(str, function (args) {
-                myLog(JSON.stringify(args));
-                if(args.filepath=="-1"){
-                    layer.msg("路径为空",{icon: 1});
-                }else if(args.filepath=="-2"){
-                    layer.msg("目录不存在",{icon: 1});
-                }else if(args.filepath=="0"){
-                    layer.msg("没有找到匹配的文件",{icon: 1});
-                }else{
-                    $("video").attr("src","D:/download/"+data+"/"+str+".MP4");
-                }
 
-            });
-
-
-            nativeBridge.attachCloseEventObserver(function () {
-                myLog("close event");
-                nativeBridge.closeWindow();
-            });
-
-
-        })
 
     function myLog(log) {
        /* document.getElementById("txt-area").value += log + "\n";*/
