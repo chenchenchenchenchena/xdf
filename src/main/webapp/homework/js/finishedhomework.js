@@ -102,7 +102,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     //将文件显示到布局中
-                    if (fileType == "mp3") {
+                    if (fileType.indexOf("mp3") != -1) {
                         showAudio(e.fileUrl, e.fileSize, "audio_" + flag, "audio" + flag);
                     } else {
                         showImage(e.thumbnail, "imagBox_" + flag);
