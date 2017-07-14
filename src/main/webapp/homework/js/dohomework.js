@@ -55,7 +55,8 @@ $(function () {
     /*------------------录制语音开始------------------------------------*/
     $('#record').click(function () {
         $('.song_s').animate({'bottom': '0px'});
-        $('.song_s,.mask').show();
+        // $('.song_s,.mask').show();
+        showAudio("","",$('#record_audio_box'), "record_audio");
     });
     /* 隐藏语音弹窗 */
     $('.mask').click(function () {
@@ -181,6 +182,7 @@ $(function () {
         });
     }
 
+
     /**
      * 显示语音布局
      */
@@ -188,17 +190,17 @@ $(function () {
 
         idParent.show();
         length = "";
-        // url = "http://www.w3school.com.cn/i/song.mp3";
+        url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
         idParent.html(strVoice);
-        $('#' + idChildren)[0].onloadedmetadata = getVoiceLen();
+        var audioElem = document.getElementById(idChildren);
+        audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
-            var len = $('#' + idChildren)[0].duration;
+            var len = audioElem.duration;
             len = parseInt(len);
-            alert(len);
             var hh = parseInt(len / 3600);
             var mm = parseInt((len % 3600) / 60);
             var ss = parseInt((len % 3600) % 60);

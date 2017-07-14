@@ -123,11 +123,11 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
         idParent.html(strVoice);
-        $('#' + idChildren)[0].onloadedmetadata = getVoiceLen();
+        var audioElem = document.getElementById(idChildren);
+        audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
-            var len = $('#' + idChildren)[0].duration;
+            var len = audioElem.duration;
             len = parseInt(len);
-            alert(len);
             var hh = parseInt(len / 3600);
             var mm = parseInt((len % 3600) / 60);
             var ss = parseInt((len % 3600) % 60);
