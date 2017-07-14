@@ -156,7 +156,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    $('.teBox').val(e.data.fileUrl);
+                    // $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
@@ -249,7 +249,7 @@ $(function () {
                 success: function (res) {
                     i++;
                     // alert('已上传：' + i + '/' + length);
-                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
