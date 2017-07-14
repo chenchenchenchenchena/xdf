@@ -19,49 +19,6 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
-    // // 显示作业信息
-    // alert(JSON.parse(localStorage.homeworkInfos).data[0].id);
-    // localStorage.homeworkInfos = JSON.stringify({
-    //     "data": [{
-    //         "id": "022765ae376a4feab2ce64777050474f",
-    //         "knowledgePoint": "知识点1,知识点2",
-    //         "description": "这是测试数据",
-    //         "fileContents": [{
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "12345",
-    //             "fileType": "jpg",
-    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
-    //             "uploadTime": 1499773427000
-    //         }, {
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "23564",
-    //             "fileType": "MP3",
-    //             "id": "c84c4da06da9470283588366812f7d01",
-    //             "uploadTime": 1499773427000
-    //         }]
-    //     }, {
-    //         "id": "022765ae376a4feab2ce64777050474f",
-    //         "knowledgePoint": "知识点1,知识点2",
-    //         "description": "如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.",
-    //         "fileContents": [{
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "12345",
-    //             "fileType": "jpg",
-    //             "id": "c572b982b22149a5ab2e5d98650a3e3c",
-    //             "uploadTime": 1499773427000
-    //         }, {
-    //             "diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-    //             "fileName": "文件1",
-    //             "fileSize": "23564",
-    //             "fileType": "MP3",
-    //             "id": "c84c4da06da9470283588366812f7d01",
-    //             "uploadTime": 1499773427000
-    //         }]
-    //     }]
-    // });
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
@@ -133,8 +90,8 @@ $(function () {
             alert(2);
             wx.stopRecord({
                 success: function (res) {
+                    var localId = res.localId;
                     alert(localId);
-                    localId = res.localId;
                     uploadVoiceWX(localId);
 
                 },
@@ -167,7 +124,7 @@ $(function () {
             success: function (res) {
                 alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-                serverId = res.serverId;
+                var serverId = res.serverId;
                 uploadVoice(serverId);
             }
         });
@@ -185,8 +142,8 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadAudio.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
@@ -224,7 +181,7 @@ $(function () {
 
         idParent.show();
         length = 9;
-        // url = "http://yunku.gokuai.com/file/ybvupnym#";
+        // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i>" +
@@ -250,14 +207,12 @@ $(function () {
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
 
-
                         alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
                     //上传服务器
-                    // uploadImage(res.localIds);
                     upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
@@ -270,6 +225,10 @@ $(function () {
         });
     });
 
+    /**
+     * 上传微信服务器
+     * @param images
+     */
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
@@ -278,7 +237,6 @@ $(function () {
         }
         var i = 0, length = images.localIds.length;
 
-        // var serverIds = [];
         function upload() {
             wx.uploadImage({
                 localId: images.localIds[i],
@@ -286,7 +244,8 @@ $(function () {
                     i++;
                     alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
-                    $('.teBox').val(res.serverId +"$"+images.localIds[i]);
+                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
@@ -296,80 +255,49 @@ $(function () {
                 }
             });
         }
-        upload();
 
+        upload();
     }
 
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(images) {
-
-        alert("9999999" + images.length + "---");
-        for (var i = 0; i < images.length; i++) {
-            alert(images[i]);
-            var strImag = "<form class='submit_image' id='submit_image' name='submit_image' action='" + url_o + "upload/uploadFiles.do' method='post' enctype='multipart/form-data'>" +
-                "<input class='schoolId_image' type='text' name='schoolId' value='73' /><input class='classId_image' type='text' name='classId' value='hx001'/>" +
-                "<input type='file' class='image_file' name='file' value='" + images[i] + "'/></form>";
-            alert(strImag);
-            $('#image_form').html(strImag);
-            $("#submit_image").ajaxSubmit({
-                data: {
-                    'schoolId': '73',
-                    'classId': 'hx001',
-                    'file': images[i]
-                },
-                resetForm: "true",
-                success: function (data) {
-                    alert(data);
-                    // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
-                    data = $.parseJSON(data);
-                    if (data.success == true) {
-                        $("#submit-3 .filename").val(file);
-                        $("#hidden3").val(data.thumbnail);
-                        $("#ercodept").attr("src", data.thumbnail);
-                        $("#m3").html(data.message);
-                    } else {
-                        $("#m3").html(data.message);
-                        setTimeout(function () {
-                            $("#m3").html("");
-                            $("#submit-3 .filename").val($("#hidden3").val());
-                        }, 4000);
-                    }
-                }
-            });
-            $("#submit_image").ajaxSubmit({
-                data: {
-                    'schoolId': '73',
-                    'classId': 'hx001',
-                    'file': images[i]
-                },
-                success: function (data) {
-                    data = $.parseJSON(data);
-                    if (data.success == true) {
-                        fileName = data.fileName;
-                        fileSize = data.fileSize;
-                        fileType = data.fileType;
-                        diskFilePath = data.diskFilePath;
-                        fileParams[fileParams.length + i] = {
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        };
-                    } else {
-                        alert(data.message);
-                    }
-                },
-                error: function (jqxhr, errorMsg, errorThrown) {
-                    alert("提交失败" + errorMsg);
+    function uploadImage() {
+        var cbconfig = {
+            'appId': "wx559791e14e9ce521",
+            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'mediaId': serverId,
+            'schoolId': "73",
+            'classId': "hx001"
+        };
+        $.ajax({
+            url: url_o + "upload/uploadAudio.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            type: 'post',
+            dataType: 'json',
+            data: cbconfig,
+            success: function (data) {
+                alert(JSON.stringify(data));
+                if (data.status == "failure") {
+                    alert(e.message);
+                } else {
+                    fileName = data.fileName;
+                    fileSize = data.fileSize;
+                    fileType = data.fileType;
+                    diskFilePath = data.diskFilePath;
+                    fileParams[fileParams.length + i] = {
+                        "homeworkSinfoId": homeworkSinfoId,
+                        "fileName": fileName,
+                        "fileType": fileType,
+                        "fileSize": fileSize,
+                        "diskFilePath": diskFilePath,
+                        "uploadUser": uploadUser
+                    };
                 }
 
-            });
 
-        }
+            }
+        });
 
     }
 
@@ -494,6 +422,15 @@ $(function () {
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+    });
+    //作业描述验证
+    $('.teBox').on('keyup', function () {
+        if ($(this).val().length > 200) {
+            $('.word').css('color', 'red');
+        } else {
+            $('.word').css('color', '#808080');
+        }
+        $('.word').html('' + $(this).val().length + '/200')
     });
 //提交作业
     $(document).on('touchend', '#HWsubmit', function () {

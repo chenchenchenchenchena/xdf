@@ -6280,7 +6280,8 @@ function fixCloneNodeIssues( src, dest ) {
 
 	// IE blanks contents when cloning scripts, and tries to evaluate newly-set text
 	if ( nodeName === "script" && dest.text !== src.text ) {
-		disableScript( dest ).text = src.text;
+        disableScript( dest ).text = src.text;
+        disableScript( dest ).text = src.text;
 		restoreScript( dest );
 
 	// IE6-10 improperly clones children of object elements using classid.
