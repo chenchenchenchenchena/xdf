@@ -410,14 +410,14 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-        fileParams[0] = {
-            "homeworkSinfoId": homeworkSinfoId,
-            "fileName": "496aca1f3f874fce981771bb07d49c10.mp3",
-            "fileType": ".mp3",
-            "fileSize": "4005",
-            "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
-            "uploadUser": uploadUser
-        };
+        // fileParams[0] = {
+        //     "homeworkSinfoId": homeworkSinfoId,
+        //     "fileName": "496aca1f3f874fce981771bb07d49c10.mp3",
+        //     "fileType": ".mp3",
+        //     "fileSize": "4005",
+        //     "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
+        //     "uploadUser": uploadUser
+        // };
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
