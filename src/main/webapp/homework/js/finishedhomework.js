@@ -117,13 +117,31 @@ $(function () {
      */
     function showAudio(url, length, idParent, idChildren) {
 
-        // document.getElementById(idParent).show();
-        $('#'+idParent).show();
-        length = 9;
+        idParent.show();
+        length = "";
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i>" +
-            "</div><span>" + length + "''</span>";
-        $('#'+idParent).html(strVoice);
+            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
+
+        idParent.html(strVoice);
+        $('#' + idChildren)[0].onloadedmetadata = getVoiceLen();
+        function getVoiceLen() {
+            var len = $('#' + idChildren)[0].duration;
+            len = parseInt(len);
+            alert(len);
+            var hh = parseInt(len / 3600);
+            var mm = parseInt((len % 3600) / 60);
+            var ss = parseInt((len % 3600) % 60);
+            var voiceLen = "";
+            if (hh > 0) {
+                voiceLen = hh + "'" + mm + "'" + ss + "''";
+            } else if (mm > 0) {
+                voiceLen = mm + "'" + ss + "''";
+            } else {
+                voiceLen = ss + "''";
+            }
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        }
+
     }
 
 
