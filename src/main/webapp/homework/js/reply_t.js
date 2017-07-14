@@ -15,7 +15,7 @@ $(function(){
                 $('.emptyOne').show()
             }else{
                 for(var c = 0;c<data.notCorrect.length;c++){
-                    $('.Pending').eq(0).append('<li Id="'+data.notCorrect[c].id+'" text="'+data.notCorrect[c].knowledgePoint+'"><span class="yeCircle">'+data.notCorrect[c].studentName.substr(1,2)+'</span><span>'+data.notCorrect[c].studentName+'</span><span>'+data.notCorrect[c].homeworkTime+'</span></li>')
+                    $('.Pending').eq(0).append('<li Id="'+data.notCorrect[c].id+'" text="'+data.notCorrect[c].replydescription+'" knowledgePoint="'+data.notCorrect[c].knowledgePoint+'"  description = "'+data.notCorrect[c].description+'"><span class="yeCircle">'+data.notCorrect[c].studentName.substr(1,2)+'</span><span>'+data.notCorrect[c].studentName+'</span><span>'+data.notCorrect[c].homeworkTime+'</span></li>')
                 }
             }
             if(data.yesCorrect.length==0){
@@ -45,8 +45,10 @@ $(function(){
 
 
     $(document).on('touchend','.home_t li',function(){
-        sessionStorage.TeacherId = $(this).attr('Id');
+        sessionStorage.stuid = $(this).attr('Id');
         sessionStorage.stutext = $(this).attr('text');
+        sessionStorage.knowledgePoint = $(this).attr('knowledgePoint');
+        sessionStorage.description = $(this).attr('description');
         location.href = 'replydetail_t.html';
     })
 

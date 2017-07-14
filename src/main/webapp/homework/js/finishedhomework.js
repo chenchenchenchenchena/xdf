@@ -23,7 +23,7 @@ $(function () {
         /*******作业信息*******/
         //知识点
         if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-            knowledgePoint = datas.teacherKnowledgePoint.split(',');
+            knowledgePoint =splitStrs(datas.teacherKnowledgePoint);
             for (var i = 0; i < knowledgePoint.length; i++) {
                 kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                 $('.knowPoint').append(kpHtml);
@@ -102,7 +102,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     //将文件显示到布局中
-                    if (fileType == "mp3") {
+                    if (fileType.indexOf("mp3") != -1) {
                         showAudio(e.fileUrl, e.fileSize, "audio_" + flag, "audio" + flag);
                     } else {
                         showImage(e.thumbnail, "imagBox_" + flag);

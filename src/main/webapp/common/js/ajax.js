@@ -90,7 +90,7 @@ var homework_s = {
     't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
     't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
     't_sbim': url_o+'teacherData/addHomeWork.do',    //提交老师作业
-    't_modi': url_o+'teacherData/teacherReplyHomeWork.do',//老师批改作业
+    't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
     't_seac': url_o+'teacherData/gainHomeworkFileData.do', // 老师获取学生文件
     's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
@@ -243,3 +243,24 @@ function getCountDays() {
     /* 返回当月的天数 */
     return curDate.getDate();
 }
+
+// 去除字符串中所有空格
+function removeAllSpace(str) {
+    return str.replace(/\s+/g, "");
+}
+// 分隔成数组
+function splitStrs(strs) {
+    strs = removeAllSpace(strs);
+    if(strs.indexOf(',')!=-1){
+        strs = strs.split(',');
+    }else if(strs.indexOf('，')!=-1){
+        strs = strs.split('，');
+    }else if(strs.indexOf(';')!=-1){
+        strs = strs.split(';');
+    }else if(strs.indexOf('；')!=-1){
+        strs = strs.split('；');
+    }else{
+        strs = strs.split(',');
+    }
+    return strs;
+};

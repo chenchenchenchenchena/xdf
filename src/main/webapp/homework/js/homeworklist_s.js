@@ -148,7 +148,8 @@ function getHwContentSuccess(msg) {
 				// localStorage.homeworkInfos = JSON.stringify(homeworkInfos);
 				console.log(typeof homeworkInfosArray);
 				if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
-					knowledgePoint = item.knowledgePoint.split(',');
+
+					knowledgePoint =splitStrs(item.knowledgePoint);
 					console.log(knowledgePoint+"----"+knowledgePoint.length);
 					for(var i = 0;i<knowledgePoint.length;i++){
 						kpHtml += '<span>'+knowledgePoint[i]+'</span>';
@@ -416,3 +417,5 @@ function getHwFinishSuccess(msg){
 		}
 	}
 }
+
+
