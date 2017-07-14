@@ -30,7 +30,7 @@ $(function () {
             }
         }
         //作业描述
-        $('.des').html(datas.teacherDes);
+        $('.des .hwCon').html(datas.teacherDes);
         //语音,图片
         $.each(datas.teaHomeworkFiles,function(i,paths){
             var pathUrls = ['1',paths.diskFilePath,paths.fileType];
