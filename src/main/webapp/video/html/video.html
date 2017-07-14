@@ -5,7 +5,7 @@
     <title>视频</title>
     <link rel="stylesheet" href="../css/core.css" />
     <link rel="stylesheet" href="../css/addInfo.css" />
-    <script src="../../common/js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
     <script src="../js/layer-v2.1/layer/layer.js"></script>
 </head>
 <body>
@@ -15,7 +15,7 @@
 </div>
 <script>
     var str = "";
-   /* setInterval(function () {*/
+   setInterval(function () {
         /* str = "";*/
         $.ajax({
             url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
@@ -47,7 +47,23 @@
 
             }
         })
-  /*  },10000);*/
+     },10000);
+    var playerId = 0;
+    window.onload=function () {
+        createNativeBridge(function (bridge) {
+            window.nativeBridge = bridge;
+            nativeBridge.getVideoDemandPath(str, function (args) {
+                myLog(JSON.stringify(args));
+            });
+        })
+    }
+    function myLog(log) {
+       /* document.getElementById("txt-area").value += log + "\n";*/
+        console.log("nihao....................");
+    }
+
+
+
 </script>
 </body>
 </html>
