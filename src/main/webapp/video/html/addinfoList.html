@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../js/layer-v2.1/layer/skin/layer.css"  />
+    <link rel="stylesheet" href="../css/addInfo.css"  />
+   <!-- <link rel="stylesheet" href="../css/p176.css"  />-->
+    <script src="../js/jquery.js"></script>
+    <script src="../js/layer-v2.1/layer/layer.js"></script>
+   <!-- <script src="../js/main.js"></script>-->
+</head>
+<body>
+	<!--<div class="startImg"><img src="../images/01.png"  /></div>-->
+	<div class="listData">
+		<div class="p176-nav clearfix">
+			<div class="p176-logo-left"></div>
+		</div>
+        <select style="margin-left: 35%;margin-top: 25px;width: 100px;">
+            <option>海口</option>
+            <option>东莞</option>
+            <option>银川</option>
+            <option>中山</option>
+            <option>焦作</option>
+        </select>
+        <span id="btn" onclick="showList()">查询</span>
+		<h2 style="width: 1000px;margin: 20px auto 0;text-align: center" class="p176-tit clearfix"><span class="p176-alresdy" style="font-size: 20px;">文件播放列表</span></h2>
+		<div style="width: 1000px;margin: 0px auto;" class="p176-table-wrap" >
+			<table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
+				<thead>
+				<tr id="ckListHead">
+					<th style="width:50%;text-align: center">文件名</th>
+				</tr>
+				</thead>
+				<tbody id="ckListTbody">
+				</tbody>
+			</table>
+			<div class="PublicPage" id="publicPage"></div>
+		</div>
+	</div>
+
+</body>
+<script>
+    $(function () {
+		/*$(".listData").hide();*/
+
+    })
+    //显示已经录入的数据
+
+
+    function showList() {
+        var school=$("select").val();
+        var schoolName={
+            "schoolName":school
+        }
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            type: 'post',
+            data:schoolName,
+            dataType: 'json',
+            success: function (e) {
+                console.log(e)
+				/*$(".listData").show();
+				$(".startImg").hide();*/
+                var dataList = e.dataList;
+                var str = "";
+                for (var i = 0; i < dataList.length; i++) {
+                    var grade = dataList[i]["grade"];
+					var lessonNo = dataList[i]["lessonNo"];
+					var subject = dataList[i]["subject"];
+					var teacherName = dataList[i]["teacherName"];
+					/*var schoolName = dataList[i]["schoolName"];*/
+                    var studioNo=dataList[i]["studioNo"];
+                    var learningPeriod=dataList[i]["learningPeriod"];
+                    var courseName=dataList[i]["courseName"];
+                   /* var fileUrl = dataList[i]["fileUrl"];*/
+
+                    if (i % 2 == 1) {
+                        str += "<tr class='table-tr-odd'>"
+                    } else {
+                        str += "<tr class='table-tr-even'>"
+                    }
+
+                    str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+subject+"_"+courseName+"_"+lessonNo+"讲</td>";
+
+
+
+                    str += "</tr>";
+                }
+                $("#ckListTbody").html(str);
+
+            }
+        });
+    }
+    $("#ckListTbody").on("click","#playBtn button",function () {
+        $("#playBtn button").attr("disabled",true);
+        var fileName=$(this).parent().prev().html();
+        var fileN=fileName.split("_");
+        /*fileN[0]=fileN[0].substring(3,7);
+        fileN[6]=fileN[6].substring(0,1);*/
+        console.log(fileName.split("_"));
+        console.log(fileN);
+
+        var file={
+            "studioNo":fileN[0].substring(3,7),
+            "teacherName":fileN[1],
+            "learningPeriod":fileN[2],
+            "grade":fileN[3],
+            "courseName":fileN[4],
+            "subject":fileN[5],
+            "lessonNo":fileN[6].substring(0,1),
+            "schoolName":$("select").val(),
+            "status":1
+        }
+        console.log(file);
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
+            type: 'post',
+            data:JSON.stringify(file),
+            dataType: 'json',
+            success:function (e) {
+                if(e.result){
+                    $("#playBtn button").attr("disabled",false);
+                    layer.msg(e.message,{icon:1});
+                }else{
+                    $("#playBtn button").attr("disabled",false);
+                    layer.msg(e.message,{icon:1});
+                }
+            }
+        })
+    })
+
+    /*var playerId = 0;
+    createNativeBridge(function (bridge) {
+        window.nativeBridge = bridge;
+        nativeBridge.attachCloseEventObserver(function () {
+            myLog("close event");
+            nativeBridge.closeWindow();
+        });
+    })
+
+    function myLog(log) {
+        /!* document.getElementById("txt-area").value += log + "\n";*!/
+        console.log(log);
+    }*/
+</script>
+</html>
