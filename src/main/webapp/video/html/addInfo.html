@@ -93,7 +93,14 @@
         }
         
     }
-
+    var playerId = 0;
+    createNativeBridge(function (bridge) {
+        window.nativeBridge = bridge;
+        nativeBridge.attachCloseEventObserver(function () {
+            myLog("close event");
+            nativeBridge.closeWindow();
+        });
+    })
 
 </script>
 </html>

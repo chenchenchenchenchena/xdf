@@ -54,7 +54,13 @@ $(function () {
 
     /*------------------录制语音开始------------------------------------*/
     $('#record').click(function () {
-        $('.song_s').show();
+        $('.song_s').animate({'bottom': '0px'});
+        $('.song_s,.mask').show();
+    });
+    /* 隐藏语音弹窗 */
+    $('.mask').click(function () {
+        $('.song_s').animate({'bottom': '-300px'});
+        $('.song_s,.mask').hide();
     });
     var timeInedex = 0;
     var timeds;

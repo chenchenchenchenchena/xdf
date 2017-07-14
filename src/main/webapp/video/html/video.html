@@ -25,22 +25,25 @@
                 if(e.result){
                     $(".startImg").hide();
                     $(".video").show();
-                    var dataList = e.dataList;
-                    for (var i = 0; i < dataList.length; i++) {
-                        var grade = dataList[i]["grade"];
-                        var lessonNo = dataList[i]["lessonNo"];
-                        var subject = dataList[i]["subject"];
-                        var teacherName = dataList[i]["teacherName"];
-                        /*var schoolName = dataList[i]["schoolName"];*/
-                        var studioNo = dataList[i]["studioNo"];
-                        var learningPeriod = dataList[i]["learningPeriod"];
-                        var courseName = dataList[i]["courseName"];
-                        /* var fileUrl = dataList[i]["fileUrl"];*/
+                    if(e.dataList){
+                        var dataList = e.dataList;
+                        for (var i = 0; i < dataList.length; i++) {
+                            var grade = dataList[i]["grade"];
+                            var lessonNo = dataList[i]["lessonNo"];
+                            var subject = dataList[i]["subject"];
+                            var teacherName = dataList[i]["teacherName"];
+                            /*var schoolName = dataList[i]["schoolName"];*/
+                            var studioNo = dataList[i]["studioNo"];
+                            var learningPeriod = dataList[i]["learningPeriod"];
+                            var courseName = dataList[i]["courseName"];
+                            /* var fileUrl = dataList[i]["fileUrl"];*/
 
-                        str += "直播间" + studioNo + "/" + teacherName + "/" + learningPeriod + "/" + grade + "/" + courseName + "/" + subject + "/" + lessonNo + "讲---";
+                            str += "直播间" + studioNo + "/" + teacherName + "/" + learningPeriod + "/" + grade + "/" + courseName + "/" + subject + "/" + lessonNo + "讲---";
 
+                        }
+                        console.log(str);
                     }
-                    console.log(str);
+
                 }else{
                     layer.msg(e.message,{icon:1});
                 }
@@ -48,18 +51,38 @@
             }
         })
      },10000);
+
     var playerId = 0;
-    window.onload=function () {
         createNativeBridge(function (bridge) {
             window.nativeBridge = bridge;
+            var data= new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate();
             nativeBridge.getVideoDemandPath(str, function (args) {
                 myLog(JSON.stringify(args));
+                if(args.filepath=="-1"){
+                    layer.msg("路径为空",{icon: 1});
+                }else if(args.filepath=="-2"){
+                    layer.msg("目录不存在",{icon: 1});
+                }else if(args.filepath=="0"){
+                    layer.msg("没有找到匹配的文件",{icon: 1});
+                }else{
+                    $("video").attr("src","D:/download/"+data+"/"+str+".MP4");
+                }
+
             });
+            var playerId = 0;
+            createNativeBridge(function (bridge) {
+                window.nativeBridge = bridge;
+                nativeBridge.attachCloseEventObserver(function () {
+                    myLog("close event");
+                    nativeBridge.closeWindow();
+                });
+            })
+
         })
-    }
+
     function myLog(log) {
        /* document.getElementById("txt-area").value += log + "\n";*/
-        console.log("nihao....................");
+        console.log(log);
     }
 
 

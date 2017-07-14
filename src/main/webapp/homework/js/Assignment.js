@@ -6,7 +6,11 @@ $(function () {
     var homeworksubm = {
         'teacherEmail': 'caoxuefeng@xdf.cn',
         'teacherName': '曹雪峰',
-        'schoolId': '73'
+        'schoolId': '73',
+        'appid':'wx4430a619527b0667',
+        'secret':'7739991fcce774c2281147eae3986ad9',
+        'url':'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+        'templateId':'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
 
 
@@ -129,6 +133,10 @@ $(function () {
     });
     //提交作业
     $('.Submit_s').on('touchend', function () {
+        if($(this).css('background')=='rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box'){
+            layer.msg('正在提交，请稍等');
+            return false;
+        }
         if ($('.class_s i').html() == '') {
             layer.open({
                 type: 1,
@@ -138,7 +146,7 @@ $(function () {
                 skin: '',
                 time: 3000,
                 content: $(".classEmpty")
-            })
+            });
             return false;
         }
         if ($('.time_S i').html() == '') {
@@ -150,7 +158,7 @@ $(function () {
                 skin: '',
                 time: 3000,
                 content: $(".classTime")
-            })
+            });
             return false;
         }
         if ($('.Knowledge input').val() == '') {
@@ -162,7 +170,7 @@ $(function () {
                 skin: '',
                 time: 3000,
                 content: $(".classKnow")
-            })
+            });
             return false;
         }
         if ($('.home_text textarea').val() == '') {
@@ -174,10 +182,9 @@ $(function () {
                 skin: '',
                 time: 3000,
                 content: $(".classHome")
-            })
+            });
             return false;
         }
-        console.log($('.home_text span').css('color'))
         if ($('.home_text span').css('color') == 'rgb(255, 0, 0)') {
             layer.open({
                 type: 1,
@@ -187,10 +194,10 @@ $(function () {
                 skin: '',
                 time: 3000,
                 content: $(".classText")
-            })
+            });
             return false;
         }
-
+        $(this).css('background','#ccc');
         var class_c = classCode.substr(0, classCode.length - 1);
         var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
         homeworksubm.classCode = class_c;
@@ -198,12 +205,15 @@ $(function () {
         homeworksubm.homeworkTime = $('.time_S i').html();
         homeworksubm.knowledgePoint = $('.Knowledge input').val();
         homeworksubm.description = $('.home_text textarea').val();
-        homeworksubm.fileInfo = [];
+        homeworksubm.fileInfo = [
+            // {"fileName":"####", "fileType":"####", "fileSize":"####", "diskFilePath":"####"},
+        ];
 
         ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
+                $(this).css('background','#00ba97');
             } else {
                 $('.big_back').show();
                 $('.erro').show();
