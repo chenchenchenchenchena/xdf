@@ -67,8 +67,10 @@ $(function(){
 
             $('.music_s ').on('touchend', function () {
                 $(this).addClass('playing_s');
+                document.removeEventListener("WeixinJSBridgeReady", play);
+                document.removeEventListener("YixinJSBridgeReady", play);
                 var audio = document.getElementById("bgMusic");
-                audio.play()
+                audio.play();
                 setTimeout(function(){
                     $('.music_s').removeClass('playing_s');
                 },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');

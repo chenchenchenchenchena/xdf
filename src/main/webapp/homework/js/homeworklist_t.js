@@ -70,10 +70,7 @@ $(function(){
             }
         }
     });
-    //删除
-    $(document).on('touchend','.delete_s',function(){
 
-    });
     //查看更多
     $(document).on('touchend','.more_so',function(){
         sessionStorage.classCode_s = $(this).attr('classCode');
