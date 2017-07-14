@@ -194,7 +194,7 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>"+length+"</span>";
 
         idParent.html(strVoice);
-        function getVoiceLen() {
+        // function getVoiceLen() {
             setTimeout(function(){
                 var len = $('#'+idChildren)[0].duration;
                 len = parseInt(len);
@@ -211,8 +211,8 @@ $(function () {
                     voiceLen = ss+"''";
                 }
                 $('#'+idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
-            },200);
-        }
+            },1000);
+        // }
 
         window.onload = getVoiceLen();
 
