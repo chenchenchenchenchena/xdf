@@ -57,6 +57,9 @@ $(function () {
     $('#record').click(function () {
         $('.song_s').show();
     });
+    var timeInedex = 0;
+    var timeds;
+    var localId;
     /**
      * 按下开始录音
      */
@@ -68,6 +71,9 @@ $(function () {
             wx.startRecord({
                 success: function () {
                     localStorage.rainAllowRecord = 'true';
+                    timeds = setInterval(function () {
+                        timeInedex++
+                    }, 1000);
                 },
                 cancel: function () {
                     alert('用户拒绝授权录音');
@@ -93,8 +99,10 @@ $(function () {
             alert(2);
             wx.stopRecord({
                 success: function (res) {
-                    var localId = res.localId;
-                    alert(localId);
+                    clearInterval(timeds);
+                    localId = res.localId;
+                    // alert(localId);
+                    $('.song_s').hide();
                     uploadVoiceWX(localId);
 
                 },
@@ -103,17 +111,6 @@ $(function () {
             });
         }
     });
-
-    /**
-     * 播放微信录制后的本地语音文件
-     */
-    function playVoice(plId) {
-        alert("开始播放");
-        //播放录音
-        wx.playVoice({
-            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-        });
-    }
 
     /**
      * 上传微信服务器，获取保存的serverId
@@ -125,11 +122,9 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                alert(JSON.stringify(res));
+                // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
-                $()
-
                 uploadVoice(serverId);
             }
         });
@@ -143,7 +138,7 @@ $(function () {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
-            'schoolId': "73",
+            'schoolId': sessionStorage.schoolId,
             'classId': "hx001"
         };
         $.ajax({
@@ -159,8 +154,9 @@ $(function () {
                 } else {
                     $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
-                    $('.song_s').hide();
+
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
+                    // playVoice(localId, timeInedex,$('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
@@ -186,14 +182,15 @@ $(function () {
     function showAudio(url, length, idParent, idChildren) {
 
         idParent.show();
-        length = 9;
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i>" +
-            "</div><span>" + length + "''</span>";
-        idParent.html(strVoice);
-        alert($('.audio_box #audio_record source').attr("src"));
+            "<i class='play-icon'></i>";
+        length = $('#'+idChildren).duration;
+        var lengthStr = "</div><span>" + length + "''</span>";
+
+        idParent.html(strVoice+lengthStr);
+        // alert($('.audio_box #audio_record source').attr("src"));
     }
 
     /*------------------录制语音结束------------------------------------*/
@@ -213,7 +210,6 @@ $(function () {
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
 
-                        alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
@@ -238,7 +234,7 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
+            // alert('请先使用 chooseImage 接口选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
@@ -248,8 +244,7 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    alert('已上传：' + i + '/' + length);
-                    // serverIds.push(res.serverId);
+                    // alert('已上传：' + i + '/' + length);
                     $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     // uploadImage(res.serverId);
                     if (i < length) {
@@ -273,7 +268,7 @@ $(function () {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
-            'schoolId': "73",
+            'schoolId': sessionStorage.schoolId,
             'classId': "hx001"
         };
         $.ajax({
