@@ -38,7 +38,8 @@
             <option>中山</option>
             <option>焦作</option>
         </select>
-        <span id="btn" onclick="save()">增加</span>
+        <span id="bt" onclick="save()">增加</span>
+        <span id="go">跳转到列表页</span>
     </div>
 </form>
 </body>
@@ -106,6 +107,8 @@
             nativeBridge.closeWindow();
         });
     })*/
-
+    $("#go").click(function () {
+        location.href="addinfoList.html";
+    })
 </script>
 </html>
