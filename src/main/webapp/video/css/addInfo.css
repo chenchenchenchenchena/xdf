@@ -18,7 +18,7 @@ html,body{
     background: #00ba97;
     position: relative;
     z-index: 1;
-    min-width: 1042px;
+    /*min-width: 1042px;*/
 }
 
 .p176-logo-left {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        html{
+            height:100%;
+            overflow: hidden;
+            background: url("../images/01.png") no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin: 30% auto 0;width:200px" class="inputBox">
+       <!-- <form>-->
+            <input type="text" placeholder="请输入手机号" class="password"/>
+            <button style="margin: 9% 0 0 29%;" class="subBtn">登陆</button>
+       <!-- </form>-->
+    </div>
+</body>
+</html>
+<script>
+    $(".subBtn").click(function () {
+        if($(".password").val()=="13146389836"){
+            location.href="infoList.html";
+            $(".password").val("");
+        }else if($(".password").val()==""){
+            alert("手机号不能为空");
+        }else{
+            alert("手机号不正确");
+        }
+    })
+</script>
