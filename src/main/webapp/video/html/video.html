@@ -82,7 +82,7 @@
                         }else{
                             document.getElementById('video').onended = function(){
                                 $("#video").hide();
-                                $("video").attr("src","");
+                                /*$("video").attr("src","");*/
                                 $(".box").hide();
                                 $("<div class=over style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播已结束...</div>").appendTo("body,html");
                             }
