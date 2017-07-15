@@ -4,14 +4,14 @@
 $(function(){
     var loading;
     $(".ranklist,.stuempty").hide();
-    var reqData = 'homeworkTinfoId=3';
+    var reqData = 'homeworkTinfoId='+localStorage.hwteacherId;
     // loading = layer.load();
     ajaxRequest('GET', homework_s.s_hwrank, reqData, getHwRankSuccess);
 })
 
 //获取学生排行
 function getHwRankSuccess(msg) {
-    var msg = {
+    var msg1 = {
         "code": "200",
         "data": [
             {
@@ -71,7 +71,7 @@ function getHwRankSuccess(msg) {
                 }
                 var rankListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+parseInt(i+1)+'</i><i>'
                     +items.stuName.substr(-2,2)+'</i><i>'+items.stuName
-                    +'</i></span><span class="rankright"><i>'+items.lessonTime+'</i></span></li>';
+                    +'</i></span><span class="rankright"><i>'+items.homeworkTime+'</i></span></li>';
                 $(".ranklist").append(rankListHtml);
                 $(".ranklist").show();
                 // layer.close(loading);

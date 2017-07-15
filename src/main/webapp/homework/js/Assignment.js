@@ -1,13 +1,13 @@
 $(function () {
     var trardata = {
-        'teacherCode': 'TC41',
+        'teacherCode': 'TC23',
         'schoolId': '73'
     };
     var homeworksubm = {
         'teacherEmail': 'caoxuefeng@xdf.cn',
         'teacherName': '曹雪峰',
         'schoolId': '73',
-        'appid':'wx4430a619527b0667',
+        'appid':'wxab29a3e2000b8d2a',
         'secret':'7739991fcce774c2281147eae3986ad9',
         'url':'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
         'templateId':'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
@@ -20,6 +20,20 @@ $(function () {
         var className = e.data.Data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
+        }
+        if(sessionStorage.Classname_x){
+            $('.class_s i').html('已选择1个班'+sessionStorage.Classname_x+';');
+            $('.time_S i').html(sessionStorage.ClassTime_x);
+            $('.class_name i').html('1')
+            $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
+            $('.home_text textarea').val(sessionStorage.description_x);
+            $('.class_name li').each(function(){
+                console.log($(this).text());
+                console.log(sessionStorage.Classname_x+'1111');
+                if($(this).html()==sessionStorage.Classname_x){
+                    $(this).find('img').attr('sec','images/C0503.png')
+                }
+            })
         }
     });
 
@@ -197,28 +211,51 @@ $(function () {
             });
             return false;
         }
-        $(this).css('background','#ccc');
-        var class_c = classCode.substr(0, classCode.length - 1);
-        var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
-        homeworksubm.classCode = class_c;
-        homeworksubm.className = class_n;
-        homeworksubm.homeworkTime = $('.time_S i').html();
-        homeworksubm.knowledgePoint = $('.Knowledge input').val();
-        homeworksubm.description = $('.home_text textarea').val();
-        homeworksubm.fileInfo = [
-            // {"fileName":"####", "fileType":"####", "fileSize":"####", "diskFilePath":"####"},
-        ];
+        if(sessionStorage.Classname_x){
+            var errohome = {};
+            errohome.knowledgePoint = $('.Knowledge input').val();
+            errohome.id = sessionStorage.id_x;
+            errohome.description = $('.home_text textarea').val();
+            errohome.fileInfo = [];
+            ajax_S(homework_s.t_erro,errohome, function (e) {
+                if (e.result == true) {
+                    $(this).css('background','#ccc');
+                    $('.big_back').show();
+                    $('.succ').show();
+                    $('.Submit_s').css('background','#00ba97');
+                    sessionStorage.removeItem('Classname_x');
+                    sessionStorage.removeItem('ClassTime_x');
+                    sessionStorage.removeItem('knowledgePoint_x');
+                    sessionStorage.removeItem('description_x');
+                    sessionStorage.removeItem('id_x');
+                } else {
+                    $('.big_back').show();
+                    $('.erro').show();
+                }
+            })
+        }else{
+            var class_c = classCode.substr(0, classCode.length - 1);
+            var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+            homeworksubm.classCode = class_c;
+            homeworksubm.className = class_n;
+            homeworksubm.homeworkTime = $('.time_S i').html();
+            homeworksubm.knowledgePoint = $('.Knowledge input').val();
+            homeworksubm.description = $('.home_text textarea').val();
+            homeworksubm.fileInfo = [];
+            alert(song_s)
+            ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
+                $(this).css('background','#ccc');
+                if (e.result == true) {
+                    $('.big_back').show();
+                    $('.succ').show();
+                    $('.Submit_s').css('background','#00ba97');
+                } else {
+                    $('.big_back').show();
+                    $('.erro').show();
+                }
+            })
+        }
 
-        ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
-            if (e.result == true) {
-                $('.big_back').show();
-                $('.succ').show();
-                $(this).css('background','#00ba97');
-            } else {
-                $('.big_back').show();
-                $('.erro').show();
-            }
-        })
 
 
     });
@@ -289,6 +326,9 @@ $(function () {
     var timeInedex = 0;
     var timeds;
     $('#record').on('touchstart', function (event) {
+        $(this).siblings('img').attr('src','images/speak.gif');
+        $(this).siblings('img').css('margin-top','-1216px');
+
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -305,6 +345,8 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
+        $(this).siblings('img').attr('src','images/C04-03.png');
+        $(this).siblings('img').css('margin-top','40px');
         event.preventDefault();
         wx.stopRecord({
             success: function (res) {

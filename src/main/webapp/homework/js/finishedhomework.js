@@ -20,6 +20,7 @@ $(function () {
     getHwFinishInfos();
     function getHwFinishInfos() {
         var datas = hwfinishInfos[curIndex].lessNos[classIndex];
+        localStorage.hwteacherId = datas.homeworkTinfoId;//老师主键id
         /*******作业信息*******/
         //知识点
         if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {

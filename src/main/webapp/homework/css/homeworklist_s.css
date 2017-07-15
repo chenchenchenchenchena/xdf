@@ -126,7 +126,7 @@ body,html{
 	color: #949494;
 	font-size: 25px;
 }
-.secul li>span:nth-child(3){
+.secul li>span:nth-child(2){
 	display: inline-block;
 	width: 75px;
 	height: 40px;
@@ -220,6 +220,7 @@ body{
 .tealist_s li{
 	position:relative;
 	transition:1s all ease;
+	overflow:hidden;
 }
 .state_st{
 	display: inline-block;
@@ -235,7 +236,6 @@ body{
 html body .tealist_s .more_so{
 	float:right;
 	width:auto;
-	margin-top:35px;
 }
 .more_so img{
 	margin-left:10px;
