@@ -48,13 +48,13 @@
             dataType: 'json',
             success:function (e) {
                 if(e.result){
-                    str="";
+                    /*str="";*/
                     $(".startImg").hide();
-                    $(".video").show();
+                    $(".video").hide();
                     if(e.dataList){
                         $(".box").hide();
                         $(".over").hide();
-                        $("#video").show();
+                        $(".video").show();
                         str="";
                         var dataList = e.dataList;
                         for (var i = 0; i < dataList.length; i++) {
