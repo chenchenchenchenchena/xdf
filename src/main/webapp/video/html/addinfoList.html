@@ -17,7 +17,8 @@
 		<div class="p176-nav clearfix">
 			<div class="p176-logo-left"></div>
 		</div>
-        <select style="margin-left: 35%;margin-top: 25px;width: 100px;">
+        <span id="goBack">返回</span>
+        <select style="margin-left: 15%;margin-top: 25px;width: 100px;">
             <option>海口</option>
             <option>东莞</option>
             <option>银川</option>
@@ -133,7 +134,9 @@
             }
         })
     })
-
+    $("#goBack").click(function () {
+        location.href="addInfo.html";
+    })
     /*var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;

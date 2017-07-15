@@ -73,7 +73,10 @@
 	                console.log(e);
                     if(e.result){
                         layer.msg(e.message,{icon: 1});
-                        location.href="addinfoList.html";
+                        setTimeout(function () {
+                            location.href="addinfoList.html";
+                        },3000);
+
                     }else{
                         layer.msg(e.message,{icon: 1});
                     }
@@ -94,6 +97,7 @@
         }
         
     }
+
     /*var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;
