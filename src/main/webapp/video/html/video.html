@@ -73,8 +73,9 @@
                         getVideoDemandPath();
                         console.log(str);
                     }else{
-                        $(".video").hide();
+
                         if($("video").attr("src")==""){
+                            $(".video").hide();
                             $("body,html").css({
                                 "background":"#000",
                                 "position":'reltive'
