@@ -48,6 +48,7 @@
             dataType: 'json',
             success:function (e) {
                 if(e.result){
+                    str="";
                     $(".startImg").hide();
                     $(".video").show();
                     if(e.dataList){
