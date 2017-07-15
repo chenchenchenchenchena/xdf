@@ -36,7 +36,7 @@
                 layer.msg("目录不存在",{icon: 1});
             }else if(args.filepath=="0"){
                 $(".video").hide();
-                layer.msg("请联系直播间老师",{icon: 1});
+                layer.msg("视频未同步到本地",{icon: 1});
             }else{
                 $(".video").show();
                 $("video").attr("src",args.filepath);
