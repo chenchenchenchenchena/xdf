@@ -47,4 +47,15 @@
             alert("手机号不正确");
         }
     })
+    var playerId = 0;
+    createNativeBridge(function (bridge) {
+        window.nativeBridge = bridge;
+        nativeBridge.attachCloseEventObserver(function () {
+            myLog("close event");
+            nativeBridge.closeWindow();
+        });
+    })
+    function myLog(log) {
+        console.log(log);
+    }
 </script>

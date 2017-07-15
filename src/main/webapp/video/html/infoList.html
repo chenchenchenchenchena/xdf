@@ -56,7 +56,7 @@
             "schoolName":school
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
             data:schoolName,
             dataType: 'json',
@@ -120,7 +120,7 @@
             "id":$(this).parent().prev().find("span").html()
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',
             data:JSON.stringify(file),
             dataType: 'json',
