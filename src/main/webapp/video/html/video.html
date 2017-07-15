@@ -11,7 +11,7 @@
 <body>
 <div class="startImg"><img src="../images/01.png"  /></div>
 <div class="video" style="display:none">
-    <video src="" autoplay></video>
+    <video src="" autoplay id="video"></video>
 </div>
 <script>
     var str = "";
@@ -51,8 +51,9 @@
                     $(".startImg").hide();
                     $(".video").show();
                     if(e.dataList){
+                        $("#video").show();
                         str="";
-                        $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'></div>").appendTo("body,html");
+                        $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center;display:none'>直播马上开始，请不要走开...</div>").appendTo("body,html");
                         var dataList = e.dataList;
                         for (var i = 0; i < dataList.length; i++) {
                             var grade = dataList[i]["grade"];
@@ -77,7 +78,13 @@
                                 "position":'reltive'
                             });
                             $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
+                        }else{
+                            document.getElementById('video').onended = function(){
+                                $("#video").hide();
+                                $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播已结束...</div>").appendTo("body,html");
+                            }
                         }
+
                     }
 
                 }else{
