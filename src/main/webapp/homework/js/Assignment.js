@@ -457,15 +457,12 @@ $(function () {
     $(document).on('touchend','.music_s',function () {
         if($(this).find('audio')){
             alert(0);
-            try
-            {
+            document.addEventListener("WeixinJSBridgeReady",function() {
+
                 var myAuto = document.getElementById('bgMusic0');
                 myAuto.play();
-            }
-            catch(e)
-            {
-                alert(e);
-            }
+
+            },false);
         }
         $(this).addClass('playing_s');
         playVoice(song_s);
