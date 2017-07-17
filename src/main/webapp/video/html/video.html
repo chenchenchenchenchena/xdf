@@ -74,7 +74,7 @@
                             str = "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
 
                         }
-                       /* getVideoDemandPath();*/
+                        getVideoDemandPath();
                         console.log(str);
                     }else{
 
@@ -87,7 +87,7 @@
                             $("<div class=box style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
                         }else{
                             if(e.flag=="2"){
-                                $("#video").pause();
+                                document.getElementById("video").pause();
                             }
                         }
 
