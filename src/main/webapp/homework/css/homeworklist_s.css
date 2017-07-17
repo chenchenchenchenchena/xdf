@@ -1,6 +1,9 @@
 body,html{
 	background: #f1f1f1;
 }
+input{
+	-webkit-appearance: none;
+}
 .stuImg{
 	display: inline-block;
 	width:42px;
