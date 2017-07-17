@@ -36,7 +36,7 @@ $(function () {
                 var tea = e.data;
                 for(var b  = 0;b<tea.length;b++){
                     if(tea[b].fileType=='mp3'){
-                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic"></audio ></div>')
+                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio   id="bgMusic"> <source src="'+tea[b].previewUrl+'" type="audio/mpeg" /></audio ></div>')
                     }else{
                         $('.imgBox').show();
                         $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
