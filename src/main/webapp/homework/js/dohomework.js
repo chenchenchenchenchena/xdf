@@ -79,6 +79,8 @@ $(function () {
 
         event.preventDefault();
         START = new Date().getTime();
+        $(this).attr('src', 'images/speak.gif');
+        event.preventDefault();
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
@@ -98,7 +100,7 @@ $(function () {
      * 松手结束录音
      */
     $('#record_btn').on('touchend', function (event) {
-
+        $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 300) {
@@ -231,7 +233,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<div><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></div>";
 
                     }
 
@@ -266,7 +268,7 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
-                    uploadImage(res.serverId,i);
+                    uploadImage(res.serverId, i);
                     i++;
                     if (i < length) {
                         upload();
@@ -285,7 +287,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId,i) {
+    function uploadImage(serverId, i) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -386,7 +388,7 @@ $(function () {
 // 删除图片
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).attr('img-index'));
-        $('.delete-img .confirmBtn').attr('img-index',$(this).attr('img-index'));
+        $('.delete-img .confirmBtn').attr('img-index', $(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
         //删除图片
@@ -414,7 +416,7 @@ $(function () {
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
-        $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        $('.imgBox div:eq(' + parseInt($(this).attr('img-index')) + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
