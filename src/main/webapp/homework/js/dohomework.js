@@ -240,7 +240,7 @@ $(function () {
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    $('.teBox').val(JSON.stringify(res)+ "$" + res.localIds[i - 1]);
+                    // $('.teBox').val(JSON.stringify(res)+ "$" + res.localIds[i - 1]);
                     //上传服务器
                     upLoadWxImage(res);
                     //界面样式控制
@@ -273,7 +273,7 @@ $(function () {
                     i++;
                     var tempFilePaths = res.tempFilePaths;
                     // alert('已上传：' + i + '/' + length);
-                    // $('.teBox').val(res.tempFilePaths + "$" + images.localIds[i - 1]);
+                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
@@ -291,7 +291,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage() {
+    function uploadImage(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
