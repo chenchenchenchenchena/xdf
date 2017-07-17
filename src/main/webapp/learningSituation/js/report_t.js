@@ -471,7 +471,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 var Tbuer = false;
                                 for(r in timejson){
                                     console.log(r);
-                                    if(m != r){
+                                    if(m+1 != r){
                                         Tbuer = true;
                                         break;
                                     }
@@ -482,7 +482,11 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }
                                     timeIndex.push(timejson[r]);
                                     mfInedx_r.push('满分：'+manfjson[r]);
-                                    mfInedx_c.push('满分：'+manfjsont[r])
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0')
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r])
+                                    }
                                 }else{
                                     timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
