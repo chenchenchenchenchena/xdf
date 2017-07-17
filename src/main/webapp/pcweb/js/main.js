@@ -1,5 +1,6 @@
 var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
+var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
 //访问doLogin.do
 function toLogin() {
 
@@ -48,7 +49,7 @@ function showFunctionList(json) {
 
         var functionList = json.functionList;
 
-        if(functionList == undefined){
+        if(functionList == undefined || functionList.length == 0){
             alert("请重新登录");
             clearCookie();
             window.top.location.href = getRootPath();
