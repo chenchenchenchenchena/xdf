@@ -142,34 +142,19 @@ $(function () {
         str += "</div>";
         $('#'+imageId).html(str);
     }
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('touchend', '.imgBox img', function () {
+        alert("预览图片" + $(this).attr('src'));
+        var previewUrl = "";
+        // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
+        //     previewUrl = $(this).attr('src');
+        // } else {
+        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
+        // }
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
 
 });
-/* //超出字数
- layer.open({
- type: 1,
- area: ['310px', '195px'],
- shade: [0.1, '#fff'],
- title: false,
- skin: 'tips',
- content:$("#alert")
- });*/
-
-/* //提交成功
- layer.open({
- type: 1,
- area: ['548px', '345px'],
- shade:[0.2,'#000'],
- title:'',
- skin: '',
- content:$(".submitBox")
- });*/
-
-/* //提交失败
- layer.open({
- type: 1,
- area: ['548px', '345px'],
- shade:[0.2,'#000'],
- title:'',
- skin: '',
- content:$(".submitFail")
- })*/
