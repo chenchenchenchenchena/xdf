@@ -121,7 +121,6 @@ $(function(){
         sessionStorage.knowledgePoint_x =  $(this).attr('know');
         sessionStorage.description_x =  $(this).attr('text');
         sessionStorage.id_x =  $(this).attr('Id');
-
         location.href = 'Assignment.html'
     });
     // {
