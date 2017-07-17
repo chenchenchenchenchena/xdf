@@ -520,8 +520,8 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (data) {
-                alert(JSON.stringify(data));
-                if (data.status == "failure") {
+                alert(JSON.stringify(e));
+                if (e.status == "failure") {
                     alert(e.message);
                 } else {
                     arr_s.push({
