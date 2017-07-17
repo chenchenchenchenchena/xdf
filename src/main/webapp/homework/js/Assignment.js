@@ -36,15 +36,13 @@ $(function () {
                 var tea = e.data;
                 for(var b  = 0;b<tea.length;b++){
                     if(tea[b].fileType=='mp3'){
-                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
+                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic'+b+'"></audio ></div>')
                     }else{
                         $('.imgBox').show();
                         $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
                     }
                 }
             });
-
-
         }
     });
 
@@ -457,6 +455,15 @@ $(function () {
 
 
     $(document).on('touchend','.music_s',function () {
+        if($(this).find('audio')){
+            alert(0);
+            document.addEventListener("WeixinJSBridgeReady",function() {
+
+                var myAuto = document.getElementById('bgMusic0');
+                myAuto.play();
+
+            },false);
+        }
         $(this).addClass('playing_s');
         playVoice(song_s);
         setTimeout(function(){
