@@ -479,7 +479,7 @@ $(function () {
                     i++;
                     alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
-                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
@@ -497,7 +497,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage() {
+    function uploadImage(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -506,8 +506,8 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadFileByWeiChat.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,

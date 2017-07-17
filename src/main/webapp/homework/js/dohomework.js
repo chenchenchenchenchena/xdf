@@ -156,7 +156,6 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                // alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
@@ -274,7 +273,7 @@ $(function () {
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
+                    // alert(JSON.stringify(res));
                 }
             });
         }
@@ -310,7 +309,6 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        // $().(fileName + "^^^" + fileSize + "^^^" + fileType + "^^^" + diskFilePath + "^^^");
                         var location = 0;
                         if (fileParams.length > 0) {
                             location = fileParams.length + i;
@@ -469,22 +467,12 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-        // fileParams[0] = {
-        //     "homeworkSinfoId": homeworkSinfoId,
-        //     "fileName": "496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "fileType": ".mp3",
-        //     "fileSize": "4005",
-        //     "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "uploadUser": uploadUser
-        // };
 
         var reqData = {
-            // "id": GetRequest('id'),
-            "id": "02c85b19f0e44a0fab7c140c276c5f8b",
+            "id": GetRequest('id'),
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
-        alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
