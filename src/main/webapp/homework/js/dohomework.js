@@ -267,8 +267,8 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
+                    uploadImage(res.serverId,i);
                     i++;
-                    uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
@@ -286,7 +286,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId) {
+    function uploadImage(serverId,i) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -310,7 +310,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        alert(fileName + "^^^" + fileSize + "^^^" + fileType + "^^^" + diskFilePath + "^^^");
+                        // $().(fileName + "^^^" + fileSize + "^^^" + fileType + "^^^" + diskFilePath + "^^^");
                         var location = 0;
                         if (fileParams.length > 0) {
                             location = fileParams.length + i;
@@ -479,7 +479,8 @@ $(function () {
         // };
 
         var reqData = {
-            "id": GetRequest('id'),
+            // "id": GetRequest('id'),
+            "id": "02c85b19f0e44a0fab7c140c276c5f8b",
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
