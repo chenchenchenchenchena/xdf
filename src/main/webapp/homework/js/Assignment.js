@@ -324,9 +324,13 @@ $(function () {
 
     //按下开始录音
     var timeInedex = 0;
+    var Index_s = 0;
     var timeds;
     $('#record').on('touchstart', function (event) {
+        Index_s++;
+        timeInedex = 0;
         $(this).siblings('img').attr('src','images/speak.gif');
+        $('.big_s').append('<div class="music_s"><span>10"</span> </div>');
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -344,7 +348,6 @@ $(function () {
     //松手结束录音
     $('#record').on('touchend', function (event) {
         $(this).siblings('img').attr('src','images/C04-03.png');
-        $(this).siblings('img').css('margin-top','40px');
         event.preventDefault();
         wx.stopRecord({
             success: function (res) {
@@ -416,7 +419,7 @@ $(function () {
     //显示语音布局
     function showAudio(url, length) {
         // $('.music_s').css('width',timeInedex/0.6+'%');
-        $('.music_s span').html(timeInedex + '"');
+        $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
     }
 
 
