@@ -467,7 +467,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 }
                             }
 
-                            for(var m = 0;m<Rindex_max;m++){
+                            for(var m = 0;m<Cindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
                                     console.log(r);
