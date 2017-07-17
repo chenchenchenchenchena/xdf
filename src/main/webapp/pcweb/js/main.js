@@ -46,7 +46,7 @@ function showFunctionList(json) {
         var functionList = json.functionList;
 
         if(functionList == undefined){
-            alert("用户名不存在");
+            alert("请重新登录");
             clearCookie();
             window.top.location.href = getRootPath();
         }else{
