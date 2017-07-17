@@ -12,6 +12,8 @@ $(function () {
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
+    var location = 0;
+    var deleteImageId = [];
 
     var layer1, layer2;
     // //点击作业排行榜
@@ -169,7 +171,7 @@ $(function () {
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    fileParams[0] = {
+                    fileParams[location] = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -177,6 +179,9 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
+                    deleteImageId[location] = e.data.fileUrl;
+
+                    location++;
                 }
 
 
@@ -233,7 +238,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></li>";
+                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
@@ -268,7 +273,7 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
-                    uploadImage(res.serverId,i);
+                    uploadImage(res.serverId, i);
                     i++;
                     if (i < length) {
                         upload();
@@ -311,10 +316,6 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        var location = 0;
-                        if (fileParams.length > 0) {
-                            location = fileParams.length + i;
-                        }
                         fileParams[location] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
@@ -323,6 +324,9 @@ $(function () {
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
                         };
+
+                        deleteImageId[location] = e.data.fileUrl;
+                        location++;
                     } else {
                         //上传失败重新上传一次
                         uploadImage(serverId);
@@ -388,7 +392,7 @@ $(function () {
 // 删除图片
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
-        $('.delete-img .confirmBtn').attr('img-index',$(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
         layer.close(layer1);
         layer.close(layer2);
         //删除图片
@@ -416,11 +420,21 @@ $(function () {
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
-        $('.imgBox li:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        $('.imgBox li:eq(' + parseInt($(this).attr('img-index')) + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+
+        if(deleteImageId.length > 0){
+            for (var i = 0; i < deleteImageId.length; i++) {
+                if (src == deleteImageId[i]) {
+                    fileParams.remove(i);
+                }
+            }
+        }
+
+
     });
 
     //作业描述验证
