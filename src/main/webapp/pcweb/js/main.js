@@ -20,7 +20,10 @@ function toLogin() {
         success: function (e) {
             console.log(e);
             if(e.result == false){
+
                 alert(e.message);
+                clearCookie();
+                window.top.location.href = getRootPath();
             }else {
                 showFunctionList(e);
             }
