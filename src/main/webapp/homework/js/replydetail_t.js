@@ -99,7 +99,7 @@ $(function(){
             }else{
                 need.tag = '1'
             }
-            need.fileInfo = [];
+            need.fileInfo = arr_s;
             ajax_S(homework_s.t_succ,need,function(e){
                 console.log(e)
             })

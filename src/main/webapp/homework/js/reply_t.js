@@ -6,13 +6,14 @@ $(function() {
         'appid': 'wxab29a3e2000b8d2a',
         'secret': '7739991fcce774c2281147eae3986ad9',
         'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
-        'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M',
+        'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
+    $('.frend').hide();
     var arr;
     ajax_S(homework_s.t_more, need, function (e) {
         console.log(e);
-        var data = e.data
-        arr = e.data.notCommit
+        var data = e.data;
+        arr = e.data.notCommit;
         if (data.notCommit.length == 0) {
             $('.emptyThree').show()
         } else {
@@ -33,6 +34,7 @@ $(function() {
             for (var d = 0; d < data.yesCorrect.length; d++) {
                 if (data.yesCorrect[d].tag == '1') {
                     $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span><i>优秀</i></li>')
+                    $('.frend').show();
                 } else {
                     $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span></li>')
                 }
