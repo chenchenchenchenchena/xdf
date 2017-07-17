@@ -112,15 +112,15 @@ body,html{
 	margin-top: 30px;
 	overflow: hidden;
 }
-.imgBox div{
-	margin: 0 20px 0 0;
+.imgBox div,.imgBox li{
+	margin: 0 14px 0 0;
 	float: left;
 	position: relative;
 }
 .imgBox>div:last-child{
 	margin-right: 0;
 }
-.imgBox div img{
+.imgBox div img,.imgBox li img{
 	width:216px;
 	height: 216px;
 }
