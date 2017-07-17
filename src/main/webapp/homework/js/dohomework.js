@@ -161,11 +161,9 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    // $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
-                    // playVoice(localId, timeInedex,$('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
@@ -240,13 +238,13 @@ $(function () {
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    // $('.teBox').val(JSON.stringify(res)+ "$" + res.localIds[i - 1]);
-                    //上传服务器
-                    upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
                     }
+
+                    //上传服务器
+                    upLoadWxImage(res);
                 }
 
 
@@ -261,7 +259,6 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            // alert('请先使用 chooseImage 接口选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
@@ -271,10 +268,8 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    var tempFilePaths = res.tempFilePaths;
-                    // alert('已上传：' + i + '/' + length);
                     $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    // uploadImage(res.serverId);
+                    uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
