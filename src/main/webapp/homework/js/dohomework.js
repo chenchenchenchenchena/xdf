@@ -410,13 +410,13 @@ $(function () {
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
-        $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         if ($('.imgBox').find('div').length <= 1) {
             $('.imgBox').hide();
         }
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
+        $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
