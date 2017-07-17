@@ -89,7 +89,7 @@ var homework_s = {
     't_stat': url_o+'teacherData/TeacherupdateReadstatus.do',//老师未读已读状态
     't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
     't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
-    't_sbim': url_o+'teacherData/addHomeWork.do',    //提交老师作业
+    't_sbim': url_o+'/teacherData/addHomeWork.do',    //提交老师作业
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
@@ -101,6 +101,8 @@ var homework_s = {
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
+    's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
+
 };
 //百度统计
 function wechatCode(url) {

@@ -216,7 +216,7 @@ $(function () {
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
             errohome.description = $('.home_text textarea').val();
-            errohome.fileInfo = [];
+            errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro,errohome, function (e) {
                 if (e.result == true) {
                     $(this).css('background','#ccc');
@@ -241,8 +241,7 @@ $(function () {
             homeworksubm.homeworkTime = $('.time_S i').html();
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
             homeworksubm.description = $('.home_text textarea').val();
-            homeworksubm.fileInfo = [];
-            alert(song_s)
+            homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $(this).css('background','#ccc');
                 if (e.result == true) {
@@ -330,7 +329,6 @@ $(function () {
         Index_s++;
         timeInedex = 0;
         $(this).siblings('img').attr('src','images/speak.gif');
-        $('.big_s').append('<div class="music_s"><span></span> </div>');
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -352,6 +350,9 @@ $(function () {
         wx.stopRecord({
             success: function (res) {
                 clearInterval(timeds);
+                if(timeds>1){
+                    $('.big_s').append('<div class="music_s"><span></span> </div>');
+                }
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
@@ -385,7 +386,7 @@ $(function () {
             }
         });
     }
-
+    var arr_s = [];
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -402,11 +403,17 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
                     $('.teBox').val(e.data.fileUrl);
+                    arr_s.push({
+                        'fileName':e.data.fileName,
+                        'fileType':e.data.fileType,
+                        'fileSize':e.data.fileSize,
+                        'diskFilePath':e.data.diskFilePath
+                    });
+                    alert(arr_s);
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -427,7 +434,7 @@ $(function () {
         playVoice(song_s);
         setTimeout(function(){
          $('.music_s').removeClass('playing_s');
-        },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');
+        },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
     });
 
     //图片上传
@@ -442,7 +449,6 @@ $(function () {
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
 
-                        alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
@@ -479,14 +485,13 @@ $(function () {
                     i++;
                     alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
-                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
                 }
             });
         }
@@ -497,7 +502,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage() {
+    function uploadImage(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -506,16 +511,21 @@ $(function () {
             'classId': "hx001"
         };
         $.ajax({
-            // url: url_o + "upload/uploadAudio.do",
-            url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
+            url: url_o + "upload/uploadFileByWeiChat.do",
+            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
-            success: function (data) {
-                alert(JSON.stringify(data));
-                if (data.status == "failure") {
+            success: function (e) {
+                if (e.status == "failure") {
                     alert(e.message);
                 } else {
+                    arr_s.push({
+                        'fileName':e.data.fileName,
+                        'fileType':e.data.fileType,
+                        'fileSize':e.data.fileSize,
+                        'diskFilePath':e.data.diskFilePath
+                    });
 
                 }
 

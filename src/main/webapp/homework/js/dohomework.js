@@ -6,6 +6,7 @@ $(function () {
      * 作业提交需要的参数
      */
     var fileParams = [];
+    var voiceFileParams;
     var homeworkSinfoId = GetRequest('id');
     var fileName;
     var fileType;
@@ -76,9 +77,11 @@ $(function () {
      * 按下开始录音
      */
     $('#record_btn').on('touchstart', function (event) {
-
-        event.preventDefault();
+        //初始化语音参数
+        voiceFileParams = null;
         START = new Date().getTime();
+        $(this).attr('src', 'images/speak.gif');
+        event.preventDefault();
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
@@ -98,7 +101,7 @@ $(function () {
      * 松手结束录音
      */
     $('#record_btn').on('touchend', function (event) {
-
+        $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 300) {
@@ -156,7 +159,6 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                // alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
@@ -168,7 +170,7 @@ $(function () {
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    fileParams[0] = {
+                    voiceFileParams = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -193,7 +195,7 @@ $(function () {
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
+            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span>";
 
         idParent.html(strVoice);
         var audioElem = document.getElementById(idChildren);
@@ -224,6 +226,10 @@ $(function () {
      *点击选择图片
      */
     $('#chooseImage').click(function () {
+        //重新选择图片，清除之前数据
+        fileParams = [];
+
+
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -232,7 +238,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
@@ -267,14 +273,14 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
+                    uploadImage(res.serverId, i);
                     i++;
-                    uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
+                    // alert(JSON.stringify(res));
                 }
             });
         }
@@ -286,7 +292,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId) {
+    function uploadImage(serverId, i) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -301,7 +307,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (data) {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
@@ -310,12 +316,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        alert(fileName + "^^^" + fileSize + "^^^" + fileType + "^^^" + diskFilePath + "^^^");
-                        var location = 0;
-                        if (fileParams.length > 0) {
-                            location = fileParams.length + i;
-                        }
-                        fileParams[location] = {
+                        fileParams[i] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -323,6 +324,7 @@ $(function () {
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
                         };
+
                     } else {
                         //上传失败重新上传一次
                         uploadImage(serverId);
@@ -385,10 +387,10 @@ $(function () {
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
 
-// 删除图片
+    // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        // alert($(this).attr('img-index'));
-        $('.delete-img .confirmBtn').attr('img-index',$(this).attr('img-index'));
+        // alert($(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
         layer.close(layer1);
         layer.close(layer2);
         //删除图片
@@ -408,17 +410,27 @@ $(function () {
     });
     // 删除图片-确定
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('div').length <= 1) {
-            $('.imgBox').remove();
-        } else {
-            $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        if ($('.imgBox').find('li').length <= 1) {
+            $('.imgBox').hide();
         }
+        // else {
+        //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        // }
+        $('.imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+        if (fileParams.length > 0) {
+
+            fileParams.splice(index, 1);
+        }
+
+
     });
 
     //作业描述验证
@@ -430,7 +442,7 @@ $(function () {
         }
         $('.word').html('' + $(this).val().length + '/200')
     });
-//提交作业
+    //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
         console.log($('.notsubmit .imgBox').children('div').length);
         var answerVal = $('.teBox').val().trim();
@@ -467,14 +479,11 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-        // fileParams[0] = {
-        //     "homeworkSinfoId": homeworkSinfoId,
-        //     "fileName": "496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "fileType": ".mp3",
-        //     "fileSize": "4005",
-        //     "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "uploadUser": uploadUser
-        // };
+
+        //将语音和图片一起传给服务器
+        if (voiceFileParams != undefined) {
+            fileParams.push(voiceFileParams);
+        }
 
         var reqData = {
             "id": GetRequest('id'),
@@ -510,8 +519,8 @@ $(function () {
     }
 
 // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function () {
-        alert("预览图片" + $(this).attr('src'));
+    $(document).on('touchend', '.imgBox img', function () {
+        // alert("预览图片" + $(this).attr('src'));
         var previewUrl = "";
         if ($(this).attr('src').indexOf('weixin://') != -1) {
             previewUrl = $(this).attr('src');
@@ -527,7 +536,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
-        console.log("提交成功：" + JSON.stringify(msg));
+        alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
         layer.close(layer2);

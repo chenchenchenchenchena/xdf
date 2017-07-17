@@ -112,15 +112,15 @@ body,html{
 	margin-top: 30px;
 	overflow: hidden;
 }
-.imgBox div{
-	margin: 0 20px 0 0;
+.imgBox div,.imgBox li{
+	margin: 0 14px 0 0;
 	float: left;
 	position: relative;
 }
 .imgBox>div:last-child{
 	margin-right: 0;
 }
-.imgBox div img{
+.imgBox div img,.imgBox li img{
 	width:216px;
 	height: 216px;
 }
@@ -188,6 +188,16 @@ body,html{
 	position: absolute;
 	left: 176px;
 	top:0;
+}
+.stuVoice{
+	display: inline-block;
+	width: 42px;
+	height: 42px;
+	background: url(../images/121.png) no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0 10px 0 0;
 }
 .layer-tips{
 	/*width: 310px;
