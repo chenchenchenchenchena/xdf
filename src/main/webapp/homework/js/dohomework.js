@@ -370,7 +370,7 @@ $(function () {
             data: optionFile,
             success: function (e) {
                 if (e.success == false) {
-                    alert(e.message);
+                    console.log(e.message);
                 } else {
                     //将文件显示到布局中
                     var fileType = e.fileType;
@@ -503,7 +503,7 @@ $(function () {
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
-        alert(JSON.stringify(reqData));
+        // alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -536,7 +536,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
-        alert(JSON.stringify(msg));
+        // alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
         layer.close(layer2);
