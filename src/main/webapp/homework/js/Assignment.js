@@ -241,8 +241,8 @@ $(function () {
             homeworksubm.homeworkTime = $('.time_S i').html();
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
             homeworksubm.description = $('.home_text textarea').val();
-            homeworksubm.fileInfo = [];
-            alert(song_s)
+            homeworksubm.fileInfo = arr_s;
+            alert(JSON.stringify(arr_s));
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $(this).css('background','#ccc');
                 if (e.result == true) {
@@ -330,7 +330,6 @@ $(function () {
         Index_s++;
         timeInedex = 0;
         $(this).siblings('img').attr('src','images/speak.gif');
-        $('.big_s').append('<div class="music_s"><span></span> </div>');
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -352,6 +351,9 @@ $(function () {
         wx.stopRecord({
             success: function (res) {
                 clearInterval(timeds);
+                if(timeds>1){
+                    $('.big_s').append('<div class="music_s"><span></span> </div>');
+                }
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
@@ -412,6 +414,7 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
+                    alert(arr_s);
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -521,6 +524,13 @@ $(function () {
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
+                    arr_s.push({
+                        'fileName':e.datta.foleName,
+                        'fileType':e.data.fileType,
+                        'fileSize':e.data.fileSize,
+                        'diskFilePath':e.data.diskFilePath
+                    });
+                    alert(arr_s);
 
                 }
 
