@@ -414,7 +414,7 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    alert(arr_s)
+                    alert(arr_s);
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -530,6 +530,8 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
+                    alert(arr_s);
+
                 }
 
 
