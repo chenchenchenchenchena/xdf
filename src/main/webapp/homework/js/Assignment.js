@@ -494,7 +494,6 @@ $(function () {
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
                 }
             });
         }
@@ -519,8 +518,7 @@ $(function () {
             type: 'post',
             dataType: 'json',
             data: cbconfig,
-            success: function (data) {
-                alert(JSON.stringify(e));
+            success: function (e) {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
