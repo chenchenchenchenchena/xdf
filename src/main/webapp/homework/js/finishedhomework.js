@@ -65,21 +65,6 @@ $(function () {
             getFileInfo(pathUrls);
         });
     }
-    // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function () {
-        alert("预览图片" + $(this).attr('src'));
-        var previewUrl = "";
-        if ($(this).attr('src').indexOf('weixin://') != -1) {
-            previewUrl = $(this).attr('src');
-        } else {
-            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
-        }
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
-    });
-
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
     /**

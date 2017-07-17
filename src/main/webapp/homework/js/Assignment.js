@@ -28,12 +28,23 @@ $(function () {
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
             $('.class_name li').each(function(){
-                console.log($(this).text());
-                console.log(sessionStorage.Classname_x+'1111');
                 if($(this).html()==sessionStorage.Classname_x){
                     $(this).find('img').attr('sec','images/C0503.png')
                 }
-            })
+            });
+            ajaxRequest('post',homework_s.t_seac,{'Tcid': sessionStorage.id_x},function(e){
+                var tea = e.data;
+                for(var b  = 0;b<tea.length;b++){
+                    if(tea[b].fileType=='mp3'){
+                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
+                    }else{
+                        $('.imgBox').show();
+                        $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
+                    }
+                }
+            });
+
+
         }
     });
 
@@ -217,6 +228,22 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = $('.home_text textarea').val();
             errohome.fileInfo = arr_s;
+            if($('.music_s').eq(0).attr('filename')){
+                arr_s.push({
+                    'fileName':$('.music_s').eq(0).attr('filename'),
+                    'fileType':$('.music_s').eq(0).attr('filetype'),
+                    'fileSize':$('.music_s').eq(0).attr('filesize'),
+                    'diskFilePath':$('.music_s').eq(0).attr('diskfilepath')
+                });
+            }
+            if($('.imgBox img').eq(0).attr('filename')){
+                arr_s.push({
+                    'fileName':$('.imgBox img').eq(0).attr('filename'),
+                    'fileType':$('.imgBox img').eq(0).attr('filetype'),
+                    'fileSize':$('.imgBox img').eq(0).attr('filesize'),
+                    'diskFilePath':$('.imgBox img').eq(0).attr('diskfilepath')
+                });
+            }
             ajax_S(homework_s.t_erro,errohome, function (e) {
                 if (e.result == true) {
                     $(this).css('background','#ccc');
