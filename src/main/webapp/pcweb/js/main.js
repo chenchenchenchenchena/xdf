@@ -47,7 +47,8 @@ function showFunctionList(json) {
 
         if(functionList == undefined){
             alert("用户名不存在");
-            // window.top.location.href = getRootPath();
+            clearCookie();
+            window.top.location.href = getRootPath();
         }else{
             //获取functionIds
             setFunctionList(json.functionList);
