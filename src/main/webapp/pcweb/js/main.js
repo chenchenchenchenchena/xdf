@@ -24,7 +24,7 @@ function toLogin() {
 
                 alert(e.message);
                 clearCookie();
-                window.top.location.href = getRootPath();
+                toLogout();
             }else {
                 showFunctionList(e);
             }
@@ -52,7 +52,7 @@ function showFunctionList(json) {
         if(functionList == undefined || functionList.length == 0){
             alert("请重新登录");
             clearCookie();
-            window.top.location.href = getRootPath();
+            toLogout();
         }else{
             //获取functionIds
             setFunctionList(json.functionList);
