@@ -240,7 +240,7 @@ $(function () {
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    $('.teBox').val(res.tempFilePaths + "$" + res.localIds[i - 1]);
+                    $('.teBox').val(JSON.stringify(res)+ "$" + res.localIds[i - 1]);
                     //上传服务器
                     upLoadWxImage(res);
                     //界面样式控制
