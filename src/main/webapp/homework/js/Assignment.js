@@ -324,9 +324,13 @@ $(function () {
 
     //按下开始录音
     var timeInedex = 0;
+    var Index_s = -1;
     var timeds;
     $('#record').on('touchstart', function (event) {
+        Index_s++;
+        timeInedex = 0;
         $(this).siblings('img').attr('src','images/speak.gif');
+        $('.big_s').append('<div class="music_s"><span></span> </div>');
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -344,7 +348,6 @@ $(function () {
     //松手结束录音
     $('#record').on('touchend', function (event) {
         $(this).siblings('img').attr('src','images/C04-03.png');
-        $(this).siblings('img').css('margin-top','40px');
         event.preventDefault();
         wx.stopRecord({
             success: function (res) {
@@ -415,16 +418,13 @@ $(function () {
 
     //显示语音布局
     function showAudio(url, length) {
-        // $('.music_s').css('width',timeInedex/0.6+'%');
-        $('.music_s span').html(timeInedex + '"');
+        $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
     }
 
 
-    $('.music_s ').on('touchend', function () {
+    $(document).on('touchend','.music_s',function () {
         $(this).addClass('playing_s');
         playVoice(song_s);
-        alert($('.teBox').val());
-        alert($('.music_s span').html().substr(0,$('.music_s span').html().length-1));
         setTimeout(function(){
          $('.music_s').removeClass('playing_s');
         },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');

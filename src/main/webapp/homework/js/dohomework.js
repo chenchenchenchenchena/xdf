@@ -232,7 +232,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<div><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></div>";
 
                     }
 
@@ -387,16 +387,42 @@ $(function () {
 
 // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        if ($(this).parents('.imgBox').find('div').length <= 1) {
-            $(this).parents('.imgBox').remove();
-        } else {
-            $(this).parent('div').remove();
+        // alert($(this).attr('img-index'));
+        $('.delete-img .confirmBtn').attr('img-index',$(this).attr('img-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除图片
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-img")
+        })
+    });
+    // 删除图片-取消
+    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除图片-确定
+    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('.imgBox').find('div').length <= 1) {
+            $('.imgBox').hide();
         }
+        // else {
+        //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        // }
+        $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
     });
+
     //作业描述验证
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
@@ -463,16 +489,16 @@ $(function () {
     }
 
     //提交作业--成功--确定
-    $(document).on('touchend', '.confirmBtn', function () {
+    $(document).on('touchend', '.submitBox .confirmBtn', function () {
         layer.close(layer2);
         window.location.href = 'homeworklist_s.html';
     });
     //提交作业--失败--取消
-    $(document).on('touchend', '.cancelBtn', function () {
+    $(document).on('touchend', '.submitFail .cancelBtn', function () {
         layer.close(layer2);
     });
     //提交作业--失败--重试
-    $(document).on('touchend', '.retryBtn', function () {
+    $(document).on('touchend', '.submitFail .retryBtn', function () {
         layer.close(layer2);
         layer.close(layer1);
         layer.close(layer);
