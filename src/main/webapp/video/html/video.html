@@ -8,10 +8,10 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/layer-v2.1/layer/layer.js"></script>
 </head>
-<body>
+<body style="background: #000">
 <div class="startImg"><img src="../images/01.png"  /></div>
 <div class="video" style="display:none">
-    <video src="" autoplay></video>
+    <video src="" autoplay id="video"></video>
 </div>
 <script>
     var str = "";
@@ -29,12 +29,16 @@
         nativeBridge.getVideoDemandPath(str, function (args) {
             myLog(JSON.stringify(args));
             if(args.filepath=="-1"){
+                $(".video").hide();
                 layer.msg("路径为空",{icon: 1});
             }else if(args.filepath=="-2"){
+                $(".video").hide();
                 layer.msg("目录不存在",{icon: 1});
             }else if(args.filepath=="0"){
-                layer.msg("没有找到匹配的文件",{icon: 1});
+                $(".video").hide();
+                layer.msg("视频未同步到本地",{icon: 1});
             }else{
+                $(".video").show();
                 $("video").attr("src",args.filepath);
             }
 
@@ -43,16 +47,17 @@
    setInterval(function () {
        /*  str = "";*/
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
             type: 'get',
             dataType: 'json',
             success:function (e) {
                 if(e.result){
+                    /*str="";*/
                     $(".startImg").hide();
-                    $(".video").show();
                     if(e.dataList){
+                        $(".box").hide();
+                        $(".over").hide();
                         str="";
-                        $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'></div>").appendTo("body,html");
                         var dataList = e.dataList;
                         for (var i = 0; i < dataList.length; i++) {
                             var grade = dataList[i]["grade"];
@@ -71,13 +76,16 @@
                         getVideoDemandPath();
                         console.log(str);
                     }else{
+
                         if($("video").attr("src")==""){
+                            $(".video").hide();
                             $("body,html").css({
                                 "background":"#000",
                                 "position":'reltive'
                             });
-                            $("<div style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
+                            $("<div class=box style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
                         }
+
                     }
 
                 }else{
@@ -85,8 +93,14 @@
                 }
 
             }
-        })
 
+        })
+           document.getElementById('video').onended = function(){
+               $(".video").hide();
+               /*$("video").attr("src","");*/
+               $(".box").hide();
+               $("<div class=over style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播已结束...</div>").appendTo("body,html");
+           }
      },10000);
 
 

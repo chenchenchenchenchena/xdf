@@ -26,7 +26,7 @@
         <input id="grade" type="text" placeholder="请输入年级"><br  />
         <span style="margin-left: 56px">科目：</span>
         <input id="subject" type="text" placeholder="请输入科目"><br  />
-        <span style="margin-left: 20px">课程名称：</span>
+        <span style="margin-left: 16px">课程名称：</span>
         <input id="subjectName" type="text" placeholder="请输入课程名称"><br  />
         <span style="margin-left: 56px">课次：</span>
         <input id="classTime" type="number" placeholder="请输入课次"><br  />
@@ -38,7 +38,8 @@
             <option>中山</option>
             <option>焦作</option>
         </select>
-        <span id="btn" onclick="save()">增加</span>
+        <span id="bt" onclick="save()">增加</span>
+        <span id="go">跳转到列表页</span>
     </div>
 </form>
 </body>
@@ -65,7 +66,7 @@
                 'schoolName':school
         	};
 	        $.ajax({
-	            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/saveVideoFileInfo.do",
+	            url: "http://dt.xdf.cn/xdfdtmanager/videofile/saveVideoFileInfo.do",
 	            type: 'post',
 	            dataType: 'json',
 	            data: JSON.stringify(cbconfig),
@@ -73,7 +74,10 @@
 	                console.log(e);
                     if(e.result){
                         layer.msg(e.message,{icon: 1});
-                        location.href="addinfoList.html";
+                        setTimeout(function () {
+                            location.href="addinfoList.html";
+                        },3000);
+
                     }else{
                         layer.msg(e.message,{icon: 1});
                     }
@@ -94,6 +98,7 @@
         }
         
     }
+
     /*var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;
@@ -101,7 +106,12 @@
             myLog("close event");
             nativeBridge.closeWindow();
         });
-    })*/
-
+    })
+    function myLog(log) {
+        console.log(log);
+    }*/
+    $("#go").click(function () {
+        location.href="addinfoList.html";
+    })
 </script>
 </html>

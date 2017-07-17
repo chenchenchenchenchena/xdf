@@ -25,8 +25,8 @@
             <option>焦作</option>
         </select>
         <span id="btn" onclick="showList()">查询</span>
-		<h2 style="width: 1000px;margin: 20px auto 0;text-align: center" class="p176-tit clearfix"><span class="p176-alresdy" style="font-size: 20px;">文件播放列表</span></h2>
-		<div style="width: 1000px;margin: 0px auto;" class="p176-table-wrap" >
+		<h2 style="width: 79%;margin: 20px auto 0;text-align: center" class="p176-tit clearfix"><span class="p176-alresdy" style="font-size: 20px;">文件播放列表</span></h2>
+		<div style="width: 79%;margin: 0px auto;" class="p176-table-wrap" >
 			<table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
 				<thead>
 				<tr id="ckListHead">
@@ -56,7 +56,7 @@
             "schoolName":school
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
             data:schoolName,
             dataType: 'json',
@@ -84,7 +84,7 @@
                         str += "<tr class='table-tr-even'>"
                     }
 
-                    str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+subject+"_"+courseName+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
+                    str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+courseName+"_"+subject+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
                     str += "<td id='playBtn'><button>播放</button></td>";
 
 
@@ -120,7 +120,7 @@
             "id":$(this).parent().prev().find("span").html()
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',
             data:JSON.stringify(file),
             dataType: 'json',
@@ -136,7 +136,7 @@
         })
     })
 
-    /*var playerId = 0;
+    var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;
         nativeBridge.attachCloseEventObserver(function () {
@@ -146,8 +146,7 @@
     })
 
     function myLog(log) {
-        /!* document.getElementById("txt-area").value += log + "\n";*!/
         console.log(log);
-    }*/
+    }
 </script>
 </html>
