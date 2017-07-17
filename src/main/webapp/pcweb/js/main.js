@@ -50,7 +50,7 @@ function showFunctionList(json) {
         var functionList = json.functionList;
 
         if(functionList == undefined || functionList.length == 0){
-            alert("请重新登录");
+            alert("当前用户没用功能权限，请切换用户");
             // clearCookie();
             toLogout();
         }else{
