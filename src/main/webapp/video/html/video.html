@@ -47,10 +47,11 @@
    setInterval(function () {
        /*  str = "";*/
         $.ajax({
-            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
             type: 'get',
             dataType: 'json',
             success:function (e) {
+                console.log(e);
                 if(e.result){
                     /*str="";*/
                     $(".startImg").hide();
@@ -73,7 +74,7 @@
                             str = "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
 
                         }
-                        getVideoDemandPath();
+                       /* getVideoDemandPath();*/
                         console.log(str);
                     }else{
 
@@ -84,6 +85,10 @@
                                 "position":'reltive'
                             });
                             $("<div class=box style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
+                        }else{
+                            if(e.flag=="2"){
+                                $("#video").pause();
+                            }
                         }
 
                     }
