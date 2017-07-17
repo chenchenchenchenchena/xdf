@@ -240,6 +240,7 @@ $(function () {
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
+                    $('.teBox').val(res.tempFilePaths + "$" + images.localIds[i - 1]);
                     //上传服务器
                     upLoadWxImage(res);
                     //界面样式控制
@@ -272,7 +273,7 @@ $(function () {
                     i++;
                     var tempFilePaths = res.tempFilePaths;
                     // alert('已上传：' + i + '/' + length);
-                    $('.teBox').val(res.tempFilePaths + "$" + images.localIds[i - 1]);
+                    // $('.teBox').val(res.tempFilePaths + "$" + images.localIds[i - 1]);
                     // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
