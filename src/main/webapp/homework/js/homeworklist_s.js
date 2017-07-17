@@ -1,6 +1,6 @@
 $(function(){
 	//缓存数据 TODO
-	sessionStorage.stuNumber = 'SS2522';
+	sessionStorage.stuNumber = 'SS4901';
 	sessionStorage.studentName = '刘契萱';
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
@@ -13,6 +13,7 @@ $(function(){
 	var reqData = 'stuNum='+sessionStorage.stuNumber;
 	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
+		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
