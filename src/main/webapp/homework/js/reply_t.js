@@ -1,10 +1,6 @@
 $(function() {
     var need = {
-        "classCode": sessionStorage.classCode_s,
-        "homeworkTime": sessionStorage.homeworkTime_s,
-        "courseCode": sessionStorage.courseCode_s,
-        "teacherEmail": "caoxuefeng@xdf.cn",
-        "schoolId": "73"
+        "Tcid": sessionStorage.Tid
     };
     var Homework = {
         'appid': 'wxab29a3e2000b8d2a',
