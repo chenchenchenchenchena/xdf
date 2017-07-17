@@ -216,7 +216,7 @@ $(function () {
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
             errohome.description = $('.home_text textarea').val();
-            errohome.fileInfo = [];
+            errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro,errohome, function (e) {
                 if (e.result == true) {
                     $(this).css('background','#ccc');
@@ -385,7 +385,7 @@ $(function () {
             }
         });
     }
-
+    var arr_s = [];
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -402,11 +402,16 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
                     $('.teBox').val(e.data.fileUrl);
+                    arr_s.push({
+                        'fileName':e.datta.foleName,
+                        'fileType':e.data.fileType,
+                        'fileSize':e.data.fileSize,
+                        'diskFilePath':e.data.diskFilePath
+                    });
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -427,7 +432,7 @@ $(function () {
         playVoice(song_s);
         setTimeout(function(){
          $('.music_s').removeClass('playing_s');
-        },$('.music_s span').html().substr(0,$('.music_s span').html().length-1)+'000');
+        },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
     });
 
     //图片上传
