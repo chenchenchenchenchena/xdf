@@ -305,13 +305,17 @@ $(function () {
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
-                    if(data.data.success == true){
+                    if (data.data.success == true) {
                         fileName = data.data.fileName;
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        alert(fileName+"^^^"+fileSize+"^^^"+fileType+"^^^"+diskFilePath+"^^^");
-                        fileParams[fileParams.length + i] = {
+                        alert(fileName + "^^^" + fileSize + "^^^" + fileType + "^^^" + diskFilePath + "^^^");
+                        var location = 0;
+                        if (fileParams.length > 0) {
+                            location = fileParams.length + i;
+                        }
+                        fileParams[location] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -319,7 +323,7 @@ $(function () {
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
                         };
-                    }else {
+                    } else {
                         //上传失败重新上传一次
                         uploadImage(serverId);
                     }
