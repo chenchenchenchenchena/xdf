@@ -270,8 +270,9 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
+                    var tempFilePaths = res.tempFilePaths;
                     // alert('已上传：' + i + '/' + length);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    $('.teBox').val(res.tempFilePaths + "$" + images.localIds[i - 1]);
                     // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
