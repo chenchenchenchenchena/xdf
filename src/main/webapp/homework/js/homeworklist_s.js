@@ -134,13 +134,9 @@ function getHwContentSuccess(msg) {
 			$.each(datas,function(i,item){
 				var classTitle = item.className;
 				//课程名称显示控制
-				// if (item.className.length==8){
-				// 	classTitle = item.className.substr(0,8)+'(第'+item.lessonNo+'课次)';
-				// }else if (item.className.length>=10){
-				// 	classTitle = item.className.substr(0,6)+'...(第'+item.lessonNo+'课次)';
-				// }else{
-				// 	classTitle = item.className+'(第'+item.lessonNo+'课次)';
-				// }
+				if (item.className.length>11){
+					classTitle = item.className.substr(0,10)+'...';
+				}
 				var knowledgePoint, kpHtml = "";
 				var homeworkInfos ={//作业信息：知识点，描述，图片，语音
 					'id':item.id,//学生作业主键id
@@ -161,13 +157,13 @@ function getHwContentSuccess(msg) {
 						kpHtml += '<span>'+knowledgePoint[i]+'</span>';
 					}
 				}
-
+				var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";
 				console.log(kpHtml);
 				var hwListHtml = '<div class="hwList" data-id="'+item.id+'">'
 					+'<div class="hwLeft">'+item.courseName+'</div>'
 					+'<div class="hwRight">'
 					+'<div class="hwTime"><span>'+classTitle+'</span>'
-					+'<span>'+item.homeworkTime+'</span></div>'
+					+'<span>'+homeworkTime+'</span></div>'
 					+'<div class="hwKon">'+kpHtml+'</div></div></div>';
 				$(".hwContent").append(hwListHtml);
 				$(".hwContent").show();
@@ -408,8 +404,12 @@ function getHwFinishSuccess(msg){
 					hwLessNosHtml +='<li><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 				});
 				console.log(hwLessNosHtml);
+				var className = items.className;
+				if (items.className.length>18){
+					className = items.className.substr(0,15)+"...";
+				}
 				var hwListFinishHtml = '<li class="firstList">'
-					+'<p>'+items.className+'('+items.teacherName+')<span class="'+readStatus+'"></span></p>'
+					+'<p>'+className+'('+items.teacherName+')<span class="'+readStatus+'"></span></p>'
 					+'<ul class="secul">'+hwLessNosHtml+'</ul>'
 					+'</li>';
 				$(".hwFinish>ul").append(hwListFinishHtml);
