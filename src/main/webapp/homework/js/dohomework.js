@@ -233,7 +233,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
