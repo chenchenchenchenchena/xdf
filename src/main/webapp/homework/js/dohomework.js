@@ -307,7 +307,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (data) {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
@@ -489,6 +489,7 @@ $(function () {
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
+        alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -517,8 +518,8 @@ $(function () {
     }
 
 // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function () {
-        alert("预览图片" + $(this).attr('src'));
+    $(document).on('touchend', '.imgBox img', function () {
+        // alert("预览图片" + $(this).attr('src'));
         var previewUrl = "";
         if ($(this).attr('src').indexOf('weixin://') != -1) {
             previewUrl = $(this).attr('src');
@@ -534,7 +535,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
-        console.log("提交成功：" + JSON.stringify(msg));
+        alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
         layer.close(layer2);

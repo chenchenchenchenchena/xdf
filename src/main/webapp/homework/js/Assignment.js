@@ -242,7 +242,6 @@ $(function () {
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
             homeworksubm.description = $('.home_text textarea').val();
             homeworksubm.fileInfo = arr_s;
-            alert(JSON.stringify(arr_s));
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $(this).css('background','#ccc');
                 if (e.result == true) {
@@ -450,7 +449,6 @@ $(function () {
                     for (var i = 0; i < res.localIds.length; i++) {
                         str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
 
-                        alert(res.localIds[i]);
                     }
 
                     $(".notsubmit .imgBox").show();
@@ -494,7 +492,6 @@ $(function () {
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
                 }
             });
         }
@@ -519,9 +516,8 @@ $(function () {
             type: 'post',
             dataType: 'json',
             data: cbconfig,
-            success: function (data) {
-                alert(JSON.stringify(data));
-                if (data.status == "failure") {
+            success: function (e) {
+                if (e.status == "failure") {
                     alert(e.message);
                 } else {
                     arr_s.push({
@@ -530,7 +526,6 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    alert(arr_s);
 
                 }
 
