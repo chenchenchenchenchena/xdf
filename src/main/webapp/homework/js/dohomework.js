@@ -195,7 +195,7 @@ $(function () {
         // url = "http://www.w3school.com.cn/i/song.mp3";
 
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
+            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span>";
 
         idParent.html(strVoice);
         var audioElem = document.getElementById(idChildren);

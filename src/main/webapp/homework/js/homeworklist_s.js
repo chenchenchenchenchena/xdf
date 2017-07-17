@@ -51,6 +51,8 @@ $(function(){
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
 		// sessionStorage.removeItem('finishhwInfos');
+		var curIndex = $(this).parents('.firstList').index();
+		var classIndex = $(this).index();
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
 		ajaxRequest('GET', homework_s.s_readstatus, 'classCode='+$(this).attr('data-classCode'), function(msg){
@@ -59,8 +61,9 @@ $(function(){
 			}else{
 				console.log("阅读失败！"+msg.msg);
 			}
-			window.location.href = 'finishedhomework_s.html?curIndex='+$(this).parents('.firstList').index()+'&classIndex='+$(this).index();
+			window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex;
 		});
+
 	});
 
 

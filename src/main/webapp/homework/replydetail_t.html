@@ -10,8 +10,12 @@
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
 	<link rel="stylesheet" href="css/dohomework_s.css"  />
+	<link rel="stylesheet" href="css/homeworklist_s.css"  />
 	<script src="../common/js/jquery.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="js/wx.js"></script>
 	<script src="../common/js/ajax.js"></script>
+	<script src="../common/js/layer-v2.1/layer/layer.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="js/replydetail_t.js"></script>
 </head>
@@ -22,21 +26,19 @@
 		<!--<div class="infoTitle">作业信息</div>-->
 		<div class="kon">
 			<p class="sTitle">知识点</p>
-			<p>等腰直角三角形</p>
+			<p style="margin: 0 0 22px 27px;">等腰直角三角形</p>
 		</div>
 		<div class="des">
 			<p class="sTitle">作业描述</p>
 			<p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
 		</div>
 		<div>
-			<div class="music_s">
-				<span>10"</span>
-				<video  src="" id="bgMusic"></video >
+			<div class="big_ss">
+
 			</div>
+
 			<div class="imgBox">
-				<div><img src="images/B02-23_03.png" alt="" /></div>
-				<div><img src="images/B02-23_03.png" alt="" /></div>
-				<div><img src="images/B02-23_03.png" alt="" /></div>
+
 			</div>
 		</div>
 	</div>
@@ -44,14 +46,12 @@
 		<div class="infoTitle">作业答案 <span>优秀</span></div>
 		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div class="music_s">
-				<span>10"</span>
+			<div class="big_ss">
+
 			</div>
-			<div id="audio" src=""></div>
+
 			<div class="imgBox">
-				<div><img src="images/B02-23_03.png" alt="" /></div>
-				<div><img src="images/B02-23_03.png" alt="" /></div>
-				<div><img src="images/B02-23_03.png" alt="" /></div>
+
 			</div>
 		</div>
 	</div>
@@ -60,8 +60,9 @@
 		<p class="sTitle dh"></p>
 		<textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200" style="resize:none;"></textarea>
 		<p class="word teacherword"><span>0</span>/<span>200</span>
-		<div class="clickImg" style="margin:20px 0">
-			<img src="images/B02-2_10.png"  /><img src="images/B02-2_12.png"  />
+		<div class="Media_s">
+			<img src="images/B02-2_10.png" alt="" class="image_s" style="margin-right:20px;">
+			<img src="images/voice.png" alt="" class="Voice">
 		</div>
 		<div style="display: none;">
 			<div id="audio" src=""></div>
@@ -71,16 +72,25 @@
 				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
 			</div>
 		</div>
+		<div class="big_s">
+
+		</div>
+		<div class="notsubmit" style="display: block;">
+			<div class="imgBox" style="display: none">
+			</div>
+		</div>
 		<button class="btn sub_p">提交</button>
 	</div>
-	<div class="voiceControl" style="display: none;">
-		<img src="images/C04-03.png"  />
-		<p>按住说话</p>
-	</div>
-	<div class="excellent">
-		<img src="images/excellent.gif" alt="">
-	</div>
+</div>
+<div class="excellent">
+	<img src="images/excellent.gif" alt="">
+</div>
 
+<div class="big_whit"></div>
+<div class="song_s">
+	<img src="images/C04-03.png" alt="">
+	<p>按住说话</p>
+	<div id="record"></div>
 </div>
 </body>
 </html>

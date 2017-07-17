@@ -189,6 +189,16 @@ body,html{
 	left: 176px;
 	top:0;
 }
+.stuVoice{
+	display: inline-block;
+	width: 42px;
+	height: 42px;
+	background: url(../images/121.png) no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0 10px 0 0;
+}
 .layer-tips{
 	/*width: 310px;
 	height: 195px;*/

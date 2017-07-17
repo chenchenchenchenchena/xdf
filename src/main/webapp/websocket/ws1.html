@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html >
+<head>
+    <meta charset="utf-8"/>
+    <title>Java API for WebSocket (JSR-356)</title>
+</head>
+<body>
+<script type="text/javascript" src="../common/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../common/js/sockjs.min.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8080/xdfdtmanager/websocket/wsStudentServer.do");
+    }
+    else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://localhost:8080/xdfdtmanager/websocket/wsStudentServer.do");
+    }
+    else {
+        websocket = new SockJS("http://localhost:8080/ship/xdfdtmanager/websocket/wsStudentServer.do");
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        alert("与服务器端建立连接0");
+    }
+    function onMessage(evt) {
+        alert(evt.data);
+    }
+    function onError() {
+        alert("服务器发生错误0");
+    }
+    function onClose() {
+        alert("与服务器端断开连接0");
+    }
+
+    function doSend() {
+        if (websocket.readyState == websocket.OPEN) {
+            var msg = document.getElementById("inputMsg").value;
+            //调用后台handleTextMessage方法
+            websocket.send(msg);
+        } else {
+            alert("连接失败!");
+        }
+    }
+</script>
+请输入：<textarea rows="5" cols="10" id="inputMsg" name="inputMsg"></textarea>
+<button onclick="doSend();">发送</button>
+</body>
+</html>
