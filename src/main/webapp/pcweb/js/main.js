@@ -23,7 +23,7 @@ function toLogin() {
             if(e.result == false){
 
                 alert(e.message);
-                clearCookie();
+                // clearCookie();
                 toLogout();
             }else {
                 showFunctionList(e);
@@ -51,7 +51,7 @@ function showFunctionList(json) {
 
         if(functionList == undefined || functionList.length == 0){
             alert("请重新登录");
-            clearCookie();
+            // clearCookie();
             toLogout();
         }else{
             //获取functionIds
@@ -240,7 +240,6 @@ function toLogout() {
         success: function (json) {
             if (json.result == true) {
                 clearCookie();
-                alert(json.logoutUrl);
                 window.top.location.href = json.logoutUrl;
             }
         }
