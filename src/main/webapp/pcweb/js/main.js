@@ -240,6 +240,7 @@ function toLogout() {
         success: function (json) {
             if (json.result == true) {
                 clearCookie();
+                alert(json.logoutUrl);
                 window.top.location.href = json.logoutUrl;
             }
         }
