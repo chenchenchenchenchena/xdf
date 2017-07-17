@@ -268,7 +268,6 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
@@ -306,18 +305,24 @@ $(function () {
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
-                    fileName = data.fileName;
-                    fileSize = data.fileSize;
-                    fileType = data.fileType;
-                    diskFilePath = data.diskFilePath;
-                    fileParams[fileParams.length + i] = {
-                        "homeworkSinfoId": homeworkSinfoId,
-                        "fileName": fileName,
-                        "fileType": fileType,
-                        "fileSize": fileSize,
-                        "diskFilePath": diskFilePath,
-                        "uploadUser": uploadUser
-                    };
+                    if(data.data.success == true){
+                        fileName = data.data.fileName;
+                        fileSize = data.data.fileSize;
+                        fileType = data.data.fileType;
+                        diskFilePath = data.data.diskFilePath;
+                        fileParams[fileParams.length + i] = {
+                            "homeworkSinfoId": homeworkSinfoId,
+                            "fileName": fileName,
+                            "fileType": fileType,
+                            "fileSize": fileSize,
+                            "diskFilePath": diskFilePath,
+                            "uploadUser": uploadUser
+                        };
+                    }else {
+                        //上传失败重新上传一次
+                        uploadImage(serverId);
+                    }
+
                 }
 
 
