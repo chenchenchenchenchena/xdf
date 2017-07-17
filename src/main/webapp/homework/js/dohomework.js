@@ -79,6 +79,8 @@ $(function () {
 
         event.preventDefault();
         START = new Date().getTime();
+        $(this).attr('src', 'images/speak.gif');
+        event.preventDefault();
         recordTimer = setTimeout(function () {
             wx.startRecord({
                 success: function () {
@@ -98,7 +100,7 @@ $(function () {
      * 松手结束录音
      */
     $('#record_btn').on('touchend', function (event) {
-
+        $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 300) {
@@ -231,7 +233,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></li>";
+                        str += "<li><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
@@ -285,7 +287,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId,i) {
+    function uploadImage(serverId, i) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -300,7 +302,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (data) {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
@@ -473,6 +475,7 @@ $(function () {
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
+        alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -501,8 +504,8 @@ $(function () {
     }
 
 // 图片预览
-    $(document).on('touchend', '.imgBox>div>img', function () {
-        alert("预览图片" + $(this).attr('src'));
+    $(document).on('touchend', '.imgBox img', function () {
+        // alert("预览图片" + $(this).attr('src'));
         var previewUrl = "";
         if ($(this).attr('src').indexOf('weixin://') != -1) {
             previewUrl = $(this).attr('src');
@@ -518,7 +521,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
-        console.log("提交成功：" + JSON.stringify(msg));
+        alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
         layer.close(layer2);
