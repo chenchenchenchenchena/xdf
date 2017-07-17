@@ -156,16 +156,13 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                // alert(JSON.stringify(e));
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    // $('.teBox').val(e.data.fileUrl);
                     //显示语音布局
 
                     showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
-                    // playVoice(localId, timeInedex,$('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
@@ -234,18 +231,19 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    //上传服务器
-                    upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
                     }
+
+                    //上传服务器
+                    upLoadWxImage(res);
                 }
 
 
@@ -260,7 +258,6 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            // alert('请先使用 chooseImage 接口选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
@@ -269,16 +266,14 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
+                    uploadImage(res.serverId,i);
                     i++;
-                    // alert('已上传：' + i + '/' + length);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    // uploadImage(res.serverId);
                     if (i < length) {
                         upload();
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
+                    // alert(JSON.stringify(res));
                 }
             });
         }
@@ -286,10 +281,11 @@ $(function () {
         upload();
     }
 
+
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage() {
+    function uploadImage(serverId,i) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -298,7 +294,7 @@ $(function () {
             'classId': localStorage.classCode
         };
         $.ajax({
-            url: url_o + "upload/uploadAudio.do",
+            url: url_o + "upload/uploadFileByWeiChat.do",
             // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
@@ -308,18 +304,28 @@ $(function () {
                 if (data.status == "failure") {
                     alert(e.message);
                 } else {
-                    fileName = data.fileName;
-                    fileSize = data.fileSize;
-                    fileType = data.fileType;
-                    diskFilePath = data.diskFilePath;
-                    fileParams[fileParams.length + i] = {
-                        "homeworkSinfoId": homeworkSinfoId,
-                        "fileName": fileName,
-                        "fileType": fileType,
-                        "fileSize": fileSize,
-                        "diskFilePath": diskFilePath,
-                        "uploadUser": uploadUser
-                    };
+                    if (data.data.success == true) {
+                        fileName = data.data.fileName;
+                        fileSize = data.data.fileSize;
+                        fileType = data.data.fileType;
+                        diskFilePath = data.data.diskFilePath;
+                        var location = 0;
+                        if (fileParams.length > 0) {
+                            location = fileParams.length + i;
+                        }
+                        fileParams[location] = {
+                            "homeworkSinfoId": homeworkSinfoId,
+                            "fileName": fileName,
+                            "fileType": fileType,
+                            "fileSize": fileSize,
+                            "diskFilePath": diskFilePath,
+                            "uploadUser": uploadUser
+                        };
+                    } else {
+                        //上传失败重新上传一次
+                        uploadImage(serverId);
+                    }
+
                 }
 
 
@@ -379,16 +385,42 @@ $(function () {
 
 // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        if ($(this).parents('.imgBox').find('div').length <= 1) {
-            $(this).parents('.imgBox').remove();
-        } else {
-            $(this).parent('div').remove();
+        // alert($(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index',$(this).parent('li').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除图片
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-img")
+        })
+    });
+    // 删除图片-取消
+    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除图片-确定
+    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('.imgBox').find('li').length <= 1) {
+            $('.imgBox').hide();
         }
+        // else {
+        //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        // }
+        $('.imgBox li:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
     });
+
     //作业描述验证
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
@@ -435,14 +467,7 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-        // fileParams[0] = {
-        //     "homeworkSinfoId": homeworkSinfoId,
-        //     "fileName": "496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "fileType": ".mp3",
-        //     "fileSize": "4005",
-        //     "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
-        //     "uploadUser": uploadUser
-        // };
+
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
@@ -452,16 +477,16 @@ $(function () {
     }
 
     //提交作业--成功--确定
-    $(document).on('touchend', '.confirmBtn', function () {
+    $(document).on('touchend', '.submitBox .confirmBtn', function () {
         layer.close(layer2);
         window.location.href = 'homeworklist_s.html';
     });
     //提交作业--失败--取消
-    $(document).on('touchend', '.cancelBtn', function () {
+    $(document).on('touchend', '.submitFail .cancelBtn', function () {
         layer.close(layer2);
     });
     //提交作业--失败--重试
-    $(document).on('touchend', '.retryBtn', function () {
+    $(document).on('touchend', '.submitFail .retryBtn', function () {
         layer.close(layer2);
         layer.close(layer1);
         layer.close(layer);

@@ -112,15 +112,15 @@ body,html{
 	margin-top: 30px;
 	overflow: hidden;
 }
-.imgBox div{
-	margin: 0 20px 0 0;
+.imgBox div,.imgBox li{
+	margin: 0 14px 0 0;
 	float: left;
 	position: relative;
 }
 .imgBox>div:last-child{
 	margin-right: 0;
 }
-.imgBox div img{
+.imgBox div img,.imgBox li img{
 	width:216px;
 	height: 216px;
 }
@@ -210,7 +210,7 @@ body,html{
 	/*transform: translate(-50%);*/
 	/*z-index: 10;*/
 }
-.submitBox p,.submitFail p{
+.submitBox p,.submitFail p,.tips-box p{
 	font-size: 30px;
 	color: #333333;
 	text-align: center;
@@ -219,7 +219,7 @@ body,html{
 .layui-layer-content{
 	border-radius: 10px;
 }
-.submitBox button,.submitFail button{
+.submitBox button,.submitFail button,.tips-box button{
 	width: 175px;
 	height: 72px;
 	line-height: 72px;
@@ -232,14 +232,16 @@ body,html{
 	margin: 40px 0 0 185px;
 	border-radius: 10px;
 }
-.submitFail button{
+.submitFail button,.tips-box button{
 	margin: 40px 0 0 60px;
 }
-.submitFail>button:nth-child(3){
+.submitFail>button:nth-child(3),
+.tips-box>button:nth-child(3){
 	background: #e4eaf1;
 	color: #aeb1b7;
 }
-.submitFail img,.submitBox img{
+.submitFail img,.submitBox img,
+.tips-box img,.submitBox img{
 	margin: 38px 0 0 224px;
 }
 .hmAnswer{
