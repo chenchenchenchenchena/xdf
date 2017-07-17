@@ -327,7 +327,9 @@ $(function () {
     var timeds;
     $('#record').on('touchstart', function (event) {
         $(this).siblings('img').attr('src','images/speak.gif');
-        $(this).siblings('img').css('margin-top','-1216px');
+        $(this).siblings('img').load(function(){
+            $(this).siblings('img').css('margin-top','-1216px');
+        });
 
         event.preventDefault();
         wx.startRecord({
