@@ -22,7 +22,7 @@ function toLogin() {
             if(e.result == false){
                 alert(e.message);
             }else {
-                // showFunctionList(e);
+                showFunctionList(e);
             }
 
         }
