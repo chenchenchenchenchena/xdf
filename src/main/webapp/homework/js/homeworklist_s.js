@@ -1,6 +1,6 @@
 $(function(){
 	//缓存数据 TODO
-	sessionStorage.stuNumber = 'SS4901';
+	sessionStorage.stuNumber = 'SS5622';
 	sessionStorage.studentName = '刘契萱';
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';

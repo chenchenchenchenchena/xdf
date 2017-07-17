@@ -310,6 +310,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
+                        alert(fileName+"^^^"+fileSize+"^^^"+fileType+"^^^"+diskFilePath+"^^^");
                         fileParams[fileParams.length + i] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
@@ -446,11 +447,13 @@ $(function () {
         //     "diskFilePath": "homework/73/hx001/2017-07-14/496aca1f3f874fce981771bb07d49c10.mp3",
         //     "uploadUser": uploadUser
         // };
+
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
             "fileStuhomeworks": fileParams
         };
+        alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
