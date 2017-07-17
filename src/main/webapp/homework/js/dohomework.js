@@ -231,7 +231,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
@@ -385,8 +385,8 @@ $(function () {
 
 // 删除图片
     $(document).on('touchend', '.stuImg', function () {
-        // alert($(this).attr('img-index'));
-        $('.delete-img .confirmBtn').attr('img-index',$(this).attr('img-index'));
+        // alert($(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index',$(this).parent('li').index());
         layer.close(layer1);
         layer.close(layer2);
         //删除图片
@@ -408,13 +408,13 @@ $(function () {
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('div').length <= 1) {
+        if ($('.imgBox').find('li').length <= 1) {
             $('.imgBox').hide();
         }
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
-        $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        $('.imgBox li:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
