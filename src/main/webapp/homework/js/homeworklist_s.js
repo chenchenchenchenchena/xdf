@@ -52,8 +52,18 @@ $(function(){
 	$(document).on('touchend','.secul>li',function(){
 		// sessionStorage.removeItem('finishhwInfos');
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
-		window.location.href = 'finishedhomework_s.html?curIndex='+$(this).parents('.firstList').index()+'&classIndex='+$(this).index();
+		//点击已完成列表-阅读
+		ajaxRequest('GET', homework_s.s_readstatus, 'classCode='+$(this).attr('data-classCode'), function(msg){
+			if(msg.code==200){
+				console.log("阅读成功！"+msg.msg);
+			}else{
+				console.log("阅读失败！"+msg.msg);
+			}
+			window.location.href = 'finishedhomework_s.html?curIndex='+$(this).parents('.firstList').index()+'&classIndex='+$(this).index();
+		});
 	});
+
+
 })
 
 //获取待交作业列表
@@ -386,7 +396,7 @@ function getHwFinishSuccess(msg){
 			$.each(datas,function(i,items){
 				var lessNos = items.lessNos;
 				var hwLessNosHtml='',readStatus='';
-				if (items.readStatus!=1){
+				if (items.replyStatus==1&&items.readStatus==0){
 					readStatus = "redCircle";
 				}
 				$.each(lessNos,function(i,item){
@@ -401,7 +411,7 @@ function getHwFinishSuccess(msg){
 							statusCss = 'blue';
 							break;
 					}
-					hwLessNosHtml +='<li><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
+					hwLessNosHtml +='<li data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 				});
 				console.log(hwLessNosHtml);
 				var className = items.className;
@@ -423,5 +433,7 @@ function getHwFinishSuccess(msg){
 		}
 	}
 }
+
+
 
 

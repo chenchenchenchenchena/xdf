@@ -101,6 +101,8 @@ var homework_s = {
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
+    's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
+
 };
 //百度统计
 function wechatCode(url) {
