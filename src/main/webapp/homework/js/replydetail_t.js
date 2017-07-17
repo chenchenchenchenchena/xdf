@@ -206,14 +206,12 @@ $(function(){
                     if (e.status == "failure") {
                         alert(e.message);
                     } else {
-                        $('.teBox').val(e.data.fileUrl);
                         arr_s.push({
                             'fileName':e.data.fileName,
                             'fileType':e.data.fileType,
                             'fileSize':e.data.fileSize,
                             'diskFilePath':e.data.diskFilePath
                         });
-                        alert(arr_s);
                         //显示语音布局
                         showAudio(e.data.fileUrl, e.data.fileSize);
                     }
@@ -225,7 +223,7 @@ $(function(){
 
         //显示语音布局
         function showAudio(url, length) {
-            $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
+            $('.big_s .music_s').eq(Index_s).find('span').html(timeInedex + '"');
         }
 
 
