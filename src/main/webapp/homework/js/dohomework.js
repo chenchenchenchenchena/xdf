@@ -6,14 +6,13 @@ $(function () {
      * 作业提交需要的参数
      */
     var fileParams = [];
+    var voiceFileParams;
     var homeworkSinfoId = GetRequest('id');
     var fileName;
     var fileType;
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-    var location = 0;
-    var deleteImageId = [];
 
     var layer1, layer2;
     // //点击作业排行榜
@@ -78,8 +77,8 @@ $(function () {
      * 按下开始录音
      */
     $('#record_btn').on('touchstart', function (event) {
-
-        event.preventDefault();
+        //初始化语音参数
+        voiceFileParams = null;
         START = new Date().getTime();
         $(this).attr('src', 'images/speak.gif');
         event.preventDefault();
@@ -171,7 +170,7 @@ $(function () {
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    fileParams[location] = {
+                    voiceFileParams = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -179,9 +178,6 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
-                    deleteImageId[location] = e.data.fileUrl;
-
-                    location++;
                 }
 
 
@@ -230,6 +226,10 @@ $(function () {
      *点击选择图片
      */
     $('#chooseImage').click(function () {
+        //重新选择图片，清除之前数据
+        fileParams = [];
+
+
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -316,7 +316,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        fileParams[location] = {
+                        fileParams[i] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -325,8 +325,6 @@ $(function () {
                             "uploadUser": uploadUser
                         };
 
-                        deleteImageId[location] = e.data.fileUrl;
-                        location++;
                     } else {
                         //上传失败重新上传一次
                         uploadImage(serverId);
@@ -389,7 +387,7 @@ $(function () {
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
 
-// 删除图片
+    // 删除图片
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
         $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
@@ -412,6 +410,8 @@ $(function () {
     });
     // 删除图片-确定
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
         if ($('.imgBox').find('li').length <= 1) {
@@ -420,18 +420,14 @@ $(function () {
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
-        $('.imgBox li:eq(' + parseInt($(this).attr('img-index')) + ')').remove();
+        $('.imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+        if (fileParams.length > 0) {
 
-        if(deleteImageId.length > 0){
-            for (var i = 0; i < deleteImageId.length; i++) {
-                if (src == deleteImageId[i]) {
-                    fileParams.remove(i);
-                }
-            }
+            fileParams.splice(index, 1);
         }
 
 
@@ -446,7 +442,7 @@ $(function () {
         }
         $('.word').html('' + $(this).val().length + '/200')
     });
-//提交作业
+    //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
         console.log($('.notsubmit .imgBox').children('div').length);
         var answerVal = $('.teBox').val().trim();
@@ -483,6 +479,11 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
+
+        //将语音和图片一起传给服务器
+        if (voiceFileParams != undefined) {
+            fileParams.push(voiceFileParams);
+        }
 
         var reqData = {
             "id": GetRequest('id'),
