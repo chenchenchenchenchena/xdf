@@ -31,7 +31,8 @@
 				<thead>
 				<tr id="ckListHead">
 					<th style="width:50%;text-align: center">文件名</th>
-					<th style="width:50%;text-align: center">播放按钮</th>
+					<th style="width:25%;text-align: center">播放按钮</th>
+                    <th style="width:25%;text-align: center">暂停按钮</th>
 				</tr>
 				</thead>
 				<tbody id="ckListTbody">
@@ -56,7 +57,7 @@
             "schoolName":school
         }
         $.ajax({
-            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
             data:schoolName,
             dataType: 'json',
@@ -86,6 +87,7 @@
 
                     str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+courseName+"_"+subject+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
                     str += "<td id='playBtn'><button>播放</button></td>";
+                    str += "<td id='pauseBtn'><button>暂停</button></td>";
 
 
                     str += "</tr>";
@@ -119,8 +121,9 @@
         var file={
             "id":$(this).parent().prev().find("span").html()
         }
+        console.log(file);
         $.ajax({
-            url: "http://dt.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',
             data:JSON.stringify(file),
             dataType: 'json',
@@ -135,7 +138,27 @@
             }
         })
     })
-
+    $("#ckListTbody").on("click","#pauseBtn button",function () {
+        var file={
+            "id":$(this).parent().prev().prev().find("span").html()
+        }
+        $.ajax({
+            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/stopPlayStatus.do",
+            type: 'post',
+            data:JSON.stringify(file),
+            dataType: 'json',
+            success:function (e) {
+                if(e.result){
+                    console.log(e);
+                    $("#pauseBtn button").attr("disabled",false);
+                    layer.msg(e.message,{icon:1});
+                }else{
+                    $("#pauseBtn button").attr("disabled",false);
+                    layer.msg(e.message,{icon:1});
+                }
+            }
+        })
+    });
     var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;

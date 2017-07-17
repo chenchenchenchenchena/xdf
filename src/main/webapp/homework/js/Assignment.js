@@ -409,7 +409,7 @@ $(function () {
                 } else {
                     $('.teBox').val(e.data.fileUrl);
                     arr_s.push({
-                        'fileName':e.datta.foleName,
+                        'fileName':e.data.fileName,
                         'fileType':e.data.fileType,
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
@@ -525,7 +525,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     arr_s.push({
-                        'fileName':e.datta.foleName,
+                        'fileName':e.data.fileName,
                         'fileType':e.data.fileType,
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
