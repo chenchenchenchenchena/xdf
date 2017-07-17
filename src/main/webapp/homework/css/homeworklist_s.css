@@ -122,6 +122,7 @@ input{
 	line-height: 111px;
 	background: url(../images/jiao22222.png) no-repeat right 55px;
 	position: relative;
+	font-size:32px;
 }
 .secul li>span:nth-child(1){
 	margin-right: 25px;
