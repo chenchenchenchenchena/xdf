@@ -10,7 +10,7 @@ function toLogin() {
         'e2State': state_s,
         'state': state_s
     };
-    alert("code:" + code_s + "state_s:" + state_s);
+    // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
         url: baseUrl+"/e2Login/doLogin.do",
         // url: baseUrl+"/e2Login/pcLogin.do",
@@ -22,7 +22,7 @@ function toLogin() {
             if(e.result == false){
                 alert(e.message);
             }else {
-                showFunctionList(e);
+                // showFunctionList(e);
             }
 
         }
