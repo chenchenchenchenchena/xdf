@@ -6,7 +6,7 @@ $(function () {
      * 作业提交需要的参数
      */
     var fileParams = [];
-    var voiceFileParams;
+    var voiceFileParams = [];
     var homeworkSinfoId = GetRequest('id');
     var fileName;
     var fileType;
