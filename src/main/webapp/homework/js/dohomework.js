@@ -59,8 +59,13 @@ $(function () {
 
     /*------------------录制语音开始------------------------------------*/
     $('#record').click(function () {
-        $('.song_s').animate({'bottom': '0px'});
-        $('.song_s,.mask').show();
+        if (recordCount >= 3) {
+            alert("最多录制三条语音");
+        } else {
+            $('.song_s').animate({'bottom': '0px'});
+            $('.song_s,.mask').show();
+        }
+
     });
     /* 隐藏语音弹窗 */
     $('.mask').click(function () {
@@ -73,6 +78,8 @@ $(function () {
     var START;
     var END;
     var recordTimer;
+    var recordVoiceId = [];
+    var recordCount = 0;
     /**
      * 按下开始录音
      */
@@ -163,14 +170,11 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    //显示语音布局
-
-                    showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    voiceFileParams = {
+                    voiceFileParams[recordCount] = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -178,6 +182,10 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
+                    //显示语音布局
+                    showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
+
+                    recordCount++;
                 }
 
 
@@ -186,34 +194,52 @@ $(function () {
     }
 
     /**
-     * 显示语音布局
+     * 显示录制语音布局
      */
-    function showAudio(url, length, idParent, idChildren) {
+    function showAudio(url, parentId, id, flag) {
 
-        idParent.show();
-        length = "";
-        // url = "http://www.w3school.com.cn/i/song.mp3";
+        parentId.show();
+        var strVoice = "";
+        var idChildren;
+        if (flag == 1) {
+            idChildren = "record_audio" + id;
+            //录音布局，可以删除
+            strVoice += "<li><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
+            strVoice += "</div>";
+        } else {
 
-        var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span>";
+            idChildren = "audio" + id;
+            strVoice += "<li><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
+            strVoice += "</div>";
+        }
 
-        idParent.html(strVoice);
+
+        parentId.html(strVoice);
+
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
             var len = audioElem.duration;
             len = parseInt(len);
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
             var voiceLen = "";
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
+            if (len > 60) {
+
+                var hh = parseInt(len / 3600);
+                var mm = parseInt((len % 3600) / 60);
+                var ss = parseInt((len % 3600) % 60);
+                if (hh > 0) {
+                    voiceLen = hh + "'" + mm + "'" + ss + "''";
+                } else if (mm > 0) {
+                    voiceLen = mm + "'" + ss + "''";
+                } else {
+                    voiceLen = ss + "''";
+                }
             } else {
-                voiceLen = ss + "''";
+                voiceLen = "1''";
             }
+
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
 
@@ -355,6 +381,7 @@ $(function () {
     });
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
+    var audioCount = 0;
 
     /**
      * 获取文件信息
@@ -375,7 +402,7 @@ $(function () {
                     //将文件显示到布局中
                     var fileType = e.fileType;
                     if (fileType == "mp3") {
-                        showAudio(e.fileUrl, e.fileSize, $('#audio_1'), "audio1");
+                        showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
                     } else {
                         showImage(e.thumbnail);
                     }
@@ -384,9 +411,8 @@ $(function () {
         });
     }
 
-
     /**
-     * 显示获取到的图片
+     * 显示获取到的图片布局
      */
     function showImage(previewUrl) {
         $('#imagBox_1').show();
@@ -530,7 +556,6 @@ $(function () {
             layer.close(layerName);
         }, 3000);
     }
-
 
 
 // 提交作业接口返回处理
