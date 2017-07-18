@@ -7,6 +7,16 @@ $(function(){
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
+	//Tap事件封装
+	$(document).on("touchstart", function (e) {
+		if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 0);
+	});
+	$(document).on("touchmove", function (e) {
+		if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 1);
+	});
+	$(document).on("touchend", function (e) {
+		if (!$(e.target).hasClass("disable") && $(e.target).data("isMoved") == 0) $(e.target).trigger("tap");
+	});
 
 	//点击待交作业
 	$(".secul").hide();
@@ -48,7 +58,7 @@ $(function(){
 		location.href="studentrank_s.html";
 	});
 	// 点击待交作业列表
-	$(document).on('click','.hwList',function(){
+	$(document).on('tap','.hwList',function(){
 		sessionStorage.removeItem('homeworkInfos');
 		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
 	});
