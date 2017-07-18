@@ -286,6 +286,7 @@ $(function () {
                     sessionStorage.removeItem('description_x');
                     sessionStorage.removeItem('id_x');
                 } else {
+                    $('.erro p').html(e.message);
                     $('.big_back').show();
                     $('.erro').show();
                 }
