@@ -513,8 +513,8 @@ $(function () {
         if ($('.notsubmit #record_audio_box li').length < 3) {
             $('#record').show();
         }
-        if (fileParams.length > 0) {
-            fileParams.splice(index, 1);
+        if (voiceFileParams.length > 0) {
+            voiceFileParams.splice(index, 1);
             recordCount--;
         }
 
