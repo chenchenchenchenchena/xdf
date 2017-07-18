@@ -45,7 +45,7 @@ $(function () {
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
                     console.log(paths.diskFilePath);
-                    getFileInfo(paths.diskFilePath);
+                    getFileInfo(paths.diskFilePath,paths.fileType);
 
                 });
 
@@ -390,7 +390,7 @@ $(function () {
     /**
      * 获取文件信息
      */
-    function getFileInfo(diskFileUrl) {
+    function getFileInfo(diskFileUrl,fileType) {
         // diskFileUrl = "homework/b479a873299649a48d9741582a735450.jpg";
         var netConfig = "IN";//DEFAULT/IN
         var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
@@ -404,7 +404,6 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    var fileType = e.fileType;
                     if (fileType.indexOf("mp3") != -1) {
                         showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
                         audioCount++;
