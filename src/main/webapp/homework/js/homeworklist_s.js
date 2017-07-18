@@ -16,7 +16,6 @@ $(function(){
 	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
-		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
 			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum='+sessionStorage.stuNumber, getHwContentSuccess);
@@ -26,8 +25,8 @@ $(function(){
 				'stuNum':sessionStorage.stuNumber //学生编号
 			};
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
-
 		}
+		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 	})
 	//点击已交作业列表
 	var flag=true;
@@ -46,7 +45,7 @@ $(function(){
 		location.href="studentrank_s.html";
 	});
 	// 点击待交作业列表
-	$(document).on('touchend','.hwList',function(){
+	$(document).on('click','.hwList',function(){
 		sessionStorage.removeItem('homeworkInfos');
 		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
 	});
