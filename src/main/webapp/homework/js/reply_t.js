@@ -35,6 +35,7 @@ $(function() {
                 if (data.yesCorrect[d].tag == '1') {
                     $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span><i>优秀</i></li>')
                     $('.frend').show();
+                    $('.noreply').css('padding-bottom','120px')
                 } else {
                     $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span></li>')
                 }

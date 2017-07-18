@@ -221,6 +221,37 @@ $(function () {
             });
             return false;
         }
+        if($('.Knowledge input').val().indexOf(',')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(','));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf(';')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(';'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf('，')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('，'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf('；')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('；'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else{
+            var html_te = $('.Knowledge input').val();
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }
         if(sessionStorage.Classname_x){
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
@@ -288,6 +319,7 @@ $(function () {
     $('.succ input').on('touchend', function () {
         $('.big_back').hide();
         $('.succ').hide();
+        location.href = 'homeworklist_t.html';
     });
 
     $('.erro input:first-of-type').on('touchend', function () {
@@ -439,7 +471,7 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    alert(arr_s);
+                    layer.msg('上传成功');
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -524,7 +556,9 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    alert('已上传：' + i + '/' + length);
+                    if(length==i){
+                        alert('已上传：' + i + '/' + length);
+                    }
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
