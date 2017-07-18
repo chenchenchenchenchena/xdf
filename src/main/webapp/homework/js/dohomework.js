@@ -89,7 +89,7 @@ $(function () {
      */
     $('#record_btn').on('touchstart', function (event) {
         //初始化语音参数
-        voiceFileParams = null;
+        voiceFileParams = [];
         START = new Date().getTime();
         $(this).attr('src', 'images/speak.gif');
         event.preventDefault();
@@ -573,7 +573,7 @@ $(function () {
     function hwcommit() {
 
         //将语音和图片一起传给服务器
-        if (voiceFileParams != undefined) {
+        if (voiceFileParams.length != 0) {
             fileParams.push(voiceFileParams);
         }
 
