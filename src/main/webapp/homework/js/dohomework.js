@@ -405,7 +405,7 @@ $(function () {
                 } else {
                     //将文件显示到布局中
                     var fileType = e.fileType;
-                    if (fileType == "mp3") {
+                    if (fileType.indexOf("mp3") != -1) {
                         showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
                         audioCount++;
                     } else {
