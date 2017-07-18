@@ -45,7 +45,7 @@ $(function () {
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
                     console.log(paths.diskFilePath);
-                    getFileInfo(paths.diskFilePath,paths.fileType);
+                    getFileInfo(paths.diskFilePath, paths.fileType);
 
                 });
 
@@ -205,6 +205,7 @@ $(function () {
         parentId.show();
         var strVoice = "";
         var idChildren;
+        var length = "";
         if (flag == 1) {
             idChildren = "record_audio" + id;
             //录音布局，可以删除
@@ -226,24 +227,24 @@ $(function () {
             var len = audioElem.duration;
             len = parseInt(len);
             var voiceLen = "";
-            if (len > 60) {
-
-                var hh = parseInt(len / 3600);
-                var mm = parseInt((len % 3600) / 60);
-                var ss = parseInt((len % 3600) % 60);
-                if (hh > 0) {
-                    voiceLen = hh + "'" + mm + "'" + ss + "''";
-                } else if (mm > 0) {
-                    voiceLen = mm + "'" + ss + "''";
-                } else {
-                    voiceLen = ss + "''";
-                }
+            var hh = parseInt(len / 3600);
+            var mm = parseInt((len % 3600) / 60);
+            var ss = parseInt((len % 3600) % 60);
+            if (hh > 0) {
+                voiceLen = hh + "'" + mm + "'" + ss + "''";
+            } else if (mm > 0) {
+                voiceLen = mm + "'" + ss + "''";
             } else {
+                voiceLen = ss + "''";
+            }
+            if (voiceLen.indexOf("0") == -1) {
+
                 voiceLen = "1''";
             }
 
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
+
         $('.song_s,.mask').hide();
     }
 
@@ -388,7 +389,7 @@ $(function () {
     /**
      * 获取文件信息
      */
-    function getFileInfo(diskFileUrl,fileType) {
+    function getFileInfo(diskFileUrl, fileType) {
         // diskFileUrl = "homework/b479a873299649a48d9741582a735450.jpg";
         var netConfig = "IN";//DEFAULT/IN
         var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};

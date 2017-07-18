@@ -24,7 +24,7 @@ $(function () {
         /*******作业信息*******/
         //知识点
         if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-            knowledgePoint =splitStrs(datas.teacherKnowledgePoint);
+            knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
             for (var i = 0; i < knowledgePoint.length; i++) {
                 kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                 $('.knowPoint').append(kpHtml);
@@ -33,8 +33,8 @@ $(function () {
         //作业描述
         $('.des .hwCon').html(datas.teacherDes);
         //语音,图片
-        $.each(datas.teaHomeworkFiles,function(i,paths){
-            var pathUrls = ['1',paths.diskFilePath,paths.fileType];
+        $.each(datas.teaHomeworkFiles, function (i, paths) {
+            var pathUrls = ['1', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址 TODO
             console.log(pathUrls);
             getFileInfo(pathUrls);
@@ -42,35 +42,36 @@ $(function () {
         /*******作业答案*******/
         $('.hmAnswer .anDes').html(datas.description);
         // 优秀
-        if(datas.tag==1){
+        if (datas.tag == 1) {
             $('.hw_status').addClass('hw_status_s');
-        }else{
+        } else {
             $('.hw_status').removeClass('hw_status_s');
         }
         //语音,图片
-        $.each(datas.stuHomeworkFiles,function(i,paths){
-            var pathUrls = ['2',paths.diskFilePath,paths.fileType];
+        $.each(datas.stuHomeworkFiles, function (i, paths) {
+            var pathUrls = ['2', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
             console.log(pathUrls);
             getFileInfo(pathUrls);
         });
         /*******老师批注*******/
         var pizhuHtml = "";
-        if (datas.replyStatus=="0"){
+        if (datas.replyStatus == "0") {
             pizhuHtml = "暂无批注"
-        }else{
+        } else {
             pizhuHtml = datas.replyDesc;
         }
         $('.comment .anDes').html(pizhuHtml);
         //语音，图片
         //语音,图片
-        $.each(datas.teaHomeworkReplyFiles,function(i,paths){
-            var pathUrls = ['3',paths.diskFilePath,paths.fileType];
+        $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+            var pathUrls = ['3', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
             console.log(pathUrls);
             getFileInfo(pathUrls);
         });
     }
+
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
     /**
@@ -109,12 +110,12 @@ $(function () {
      */
     function showAudio(url, length, idParent, idChildren) {
 
-        $('#'+idParent).show();
+        $('#' + idParent).show();
         length = "";
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
-        $('#'+idParent).html(strVoice);
+        $('#' + idParent).html(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
@@ -131,6 +132,12 @@ $(function () {
             } else {
                 voiceLen = ss + "''";
             }
+
+            if (voiceLen.indexOf("0") == -1) {
+
+                voiceLen = "1''";
+            }
+
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
 
@@ -141,13 +148,14 @@ $(function () {
      * 显示获取到的图片
      */
     function showImage(previewUrl, imageId) {
-        $('#'+imageId).show();
+        $('#' + imageId).show();
         var str = "";
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#'+imageId).html(str);
+        $('#' + imageId).html(str);
     }
+
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         // alert("预览图片" + $(this).attr('src'));
