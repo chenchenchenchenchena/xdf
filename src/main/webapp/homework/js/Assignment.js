@@ -1,7 +1,8 @@
 $(function () {
     var trardata = {
         'teacherCode': 'TC23',
-        'schoolId': '73'
+        'schoolId': '73',
+        'email':'caoxuefeng@xdf.cn'
     };
     var homeworksubm = {
         'teacherEmail': 'caoxuefeng@xdf.cn',
