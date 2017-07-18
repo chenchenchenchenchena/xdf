@@ -69,7 +69,7 @@ $(function(){
                 if(tea[b].fileType=='mp3'){
                     $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
                 }else{
-                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].thumbnail+'" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].previewUrl+'" alt="" /></div>')
                 }
             }
         });
