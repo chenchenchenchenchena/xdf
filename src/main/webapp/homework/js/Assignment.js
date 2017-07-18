@@ -493,22 +493,13 @@ $(function () {
         thissound.play();
 
     }
-    // $(document).on('touchend','.music_s',function () {
-    //     if($(this).find('audio')){
-    //         alert(0);
-    //         document.addEventListener("WeixinJSBridgeReady",function() {
-    //
-    //             var myAuto = document.getElementById('bgMusic0');
-    //             myAuto.play();
-    //
-    //         },false);
-    //     }
-    //     $(this).addClass('playing_s');
-    //     playVoice(song_s);
-    //     setTimeout(function(){
-    //      $('.music_s').removeClass('playing_s');
-    //     },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
-    // });
+    $(document).on('touchend','.music_s',function () {
+        $(this).addClass('playing_s');
+        playVoice(song_s);
+        setTimeout(function(){
+         $('.music_s').removeClass('playing_s');
+        },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
+    });
 
     //图片上传
     $('.image_s').click(function () {
@@ -623,5 +614,5 @@ $(function () {
         }
     });
 
-
+    $('body').css('overflow-y','auto')
 });

@@ -24,7 +24,7 @@ $(function(){
 
 
         //输入验证
-        $('.teBox').on('keyup',function(){
+        $('.teBox').on('change',function(){
             $('.teacherword').html(''+$(this).val().length+'/200')
         });
 
