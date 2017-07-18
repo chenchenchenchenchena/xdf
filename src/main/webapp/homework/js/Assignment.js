@@ -103,7 +103,7 @@ $(function () {
 
 
     //作业描述验证
-    $('.home_text textarea').on('keyup', function () {
+    $('.home_text textarea').on('change', function () {
         if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
         } else {
