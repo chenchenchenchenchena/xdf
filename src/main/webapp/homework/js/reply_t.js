@@ -23,7 +23,7 @@ $(function() {
                 }else{
                     var name = data.notCommit[b].studentName.substr(1, 2);
                 }
-                $('.Pending').eq(2).append('<li><span class="yeCircle">' + data.notCommit[b].studentName.substr(1, 2) + '</span><span>' + data.notCommit[b].studentName + '</span></li>')
+                $('.Pending').eq(2).append('<li><span class="yeCircle">' + name + '</span><span>' + data.notCommit[b].studentName + '</span></li>')
             }
         }
         if (data.notCorrect.length == 0) {
@@ -38,7 +38,7 @@ $(function() {
                 }else{
                     var name_ = data.notCorrect[c].studentName.substr(1, 2)
                 }
-                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + data.notCorrect[c].description + '"><span class="yeCircle">' + data.notCorrect[c].studentName.substr(1, 2) + '</span><span>' + name_ + '</span><span>' + montht+'    '+dayt + '</span></li>')
+                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + data.notCorrect[c].description + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
             }
         }
         if (data.yesCorrect.length == 0) {
@@ -48,7 +48,6 @@ $(function() {
                 var time = data.yesCorrect[d].replyTime;
                 var month = time.substring(5,time.indexOf(' ')).replace('-','.');
                 var day = time.split(' ')[1].substring(0,5);
-                console.log(month,day)
                 if(data.yesCorrect[d].studentName.length==2){
                     var name_t = data.yesCorrect[d].studentName
                 }else{
