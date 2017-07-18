@@ -63,14 +63,15 @@ $(function(){
                 if(stu[a].fileType=='mp3'){
                     $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <video  src="'+stu[a].previewUrl+'" id="bgMusic"></video ></div>')
                 }else{
-                    $('.imgBox').eq(1).append('<div><img src="'+stu[a].previewUrl+'" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="'+stu[a].url+'" alt="" /></div>')
                 }
             }
             for(var b  = 0;b<tea.length;b++){
                 if(tea[b].fileType=='mp3'){
                     $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
                 }else{
-                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].previewUrl+'" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].url+'" alt="" /></div>')
+
                 }
             }
         });
