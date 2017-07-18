@@ -42,12 +42,6 @@ $(function() {
 
             }
         }
-
-        if($('.Pending').eq(1).find('i')){
-            $('.frend').show()
-        }else{
-            $('.frend').hide()
-        }
     });
 
 
