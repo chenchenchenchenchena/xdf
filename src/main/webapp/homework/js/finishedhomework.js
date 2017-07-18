@@ -41,6 +41,12 @@ $(function () {
         });
         /*******作业答案*******/
         $('.hmAnswer .anDes').html(datas.description);
+        // 优秀
+        if(datas.tag==1){
+            $('.hw_status').addClass('hw_status_s');
+        }else{
+            $('.hw_status').removeClass('hw_status_s');
+        }
         //语音,图片
         $.each(datas.stuHomeworkFiles,function(i,paths){
             var pathUrls = ['2',paths.diskFilePath,paths.fileType];
@@ -85,7 +91,7 @@ $(function () {
             success: function (e) {
                 // alert(JSON.stringify(e));
                 if (e.success == false) {
-                    alert(e.message);
+                    console.log(e.message);
                 } else {
                     //将文件显示到布局中
                     if (fileType.indexOf("mp3") != -1) {
@@ -144,13 +150,13 @@ $(function () {
     }
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
-        alert("预览图片" + $(this).attr('src'));
+        // alert("预览图片" + $(this).attr('src'));
         var previewUrl = $(this).attr('src');
-        if ($(this).attr('src').indexOf('weixin://') == -1&&$(this).attr('src').indexOf('http:') == -1) {
-            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
-        } else {
-            previewUrl = $(this).attr('src');
-        }
+        // if ($(this).attr('src').indexOf('weixin://') == -1&&$(this).attr('src').indexOf('http:') == -1) {
+        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
+        // } else {
+        //     previewUrl = $(this).attr('src');
+        // }
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表

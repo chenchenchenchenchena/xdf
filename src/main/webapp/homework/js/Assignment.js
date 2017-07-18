@@ -1,7 +1,8 @@
 $(function () {
     var trardata = {
         'teacherCode': 'TC23',
-        'schoolId': '73'
+        'schoolId': '73',
+        'email':'caoxuefeng@xdf.cn'
     };
     var homeworksubm = {
         'teacherEmail': 'caoxuefeng@xdf.cn',
@@ -36,7 +37,7 @@ $(function () {
                 var tea = e.data;
                 for(var b  = 0;b<tea.length;b++){
                     if(tea[b].fileType=='mp3'){
-                        $('.big_s').eq(0).append('<div class="music_s" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic'+b+'"></audio ></div>')
+                        $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic'+b+')"  fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic'+b+'"  controls="controls" preload="auto"></audio ></div>')
                     }else{
                         $('.imgBox').show();
                         $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
@@ -103,7 +104,7 @@ $(function () {
 
 
     //作业描述验证
-    $('.home_text textarea').on('keyup', function () {
+    $('.home_text textarea').on('change', function () {
         if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
         } else {
@@ -453,23 +454,29 @@ $(function () {
         $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
     }
 
+    function PlaySound(soundobj) {
+        alert(5);
+        var thissound = document.getElementById(soundobj);
 
-    $(document).on('touchend','.music_s',function () {
-        if($(this).find('audio')){
-            alert(0);
-            document.addEventListener("WeixinJSBridgeReady",function() {
+        thissound.play();
 
-                var myAuto = document.getElementById('bgMusic0');
-                myAuto.play();
-
-            },false);
-        }
-        $(this).addClass('playing_s');
-        playVoice(song_s);
-        setTimeout(function(){
-         $('.music_s').removeClass('playing_s');
-        },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
-    });
+    }
+    // $(document).on('touchend','.music_s',function () {
+    //     if($(this).find('audio')){
+    //         alert(0);
+    //         document.addEventListener("WeixinJSBridgeReady",function() {
+    //
+    //             var myAuto = document.getElementById('bgMusic0');
+    //             myAuto.play();
+    //
+    //         },false);
+    //     }
+    //     $(this).addClass('playing_s');
+    //     playVoice(song_s);
+    //     setTimeout(function(){
+    //      $('.music_s').removeClass('playing_s');
+    //     },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
+    // });
 
     //图片上传
     $('.image_s').click(function () {
