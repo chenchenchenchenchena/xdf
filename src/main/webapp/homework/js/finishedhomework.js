@@ -52,7 +52,7 @@ $(function () {
         $.each(datas.stuHomeworkFiles, function (i, paths) {
             var pathUrls = ['2', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
-            console.log(pathUrls);
+            console.log(i+"---"+pathUrls);
             getFileInfo(pathUrls);
         });
         /*******老师批注*******/

@@ -7,7 +7,7 @@ $(function(){
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
-
+	
 	//点击待交作业
 	$(".secul").hide();
 	// $(".hwContent").show();
@@ -48,7 +48,7 @@ $(function(){
 		location.href="studentrank_s.html";
 	});
 	// 点击待交作业列表
-	$(document).on('click','.hwList',function(){
+	$(document).on('tap','.hwList',function(){
 		sessionStorage.removeItem('homeworkInfos');
 		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
 	});
