@@ -24,7 +24,10 @@ $(function(){
 
 
         //输入验证
-        $('.teBox').on('change',function(){
+        $('.teBox').on('keyup',function(){
+            $('.teacherword').html(''+$(this).val().length+'/200')
+        });
+        $('.teBox').on('blur',function(){
             $('.teacherword').html(''+$(this).val().length+'/200')
         });
 
@@ -90,6 +93,10 @@ $(function(){
 
         //批改作业提交
         $('.sub_p').on('touchend',function(){
+            if($(this).css('background')=='rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box'){
+                layer.msg('正在提交，请稍等');
+                return false;
+            }
             if($('.teBox').val()==''){
                 layer.msg('批复内容不能为空');
             }
@@ -100,19 +107,80 @@ $(function(){
                 need.tag = '1'
             }
             need.fileInfo = arr_s;
+            need.replyDesc = $('.answer textarea').val();
             ajax_S(homework_s.t_succ,need,function(e){
-                console.log(e)
+                if (e.result == true) {
+                    $('.big_back').show();
+                    $('.succ').show();
+                    $('.Submit_s').css('background','#00ba97');
+                } else {
+                    $('.erro p').html(e.message);
+                    $('.big_back').show();
+                    $('.erro').show();
+                }
             })
         })
 
 
+        //状态点击
+        $('.succ input').on('touchend', function () {
+            $('.big_back').hide();
+            $('.succ').hide();
+            location.href = 'reply_t.html';
+        });
 
+        $('.erro input:first-of-type').on('touchend', function () {
+            $('.big_back').hide();
+            $('.erro').hide();
+        });
 
-         $('.big_whit').on('touchend', function () {
+        $('.erro input:last-of-type').on('touchend', function () {
+            $('.big_back').hide();
+            $('.erro').hide();
+            ajax_S(homework_s.t_succ,need,function(e){
+                if (e.result == true) {
+                    $('.big_back').show();
+                    $('.succ').show();
+                    $('.Submit_s').css('background','#00ba97');
+                } else {
+                    $('.erro p').html(e.message);
+                    $('.big_back').show();
+                    $('.erro').show();
+                }
+            })
+        });
+
+        $('.big_whit').on('touchend', function () {
         setTimeout(function () {
             $('.big_whit').hide();
         }, 300);
         $('.song_s').hide();
+    });
+
+        $('.big_back').on('touchstart', function () {
+        if ($('.class_name').css('display') == 'block') {
+            $('.class_name').animate({'bottom': '-438px'});
+            setTimeout(function () {
+                $('.big_back').hide();
+            }, 300);
+            $('.class_name i').html('0');
+            $('.class_name img').attr('src', 'images/C05_06.png');
+            if ($('.class_name i').html() == '0') {
+                $('.class_s i').html('')
+            }
+        }
+        if ($('.succ').css('display') == 'block') {
+            setTimeout(function () {
+                $('.big_back').hide();
+            }, 300);
+            $('.succ').hide();
+        }
+        if ($('.erro').css('display') == 'block') {
+            setTimeout(function () {
+                $('.big_back').hide();
+            }, 300);
+            $('.erro').hide();
+        }
     });
 
         //语音

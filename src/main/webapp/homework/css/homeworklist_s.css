@@ -2,7 +2,6 @@ body,html{
 	background: #f1f1f1;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 }
 input{
 	-webkit-appearance: none;
@@ -425,9 +424,9 @@ html body .tealist_s .more_so{
 	height: 90px;
 	opacity: 0;
 }
-.succ,.erro{
+.succ,.erro,.music_succ{
 	width:542px;
-	height:364px;
+	min-height:364px;
 	background:#fff;
 	border-radius:20px;
 	position:fixed;
@@ -438,10 +437,10 @@ html body .tealist_s .more_so{
 	text-align:center;
 	display:none;
 }
-.succ img,.erro img{
+.succ img,.erro img,.music_succ img{
 	padding-top:50px;
 }
-.succ p,.erro p{
+.succ p,.erro p,.music_succ p{
 	padding-top:30px;
 	font-size:32px;
 	color:#333;
