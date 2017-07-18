@@ -16,46 +16,46 @@ $(function () {
 
     var layer1, layer2;
     // //点击作业排行榜
-    $(document).on('touchend', '.hwRankTitle', function () {
-        window.location.href = "studentrank_s.html";
-    });
-    var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
-    gethwInfos();
-    function gethwInfos() {
-        var knowledgePoint, kpHtml;
-        $.each(hwInfos, function (i, item) {
-            if (item.id == GetRequest('id')) {
-                localStorage.hwteacherId = item.homeworkTId;//老师主键id
-                localStorage.hwstudentId = item.id;//学生主键id
-                localStorage.classCode = item.classCode;//学生code
-
-                //知识点
-                if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
-                    knowledgePoint = splitStrs(item.knowledgePoint);
-                    for (var i = 0; i < knowledgePoint.length; i++) {
-                        kpHtml = '<span>' + knowledgePoint[i] + '</span>';
-                        $('.knowPoint').append(kpHtml);
-                    }
-                }
-                //作业描述
-                $('.hwCon').html(item.description);
-                //语音，图片 TODO
-                $.each(item.fileContents, function (i, paths) {
-                    var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-                    // 获取语音和图片的预览地址 TODO
-                    console.log(pathUrls);
-                    console.log(paths.diskFilePath);
-                    getFileInfo(paths.diskFilePath,paths.fileType);
-
-                });
-
-                return false;
-            }
-
-        });
-
-
-    }
+    // $(document).on('touchend', '.hwRankTitle', function () {
+    //     window.location.href = "studentrank_s.html";
+    // });
+    // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
+    // gethwInfos();
+    // function gethwInfos() {
+    //     var knowledgePoint, kpHtml;
+    //     $.each(hwInfos, function (i, item) {
+    //         if (item.id == GetRequest('id')) {
+    //             localStorage.hwteacherId = item.homeworkTId;//老师主键id
+    //             localStorage.hwstudentId = item.id;//学生主键id
+    //             localStorage.classCode = item.classCode;//学生code
+    //
+    //             //知识点
+    //             if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
+    //                 knowledgePoint = splitStrs(item.knowledgePoint);
+    //                 for (var i = 0; i < knowledgePoint.length; i++) {
+    //                     kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+    //                     $('.knowPoint').append(kpHtml);
+    //                 }
+    //             }
+    //             //作业描述
+    //             $('.hwCon').html(item.description);
+    //             //语音，图片 TODO
+    //             $.each(item.fileContents, function (i, paths) {
+    //                 var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+    //                 // 获取语音和图片的预览地址 TODO
+    //                 console.log(pathUrls);
+    //                 console.log(paths.diskFilePath);
+    //                 getFileInfo(paths.diskFilePath,paths.fileType);
+    //
+    //             });
+    //
+    //             return false;
+    //         }
+    //
+    //     });
+    //
+    //
+    // }
 
     /*------------------录制语音开始------------------------------------*/
 
@@ -174,6 +174,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
+                    alert(JSON.stringify(e));
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
