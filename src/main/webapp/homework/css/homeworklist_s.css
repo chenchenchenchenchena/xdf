@@ -285,7 +285,9 @@ html body .tealist_s .more_so{
 	width:100%;
 	font-size:30px;
 	color:#000;
-	line-height:104px;
+	line-height:30px;
+	height:30px;
+	padding:37px 0;
 	outline:none;
 	border:none;
 }
