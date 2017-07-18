@@ -19,6 +19,7 @@ $(function () {
     // 显示作业信息
     getHwFinishInfos();
     function getHwFinishInfos() {
+        loading = layer.load();
         var datas = hwfinishInfos[curIndex].lessNos[classIndex];
         localStorage.hwteacherId = datas.homeworkTinfoId;//老师主键id
         /*******作业信息*******/

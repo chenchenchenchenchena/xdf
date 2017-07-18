@@ -569,7 +569,6 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-
         //将语音和图片一起传给服务器
         if (voiceFileParams.length != 0) {
             fileParams.push(voiceFileParams);
@@ -581,6 +580,9 @@ $(function () {
             "fileStuhomeworks": fileParams
         };
         // alert(JSON.stringify(reqData));
+        loading = layer.load();
+        $('#HWsubmit').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit').addClass('btn-grey');
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -612,6 +614,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit').addClass('btn-grey');
         // alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
@@ -637,6 +640,8 @@ $(function () {
                 content: $(".submitFail")
             })
         }
-        $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeClass('btn-grey');
+        layer.close(loading);
     }
 })
