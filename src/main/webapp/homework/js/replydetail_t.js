@@ -58,11 +58,12 @@ $(function(){
             console.log(e);
             var stu = e.data.StudentHomeworkFile;
             var tea = e.data.TeacherHomeworkFile;
+
             for(var a  = 0;a<stu.length;a++){
-                if(tea[b].fileType=='mp3'){
-                    $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
+                if(stu[a].fileType=='mp3'){
+                    $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
                 }else{
-                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].thumbnail+'" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="'+tea[b].thumbnail+'" alt="" /></div>')
                 }
             }
             for(var b  = 0;b<tea.length;b++){
