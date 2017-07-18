@@ -200,6 +200,7 @@ $(function () {
      */
     function showAudio(url, parentId, id, flag) {
 
+        url = decodeURI(URIstring);
         parentId.show();
         var strVoice = "";
         var idChildren;
