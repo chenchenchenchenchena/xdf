@@ -2,11 +2,11 @@ $(function () {
     var trardata = {
         'teacherCode': 'TC23',
         'schoolId': '73',
-        'email':'caoxuefeng@xdf.cn'
+        'email':'hanqifan@xdf.cn'
     };
     var homeworksubm = {
-        'teacherEmail': 'caoxuefeng@xdf.cn',
-        'teacherName': '曹雪峰',
+        'teacherEmail': 'hanqifan@xdf.cn',
+        'teacherName': '韩启凡',
         'schoolId': '73',
         'appid':'wxab29a3e2000b8d2a',
         'secret':'7739991fcce774c2281147eae3986ad9',
