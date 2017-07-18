@@ -73,7 +73,6 @@ $(function() {
             })
         }
         ajax_S(homework_s.t_quck, {'params': Homework}, function (e) {
-            console.log(e)
             if (e.result == true) {
                 layer.open({
                     type: 1,
@@ -83,7 +82,6 @@ $(function() {
                     skin: '',
                     content: $(".homeworkSucc")
                 })
-
             } else {
                 layer.open({
                     type: 1,
