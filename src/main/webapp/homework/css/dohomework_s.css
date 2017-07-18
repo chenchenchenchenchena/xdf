@@ -462,3 +462,6 @@ i{font-style: normal;}
 		background-image: url("../images/voice_playing_f3.png");
 	}
 }
+.layui-layer-setwin{
+	display: none!important;
+}
