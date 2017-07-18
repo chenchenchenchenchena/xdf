@@ -117,7 +117,7 @@ $(function () {
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
-        $('#' + idParent).html(strVoice);
+        $('#' + idParent).append(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
@@ -155,7 +155,7 @@ $(function () {
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#' + imageId).html(str);
+        $('#' + imageId).append(str);
     }
 
     /*--------------------图片预览----------------------------------*/
