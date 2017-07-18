@@ -237,7 +237,7 @@ $(function () {
             } else {
                 voiceLen = ss + "''";
             }
-            if (voiceLen == 0) {
+            if (voiceLen.indexOf("0") == -1) {
 
                 voiceLen = "1''";
             }
