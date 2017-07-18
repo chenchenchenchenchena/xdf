@@ -174,7 +174,6 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    alert(JSON.stringify(e));
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
@@ -187,12 +186,9 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
-                    alert(JSON.stringify(voiceFile));
                     voiceFileParams.push(voiceFile);
-                    alert(JSON.stringify(voiceFileParams));
                     //显示语音布局
                     showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
-                    alert("ok");
                     recordCount++;
                 }
 
@@ -205,7 +201,6 @@ $(function () {
      * 显示录制语音布局
      */
     function showAudio(url, parentId, id, flag) {
-        alert("ok-ok"+url);
 
         parentId.show();
         var strVoice = "";
@@ -224,8 +219,6 @@ $(function () {
 
 
         parentId.append(strVoice);
-
-        alert(parentId.html);
 
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
@@ -251,7 +244,7 @@ $(function () {
 
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
-
+        $('.song_s,.mask').hide();
     }
 
     /*------------------录制语音结束------------------------------------*/
