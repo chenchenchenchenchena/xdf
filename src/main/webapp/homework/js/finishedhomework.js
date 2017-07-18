@@ -41,6 +41,12 @@ $(function () {
         });
         /*******作业答案*******/
         $('.hmAnswer .anDes').html(datas.description);
+        // 优秀
+        if(datas.tag==1){
+            $('.hw_status').addClass('hw_status_s');
+        }else{
+            $('.hw_status').removeClass('hw_status_s');
+        }
         //语音,图片
         $.each(datas.stuHomeworkFiles,function(i,paths){
             var pathUrls = ['2',paths.diskFilePath,paths.fileType];
