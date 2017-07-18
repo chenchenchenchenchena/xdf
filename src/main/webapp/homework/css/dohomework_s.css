@@ -45,7 +45,7 @@ i{font-style: normal;}
 .knowPoint span{
 	display: inline-block;
 	margin-left: 27px;
-	width: 250px;
+	padding: 0 15px;
 	height: 50px;
 	background: #ccf1ea;
 	border-radius: 20px;
