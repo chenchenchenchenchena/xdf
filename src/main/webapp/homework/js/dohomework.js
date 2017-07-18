@@ -178,7 +178,7 @@ $(function () {
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    voiceFileParams[recordCount] = {
+                    var voiceFile = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -186,6 +186,7 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
+                    voiceFileParams.push(voiceFile);
                     //显示语音布局
                     showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
 
@@ -201,6 +202,7 @@ $(function () {
      * 显示录制语音布局
      */
     function showAudio(url, parentId, id, flag) {
+
 
         parentId.show();
         var strVoice = "";
@@ -514,7 +516,7 @@ $(function () {
         }
         if (fileParams.length > 0) {
             fileParams.splice(index, 1);
-            recordCount --;
+            recordCount--;
         }
 
 
