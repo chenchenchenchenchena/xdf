@@ -120,6 +120,7 @@ $(function () {
             START = 0;
             //小于300ms，不录音
             clearTimeout(recordTimer);
+            alert("录制时间太短");
         } else {
             wx.stopRecord({
                 success: function (res) {
