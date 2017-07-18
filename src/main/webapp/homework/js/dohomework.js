@@ -186,10 +186,12 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
+                    alert(voiceFile);
                     voiceFileParams.push(voiceFile);
+                    alert(voiceFileParams);
                     //显示语音布局
                     showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
-
+                    alert("ok");
                     recordCount++;
                 }
 
@@ -202,7 +204,7 @@ $(function () {
      * 显示录制语音布局
      */
     function showAudio(url, parentId, id, flag) {
-
+        alert("ok-ok");
 
         parentId.show();
         var strVoice = "";
@@ -221,6 +223,8 @@ $(function () {
 
 
         parentId.append(strVoice);
+
+        alert(parentId.html);
 
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
