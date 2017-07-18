@@ -205,7 +205,7 @@ $(function () {
      * 显示录制语音布局
      */
     function showAudio(url, parentId, id, flag) {
-        alert("ok-ok");
+        alert("ok-ok"+url);
 
         parentId.show();
         var strVoice = "";
