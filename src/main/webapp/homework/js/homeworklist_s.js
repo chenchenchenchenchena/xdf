@@ -7,17 +7,7 @@ $(function(){
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
-	//Tap事件封装
-	$(document).on("touchstart", function (e) {
-		if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 0);
-	});
-	$(document).on("touchmove", function (e) {
-		if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 1);
-	});
-	$(document).on("touchend", function (e) {
-		if (!$(e.target).hasClass("disable") && $(e.target).data("isMoved") == 0) $(e.target).trigger("tap");
-	});
-
+	
 	//点击待交作业
 	$(".secul").hide();
 	// $(".hwContent").show();
