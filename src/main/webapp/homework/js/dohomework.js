@@ -74,7 +74,7 @@ $(function () {
         } else {
 
             //显示语音布局
-            showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
+            showAudio("", $('#record_audio_box'), recordCount, 1);
             alert("ok");
             recordCount++;
             // $('.song_s').animate({'bottom': '0px'});
