@@ -72,8 +72,13 @@ $(function () {
         if (recordCount >= 3) {
             alert("最多录制三条语音");
         } else {
-            $('.song_s').animate({'bottom': '0px'});
-            $('.song_s,.mask').show();
+
+            //显示语音布局
+            showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
+            alert("ok");
+            recordCount++;
+            // $('.song_s').animate({'bottom': '0px'});
+            // $('.song_s,.mask').show();
         }
 
     });
