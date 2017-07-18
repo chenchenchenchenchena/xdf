@@ -575,6 +575,9 @@ $(function () {
 
             fileStuhomeworks = fileParams.concat(voiceFileParams);
         }
+        alert(JSON.stringify(fileStuhomeworks));
+        alert(JSON.stringify(voiceFileParams));
+        alert(JSON.stringify(fileParams));
 
         var reqData = {
             "id": GetRequest('id'),
