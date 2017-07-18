@@ -63,7 +63,7 @@ $(function(){
                 if(stu[a].fileType=='mp3'){
                     $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <video  src="'+tea[b].previewUrl+'" id="bgMusic"></video ></div>')
                 }else{
-                    $('.imgBox').eq(1).append('<div><img src="'+tea[b].thumbnail+'" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="'+tea[b].previewUrl+'" alt="" /></div>')
                 }
             }
             for(var b  = 0;b<tea.length;b++){
