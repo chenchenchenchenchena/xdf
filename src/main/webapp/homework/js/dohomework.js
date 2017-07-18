@@ -67,19 +67,21 @@ $(function () {
         }
 
     });
+
     /* 隐藏语音弹窗 */
     $('.mask').click(function () {
         $('.song_s').animate({'bottom': '-300px'});
         $('.song_s,.mask').hide();
     });
+
     var timeInedex = 0;
     var timeds;
     var localId;
     var START;
     var END;
     var recordTimer;
-    var recordVoiceId = [];
     var recordCount = 0;
+
     /**
      * 按下开始录音
      */
@@ -403,9 +405,11 @@ $(function () {
                     var fileType = e.fileType;
                     if (fileType == "mp3") {
                         showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
+                        audioCount++;
                     } else {
                         showImage(e.thumbnail);
                     }
+
                 }
             }
         });
