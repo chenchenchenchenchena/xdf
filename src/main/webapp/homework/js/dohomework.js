@@ -571,14 +571,16 @@ $(function () {
     function hwcommit() {
 
         //将语音和图片一起传给服务器
+        var fileStuhomeworks;
         if (voiceFileParams.length != 0) {
-            fileParams.push(voiceFileParams);
+
+            fileStuhomeworks = fileParams.concat(voiceFileParams);
         }
 
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
-            "fileStuhomeworks": fileParams
+            "fileStuhomeworks": fileStuhomeworks
         };
         // alert(JSON.stringify(reqData));
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
