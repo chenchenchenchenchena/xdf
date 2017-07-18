@@ -206,15 +206,13 @@ $(function () {
         if (flag == 1) {
             idChildren = "record_audio" + id;
             //录音布局，可以删除
-            strVoice += "<li><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
-            strVoice += "</div>";
         } else {
 
             idChildren = "audio" + id;
-            strVoice += "<li><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
-            strVoice += "</div>";
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
         }
 
 
@@ -430,7 +428,7 @@ $(function () {
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
 
-    // 删除图片
+    /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
         $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
@@ -476,6 +474,49 @@ $(function () {
 
     });
 
+    /*-------------------- 删除语音 --------------------*/
+    $(document).on('touchend', '.stuVoice', function () {
+        //alert($(this).parents('.audio_box').index());
+        $('.delete-voice .confirmBtn').attr('voice-index', $(this).parents('.audio_box').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除语音
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-voice")
+        })
+    });
+    // 删除语音-取消
+    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除语音-确定
+    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('voice-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('#record_audio_box').find('.audio_box').length <= 1) {
+            $('#record_audio_box').hide();
+        }
+
+        $('#record_audio_box li:eq(' + index + ')').remove();
+        // 语音小于三张，显示添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length < 3) {
+            $('#record').show();
+        }
+        if (fileParams.length > 0) {
+            fileParams.splice(index, 1);
+            recordCount --;
+        }
+
+
+    });
     //作业描述验证
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
