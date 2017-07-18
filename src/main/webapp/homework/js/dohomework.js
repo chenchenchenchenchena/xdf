@@ -187,6 +187,8 @@ $(function () {
                         "uploadUser": uploadUser
                     };
                     voiceFileParams.push(voiceFile);
+                    alert(JSON.stringify(voiceFileParams));
+                    alert(voiceFileParams.length);
                     //显示语音布局
                     showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
