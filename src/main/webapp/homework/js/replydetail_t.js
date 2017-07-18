@@ -13,12 +13,15 @@ $(function(){
                 $('.hwInfo').show();
                 $('.hwRankTitle').css('margin-bottom','0');
                 $('.hwRankTitle').css('border-bottom','1px solid #ccc');
+                $('.hwRankTitle').css('background-image','url(../homework/images/jiao11.png)');
 
             }else{
                 $('.hwInfo').hide();
                 $('.hwRankTitle').css('margin-bottom','18px');
                 $('.hwRankTitle').css('border-bottom','none');
+                $('.hwRankTitle').css('background-image','url(../homework/images/jiao22222.png)');
             }
+
         })
 
 
