@@ -58,6 +58,16 @@ $(function () {
     }
 
     /*------------------录制语音开始------------------------------------*/
+
+
+    var timeInedex = 0;
+    var timeds;
+    var localId;
+    var START;
+    var END;
+    var recordTimer;
+    var recordCount = 0;
+
     $('#record').click(function () {
         if (recordCount >= 3) {
             alert("最多录制三条语音");
@@ -73,14 +83,6 @@ $(function () {
         $('.song_s').animate({'bottom': '-300px'});
         $('.song_s,.mask').hide();
     });
-
-    var timeInedex = 0;
-    var timeds;
-    var localId;
-    var START;
-    var END;
-    var recordTimer;
-    var recordCount = 0;
 
     /**
      * 按下开始录音
