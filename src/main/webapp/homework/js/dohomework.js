@@ -428,7 +428,7 @@ $(function () {
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#imagBox_1').html(str);
+        $('#imagBox_1').append(str);
 
     }
 
