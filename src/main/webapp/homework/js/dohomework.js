@@ -200,7 +200,6 @@ $(function () {
      */
     function showAudio(url, parentId, id, flag) {
 
-        var url1 = decodeURI(url);
         parentId.show();
         var strVoice = "";
         var idChildren;
@@ -208,12 +207,12 @@ $(function () {
         if (flag == 1) {
             idChildren = "record_audio" + id;
             //录音布局，可以删除
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url1 + "' type='audio/mpeg'></audio>" +
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
         } else {
 
             idChildren = "audio" + id;
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url1 + "' type='audio/mpeg'></audio>" +
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
         }
 
