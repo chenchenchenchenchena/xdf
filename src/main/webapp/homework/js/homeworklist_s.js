@@ -26,7 +26,7 @@ $(function(){
 			};
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 		}
-		$(this).addClass("hwShow").siblings("li").removeClass("hwShow");
+		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 	})
 	//点击已交作业列表
 	var flag=true;
@@ -73,74 +73,6 @@ $(function(){
 //获取待交作业列表
 var homeworkInfosArray=[];
 function getHwContentSuccess(msg) {
-	var msg1 = {
-		"code": "200",
-		"data": [
-			{
-				"id": "022765ae376a4feab2ce64777050474f",
-				"lessonNo": 0,
-				"teacherName": "高伟",
-				"homeworkTime": "2017-07-11",
-				"knowledgePoint": "知识点1,知识点2",
-				"className": "中考提高物理暑假班",
-				"courseName": "双师",
-				"homeworkTId": "9076ac7323144324a53ae24d594abced",
-				"description": "这是测试数据",
-				"status": 0,
-				"readStatus": 0,
-				"fileContents": [
-					{
-						"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-						"fileName": "文件1",
-						"fileSize": "12345",
-						"fileType": "jpg",
-						"id": "c572b982b22149a5ab2e5d98650a3e3c",
-						"uploadTime": 1499773427000
-					},
-					{
-						"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-						"fileName": "文件1",
-						"fileSize": "23564",
-						"fileType": "MP3",
-						"id": "c84c4da06da9470283588366812f7d01",
-						"uploadTime": 1499773427000
-					}
-				]
-			},
-			{
-				"id": "022765ae376a4feab2ce64777050474f",
-				"lessonNo": 0,
-				"teacherName": "高伟",
-				"homeworkTime": "2017-07-11",
-				"knowledgePoint": "知识点1,知识点2",
-				"className": "中考提高物理暑假班",
-				"courseName": "双师",
-				"homeworkTId": "9076ac7323144324a53ae24d594abced",
-				"description": "如图，test点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.",
-				"status": 0,
-				"readStatus": 0,
-				"fileContents": [
-					{
-						"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-						"fileName": "文件1",
-						"fileSize": "12345",
-						"fileType": "jpg",
-						"id": "c572b982b22149a5ab2e5d98650a3e3c",
-						"uploadTime": 1499773427000
-					},
-					{
-						"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-						"fileName": "文件1",
-						"fileSize": "23564",
-						"fileType": "MP3",
-						"id": "c84c4da06da9470283588366812f7d01",
-						"uploadTime": 1499773427000
-					}
-				]
-			}
-		],
-		"status": "success"
-	};
 	$(".hwContent").html(" ");
 	if(msg.code==200){
 		if(msg.data.length>0){
@@ -189,206 +121,14 @@ function getHwContentSuccess(msg) {
 			$('.hwEmpty p').html("您没有待交作业哦~");
 			$('.hwEmpty').show();
 		}
+	}else{
+		$('.hwEmpty p').html("您没有待交作业哦~");
+		$('.hwEmpty').show();
 	}
-
+	$(".hwHeader ul li:eq(0)").addClass("hwShow").siblings("li").removeClass("hwShow");
 }
 //获取已完成作业列表
 function getHwFinishSuccess(msg){
-	var msg1 = {
-		"code": "200",
-		"data": [
-			{
-				"readStatus": 0,
-				"lessNos": [
-					{
-						"id": "022765ae376a4feab2ce64777050474f",
-						"teaHomeworkReplyFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherDes": "这是测试数据",
-						"stuHomeworkFiles": [
-							{
-								"diskFilePath": "aaa/bbb/ccc",
-								"fileName": "学生作业",
-								"fileSize": "3356",
-								"fileType": "jpg",
-								"homeworkSinfoId": "022765ae376a4feab2ce64777050474f",
-								"id": "sxsxsxsx"
-							}
-						],
-						"status": 1,
-						"description": "这是我的作业答复",
-						"replyStatus": 0,
-						"teaHomeworkFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherKnowledgePoint": "知识点1,知识点2",
-						"homeworkTime": "2017-07-11",
-						"lessonNo": 0
-					}
-				],
-				"classCode": "HDXU3PB01",
-				"className": "中考提高物理暑假班",
-				"teacherName": "高伟"
-			},
-			{
-				"readStatus": 0,
-				"lessNos": [
-					{
-						"id": "022765ae376a4feab2ce64777050474f",
-						"teaHomeworkReplyFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherDes": "这是测试数据",
-						"stuHomeworkFiles": [
-							{
-								"diskFilePath": "aaa/bbb/ccc",
-								"fileName": "学生作业",
-								"fileSize": "3356",
-								"fileType": "jpg",
-								"homeworkSinfoId": "022765ae376a4feab2ce64777050474f",
-								"id": "sxsxsxsx"
-							}
-						],
-						"status": 1,
-						"description": "作业描述2222",
-						"replyStatus": 0,
-						"teaHomeworkFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherKnowledgePoint": "知识点11,知识点21",
-						"homeworkTime": "2017-07-11",
-						"lessonNo": 0
-					},
-					{
-						"id": "022765ae376a4feab2ce64777050474f",
-						"teaHomeworkReplyFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherDes": "这是测试数据8888888",
-						"stuHomeworkFiles": [
-							{
-								"diskFilePath": "aaa/bbb/ccc",
-								"fileName": "学生作业",
-								"fileSize": "3356",
-								"fileType": "jpg",
-								"homeworkSinfoId": "022765ae376a4feab2ce64777050474f",
-								"id": "sxsxsxsx"
-							}
-						],
-						"status": 1,
-						"description": "作业描述8888888888",
-						"replyStatus": 0,
-						"teaHomeworkFiles": [
-							{
-								"diskFilePath": "homework/73/HDXP5MB01/0711.jpg",
-								"fileName": "文件1",
-								"fileSize": "12345",
-								"fileType": "jpg",
-								"id": "c572b982b22149a5ab2e5d98650a3e3c",
-								"uploadTime": 1499773427000
-							},
-							{
-								"diskFilePath": "homework/b479a873299649a48d9741582a735450.jpg",
-								"fileName": "文件1",
-								"fileSize": "23564",
-								"fileType": "MP3",
-								"id": "c84c4da06da9470283588366812f7d01",
-								"uploadTime": 1499773427000
-							}
-						],
-						"teacherKnowledgePoint": "知识点11,知识点21",
-						"homeworkTime": "2017-07-11",
-						"lessonNo": 0
-					}
-				],
-				"classCode": "HDXU3PB01",
-				"className": "中考提高物理暑假班",
-				"teacherName": "高伟"
-			}
-		],
-		"status": "success"
-	};
-	// var msg = {
-	// 	"code": "200",
-	// 	"data": [],
-	// 	"status": "success"
-	// };
 	$(".hwFinish>ul").html(" ");
 	if(msg.code==200){
 		if(msg.data.length>0){
@@ -435,7 +175,11 @@ function getHwFinishSuccess(msg){
 			$('.hwEmpty p').html("您没有已交作业哦~");
 			$('.hwEmpty').show();
 		}
+	}else{
+		$('.hwEmpty p').html("您没有已交作业哦~");
+		$('.hwEmpty').show();
 	}
+	$(".hwHeader ul li:eq(1)").addClass("hwShow").siblings("li").removeClass("hwShow");
 }
 
 
