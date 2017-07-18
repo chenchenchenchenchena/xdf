@@ -76,6 +76,7 @@ $(function () {
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
+    var voiceCount = 0;
     /**
      * 获取文件信息
      */
@@ -98,7 +99,8 @@ $(function () {
                 } else {
                     //将文件显示到布局中
                     if (fileType.indexOf("mp3") != -1) {
-                        showAudio(e.fileUrl, e.fileSize, "audio_" + flag, "audio" + flag);
+                        voiceCount++;
+                        showAudio(e.fileUrl, "audio_" + flag, "audio" + flag+""+voiceCount);
                     } else {
                         showImage(e.thumbnail, "imagBox_" + flag);
                     }
@@ -110,12 +112,12 @@ $(function () {
     /**
      * 显示语音布局
      */
-    function showAudio(url, length, idParent, idChildren) {
+    function showAudio(url, idParent, idChildren) {
 
         $('#' + idParent).show();
-        length = "";
-        var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
+        var length = "";
+        var strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
 
         $('#' + idParent).append(strVoice);
         var audioElem = document.getElementById(idChildren);
