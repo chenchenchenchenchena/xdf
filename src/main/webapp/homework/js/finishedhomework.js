@@ -2,7 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
-    var layer1;
+    var layer1,loading;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -19,6 +19,7 @@ $(function () {
     // 显示作业信息
     getHwFinishInfos();
     function getHwFinishInfos() {
+        loading = layer.load();
         var datas = hwfinishInfos[curIndex].lessNos[classIndex];
         localStorage.hwteacherId = datas.homeworkTinfoId;//老师主键id
         /*******作业信息*******/
@@ -70,6 +71,7 @@ $(function () {
             console.log(pathUrls);
             getFileInfo(pathUrls);
         });
+        layer.close(loading);
     }
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
@@ -115,7 +117,7 @@ $(function () {
         var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
 
-        $('#' + idParent).html(strVoice);
+        $('#' + idParent).append(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
@@ -153,7 +155,7 @@ $(function () {
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#' + imageId).html(str);
+        $('#' + imageId).append(str);
     }
 
     /*--------------------图片预览----------------------------------*/

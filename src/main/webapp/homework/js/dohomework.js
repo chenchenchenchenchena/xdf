@@ -13,8 +13,7 @@ $(function () {
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-
-    var layer1, layer2;
+    var layer1, layer2,loading;
     // //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -22,6 +21,7 @@ $(function () {
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
+        loading = layer.load();
         var knowledgePoint, kpHtml;
         $.each(hwInfos, function (i, item) {
             if (item.id == GetRequest('id')) {
@@ -53,8 +53,7 @@ $(function () {
             }
 
         });
-
-
+        layer.close(loading);
     }
 
     /*------------------录制语音开始------------------------------------*/
@@ -247,6 +246,10 @@ $(function () {
         }
 
         $('.song_s,.mask').hide();
+        // 语音大于三张，隐藏添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length >= 3) {
+            $('#record').hide();
+        }
     }
 
     /*------------------录制语音结束------------------------------------*/
@@ -425,7 +428,7 @@ $(function () {
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#imagBox_1').html(str);
+        $('#imagBox_1').append(str);
 
     }
 
@@ -513,8 +516,8 @@ $(function () {
         if ($('.notsubmit #record_audio_box li').length < 3) {
             $('#record').show();
         }
-        if (fileParams.length > 0) {
-            fileParams.splice(index, 1);
+        if (voiceFileParams.length > 0) {
+            voiceFileParams.splice(index, 1);
             recordCount--;
         }
 
@@ -566,18 +569,22 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
-
         //将语音和图片一起传给服务器
+        var fileStuhomeworks;
         if (voiceFileParams.length != 0) {
-            fileParams.push(voiceFileParams);
+
+            fileStuhomeworks = fileParams.concat(voiceFileParams);
         }
 
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
-            "fileStuhomeworks": fileParams
+            "fileStuhomeworks": fileStuhomeworks
         };
         // alert(JSON.stringify(reqData));
+        loading = layer.load();
+        $('#HWsubmit').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit').addClass('btn-grey');
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -609,6 +616,7 @@ $(function () {
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit').addClass('btn-grey');
         // alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
@@ -634,6 +642,8 @@ $(function () {
                 content: $(".submitFail")
             })
         }
-        $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeClass('btn-grey');
+        layer.close(loading);
     }
 })

@@ -96,7 +96,7 @@ input{
 }
 .hwKon span{
 	display: inline-block;
-	width: 184px;
+	padding: 0 15px;
 	height: 40px;
 	background: #ccf1ea;
 	border-radius: 20px;

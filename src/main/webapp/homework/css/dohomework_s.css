@@ -45,7 +45,7 @@ i{font-style: normal;}
 .knowPoint span{
 	display: inline-block;
 	margin-left: 27px;
-	width: 250px;
+	padding: 0 15px;
 	height: 50px;
 	background: #ccf1ea;
 	border-radius: 20px;
@@ -180,6 +180,9 @@ i{font-style: normal;}
 	border: none;
 	border-radius: 10px;
 	margin-top: 30px;
+}
+.btn-grey{
+	background: #b2b2b2;
 }
 .stuImg{
 	display: inline-block;
@@ -458,4 +461,7 @@ i{font-style: normal;}
 	100% {
 		background-image: url("../images/voice_playing_f3.png");
 	}
+}
+.layui-layer-setwin{
+	display: none!important;
 }
