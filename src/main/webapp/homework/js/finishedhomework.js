@@ -2,7 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
-    var layer1;
+    var layer1,loading;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -70,6 +70,7 @@ $(function () {
             console.log(pathUrls);
             getFileInfo(pathUrls);
         });
+        layer.close(loading);
     }
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
