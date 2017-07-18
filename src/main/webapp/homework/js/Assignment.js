@@ -104,7 +104,7 @@ $(function () {
 
 
     //作业描述验证
-    $('.home_text textarea').on('change', function () {
+    $('.home_text textarea').on('keyup', function () {
         if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
         } else {
@@ -112,7 +112,14 @@ $(function () {
         }
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
-
+    $('.home_text textarea').on('blur', function () {
+        if ($(this).val().length > 200) {
+            $('.home_text span').css('color', 'red');
+        } else {
+            $('.home_text span').css('color', '#808080');
+        }
+        $('.home_text span').html('' + $(this).val().length + '/200')
+    });
     //知识点验证
     $('.Knowledge input').on('keyup', function () {
         var html_ = $(this).val();
@@ -276,7 +283,6 @@ $(function () {
             }
             ajax_S(homework_s.t_erro,errohome, function (e) {
                 if (e.result == true) {
-                    $(this).css('background','#ccc');
                     $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background','#00ba97');
@@ -301,7 +307,7 @@ $(function () {
             homeworksubm.description = $('.home_text textarea').val();
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
-                $(this).css('background','#ccc');
+                $('.Submit_s').css('background','#ccc');
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -473,7 +479,15 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    layer.msg('上传成功');
+                    layer.open({
+                        type: 1,
+                        area: ['312px', '194px'],
+                        shade: 0,
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }

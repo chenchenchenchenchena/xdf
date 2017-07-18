@@ -13,8 +13,7 @@ $(function () {
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-
-    var layer1, layer2;
+    var layer1, layer2,loading;
     // //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -22,6 +21,7 @@ $(function () {
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
+        loading = layer.load();
         var knowledgePoint, kpHtml;
         $.each(hwInfos, function (i, item) {
             if (item.id == GetRequest('id')) {
@@ -53,8 +53,7 @@ $(function () {
             }
 
         });
-
-
+        layer.close(loading);
     }
 
     /*------------------录制语音开始------------------------------------*/
@@ -247,6 +246,10 @@ $(function () {
         }
 
         $('.song_s,.mask').hide();
+        // 语音大于三张，隐藏添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length >= 3) {
+            $('#record').hide();
+        }
     }
 
     /*------------------录制语音结束------------------------------------*/
