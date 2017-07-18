@@ -87,8 +87,6 @@ $(function () {
      * 按下开始录音
      */
     $('#record_btn').on('touchstart', function (event) {
-        //初始化语音参数
-        voiceFileParams = [];
         START = new Date().getTime();
         $(this).attr('src', 'images/speak.gif');
         event.preventDefault();
@@ -187,8 +185,6 @@ $(function () {
                         "uploadUser": uploadUser
                     };
                     voiceFileParams.push(voiceFile);
-                    alert(JSON.stringify(voiceFileParams));
-                    alert(voiceFileParams.length);
                     //显示语音布局
                     showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
