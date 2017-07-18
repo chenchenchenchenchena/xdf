@@ -126,6 +126,7 @@ $(function () {
                     $('.song_s').hide();
                     // uploadVoiceWX(localId);
                     showAudio(localId, $('#record_audio_box'), recordCount, 1);
+                    recordCount++;
 
                 },
                 fail: function (res) {
