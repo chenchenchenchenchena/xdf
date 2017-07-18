@@ -52,7 +52,7 @@ $(function(){
 
     var Read = '';
 	// 获取老师作业列表
-    ajax_S(homework_s.t_list,{email:'caoxuefeng@xdf.cn','schoolId':'73'},function(e){
+    ajax_S(homework_s.t_list,{email:'hanqifan@xdf.cn','schoolId':'73'},function(e){
         console.log(e);
         if(e.data==undefined){
             $('.empty').show();

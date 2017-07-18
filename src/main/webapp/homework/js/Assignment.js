@@ -2,11 +2,11 @@ $(function () {
     var trardata = {
         'teacherCode': 'TC23',
         'schoolId': '73',
-        'email':'caoxuefeng@xdf.cn'
+        'email':'hanqifan@xdf.cn'
     };
     var homeworksubm = {
-        'teacherEmail': 'caoxuefeng@xdf.cn',
-        'teacherName': '曹雪峰',
+        'teacherEmail': 'hanqifan@xdf.cn',
+        'teacherName': '韩启凡',
         'schoolId': '73',
         'appid':'wxab29a3e2000b8d2a',
         'secret':'7739991fcce774c2281147eae3986ad9',
@@ -18,7 +18,7 @@ $(function () {
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
         console.log(e);
-        var className = e.data.Data;
+        var className = e.data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
         }
