@@ -1,0 +1,58 @@
+/**************************作业列表公用样式**************************/
+/*语音*/
+.audio_box{
+    height: 78px;
+    width: 100%;
+    margin-top: 30px;
+}
+.audio_box div{
+    display: inline-block;
+    width: 274px;
+    max-width: 620px;
+    height: 78px;
+    border: 1px solid #82be66;
+    background: #a0e75a;
+    border-radius: 10px;
+    float: left;
+    position: relative;
+}
+.audio_box span{
+    display: inline-block;
+    height: 78px;
+    line-height: 78px;
+    font-size: 30px;
+    margin-left: 20px;
+}
+.play-icon{
+    background: url("../images/voice_playing.png") 0 0 no-repeat;
+    display: inline-block;
+    width: 27px;
+    height: 33px;
+    position: absolute;
+    top: 22px;
+    left: 22px;
+}
+.playing{
+    -webkit-animation: playvoice_1 2s infinite ease-in-out;
+}
+@keyframes playvoice_1 {
+    0% {
+        background: url("../images/voice_playing_f1.png") 0 0 no-repeat;
+    }
+    50% {
+        background: url("../images/voice_playing_f2.png") 0 0 no-repeat;
+    }
+    100% {
+        background: url("../images/voice_playing_f3.png") 0 0 no-repeat;
+    }
+}
+.stuVoice{
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    background: url(../images/121.png) no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 10px 0 0;
+}
