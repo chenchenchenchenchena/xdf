@@ -416,9 +416,9 @@ $(function () {
         wx.stopRecord({
             success: function (res) {
                 clearInterval(timeds);
-                if (timeds > 1) {
-                    $('.big_s').append('<div class="music_s"><span></span> </div>');
-                }
+                // if (timeds > 1) {
+                //     $('.big_s').append('<div class="music_s"><span></span> </div>');
+                // }
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
