@@ -63,18 +63,11 @@ $(function () {
      *开始播放方法
      */
     function play() {
-        var second = audioCur.duration;//获取音频秒数
-        audioCur.currentTime = 0;
-        // var play = function() {
-        //     document.removeEventListener("WeixinJSBridgeReady", play);
-        //     document.removeEventListener("YixinJSBridgeReady", play);
-        //     // document.removeEventListener("touchstart", play, false);
-        //     audio.play();
-        //     audio.pause();
-        // };
-        // audioCur.play();
         alert(audioCur.attr("src"));
         playVoice(audioCur.attr("src"));
+        var second = audioCur.duration;//获取音频秒数
+        audioCur.currentTime = 0;
+        audioCur.play();
         //播放动画
         $(audioCur).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function () {
