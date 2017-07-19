@@ -6,13 +6,10 @@
     <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../js/layer-v2.1/layer/skin/layer.css"  />
     <link rel="stylesheet" href="../css/addInfo.css"  />
-   <!-- <link rel="stylesheet" href="../css/p176.css"  />-->
     <script src="../js/jquery.js"></script>
     <script src="../js/layer-v2.1/layer/layer.js"></script>
-   <!-- <script src="../js/main.js"></script>-->
 </head>
 <body>
-	<!--<div class="startImg"><img src="../images/01.png"  /></div>-->
 	<div class="listData">
 		<div class="p176-nav clearfix">
 			<div class="p176-logo-left"></div>
@@ -32,7 +29,7 @@
 				<tr id="ckListHead">
 					<th style="width:50%;text-align: center">文件名</th>
 					<th style="width:25%;text-align: center">播放按钮</th>
-                    <th style="width:25%;text-align: center">暂停按钮</th>
+                    <th style="width:25%;text-align: center">停止按钮</th>
 				</tr>
 				</thead>
 				<tbody id="ckListTbody">
@@ -44,13 +41,7 @@
 
 </body>
 <script>
-    $(function () {
-		/*$(".listData").hide();*/
-
-    })
     //显示已经录入的数据
-
-
     function showList() {
         var school=$("select").val();
         var schoolName={
@@ -62,9 +53,7 @@
             data:schoolName,
             dataType: 'json',
             success: function (e) {
-                console.log(e)
-				/*$(".listData").show();
-				$(".startImg").hide();*/
+                console.log(e);
                 var dataList = e.dataList;
                 var str = "";
                 for (var i = 0; i < dataList.length; i++) {
@@ -72,22 +61,18 @@
 					var lessonNo = dataList[i]["lessonNo"];
 					var subject = dataList[i]["subject"];
 					var teacherName = dataList[i]["teacherName"];
-					/*var schoolName = dataList[i]["schoolName"];*/
                     var studioNo=dataList[i]["studioNo"];
                     var learningPeriod=dataList[i]["learningPeriod"];
                     var courseName=dataList[i]["courseName"];
                     var id=dataList[i]["id"];
-                   /* var fileUrl = dataList[i]["fileUrl"];*/
-
                     if (i % 2 == 1) {
                         str += "<tr class='table-tr-odd'>"
                     } else {
                         str += "<tr class='table-tr-even'>"
                     }
-
                     str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+courseName+"_"+subject+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
                     str += "<td id='playBtn'><button>播放</button></td>";
-                    str += "<td id='pauseBtn'><button>暂停</button></td>";
+                    str += "<td id='pauseBtn'><button>停止</button></td>";
 
 
                     str += "</tr>";
@@ -99,25 +84,11 @@
     }
     $("#ckListTbody").on("click","#playBtn button",function () {
         $("#playBtn button").attr("disabled",true);
-        /*var fileName=$(this).parent().prev().html();
-        var fileN=fileName.split("_");*/
-        /*fileN[0]=fileN[0].substring(3,7);
-        fileN[6]=fileN[6].substring(0,1);*/
-        /*console.log(fileName.split("_"));
-        console.log(fileN);*/
-
-        /*var file={
-            "studioNo":fileN[0].substring(3,7),
-            "teacherName":fileN[1],
-            "learningPeriod":fileN[2],
-            "grade":fileN[3],
-            "courseName":fileN[4],
-            "subject":fileN[5],
-            "lessonNo":fileN[6].substring(0,1),
-            "schoolName":$("select").val(),
-            "status":1
-        }
-        console.log(file);*/
+        $("#pauseBtn button").attr("disabled",true);
+        setTimeout(function () {
+            $("#playBtn button").attr("disabled",false);
+            $("#pauseBtn button").attr("disabled",false);
+        },10000);
         var file={
             "id":$(this).parent().prev().find("span").html()
         }
@@ -129,16 +100,22 @@
             dataType: 'json',
             success:function (e) {
                 if(e.result){
-                    $("#playBtn button").attr("disabled",false);
+                    /*$("#playBtn button").attr("disabled",false);*/
                     layer.msg(e.message,{icon:1});
                 }else{
-                    $("#playBtn button").attr("disabled",false);
+                    /*$("#playBtn button").attr("disabled",false);*/
                     layer.msg(e.message,{icon:1});
                 }
             }
         })
     })
     $("#ckListTbody").on("click","#pauseBtn button",function () {
+        $("#pauseBtn button").attr("disabled",true);
+        $("#playBtn button").attr("disabled",true);
+        setTimeout(function () {
+            $("#pauseBtn button").attr("disabled",false);
+            $("#playBtn button").attr("disabled",false);
+        },10000);
         var file={
             "id":$(this).parent().prev().prev().find("span").html()
         }
@@ -150,10 +127,10 @@
             success:function (e) {
                 if(e.result){
                     console.log(e);
-                    $("#pauseBtn button").attr("disabled",false);
+                    /*$("#pauseBtn button").attr("disabled",false);*/
                     layer.msg(e.message,{icon:1});
                 }else{
-                    $("#pauseBtn button").attr("disabled",false);
+                   /* $("#pauseBtn button").attr("disabled",false);*/
                     layer.msg(e.message,{icon:1});
                 }
             }
@@ -165,6 +142,14 @@
         nativeBridge.attachCloseEventObserver(function () {
             myLog("close event");
             nativeBridge.closeWindow();
+            $.ajax({
+                url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updateInitialization.do",
+                type: 'get',
+                dataType: 'json',
+                success:function (e) {
+                     console.log(e);
+                }
+            })
         });
     })
 
