@@ -477,6 +477,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }
                                 }
                                 if(Tbuer==true){
+                                    console.log(r);
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
