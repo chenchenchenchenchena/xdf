@@ -72,7 +72,9 @@ $(function () {
         //     audio.play();
         //     audio.pause();
         // };
-        audioCur.play();
+        // audioCur.play();
+        alert(audioCur.attr("src"));
+        playVoice(audioCur.attr("src"));
         //播放动画
         $(audioCur).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function () {

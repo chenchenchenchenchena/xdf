@@ -171,7 +171,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    alert("语音提交成功");
+                    alert("语音上传成功");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;

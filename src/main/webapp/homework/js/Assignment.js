@@ -472,22 +472,23 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    $('.teBox').val(e.data.fileUrl);
+                    // $('.teBox').val(e.data.fileUrl);
                     arr_s.push({
                         'fileName':e.data.fileName,
                         'fileType':e.data.fileType,
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    layer.open({
-                        type: 1,
-                        area: ['312px', '194px'],
-                        shade: 0,
-                        title: '',
-                        skin: '',
-                        time: 3000,
-                        content: $(".music_succ")
-                    });
+                    alert("语音上传成功");
+                    // layer.open({
+                    //     type: 1,
+                    //     area: ['312px', '194px'],
+                    //     shade: 0,
+                    //     title: '',
+                    //     skin: '',
+                    //     time: 3000,
+                    //     content: $(".music_succ")
+                    // });
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -563,11 +564,6 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    if(length==i){
-                        alert('已上传：' + i + '/' + length);
-                    }
-                    // serverIds.push(res.serverId);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
