@@ -13,7 +13,8 @@ $(function () {
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-    var layer1, layer2,loading;
+    alert(sessionStorage.studentName);
+    var layer1, layer2, loading;
     // //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -569,13 +570,8 @@ $(function () {
     function hwcommit() {
         //将语音和图片一起传给服务器
         var fileStuhomeworks;
-        if (voiceFileParams.length != 0) {
 
-            fileStuhomeworks = fileParams.concat(voiceFileParams);
-        }
-        alert(JSON.stringify(fileStuhomeworks));
-        alert(JSON.stringify(voiceFileParams));
-        alert(JSON.stringify(fileParams));
+        fileStuhomeworks = fileParams.concat(voiceFileParams);
 
         var reqData = {
             "id": GetRequest('id'),
@@ -643,8 +639,8 @@ $(function () {
                 content: $(".submitFail")
             })
         }
-         $('#HWsubmit').removeAttr("disabled");
-         $('#HWsubmit').removeClass('btn-grey');
+        $('#HWsubmit').removeAttr("disabled");
+        $('#HWsubmit').removeClass('btn-grey');
         layer.close(loading);
     }
 })
