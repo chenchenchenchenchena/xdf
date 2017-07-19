@@ -27,7 +27,6 @@ $(function(){
 	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
-	alert(sessionStorage.studentName);
 	//点击待交作业
 	$(".secul").hide();
 	// $(".hwContent").show();
