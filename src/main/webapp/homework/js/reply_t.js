@@ -54,11 +54,11 @@ $(function() {
                     var name_t = data.yesCorrect[d].studentName.substr(1, 2)
                 }
                 if (data.yesCorrect[d].tag == '1') {
-                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>')
+                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'" text_t="'+data.yesCorrect[d].replyDesc+'" text="' + data.yesCorrect[d].replydescription + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + data.yesCorrect[d].description + '"><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>');
                     $('.frend').show();
                     $('.noreply').css('padding-bottom','120px')
                 } else {
-                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
+                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'"  text_t="'+data.yesCorrect[d].replyDesc+'" text="' + data.yesCorrect[d].replydescription + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + data.yesCorrect[d].description + '"><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
                 }
 
             }
@@ -115,7 +115,15 @@ $(function() {
 
     $('.frend input').on('touchend',function(){
         location.href = 'sharedranking_t.html?tid='+sessionStorage.Tid
+    });
+    
+    $(document).on('touchend','.home_tw li',function(){
+        sessionStorage.Teatwo = 1;
+        sessionStorage.Stuid_t = $(this).attr('Id');
+        sessionStorage.T_text = $(this).attr('text_t')
+        sessionStorage.stutext = $(this).attr('text');
+        sessionStorage.knowledgePoint = $(this).attr('knowledgePoint');
+        sessionStorage.description = $(this).attr('description');
+        location.href = 'replydetail_t.html';
     })
-
-
 });
