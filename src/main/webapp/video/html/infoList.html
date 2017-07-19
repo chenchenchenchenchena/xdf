@@ -27,10 +27,10 @@
 			<table class="p176-table p176-table02 p176-table04 fz14" id="ckList">
 				<thead>
 				<tr id="ckListHead">
-					<th style="width:50%;text-align: center">文件名</th>
-					<th style="width:25%;text-align: center">播放按钮</th>
+                    <th style="width:50%;text-align: center">文件名</th>
+                    <th style="width:25%;text-align: center">播放按钮</th>
                     <th style="width:25%;text-align: center">停止按钮</th>
-				</tr>
+                </tr>
 				</thead>
 				<tbody id="ckListTbody">
 				</tbody>
@@ -73,8 +73,6 @@
                     str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+courseName+"_"+subject+"_"+lessonNo+"讲<span style=display:none>"+id+"</span></td>";
                     str += "<td id='playBtn'><button>播放</button></td>";
                     str += "<td id='pauseBtn'><button>停止</button></td>";
-
-
                     str += "</tr>";
                 }
                 $("#ckListTbody").html(str);
