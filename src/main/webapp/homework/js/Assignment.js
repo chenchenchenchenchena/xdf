@@ -55,7 +55,7 @@ $(function () {
         $('.big_back').show();
     });
 
-    $(document).on('touchend', '.class_name li', function () {
+    $(document).on('tap', '.class_name li', function () {
         var html_ = $('.class_name i').html();
         if ($(this).find('img').attr('src') == 'images/C05_06.png') {
             $(this).find('img').attr('src', 'images/C0503.png');
@@ -333,6 +333,7 @@ $(function () {
     $('.erro input:first-of-type').on('touchend', function () {
         $('.big_back').hide();
         $('.erro').hide();
+        $('.Submit_s').css('background','#00ba97')
     });
 
     $('.erro input:last-of-type').on('touchend', function () {
