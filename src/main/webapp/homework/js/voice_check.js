@@ -9,7 +9,6 @@ $(function () {
      */
     $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
-        alert('oooo' + $(this).find('audio')[0]);
         voiceCheck($(this).find('audio')[0]);
     });
 
@@ -35,19 +34,14 @@ $(function () {
      */
     function voiceCheck(voiceId) {
 
-        alert(1);
         var newID = $(voiceId).attr('id');
-        alert(2);
         if (newID != oldId) {
-            alert(3);
             if (audioCur != null) {
                 stop();
                 audioCur = null;
             }
-            alert(4);
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
-            alert(5);
             play();
         } else {
             oldId = undefined;
@@ -69,9 +63,6 @@ $(function () {
      *开始播放方法
      */
     function play() {
-        alert(6);
-        alert(audioCur.find('source').attr("src"));
-        playVoice(audioCur.find('source').attr("src"));
         var second = audioCur.duration;//获取音频秒数
         audioCur.currentTime = 0;
         audioCur.play();
