@@ -160,10 +160,8 @@ $(function(){
 				});
 				$.each(datas,function(i,items){
 					var lessNos = items.lessNos;
-					var hwLessNosHtml='',readStatus='';
-					if (items.replyStatus==1&&items.readStatus==0){
-						readStatus = "redCircle";
-					}
+					var hwLessNosHtml='',readStatus='',replay=0;
+
 					$.each(lessNos,function(i,item){
 						var replyStatus = "",statusCss="";
 						switch (item.replyStatus){
@@ -174,10 +172,14 @@ $(function(){
 							case 1:
 								replyStatus = '已批';
 								statusCss = 'blue';
+								replay=1;
 								break;
 						}
 						hwLessNosHtml +='<li data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 					});
+					if (replay==1&&items.readStatus==0){
+						readStatus = "redCircle";
+					}
 					console.log(hwLessNosHtml);
 					var className = items.className;
 					if (items.className.length>18){
