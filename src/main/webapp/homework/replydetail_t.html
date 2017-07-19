@@ -9,6 +9,7 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/hwcommon.css"  />
 	<link rel="stylesheet" href="css/dohomework_s.css"  />
 	<link rel="stylesheet" href="css/homeworklist_s.css"  />
 	<script src="../common/js/jquery.js"></script>
@@ -18,6 +19,7 @@
 	<script src="../common/js/layer-v2.1/layer/layer.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="js/replydetail_t.js"></script>
+	<script src="js/voice_check.js"></script>
 </head>
 <body>
 <div class="doHomework">
@@ -33,10 +35,8 @@
 			<p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
 		</div>
 		<div>
-			<div class="big_ss">
-
-			</div>
-
+			<!--<div class="big_ss"></div>-->
+			<ul id="audio_1" style="display:none;"></ul>
 			<div class="imgBox">
 
 			</div>
@@ -46,10 +46,9 @@
 		<div class="infoTitle">作业答案 <span>优秀</span></div>
 		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div class="big_ss">
-
-			</div>
-
+			<!--<div class="big_ss">-->
+			<!--</div>-->
+			<ul id="audio_2" style="display:none;"></ul>
 			<div class="imgBox">
 
 			</div>
@@ -59,10 +58,10 @@
 		<div class="infoTitle">老师批复 </div>
 		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div class="big_ss">
+			<!--<div class="big_ss">-->
 
-			</div>
-
+			<!--</div>-->
+			<ul id="audio_3" style="display:none;"></ul>
 			<div class="imgBox">
 
 			</div>
@@ -85,9 +84,10 @@
 				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
 			</div>
 		</div>
-		<div class="big_s">
+		<!--<div class="big_s">-->
 
-		</div>
+		<!--</div>-->
+		<ul id="record_audio_box" class="big_s" style="display: none;"></ul>
 		<div class="notsubmit" style="display: block;">
 			<div class="imgBox" style="display: none">
 			</div>
