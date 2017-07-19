@@ -450,7 +450,7 @@ html body .tealist_s .more_so{
 	font-size:32px;
 	color:#333;
 }
-.succ input{
+.succ input,.music_succ input{
 	display: block;
 	outline:none;
 	border:none;

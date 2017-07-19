@@ -479,16 +479,15 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    alert("语音上传成功");
-                    // layer.open({
-                    //     type: 1,
-                    //     area: ['312px', '194px'],
-                    //     shade: 0,
-                    //     title: '',
-                    //     skin: '',
-                    //     time: 3000,
-                    //     content: $(".music_succ")
-                    // });
+                    layer.open({
+                        type: 1,
+                        area: ['548px', '345px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -504,7 +503,6 @@ $(function () {
     }
 
     function PlaySound(soundobj) {
-        alert(5);
         var thissound = document.getElementById(soundobj);
 
         thissound.play();
