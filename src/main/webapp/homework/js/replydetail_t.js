@@ -1,5 +1,5 @@
 $(function () {
-
+    var layer1, layer2, loading;
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid

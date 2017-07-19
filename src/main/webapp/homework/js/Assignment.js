@@ -14,6 +14,7 @@ $(function () {
         'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
 
+    var layer1, layer2, loading;
 
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
