@@ -7,14 +7,44 @@
     <link rel="stylesheet" href="../css/addInfo.css" />
     <script src="../js/jquery.js"></script>
     <script src="../js/layer-v2.1/layer/layer.js"></script>
+    <style>
+        .box{
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -200px;
+            margin-top: -50px;
+            width: 400px;
+            height: 100px;
+            font-size: 30px;
+            color:#fff;
+            text-align: center;
+
+        }
+        .over{
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -200px;
+            margin-top: -50px;
+            width: 400px;
+            height: 100px;
+            font-size: 30px;
+            color:#fff;
+            text-align: center;
+        }
+    </style>
 </head>
 <body style="background: #000">
 <div class="startImg"><img src="../images/01.png"  /></div>
 <div class="video" style="display:none">
     <video src="" autoplay id="video"></video>
 </div>
+<div class="box" style="display:none">直播马上开始，请不要走开...</div>
+<div class="over" style="display:none">直播已结束...</div>
 <script>
     var str = "";
+    var isPlay="0";
     var playerId = 0;
     createNativeBridge(function (bridge) {
         window.nativeBridge = bridge;
@@ -25,7 +55,7 @@
         });
     })
     function getVideoDemandPath() {
-        var data= new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate();
+       /* var data= new Date().getFullYear()+(new Date().getMonth()+1)+ new Date().getDate();*/
         nativeBridge.getVideoDemandPath(str, function (args) {
             myLog(JSON.stringify(args));
             if(args.filepath=="-1"){
@@ -35,87 +65,91 @@
                 $(".video").hide();
                 layer.msg("目录不存在",{icon: 1});
             }else if(args.filepath=="0"){
-                $(".video").hide();
+                /*$(".video").hide();*/
                 layer.msg("视频未同步到本地",{icon: 1});
             }else{
                 $(".video").show();
                 $("video").attr("src",args.filepath);
+                isPlay="1";
             }
 
         });
     }
+    function myLog(log) {
+        console.log(log);
+    }
    setInterval(function () {
-       /*  str = "";*/
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getPlayInformation.do",
             type: 'get',
             dataType: 'json',
             success:function (e) {
                 console.log(e);
                 if(e.result){
-                    /*str="";*/
                     $(".startImg").hide();
                     if(e.dataList){
+                        console.log(JSON.stringify(e.dataList));
                         $(".box").hide();
                         $(".over").hide();
                         str="";
                         var dataList = e.dataList;
-                        for (var i = 0; i < dataList.length; i++) {
-                            var grade = dataList[i]["grade"];
-                            var lessonNo = dataList[i]["lessonNo"];
-                            var subject = dataList[i]["subject"];
-                            var teacherName = dataList[i]["teacherName"];
-                            /*var schoolName = dataList[i]["schoolName"];*/
-                            var studioNo = dataList[i]["studioNo"];
-                            var learningPeriod = dataList[i]["learningPeriod"];
-                            var courseName = dataList[i]["courseName"];
-                            /* var fileUrl = dataList[i]["fileUrl"];*/
+                        var grade = dataList["grade"];
+                        var lessonNo = dataList["lessonNo"];
+                        var subject = dataList["subject"];
+                        var teacherName = dataList["teacherName"];
+                        var studioNo = dataList["studioNo"];
+                        var learningPeriod = dataList["learningPeriod"];
+                        var courseName = dataList["courseName"];
 
-                            str = "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
+                        str = "直播间" + studioNo + "_" + teacherName + "_" + learningPeriod + "_" + grade + "_" + courseName + "_" + subject + "_" + lessonNo + "讲";
 
-                        }
-                        getVideoDemandPath();
                         console.log(str);
+                        if($("#video").attr("src")==""){
+                            getVideoDemandPath();
+                        }
+                        if(e.flag!=isPlay){
+                            getVideoDemandPath();
+                        }
+                       if(e.flag==isPlay&&"D:/download/"+str+".doc"!=$("#video").attr("src")){
+                            getVideoDemandPath();
+                       }
                     }else{
-
                         if($("video").attr("src")==""){
                             $(".video").hide();
                             $("body,html").css({
                                 "background":"#000",
-                                "position":'reltive'
+                                "position":'relative'
                             });
-                            $("<div class=box style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播马上开始，请不要走开...</div>").appendTo("body,html");
+                            $(".box").show();
                         }else{
                             if(e.flag=="2"){
-                                document.getElementById("video").pause();
+                                $(".video").hide();
+                                $("#video").attr("src","");
+                            }else if(e.flag=="3"){
+                                $(".video").hide();
+                                $("#video").attr("src","");
                             }
                         }
-
                     }
-
                 }else{
                     layer.msg(e.message,{icon:1});
                 }
-
             }
-
         })
-           document.getElementById('video').onended = function(){
-               $(".video").hide();
-               /*$("video").attr("src","");*/
-               $(".box").hide();
-               $("<div class=over style='position: absolute;left: 50%;top:50%;margin-left: -200px;margin-top: -50px;width: 400px;height: 100px;font-size: 30px;color:#fff;text-align: center'>直播已结束...</div>").appendTo("body,html");
-           }
+       document.getElementById('video').onended = function(){
+           $(".video").hide();
+           isPlay="0";
+           $(".box").hide();
+           $("body,html").css({
+               "background":"#000",
+               "position":'relative'
+           });
+           $(".over").show();
+       }
+       $(".video").click(function () {
+           $("#video").attr("controls","controls");
+       })
      },10000);
-
-
-
-    function myLog(log) {
-        console.log(log);
-    }
-
-
-
 </script>
 </body>
 </html>

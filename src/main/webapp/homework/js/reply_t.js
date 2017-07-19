@@ -18,26 +18,47 @@ $(function() {
             $('.emptyThree').show()
         } else {
             for (var b = 0; b < data.notCommit.length; b++) {
-                $('.Pending').eq(2).append('<li><span class="yeCircle">' + data.notCommit[b].studentName.substr(1, 2) + '</span><span>' + data.notCommit[b].studentName + '</span></li>')
+                if(data.notCommit[b].studentName.length==2){
+                    var name = data.notCommit[b].studentName;
+                }else{
+                    var name = data.notCommit[b].studentName.substr(1, 2);
+                }
+                $('.Pending').eq(2).append('<li><span class="yeCircle">' + name + '</span><span>' + data.notCommit[b].studentName + '</span></li>')
             }
         }
         if (data.notCorrect.length == 0) {
             $('.emptyOne').show()
         } else {
             for (var c = 0; c < data.notCorrect.length; c++) {
-                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + data.notCorrect[c].description + '"><span class="yeCircle">' + data.notCorrect[c].studentName.substr(1, 2) + '</span><span>' + data.notCorrect[c].studentName + '</span><span>' + data.notCorrect[c].homeworkTime + '</span></li>')
+                var timet = data.notCorrect[c].updateTime;
+                var montht = timet.substring(5,timet.indexOf(' ')).replace('-','.');
+                var dayt = timet.split(' ')[1].substring(0,5);
+                if(data.notCommit[c].studentName.length==2){
+                    var name_ = data.notCorrect[c].studentName
+                }else{
+                    var name_ = data.notCorrect[c].studentName.substr(1, 2)
+                }
+                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + data.notCorrect[c].description + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
             }
         }
         if (data.yesCorrect.length == 0) {
             $('.emptyTwo').show()
         } else {
             for (var d = 0; d < data.yesCorrect.length; d++) {
+                var time = data.yesCorrect[d].replyTime;
+                var month = time.substring(5,time.indexOf(' ')).replace('-','.');
+                var day = time.split(' ')[1].substring(0,5);
+                if(data.yesCorrect[d].studentName.length==2){
+                    var name_t = data.yesCorrect[d].studentName
+                }else{
+                    var name_t = data.yesCorrect[d].studentName.substr(1, 2)
+                }
                 if (data.yesCorrect[d].tag == '1') {
-                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span><i>优秀</i></li>')
+                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>')
                     $('.frend').show();
                     $('.noreply').css('padding-bottom','120px')
                 } else {
-                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + data.yesCorrect[d].studentName.substr(1, 2) + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + data.yesCorrect[d].homeworkTime + '</span></li>')
+                    $('.Pending').eq(1).append('<li><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
                 }
 
             }

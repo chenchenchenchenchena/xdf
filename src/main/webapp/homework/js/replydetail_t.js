@@ -13,12 +13,15 @@ $(function(){
                 $('.hwInfo').show();
                 $('.hwRankTitle').css('margin-bottom','0');
                 $('.hwRankTitle').css('border-bottom','1px solid #ccc');
+                $('.hwRankTitle').css('background-image','url(../homework/images/jiao11.png)');
 
             }else{
                 $('.hwInfo').hide();
                 $('.hwRankTitle').css('margin-bottom','18px');
                 $('.hwRankTitle').css('border-bottom','none');
+                $('.hwRankTitle').css('background-image','url(../homework/images/jiao22222.png)');
             }
+
         })
 
 
@@ -61,14 +64,14 @@ $(function(){
 
             for(var a  = 0;a<stu.length;a++){
                 if(stu[a].fileType=='mp3'){
-                    $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="'+stu[a].url+'" id="bgMusic"></audio ></div>')
+                    $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 }else{
                     $('.imgBox').eq(1).append('<div><img src="'+stu[a].url+'" alt="" /></div>')
                 }
             }
             for(var b  = 0;b<tea.length;b++){
                 if(tea[b].fileType=='mp3'){
-                    $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="'+tea[b].url+'" id="bgMusic"></audio ></div>')
+                    $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 }else{
                     $('.imgBox').eq(0).append('<div><img src="'+tea[b].url+'" alt="" /></div>')
 
