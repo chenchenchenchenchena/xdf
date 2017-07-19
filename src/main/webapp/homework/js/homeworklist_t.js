@@ -31,7 +31,7 @@ $(function(){
                     $(this).siblings().css('margin-left','0px');
                     $(this).siblings().find('.remove_s').css('right','-270px');
                     $(this).css('margin-left','-181px');
-                    $(this).find('.remove_s').css('right','-30px');
+                    $(this).find('.remove_s').css('right','-0px');
                     $(this).parent().css('overflow','inherit');
                     return false;
                 }
