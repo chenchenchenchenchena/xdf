@@ -26,12 +26,12 @@ $(function () {
         if (sessionStorage.Classname_x) {
             $('.class_s i').html('已选择1个班' + sessionStorage.Classname_x + ';');
             $('.time_S i').html(sessionStorage.ClassTime_x);
-            $('.class_name i').html('1')
+            $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
             $('.class_name li').each(function () {
-                if ($(this).html() == sessionStorage.Classname_x) {
-                    $(this).find('img').attr('sec', 'images/C0503.png')
+                if ($(this).attr('classcode') == sessionStorage.classCode_in) {
+                    $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
@@ -356,10 +356,12 @@ $(function () {
             setTimeout(function () {
                 $('.big_back').hide();
             }, 300);
-            $('.class_name i').html('0');
-            $('.class_name img').attr('src', 'images/C05_06.png');
-            if ($('.class_name i').html() == '0') {
-                $('.class_s i').html('')
+            if($('.class_s i').html()==''){
+                $('.class_name i').html('0');
+                $('.class_name img').attr('src', 'images/C05_06.png');
+                if ($('.class_name i').html() == '0') {
+                    $('.class_s i').html('')
+                }
             }
         }
         if ($('.succ').css('display') == 'block') {
