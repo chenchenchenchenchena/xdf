@@ -62,8 +62,6 @@
             dataType: 'json',
             success: function (e) {
                 console.log(e)
-				/*$(".listData").show();
-				$(".startImg").hide();*/
                 var dataList = e.dataList;
                 var str = "";
                 for (var i = 0; i < dataList.length; i++) {
@@ -71,11 +69,9 @@
 					var lessonNo = dataList[i]["lessonNo"];
 					var subject = dataList[i]["subject"];
 					var teacherName = dataList[i]["teacherName"];
-					/*var schoolName = dataList[i]["schoolName"];*/
                     var studioNo=dataList[i]["studioNo"];
                     var learningPeriod=dataList[i]["learningPeriod"];
                     var courseName=dataList[i]["courseName"];
-                   /* var fileUrl = dataList[i]["fileUrl"];*/
 
                     if (i % 2 == 1) {
                         str += "<tr class='table-tr-odd'>"
@@ -84,9 +80,6 @@
                     }
 
                     str += "<td id='name'>直播间"+studioNo+"_"+teacherName+"_" + learningPeriod + "_"+grade+"_"+courseName+"_"+subject+"_"+lessonNo+"讲</td>";
-
-
-
                     str += "</tr>";
                 }
                 $("#ckListTbody").html(str);
@@ -96,24 +89,6 @@
     }
     $("#ckListTbody").on("click","#playBtn button",function () {
         $("#playBtn button").attr("disabled",true);
-      /*  var fileName=$(this).parent().prev().html();
-        var fileN=fileName.split("_");*/
-        /*fileN[0]=fileN[0].substring(3,7);
-        fileN[6]=fileN[6].substring(0,1);*/
-        /*console.log(fileName.split("_"));
-        console.log(fileN);*/
-
-        /*var file={
-            "studioNo":fileN[0].substring(3,7),
-            "teacherName":fileN[1],
-            "learningPeriod":fileN[2],
-            "grade":fileN[3],
-            "courseName":fileN[4],
-            "subject":fileN[5],
-            "lessonNo":fileN[6].substring(0,1),
-            "schoolName":$("select").val(),
-            "status":1
-        }*/
         var file={
             "id":$(this).parent().prev().find("span").html()
         }
@@ -137,17 +112,6 @@
     $("#goBack").click(function () {
         location.href="addInfo.html";
     })
-   /* var playerId = 0;
-    createNativeBridge(function (bridge) {
-        window.nativeBridge = bridge;
-        nativeBridge.attachCloseEventObserver(function () {
-            myLog("close event");
-            nativeBridge.closeWindow();
-        });
-    })
 
-    function myLog(log) {
-        console.log(log);
-    }*/
 </script>
 </html>

@@ -48,7 +48,7 @@
             "schoolName":school
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
             type: 'post',
             data:schoolName,
             dataType: 'json',
@@ -94,7 +94,7 @@
         }
         console.log(file);
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/updatePlayStatus.do",
             type: 'post',
             data:JSON.stringify(file),
             dataType: 'json',
@@ -120,7 +120,7 @@
             "id":$(this).parent().prev().prev().find("span").html()
         }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/stopPlayStatus.do",
+            url: "http://dt.xdf.cn/xdfdtmanager/videofile/stopPlayStatus.do",
             type: 'post',
             data:JSON.stringify(file),
             dataType: 'json',
@@ -143,7 +143,7 @@
             myLog("close event");
             nativeBridge.closeWindow();
             $.ajax({
-                url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/updateInitialization.do",
+                url: "http://dt.xdf.cn/xdfdtmanager/videofile/updateInitialization.do",
                 type: 'get',
                 dataType: 'json',
                 success:function (e) {
