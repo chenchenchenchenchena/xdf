@@ -2,7 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
-    var layer1,loading;
+    var layer1, loading;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -38,7 +38,11 @@ $(function () {
             var pathUrls = ['1', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址 TODO
             console.log(pathUrls);
-            getFileInfo(pathUrls);
+            if(paths.fileType.indexOf("mp3") != -1){
+                getAudioInfo(pathUrls);
+            }else {
+                getFileInfo(pathUrls);
+            }
         });
         /*******作业答案*******/
         $('.hmAnswer .anDes').html(datas.description);
@@ -52,8 +56,12 @@ $(function () {
         $.each(datas.stuHomeworkFiles, function (i, paths) {
             var pathUrls = ['2', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
-            console.log(i+"---"+pathUrls);
-            getFileInfo(pathUrls);
+            console.log(i + "---" + pathUrls);
+            if(paths.fileType.indexOf("mp3") != -1){
+                getAudioInfo(pathUrls);
+            }else {
+                getFileInfo(pathUrls);
+            }
         });
         /*******老师批注*******/
         var pizhuHtml = "";
@@ -69,7 +77,11 @@ $(function () {
             var pathUrls = ['3', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
             console.log(pathUrls);
-            getFileInfo(pathUrls);
+            if(paths.fileType.indexOf("mp3") != -1){
+                getAudioInfo(pathUrls);
+            }else {
+                getFileInfo(pathUrls);
+            }
         });
         layer.close(loading);
     }
@@ -77,6 +89,7 @@ $(function () {
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
     var voiceCount = 0;
+
     /**
      * 获取文件信息
      */
@@ -98,12 +111,32 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    if (fileType.indexOf("mp3") != -1) {
-                        voiceCount++;
-                        showAudio(e.fileUrl, "audio_" + flag, "audio" + flag+""+voiceCount);
-                    } else {
-                        showImage(e.fileUrl, "imagBox_" + flag);
-                    }
+                    showImage(e.fileUrl, "imagBox_" + flag);
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取语音信息
+     */
+    function getAudioInfo(fileArray) {
+        var flag = fileArray[0];
+        var diskFileUrl = fileArray[1];
+        var optionFile = {"fullPath": diskFileUrl};
+        $.ajax({
+            url: url_o + "upload/getMp3Url.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                if (e.status == "failed") {
+                    console.log(e.message);
+                } else {
+                    //将文件显示到布局中
+                    voiceCount++;
+                    showAudio(e.data, "audio_" + flag, "audio" + flag + "" + voiceCount);
+
                 }
             }
         });

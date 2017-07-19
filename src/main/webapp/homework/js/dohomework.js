@@ -45,7 +45,11 @@ $(function () {
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
                     console.log(paths.diskFilePath);
-                    getFileInfo(paths.diskFilePath, paths.fileType);
+                    if(paths.fileType.indexOf("mp3") != -1){
+                        getAudioInfo(pathUrls);
+                    }else {
+                        getFileInfo(pathUrls);
+                    }
 
                 });
 
@@ -145,7 +149,7 @@ $(function () {
             success: function (res) {
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
-                uploadVoice(serverId);
+                uploadVoice(serverId,upId);
             }
         });
     }
@@ -153,7 +157,7 @@ $(function () {
     /**
      *将serverId上传到自己服务器
      */
-    function uploadVoice(serverId) {
+    function uploadVoice(serverId,localId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -389,10 +393,9 @@ $(function () {
     var audioCount = 0;
 
     /**
-     * 获取文件信息
+     * 获取图片信息
      */
-    function getFileInfo(diskFileUrl, fileType) {
-        // diskFileUrl = "homework/b479a873299649a48d9741582a735450.jpg";
+    function getFileInfo(diskFileUrl) {
         var netConfig = "IN";//DEFAULT/IN
         var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
         $.ajax({
@@ -405,12 +408,30 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    if (fileType.indexOf("mp3") != -1) {
-                        showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
-                        audioCount++;
-                    } else {
-                        showImage(e.fileUrl);
-                    }
+                    showImage(e.fileUrl);
+
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取语音信息
+     */
+    function getAudioInfo(diskFileUrl) {
+        var optionFile = {"fullPath": diskFileUrl};
+        $.ajax({
+            url: url_o + "upload/getMp3Url.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                if (e.status == "failed") {
+                    console.log(e.message);
+                } else {
+                    //将文件显示到布局中
+                    showAudio(e.data, $('#audio_box'), audioCount, 2);
+                    audioCount++;
 
                 }
             }

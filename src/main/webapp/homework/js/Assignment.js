@@ -472,7 +472,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    // $('.teBox').val(e.data.fileUrl);
+                    $('.teBox').val(e.data.fileUrl);
                     arr_s.push({
                         'fileName':e.data.fileName,
                         'fileType':e.data.fileType,
@@ -481,8 +481,8 @@ $(function () {
                     });
                     layer.open({
                         type: 1,
-                        area: ['548px', '345px'],
-                        shade: [0.2, '#000'],
+                        area: ['312px', '194px'],
+                        shade: 0,
                         title: '',
                         skin: '',
                         time: 3000,
@@ -503,6 +503,7 @@ $(function () {
     }
 
     function PlaySound(soundobj) {
+        alert(5);
         var thissound = document.getElementById(soundobj);
 
         thissound.play();
@@ -562,6 +563,8 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
+                    // serverIds.push(res.serverId);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
