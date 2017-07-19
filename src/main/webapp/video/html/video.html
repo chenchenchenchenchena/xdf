@@ -110,8 +110,20 @@
                         if(e.flag!=isPlay){
                             getVideoDemandPath();
                         }
-                       if(e.flag==isPlay&&"D:/download/"+str+".doc"!=$("#video").attr("src")){
-                            getVideoDemandPath();
+
+                       if(e.flag==isPlay){
+                           var src1=$("#video").attr("src");
+                           var src2=src1.split("/");
+                           console.log(src2);
+                           var src3=src2[2];
+                           console.log(src3);
+                           var src4=src3.split(".");
+                           console.log(src4);
+                           var src5 = src4[0];
+                           console.log(src5);
+                           if(str!=src5){
+                               getVideoDemandPath();
+                           }
                        }
                     }else{
                         if($("video").attr("src")==""){
@@ -120,7 +132,9 @@
                                 "background":"#000",
                                 "position":'relative'
                             });
+                            $(".over").hide();
                             $(".box").show();
+
                         }else{
                             if(e.flag=="2"){
                                 $(".video").hide();
@@ -128,6 +142,8 @@
                             }else if(e.flag=="3"){
                                 $(".video").hide();
                                 $("#video").attr("src","");
+                                $(".over").hide();
+                                $(".box").hide();
                             }
                         }
                     }
@@ -145,6 +161,7 @@
                "position":'relative'
            });
            $(".over").show();
+
        }
        $(".video").click(function () {
            $("#video").attr("controls","controls");
