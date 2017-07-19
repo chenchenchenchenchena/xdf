@@ -70,8 +70,8 @@ $(function () {
      */
     function play() {
         alert(6);
-        alert(audioCur.attr("src"));
-        playVoice(audioCur.attr("src"));
+        alert(audioCur.find('source').attr("src"));
+        playVoice(audioCur.find('source').attr("src"));
         var second = audioCur.duration;//获取音频秒数
         audioCur.currentTime = 0;
         audioCur.play();
