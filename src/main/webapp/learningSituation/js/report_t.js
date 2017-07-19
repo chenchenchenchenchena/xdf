@@ -477,7 +477,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }
                                 }
                                 if(Tbuer==true){
-
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
@@ -488,8 +487,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }else{
                                         mfInedx_c.push('满分：'+manfjsont[r])
                                     }
-                                    manfjson[r].r = m+1;
-                                    timejson[r].r = m+1;
                                 }else{
                                     timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
