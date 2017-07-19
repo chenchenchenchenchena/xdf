@@ -56,3 +56,35 @@
     top: 0;
     border-radius: 0 10px 0 0;
 }
+/*提示框-删除*/
+.submitBox button,.submitFail button,.tips-box button{
+    width: 175px;
+    height: 72px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    background: #00ba97;
+    outline: none;
+    border: none;
+    margin: 40px 0 0 185px;
+    border-radius: 10px;
+}
+.submitFail button,.tips-box button{
+    margin: 40px 0 0 60px;
+}
+.submitFail>button:nth-child(3),
+.tips-box>button:nth-child(3){
+    background: #e4eaf1;
+    color: #aeb1b7;
+}
+.submitFail img,.submitBox img,
+.tips-box img,.submitBox img{
+    margin: 38px 0 0 224px;
+}
+.submitBox p,.submitFail p,.tips-box p{
+    font-size: 30px;
+    color: #333333;
+    text-align: center;
+    margin-top: 30px;
+}
