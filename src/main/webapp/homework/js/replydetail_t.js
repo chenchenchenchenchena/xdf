@@ -8,6 +8,7 @@ $(function(){
         $('.anDes').eq(0).html(sessionStorage.stutext);
         $('.kon p:last-of-type').html(sessionStorage.knowledgePoint);
         $('.hwCon').eq(0).html(sessionStorage.description);
+
         $('.hwTeacherRankTitle').on('touchend',function(){
             if($('.hwInfo').css('display')=='none'){
                 $('.hwInfo').show();
@@ -39,18 +40,19 @@ $(function(){
         $('.infoTitle span').on('touchend',function(){
             if($(this).css('color')=='rgb(255, 106, 106)'){
                 $(this).css({
-                    'color':'#ccc',
-                    'border':'1px solid #ccc'
+                    'color':'#fff',
+                    'background':'#ff6a6a'
                 });
                 $('.excellent').show();
-                $('.excellent').append('<img src="images/excellent.gif" alt="">')
+                $('.excellent').append('<img src="images/excellent.gif" alt="">');
                 setTimeout(function(){
                     $('.excellent').html('  ')
                 },1000)
             }else{
                 $(this).css({
                     'color':'#ff6a6a',
-                    'border':'1px solid #ff6a6a'
+                    'border':'1px solid #ff6a6a',
+                    'background':'none'
                 });
             }
         });
@@ -136,6 +138,7 @@ $(function(){
             }
             if($('.teBox').val()==''){
                 layer.msg('批复内容不能为空');
+                return false;
             }
             need.replyDesc = $('.teBox').html();
             if($('.infoTitle span').css('color')=='rgb(255, 106, 106)'){

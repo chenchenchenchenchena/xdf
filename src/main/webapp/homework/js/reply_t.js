@@ -33,10 +33,10 @@ $(function() {
                 var timet = data.notCorrect[c].updateTime;
                 var montht = timet.substring(5,timet.indexOf(' ')).replace('-','.');
                 var dayt = timet.split(' ')[1].substring(0,5);
-                if(data.notCommit[c].studentName.length==2){
+                if(data.notCorrect[c].studentName.length==2){
                     var name_ = data.notCorrect[c].studentName
                 }else{
-                    var name_ = data.notCorrect[c].studentName.substr(1, 2)
+                    var name_ = data.notCorrect[c].studentName.substr(1, 2);
                 }
                 $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + data.notCorrect[c].description + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
             }
@@ -116,7 +116,7 @@ $(function() {
     $('.frend input').on('touchend',function(){
         location.href = 'sharedranking_t.html?tid='+sessionStorage.Tid
     });
-    
+
     $(document).on('touchend','.home_tw li',function(){
         sessionStorage.Teatwo = 1;
         sessionStorage.Stuid_t = $(this).attr('Id');
