@@ -46,9 +46,9 @@ $(function () {
                     console.log(pathUrls);
                     console.log(paths.diskFilePath);
                     if(paths.fileType.indexOf("mp3") != -1){
-                        getAudioInfo(pathUrls);
+                        getAudioInfo(paths.diskFilePath);
                     }else {
-                        getFileInfo(pathUrls);
+                        getFileInfo(paths.diskFilePath);
                     }
 
                 });
