@@ -57,10 +57,9 @@ $(function () {
     });
 
     if (sessionStorage.Teatwo) {
-        // sessionStorage.removeItem('Teatwo');
+        sessionStorage.removeItem('Teatwo');
         $('.anDes').eq(1).html(sessionStorage.T_text);
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.Stuid_t}, function (e) {
-            console.log(e)
             var tea = e.data.RevampFile;
             var stu = e.data.StudentHomeworkFile;
             var tea_t = e.data.TeacherHomeworkFile;
@@ -91,6 +90,7 @@ $(function () {
             }
         });
     } else {
+        $('.hmAnswer').eq(1).hide();
         //获取文件信息
         ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             console.log(e);

@@ -35,6 +35,7 @@ $(function () {
                 }
             });
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
+                sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
@@ -264,7 +265,7 @@ $(function () {
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
-            errohome.description = $('.home_text textarea').val();
+            errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
             if ($('.music_s').eq(0).attr('filename')) {
                 arr_s.push({
@@ -305,7 +306,7 @@ $(function () {
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
-            homeworksubm.description = $('.home_text textarea').val();
+            homeworksubm.description = encodeURI($('.home_text textarea').val());
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.Submit_s').css('background', '#ccc');
