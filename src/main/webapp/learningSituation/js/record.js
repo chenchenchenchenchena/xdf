@@ -59,9 +59,9 @@ $(function () {
             $(".class").html(spanObj.html());
             $(".classTime").html("");
             $(".scoreTitle input").val("");
-            //课次及时间
+            //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
-                if ($(".classrome").html() == e.Data[i].className) {
+                if ($(".class").html() == e.Data[i].classCode) {
                 	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
                     	for (var j = 0; j < e.Data[i].studentData.length; j++) {
                     		var stuInfo = {name: e.Data[i].studentData[j].StudentName, scode: e.Data[i].studentData[j].StudentCode};
