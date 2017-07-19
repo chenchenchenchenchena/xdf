@@ -172,12 +172,14 @@ $(function(){
 							case 1:
 								replyStatus = '已批';
 								statusCss = 'blue';
-								replay=1;
+								// replay=1;
 								break;
 						}
 						hwLessNosHtml +='<li data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 					});
-					if (replay==1&&items.readStatus==0){
+					//红点显示判断
+					// if (replay==1&&items.readStatus==0){
+					if (items.readStatus==0){
 						readStatus = "redCircle";
 					}
 					console.log(hwLessNosHtml);
