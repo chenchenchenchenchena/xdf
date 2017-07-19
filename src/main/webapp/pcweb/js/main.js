@@ -1,5 +1,6 @@
 var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
+var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
 //访问doLogin.do
 function toLogin() {
 
@@ -10,7 +11,7 @@ function toLogin() {
         'e2State': state_s,
         'state': state_s
     };
-    alert("code:" + code_s + "state_s:" + state_s);
+    // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
         url: baseUrl+"/e2Login/doLogin.do",
         // url: baseUrl+"/e2Login/pcLogin.do",
@@ -20,7 +21,10 @@ function toLogin() {
         success: function (e) {
             console.log(e);
             if(e.result == false){
+
                 alert(e.message);
+                // clearCookie();
+                toLogout();
             }else {
                 showFunctionList(e);
             }
@@ -45,9 +49,10 @@ function showFunctionList(json) {
 
         var functionList = json.functionList;
 
-        if(functionList == undefined){
-            alert("用户名不存在");
-            window.top.location.href = getRootPath();
+        if(functionList == undefined || functionList.length == 0){
+            alert("当前用户没用功能权限，请切换用户");
+            // clearCookie();
+            toLogout();
         }else{
             //获取functionIds
             setFunctionList(json.functionList);

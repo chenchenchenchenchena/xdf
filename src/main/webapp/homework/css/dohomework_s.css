@@ -4,6 +4,7 @@ body,html{
 	background: #F1F1F1;
 	/*overflow: hidden;*/
 }
+i{font-style: normal;}
 .doHomework{
 	background: #f1f1f1;
 	position: relative;
@@ -44,7 +45,7 @@ body,html{
 .knowPoint span{
 	display: inline-block;
 	margin-left: 27px;
-	width: 250px;
+	padding: 0 15px;
 	height: 50px;
 	background: #ccf1ea;
 	border-radius: 20px;
@@ -180,6 +181,9 @@ body,html{
 	border-radius: 10px;
 	margin-top: 30px;
 }
+.btn-grey{
+	background: #b2b2b2;
+}
 .stuImg{
 	display: inline-block;
 	width:42px;
@@ -188,6 +192,16 @@ body,html{
 	position: absolute;
 	left: 176px;
 	top:0;
+}
+.stuVoice{
+	display: inline-block;
+	width: 42px;
+	height: 42px;
+	background: url(../images/121.png) no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0 10px 0 0;
 }
 .layer-tips{
 	/*width: 310px;
@@ -356,9 +370,14 @@ body,html{
 	border-radius: 10px!important;
 }
 .hw_status_s{
+	display: inline-block;
+	width: 96px;
+	height: 96px;
 	position: absolute;
 	right: 30px;
-	top:16px;
+	top: 16px;
+	background: url("../images/excellent_icon.png") center center no-repeat;
+
 }
 .none{
 	display: none;
@@ -442,4 +461,7 @@ body,html{
 	100% {
 		background-image: url("../images/voice_playing_f3.png");
 	}
+}
+.layui-layer-setwin{
+	display: none!important;
 }

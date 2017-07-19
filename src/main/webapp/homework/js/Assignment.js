@@ -1,11 +1,12 @@
 $(function () {
     var trardata = {
         'teacherCode': 'TC23',
-        'schoolId': '73'
+        'schoolId': '73',
+        'email':'hanqifan@xdf.cn'
     };
     var homeworksubm = {
-        'teacherEmail': 'caoxuefeng@xdf.cn',
-        'teacherName': '曹雪峰',
+        'teacherEmail': 'hanqifan@xdf.cn',
+        'teacherName': '韩启凡',
         'schoolId': '73',
         'appid':'wxab29a3e2000b8d2a',
         'secret':'7739991fcce774c2281147eae3986ad9',
@@ -17,7 +18,7 @@ $(function () {
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
         console.log(e);
-        var className = e.data.Data;
+        var className = e.data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
         }
@@ -28,12 +29,21 @@ $(function () {
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
             $('.class_name li').each(function(){
-                console.log($(this).text());
-                console.log(sessionStorage.Classname_x+'1111');
                 if($(this).html()==sessionStorage.Classname_x){
                     $(this).find('img').attr('sec','images/C0503.png')
                 }
-            })
+            });
+            ajaxRequest('post',homework_s.t_seac,{'Tcid': sessionStorage.id_x},function(e){
+                var tea = e.data;
+                for(var b  = 0;b<tea.length;b++){
+                    if(tea[b].fileType=='mp3'){
+                        $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic'+b+')"  fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic'+b+'"  controls="controls" preload="auto"></audio ></div>')
+                    }else{
+                        $('.imgBox').show();
+                        $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
+                    }
+                }
+            });
         }
     });
 
@@ -102,7 +112,14 @@ $(function () {
         }
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
-
+    $('.home_text textarea').on('blur', function () {
+        if ($(this).val().length > 200) {
+            $('.home_text span').css('color', 'red');
+        } else {
+            $('.home_text span').css('color', '#808080');
+        }
+        $('.home_text span').html('' + $(this).val().length + '/200')
+    });
     //知识点验证
     $('.Knowledge input').on('keyup', function () {
         var html_ = $(this).val();
@@ -211,15 +228,61 @@ $(function () {
             });
             return false;
         }
+        if($('.Knowledge input').val().indexOf(',')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(','));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf(';')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(';'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf('，')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('，'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else if($('.Knowledge input').val().indexOf('；')!=-1){
+            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('；'));
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }else{
+            var html_te = $('.Knowledge input').val();
+            if(html_te.length>10){
+                layer.msg('单条知识点对多输入10个字');
+                return false;
+            }
+        }
         if(sessionStorage.Classname_x){
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
             errohome.description = $('.home_text textarea').val();
             errohome.fileInfo = arr_s;
+            if($('.music_s').eq(0).attr('filename')){
+                arr_s.push({
+                    'fileName':$('.music_s').eq(0).attr('filename'),
+                    'fileType':$('.music_s').eq(0).attr('filetype'),
+                    'fileSize':$('.music_s').eq(0).attr('filesize'),
+                    'diskFilePath':$('.music_s').eq(0).attr('diskfilepath')
+                });
+            }
+            if($('.imgBox img').eq(0).attr('filename')){
+                arr_s.push({
+                    'fileName':$('.imgBox img').eq(0).attr('filename'),
+                    'fileType':$('.imgBox img').eq(0).attr('filetype'),
+                    'fileSize':$('.imgBox img').eq(0).attr('filesize'),
+                    'diskFilePath':$('.imgBox img').eq(0).attr('diskfilepath')
+                });
+            }
             ajax_S(homework_s.t_erro,errohome, function (e) {
                 if (e.result == true) {
-                    $(this).css('background','#ccc');
                     $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background','#00ba97');
@@ -229,6 +292,7 @@ $(function () {
                     sessionStorage.removeItem('description_x');
                     sessionStorage.removeItem('id_x');
                 } else {
+                    $('.erro p').html(e.message);
                     $('.big_back').show();
                     $('.erro').show();
                 }
@@ -243,12 +307,13 @@ $(function () {
             homeworksubm.description = $('.home_text textarea').val();
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
-                $(this).css('background','#ccc');
+                $('.Submit_s').css('background','#ccc');
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background','#00ba97');
                 } else {
+                    $('.erro p').html(e.message);
                     $('.big_back').show();
                     $('.erro').show();
                 }
@@ -262,6 +327,7 @@ $(function () {
     $('.succ input').on('touchend', function () {
         $('.big_back').hide();
         $('.succ').hide();
+        location.href = 'homeworklist_t.html';
     });
 
     $('.erro input:first-of-type').on('touchend', function () {
@@ -413,7 +479,15 @@ $(function () {
                         'fileSize':e.data.fileSize,
                         'diskFilePath':e.data.diskFilePath
                     });
-                    alert(arr_s);
+                    layer.open({
+                        type: 1,
+                        area: ['312px', '194px'],
+                        shade: 0,
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
                     //显示语音布局
                     showAudio(e.data.fileUrl, e.data.fileSize);
                 }
@@ -428,7 +502,13 @@ $(function () {
         $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
     }
 
+    function PlaySound(soundobj) {
+        alert(5);
+        var thissound = document.getElementById(soundobj);
 
+        thissound.play();
+
+    }
     $(document).on('touchend','.music_s',function () {
         $(this).addClass('playing_s');
         playVoice(song_s);
@@ -483,7 +563,9 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    alert('已上传：' + i + '/' + length);
+                    if(length==i){
+                        alert('已上传：' + i + '/' + length);
+                    }
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
@@ -548,5 +630,5 @@ $(function () {
         }
     });
 
-
+    $('body').css('overflow-y','auto')
 });

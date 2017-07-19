@@ -6,14 +6,14 @@ $(function () {
      * 作业提交需要的参数
      */
     var fileParams = [];
+    var voiceFileParams = [];
     var homeworkSinfoId = GetRequest('id');
     var fileName;
     var fileType;
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-
-    var layer1, layer2;
+    var layer1, layer2,loading;
     // //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -21,6 +21,7 @@ $(function () {
     var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     gethwInfos();
     function gethwInfos() {
+        loading = layer.load();
         var knowledgePoint, kpHtml;
         $.each(hwInfos, function (i, item) {
             if (item.id == GetRequest('id')) {
@@ -44,7 +45,7 @@ $(function () {
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
                     console.log(paths.diskFilePath);
-                    getFileInfo(paths.diskFilePath);
+                    getFileInfo(paths.diskFilePath, paths.fileType);
 
                 });
 
@@ -52,32 +53,40 @@ $(function () {
             }
 
         });
-
-
+        layer.close(loading);
     }
 
     /*------------------录制语音开始------------------------------------*/
-    $('#record').click(function () {
-        $('.song_s').animate({'bottom': '0px'});
-        $('.song_s,.mask').show();
-    });
-    /* 隐藏语音弹窗 */
-    $('.mask').click(function () {
-        $('.song_s').animate({'bottom': '-300px'});
-        $('.song_s,.mask').hide();
-    });
+
+
     var timeInedex = 0;
     var timeds;
     var localId;
     var START;
     var END;
     var recordTimer;
+    var recordCount = 0;
+
+    $('#record').click(function () {
+        if (recordCount >= 3) {
+            alert("最多录制三条语音");
+        } else {
+            $('.song_s').animate({'bottom': '0px'});
+            $('.song_s,.mask').show();
+        }
+
+    });
+
+    /* 隐藏语音弹窗 */
+    $('.mask').click(function () {
+        $('.song_s').animate({'bottom': '-300px'});
+        $('.song_s,.mask').hide();
+    });
+
     /**
      * 按下开始录音
      */
     $('#record_btn').on('touchstart', function (event) {
-
-        event.preventDefault();
         START = new Date().getTime();
         $(this).attr('src', 'images/speak.gif');
         event.preventDefault();
@@ -108,6 +117,7 @@ $(function () {
             START = 0;
             //小于300ms，不录音
             clearTimeout(recordTimer);
+            alert("录制时间太短");
         } else {
             wx.stopRecord({
                 success: function (res) {
@@ -162,14 +172,11 @@ $(function () {
                     alert(e.message);
                 } else {
                     alert("语音提交成功");
-                    //显示语音布局
-
-                    showAudio(e.data.fileUrl, e.data.fileSize, $('#record_audio_box'), "record_audio");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
                     diskFilePath = e.data.diskFilePath;
-                    fileParams[0] = {
+                    var voiceFile = {
                         "homeworkSinfoId": homeworkSinfoId,
                         "fileName": fileName,
                         "fileType": fileType,
@@ -177,6 +184,10 @@ $(function () {
                         "diskFilePath": diskFilePath,
                         "uploadUser": uploadUser
                     };
+                    voiceFileParams.push(voiceFile);
+                    //显示语音布局
+                    showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
+                    recordCount++;
                 }
 
 
@@ -185,27 +196,38 @@ $(function () {
     }
 
     /**
-     * 显示语音布局
+     * 显示录制语音布局
      */
-    function showAudio(url, length, idParent, idChildren) {
+    function showAudio(url, parentId, id, flag) {
 
-        idParent.show();
-        length = "";
-        // url = "http://www.w3school.com.cn/i/song.mp3";
+        parentId.show();
+        var strVoice = "";
+        var idChildren;
+        var length = "";
+        if (flag == 1) {
+            idChildren = "record_audio" + id;
+            //录音布局，可以删除
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
+        } else {
 
-        var strVoice = "<div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span>";
+            idChildren = "audio" + id;
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
+        }
 
-        idParent.html(strVoice);
+
+        parentId.append(strVoice);
+
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
             var len = audioElem.duration;
             len = parseInt(len);
+            var voiceLen = "";
             var hh = parseInt(len / 3600);
             var mm = parseInt((len % 3600) / 60);
             var ss = parseInt((len % 3600) % 60);
-            var voiceLen = "";
             if (hh > 0) {
                 voiceLen = hh + "'" + mm + "'" + ss + "''";
             } else if (mm > 0) {
@@ -213,9 +235,19 @@ $(function () {
             } else {
                 voiceLen = ss + "''";
             }
+            if (ss == 0) {
+
+                voiceLen = "1''";
+            }
+
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
 
+        $('.song_s,.mask').hide();
+        // 语音大于三张，隐藏添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length >= 3) {
+            $('#record').hide();
+        }
     }
 
     /*------------------录制语音结束------------------------------------*/
@@ -225,6 +257,10 @@ $(function () {
      *点击选择图片
      */
     $('#chooseImage').click(function () {
+        //重新选择图片，清除之前数据
+        fileParams = [];
+
+
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -233,7 +269,7 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='"+i+"'></span><img src='" + res.localIds[i] + "'/></li>";
+                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
@@ -268,7 +304,7 @@ $(function () {
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
-                    uploadImage(res.serverId,i);
+                    uploadImage(res.serverId, i);
                     i++;
                     if (i < length) {
                         upload();
@@ -311,11 +347,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        var location = 0;
-                        if (fileParams.length > 0) {
-                            location = fileParams.length + i;
-                        }
-                        fileParams[location] = {
+                        fileParams[i] = {
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -323,6 +355,7 @@ $(function () {
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
                         };
+
                     } else {
                         //上传失败重新上传一次
                         uploadImage(serverId);
@@ -337,14 +370,28 @@ $(function () {
     }
 
     /*----------------图片选择结束--------------------------------------*/
-
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('touchend', '.imgBox img', function () {
+        // alert("预览图片" + $(this).attr('src'));
+        var previewUrl = $(this).attr('src');
+        // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
+        //     previewUrl = $(this).attr('src');
+        // } else {
+        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
+        // }
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
+    var audioCount = 0;
 
     /**
      * 获取文件信息
      */
-    function getFileInfo(diskFileUrl) {
+    function getFileInfo(diskFileUrl, fileType) {
         // diskFileUrl = "homework/b479a873299649a48d9741582a735450.jpg";
         var netConfig = "IN";//DEFAULT/IN
         var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
@@ -355,23 +402,23 @@ $(function () {
             data: optionFile,
             success: function (e) {
                 if (e.success == false) {
-                    alert(e.message);
+                    console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    var fileType = e.fileType;
-                    if (fileType == "mp3") {
-                        showAudio(e.fileUrl, e.fileSize, $('#audio_1'), "audio1");
+                    if (fileType.indexOf("mp3") != -1) {
+                        showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
+                        audioCount++;
                     } else {
                         showImage(e.thumbnail);
                     }
+
                 }
             }
         });
     }
 
-
     /**
-     * 显示获取到的图片
+     * 显示获取到的图片布局
      */
     function showImage(previewUrl) {
         $('#imagBox_1').show();
@@ -379,16 +426,16 @@ $(function () {
         str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
         str += "</div>";
-        $('#imagBox_1').html(str);
+        $('#imagBox_1').append(str);
 
     }
 
     /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
 
-// 删除图片
+    /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
-        $('.delete-img .confirmBtn').attr('img-index',$(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
         layer.close(layer1);
         layer.close(layer2);
         //删除图片
@@ -408,6 +455,8 @@ $(function () {
     });
     // 删除图片-确定
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
         if ($('.imgBox').find('li').length <= 1) {
@@ -416,13 +465,62 @@ $(function () {
         // else {
         //     $('.imgBox div:eq('+parseInt($(this).attr('img-index'))+')').remove();
         // }
-        $('.imgBox li:eq('+parseInt($(this).attr('img-index'))+')').remove();
+        $('.imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+        if (fileParams.length > 0) {
+
+            fileParams.splice(index, 1);
+        }
+
+
     });
 
+    /*-------------------- 删除语音 --------------------*/
+    $(document).on('touchend', '.stuVoice', function () {
+        //alert($(this).parents('.audio_box').index());
+        $('.delete-voice .confirmBtn').attr('voice-index', $(this).parents('.audio_box').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除语音
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-voice")
+        })
+    });
+    // 删除语音-取消
+    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除语音-确定
+    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('voice-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('#record_audio_box').find('.audio_box').length <= 1) {
+            $('#record_audio_box').hide();
+        }
+
+        $('#record_audio_box li:eq(' + index + ')').remove();
+        // 语音小于三张，显示添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length < 3) {
+            $('#record').show();
+        }
+        if (voiceFileParams.length > 0) {
+            voiceFileParams.splice(index, 1);
+            recordCount--;
+        }
+
+
+    });
     //作业描述验证
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
@@ -432,7 +530,7 @@ $(function () {
         }
         $('.word').html('' + $(this).val().length + '/200')
     });
-//提交作业
+    //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
         console.log($('.notsubmit .imgBox').children('div').length);
         var answerVal = $('.teBox').val().trim();
@@ -469,13 +567,25 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
+        //将语音和图片一起传给服务器
+        var fileStuhomeworks;
+        if (voiceFileParams.length != 0) {
+
+            fileStuhomeworks = fileParams.concat(voiceFileParams);
+        }
+        alert(JSON.stringify(fileStuhomeworks));
+        alert(JSON.stringify(voiceFileParams));
+        alert(JSON.stringify(fileParams));
 
         var reqData = {
             "id": GetRequest('id'),
             "description": $('.teBox').val(),
-            "fileStuhomeworks": fileParams
+            "fileStuhomeworks": fileStuhomeworks
         };
-        alert(JSON.stringify(reqData));
+        // alert(JSON.stringify(reqData));
+        loading = layer.load();
+        $('#HWsubmit').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit').addClass('btn-grey');
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
     }
 
@@ -503,25 +613,12 @@ $(function () {
         }, 3000);
     }
 
-// 图片预览
-    $(document).on('touchend', '.imgBox img', function () {
-        // alert("预览图片" + $(this).attr('src'));
-        var previewUrl = "";
-        if ($(this).attr('src').indexOf('weixin://') != -1) {
-            previewUrl = $(this).attr('src');
-        } else {
-            previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
-        }
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
-    });
 
 // 提交作业接口返回处理
     function hwCommitSuccess(msg) {
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
-        alert(JSON.stringify(msg));
+        $('#HWsubmit').addClass('btn-grey');
+        // alert(JSON.stringify(msg));
         // layer.close(layer);
         layer.close(layer1);
         layer.close(layer2);
@@ -546,8 +643,8 @@ $(function () {
                 content: $(".submitFail")
             })
         }
-        $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeAttr("disabled");
+         $('#HWsubmit').removeClass('btn-grey');
+        layer.close(loading);
     }
 })
-;
-
