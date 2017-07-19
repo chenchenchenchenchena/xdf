@@ -211,6 +211,7 @@ $(function () {
         } else {
             need.tag = '1'
         }
+        arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         need.replyDesc = $('.answer textarea').val();
         ajax_S(homework_s.t_succ, need, function (e) {
@@ -348,6 +349,8 @@ $(function () {
     }
 
     var arr_s = [];
+    var arr_voice = [];
+    var arr_image = [];
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -367,7 +370,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    arr_s.push({
+                    arr_voice.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
@@ -503,7 +506,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    arr_s.push({
+                    arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
@@ -528,6 +531,9 @@ $(function () {
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#image_s').show();
+        }
+        if (arr_image.length > 0) {
+            arr_image.splice(index, 1);
         }
     });
     /*-------------------- 删除语音 --------------------*/
@@ -566,8 +572,8 @@ $(function () {
         if ($('.notsubmit #record_audio_box li').length < 3) {
             $('#record').show();
         }
-        if (voiceFileParams.length > 0) {
-            voiceFileParams.splice(index, 1);
+        if (arr_voice.length > 0) {
+            arr_voice.splice(index, 1);
             recordCount--;
         }
 

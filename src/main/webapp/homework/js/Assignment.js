@@ -261,27 +261,28 @@ $(function () {
             }
         }
         if (sessionStorage.Classname_x) {
+            arr_s = arr_voice.concat(arr_image);
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
             errohome.description = $('.home_text textarea').val();
             errohome.fileInfo = arr_s;
-            if ($('.music_s').eq(0).attr('filename')) {
-                arr_s.push({
-                    'fileName': $('.music_s').eq(0).attr('filename'),
-                    'fileType': $('.music_s').eq(0).attr('filetype'),
-                    'fileSize': $('.music_s').eq(0).attr('filesize'),
-                    'diskFilePath': $('.music_s').eq(0).attr('diskfilepath')
-                });
-            }
-            if ($('.imgBox img').eq(0).attr('filename')) {
-                arr_s.push({
-                    'fileName': $('.imgBox img').eq(0).attr('filename'),
-                    'fileType': $('.imgBox img').eq(0).attr('filetype'),
-                    'fileSize': $('.imgBox img').eq(0).attr('filesize'),
-                    'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
-                });
-            }
+            // if ($('.music_s').eq(0).attr('filename')) {
+            //     arr_s.push({
+            //         'fileName': $('.music_s').eq(0).attr('filename'),
+            //         'fileType': $('.music_s').eq(0).attr('filetype'),
+            //         'fileSize': $('.music_s').eq(0).attr('filesize'),
+            //         'diskFilePath': $('.music_s').eq(0).attr('diskfilepath')
+            //     });
+            // }
+            // if ($('.imgBox img').eq(0).attr('filename')) {
+            //     arr_s.push({
+            //         'fileName': $('.imgBox img').eq(0).attr('filename'),
+            //         'fileType': $('.imgBox img').eq(0).attr('filetype'),
+            //         'fileSize': $('.imgBox img').eq(0).attr('filesize'),
+            //         'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
+            //     });
+            // }
             ajax_S(homework_s.t_erro, errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
@@ -301,6 +302,9 @@ $(function () {
         } else {
             var class_c = classCode.substr(0, classCode.length - 1);
             var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+
+            arr_s = arr_voice.concat(arr_image);
+
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
@@ -447,6 +451,8 @@ $(function () {
     }
 
     var arr_s = [];
+    var arr_voice = [];
+    var arr_image = [];
     var recordCount = 0;
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
@@ -468,7 +474,7 @@ $(function () {
                     alert(e.message);
                 } else {
                     $('.teBox').val(e.data.fileUrl);
-                    arr_s.push({
+                    arr_voice.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
@@ -594,8 +600,8 @@ $(function () {
         if ($('.notsubmit #record_audio_box li').length < 3) {
             $('#record').show();
         }
-        if (voiceFileParams.length > 0) {
-            voiceFileParams.splice(index, 1);
+        if (arr_voice.length > 0) {
+            arr_voice.splice(index, 1);
             recordCount--;
         }
 
@@ -704,7 +710,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    arr_s.push({
+                    arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
@@ -729,6 +735,9 @@ $(function () {
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#image_s').show();
+        }
+        if (arr_image.length > 0) {
+            arr_image.splice(index, 1);
         }
     });
 
