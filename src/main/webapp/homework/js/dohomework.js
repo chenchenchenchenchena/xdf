@@ -13,7 +13,6 @@ $(function () {
     var fileSize;
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
-    alert(sessionStorage.studentName);
     var layer1, layer2, loading;
     // //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
