@@ -210,7 +210,7 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //显示语音布局
-                    showAudio(url_o+diskFilePath, $('#record_audio_box'), recordCount, 1);
+                    showAudio(url_o+e.data, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
 
                 }
