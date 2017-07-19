@@ -5,9 +5,10 @@ $(function(){
             'homeworkTinfoId':sessionStorage.Tid
 
         };
-        $('.anDes').html(sessionStorage.stutext);
+        $('.anDes').eq(0).html(sessionStorage.stutext);
         $('.kon p:last-of-type').html(sessionStorage.knowledgePoint);
-        $('.hwCon').html(sessionStorage.description);
+        $('.hwCon').eq(0).html(sessionStorage.description);
+
         $('.hwTeacherRankTitle').on('touchend',function(){
             if($('.hwInfo').css('display')=='none'){
                 $('.hwInfo').show();
@@ -39,45 +40,78 @@ $(function(){
         $('.infoTitle span').on('touchend',function(){
             if($(this).css('color')=='rgb(255, 106, 106)'){
                 $(this).css({
-                    'color':'#ccc',
-                    'border':'1px solid #ccc'
+                    'color':'#fff',
+                    'background':'#ff6a6a'
                 });
                 $('.excellent').show();
-                $('.excellent').append('<img src="images/excellent.gif" alt="">')
+                $('.excellent').append('<img src="images/excellent.gif" alt="">');
                 setTimeout(function(){
                     $('.excellent').html('  ')
                 },1000)
             }else{
                 $(this).css({
                     'color':'#ff6a6a',
-                    'border':'1px solid #ff6a6a'
+                    'border':'1px solid #ff6a6a',
+                    'background':'none'
                 });
             }
         });
 
-
-        //获取文件信息
-        ajaxRequest('post',homework_s.t_modi,{Tcid:sessionStorage.Tid,Sdtid:sessionStorage.stuid},function(e){
-            console.log(e);
-            var stu = e.data.StudentHomeworkFile;
-            var tea = e.data.TeacherHomeworkFile;
-
-            for(var a  = 0;a<stu.length;a++){
-                if(stu[a].fileType=='mp3'){
-                    $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
-                }else{
-                    $('.imgBox').eq(1).append('<div><img src="'+stu[a].url+'" alt="" /></div>')
+        if(sessionStorage.Teatwo){
+            // sessionStorage.removeItem('Teatwo');
+            $('.anDes').eq(1).html(sessionStorage.T_text);
+            ajaxRequest('post',homework_s.t_two,{Tcid:sessionStorage.Tid,Sdtid:sessionStorage.Stuid_t},function(e){
+                console.log(e)
+                var tea = e.data.RevampFile;
+                var stu = e.data.StudentHomeworkFile;
+                var tea_t = e.data.TeacherHomeworkFile;
+                for(var b  = 0;b<tea.length;b++){
+                    if(tea[b].fileType=='mp3'){
+                        $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    }else{
+                        $('.imgBox').eq(2).append('<div><img src="'+tea[b].url+'" alt="" /></div>')
+                    }
                 }
-            }
-            for(var b  = 0;b<tea.length;b++){
-                if(tea[b].fileType=='mp3'){
-                    $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
-                }else{
-                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].url+'" alt="" /></div>')
-
+                for(var a  = 0;a<stu.length;a++){
+                    if(stu[a].fileType=='mp3'){
+                        $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    }else{
+                        $('.imgBox').eq(1).append('<div><img src="'+stu[a].url+'" alt="" /></div>')
+                    }
                 }
-            }
-        });
+                for(var c  = 0;c<tea_t.length;c++){
+                    if(tea_t[c].fileType=='mp3'){
+                        $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    }else{
+                        $('.imgBox').eq(0).append('<div><img src="'+tea_t[c].url+'" alt="" /></div>')
+
+                    }
+                }
+            });
+        }else{
+            //获取文件信息
+            ajaxRequest('post',homework_s.t_modi,{Tcid:sessionStorage.Tid,Sdtid:sessionStorage.stuid},function(e){
+                console.log(e);
+                var stu = e.data.StudentHomeworkFile;
+                var tea = e.data.TeacherHomeworkFile;
+
+                for(var a  = 0;a<stu.length;a++){
+                    if(stu[a].fileType=='mp3'){
+                        $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    }else{
+                        $('.imgBox').eq(1).append('<div><img src="'+stu[a].url+'" alt="" /></div>')
+                    }
+                }
+                for(var b  = 0;b<tea.length;b++){
+                    if(tea[b].fileType=='mp3'){
+                        $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    }else{
+                        $('.imgBox').eq(0).append('<div><img src="'+tea[b].url+'" alt="" /></div>')
+
+                    }
+                }
+            });
+        }
 
 
         $(document).on('touchend','.music_s', function () {
@@ -104,6 +138,7 @@ $(function(){
             }
             if($('.teBox').val()==''){
                 layer.msg('批复内容不能为空');
+                return false;
             }
             need.replyDesc = $('.teBox').html();
             if($('.infoTitle span').css('color')=='rgb(255, 106, 106)'){

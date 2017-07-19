@@ -182,6 +182,8 @@ $(function () {
 	})
     
     function saveData(){
+		//禁用按钮
+		$('.subtn').attr('disabled', "true");//禁用按钮
     	load = layer.load(0,{shade: [0.8, '#000']});
     	/*var student = [];
     	for (var i = 0; i < $(".scoreList dl").length; i++) {
@@ -251,6 +253,7 @@ $(function () {
 	             content:$(".subFail")
 	         })
 	     }
+		$('.subtn').removeAttr("disabled");
     }
     //获取openId
 

@@ -92,7 +92,7 @@ var homework_s = {
     't_sbim': url_o+'/teacherData/addHomeWork.do',    //提交老师作业
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
-
+    't_two' : url_o+'teacherData//queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
     't_erro': url_o+'teacherData/updateTeaHomework.do',//老师修改作业
     't_quck': url_o+'teacherData/pressStuHomework.do',  //老师催交作业
