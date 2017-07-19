@@ -102,7 +102,7 @@ $(function () {
                         voiceCount++;
                         showAudio(e.fileUrl, "audio_" + flag, "audio" + flag+""+voiceCount);
                     } else {
-                        showImage(e.thumbnail, "imagBox_" + flag);
+                        showImage(e.fileUrl, "imagBox_" + flag);
                     }
                 }
             }

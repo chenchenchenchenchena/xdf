@@ -409,7 +409,7 @@ $(function () {
                         showAudio(e.fileUrl, $('#audio_box'), audioCount, 2);
                         audioCount++;
                     } else {
-                        showImage(e.thumbnail);
+                        showImage(e.fileUrl);
                     }
 
                 }
