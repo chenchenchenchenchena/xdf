@@ -557,6 +557,50 @@ $(function () {
         }
     }
 
+    /*-------------------- 删除语音 --------------------*/
+    $(document).on('touchend', '.stuVoice', function () {
+        //alert($(this).parents('.audio_box').index());
+        $('.delete-voice .confirmBtn').attr('voice-index', $(this).parents('.audio_box').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除语音
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-voice")
+        })
+    });
+    // 删除语音-取消
+    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除语音-确定
+    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('voice-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('#record_audio_box').find('.audio_box').length <= 1) {
+            $('#record_audio_box').hide();
+        }
+
+        $('#record_audio_box li:eq(' + index + ')').remove();
+        // 语音小于三张，显示添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length < 3) {
+            $('#record').show();
+        }
+        if (voiceFileParams.length > 0) {
+            voiceFileParams.splice(index, 1);
+            recordCount--;
+        }
+
+
+    });
+
     // //显示语音布局
     // function showAudio(url, length) {
     //     $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
