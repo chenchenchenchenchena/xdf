@@ -189,7 +189,7 @@ $(function () {
                     };
                     voiceFileParams.push(voiceFile);
                     //显示语音布局
-                    showAudio(url_o+diskFilePath, $('#record_audio_box'), recordCount, 1);
+                    showAudio(localId, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
                 }
 
