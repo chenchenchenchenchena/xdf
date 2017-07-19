@@ -62,7 +62,6 @@ $(function () {
 
     /*------------------录制语音开始------------------------------------*/
 
-
     var timeInedex = 0;
     var timeds;
     var localId;
@@ -190,7 +189,7 @@ $(function () {
                     };
                     voiceFileParams.push(voiceFile);
                     //显示语音布局
-                    showAudio(e.data.fileUrl, $('#record_audio_box'), recordCount, 1);
+                    showAudio(url_o+diskFilePath, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
                 }
 
@@ -430,7 +429,7 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    showAudio(e.data, $('#audio_box'), audioCount, 2);
+                    showAudio(url_o+e.data, $('#audio_box'), audioCount, 2);
                     audioCount++;
 
                 }

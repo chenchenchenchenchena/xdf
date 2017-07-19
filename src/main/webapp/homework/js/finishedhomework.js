@@ -135,7 +135,7 @@ $(function () {
                 } else {
                     //将文件显示到布局中
                     voiceCount++;
-                    showAudio(e.data, "audio_" + flag, "audio" + flag + "" + voiceCount);
+                    showAudio(url_o+e.data, "audio_" + flag, "audio" + flag + "" + voiceCount);
 
                 }
             }
