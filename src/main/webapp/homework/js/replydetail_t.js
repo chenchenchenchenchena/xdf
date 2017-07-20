@@ -48,6 +48,7 @@ $(function () {
                 $('.excellent').html('  ')
             }, 1000)
         } else {
+            $('.excellent').hide();
             $(this).css({
                 'color': '#ff6a6a',
                 'border': '1px solid #ff6a6a',
