@@ -36,7 +36,7 @@ if (window.location.host == onlineUrl) {//正式环境
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
-    appId =  'wx559791e14e9ce521';
+    appId =  'wxab29a3e2000b8d2a';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
 
