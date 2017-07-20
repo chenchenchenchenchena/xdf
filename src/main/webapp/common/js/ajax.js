@@ -300,7 +300,7 @@ function weChatData() {
         url: url.w_xmor,
         async: true,
         dataType: 'json',
-        data: businessP,
+        data: JSON.stringify(businessP),
         success: function (json) {
             if (json.result == true) {//获取成功
                 var appId = Global.appid;
