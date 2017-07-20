@@ -213,7 +213,7 @@ $(function () {
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.replyDesc = $('.answer textarea').val();
+        need.replyDesc = encodeURI($('.answer textarea').val());
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
