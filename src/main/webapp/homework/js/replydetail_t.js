@@ -56,16 +56,16 @@ $(function () {
         }
     });
 
-    if (sessionStorage.Teatwo) {
+    if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
         $('.anDes').eq(1).html(sessionStorage.T_text);
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            var tea = e.data.RevampFile;
-            var stu = e.data.StudentHomeworkFile;
-            var tea_t = e.data.TeacherHomeworkFile;
+            var tea = e.data.RevampFile;//老师批注
+            var stu = e.data.StudentHomeworkFile;//学生答案
+            var tea_t = e.data.TeacherHomeworkFile;//作业信息
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1,tea[b].diskFilePath,"mp3"]);
+                    getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
@@ -81,7 +81,7 @@ $(function () {
             }
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([3,tea_t[c].diskFilePath,"mp3"]);
+                    getAudioInfo([1,tea_t[c].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
@@ -89,7 +89,7 @@ $(function () {
                 }
             }
         });
-    } else {
+    } else {//待批复
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
@@ -99,14 +99,14 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([1,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                 }
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
+                    getAudioInfo([1,tea[b].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
