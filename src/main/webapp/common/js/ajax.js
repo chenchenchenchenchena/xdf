@@ -324,6 +324,25 @@ function weChatData() {
                             // 用户确认分享后执行的回调函数
                             //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
                             // shareCmsFn();
+                            //禁用部分分享按钮
+                            wx.hideMenuItems({
+                                menuList: ['menuItem:share:qq',         //分享到QQ
+                                    'menuItem:share:weiboApp',   //分享到微博
+                                    'menuItem:share:facebook',   //分享到Facebook
+                                    'menuItem:share:QZone',      //分享到QQ空间
+                                    'menuItem:openWithQQBrowser',//在QQ浏览器中打开
+                                    'menuItem:openWithSafari',   //在Safari中打开
+                                    'menuItem:share:email',
+                                    'menuItem:copyUrl',          //复制链接
+                                    'menuItem:readMode'          //阅读模式
+                                ],
+                                success: function () {
+                                    //alert("testing:ok");
+                                },
+                                error: function () {
+                                    //alert("testing:error");
+                                }
+                            });
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -348,25 +367,7 @@ function weChatData() {
                         }
 
                     });
-                    //禁用部分分享按钮
-                    wx.hideMenuItems({
-                        menuList: ['menuItem:share:qq',         //分享到QQ
-                            'menuItem:share:weiboApp',   //分享到微博
-                            'menuItem:share:facebook',   //分享到Facebook
-                            'menuItem:share:QZone',      //分享到QQ空间
-                            'menuItem:openWithQQBrowser',//在QQ浏览器中打开
-                            'menuItem:openWithSafari',   //在Safari中打开
-                            'menuItem:share:email',
-                            'menuItem:copyUrl',          //复制链接
-                            'menuItem:readMode'          //阅读模式
-                        ],
-                        success: function () {
-                            //alert("testing:ok");
-                        },
-                        error: function () {
-                            //alert("testing:error");
-                        }
-                    });
+
                 });
             }
         }
