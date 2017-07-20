@@ -188,6 +188,15 @@ $(function () {
                         "uploadUser": uploadUser
                     };
                     voiceFileParams.push(voiceFile);
+                    layer.open({
+                        type: 1,
+                        area: ['548px', '345px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
                     getRecordInfo(diskFilePath);
                 }
 
@@ -576,29 +585,31 @@ $(function () {
         var answerVal = $('.teBox').val().trim();
         // 答案不能为空
         if (answerVal == "" || answerVal == null) {
-            layer1 = layer.open({
+            layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
+                time:3000,
                 content: '<div class="layer-tips">答案不能为空！</div>'
             });
-            closeLayer(layer1);
+            // closeLayer(layer1);
             return;
         }
         // 超出字数
         console.log(answerVal.length)
         if (answerVal.length > 200) {
-            layer1 = layer.open({
+            layer.open({
                 type: 1,
                 area: ['310px', '195px'],
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
+                time:3000,
                 content: '<div class="layer-tips">超出字符上限！</div>'
             });
-            closeLayer(layer1);
+            // closeLayer(layer1);
             return;
         }
         // 语音最多可上传*个，图片最多可上传*个 TODO

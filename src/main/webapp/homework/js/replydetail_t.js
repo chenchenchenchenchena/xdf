@@ -380,6 +380,15 @@ $(function () {
                         'fileSize': e.data.fileSize,
                         'diskFilePath': e.data.diskFilePath
                     });
+                    layer.open({
+                        type: 1,
+                        area: ['548px', '345px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
                     getRecordInfo(e.data.diskFilePath);
                 }
 
