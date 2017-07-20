@@ -467,7 +467,7 @@ $(function () {
             'appId': "wxab29a3e2000b8d2a",
             'appSecret': "7739991fcce774c2281147eae3986ad9",
             'mediaId': serverId,
-            'schoolId':   localStorage.teacherId,
+            'schoolId':   localStorage.schoolId,
             'classId': "hx001"
         };
         $.ajax({
