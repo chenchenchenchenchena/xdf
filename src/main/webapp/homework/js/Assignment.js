@@ -113,16 +113,18 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
-        if ($(this).val().length > 200) {
+        if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
+            $(this).val($(this).val().substring(0,200));
         } else {
             $('.home_text span').css('color', '#808080');
         }
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
     $('.home_text textarea').on('blur', function () {
-        if ($(this).val().length > 200) {
+        if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
+            $(this).val($(this).val().substring(0,200));
         } else {
             $('.home_text span').css('color', '#808080');
         }

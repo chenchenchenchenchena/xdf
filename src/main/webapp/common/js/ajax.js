@@ -288,7 +288,7 @@ $(document).on("touchend", function (e) {
 
 // 微信分享
 
-function weChatData() {
+function weChatData(json) {
     var urlVal = window.location.href;
     var businessP = {
         "appid" :  'wx559791e14e9ce521',
@@ -317,9 +317,9 @@ function weChatData() {
                 });
                 wx.ready(function () {
                     wx.onMenuShareTimeline({
-                        title: '测试标题', // 分享标题
+                        title: json.title, // 分享标题
                         link: urlVal, // 分享链接
-                        imgUrl: 'https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/yunying/HumanMoonDay2017PC/common/img/doodle-1.gif', // 分享图标
+                        imgUrl:json.url, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
                             //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
@@ -350,10 +350,10 @@ function weChatData() {
                         }
                     });
                     wx.onMenuShareAppMessage({
-                        title: '测试标题', // 分享标题
-                        desc: '分享给谁啊', // 分享描述
+                        title: json.title, // 分享标题
+                        desc: json.text, // 分享描述
                         link:urlVal , // 分享链接
-                        imgUrl: 'https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/yunying/HumanMoonDay2017PC/common/img/doodle-1.gif', // 分享图标
+                        imgUrl:json.url, // 分享图标
                         type: '', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {

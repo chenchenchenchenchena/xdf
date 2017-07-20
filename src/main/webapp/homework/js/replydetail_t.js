@@ -28,6 +28,12 @@ $(function () {
     //输入验证
     $('.teBox').on('keyup', function () {
         $('.teacherword').html('' + $(this).val().length + '/200')
+        if ($(this).val().length > 199) {
+            $('.teacherword').css('color', 'red');
+            $(this).val($(this).val().substring(0,200));
+        } else {
+            $('.teacherword').css('color', '#808080');
+        }
     });
     $('.teBox').on('blur', function () {
         $('.teacherword').html('' + $(this).val().length + '/200')
