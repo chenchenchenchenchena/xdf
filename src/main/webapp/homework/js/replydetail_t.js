@@ -59,7 +59,7 @@ $(function () {
     if (sessionStorage.Teatwo) {
         sessionStorage.removeItem('Teatwo');
         $('.anDes').eq(1).html(sessionStorage.T_text);
-        ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.Stuid_t}, function (e) {
+        ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             // var tea = e.data.RevampFile;
             var stu = e.data.StudentHomeworkFile;
             var tea_t = e.data.TeacherHomeworkFile;
