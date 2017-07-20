@@ -574,6 +574,8 @@ $(function () {
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
             $('.word').css('color', 'red');
+            $('.teBox').val($(this).val().substr(0,200));
+            // $('.teBox').attr('readonly',true);
         } else {
             $('.word').css('color', '#808080');
         }
