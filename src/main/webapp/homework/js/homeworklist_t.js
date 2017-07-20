@@ -37,7 +37,7 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart','.tealist_s',function(){
-	    if($(this).children('.remove_s').length!=0){
+	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
