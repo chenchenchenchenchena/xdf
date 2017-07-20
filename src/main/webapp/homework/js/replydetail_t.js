@@ -115,6 +115,7 @@ $(function () {
             }
         });
     }
+    var voiceCount = 0;
 
     /**
      * 获取文件信息
