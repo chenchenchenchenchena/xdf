@@ -38,7 +38,7 @@ $(function () {
                     }
                 }
                 //作业描述
-                $('.hwCon').html(item.description);
+                $('.hwCon').html(decodeURI(item.description));
                 //语音，图片 TODO
                 $.each(item.fileContents, function (i, paths) {
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
