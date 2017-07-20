@@ -11,7 +11,7 @@ $(function () {
         'email': localStorage.terEmail
     };
     var homeworksubm = {
-        'teacherEmail': localStorage.teacherId,
+        'teacherEmail': localStorage.terEmail,
         'teacherName': localStorage.teacherName,
         'schoolId':  localStorage.schoolId,
         'appid': Global.appid,
