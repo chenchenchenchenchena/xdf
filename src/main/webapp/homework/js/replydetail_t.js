@@ -473,7 +473,6 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
-                    alert('已上传：' + i + '/' + length);
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);

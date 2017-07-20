@@ -32,7 +32,7 @@ $(function () {
             }
         }
         //作业描述
-        $('.des .hwCon').html(datas.teacherDes);
+        $('.des .hwCon').html(decodeURI(datas.teacherDes));
         //语音,图片
         $.each(datas.teaHomeworkFiles, function (i, paths) {
             var pathUrls = ['1', paths.diskFilePath, paths.fileType];
