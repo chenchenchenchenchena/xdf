@@ -582,7 +582,8 @@ $(function () {
     //提交作业
     $(document).on('touchend', '#HWsubmit', function () {
         console.log($('.notsubmit .imgBox').children('div').length);
-        var answerVal = $('.teBox').val().trim();
+        // var answerVal = $('.teBox').val().trim();
+        var answerVal = $('.teBox').val();
         // 答案不能为空
         if (answerVal == "" || answerVal == null) {
             layer.open({
