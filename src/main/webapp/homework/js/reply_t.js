@@ -54,7 +54,7 @@ $(function() {
                     var name_t = data.yesCorrect[d].studentName.substr(1, 2)
                 }
                 if (data.yesCorrect[d].tag == '1') {
-                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'" text_t="'+data.yesCorrect[d].replyDesc+'" text="' + decodeURI(data.yesCorrect[d].replydescription) + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>');
+                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'" text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + decodeURI(data.yesCorrect[d].replydescription) + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>');
                     $('.frend').show();
                     $('.noreply').css('padding-bottom','120px')
                 } else {
