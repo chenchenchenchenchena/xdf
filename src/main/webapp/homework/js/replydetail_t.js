@@ -66,7 +66,7 @@ $(function () {
             var tea_t = e.data.TeacherHomeworkFile;
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([1,tea[b].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
@@ -82,7 +82,7 @@ $(function () {
             }
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([3,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([3,tea_t[c].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
@@ -100,7 +100,7 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([1,stu[a].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                 }
