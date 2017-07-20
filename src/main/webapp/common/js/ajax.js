@@ -36,7 +36,7 @@ if (window.location.host == onlineUrl) {//正式环境
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
-    appId =  'wxab29a3e2000b8d2a';
+    appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
 
@@ -291,8 +291,8 @@ $(document).on("touchend", function (e) {
 function weChatData() {
     var urlVal = window.location.href;
     var businessP = {
-        "appid" :  'wxab29a3e2000b8d2a',
-        "secret": '7739991fcce774c2281147eae3986ad9',
+        "appid" :  'wx559791e14e9ce521',
+        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
         "url": urlVal
     };
     jQuery.ajax({
