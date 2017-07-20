@@ -106,7 +106,7 @@ $(function () {
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([3,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
@@ -115,33 +115,6 @@ $(function () {
         });
     }
     var voiceCount = 0;
-
-    /**
-     * 获取文件信息
-     */
-    function getFileInfo(fileArray) {
-        // fileArray = ["1", "homework/b479a873299649a48d9741582a735450.jpg", "jpg"];
-        var flag = fileArray[0];
-        var fileType = fileArray[2];
-        var diskFileUrl = fileArray[1];
-        var netConfig = "IN";//DEFAULT/IN
-        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
-        $.ajax({
-            url: url_o + "upload/viewFileDetail.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                // alert(JSON.stringify(e));
-                if (e.success == false) {
-                    console.log(e.message);
-                } else {
-                    //将文件显示到布局中
-                    showImage(e.fileUrl, "imagBox_" + flag);
-                }
-            }
-        });
-    }
 
     /**
      * 获取语音信息
@@ -161,7 +134,7 @@ $(function () {
                 } else {
                     //将文件显示到布局中
                     voiceCount++;
-                    showAudio(url_o+e.data, "audio_" + flag, "audio" + flag + "" + voiceCount);
+                    showAudio(url_o+e.data, $("#audio_" + flag), "audio" + flag + "" + voiceCount,2);
 
                 }
             }
@@ -169,7 +142,7 @@ $(function () {
     }
 
     /**
-     * 显示录制语音布局
+     * 显示语音布局
      */
     function showAudio(url, parentId, id, flag) {
 
@@ -438,20 +411,6 @@ $(function () {
             }
         });
     }
-
-    // //显示语音布局
-    // function showAudio(url, length) {
-    //     $('.big_s .music_s').eq(Index_s).find('span').html(timeInedex + '"');
-    // }
-    //
-    //
-    // $(document).on('touchend', '.music_s', function () {
-    //     $(this).addClass('playing_s');
-    //     playVoice(song_s);
-    //     setTimeout(function () {
-    //         $('.music_s').removeClass('playing_s');
-    //     }, $('.music_s').eq(Index_s).find('span').html().substr(0, $('.music_s').eq(Index_s).find('span').html().length - 1) + '000');
-    // });
 
     //图片上传
     $('.image_s').click(function () {
