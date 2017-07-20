@@ -97,3 +97,20 @@
 .layui-layer-setwin{
     display: none!important;
 }
+/*图片*/
+.imgBox{
+    margin-top: 30px;
+    overflow: hidden;
+}
+.imgBox div,.imgBox li{
+    margin: 0 14px 0 0;
+    float: left;
+    position: relative;
+}
+.imgBox>div:last-child{
+    margin-right: 0;
+}
+.imgBox div img,.imgBox li img{
+    width:216px;
+    height: 216px;
+}

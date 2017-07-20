@@ -637,6 +637,8 @@ $(function () {
 
     //图片上传
     $('.image_s').click(function () {
+        //重新选择图片，清除之前数据
+        fileParams = [];
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -645,18 +647,19 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    //上传服务器
-                    upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
-                        $('#image_s').hide();
+                        $('#chooseImage').hide();
                     }
+
+                    //上传服务器
+                    upLoadWxImage(res);
                 }
 
 
