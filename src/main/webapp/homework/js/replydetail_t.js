@@ -521,16 +521,41 @@ $(function () {
 
     }
 
-    // 删除图片
+    /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
-        if ($(this).parents('.imgBox').find('div').length <= 1) {
-            $(this).parents('.imgBox').remove();
-        } else {
-            $(this).parent('div').remove();
+        // alert($(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除图片
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-img")
+        })
+    });
+    // 删除图片-取消
+    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除图片-确定
+    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('img-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('.imgBox').find('li').length <= 1) {
+            $('.imgBox').hide();
         }
+
+        $('.imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
-            $('#image_s').show();
+            $('.image_s').show();
         }
         if (arr_image.length > 0) {
             arr_image.splice(index, 1);
