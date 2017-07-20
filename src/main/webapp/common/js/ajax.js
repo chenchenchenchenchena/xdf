@@ -288,7 +288,7 @@ $(document).on("touchend", function (e) {
 
 // 微信分享
 
-function weChatData(json) {
+function weChatData(Json) {
     var urlVal = window.location.href;
     var businessP = {
         "appid" :  'wx559791e14e9ce521',
@@ -317,9 +317,9 @@ function weChatData(json) {
                 });
                 wx.ready(function () {
                     wx.onMenuShareTimeline({
-                        title: json.title, // 分享标题
+                        title: Json.title, // 分享标题
                         link: urlVal, // 分享链接
-                        imgUrl:json.url, // 分享图标
+                        imgUrl:Json.url, // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
                             //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
@@ -350,10 +350,10 @@ function weChatData(json) {
                         }
                     });
                     wx.onMenuShareAppMessage({
-                        title: json.title, // 分享标题
-                        desc: json.text, // 分享描述
+                        title: Json.title, // 分享标题
+                        desc: Json.text, // 分享描述
                         link:urlVal , // 分享链接
-                        imgUrl:json.url, // 分享图标
+                        imgUrl:Json.url, // 分享图标
                         type: '', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
