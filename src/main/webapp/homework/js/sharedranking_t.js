@@ -6,7 +6,8 @@ $(function(){
 
 
     ajaxRequest('post',homework_s.t_mmmm,{Tcid:getRequest('tid').tid},function(e){
-            console.log(e);
+
+        weChatData()
             var data = e.data;
             $('.title_s i').html(data.className);
             $('.title_s p').eq(1).html(data.teacherName+'老师');

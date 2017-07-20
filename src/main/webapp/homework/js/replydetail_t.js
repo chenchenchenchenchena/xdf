@@ -44,7 +44,8 @@ $(function () {
             $('.excellent').show();
             $('.excellent').append('<img src="images/excellent.gif" alt="">');
             setTimeout(function () {
-                $('.excellent').html('  ')
+                $('.excellent').html('  ');
+                $('.excellent').hide();
             }, 1000)
         } else {
             $('.excellent').hide();
