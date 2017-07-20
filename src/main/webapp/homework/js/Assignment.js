@@ -464,10 +464,10 @@ $(function () {
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
-            'appId': "wxab29a3e2000b8d2a",
-            'appSecret': "7739991fcce774c2281147eae3986ad9",
+            'appId': "wx559791e14e9ce521",
+            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
             'mediaId': serverId,
-            'schoolId':   localStorage.teacherId,
+            'schoolId': "73",
             'classId': "hx001"
         };
         $.ajax({
