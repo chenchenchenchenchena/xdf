@@ -66,7 +66,7 @@ $(function () {
             var tea_t = e.data.TeacherHomeworkFile;
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo(stu[a].diskFilePath);
+                    getAudioInfo([1,stu[a].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
@@ -74,7 +74,7 @@ $(function () {
             }
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo(stu[a].diskFilePath);
+                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
@@ -82,7 +82,7 @@ $(function () {
             }
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo(stu[a].diskFilePath);
+                    getAudioInfo([3,stu[a].diskFilePath,"mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
@@ -100,14 +100,14 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo(stu[a].diskFilePath);
+                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                 }
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo(tea[b].diskFilePath);
+                    getAudioInfo([3,stu[a].diskFilePath,"mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
@@ -115,13 +115,41 @@ $(function () {
             }
         });
     }
+    var voiceCount = 0;
 
-    var audioCount = 0;
+    /**
+     * 获取文件信息
+     */
+    function getFileInfo(fileArray) {
+        // fileArray = ["1", "homework/b479a873299649a48d9741582a735450.jpg", "jpg"];
+        var flag = fileArray[0];
+        var fileType = fileArray[2];
+        var diskFileUrl = fileArray[1];
+        var netConfig = "IN";//DEFAULT/IN
+        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
+        $.ajax({
+            url: url_o + "upload/viewFileDetail.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                // alert(JSON.stringify(e));
+                if (e.success == false) {
+                    console.log(e.message);
+                } else {
+                    //将文件显示到布局中
+                    showImage(e.fileUrl, "imagBox_" + flag);
+                }
+            }
+        });
+    }
 
     /**
      * 获取语音信息
      */
-    function getAudioInfo(diskFileUrl) {
+    function getAudioInfo(fileArray) {
+        var flag = fileArray[0];
+        var diskFileUrl = fileArray[1];
         var optionFile = {"fullPath": diskFileUrl};
         $.ajax({
             url: url_o + "upload/getMp3Url.do",
@@ -133,8 +161,8 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //将文件显示到布局中
-                    showAudio(url_o + e.data, $('#audio_box'), audioCount, 2);
-                    audioCount++;
+                    voiceCount++;
+                    showAudio(url_o+e.data, "audio_" + flag, "audio" + flag + "" + voiceCount);
 
                 }
             }
@@ -157,7 +185,7 @@ $(function () {
                 "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
         } else {
 
-            idChildren = "audio" + id;
+            idChildren = "audio_" + id;
             strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
         }
@@ -195,6 +223,8 @@ $(function () {
             $('#record').hide();
         }
     }
+
+
 
     //批改作业提交
     $('.sub_p').on('touchend', function () {
