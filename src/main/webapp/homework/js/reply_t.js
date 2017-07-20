@@ -119,8 +119,8 @@ $(function() {
 
     $(document).on('touchend','.home_tw li',function(){
         sessionStorage.Teatwo = 1;
-        sessionStorage.Stuid_t = $(this).attr('Id');
-        sessionStorage.T_text = $(this).attr('text_t')
+        sessionStorage.stuid = $(this).attr('Id');
+        sessionStorage.T_text = $(this).attr('text_t');
         sessionStorage.stutext = $(this).attr('text');
         sessionStorage.knowledgePoint = $(this).attr('knowledgePoint');
         sessionStorage.description = $(this).attr('description');
