@@ -1,5 +1,19 @@
 $(function(){
-
+    //登录相关
+    if(!localStorage.terEmail){
+        var WXnum  = {
+            'wechatId':sessionStorage.openid
+        };
+        ajax_S(url.s_seac,WXnum,function(e){
+            if(e.result==true){
+                sessionStorage.stuNumber = e.data.studentNo;
+                sessionStorage.schoolId = e.data.schoolId;
+                location.href = 'homeworklist_s.html';
+            }else{
+                location.href = '../schedule/login_s.html'
+            }
+        });
+    }
 
     //tab
 	$(document).on('touchstart','.hwFinish .firstList',function(){
@@ -52,7 +66,7 @@ $(function(){
 
     var Read = '';
 	// 获取老师作业列表
-    ajax_S(homework_s.t_list,{email:'hanqifan@xdf.cn','schoolId':'73'},function(e){
+    ajax_S(homework_s.t_list,{email:localStorage.terEmail,'schoolId':localStorage.schoolId},function(e){
         console.log(e);
         if(e.data==undefined){
             $('.empty').show();
@@ -132,19 +146,6 @@ $(function(){
         sessionStorage.classCode_in = $(this).attr('classCode');
         location.href = 'Assignment.html'
     });
-    // {
-    //     "appid":"wxab29a3e2000b8d2a",
-    //     "secret":"7739991fcce774c2281147eae3986ad9",
-    //     "remark":"发送人",
-    //     "courseName":"我是班级名字",
-    //     "time":"2017年",
-    //     "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-    //     "url":"http://www.baidu.com",
-    //     "info":[
-    //     {"childName":"我是测试","first":"我是测试标题","score":"100000分","openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"},
-    // ]
-    // }
-
 
 
 

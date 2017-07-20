@@ -3,7 +3,6 @@ $(function () {
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid
-
     };
     $('.anDes').eq(0).html(sessionStorage.stutext);
     $('.kon p:last-of-type').html(sessionStorage.knowledgePoint);

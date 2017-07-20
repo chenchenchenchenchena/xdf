@@ -6,16 +6,16 @@ $(function () {
 
 
     var trardata = {
-        'teacherCode': 'TC23',
-        'schoolId': '73',
-        'email': 'hanqifan@xdf.cn'
+        'teacherCode': localStorage.teacherId,
+        'schoolId': localStorage.schoolId,
+        'email': localStorage.terEmail
     };
     var homeworksubm = {
-        'teacherEmail': 'hanqifan@xdf.cn',
-        'teacherName': '韩启凡',
-        'schoolId': '73',
-        'appid': 'wxab29a3e2000b8d2a',
-        'secret': '7739991fcce774c2281147eae3986ad9',
+        'teacherEmail': localStorage.teacherId,
+        'teacherName': localStorage.teacherName,
+        'schoolId':  localStorage.schoolId,
+        'appid': Global.appid,
+        'secret': Global.secret,
         'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
         'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
@@ -464,12 +464,11 @@ $(function () {
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'appId': "wxab29a3e2000b8d2a",
+            'appSecret': "7739991fcce774c2281147eae3986ad9",
             'mediaId': serverId,
-            'schoolId': "73",
+            'schoolId':   localStorage.teacherId,
             'classId': "hx001"
-
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",

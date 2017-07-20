@@ -3,8 +3,8 @@ $(function() {
         "Tcid": sessionStorage.Tid
     };
     var Homework = {
-        'appid': 'wxab29a3e2000b8d2a',
-        'secret': '7739991fcce774c2281147eae3986ad9',
+        'appid': Global.appid,
+        'secret': Global.secret,
         'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
         'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
