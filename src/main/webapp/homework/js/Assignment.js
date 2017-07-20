@@ -773,6 +773,18 @@ $(function () {
             arr_image.splice(index, 1);
         }
     });
-
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('touchend', '.imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
+        //     previewUrl = $(this).attr('src');
+        // } else {
+        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
+        // }
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
     $('body').css('overflow-y', 'auto')
 });
