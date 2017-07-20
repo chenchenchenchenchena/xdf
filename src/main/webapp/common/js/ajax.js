@@ -105,7 +105,6 @@ var homework_s = {
     's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
 
 };
-//百度统计
 function wechatCode(url) {
     var code = getRequest()['code'];
     var url = url;
@@ -298,7 +297,7 @@ function weChatData() {
     };
     jQuery.ajax({
         type: "POST",
-        url: Global.actionURL,
+        url: url.w_xmor,
         async: true,
         dataType: 'json',
         data: businessP,
