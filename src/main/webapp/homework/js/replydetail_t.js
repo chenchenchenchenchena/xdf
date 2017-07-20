@@ -61,7 +61,7 @@ $(function () {
         sessionStorage.removeItem('Teatwo');
         $('.anDes').eq(1).html(sessionStorage.T_text);
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.Stuid_t}, function (e) {
-            var tea = e.data.RevampFile;
+            // var tea = e.data.RevampFile;
             var stu = e.data.StudentHomeworkFile;
             var tea_t = e.data.TeacherHomeworkFile;
             for (var b = 0; b < tea.length; b++) {
