@@ -77,7 +77,12 @@ $(function(){
         $('.Prompt_s i').html(e.SumUpnotCorrect);
         for(var a = 0;a<list_s.length;a++){
             for(var c = 0;c<list_s[a].length;c++){
-                list_s[a][c].readStatus==0?Read='state_st':Read='';
+                if(list_s[a][c].readStatus==0){
+                    Read='state_st';
+                    break;
+                }else{
+                    Read = '';
+                }
             }
             $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display:inline;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
             for(var b = 0;b<list_s[a].length;b++){
