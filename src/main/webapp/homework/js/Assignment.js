@@ -1,4 +1,10 @@
 $(function () {
+
+
+
+
+
+
     var trardata = {
         'teacherCode': 'TC23',
         'schoolId': '73',
@@ -303,9 +309,7 @@ $(function () {
         } else {
             var class_c = classCode.substr(0, classCode.length - 1);
             var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
-
             arr_s = arr_voice.concat(arr_image);
-
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();

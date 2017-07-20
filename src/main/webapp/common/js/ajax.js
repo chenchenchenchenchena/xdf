@@ -89,7 +89,7 @@ var homework_s = {
     't_stat': url_o+'teacherData/TeacherupdateReadstatus.do',//老师未读已读状态
     't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
     't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
-    't_sbim': url_o+'/teacherData/addHomeWork.do',    //提交老师作业
+    't_sbim': 'http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do',    //提交老师作业
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
     't_two' : url_o+'teacherData//queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
