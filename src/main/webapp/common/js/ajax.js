@@ -291,8 +291,8 @@ $(document).on("touchend", function (e) {
 function weChatData() {
     var urlVal = window.location.href;
     var businessP = {
-        "appId" :  'wxab29a3e2000b8d2a',
-        "secreT": '7739991fcce774c2281147eae3986ad9',
+        "appid" :  'wxab29a3e2000b8d2a',
+        "secret": '7739991fcce774c2281147eae3986ad9',
         "url": urlVal
     };
     jQuery.ajax({
