@@ -130,7 +130,7 @@ $(function () {
             }
             //获取学生作业答案
             if (msg.data.fileS != "" && msg.data.fileS != null && msg.data.fileS != undefined) {
-                $.each(msg.data.fileT, function (i, paths) {
+                $.each(msg.data.fileS, function (i, paths) {
                     var pathUrls = ['2', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址
                     console.log(i + "---" + pathUrls);
@@ -145,7 +145,7 @@ $(function () {
             }
             //获取老师批注
             if (msg.data.fileR != "" && msg.data.fileR != null && msg.data.fileR != undefined) {
-                $.each(msg.data.fileT, function (i, paths) {
+                $.each(msg.data.fileR, function (i, paths) {
                     var pathUrls = ['3', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址
                     console.log(pathUrls);
