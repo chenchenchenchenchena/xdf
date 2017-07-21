@@ -44,6 +44,14 @@ $(function(){
                     }
                 }
             }
+            for(var j = 0;j<masterta.length;j++){
+                if(masterta[j]!=''){
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p></li>')
+                }else{
+                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>');
+                    masteaname = mastertae[teacindex]
+                }
+            }
         }
 
         var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3)
@@ -56,7 +64,8 @@ $(function(){
         $('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+subject_s+')')
         $('.time span').html(begintime+'-'+endtime)
         $('.date span').html(begindata+'-'+enddata)
-        $('.classHour i').eq(0).html(LessonNo)
+        $('.classHour i').eq(0).html(LessonNo);
+        $('.stuNum').html(BeginDate[timeindex].ClassCode);
         $('.classHour i').eq(1).html(LessonCount)
         $('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
         var arr = [];
@@ -70,14 +79,7 @@ $(function(){
                 room_html = '暂无数据'
             }
             $('#position').html(room_html);
-            for(var j = 0;j<masterta.length;j++){
-                if(masterta[j]!=''){
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>'+masterta[j]+'</p></li>')
-                }else{
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>'+mastertae[teacindex].teacherName+'</p></li>');
-                    masteaname = mastertae[teacindex]
-                }
-            }
+
 
             arr.push(BeginDate[regionindex[i]].Students);
             var stuall = BeginDate[regionindex[i]].Students;

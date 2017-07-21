@@ -48,9 +48,8 @@ $(function () {
                         "fileTfullPath": [],
                         "fileRfullPath": []
                     };
-                    allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
-                    console.log("获取文件排序" + JSON.stringify(allFilePath));
-
+                    allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
+                    console.log("获取文件排序"+JSON.stringify(allFilePath));
                 });
                 ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
                 /*$.each(item.fileContents, function (i, paths) {
@@ -83,6 +82,7 @@ $(function () {
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
+                    // paths.fileType = 'jpg';
                     console.log(paths.diskFilePath);
                     if (paths.fileType.indexOf("mp3") != -1) {
                         //将文件显示到布局中
@@ -257,6 +257,7 @@ $(function () {
                 }
 
 
+                }
             }
         });
     }
