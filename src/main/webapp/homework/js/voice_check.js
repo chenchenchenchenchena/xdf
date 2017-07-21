@@ -16,12 +16,13 @@ $(function () {
      * 播放微信录制后的本地语音文件
      */
     function playVoice(plId) {
-        wx.ready(function () {
+        // wx.ready(function () {
             //播放录音
             wx.playVoice({
                 localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
             });
-        });
+            playAnimation();
+        // });
 
     }
 
@@ -29,13 +30,12 @@ $(function () {
      * 停止播放微信录制后的本地语音文件
      */
     function stopVoice(plId) {
-        alert(plId);
         // wx.ready(function () {
             //播放录音
             wx.stopVoice({
                 localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
             });
-            playAnimation();
+        stopAnimation();
         // });
     }
 
