@@ -254,7 +254,9 @@ $(function () {
                         time: 3000,
                         content: $(".music_succ")
                     });
-                    getRecordInfo(diskFilePath);
+                    // getRecordInfo(diskFilePath);
+                    showAudio(localId, $('#record_audio_box'), recordCount, 1);
+                    recordCount++;
                 }
 
 
