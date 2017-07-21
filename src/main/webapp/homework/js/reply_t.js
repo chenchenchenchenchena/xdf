@@ -38,7 +38,7 @@ $(function() {
                 }else{
                     var name_ = data.notCorrect[c].studentName.substr(1, 2);
                 }
-                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + data.notCorrect[c].replydescription + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + decodeURI(data.notCorrect[c].description) + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
+                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + decodeURI(data.notCorrect[c].replydescription) + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + decodeURI(data.notCorrect[c].description) + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
             }
         }
         if (data.yesCorrect.length == 0) {
