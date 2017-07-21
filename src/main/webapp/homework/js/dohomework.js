@@ -41,29 +41,30 @@ $(function () {
                 $('.hwCon').html(decodeURI(item.description));
                 //语音，图片 TODO
                 //语音，图片 TODO
-                var allFilePath={};
+                var allFilePath = {};
                 $.each(item.fileContents, function (i, paths) {
                     allFilePath = {
-                        "fileSfullPath":[],
-                        "fileTfullPath":[],
-                        "fileRfullPath":[]
+                        "fileSfullPath": [],
+                        "fileTfullPath": [],
+                        "fileRfullPath": []
                     };
-                    allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
-                    console.log("获取文件排序"+JSON.stringify(allFilePath));
-                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
-                });
-                /*$.each(item.fileContents, function (i, paths) {
-                    var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-                    // 获取语音和图片的预览地址 TODO
-                    console.log(pathUrls);
-                    console.log(paths.diskFilePath);
-                    if(paths.fileType.indexOf("mp3") != -1){
-                        getAudioInfo(paths.diskFilePath);
-                    }else {
-                        getFileInfo(paths.diskFilePath);
-                    }
+                    allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
+                    console.log("获取文件排序" + JSON.stringify(allFilePath));
 
-                });*/
+                });
+                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                /*$.each(item.fileContents, function (i, paths) {
+                 var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+                 // 获取语音和图片的预览地址 TODO
+                 console.log(pathUrls);
+                 console.log(paths.diskFilePath);
+                 if(paths.fileType.indexOf("mp3") != -1){
+                 getAudioInfo(paths.diskFilePath);
+                 }else {
+                 getFileInfo(paths.diskFilePath);
+                 }
+
+                 });*/
 
                 return false;
             }
@@ -71,27 +72,47 @@ $(function () {
         });
         layer.close(loading);
     }
-    function getAllFileRankSuccess(msg){
-        if(msg.code==200){
+
+    var audioCount = 0;
+
+    function getAllFileRankSuccess(msg) {
+        if (msg.code == 200) {
             //获取老师作业信息
-            if(msg.data.fileT!=""&&msg.data.fileT!=null&&msg.data.fileT!=undefined){
-                $.each(msg.data.fileT,function (i,paths) {
+            if (msg.data.fileT != "" && msg.data.fileT != null && msg.data.fileT != undefined) {
+                $.each(msg.data.fileT, function (i, paths) {
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
-                    // paths.fileType = 'jpg';
                     console.log(paths.diskFilePath);
-                    if(paths.fileType.indexOf("mp3") != -1){
-                        getAudioInfo(paths.diskFilePath);
-                    }else {
-                        getFileInfo(paths.diskFilePath);
+                    if (paths.fileType.indexOf("mp3") != -1) {
+                        //将文件显示到布局中
+                        showAudio(url_o + paths.relativePath, $('#audio_box'), audioCount, 2);
+                        audioCount++;
+                    } else {
+                        //显示老师作业信息图片
+                        showImage(paths.fileUrl);
                     }
                 });
             }
-        }else{
+        } else {
             alert("获取文件失败");
         }
     }
+
+
+    /**
+     * 显示获取到的作业信息图片
+     */
+    function showImage(previewUrl) {
+        $('#imagBox_1').show();
+        var str = "";
+        str += "<div class = 'imgBox'>";
+        str += "<div><img src='" + previewUrl + "'/></div>";
+        str += "</div>";
+        $('#imagBox_1').append(str);
+
+    }
+
     /*------------------录制语音开始------------------------------------*/
 
     var timeInedex = 0;
@@ -180,7 +201,7 @@ $(function () {
             success: function (res) {
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
-                uploadVoice(serverId,upId);
+                uploadVoice(serverId, upId);
             }
         });
     }
@@ -188,7 +209,7 @@ $(function () {
     /**
      *将serverId上传到自己服务器
      */
-    function uploadVoice(serverId,localId) {
+    function uploadVoice(serverId, localId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -229,38 +250,42 @@ $(function () {
                         time: 3000,
                         content: $(".music_succ")
                     });
-                    getRecordInfo(diskFilePath);
-                }
-
-
-            }
-        });
-    }
-    /**
-     * 获取录制语音信息
-     */
-    function getRecordInfo(diskFileUrl) {
-        var optionFile = {"fullPath": diskFileUrl};
-        $.ajax({
-            url: url_o + "upload/getMp3Url.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                if (e.status == "failed") {
-                    console.log(e.message);
-                } else {
+                    // getRecordInfo(diskFilePath);
                     //显示语音布局
-                    showAudio(url_o+e.data, $('#record_audio_box'), recordCount, 1);
+                    showAudio(localId, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
-
                 }
+
+
             }
         });
     }
+    //
+    // /**
+    //  * 获取录制语音信息
+    //  */
+    // function getRecordInfo(diskFileUrl) {
+    //     var optionFile = {"fullPath": diskFileUrl};
+    //     $.ajax({
+    //         url: url_o + "upload/getMp3Url.do",
+    //         type: 'post',
+    //         dataType: 'json',
+    //         data: optionFile,
+    //         success: function (e) {
+    //             if (e.status == "failed") {
+    //                 console.log(e.message);
+    //             } else {
+    //                 //显示语音布局
+    //                 showAudio(url_o + e.data, $('#record_audio_box'), recordCount, 1);
+    //                 recordCount++;
+    //
+    //             }
+    //         }
+    //     });
+    // }
 
     /**
-     * 显示录制语音布局
+     * 显示语音布局
      */
     function showAudio(url, parentId, id, flag) {
 
@@ -323,8 +348,6 @@ $(function () {
     $('#chooseImage').click(function () {
         //重新选择图片，清除之前数据
         fileParams = [];
-
-
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -449,70 +472,6 @@ $(function () {
         });
     });
 
-    /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
-    var audioCount = 0;
-
-    /**
-     * 获取图片信息
-     */
-    function getFileInfo(diskFileUrl) {
-        var netConfig = "IN";//DEFAULT/IN
-        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
-        $.ajax({
-            url: url_o + "upload/viewFileDetail.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                if (e.success == false) {
-                    console.log(e.message);
-                } else {
-                    //将文件显示到布局中
-                    showImage(e.fileUrl);
-
-                }
-            }
-        });
-    }
-
-    /**
-     * 获取语音信息
-     */
-    function getAudioInfo(diskFileUrl) {
-        var optionFile = {"fullPath": diskFileUrl};
-        $.ajax({
-            url: url_o + "upload/getMp3Url.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                if (e.status == "failed") {
-                    console.log(e.message);
-                } else {
-                    //将文件显示到布局中
-                    showAudio(url_o+e.data, $('#audio_box'), audioCount, 2);
-                    audioCount++;
-
-                }
-            }
-        });
-    }
-
-    /**
-     * 显示获取到的图片布局
-     */
-    function showImage(previewUrl) {
-        $('#imagBox_1').show();
-        var str = "";
-        str += "<div class = 'imgBox'>";
-        str += "<div><img src='" + previewUrl + "'/></div>";
-        str += "</div>";
-        $('#imagBox_1').append(str);
-
-    }
-
-    /*--------------------根据diskFileUrl从服务器获取文件地址--End----------------------------------*/
-
     /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
@@ -606,7 +565,7 @@ $(function () {
     $('.teBox').on('keyup', function () {
         if ($(this).val().length > 200) {
             $('.word').css('color', 'red');
-            $('.teBox').val($(this).val().substr(0,200));
+            $('.teBox').val($(this).val().substr(0, 200));
             // $('.teBox').attr('readonly',true);
         } else {
             $('.word').css('color', '#808080');
@@ -626,7 +585,7 @@ $(function () {
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                time:3000,
+                time: 3000,
                 content: '<div class="layer-tips">答案不能为空！</div>'
             });
             // closeLayer(layer1);
@@ -641,7 +600,7 @@ $(function () {
                 shade: [0.1, '#fff'],
                 title: false,
                 skin: 'tips',
-                time:3000,
+                time: 3000,
                 content: '<div class="layer-tips">超出字符上限！</div>'
             });
             // closeLayer(layer1);
