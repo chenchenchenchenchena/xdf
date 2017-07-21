@@ -620,7 +620,7 @@ $(function () {
 
         var reqData = {
             "id": GetRequest('id'),
-            "description": $('.teBox').val(),
+            "description": ecodeURI($('.teBox').val()),
             "fileStuhomeworks": fileStuhomeworks
         };
         // alert(JSON.stringify(reqData));
