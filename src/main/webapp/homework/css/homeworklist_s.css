@@ -589,10 +589,18 @@ html body .tealist_s .more_so{
 	max-width:100%;
 	max-height:100%;
 }
-.big_back_s span{
+.big_back_s span,.esc_s,.true_s{
 	position: absolute;
-	bottom:20px;
-	right:20px;
+	bottom:0px;
+	right:0px;
 	font-size:25px;
 	color:#fff;
+	padding:20px;
+}
+html body .true_s{
+	display:none;
+}
+html body .esc_s{
+	left:0px;
+	display:none;
 }
