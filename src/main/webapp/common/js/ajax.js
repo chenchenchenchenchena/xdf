@@ -272,6 +272,7 @@ function splitStrs(strs) {
     return strs;
 };
 
+
 //Tap事件封装
 $(document).on("touchstart", function (e) {
     if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 0);

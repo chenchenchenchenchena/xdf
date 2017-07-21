@@ -126,4 +126,6 @@ $(function() {
         sessionStorage.description = $(this).attr('description');
         location.href = 'replydetail_t.html';
     })
+
+
 });

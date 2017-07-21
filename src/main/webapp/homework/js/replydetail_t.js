@@ -570,15 +570,13 @@ $(function () {
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
-        // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
-        //     previewUrl = $(this).attr('src');
-        // } else {
-        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
-        // }
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
+        $('.big_back_s').show();
+        $('.big_back_s img').attr('src',previewUrl);
+        $('.big_back_s img').css({
+            'margin-top': -$('.big_back_s img').css('height')/2+'px'
+        })
+
+
     });
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
