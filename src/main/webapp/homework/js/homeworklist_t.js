@@ -11,6 +11,7 @@ $(function(){
             if(e.result==true){
                 sessionStorage.stuNumber = e.data.studentNo;
                 sessionStorage.schoolId = e.data.schoolId;
+                sessionStorage.studentName = e.data.studentName;
                 location.href = 'homeworklist_s.html';
             }else{
                 location.href = '../schedule/login_s.html'
