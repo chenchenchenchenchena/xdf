@@ -635,21 +635,21 @@ $(function () {
             });
 
         });
-
+        $('.true_s').on('touchend',function(){
+            $('.notsubmit .imgBox').show();
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl+ "'/></li>");
+            $('.big_back_s').show();
+            setTimeout(function(){
+                $('.big_back_s').hide();
+            },300)
+        });
         return false;
     });
     //禁止浏览器
     document.querySelector('body').addEventListener('touchstart', function (ev) {
         event.preventDefault();
     });
-    $('.true_s').on('touchend',function(){
-        $('.notsubmit .imgBox').show();
-        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
-        $('.big_back_s').show();
-        setTimeout(function(){
-            $('.big_back_s').hide();
-        },300)
-    });
+
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
         //alert($(this).parents('.audio_box').index());
