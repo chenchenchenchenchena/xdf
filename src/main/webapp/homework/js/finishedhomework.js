@@ -34,16 +34,16 @@ $(function () {
         //作业描述
         $('.des .hwCon').html(decodeURI(datas.teacherDes));
         //语音,图片
-        $.each(datas.teaHomeworkFiles, function (i, paths) {
+        /*$.each(datas.teaHomeworkFiles, function (i, paths) {
             var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-            // 获取语音和图片的预览地址 TODO
-            console.log(pathUrls);
-            if(paths.fileType.indexOf("mp3") != -1){
-                getAudioInfo(pathUrls);
-            }else {
-                getFileInfo(pathUrls);
-            }
-        });
+             // 获取语音和图片的预览地址 TODO
+             console.log(pathUrls);
+             if(paths.fileType.indexOf("mp3") != -1){
+             getAudioInfo(pathUrls);
+             }else {
+             getFileInfo(pathUrls);
+             }
+        });*/
         /*******作业答案*******/
         $('.hmAnswer .anDes').html(decodeURI(datas.description));
         // 优秀
@@ -53,7 +53,7 @@ $(function () {
             $('.hw_status').removeClass('hw_status_s');
         }
         //语音,图片
-        $.each(datas.stuHomeworkFiles, function (i, paths) {
+        /*$.each(datas.stuHomeworkFiles, function (i, paths) {
             var pathUrls = ['2', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
             console.log(i + "---" + pathUrls);
@@ -62,7 +62,7 @@ $(function () {
             }else {
                 getFileInfo(pathUrls);
             }
-        });
+        });*/
         /*******老师批注*******/
         var pizhuHtml = "";
         if (datas.replyStatus == "0") {
@@ -71,9 +71,8 @@ $(function () {
             pizhuHtml = datas.replyDesc;
         }
         $('.comment .anDes').html(decodeURI(pizhuHtml));
-        //语音，图片
         //语音,图片
-        $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+        /*$.each(datas.teaHomeworkReplyFiles, function (i, paths) {
             var pathUrls = ['3', paths.diskFilePath, paths.fileType];
             // 获取语音和图片的预览地址
             console.log(pathUrls);
@@ -82,10 +81,75 @@ $(function () {
             }else {
                 getFileInfo(pathUrls);
             }
+        });*/
+        //语音，图片
+        var allFilePath={
+            "fileSfullPath":[],//学生作业文件云盘全路径
+            "fileTfullPath":[],//老师作业文件云盘全路径
+            "fileRfullPath":[]//老师回复作业文件云盘全路径
+        };
+        //老师作业信息---语音，图片
+        $.each(datas.teaHomeworkFiles, function (i, paths) {
+            allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
         });
+        //学生答案信息--语音，图片
+        $.each(datas.stuHomeworkFiles, function (i, paths) {
+            allFilePath.fileSfullPath.push({"fullPath":paths.diskFilePath});
+        });
+        //老师批复作业信息---语音，图片
+        $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+            allFilePath.fileRfullPath.push({"fullPath":paths.diskFilePath});
+        });
+        console.log("获取文件排序"+JSON.stringify(allFilePath));
+        ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
         layer.close(loading);
     }
-
+    //获取文件信息
+    function getAllFileRankSuccess(msg){
+        if(msg.code==200){
+            //获取老师作业信息
+            if(msg.data.fileT!=""&&msg.data.fileT!=null&&msg.data.fileT!=undefined){
+                $.each(msg.data.fileT,function (i,paths) {
+                    // 获取语音和图片的预览地址
+                    // paths.fileType = 'jpg';
+                    var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+                    if(paths.fileType.indexOf("mp3") != -1){
+                        getAudioInfo(pathUrls);
+                    }else {
+                        getFileInfo(pathUrls);
+                    }
+                });
+            }
+            //获取学生作业答案
+            if(msg.data.fileS!=""&&msg.data.fileS!=null&&msg.data.fileS!=undefined){
+                $.each(msg.data.fileT,function (i,paths) {
+                    var pathUrls = ['2', paths.diskFilePath, paths.fileType];
+                    // 获取语音和图片的预览地址
+                    console.log(i + "---" + pathUrls);
+                    if(paths.fileType.indexOf("mp3") != -1){
+                        getAudioInfo(pathUrls);
+                    }else {
+                        getFileInfo(pathUrls);
+                    }
+                });
+            }
+            //获取老师批注
+            if(msg.data.fileR!=""&&msg.data.fileR!=null&&msg.data.fileR!=undefined){
+                $.each(msg.data.fileT,function (i,paths) {
+                    var pathUrls = ['3', paths.diskFilePath, paths.fileType];
+                    // 获取语音和图片的预览地址
+                    console.log(pathUrls);
+                    if(paths.fileType.indexOf("mp3") != -1){
+                        getAudioInfo(pathUrls);
+                    }else {
+                        getFileInfo(pathUrls);
+                    }
+                });
+            }
+        }else{
+            alert("获取文件失败");
+        }
+    }
     /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
     var voiceCount = 0;

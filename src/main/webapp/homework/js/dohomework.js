@@ -50,8 +50,8 @@ $(function () {
                     };
                     allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
                     console.log("获取文件排序"+JSON.stringify(allFilePath));
-                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
                 });
+                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
                 /*$.each(item.fileContents, function (i, paths) {
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址 TODO
