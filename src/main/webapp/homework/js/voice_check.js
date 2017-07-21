@@ -73,7 +73,7 @@ $(function () {
      */
     function stopVoice(plId) {
         //播放录音
-        wx.stopVoice({
+        wx.pauseVoice({
             localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
         });
         stopAnimation();
