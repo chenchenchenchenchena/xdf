@@ -41,17 +41,18 @@ $(function () {
                 $('.hwCon').html(decodeURI(item.description));
                 //语音，图片 TODO
                 //语音，图片 TODO
-                var allFilePath = {};
+                var allFilePath = {
+                    "fileSfullPath": [],
+                    "fileTfullPath": [],
+                    "fileRfullPath": []
+                };
                 if(item.fileContents.length>0){
                     $.each(item.fileContents, function (i, paths) {
-                        allFilePath = {
-                            "fileSfullPath": [],
-                            "fileTfullPath": [],
-                            "fileRfullPath": []
-                        };
                         allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
-                        console.log("获取文件排序"+JSON.stringify(allFilePath));
+                        // console.log("获取文件排序222"+JSON.stringify(allFilePath.fileTfullPath));
+
                     });
+                    console.log("获取文件排序"+JSON.stringify(allFilePath));
                     ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
                 }
 
