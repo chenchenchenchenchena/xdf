@@ -635,7 +635,8 @@ $(function () {
     //提交作业--成功--确定
     $(document).on('touchend', '.submitBox .confirmBtn', function () {
         layer.close(layer2);
-        window.location.href = 'homeworklist_s.html';
+        // window.location.href = 'homeworklist_s.html';
+        window.location.href = document.referrer;//返回上一页并刷新
     });
     //提交作业--失败--取消
     $(document).on('touchend', '.submitFail .cancelBtn', function () {

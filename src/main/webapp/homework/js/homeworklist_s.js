@@ -1,5 +1,5 @@
 $(function(){
-
+	// window.location.reload();
 	//缓存数据 TODO
 	sessionStorage.stuNumber = GetRequest('stuNumber');
 	sessionStorage.studentName = GetRequest('studentName');
