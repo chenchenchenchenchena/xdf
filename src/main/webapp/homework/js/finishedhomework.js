@@ -88,20 +88,22 @@ $(function () {
             "fileTfullPath":[],//老师作业文件云盘全路径
             "fileRfullPath":[]//老师回复作业文件云盘全路径
         };
-        //老师作业信息---语音，图片
-        $.each(datas.teaHomeworkFiles, function (i, paths) {
-            allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
-        });
-        //学生答案信息--语音，图片
-        $.each(datas.stuHomeworkFiles, function (i, paths) {
-            allFilePath.fileSfullPath.push({"fullPath":paths.diskFilePath});
-        });
-        //老师批复作业信息---语音，图片
-        $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
-            allFilePath.fileRfullPath.push({"fullPath":paths.diskFilePath});
-        });
-        console.log("获取文件排序"+JSON.stringify(allFilePath));
-        ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+        if(datas.teaHomeworkFiles.length>0||datas.stuHomeworkFiles.length>0||datas.teaHomeworkReplyFiles.length>0){
+            //老师作业信息---语音，图片
+            $.each(datas.teaHomeworkFiles, function (i, paths) {
+                allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
+            });
+            //学生答案信息--语音，图片
+            $.each(datas.stuHomeworkFiles, function (i, paths) {
+                allFilePath.fileSfullPath.push({"fullPath":paths.diskFilePath});
+            });
+            //老师批复作业信息---语音，图片
+            $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+                allFilePath.fileRfullPath.push({"fullPath":paths.diskFilePath});
+            });
+            console.log("获取文件排序"+JSON.stringify(allFilePath));
+            ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+        }
         layer.close(loading);
     }
     //获取文件信息

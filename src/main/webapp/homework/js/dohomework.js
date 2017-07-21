@@ -42,16 +42,19 @@ $(function () {
                 //语音，图片 TODO
                 //语音，图片 TODO
                 var allFilePath = {};
-                $.each(item.fileContents, function (i, paths) {
-                    allFilePath = {
-                        "fileSfullPath": [],
-                        "fileTfullPath": [],
-                        "fileRfullPath": []
-                    };
-                    allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
-                    console.log("获取文件排序"+JSON.stringify(allFilePath));
-                });
-                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                if(item.fileContents.length>0){
+                    $.each(item.fileContents, function (i, paths) {
+                        allFilePath = {
+                            "fileSfullPath": [],
+                            "fileTfullPath": [],
+                            "fileRfullPath": []
+                        };
+                        allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
+                        console.log("获取文件排序"+JSON.stringify(allFilePath));
+                    });
+                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                }
+
                 /*$.each(item.fileContents, function (i, paths) {
                  var pathUrls = ['1', paths.diskFilePath, paths.fileType];
                  // 获取语音和图片的预览地址 TODO
