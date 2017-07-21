@@ -7,13 +7,13 @@
 	<script src="jquery-1.11.0.min.js"></script>
 </head>
 <body>
-	<canvas id="myCanvas" width="200" height="200"style="border:1px solid #c3c3c3;">Your browser does not support the HTML5 canvas tag.</canvas>
+	<canvas id="myCanvas" width="640" height="480"style="border:1px solid #c3c3c3;">Your browser does not support the HTML5 canvas tag.</canvas>
 	<img src="" alt="" id="img">
 	<button id="button" style="width:500px;height:500px;"></button>
 	<script>
 		
 		var img=new Image();
-		img.src="sys.png";
+		img.src="http://dn-storage-xdf.gokuai.com/ff/ff1fc043029ac058f5a062f01ea326b12811e001.dat?response-content-disposition=attachment%3B%20filename%3D%22vzBWmWgYXzSAoxxtqOqrjWKsOH0G0PBzYKUDYrj5fBNPR3f7Do.jpg%22%3B%20filename%2A%3Dutf-8%27%27vzBWmWgYXzSAoxxtqOqrjWKsOH0G0PBzYKUDYrj5fBNPR3f7Do.jpg&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1500627754&Signature=qYCoHgmdilHZE1mBcf%2FnjFskqnQ%3D";
         var canvas =document.getElementById("myCanvas");
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
@@ -23,7 +23,7 @@
 	            $('body').append('保存图片哈')
 
                 
-            }
+		};
 		$('button').click(function(){
             $('#img').attr('src',canvas.toDataURL("image/png"))
 

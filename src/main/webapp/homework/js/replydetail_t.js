@@ -570,13 +570,54 @@ $(function () {
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
+        $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
+
         $('.big_back_s img').css({
-            'margin-top': -$('.big_back_s img').css('height')/2+'px'
-        })
+            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+        });
+        $('.big_back_s canvas').css({
+            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+        });
+    });
+    $('.big_back_s span:last-of-type').on('touchend',function(){
+        var previewUrl = $('.big_back_s img').attr('src');
+        var img = new Image();
+        img.src=previewUrl;
+        var width_ = parseInt($('.big_back_s img').css('width'))
+        var height = parseInt($('.big_back_s img').css('height'))
+        console.log(height)
+        console.log($('.big_back_s img').css('height'))
+        var canvas =document.getElementById("myCanvas");
+        canvas.width=width_;
+        canvas.height=height;
+        var ctx=canvas .getContext("2d");
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'red';
+        ctx.drawImage(img,0,0,width_,height);
+        $('.big_back_s img').hide();
+        $('.big_back_s canvas').show();
+        // canvas事件
+        $(document).on('touchstart','canvas',function(){
+            console.log((event.touches[ 0 ].pageX - canvas.offsetLeft));
+            ctx.beginPath();
+            ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
+            $(document).on('touchmove','canvas',function(){
+                var ev = ev || event;
+                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
+                ctx.stroke();
+            });
+            $(document).on('touchend','canvas',function(){
+                $(document).unbind('touchmove','canvas',function(){});
+                $(document).unbind('touchend','canvas',function(){});
 
+                ctx.closePath();
+            });
 
+        });
     });
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
@@ -621,5 +662,6 @@ $(function () {
 
 
     });
+
 
 });
