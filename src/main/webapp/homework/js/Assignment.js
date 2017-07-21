@@ -1,19 +1,26 @@
 $(function () {
+
+
+
+
+
+
     var trardata = {
-        'teacherCode': 'TC23',
-        'schoolId': '73',
-        'email':'hanqifan@xdf.cn'
+        'teacherCode': localStorage.teacherId,
+        'schoolId': localStorage.schoolId,
+        'email': localStorage.terEmail
     };
     var homeworksubm = {
-        'teacherEmail': 'hanqifan@xdf.cn',
-        'teacherName': '韩启凡',
-        'schoolId': '73',
-        'appid':'wxab29a3e2000b8d2a',
-        'secret':'7739991fcce774c2281147eae3986ad9',
-        'url':'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
-        'templateId':'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
+        'teacherEmail': localStorage.terEmail,
+        'teacherName': localStorage.teacherName,
+        'schoolId':  localStorage.schoolId,
+        'appid': Global.appid,
+        'secret': Global.secret,
+        'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+        'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
 
+    var layer1, layer2, loading;
 
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
@@ -22,25 +29,26 @@ $(function () {
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
         }
-        if(sessionStorage.Classname_x){
-            $('.class_s i').html('已选择1个班'+sessionStorage.Classname_x+';');
+        if (sessionStorage.Classname_x) {
+            $('.class_s i').html('已选择1个班' + sessionStorage.Classname_x + ';');
             $('.time_S i').html(sessionStorage.ClassTime_x);
-            $('.class_name i').html('1')
+            $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
-            $('.class_name li').each(function(){
-                if($(this).html()==sessionStorage.Classname_x){
-                    $(this).find('img').attr('sec','images/C0503.png')
+            $('.class_name li').each(function () {
+                if ($(this).attr('classcode') == sessionStorage.classCode_in) {
+                    $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            ajaxRequest('post',homework_s.t_seac,{'Tcid': sessionStorage.id_x},function(e){
+            ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
+                sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
-                for(var b  = 0;b<tea.length;b++){
-                    if(tea[b].fileType=='mp3'){
-                        $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic'+b+')"  fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"><span>10"</span> <audio  src="'+tea[b].previewUrl+'" id="bgMusic'+b+'"  controls="controls" preload="auto"></audio ></div>')
-                    }else{
+                for (var b = 0; b < tea.length; b++) {
+                    if (tea[b].fileType == 'mp3') {
+                        $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
+                    } else {
                         $('.imgBox').show();
-                        $('.imgBox').eq(0).append('<img src="'+tea[b].thumbnail+'" alt="" fileName="'+tea[b].fileName+'" fileType="'+tea[b].fileType+'" fileSize="'+tea[b].fileSize+'" diskFilePath="'+tea[b].diskFilePath+'"/>')
+                        $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
                 }
             });
@@ -55,7 +63,7 @@ $(function () {
         $('.big_back').show();
     });
 
-    $(document).on('touchend', '.class_name li', function () {
+    $(document).on('tap', '.class_name li', function () {
         var html_ = $('.class_name i').html();
         if ($(this).find('img').attr('src') == 'images/C05_06.png') {
             $(this).find('img').attr('src', 'images/C0503.png');
@@ -105,16 +113,18 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
-        if ($(this).val().length > 200) {
+        if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
+            $(this).val($(this).val().substring(0,200));
         } else {
             $('.home_text span').css('color', '#808080');
         }
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
     $('.home_text textarea').on('blur', function () {
-        if ($(this).val().length > 200) {
+        if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
+            $(this).val($(this).val().substring(0,200));
         } else {
             $('.home_text span').css('color', '#808080');
         }
@@ -168,7 +178,7 @@ $(function () {
     });
     //提交作业
     $('.Submit_s').on('touchend', function () {
-        if($(this).css('background')=='rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box'){
+        if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
             return false;
         }
@@ -232,64 +242,65 @@ $(function () {
             });
             return false;
         }
-        if($('.Knowledge input').val().indexOf(',')!=-1){
-            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(','));
-            if(html_te.length>10){
+        if ($('.Knowledge input').val().indexOf(',') != -1) {
+            var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(','));
+            if (html_te.length > 10) {
                 layer.msg('单条知识点对多输入10个字');
                 return false;
             }
-        }else if($('.Knowledge input').val().indexOf(';')!=-1){
-            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf(';'));
-            if(html_te.length>10){
+        } else if ($('.Knowledge input').val().indexOf(';') != -1) {
+            var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(';'));
+            if (html_te.length > 10) {
                 layer.msg('单条知识点对多输入10个字');
                 return false;
             }
-        }else if($('.Knowledge input').val().indexOf('，')!=-1){
-            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('，'));
-            if(html_te.length>10){
+        } else if ($('.Knowledge input').val().indexOf('，') != -1) {
+            var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('，'));
+            if (html_te.length > 10) {
                 layer.msg('单条知识点对多输入10个字');
                 return false;
             }
-        }else if($('.Knowledge input').val().indexOf('；')!=-1){
-            var html_te = $('.Knowledge input').val().substring(0,$('.Knowledge input').val().indexOf('；'));
-            if(html_te.length>10){
+        } else if ($('.Knowledge input').val().indexOf('；') != -1) {
+            var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('；'));
+            if (html_te.length > 10) {
                 layer.msg('单条知识点对多输入10个字');
                 return false;
             }
-        }else{
+        } else {
             var html_te = $('.Knowledge input').val();
-            if(html_te.length>10){
+            if (html_te.length > 10) {
                 layer.msg('单条知识点对多输入10个字');
                 return false;
             }
         }
-        if(sessionStorage.Classname_x){
+        if (sessionStorage.Classname_x) {
+            arr_s = arr_voice.concat(arr_image);
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
-            errohome.description = $('.home_text textarea').val();
+            errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            if($('.music_s').eq(0).attr('filename')){
-                arr_s.push({
-                    'fileName':$('.music_s').eq(0).attr('filename'),
-                    'fileType':$('.music_s').eq(0).attr('filetype'),
-                    'fileSize':$('.music_s').eq(0).attr('filesize'),
-                    'diskFilePath':$('.music_s').eq(0).attr('diskfilepath')
-                });
-            }
-            if($('.imgBox img').eq(0).attr('filename')){
-                arr_s.push({
-                    'fileName':$('.imgBox img').eq(0).attr('filename'),
-                    'fileType':$('.imgBox img').eq(0).attr('filetype'),
-                    'fileSize':$('.imgBox img').eq(0).attr('filesize'),
-                    'diskFilePath':$('.imgBox img').eq(0).attr('diskfilepath')
-                });
-            }
-            ajax_S(homework_s.t_erro,errohome, function (e) {
+            // if ($('.music_s').eq(0).attr('filename')) {
+            //     arr_s.push({
+            //         'fileName': $('.music_s').eq(0).attr('filename'),
+            //         'fileType': $('.music_s').eq(0).attr('filetype'),
+            //         'fileSize': $('.music_s').eq(0).attr('filesize'),
+            //         'diskFilePath': $('.music_s').eq(0).attr('diskfilepath')
+            //     });
+            // }
+            // if ($('.imgBox img').eq(0).attr('filename')) {
+            //     arr_s.push({
+            //         'fileName': $('.imgBox img').eq(0).attr('filename'),
+            //         'fileType': $('.imgBox img').eq(0).attr('filetype'),
+            //         'fileSize': $('.imgBox img').eq(0).attr('filesize'),
+            //         'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
+            //     });
+            // }
+            ajax_S(homework_s.t_erro, errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
-                    $('.Submit_s').css('background','#00ba97');
+                    $('.Submit_s').css('background', '#00ba97');
                     sessionStorage.removeItem('Classname_x');
                     sessionStorage.removeItem('ClassTime_x');
                     sessionStorage.removeItem('knowledgePoint_x');
@@ -301,21 +312,22 @@ $(function () {
                     $('.erro').show();
                 }
             })
-        }else{
+        } else {
             var class_c = classCode.substr(0, classCode.length - 1);
             var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+            arr_s = arr_voice.concat(arr_image);
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
-            homeworksubm.description = $('.home_text textarea').val();
+            homeworksubm.description = encodeURI($('.home_text textarea').val());
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
-                $('.Submit_s').css('background','#ccc');
+                $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
-                    $('.Submit_s').css('background','#00ba97');
+                    $('.Submit_s').css('background', '#00ba97');
                 } else {
                     $('.erro p').html(e.message);
                     $('.big_back').show();
@@ -323,7 +335,6 @@ $(function () {
                 }
             })
         }
-
 
 
     });
@@ -337,6 +348,7 @@ $(function () {
     $('.erro input:first-of-type').on('touchend', function () {
         $('.big_back').hide();
         $('.erro').hide();
+        $('.Submit_s').css('background', '#00ba97')
     });
 
     $('.erro input:last-of-type').on('touchend', function () {
@@ -359,10 +371,12 @@ $(function () {
             setTimeout(function () {
                 $('.big_back').hide();
             }, 300);
-            $('.class_name i').html('0');
-            $('.class_name img').attr('src', 'images/C05_06.png');
-            if ($('.class_name i').html() == '0') {
-                $('.class_s i').html('')
+            if($('.class_s i').html()==''){
+                $('.class_name i').html('0');
+                $('.class_name img').attr('src', 'images/C05_06.png');
+                if ($('.class_name i').html() == '0') {
+                    $('.class_s i').html('')
+                }
             }
         }
         if ($('.succ').css('display') == 'block') {
@@ -398,7 +412,7 @@ $(function () {
     $('#record').on('touchstart', function (event) {
         Index_s++;
         timeInedex = 0;
-        $(this).siblings('img').attr('src','images/speak.gif');
+        $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
         wx.startRecord({
             success: function () {
@@ -415,14 +429,14 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
-        $(this).siblings('img').attr('src','images/C04-03.png');
+        $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
         wx.stopRecord({
             success: function (res) {
                 clearInterval(timeds);
-                if(timeds>1){
-                    $('.big_s').append('<div class="music_s"><span></span> </div>');
-                }
+                // if (timeds > 1) {
+                //     $('.big_s').append('<div class="music_s"><span></span> </div>');
+                // }
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
@@ -432,14 +446,6 @@ $(function () {
             }
         });
     });
-
-    //播放微信录制后的本地语音文件
-    function playVoice(plId) {
-        //播放录音
-        wx.playVoice({
-            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-        });
-    }
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
@@ -456,7 +462,11 @@ $(function () {
             }
         });
     }
+
     var arr_s = [];
+    var arr_voice = [];
+    var arr_image = [];
+    var recordCount = 0;
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -465,7 +475,6 @@ $(function () {
             'mediaId': serverId,
             'schoolId': "73",
             'classId': "hx001"
-
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -476,12 +485,12 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    // $('.teBox').val(e.data.fileUrl);
-                    arr_s.push({
-                        'fileName':e.data.fileName,
-                        'fileType':e.data.fileType,
-                        'fileSize':e.data.fileSize,
-                        'diskFilePath':e.data.diskFilePath
+                    $('.teBox').val(e.data.fileUrl);
+                    arr_voice.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath
                     });
                     layer.open({
                         type: 1,
@@ -492,36 +501,149 @@ $(function () {
                         time: 3000,
                         content: $(".music_succ")
                     });
-                    //显示语音布局
-                    showAudio(e.data.fileUrl, e.data.fileSize);
+                    getRecordInfo(e.data.diskFilePath);
                 }
-
-
             }
         });
     }
 
-    //显示语音布局
-    function showAudio(url, length) {
-        $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
+    /**
+     * 获取录制语音信息
+     */
+    function getRecordInfo(diskFileUrl) {
+        var optionFile = {"fullPath": diskFileUrl};
+        $.ajax({
+            url: url_o + "upload/getMp3Url.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                if (e.status == "failed") {
+                    console.log(e.message);
+                } else {
+                    //显示语音布局
+                    showAudio(url_o + e.data, $('#record_audio_box'), recordCount);
+                    recordCount++;
+
+                }
+            }
+        });
     }
 
-    function PlaySound(soundobj) {
-        var thissound = document.getElementById(soundobj);
+    /**
+     * 显示录制语音布局
+     */
+    function showAudio(url, parentId, id) {
 
-        thissound.play();
+        parentId.show();
+        var strVoice = "";
+        var idChildren;
+        var length = "";
+        idChildren = "record_audio" + id;
+        //录音布局，可以删除
+        strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
 
+        parentId.append(strVoice);
+
+        var audioElem = document.getElementById(idChildren);
+        audioElem.onloadedmetadata = getVoiceLen;
+        function getVoiceLen() {
+            var len = audioElem.duration;
+            len = parseInt(len);
+            var voiceLen = "";
+            var hh = parseInt(len / 3600);
+            var mm = parseInt((len % 3600) / 60);
+            var ss = parseInt((len % 3600) % 60);
+            if (hh > 0) {
+                voiceLen = hh + "'" + mm + "'" + ss + "''";
+            } else if (mm > 0) {
+                voiceLen = mm + "'" + ss + "''";
+            } else {
+                voiceLen = ss + "''";
+            }
+            if (ss == 0) {
+
+                voiceLen = "1''";
+            }
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        }
+
+        $('.song_s,.mask').hide();
+        // 语音大于三张，隐藏添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length >= 3) {
+            $('#record').hide();
+        }
     }
-    $(document).on('touchend','.music_s',function () {
-        $(this).addClass('playing_s');
-        playVoice(song_s);
-        setTimeout(function(){
-         $('.music_s').removeClass('playing_s');
-        },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
+
+    /*-------------------- 删除语音 --------------------*/
+    $(document).on('touchend', '.stuVoice', function () {
+        //alert($(this).parents('.audio_box').index());
+        $('.delete-voice .confirmBtn').attr('voice-index', $(this).parents('.audio_box').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除语音
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-voice")
+        })
     });
+    // 删除语音-取消
+    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除语音-确定
+    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('voice-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('#record_audio_box').find('.audio_box').length <= 1) {
+            $('#record_audio_box').hide();
+        }
+
+        $('#record_audio_box li:eq(' + index + ')').remove();
+        // 语音小于三张，显示添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length < 3) {
+            $('#record').show();
+        }
+        if (arr_voice.length > 0) {
+            arr_voice.splice(index, 1);
+            recordCount--;
+        }
+
+
+    });
+
+    // //显示语音布局
+    // function showAudio(url, length) {
+    //     $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
+    // }
+    //
+    // function PlaySound(soundobj) {
+    //     alert(5);
+    //     var thissound = document.getElementById(soundobj);
+    //
+    //     thissound.play();
+    //
+    // }
+    // $(document).on('touchend','.music_s',function () {
+    //     $(this).addClass('playing_s');
+    //     playVoice(song_s);
+    //     setTimeout(function(){
+    //      $('.music_s').removeClass('playing_s');
+    //     },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
+    // });
 
     //图片上传
     $('.image_s').click(function () {
+        //重新选择图片，清除之前数据
+        fileParams = [];
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -530,18 +652,19 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<div><span class='stuImg'></span><img src='" + res.localIds[i] + "'/></div>";
+                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").html(str);
-                    //上传服务器
-                    upLoadWxImage(res);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
-                        $('#image_s').hide();
+                        $('#chooseImage').hide();
                     }
+
+                    //上传服务器
+                    upLoadWxImage(res);
                 }
 
 
@@ -566,6 +689,8 @@ $(function () {
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
+                    // serverIds.push(res.serverId);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
                     uploadImage(res.serverId);
                     if (i < length) {
                         upload();
@@ -600,11 +725,11 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    arr_s.push({
-                        'fileName':e.data.fileName,
-                        'fileType':e.data.fileType,
-                        'fileSize':e.data.fileSize,
-                        'diskFilePath':e.data.diskFilePath
+                    arr_image.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath
                     });
 
                 }
@@ -614,19 +739,58 @@ $(function () {
         });
 
     }
-
-    // 删除图片
+    /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
-        if ($(this).parents('.imgBox').find('div').length <= 1) {
-            $(this).parents('.imgBox').remove();
-        } else {
-            $(this).parent('div').remove();
+        // alert($(this).parent('li').index());
+        $('.delete-img .confirmBtn').attr('img-index', $(this).parent('li').index());
+        layer.close(layer1);
+        layer.close(layer2);
+        //删除图片
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".delete-img")
+        })
+    });
+    // 删除图片-取消
+    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+        layer.close(layer1);
+        layer.close(layer2);
+    });
+    // 删除图片-确定
+    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+
+        var index = parseInt($(this).attr('img-index'));
+        layer.close(layer1);
+        layer.close(layer2);
+        if ($('.imgBox').find('li').length <= 1) {
+            $('.imgBox').hide();
         }
+
+        $('.imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
-            $('#image_s').show();
+            $('.image_s').show();
+        }
+        if (arr_image.length > 0) {
+            arr_image.splice(index, 1);
         }
     });
-
-    $('body').css('overflow-y','auto')
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('touchend', '.imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
+        //     previewUrl = $(this).attr('src');
+        // } else {
+        //     previewUrl = 'http://dt.staff.xdf.cn/xdfdthome/homework/' + $(this).attr('src');
+        // }
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
+    $('body').css('overflow-y', 'auto')
 });

@@ -1,5 +1,19 @@
 $(function(){
-
+    //登录相关
+    if(!localStorage.terEmail){
+        var WXnum  = {
+            'wechatId':sessionStorage.openid
+        };
+        ajax_S(url.s_seac,WXnum,function(e){
+            if(e.result==true){
+                sessionStorage.stuNumber = e.data.studentNo;
+                sessionStorage.schoolId = e.data.schoolId;
+                location.href = 'homeworklist_s.html';
+            }else{
+                location.href = '../schedule/login_s.html'
+            }
+        });
+    }
 
     //tab
 	$(document).on('touchstart','.hwFinish .firstList',function(){
@@ -23,7 +37,7 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart','.tealist_s',function(){
-	    if($(this).find('.remove_s')){
+	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
@@ -31,7 +45,7 @@ $(function(){
                     $(this).siblings().css('margin-left','0px');
                     $(this).siblings().find('.remove_s').css('right','-270px');
                     $(this).css('margin-left','-181px');
-                    $(this).find('.remove_s').css('right','-30px');
+                    $(this).find('.remove_s').css('right','-0px');
                     $(this).parent().css('overflow','inherit');
                     return false;
                 }
@@ -52,7 +66,7 @@ $(function(){
 
     var Read = '';
 	// 获取老师作业列表
-    ajax_S(homework_s.t_list,{email:'hanqifan@xdf.cn','schoolId':'73'},function(e){
+    ajax_S(homework_s.t_list,{email:localStorage.terEmail,'schoolId':localStorage.schoolId},function(e){
         console.log(e);
         if(e.data==undefined){
             $('.empty').show();
@@ -63,11 +77,16 @@ $(function(){
         $('.Prompt_s i').html(e.SumUpnotCorrect);
         for(var a = 0;a<list_s.length;a++){
             for(var c = 0;c<list_s[a].length;c++){
-                list_s[a][c].readStatus==0?Read='state_st':Read='';
+                if(list_s[a][c].readStatus==0){
+                    Read='state_st';
+                    break;
+                }else{
+                    Read = '';
+                }
             }
             $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display:inline;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
             for(var b = 0;b<list_s[a].length;b++){
-                if((list_s[a][b].yescommit+list_s[a][b].nocorrect)==list_s[a][0].studentNum||list_s[a][b].yescommit==list_s[a][0].studentNum){
+                if((parseInt(list_s[a][b].yescommit)+parseInt(list_s[a][b].nocorrect))==list_s[a][0].studentNum||list_s[a][b].yescommit==list_s[a][0].studentNum){
                     if(list_s[a][b].nocorrect==0){
                         $('.tealist_s').eq(a).append(' <li><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescorrect+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                     }else{
@@ -76,16 +95,15 @@ $(function(){
 
                 }else{
                     if(list_s[a][b].nocorrect==0){
-                        $('.tealist_s').eq(a).append(' <li><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescorrect+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="'+list_s[a][b].className+'" time="'+list_s[a][b].homeworkTime+'" know="'+list_s[a][b].knowledgePoint+'" text="'+list_s[a][b].description+'" Id="'+list_s[a][b].id+'">修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
+                        $('.tealist_s').eq(a).append(' <li><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescorrect+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="'+list_s[a][b].className+'" time="'+list_s[a][b].homeworkTime+'" know="'+list_s[a][b].knowledgePoint+'" text="'+decodeURI(list_s[a][b].description)+'" Id="'+list_s[a][b].id+'"  classCode="'+list_s[a][b].classCode+'">修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
                     }else{
-                        $('.tealist_s').eq(a).append(' <li style="color:#000;"><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescorrect+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="'+list_s[a][b].className+'" time="'+list_s[a][b].homeworkTime+'" know="'+list_s[a][b].knowledgePoint+'" text="'+list_s[a][b].description+'" Id="'+list_s[a][b].id+'">修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
+                        $('.tealist_s').eq(a).append(' <li style="color:#000;"><span>'+list_s[a][b].homeworkTime+'</span><p class="state_s">已批:'+list_s[a][b].yescorrect+'/未批:'+list_s[a][b].nocorrect+'/未交:'+list_s[a][b].notcommit+'</p><span class="more_so"  classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'" homeworkTime="'+list_s[a][b].homeworkTime+'" Tid="'+list_s[a][b].id+'">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="'+list_s[a][b].className+'" time="'+list_s[a][b].homeworkTime+'" know="'+list_s[a][b].knowledgePoint+'" text="'+decodeURI(list_s[a][b].description)+'" Id="'+list_s[a][b].id+'" classCode="'+list_s[a][b].classCode+'">修改</span><span class="delete_s" id="'+list_s[a][b].id+'">删除</span></div></li> ')
                     }
                 }
                 }
 
             }
     });
-
     //查看更多
     $(document).on('touchend','.more_so',function(){
         sessionStorage.classCode_s = $(this).attr('classCode');
@@ -130,21 +148,9 @@ $(function(){
         sessionStorage.knowledgePoint_x =  $(this).attr('know');
         sessionStorage.description_x =  $(this).attr('text');
         sessionStorage.id_x =  $(this).attr('Id');
+        sessionStorage.classCode_in = $(this).attr('classCode');
         location.href = 'Assignment.html'
     });
-    // {
-    //     "appid":"wxab29a3e2000b8d2a",
-    //     "secret":"7739991fcce774c2281147eae3986ad9",
-    //     "remark":"发送人",
-    //     "courseName":"我是班级名字",
-    //     "time":"2017年",
-    //     "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-    //     "url":"http://www.baidu.com",
-    //     "info":[
-    //     {"childName":"我是测试","first":"我是测试标题","score":"100000分","openId":"or2E7wXQqLPoNHoXcPQFu93lArDI"},
-    // ]
-    // }
-
 
 
 

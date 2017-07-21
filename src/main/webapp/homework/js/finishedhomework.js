@@ -2,7 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
-    var layer1,loading;
+    var layer1, loading;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -32,16 +32,20 @@ $(function () {
             }
         }
         //作业描述
-        $('.des .hwCon').html(datas.teacherDes);
+        $('.des .hwCon').html(decodeURI(datas.teacherDes));
         //语音,图片
-        $.each(datas.teaHomeworkFiles, function (i, paths) {
-            var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-            // 获取语音和图片的预览地址 TODO
-            console.log(pathUrls);
-            getFileInfo(pathUrls);
-        });
+        /*$.each(datas.teaHomeworkFiles, function (i, paths) {
+         var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+         // 获取语音和图片的预览地址 TODO
+         console.log(pathUrls);
+         if(paths.fileType.indexOf("mp3") != -1){
+         getAudioInfo(pathUrls);
+         }else {
+         getFileInfo(pathUrls);
+         }
+         });*/
         /*******作业答案*******/
-        $('.hmAnswer .anDes').html(datas.description);
+        $('.hmAnswer .anDes').html(decodeURI(datas.description));
         // 优秀
         if (datas.tag == 1) {
             $('.hw_status').addClass('hw_status_s');
@@ -49,12 +53,16 @@ $(function () {
             $('.hw_status').removeClass('hw_status_s');
         }
         //语音,图片
-        $.each(datas.stuHomeworkFiles, function (i, paths) {
-            var pathUrls = ['2', paths.diskFilePath, paths.fileType];
-            // 获取语音和图片的预览地址
-            console.log(i+"---"+pathUrls);
-            getFileInfo(pathUrls);
-        });
+        /*$.each(datas.stuHomeworkFiles, function (i, paths) {
+         var pathUrls = ['2', paths.diskFilePath, paths.fileType];
+         // 获取语音和图片的预览地址
+         console.log(i + "---" + pathUrls);
+         if(paths.fileType.indexOf("mp3") != -1){
+         getAudioInfo(pathUrls);
+         }else {
+         getFileInfo(pathUrls);
+         }
+         });*/
         /*******老师批注*******/
         var pizhuHtml = "";
         if (datas.replyStatus == "0") {
@@ -62,51 +70,97 @@ $(function () {
         } else {
             pizhuHtml = datas.replyDesc;
         }
-        $('.comment .anDes').html(pizhuHtml);
-        //语音，图片
+        $('.comment .anDes').html(decodeURI(pizhuHtml));
         //语音,图片
-        $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
-            var pathUrls = ['3', paths.diskFilePath, paths.fileType];
-            // 获取语音和图片的预览地址
-            console.log(pathUrls);
-            getFileInfo(pathUrls);
-        });
+        /*$.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+         var pathUrls = ['3', paths.diskFilePath, paths.fileType];
+         // 获取语音和图片的预览地址
+         console.log(pathUrls);
+         if(paths.fileType.indexOf("mp3") != -1){
+         getAudioInfo(pathUrls);
+         }else {
+         getFileInfo(pathUrls);
+         }
+         });*/
+        //语音，图片
+        var allFilePath = {
+            "fileSfullPath": [],//学生作业文件云盘全路径
+            "fileTfullPath": [],//老师作业文件云盘全路径
+            "fileRfullPath": []//老师回复作业文件云盘全路径
+        };
+        if (datas.teaHomeworkFiles.length > 0 || datas.stuHomeworkFiles.length > 0 || datas.teaHomeworkReplyFiles.length > 0) {
+            //老师作业信息---语音，图片
+            $.each(datas.teaHomeworkFiles, function (i, paths) {
+                allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
+            });
+            //学生答案信息--语音，图片
+            $.each(datas.stuHomeworkFiles, function (i, paths) {
+                allFilePath.fileSfullPath.push({"fullPath": paths.diskFilePath});
+            });
+            //老师批复作业信息---语音，图片
+            $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+                allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
+            });
+            console.log("获取文件排序" + JSON.stringify(allFilePath));
+            ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+        }
         layer.close(loading);
     }
 
-    /*--------------------根据diskFileUrl从服务器获取文件地址--Start----------------------------------*/
 
     var voiceCount = 0;
-    /**
-     * 获取文件信息
-     */
-    function getFileInfo(fileArray) {
-        // fileArray = ["1", "homework/b479a873299649a48d9741582a735450.jpg", "jpg"];
-        var flag = fileArray[0];
-        var fileType = fileArray[2];
-        var diskFileUrl = fileArray[1];
-        var netConfig = "IN";//DEFAULT/IN
-        var optionFile = {"fullPath": diskFileUrl, "net": netConfig, "getAttribute": false};
-        $.ajax({
-            url: url_o + "upload/viewFileDetail.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                // alert(JSON.stringify(e));
-                if (e.success == false) {
-                    console.log(e.message);
-                } else {
-                    //将文件显示到布局中
-                    if (fileType.indexOf("mp3") != -1) {
+    //获取文件信息
+    function getAllFileRankSuccess(msg) {
+        if (msg.code == 200) {
+            //获取老师作业信息
+            if (msg.data.fileT != "" && msg.data.fileT != null && msg.data.fileT != undefined) {
+                $.each(msg.data.fileT, function (i, paths) {
+                    // 获取语音和图片的预览地址
+                    // paths.fileType = 'jpg';
+                    var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+                    if (paths.fileType.indexOf("mp3") != -1) {
+                        //将文件显示到布局中
                         voiceCount++;
-                        showAudio(e.fileUrl, "audio_" + flag, "audio" + flag+""+voiceCount);
+                        showAudio(url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
                     } else {
-                        showImage(e.fileUrl, "imagBox_" + flag);
+                        //将文件显示到布局中
+                        showImage(paths.fileUrl, "imagBox_" + 1);
                     }
-                }
+                });
             }
-        });
+            //获取学生作业答案
+            if (msg.data.fileS != "" && msg.data.fileS != null && msg.data.fileS != undefined) {
+                $.each(msg.data.fileS, function (i, paths) {
+                    var pathUrls = ['2', paths.diskFilePath, paths.fileType];
+                    // 获取语音和图片的预览地址
+                    console.log(i + "---" + pathUrls);
+                    if (paths.fileType.indexOf("mp3") != -1) {
+                        voiceCount++;
+                        showAudio(url_o + paths.diskFilePath, "audio_" + 2, "audio" + 2 + "" + voiceCount);
+                    } else {
+                        //将文件显示到布局中
+                        showImage(paths.fileUrl, "imagBox_" + 2);
+                    }
+                });
+            }
+            //获取老师批注
+            if (msg.data.fileR != "" && msg.data.fileR != null && msg.data.fileR != undefined) {
+                $.each(msg.data.fileR, function (i, paths) {
+                    var pathUrls = ['3', paths.diskFilePath, paths.fileType];
+                    // 获取语音和图片的预览地址
+                    console.log(pathUrls);
+                    if (paths.fileType.indexOf("mp3") != -1) {
+                        voiceCount++;
+                        showAudio(url_o + paths.diskFilePath, "audio_" + 3, "audio" + 3 + "" + voiceCount);
+                    } else {
+                        //将文件显示到布局中
+                        showImage(paths.fileUrl, "imagBox_" + 3);
+                    }
+                });
+            }
+        } else {
+            alert("获取文件失败");
+        }
     }
 
     /**

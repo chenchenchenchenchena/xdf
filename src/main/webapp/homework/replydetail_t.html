@@ -9,6 +9,7 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="full-screen" content="yes"/>
 	<link rel="stylesheet" href="../common/css/base.css"  />
+	<link rel="stylesheet" href="css/hwcommon.css"  />
 	<link rel="stylesheet" href="css/dohomework_s.css"  />
 	<link rel="stylesheet" href="css/homeworklist_s.css"  />
 	<script src="../common/js/jquery.js"></script>
@@ -18,6 +19,7 @@
 	<script src="../common/js/layer-v2.1/layer/layer.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="js/replydetail_t.js"></script>
+	<script src="js/voice_check.js"></script>
 </head>
 <body>
 <div class="doHomework">
@@ -33,39 +35,30 @@
 			<p class="hwCon">如图，点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</p>
 		</div>
 		<div>
-			<div class="big_ss">
-
-			</div>
-
-			<div class="imgBox">
-
-			</div>
+			<!--<div class="big_ss"></div>-->
+			<ul id="audio_1" style="display:none;"></ul>
+			<div class="imgBox" id="imagBox_1" style="display:block;"></div>
 		</div>
 	</div>
 	<div class="hmAnswer">
 		<div class="infoTitle">作业答案 <span>优秀</span></div>
 		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div class="big_ss">
-
-			</div>
-
-			<div class="imgBox">
-
-			</div>
+			<!--<div class="big_ss">-->
+			<!--</div>-->
+			<ul id="audio_2" style="display:none;"></ul>
+			<div class="imgBox" id="imagBox_2" style="display:block;"></div>
 		</div>
 	</div>
 	<div class="hmAnswer">
 		<div class="infoTitle">老师批复 </div>
 		<div class="anDes">答:点E为正方形ABCD的边CD上的一点，点F为CB的延长线上的一点，且EA垂直AF,求证：DE=BF.</div>
 		<div>
-			<div class="big_ss">
+			<!--<div class="big_ss">-->
 
-			</div>
-
-			<div class="imgBox">
-
-			</div>
+			<!--</div>-->
+			<ul id="audio_3" style="display:none;"></ul>
+			<div class="imgBox" id="imagBox_3" style="display:block;"></div>
 		</div>
 	</div>
 	<div class="answer" style="display: block;">
@@ -79,18 +72,20 @@
 		</div>
 		<div style="display: none;">
 			<div id="audio" src=""></div>
-			<div class="imgBox">
-				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-				<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>
-			</div>
+			<div class="imgBox" id="imagBox_4" style="display:block;"></div>
+			<!--<div class="imgBox">-->
+				<!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>-->
+				<!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>-->
+				<!--<div><span class="stuImg"></span><img src="images/B02-23_03.png" alt="" /></div>-->
+			<!--</div>-->
 		</div>
-		<div class="big_s">
+		<!--<div class="big_s">-->
 
-		</div>
+		<!--</div>-->
+		<ul id="record_audio_box" class="big_s" style="display: none;"></ul>
 		<div class="notsubmit" style="display: block;">
-			<div class="imgBox" style="display: none">
-			</div>
+			<ul class="imgBox" style="display: none">
+			</ul>
 		</div>
 		<button class="btn sub_p">提交</button>
 	</div>
@@ -108,7 +103,7 @@
 <div class="music_succ">
 	<img src="images/7.png" alt="">
 	<p>语音上传成功</p>
-	<input type="button" value="确定">
+	<!--<input type="button" value="确定">-->
 </div>
 <div class="erro">
 	<img src="images/redtan.png" alt="">
@@ -120,6 +115,16 @@
 	<img src="images/C04-03.png" alt="">
 	<p>按住说话</p>
 	<div id="record"></div>
+</div>
+<div class="tips-box delete-voice" style="display: none;"><img src="images/redtan.png"/>
+	<p>确定删除语音</p>
+	<button class="cancelBtn">取消</button>
+	<button class="confirmBtn">确定</button>
+</div>
+<div class="tips-box delete-img none"><img src="images/redtan.png"/>
+	<p>确定删除图片</p>
+	<button class="cancelBtn">取消</button>
+	<button class="confirmBtn">确定</button>
 </div>
 </body>
 </html>

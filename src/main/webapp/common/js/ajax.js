@@ -89,7 +89,7 @@ var homework_s = {
     't_stat': url_o+'teacherData/TeacherupdateReadstatus.do',//老师未读已读状态
     't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
     't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
-    't_sbim': url_o+'/teacherData/addHomeWork.do',    //提交老师作业
+    't_sbim': url_o+'teacherData/addHomeWork.do',    //提交老师作业
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
     't_two' : url_o+'teacherData//queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
@@ -103,9 +103,9 @@ var homework_s = {
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
     's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
+    's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
 
 };
-//百度统计
 function wechatCode(url) {
     var code = getRequest()['code'];
     var url = url;
@@ -271,6 +271,7 @@ function splitStrs(strs) {
     }
     return strs;
 };
+
 //Tap事件封装
 $(document).on("touchstart", function (e) {
     if (!$(e.target).hasClass("disable")) $(e.target).data("isMoved", 0);
@@ -281,3 +282,109 @@ $(document).on("touchmove", function (e) {
 $(document).on("touchend", function (e) {
     if (!$(e.target).hasClass("disable") && $(e.target).data("isMoved") == 0) $(e.target).trigger("tap");
 });
+
+
+
+
+
+// 微信分享
+
+function weChatData(Json) {
+    var urlVal = window.location.href;
+    var businessP = {
+        "appid" :  'wx559791e14e9ce521',
+        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+        "url": urlVal
+    };
+    jQuery.ajax({
+        type: "POST",
+        url: url.w_xmor,
+        async: true,
+        dataType: 'json',
+        data: JSON.stringify(businessP),
+        success: function (json) {
+            if (json.result == true) {//获取成功
+                var appId = Global.appid;
+                var timestamp = json.timestamp;
+                var nonceStr = json.nonceStr;
+                var signature = json.signature;
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: appId, // 必填，公众号的唯一标识
+                    timestamp: timestamp, // 必填，生成签名的时间戳
+                    nonceStr: nonceStr, // 必填，生成签名的随机串
+                    signature: signature,// 必填，签名，见附录1
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.ready(function () {
+                    wx.onMenuShareTimeline({
+                        title: Json.title, // 分享标题
+                        link: urlVal, // 分享链接
+                        imgUrl:Json.url, // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                            // shareCmsFn();
+                            //禁用部分分享按钮
+                            wx.hideMenuItems({
+                                menuList: ['menuItem:share:qq',         //分享到QQ
+                                    'menuItem:share:weiboApp',   //分享到微博
+                                    'menuItem:share:facebook',   //分享到Facebook
+                                    'menuItem:share:QZone',      //分享到QQ空间
+                                    'menuItem:openWithQQBrowser',//在QQ浏览器中打开
+                                    'menuItem:openWithSafari',   //在Safari中打开
+                                    'menuItem:share:email',
+                                    'menuItem:copyUrl',          //复制链接
+                                    'menuItem:readMode'          //阅读模式
+                                ],
+                                success: function () {
+                                    //alert("testing:ok");
+                                },
+                                error: function () {
+                                    //alert("testing:error");
+                                }
+                            });
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                        }
+                    });
+                    wx.onMenuShareAppMessage({
+                        title: Json.title, // 分享标题
+                        desc: Json.text, // 分享描述
+                        link:urlVal , // 分享链接
+                        imgUrl:Json.url, // 分享图标
+                        type: '', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                            // shareCmsFn();
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                            //$('.tan-box,.tan3,.mask,.popup,.mask-fq').hide();
+                        }
+
+                    });
+
+                });
+            }
+        }
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

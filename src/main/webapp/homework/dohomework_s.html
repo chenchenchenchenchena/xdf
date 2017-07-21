@@ -10,6 +10,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="full-screen" content="yes"/>
     <link rel="stylesheet" href="../common/css/base.css"/>
+    <link rel="stylesheet" href="css/hwcommon.css"/>
     <link rel="stylesheet" href="css/dohomework_s.css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
@@ -46,7 +47,7 @@
     <div class="answer">
         <div class="infoTitle">我的答案</div>
         <p class="sTitle dh">写作业</p>
-        <textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音"></textarea>
+        <textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength=""></textarea>
         <!--TODO 字数限制-->
         <p class="word"><span>0</span>/<span>200</span>
         <div class="clickImg">
@@ -99,7 +100,7 @@
                 <!--<span>16''</span>-->
             <!--</div>-->
             <!--<ul class="imgBox">-->
-                <!--<li><img src="images/B02-23_03.png" alt=""/></li>-->
+                <!--<li><span class='stuImg' img-index='1'></span><img src="images/B02-23_03.png" alt=""/></li>-->
                 <!--<li><img src="images/B02-2_10.png" alt=""/></li>-->
                 <!--<li><img src="images/C02_02.png" alt=""/></li>-->
             <!--</ul>-->
@@ -131,6 +132,11 @@
     <p>确定删除语音</p>
     <button class="cancelBtn">取消</button>
     <button class="confirmBtn">确定</button>
+</div>
+<div class="tips-box music_succ none">
+    <img src="images/7.png" alt="">
+    <p>语音上传成功</p>
+    <!--<input type="button" value="确定">-->
 </div>
 </body>
 <script src="js/dohomework.js"></script>

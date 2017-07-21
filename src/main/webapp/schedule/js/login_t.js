@@ -32,10 +32,12 @@ if(localStorage.terEmail){
 function Wxtea(e){
     if(e.data!=undefined){
         var teaname = jQuery.parseJSON(e.data);
-        console.log(teaname)
         $('.name_s').html(teaname.teacherName);
         $('.name_ema').html(teaname.teacherEmail);
         localStorage.terEmail = teaname.teacherEmail;
+        localStorage.teacherId = teacontent.teacherNo;
+        localStorage.schoolId = teacontent.schoolId;
+        localStorage.teacherName = teacontent.teacherName;
     }else{
         // etlogin('teacherWX')
     }

@@ -1,0 +1,116 @@
+/**************************作业列表公用样式**************************/
+.none{
+    display: none;
+}
+/*语音*/
+.audio_box{
+    height: 78px;
+    width: 100%;
+    margin-top: 30px;
+}
+.audio_box div{
+    display: inline-block;
+    width: 274px;
+    max-width: 620px;
+    height: 78px;
+    border: 1px solid #82be66;
+    background: #a0e75a;
+    border-radius: 10px;
+    float: left;
+    position: relative;
+}
+.audio_box span{
+    display: inline-block;
+    height: 78px;
+    line-height: 78px;
+    font-size: 30px;
+    margin-left: 20px;
+}
+.play-icon{
+    background: url("../images/voice_playing.png") 0 0 no-repeat;
+    display: inline-block;
+    width: 27px;
+    height: 33px;
+    position: absolute;
+    top: 22px;
+    left: 22px;
+}
+.playing{
+    -webkit-animation: playvoice_1 2s infinite ease-in-out;
+}
+@keyframes playvoice_1 {
+    0% {
+        background: url("../images/voice_playing_f1.png") 0 0 no-repeat;
+    }
+    50% {
+        background: url("../images/voice_playing_f2.png") 0 0 no-repeat;
+    }
+    100% {
+        background: url("../images/voice_playing_f3.png") 0 0 no-repeat;
+    }
+}
+.stuVoice{
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    background: url(../images/121.png) no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 10px 0 0;
+}
+/*提示框-删除*/
+.submitBox button,.submitFail button,.tips-box button{
+    width: 175px;
+    height: 72px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    background: #00ba97;
+    outline: none;
+    border: none;
+    margin: 40px 0 0 185px;
+    border-radius: 10px;
+}
+.submitFail button,.tips-box button{
+    margin: 40px 0 0 60px;
+}
+.submitFail>button:nth-child(3),
+.tips-box>button:nth-child(3){
+    background: #e4eaf1;
+    color: #aeb1b7;
+}
+.submitFail img,.submitBox img,
+.tips-box img,.submitBox img{
+    margin: 38px 0 0 224px;
+}
+.submitBox p,.submitFail p,.tips-box p{
+    font-size: 30px;
+    color: #333333;
+    text-align: center;
+    margin-top: 30px;
+}
+.layui-layer{
+    border-radius: 10px!important;
+}
+.layui-layer-setwin{
+    display: none!important;
+}
+/*图片*/
+.imgBox{
+    margin-top: 30px;
+    overflow: hidden;
+}
+.imgBox div,.imgBox li{
+    margin: 0 14px 0 0;
+    float: left;
+    position: relative;
+}
+.imgBox>div:last-child{
+    margin-right: 0;
+}
+.imgBox div img,.imgBox li img{
+    width:216px;
+    height: 216px;
+}
