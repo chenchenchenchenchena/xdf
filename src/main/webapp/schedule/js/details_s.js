@@ -64,7 +64,8 @@ $(function(){
         $('.scheduleTitle').html(BeginDate[timeindex].ClassName+'('+subject_s+')')
         $('.time span').html(begintime+'-'+endtime)
         $('.date span').html(begindata+'-'+enddata)
-        $('.classHour i').eq(0).html(LessonNo)
+        $('.classHour i').eq(0).html(LessonNo);
+        $('.stuNum').html(BeginDate[timeindex].ClassCode);
         $('.classHour i').eq(1).html(LessonCount)
         $('.progressBar p').css('width',LessonNo/LessonCount*100+'%');
         var arr = [];
