@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<canvas id="myCanvas" width="200" height="200"style="border:1px solid #c3c3c3;">Your browser does not support the HTML5 canvas tag.</canvas>
+	<img src="" alt="" id="img">
+	<button id="button" style="width:500px;height:500px;"></button>
+	<script>
+		
+		var img=new Image();
+		img.src="sys.png";
+		img.onload = function(){
+				var canvas =document.getElementById("myCanvas");
+				var ctx=canvas .getContext("2d");
+				ctx.strokeStyle = 'red';
+				var url = canvas.toDataURL("image/png")
+
+
+
+
+				ctx.drawImage(img,0,0);
+				$('#img').attr('src',url)
+	            $('body').append('保存图片哈')
+
+
+
+
+	            canvas.onmousedown = function(ev){
+                var ev = ev || event;
+                ctx.beginPath();
+                ctx.moveTo(ev.clientX-canvas.offsetLeft,ev.clientY-canvas.offsetTop);
+                document.onmousemove = function(ev){
+                    var ev = ev || event;
+                    ctx.lineTo(ev.clientX - canvas.offsetLeft,ev.clientY - canvas.offsetTop);
+                    ctx.stroke();    
+                }
+                document.onmouseup = function(ev){
+                    document.onmousemove = document.onmouseup = null;
+                    ctx.closePath();
+                }
+                
+            }
+		};
+            
+	            
+	</script>
+</body>
+</html>
