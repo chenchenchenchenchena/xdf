@@ -13,47 +13,6 @@ $(function () {
     });
 
     /**
-     * 播放微信录制后的本地语音文件
-     */
-    function playVoice(plId) {
-        // wx.ready(function () {
-            //播放录音
-            wx.playVoice({
-                localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-            });
-            playAnimation();
-        // });
-
-    }
-
-    /**
-     * 停止播放微信录制后的本地语音文件
-     */
-    function stopVoice(plId) {
-        // wx.ready(function () {
-            //播放录音
-            wx.stopVoice({
-                localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
-            });
-        stopAnimation();
-        // });
-    }
-
-    /**
-     * 播放微信录制后的本地语音文件
-     */
-    function playVoice(plId) {
-        alert(plId);
-        // wx.ready(function () {
-            //播放录音
-            wx.playVoice({
-                localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
-            });
-            stopAnimation();
-        // });
-    }
-
-    /**
      *播放语音
      */
     var playTimer = "", playFlag = false;
@@ -93,6 +52,31 @@ $(function () {
                 stop();
             }
         }
+    }
+
+
+
+    /**
+     * 播放微信录制后的本地语音文件
+     */
+    function playVoice(plId) {
+        //播放录音
+        wx.playVoice({
+            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+        });
+        playAnimation();
+
+    }
+
+    /**
+     * 停止播放微信录制后的本地语音文件
+     */
+    function stopVoice(plId) {
+        //播放录音
+        wx.stopVoice({
+            localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
+        });
+        stopAnimation();
     }
 
     /**
