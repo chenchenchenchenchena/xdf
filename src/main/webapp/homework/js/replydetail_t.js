@@ -616,10 +616,10 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
+
         ctx.drawImage(img,0,0,width_,height);
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
-        Imgurl  = canvas.toDataURL("image/png");
         // canvas事件
         $(document).on('touchstart','canvas',function(){
             ctx.beginPath();
@@ -635,20 +635,21 @@ $(function () {
             });
 
         });
-        $('.true_s').on('touchend',function(){
+        $('.true_s').on('touchend',function() {
             $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl+ "'/></li>");
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl + "'/></li>");
+            $('.true_s').unbind('touchend');
             $('.big_back_s').show();
-            setTimeout(function(){
+            $('body').css('overflow','auto')
+            $('body').css('overflow-x','hidden')
+            setTimeout(function () {
                 $('.big_back_s').hide();
-            },300)
-        });
+            }, 300);
+            return false;
+        })
         return false;
     });
-    //禁止浏览器
-    document.querySelector('body').addEventListener('touchstart', function (ev) {
-        event.preventDefault();
-    });
+
 
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
