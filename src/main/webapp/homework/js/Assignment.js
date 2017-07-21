@@ -1,10 +1,4 @@
 $(function () {
-
-
-
-
-
-
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -245,31 +239,31 @@ $(function () {
         if ($('.Knowledge input').val().indexOf(',') != -1) {
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(','));
             if (html_te.length > 10) {
-                layer.msg('单条知识点对多输入10个字');
+                layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf(';') != -1) {
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(';'));
             if (html_te.length > 10) {
-                layer.msg('单条知识点对多输入10个字');
+                layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf('，') != -1) {
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('，'));
             if (html_te.length > 10) {
-                layer.msg('单条知识点对多输入10个字');
+                layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf('；') != -1) {
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('；'));
             if (html_te.length > 10) {
-                layer.msg('单条知识点对多输入10个字');
+                layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else {
             var html_te = $('.Knowledge input').val();
             if (html_te.length > 10) {
-                layer.msg('单条知识点对多输入10个字');
+                layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         }
