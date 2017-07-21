@@ -250,10 +250,7 @@ $(function () {
                         time: 3000,
                         content: $(".music_succ")
                     });
-                    // getRecordInfo(diskFilePath);
-                    //显示语音布局
-                    showAudio(localId, $('#record_audio_box'), recordCount, 1);
-                    recordCount++;
+                    getRecordInfo(diskFilePath);
                 }
 
 
@@ -261,29 +258,29 @@ $(function () {
         });
     }
 
-    //
-    // /**
-    //  * 获取录制语音信息
-    //  */
-    // function getRecordInfo(diskFileUrl) {
-    //     var optionFile = {"fullPath": diskFileUrl};
-    //     $.ajax({
-    //         url: url_o + "upload/getMp3Url.do",
-    //         type: 'post',
-    //         dataType: 'json',
-    //         data: optionFile,
-    //         success: function (e) {
-    //             if (e.status == "failed") {
-    //                 console.log(e.message);
-    //             } else {
-    //                 //显示语音布局
-    //                 showAudio(url_o + e.data, $('#record_audio_box'), recordCount, 1);
-    //                 recordCount++;
-    //
-    //             }
-    //         }
-    //     });
-    // }
+
+    /**
+     * 获取录制语音信息
+     */
+    function getRecordInfo(diskFileUrl) {
+        var optionFile = {"fullPath": diskFileUrl};
+        $.ajax({
+            url: url_o + "upload/getMp3Url.do",
+            type: 'post',
+            dataType: 'json',
+            data: optionFile,
+            success: function (e) {
+                if (e.status == "failed") {
+                    console.log(e.message);
+                } else {
+                    //显示语音布局
+                    showAudio(url_o + e.data, $('#record_audio_box'), recordCount, 1);
+                    recordCount++;
+
+                }
+            }
+        });
+    }
 
     /**
      * 显示语音布局
