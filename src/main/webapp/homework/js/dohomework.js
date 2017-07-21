@@ -231,7 +231,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    alert("语音上传成功");
+                    // alert("语音上传成功");
                     fileName = e.data.fileName;
                     fileSize = e.data.fileSize;
                     fileType = e.data.fileType;
@@ -624,7 +624,7 @@ $(function () {
 
         var reqData = {
             "id": GetRequest('id'),
-            "description": ecodeURI($('.teBox').val()),
+            "description": encodeURI($('.teBox').val()),
             "fileStuhomeworks": fileStuhomeworks
         };
         // alert(JSON.stringify(reqData));
