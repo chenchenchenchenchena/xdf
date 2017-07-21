@@ -17,12 +17,13 @@
 				var canvas =document.getElementById("myCanvas");
 				var ctx=canvas .getContext("2d");
 				ctx.strokeStyle = 'red';
+				ctx.drawImage(img,0,0);
+
 				var url = canvas.toDataURL("image/png")
 
 
 
 
-				ctx.drawImage(img,0,0);
 				$('#img').attr('src',url)
 	            $('body').append('保存图片哈')
 
