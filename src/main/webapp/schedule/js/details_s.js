@@ -20,27 +20,32 @@ $(function(){
         var regionindex = [];
         for(var i = 0;i<BeginDate.length;i++){
             if(BeginDate[i].SectBegin==sessionStorage.timetoday){
-                timeindex =i
-                regionindex.push(i)
+                timeindex =i;
+                regionindex.push(i);
             }
         }
         // e.data.Data[0].mastertae
-        var masterta = e.data.Data[0].Teachers.split(',');
+        var masterta = e.data.Data[timeindex].Teachers.split(',');
         var subject = e.data.Data[timeindex].ClassCode;
         for(var v = 0;v<e.subject.length;v++){
             if(e.subject[v].classCode==subject){
                 subject_s = e.subject[v].subject
             }
         }
-        var masteaname = '';
-        for(var j = 0;j<mastertae.length;j++){
-            for(var k = 0;k<masterta.length;k++){
-                if(mastertae[j].teacherName==masterta[k]){
-                    masterta[k] = ''
-                    teacindex = j;
+        if(masterta==''||masterta==undefined){
+
+        }else{
+            var masteaname = '';
+            for(var j = 0;j<mastertae.length;j++){
+                for(var k = 0;k<masterta.length;k++){
+                    if(mastertae[j].teacherName==masterta[k]){
+                        masterta[k] = ''
+                        teacindex = j;
+                    }
                 }
             }
         }
+
         var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3)
         var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g,'/')
         var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
