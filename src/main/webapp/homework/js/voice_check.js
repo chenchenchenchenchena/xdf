@@ -16,18 +16,25 @@ $(function () {
      * 播放微信录制后的本地语音文件
      */
     function playVoice(plId) {
-        //播放录音
-        wx.playVoice({
-            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+        wx.ready(function () {
+            //播放录音
+            wx.playVoice({
+                localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+            });
         });
+
     }
+
     /**
-     * 播放微信录制后的本地语音文件
+     * 停止播放微信录制后的本地语音文件
      */
     function stopVoice(plId) {
-        //播放录音
-        wx.stopVoice({
-            localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
+        wx.ready(function () {
+            //播放录音
+            wx.stopVoice({
+                localId: plId // 需要停止播放的音频的本地ID，由stopRecord接口获得
+            });
+            playAnimation();
         });
     }
 
@@ -35,17 +42,22 @@ $(function () {
      * 播放微信录制后的本地语音文件
      */
     function playVoice(plId) {
-        //播放录音
-        wx.playVoice({
-            localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+        wx.ready(function () {
+            //播放录音
+            wx.playVoice({
+                localId: plId // 需要播放的音频的本地ID，由stopRecord接口获得
+            });
+            stopAnimation();
         });
     }
+
     /**
      *播放语音
      */
     var playTimer = "", playFlag = false;
     var audioCur = null;
     var oldId = undefined;
+    var second = 0;
 
     /**
      *语音播放方法
@@ -60,10 +72,24 @@ $(function () {
             }
             audioCur = voiceId;
             oldId = $(audioCur).attr('id');
-            play();
+
+            if (oldId.indexOf("record") != -1) {
+                second = $(audioCur).parent().siblings("span").html();//获取音频秒数
+                //如果是录制语音，则调用微信接口，本地播放。避免调用获取mp3Url接口
+                playVoice($(audioCur).find('source').attr("src"));
+
+            } else {
+                //如果是从服务端获取的播放地址则用audio播放
+                second = audioCur.duration;//获取音频秒数
+                play();
+            }
         } else {
             oldId = undefined;
-            stop();
+            if ($(audioCur).attr('id').indexOf("record") != -1) {
+                stopVoice($(audioCur).find('source').attr("src"));
+            } else {
+                stop();
+            }
         }
     }
 
@@ -72,23 +98,35 @@ $(function () {
      */
     function stop() {
         audioCur.pause();
-        audioCur.currentTime = 0;
-        clearTimeout(playTimer);
-        $(audioCur).siblings('.play-icon').removeClass('playing');
+        stopAnimation();
     }
 
     /**
      *开始播放方法
      */
     function play() {
-        var second = audioCur.duration;//获取音频秒数
-        audioCur.currentTime = 0;
+
         audioCur.play();
+        playAnimation();
+
+    }
+
+    /**
+     * 播放动画
+     */
+    function playAnimation() {
+        audioCur.currentTime = 0;
         //播放动画
         $(audioCur).siblings('.play-icon').addClass('playing');
         playTimer = setTimeout(function () {
             $(audioCur).siblings('.play-icon').removeClass('playing');
         }, second * 1000);
+    }
+
+    function stopAnimation() {
+        audioCur.currentTime = 0;
+        clearTimeout(playTimer);
+        $(audioCur).siblings('.play-icon').removeClass('playing');
     }
 
     /*--------------------语音播放结束----------------------------------*/
