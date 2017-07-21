@@ -618,6 +618,8 @@ $(function () {
         ctx.strokeStyle = 'red';
 
         ctx.drawImage(img,0,0,width_,height);
+
+        Imgurl  = canvas.toDataURL("image/png");
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
         // canvas事件
