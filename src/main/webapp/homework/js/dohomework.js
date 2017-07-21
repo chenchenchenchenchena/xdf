@@ -40,7 +40,19 @@ $(function () {
                 //作业描述
                 $('.hwCon').html(decodeURI(item.description));
                 //语音，图片 TODO
+                //语音，图片 TODO
+                var allFilePath={};
                 $.each(item.fileContents, function (i, paths) {
+                    allFilePath = {
+                        "fileSfullPath":[],
+                        "fileTfullPath":[],
+                        "fileRfullPath":[]
+                    };
+                    allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
+                    console.log("获取文件排序"+JSON.stringify(allFilePath));
+                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                });
+                /*$.each(item.fileContents, function (i, paths) {
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址 TODO
                     console.log(pathUrls);
@@ -51,7 +63,7 @@ $(function () {
                         getFileInfo(paths.diskFilePath);
                     }
 
-                });
+                });*/
 
                 return false;
             }
@@ -59,7 +71,27 @@ $(function () {
         });
         layer.close(loading);
     }
-
+    function getAllFileRankSuccess(msg){
+        if(msg.code==200){
+            //获取老师作业信息
+            if(msg.data.fileT!=""&&msg.data.fileT!=null&&msg.data.fileT!=undefined){
+                $.each(msg.data.fileT,function (i,paths) {
+                    var pathUrls = ['1', paths.diskFilePath, paths.fileType];
+                    // 获取语音和图片的预览地址 TODO
+                    console.log(pathUrls);
+                    // paths.fileType = 'jpg';
+                    console.log(paths.diskFilePath);
+                    if(paths.fileType.indexOf("mp3") != -1){
+                        getAudioInfo(paths.diskFilePath);
+                    }else {
+                        getFileInfo(paths.diskFilePath);
+                    }
+                });
+            }
+        }else{
+            alert("获取文件失败");
+        }
+    }
     /*------------------录制语音开始------------------------------------*/
 
     var timeInedex = 0;
