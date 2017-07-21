@@ -254,9 +254,7 @@ $(function () {
                         time: 3000,
                         content: $(".music_succ")
                     });
-                    // getRecordInfo(diskFilePath);
-                    showAudio(localId, $('#record_audio_box'), recordCount, 1);
-                    recordCount++;
+                    getRecordInfo(diskFilePath);
                 }
 
 
@@ -300,7 +298,6 @@ $(function () {
         if (flag == 1) {
             idChildren = "record_audio" + id;
             //录音布局，可以删除
-            length = timeInedex-3+"''";
             strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
         } else {
