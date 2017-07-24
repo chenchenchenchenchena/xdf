@@ -1,6 +1,7 @@
 /**
  * Created by use1 on 2017-07-24.
  */
+$(function(){
 /**
  * 作业提交需要的参数
  */
@@ -370,3 +371,4 @@ function hwCommitSuccess(msg) {
     $('#HWsubmit').removeClass('btn-grey');
     layer.close(loading);
 }
+});
