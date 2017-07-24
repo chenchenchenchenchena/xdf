@@ -57,6 +57,7 @@ $(function(){
 		// sessionStorage.removeItem('finishhwInfos');
 		var curIndex = $(this).parents('.firstList').index();
 		var classIndex = $(this).index();
+		var id = $(this).attr('data-id');
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
 		ajaxRequest('GET', homework_s.s_readstatus, 'classCode='+$(this).attr('data-classCode'), function(msg){
@@ -65,7 +66,7 @@ $(function(){
 			}else{
 				console.log("阅读失败！"+msg.msg);
 			}
-			window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex;
+			window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
 		});
 
 	});
@@ -156,7 +157,7 @@ $(function(){
 								// replay=1;
 								break;
 						}
-						hwLessNosHtml +='<li data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
+						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){
