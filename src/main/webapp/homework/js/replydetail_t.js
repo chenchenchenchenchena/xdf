@@ -577,7 +577,7 @@ $(function () {
         $('.big_back_s img').show();
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
-        console.log(previewUrl);
+        // console.log(previewUrl);
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
@@ -616,10 +616,11 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
+        Imgurl  = canvas.toDataURL("image/png");
+
 
         ctx.drawImage(img,0,0,width_,height);
 
-        Imgurl  = canvas.toDataURL("image/png");
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
         // canvas事件
