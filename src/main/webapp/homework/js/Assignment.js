@@ -480,7 +480,6 @@ $(function () {
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
-                showAudio();
                 $('.song_s').hide();
                 $('.big_whit').hide();
             }
@@ -656,26 +655,6 @@ $(function () {
 
 
     });
-
-    // //显示语音布局
-    // function showAudio(url, length) {
-    //     $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
-    // }
-    //
-    // function PlaySound(soundobj) {
-    //     alert(5);
-    //     var thissound = document.getElementById(soundobj);
-    //
-    //     thissound.play();
-    //
-    // }
-    // $(document).on('touchend','.music_s',function () {
-    //     $(this).addClass('playing_s');
-    //     playVoice(song_s);
-    //     setTimeout(function(){
-    //      $('.music_s').removeClass('playing_s');
-    //     },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
-    // });
 
     //图片上传
     $('.image_s').click(function () {
