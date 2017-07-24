@@ -466,7 +466,6 @@ $(function () {
                     }
                 }
 
-
             }
         });
     });
@@ -490,10 +489,10 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localId) {
 
         wx.uploadImage({
-            localId: images.localIds[i],
+            localId: localId,
             success: function (res) {
                 uploadImage(res.serverId, i);
             },
