@@ -571,7 +571,7 @@ $(function () {
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('src');``
+        var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
