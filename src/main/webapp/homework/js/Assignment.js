@@ -57,7 +57,8 @@ $(function () {
                             'fileName': tea[b].fileName,
                             'fileType': tea[b].fileType,
                             'fileSize': tea[b].fileSize,
-                            'diskFilePath': tea[b].diskFilePath
+                            'diskFilePath': tea[b].diskFilePath,
+                            'id': tea[b].id
                         });
                         showAudio(url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
                         recordCount++;
@@ -67,7 +68,8 @@ $(function () {
                             'fileName': tea[b].fileName,
                             'fileType': tea[b].fileType,
                             'fileSize': tea[b].fileSize,
-                            'diskFilePath': tea[b].diskFilePath
+                            'diskFilePath': tea[b].diskFilePath,
+                            'id': tea[b].id
                         });
                         showUpdataImage(tea[b].url);
                         // $('.imgBox').show();
@@ -478,7 +480,6 @@ $(function () {
                 localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
-                showAudio();
                 $('.song_s').hide();
                 $('.big_whit').hide();
             }
@@ -524,7 +525,8 @@ $(function () {
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
                     });
                     layer.open({
                         type: 1,
@@ -654,26 +656,6 @@ $(function () {
 
     });
 
-    // //显示语音布局
-    // function showAudio(url, length) {
-    //     $('.music_s').eq(Index_s).find('span').html(timeInedex + '"');
-    // }
-    //
-    // function PlaySound(soundobj) {
-    //     alert(5);
-    //     var thissound = document.getElementById(soundobj);
-    //
-    //     thissound.play();
-    //
-    // }
-    // $(document).on('touchend','.music_s',function () {
-    //     $(this).addClass('playing_s');
-    //     playVoice(song_s);
-    //     setTimeout(function(){
-    //      $('.music_s').removeClass('playing_s');
-    //     },$('.music_s').eq(Index_s).find('span').html().substr(0,$('.music_s').eq(Index_s).find('span').html().length-1)+'000');
-    // });
-
     //图片上传
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
@@ -741,7 +723,8 @@ $(function () {
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
                     });
 
                 }

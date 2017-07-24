@@ -108,7 +108,9 @@ $(function () {
                 if (stu[a].fileType == 'mp3') {
                     getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
+                    // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
+
                 }
             }
             for (var b = 0; b < tea.length; b++) {
@@ -575,24 +577,37 @@ $(function () {
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
+        setTimeout(function(){
+            $('.big_back_s img').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+            });
+            $('.big_back_s canvas').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+            });
+        },300)
 
-        $('.big_back_s img').css({
-            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
-        });
-        alert( $('.big_back_s img').css('margin-top'));
-        $('.big_back_s canvas').css({
-            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
-        });
     });
-    $('.big_back_s').on('touchend',function(){
-        $(this).hide();
-        $('body').css('overflow','auto')
-        $('body').css('overflow-x','hidden')
-    });
+    // $('.big_back_s').on('touchend',function(){
+    //     $(this).find('canvas').hide();
+    //     $(this).find('img').show();
+    //     $(this).find('.esc_s').hide();
+    //     $(this).find('.true_s').hide();
+    //     $(this).find('span:last-of-type').show();
+    //     $(this).hide();
+    //     $('body').css('overflow','auto')
+    //     $('body').css('overflow-x','hidden')
+    // });
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
+        $('.big_back_s canvas').hide();
+        $('.big_back_s img').show();
+        $('.big_back_s .esc_s').hide();
+        $('.big_back_s .true_s').hide();
+        $('.big_back_s span:last-of-type').show();
+        $('.big_back_s').hide();
+        $('body').css('overflow-y','auto')
     });
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
@@ -601,40 +616,53 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
+        img.crossOrigin = "Anonymous";
         img.src=previewUrl;
-        img.onload = function(){
-            var width_ = parseInt($('.big_back_s img').css('width'));
-            var height = parseInt($('.big_back_s img').css('height'));
-            var canvas =document.getElementById("myCanvas");
-            canvas.width=width_;
-            canvas.height=height;
-            var ctx=canvas .getContext("2d");
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'red';
-            ctx.drawImage(img,0,0,width_,height);
+        var canvas =document.getElementById("myCanvas");
+        var width_ = parseInt($('.big_back_s img').css('width'));
+        var height = parseInt($('.big_back_s img').css('height'));
+        canvas.width=width_;
+        canvas.height=height;
 
-            $('.big_back_s img').hide();
-            $('.big_back_s canvas').show();
+        var ctx=canvas .getContext("2d");
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'red';
+        img.onload = function(){
+            ctx.drawImage(img,0,0);
         };
+        $('.big_back_s img').hide();
+        $('.big_back_s canvas').show();
 
         // canvas事件
-        $(document).on('touchstart','canvas',function(){
+        $(document).on('touchstart','#myCanvas',function(){
             ctx.beginPath();
             ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
-            $(document).on('touchmove','canvas',function(){
+            $(document).on('touchmove','#myCanvas',function(){
                 var ev = ev || event;
                 ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
                 ctx.stroke();
             });
-            $(document).on('touchend','canvas',function(){
+            $(document).on('touchend','#myCanvas',function(){
                 ctx.closePath();
-                $('.big_back_s').show()
+                $('.big_back_s').show();
+                $('#myCanvas').unbind('touchenstart');
+                $('#myCanvas').unbind('touchmove');
+                $('#myCanvas').unbind('touchend');
             });
 
         });
+
         $('.true_s').on('touchend',function(){
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+            $('.big_back_s canvas').hide();
+            $('.big_back_s img').show();
+            $('.big_back_s .esc_s').hide();
+            $('.big_back_s .true_s').hide();
+            $('.big_back_s span:last-of-type').show();
+            $('.big_back_s').hide();
+            $('body').css('overflow-y','auto');
+            $('.true_s').unbind('touchend')
         });
         return false;
     });
