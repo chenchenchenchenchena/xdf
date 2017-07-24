@@ -571,8 +571,13 @@ $(function () {
 
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
+        $('.esc_s').hide();
+        $('.true_s').hide();
+        $('.big_back_s span:last-of-type').show();
+        $('.big_back_s img').show();
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
+        console.log(previewUrl);
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
@@ -631,6 +636,10 @@ $(function () {
         $('.true_s').on('touchend',function(){
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+            $('.big_back_s').show();
+            setTimeout(function(){
+                $('.big_back_s').hide();
+            },300)
         });
         return false;
     });
