@@ -599,7 +599,7 @@ $(function () {
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
     });
-    var Imgurl = '';
+    var Imgurl;
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
         $('.true_s').show();
@@ -607,6 +607,7 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
+        img.setAttribute('crossOrigin', 'anonymous');
         img.src=previewUrl;
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
@@ -616,9 +617,10 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-        Imgurl  = canvas.toDataURL("image/png");
+
         ctx.drawImage(img,0,0,width_,height);
 
+        Imgurl  = canvas.toDataURL("image/png");
 
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
