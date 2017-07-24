@@ -577,7 +577,7 @@ $(function () {
         $('.big_back_s img').show();
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
-        // console.log(previewUrl);
+        console.log(previewUrl);
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
@@ -599,7 +599,6 @@ $(function () {
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
     });
-    var Imgurl;
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
         $('.true_s').show();
@@ -607,7 +606,6 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
-        img.setAttribute('crossOrigin', 'anonymous');
         img.src=previewUrl;
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
@@ -617,27 +615,9 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-
         ctx.drawImage(img,0,0,width_,height);
-
-        Imgurl  = canvas.toDataURL("image/png");
-
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
-        //保存事件
-        $('.true_s').on('touchend',function() {
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl + "'/></li>");
-            $('.true_s').unbind('touchend');
-            $('.big_back_s').show();
-            $('body').css('overflow','auto');
-            $('body').css('overflow-x','hidden');
-            setTimeout(function () {
-                $('.big_back_s').hide();
-            }, 300);
-            $('.true_s').unbind('touchend');
-            return false;
-        });
         // canvas事件
         $(document).on('touchstart','canvas',function(){
             ctx.beginPath();
@@ -653,9 +633,18 @@ $(function () {
             });
 
         });
-
+        $('.true_s').on('touchend',function(){
+            $('.notsubmit .imgBox').show();
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+            $('.big_back_s').show();
+            setTimeout(function(){
+                $('.big_back_s').hide();
+            },300)
+        });
         return false;
     });
+
+
 
 
     /*-------------------- 删除语音 --------------------*/
