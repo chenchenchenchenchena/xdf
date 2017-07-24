@@ -567,8 +567,11 @@ $(function () {
             arr_image.splice(index, 1);
         }
     });
+    var Index_Last;
+
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
+        Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
@@ -583,14 +586,24 @@ $(function () {
             'margin-left': -parseInt($('.big_back_s img').css('width'))/2
         });
     });
+    $('.big_back_s').on('touchend',function(){
+        $(this).hide();
+        $('body').css('overflow','auto')
+        $('body').css('overflow-x','hidden')
+    });
+    $('.esc_s').on('touchend',function(){
+        $('.big_back_s').hide();
+    });
     $('.big_back_s span:last-of-type').on('touchend',function(){
+        $(this).hide();
+        $('.true_s').show();
+        $('body').css('overflow','hidden');
+        $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.src=previewUrl;
-        var width_ = parseInt($('.big_back_s img').css('width'))
-        var height = parseInt($('.big_back_s img').css('height'))
-        console.log(height)
-        console.log($('.big_back_s img').css('height'))
+        var width_ = parseInt($('.big_back_s img').css('width'));
+        var height = parseInt($('.big_back_s img').css('height'));
         var canvas =document.getElementById("myCanvas");
         canvas.width=width_;
         canvas.height=height;
@@ -602,7 +615,6 @@ $(function () {
         $('.big_back_s canvas').show();
         // canvas事件
         $(document).on('touchstart','canvas',function(){
-            console.log((event.touches[ 0 ].pageX - canvas.offsetLeft));
             ctx.beginPath();
             ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
             $(document).on('touchmove','canvas',function(){
@@ -611,13 +623,16 @@ $(function () {
                 ctx.stroke();
             });
             $(document).on('touchend','canvas',function(){
-                $(document).unbind('touchmove','canvas',function(){});
-                $(document).unbind('touchend','canvas',function(){});
-
                 ctx.closePath();
+                $('.big_back_s').show()
             });
 
         });
+        $('.true_s').on('touchend',function(){
+            $('.notsubmit .imgBox').show();
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+        });
+        return false;
     });
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
