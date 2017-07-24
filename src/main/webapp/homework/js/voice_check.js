@@ -2,6 +2,17 @@
  * Created by xupingwei on 2017/7/14.
  */
 $(function () {
+    /**
+     * 作业提交需要的参数
+     */
+    var fileParams = [];
+    var voiceFileParams = [];
+    var homeworkSinfoId = GetRequest('id');
+    var fileName;
+    var fileType;
+    var fileSize;
+    var diskFilePath;
+    var uploadUser = sessionStorage.studentName;
     var layer1,layer2,loading;
     /*------------------录制语音开始------------------------------------*/
 
@@ -173,60 +184,7 @@ $(function () {
         });
     }
 
-    /**
-     * 显示语音布局
-     */
-    function showAudio(url, parentId, id, flag) {
-
-        parentId.show();
-        var strVoice = "";
-        var idChildren;
-        var length = "";
-        if (flag == 1) {
-            idChildren = "record_audio" + id;
-            //录音布局，可以删除
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
-        } else {
-
-            idChildren = "audio" + id;
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
-                "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
-        }
-
-
-        parentId.append(strVoice);
-
-        var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = getVoiceLen;
-        function getVoiceLen() {
-            var len = audioElem.duration;
-            len = parseInt(len);
-            var voiceLen = "";
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
-            } else {
-                voiceLen = ss + "''";
-            }
-            if (ss == 0) {
-
-                voiceLen = "1''";
-            }
-
-            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
-        }
-
-        $('.song_s,.mask').hide();
-        // 语音大于三张，隐藏添加语音按钮
-        if ($('.notsubmit #record_audio_box li').length >= 3) {
-            $('#record').hide();
-        }
-    }
+    
 
     /*----------------语音播放开始--------------------------------------*/
     /**
