@@ -30,12 +30,12 @@ $(function () {
         }
         //作业描述
         $('.des .hwCon').html(decodeURI(datas.teacherDes));
-
         // 判断是否批复，未批复可重新提交答案
         replyStatus = datas.replyStatus;
+        var myAnswerDes = decodeURI(datas.description);
         if(replyStatus==1){//已批复
             $('.answer').hide();
-            var myAnswerDes = decodeURI(datas.description);
+
             /*******作业答案*******/
             if(myAnswerDes!=""){
                 $('.hmAnswer .anDes').html(myAnswerDes).show();
@@ -63,6 +63,7 @@ $(function () {
             if(myAnswerDes!=""){
                 $('.teBox').val(myAnswerDes);
             }
+            console.log("888--"+$('.teBox').val());
             $('.answer').show();
         }
 
@@ -103,14 +104,17 @@ $(function () {
                     // 获取语音和图片的预览地址
                     // paths.fileType = 'jpg';
                     var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-                    if (paths.fileType.indexOf("mp3") != -1) {
-                        //将文件显示到布局中
-                        voiceCount++;
-                        showAudio(url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
-                    } else {
-                        //将文件显示到布局中
-                        showImage(paths.fileUrl, "imagBox_" + 1);
+                    if(paths.fileType!= undefined){
+                        if (paths.fileType.indexOf("mp3") != -1) {
+                            //将文件显示到布局中
+                            voiceCount++;
+                            showAudio(url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
+                        } else {
+                            //将文件显示到布局中
+                            showImage(paths.fileUrl, "imagBox_" + 1);
+                        }
                     }
+
                 });
             }
             //获取学生作业答案
