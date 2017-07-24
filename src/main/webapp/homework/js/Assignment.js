@@ -86,7 +86,7 @@ $(function () {
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
         //界面样式控制
-        if (i >= 3) {
+        if (i >= 2) {
             $('#image_s').hide();
         }
 
