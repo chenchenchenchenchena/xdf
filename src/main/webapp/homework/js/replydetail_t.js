@@ -612,7 +612,9 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-        ctx.drawImage(img,0,0);
+        img.onload = function(){
+            ctx.drawImage(img,0,0);
+        }
 
             $('.big_back_s img').hide();
             $('.big_back_s canvas').show();
