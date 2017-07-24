@@ -790,6 +790,7 @@ $(function () {
         }
         if (arr_image.length > 0) {
             arr_image.splice(index, 1);
+            imgCount--;
         }
     });
     /*--------------------图片预览----------------------------------*/
