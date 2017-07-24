@@ -7,7 +7,7 @@ $(function () {
     var homeworksubm = {
         'teacherEmail': localStorage.terEmail,
         'teacherName': localStorage.teacherName,
-        'schoolId':  localStorage.schoolId,
+        'schoolId': localStorage.schoolId,
         'appid': Global.appid,
         'secret': Global.secret,
         'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
@@ -39,15 +39,31 @@ $(function () {
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
-                        $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
+                        showAudio(url_o +tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
-                        $('.imgBox').show();
-                        $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
+                        showUpdataImage(b, tea[b].url);
+                        // $('.imgBox').show();
+                        // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
                 }
             });
         }
     });
+
+    function showUpdataImage(i, url) {
+
+        var str = "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + url + "'/></li>";
+
+        $(".notsubmit .imgBox").show();
+        $(".notsubmit .imgBox").html(str);
+        //界面样式控制
+        if (i >= 3) {
+            $('#chooseImage').hide();
+        }
+
+
+    }
 
     //选择班
     $('.class_s').on('touchend', function () {
@@ -109,7 +125,7 @@ $(function () {
     $('.home_text textarea').on('keyup', function () {
         if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
-            $(this).val($(this).val().substring(0,200));
+            $(this).val($(this).val().substring(0, 200));
         } else {
             $('.home_text span').css('color', '#808080');
         }
@@ -118,7 +134,7 @@ $(function () {
     $('.home_text textarea').on('blur', function () {
         if ($(this).val().length > 199) {
             $('.home_text span').css('color', 'red');
-            $(this).val($(this).val().substring(0,200));
+            $(this).val($(this).val().substring(0, 200));
         } else {
             $('.home_text span').css('color', '#808080');
         }
@@ -128,8 +144,8 @@ $(function () {
     $('.Knowledge input').on('keyup', function () {
         var html_ = $(this).val();
         var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
-        if(regStr.test(html_)){
-            $(this).val(html_.replace(regStr,""));
+        if (regStr.test(html_)) {
+            $(this).val(html_.replace(regStr, ""));
         }
         if (html_.indexOf(',') != html_.lastIndexOf(',') && html_.lastIndexOf(',') != -1) {
             $(this).val(html_.substr(0, html_.length - 1))
@@ -365,7 +381,7 @@ $(function () {
             setTimeout(function () {
                 $('.big_back').hide();
             }, 300);
-            if($('.class_s i').html()==''){
+            if ($('.class_s i').html() == '') {
                 $('.class_name i').html('0');
                 $('.class_name img').attr('src', 'images/C05_06.png');
                 if ($('.class_name i').html() == '0') {
@@ -733,6 +749,7 @@ $(function () {
         });
 
     }
+
     /*-------------------- 删除图片 --------------------*/
     $(document).on('touchend', '.stuImg', function () {
         // alert($(this).parent('li').index());
