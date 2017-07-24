@@ -4,6 +4,7 @@ $(function () {
     var arr_voice = [];
     var arr_image = [];
     var recordCount = 0;
+    var imgCount = 0;
 
     var trardata = {
         'teacherCode': localStorage.teacherId,
@@ -45,7 +46,14 @@ $(function () {
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
+                        arr_voice.push({
+                            'fileName': tea[b].fileName,
+                            'fileType': tea[b].fileType,
+                            'fileSize': tea[b].fileSize,
+                            'diskFilePath': tea[b].diskFilePath
+                        });
                         showAudio(url_o + tea[b].url, $('#record_audio_box'), recordCount);
+                        recordCount++;
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
                         arr_image.push({
@@ -54,7 +62,8 @@ $(function () {
                             'fileSize': tea[b].fileSize,
                             'diskFilePath': tea[b].diskFilePath
                         });
-                        showUpdataImage(b, tea[b].url);
+                        showUpdataImage(imgCount, tea[b].url);
+                        imgCount++;
                         // $('.imgBox').show();
                         // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
@@ -669,12 +678,13 @@ $(function () {
 
                     var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
+                        str += "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
                     }
 
                     $(".notsubmit .imgBox").show();
                     $(".notsubmit .imgBox").append(str);
+                    imgCount++;
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
