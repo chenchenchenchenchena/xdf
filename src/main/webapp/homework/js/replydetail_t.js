@@ -639,7 +639,7 @@ $(function () {
             ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
             $(document).on('touchmove','#myCanvas',function(){
                 var ev = ev || event;
-                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop+10);
+                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop+15);
                 ctx.stroke();
             });
             $(document).on('touchend','#myCanvas',function(){
