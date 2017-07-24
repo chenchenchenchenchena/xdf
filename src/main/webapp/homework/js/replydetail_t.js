@@ -110,7 +110,7 @@ $(function () {
                 } else {
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
-
+                    $('.')
                 }
             }
             for (var b = 0; b < tea.length; b++) {
@@ -621,13 +621,13 @@ $(function () {
         var canvas =document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
-
+        canvas.width=width_;
+        canvas.height=height;
 
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-        canvas.width=width_;
-        canvas.height=height;
+
         img.onload = function(){
             ctx.drawImage(img,0,0);
         };
