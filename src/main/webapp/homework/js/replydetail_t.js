@@ -616,10 +616,9 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-
+        Imgurl  = canvas.toDataURL("image/png");
         ctx.drawImage(img,0,0,width_,height);
 
-        Imgurl  = canvas.toDataURL("image/png");
 
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
@@ -634,6 +633,7 @@ $(function () {
             setTimeout(function () {
                 $('.big_back_s').hide();
             }, 300);
+            $('.true_s').unbind('touchend');
             return false;
         });
         // canvas事件
