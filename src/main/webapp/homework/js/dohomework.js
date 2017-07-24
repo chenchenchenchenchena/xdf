@@ -115,6 +115,7 @@ $(function () {
         str += "</div>";
         $('#imagBox_1').append(str);
 
+
     }
 
     /*------------------录制语音开始------------------------------------*/
@@ -348,37 +349,46 @@ $(function () {
 
     //重新选择图片，清除之前数据
     fileParams = [];
+    var imageCount = 0;//控制提交图片个数
     /**
      *点击选择图片
      */
     $('#chooseImage').click(function () {
+        var count = 3-imageCount;
         wx.chooseImage({
-            count: 3,
+            count: count,
             success: function (res) {
 
                 if (res.localIds.length > 0) {
 
-                    var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
+
+                        showNotImg();
+                        //上传服务器
+                        upLoadWxImage(res.localIds[i]);
 
                     }
-
-                    $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").append(str);
-                    //界面样式控制
-                    if (res.localIds.length >= 3) {
-                        $('#chooseImage').hide();
-                    }
-
-                    //上传服务器
-                    upLoadWxImage(res);
                 }
 
 
             }
         });
     });
+
+    /**
+     * 显示未提交图片布局
+     */
+    function showNotImg() {
+        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + res.localIds[i] + "'/></li>";
+        $(".notsubmit .imgBox").show();
+        $(".notsubmit .imgBox").append(str);
+        imageCount++;
+
+        //界面样式控制
+        if (imageCount >= 3) {
+            $('#chooseImage').hide();
+        }
+    }
 
     /**
      * 上传微信服务器

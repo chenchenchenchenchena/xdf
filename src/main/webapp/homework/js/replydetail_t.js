@@ -568,7 +568,6 @@ $(function () {
         }
     });
     var Index_Last;
-
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         Index_Last = $(this).parent().index();
@@ -602,17 +601,21 @@ $(function () {
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.src=previewUrl;
-        var width_ = parseInt($('.big_back_s img').css('width'));
-        var height = parseInt($('.big_back_s img').css('height'));
-        var canvas =document.getElementById("myCanvas");
-        canvas.width=width_;
-        canvas.height=height;
-        var ctx=canvas .getContext("2d");
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'red';
-        ctx.drawImage(img,0,0,width_,height);
-        $('.big_back_s img').hide();
-        $('.big_back_s canvas').show();
+        img.onload = function(){
+            var width_ = parseInt($('.big_back_s img').css('width'));
+            var height = parseInt($('.big_back_s img').css('height'));
+            var canvas =document.getElementById("myCanvas");
+            canvas.width=width_;
+            canvas.height=height;
+            var ctx=canvas .getContext("2d");
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'red';
+            ctx.drawImage(img,0,0,width_,height);
+
+            $('.big_back_s img').hide();
+            $('.big_back_s canvas').show();
+        };
+
         // canvas事件
         $(document).on('touchstart','canvas',function(){
             ctx.beginPath();
