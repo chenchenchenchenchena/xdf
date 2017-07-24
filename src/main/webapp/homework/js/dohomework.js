@@ -355,6 +355,7 @@ $(function () {
      */
     $('#chooseImage').click(function () {
         var count = 3-imageCount;
+        alert(count);
         wx.chooseImage({
             count: count,
             success: function (res) {
@@ -498,6 +499,7 @@ $(function () {
     // 删除图片-确定
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
 
+        alert(imageCount);
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
@@ -512,8 +514,9 @@ $(function () {
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
+        alert(imageCount);
         if (fileParams.length > 0) {
-
+            alert(imageCount);
             fileParams.splice(index, 1);
             imageCount--;
         }
