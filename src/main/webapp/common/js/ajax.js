@@ -72,7 +72,8 @@ var url = {
     't_webmore':url_o+'teacherBind/pcqueryTeacherInfo.do', //查询教师信息
     'w_token':url_o+'/wechatSignature/getWechatToken.do',
     'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do',
-    'w_push':url_o+'wechatSignature/sendTemplateMsg.do'//微信推送成绩信息
+    'w_push':url_o+'wechatSignature/sendTemplateMsg.do',//微信推送成绩信息
+    't_email':url_o+'e2Login/queryTeacherInfo.do'//查询老师邮箱
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩

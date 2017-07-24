@@ -648,7 +648,8 @@ $(function () {
         var reqData = {
             "id": GetRequest('id'),
             "description": encodeURI($('.teBox').val()),
-            "fileStuhomeworks": fileStuhomeworks
+            "fileStuhomeworks": fileStuhomeworks,
+            "modify":false
         };
         // alert(JSON.stringify(reqData));
         loading = layer.load();
