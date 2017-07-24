@@ -1,4 +1,18 @@
 $(function () {
+
+    var arr_s = [];
+    var arr_voice = [];
+    var arr_image = [];
+    var recordCount = 0;
+    var imgCount = 0;
+
+    if (imgCount >= 3) {
+        $('#image_s').hide();
+    } else {
+        $('#image_s').show();
+    }
+
+
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -35,14 +49,27 @@ $(function () {
                 }
             });
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
-                sessionStorage.removeItem('Classname_x');
+                // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
-                        showAudio(url_o +tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        arr_voice.push({
+                            'fileName': tea[b].fileName,
+                            'fileType': tea[b].fileType,
+                            'fileSize': tea[b].fileSize,
+                            'diskFilePath': tea[b].diskFilePath
+                        });
+                        showAudio(url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        recordCount++;
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
-                        showUpdataImage(b, tea[b].url);
+                        arr_image.push({
+                            'fileName': tea[b].fileName,
+                            'fileType': tea[b].fileType,
+                            'fileSize': tea[b].fileSize,
+                            'diskFilePath': tea[b].diskFilePath
+                        });
+                        showUpdataImage(tea[b].url);
                         // $('.imgBox').show();
                         // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
@@ -51,17 +78,18 @@ $(function () {
         }
     });
 
-    function showUpdataImage(i, url) {
+    function showUpdataImage(url) {
 
-        var str = "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + url + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + url + "'/></li>";
 
         $(".notsubmit .imgBox").show();
-        $(".notsubmit .imgBox").html(str);
-        //界面样式控制
-        if (i >= 3) {
-            $('#chooseImage').hide();
-        }
+        $(".notsubmit .imgBox").append(str);
 
+        imgCount++;
+        //界面样式控制
+        if (imgCount >= 3) {
+            $('.image_s').hide();
+        }
 
     }
 
@@ -473,10 +501,6 @@ $(function () {
         });
     }
 
-    var arr_s = [];
-    var arr_voice = [];
-    var arr_image = [];
-    var recordCount = 0;
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
@@ -653,28 +677,19 @@ $(function () {
     //图片上传
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
-        fileParams = [];
+        var count = 3 - imgCount;
         wx.chooseImage({
-            count: 3,
+            count: count,
             success: function (res) {
 
                 if (res.localIds.length > 0) {
 
-                    var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
+                        showUpdataImage(res.localIds[i]);
+                        //上传服务器
+                        upLoadWxImage(res.localIds[i]);
                     }
-
-                    $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").html(str);
-                    //界面样式控制
-                    if (res.localIds.length >= 3) {
-                        $('#chooseImage').hide();
-                    }
-
-                    //上传服务器
-                    upLoadWxImage(res);
                 }
 
 
@@ -686,32 +701,19 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localIds) {
 
-        if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
-            return;
-        }
-        var i = 0, length = images.localIds.length;
+        wx.uploadImage({
+            localId: localIds,
+            success: function (res) {
 
-        function upload() {
-            wx.uploadImage({
-                localId: images.localIds[i],
-                success: function (res) {
-                    i++;
-                    // serverIds.push(res.serverId);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
-                    if (i < length) {
-                        upload();
-                    }
-                },
-                fail: function (res) {
-                }
-            });
-        }
+                uploadImage(res.serverId);
+            },
+            fail: function (res) {
+            }
+        });
 
-        upload();
+
     }
 
     /**

@@ -577,7 +577,6 @@ $(function () {
         $('.big_back_s img').show();
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
-        console.log(previewUrl);
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
@@ -607,6 +606,7 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
+        img.crossOrigin="anonymous"; //关键
         img.src=previewUrl;
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
@@ -617,42 +617,37 @@ $(function () {
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
 
-        ctx.drawImage(img,0,0,width_,height);
+        ctx.drawImage(img,0,0,width_,height) ;
 
         Imgurl  = canvas.toDataURL("image/png");
+
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
-        // canvas事件
-        $(document).on('touchstart','canvas',function(){
-            ctx.beginPath();
-            ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
-            $(document).on('touchmove','canvas',function(){
-                var ev = ev || event;
-                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
-                ctx.stroke();
-            });
-            $(document).on('touchend','canvas',function(){
-                ctx.closePath();
-                $('.big_back_s').show()
-            });
-
-        });
-        $('.true_s').on('touchend',function() {
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl + "'/></li>");
-            $('.true_s').unbind('touchend');
-            $('.big_back_s').show();
-            $('body').css('overflow','auto')
-            $('body').css('overflow-x','hidden')
-            setTimeout(function () {
-                $('.big_back_s').hide();
-            }, 300);
-            return false;
-        })
         return false;
     });
+    $('.true_s').on('touchend',function(){
+        $('.notsubmit .imgBox').show();
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
+        $('.big_back_s').show();
+        setTimeout(function(){
+            $('.big_back_s').hide();
+        },300)
+    });
+    // canvas事件
+    $(document).on('touchstart','canvas',function(){
+        ctx.beginPath();
+        ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
+        $(document).on('touchmove','canvas',function(){
+            var ev = ev || event;
+            ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
+            ctx.stroke();
+        });
+        $(document).on('touchend','canvas',function(){
+            ctx.closePath();
+            $('.big_back_s').show()
+        });
 
-
+    });
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
         //alert($(this).parents('.audio_box').index());
