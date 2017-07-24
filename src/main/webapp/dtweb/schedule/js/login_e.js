@@ -4,13 +4,19 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 var temail={
-    "email":$(".t_email").val()+"@xdf.cn"
+    "email":$(".t_email input").val()+"@xdf.cn"
 }
 $(".t_email button").click(function () {
-    ajax_S(url.t_email,temail,teac);
+    alert("111");
+    if($(".t_email input").val()==""){
+        layer.msg("邮箱不能为空");
+    }else{
+        ajax_S(url.t_email,temail,terEmail);
+    }
+
 })
 
-function teac(e){
+function terEmail(e){
     console.log(e.data)
     if(e.result==true){
         location.href="login_t.html";
