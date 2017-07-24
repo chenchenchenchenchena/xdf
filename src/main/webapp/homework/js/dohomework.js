@@ -394,30 +394,18 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localId) {
 
-        if (images.localIds.length == 0) {
-            return;
-        }
-        var i = 0, length = images.localIds.length;
+        wx.uploadImage({
+            localId: localId,
+            success: function (res) {
+                uploadImage(res.serverId, i);
+            },
+            fail: function (res) {
+                // alert(JSON.stringify(res));
+            }
+        });
 
-        function upload() {
-            wx.uploadImage({
-                localId: images.localIds[i],
-                success: function (res) {
-                    uploadImage(res.serverId, i);
-                    i++;
-                    if (i < length) {
-                        upload();
-                    }
-                },
-                fail: function (res) {
-                    // alert(JSON.stringify(res));
-                }
-            });
-        }
-
-        upload();
     }
 
 
