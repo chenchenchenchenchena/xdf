@@ -599,6 +599,7 @@ $(function () {
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
     });
+    var Imgurl = '';
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
         $('.true_s').show();
@@ -618,6 +619,7 @@ $(function () {
         ctx.drawImage(img,0,0,width_,height);
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
+        Imgurl  = canvas.toDataURL("image/png");
         // canvas事件
         $(document).on('touchstart','canvas',function(){
             ctx.beginPath();
@@ -633,17 +635,17 @@ $(function () {
             });
 
         });
-        $('.true_s').on('touchend',function(){
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
-            $('.big_back_s').show();
-            setTimeout(function(){
-                $('.big_back_s').hide();
-            },300)
-        });
+
         return false;
     });
-
+    $('.true_s').on('touchend',function(){
+        $('.notsubmit .imgBox').show();
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
+        $('.big_back_s').show();
+        setTimeout(function(){
+            $('.big_back_s').hide();
+        },300)
+    });
 
 
 
