@@ -6,9 +6,9 @@ $(function () {
     var recordCount = 0;
     var imgCount = 0;
 
-    if(imgCount>=3){
+    if (imgCount >= 3) {
         $('#image_s').hide();
-    }else {
+    } else {
         $('#image_s').show();
     }
 
@@ -69,8 +69,7 @@ $(function () {
                             'fileSize': tea[b].fileSize,
                             'diskFilePath': tea[b].diskFilePath
                         });
-                        showUpdataImage(imgCount, tea[b].url);
-                        imgCount++;
+                        showUpdataImage(tea[b].url);
                         // $('.imgBox').show();
                         // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
@@ -79,14 +78,17 @@ $(function () {
         }
     });
 
-    function showUpdataImage(i, url) {
+    function showUpdataImage(url) {
 
-        var str = "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + url + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + url + "'/></li>";
 
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
+
+        imgCount++;
+
         //界面样式控制
-        if (i >= 2) {
+        if (imgCount >= 3) {
             $('#image_s').hide();
         }
 
@@ -676,20 +678,19 @@ $(function () {
     //图片上传
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
+        var count = 3 - imgCount;
         wx.chooseImage({
-            count: 3-imgCount,
+            count: count,
             success: function (res) {
 
                 if (res.localIds.length > 0) {
 
                     for (var i = 0; i < res.localIds.length; i++) {
 
-                        showUpdataImage(imgCount, res.localIds[i]);
-                        imgCount++;
+                        showUpdataImage(res.localIds[i]);
+                        //上传服务器
+                        upLoadWxImage(res.localIds[i]);
                     }
-
-                    //上传服务器
-                    upLoadWxImage(res);
                 }
 
 
@@ -701,32 +702,19 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localIds) {
 
-        if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
-            return;
-        }
-        var i = 0, length = images.localIds.length;
+        wx.uploadImage({
+            localId: localIds,
+            success: function (res) {
 
-        function upload() {
-            wx.uploadImage({
-                localId: images.localIds[i],
-                success: function (res) {
-                    i++;
-                    // serverIds.push(res.serverId);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
-                    if (i < length) {
-                        upload();
-                    }
-                },
-                fail: function (res) {
-                }
-            });
-        }
+                uploadImage(res.serverId);
+            },
+            fail: function (res) {
+            }
+        });
 
-        upload();
+
     }
 
     /**
