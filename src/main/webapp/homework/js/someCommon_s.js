@@ -310,7 +310,8 @@ function hwcommit() {
     var reqData = {
         "id": GetRequest('id'),
         "description": encodeURI($('.teBox').val()),
-        "fileStuhomeworks": fileStuhomeworks
+        "fileStuhomeworks": fileStuhomeworks,
+        "modify":true
     };
     // alert(JSON.stringify(reqData));
     loading = layer.load();

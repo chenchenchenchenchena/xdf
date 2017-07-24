@@ -169,3 +169,40 @@ body{
 	float:right;
 	margin-top:.2rem;
 }
+/*--------email--------*/
+.t_title{
+	height:1.17rem;
+	font-size:0.43rem;
+	line-height:1.33rem;
+	padding-left: 0.4rem;
+}
+.t_email{
+	padding-left: 0.4rem;
+}
+.t_email span{
+	font-size:0.43rem;
+}
+.t_email input{
+	width:7.1rem;
+	height:1.33rem;
+	line-height:1.33rem;
+	background: #fff;
+	border-radius: 5px;
+	border:none;
+	outline: none;
+	margin-right: 0.2rem;
+	padding-left: 0.4rem;
+	font-size:0.43rem;
+}
+.t_email button{
+	width:9rem;
+	height:1.17rem;
+	background: #3bc1a4;
+	border:none;
+	outline: none;
+	margin-top: 0.4rem;
+	border-radius: 5px;
+	color: #fff;
+	font-weight:700;
+	font-size:0.43rem;
+}

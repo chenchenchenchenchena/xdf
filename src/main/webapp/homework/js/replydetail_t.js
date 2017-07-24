@@ -606,25 +606,45 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
-        img.crossOrigin="anonymous"; //关键
+        img.crossOrigin="anonymous";
         img.src=previewUrl;
-        var width_ = parseInt($('.big_back_s img').css('width'));
-        var height = parseInt($('.big_back_s img').css('height'));
-        var canvas =document.getElementById("myCanvas");
-        canvas.width=width_;
-        canvas.height=height;
-        var ctx=canvas .getContext("2d");
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'red';
+        img.onload = function(){
+            var width_ = parseInt($('.big_back_s img').css('width'));
+            var height = parseInt($('.big_back_s img').css('height'));
+            var canvas =document.getElementById("myCanvas");
+            canvas.width=width_;
+            canvas.height=height;
+            var ctx=canvas .getContext("2d");
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'red';
 
-        ctx.drawImage(img,0,0,width_,height) ;
+            ctx.drawImage(img,0,0,width_,height) ;
+            Imgurl  = canvas.toDataURL("image/png");
 
-        Imgurl  = canvas.toDataURL("image/png");
+        };
+        // canvas事件
+        $(document).on('touchstart','canvas',function(){
+            ctx.beginPath();
+            ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
+            $(document).on('touchmove','canvas',function(){
+                var ev = ev || event;
+                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
+                ctx.stroke();
+            });
+            $(document).on('touchend','canvas',function(){
+                ctx.closePath();
+                $('.big_back_s').show()
+            });
+
+        });
 
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
+
+
         return false;
     });
+
     $('.true_s').on('touchend',function(){
         $('.notsubmit .imgBox').show();
         $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
@@ -632,21 +652,6 @@ $(function () {
         setTimeout(function(){
             $('.big_back_s').hide();
         },300)
-    });
-    // canvas事件
-    $(document).on('touchstart','canvas',function(){
-        ctx.beginPath();
-        ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
-        $(document).on('touchmove','canvas',function(){
-            var ev = ev || event;
-            ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
-            ctx.stroke();
-        });
-        $(document).on('touchend','canvas',function(){
-            ctx.closePath();
-            $('.big_back_s').show()
-        });
-
     });
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
