@@ -601,6 +601,13 @@ $(function () {
     // });
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
+        $('.big_back_s canvas').hide();
+        $('.big_back_s img').show();
+        $('.big_back_s .esc_s').hide();
+        $('.big_back_s .true_s').hide();
+        $('.big_back_s span:last-of-type').show();
+        $('.big_back_s').hide();
+        $('body').css('overflow-y','auto')
     });
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
@@ -654,7 +661,7 @@ $(function () {
             $('.big_back_s .true_s').hide();
             $('.big_back_s span:last-of-type').show();
             $('.big_back_s').hide();
-            $('body').css('overflow-y','auto')
+            $('body').css('overflow-y','auto');
             $('.true_s').unbind('touchend')
         });
         return false;
