@@ -575,16 +575,18 @@ $(function () {
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
+        setTimeout(function(){
+            $('.big_back_s img').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+            });
+            alert( $('.big_back_s img').css('margin-top'));
+            $('.big_back_s canvas').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
+                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+            });
+        },300)
 
-        $('.big_back_s img').css({
-            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
-        });
-        alert( $('.big_back_s img').css('margin-top'));
-        $('.big_back_s canvas').css({
-            'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-            'margin-left': -parseInt($('.big_back_s img').css('width'))/2
-        });
     });
     $('.big_back_s').on('touchend',function(){
         $(this).hide();
