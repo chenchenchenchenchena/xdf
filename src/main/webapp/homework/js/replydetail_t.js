@@ -580,6 +580,7 @@ $(function () {
             'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
             'margin-left': -parseInt($('.big_back_s img').css('width'))/2
         });
+        alert( $('.big_back_s img').css('margin-top'));
         $('.big_back_s canvas').css({
             'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
             'margin-left': -parseInt($('.big_back_s img').css('width'))/2
