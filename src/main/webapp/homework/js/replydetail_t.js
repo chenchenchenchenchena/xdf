@@ -580,7 +580,6 @@ $(function () {
                 'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
                 'margin-left': -parseInt($('.big_back_s img').css('width'))/2
             });
-            alert( $('.big_back_s img').css('margin-top'));
             $('.big_back_s canvas').css({
                 'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
                 'margin-left': -parseInt($('.big_back_s img').css('width'))/2
@@ -620,20 +619,22 @@ $(function () {
         };
 
         // canvas事件
-        $(document).on('touchstart','canvas',function(){
+        $(document).on('touchstart','#myCanvas',function(){
+            alert(0);
             ctx.beginPath();
             ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
-            $(document).on('touchmove','canvas',function(){
+            $(document).on('touchmove','#myCanvas',function(){
                 var ev = ev || event;
                 ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop);
                 ctx.stroke();
             });
-            $(document).on('touchend','canvas',function(){
+            $(document).on('touchend','#myCanvas',function(){
                 ctx.closePath();
                 $('.big_back_s').show()
             });
 
         });
+
         $('.true_s').on('touchend',function(){
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
