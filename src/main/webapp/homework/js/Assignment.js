@@ -80,7 +80,7 @@ $(function () {
         $(".notsubmit .imgBox").html(str);
         //界面样式控制
         if (i >= 3) {
-            $('#chooseImage').hide();
+            $('#image_s').hide();
         }
 
 
@@ -687,7 +687,7 @@ $(function () {
                     imgCount++;
                     //界面样式控制
                     if (res.localIds.length >= 3) {
-                        $('#chooseImage').hide();
+                        $('.image_s').hide();
                     }
 
                     //上传服务器
