@@ -674,8 +674,11 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    showUpdataImage(imgCount, res.localIds[i]);
-                    imgCount++;
+                    for (var i = 0; i < res.localIds.length; i++) {
+
+                        showUpdataImage(imgCount, res.localIds[i]);
+                        imgCount++;
+                    }
 
                     //上传服务器
                     upLoadWxImage(res);
