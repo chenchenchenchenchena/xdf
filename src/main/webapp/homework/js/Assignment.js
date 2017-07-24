@@ -86,7 +86,7 @@ $(function () {
         $(".notsubmit .imgBox").append(str);
 
         imgCount++;
-
+        alert(imgCount);
         //界面样式控制
         if (imgCount >= 3) {
             $('#image_s').hide();
@@ -678,6 +678,7 @@ $(function () {
     //图片上传
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
+        alert(imgCount);
         var count = 3 - imgCount;
         wx.chooseImage({
             count: count,
