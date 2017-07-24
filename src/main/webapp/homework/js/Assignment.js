@@ -6,6 +6,13 @@ $(function () {
     var recordCount = 0;
     var imgCount = 0;
 
+    if(imgCount>=3){
+        $('#image_s').hide();
+    }else {
+        $('#image_s').show();
+    }
+
+
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -670,7 +677,7 @@ $(function () {
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
         wx.chooseImage({
-            count: 3,
+            count: 3-imgCount,
             success: function (res) {
 
                 if (res.localIds.length > 0) {
