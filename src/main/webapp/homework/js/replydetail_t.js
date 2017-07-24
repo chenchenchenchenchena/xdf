@@ -108,7 +108,9 @@ $(function () {
                 if (stu[a].fileType == 'mp3') {
                     getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
+                    // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
+
                 }
             }
             for (var b = 0; b < tea.length; b++) {
@@ -588,6 +590,11 @@ $(function () {
 
     });
     $('.big_back_s').on('touchend',function(){
+        $(this).find('canvas').hide();
+        $(this).find('img').show();
+        $(this).find('.esc_s').hide();
+        $(this).find('.true_s').hide();
+        $(this).find('span:last-of-type').show();
         $(this).hide();
         $('body').css('overflow','auto')
         $('body').css('overflow-x','hidden')
@@ -639,6 +646,11 @@ $(function () {
         $('.true_s').on('touchend',function(){
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+            $('.big_back_s canvas').hide();
+            $('.big_back_s img').show();
+            $('.big_back_s .esc_s').hide();
+            $('.big_back_s .true_s').hide();
+            $('.big_back_s span:last-of-type').show();
         });
         return false;
     });
