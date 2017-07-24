@@ -494,7 +494,7 @@ $(function () {
         wx.uploadImage({
             localId: localId,
             success: function (res) {
-                uploadImage(res.serverId, i);
+                uploadImage(res.serverId);
             },
             fail: function (res) {
                 // alert(JSON.stringify(res));
@@ -531,14 +531,14 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        fileParams[i] = {
+                        fileParamspush({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
                             "fileSize": fileSize,
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
-                        };
+                        });
 
                     } else {
                         //上传失败重新上传一次

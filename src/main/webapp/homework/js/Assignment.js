@@ -57,7 +57,8 @@ $(function () {
                             'fileName': tea[b].fileName,
                             'fileType': tea[b].fileType,
                             'fileSize': tea[b].fileSize,
-                            'diskFilePath': tea[b].diskFilePath
+                            'diskFilePath': tea[b].diskFilePath,
+                            'id': tea[b].id
                         });
                         showAudio(url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
                         recordCount++;
@@ -67,7 +68,8 @@ $(function () {
                             'fileName': tea[b].fileName,
                             'fileType': tea[b].fileType,
                             'fileSize': tea[b].fileSize,
-                            'diskFilePath': tea[b].diskFilePath
+                            'diskFilePath': tea[b].diskFilePath,
+                            'id': tea[b].id
                         });
                         showUpdataImage(tea[b].url);
                         // $('.imgBox').show();
@@ -524,7 +526,8 @@ $(function () {
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
                     });
                     layer.open({
                         type: 1,
@@ -741,7 +744,8 @@ $(function () {
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
                     });
 
                 }
