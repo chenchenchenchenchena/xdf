@@ -345,12 +345,13 @@ $(function () {
     /*------------------录制语音结束------------------------------------*/
 
     /*------------------图片选择开始------------------------------------*/
+
+    //重新选择图片，清除之前数据
+    fileParams = [];
     /**
      *点击选择图片
      */
     $('#chooseImage').click(function () {
-        //重新选择图片，清除之前数据
-        fileParams = [];
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -364,7 +365,7 @@ $(function () {
                     }
 
                     $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").html(str);
+                    $(".notsubmit .imgBox").append(str);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();

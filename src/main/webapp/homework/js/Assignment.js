@@ -653,7 +653,6 @@ $(function () {
     //图片上传
     $('.image_s').click(function () {
         //重新选择图片，清除之前数据
-        fileParams = [];
         wx.chooseImage({
             count: 3,
             success: function (res) {
@@ -667,7 +666,7 @@ $(function () {
                     }
 
                     $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").html(str);
+                    $(".notsubmit .imgBox").append(str);
                     //界面样式控制
                     if (res.localIds.length >= 3) {
                         $('#chooseImage').hide();
