@@ -599,7 +599,6 @@ $(function () {
     $('.esc_s').on('touchend',function(){
         $('.big_back_s').hide();
     });
-    var Imgurl = '';
     $('.big_back_s span:last-of-type').on('touchend',function(){
         $(this).hide();
         $('.true_s').show();
@@ -616,8 +615,6 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
-        Imgurl  = canvas.toDataURL("image/png");
-
 
         ctx.drawImage(img,0,0,width_,height);
 
@@ -638,21 +635,24 @@ $(function () {
             });
 
         });
-        $('.true_s').on('touchend',function() {
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl + "'/></li>");
-            $('.true_s').unbind('touchend');
-            $('.big_back_s').show();
-            $('body').css('overflow','auto')
-            $('body').css('overflow-x','hidden')
-            setTimeout(function () {
-                $('.big_back_s').hide();
-            }, 300);
-            return false;
-        })
+
         return false;
     });
+    $('.true_s').on('touchend',function() {
+        var canvas =document.getElementById("myCanvas");
 
+
+        $('.notsubmit .imgBox').show();
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
+        $('.true_s').unbind('touchend');
+        $('.big_back_s').show();
+        $('body').css('overflow','auto');
+        $('body').css('overflow-x','hidden');
+        setTimeout(function () {
+            $('.big_back_s').hide();
+        }, 300);
+        return false;
+    })
 
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
