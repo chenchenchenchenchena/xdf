@@ -602,6 +602,7 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
+        img.crossOrigin = "Anonymous";
         img.src=previewUrl;
         var canvas =document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
