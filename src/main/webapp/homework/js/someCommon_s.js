@@ -17,9 +17,9 @@ var layer1,layer2,loading;
 /**
  *点击选择图片
  */
+fileParams = [];
 $('#chooseImage').click(function () {
     //重新选择图片，清除之前数据
-    fileParams = [];
     wx.chooseImage({
         count: 3,
         success: function (res) {
@@ -33,7 +33,7 @@ $('#chooseImage').click(function () {
                 }
 
                 $(".notsubmit .imgBox").show();
-                $(".notsubmit .imgBox").html(str);
+                $(".notsubmit .imgBox").append(str);
                 //界面样式控制
                 if (res.localIds.length >= 3) {
                     $('#chooseImage').hide();
@@ -272,7 +272,31 @@ $(document).on('touchend', '#HWsubmit', function () {
         // closeLayer(layer1);
         return;
     }
-    // 语音最多可上传*个，图片最多可上传*个 TODO
+    // 语音最多可上传*个，图片最多可上传3个
+    if ($('#record_audio_box li').length > 3) {
+        layer.open({
+            type: 1,
+            area: ['310px', '195px'],
+            shade: [0.1, '#fff'],
+            title: false,
+            skin: 'tips',
+            time: 3000,
+            content: '<div class="layer-tips">最多可传3段语音！</div>'
+        });
+        return;
+    }
+    if ($('.notsubmit .imgBox li').length > 3) {
+        layer.open({
+            type: 1,
+            area: ['310px', '195px'],
+            shade: [0.1, '#fff'],
+            title: false,
+            skin: 'tips',
+            time: 3000,
+            content: '<div class="layer-tips">最多可传3张图片！</div>'
+        });
+        return;
+    }
     hwcommit();
 
 });
