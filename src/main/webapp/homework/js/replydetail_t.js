@@ -647,6 +647,7 @@ $(function () {
 
 
 
+
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
         //alert($(this).parents('.audio_box').index());
