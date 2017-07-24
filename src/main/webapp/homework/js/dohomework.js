@@ -363,7 +363,7 @@ $(function () {
 
                     for (var i = 0; i < res.localIds.length; i++) {
 
-                        showNotImg();
+                        showNotImg(res.localIds[i]);
                         //上传服务器
                         upLoadWxImage(res.localIds[i]);
 
@@ -378,8 +378,8 @@ $(function () {
     /**
      * 显示未提交图片布局
      */
-    function showNotImg() {
-        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + res.localIds[i] + "'/></li>";
+    function showNotImg(localId) {
+        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + localId + "'/></li>";
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
         imageCount++;
@@ -394,30 +394,18 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localId) {
 
-        if (images.localIds.length == 0) {
-            return;
-        }
-        var i = 0, length = images.localIds.length;
+        wx.uploadImage({
+            localId: localId,
+            success: function (res) {
+                uploadImage(res.serverId, i);
+            },
+            fail: function (res) {
+                // alert(JSON.stringify(res));
+            }
+        });
 
-        function upload() {
-            wx.uploadImage({
-                localId: images.localIds[i],
-                success: function (res) {
-                    uploadImage(res.serverId, i);
-                    i++;
-                    if (i < length) {
-                        upload();
-                    }
-                },
-                fail: function (res) {
-                    // alert(JSON.stringify(res));
-                }
-            });
-        }
-
-        upload();
     }
 
 
@@ -527,6 +515,7 @@ $(function () {
         if (fileParams.length > 0) {
 
             fileParams.splice(index, 1);
+            imageCount--;
         }
 
 
