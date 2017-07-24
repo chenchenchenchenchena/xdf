@@ -635,16 +635,18 @@ $(function () {
             });
 
         });
-        $('.true_s').on('touchend',function(){
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + Imgurl+ "'/></li>");
-            $('.big_back_s').show();
-            setTimeout(function(){
-                $('.big_back_s').hide();
-            },300)
-        });
+
         return false;
     });
+    $('.true_s').on('touchend',function(){
+        $('.notsubmit .imgBox').show();
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
+        $('.big_back_s').show();
+        setTimeout(function(){
+            $('.big_back_s').hide();
+        },300)
+    });
+
 
 
 
