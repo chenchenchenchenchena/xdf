@@ -568,11 +568,10 @@ $(function () {
         }
     });
     var Index_Last;
-
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('src');``
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src',previewUrl);
@@ -611,6 +610,7 @@ $(function () {
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
         ctx.drawImage(img,0,0,width_,height);
+
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
         // canvas事件
