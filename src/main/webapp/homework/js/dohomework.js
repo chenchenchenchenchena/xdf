@@ -355,7 +355,6 @@ $(function () {
      */
     $('#chooseImage').click(function () {
         var count = 3-imageCount;
-        alert(count);
         wx.chooseImage({
             count: count,
             success: function (res) {
@@ -400,7 +399,7 @@ $(function () {
         wx.uploadImage({
             localId: localId,
             success: function (res) {
-                uploadImage(res.serverId, i);
+                uploadImage(res.serverId);
             },
             fail: function (res) {
                 // alert(JSON.stringify(res));
@@ -413,7 +412,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId, i) {
+    function uploadImage(serverId) {
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -437,14 +436,14 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        fileParams[i] = {
+                        fileParams.push({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
                             "fileSize": fileSize,
                             "diskFilePath": diskFilePath,
                             "uploadUser": uploadUser
-                        };
+                        });
 
                     } else {
                         //上传失败重新上传一次
@@ -499,7 +498,6 @@ $(function () {
     // 删除图片-确定
     $(document).on('touchend', '.delete-img .confirmBtn', function () {
 
-        alert(imageCount);
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
@@ -514,9 +512,7 @@ $(function () {
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('#chooseImage').show();
         }
-        alert(imageCount);
         if (fileParams.length > 0) {
-            alert(imageCount);
             fileParams.splice(index, 1);
             imageCount--;
         }
