@@ -1,4 +1,10 @@
 $(function () {
+
+    var arr_s = [];
+    var arr_voice = [];
+    var arr_image = [];
+    var recordCount = 0;
+
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -39,9 +45,15 @@ $(function () {
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
-                        showAudio(url_o +tea[b].url, $('#record_audio_box'), recordCount);
+                        showAudio(url_o + tea[b].url, $('#record_audio_box'), recordCount);
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
+                        arr_image.push({
+                            'fileName': tea[b].fileName,
+                            'fileType': tea[b].fileType,
+                            'fileSize': tea[b].fileSize,
+                            'diskFilePath': tea[b].diskFilePath
+                        });
                         showUpdataImage(b, tea[b].url);
                         // $('.imgBox').show();
                         // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
@@ -473,10 +485,6 @@ $(function () {
         });
     }
 
-    var arr_s = [];
-    var arr_voice = [];
-    var arr_image = [];
-    var recordCount = 0;
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
