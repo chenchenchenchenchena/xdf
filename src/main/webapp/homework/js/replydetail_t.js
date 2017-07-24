@@ -640,10 +640,10 @@ $(function () {
     });
     $('.true_s').on('touchend',function() {
         var canvas =document.getElementById("myCanvas");
-
+        var Imgurl =canvas.toDataURL("image/png")
 
         $('.notsubmit .imgBox').show();
-        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
         $('.true_s').unbind('touchend');
         $('.big_back_s').show();
         $('body').css('overflow','auto');
