@@ -614,19 +614,17 @@ $(function () {
         var canvas =document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
-
+        canvas.width=width_;
+        canvas.height=height;
 
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
         img.onload = function(){
-            canvas.width=width_;
-            canvas.height=height;
             ctx.drawImage(img,0,0);
         };
-
-            $('.big_back_s img').hide();
-            $('.big_back_s canvas').show();
+        $('.big_back_s img').hide();
+        $('.big_back_s canvas').show();
 
         // canvas事件
         $(document).on('touchstart','#myCanvas',function(){
@@ -639,7 +637,10 @@ $(function () {
             });
             $(document).on('touchend','#myCanvas',function(){
                 ctx.closePath();
-                $('.big_back_s').show()
+                $('.big_back_s').show();
+                $('#myCanvas').unbind('touchenstart');
+                $('#myCanvas').unbind('touchmove');
+                $('#myCanvas').unbind('touchend');
             });
 
         });
