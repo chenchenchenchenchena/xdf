@@ -615,10 +615,11 @@ $(function () {
         var ctx=canvas .getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
+        Imgurl  = canvas.toDataURL("image/png");
+
         ctx.drawImage(img,0,0,width_,height);
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
-        Imgurl  = canvas.toDataURL("image/png");
         // canvas事件
         $(document).on('touchstart','canvas',function(){
             ctx.beginPath();
