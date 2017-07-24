@@ -601,6 +601,7 @@ $(function () {
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.src=previewUrl;
+        alert(previewUrl);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         var canvas =document.getElementById("myCanvas");
