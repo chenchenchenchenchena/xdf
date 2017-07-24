@@ -77,12 +77,11 @@ $(function () {
         var str = "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + url + "'/></li>";
 
         $(".notsubmit .imgBox").show();
-        $(".notsubmit .imgBox").html(str);
+        $(".notsubmit .imgBox").append(str);
         //界面样式控制
         if (i >= 3) {
             $('#image_s').hide();
         }
-
 
     }
 
@@ -676,19 +675,8 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    var str = "";
-                    for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + res.localIds[i] + "'/></li>";
-
-                    }
-
-                    $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").append(str);
+                    showUpdataImage(imgCount, res.localIds[i]);
                     imgCount++;
-                    //界面样式控制
-                    if (res.localIds.length >= 3) {
-                        $('.image_s').hide();
-                    }
 
                     //上传服务器
                     upLoadWxImage(res);
