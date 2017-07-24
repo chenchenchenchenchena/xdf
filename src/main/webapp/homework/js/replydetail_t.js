@@ -638,26 +638,25 @@ $(function () {
 
         return false;
     });
-
-    document.querySelector('.true_s').addEventListener("touchend", function(){
-        var Imgurl =document.getElementById("myCanvas").toDataURL("image/png");
-        console.log(Imgurl);
-    });
+        function move(){
+            var Imgurl =document.getElementById("myCanvas").toDataURL("image/png");
+            console.log(Imgurl);
+        }
 
     // })
-    // $('.true_s').on('touchend',function() {
-    //
-    //     $('.notsubmit .imgBox').show();
-    //     $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
-    //     $('.true_s').unbind('touchend');
-    //     $('.big_back_s').show();
-    //     $('body').css('overflow','auto');
-    //     $('body').css('overflow-x','hidden');
-    //     setTimeout(function () {
-    //         $('.big_back_s').hide();
-    //     }, 300);
-    //     return false;
-    // })
+    $('.true_s').on('touchend',function() {
+        move();
+        $('.notsubmit .imgBox').show();
+        $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +Imgurl+ "'/></li>");
+        $('.true_s').unbind('touchend');
+        $('.big_back_s').show();
+        $('body').css('overflow','auto');
+        $('body').css('overflow-x','hidden');
+        setTimeout(function () {
+            $('.big_back_s').hide();
+        }, 300);
+        return false;
+    })
 
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
