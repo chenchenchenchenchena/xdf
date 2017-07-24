@@ -161,6 +161,7 @@ function ajax_S(link,more,func){
         type: 'post',
         asyns:false,
         dataType: 'json',
+        crossDomain:true,
         data:JSON.stringify(more),
         success:function(e){
             func(e)
