@@ -363,7 +363,7 @@ $(function () {
 
                     for (var i = 0; i < res.localIds.length; i++) {
 
-                        showNotImg();
+                        showNotImg(res.localIds[i]);
                         //上传服务器
                         upLoadWxImage(res.localIds[i]);
 
@@ -378,8 +378,8 @@ $(function () {
     /**
      * 显示未提交图片布局
      */
-    function showNotImg() {
-        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + res.localIds[i] + "'/></li>";
+    function showNotImg(localId) {
+        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + localId + "'/></li>";
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
         imageCount++;
@@ -527,6 +527,7 @@ $(function () {
         if (fileParams.length > 0) {
 
             fileParams.splice(index, 1);
+            imageCount--;
         }
 
 
