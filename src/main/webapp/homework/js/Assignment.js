@@ -39,7 +39,7 @@ $(function () {
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
-                        showAudio(url_o +tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        showAudio(url_o +tea[b].url, $('#record_audio_box'), recordCount);
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
                         showUpdataImage(b, tea[b].url);
