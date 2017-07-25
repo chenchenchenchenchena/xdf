@@ -11,7 +11,7 @@ $(function () {
             "email":$(".t_email input").val()+"@xdf.cn"
         }
         if($(".t_email input").val()==""){
-            layer.msg("邮箱不能为空");
+            layer.msg("邮箱不能为空",{icon:6});
         }else{
             ajax_S(url.w_email,temail,terEmail);
         }
@@ -28,11 +28,11 @@ $(function () {
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
             }else{
-                layer.msg("教师邮箱不存在");
+                layer.msg("教师邮箱不存在",{icon:6});
             }
 
         }else{
-            layer.msg("教师邮箱不正确");
+            layer.msg("教师邮箱不正确",{icon:6});
         }
     }
 //清除缓存
