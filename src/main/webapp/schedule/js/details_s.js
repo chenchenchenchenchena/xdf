@@ -62,7 +62,6 @@ $(function(){
         }else{
             var begindata = '';
         }
-        var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
         if(BeginDate[timeindex].EndDate!=undefined||BeginDate[timeindex].EndDate==null||BeginDate[timeindex].EndDate==''){
             var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
         }else{
