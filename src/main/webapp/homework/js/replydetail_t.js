@@ -110,7 +110,7 @@ $(function () {
                 } else {
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
-                    $('.')
+                    // $('.')
                 }
             }
             for (var b = 0; b < tea.length; b++) {
@@ -556,8 +556,8 @@ $(function () {
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('li').length <= 1) {
-            $('.imgBox').hide();
+        if ($('.notsubmit .imgBox').find('li').length <= 1) {
+            $('.notsubmit .imgBox').hide();
         }
 
         $('.imgBox li:eq(' + index + ')').remove();
