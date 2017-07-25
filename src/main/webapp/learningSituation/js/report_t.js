@@ -472,6 +472,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 for(r in timejson){
                                     console.log(r);
                                     if(m+1 != r){
+                                        r = m+1;
                                         Tbuer = true;
                                         break;
                                     }
