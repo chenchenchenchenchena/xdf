@@ -596,11 +596,11 @@ $(function () {
             } else if (mm > 0) {
                 voiceLen = mm + "'" + ss + "''";
             } else {
-                voiceLen = ss + "''";
-            }
-            if (ss == 0) {
-
-                voiceLen = "1''";
+                if (ss == 0) {
+                    voiceLen = "1''";
+                }else {
+                    voiceLen = ss + "''";
+                }
             }
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
         }
@@ -762,8 +762,8 @@ $(function () {
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('li').length <= 1) {
-            $('.imgBox').hide();
+        if ($('.notsubmit .imgBox').find('li').length <= 1) {
+            $('.notsubmit .imgBox').hide();
         }
 
         $('.imgBox li:eq(' + index + ')').remove();
