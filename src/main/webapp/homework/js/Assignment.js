@@ -1,5 +1,6 @@
 $(function () {
-
+    localStorage.schoolId= 73;
+    sessionStorage.classCode_s = "hx001";
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
@@ -673,7 +674,7 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
+            alert('请先选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
