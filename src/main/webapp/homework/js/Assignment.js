@@ -48,7 +48,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            ajaxRequest('post', "http://10.73.32.97:8080/xdfdtmanager/teacherData/gainHomeworkFileData.do", {'Tcid': sessionStorage.id_x}, function (e) {
+            ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
@@ -320,22 +320,7 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            // if ($('.music_s').eq(0).attr('filename')) {
-            //     arr_s.push({
-            //         'fileName': $('.music_s').eq(0).attr('filename'),
-            //         'fileType': $('.music_s').eq(0).attr('filetype'),
-            //         'fileSize': $('.music_s').eq(0).attr('filesize'),
-            //         'diskFilePath': $('.music_s').eq(0).attr('diskfilepath')
-            //     });
-            // }
-            // if ($('.imgBox img').eq(0).attr('filename')) {
-            //     arr_s.push({
-            //         'fileName': $('.imgBox img').eq(0).attr('filename'),
-            //         'fileType': $('.imgBox img').eq(0).attr('filetype'),
-            //         'fileSize': $('.imgBox img').eq(0).attr('filesize'),
-            //         'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
-            //     });
-            // }
+            // ajax_S(homework_s.t_erro,errohome, function (e) {
             ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
@@ -362,9 +347,6 @@ $(function () {
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
             homeworksubm.description = encodeURI($('.home_text textarea').val());
             homeworksubm.fileInfo = arr_s;
-            alert(JSON.stringify(homeworksubm));
-            alert(JSON.stringify(arr_image));
-            alert(JSON.stringify(arr_s));
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
@@ -719,7 +701,6 @@ $(function () {
      * 图片上传到自己服务器
      */
     function uploadImage(serverId) {
-        alert("q");
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -736,7 +717,6 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    alert("qqqq");
                     arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
