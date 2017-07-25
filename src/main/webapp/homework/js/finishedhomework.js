@@ -468,6 +468,7 @@ $(function () {
     fileParams = [];
     var imageCount = 0
     $('#chooseImage').click(function () {
+        imageCount = $('.notsubmit .imgBox li').length;
         //重新选择图片，清除之前数据
         var count = 3 - imageCount;
         wx.chooseImage({
