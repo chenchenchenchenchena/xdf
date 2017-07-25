@@ -15,7 +15,7 @@ $(function(){
     var subject_s = '';
     function stusea(e){
         var teacindex = 0;
-        var BeginDate =  e.data.Data
+        var BeginDate =  e.data.Data;
         var timeindex = 0;
         var regionindex = [];
         for(var i = 0;i<BeginDate.length;i++){
