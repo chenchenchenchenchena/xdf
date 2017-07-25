@@ -5,7 +5,7 @@
 // sessionStorage.stuNum= 'sy1';
 $(function () {
     $('.name_s').html(localStorage.terEmail);
-    $('.name_ema').html(localStorage.tname);
+    $('.name_ema').html(localStorage.teacherName);
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
@@ -20,12 +20,17 @@ $(function () {
     function terEmail(e){
         console.log(e.data)
         if(e.result==true){
-            location.href="login_t.html";
-            // var teaname = jQuery.parseJSON(e.data);
-            localStorage.terEmail = e.data.sEmail;
-            localStorage.sid = e.data.nSchoolId;
-            localStorage.tid=e.data.sCode;
-            localStorage.tname=e.data.sName;
+            if(e.data!=undefined){
+                location.href="login_t.html";
+                // var teaname = jQuery.parseJSON(e.data);
+                localStorage.terEmail = e.data.sEmail;
+                localStorage.schoolId = e.data.nSchoolId;
+                localStorage.teacherId=e.data.sCode;
+                localStorage.teacherName=e.data.sName;
+            }else{
+                layer.msg("教师邮箱不存在");
+            }
+
         }else{
             layer.msg("教师邮箱不正确");
         }
