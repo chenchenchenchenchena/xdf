@@ -653,11 +653,11 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    for (var i = 0; i < res.localIds.length; i++) {
-
-                        showUpdataImage(res.localIds[i]);
-
-                    }
+                    // for (var i = 0; i < res.localIds.length; i++) {
+                    //
+                    //     showUpdataImage(res.localIds[i]);
+                    //
+                    // }
                     //上传服务器
                     upLoadWxImage(res);
                 }
@@ -719,6 +719,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
+                    showUpdataImage(e.data.fileUrl);
                     arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
