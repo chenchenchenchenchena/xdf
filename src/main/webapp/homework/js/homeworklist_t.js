@@ -14,14 +14,14 @@ $(function(){
                 sessionStorage.studentName = e.data.studentName;
                 location.href = 'homeworklist_s.html';
             }else{
-                sessionStorage.homeCanfig=='home';
+                sessionStorage.homeCanfig=='home'
                 location.href = '../schedule/login_s.html'
             }
         });
     }
 
     //tab
-	$(document).on('touchend','.hwFinish .firstList',function(){
+	$(document).on('tap','.hwFinish .firstList',function(){
 	    if($(this).find('ul').css('display')=='none'){
 	        if($(this).find('.state_st').length!=0){
                 ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$(this).attr('classCode'),schoolId:'73'},function(e){
