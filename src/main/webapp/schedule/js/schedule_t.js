@@ -43,44 +43,8 @@ function stud(e){
     }
 }
 
-    $('.js_jin').click(function(){
-        var time1 = new Date().format("yyyy-MM-dd");
-        var menu_s = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
-        };
-        ajax_S(url.s_emai,emailm,stusea);
-        var month  = $('.today').attr('data_m');
-        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-        var daycount = day.getDate();
-        var menu_s = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-        };
-        ajax_S(url.s_emai,menu_s,menufunc);
-        monththis = month
-    });
-    $(document).on('touchstart','.tc-bot-right',function(){
-        var time1 = new Date().format("yyyy-MM-dd");
-        var menu_s = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
-        };
-        ajax_S(url.s_emai,emailm,stusea);
-        var month  = $('.today').attr('data_m');
-        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-        var daycount = day.getDate();
-        var menu_s = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
-        };
-        ajax_S(url.s_emai,menu_s,menufunc);
-        monththis = month
-    });
+    $('.js_jin').click(menu_int);
+    $(document).on('touchstart','.tc-bot-right',menu_int);
 
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
