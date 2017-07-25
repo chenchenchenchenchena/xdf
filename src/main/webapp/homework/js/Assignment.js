@@ -762,8 +762,8 @@ $(function () {
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('li').length <= 1) {
-            $('.imgBox').hide();
+        if ($('.notsubmit .imgBox').find('li').length <= 1) {
+            $('.notsubmit .imgBox').hide();
         }
 
         $('.imgBox li:eq(' + index + ')').remove();
