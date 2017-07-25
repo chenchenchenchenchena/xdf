@@ -44,7 +44,7 @@ function stud(e){
 }
 
     $('.js_jin').click(menu_int);
-    $(document).on('touchstart','.tc-bot-right',menu_int);
+    // $(document).on('touchstart','.tc-bot-right',menu_int);
 
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
@@ -285,7 +285,7 @@ $(document).on('click','.H-data li',function(){
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
-            monththis = month
+            monththis = month;
             ajax_S(url.s_emai,menu_s,menufunc);
         }
         var html_s = $('.swiper-slide-active table').find('td');
