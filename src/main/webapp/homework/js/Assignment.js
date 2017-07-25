@@ -1,5 +1,6 @@
 $(function () {
-
+    localStorage.schoolId= 73;
+    sessionStorage.classCode_s = "hx001";
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
@@ -321,8 +322,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            ajax_S(homework_s.t_erro,errohome, function (e) {
-            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
+            // ajax_S(homework_s.t_erro,errohome, function (e) {
+            ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -652,11 +653,11 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    for (var i = 0; i < res.localIds.length; i++) {
-
-                        showUpdataImage(res.localIds[i]);
-
-                    }
+                    // for (var i = 0; i < res.localIds.length; i++) {
+                    //
+                    //     showUpdataImage(res.localIds[i]);
+                    //
+                    // }
                     //上传服务器
                     upLoadWxImage(res);
                 }
@@ -673,7 +674,7 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
+            alert('请先选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
@@ -716,8 +717,9 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    alert(e.msg);
                 } else {
+                    showUpdataImage(e.data.fileUrl);
                     arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,

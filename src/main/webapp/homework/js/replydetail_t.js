@@ -448,6 +448,7 @@ $(function () {
     var imgCount = 0;
     //图片上传
     $('.image_s').click(function () {
+        imgCount = $('.notsubmit .imgBox li').length;
         //重新选择图片，追加图片，max = 3；
         var count = 3 - imgCount;
         wx.chooseImage({
@@ -534,6 +535,19 @@ $(function () {
 
             }
         });
+
+    }
+
+    function showUpdataImage(url) {
+
+        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + url + "'/></li>";
+
+        $(".notsubmit .imgBox").show();
+        $(".notsubmit .imgBox").append(str);
+        //界面样式控制
+        if ($('.notsubmit .imgBox li').length >= 3) {
+            $('.image_s').hide();
+        }
 
     }
 
@@ -663,10 +677,10 @@ $(function () {
         });
 
         $('.true_s').on('touchend',function(){
-            console.log(canvas.toDataURL("image/png"));
+            console.log(encodeURI(canvas.toDataURL("image/png")));
             //上传文件到服务器
             var reqData = {
-                'file':canvas.toDataURL("image/png"),
+                'file':encodeURI(canvas.toDataURL("image/png")),
                 'schoolId':localStorage.schoolId,
                 'classId':'hx001'};
             console.log(reqData);

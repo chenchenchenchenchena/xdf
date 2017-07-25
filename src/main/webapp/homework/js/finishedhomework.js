@@ -476,10 +476,6 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    for (var i = 0; i < res.localIds.length; i++) {
-                        showNotImg(res.localIds[i]);
-                    }
-
                     //上传服务器
                     upLoadWxImage(res);
                 }
@@ -555,9 +551,10 @@ $(function () {
             success: function (data) {
                 // alert(JSON.stringify(data));
                 if (data.status == "failure") {
-                    alert(e.message);
+                    alert(e.msg);
                 } else {
                     if (data.data.success == true) {
+                        showNotImg(data.data.fileUrl);
                         fileName = data.data.fileName;
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
