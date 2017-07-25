@@ -1,5 +1,7 @@
 $(function () {
 
+    sessionStorage.classId = "hx001";
+    sessionStorage.schoolId= 73;
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
