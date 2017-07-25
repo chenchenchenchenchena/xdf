@@ -199,6 +199,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -267,6 +268,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -332,8 +334,8 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
+                                        r = m+1;
                                         Tbuer = true;
                                         break;
                                     }
@@ -405,6 +407,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -546,6 +549,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -616,6 +620,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -684,6 +689,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
@@ -752,6 +758,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     console.log(r);
                                     if(m != r){
                                         Tbuer = true;
+                                        r = m+1;
                                         break;
                                     }
                                 }
