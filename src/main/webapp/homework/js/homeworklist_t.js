@@ -1,8 +1,8 @@
 $(function(){
     //登录相关
-    // if(!sessionStorage.openid){
-    //     wechatCode(location.href);
-    // };
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
     if(!localStorage.terEmail){
         var WXnum  = {
             'wechatId':sessionStorage.openid
@@ -21,7 +21,7 @@ $(function(){
     }
 
     //tab
-	$(document).on('click','.firstList',function(){
+	$(document).on('tap click','.firstList',function(){
 	    if($(this).find('ul').css('display')=='none'){
 	        if($(this).find('.state_st').length!=0){
                 ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$(this).attr('classCode'),schoolId:'73'},function(e){
