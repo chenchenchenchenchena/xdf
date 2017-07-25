@@ -240,19 +240,6 @@ $(function () {
         };
         need.fileInfo = arr_s;
         need.replyDesc = encodeURI($('.answer textarea').val());
-
-            $.ajax({
-                processData : false,
-                contentType : false,
-                url:homework_s.t_file,
-                type: 'post',
-                asyns:false,
-                dataType: 'json',
-                data:JSON.stringify({file:arr_s,schoolId:localStorage.schoolId,classId:'hx001'}),
-                success:function(e){
-                    console.log(e)
-                }
-            });
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
