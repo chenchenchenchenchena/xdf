@@ -479,9 +479,10 @@ $(function () {
 
                     for (var i = 0; i < res.localIds.length; i++) {
                         showNotImg(res.localIds[i]);
-                        //上传服务器
-                        upLoadWxImage(res.localIds[i]);
                     }
+
+                    //上传服务器
+                    upLoadWxImage(res);
                 }
 
             }
@@ -507,18 +508,32 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(localId) {
+    function upLoadWxImage(images) {
 
-        wx.uploadImage({
-            localId: localId,
-            success: function (res) {
-                uploadImage(res.serverId);
-            },
-            fail: function (res) {
-                // alert(JSON.stringify(res));
-            }
-        });
+        if (images.localIds.length == 0) {
+            alert('请先使用 chooseImage 接口选择图片');
+            return;
+        }
+        var i = 0, length = images.localIds.length;
 
+        function upload() {
+            wx.uploadImage({
+                localId: images.localIds[i],
+                success: function (res) {
+                    i++;
+                    // serverIds.push(res.serverId);
+                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
+                    uploadImage(res.serverId);
+                    if (i < length) {
+                        upload();
+                    }
+                },
+                fail: function (res) {
+                }
+            });
+        }
+
+        upload();
     }
 
 
