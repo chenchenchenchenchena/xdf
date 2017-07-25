@@ -4,8 +4,6 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 $(function () {
-    $('.name_s').html(localStorage.terEmail);
-    $('.name_ema').html(localStorage.teacherName);
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
@@ -21,7 +19,7 @@ $(function () {
         console.log(e.data)
         if(e.result==true){
             if(e.data!=undefined){
-                location.href="login_t.html";
+                location.href="../../schedule/login_t.html";
                 // var teaname = jQuery.parseJSON(e.data);
                 localStorage.terEmail = e.data.sEmail;
                 localStorage.schoolId = e.data.nSchoolId;
