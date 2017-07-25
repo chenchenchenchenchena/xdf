@@ -47,13 +47,12 @@ $(function(){
         }else{
             var begindata = '';
         }
+		var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
 		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
-        if( BeginDate[timeindex].EndDate!=undefined){
-
-            var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
-
+        if(BeginDate[timeindex].EndDate.split(' ')!=undefined){
+            var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
         }else{
-            var endtime = '';
+            var enddata = '';
         }
 		var LessonCount = BeginDate[timeindex].LessonCount
 		var LessonNo = BeginDate[timeindex].LessonNo
