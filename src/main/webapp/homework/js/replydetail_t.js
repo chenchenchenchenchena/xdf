@@ -677,10 +677,10 @@ $(function () {
         });
 
         $('.true_s').on('touchend',function(){
-            console.log(canvas.toDataURL("image/png"));
+            console.log(encodeURI(canvas.toDataURL("image/png")));
             //上传文件到服务器
             var reqData = {
-                'file':canvas.toDataURL("image/png"),
+                'file':encodeURI(canvas.toDataURL("image/png")),
                 'schoolId':localStorage.schoolId,
                 'classId':'hx001'};
             console.log(reqData);
