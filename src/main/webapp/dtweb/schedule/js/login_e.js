@@ -3,40 +3,46 @@
  */
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
-var temail={
-    "email":$(".t_email input").val()+"@xdf.cn"
-}
-$(".t_email button").click(function () {
-    alert("111");
-    if($(".t_email input").val()==""){
-        layer.msg("邮箱不能为空");
-    }else{
-        ajax_S(url.t_email,temail,terEmail);
-    }
+$(function () {
+    $('.name_s').html(localStorage.terEmail);
+    $('.name_ema').html(localStorage.teacherName);
+    $(".t_email button").click(function () {
+        var temail={
+            "email":$(".t_email input").val()+"@xdf.cn"
+        }
+        if($(".t_email input").val()==""){
+            layer.msg("邮箱不能为空");
+        }else{
+            ajax_S(url.w_email,temail,terEmail);
+        }
 
+    })
+    function terEmail(e){
+        console.log(e.data)
+        if(e.result==true){
+            if(e.data!=undefined){
+                location.href="login_t.html";
+                // var teaname = jQuery.parseJSON(e.data);
+                localStorage.terEmail = e.data.sEmail;
+                localStorage.schoolId = e.data.nSchoolId;
+                localStorage.teacherId=e.data.sCode;
+                localStorage.teacherName=e.data.sName;
+            }else{
+                layer.msg("教师邮箱不存在");
+            }
+
+        }else{
+            layer.msg("教师邮箱不正确");
+        }
+    }
+//清除缓存
+    function clear(){
+        localStorage.removeItem("teacherId");
+        localStorage.removeItem("terEmail");
+        localStorage.removeItem("schoolId");
+        localStorage.removeItem("teacherName");
+    }
 })
 
-function terEmail(e){
-    console.log(e.data)
-    if(e.result==true){
-        location.href="login_t.html";
-        // var teaname = jQuery.parseJSON(e.data);
-        $('.name_s').html(e.data.sName);
-        $('.name_ema').html(e.data.UserID);
-        localStorage.terEmail = e.data.UserID;
-        localStorage.sid = e.data.nSchoolId;
-        localStorage.tid=e.data.sCode;
-
-    }else{
-        layer.msg("教师邮箱不正确");
-    }
-}
-//清除缓存
-function clear(){
-    localStorage.removeItem("teacherId");
-    localStorage.removeItem("terEmail");
-    localStorage.removeItem("schoolId");
-    localStorage.removeItem("teacherName");
-}
 
 

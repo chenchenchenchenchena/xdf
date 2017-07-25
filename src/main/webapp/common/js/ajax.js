@@ -73,7 +73,7 @@ var url = {
     'w_token':url_o+'/wechatSignature/getWechatToken.do',
     'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do',
     'w_push':url_o+'wechatSignature/sendTemplateMsg.do',//微信推送成绩信息
-    'w_email':url_o+'e2Login/queryTeacherInfo.do'
+    'w_email':url_o+'e2Login/queryTeacherInfo.do'//查询老师信息
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
@@ -104,7 +104,7 @@ var homework_s = {
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
     's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
-    's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
+    's_fileRank': url_o+'upload/viewAllFileDetails.do'//集合方式获取云盘信息
 
 };
 function wechatCode(url) {
