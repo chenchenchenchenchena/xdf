@@ -48,7 +48,6 @@ $(function(){
             var begindata = '';
         }
 		var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
-		var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
         if(BeginDate[timeindex].EndDate.split(' ')!=undefined){
             var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
         }else{
