@@ -151,10 +151,10 @@ $(function () {
                             showImage(paths.fileUrl, "imagBox_" + 2);
                         } else {
                             str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + paths.fileUrl + "'/></li>";
-                            $(".notsubmit .imgBox").show();
-                            $(".notsubmit .imgBox").html(str);
+                            // $(".notsubmit .imgBox").show();
+                            $(".notsubmit .imgBox").html(str).show();
                             //界面样式控制
-                            if (i >= 3) {
+                            if (i >= 2) {
                                 $('#chooseImage').hide();
                             }
                         }
@@ -531,7 +531,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        fileParamspush({
+                        fileParams.push({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -739,7 +739,7 @@ $(function () {
             "fileStuhomeworks": fileStuhomeworks,
             "modify": true
         };
-        // alert(JSON.stringify(reqData));
+        alert(JSON.stringify(reqData));
         loading = layer.load();
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
         $('#HWsubmit').addClass('btn-grey');
