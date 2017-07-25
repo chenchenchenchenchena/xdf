@@ -1,6 +1,4 @@
 $(function () {
-    sessionStorage.classId = "hx001";
-    sessionStorage.schoolId= 73;
     var layer1, layer2, loading;
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
@@ -400,8 +398,8 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'schoolId': localStorage.schoolId,
+            'classId': sessionStorage.classCode_s
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -525,8 +523,8 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'schoolId': localStorage.schoolId,
+            'classId': sessionStorage.classCode_s
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",

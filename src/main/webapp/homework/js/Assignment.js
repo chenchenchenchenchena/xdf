@@ -1,6 +1,6 @@
 $(function () {
 
-    sessionStorage.classId = "hx001";
+    sessionStorage.classCode_s = "hx001";
     sessionStorage.schoolId= 73;
     var arr_s = [];
     var arr_voice = [];
@@ -496,8 +496,8 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'schoolId': localStorage.schoolId,
+            'classId': sessionStorage.classCode_s
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -708,8 +708,8 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': sessionStorage.schoolId,
-            'classId': sessionStorage.classId
+            'schoolId': localStorage.schoolId,
+            'classId': sessionStorage.classCode_s
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
