@@ -1,5 +1,6 @@
 $(function () {
-    sessionStorage.classId;
+    sessionStorage.classId = "hx001";
+    sessionStorage.schoolId= 73;
     var layer1, layer2, loading;
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
