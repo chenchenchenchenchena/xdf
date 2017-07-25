@@ -4,8 +4,8 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 $(function () {
-    $('.name_s').html(localStorage.terEmail);
-    $('.name_ema').html(localStorage.teacherName);
+    $('.name_s').html(localStorage.teacherName);
+    $('.name_ema').html(localStorage.terEmail);
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
@@ -21,12 +21,12 @@ $(function () {
         console.log(e.data)
         if(e.result==true){
             if(e.data!=undefined){
-                location.href="login_t.html";
                 // var teaname = jQuery.parseJSON(e.data);
                 localStorage.terEmail = e.data.sEmail;
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
+                location.href="../../schedule/login_t.html";
             }else{
                 layer.msg("教师邮箱不存在",{icon:6});
             }
