@@ -326,11 +326,12 @@ $(function () {
             } else if (mm > 0) {
                 voiceLen = mm + "'" + ss + "''";
             } else {
-                voiceLen = ss + "''";
-            }
-            if (ss == 0) {
+                if (ss == 0) {
 
-                voiceLen = "1''";
+                    voiceLen = "1''";
+                }else {
+                    voiceLen = ss + "''";
+                }
             }
 
             $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
