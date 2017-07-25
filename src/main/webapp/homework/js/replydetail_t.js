@@ -108,8 +108,14 @@ $(function () {
                 if (stu[a].fileType == 'mp3') {
                     getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
                 } else {
+                    var onlineUrl = 'dt.xdf.cn';
+                    if (window.location.host == onlineUrl) {//正式环境
+                        $('.imgBox').eq(1).append('<div><img src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                    } else {//测试环境
+                        $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                    }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
-                    $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
+                    // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
                     // $('.')
                 }
             }
@@ -237,9 +243,7 @@ $(function () {
                 $('.erro').show();
             }
         })
-    })
-
-
+    });
     //状态点击
     $('.succ input').on('touchend', function () {
         $('.big_back').hide();
@@ -556,8 +560,8 @@ $(function () {
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.notsubmit .imgBox').find('li').length <= 1) {
-            $('.notsubmit .imgBox').hide();
+        if ($('.imgBox').find('li').length <= 1) {
+            $('.imgBox').hide();
         }
 
         $('.imgBox li:eq(' + index + ')').remove();

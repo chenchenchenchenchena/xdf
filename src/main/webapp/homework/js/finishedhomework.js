@@ -144,6 +144,15 @@ $(function () {
                             //显示可修改语音布局
                             showRecordAudio(url_o + paths.diskFilePath, $('#record_audio_box'), recordCount, 1);
                             recordCount++;
+                            var voiceFile = {
+                                "homeworkSinfoId": homeworkSinfoId,
+                                "fileName": paths.fileName,
+                                "fileType": paths.fileType,
+                                "fileSize": paths.fileSize,
+                                "diskFilePath": paths.diskFilePath,
+                                "uploadUser": uploadUser
+                            };
+                            voiceFileParams.push(voiceFile);
                         }
                     } else {
                         //将图片文件显示到布局中
@@ -151,12 +160,20 @@ $(function () {
                             showImage(paths.fileUrl, "imagBox_" + 2);
                         } else {
                             str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + paths.fileUrl + "'/></li>";
-                            $(".notsubmit .imgBox").show();
-                            $(".notsubmit .imgBox").html(str);
+                            // $(".notsubmit .imgBox").show();
+                            $(".notsubmit .imgBox").html(str).show();
                             //界面样式控制
-                            if (i >= 3) {
+                            if (i >= 2) {
                                 $('#chooseImage').hide();
                             }
+                            fileParams.push({
+                                "homeworkSinfoId": homeworkSinfoId,
+                                "fileName": paths.fileName,
+                                "fileType": paths.fileType,
+                                "fileSize": paths.fileSize,
+                                "diskFilePath": paths.diskFilePath,
+                                "uploadUser": uploadUser
+                            });
                         }
                     }
                 });
@@ -531,7 +548,7 @@ $(function () {
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
                         diskFilePath = data.data.diskFilePath;
-                        fileParamspush({
+                        fileParams.push({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
                             "fileType": fileType,
@@ -728,6 +745,7 @@ $(function () {
     });
 // 提交作业接口
     function hwcommit() {
+
         //将语音和图片一起传给服务器
         var fileStuhomeworks;
 
@@ -739,7 +757,7 @@ $(function () {
             "fileStuhomeworks": fileStuhomeworks,
             "modify": true
         };
-        // alert(JSON.stringify(reqData));
+        // console.log(JSON.stringify(reqData));
         loading = layer.load();
         $('#HWsubmit').attr('disabled', "true");//禁用按钮
         $('#HWsubmit').addClass('btn-grey');
