@@ -48,6 +48,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
+
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
