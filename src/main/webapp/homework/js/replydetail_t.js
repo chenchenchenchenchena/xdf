@@ -218,6 +218,7 @@ $(function () {
 
     //批改作业提交
     $('.sub_p').on('touchend', function () {
+        var arr_s  = [];
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
             return false;
@@ -232,9 +233,16 @@ $(function () {
         } else {
             need.tag = '1'
         }
-        arr_s = arr_voice.concat(arr_image);
+        if($('.notsubmit').find('li').length!=0){
+            for(var k = 0;k<$('.notsubmit').find('img').length;k++){
+                arr_s.push($('.notsubmit').find('img').attr('src'))
+            }
+        };
         need.fileInfo = arr_s;
         need.replyDesc = encodeURI($('.answer textarea').val());
+        ajax_S(homework_s.t_file,{file:arr_s,schoolId:localStorage.schoolId,classId:'hx001'},function(e){
+            console.log(e)
+        });
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
@@ -246,6 +254,10 @@ $(function () {
                 $('.erro').show();
             }
         })
+
+
+
+
     });
     //状态点击
     $('.succ input').on('touchend', function () {
