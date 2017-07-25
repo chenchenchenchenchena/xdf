@@ -320,23 +320,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            // if ($('.music_s').eq(0).attr('filename')) {
-            //     arr_s.push({
-            //         'fileName': $('.music_s').eq(0).attr('filename'),
-            //         'fileType': $('.music_s').eq(0).attr('filetype'),
-            //         'fileSize': $('.music_s').eq(0).attr('filesize'),
-            //         'diskFilePath': $('.music_s').eq(0).attr('diskfilepath')
-            //     });
-            // }
-            // if ($('.imgBox img').eq(0).attr('filename')) {
-            //     arr_s.push({
-            //         'fileName': $('.imgBox img').eq(0).attr('filename'),
-            //         'fileType': $('.imgBox img').eq(0).attr('filetype'),
-            //         'fileSize': $('.imgBox img').eq(0).attr('filesize'),
-            //         'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
-            //     });
-            // }
-            ajax_S(homework_s.t_erro,errohome, function (e) {
+            // ajax_S(homework_s.t_erro,errohome, function (e) {
+            ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
