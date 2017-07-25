@@ -223,11 +223,15 @@ $(function () {
             layer.msg('正在提交，请稍等');
             return false;
         }
-        if ($('.teBox').val() == '') {
-            layer.msg('批复内容不能为空');
+        if ($('.teBox').val() == ''&&$('.notsubmit li').length==0&&$('#record_audio_box li').length==0) {
+            layer.msg('批复不能为空');
             return false;
         }
-        need.replyDesc = $('.teBox').html();
+        if($('.teBox').html()==''){
+            need.replyDesc = '';
+        }else{
+            need.replyDesc = $('.teBox').html();
+        }
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {
