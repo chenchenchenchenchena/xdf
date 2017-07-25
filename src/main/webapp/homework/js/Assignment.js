@@ -490,11 +490,11 @@ $(function () {
     //将serverId上传到自己服务器
     function uploadVoice(serverId) {
         var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'appId': appId,
+            'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': "73",
-            'classId': "hx001"
+            'schoolId': sessionStorage.schoolId,
+            'classId': sessionStorage.classId
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -702,11 +702,11 @@ $(function () {
      */
     function uploadImage(serverId) {
         var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'appId': appId,
+            'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': "73",
-            'classId': "hx001"
+            'schoolId': sessionStorage.schoolId,
+            'classId': sessionStorage.classId
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",

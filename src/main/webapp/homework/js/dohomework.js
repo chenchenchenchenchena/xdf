@@ -215,17 +215,16 @@ $(function () {
     /**
      *将serverId上传到自己服务器
      */
-    function uploadVoice(serverId, localId) {
+    function uploadVoice(serverId) {
         var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'appId': appId,
+            'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
-            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
@@ -429,15 +428,14 @@ $(function () {
      */
     function uploadImage(serverId) {
         var cbconfig = {
-            'appId': "wx559791e14e9ce521",
-            'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
+            'appId': appId,
+            'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
-            // url: "http://10.200.80.235:8080/xdfdtmanager/upload/uploadAudio.do",
             type: 'post',
             dataType: 'json',
             data: cbconfig,
