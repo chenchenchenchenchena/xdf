@@ -1,11 +1,11 @@
 $(function(){
 	// window.location.reload();
 	//缓存数据 TODO
-	sessionStorage.stuNumber = GetRequest('stuNumber');
-	sessionStorage.studentName = GetRequest('studentName');
-	// sessionStorage.stuNumber = 'SS5786';
-	// sessionStorage.studentName = '郭紫楚';
-	sessionStorage.schoolId = '73';
+	// sessionStorage.stuNumber = GetRequest('stuNumber');
+	// sessionStorage.studentName = GetRequest('studentName');
+	/*sessionStorage.stuNumber = 'SS5786';
+	sessionStorage.studentName = '郭紫楚';
+	sessionStorage.schoolId = '73';*/
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业

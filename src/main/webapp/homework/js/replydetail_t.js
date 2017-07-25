@@ -677,14 +677,16 @@ $(function () {
         });
 
         $('.true_s').on('touchend',function(){
-            console.log(encodeURI(canvas.toDataURL("image/png")));
+            var b = new Base64();
+            var str = b.encode(canvas.toDataURL("image/png"));
             //上传文件到服务器
             var reqData = {
-                'file':encodeURI(canvas.toDataURL("image/png")),
+                'base64Str':str,
                 'schoolId':localStorage.schoolId,
-                'classId':'hx001'};
-            console.log(reqData);
-            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData),uploadFilesSuccess);
+                'classId':sessionStorage.classCode_s
+            };
+            // console.log(reqData);
+            ajaxRequest('POST',homework_s.s_uploadFiles, JSON.stringify(reqData),uploadFilesSuccess);
 
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
