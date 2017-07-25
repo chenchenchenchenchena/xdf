@@ -285,8 +285,8 @@ $(document).on('click','.H-data li',function(){
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
-            ajax_S(url.s_emai,menu_s,menufunc);
             monththis = month
+            ajax_S(url.s_emai,menu_s,menufunc);
         }
         var html_s = $('.swiper-slide-active table').find('td');
         for(var k = 0;k<html_s.length;k++){
