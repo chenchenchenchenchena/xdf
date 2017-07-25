@@ -243,7 +243,7 @@ $(function () {
                 $('.erro').show();
             }
         })
-    })
+    });
     //状态点击
     $('.succ input').on('touchend', function () {
         $('.big_back').hide();

@@ -14,6 +14,7 @@ $(function(){
                 sessionStorage.studentName = e.data.studentName;
                 location.href = 'homeworklist_s.html';
             }else{
+                sessionStorage.homeCanfig=='home';
                 location.href = '../schedule/login_s.html'
             }
         });
