@@ -70,14 +70,17 @@ $(function () {
             var tea = e.data.RevampFile;//老师批注
             var stu = e.data.StudentHomeworkFile;//学生答案
             var tea_t = e.data.TeacherHomeworkFile;//作业信息
-            for (var b = 0; b < tea.length; b++) {
-                if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
-                    // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
-                } else {
-                    $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
+            if(tea != undefined){
+                for (var b = 0; b < tea.length; b++) {
+                    if (tea[b].fileType == 'mp3') {
+                        getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
+                        // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                    } else {
+                        $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
+                    }
                 }
             }
+
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
                     getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
@@ -434,30 +437,23 @@ $(function () {
         });
     }
 
+    var imgCount = 0;
     //图片上传
     $('.image_s').click(function () {
-        //重新选择图片，清除之前数据
+        //重新选择图片，追加图片，max = 3；
+        var count = 3 - imgCount;
         wx.chooseImage({
-            count: 3,
+            count: count,
             success: function (res) {
 
                 if (res.localIds.length > 0) {
 
-                    var str = "";
                     for (var i = 0; i < res.localIds.length; i++) {
-                        str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + res.localIds[i] + "'/></li>";
 
+                        showUpdataImage(res.localIds[i]);
+                        //上传服务器
+                        upLoadWxImage(res.localIds[i]);
                     }
-
-                    $(".notsubmit .imgBox").show();
-                    $(".notsubmit .imgBox").html(str);
-                    //界面样式控制
-                    if (res.localIds.length >= 3) {
-                        $('#chooseImage').hide();
-                    }
-
-                    //上传服务器
-                    upLoadWxImage(res);
                 }
 
 
@@ -469,32 +465,19 @@ $(function () {
      * 上传微信服务器
      * @param images
      */
-    function upLoadWxImage(images) {
+    function upLoadWxImage(localIds) {
 
-        if (images.localIds.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
-            return;
-        }
-        var i = 0, length = images.localIds.length;
+        wx.uploadImage({
+            localId: localIds,
+            success: function (res) {
 
-        function upload() {
-            wx.uploadImage({
-                localId: images.localIds[i],
-                success: function (res) {
-                    i++;
-                    // serverIds.push(res.serverId);
-                    // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
-                    if (i < length) {
-                        upload();
-                    }
-                },
-                fail: function (res) {
-                }
-            });
-        }
+                uploadImage(res.serverId);
+            },
+            fail: function (res) {
+            }
+        });
 
-        upload();
+
     }
 
     /**
@@ -654,6 +637,7 @@ $(function () {
                 $('#myCanvas').unbind('touchmove');
                 $('#myCanvas').unbind('touchend');
             });
+            // upLoadWxImage(canvas.toDataURL("image/png"));
 
         });
 

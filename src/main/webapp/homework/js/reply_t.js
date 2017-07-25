@@ -68,7 +68,7 @@ $(function() {
 
     $(document).on('touchend', '.home_t li', function () {
         sessionStorage.stuid = $(this).attr('Id');
-        sessionStorage.stutext = $(this).attr('text');
+        sessionStorage.stutext = decodeURI($(this).attr('text'));
         sessionStorage.knowledgePoint = $(this).attr('knowledgePoint');
         sessionStorage.description = $(this).attr('description');
         location.href = 'replydetail_t.html';
@@ -120,8 +120,8 @@ $(function() {
     $(document).on('touchend','.home_tw li',function(){
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');
-        sessionStorage.T_text = $(this).attr('text_t');
-        sessionStorage.stutext = $(this).attr('text');
+        sessionStorage.T_text = decodeURI($(this).attr('text_t'));
+        sessionStorage.stutext = decodeURI($(this).attr('text'));
         sessionStorage.knowledgePoint = $(this).attr('knowledgePoint');
         sessionStorage.description = $(this).attr('description');
         location.href = 'replydetail_t.html';
