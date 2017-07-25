@@ -747,14 +747,15 @@ $(function () {
     
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
-        if(msg.success){
+        if(msg.data.success){
             console.log("文件上传成功！");
             arr_image.push({
-                'fileName': msg.fileName,
-                'fileType': msg.fileType,
-                'fileSize': msg.fileSize,
-                'diskFilePath': msg.diskFilePath
+                'fileName': msg.data.fileName,
+                'fileType': msg.data.fileType,
+                'fileSize': msg.data.fileSize,
+                'diskFilePath': msg.data.diskFilePath
             });
+            // console.log("ok:"+JSON.stringify(arr_image));
         }else{
             console.log("文件上传失败！");
         }
