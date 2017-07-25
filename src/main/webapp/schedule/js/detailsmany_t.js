@@ -41,14 +41,14 @@ $(function(){
             }
 		}
 		var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3);
-		if( BeginDate[timeindex].BeginDate!=undefined){
+		if( BeginDate[timeindex].BeginDate!=undefined||BeginDate[timeindex].BeginDate==null|BeginDate[timeindex].BeginDate==''){
             var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g,'/');
 
         }else{
             var begindata = '';
         }
 		var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
-        if(BeginDate[timeindex].EndDate!=undefined){
+        if(BeginDate[timeindex].EndDate!=undefined||BeginDate[timeindex].EndDate==null||BeginDate[timeindex].EndDate==''){
             var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
         }else{
             var enddata = '';
