@@ -96,7 +96,7 @@ $(function () {
     }
 
     //选择班
-    $('.class_s').on('touchend', function () {
+    $('.class_s').on('touchend click', function () {
         $('.class_name').show();
         $('.class_name').animate({'bottom': '0px'});
         $('.class_name').show();

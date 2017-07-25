@@ -169,7 +169,7 @@ function ajax_S(link,more,func){
     });
 }
 
-/** @brief  封装ajax请求 create by zsj
+/** @brief  封装ajax请求 create by Gws
  *  @param  targetUrl     请求接口
  *  @param  requestData        请求接口传参
  *  @param  successCallback     回调方法
@@ -212,7 +212,7 @@ Date.prototype.format = function(fmt) {
         }
     }
     return fmt;
-}
+};
 
 // 获取路径的参数
 function getRequest() {

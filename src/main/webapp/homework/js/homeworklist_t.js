@@ -14,14 +14,14 @@ $(function(){
                 sessionStorage.studentName = e.data.studentName;
                 location.href = 'homeworklist_s.html';
             }else{
-                sessionStorage.homeCanfig=='home';
+                sessionStorage.homeCanfig=='home'
                 location.href = '../schedule/login_s.html'
             }
         });
     }
 
     //tab
-	$(document).on('tap','.hwFinish .firstList',function(){
+	$(document).on('tap click','.firstList',function(){
 	    if($(this).find('ul').css('display')=='none'){
 	        if($(this).find('.state_st').length!=0){
                 ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$(this).attr('classCode'),schoolId:'73'},function(e){
@@ -41,10 +41,10 @@ $(function(){
 
 
 	//滑动事件
-	$(document).on('touchstart','.tealist_s',function(){
+	$(document).on('touchstart mouusedown','.tealist_s',function(){
 	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
-            $(document).on('touchmove','.tealist_s li',function(){
+            $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
                 if(begin_s-move_s>=20){
                     $(this).siblings().css('margin-left','0px');
@@ -63,7 +63,7 @@ $(function(){
                 // console.log(begin_s+'，'+move_s);
                 $(this).css('margin-left',move_s-begin_s+'px');
                 return false;
-            })
+            });
             return false;
         }
     });
