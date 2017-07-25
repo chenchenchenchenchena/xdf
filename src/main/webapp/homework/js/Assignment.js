@@ -48,7 +48,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
+            ajaxRequest('post', "http://10.73.32.97:8080/xdfdtmanager/teacherData/gainHomeworkFileData.do", {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
@@ -336,7 +336,7 @@ $(function () {
             //         'diskFilePath': $('.imgBox img').eq(0).attr('diskfilepath')
             //     });
             // }
-            ajax_S(homework_s.t_erro, errohome, function (e) {
+            ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
