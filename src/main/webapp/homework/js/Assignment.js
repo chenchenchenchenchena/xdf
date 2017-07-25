@@ -362,9 +362,6 @@ $(function () {
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
             homeworksubm.description = encodeURI($('.home_text textarea').val());
             homeworksubm.fileInfo = arr_s;
-            alert(JSON.stringify(homeworksubm));
-            alert(JSON.stringify(arr_image));
-            alert(JSON.stringify(arr_s));
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
@@ -719,7 +716,6 @@ $(function () {
      * 图片上传到自己服务器
      */
     function uploadImage(serverId) {
-        alert("q");
         var cbconfig = {
             'appId': "wx559791e14e9ce521",
             'appSecret': "baa4373d5a8750c69b9d1655a2e31370",
@@ -736,7 +732,6 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
-                    alert("qqqq");
                     arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
