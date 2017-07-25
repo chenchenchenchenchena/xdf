@@ -58,7 +58,6 @@ function teac(e){
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
-
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
 }
@@ -85,8 +84,12 @@ function binding(e){
             sessionStorage.removeItem('callbackconfig')
         }
         if(sessionStorage.studayCanfig=='studay'){
-            location.href = '../learningSituation/report_t.html'
+            location.href = '../learningSituation/report_t.html';
             sessionStorage.removeItem('studayCanfig')
+        }
+        if(sessionStorage.homeCanfig=='home'){
+            location.href = '../homework/homeworklist_t.html';
+            sessionStorage.removeItem('homeCanfig');
         }
 	}
 
