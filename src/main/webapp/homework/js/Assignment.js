@@ -717,7 +717,7 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    alert(e.msg);
                 } else {
                     showUpdataImage(e.data.fileUrl);
                     arr_image.push({
