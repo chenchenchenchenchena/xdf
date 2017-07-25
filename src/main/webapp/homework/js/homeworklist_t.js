@@ -112,7 +112,6 @@ $(function(){
     //查看更多
     $(document).on('touchend','.more_so',function(){
         sessionStorage.classCode_s = $(this).attr('classCode');
-
         sessionStorage.courseCode_s = $(this).attr('courseCode');
         sessionStorage.homeworkTime_s = $(this).attr('homeworkTime');
         sessionStorage.Tid = $(this).attr('tid');
