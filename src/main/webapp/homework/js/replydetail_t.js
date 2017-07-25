@@ -676,6 +676,15 @@ $(function () {
         });
 
         $('.true_s').on('touchend',function(){
+            console.log(canvas.toDataURL("image/png"));
+            //上传文件到服务器
+            var reqData = {
+                'file':canvas.toDataURL("image/png"),
+                'schoolId':localStorage.schoolId,
+                'classId':'hx001'};
+            console.log(reqData);
+            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData),uploadFilesSuccess);
+
             $('.notsubmit .imgBox').show();
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
             $('.big_back_s canvas').hide();
@@ -685,7 +694,7 @@ $(function () {
             $('.big_back_s span:last-of-type').show();
             $('.big_back_s').hide();
             $('body').css('overflow-y','auto');
-            $('.true_s').unbind('touchend')
+            $('.true_s').unbind('touchend');
         });
         return false;
     });
@@ -732,6 +741,21 @@ $(function () {
 
 
     });
+    
+//    上传文件到服务器
+    function uploadFilesSuccess(msg) {
+        if(msg.success){
+            console.log("文件上传成功！");
+            arr_image.push({
+                'fileName': msg.fileName,
+                'fileType': msg.fileType,
+                'fileSize': msg.fileSize,
+                'diskFilePath': msg.diskFilePath
+            });
+        }else{
+            console.log("文件上传失败！");
+        }
+    }
 
 
 });
