@@ -42,15 +42,15 @@ $(function () {
             $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
+            $('.class_s').unbind('touchend');
             $('.class_name li').each(function () {
                 if ($(this).attr('classcode') == sessionStorage.classCode_in) {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            classCode = sessionStorage.classCode_in.split(',')[0];
+            classCode = sessionStorage.classCode_in;
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
-                // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
@@ -129,7 +129,7 @@ $(function () {
                 classCode += $(this).attr('ClassCode') + ',';
             }
         });
-
+        classCode = classCode.substr(0,classCode.length-1);
         if (className == '') {
             layer.open({
                 type: 1,
@@ -322,7 +322,7 @@ $(function () {
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro, errohome, function (e) {
-            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
+                // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -507,7 +507,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': classCode
+            'classId': classCode.split(',')[0]
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -731,7 +731,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': classCode
+            'classId': classCode.split(',')[0]
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
@@ -740,22 +740,19 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.msg);
-                } else {
-                    if (e.data.success == true) {
-                        showUpdataImage(localID);
-                        arr_image.push({
-                            'fileName': e.data.fileName,
-                            'fileType': e.data.fileType,
-                            'fileSize': e.data.fileSize,
-                            'diskFilePath': e.data.diskFilePath,
-                            'id': ""
-                        });
+                    layer.msg('图片上传失败');
+                } else if (e.status == "succeed") {
 
-                    } else {
-                        //上传失败重新上传一次
-                        uploadImage(serverId, localID);
-                    }
+                    showUpdataImage(localID);
+                    arr_image.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
+                    });
+
+
                 }
 
             }
@@ -821,7 +818,6 @@ $(function () {
 });
 
 
-
-window.addEventListener("beforeunload", function(event) {
+window.addEventListener("beforeunload", function (event) {
     sessionStorage.removeItem('Classname_x');
 });

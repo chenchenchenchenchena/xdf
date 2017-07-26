@@ -513,20 +513,19 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.msg);
-                } else {
-                    if (e.data.success == true) {
-                        showUpdataImage(localID);
-                        arr_image.push({
-                            'fileName': e.data.fileName,
-                            'fileType': e.data.fileType,
-                            'fileSize': e.data.fileSize,
-                            'diskFilePath': e.data.diskFilePath
-                        });
+                    // alert(e.msg);
+                    layer.msg('图片上传失败');
 
-                    } else {
-                        uploadImage(serverId, localID);
-                    }
+                } else if (e.status == "succeed") {
+                    showUpdataImage(localID);
+                    arr_image.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath
+                    });
+
+
                 }
 
 
@@ -608,15 +607,15 @@ $(function () {
         }, 300)
 
     });
-    $('.big_back_s').on('touchend',function(){
+    $('.big_back_s').on('touchend', function () {
         $(this).find('canvas').hide();
         $(this).find('img').show();
         $(this).find('.esc_s').hide();
         $(this).find('.true_s').hide();
         $(this).find('span:last-of-type').show();
         $(this).hide();
-        $('body').css('overflow','auto')
-        $('body').css('overflow-x','hidden')
+        $('body').css('overflow', 'auto')
+        $('body').css('overflow-x', 'hidden')
     });
     $('.esc_s').on('touchend', function () {
         $('.big_back_s').hide();

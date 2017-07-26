@@ -46,13 +46,13 @@ $(function () {
                     "fileTfullPath": [],
                     "fileRfullPath": []
                 };
-                if(item.fileContents.length>0){
+                if (item.fileContents.length > 0) {
                     $.each(item.fileContents, function (i, paths) {
-                        allFilePath.fileTfullPath.push({"fullPath":paths.diskFilePath});
+                        allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
                         // console.log("获取文件排序222"+JSON.stringify(allFilePath.fileTfullPath));
 
                     });
-                    console.log("获取文件排序"+JSON.stringify(allFilePath));
+                    console.log("获取文件排序" + JSON.stringify(allFilePath));
                     ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
                 }
 
@@ -328,7 +328,7 @@ $(function () {
                 if (ss == 0) {
 
                     voiceLen = "1''";
-                }else {
+                } else {
                     voiceLen = ss + "''";
                 }
             }
@@ -354,7 +354,7 @@ $(function () {
      *点击选择图片
      */
     $('#chooseImage').click(function () {
-        var count = 3-imageCount;
+        var count = 3 - imageCount;
         wx.chooseImage({
             count: count,
             success: function (res) {
@@ -398,13 +398,14 @@ $(function () {
         var i = 0, length = images.localIds.length;
 
         function upload() {
+
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i-1]);
+                    uploadImage(res.serverId, images.localIds[i - 1]);
                     if (i < length) {
                         upload();
                     }
@@ -417,11 +418,10 @@ $(function () {
         upload();
     }
 
-
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId,localID) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -437,27 +437,23 @@ $(function () {
             success: function (e) {
                 // alert(JSON.stringify(data));
                 if (e.status == "failure") {
-                    alert(e.msg);
-                } else {
-                    if (e.data.success == true) {
-                        showNotImg(localID);
-                        fileName = e.data.fileName;
-                        fileSize = e.data.fileSize;
-                        fileType = e.data.fileType;
-                        diskFilePath = e.data.diskFilePath;
-                        fileParams.push({
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        });
+                    layer.msg('图片上传失败');
+                } else if (e.status == "succeed") {
 
-                    } else {
-                        //上传失败重新上传一次
-                        uploadImage(serverId,localID);
-                    }
+                    showNotImg(localID);
+                    fileName = e.data.fileName;
+                    fileSize = e.data.fileSize;
+                    fileType = e.data.fileType;
+                    diskFilePath = e.data.diskFilePath;
+                    fileParams.push({
+                        "homeworkSinfoId": homeworkSinfoId,
+                        "fileName": fileName,
+                        "fileType": fileType,
+                        "fileSize": fileSize,
+                        "diskFilePath": diskFilePath,
+                        "uploadUser": uploadUser
+                    });
+
 
                 }
 
@@ -656,7 +652,7 @@ $(function () {
             "id": GetRequest('id'),
             "description": encodeURI($('.teBox').val()),
             "fileStuhomeworks": fileStuhomeworks,
-            "modify":false
+            "modify": false
         };
         // alert(JSON.stringify(reqData));
         loading = layer.load();
