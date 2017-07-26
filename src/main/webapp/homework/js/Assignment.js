@@ -42,15 +42,15 @@ $(function () {
             $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
             $('.home_text textarea').val(sessionStorage.description_x);
+            $('.class_s').unbind('touchend');
             $('.class_name li').each(function () {
                 if ($(this).attr('classcode') == sessionStorage.classCode_in) {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            classCode = sessionStorage.classCode_in.split(',')[0];
+            classCode = sessionStorage.classCode_in;
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
-                // sessionStorage.removeItem('Classname_x');
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
@@ -129,7 +129,7 @@ $(function () {
                 classCode += $(this).attr('ClassCode') + ',';
             }
         });
-
+        classCode = classCode.substr(0,classCode.length-1);
         if (className == '') {
             layer.open({
                 type: 1,
