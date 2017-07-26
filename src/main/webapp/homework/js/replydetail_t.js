@@ -457,11 +457,6 @@ $(function () {
 
                 if (res.localIds.length > 0) {
 
-                    for (var i = 0; i < res.localIds.length; i++) {
-
-                        showUpdataImage(res.localIds[i]);
-
-                    }
                     //上传服务器
                     upLoadWxImage(res);
                 }
@@ -490,7 +485,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
+                    uploadImage(res.serverId,images.localIds[i]);
                     if (i < length) {
                         upload();
                     }
@@ -506,7 +501,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId) {
+    function uploadImage(serverId,localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -523,6 +518,7 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.message);
                 } else {
+                    showUpdataImage(localID);
                     arr_image.push({
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,

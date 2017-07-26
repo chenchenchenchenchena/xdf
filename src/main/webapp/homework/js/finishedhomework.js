@@ -518,7 +518,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
+                    uploadImage(res.serverId,images.localIds[i]);
                     if (i < length) {
                         upload();
                     }
@@ -535,7 +535,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId, i) {
+    function uploadImage(serverId, localId) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -554,7 +554,7 @@ $(function () {
                     alert(e.msg);
                 } else {
                     if (data.data.success == true) {
-                        showNotImg(data.data.fileUrl);
+                        showNotImg(localId);
                         fileName = data.data.fileName;
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
