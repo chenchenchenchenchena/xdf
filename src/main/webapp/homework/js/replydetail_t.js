@@ -76,7 +76,7 @@ $(function () {
                         getAudioInfo([3, tea[b].diskFilePath, "mp3"]);
                         // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                     } else {
-                        $('.imgBox').eq(2).append('<div><img src="'+url_o+tea[b].url + '" alt="" /></div>')
+                        $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 }
             }
@@ -94,7 +94,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="'+url_o+tea_t[c].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img src="'+tea_t[c].url + '" alt="" /></div>')
 
                 }
             }
