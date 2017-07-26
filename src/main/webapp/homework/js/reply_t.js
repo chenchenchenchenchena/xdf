@@ -5,13 +5,12 @@ $(function() {
     var Homework = {
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+        'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_s.html',
         'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
     $('.frend').hide();
     var arr;
     ajax_S(homework_s.t_more, need, function (e) {
-        console.log(e);
         var data = e.data;
         arr = e.data.notCommit;
         if (data.notCommit.length == 0) {

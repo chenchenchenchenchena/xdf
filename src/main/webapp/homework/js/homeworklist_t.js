@@ -1,8 +1,8 @@
 $(function(){
     //登录相关
-    // if(!sessionStorage.openid){
-    //     wechatCode(location.href);
-    // };
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
     // if(!localStorage.terEmail){
     //     var WXnum  = {
     //         'wechatId':sessionStorage.openid
@@ -60,7 +60,6 @@ $(function(){
                     $(this).parent().css('overflow','hidden');
                     return false;
                 }
-                // console.log(begin_s+'，'+move_s);
                 $(this).css('margin-left',move_s-begin_s+'px');
                 return false;
             });

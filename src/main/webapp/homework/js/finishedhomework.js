@@ -518,7 +518,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
+                    uploadImage(res.serverId,images.localIds[i-1]);
                     if (i < length) {
                         upload();
                     }
@@ -535,7 +535,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId, i) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -553,24 +553,28 @@ $(function () {
                 if (data.status == "failure") {
                     alert(e.msg);
                 } else {
-                    if (data.data.success == true) {
-                        showNotImg(data.data.fileUrl);
-                        fileName = data.data.fileName;
-                        fileSize = data.data.fileSize;
-                        fileType = data.data.fileType;
-                        diskFilePath = data.data.diskFilePath;
-                        fileParams.push({
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        });
-
+                    if (e.status == "failure") {
+                        alert(e.msg);
                     } else {
-                        //上传失败重新上传一次
-                        uploadImage(serverId);
+                        if (e.data.success == true) {
+                            showNotImg(localID);
+                            fileName = data.data.fileName;
+                            fileSize = data.data.fileSize;
+                            fileType = data.data.fileType;
+                            diskFilePath = data.data.diskFilePath;
+                            fileParams.push({
+                                "homeworkSinfoId": homeworkSinfoId,
+                                "fileName": fileName,
+                                "fileType": fileType,
+                                "fileSize": fileSize,
+                                "diskFilePath": diskFilePath,
+                                "uploadUser": uploadUser
+                            });
+
+                        } else {
+                            //上传失败重新上传一次
+                            uploadImage(serverId, localID);
+                        }
                     }
 
                 }

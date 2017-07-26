@@ -37,15 +37,14 @@ function Wxtea(e){
         $('.name_s').html(teaname.teacherName);
         $('.name_ema').html(teaname.teacherEmail);
         localStorage.terEmail = teaname.teacherEmail;
-        localStorage.teacherId = teacontent.teacherNo;
-        localStorage.schoolId = teacontent.schoolId;
-        localStorage.teacherName = teacontent.teacherName;
+        localStorage.teacherId = teaname.teacherNo;
+        localStorage.schoolId = teaname.schoolId;
+        localStorage.teacherName = teaname.teacherName;
     }else{
         // etlogin('teacherWX')
     }
 }
 function teac(e){
-    console.log(e)
     if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
     }else{

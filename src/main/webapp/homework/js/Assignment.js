@@ -1,6 +1,4 @@
 $(function () {
-    // localStorage.schoolId= 73;
-    // sessionStorage.classCode_s = "hx001";
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
@@ -25,7 +23,7 @@ $(function () {
         'schoolId': localStorage.schoolId,
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+        'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_s.html',
         'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
 
@@ -49,6 +47,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
+            classCode = sessionStorage.classCode_in.split(',')[0];
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
@@ -322,8 +321,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            ajax_S(homework_s.t_erro,errohome, function (e) {
-            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
+            ajax_S(homework_s.t_erro, errohome, function (e) {
+            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -428,8 +427,20 @@ $(function () {
 
     //语音
     $('.Voice').on('touchend', function () {
-        $('.big_whit').show();
-        $('.song_s').show();
+        if (classCode == "") {
+            layer.open({
+                type: 1,
+                area: ['312px', '194px'],
+                shade: 0,
+                title: '',
+                skin: '',
+                time: 3000,
+                content: $(".classEmpty")
+            })
+        } else {
+            $('.big_whit').show();
+            $('.song_s').show();
+        }
     });
 
     //按下开始录音
@@ -496,7 +507,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': classCode
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -585,7 +596,7 @@ $(function () {
             } else {
                 if (ss == 0) {
                     voiceLen = "1''";
-                }else {
+                } else {
                     voiceLen = ss + "''";
                 }
             }
@@ -645,26 +656,38 @@ $(function () {
 
     //图片上传
     $('.image_s').click(function () {
-        //重新选择图片，清除之前数据
-        var count = 3 - imgCount;
-        wx.chooseImage({
-            count: count,
-            success: function (res) {
+        if (classCode == "") {
+            layer.open({
+                type: 1,
+                area: ['312px', '194px'],
+                shade: 0,
+                title: '',
+                skin: '',
+                time: 3000,
+                content: $(".classEmpty")
+            })
+        } else {
+            //重新选择图片，清除之前数据
+            var count = 3 - imgCount;
+            wx.chooseImage({
+                count: count,
+                success: function (res) {
 
-                if (res.localIds.length > 0) {
+                    if (res.localIds.length > 0) {
 
-                    // for (var i = 0; i < res.localIds.length; i++) {
-                    //
-                    //     showUpdataImage(res.localIds[i]);
-                    //
-                    // }
-                    //上传服务器
-                    upLoadWxImage(res);
+                        // for (var i = 0; i < res.localIds.length; i++) {
+                        //
+                        //     showUpdataImage(res.localIds[i]);
+                        //
+                        // }
+                        //上传服务器
+                        upLoadWxImage(res);
+                    }
+
+
                 }
-
-
-            }
-        });
+            });
+        }
     });
 
     /**
@@ -686,7 +709,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId);
+                    uploadImage(res.serverId, images.localIds[i - 1]);
                     if (i < length) {
                         upload();
                     }
@@ -702,13 +725,13 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': classCode
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
@@ -719,15 +742,20 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.msg);
                 } else {
-                    showUpdataImage(e.data.fileUrl);
-                    arr_image.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath,
-                        'id': ""
-                    });
+                    if (e.data.success == true) {
+                        showUpdataImage(localID);
+                        arr_image.push({
+                            'fileName': e.data.fileName,
+                            'fileType': e.data.fileType,
+                            'fileSize': e.data.fileSize,
+                            'diskFilePath': e.data.diskFilePath,
+                            'id': ""
+                        });
 
+                    } else {
+                        //上传失败重新上传一次
+                        uploadImage(serverId, localID);
+                    }
                 }
 
             }
@@ -790,4 +818,10 @@ $(function () {
         });
     });
     $('body').css('overflow-y', 'auto')
+});
+
+
+
+window.addEventListener("beforeunload", function(event) {
+    sessionStorage.removeItem('Classname_x');
 });
