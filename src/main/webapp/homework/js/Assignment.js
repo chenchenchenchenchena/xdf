@@ -37,8 +37,8 @@ $(function () {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
         }
         if (sessionStorage.Classname_x) {
-            sessionStorage.removeItem('Classname_x');
             $('.class_s i').html('已选择1个班' + sessionStorage.Classname_x + ';');
+            sessionStorage.removeItem('Classname_x');
             $('.time_S i').html(sessionStorage.ClassTime_x);
             $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
