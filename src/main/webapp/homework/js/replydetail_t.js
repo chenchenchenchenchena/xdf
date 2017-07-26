@@ -485,7 +485,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i]);
+                    uploadImage(res.serverId,images.localIds[i-1]);
                     if (i < length) {
                         upload();
                     }
