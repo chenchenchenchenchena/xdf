@@ -710,7 +710,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i]);
+                    uploadImage(res.serverId,images.localIds[i-1]);
                     if (i < length) {
                         upload();
                     }
@@ -743,15 +743,20 @@ $(function () {
                 if (e.status == "failure") {
                     alert(e.msg);
                 } else {
-                    showUpdataImage(localID);
-                    arr_image.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath,
-                        'id': ""
-                    });
+                    if (e.data.success == true) {
+                        showUpdataImage(localID);
+                        arr_image.push({
+                            'fileName': e.data.fileName,
+                            'fileType': e.data.fileType,
+                            'fileSize': e.data.fileSize,
+                            'diskFilePath': e.data.diskFilePath,
+                            'id': ""
+                        });
 
+                    } else {
+                        //上传失败重新上传一次
+                        uploadImage(serverId, localID);
+                    }
                 }
 
             }
