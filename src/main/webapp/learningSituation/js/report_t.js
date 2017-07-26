@@ -206,17 +206,20 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
                                     }
-
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
+                                    }
                                 }else{
                                     timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
@@ -282,15 +285,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -356,15 +363,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -433,12 +444,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
+
+                                    }
+                                    if(manfjson[r]==undefined){
+                                        mfInedx_r.push('满分：0');
+                                    }else{
                                         mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
@@ -508,19 +526,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
-                                    }
 
-                                    mfInedx_r.push('满分：'+manfjson[r]);
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0')
+                                    }
+                                    if(manfjson[r]==undefined){
+                                        mfInedx_r.push('满分：0');
                                     }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -587,15 +605,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -664,15 +686,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -739,15 +765,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+
                                     }
                                     if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
+                                        mfInedx_r.push('满分：0');
+                                    }else{
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                 }else{
                                     timeIndex.push('0');
@@ -814,12 +844,19 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                 if(Tbuer==true){
                                     if(timejson[r]==undefined){
                                         timeIndex.push('0');
-                                        mfInedx_r.push('满分：0');
-                                        mfInedx_c.push('满分：0')
                                     }else{
                                         timeIndex.push(timejson[r]);
+
+                                    }
+                                    if(manfjson[r]==undefined){
+                                        mfInedx_r.push('满分：0');
+                                    }else{
                                         mfInedx_r.push('满分：'+manfjson[r]);
-                                        mfInedx_c.push('满分：'+manfjsont[r])
+                                    }
+                                    if(manfjsont[r]==undefined){
+                                        mfInedx_c.push('满分：0');
+                                    }else{
+                                        mfInedx_c.push('满分：'+manfjsont[r]);
                                     }
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
