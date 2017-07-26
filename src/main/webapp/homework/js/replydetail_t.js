@@ -608,14 +608,16 @@ $(function () {
 
     });
     $('.big_back_s').on('touchend', function () {
-        $(this).find('canvas').hide();
-        $(this).find('img').show();
-        $(this).find('.esc_s').hide();
-        $(this).find('.true_s').hide();
-        $(this).find('span:last-of-type').show();
-        $(this).hide();
-        $('body').css('overflow', 'auto')
-        $('body').css('overflow-x', 'hidden')
+        if($('.true_s').css('display')!='block'){
+            $(this).find('canvas').hide();
+            $(this).find('img').show();
+            $(this).find('.esc_s').hide();
+            $(this).find('.true_s').hide();
+            $(this).find('span:last-of-type').show();
+            $(this).hide();
+            $('body').css('overflow', 'auto');
+            $('body').css('overflow-x', 'hidden')
+        }
     });
     $('.esc_s').on('touchend', function () {
         $('.big_back_s').hide();

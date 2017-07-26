@@ -339,7 +339,7 @@ $(function () {
                 }
             })
         } else {
-            var class_c = classCode.substr(0, classCode.length - 1);
+            var class_c = classCode;
             var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
             arr_s = arr_voice.concat(arr_image);
             homeworksubm.classCode = class_c;
