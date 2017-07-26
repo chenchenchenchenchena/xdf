@@ -68,10 +68,10 @@ $(function () {
                     if (Media.fileType == 'mp3') {
                         // music += '<div class="music_s"> <span>10"</span> </div> '
                         voiceCount++;
-                        showAudio(url_o + paths.diskFilePath, "audio_" + i , "audio" + i  + "" + voiceCount);
+                        showAudio(url_o + Media.url, "audio_" + i , "audio" + i  + "" + voiceCount);
                     } else {
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
-                        showImage(paths.fileUrl, "imagBox_" + i );
+                        showImage(Media.url, "imagBox_" + i );
                     }
                 }
             }
