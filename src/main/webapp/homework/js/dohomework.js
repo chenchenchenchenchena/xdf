@@ -434,17 +434,17 @@ $(function () {
             type: 'post',
             dataType: 'json',
             data: cbconfig,
-            success: function (data) {
+            success: function (e) {
                 // alert(JSON.stringify(data));
-                if (data.status == "failure") {
+                if (e.status == "failure") {
                     alert(e.msg);
                 } else {
-                    if (data.data.success == true) {
+                    if (e.data.success == true) {
                         showNotImg(localID);
-                        fileName = data.data.fileName;
-                        fileSize = data.data.fileSize;
-                        fileType = data.data.fileType;
-                        diskFilePath = data.data.diskFilePath;
+                        fileName = e.data.fileName;
+                        fileSize = e.data.fileSize;
+                        fileType = e.data.fileType;
+                        diskFilePath = e.data.diskFilePath;
                         fileParams.push({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,

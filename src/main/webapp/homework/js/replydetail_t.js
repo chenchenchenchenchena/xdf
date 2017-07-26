@@ -30,7 +30,7 @@ $(function () {
         $('.teacherword').html('' + $(this).val().length + '/200')
         if ($(this).val().length > 199) {
             $('.teacherword').css('color', 'red');
-            $(this).val($(this).val().substring(0,200));
+            $(this).val($(this).val().substring(0, 200));
         } else {
             $('.teacherword').css('color', '#808080');
         }
@@ -70,10 +70,10 @@ $(function () {
             var tea = e.data.RevampFile;//老师批注
             var stu = e.data.StudentHomeworkFile;//学生答案
             var tea_t = e.data.TeacherHomeworkFile;//作业信息
-            if(tea != undefined){
+            if (tea != undefined) {
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
-                        getAudioInfo([3,tea[b].diskFilePath,"mp3"]);
+                        getAudioInfo([3, tea[b].diskFilePath, "mp3"]);
                         // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                     } else {
                         $('.imgBox').eq(2).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
@@ -83,7 +83,7 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
@@ -91,7 +91,7 @@ $(function () {
             }
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([1,tea_t[c].diskFilePath,"mp3"]);
+                    getAudioInfo([1, tea_t[c].diskFilePath, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
@@ -109,7 +109,7 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2,stu[a].diskFilePath,"mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, "mp3"]);
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
@@ -124,7 +124,7 @@ $(function () {
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1,tea[b].diskFilePath,"mp3"]);
+                    getAudioInfo([1, tea[b].diskFilePath, "mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
@@ -152,7 +152,7 @@ $(function () {
                 } else {
                     //将文件显示到布局中
                     voiceCount++;
-                    showAudio(url_o+e.data, $("#audio_" + flag), "audio" + flag + "" + voiceCount,2);
+                    showAudio(url_o + e.data, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
 
                 }
             }
@@ -215,21 +215,20 @@ $(function () {
     }
 
 
-
     //批改作业提交
     $('.sub_p').on('touchend', function () {
-        var arr_s  = [];
+        var arr_s = [];
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
             return false;
         }
-        if ($('.teBox').val() == ''&&$('.notsubmit li').length==0&&$('#record_audio_box li').length==0) {
+        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0) {
             layer.msg('批复不能为空');
             return false;
         }
-        if($('.teBox').html()==''){
+        if ($('.teBox').html() == '') {
             need.replyDesc = '';
-        }else{
+        } else {
             need.replyDesc = $('.teBox').html();
         }
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
@@ -251,8 +250,6 @@ $(function () {
                 $('.erro').show();
             }
         })
-
-
 
 
     });
@@ -485,7 +482,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i-1]);
+                    uploadImage(res.serverId, images.localIds[i - 1]);
                     if (i < length) {
                         upload();
                     }
@@ -501,7 +498,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId,localID) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -515,17 +512,21 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                if (data.data.success == true) {
-                    showUpdataImage(localID);
-                    arr_image.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
-                    });
+                if (e.status == "failure") {
+                    alert(e.msg);
+                } else {
+                    if (e.data.success == true) {
+                        showUpdataImage(localID);
+                        arr_image.push({
+                            'fileName': e.data.fileName,
+                            'fileType': e.data.fileType,
+                            'fileSize': e.data.fileSize,
+                            'diskFilePath': e.data.diskFilePath
+                        });
 
-                }else {
-                    uploadImage(serverId,localID);
+                    } else {
+                        uploadImage(serverId, localID);
+                    }
                 }
 
 
@@ -594,17 +595,17 @@ $(function () {
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
-        $('.big_back_s img').attr('src',previewUrl);
-        setTimeout(function(){
+        $('.big_back_s img').attr('src', previewUrl);
+        setTimeout(function () {
             $('.big_back_s img').css({
-                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
             $('.big_back_s canvas').css({
-                'margin-top': -parseInt($('.big_back_s img').css('height'))/2,
-                'margin-left': -parseInt($('.big_back_s img').css('width'))/2
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
-        },300)
+        }, 300)
 
     });
     // $('.big_back_s').on('touchend',function(){
@@ -617,7 +618,7 @@ $(function () {
     //     $('body').css('overflow','auto')
     //     $('body').css('overflow-x','hidden')
     // });
-    $('.esc_s').on('touchend',function(){
+    $('.esc_s').on('touchend', function () {
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
@@ -625,43 +626,43 @@ $(function () {
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
-        $('body').css('overflow-y','auto')
+        $('body').css('overflow-y', 'auto')
     });
-    $('.big_back_s span:last-of-type').on('touchend',function(){
+    $('.big_back_s span:last-of-type').on('touchend', function () {
         $(this).hide();
         $('.true_s').show();
-        $('body').css('overflow','hidden');
+        $('body').css('overflow', 'hidden');
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.crossOrigin = "Anonymous";
-        img.src=previewUrl;
-        var canvas =document.getElementById("myCanvas");
+        img.src = previewUrl;
+        var canvas = document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
-        canvas.width=width_;
-        canvas.height=height;
+        canvas.width = width_;
+        canvas.height = height;
 
-        var ctx=canvas .getContext("2d");
+        var ctx = canvas.getContext("2d");
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'red';
 
-        img.onload = function(){
-            ctx.drawImage(img,0,0,width_,height);
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, width_, height);
         };
         $('.big_back_s img').hide();
         $('.big_back_s canvas').show();
 
         // canvas事件
-        $(document).on('touchstart','#myCanvas',function(){
+        $(document).on('touchstart', '#myCanvas', function () {
             ctx.beginPath();
-            ctx.moveTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY - canvas.offsetTop);
-            $(document).on('touchmove','#myCanvas',function(){
+            ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+            $(document).on('touchmove', '#myCanvas', function () {
                 var ev = ev || event;
-                ctx.lineTo(event.touches[ 0 ].pageX - canvas.offsetLeft, event.touches[ 0 ].pageY- canvas.offsetTop+15);
+                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop + 15);
                 ctx.stroke();
             });
-            $(document).on('touchend','#myCanvas',function(){
+            $(document).on('touchend', '#myCanvas', function () {
                 ctx.closePath();
                 $('.big_back_s').show();
                 $('#myCanvas').unbind('touchenstart');
@@ -672,27 +673,27 @@ $(function () {
 
         });
 
-        $('.true_s').on('touchend',function(){
+        $('.true_s').on('touchend', function () {
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
             //上传文件到服务器
             var reqData = {
-                'base64Str':str,
-                'schoolId':localStorage.schoolId,
-                'classId':sessionStorage.classCode_s
+                'base64Str': str,
+                'schoolId': localStorage.schoolId,
+                'classId': sessionStorage.classCode_s
             };
             // console.log(reqData);
-            ajaxRequest('POST',homework_s.s_uploadFiles, JSON.stringify(reqData),uploadFilesSuccess);
+            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
             $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" +canvas.toDataURL("image/png") + "'/></li>");
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
             $('.big_back_s .esc_s').hide();
             $('.big_back_s .true_s').hide();
             $('.big_back_s span:last-of-type').show();
             $('.big_back_s').hide();
-            $('body').css('overflow-y','auto');
+            $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
         });
         return false;
@@ -740,10 +741,10 @@ $(function () {
 
 
     });
-    
+
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
-        if(msg.data.success){
+        if (msg.data.success) {
             console.log("文件上传成功！");
             arr_image.push({
                 'fileName': msg.data.fileName,
@@ -752,7 +753,7 @@ $(function () {
                 'diskFilePath': msg.data.diskFilePath
             });
             // console.log("ok:"+JSON.stringify(arr_image));
-        }else{
+        } else {
             console.log("文件上传失败！");
         }
     }

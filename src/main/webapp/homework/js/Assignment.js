@@ -740,19 +740,23 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                if (data.data.success == true) {
-                    showUpdataImage(localID);
-                    arr_image.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath,
-                        'id': ""
-                    });
-
+                if (e.status == "failure") {
+                    alert(e.msg);
                 } else {
-                    //上传失败重新上传一次
-                    uploadImage(serverId,localID);
+                    if (e.data.success == true) {
+                        showUpdataImage(localID);
+                        arr_image.push({
+                            'fileName': e.data.fileName,
+                            'fileType': e.data.fileType,
+                            'fileSize': e.data.fileSize,
+                            'diskFilePath': e.data.diskFilePath,
+                            'id': ""
+                        });
+
+                    } else {
+                        //上传失败重新上传一次
+                        uploadImage(serverId, localID);
+                    }
                 }
 
             }
