@@ -12,8 +12,8 @@ var calbac = {
     'state':state_s
 };
 if(localStorage.terEmail){
-    $('.name_s').html(localStorage.teacherName);
-    $('.name_ema').html(localStorage.terEmail);
+   /* $('.name_s').html(localStorage.teacherName);
+    $('.name_ema').html(localStorage.terEmail);*/
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;

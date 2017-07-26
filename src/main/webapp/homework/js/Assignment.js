@@ -507,7 +507,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': classCode
+            'classId': classCode.split(',')[0]
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -731,7 +731,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': classCode
+            'classId': classCode.split(',')[0]
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
