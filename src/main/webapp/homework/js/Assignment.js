@@ -47,6 +47,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
+            classCode = sessionStorage.classCode_in
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
