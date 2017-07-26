@@ -398,6 +398,7 @@ $(function () {
         var i = 0, length = images.localIds.length;
 
         function upload() {
+
             wx.uploadImage({
                 localId: images.localIds[i],
                 success: function (res) {
@@ -416,7 +417,6 @@ $(function () {
 
         upload();
     }
-
 
     /**
      * 图片上传到自己服务器
@@ -437,7 +437,7 @@ $(function () {
             success: function (e) {
                 // alert(JSON.stringify(data));
                 if (e.status == "failure") {
-                    alert(e.msg);
+                    layer.msg('图片上传失败');
                 } else {
                     if (e.data.success == true) {
                         showNotImg(localID);
@@ -456,7 +456,8 @@ $(function () {
 
                     } else {
                         //上传失败重新上传一次
-                        uploadImage(serverId,localID);
+                        // uploadImage(serverId,localID);
+                        layer.msg('图片上传失败');
                     }
 
                 }

@@ -740,7 +740,7 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.msg);
+                    layer.msg('图片上传失败');
                 } else {
                     if (e.data.success == true) {
                         showUpdataImage(localID);
@@ -754,7 +754,8 @@ $(function () {
 
                     } else {
                         //上传失败重新上传一次
-                        uploadImage(serverId, localID);
+                        // uploadImage(serverId, localID);
+                        layer.msg('图片上传失败');
                     }
                 }
 

@@ -489,8 +489,9 @@ $(function () {
      */
     function showNotImg(localId) {
         var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + localId + "'/></li>";
-        $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
+        $(".notsubmit .imgBox").show();
+
         imageCount++;
 
         //界面样式控制
@@ -551,7 +552,7 @@ $(function () {
             success: function (data) {
                 // alert(JSON.stringify(data));
                 if (data.status == "failure") {
-                    alert(e.msg);
+                    layer.msg('图片上传失败');
                 } else {
                     if (e.status == "failure") {
                         alert(e.msg);
@@ -573,7 +574,8 @@ $(function () {
 
                         } else {
                             //上传失败重新上传一次
-                            uploadImage(serverId, localID);
+                            // uploadImage(serverId, localID);
+                            layer.msg('图片上传失败');
                         }
                     }
 
