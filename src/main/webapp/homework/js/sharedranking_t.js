@@ -88,5 +88,12 @@ $(function () {
 
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
     }
-
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('touchend', '.imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
 })
