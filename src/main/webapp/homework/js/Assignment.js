@@ -321,8 +321,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            ajax_S(homework_s.t_erro, errohome, function (e) {
-                // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
+            // ajax_S(homework_s.t_erro, errohome, function (e) {
+            ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -709,7 +709,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i-1]);
+                    uploadImage(res.serverId, images.localIds[i - 1]);
                     if (i < length) {
                         upload();
                     }
@@ -725,7 +725,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId,localID) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
