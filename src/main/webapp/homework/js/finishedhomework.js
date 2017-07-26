@@ -545,24 +545,21 @@ $(function () {
             'classId': localStorage.classCode
         };
         $.ajax({
-            url: url_o + "upload/uploadFileByWeiChat.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (data) {
-                // alert(JSON.stringify(data));
-                if (data.status == "failure") {
-                    layer.msg('图片上传失败');
-                } else {
+                url: url_o + "upload/uploadFileByWeiChat.do",
+                type: 'post',
+                dataType: 'json',
+                data: cbconfig,
+                success: function (e) {
+                    // alert(JSON.stringify(data));
                     if (e.status == "failure") {
-                        alert(e.msg);
+                        layer.msg('图片上传失败');
                     } else if (e.status == "succeed") {
 
                         showNotImg(localID);
-                        fileName = data.data.fileName;
-                        fileSize = data.data.fileSize;
-                        fileType = data.data.fileType;
-                        diskFilePath = data.data.diskFilePath;
+                        fileName = e.data.fileName;
+                        fileSize = e.data.fileSize;
+                        fileType = e.data.fileType;
+                        diskFilePath = e.data.diskFilePath;
                         fileParams.push({
                             "homeworkSinfoId": homeworkSinfoId,
                             "fileName": fileName,
@@ -575,11 +572,10 @@ $(function () {
 
                     }
 
+
                 }
-
-
             }
-        });
+        );
 
     }
 
@@ -828,4 +824,5 @@ $(function () {
         layer.close(loading);
     }
 
-});
+})
+;
