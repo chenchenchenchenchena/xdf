@@ -1,6 +1,4 @@
 $(function () {
-    // localStorage.schoolId= 73;
-    // sessionStorage.classCode_s = "hx001";
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
@@ -322,8 +320,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            ajax_S(homework_s.t_erro,errohome, function (e) {
-            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
+            ajax_S(homework_s.t_erro, errohome, function (e) {
+                // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do",errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -428,8 +426,20 @@ $(function () {
 
     //语音
     $('.Voice').on('touchend', function () {
-        $('.big_whit').show();
-        $('.song_s').show();
+        if (classCode == "") {
+            layer.open({
+                type: 1,
+                area: ['312px', '194px'],
+                shade: 0,
+                title: '',
+                skin: '',
+                time: 3000,
+                content: $(".classEmpty")
+            })
+        } else {
+            $('.big_whit').show();
+            $('.song_s').show();
+        }
     });
 
     //按下开始录音
@@ -496,7 +506,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': classCode
         };
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
@@ -585,7 +595,7 @@ $(function () {
             } else {
                 if (ss == 0) {
                     voiceLen = "1''";
-                }else {
+                } else {
                     voiceLen = ss + "''";
                 }
             }
@@ -645,26 +655,38 @@ $(function () {
 
     //图片上传
     $('.image_s').click(function () {
-        //重新选择图片，清除之前数据
-        var count = 3 - imgCount;
-        wx.chooseImage({
-            count: count,
-            success: function (res) {
+        if (classCode == "") {
+            layer.open({
+                type: 1,
+                area: ['312px', '194px'],
+                shade: 0,
+                title: '',
+                skin: '',
+                time: 3000,
+                content: $(".classEmpty")
+            })
+        } else {
+            //重新选择图片，清除之前数据
+            var count = 3 - imgCount;
+            wx.chooseImage({
+                count: count,
+                success: function (res) {
 
-                if (res.localIds.length > 0) {
+                    if (res.localIds.length > 0) {
 
-                    // for (var i = 0; i < res.localIds.length; i++) {
-                    //
-                    //     showUpdataImage(res.localIds[i]);
-                    //
-                    // }
-                    //上传服务器
-                    upLoadWxImage(res);
+                        // for (var i = 0; i < res.localIds.length; i++) {
+                        //
+                        //     showUpdataImage(res.localIds[i]);
+                        //
+                        // }
+                        //上传服务器
+                        upLoadWxImage(res);
+                    }
+
+
                 }
-
-
-            }
-        });
+            });
+        }
     });
 
     /**
@@ -708,7 +730,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': classCode
         };
         $.ajax({
             url: url_o + "upload/uploadFileByWeiChat.do",
