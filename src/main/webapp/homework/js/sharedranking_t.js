@@ -6,7 +6,7 @@ $(function(){
 
 
     ajaxRequest('post',homework_s.t_mmmm,{Tcid:getRequest('tid').tid},function(e){
-            var Month = e.data.homeworkTime.substring(5,2);
+            var Month = e.data.homeworkTime.substr(5,2);
             var Day = e.data.homeworkTime.substring(8,2);
             var teaName = e.data.teacherNam;
             var json = {
