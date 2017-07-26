@@ -34,7 +34,7 @@ if (window.location.host == onlineUrl) {//正式环境
         't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
     }
 } else {//测试环境
-    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o = "http://10.200.80.120:8080/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -296,8 +296,8 @@ $(document).on("touchend", function (e) {
 function weChatData(Json) {
     var urlVal = window.location.href;
     var businessP = {
-        "appid" :  'wx559791e14e9ce521',
-        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+        "appid" :  'wxab29a3e2000b8d2a',
+        "secret": '7739991fcce774c2281147eae3986ad9',
         "url": urlVal
     };
     jQuery.ajax({
