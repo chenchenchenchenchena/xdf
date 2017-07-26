@@ -740,9 +740,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                if (e.status == "failure") {
-                    alert(e.msg);
-                } else {
+                if (data.data.success == true) {
                     showUpdataImage(localID);
                     arr_image.push({
                         'fileName': e.data.fileName,
@@ -752,6 +750,9 @@ $(function () {
                         'id': ""
                     });
 
+                } else {
+                    //上传失败重新上传一次
+                    uploadImage(serverId,localID);
                 }
 
             }

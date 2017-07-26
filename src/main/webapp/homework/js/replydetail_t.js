@@ -515,9 +515,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                if (e.status == "failure") {
-                    alert(e.message);
-                } else {
+                if (data.data.success == true) {
                     showUpdataImage(localID);
                     arr_image.push({
                         'fileName': e.data.fileName,
@@ -526,6 +524,8 @@ $(function () {
                         'diskFilePath': e.data.diskFilePath
                     });
 
+                }else {
+                    uploadImage(serverId,localID);
                 }
 
 

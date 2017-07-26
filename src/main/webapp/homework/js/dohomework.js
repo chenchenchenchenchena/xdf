@@ -456,7 +456,7 @@ $(function () {
 
                     } else {
                         //上传失败重新上传一次
-                        uploadImage(serverId);
+                        uploadImage(serverId,localID);
                     }
 
                 }

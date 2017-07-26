@@ -535,7 +535,7 @@ $(function () {
     /**
      * 图片上传到自己服务器
      */
-    function uploadImage(serverId, localId) {
+    function uploadImage(serverId, localID) {
         var cbconfig = {
             'appId': appId,
             'appSecret': secreT,
@@ -554,7 +554,7 @@ $(function () {
                     alert(e.msg);
                 } else {
                     if (data.data.success == true) {
-                        showNotImg(localId);
+                        showNotImg(localID);
                         fileName = data.data.fileName;
                         fileSize = data.data.fileSize;
                         fileType = data.data.fileType;
@@ -570,7 +570,7 @@ $(function () {
 
                     } else {
                         //上传失败重新上传一次
-                        uploadImage(serverId);
+                        uploadImage(serverId,localID);
                     }
 
                 }
