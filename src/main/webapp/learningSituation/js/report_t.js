@@ -204,7 +204,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }
                                 }
                                 if(Tbuer==true){
-                                    timeIndex.push(timejson[r])
+                                    timeIndex.push(timejson[r]);
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
@@ -216,7 +216,7 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
+                            console.log(mfInedx_r);
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
@@ -625,12 +625,18 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     }
                                 }
                                 if(Tbuer==true){
-                                    timeIndex.push(timejson[r])
+                                    if(timejson[r]==undefined){
+                                        timeIndex.push('0');
+                                        mfInedx_r.push('满分：0');
+                                        mfInedx_c.push('满分：0')
+                                    }else{
+                                        timeIndex.push(timejson[r]);
+                                        mfInedx_r.push('满分：'+manfjson[r]);
+                                        mfInedx_c.push('满分：'+manfjsont[r])
+                                    }
                                     if(manfjson[r]==undefined){
                                         manfjson[r] = '0'
                                     }
-                                    mfInedx_r.push('满分：'+manfjson[r]);
-                                    mfInedx_c.push('满分：'+manfjsont[r])
                                 }else{
                                     timeIndex.push('0');
                                     mfInedx_r.push('满分：0');
