@@ -25,7 +25,7 @@ $(function () {
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
                 location.href="../../schedule/login_t.html";
-                /*location.href="login_t.html";*/
+               /* location.href="login_t.html";*/
             }else{
                 layer.msg("教师邮箱不存在",{icon:6});
             }
