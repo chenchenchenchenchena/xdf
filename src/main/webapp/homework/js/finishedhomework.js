@@ -247,9 +247,9 @@ $(function () {
     function showImage(previewUrl, imageId) {
         $('#' + imageId).show();
         var str = "";
-        str += "<div class = 'imgBox'>";
+        // str += "<div class = 'imgBox'>";
         str += "<div><img src='" + previewUrl + "'/></div>";
-        str += "</div>";
+        // str += "</div>";
         $('#' + imageId).append(str);
     }
 
