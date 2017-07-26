@@ -38,7 +38,6 @@ $(function () {
         }
         if (sessionStorage.Classname_x) {
             $('.class_s i').html('已选择1个班' + sessionStorage.Classname_x + ';');
-            sessionStorage.removeItem('Classname_x');
             $('.time_S i').html(sessionStorage.ClassTime_x);
             $('.class_name i').html('1');
             $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
@@ -819,4 +818,10 @@ $(function () {
         });
     });
     $('body').css('overflow-y', 'auto')
+});
+
+
+
+window.addEventListener("beforeunload", function(event) {
+    sessionStorage.removeItem('Classname_x');
 });
