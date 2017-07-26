@@ -1,47 +1,6 @@
 $(function () {
     var voiceCount = 0;
     ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
-        var e1 = {
-            "code": "200",
-            "data": {
-                "homeworkTime": "7月13日",
-                "teacherName": "高伟",
-                "StudentHomeInfo": [{
-                    "RevampFile": [{
-                        "diskFilePath": "homework/73/www/111.png",
-                        "fileName": "111",
-                        "fileSize": "1236",
-                        "fileType": "png",
-                        "homeworkSinfoId": "47f8bfad04124e9cb3587238a87325f9",
-                        "id": "7a6dba74aa1d43669be326154ab58d5a",
-                        "uploadTime": 1499831173000, "url": "homework/73/www/111.png", "previewUrl": "", "thumbnail": ""
-                    },
-                        {
-                            "diskFilePath": "homework/73/www/222.mp3",
-                            "fileName": "222",
-                            "fileSize": "6555",
-                            "fileType": "mp3",
-                            "homeworkSinfoId": "47f8bfad04124e9cb3587238a87325f9",
-                            "id": "f9618f1047cf477d9b96bbace9ff153b",
-                            "uploadTime": 1499831173000, "url": "homework/73/www/222.mp3", "previewUrl": "", "thumbnail": ""
-                        }],
-                    "studentName": "武铮铮",
-                    "description": "这是测试数据"
-                },
-                    {
-                        "RevampFile": [],
-                        "studentName": "杨佳琳",
-                        "description": "这是测试数据"
-                    },
-                    {
-                        "RevampFile": [],
-                        "studentName": "汲思含",
-                        "description": "这是测试数据"
-                    }],
-                "className": "五年级数学综合培优暑假班"
-            },
-            "status": "success"
-        };
         var Month = e.data.homeworkTime.substr(5, 2);
         var Day = e.data.homeworkTime.substr(8, 2);
         var teaName = e.data.teacherName;
@@ -64,7 +23,6 @@ $(function () {
             if (Media.length != 0) {
                 for (var k = 0; k < Media.length; k++) {
                     if (Media[k].fileType == 'mp3') {
-                        // music += '<div class="music_s"> <span>10"</span> </div> '
                         voiceCount++;
                         showAudio(url_o + Media[k].url, "audio_" + i , "audio" + i  + "" + voiceCount);
                     } else {
