@@ -11,7 +11,6 @@ $(function() {
     $('.frend').hide();
     var arr;
     ajax_S(homework_s.t_more, need, function (e) {
-        console.log(e);
         var data = e.data;
         arr = e.data.notCommit;
         if (data.notCommit.length == 0) {

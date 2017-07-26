@@ -8,7 +8,7 @@ $(function(){
     ajaxRequest('post',homework_s.t_mmmm,{Tcid:getRequest('tid').tid},function(e){
             var Month = e.data.homeworkTime.substring(5,2);
             var Day = e.data.homeworkTime.substring(8,2);
-            var teaName = e.data.teacherName
+            var teaName = e.data.teacherNam;
             var json = {
                 'title':''+Month+'月'+Day+'日的优秀作业',
                 'text':''+teaName+'老师公布了今日的优秀作业，快看看你被选中了吗？',
@@ -32,7 +32,7 @@ $(function(){
                         }
                     }
                 }
-                $('.homework_big').append('<div class="homework_small"> <div class="homework_small_title"> <h4>'+data.StudentHomeInfo[i].studentName+'同学</h4> </div> <div class="answer_s"> <p>'+data.StudentHomeInfo[i].description+'</p></div>'+music+'<div class="imgBox imgBox_s"> '+Img+'</div> </div>')
+                $('.homework_big').append('<div class="homework_small"> <div class="homework_small_title"> <h4>'+data.StudentHomeInfo[i].studentName+'同学</h4> </div> <div class="answer_s"> <p>'+ decodeURI(data.StudentHomeInfo[i].description)+'</p></div>'+music+'<div class="imgBox imgBox_s"> '+Img+'</div> </div>')
             }
     });
 
