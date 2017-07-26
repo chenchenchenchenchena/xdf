@@ -211,13 +211,13 @@ $(function () {
         $('#' + idParent).append(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = function () {
-            getVoiceLen(audioElem,idChildren)
+            getVoiceLen(audioElem, idChildren)
         };
 
 
     }
 
-    function getVoiceLen(audioElem,idChildren) {
+    function getVoiceLen(audioElem, idChildren) {
         var len = audioElem.duration;
         len = parseInt(len);
         var hh = parseInt(len / 3600);
@@ -232,7 +232,7 @@ $(function () {
             if (ss == 0) {
 
                 voiceLen = "1''";
-            }else {
+            } else {
                 voiceLen = ss + "''";
             }
         }
@@ -279,7 +279,7 @@ $(function () {
 
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = function () {
-            getVoiceLen(audioElem,idChildren)
+            getVoiceLen(audioElem, idChildren)
         };
 
         $('.song_s,.mask').hide();
@@ -519,7 +519,7 @@ $(function () {
                     i++;
                     // serverIds.push(res.serverId);
                     // $('.teBox').val(res.serverId + "$" + images.localIds[i - 1]);
-                    uploadImage(res.serverId,images.localIds[i-1]);
+                    uploadImage(res.serverId, images.localIds[i - 1]);
                     if (i < length) {
                         upload();
                     }
@@ -556,27 +556,23 @@ $(function () {
                 } else {
                     if (e.status == "failure") {
                         alert(e.msg);
-                    } else {
-                        if (e.data.success == true) {
-                            showNotImg(localID);
-                            fileName = data.data.fileName;
-                            fileSize = data.data.fileSize;
-                            fileType = data.data.fileType;
-                            diskFilePath = data.data.diskFilePath;
-                            fileParams.push({
-                                "homeworkSinfoId": homeworkSinfoId,
-                                "fileName": fileName,
-                                "fileType": fileType,
-                                "fileSize": fileSize,
-                                "diskFilePath": diskFilePath,
-                                "uploadUser": uploadUser
-                            });
+                    } else if (e.status == "succeed") {
 
-                        } else {
-                            //上传失败重新上传一次
-                            // uploadImage(serverId, localID);
-                            layer.msg('图片上传失败');
-                        }
+                        showNotImg(localID);
+                        fileName = data.data.fileName;
+                        fileSize = data.data.fileSize;
+                        fileType = data.data.fileType;
+                        diskFilePath = data.data.diskFilePath;
+                        fileParams.push({
+                            "homeworkSinfoId": homeworkSinfoId,
+                            "fileName": fileName,
+                            "fileType": fileType,
+                            "fileSize": fileSize,
+                            "diskFilePath": diskFilePath,
+                            "uploadUser": uploadUser
+                        });
+
+
                     }
 
                 }
