@@ -322,7 +322,7 @@ $(function () {
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro, errohome, function (e) {
-            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
+                // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
@@ -741,22 +741,18 @@ $(function () {
             success: function (e) {
                 if (e.status == "failure") {
                     layer.msg('图片上传失败');
-                } else {
-                    if (e.data.success == true) {
-                        showUpdataImage(localID);
-                        arr_image.push({
-                            'fileName': e.data.fileName,
-                            'fileType': e.data.fileType,
-                            'fileSize': e.data.fileSize,
-                            'diskFilePath': e.data.diskFilePath,
-                            'id': ""
-                        });
+                } else if (e.status == "succeed") {
 
-                    } else {
-                        //上传失败重新上传一次
-                        // uploadImage(serverId, localID);
-                        layer.msg('图片上传失败');
-                    }
+                    showUpdataImage(localID);
+                    arr_image.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
+                    });
+
+
                 }
 
             }
@@ -822,7 +818,6 @@ $(function () {
 });
 
 
-
-window.addEventListener("beforeunload", function(event) {
+window.addEventListener("beforeunload", function (event) {
     sessionStorage.removeItem('Classname_x');
 });
