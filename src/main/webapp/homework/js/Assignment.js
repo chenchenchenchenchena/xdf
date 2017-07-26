@@ -47,7 +47,7 @@ $(function () {
                     $(this).find('img').attr('src', 'images/C0503.png')
                 }
             });
-            classCode = sessionStorage.classCode_in;
+            classCode = sessionStorage.classCode_in.split(',')[0];
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
                 // sessionStorage.removeItem('Classname_x');
@@ -321,8 +321,8 @@ $(function () {
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURI($('.home_text textarea').val());
             errohome.fileInfo = arr_s;
-            // ajax_S(homework_s.t_erro, errohome, function (e) {
-            ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
+            ajax_S(homework_s.t_erro, errohome, function (e) {
+            // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.big_back').show();
                     $('.succ').show();
