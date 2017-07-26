@@ -1,6 +1,6 @@
 $(function () {
-    localStorage.schoolId= 73;
-    sessionStorage.classCode_s = "hx001";
+    // localStorage.schoolId= 73;
+    // sessionStorage.classCode_s = "hx001";
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
