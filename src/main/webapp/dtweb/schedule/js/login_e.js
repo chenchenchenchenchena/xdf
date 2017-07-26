@@ -18,12 +18,15 @@ $(function () {
     function terEmail(e){
         console.log(e.data)
         if(e.result==true){
-            if(e.data!=undefined){
+            if(e.data!=undefined&&e.wechatData.length>0){
                 // var teaname = jQuery.parseJSON(e.data);
                 localStorage.terEmail = e.data.sEmail;
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
+                sessionStorage.nickname=e.wechatData[0].nickName;
+                sessionStorage.headimgurl=e.wechatData[0].headImg;
+                sessionStorage.openid=e.wechatData[0].wechatId;
                 location.href="../../schedule/login_t.html";
                /* location.href="login_t.html";*/
             }else{
