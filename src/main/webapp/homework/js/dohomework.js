@@ -220,7 +220,7 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': sessionStorage.schoolId,
+            'schoolId': '73',
             'classId': localStorage.classCode
         };
         alert(JSON.stringify(cbconfig));
