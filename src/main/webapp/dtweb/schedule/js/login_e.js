@@ -17,24 +17,28 @@ $(function () {
     })
     function terEmail(e){
         console.log(e.data)
+        console.log(e.wechatData)
         if(e.result==true){
-            if(e.data!=undefined&&e.wechatData.length>0){
+            if(e.data!=undefined){
                 // var teaname = jQuery.parseJSON(e.data);
                 localStorage.terEmail = e.data.sEmail;
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                sessionStorage.nickname=e.wechatData[0].nickName;
-                sessionStorage.headimgurl=e.wechatData[0].headImg;
-                sessionStorage.openid=e.wechatData[0].wechatId;
-                location.href="../../schedule/login_t.html";
-               /* location.href="login_t.html";*/
+                if(e.wechatData.length<=0){
+                    layer.msg("微信未授权",{icon:6});
+                }else{
+                    sessionStorage.nickname=e.wechatData[0].nickName;
+                    sessionStorage.headimgurl=e.wechatData[0].headImg;
+                    sessionStorage.openid=e.wechatData[0].wechatId;
+                    location.href="../../schedule/login_t.html";
+                }
             }else{
                 layer.msg("教师邮箱不存在",{icon:6});
             }
 
         }else{
-            layer.msg("教师邮箱不正确",{icon:6});
+            layer.msg("请输入正确的老师邮箱",{icon:6});
         }
     }
 //清除缓存
