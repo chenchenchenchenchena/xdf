@@ -27,7 +27,7 @@ $(function () {
                         showAudio(url_o + Media[k].url, "audio_" + i , "audio" + i  + "" + voiceCount);
                     } else {
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
-                        showImage(Media[k].url, "imagBox_" + i );
+                        showImage(url_o + Media[k].url, "imagBox_" + i );
                     }
                 }
             }
