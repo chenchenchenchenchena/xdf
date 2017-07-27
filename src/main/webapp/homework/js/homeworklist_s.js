@@ -1,5 +1,4 @@
 $(function(){
-	weChatData();
 	// window.location.reload();
 	//缓存数据 TODO
 	if(sessionStorage.stuNumber!=""||sessionStorage.stuNumber!=null||sessionStorage.stuNumber!=undefined){
