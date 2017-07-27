@@ -197,12 +197,12 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
 //时间格式化
 Date.prototype.format = function(fmt) {
     var o = {
-        "M+" : this.getMonth()+1,                 //月份 
-        "d+" : this.getDate(),                    //日 
-        "h+" : this.getHours(),                   //小时 
-        "m+" : this.getMinutes(),                 //分 
-        "s+" : this.getSeconds(),                 //秒 
-        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+        "M+" : this.getMonth()+1,                 //月份
+        "d+" : this.getDate(),                    //日
+        "h+" : this.getHours(),                   //小时
+        "m+" : this.getMinutes(),                 //分
+        "s+" : this.getSeconds(),                 //秒
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度
         "S"  : this.getMilliseconds()             //毫秒
     };
     if(/(y+)/.test(fmt)) {
@@ -318,9 +318,17 @@ function weChatData(Json) {
                     timestamp: timestamp, // 必填，生成签名的时间戳
                     nonceStr: nonceStr, // 必填，生成签名的随机串
                     signature: signature,// 必填，签名，见附录1
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    jsApiList: ["startRecord", "uploadImage", "chooseImage", "previewImage", "stopRecord", "uploadVoice", "playVoice", "downloadVoice", "onMenuShareTimeline", "onMenuShareAppMessage", "hideMenuItems"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
                 wx.ready(function () {
+
+                    wx.checkJsApi({
+                        jsApiList: ["startRecord", "uploadImage", "chooseImage", "previewImage", "stopRecord", "uploadVoice", "playVoice", "downloadVoice"],
+                        success: function (res) {
+                            // alert(JSON.stringify(res));
+                        }
+                    });
+
                     wx.onMenuShareTimeline({
                         title: Json.title, // 分享标题
                         link: urlVal, // 分享链接
