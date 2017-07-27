@@ -65,6 +65,7 @@ $(function () {
 
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
+        $('title').html('已批复')
         var arr_text = sessionStorage.T_text.split('|>|');
         for(var p = 0;p<arr_text.length;p++){
             if(arr_text[p]!=''){
