@@ -315,25 +315,25 @@ $(function () {
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
             var len = audioElem.duration;
-            len = parseInt(len);
-            var voiceLen = "";
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
-            } else {
-                if (ss == 0) {
+            // len = parseInt(len);
+            // var voiceLen = "";
+            // var hh = parseInt(len / 3600);
+            // var mm = parseInt((len % 3600) / 60);
+            // var ss = parseInt((len % 3600) % 60);
+            // if (hh > 0) {
+            //     voiceLen = hh + "'" + mm + "'" + ss + "''";
+            // } else if (mm > 0) {
+            //     voiceLen = mm + "'" + ss + "''";
+            // } else {
+            //     if (ss == 0) {
+            //
+            //         voiceLen = "1''";
+            //     } else {
+            //         voiceLen = ss + "''";
+            //     }
+            // }
 
-                    voiceLen = "1''";
-                } else {
-                    voiceLen = ss + "''";
-                }
-            }
-
-            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(len);
         }
 
         $('.song_s,.mask').hide();
