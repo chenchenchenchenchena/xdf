@@ -94,7 +94,7 @@ var homework_s = {
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
     't_file': 'http://10.200.80.235:8080/xdfdtmanager/upload/uploadFiles.do',   //文件上传云盘
-    't_two' : url_o+'teacherData//queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
+    't_two' : url_o+'teacherData/queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
     't_erro': url_o+'teacherData/updateTeaHomework.do',//老师修改作业
     't_quck': url_o+'teacherData/pressStuHomework.do',  //老师催交作业
@@ -104,7 +104,7 @@ var homework_s = {
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
-    's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
+    's_readstatus': url_o+'studentHWork/updateStuReadstatus.do',//学生端完成作业的学生阅读状态
     's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
     's_uploadFiles': url_o+'upload/uploadFileByBase64.do'//文件上传接口
 
@@ -296,8 +296,8 @@ $(document).on("touchend", function (e) {
 function weChatData(Json) {
     var urlVal = window.location.href;
     var businessP = {
-        "appid" :  'wxab29a3e2000b8d2a',
-        "secret": '7739991fcce774c2281147eae3986ad9',
+        "appid" :  appId,
+        "secret": secreT,
         "url": urlVal
     };
     jQuery.ajax({

@@ -1,4 +1,5 @@
 $(function(){
+	weChatData();
 	// window.location.reload();
 	//缓存数据 TODO
 	if(sessionStorage.stuNumber!=""||sessionStorage.stuNumber!=null||sessionStorage.stuNumber!=undefined){
@@ -63,7 +64,7 @@ $(function(){
 		var id = $(this).attr('data-id');
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
-		ajaxRequest('GET', homework_s.s_readstatus, 'classCode='+$(this).attr('data-classCode'), function(msg){
+		ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
 			if(msg.code==200){
 				console.log("阅读成功！"+msg.msg);
 			}else{
