@@ -230,7 +230,7 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    alert(e.msg);
                 } else {
                     // alert("语音上传成功");
                     fileName = e.data.fileName;
