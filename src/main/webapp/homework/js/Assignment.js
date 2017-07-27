@@ -521,7 +521,7 @@ $(function () {
                     $('.teBox').val(e.data.fileUrl);
                     arr_voice.push({
                         'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
+                          'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
                         'diskFilePath': e.data.diskFilePath,
                         'id': ""
@@ -563,7 +563,6 @@ $(function () {
             }
         });
     }
-
     /**
      * 显示录制语音布局
      */

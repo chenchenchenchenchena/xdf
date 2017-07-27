@@ -65,7 +65,13 @@ $(function () {
 
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
-        $('.anDes').eq(1).html(sessionStorage.T_text);
+        var arr_text = sessionStorage.T_text.split('|>|');
+        for(var p = 0;p<arr_text.length;p++){
+            if(arr_text[p]!=''){
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr_text[p]+'</div><div><ul id="audio_3" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            }
+        }
+        // $('.anDes').eq(1).html(sessionStorage.T_text);
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             var tea = e.data.RevampFile;//老师批注
             var stu = e.data.StudentHomeworkFile;//学生答案
@@ -238,7 +244,12 @@ $(function () {
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.replyDesc = encodeURI($('.answer textarea').val());
+        for(var x = 0;x<$('.anDes').length;x++){
+            if(x!=0&&$('.anDes').eq(x).html()!=''){
+                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|')
+            }
+        }
+        need.replyDesc += encodeURI($('.answer textarea').val());
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
