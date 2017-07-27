@@ -117,6 +117,9 @@ $(function() {
     });
 
     $(document).on('touchend','.home_tw li',function(){
+        if($(this).find('i').html()=='优秀'){
+           sessionStorage.bangbang = 1;
+        }
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');
         sessionStorage.T_text = decodeURI($(this).attr('text_t'));

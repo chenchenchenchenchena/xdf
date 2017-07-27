@@ -200,6 +200,7 @@ i{font-style: normal;}
 .rankleft{
 	font-size: 27px;
 	float: left;
+	position: relative;
 }
 .rankfirst{
 	color: #ffc600;
@@ -230,6 +231,15 @@ i{font-style: normal;}
 	font-size: 23px;
 	float: right;
 	color: #808080;
+	position: relative;
+}
+.excellent-bg{
+	width:100px;
+	height: 100px;
+	position: absolute;
+	top: 10px;
+	left: -110px;
+	background: url("../images/excellent_icon.png") right center/60px 60px   no-repeat;
 }
 .rankright>i:nth-child(1){
 	margin-right: 20px;

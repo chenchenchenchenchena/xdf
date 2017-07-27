@@ -94,7 +94,7 @@ var homework_s = {
     't_modi': url_o+'teacherData/queryupdateHomeWorkFile.do',//老师批改作业获取文件
     't_succ': url_o+'teacherData/teacherReplyHomeWork.do', //批改提交
     't_file': 'http://10.200.80.235:8080/xdfdtmanager/upload/uploadFiles.do',   //文件上传云盘
-    't_two' : url_o+'teacherData//queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
+    't_two' : url_o+'teacherData/queryMyResponsesHomrWorkFile.do' ,//老师查看批复作业
     't_dele': url_o+'teacherData/updateHomeWork.do',//老师删除作业
     't_erro': url_o+'teacherData/updateTeaHomework.do',//老师修改作业
     't_quck': url_o+'teacherData/pressStuHomework.do',  //老师催交作业
@@ -104,7 +104,7 @@ var homework_s = {
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
-    's_readstatus': url_o+'studentHWork/updateShfinishReadstatus.do',//学生端完成作业的学生阅读状态
+    's_readstatus': url_o+'studentHWork/updateStuReadstatus.do',//学生端完成作业的学生阅读状态
     's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
     's_uploadFiles': url_o+'upload/uploadFileByBase64.do'//文件上传接口
 
@@ -197,12 +197,12 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
 //时间格式化
 Date.prototype.format = function(fmt) {
     var o = {
-        "M+" : this.getMonth()+1,                 //月份 
-        "d+" : this.getDate(),                    //日 
-        "h+" : this.getHours(),                   //小时 
-        "m+" : this.getMinutes(),                 //分 
-        "s+" : this.getSeconds(),                 //秒 
-        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+        "M+" : this.getMonth()+1,                 //月份
+        "d+" : this.getDate(),                    //日
+        "h+" : this.getHours(),                   //小时
+        "m+" : this.getMinutes(),                 //分
+        "s+" : this.getSeconds(),                 //秒
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度
         "S"  : this.getMilliseconds()             //毫秒
     };
     if(/(y+)/.test(fmt)) {
@@ -296,8 +296,8 @@ $(document).on("touchend", function (e) {
 function weChatData(Json) {
     var urlVal = window.location.href;
     var businessP = {
-        "appid" :  'wx559791e14e9ce521',
-        "secret": 'baa4373d5a8750c69b9d1655a2e31370',
+        "appid" :  appId,
+        "secret": secreT,
         "url": urlVal
     };
     jQuery.ajax({
@@ -318,9 +318,17 @@ function weChatData(Json) {
                     timestamp: timestamp, // 必填，生成签名的时间戳
                     nonceStr: nonceStr, // 必填，生成签名的随机串
                     signature: signature,// 必填，签名，见附录1
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    jsApiList: ["startRecord", "uploadImage", "chooseImage", "previewImage", "stopRecord", "uploadVoice", "playVoice", "downloadVoice", "onMenuShareTimeline", "onMenuShareAppMessage", "hideMenuItems"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
                 wx.ready(function () {
+
+                    wx.checkJsApi({
+                        jsApiList: ["startRecord", "uploadImage", "chooseImage", "previewImage", "stopRecord", "uploadVoice", "playVoice", "downloadVoice"],
+                        success: function (res) {
+                            // alert(JSON.stringify(res));
+                        }
+                    });
+
                     wx.onMenuShareTimeline({
                         title: Json.title, // 分享标题
                         link: urlVal, // 分享链接

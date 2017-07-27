@@ -217,8 +217,16 @@ $(function () {
     $('.Choice_s input').on('change', function () {
         $('.time_S i').html($(this).val())
     });
+    //提交确认
+    $('.Submit_s').on('touchend',function(){
+        $('.areyok').show();
+    });
+    $('.areyok input:first-of-type').on('touchend',function(){
+        $(".areyok").hide()
+    });
     //提交作业
-    $('.Submit_s').on('touchend', function () {
+    $('.areyok input:last-of-type').on('touchend', function () {
+        $(".areyok").hide();
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
             return false;
@@ -521,7 +529,7 @@ $(function () {
                     $('.teBox').val(e.data.fileUrl);
                     arr_voice.push({
                         'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
+                          'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
                         'diskFilePath': e.data.diskFilePath,
                         'id': ""
@@ -563,7 +571,6 @@ $(function () {
             }
         });
     }
-
     /**
      * 显示录制语音布局
      */

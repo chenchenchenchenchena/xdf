@@ -2,7 +2,7 @@
  * Created by xupingwei on 2017/7/10.
  */
 $(function () {
-    var Wxconfig = {"url": location.href, "appid": "wx559791e14e9ce521", "secret": "baa4373d5a8750c69b9d1655a2e31370"};
+    var Wxconfig = {"url": location.href, "appid": appId, "secret": secreT};
     var Wxconfig_h;
     $.ajax({
         url: url.w_xmor,

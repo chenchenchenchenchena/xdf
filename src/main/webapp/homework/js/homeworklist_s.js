@@ -1,8 +1,11 @@
 $(function(){
 	// window.location.reload();
 	//缓存数据 TODO
-	// sessionStorage.stuNumber = GetRequest('stuNumber');
-	// sessionStorage.studentName = GetRequest('studentName');
+	if(sessionStorage.stuNumber!=""||sessionStorage.stuNumber!=null||sessionStorage.stuNumber!=undefined){
+		sessionStorage.stuNumber = GetRequest('stuNumber');
+		sessionStorage.studentName = GetRequest('studentName');
+	}
+
 	/*sessionStorage.stuNumber = 'SS5786';
 	sessionStorage.studentName = '郭紫楚';
 	sessionStorage.schoolId = '73';*/
@@ -60,7 +63,7 @@ $(function(){
 		var id = $(this).attr('data-id');
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
-		ajaxRequest('GET', homework_s.s_readstatus, 'classCode='+$(this).attr('data-classCode'), function(msg){
+		ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
 			if(msg.code==200){
 				console.log("阅读成功！"+msg.msg);
 			}else{
@@ -145,7 +148,11 @@ $(function(){
 					var hwLessNosHtml='',readStatus='',replay=0;
 
 					$.each(lessNos,function(i,item){
-						var replyStatus = "",statusCss="";
+						var replyStatus = "",statusCss="",readCss="";
+						//红点显示判断
+						if (item.readStatus==0){//未读
+							readCss = "redCircle";
+						}
 						switch (item.replyStatus){
 							case 0:
 								replyStatus = '未批';
@@ -157,11 +164,11 @@ $(function(){
 								// replay=1;
 								break;
 						}
-						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
+						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span></li>';
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){
-					if (items.readStatus==0){
+					if (items.readStatus==0){//未读
 						readStatus = "redCircle";
 					}
 					console.log(hwLessNosHtml);

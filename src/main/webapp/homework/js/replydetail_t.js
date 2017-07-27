@@ -65,7 +65,25 @@ $(function () {
 
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
-        $('.anDes').eq(1).html(sessionStorage.T_text);
+        $('title').html('已批复');
+        var arr_text = sessionStorage.T_text.split('|>|');
+        if(sessionStorage.bangbang){
+            $('.hmAnswer .infoTitle span').css({
+                'color': '#fff',
+                'background': '#ff6a6a'
+            });
+        }
+        for(var p = 0;p<arr_text.length;p++){
+            if(arr_text[p]!=''){
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr_text[p]+'</div><div><ul id="audio_3" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            }
+        }
+
+
+
+
+
+        // $('.anDes').eq(1).html(sessionStorage.T_text);
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             var tea = e.data.RevampFile;//老师批注
             var stu = e.data.StudentHomeworkFile;//学生答案
@@ -76,7 +94,7 @@ $(function () {
                         getAudioInfo([3, tea[b].diskFilePath, "mp3"]);
                         // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                     } else {
-                        $('.imgBox').eq(2).append('<div><img src='+url_o+tea[b].url + ' alt="" /></div>')
+                        $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 }
             }
@@ -86,7 +104,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="'+url_o+stu[a].url + '" alt="" /></div>')
                 }
             }
             for (var c = 0; c < tea_t.length; c++) {
@@ -94,7 +112,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img src="'+tea_t[c].url + '" alt="" /></div>')
 
                 }
             }
@@ -187,24 +205,25 @@ $(function () {
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
             var len = audioElem.duration;
-            len = parseInt(len);
-            var voiceLen = "";
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
-            } else {
-                voiceLen = ss + "''";
-            }
-            if (ss == 0) {
+            // len = parseInt(len);
+            // var voiceLen = "";
+            // var hh = parseInt(len / 3600);
+            // var mm = parseInt((len % 3600) / 60);
+            // var ss = parseInt((len % 3600) % 60);
+            // if (hh > 0) {
+            //     voiceLen = hh + "'" + mm + "'" + ss + "''";
+            // } else if (mm > 0) {
+            //     voiceLen = mm + "'" + ss + "''";
+            // } else {
+            //     if (ss == 0) {
+            //
+            //         voiceLen = "1''";
+            //     } else {
+            //         voiceLen = ss + "''";
+            //     }
+            // }
 
-                voiceLen = "1''";
-            }
-
-            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(len);
         }
 
         $('.song_s,.mask').hide();
@@ -213,10 +232,17 @@ $(function () {
             $('#record').hide();
         }
     }
-
+    //提交确认
+    $('.sub_p').on('touchend',function(){
+        $('.areyok').show();
+    });
+    $('.areyok input:first-of-type').on('touchend',function(){
+        $(".areyok").hide()
+    });
 
     //批改作业提交
-    $('.sub_p').on('touchend', function () {
+    $('.areyok input:last-of-type').on('touchend', function () {
+        $(".areyok").hide();
         var arr_s = [];
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
@@ -231,14 +257,24 @@ $(function () {
         } else {
             need.replyDesc = $('.teBox').html();
         }
-        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
+        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {0
             need.tag = '0'
         } else {
             need.tag = '1'
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.replyDesc = encodeURI($('.answer textarea').val());
+
+
+
+        for(var x = 0;x<$('.anDes').length;x++){
+            if(x!=0&&$('.anDes').eq(x).html()!=''){
+                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|>|')
+            }
+        }
+
+
+        need.replyDesc += encodeURI($('.answer textarea').val());
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
@@ -588,8 +624,23 @@ $(function () {
         }
     });
     var Index_Last;
+
+    $(document).on('touchend','.hwInfo img',function(){
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
+    $(document).on('touchend','.tea_sp img',function(){
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('touchend', '.hmAnswer .imgBox img', function () {
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();

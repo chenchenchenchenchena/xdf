@@ -207,7 +207,7 @@ $(function () {
             success: function (res) {
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
-                uploadVoice(serverId, upId);
+                uploadVoice(serverId);
             }
         });
     }
@@ -230,7 +230,7 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    alert(e.msg);
                 } else {
                     // alert("语音上传成功");
                     fileName = e.data.fileName;
@@ -315,25 +315,25 @@ $(function () {
         audioElem.onloadedmetadata = getVoiceLen;
         function getVoiceLen() {
             var len = audioElem.duration;
-            len = parseInt(len);
-            var voiceLen = "";
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
-            } else {
-                if (ss == 0) {
+            // len = parseInt(len);
+            // var voiceLen = "";
+            // var hh = parseInt(len / 3600);
+            // var mm = parseInt((len % 3600) / 60);
+            // var ss = parseInt((len % 3600) % 60);
+            // if (hh > 0) {
+            //     voiceLen = hh + "'" + mm + "'" + ss + "''";
+            // } else if (mm > 0) {
+            //     voiceLen = mm + "'" + ss + "''";
+            // } else {
+            //     if (ss == 0) {
+            //
+            //         voiceLen = "1''";
+            //     } else {
+            //         voiceLen = ss + "''";
+            //     }
+            // }
 
-                    voiceLen = "1''";
-                } else {
-                    voiceLen = ss + "''";
-                }
-            }
-
-            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(len);
         }
 
         $('.song_s,.mask').hide();
