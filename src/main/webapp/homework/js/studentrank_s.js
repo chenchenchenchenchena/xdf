@@ -39,7 +39,7 @@ $(function(){
 
                     var rankListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+parseInt(i+1)+'</i><i>'
                         +items.stuName.substr(-2,2)+'</i><i>'+items.stuName
-                        +'</i><i class="'+excellentTag+'"></i></span><span class="rankright"><i>'+items.updateTime.substr(0,16)+'</i></span></li>';
+                        +'</i></span><span class="rankright"><i class="'+excellentTag+'"></i><i>'+items.updateTime.substr(0,16)+'</i></span></li>';
                     $(".ranklist").append(rankListHtml);
                     $(".ranklist").show();
                     // layer.close(loading);

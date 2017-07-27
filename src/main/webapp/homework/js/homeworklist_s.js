@@ -148,7 +148,11 @@ $(function(){
 					var hwLessNosHtml='',readStatus='',replay=0;
 
 					$.each(lessNos,function(i,item){
-						var replyStatus = "",statusCss="";
+						var replyStatus = "",statusCss="",readCss="";
+						//红点显示判断
+						if (item.readStatus==0){//未读
+							readCss = "redCircle";
+						}
 						switch (item.replyStatus){
 							case 0:
 								replyStatus = '未批';
@@ -160,11 +164,11 @@ $(function(){
 								// replay=1;
 								break;
 						}
-						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span></li>';
+						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span></li>';
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){
-					if (items.readStatus==0){
+					if (items.readStatus==0){//未读
 						readStatus = "redCircle";
 					}
 					console.log(hwLessNosHtml);

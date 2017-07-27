@@ -34,7 +34,7 @@ if (window.location.host == onlineUrl) {//正式环境
         't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
     }
 } else {//测试环境
-    url_o = "http://dt.xdf.cn/xdfdtmanager/";
+    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';

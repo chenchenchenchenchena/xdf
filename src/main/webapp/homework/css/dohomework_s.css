@@ -238,7 +238,7 @@ i{font-style: normal;}
 	height: 100px;
 	position: absolute;
 	top: 10px;
-	right:-60px;
+	left: -110px;
 	background: url("../images/excellent_icon.png") right center/60px 60px   no-repeat;
 }
 .rankright>i:nth-child(1){
