@@ -223,6 +223,7 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
+        alert(JSON.stringify(cbconfig));
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
             type: 'post',
