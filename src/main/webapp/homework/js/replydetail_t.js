@@ -66,14 +66,13 @@ $(function () {
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
         $('title').html('已批复');
-
-
-
         var arr_text = sessionStorage.T_text.split('|>|');
-
-
-
-
+        if(sessionStorage.bangbang){
+            $('.hmAnswer .infoTitle span').css({
+                'color': '#fff',
+                'background': '#ff6a6a'
+            });
+        }
         for(var p = 0;p<arr_text.length;p++){
             if(arr_text[p]!=''){
                 $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr_text[p]+'</div><div><ul id="audio_3" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
