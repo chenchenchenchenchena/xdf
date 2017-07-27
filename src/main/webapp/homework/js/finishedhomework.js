@@ -120,7 +120,7 @@ $(function () {
                         if (paths.fileType.indexOf("mp3") != -1) {
                             //将文件显示到布局中
                             voiceCount++;
-                            showAudio(url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
+                            showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
                         } else {
                             //将文件显示到布局中
                             showImage(paths.fileUrl, "imagBox_" + 1);
@@ -139,10 +139,10 @@ $(function () {
                     if (paths.fileType.indexOf("mp3") != -1) {
                         if (replyStatus == 1) {//已批复
                             voiceCount++;
-                            showAudio(url_o + paths.diskFilePath, "audio_" + 2, "audio" + 2 + "" + voiceCount);
+                            showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 2, "audio" + 2 + "" + voiceCount);
                         } else {
                             //显示可修改语音布局
-                            showRecordAudio(url_o + paths.diskFilePath, $('#record_audio_box'), recordCount, 1);
+                            showRecordAudio(paths.playTime,url_o + paths.diskFilePath, $('#record_audio_box'), recordCount, 1);
                             recordCount++;
                             var voiceFile = {
                                 "homeworkSinfoId": homeworkSinfoId,
@@ -186,7 +186,7 @@ $(function () {
                     console.log(pathUrls);
                     if (paths.fileType.indexOf("mp3") != -1) {
                         voiceCount++;
-                        showAudio(url_o + paths.diskFilePath, "audio_" + 3, "audio" + 3 + "" + voiceCount);
+                        showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 3, "audio" + 3 + "" + voiceCount);
                     } else {
                         //将文件显示到布局中
                         showImage(paths.fileUrl, "imagBox_" + 3);
@@ -199,9 +199,15 @@ $(function () {
     }
 
     /**
+     *
      * 显示语音布局
+     *
+     * @param playTime 语音播放长度
+     * @param url 语音播放地址
+     * @param parentId 要显示布局的位置
+     * @param idChildren 给要显示的布局定义一个id
      */
-    function showAudio(url, idParent, idChildren) {
+    function showAudio(playTime,url, idParent, idChildren) {
 
         $('#' + idParent).show();
         var length = "";
@@ -209,17 +215,17 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
 
         $('#' + idParent).append(strVoice);
+        length = playTime;
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = function () {
-            getVoiceLen(audioElem, idChildren)
+            getVoiceLen(length,idChildren)
         };
 
 
     }
 
-    function getVoiceLen(audioElem, idChildren) {
-        var len = audioElem.duration;
-        len = parseInt(len);
+    function getVoiceLen(length,idChildren) {
+        var len = parseInt(length)
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
@@ -254,9 +260,16 @@ $(function () {
     }
 
     /**
+     *
      * 显示语音布局
+     *
+     * @param playTime 语音播放长度
+     * @param url 语音播放地址
+     * @param parentId 要显示布局的位置
+     * @param id 给要显示的布局定义一个id
+     * @param flag 判断是否可以删除语音，不需要删除语音的布局不同
      */
-    function showRecordAudio(url, parentId, id, flag) {
+    function showRecordAudio(playTime,url, parentId, id, flag) {
 
         parentId.show();
         var strVoice = "";
@@ -277,9 +290,11 @@ $(function () {
 
         parentId.append(strVoice);
 
+        length = playTime;
+
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = function () {
-            getVoiceLen(audioElem, idChildren)
+            getVoiceLen(length,idChildren)
         };
 
         $('.song_s,.mask').hide();
