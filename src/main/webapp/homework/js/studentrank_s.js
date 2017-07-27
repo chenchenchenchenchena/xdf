@@ -31,9 +31,15 @@ $(function(){
                             rankCss = "rankcom";
                             break;
                     }
+                    //优秀
+                    var excellentTag = '';
+                    if(items.tag==1){
+                        excellentTag = 'excellent-bg';
+                    }
+
                     var rankListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+parseInt(i+1)+'</i><i>'
                         +items.stuName.substr(-2,2)+'</i><i>'+items.stuName
-                        +'</i></span><span class="rankright"><i>'+items.updateTime.substr(0,16)+'</i></span></li>';
+                        +'</i><i class="'+excellentTag+'"></i></span><span class="rankright"><i>'+items.updateTime.substr(0,16)+'</i></span></li>';
                     $(".ranklist").append(rankListHtml);
                     $(".ranklist").show();
                     // layer.close(loading);
