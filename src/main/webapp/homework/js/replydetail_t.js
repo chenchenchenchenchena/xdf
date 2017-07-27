@@ -247,7 +247,7 @@ $(function () {
         need.fileInfo = arr_s;
         for(var x = 0;x<$('.anDes').length;x++){
             if(x!=0&&$('.anDes').eq(x).html()!=''){
-                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|')
+                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|>|')
             }
         }
         need.replyDesc += encodeURI($('.answer textarea').val());
