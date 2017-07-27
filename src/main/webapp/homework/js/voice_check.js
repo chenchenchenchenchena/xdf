@@ -6,7 +6,7 @@ $(function () {
     /**
      * 播放作业描述语音
      */
-    $(document).on('click', '.audio_box>div', function () {
+    $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
         voiceCheck($(this).find('audio')[0]);
     });

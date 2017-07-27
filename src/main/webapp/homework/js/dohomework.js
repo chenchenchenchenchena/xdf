@@ -220,10 +220,9 @@ $(function () {
             'appId': appId,
             'appSecret': secreT,
             'mediaId': serverId,
-            'schoolId': '73',
+            'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        alert(JSON.stringify(cbconfig));
         $.ajax({
             url: url_o + "upload/uploadAudio.do",
             type: 'post',
