@@ -1,8 +1,8 @@
 $(function(){
 //禁止浏览器拖动
-    addEventListener("touchmove", function (event) {
-        event.preventDefault();
-    }, false);
+//     addEventListener("touchmove", function (event) {
+//         event.preventDefault();
+//     }, false);
     // localStorage.terEmail="caoxuefeng@xdf.cn";
     // sessionStorage.teacherId="TC41";
     // sessionStorage.schoolId="73";
@@ -86,6 +86,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 
 
                 for (var y = 0; y < class_[i].length; y++) {
+
                     $('.reportstu_S').eq(i).find('ul').eq(0).append('<li>' + e.data[i][y].lessonNO + '</li>');
                     $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data[i][y].realGrade) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName);
@@ -104,6 +105,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                  Rindex     //入门测
                  */
                 }
+                    $('.reportstu_S ul').css('width',145*(class_[i].length+1));
                 if(Xindex==e.data[0].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
