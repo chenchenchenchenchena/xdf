@@ -395,19 +395,20 @@ $(function () {
             //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
-        } else {
-            wx.stopRecord({
-                success: function (res) {
-                    clearInterval(timeds);
-                    // var localId = res.localId;
-                    // song_s = localId;
-                    uploadVoiceWX(res.localId);
-                    // showAudio();
-                    $('.song_s').hide();
-                    $('.big_whit').hide();
-                }
-            });
+            return;
         }
+        wx.stopRecord({
+            success: function (res) {
+                clearInterval(timeds);
+                // var localId = res.localId;
+                // song_s = localId;
+                uploadVoiceWX(res.localId);
+                // showAudio();
+                $('.song_s').hide();
+                $('.big_whit').hide();
+            }
+        });
+
     });
 
     //上传微信服务器，获取保存的serverId

@@ -501,21 +501,22 @@ $(function () {
             //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
-        } else {
-            wx.stopRecord({
-                success: function (res) {
-                    clearInterval(timeds);
-                    // if (timeds > 1) {
-                    //     $('.big_s').append('<div class="music_s"><span></span> </div>');
-                    // }
-                    localId = res.localId;
-                    song_s = localId;
-                    uploadVoiceWX(localId);
-                    $('.song_s').hide();
-                    $('.big_whit').hide();
-                }
-            });
+            return;
         }
+        wx.stopRecord({
+            success: function (res) {
+                clearInterval(timeds);
+                // if (timeds > 1) {
+                //     $('.big_s').append('<div class="music_s"><span></span> </div>');
+                // }
+                localId = res.localId;
+                song_s = localId;
+                uploadVoiceWX(localId);
+                $('.song_s').hide();
+                $('.big_whit').hide();
+            }
+        });
+
     });
 
     //上传微信服务器，获取保存的serverId

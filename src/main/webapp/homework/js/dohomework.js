@@ -180,22 +180,23 @@ $(function () {
             //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
-        } else {
-            wx.stopRecord({
-                success: function (res) {
-                    clearInterval(timeds);
-                    localId = res.localId;
-                    $('.song_s').hide();
-                    uploadVoiceWX(localId);
-
-                },complete: function () {
-                    //接口调用完成（失败成功）
-
-                },
-                fail: function (res) {
-                }
-            });
+            return;
         }
+        wx.stopRecord({
+            success: function (res) {
+                clearInterval(timeds);
+                localId = res.localId;
+                $('.song_s').hide();
+                uploadVoiceWX(localId);
+
+            }, complete: function () {
+                //接口调用完成（失败成功）
+
+            },
+            fail: function (res) {
+            }
+        });
+
     });
 
     /**
