@@ -1,39 +1,40 @@
 $(function(){
     //登录相关
-    if(!sessionStorage.openid){
-        wechatCode(location.href);
-    };
-    if(!localStorage.terEmail){
-        var WXnum  = {
-            'wechatId':sessionStorage.openid
-        };
-        ajax_S(url.s_seac,WXnum,function(e){
-            if(e.result==true){
-                sessionStorage.stuNumber = e.data.studentNo;
-                sessionStorage.schoolId = e.data.schoolId;
-                sessionStorage.studentName = e.data.studentName;
-                location.href = 'homeworklist_s.html';
-            }else{
-                sessionStorage.homeCanfig=='home'
-                location.href = '../schedule/login_s.html'
-            }
-        });
-    }
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href);
+    // };
+    // if(!localStorage.terEmail){
+    //     var WXnum  = {
+    //         'wechatId':sessionStorage.openid
+    //     };
+    //     ajax_S(url.s_seac,WXnum,function(e){
+    //         if(e.result==true){
+    //             sessionStorage.stuNumber = e.data.studentNo;
+    //             sessionStorage.schoolId = e.data.schoolId;
+    //             sessionStorage.studentName = e.data.studentName;
+    //             location.href = 'homeworklist_s.html';
+    //         }else{
+    //             sessionStorage.homeCanfig=='home'
+    //             location.href = '../schedule/login_s.html'
+    //         }
+    //     });
+    // }
     //tab
-	$(document).on('tap','.firstList',function(){
-	    if($(this).find('ul').css('display')=='none'){
-	        if($(this).find('.state_st').length!=0){
-                ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$(this).attr('classCode'),schoolId:'73'},function(e){
+	$(document).on('tap','.firstList>p',function(){
+	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
+	        if($('.firstList').eq($(this).parent().index()).find('.state_st').length!=0){
+                ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$('.firstList').eq($(this).parent().index()).attr('classCode'),schoolId:'73'},function(e){
+
                 });
             }
-            $(this).find('.state_st').hide();
-	       $(this).find('ul').show();
-           $(this).css("background","url(images/jiao11.png) no-repeat right 55px");
+            $('.firstList').eq($(this).parent().index()).find('.state_st').hide();
+            $('.firstList').eq($(this).parent().index()).find('ul').show();
+            $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
         }else{
-            $(this).find('ul').hide();
-            $(this).css("background","url(images/jiao22222.png) no-repeat right 55px");
-            $(this).find('ul li').css('margin-left','0px');
-            $(this).find('ul li').find('.remove_s').css('right','-270px');
+            $('.firstList').eq($(this).parent().index()).find('ul').hide();
+            $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao22222.png) no-repeat right 55px");
+            $('.firstList').eq($(this).parent().index()).find('ul li').css('margin-left','0px');
+            $('.firstList').eq($(this).parent().index()).find('ul li').find('.remove_s').css('right','-270px');
         }
 
     });
@@ -41,6 +42,7 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart mouusedown','.tealist_s',function(){
+        e.stopPropagation();
 	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
@@ -55,14 +57,15 @@ $(function(){
                 }
                 if(begin_s-move_s<=-20){
                     $(this).css('margin-left','0px');
+
                     $(this).find('.remove_s').css('right','-270px');
                     $(this).parent().css('overflow','hidden');
                     return false;
                 }
                 $(this).css('margin-left',move_s-begin_s+'px');
-                return false;
+                // return false;
             });
-            return false;
+            // return false;
         }
     });
 
