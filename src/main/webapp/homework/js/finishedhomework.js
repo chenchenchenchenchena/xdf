@@ -360,10 +360,10 @@ $(function () {
         $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
-        if ((END - START) < 300) {
+        if ((END - START) < 1000) {
             END = 0;
             START = 0;
-            //小于300ms，不录音
+            //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
         } else {
@@ -394,6 +394,12 @@ $(function () {
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 var serverId = res.serverId;
                 uploadVoice(serverId, upId);
+            },
+            complete: function () {
+                //接口调用完成（失败成功）
+
+            },
+            fail: function (res) {
             }
         });
     }
