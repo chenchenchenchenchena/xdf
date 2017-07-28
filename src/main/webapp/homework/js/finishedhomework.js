@@ -468,13 +468,14 @@ $(function () {
             dataType: 'json',
             data: optionFile,
             success: function (e) {
-                if (e.status == "failed") {
-                    console.log(e.message);
-                } else {
+
+                if (e.status == "success") {
                     //显示语音布局
-                    showRecordAudio(url_o + e.data, $('#record_audio_box'), recordCount, 1);
+                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
 
+                } else {
+                    layer.msg("语音获取失败");
                 }
             }
         });
