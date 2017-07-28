@@ -266,7 +266,15 @@ $(function () {
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
-            need.replyDesc = encodeURI($('.anDes').eq(1).html()+'|>|'+$('.answer textarea').val());
+            for(var o = 0;o<$('.anDes').length;o++){
+                if(o!=0&&$('.anDes').eq(1).html()!=undefined){
+                    if(o==$('.anDes').length-1){
+                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+$('.answer textarea').val());
+                    }else{
+                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
+                    }
+                }
+            }
         }else{
             need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
         }
