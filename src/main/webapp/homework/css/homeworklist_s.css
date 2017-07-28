@@ -442,6 +442,7 @@ html body .tealist_s .more_so{
 	margin-left:-271px;
 	text-align:center;
 	display:none;
+	border:1px solid #ccc;
 }
 .pinch-zoom,.pinch-zoom-container
 {	width:100%;

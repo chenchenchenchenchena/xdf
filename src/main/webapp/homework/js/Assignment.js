@@ -338,10 +338,10 @@ $(function () {
                 return false;
             }
         } else {
-            $('.areyok').hide();
-            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val();
             if (html_te.length > 10) {
+                $('.areyok').hide();
+                $('.areyok input:last-of-type').css('background', '#00ba97');
                 layer.msg('单条知识点最多输入10个字');
                 return false;
             }
@@ -386,12 +386,12 @@ $(function () {
                 $('.areyok input:last-of-type').css('background','#00ba97');
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
-                    $('.areyok').hide()
+                    $('.areyok').hide();
                     $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background', '#00ba97');
                 } else {
-
+                    $('.areyok').hide();
                     $('.erro p').html(e.message);
                     $('.big_back').show();
                     $('.erro').show();

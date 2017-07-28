@@ -750,6 +750,16 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            $('.notsubmit .imgBox').show();
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
+            $('.big_back_s canvas').hide();
+            $('.big_back_s img').show();
+            $('.big_back_s .esc_s').hide();
+            $('.big_back_s .true_s').hide();
+            $('.big_back_s span:last-of-type').show();
+            $('.big_back_s').hide();
+            $('body').css('overflow-y', 'auto');
+            $('.true_s').unbind('touchend');
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
             //上传文件到服务器
@@ -761,16 +771,7 @@ $(function () {
             // console.log(reqData);
             ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
-            $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
-            $('.big_back_s canvas').hide();
-            $('.big_back_s img').show();
-            $('.big_back_s .esc_s').hide();
-            $('.big_back_s .true_s').hide();
-            $('.big_back_s span:last-of-type').show();
-            $('.big_back_s').hide();
-            $('body').css('overflow-y', 'auto');
-            $('.true_s').unbind('touchend');
+
         });
         return false;
     });
