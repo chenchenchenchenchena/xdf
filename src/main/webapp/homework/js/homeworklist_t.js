@@ -42,7 +42,7 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart mouusedown','.tealist_s',function(){
-        e.stopPropagation();
+        // e.stopPropagation();
 	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
@@ -90,9 +90,7 @@ $(function(){
                     Read = '';
                 }
             }
-            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display: inline-block;\n' +
-                '    height: 100%;\n' +
-                '    width: 100%;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
+            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display: inline-block;height: 100%;width: 100%;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
             for(var b = 0;b<list_s[a].length;b++){
                 if((parseInt(list_s[a][b].yescommit)+parseInt(list_s[a][b].nocorrect))==list_s[a][0].studentNum||list_s[a][b].yescommit==list_s[a][0].studentNum){
                     if(list_s[a][b].nocorrect==0&&list_s[a][b].notcommit==0){
