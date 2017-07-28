@@ -106,6 +106,7 @@ var maxnumber = 0;
                            $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                            $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                        }
+                       $('.reportstu_S ul').css('width',30*stuSelf.length)
                    }
 
                }else{
@@ -122,6 +123,8 @@ var maxnumber = 0;
                        $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                        $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                    }
+                   $('.reportstu_S ul').css('width',30*stuSelf.length)
+
                }
                console.log(pjIndex);
                 Echart('chart_S',Xtwindex,Cindex,pjIndex,timeIndex,mfInedx,maxnumber);
