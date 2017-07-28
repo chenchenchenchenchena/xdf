@@ -136,7 +136,8 @@ i{font-style: normal;}
 	margin-top: 30px;
 }
 .btn-grey{
-	background: #b2b2b2;
+	background: #e9e7e7!important;
+	color: #aeb1b7!important;
 }
 .stuImg{
 	display: inline-block;
