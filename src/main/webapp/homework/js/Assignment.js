@@ -61,7 +61,7 @@ $(function () {
                             'diskFilePath': tea[b].diskFilePath,
                             'id': tea[b].id
                         });
-                        showAudio(url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        showAudio(tea[b].PlayTime, url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
                         recordCount++;
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
@@ -129,7 +129,7 @@ $(function () {
                 classCode += $(this).attr('ClassCode') + ',';
             }
         });
-        classCode = classCode.substr(0,classCode.length-1);
+        classCode = classCode.substr(0, classCode.length - 1);
         if (className == '') {
             layer.open({
                 type: 1,
@@ -218,10 +218,10 @@ $(function () {
         $('.time_S i').html($(this).val())
     });
     //提交确认
-    $('.Submit_s').on('touchend',function(){
+    $('.Submit_s').on('touchend', function () {
         $('.areyok').show();
     });
-    $('.areyok input:first-of-type').on('touchend',function(){
+    $('.areyok input:first-of-type').on('touchend', function () {
         $(".areyok").hide()
     });
     //提交作业
@@ -529,7 +529,7 @@ $(function () {
                     $('.teBox').val(e.data.fileUrl);
                     arr_voice.push({
                         'fileName': e.data.fileName,
-                          'fileType': e.data.fileType,
+                        'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
                         'diskFilePath': e.data.diskFilePath,
                         'id': ""
@@ -551,8 +551,19 @@ $(function () {
 
     /**
      * 获取录制语音信息
+     * @param diskFileUrl "fullPath": "homeworktest/73/HDXP3EB03/2017-07-27/fb628707b69a421d945cab3e5e23ff71.mp3"
      */
     function getRecordInfo(diskFileUrl) {
+        /**
+         *{
+         *  "code": "200",
+         *  "data": {
+         *     "playTime": 5,
+         *     "fullPath": "homeworktest/73/HDXP3EB03/2017-07-27/fb628707b69a421d945cab3e5e23ff71.mp3"
+         *  },
+         *  "status": "success"
+         *  }
+         */
         var optionFile = {"fullPath": diskFileUrl};
         $.ajax({
             url: url_o + "upload/getMp3Url.do",
@@ -564,17 +575,22 @@ $(function () {
                     console.log(e.message);
                 } else {
                     //显示语音布局
-                    showAudio(url_o + e.data, $('#record_audio_box'), recordCount);
+                    showAudio(e.data.playTime,url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
                     recordCount++;
 
                 }
             }
         });
     }
+
     /**
      * 显示录制语音布局
+     * @param playTime 语音播放时间
+     * @param url 语音播放地址
+     * @param parentId 语音布局文件需要添加的父节点
+     * @param id 给要添加的audio标签添加id
      */
-    function showAudio(url, parentId, id) {
+    function showAudio(playTime, url, parentId, id) {
 
         parentId.show();
         var strVoice = "";
@@ -588,33 +604,35 @@ $(function () {
         parentId.append(strVoice);
 
         var audioElem = document.getElementById(idChildren);
+        //在audio标签布局渲染之后
         audioElem.onloadedmetadata = getVoiceLen;
-        function getVoiceLen() {
-            var len = audioElem.duration;
-            len = parseInt(len);
-            var voiceLen = "";
-            var hh = parseInt(len / 3600);
-            var mm = parseInt((len % 3600) / 60);
-            var ss = parseInt((len % 3600) % 60);
-            if (hh > 0) {
-                voiceLen = hh + "'" + mm + "'" + ss + "''";
-            } else if (mm > 0) {
-                voiceLen = mm + "'" + ss + "''";
-            } else {
-                if (ss == 0) {
-                    voiceLen = "1''";
-                } else {
-                    voiceLen = ss + "''";
-                }
-            }
-            $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
-        }
+        getVoiceLen(playTime,idChildren);
 
         $('.song_s,.mask').hide();
         // 语音大于三张，隐藏添加语音按钮
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
         }
+    }
+
+    function getVoiceLen(playTime,idChildren) {
+        var len = parseInt(playTime);
+        var voiceLen = "";
+        var hh = parseInt(len / 3600);
+        var mm = parseInt((len % 3600) / 60);
+        var ss = parseInt((len % 3600) % 60);
+        if (hh > 0) {
+            voiceLen = hh + "'" + mm + "'" + ss + "''";
+        } else if (mm > 0) {
+            voiceLen = mm + "'" + ss + "''";
+        } else {
+            if (ss == 0) {
+                voiceLen = "1''";
+            } else {
+                voiceLen = ss + "''";
+            }
+        }
+        $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
     }
 
     /*-------------------- 删除语音 --------------------*/

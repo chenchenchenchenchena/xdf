@@ -34,25 +34,24 @@ $(function () {
             oldId = $(audioCur).attr('id');
 
             // if (oldId.indexOf("record") != -1) {
-            //     second = $(audioCur).parent().siblings("span").html();//获取音频秒数
+            second = $(audioCur).parent().siblings("span").html();//获取音频秒数
             //     //如果是录制语音，则调用微信接口，本地播放。避免调用获取mp3Url接口
             //     playVoice($(audioCur).find('source').attr("src"));
 
             // } else {
-                //如果是从服务端获取的播放地址则用audio播放
-                second = audioCur.duration;//获取音频秒数
-                play();
+            //如果是从服务端获取的播放地址则用audio播放
+            // second = audioCur.duration;//获取音频秒数
+            play();
             // }
         } else {
             oldId = undefined;
             // if ($(audioCur).attr('id').indexOf("record") != -1) {
             //     stopVoice($(audioCur).find('source').attr("src"));
             // } else {
-                stop();
+            stop();
             // }
         }
     }
-
 
 
     /**
@@ -115,5 +114,5 @@ $(function () {
     }
 
     /*--------------------语音播放结束----------------------------------*/
-   
+
 });

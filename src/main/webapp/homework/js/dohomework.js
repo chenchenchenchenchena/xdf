@@ -328,8 +328,7 @@ $(function () {
 
 
         parentId.append(strVoice);
-        length = playTime;
-        length = parseInt(length);
+        length = parseInt(playTime);
         var voiceLen = "";
         var hh = parseInt(length / 3600);
         var mm = parseInt((length % 3600) / 60);
