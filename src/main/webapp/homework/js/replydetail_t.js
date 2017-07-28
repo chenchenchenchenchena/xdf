@@ -691,6 +691,7 @@ $(function () {
         $('.true_s').show();
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
+        $('.pinch-zoom-container').eq(0).hide()
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         // img.crossOrigin = "Anonymous";
