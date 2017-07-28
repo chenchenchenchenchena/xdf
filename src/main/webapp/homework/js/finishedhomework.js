@@ -215,17 +215,8 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
 
         $('#' + idParent).append(strVoice);
-        length = playTime;
-        var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = function () {
-            getVoiceLen(length,idChildren)
-        };
 
-
-    }
-
-    function getVoiceLen(length,idChildren) {
-        var len = parseInt(length)
+        var len = parseInt(playTime)
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
@@ -244,6 +235,8 @@ $(function () {
         }
 
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+
+
     }
 
 
@@ -290,12 +283,26 @@ $(function () {
 
         parentId.append(strVoice);
 
-        length = playTime;
+        var len = parseInt(playTime)
+        var hh = parseInt(len / 3600);
+        var mm = parseInt((len % 3600) / 60);
+        var ss = parseInt((len % 3600) % 60);
+        var voiceLen = "";
+        if (hh > 0) {
+            voiceLen = hh + "'" + mm + "'" + ss + "''";
+        } else if (mm > 0) {
+            voiceLen = mm + "'" + ss + "''";
+        } else {
+            if (ss == 0) {
 
-        var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = function () {
-            getVoiceLen(length,idChildren)
-        };
+                voiceLen = "1''";
+            } else {
+                voiceLen = ss + "''";
+            }
+        }
+
+        $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+
 
         $('.song_s,.mask').hide();
         // 语音大于三张，隐藏添加语音按钮

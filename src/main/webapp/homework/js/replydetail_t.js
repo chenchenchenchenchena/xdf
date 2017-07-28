@@ -174,9 +174,26 @@ $(function () {
 
         parentId.append(strVoice);
 
-        var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime,idChildren);
+        var len = parseInt(playTime)
+        var hh = parseInt(len / 3600);
+        var mm = parseInt((len % 3600) / 60);
+        var ss = parseInt((len % 3600) % 60);
+        var voiceLen = "";
+        if (hh > 0) {
+            voiceLen = hh + "'" + mm + "'" + ss + "''";
+        } else if (mm > 0) {
+            voiceLen = mm + "'" + ss + "''";
+        } else {
+            if (ss == 0) {
+
+                voiceLen = "1''";
+            } else {
+                voiceLen = ss + "''";
+            }
+        }
+
+        $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+
 
 
         $('.song_s,.mask').hide();
@@ -202,19 +219,12 @@ $(function () {
         strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
         $('.tea_sp .hmAnswer:eq('+domIndex+')').find('.voiceBox').append(strVoice);
-        var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = function(){
-            getVoiceLen(playTime,idChildren);
-        };
-         $('.song_s,.mask').hide();
-    }
 
-    function getVoiceLen(playTime,idChildren) {
-        var len = parseInt(playTime);
-        var voiceLen = "";
+        var len = parseInt(playTime)
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
+        var voiceLen = "";
         if (hh > 0) {
             voiceLen = hh + "'" + mm + "'" + ss + "''";
         } else if (mm > 0) {
@@ -229,7 +239,10 @@ $(function () {
         }
 
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+
+        $('.song_s,.mask').hide();
     }
+
     //提交确认
     $('.sub_p').on('touchend',function(){
         $('.areyok').show();

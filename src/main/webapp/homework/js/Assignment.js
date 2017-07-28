@@ -662,19 +662,6 @@ $(function () {
 
         parentId.append(strVoice);
 
-        var audioElem = document.getElementById(idChildren);
-        //在audio标签布局渲染之后
-        audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime, idChildren);
-
-        $('.song_s,.mask').hide();
-        // 语音大于三张，隐藏添加语音按钮
-        if ($('.notsubmit #record_audio_box li').length >= 3) {
-            $('#record').hide();
-        }
-    }
-
-    function getVoiceLen(playTime, idChildren) {
         var len = parseInt(playTime);
         var voiceLen = "";
         var hh = parseInt(len / 3600);
@@ -692,7 +679,14 @@ $(function () {
             }
         }
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+
+        $('.song_s,.mask').hide();
+        // 语音大于三张，隐藏添加语音按钮
+        if ($('.notsubmit #record_audio_box li').length >= 3) {
+            $('#record').hide();
+        }
     }
+
 
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
