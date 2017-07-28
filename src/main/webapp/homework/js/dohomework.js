@@ -188,6 +188,9 @@ $(function () {
                     $('.song_s').hide();
                     uploadVoiceWX(localId);
 
+                },complete: function () {
+                    //接口调用完成（失败成功）
+
                 },
                 fail: function (res) {
                 }

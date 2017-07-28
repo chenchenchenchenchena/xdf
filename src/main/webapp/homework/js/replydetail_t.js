@@ -420,6 +420,12 @@ $(function () {
             success: function (res) {
                 serverId = res.serverId;
                 uploadVoice(serverId);
+            },
+            complete: function () {
+                //接口调用完成（失败成功）
+
+            },
+            fail: function (res) {
             }
         });
     }
