@@ -652,9 +652,27 @@ $(function () {
             });
             return;
         }
-        hwcommit();
+        // hwcommit();
+        //确认提交？
+        layer2 = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".confirm-sub")
+        })
 
     });
+//    提交二次确认---确认
+    $(document).on('touchend', '.confirm-sub .confirmBtn', function () {
+        hwcommit();
+    });
+//    提交二次确认---取消
+    $(document).on('touchend', '.confirm-sub .cancelBtn', function () {
+        layer.close(layer2);
+    });
+
 // 提交作业接口
     function hwcommit() {
         //将语音和图片一起传给服务器
