@@ -90,7 +90,7 @@ $(function () {
                     console.log(paths.diskFilePath);
                     if (paths.fileType.indexOf("mp3") != -1) {
                         //将文件显示到布局中
-                        showAudio(paths.playTime,url_o + paths.relativePath, $('#audio_box'), audioCount, 2);
+                        showAudio(paths.playTime, url_o + paths.relativePath, $('#audio_box'), audioCount, 2);
                         audioCount++;
                     } else {
                         //显示老师作业信息图片
@@ -230,32 +230,36 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.msg);
+                    layer.msg(e.msg);
                 } else {
-                    // alert("语音上传成功");
-                    fileName = e.data.fileName;
-                    fileSize = e.data.fileSize;
-                    fileType = e.data.fileType;
-                    diskFilePath = e.data.diskFilePath;
-                    var voiceFile = {
-                        "homeworkSinfoId": homeworkSinfoId,
-                        "fileName": fileName,
-                        "fileType": fileType,
-                        "fileSize": fileSize,
-                        "diskFilePath": diskFilePath,
-                        "uploadUser": uploadUser
-                    };
-                    voiceFileParams.push(voiceFile);
-                    layer.open({
-                        type: 1,
-                        area: ['548px', '345px'],
-                        shade: [0.2, '#000'],
-                        title: '',
-                        skin: '',
-                        time: 3000,
-                        content: $(".music_succ")
-                    });
-                    getRecordInfo(diskFilePath);
+                    if (e.data.success) {
+                        fileName = e.data.fileName;
+                        fileSize = e.data.fileSize;
+                        fileType = e.data.fileType;
+                        diskFilePath = e.data.diskFilePath;
+                        var voiceFile = {
+                            "homeworkSinfoId": homeworkSinfoId,
+                            "fileName": fileName,
+                            "fileType": fileType,
+                            "fileSize": fileSize,
+                            "diskFilePath": diskFilePath,
+                            "uploadUser": uploadUser
+                        };
+                        voiceFileParams.push(voiceFile);
+                        layer.open({
+                            type: 1,
+                            area: ['548px', '345px'],
+                            shade: [0.2, '#000'],
+                            title: '',
+                            skin: '',
+                            time: 3000,
+                            content: $(".music_succ")
+                        });
+                        getRecordInfo(diskFilePath);
+                    }else {
+                        layer.msg("语音上传失败");
+                    }
+
                 }
 
 
@@ -286,13 +290,13 @@ $(function () {
                  *  "status": "success"
                  *  }
                  */
-                if (e.status == "failed") {
-                    console.log(e.message);
-                } else {
+                if (e.status == "success") {
                     //显示语音布局
                     showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
 
+                } else {
+                    layer.msg("语音获取失败");
                 }
             }
         });

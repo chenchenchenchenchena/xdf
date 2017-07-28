@@ -524,26 +524,31 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    layer.msg(e.msg);
                 } else {
-                    $('.teBox').val(e.data.fileUrl);
-                    arr_voice.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath,
-                        'id': ""
-                    });
-                    layer.open({
-                        type: 1,
-                        area: ['548px', '345px'],
-                        shade: [0.2, '#000'],
-                        title: '',
-                        skin: '',
-                        time: 3000,
-                        content: $(".music_succ")
-                    });
-                    getRecordInfo(e.data.diskFilePath);
+                    if (e.data.success) {
+                        $('.teBox').val(e.data.fileUrl);
+                        arr_voice.push({
+                            'fileName': e.data.fileName,
+                            'fileType': e.data.fileType,
+                            'fileSize': e.data.fileSize,
+                            'diskFilePath': e.data.diskFilePath,
+                            'id': ""
+                        });
+                        layer.open({
+                            type: 1,
+                            area: ['548px', '345px'],
+                            shade: [0.2, '#000'],
+                            title: '',
+                            skin: '',
+                            time: 3000,
+                            content: $(".music_succ")
+                        });
+                        getRecordInfo(e.data.diskFilePath);
+                    }
+                    else {
+                        layer.msg("语音上传失败");
+                    }
                 }
             }
         });
@@ -572,10 +577,10 @@ $(function () {
             data: optionFile,
             success: function (e) {
                 if (e.status == "failed") {
-                    console.log(e.message);
+                    layer.msg("语音获取失败");
                 } else {
                     //显示语音布局
-                    showAudio(e.data.playTime,url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
+                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
                     recordCount++;
 
                 }
@@ -606,7 +611,7 @@ $(function () {
         var audioElem = document.getElementById(idChildren);
         //在audio标签布局渲染之后
         audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime,idChildren);
+        getVoiceLen(playTime, idChildren);
 
         $('.song_s,.mask').hide();
         // 语音大于三张，隐藏添加语音按钮
@@ -615,7 +620,7 @@ $(function () {
         }
     }
 
-    function getVoiceLen(playTime,idChildren) {
+    function getVoiceLen(playTime, idChildren) {
         var len = parseInt(playTime);
         var voiceLen = "";
         var hh = parseInt(len / 3600);
