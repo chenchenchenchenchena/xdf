@@ -1,24 +1,24 @@
 $(function(){
     //登录相关
-    // if(!sessionStorage.openid){
-    //     wechatCode(location.href);
-    // };
-    // if(!localStorage.terEmail){
-    //     var WXnum  = {
-    //         'wechatId':sessionStorage.openid
-    //     };
-    //     ajax_S(url.s_seac,WXnum,function(e){
-    //         if(e.result==true){
-    //             sessionStorage.stuNumber = e.data.studentNo;
-    //             sessionStorage.schoolId = e.data.schoolId;
-    //             sessionStorage.studentName = e.data.studentName;
-    //             location.href = 'homeworklist_s.html';
-    //         }else{
-    //             sessionStorage.homeCanfig=='home'
-    //             location.href = '../schedule/login_s.html'
-    //         }
-    //     });
-    // }
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
+    if(!localStorage.terEmail){
+        var WXnum  = {
+            'wechatId':sessionStorage.openid
+        };
+        ajax_S(url.s_seac,WXnum,function(e){
+            if(e.result==true){
+                sessionStorage.stuNumber = e.data.studentNo;
+                sessionStorage.schoolId = e.data.schoolId;
+                sessionStorage.studentName = e.data.studentName;
+                location.href = 'homeworklist_s.html';
+            }else{
+                sessionStorage.homeCanfig=='home'
+                location.href = '../schedule/login_s.html'
+            }
+        });
+    }
     //tab
 	$(document).on('tap','.firstList>p',function(){
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
@@ -90,7 +90,9 @@ $(function(){
                     Read = '';
                 }
             }
-            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display:inline;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
+            $('.hwFinish>ul').append('<li class="firstList" classCode="'+list_s[a][0].classCode+'" courseCode="'+list_s[a][0].courseCode+'"> <p style="display: inline-block;\n' +
+                '    height: 100%;\n' +
+                '    width: 100%;">'+list_s[a][0].className+'&nbsp;('+list_s[a][0].studentNum+'人)</p><span class='+Read+'></span><ul class="secul tealist_s"></ul></li>');
             for(var b = 0;b<list_s[a].length;b++){
                 if((parseInt(list_s[a][b].yescommit)+parseInt(list_s[a][b].nocorrect))==list_s[a][0].studentNum||list_s[a][b].yescommit==list_s[a][0].studentNum){
                     if(list_s[a][b].nocorrect==0&&list_s[a][b].notcommit==0){

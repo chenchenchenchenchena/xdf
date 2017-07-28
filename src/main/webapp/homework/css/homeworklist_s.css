@@ -247,11 +247,12 @@ body{
 	display: inline-block;
 	width: 14px;
 	height: 14px;
+
 	border-radius: 50%;
 	background: red;
 	position: absolute;
 	margin-top:40px;
-	margin-left:10px;
+	margin-left:-295px;
 }
 
 html body .tealist_s .more_so{

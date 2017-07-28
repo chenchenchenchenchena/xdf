@@ -196,6 +196,7 @@ i{font-style: normal;}
 	height: 120px;
 	border-bottom: 1px solid #e1e1e1;
 	line-height: 120px;
+	clear: both;
 }
 .rankleft{
 	font-size: 27px;
