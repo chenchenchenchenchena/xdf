@@ -17,17 +17,17 @@ $(function () {
         for (var i = 0; i < data.StudentHomeInfo.length; i++) {
             var music = '';
             var Img = '';
-            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学</h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_'+i+'"></ul><div class="imgBox" id="imagBox_'+i+'" style="display:block;"></div></div> </div>';
+            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学</h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div> </div>';
             $('.homework_big').append(hwsharedHtml);
             var Media = data.StudentHomeInfo[i].RevampFile;
             if (Media.length != 0) {
                 for (var k = 0; k < Media.length; k++) {
                     if (Media[k].fileType == 'mp3') {
                         voiceCount++;
-                        showAudio(url_o + Media[k].url, "audio_" + i , "audio" + i  + "" + voiceCount);
+                        showAudio(Media[k].PlayTime, url_o + Media[k].url, "audio_" + i, "audio" + i + "" + voiceCount);
                     } else {
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
-                        showImage(url_o + Media[k].url, "imagBox_" + i );
+                        showImage(url_o + Media[k].url, "imagBox_" + i);
                     }
                 }
             }
@@ -49,8 +49,12 @@ $(function () {
 
     /**
      * 显示语音布局
+     * @param playTime 语音播放时长
+     * @param url 语音播放地址
+     * @param idParent 语音布局添加的父节点
+     * @param idChildren 语音audio控件的ID
      */
-    function showAudio(url, idParent, idChildren) {
+    function showAudio(playTime, url, idParent, idChildren) {
 
         $('#' + idParent).show();
         var length = "";
@@ -60,15 +64,14 @@ $(function () {
         $('#' + idParent).append(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = function () {
-            getVoiceLen(audioElem,idChildren)
+            getVoiceLen(playTime, idChildren)
         };
 
 
     }
 
-    function getVoiceLen(audioElem,idChildren) {
-        var len = audioElem.duration;
-        len = parseInt(len);
+    function getVoiceLen(playTime, idChildren) {
+        var len = parseInt(playTime);
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
@@ -81,13 +84,14 @@ $(function () {
             if (ss == 0) {
 
                 voiceLen = "1''";
-            }else {
+            } else {
                 voiceLen = ss + "''";
             }
         }
 
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
     }
+
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
