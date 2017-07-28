@@ -1,24 +1,24 @@
 $(function(){
     //登录相关
-    if(!sessionStorage.openid){
-        wechatCode(location.href);
-    };
-    if(!localStorage.terEmail){
-        var WXnum  = {
-            'wechatId':sessionStorage.openid
-        };
-        ajax_S(url.s_seac,WXnum,function(e){
-            if(e.result==true){
-                sessionStorage.stuNumber = e.data.studentNo;
-                sessionStorage.schoolId = e.data.schoolId;
-                sessionStorage.studentName = e.data.studentName;
-                location.href = 'homeworklist_s.html';
-            }else{
-                sessionStorage.homeCanfig=='home'
-                location.href = '../schedule/login_s.html'
-            }
-        });
-    }
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href);
+    // };
+    // if(!localStorage.terEmail){
+    //     var WXnum  = {
+    //         'wechatId':sessionStorage.openid
+    //     };
+    //     ajax_S(url.s_seac,WXnum,function(e){
+    //         if(e.result==true){
+    //             sessionStorage.stuNumber = e.data.studentNo;
+    //             sessionStorage.schoolId = e.data.schoolId;
+    //             sessionStorage.studentName = e.data.studentName;
+    //             location.href = 'homeworklist_s.html';
+    //         }else{
+    //             sessionStorage.homeCanfig=='home'
+    //             location.href = '../schedule/login_s.html'
+    //         }
+    //     });
+    // }
     //tab
 	$(document).on('tap','.firstList',function(){
 	    if($(this).find('ul').css('display')=='none'){
@@ -41,6 +41,7 @@ $(function(){
 
 	//滑动事件
 	$(document).on('touchstart mouusedown','.tealist_s',function(){
+        e.stopPropagation();
 	    if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
