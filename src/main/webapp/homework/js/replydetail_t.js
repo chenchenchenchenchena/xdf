@@ -718,20 +718,17 @@ $(function () {
         $('.big_back_s canvas').show();
 
         // canvas事件
-        $(document).on('touchstart', '#myCanvas', function () {
+        $('#myCanvas').on('touchstart', function () {
             ctx.beginPath();
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-            $(document).on('touchmove', '#myCanvas', function () {
+            $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
-                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop + 15);
+                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 ctx.stroke();
             });
-            $(document).on('touchend', '#myCanvas', function () {
+            $('#myCanvas').on('touchend', function () {
                 ctx.closePath();
                 $('.big_back_s').show();
-                $('#myCanvas').unbind('touchenstart');
-                $('#myCanvas').unbind('touchmove');
-                $('#myCanvas').unbind('touchend');
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
 
