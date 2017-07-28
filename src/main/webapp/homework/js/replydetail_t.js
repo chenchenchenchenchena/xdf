@@ -71,9 +71,17 @@ $(function () {
         $('title').html('已批复');
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+ decodeURI(e.data.replyDesc)+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
+            console.log(decodeURI(e.data.replyDesc))
+
+            var arr = decodeURI(e.data.replyDesc).split('|>|');
+            for(var L=0;L<arr.length;L++){
+                if(arr[L]!=''){
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr[L]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
+                }
+            }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
             getHwFilesSucess(e);
         });
@@ -258,9 +266,9 @@ $(function () {
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
-            need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
+            need.replyDesc = encodeURI($('.anDes').eq(1).html()+'|>|'+$('.answer textarea').val());
         }else{
-            need.replyDesc = encodeURI($('.answer textarea').val());
+            need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
         }
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
