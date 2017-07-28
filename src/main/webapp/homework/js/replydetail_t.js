@@ -71,11 +71,11 @@ $(function () {
         $('title').html('已批复');
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            getHwFilesSucess(e);
             $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+ decodeURI(e.data.replyDesc)+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
+            getHwFilesSucess(e);
         });
 
     } else {//待批复
