@@ -1,8 +1,8 @@
 $(function(){
 //禁止浏览器拖动
-    addEventListener("touchmove", function (event) {
-        event.preventDefault();
-    }, false);
+//     addEventListener("touchmove", function (event) {
+//         event.preventDefault();
+//     }, false);
 
     var Stujson = {
         'teacherEmail':localStorage.terEmail,
