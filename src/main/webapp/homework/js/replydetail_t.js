@@ -4,9 +4,6 @@ $(function () {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid
     };
-    $('.anDes').eq(0).html(sessionStorage.stutext);
-    $('.kon p:last-of-type').html(sessionStorage.knowledgePoint);
-    $('.hwCon').eq(0).html(sessionStorage.description);
 
     $('.hwTeacherRankTitle').on('touchend', function () {
         if ($('.hwInfo').css('display') == 'none') {
@@ -67,33 +64,37 @@ $(function () {
         sessionStorage.removeItem('Teatwo');
         $('title').html('已批复');
         var arr_text = sessionStorage.T_text.split('|>|');
-        if (sessionStorage.bangbang) {
+        if(sessionStorage.bangbang){
             $('.hmAnswer .infoTitle span').css({
                 'color': '#fff',
                 'background': '#ff6a6a'
             });
         }
-        for (var p = 0; p < arr_text.length; p++) {
-            if (arr_text[p] != '') {
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr_text[p] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+        for(var p = 0;p<arr_text.length;p++){
+            if(arr_text[p]!=''){
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr_text[p]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
 
             }
         }
         // $('.anDes').eq(1).html(sessionStorage.T_text);
         //获取文件信息
-        ajaxRequest('post', homework_s.t_two, {
-            Tcid: sessionStorage.Tid,
-            Sdtid: sessionStorage.stuid
-        }, getHwFilesSucess);
+        ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
+            getHwFilesSucess(e)
+            $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
+            $('.hwCon').eq(0).html(decodeURI(e.data.description));
+        });
 
     } else {//待批复
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            console.log(e);
-            var stu = e.data.StudentHomeworkFile;
-            var tea = e.data.TeacherHomeworkFile;
-
+            console.log(e)
+            $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
+            $('.hwCon').eq(0).html(decodeURI(e.data.description));
+            var stu = e.data.File.StudentHomeworkFile;
+            var tea = e.data.File.TeacherHomeworkFile;
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].PlayTime, "mp3"]);
@@ -127,7 +128,7 @@ $(function () {
      * diskFileUrl: 语音地址
      * hwFlag:hwFlag[0]作业标识，区分老师批复还是其他 replayT（老师批复）,hwFlag[1] 老师批复次数，0开始
      */
-    function getAudioInfo(fileArray, hwFlag) {
+    function getAudioInfo(fileArray,hwFlag) {
         var flag = fileArray[0];
         var diskFileUrl = fileArray[1];
         var playTime = fileArray[2];
@@ -151,7 +152,7 @@ $(function () {
      * @param id  语音控件id，播放时需要
      * @param flag 1：表示语音布局可以删除；2：表示不可以删除
      */
-    function showAudio(playTime, url, parentId, id, flag) {
+    function showAudio(playTime,url, parentId, id, flag) {
 
         parentId.show();
         var strVoice = "";
@@ -174,7 +175,7 @@ $(function () {
 
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime, idChildren);
+        getVoiceLen(playTime,idChildren);
 
 
         $('.song_s,.mask').hide();
@@ -191,22 +192,22 @@ $(function () {
      * @param id  语音控件id，播放时需要
      * @param domIndex 老师批复次数 显示布局用
      */
-    function replayTShowAudio(playTime, url, id, domIndex) {
-        console.log(id + "---" + domIndex);
+    function replayTShowAudio(playTime,url, id,domIndex) {
+        console.log(id+"---"+domIndex);
         var strVoice = "";
         var idChildren;
         var length = "";
         idChildren = "audio_" + id;
         strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
-        $('.tea_sp .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
+        $('.tea_sp .hmAnswer:eq('+domIndex+')').find('.voiceBox').append(strVoice);
         var audioElem = document.getElementById(idChildren);
         audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime, idChildren);
+        getVoiceLen(playTime,idChildren);
         $('.song_s,.mask').hide();
     }
 
-    function getVoiceLen(playTime, idChildren) {
+    function getVoiceLen(playTime,idChildren) {
         var len = parseInt(playTime);
         var voiceLen = "";
         var hh = parseInt(len / 3600);
@@ -227,12 +228,11 @@ $(function () {
 
         $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
     }
-
     //提交确认
-    $('.sub_p').on('touchend', function () {
+    $('.sub_p').on('touchend',function(){
         $('.areyok').show();
     });
-    $('.areyok input:first-of-type').on('touchend', function () {
+    $('.areyok input:first-of-type').on('touchend',function(){
         $(".areyok").hide()
     });
 
@@ -253,8 +253,7 @@ $(function () {
         } else {
             need.replyDesc = $('.teBox').html();
         }
-        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
-            0
+        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {0
             need.tag = '0'
         } else {
             need.tag = '1'
@@ -263,9 +262,10 @@ $(function () {
         need.fileInfo = arr_s;
 
 
-        for (var x = 0; x < $('.anDes').length; x++) {
-            if (x != 0 && $('.anDes').eq(x).html() != '') {
-                need.replyDesc += encodeURI($('.anDes').eq(x).html() + '|>|')
+
+        for(var x = 0;x<$('.anDes').length;x++){
+            if(x!=0&&$('.anDes').eq(x).html()!=''){
+                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|>|')
             }
         }
 
@@ -401,10 +401,6 @@ $(function () {
             success: function (res) {
                 serverId = res.serverId;
                 uploadVoice(serverId);
-            },
-            fail: function () {
-                //接口调用完成（失败）
-                layer.msg("微信上传失败，请重新录制");
             }
         });
     }
@@ -630,19 +626,23 @@ $(function () {
     });
     var Index_Last;
 
-    $(document).on('touchend', '.hwInfo img', function () {
+    $(document).on('touchend','.hwInfo img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
-    $(document).on('touchend', '.tea_sp img', function () {
+    $(document).on('touchend','.tea_sp img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
+    });
+
+    $('.pinch-zoom').each(function () {
+        new RTP.PinchZoom($(this), {});
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer .imgBox img', function () {
@@ -664,7 +664,7 @@ $(function () {
 
     });
     $('.big_back_s').on('touchend', function () {
-        if ($('.true_s').css('display') != 'block') {
+        if($('.true_s').css('display')!='block'){
             $(this).find('canvas').hide();
             $(this).find('img').show();
             $(this).find('.esc_s').hide();
@@ -816,17 +816,17 @@ $(function () {
     }
 
 //    获取作业文件信息（图片/语音）
-    function getHwFilesSucess(e) {
+    function getHwFilesSucess (e) {
         var tea = e.data.RevampFile;//老师批注
         var stu = e.data.StudentHomeworkFile;//学生答案
         var tea_t = e.data.TeacherHomeworkFile;//作业信息
         if (tea != undefined) {
             for (var b = 0; b < tea.length; b++) {
-                $.each(tea[b], function (i, item) {
+                $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
                         getAudioInfo([3, item.diskFilePath, item.PlayTime, "mp3"], ['replayT', b]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq(' + b + ')').find('.imgBox').append('<div><img src="' + item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });
