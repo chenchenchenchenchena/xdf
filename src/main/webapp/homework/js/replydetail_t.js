@@ -79,11 +79,6 @@ $(function () {
 
             }
         }
-
-
-
-
-
         // $('.anDes').eq(1).html(sessionStorage.T_text);
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},getHwFilesSucess);
@@ -127,8 +122,9 @@ $(function () {
      * 获取语音信息
      * flag: 区分是 老师作业信息部分的语音，还是学生答案语音，还是老师批复语音 ，方式ID重复（播放语音需要ID）
      * diskFileUrl: 语音地址
+     * hwFlag:hwFlag[0]作业标识，区分老师批复还是其他 replayT（老师批复）,hwFlag[1] 老师批复次数，0开始
      */
-    function getAudioInfo(fileArray) {
+    function getAudioInfo(fileArray,hwFlag) {
         var flag = fileArray[0];
         var diskFileUrl = fileArray[1];
         var optionFile = {"fullPath": diskFileUrl};
@@ -141,10 +137,15 @@ $(function () {
                 if (e.status == "failed") {
                     console.log(e.message);
                 } else {
-                    //将文件显示到布局中
-                    voiceCount++;
-                    showAudio(e.data.playTime, url_o + e.data.fullPath, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
-
+                    if(hwFlag[0]=='replayT'){//老师批复
+                        //将文件显示到布局中
+                        voiceCount++;
+                        replayTShowAudio(e.data.playTime, url_o + e.data.fullPath, hwFlag[1] + "_" + voiceCount,hwFlag[1]);
+                    }else{
+                        //将文件显示到布局中
+                        voiceCount++;
+                        showAudio(e.data.playTime, url_o + e.data.fullPath, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
+                    }
                 }
             }
         });
@@ -189,6 +190,27 @@ $(function () {
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
         }
+    }
+    /**
+     * 显示语音布局
+     * @param playTime  语音播放时长
+     * @param url 语音播放地址
+     * @param id  语音控件id，播放时需要
+     * @param domIndex 老师批复次数 显示布局用
+     */
+    function replayTShowAudio(playTime,url, id,domIndex) {
+        console.log(id+"---"+domIndex);
+        var strVoice = "";
+        var idChildren;
+        var length = "";
+        idChildren = "audio_" + id;
+        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
+        $('.tea_sp .hmAnswer:eq('+domIndex+')').find('.voiceBox').append(strVoice);
+        var audioElem = document.getElementById(idChildren);
+        audioElem.onloadedmetadata = getVoiceLen;
+        getVoiceLen(playTime,idChildren);
+        $('.song_s,.mask').hide();
     }
 
     function getVoiceLen(playTime,idChildren) {
@@ -799,11 +821,7 @@ $(function () {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
-                        /*var voiceHtml = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto'><source src='" + item.url + "' type='audio/mpeg'></audio>" +
-                            "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
-                        $('.tea_sp .hmAnswer:eq('+b+')').find('.voiceBox').append(voiceHtml);*/
-                        getAudioInfo([3, item.diskFilePath, "mp3",b]);
-                        // $('.big_ss').eq(2).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
+                        getAudioInfo([3, item.diskFilePath, "mp3"],['replayT',b]);
                     } else {
                         $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
