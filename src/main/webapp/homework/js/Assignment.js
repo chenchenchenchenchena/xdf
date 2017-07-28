@@ -29,28 +29,32 @@ $(function () {
 
     var layer1, layer2, loading;
 
+
+
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
-        console.log(e);
         var className = e.data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
         }
         if (sessionStorage.Classname_x) {
-            $('.class_s i').html('已选择1个班' + sessionStorage.Classname_x + ';');
-            $('.time_S i').html(sessionStorage.ClassTime_x);
-            $('.class_name i').html('1');
-            $('.Knowledge input').val(sessionStorage.knowledgePoint_x);
-            $('.home_text textarea').val(sessionStorage.description_x);
-            $('.class_s').unbind('touchend');
-            $('.class_name li').each(function () {
-                if ($(this).attr('classcode') == sessionStorage.classCode_in) {
-                    $(this).find('img').attr('src', 'images/C0503.png')
-                }
-            });
-            classCode = sessionStorage.classCode_in;
+
 
             ajaxRequest('post', homework_s.t_seac, {'Tcid': sessionStorage.id_x}, function (e) {
+                $('.class_s i').html('已选择1个班' + e.data.className + ';');
+                $('.time_S i').html(e.data.homeworkTime);
+                $('.class_name i').html('1');
+                $('.Knowledge input').val(e.data.knowledgePoint);
+                $('.home_text textarea').val(decodeURI(e.data.description));
+                classCode = e.data.classCode;
+
+                $('.class_s').unbind('touchend');
+                $('.class_name li').each(function () {
+                    if ($(this).attr('classcode') == classCode) {
+                        $(this).find('img').attr('src', 'images/C0503.png')
+                    }
+                });
+                console.log(e)
                 var tea = e.data;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
