@@ -423,32 +423,36 @@ $(function () {
             data: cbconfig,
             success: function (e) {
                 if (e.status == "failure") {
-                    alert(e.message);
+                    layer.msg(e.msg);
                 } else {
-                    // alert("语音上传成功");
-                    fileName = e.data.fileName;
-                    fileSize = e.data.fileSize;
-                    fileType = e.data.fileType;
-                    diskFilePath = e.data.diskFilePath;
-                    var voiceFile = {
-                        "homeworkSinfoId": homeworkSinfoId,
-                        "fileName": fileName,
-                        "fileType": fileType,
-                        "fileSize": fileSize,
-                        "diskFilePath": diskFilePath,
-                        "uploadUser": uploadUser
-                    };
-                    voiceFileParams.push(voiceFile);
-                    layer.open({
-                        type: 1,
-                        area: ['548px', '345px'],
-                        shade: [0.2, '#000'],
-                        title: '',
-                        skin: '',
-                        time: 3000,
-                        content: $(".music_succ")
-                    });
-                    getRecordInfo(diskFilePath);
+                    if (e.data.success) {
+                        // alert("语音上传成功");
+                        fileName = e.data.fileName;
+                        fileSize = e.data.fileSize;
+                        fileType = e.data.fileType;
+                        diskFilePath = e.data.diskFilePath;
+                        var voiceFile = {
+                            "homeworkSinfoId": homeworkSinfoId,
+                            "fileName": fileName,
+                            "fileType": fileType,
+                            "fileSize": fileSize,
+                            "diskFilePath": diskFilePath,
+                            "uploadUser": uploadUser
+                        };
+                        voiceFileParams.push(voiceFile);
+                        layer.open({
+                            type: 1,
+                            area: ['548px', '345px'],
+                            shade: [0.2, '#000'],
+                            title: '',
+                            skin: '',
+                            time: 3000,
+                            content: $(".music_succ")
+                        });
+                        getRecordInfo(diskFilePath);
+                    }else {
+                        layer.msg("语音上传失败");
+                    }
                 }
 
 
