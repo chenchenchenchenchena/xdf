@@ -53,14 +53,14 @@ $(function(){
                     $(this).css('margin-left','-181px');
                     $(this).find('.remove_s').css('right','-0px');
                     $(this).parent().css('overflow','inherit');
-                    return false;
+                    // return false;
                 }
                 if(begin_s-move_s<=-20){
                     $(this).css('margin-left','0px');
 
                     $(this).find('.remove_s').css('right','-270px');
                     $(this).parent().css('overflow','hidden');
-                    return false;
+                    // return false;
                 }
                 $(this).css('margin-left',move_s-begin_s+'px');
                 // return false;
