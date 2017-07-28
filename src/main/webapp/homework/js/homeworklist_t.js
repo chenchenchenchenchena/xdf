@@ -20,7 +20,7 @@ $(function(){
         });
     }
     //tab
-	$(document).on('tap','.firstList>p',function(){
+	$(document).on('touchend','.firstList>p',function(){
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
 	        if($('.firstList').eq($(this).parent().index()).find('.state_st').length!=0){
                 ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$('.firstList').eq($(this).parent().index()).attr('classCode'),schoolId:'73'},function(e){

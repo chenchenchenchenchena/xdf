@@ -71,11 +71,11 @@ $(function () {
         $('title').html('已批复');
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            getHwFilesSucess(e);
             $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+ decodeURI(e.data.replyDesc)+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
+            getHwFilesSucess(e);
         });
 
     } else {//待批复
@@ -237,8 +237,11 @@ $(function () {
             layer.msg('正在提交，请稍等');
             return false;
         }
+        $(this).css('background','rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
         if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0) {
             layer.msg('批复不能为空');
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
         if ($('.teBox').html() == '') {
@@ -253,12 +256,16 @@ $(function () {
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
+        if($('.anDes').eq(1).html()!=undefined){
+            need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
+        }else{
+            need.replyDesc = encodeURI($('.answer textarea').val());
+        }
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('.Submit_s').css('background', '#00ba97');
+                $('..areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
@@ -727,6 +734,7 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             ctx.beginPath();
+            console.log(canvas.offsetLeft);
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
             $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
