@@ -79,7 +79,7 @@ $(function () {
         // $('.anDes').eq(1).html(sessionStorage.T_text);
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            getHwFilesSucess(e)
+            getHwFilesSucess(e);
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
