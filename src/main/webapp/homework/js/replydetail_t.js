@@ -97,7 +97,7 @@ $(function () {
             var tea = e.data.File.TeacherHomeworkFile;
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, stu[a].PlayTime, "mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
@@ -112,7 +112,7 @@ $(function () {
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1, tea[b].diskFilePath, tea[b].PlayTime, "mp3"]);
+                    getAudioInfo([1, tea[b].diskFilePath, tea[b].playTime, "mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
@@ -132,7 +132,7 @@ $(function () {
         var flag = fileArray[0];
         var diskFileUrl = fileArray[1];
         var playTime = fileArray[2];
-        if (hwFlag[0] == 'replayT') {//老师批复
+        if (hwFlag!=undefined&&hwFlag[0] == 'replayT') {//老师批复
             //将文件显示到布局中
             voiceCount++;
             replayTShowAudio(playTime, url_o + diskFileUrl, hwFlag[1] + "_" + voiceCount, hwFlag[1]);
@@ -818,14 +818,14 @@ $(function () {
 
 //    获取作业文件信息（图片/语音）
     function getHwFilesSucess (e) {
-        var tea = e.data.RevampFile;//老师批注
-        var stu = e.data.StudentHomeworkFile;//学生答案
-        var tea_t = e.data.TeacherHomeworkFile;//作业信息
+        var tea = e.data.File.RevampFile;//老师批注
+        var stu = e.data.File.StudentHomeworkFile;//学生答案
+        var tea_t = e.data.File.TeacherHomeworkFile;//作业信息
         if (tea != undefined) {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.PlayTime, "mp3"], ['replayT', b]);
+                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
                     } else {
                         $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
@@ -837,7 +837,7 @@ $(function () {
         if (stu != undefined) {
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, stu[a].PlayTime, "mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '" alt="" /></div>')
@@ -847,7 +847,7 @@ $(function () {
         if (tea_t != undefined) {
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].PlayTime, "mp3"]);
+                    getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
