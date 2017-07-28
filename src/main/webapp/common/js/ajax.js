@@ -82,7 +82,7 @@ var Global = {
 };
 var homework_s = {
     't_list': url_o+'teacherData/queryHomeWorkListInfo.do',   //老师作业列表
-    't_stat': url_o+'teacherData/TeacherupdateReadstatus.do',//老师未读已读状态
+    't_stat': url_o+'teacherData/updateSeveralStatus.do',//老师未读已读状态
     't_more': url_o+'teacherData/queryHomeWorkStateInfo.do',// 老师查看作业详情
     't_clas': url_o+'teacherData/queryTeacherClassList.do',//获取老师所带班级
     't_sbim': url_o+'teacherData/addHomeWork.do',    //提交老师作业
