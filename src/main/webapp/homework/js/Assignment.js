@@ -504,6 +504,13 @@ $(function () {
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
                 serverId = res.serverId;
                 uploadVoice(serverId);
+            },
+            complete: function () {
+                //接口调用完成（失败成功）
+
+            },fail:function () {
+                //接口调用完成（失败）
+                layer.msg("微信上传失败，请重新录制");
             }
         });
     }

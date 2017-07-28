@@ -96,7 +96,7 @@ $(function () {
 
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, "mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, stu[a].PlayTime, "mp3"]);
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
@@ -111,7 +111,7 @@ $(function () {
             }
             for (var b = 0; b < tea.length; b++) {
                 if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1, tea[b].diskFilePath, "mp3"]);
+                    getAudioInfo([1, tea[b].diskFilePath, tea[b].PlayTime, "mp3"]);
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
 
@@ -130,17 +130,16 @@ $(function () {
     function getAudioInfo(fileArray, hwFlag) {
         var flag = fileArray[0];
         var diskFileUrl = fileArray[1];
-        var optionFile = {"fullPath": diskFileUrl};
+        var playTime = fileArray[2];
         if (hwFlag[0] == 'replayT') {//老师批复
             //将文件显示到布局中
             voiceCount++;
-            replayTShowAudio(e.data.playTime, url_o + e.data.fullPath, hwFlag[1] + "_" + voiceCount, hwFlag[1]);
+            replayTShowAudio(playTime, url_o + diskFileUrl, hwFlag[1] + "_" + voiceCount, hwFlag[1]);
         } else {
             //将文件显示到布局中
             voiceCount++;
-            showAudio(e.data.playTime, url_o + e.data.fullPath, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
+            showAudio(playTime, url_o + diskFileUrl, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
         }
-
 
     }
 
@@ -402,6 +401,10 @@ $(function () {
             success: function (res) {
                 serverId = res.serverId;
                 uploadVoice(serverId);
+            },
+            fail: function () {
+                //接口调用完成（失败）
+                layer.msg("微信上传失败，请重新录制");
             }
         });
     }
@@ -821,7 +824,7 @@ $(function () {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b], function (i, item) {
                     if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, "mp3"], ['replayT', b]);
+                        getAudioInfo([3, item.diskFilePath, item.PlayTime, "mp3"], ['replayT', b]);
                     } else {
                         $('.tea_sp .hmAnswer:eq(' + b + ')').find('.imgBox').append('<div><img src="' + item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
@@ -833,7 +836,7 @@ $(function () {
         if (stu != undefined) {
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, "mp3"]);
+                    getAudioInfo([2, stu[a].diskFilePath, stu[a].PlayTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '" alt="" /></div>')
@@ -843,7 +846,7 @@ $(function () {
         if (tea_t != undefined) {
             for (var c = 0; c < tea_t.length; c++) {
                 if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([1, tea_t[c].diskFilePath, "mp3"]);
+                    getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].PlayTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
                     $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')

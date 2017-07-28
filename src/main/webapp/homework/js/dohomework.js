@@ -209,9 +209,13 @@ $(function () {
                 var serverId = res.serverId;
                 uploadVoice(serverId);
             },
-            complete:function () {
+            complete: function () {
                 //接口调用完成（失败成功）
 
+            },
+            fail: function () {
+                //接口调用完成（失败）
+                layer.msg("微信上传失败，请重新录制");
             }
         });
     }
@@ -260,7 +264,7 @@ $(function () {
                             content: $(".music_succ")
                         });
                         getRecordInfo(diskFilePath);
-                    }else {
+                    } else {
                         layer.msg("语音上传失败");
                     }
 
