@@ -48,7 +48,7 @@ $(function () {
                 $('.home_text textarea').val(decodeURI(e.data.description));
                 classCode = e.data.classCode;
 
-                $('.class_s').unbind('touchend');
+                $('.class_s').unbind();
                 $('.class_name li').each(function () {
                     if ($(this).attr('classcode') == classCode) {
                         $(this).find('img').attr('src', 'images/C0503.png')
@@ -236,6 +236,8 @@ $(function () {
         }
         $(this).css('background','rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
         if ($('.class_s i').html() == '') {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -248,6 +250,8 @@ $(function () {
             return false;
         }
         if ($('.time_S i').html() == '') {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -260,6 +264,8 @@ $(function () {
             return false;
         }
         if ($('.Knowledge input').val() == '') {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -272,6 +278,8 @@ $(function () {
             return false;
         }
         if ($('.home_text textarea').val() == '') {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -284,6 +292,8 @@ $(function () {
             return false;
         }
         if ($('.home_text span').css('color') == 'rgb(255, 0, 0)') {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -296,30 +306,40 @@ $(function () {
             return false;
         }
         if ($('.Knowledge input').val().indexOf(',') != -1) {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(','));
             if (html_te.length > 10) {
                 layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf(';') != -1) {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf(';'));
             if (html_te.length > 10) {
                 layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf('，') != -1) {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('，'));
             if (html_te.length > 10) {
                 layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else if ($('.Knowledge input').val().indexOf('；') != -1) {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val().substring(0, $('.Knowledge input').val().indexOf('；'));
             if (html_te.length > 10) {
                 layer.msg('单条知识点最多输入10个字');
                 return false;
             }
         } else {
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             var html_te = $('.Knowledge input').val();
             if (html_te.length > 10) {
                 layer.msg('单条知识点最多输入10个字');
@@ -339,7 +359,7 @@ $(function () {
                     $('.areyok input:last-of-type').css('background','#00ba97');
                     $('.big_back').show();
                     $('.succ').show();
-                    $('.areyok').hide()
+                    $('.areyok').hide();
                     $('.Submit_s').css('background', '#00ba97');
                     sessionStorage.removeItem('Classname_x');
                     sessionStorage.removeItem('ClassTime_x');
