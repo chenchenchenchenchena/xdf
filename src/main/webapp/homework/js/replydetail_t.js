@@ -752,7 +752,6 @@ $(function () {
 
         $('.true_s').on('touchend', function () {
             $('.notsubmit .imgBox').show();
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
             $('.big_back_s .esc_s').hide();
@@ -761,6 +760,7 @@ $(function () {
             $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
             //上传文件到服务器

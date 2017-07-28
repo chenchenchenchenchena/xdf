@@ -106,7 +106,7 @@ var maxnumber = 0;
                            $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                            $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                        }
-                       $('.reportstu_S ul').css('width',30*stuSelf.length)
+                       $('.reportstu_S ul').css('width',145*(stuSelf.length+1));
                    }
 
                }else{
@@ -123,7 +123,7 @@ var maxnumber = 0;
                        $('.reportstu_S ul').eq(1).find('li').eq(0).html(stuSelf[u].studentName);
                        $('.reportstu_S ul').eq(2).append('<li>'+e.data.AvgrealGrade[stuSelf[u].lessonNo-1].avgGrade+'</li>');
                    }
-                   $('.reportstu_S ul').css('width',30*stuSelf.length)
+                   $('.reportstu_S ul').css('width',145*(stuSelf.length+1));
 
                }
                console.log(pjIndex);
