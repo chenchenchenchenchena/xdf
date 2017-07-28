@@ -20,20 +20,21 @@ $(function(){
     //     });
     // }
     //tab
-	$(document).on('tap','.firstList',function(){
-	    if($(this).find('ul').css('display')=='none'){
-	        if($(this).find('.state_st').length!=0){
-                ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$(this).attr('classCode'),schoolId:'73'},function(e){
+	$(document).on('tap','.firstList>p',function(){
+	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
+	        if($('.firstList').eq($(this).parent().index()).find('.state_st').length!=0){
+                ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$('.firstList').eq($(this).parent().index()).attr('classCode'),schoolId:'73'},function(e){
+
                 });
             }
-            $(this).find('.state_st').hide();
-	       $(this).find('ul').show();
-           $(this).css("background","url(images/jiao11.png) no-repeat right 55px");
+            $('.firstList').eq($(this).parent().index()).find('.state_st').hide();
+            $('.firstList').eq($(this).parent().index()).find('ul').show();
+            $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
         }else{
-            $(this).find('ul').hide();
-            $(this).css("background","url(images/jiao22222.png) no-repeat right 55px");
-            $(this).find('ul li').css('margin-left','0px');
-            $(this).find('ul li').find('.remove_s').css('right','-270px');
+            $('.firstList').eq($(this).parent().index()).find('ul').hide();
+            $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao22222.png) no-repeat right 55px");
+            $('.firstList').eq($(this).parent().index()).find('ul li').css('margin-left','0px');
+            $('.firstList').eq($(this).parent().index()).find('ul li').find('.remove_s').css('right','-270px');
         }
 
     });
