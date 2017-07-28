@@ -646,6 +646,7 @@ $(function () {
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer .imgBox img', function () {
+
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
@@ -660,6 +661,8 @@ $(function () {
                 'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
                 'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
+
+
         }, 300)
 
     });
@@ -687,17 +690,19 @@ $(function () {
     $('.esc_s').show();
 
     $('.big_back_s span:last-of-type').on('touchend', function () {
+        var width_ = parseInt($('.big_back_s img').css('width'));
+        var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
         $('.true_s').show();
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
+        $('.pinch-zoom-container').eq(0).hide()
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
-        // img.crossOrigin = "Anonymous";
+        img.crossOrigin = "Anonymous";
         img.src = previewUrl;
         var canvas = document.getElementById("myCanvas");
-        var width_ = parseInt($('.big_back_s img').css('width'));
-        var height = parseInt($('.big_back_s img').css('height'));
+
         canvas.width = width_;
         canvas.height = height;
 
