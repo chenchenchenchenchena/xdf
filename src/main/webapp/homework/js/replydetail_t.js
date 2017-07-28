@@ -694,7 +694,7 @@ $(function () {
         $('.pinch-zoom-container').eq(0).hide()
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
-        // img.crossOrigin = "Anonymous";
+        img.crossOrigin = "Anonymous";
         img.src = previewUrl;
         var canvas = document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
