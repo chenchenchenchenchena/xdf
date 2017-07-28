@@ -34,7 +34,7 @@ $(function () {
             oldId = $(audioCur).attr('id');
 
             // if (oldId.indexOf("record") != -1) {
-            second = $(audioCur).parent().siblings("span").html();//获取音频秒数
+            second = $(audioCur).attr("data-time");//获取音频秒数
             //     //如果是录制语音，则调用微信接口，本地播放。避免调用获取mp3Url接口
             //     playVoice($(audioCur).find('source').attr("src"));
 
