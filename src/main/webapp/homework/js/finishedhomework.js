@@ -475,7 +475,7 @@ $(function () {
 
                 if (e.status == "success") {
                     //显示语音布局
-                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
+                    showRecordAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
 
                 } else {
