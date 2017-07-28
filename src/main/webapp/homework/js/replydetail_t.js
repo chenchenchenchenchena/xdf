@@ -646,7 +646,8 @@ $(function () {
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer .imgBox img', function () {
-
+        $('.pinch-zoom-container').eq(0).show();
+        $('.esc_s').show()
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
@@ -696,7 +697,7 @@ $(function () {
         $('.true_s').show();
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
-        $('.pinch-zoom-container').eq(0).hide()
+        $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.crossOrigin = "Anonymous";
