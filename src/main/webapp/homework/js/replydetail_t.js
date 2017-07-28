@@ -679,7 +679,6 @@ $(function () {
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
-        $('.big_back_s .esc_s').hide();
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
@@ -694,7 +693,7 @@ $(function () {
         $('.esc_s').show();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
-        img.crossOrigin = "Anonymous";
+        // img.crossOrigin = "Anonymous";
         img.src = previewUrl;
         var canvas = document.getElementById("myCanvas");
         var width_ = parseInt($('.big_back_s img').css('width'));
