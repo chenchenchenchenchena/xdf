@@ -232,13 +232,14 @@ i{font-style: normal;}
 	float: right;
 	color: #808080;
 	position: relative;
+	padding-right: 60px;
 }
 .excellent-bg{
 	width:100px;
 	height: 100px;
 	position: absolute;
 	top: 10px;
-	left: -110px;
+	right: -30px;
 	background: url("../images/excellent_icon.png") right center/60px 60px   no-repeat;
 }
 .rankright>i:nth-child(1){
