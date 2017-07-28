@@ -66,9 +66,12 @@ $(function () {
             if (datas.replyStatus == "0") {
                 pizhuHtml = "暂无批注"
             } else {
-                pizhuHtml = datas.replyDesc;
+                var pizhu = decodeURI(datas.replyDesc).split('|>|');
+                for(var i=0;i<pizhu.length;i++){
+                    pizhuHtml += pizhu[i]+'<br/>';
+                }
             }
-            $('.comment .anDes').html(decodeURI(pizhuHtml));
+            $('.comment .anDes').html(pizhuHtml);
             $('.hmAnswer,.comment').show();
         } else {
             $('.hmAnswer,.comment').hide();
