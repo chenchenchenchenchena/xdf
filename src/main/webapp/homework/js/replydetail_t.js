@@ -79,7 +79,7 @@ $(function () {
         // $('.anDes').eq(1).html(sessionStorage.T_text);
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            getHwFilesSucess(e)
+            getHwFilesSucess(e);
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -663,7 +663,8 @@ $(function () {
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer .imgBox img', function () {
-
+        $('.pinch-zoom-container').eq(0).show();
+        $('.esc_s').show()
         Index_Last = $(this).parent().index();
         var previewUrl = $(this).attr('src');
         $('.big_back_s canvas').hide();
@@ -713,7 +714,7 @@ $(function () {
         $('.true_s').show();
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
-        $('.pinch-zoom-container').eq(0).hide()
+        $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
         var img = new Image();
         img.crossOrigin = "Anonymous";
@@ -734,20 +735,17 @@ $(function () {
         $('.big_back_s canvas').show();
 
         // canvas事件
-        $(document).on('touchstart', '#myCanvas', function () {
+        $('#myCanvas').on('touchstart', function () {
             ctx.beginPath();
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-            $(document).on('touchmove', '#myCanvas', function () {
+            $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
-                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop + 15);
+                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 ctx.stroke();
             });
-            $(document).on('touchend', '#myCanvas', function () {
+            $('#myCanvas').on('touchend', function () {
                 ctx.closePath();
                 $('.big_back_s').show();
-                $('#myCanvas').unbind('touchenstart');
-                $('#myCanvas').unbind('touchmove');
-                $('#myCanvas').unbind('touchend');
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
 

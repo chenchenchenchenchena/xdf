@@ -230,11 +230,11 @@ $(function () {
     });
     //提交作业
     $('.areyok input:last-of-type').on('touchend', function () {
-        $(".areyok").hide();
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
             return false;
         }
+        $(this).css('background','rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
         if ($('.class_s i').html() == '') {
             layer.open({
                 type: 1,
@@ -336,8 +336,10 @@ $(function () {
             ajax_S(homework_s.t_erro, errohome, function (e) {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
+                    $('.areyok input:last-of-type').css('background','#00ba97');
                     $('.big_back').show();
                     $('.succ').show();
+                    $('.areyok').hide()
                     $('.Submit_s').css('background', '#00ba97');
                     sessionStorage.removeItem('Classname_x');
                     sessionStorage.removeItem('ClassTime_x');
@@ -361,12 +363,15 @@ $(function () {
             homeworksubm.description = encodeURI($('.home_text textarea').val());
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
+                $('.areyok input:last-of-type').css('background','#00ba97');
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
+                    $('.areyok').hide()
                     $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background', '#00ba97');
                 } else {
+
                     $('.erro p').html(e.message);
                     $('.big_back').show();
                     $('.erro').show();
