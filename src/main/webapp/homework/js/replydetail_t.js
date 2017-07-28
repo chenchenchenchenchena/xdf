@@ -346,17 +346,27 @@ $(function () {
         }
     });
 
+
+    var recordCount = 0;//判断语音录制条数
     //语音
     $('.Voice').on('touchend', function () {
-        $('.big_whit').show();
-        $('.song_s').show();
+        if (recordCount >= 3) {
+            alert("最多录制三条语音");
+        } else {
+            $('.big_whit').show();
+            $('.song_s').show();
+        }
     });
 
     //按下开始录音
     var timeInedex = 0;
     var Index_s = -1;
     var timeds;
+    var START;
+    var END;
+    var recordTimer;
     $('#record').on('touchstart', function (event) {
+        START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
         $(this).siblings('img').attr('src', 'images/speak.gif');
@@ -378,17 +388,26 @@ $(function () {
     $('#record').on('touchend', function (event) {
         $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
-        wx.stopRecord({
-            success: function (res) {
-                clearInterval(timeds);
-                // var localId = res.localId;
-                // song_s = localId;
-                uploadVoiceWX(res.localId);
-                // showAudio();
-                $('.song_s').hide();
-                $('.big_whit').hide();
-            }
-        });
+        END = new Date().getTime();
+        if ((END - START) < 1000) {
+            END = 0;
+            START = 0;
+            //小于1000ms，不录音
+            clearTimeout(recordTimer);
+            alert("录制时间太短");
+        } else {
+            wx.stopRecord({
+                success: function (res) {
+                    clearInterval(timeds);
+                    // var localId = res.localId;
+                    // song_s = localId;
+                    uploadVoiceWX(res.localId);
+                    // showAudio();
+                    $('.song_s').hide();
+                    $('.big_whit').hide();
+                }
+            });
+        }
     });
 
     //上传微信服务器，获取保存的serverId
@@ -453,8 +472,6 @@ $(function () {
             }
         });
     }
-
-    var recordCount = 0;
 
     /**
      * 获取录制语音信息

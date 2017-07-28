@@ -174,10 +174,10 @@ $(function () {
         $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
-        if ((END - START) < 300) {
+        if ((END - START) < 1000) {
             END = 0;
             START = 0;
-            //小于300ms，不录音
+            //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
         } else {

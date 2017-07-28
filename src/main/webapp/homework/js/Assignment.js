@@ -2,7 +2,7 @@ $(function () {
     var arr_s = [];
     var arr_voice = [];
     var arr_image = [];
-    var recordCount = 0;
+    var recordCount = 0;//判断录制语音的条数
     var imgCount = 0;
 
     if (imgCount >= 3) {
@@ -437,29 +437,37 @@ $(function () {
         $('.song_s').hide();
     });
 
-    //语音
-    $('.Voice').on('touchend', function () {
-        if (classCode == "") {
-            layer.open({
-                type: 1,
-                area: ['312px', '194px'],
-                shade: 0,
-                title: '',
-                skin: '',
-                time: 3000,
-                content: $(".classEmpty")
-            })
-        } else {
-            $('.big_whit').show();
-            $('.song_s').show();
-        }
-    });
 
     //按下开始录音
     var timeInedex = 0;
     var Index_s = -1;
     var timeds;
+    var START;
+    var END;
+    var recordTimer;
+    //语音
+    $('.Voice').on('touchend', function () {
+        if (recordCount >= 3) {
+            alert("最多录制三条语音");
+        } else {
+            if (classCode == "") {
+                layer.open({
+                    type: 1,
+                    area: ['312px', '194px'],
+                    shade: 0,
+                    title: '',
+                    skin: '',
+                    time: 3000,
+                    content: $(".classEmpty")
+                })
+            } else {
+                $('.big_whit').show();
+                $('.song_s').show();
+            }
+        }
+    });
     $('#record').on('touchstart', function (event) {
+        START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
         $(this).siblings('img').attr('src', 'images/speak.gif');
@@ -481,19 +489,28 @@ $(function () {
     $('#record').on('touchend', function (event) {
         $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
-        wx.stopRecord({
-            success: function (res) {
-                clearInterval(timeds);
-                // if (timeds > 1) {
-                //     $('.big_s').append('<div class="music_s"><span></span> </div>');
-                // }
-                localId = res.localId;
-                song_s = localId;
-                uploadVoiceWX(localId);
-                $('.song_s').hide();
-                $('.big_whit').hide();
-            }
-        });
+        END = new Date().getTime();
+        if ((END - START) < 1000) {
+            END = 0;
+            START = 0;
+            //小于1000ms，不录音
+            clearTimeout(recordTimer);
+            alert("录制时间太短");
+        } else {
+            wx.stopRecord({
+                success: function (res) {
+                    clearInterval(timeds);
+                    // if (timeds > 1) {
+                    //     $('.big_s').append('<div class="music_s"><span></span> </div>');
+                    // }
+                    localId = res.localId;
+                    song_s = localId;
+                    uploadVoiceWX(localId);
+                    $('.song_s').hide();
+                    $('.big_whit').hide();
+                }
+            });
+        }
     });
 
     //上传微信服务器，获取保存的serverId
