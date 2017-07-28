@@ -55,6 +55,7 @@ $(function(){
                 }
                 if(begin_s-move_s<=-20){
                     $(this).css('margin-left','0px');
+
                     $(this).find('.remove_s').css('right','-270px');
                     $(this).parent().css('overflow','hidden');
                     return false;
