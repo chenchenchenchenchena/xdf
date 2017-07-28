@@ -24,7 +24,7 @@ $(function () {
                 for (var k = 0; k < Media.length; k++) {
                     if (Media[k].fileType == 'mp3') {
                         voiceCount++;
-                        showAudio(Media[k].PlayTime, url_o + Media[k].url, "audio_" + i, "audio" + i + "" + voiceCount);
+                        showAudio(Media[k].playTime, url_o + Media[k].url, "audio_" + i, "audio" + i + "" + voiceCount);
                     } else {
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
                         showImage(url_o + Media[k].url, "imagBox_" + i);
