@@ -62,24 +62,17 @@ $(function () {
 
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
-        $('title').html('已批复');
-        var arr_text = sessionStorage.T_text.split('|>|');
         if(sessionStorage.bangbang){
             $('.hmAnswer .infoTitle span').css({
                 'color': '#fff',
                 'background': '#ff6a6a'
             });
         }
-        for(var p = 0;p<arr_text.length;p++){
-            if(arr_text[p]!=''){
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr_text[p]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-
-            }
-        }
-        // $('.anDes').eq(1).html(sessionStorage.T_text);
+        $('title').html('已批复');
         //获取文件信息
         ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-            getHwFilesSucess(e)
+            getHwFilesSucess(e);
+            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+ decodeURI(e.data.description)+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -253,24 +246,14 @@ $(function () {
         } else {
             need.replyDesc = $('.teBox').html();
         }
-        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {0
+        if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {
             need.tag = '1'
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-
-
-
-        for(var x = 0;x<$('.anDes').length;x++){
-            if(x!=0&&$('.anDes').eq(x).html()!=''){
-                need.replyDesc+=encodeURI($('.anDes').eq(x).html()+'|>|')
-            }
-        }
-
-
-        need.replyDesc += encodeURI($('.answer textarea').val());
+        need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();

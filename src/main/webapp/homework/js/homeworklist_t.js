@@ -60,7 +60,7 @@ $(function(){
                     return false;
                 }
                 $(this).css('margin-left',move_s-begin_s+'px');
-                return false;
+                // return false;
             });
             return false;
         }
