@@ -478,7 +478,7 @@ $(function () {
                     layer.msg("语音获取失败");
                 } else {
                     //显示语音布局
-                    showAudio(e.data.playTime, url_o + e.data, $('#record_audio_box'), recordCount, 1);
+                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
                     recordCount++;
 
                 }
