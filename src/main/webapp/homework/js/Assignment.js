@@ -55,7 +55,7 @@ $(function () {
                     }
                 });
                 console.log(e)
-                var tea = e.data;
+                var tea = e.data.TeahFile;
                 for (var b = 0; b < tea.length; b++) {
                     if (tea[b].fileType == 'mp3') {
                         arr_voice.push({
