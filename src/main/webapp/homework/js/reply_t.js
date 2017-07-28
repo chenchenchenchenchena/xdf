@@ -116,6 +116,10 @@ $(function() {
     $(document).on('touchend','.home_tw li',function(){
         if($(this).find('i').html()=='优秀'){
            sessionStorage.bangbang = 1;
+        }else{
+            if(sessionStorage.bangbang){
+                sessionStorage.removeItem('bangbang');
+            }
         }
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');

@@ -253,7 +253,11 @@ $(function () {
         }
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
+        if($('.anDes').eq(1).html()!=undefined){
+            need.replyDesc = encodeURI($('.anDes').eq(1).html()+$('.answer textarea').val());
+        }else{
+            need.replyDesc = encodeURI($('.answer textarea').val());
+        }
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
@@ -727,6 +731,7 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             ctx.beginPath();
+            console.log(canvas.offsetLeft);
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
             $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
