@@ -768,6 +768,7 @@ $(function () {
             $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
+
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
