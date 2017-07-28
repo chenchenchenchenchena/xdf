@@ -443,6 +443,10 @@ html body .tealist_s .more_so{
 	text-align:center;
 	display:none;
 }
+.pinch-zoom,.pinch-zoom-container
+{	width:100%;
+	height:100%;
+}
 .succ img,.erro img,.music_succ img,.areyok img{
 	padding-top:50px;
 }
