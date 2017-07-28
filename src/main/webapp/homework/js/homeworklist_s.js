@@ -1,10 +1,10 @@
 $(function(){
 	// window.location.reload();
 	//缓存数据 TODO
-	if(sessionStorage.stuNumber!=""||sessionStorage.stuNumber!=null||sessionStorage.stuNumber!=undefined){
+	/*if(sessionStorage.stuNumber!=""||sessionStorage.stuNumber!=null||sessionStorage.stuNumber!=undefined){
 		sessionStorage.stuNumber = GetRequest('stuNumber');
 		sessionStorage.studentName = GetRequest('studentName');
-	}
+	}*/
 
 	/*sessionStorage.stuNumber = 'SS5786';
 	sessionStorage.studentName = '郭紫楚';
