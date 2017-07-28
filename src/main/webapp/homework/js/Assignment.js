@@ -65,7 +65,7 @@ $(function () {
                             'diskFilePath': tea[b].diskFilePath,
                             'id': tea[b].id
                         });
-                        showAudio(tea[b].PlayTime, url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
+                        showAudio(tea[b].playTime, url_o + tea[b].diskFilePath, $('#record_audio_box'), recordCount);
                         recordCount++;
                         // $('.big_s').eq(0).append('<div class="music_s" onclick="PlaySound(bgMusic' + b + ')"  fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"><span>10"</span> <audio  src="' + tea[b].previewUrl + '" id="bgMusic' + b + '"  controls="controls" preload="auto"></audio ></div>')
                     } else {
