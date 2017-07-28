@@ -195,9 +195,10 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
         $('.tea_sp .hmAnswer:eq('+domIndex+')').find('.voiceBox').append(strVoice);
         var audioElem = document.getElementById(idChildren);
-        audioElem.onloadedmetadata = getVoiceLen;
-        getVoiceLen(playTime,idChildren);
-        $('.song_s,.mask').hide();
+        audioElem.onloadedmetadata = function(){
+            getVoiceLen(playTime,idChildren);
+        };
+         $('.song_s,.mask').hide();
     }
 
     function getVoiceLen(playTime,idChildren) {
@@ -840,19 +841,6 @@ $(function () {
         var tea = e.data.File.RevampFile;//老师批注
         var stu = e.data.File.StudentHomeworkFile;//学生答案
         var tea_t = e.data.File.TeacherHomeworkFile;//作业信息
-        if (tea != undefined) {
-            for (var b = 0; b < tea.length; b++) {
-                $.each(tea[b],function (i,item) {
-                    if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
-                    } else {
-                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
-                        // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
-                    }
-                });
-
-            }
-        }
         if (stu != undefined) {
             for (var a = 0; a < stu.length; a++) {
                 if (stu[a].fileType == 'mp3') {
@@ -874,6 +862,20 @@ $(function () {
                 }
             }
         }
+        if (tea != undefined) {
+            for (var b = 0; b < tea.length; b++) {
+                $.each(tea[b],function (i,item) {
+                    if (item.fileType == 'mp3') {
+                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
+                    } else {
+                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
+                    }
+                });
+
+            }
+        }
+
     }
 
 
