@@ -237,8 +237,11 @@ $(function () {
             layer.msg('正在提交，请稍等');
             return false;
         }
+        $(this).css('background','rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
         if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0) {
             layer.msg('批复不能为空');
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
         if ($('.teBox').html() == '') {
@@ -262,7 +265,7 @@ $(function () {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('.Submit_s').css('background', '#00ba97');
+                $('..areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
