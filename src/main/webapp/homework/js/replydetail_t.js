@@ -664,8 +664,7 @@ $(function () {
 
     });
     $('.big_back_s').on('touchend', function () {
-        alert(event.touches.length)
-        if($('.true_s').css('display')!='block'){
+        if($('.true_s').css('display')!='block'&&event.touches.length==0){
             $(this).find('canvas').hide();
             $(this).find('img').show();
             $(this).find('.esc_s').hide();
