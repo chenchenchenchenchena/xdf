@@ -277,7 +277,7 @@ $(function () {
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
                 alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .hmAnswer').eq(o).find('anDes').html());
                 if ($('.tea_sp .hmAnswer').eq(o).find('anDes').html() != undefined) {
-
+                    alert("bkjjbk");
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
