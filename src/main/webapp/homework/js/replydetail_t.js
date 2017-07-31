@@ -263,6 +263,7 @@ $(function () {
         } else {
             need.tag = '1'
         }
+        need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
@@ -279,7 +280,6 @@ $(function () {
         }else{
             need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
             need.replyTimes = '1'
-
         }
 
         ajax_S(homework_s.t_succ, need, function (e) {
