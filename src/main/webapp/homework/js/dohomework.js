@@ -613,7 +613,7 @@ $(function () {
         // var answerVal = $('.teBox').val().trim();
         var answerVal = $('.teBox').val();
         // 答案不能为空
-        if (answerVal == "" || answerVal == null) {
+        if ($('#record_audio_box li').length==0&&$('.notsubmit .imgBox li').length==0&&(answerVal == "" || answerVal == null)) {
             layer.open({
                 type: 1,
                 area: ['310px', '195px'],
