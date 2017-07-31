@@ -329,22 +329,7 @@ $(function () {
         parentId.show();
         var strVoice = "";
         var idChildren;
-        var length = "";
-        if (flag == 1) {
-            idChildren = "record_audio" + id;
-            //录音布局，可以删除
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
-                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
-        } else {
-
-            idChildren = "audio" + id;
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
-                "<i class='play-icon'></i></div><span class='voice_lenth'>" + length + "</span></li>";
-        }
-
-
-        parentId.append(strVoice);
-        length = parseInt(playTime);
+        var length = parseInt(playTime);
         var voiceLen = "";
         var hh = parseInt(length / 3600);
         var mm = parseInt((length % 3600) / 60);
@@ -362,7 +347,21 @@ $(function () {
             }
         }
 
-        $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        if (flag == 1) {
+            idChildren = "record_audio" + id;
+            //录音布局，可以删除
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
+        } else {
+
+            idChildren = "audio" + id;
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
+                "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
+        }
+
+
+        parentId.append(strVoice);
+
     }
 
     $('.song_s,.mask').hide();

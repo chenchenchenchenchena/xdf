@@ -654,31 +654,30 @@ $(function () {
         parentId.show();
         var strVoice = "";
         var idChildren;
-        var length = "";
-        idChildren = "record_audio" + id;
-        //录音布局，可以删除
-        strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
-            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + length + "</span></li>";
 
-        parentId.append(strVoice);
-
-        var len = parseInt(playTime);
+        var length = parseInt(playTime);
         var voiceLen = "";
-        var hh = parseInt(len / 3600);
-        var mm = parseInt((len % 3600) / 60);
-        var ss = parseInt((len % 3600) % 60);
+        var hh = parseInt(length / 3600);
+        var mm = parseInt((length % 3600) / 60);
+        var ss = parseInt((length % 3600) % 60);
         if (hh > 0) {
             voiceLen = hh + "'" + mm + "'" + ss + "''";
         } else if (mm > 0) {
             voiceLen = mm + "'" + ss + "''";
         } else {
             if (ss == 0) {
+
                 voiceLen = "1''";
             } else {
                 voiceLen = ss + "''";
             }
         }
-        $('#' + idChildren).parent('div').siblings('.voice_lenth').html(voiceLen);
+        idChildren = "record_audio" + id;
+        //录音布局，可以删除
+        strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='"+playTime+"'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
+
+        parentId.append(strVoice);
 
         $('.song_s,.mask').hide();
         // 语音大于三张，隐藏添加语音按钮
