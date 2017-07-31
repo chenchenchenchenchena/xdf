@@ -257,11 +257,7 @@ $(function () {
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
-        if ($('.teBox').html() == '') {
-            need.replyDesc = '';
-        } else {
-            need.replyDesc = $('.teBox').html();
-        }
+
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {
@@ -277,16 +273,20 @@ $(function () {
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
+                    need.replyTimes = +'1'
                 }
             }
         }else{
             need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
+            need.replyTimes = '1'
+
         }
+
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('..areyok input:last-of-type').css('background', '#00ba97');
+                $('.areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
