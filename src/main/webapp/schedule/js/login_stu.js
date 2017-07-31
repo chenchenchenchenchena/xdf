@@ -82,13 +82,10 @@ $(function(){
             $(".studentLogin").eq(0).hide();
             $(".studentLogin").eq(1).show();
             $(".content").show();
-           /* var tableName="dict_school_info";*/
-
             var table={
                 "tableName":"dict_school_info"
             }
             ajaxRequest("POST", url.s_select, table , selectData);
-          /*  ajax_S(url.s_select,table,selectData);*/
         }else{
             $('.card').show();
             $('.searchTwo').hide();
@@ -113,6 +110,12 @@ $(function(){
     //查询校区
     function selectData(e) {
         console.log(e);
+        if(e.code=="200"){
+            for(var i=0;i<e.data.length;i++){
+                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                $(".select ul").append(str);
+            }
+        }
     }
 
     //查询学生信息  学员号查询
