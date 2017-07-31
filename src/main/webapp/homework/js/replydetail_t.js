@@ -271,7 +271,7 @@ $(function () {
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
-            for(var o = 0;o<$('.anDes').length;o++){
+            for(var o = 0;o<$('.hmAnswer').length;o++){
                 if(o!=0&&$('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
                         var curDesc = $('.answer textarea').val();
