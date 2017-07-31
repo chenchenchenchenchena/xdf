@@ -78,12 +78,14 @@ $(function () {
 
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for(var L=0;L<arr.length;L++){
-                if (arr[L] != ''&&arr[L]!=undefined&&arr[L]!=null) {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
-                    }else {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                }
+                if (arr[L] != ''&&arr[L]!=undefined) {
+                        if(arr[L] != 'null'){
+                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
+                        }else{
+                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        }
 
+                    }
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
             getHwFilesSucess(e);
@@ -271,16 +273,16 @@ $(function () {
         need.fileInfo = arr_s;
 
         if($('.tea_sp .hmAnswer').length!=0){
-            alert("已批复长度"+$('.tea_sp .hmAnswer').length);
+            // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .anDes').eq(o).html());
+                // alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .anDes').eq(o).html());
                 if ($('.tea_sp .anDes').eq(o).html() != undefined) {
 
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
-                        // if (curDesc==""){
-                        //     curDesc = "&";
-                        // }
+                        if (curDesc==""){
+                            curDesc = "null";
+                        }
                         need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html() + '|>|' + curDesc);
                     } else {
                         need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html() + '|>|');
@@ -293,7 +295,11 @@ $(function () {
 
             }
         }else{
-            need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
+            var curDesc = $('.answer textarea').val();
+            if (curDesc==""){
+                curDesc = "null";
+            }
+            need.replyDesc = encodeURI(curDesc+'|>|');
             need.replyTimes = '1'
         }
 
