@@ -82,10 +82,8 @@ $(function(){
             $(".studentLogin").eq(0).hide();
             $(".studentLogin").eq(1).show();
             $(".content").show();
-            var table={
-                "tableName":"dict_school_info"
-            }
-            ajaxRequest("POST", url.s_select, table.tableName , selectData)
+            var tableName="dict_school_info";
+            ajaxRequest("POST", url.s_select, tableName , selectData)
         }else{
             $('.card').show();
             $('.searchTwo').hide();
