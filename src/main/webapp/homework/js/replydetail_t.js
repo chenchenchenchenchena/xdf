@@ -102,9 +102,9 @@ $(function () {
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '"  src = '+stu[a].thumbnail+' alt="" /></div>')
                     } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" src = '+stu[a].thumbnail+' alt="" /></div>')
                     }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
@@ -115,7 +115,7 @@ $(function () {
                 if (tea[b].fileType == 'mp3') {
                     getAudioInfo([1, tea[b].diskFilePath, tea[b].playTime, "mp3"]);
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img thumbnail="' + tea[b].url + '" src='+tea[b].thumbnail+' alt="" /></div>')
 
                 }
             }
@@ -662,7 +662,7 @@ $(function () {
     var Index_Last;
 
     $(document).on('touchend','.hwInfo img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('thumbnail');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -714,23 +714,6 @@ $(function () {
     //         $('body').css('overflow-x', 'hidden')
     //     }
     // });
-    function stopDrop() {
-        var lastY;//最后一次y坐标点
-        $(document.body).on('touchstart', function(event) {
-            lastY = event.originalEvent.changedTouches[0].clientY;//点击屏幕时记录最后一次Y度坐标。
-        });
-        $(document.body).on('touchmove', function(event) {
-            var y = event.originalEvent.changedTouches[0].clientY;
-            var st = $(this).scrollTop(); //滚动条高度
-            if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
-                lastY = y;
-                event.preventDefault();
-            }
-            lastY = y;
-
-        });
-    }
-    stopDrop()
     $('.esc_s').on('touchend', function () {
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
@@ -774,29 +757,23 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-            console.log(event.touches.length);
-            setTimeout(function(){
-                if(event.touches.length==1){
-
-                    time_s = setInterval(function(){
-                        $(window).scrollTop(0)
-                    },100);
-                    ctx.beginPath();
-                    ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-                    $('#myCanvas').on('touchmove', function () {
-                        var ev = ev || event;
-                        ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-                        ctx.stroke();
-                    });
-                    $('#myCanvas').on('touchend', function () {
-                        ctx.closePath();
-                        $('.big_back_s').show();
-                        clearInterval(time_s)
-                    });
-                    // upLoadWxImage(canvas.toDataURL("image/png"));
-                }
-
-            },300)
+            time_s = setInterval(function(){
+                $(window).scrollTop(0)
+            },100);
+            ctx.beginPath();
+            console.log(canvas.offsetLeft);
+            ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+            $('#myCanvas').on('touchmove', function () {
+                var ev = ev || event;
+                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+                ctx.stroke();
+            });
+            $('#myCanvas').on('touchend', function () {
+                ctx.closePath();
+                $('.big_back_s').show();
+                clearInterval(time_s)
+            });
+            // upLoadWxImage(canvas.toDataURL("image/png"));
 
         });
 
@@ -898,7 +875,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img thumbnail="' + url_o + stu[a].url + '" src='+stu[a].thumbnail+' alt="" /></div>')
                 }
             }
         }
@@ -908,7 +885,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img thumbnail="' + tea_t[c].url + '" src='+tea_t[c].thumbnail+' alt="" /></div>')
 
                 }
             }
@@ -919,7 +896,7 @@ $(function () {
                     if (item.fileType == 'mp3') {
                         getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes-1)]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes-1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes-1)+')').find('.imgBox').append('<div><img thumbnail="'+item.url + '" src='+item.thumbnail+' alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });
