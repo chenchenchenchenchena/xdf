@@ -302,7 +302,7 @@ $(function () {
             need.replyTimes = $('.tea_sp .hmAnswer').length + 1;
         }else{
             var curDesc = $('.answer textarea').val();
-            if (curDesc==""){
+            if (curDesc==""||curDesc==undefined){
                 need.replyDesc = ' ';
             }else{
                 need.replyDesc = encodeURI(curDesc);
