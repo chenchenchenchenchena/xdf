@@ -78,7 +78,7 @@ $(function () {
 
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for(var L=0;L<arr.length;L++){
-                if (arr[L] != ''&&arr[L]!=undefined) {
+                if (arr[L] != ''&&arr[L]!=undefined&&arr[L]!=null) {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
                     }else {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
