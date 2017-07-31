@@ -65,7 +65,7 @@ $(function() {
     });
 
 
-    $(document).on('touchend', '.home_t li', function () {
+    $(document).on('tap', '.home_t li', function () {
         sessionStorage.stuid = $(this).attr('Id');
         location.href = 'replydetail_t.html';
     });
