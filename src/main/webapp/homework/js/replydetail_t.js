@@ -269,9 +269,10 @@ $(function () {
         need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        if($('.anDes').eq(1).html()!=undefined){
+
+        if($('.hmAnswer').length!=0){
             for(var o = 0;o<$('.hmAnswer').length;o++){
-                if(o!=0&&$('.anDes').eq(o).html()!=undefined){
+                if($('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
@@ -282,9 +283,8 @@ $(function () {
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
                 }
-                if(o!=0){
+
                     need.replyTimes = o+1
-                }
 
             }
         }else{
