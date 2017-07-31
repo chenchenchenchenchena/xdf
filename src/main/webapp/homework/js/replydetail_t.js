@@ -267,13 +267,13 @@ $(function () {
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
             for(var o = 0;o<$('.anDes').length;o++){
-                if(o!=0&&$('.anDes').eq(1).html()!=undefined){
+                if(o!=0&&$('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+$('.answer textarea').val());
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
-                    need.replyTimes = +'1'
+                    need.replyTimes = o+1
                 }
             }
         }else{
