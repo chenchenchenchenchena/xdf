@@ -291,9 +291,9 @@ $(function () {
                     need.replyDesc += 'null'+'|>|';
                 }
 
-                need.replyTimes = o + 1;
-
             }
+
+            need.replyTimes = $('.tea_sp .hmAnswer').length + 1;
         }else{
             var curDesc = $('.answer textarea').val();
             if (curDesc==""){
