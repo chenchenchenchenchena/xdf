@@ -739,18 +739,22 @@ $(function () {
     }
     stopDrop()
     $('.esc_s').on('touchend', function () {
+        clearInterval(time_s);
+
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
-        $('body').css('overflow-y', 'auto')
+        $('body').css('overflow-y', 'auto');
         $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
     var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
+        clearInterval(time_s);
+
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
@@ -812,7 +816,7 @@ $(function () {
             $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
-
+            clearInterval(time_s)
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
