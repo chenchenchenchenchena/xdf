@@ -879,7 +879,7 @@ $(function () {
         }
     });
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('tap', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
         // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
         //     previewUrl = $(this).attr('src');

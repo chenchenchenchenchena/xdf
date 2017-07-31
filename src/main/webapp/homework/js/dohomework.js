@@ -539,7 +539,7 @@ $(function () {
 
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('tap', '.imgBox img', function () {
         // alert("预览图片" + $(this).attr('src'));
         var previewUrl = $(this).attr('src');
         // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {

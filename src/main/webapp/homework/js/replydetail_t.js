@@ -660,14 +660,14 @@ $(function () {
         }
     });
     var Index_Last;
-    $(document).on('touchend','.hwInfo img',function(){
+    $(document).on('tap','.hwInfo img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
-    $(document).on('touchend','.tea_sp img',function(){
+    $(document).on('tap','.tea_sp img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
