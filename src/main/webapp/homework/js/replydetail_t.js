@@ -722,9 +722,10 @@ $(function () {
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
         $('body').css('overflow-y', 'auto')
+        $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
-
+    var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
@@ -756,6 +757,9 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
+            time_s = setInterval(function(){
+                $(window).scrollTop(0)
+            },100);
             ctx.beginPath();
             console.log(canvas.offsetLeft);
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
@@ -767,6 +771,7 @@ $(function () {
             $('#myCanvas').on('touchend', function () {
                 ctx.closePath();
                 $('.big_back_s').show();
+                clearInterval(time_s)
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
 
