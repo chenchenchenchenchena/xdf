@@ -39,7 +39,7 @@ $(function() {
     var emailm = {
         'studentCode': sessionStorage.stuNum,
         'beginDate': time1,
-        'endDate': time1
+        'endDate': time1,
     };
     //当月课程
     var menu_s = {
