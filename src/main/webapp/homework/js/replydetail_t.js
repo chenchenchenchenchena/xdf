@@ -270,8 +270,8 @@ $(function () {
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
 
-        if($('.hmAnswer').length!=0){
-            for(var o = 0;o<$('.hmAnswer').length;o++){
+        if($('.tea_sp .hmAnswer').length!=0){
+            for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
                 if($('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
                         var curDesc = $('.answer textarea').val();
