@@ -911,9 +911,9 @@ $(function () {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
+                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });
