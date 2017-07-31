@@ -774,8 +774,6 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-            console.log(event.touches.length);
-
             if(event.touches.length==1){
             time_s = setInterval(function(){
                 $(window).scrollTop(0);
