@@ -275,31 +275,33 @@ $(function () {
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .hmAnswer').eq(o).find('anDes').html());
                 if ($('.tea_sp .hmAnswer').eq(o).find('anDes').html() != undefined) {
-                    alert("bkjjbk");
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
-                            curDesc = "null";
+                            curDesc = " ";
                         }
                         need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|' + curDesc);
                     } else {
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|');
+                        if($('.anDes').eq(o)){
+                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|');
+                        }else{
+                            need.replyDesc+=' |>|'
+                        }
                     }
                 } else {
                     need.replyDesc += 'null'+'|>|';
                 }
 
             }
-
             need.replyTimes = $('.tea_sp .hmAnswer').length + 1;
         }else{
             var curDesc = $('.answer textarea').val();
             if (curDesc==""){
-                curDesc = "null";
+                need.replyDesc = ' ';
+            }else{
+                need.replyDesc = encodeURI(curDesc);
             }
-            need.replyDesc = encodeURI(curDesc+'|>|');
             need.replyTimes = '1'
         }
         alert(decodeURI(need.replyDesc));
