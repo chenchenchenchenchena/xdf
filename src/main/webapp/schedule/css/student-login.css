@@ -169,3 +169,87 @@ body{
 	float:right;
 	margin-top:.2rem;
 }
+/*---select---*/
+.content{
+	margin-top: 15px;
+	width: 100%;
+	height: 40px;
+	/*background: #F27729;*/
+}
+.content .select{
+	width: 300px;
+	height: 40px;
+	background: #FFFFFF;
+	/*margin: 0px auto;*/
+	margin-left: 17px;
+	position: relative;
+	cursor: pointer;
+}
+.content .select::after{
+	content: "";
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-left: 1px solid #D0D0D0;
+	border-bottom: 1px solid #D0D0D0;
+	top: 12px;
+	right: 12px;
+	position: absolute;
+	transform: rotate(-46deg);
+	transition: all .3s ease-in;
+}
+.content .select p{
+	width: 300px;
+	line-height: 40px;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	color: #666666;
+	padding: 0px 15px;
+}
+.content .select ul{
+	width: 300px;
+	display: block;
+	font-size: 16px;
+	background: #FFFFFF;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height .3s ease-in;
+}
+.content .select ul li{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	padding: 0px 15px;
+	list-style: none;
+	color: #666666;
+}
+.content .select ul li.Selected{
+	background: yellowgreen;
+	color: #FFFFFF;
+}
+.content .select ul li:hover{
+	background: #D0D0D0;
+}
+@-webkit-keyframes slide-down{
+	0%{transform: scale(1,0);}
+	25%{transform: scale(1,1.2);}
+	50%{transform: scale(1,0.85);}
+	75%{transform: scale(1,1.05);}
+	100%{transform: scale(1,1);}
+}
+
+.content .select.open ul{
+	max-height: 250px;
+	transform-origin: 50% 0;
+	-webkit-animation: slide-down .5s ease-in;
+	transition: max-height .2s ease-in;
+}
+.content .select.open::after{
+	transform: rotate(134deg);
+	transition: all .3s ease-in;
+	top: 18px;
+
+}
