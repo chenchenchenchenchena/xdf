@@ -158,7 +158,7 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
-        if ($(this).val().length > 199) {
+        if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
@@ -167,7 +167,7 @@ $(function () {
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
     $('.home_text textarea').on('blur', function () {
-        if ($(this).val().length > 199) {
+        if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
@@ -879,7 +879,7 @@ $(function () {
         }
     });
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('tap', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
         // if ($(this).attr('src').indexOf('weixin://') != -1&&$(this).attr('src').indexOf('http:') != -1) {
         //     previewUrl = $(this).attr('src');

@@ -661,7 +661,7 @@ $(function () {
 
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('tap', '.imgBox img', function () {
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接

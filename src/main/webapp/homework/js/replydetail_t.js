@@ -79,7 +79,11 @@ $(function () {
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for(var L=0;L<arr.length;L++){
                 if(arr[L]!=''){
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr[L]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
+                    if(arr[L]!=null&&arr[L]!="null"){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr[L]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
+                    }else{
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }
                 }
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -267,10 +271,14 @@ $(function () {
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
-            for(var o = 0;o<$('.anDes').length;o++){
+            for(var o = 0;o<$('.hmAnswer').length;o++){
                 if(o!=0&&$('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
-                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+$('.answer textarea').val());
+                        var curDesc = $('.answer textarea').val();
+                        if (curDesc==""){
+                            curDesc = null;
+                        }
+                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+curDesc);
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
@@ -660,14 +668,14 @@ $(function () {
         }
     });
     var Index_Last;
-    $(document).on('touchend','.hwInfo img',function(){
+    $(document).on('tap','.hwInfo img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
-    $(document).on('touchend','.tea_sp img',function(){
+    $(document).on('tap','.tea_sp img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
@@ -729,20 +737,24 @@ $(function () {
 
         });
     }
-    stopDrop()
+    stopDrop();
     $('.esc_s').on('touchend', function () {
+        clearInterval(time_s);
+
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
-        $('body').css('overflow-y', 'auto')
+        $('body').css('overflow-y', 'auto');
         $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
     var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
+        clearInterval(time_s);
+
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
@@ -774,7 +786,8 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             if(event.touches.length==1){
-            time_s = setInterval(function(){
+                clearInterval(time_s);
+                time_s = setInterval(function(){
                 $(window).scrollTop(0);
             },100);
             ctx.beginPath();
@@ -785,9 +798,9 @@ $(function () {
                 ctx.stroke();
             });
             $('#myCanvas').on('touchend', function () {
+                clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
-                clearInterval(time_s)
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -804,7 +817,7 @@ $(function () {
             $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
-
+            clearInterval(time_s);
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));

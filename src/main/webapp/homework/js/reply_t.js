@@ -65,7 +65,7 @@ $(function() {
     });
 
 
-    $(document).on('touchend', '.home_t li', function () {
+    $(document).on('tap', '.home_t li', function () {
         sessionStorage.stuid = $(this).attr('Id');
         location.href = 'replydetail_t.html';
     });
@@ -109,11 +109,11 @@ $(function() {
 
     });
 
-    $('.frend input').on('touchend',function(){
+    $('.frend input').on('tap',function(){
         location.href = 'sharedranking_t.html?tid='+sessionStorage.Tid
     });
 
-    $(document).on('touchend','.home_tw li',function(){
+    $(document).on('tap','.home_tw li',function(){
         if($(this).find('i').html()=='优秀'){
            sessionStorage.bangbang = 1;
         }else{
