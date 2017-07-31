@@ -23,9 +23,9 @@ $(function () {
 
 
     //输入验证
-    $('.teBox').on('keyup', function () {
-        $('.teacherword').html('' + $(this).val().length + '/200')
-        if ($(this).val().length > 199) {
+    $('.teBox').on('keyup change', function () {
+        $('.teacherword').html('' + $(this).val().length + '/200');
+        if ($(this).val().length > 200) {
             $('.teacherword').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
@@ -263,23 +263,23 @@ $(function () {
         } else {
             need.tag = '1'
         }
+        need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
         if($('.anDes').eq(1).html()!=undefined){
             for(var o = 0;o<$('.anDes').length;o++){
-                if(o!=0&&$('.anDes').eq(1).html()!=undefined){
+                if(o!=0&&$('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+$('.answer textarea').val());
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
-                    need.replyTimes = +'1'
+                    need.replyTimes = o+1
                 }
             }
         }else{
             need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
             need.replyTimes = '1'
-
         }
 
         ajax_S(homework_s.t_succ, need, function (e) {
@@ -660,7 +660,6 @@ $(function () {
         }
     });
     var Index_Last;
-
     $(document).on('touchend','.hwInfo img',function(){
         var previewUrl = $(this).attr('src');
         wx.previewImage({
@@ -714,6 +713,23 @@ $(function () {
     //         $('body').css('overflow-x', 'hidden')
     //     }
     // });
+    function stopDrop() {
+        var lastY;//最后一次y坐标点
+        $(document.body).on('touchstart', function(event) {
+            lastY = event.originalEvent.changedTouches[0].clientY;//点击屏幕时记录最后一次Y度坐标。
+        });
+        $(document.body).on('touchmove', function(event) {
+            var y = event.originalEvent.changedTouches[0].clientY;
+            var st = $(this).scrollTop(); //滚动条高度
+            if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
+                lastY = y;
+                event.preventDefault();
+            }
+            lastY = y;
+
+        });
+    }
+    stopDrop()
     $('.esc_s').on('touchend', function () {
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
@@ -722,14 +738,17 @@ $(function () {
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
         $('body').css('overflow-y', 'auto')
+        $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
-
+    var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
         $('.true_s').show();
+        $('body').css('height', '100%');
+
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
@@ -754,8 +773,11 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
+            if(event.touches.length==1){
+            time_s = setInterval(function(){
+                $(window).scrollTop(0);
+            },100);
             ctx.beginPath();
-            console.log(canvas.offsetLeft);
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
             $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
@@ -765,8 +787,10 @@ $(function () {
             $('#myCanvas').on('touchend', function () {
                 ctx.closePath();
                 $('.big_back_s').show();
+                clearInterval(time_s)
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
+            }
 
         });
 
@@ -868,7 +892,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '"alt="" /></div>')
                 }
             }
         }
@@ -887,9 +911,9 @@ $(function () {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
+                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });

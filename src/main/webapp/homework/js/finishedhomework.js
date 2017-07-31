@@ -213,7 +213,7 @@ $(function () {
     function showAudio(playTime,url, idParent, idChildren) {
 
         $('#' + idParent).show();
-        var length = parseInt(playTime)
+        var len = parseInt(playTime)
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
@@ -334,31 +334,83 @@ $(function () {
     /**
      * 按下开始录音
      */
-    $('#record_btn').on('touchstart', function (event) {
-        timeInedex = 0;
+    /**
+     * 按下开始录音
+     */
+    var timeInedex = 0;
+    var Index_s = -1;
+    var timeds;
+    var START;
+    var END;
+    var recordTimer;
+    $('#record_bg').on('touchstart', function (event) {
+        /*timeInedex = 0;
+         START = new Date().getTime();
+         $(this).attr('src', 'images/speak.gif');
+         event.preventDefault();
+         recordTimer = setTimeout(function () {
+         wx.startRecord({
+         success: function () {
+         localStorage.rainAllowRecord = 'true';
+         timeds = setInterval(function () {
+         timeInedex++
+         }, 1000);
+         },
+         cancel: function () {
+         alert('用户拒绝授权录音');
+         }
+         });
+         }, 300);*/
         START = new Date().getTime();
-        $(this).attr('src', 'images/speak.gif');
+        Index_s++;
+        timeInedex = 0;
+        $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
-        recordTimer = setTimeout(function () {
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    timeds = setInterval(function () {
-                        timeInedex++
-                    }, 1000);
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        }, 300);
+        wx.startRecord({
+            success: function () {
+                localStorage.rainAllowRecord = 'true';
+                timeds = setInterval(function () {
+                    timeInedex++
+                }, 1000);
+            },
+            cancel: function () {
+                alert('用户拒绝授权录音');
+            }
+        });
     });
 
     /**
      * 松手结束录音
      */
-    $('#record_btn').on('touchend', function (event) {
-        $(this).attr('src', 'images/C04-03.png');
+    $('#record_bg').on('touchend', function (event) {
+        /*$(this).attr('src', 'images/C04-03.png');
+         event.preventDefault();
+         END = new Date().getTime();
+         if ((END - START) < 1000) {
+         END = 0;
+         START = 0;
+         //小于1000ms，不录音
+         clearTimeout(recordTimer);
+         alert("录制时间太短");
+         return;
+         }
+         wx.stopRecord({
+         success: function (res) {
+         clearInterval(timeds);
+         localId = res.localId;
+         $('.song_s').hide();
+         uploadVoiceWX(localId);
+
+         }, complete: function () {
+         //接口调用完成（失败成功）
+
+         },
+         fail: function (res) {
+         }
+         });*/
+
+
+        $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 1000) {
@@ -372,12 +424,12 @@ $(function () {
         wx.stopRecord({
             success: function (res) {
                 clearInterval(timeds);
-                localId = res.localId;
+                // var localId = res.localId;
+                // song_s = localId;
+                uploadVoiceWX(res.localId);
+                // showAudio();
                 $('.song_s').hide();
-                uploadVoiceWX(localId);
-
-            },
-            fail: function (res) {
+                $('.big_whit').hide();
             }
         });
 
@@ -724,7 +776,7 @@ $(function () {
         // var answerVal = $('.teBox').val().trim();
         var answerVal = $('.teBox').val();
         // 答案不能为空
-        if (answerVal == "" || answerVal == null) {
+        if ($('#record_audio_box li').length==0&&$('.notsubmit .imgBox li').length==0&&(answerVal == "" || answerVal == null)) {
             layer.open({
                 type: 1,
                 area: ['310px', '195px'],

@@ -319,7 +319,13 @@ i{font-style: normal;}
 	font-size:32px;
 	color:#333;
 }
-
+.song_s div{
+	width: 100%;
+	height: 290px;
+	position: absolute;
+	top: 0;
+	opcaticty: 0;
+}
 .infoTitle span{
 	display:block;
 	float:right;
