@@ -679,7 +679,7 @@ $(function () {
         new RTP.PinchZoom($(this), {});
     });
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.hmAnswer .imgBox img', function () {
+    $(document).on('touchend', '.hmAnswer #imagBox_2 img', function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();
