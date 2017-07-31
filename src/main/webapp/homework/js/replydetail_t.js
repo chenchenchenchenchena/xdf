@@ -275,15 +275,15 @@ $(function () {
                 if($('.tea_sp .anDes').eq(o).html()!=undefined){
                     if(o==$('.tea_sp .anDes').length-1){
                         var curDesc = $('.answer textarea').val();
-                        if (curDesc==""){
-                            curDesc = null;
-                        }
+                        // if (curDesc==""){
+                        //     curDesc = "&";
+                        // }
                         need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|'+curDesc);
                     }else{
                         need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|');
                     }
                 }else{
-                    need.replyDesc+='   |>|'
+                    need.replyDesc+='|>|'
                 }
 
                     need.replyTimes = o+1
