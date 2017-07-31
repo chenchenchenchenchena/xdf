@@ -279,7 +279,6 @@ $(function () {
                             curDesc = " ";
                         }
                         need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|'+curDesc);
-                        alert($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|'+curDesc)
                     } else {
                         if($('.anDes').eq(o)){
                             need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|');
@@ -302,7 +301,7 @@ $(function () {
             }
             need.replyTimes = '1'
         }
-
+        alert(need.replyDesc)
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
