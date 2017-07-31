@@ -722,7 +722,7 @@ $(function () {
         $(document.body).on('touchmove', function(event) {
             var y = event.originalEvent.changedTouches[0].clientY;
             var st = $(this).scrollTop(); //滚动条高度
-            if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
+            if (y >= lastY && st <= 1) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
                 lastY = y;
                 event.preventDefault();
             }
@@ -738,12 +738,14 @@ $(function () {
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
-        $('body').css('overflow-y', 'auto')
+        $('body').css('overflow-y', 'auto');
+        clearInterval(time_s);
         $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
     var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
+        clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
@@ -796,6 +798,7 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            clearInterval(time_s);
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
