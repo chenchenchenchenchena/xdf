@@ -278,10 +278,11 @@ $(function () {
                         if (curDesc==""){
                             curDesc = " ";
                         }
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc);
+                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|'+curDesc);
+                        alert($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|'+curDesc)
                     } else {
                         if($('.anDes').eq(o)){
-                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|');
+                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|');
                         }else{
                             need.replyDesc+=' |>|'
                         }
