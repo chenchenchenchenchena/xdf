@@ -257,11 +257,7 @@ $(function () {
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
-        if ($('.teBox').val() == '') {
-            need.replyDesc = '';
-        } else {
-            need.replyDesc = $('.teBox').val();
-        }
+
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {
@@ -290,7 +286,7 @@ $(function () {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('..areyok input:last-of-type').css('background', '#00ba97');
+                $('.areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
