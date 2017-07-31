@@ -775,28 +775,25 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             console.log(event.touches.length);
-            setTimeout(function(){
-                if(event.touches.length==1){
 
-                    time_s = setInterval(function(){
-                        $(window).scrollTop(0)
-                    },100);
-                    ctx.beginPath();
-                    ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-                    $('#myCanvas').on('touchmove', function () {
-                        var ev = ev || event;
-                        ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
-                        ctx.stroke();
-                    });
-                    $('#myCanvas').on('touchend', function () {
-                        ctx.closePath();
-                        $('.big_back_s').show();
-                        clearInterval(time_s)
-                    });
-                    // upLoadWxImage(canvas.toDataURL("image/png"));
-                }
-
-            },300)
+            if(event.touches.length==1){
+            time_s = setInterval(function(){
+                $(window).scrollTop(0);
+            },100);
+            ctx.beginPath();
+            ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+            $('#myCanvas').on('touchmove', function () {
+                var ev = ev || event;
+                ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+                ctx.stroke();
+            });
+            $('#myCanvas').on('touchend', function () {
+                ctx.closePath();
+                $('.big_back_s').show();
+                clearInterval(time_s)
+            });
+            // upLoadWxImage(canvas.toDataURL("image/png"));
+            }
 
         });
 
@@ -917,9 +914,9 @@ $(function () {
             for (var b = 0; b < tea.length; b++) {
                 $.each(tea[b],function (i,item) {
                     if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes-1)]);
+                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', b]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes-1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+b+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });
