@@ -74,17 +74,15 @@ $(function () {
 
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
-            console.log(decodeURI(e.data.replyDesc));
-            var arr = decodeURI(e.data.replyDesc).split('|>|');
-            for(var L=0;L<arr.length;L++){
-                if (arr[L] != ''&&arr[L]!=undefined) {
-                        if(arr[L] != ' '){
-                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                        }else{
-                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                        }
+            console.log(decodeURI(e.data.replyDesc))
 
-                    }
+            var arr = decodeURI(e.data.replyDesc).split('|>|');
+            for (var L = 0; L < arr.length; L++) {
+                if (arr[L] != '' && arr[L] != undefined) {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                } else {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                }
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
             getHwFilesSucess(e);
@@ -274,24 +272,22 @@ $(function () {
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                if ($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != undefined) {
-                    console.log($('.tea_sp .hmAnswer').length - 1)
-
+                if ($('.tea_sp .hmAnswer').eq(o).find('anDes').html() != undefined) {
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
                             curDesc = " ";
                         }
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc);
+                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|' + curDesc);
                     } else {
                         if($('.anDes').eq(o)){
-                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|');
+                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|');
                         }else{
                             need.replyDesc+=' |>|'
                         }
                     }
                 } else {
-                    need.replyDesc += ' |>|';
+                    need.replyDesc += 'null'+'|>|';
                 }
 
             }
@@ -305,6 +301,7 @@ $(function () {
             }
             need.replyTimes = '1'
         }
+        alert(decodeURI(need.replyDesc));
 
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
