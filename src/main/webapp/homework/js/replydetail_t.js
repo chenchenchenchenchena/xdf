@@ -273,12 +273,13 @@ $(function () {
         need.fileInfo = arr_s;
 
         if($('.tea_sp .hmAnswer').length!=0){
-            // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
+            alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                // alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .anDes').eq(o).html());
+                alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .anDes').eq(o).html());
                 if ($('.tea_sp .anDes').eq(o).html() != undefined) {
 
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
+                        alert("---------");
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
                             curDesc = "null";
@@ -288,10 +289,10 @@ $(function () {
                         need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html() + '|>|');
                     }
                 } else {
-                    need.replyDesc += '|>|'
+                    need.replyDesc += '|>|';
                 }
 
-                need.replyTimes = o + 1
+                need.replyTimes = o + 1;
 
             }
         }else{
@@ -302,6 +303,7 @@ $(function () {
             need.replyDesc = encodeURI(curDesc+'|>|');
             need.replyTimes = '1'
         }
+        alert(decodeURI(need.replyDesc));
 
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
