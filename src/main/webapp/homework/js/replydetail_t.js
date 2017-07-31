@@ -23,9 +23,9 @@ $(function () {
 
 
     //输入验证
-    $('.teBox').on('keyup', function () {
-        $('.teacherword').html('' + $(this).val().length + '/200')
-        if ($(this).val().length > 199) {
+    $('.teBox').on('keyup change', function () {
+        $('.teacherword').html('' + $(this).val().length + '/200');
+        if ($(this).val().length > 200) {
             $('.teacherword').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
@@ -78,8 +78,10 @@ $(function () {
 
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for(var L=0;L<arr.length;L++){
-                if(arr[L]!=''){
+                if(arr[L]!=''&&arr[L]!=null){
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">'+arr[L]+'</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>')
+                }else{
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                 }
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -270,7 +272,11 @@ $(function () {
             for(var o = 0;o<$('.anDes').length;o++){
                 if(o!=0&&$('.anDes').eq(o).html()!=undefined){
                     if(o==$('.anDes').length-1){
-                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+$('.answer textarea').val());
+                        var curDesc = $('.answer textarea').val();
+                        if (curDesc==""){
+                            curDesc = null;
+                        }
+                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+curDesc);
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
@@ -679,7 +685,7 @@ $(function () {
         new RTP.PinchZoom($(this), {});
     });
     /*--------------------图片预览----------------------------------*/
-    $(document).on('touchend', '.hmAnswer .imgBox img', function () {
+    $(document).on('touchend', '.hmAnswer #imagBox_2 img', function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();

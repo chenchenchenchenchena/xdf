@@ -302,6 +302,9 @@ body,html{
 	border-bottom:1px solid #e1e1e1;
 	padding-bottom:20px;
 }
+.answer_s p{
+	word-wrap: break-word;
+}
 html body .imgBox_s{
 	margin-bottom:0;
 }

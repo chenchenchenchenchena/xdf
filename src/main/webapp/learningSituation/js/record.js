@@ -400,7 +400,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	saveData();main-list.html
+    	saveData();
     	queryOpenid();
 
     })
@@ -421,15 +421,15 @@ $(function () {
      	var pushwei={
 					  "appid":"wxab29a3e2000b8d2a",
 					  "secret":"7739991fcce774c2281147eae3986ad9",
-					  "remark":"发送人:新小三拐点提速班 "+localStorage.teacherName+"老师感谢您对我们的支持。",
+					  "remark":"发送人:"+push.course+""+localStorage.teacherName+"老师感谢您对我们的支持。",
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-					  "url":"report_t.html",
+					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html",
 					  "info":classmate
 					};
-     	/*console.log(push);
-     	console.log(pushwei);*/
+     	/*console.log(push);*/
+     	console.log(pushwei);
      	ajax_S(url.w_push,pushwei,pushMsg);
    		location.href="report_t.html";
      })
@@ -652,6 +652,7 @@ $(function () {
 
 		var pushinfo={
 			"courseName":$(".st").html(),
+			"course":$(".classrome").html(),
 			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
 			"stuInfomation":pushStuent
 
