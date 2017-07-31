@@ -774,11 +774,13 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
+            console.log(event.touches.length);
+            if(event.touches.length==1){
+
             time_s = setInterval(function(){
                 $(window).scrollTop(0)
             },100);
             ctx.beginPath();
-            console.log(canvas.offsetLeft);
             ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
             $('#myCanvas').on('touchmove', function () {
                 var ev = ev || event;
@@ -791,6 +793,7 @@ $(function () {
                 clearInterval(time_s)
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
+            }
 
         });
 
