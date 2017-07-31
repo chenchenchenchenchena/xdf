@@ -282,6 +282,8 @@ $(function () {
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
+                }else{
+                    need.replyDesc+='   |>|'
                 }
 
                     need.replyTimes = o+1
