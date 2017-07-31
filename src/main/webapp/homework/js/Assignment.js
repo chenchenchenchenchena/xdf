@@ -158,7 +158,7 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
-        if ($(this).val().length > 199) {
+        if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
@@ -167,7 +167,7 @@ $(function () {
         $('.home_text span').html('' + $(this).val().length + '/200')
     });
     $('.home_text textarea').on('blur', function () {
-        if ($(this).val().length > 199) {
+        if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
         } else {
