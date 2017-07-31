@@ -110,6 +110,7 @@ $(function(){
     //查询校区
     function selectData(e) {
         console.log(e);
+        $(".select ul").html("");
         if(e.code=="200"){
             for(var i=0;i<e.data.length;i++){
                 var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
@@ -331,8 +332,8 @@ $(function(){
         $(".select").toggleClass('open');
         e.stopPropagation();
     });
-
-    $(".content .select ul li").click(function(e){
+    $(document).on('click','.content .select ul li',function(e){
+   /* $(".content .select ul li").click(function(e){*/
         var _this=$(this);
         $(".select > p").text(_this.attr('data-value'));
         _this.addClass("Selected").siblings().removeClass("Selected");
