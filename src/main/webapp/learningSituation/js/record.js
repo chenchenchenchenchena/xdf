@@ -400,7 +400,7 @@ $(function () {
     })
     $(".subFail button").eq(1).click(function(){
     	layer.close(layer4);
-    	saveData();main-list.html
+    	saveData();
     	queryOpenid();
 
     })
