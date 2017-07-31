@@ -272,15 +272,15 @@ $(function () {
 
         if($('.tea_sp .hmAnswer').length!=0){
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                if($('.anDes').eq(o).html()!=undefined){
-                    if(o==$('.anDes').length-1){
+                if($('.tea_sp .anDes').eq(o).html()!=undefined){
+                    if(o==$('.tea_sp .anDes').length-1){
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
                             curDesc = null;
                         }
-                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|'+curDesc);
+                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|'+curDesc);
                     }else{
-                        need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
+                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|');
                     }
                 }else{
                     need.replyDesc+='   |>|'
