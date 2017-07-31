@@ -213,7 +213,7 @@ $(function () {
     function showAudio(playTime,url, idParent, idChildren) {
 
         $('#' + idParent).show();
-        var length = parseInt(playTime)
+        var len = parseInt(playTime)
         var hh = parseInt(len / 3600);
         var mm = parseInt((len % 3600) / 60);
         var ss = parseInt((len % 3600) % 60);
