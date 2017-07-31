@@ -737,7 +737,7 @@ $(function () {
 
         });
     }
-    stopDrop()
+    stopDrop();
     $('.esc_s').on('touchend', function () {
         clearInterval(time_s);
 
@@ -786,7 +786,8 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             if(event.touches.length==1){
-            time_s = setInterval(function(){
+                clearInterval(time_s);
+                time_s = setInterval(function(){
                 $(window).scrollTop(0);
             },100);
             ctx.beginPath();
@@ -797,9 +798,9 @@ $(function () {
                 ctx.stroke();
             });
             $('#myCanvas').on('touchend', function () {
+                clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
-                clearInterval(time_s)
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -816,7 +817,7 @@ $(function () {
             $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
-            clearInterval(time_s)
+            clearInterval(time_s);
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
