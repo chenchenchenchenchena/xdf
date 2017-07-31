@@ -282,8 +282,11 @@ $(function () {
                     }else{
                         need.replyDesc += encodeURI($('.anDes').eq(o).html()+'|>|');
                     }
+                }
+                if(o!=0){
                     need.replyTimes = o+1
                 }
+
             }
         }else{
             need.replyDesc = encodeURI($('.answer textarea').val()+'|>|');
