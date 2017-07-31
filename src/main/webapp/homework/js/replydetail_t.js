@@ -731,6 +731,7 @@ $(function () {
         $(this).hide();
         $('.true_s').show();
         $('body').css('overflow', 'hidden');
+        $('body').css('scoll', 'no');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
