@@ -431,7 +431,7 @@ $(function () {
      	/*console.log(push);*/
      	console.log(pushwei);
      	ajax_S(url.w_push,pushwei,pushMsg);
-   		location.href="report_t.html";
+   		/*location.href="report_t.html";*/
      })
     function pushMsg(e){
     	if(e.result){
