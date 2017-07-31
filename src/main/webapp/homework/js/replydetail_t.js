@@ -102,9 +102,9 @@ $(function () {
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" src='+stu[a].previewUrl+' alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" src='+stu[a].previewUrl+' alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
@@ -660,9 +660,8 @@ $(function () {
         }
     });
     var Index_Last;
-
     $(document).on('touchend','.hwInfo img',function(){
-        var previewUrl = $(this).attr('thumbnail');
+        var previewUrl = $(this).attr('src');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -722,7 +721,7 @@ $(function () {
         $(document.body).on('touchmove', function(event) {
             var y = event.originalEvent.changedTouches[0].clientY;
             var st = $(this).scrollTop(); //滚动条高度
-            if (y >= lastY && st <= 1) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
+            if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
                 lastY = y;
                 event.preventDefault();
             }
@@ -738,14 +737,12 @@ $(function () {
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
-        $('body').css('overflow-y', 'auto');
-        clearInterval(time_s);
+        $('body').css('overflow-y', 'auto')
         $('.true_s').unbind('touchend');
     });
     $('.esc_s').show();
     var  time_s;
     $('.big_back_s span:last-of-type').on('touchend', function () {
-        clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
@@ -798,7 +795,6 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
-            clearInterval(time_s);
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
@@ -896,7 +892,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img thumbnail="' + url_o + stu[a].url + '" src="'+stu[a].previewUrl+'" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '"alt="" /></div>')
                 }
             }
         }
