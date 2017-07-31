@@ -74,11 +74,11 @@ $(function () {
 
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
-            console.log(decodeURI(e.data.replyDesc))
+            console.log(decodeURI(e.data.replyDesc));
 
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for (var L = 0; L < arr.length; L++) {
-                if (arr[L] != '' && arr[L] != undefined) {
+                if (arr[L] != '' && arr[L] != undefined&&arr[L]!='+') {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                 } else {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
@@ -301,7 +301,6 @@ $(function () {
             }
             need.replyTimes = '1'
         }
-        alert(need.replyDesc)
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
