@@ -272,22 +272,22 @@ $(function () {
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                if ($('.tea_sp .hmAnswer').eq(o).find('anDes').html() != undefined) {
+                if ($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != undefined) {
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
                             curDesc = " ";
                         }
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|' + curDesc);
+                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc);
                     } else {
                         if($('.anDes').eq(o)){
-                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('anDes') + '|>|');
+                            need.replyDesc+= encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|');
                         }else{
                             need.replyDesc+=' |>|'
                         }
                     }
                 } else {
-                    need.replyDesc += 'null'+'|>|';
+                    need.replyDesc += ' |>|';
                 }
 
             }
@@ -301,7 +301,6 @@ $(function () {
             }
             need.replyTimes = '1'
         }
-        alert(decodeURI(need.replyDesc));
 
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
