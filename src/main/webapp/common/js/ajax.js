@@ -68,7 +68,8 @@ var url = {
     'w_token':url_o+'/wechatSignature/getWechatToken.do',
     'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do',
     'w_push':url_o+'wechatSignature/sendTemplateMsg.do',//微信推送成绩信息
-    'w_email':url_o+'e2Login/queryTeacherInfo.do'//查询老师信息
+    'w_email':url_o+'e2Login/queryTeacherInfo.do',//查询老师信息
+    's_select':url_o+'dict/getDictListByTableName.do'//查询校区
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
