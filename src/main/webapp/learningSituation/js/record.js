@@ -425,7 +425,7 @@ $(function () {
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":"tmR-IzIYH6sg-pspeZat6sQJZ4N0ThBpLjMGWDGEHfk",
-					  "url":"http://dt.xdf.cn/xdfdthome/learningSituation/report_t.html",
+					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html",
 					  "info":classmate
 					};
      	/*console.log(push);*/
