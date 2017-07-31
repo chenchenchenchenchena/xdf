@@ -272,8 +272,10 @@ $(function () {
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
+                console.log($('.tea_sp .hmAnswer').eq(o).find('.anDes').html())
+
                 if ($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != undefined) {
-                    if (o == $('.tea_sp .hmAnswer').length - 1) {
+                    if (o == $('.tea_sp .hmAnswer').length-1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc==""){
                             curDesc = " ";
@@ -287,7 +289,15 @@ $(function () {
                         }
                     }
                 } else {
-                    need.replyDesc += ' |>|';
+                    if (o == $('.tea_sp .hmAnswer').length-1) {
+                        var curDesc = $('.answer textarea').val();
+                        if (curDesc==""){
+                            curDesc = " ";
+                        }
+                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html()+'|>|'+curDesc);
+                    }else{
+                        need.replyDesc += ' |>|';
+                    }
                 }
 
             }
