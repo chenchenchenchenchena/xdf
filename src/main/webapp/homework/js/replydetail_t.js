@@ -102,9 +102,9 @@ $(function () {
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" src='+stu[a].previewUrl+' alt="" /></div>')
                     } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img thumbnail="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" src='+stu[a].previewUrl+' alt="" /></div>')
                     }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
@@ -662,7 +662,7 @@ $(function () {
     var Index_Last;
 
     $(document).on('touchend','.hwInfo img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('thumbnail');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -893,7 +893,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '" alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img thumbnail="' + url_o + stu[a].url + '" src="'+stu[a].previewUrl+'" alt="" /></div>')
                 }
             }
         }
