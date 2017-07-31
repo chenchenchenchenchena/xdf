@@ -271,22 +271,25 @@ $(function () {
         need.fileInfo = arr_s;
 
         if($('.tea_sp .hmAnswer').length!=0){
+            alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
-                if($('.tea_sp .anDes').eq(o).html()!=undefined){
-                    if(o==$('.tea_sp .anDes').length-1){
+                alert("当前第" + o + "个布局里面的描述：" + $('.tea_sp .anDes').eq(o).html());
+                if ($('.tea_sp .anDes').eq(o).html() != undefined) {
+
+                    if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         // if (curDesc==""){
                         //     curDesc = "&";
                         // }
-                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|'+curDesc);
-                    }else{
-                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html()+'|>|');
+                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html() + '|>|' + curDesc);
+                    } else {
+                        need.replyDesc += encodeURI($('.tea_sp .anDes').eq(o).html() + '|>|');
                     }
-                }else{
-                    need.replyDesc+='|>|'
+                } else {
+                    need.replyDesc += '|>|'
                 }
 
-                    need.replyTimes = o+1
+                need.replyTimes = o + 1
 
             }
         }else{
