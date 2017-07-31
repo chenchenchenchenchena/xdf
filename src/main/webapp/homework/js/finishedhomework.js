@@ -334,7 +334,7 @@ $(function () {
     /**
      * 按下开始录音
      */
-    $('#record_btn').on('touchstart', function (event) {
+    $('#record_bg').on('touchstart', function (event) {
         timeInedex = 0;
         START = new Date().getTime();
         $(this).attr('src', 'images/speak.gif');
@@ -357,7 +357,7 @@ $(function () {
     /**
      * 松手结束录音
      */
-    $('#record_btn').on('touchend', function (event) {
+    $('#record_bg').on('touchend', function (event) {
         $(this).attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
