@@ -250,7 +250,8 @@ $(function(){
 
 
     $('.tel_log').click(function(){
-        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
+       /* console.log($(".select ul").find(".Selected").attr("data-code"));*/
+        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,"schoolId":$(".select ul").find(".Selected").attr("data-code")}
         // var stuname = {};
         // var name = $('.stname').val();
         // var mobile  = $('.phoneNumber').val();
