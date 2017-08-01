@@ -92,7 +92,7 @@ function stusea(e){
                         $('.tx').eq($(this).attr('index')).html(htmltx)
                     });
                     Index.push(htmltx);
-                    放作业提醒
+                    // 放作业提醒
                     for(var i =0;i<Index.length;i++){
                         if(Index[i]!=''){
                             $('.tx').eq(i).html(Index[i]);
