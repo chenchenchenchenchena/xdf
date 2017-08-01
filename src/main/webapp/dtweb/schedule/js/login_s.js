@@ -236,7 +236,8 @@ function stuc(e){
 	$('.tel_log').click(function(){
 		var stuname = {
 			'name':$('.stname').val(),
-			'mobile':$('.phoneNumber').val()
+			'mobile':$('.phoneNumber').val(),
+			'schoolId':''
 		}
 
 		ajax_S(url.s_webnafu,stuname,name_se)//ajax请求
