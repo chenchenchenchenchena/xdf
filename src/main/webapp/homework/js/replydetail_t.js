@@ -78,10 +78,19 @@ $(function () {
 
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for (var L = 0; L < arr.length; L++) {
-                if (arr[L] != '' && arr[L] != undefined&&arr[L]!='+'&& arr[L] != 'undefined') {
+                if (arr[L] != '' && arr[L] != undefined && arr[L]!='+' && arr[L] != 'undefined') {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                } else {
+                } else {//描述信息为空
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    /*var tea = e.data.File.RevampFile;//老师批注
+                    if (tea != undefined) {
+                        for (var b = 0; b < tea.length; b++) {
+                            if(parseInt(L+1) == parseInt(tea[b][0].replyTimes)){
+                                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                            }
+
+                        }
+                    }*/
                 }
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -965,7 +974,13 @@ $(function () {
 
             }
         }
-
+        var str = "";
+        for(var i=0;i<$('.tea_sp .hmAnswer').length;i++){
+            // alert($('.tea_sp .hmAnswer:eq('+i+')').find('.anDes').length);
+            if($('.tea_sp .hmAnswer:eq('+i+')').find('.voiceBox').html()=="" && $('.tea_sp .hmAnswer:eq('+i+')').find('.imgBox').html()=="" && $('.tea_sp .hmAnswer:eq('+i+')').find('.anDes').length<=0){
+                $('.tea_sp .hmAnswer:eq('+i+')').hide();
+            }
+        }
     }
 
 
