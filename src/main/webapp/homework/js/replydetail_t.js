@@ -252,8 +252,21 @@ $(function () {
             layer.msg('正在提交，请稍等');
             return false;
         }
+        var buer = false;
         $(this).css('background','rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
-        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0) {
+        if(sessionStorage.bangbang){
+            if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
+                buer = true;
+            }
+        }else{
+            if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
+                buer = false;
+            }else{
+                buer = true;
+            }
+
+        }
+        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false) {
             layer.msg('批复不能为空');
             $('.areyok').hide();
             $('.areyok input:last-of-type').css('background', '#00ba97');
