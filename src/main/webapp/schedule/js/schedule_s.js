@@ -2,8 +2,8 @@ $(function() {
     if (!sessionStorage.openid) {
         //微信授权判断
         wechatCode(location.href);
-    }
-    ;
+    };
+
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -36,24 +36,29 @@ $(function() {
     //存储主讲老师
     var masterteacher = '';
     //当天课程
+    ajax_S(url.s_seac, WXnum, stud);
+
     var emailm = {
         'studentCode': sessionStorage.stuNum,
         'beginDate': time1,
         'endDate': time1,
+        'schoolId':sessionStorage.schoolId
     };
     //当月课程
     var menu_s = {
         'studentCode': sessionStorage.stuNum,
         'beginDate': new Date().format("yyyy-MM-01"),
-        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays()
+        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
+        'schoolId':sessionStorage.schoolId
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
-    ajax_S(url.s_seac, WXnum, stud);
     $('.js_jin').click(function () {
         var emailm = {
             'studentCode': sessionStorage.stuNum,
             'beginDate': time1,
-            'endDate': time1
+            'endDate': time1,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_stud, emailm, stusea);
         var month = $('.today').attr('data_m');
@@ -62,9 +67,11 @@ $(function() {
         var menu_s = {
             'studentCode': sessionStorage.stuNum,
             'beginDate': $('#ymym').html().substring(0, 4) + '-' + month + '-01',
-            'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount
+            'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
-        ajax_S(url.s_stud, menu_s, menufunc);
+        // ajax_S(url.s_stud, menu_s, menufunc);
         monththis = month
     })
     // 微信查询是否绑定微信  参数：当前微信号 学生
@@ -75,7 +82,7 @@ $(function() {
         } else {
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
-            emailm.studentCode = sessionStorage.stuNum;
+            emailm.studentCode = sessionStorage.schoolId;
             menu_s.studentCode = sessionStorage.stuNum;
             ajax_S(url.s_stud, menu_s, menufunc);
             ajax_S(url.data_s, '1', function (e) {
@@ -210,7 +217,9 @@ $(function() {
                 var remindedata = {
                     'classCode': curr_e[i].ClassCode,
                     'courseCode': curr_e[i].CourseCode,
-                    'studentNo': sessionStorage.stuNum
+                    'studentNo': sessionStorage.stuNum,
+                    'schoolId':sessionStorage.schoolId
+
                 };
                 var htmltx = '';
                 // ajax_S(url.s_data,remindedata,function(e){
@@ -293,13 +302,17 @@ $(function() {
             var emailm = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': time,
-                'endDate': time
+                'endDate': time,
+                'schoolId':sessionStorage.schoolId
+
             };
             //当月课程
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': time.substring(0, 7) + '-01',
-                'endDate': time.substring(0, 7) + '-' + daycount
+                'endDate': time.substring(0, 7) + '-' + daycount,
+                'schoolId':sessionStorage.schoolId
+
             };
 
             if (time1.split(' ')[0] > time) {
@@ -363,7 +376,9 @@ $(function() {
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': $('#ymym').html().substring(0, 4) + '-' + month + '-01',
-                'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount
+                'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount,
+                'schoolId':sessionStorage.schoolId
+
             };
             ajax_S(url.s_stud, menu_s, menufunc);
             monththis = month
@@ -392,7 +407,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays(),
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,emailm,stusea);
         var month  = $('.today').attr('data_m');
@@ -401,7 +418,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,menu_s,menufunc);
         monththis = month
@@ -411,7 +430,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays(),
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,emailm,stusea);
         var month  = $('.today').attr('data_m');
@@ -420,7 +441,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,menu_s,menufunc);
         monththis = month
