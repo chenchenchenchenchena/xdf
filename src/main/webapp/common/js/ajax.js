@@ -143,11 +143,11 @@ function wechatCode(url) {
                         sessionStorage.nickname = json.userInfo.nickname;
                         sessionStorage.headimgurl = json.userInfo.headimgurl;
                     } else {
-                        layer.msg('获取用户信息失败')
+                        // layer.msg('获取用户信息失败')
                     }
                 },
                 error: function (json) {
-                    layer.msg('获取用户信息失败')
+                    // layer.msg('获取用户信息失败')
                 }
             })
         }

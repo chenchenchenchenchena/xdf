@@ -18,7 +18,7 @@ $(function(){
     }
 
     function stuc(e){
-        console.log(e)
+        console.log(e);
         if(e.result==false){
             $('.card').show();
             $('.enter').show();
