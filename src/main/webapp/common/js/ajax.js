@@ -33,7 +33,7 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
-if(getRequest('public').public=='JT'){
+if(getRequest('state').state=='JT'){
     //新的appid
     sessionStorage.signal = 0;
     appId =  'wx67e16b7247bde1a8';

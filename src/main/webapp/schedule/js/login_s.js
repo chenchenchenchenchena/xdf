@@ -258,7 +258,7 @@ $(function(){
             layer.msg(e.message)
             // layer.msg('关联成功')
             $('.deterAss').html('解除关联');
-            $('.deterAss').css('background','#fc1010')
+            $('.deterAss').css('background','#fc1010');
             if(sessionStorage.signal){
                 location.href = 'login_stu.html'
             }else{
@@ -275,12 +275,12 @@ $(function(){
 
     $(document).on('click','.Relation',function(){
         if($(this).html()=='确认关联'){
-            var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+            var stunum  = $('.stu_num').eq($(this).parent().index()-1).text();
             var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
             ajax_S(url.s_bind,stumore,telbind)
             // $(this).html('解除关联')
         }else{
-            var stunum  = $('.stu_num').eq($(this).parent().index()-1).text()
+            var stunum  = $('.stu_num').eq($(this).parent().index()-1).text();
             var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl}
             ajax_S(url.s_nobd,stumore,telbind)
             $(this).html('确认关联')
