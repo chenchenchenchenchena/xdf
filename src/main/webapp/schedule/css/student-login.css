@@ -41,13 +41,14 @@ body{
     border: none;
     outline: none;
     padding-left: 0.5rem;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+   /* border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;*/
+	border-radius:5px;
     float: left;
     font-size: 0.36rem;
 }
 .studentLogin button{
-	width:2.3rem;
+	width:2.25rem;
 	height: 1.3rem;
 	border: none;
 	background: #00bb97;
@@ -178,8 +179,10 @@ body{
 }
 .content .select{
 	/*width: 300px;*/
-	width:343px;
+	/*width:343px;*/
 	/*height: 40px;*/
+	width:90%;
+	border-radius:5px;
 	height:50px;
 	background: #FFFFFF;
 	/*margin: 0px auto;*/
@@ -201,7 +204,8 @@ body{
 	transition: all .3s ease-in;
 }
 .content .select p{
-	width: 300px;
+	/*width: 300px;*/
+	width:90%;
 	line-height: 50px;
 	font-size: 16px;
 	font-family: "microsoft yahei";
@@ -209,7 +213,8 @@ body{
 	padding: 0px 15px;
 }
 .content .select ul{
-	width: 343px;
+	/*width: 343px;*/
+	width:100%;
 	display: block;
 	font-size: 16px;
 	background: #FFFFFF;
