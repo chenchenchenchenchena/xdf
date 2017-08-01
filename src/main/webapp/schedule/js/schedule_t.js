@@ -92,13 +92,13 @@ function stusea(e){
                         $('.tx').eq($(this).attr('index')).html(htmltx)
                     });
                     Index.push(htmltx);
-                    //放作业提醒
-                    // for(var i =0;i<Index.length;i++){
-                    //     if(Index[i]!=''){
-                    //         $('.tx').eq(i).html(Index[i]);
-                    //         $('.tx').eq(i).css('padding','.05rem .1rem');
-                    //     }
-                    // }
+                    放作业提醒
+                    for(var i =0;i<Index.length;i++){
+                        if(Index[i]!=''){
+                            $('.tx').eq(i).html(Index[i]);
+                            $('.tx').eq(i).css('padding','.05rem .1rem');
+                        }
+                    }
                 }
             });
             if(time1<curr_e[i].SectEnd){

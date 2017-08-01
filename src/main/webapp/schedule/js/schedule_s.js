@@ -223,31 +223,31 @@ $(function() {
 
                 };
                 var htmltx = '';
-                // ajax_S(url.s_data,remindedata,function(e){
-                //     if(e.result==false){
-                //         layer.msg('请求参数不可以为空')
-                //     }else{
-                //         if(e.remindstatus==1){
-                //             htmltx = '有新作业'
-                //         }else if(e.remindstatus==2){
-                //             htmltx = ''
-                //         }
-                //         else if(e.remindstatus==3){
-                //             htmltx = '查看批复'
-                //         }
-                //         $('.tx').each(function(){
-                //             $('.tx').eq($(this).attr('index')).html(htmltx)
-                //         });
-                //         Index.push(htmltx);
-                //         放作业提醒
-                //         for(var i =0;i<Index.length;i++){
-                //             if(Index[i]!=''){
-                //                 $('.tx').eq(i).html(Index[i]);
-                //                 $('.tx').eq(i).css('padding','.05rem .1rem');
-                //             }
-                //         }
-                //     }
-                // });
+                ajax_S(url.s_data,remindedata,function(e){
+                    if(e.result==false){
+                        layer.msg('请求参数不可以为空')
+                    }else{
+                        if(e.remindstatus==1){
+                            htmltx = '有新作业'
+                        }else if(e.remindstatus==2){
+                            htmltx = ''
+                        }
+                        else if(e.remindstatus==3){
+                            htmltx = '查看批复'
+                        }
+                        $('.tx').each(function(){
+                            $('.tx').eq($(this).attr('index')).html(htmltx)
+                        });
+                        Index.push(htmltx);
+                        放作业提醒
+                        for(var i =0;i<Index.length;i++){
+                            if(Index[i]!=''){
+                                $('.tx').eq(i).html(Index[i]);
+                                $('.tx').eq(i).css('padding','.05rem .1rem');
+                            }
+                        }
+                    }
+                });
                 if (time1 < curr_e[i].SectEnd) {
                     old = ''
                     color = '#000'
