@@ -138,9 +138,13 @@ function stuc(e){
 			layer.msg(e.message);
 			clear();
 			$('.deterAss').html('立即关联');
-			$('.deterAss').css('background','#00ba97')
-            location.href = 'login_s.html'
-            
+			$('.deterAss').css('background','#00ba97');
+            if(sessionStorage.signal){
+                location.href = 'login_stu.html'
+            }else{
+                location.href = 'login_s.html'
+            }
+
             // location.reload()
 		}else{
             sessionStorage.stuNum = $('.stunum').val();
@@ -244,14 +248,22 @@ function telbind(e){
 	// alert(e.message.length!=0)
 	if(e.result==true&&e.data==undefined){
 	   layer.msg(e.message)
-        location.href = 'login_s.html'
+        if(sessionStorage.signal){
+            location.href = 'login_stu.html'
+        }else{
+            location.href = 'login_s.html'
+        }
         clear();
     }else if(e.result==false){
         	layer.msg(e.message)
 			// layer.msg('关联成功')
 			$('.deterAss').html('解除关联');
 			$('.deterAss').css('background','#fc1010')
-        	location.href = 'login_s.html';
+        if(sessionStorage.signal){
+            location.href = 'login_stu.html'
+        }else{
+            location.href = 'login_s.html'
+        }
         	clear();
 	}else{
 	   layer.msg('绑定成功');
@@ -275,37 +287,6 @@ $(document).on('click','.Relation',function(){
     }
 	
 })
-	// var WXnumber = [
-	// 	'ofZfFwrZfm6zzyUCXsgpvE-0qH08'
-	// 	// 'ofZfFwlCe5Br7LEYIf16fO-di2O0',
-     //    // 'ofZfFwsBvoqZaBMFovXrJn6e9kEM'
-	// ];
-    //
-	// for(var i = 0;i<WXnumber.length;i++){
-    // var json = {
-    //
-     //    "touser":WXnumber[i],
-    //
-     //    "template_id":"abx4ixmg5kmC6eHacDAtjOkzbNg-sp47LZt7LNe6VT4",
-     //    "url":"",
-     //    "data":{
-    //
-     //        "Date":{
-    //
-     //            "value":"06月07日 19时24分",
-    //
-     //            "color":"#173177"
-    //
-     //        }
-     //    }
-    //
-    // };
-    // ajax_S('https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+sessionStorage.access_token+'',json,function(e){
-    	// console.log(e)
-	// })
-
-    // }
-
 
 
 

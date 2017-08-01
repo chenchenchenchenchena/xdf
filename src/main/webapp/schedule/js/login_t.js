@@ -111,9 +111,14 @@ function clear(){
 // 退出登录
 function signOut(e) {
         var unlog = {
-            'sid': localStorage.sid,
-            'returnUrl': url.t_back
+            'sid': localStorage.sid
         };
+        if(sessionStorage.signal){
+            unlog.returnUrl = url.t_bckt
+
+        }else{
+            unlog.returnUrl = url.t_back
+        }
         clear();
         //退出e2登录
         ajax_S(url.t_logi, unlog, function (a) {

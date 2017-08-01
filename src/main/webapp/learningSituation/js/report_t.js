@@ -12,7 +12,11 @@ $(function(){
                     sessionStorage.schoolId = e.data.schoolId;
                     location.href = 'report_s.html';
                 }else{
-                   location.href = '../schedule/login_s.html'
+                    if(sessionStorage.signal){
+                        location.href = '../schedule/login_stu.html'
+                    }else{
+                        location.href = '../schedule/login_s.html'
+                    }
                 }
             });
     }
