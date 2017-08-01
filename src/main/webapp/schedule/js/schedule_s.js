@@ -261,14 +261,14 @@ $(function() {
                 if(masterta==''||masterta==undefined){
                     masterta  = '暂无'
                 }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p><span class="tx" index="'+i+'">'+htmltx+'</span></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
                 $('.curriculum').show()
             }
         }
 
 
-        // <span class="tx" index="'+i+'">'+htmltx+'</span>
+        //
     };
     // <span>12个带交作业</span>
     //日历点击事件
