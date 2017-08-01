@@ -2,9 +2,9 @@
  * Created by zyc on 2017/7/31.
  */
 $(function(){
-   /* if(!sessionStorage.openid){
+   if(!sessionStorage.openid){
         wechatCode(location.href)
-    }*/
+    }
     // sessionStorage.openid = '111';
     var WXnum  = {
         'wechatId':sessionStorage.openid
