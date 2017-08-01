@@ -68,7 +68,7 @@ $(function () {
             } else {
                 var pizhu = decodeURI(datas.replyDesc).split('|>|');
                 for(var i=0;i<pizhu.length;i++){
-                    if(pizhu[i]=='+'){
+                    if(pizhu[i]=='+'||pizhu[i]==undefined||pizhu[i]=='undefined'){
                         if(pizhu.length>1){
                             pizhuHtml += '';
                         }else{
