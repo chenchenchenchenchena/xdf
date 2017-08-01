@@ -223,6 +223,23 @@ $(function() {
 
                 };
                 var htmltx = '';
+
+                if (time1 < curr_e[i].SectEnd) {
+                    old = ''
+                    color = '#000'
+                } else {
+                    old = 'activ_c'
+                    color = '#ccc'
+                }
+                if(jteaname==undefined){
+                    jteaname = '暂无'
+                }
+                if(masterta==''||masterta==undefined){
+                    masterta  = '暂无'
+                }
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.loading_s').hide();
+                $('.curriculum').show()
                 ajax_S(url.s_data,remindedata,function(e){
                     if(e.result==false){
                         layer.msg('请求参数不可以为空')
@@ -248,25 +265,33 @@ $(function() {
                         }
                     }
                 });
-                if (time1 < curr_e[i].SectEnd) {
-                    old = ''
-                    color = '#000'
-                } else {
-                    old = 'activ_c'
-                    color = '#ccc'
-                }
-                if(jteaname==undefined){
-                    jteaname = '暂无'
-                }
-                if(masterta==''||masterta==undefined){
-                    masterta  = '暂无'
-                }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-                $('.loading_s').hide();
-                $('.curriculum').show()
             }
         }
-
+        ajax_S(url.s_data,remindedata,function(e){
+            if(e.result==false){
+                layer.msg('请求参数不可以为空')
+            }else{
+                if(e.remindstatus==1){
+                    htmltx = '有新作业'
+                }else if(e.remindstatus==2){
+                    htmltx = ''
+                }
+                else if(e.remindstatus==3){
+                    htmltx = '查看批复'
+                }
+                $('.tx').each(function(){
+                    $('.tx').eq($(this).attr('index')).html(htmltx)
+                });
+                Index.push(htmltx);
+                // 放作业提醒
+                for(var i =0;i<Index.length;i++){
+                    if(Index[i]!=''){
+                        $('.tx').eq(i).html(Index[i]);
+                        $('.tx').eq(i).css('padding','.05rem .1rem');
+                    }
+                }
+            }
+        });
 
         //
     };
