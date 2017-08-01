@@ -9,7 +9,7 @@ $(function () {
             "email":$(".t_email input").val()+"@xdf.cn"
         }
         if($(".t_email input").val()==""){
-            layer.msg("邮箱不能为空",{icon:6});
+            layer.msg("邮箱不能为空");
         }else{
             ajax_S(url.w_email,temail,terEmail);
         }
@@ -26,7 +26,7 @@ $(function () {
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
                 if(e.wechatData.length<=0){
-                    layer.msg("微信未授权",{icon:6});
+                    layer.msg("微信未授权");
                 }else{
                     sessionStorage.nickname=e.wechatData[0].nickName;
                     sessionStorage.headimgurl=e.wechatData[0].headImg;
@@ -34,11 +34,11 @@ $(function () {
                     location.href="../../schedule/login_t.html";
                 }
             }else{
-                layer.msg("教师邮箱不存在",{icon:6});
+                layer.msg("教师邮箱不存在");
             }
 
         }else{
-            layer.msg("请输入正确的老师邮箱",{icon:6});
+            layer.msg("请输入正确的老师邮箱");
         }
     }
 //清除缓存
