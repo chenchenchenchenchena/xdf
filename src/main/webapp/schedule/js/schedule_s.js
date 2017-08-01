@@ -267,6 +267,7 @@ $(function() {
                 });
             }
         }
+
         ajax_S(url.s_data,remindedata,function(e){
             if(e.result==false){
                 layer.msg('请求参数不可以为空')
@@ -292,7 +293,6 @@ $(function() {
                 }
             }
         });
-
         //
     };
     // <span>12个带交作业</span>
