@@ -68,7 +68,8 @@ $(function () {
         var emailm = {
             'studentCode': sessionStorage.stuNum,
             'beginDate': time1,
-            'endDate': time1
+            'endDate': time1,
+            'schoolId':'73'
         };
         ajax_S(url.s_stud, emailm, stusea);
         var month = $('.today').attr('data_m');
