@@ -5,7 +5,6 @@ var url_o2 = 'http://dt.xdf.cn';
 var appId = '';
 var secreT = '';
 
-
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -34,6 +33,19 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
+if(getRequest('public').public=='JT'){
+    //新的appid
+    sessionStorage.signal = 0;
+    appId =  'wx559791e14e9ce521';
+    secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+}else{
+    if(sessionStorage.signal){
+        appId =  'wx559791e14e9ce521';
+        secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+    }else{
+        sessionStorage.removeItem('signal');
+    }
+}
 
 // 接口路径
 var url = {
@@ -55,6 +67,7 @@ var url = {
     'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
     't_logi': url_o+'logout/doLogout.do',//退出登录
     't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
+    't_bckt':url_o2+'/xdfdthome/schedule/login_stu.html', //回调地址
     't_data': url_o+'teacherData/queryCourseRemind.do',  //老师课表提醒
     's_data': url_o+'studentData/queryCourseRemindStudent.do',  //学生课表提醒
     't_rankl':url_o+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
@@ -144,7 +157,7 @@ function wechatCode(url) {
     }
 }
 
-var Wxid = sessionStorage.openid
+var Wxid = sessionStorage.openid;
 var calbac = {
     'code':location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&')),
     'state':location.search.substring(location.search.indexOf('state')+6,location.search.length),

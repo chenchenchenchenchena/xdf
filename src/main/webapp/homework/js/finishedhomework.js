@@ -68,10 +68,19 @@ $(function () {
             } else {
                 var pizhu = decodeURI(datas.replyDesc).split('|>|');
                 for(var i=0;i<pizhu.length;i++){
-                    pizhuHtml += pizhu[i]+'<br/>';
+                    if(pizhu[i]=='+'){
+                        if(pizhu.length>1){
+                            pizhuHtml += '';
+                        }else{
+                            $('.comment .anDes').hide();
+                        }
+                    }else{
+                        pizhuHtml += pizhu[i]+'<br/>';
+                    }
+
                 }
             }
-            $('.comment .anDes').html(pizhuHtml);
+            $('.comment .anDes').html(pizhuHtml).show();
             $('.hmAnswer,.comment').show();
         } else {
             $('.hmAnswer,.comment').hide();

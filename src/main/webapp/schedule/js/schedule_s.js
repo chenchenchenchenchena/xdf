@@ -91,13 +91,21 @@ $(function() {
     // 微信查询是否绑定微信  参数：当前微信号 老师
     function teac(e) {
         if (e.data == "goE2") {
-            location.href = 'login_s.html';
+            if(sessionStorage.signal){
+                location.href = 'login_stu.html'
+            }else{
+                location.href = 'login_s.html'
+            }
             sessionStorage.callbackconfig = 'schedule'
         } else if (localStorage.terEmail) {
             location.href = 'schedule_t.html';
             sessionStorage.removeItem('callbackconfig')
         } else {
-            location.href = 'login_s.html';
+            if(sessionStorage.signal){
+                location.href = 'login_stu.html'
+            }else{
+                location.href = 'login_s.html'
+            }
         }
     }
 
