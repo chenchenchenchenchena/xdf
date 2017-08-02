@@ -106,13 +106,13 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                  */
                 }
                     $('.reportstu_S ul').css('width',145*(class_[i].length+1));
-                if(Xindex==e.data[0].length){
+                if(Xindex==e.data[i].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
-                        Cindex.push(e.data[0][j].avgGradeView);
-                        pjIndex.push(e.data[0][j].realGrade);
-                        mfInedx.push('满分:'+e.data[0][j].fullMarks);
-                        timeIndex.push(e.data[0][j].lessonTime.split(' ')[0]);
+                        Cindex.push(e.data[i][j].avgGradeView);
+                        pjIndex.push(e.data[i][j].realGrade);
+                        mfInedx.push('满分:'+e.data[i][j].fullMarks);
+                        timeIndex.push(e.data[i][j].lessonTime.split(' ')[0]);
                     }
                 }else{
 

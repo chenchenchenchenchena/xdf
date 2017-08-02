@@ -2,8 +2,8 @@ $(function() {
     if (!sessionStorage.openid) {
         //微信授权判断
         wechatCode(location.href);
-    }
-    ;
+    };
+
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -36,24 +36,29 @@ $(function() {
     //存储主讲老师
     var masterteacher = '';
     //当天课程
+    ajax_S(url.s_seac, WXnum, stud);
+
     var emailm = {
         'studentCode': sessionStorage.stuNum,
         'beginDate': time1,
         'endDate': time1,
+        'schoolId':sessionStorage.schoolId
     };
     //当月课程
     var menu_s = {
         'studentCode': sessionStorage.stuNum,
         'beginDate': new Date().format("yyyy-MM-01"),
-        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays()
+        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
+        'schoolId':sessionStorage.schoolId
     };
     // 微信查询是否绑定微信  参数：当前微信号 学生
-    ajax_S(url.s_seac, WXnum, stud);
     $('.js_jin').click(function () {
         var emailm = {
             'studentCode': sessionStorage.stuNum,
             'beginDate': time1,
-            'endDate': time1
+            'endDate': time1,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_stud, emailm, stusea);
         var month = $('.today').attr('data_m');
@@ -62,9 +67,11 @@ $(function() {
         var menu_s = {
             'studentCode': sessionStorage.stuNum,
             'beginDate': $('#ymym').html().substring(0, 4) + '-' + month + '-01',
-            'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount
+            'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
-        ajax_S(url.s_stud, menu_s, menufunc);
+        // ajax_S(url.s_stud, menu_s, menufunc);
         monththis = month
     })
     // 微信查询是否绑定微信  参数：当前微信号 学生
@@ -75,7 +82,8 @@ $(function() {
         } else {
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
-            emailm.studentCode = sessionStorage.stuNum;
+            sessionStorage.schoolId = e.data.schoolId
+            emailm.studentCode = sessionStorage.schoolId;
             menu_s.studentCode = sessionStorage.stuNum;
             ajax_S(url.s_stud, menu_s, menufunc);
             ajax_S(url.data_s, '1', function (e) {
@@ -210,9 +218,27 @@ $(function() {
                 var remindedata = {
                     'classCode': curr_e[i].ClassCode,
                     'courseCode': curr_e[i].CourseCode,
-                    'studentNo': sessionStorage.stuNum
+                    'studentNo': sessionStorage.stuNum,
+                    'schoolId':sessionStorage.schoolId
                 };
                 var htmltx = '';
+
+                if (time1 < curr_e[i].SectEnd) {
+                    old = ''
+                    color = '#000'
+                } else {
+                    old = 'activ_c'
+                    color = '#ccc'
+                }
+                if(jteaname==undefined){
+                    jteaname = '暂无'
+                }
+                if(masterta==''||masterta==undefined){
+                    masterta  = '暂无'
+                }
+                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次<span class="tx" index="'+i+'">'+htmltx+'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.loading_s').hide();
+                $('.curriculum').show()
                 // ajax_S(url.s_data,remindedata,function(e){
                 //     if(e.result==false){
                 //         layer.msg('请求参数不可以为空')
@@ -229,7 +255,7 @@ $(function() {
                 //             $('.tx').eq($(this).attr('index')).html(htmltx)
                 //         });
                 //         Index.push(htmltx);
-                //         放作业提醒
+                //         // 放作业提醒
                 //         for(var i =0;i<Index.length;i++){
                 //             if(Index[i]!=''){
                 //                 $('.tx').eq(i).html(Index[i]);
@@ -238,27 +264,11 @@ $(function() {
                 //         }
                 //     }
                 // });
-                if (time1 < curr_e[i].SectEnd) {
-                    old = ''
-                    color = '#000'
-                } else {
-                    old = 'activ_c'
-                    color = '#ccc'
-                }
-                if(jteaname==undefined){
-                    jteaname = '暂无'
-                }
-                if(masterta==''||masterta==undefined){
-                    masterta  = '暂无'
-                }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-                $('.loading_s').hide();
-                $('.curriculum').show()
             }
         }
 
 
-        // <span class="tx" index="'+i+'">'+htmltx+'</span>
+        //
     };
     // <span>12个带交作业</span>
     //日历点击事件
@@ -293,13 +303,17 @@ $(function() {
             var emailm = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': time,
-                'endDate': time
+                'endDate': time,
+                'schoolId':sessionStorage.schoolId
+
             };
             //当月课程
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': time.substring(0, 7) + '-01',
-                'endDate': time.substring(0, 7) + '-' + daycount
+                'endDate': time.substring(0, 7) + '-' + daycount,
+                'schoolId':sessionStorage.schoolId
+
             };
 
             if (time1.split(' ')[0] > time) {
@@ -363,7 +377,9 @@ $(function() {
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': $('#ymym').html().substring(0, 4) + '-' + month + '-01',
-                'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount
+                'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount,
+                'schoolId':sessionStorage.schoolId
+
             };
             ajax_S(url.s_stud, menu_s, menufunc);
             monththis = month
@@ -392,7 +408,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays(),
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,emailm,stusea);
         var month  = $('.today').attr('data_m');
@@ -401,7 +419,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,menu_s,menufunc);
         monththis = month
@@ -411,7 +431,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':new Date().format("yyyy-MM-01"),
-            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
+            'endDate':new Date().format("yyyy-MM")+'-'+getCountDays(),
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,emailm,stusea);
         var month  = $('.today').attr('data_m');
@@ -420,7 +442,9 @@ $(function() {
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
+            'schoolId':sessionStorage.schoolId
+
         };
         ajax_S(url.s_emai,menu_s,menufunc);
         monththis = month

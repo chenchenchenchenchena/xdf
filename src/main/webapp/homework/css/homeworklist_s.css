@@ -439,10 +439,14 @@ html body .tealist_s .more_so{
 	left:50%;
 	top:50%;
 	margin-top:-182px;
-	margin-left:-271px;
+	margin-left:-275px;
 	text-align:center;
 	display:none;
 	border:1px solid #ccc;
+}
+.music_succ{
+	width:100%;
+	margin-left:-275px;
 }
 .pinch-zoom,.pinch-zoom-container
 {	width:100%;
