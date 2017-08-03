@@ -2,7 +2,8 @@ $(function(){
     var emailm = {
         'studentCode':sessionStorage.stuNum,
         'beginDate':sessionStorage.timetoday.split(' ')[0],
-        'endDate':sessionStorage.timetoday.split(' ')[0]
+        'endDate':sessionStorage.timetoday.split(' ')[0],
+        'schoolId':sessionStorage.schoolId
     };
     var mastertae = [];
 	sessionStorage.s ='';

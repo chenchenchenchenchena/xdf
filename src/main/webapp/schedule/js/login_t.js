@@ -268,7 +268,7 @@ $(document).on('touchend',"#onMenuShareAppMessage",function() {
                     for(var k = 0;k<stumore.length;k++){
                         stumodata.push({
                             'studentName' :stumore[k].StudentName,
-                            'studentId':stumore[k].Id,
+                            'studentId':stumore[k].StudentCode,
                             'studentUserId':stumore[k].CardCode ,
                         });
                     }
