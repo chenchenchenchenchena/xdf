@@ -81,9 +81,13 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                   pjIndex = [];
                   mfInedx = [];
                   timeIndex = [];
-                Cindex = [];
-                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s"></div>');
-
+                  Cindex = [];
+                if(class_[i][0].className){
+                    html_yh = '<h4>查看课堂数据</h4><img  src="images/rightArrow.png" alt="">'
+                }else{
+                    html_yh = ''
+                }
+                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s">'+html_yh+'</div>');
 
                 for (var y = 0; y < class_[i].length; y++) {
 
@@ -160,7 +164,14 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 
 
 })};
+//课堂互动跳转
+$(document).on('touchend','achievement_s',function(){
 
+
+
+
+    location.href = ''
+});
 
 
 

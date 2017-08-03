@@ -24,12 +24,32 @@ $(function(){
 
 //点击查看成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
-    var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
-    sessionStorage.classcode = $(this).attr('classcode');
-    sessionStorage.schoolid = $(this).attr('schoolid');
-    localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
-    localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
-    window.location.href = 'rankinglist_t.html?title='+title;
+    if($('.achievement_s>h4').length==2){
+        if($(this).index()==0){
+
+
+
+
+            location.href = '';
+        }else{
+            var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
+            sessionStorage.classcode = $(this).attr('classcode');
+            sessionStorage.schoolid = $(this).attr('schoolid');
+            localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
+            localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
+            window.location.href = 'rankinglist_t.html?title='+title;
+        }
+
+
+    }else{
+        var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
+        sessionStorage.classcode = $(this).attr('classcode');
+        sessionStorage.schoolid = $(this).attr('schoolid');
+        localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
+        localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
+        window.location.href = 'rankinglist_t.html?title='+title;
+    }
+
 });
 
 
@@ -69,7 +89,13 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                 var mfInedx_r = [];
                 var mfInedx_c = [];
                 var timeIndex  = [];
-$('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s"> <h4 classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
+                if(class_[i][0].className){
+                    html_yh = '<h4 style="text-align:left;position:absolute;width:auto;padding-right:20px;">查看课堂数据</h4><img  src="images/rightArrow.png" alt="">'
+                }else{
+                    html_yh = ''
+                }
+$('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'">查看成绩排行</h4> <img src="images/rightArrow.png" alt=""> </div></div>');
+
                 $('.title_s').eq(0).siblings().show();
                 $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
                 var Cindex = e.data[i].data[0].data.length;
@@ -200,7 +226,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -230,7 +255,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r);
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
@@ -279,7 +303,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -309,7 +332,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
@@ -387,7 +409,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }
@@ -438,7 +459,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -471,7 +491,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
@@ -520,7 +539,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Cindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m+1 != r){
                                         r = m+1;
                                         Tbuer = true;
@@ -550,7 +568,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
@@ -599,7 +616,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -629,7 +645,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }
@@ -680,7 +695,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -710,7 +724,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max>Rindex_max){
@@ -759,7 +772,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -789,7 +801,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                         if(Cindex_max==Rindex_max){
@@ -838,7 +849,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                             for(var m = 0;m<Rindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
-                                    console.log(r);
                                     if(m != r){
                                         Tbuer = true;
                                         r = m+1;
@@ -871,7 +881,6 @@ $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.da
                                     mfInedx_c.push('满分：0');
                                 }
                             }
-                            console.log(mfInedx_r)
                             Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
                         }
                     }

@@ -2,9 +2,13 @@ $(function () {
     var layer1, layer2, loading;
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
-        'homeworkTinfoId': sessionStorage.Tid
+        'homeworkTinfoId': sessionStorage.Tid,
+        'appid': Global.appid,
+        'secret': Global.secret,
+        'url': 'http://dt.xdf.cn/xdfdthome/homework/finishedhomework_s.html',
+        'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
     };
-
+    var classYHname;
     $('.hwTeacherRankTitle').on('touchend', function () {
         if ($('.hwInfo').css('display') == 'none') {
             $('.hwInfo').show();
@@ -102,6 +106,7 @@ $(function () {
         //获取文件信息
         ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             console.log(e)
+            classYHname = e.data.className
             $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
             $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
@@ -252,7 +257,6 @@ $(function () {
     $('.areyok input:first-of-type').on('touchend',function(){
         $(".areyok").hide()
     });
-
     //批改作业提交
     $('.areyok input:last-of-type').on('touchend', function () {
         $(".areyok").hide();
@@ -331,6 +335,7 @@ $(function () {
             }
             need.replyTimes = '1'
         }
+        need.className = classYHname;
         ajax_S(homework_s.t_succ, need, function (e) {
             if (e.result == true) {
                 $('.big_back').show();
