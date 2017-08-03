@@ -91,9 +91,14 @@ $(function () {
             sessionStorage.tm = mastertae[teacindex].teacherName;
             sessionStorage.cc = BeginDate[regionindex[i]].ClassCode;
             var stuall = BeginDate[regionindex[i]].Students;
+            var stuListStorage = [];
             for (var k = 0; k < stuall.length; k++) {
+                var stuInfo = {'studentName':stuall[k].StudentName,'studentCode':stuall[k].StudentCode,'classCode':stuall[k].ClassCode,'schoolId':stuall[k].SchoolId};
+                stuListStorage.push(stuInfo);
                 //存储学生的名字，在studentlist_t.html页面要用到
-                sessionStorage.s += stuall[k].StudentName + ',';
+                // sessionStorage.s += stuall[k].StudentName + ',';
+                //存储学生学号
+                // sessionStorage.studentCode = stuall[k].StudentCode;
                 //在studentlist_t.html页面新增添 打电话、进入学情的功能，需要的数据
                 // teacherEmail:hanqifan@xdf.cn
                 // classCode:HDXP3EB03  sessionStorage.cc/sessionStorage.classCode
@@ -108,6 +113,10 @@ $(function () {
                     $('.studentList ul').append('<li class="swiper-slide">' + stuall[k].StudentName.substring(1, stuall[k].StudentName.length) + '<p >' + stuall[k].StudentName + '</p></li>')
                 }
             }
+
+            //存储学生的名字和学号，在studentlist_t.html页面要用到
+            var stuInfoKey = {'stuInfoKey':stuListStorage};
+            sessionStorage.stuList = JSON.stringify(stuInfoKey);
         }
         $('.teacherList p span').html('(' + $('.teacherList li').length + ')')
         $('.studentList p span').html('(' + $('.studentList li').length + ')')
