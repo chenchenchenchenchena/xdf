@@ -217,7 +217,7 @@ $(function() {
                 var jteaname;
                 var remindedata = {
                     'classCode': curr_e[i].ClassCode,
-                    'courseCode': curr_e[i].CourseCode,
+                    // 'courseCode': curr_e[i].CourseCode,
                     'studentNo': sessionStorage.stuNum,
                     'schoolId':sessionStorage.schoolId
                 };
