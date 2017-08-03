@@ -89,10 +89,18 @@ $(function () {
             arr.push(BeginDate[regionindex[i]].Students);
             sessionStorage.t = masterta;
             sessionStorage.tm = mastertae[teacindex].teacherName;
-            sessionStorage.cc = BeginDate[regionindex[i]].ClassCode
-            var stuall = BeginDate[regionindex[i]].Students
+            sessionStorage.cc = BeginDate[regionindex[i]].ClassCode;
+            var stuall = BeginDate[regionindex[i]].Students;
             for (var k = 0; k < stuall.length; k++) {
+                //存储学生的名字，在studentlist_t.html页面要用到
                 sessionStorage.s += stuall[k].StudentName + ',';
+                //在studentlist_t.html页面新增添 打电话、进入学情的功能，需要的数据
+                // teacherEmail:hanqifan@xdf.cn
+                // classCode:HDXP3EB03  sessionStorage.cc/sessionStorage.classCode
+                // tCode:2
+                // studentNo:SS6077  sessionStorage.studentCode = stuall[k].StudentCode;
+                // schoolId:73
+                //电话号码
                 if (stuall[k].StudentName.length > 3) {
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
                         'rem;">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '<p style="font-size:.3rem;">' + stuall[k].StudentName + '</p></li>')
