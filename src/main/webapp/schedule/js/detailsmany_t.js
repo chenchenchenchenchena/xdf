@@ -112,9 +112,9 @@ $(function () {
                 //电话号码
                 if (stuall[k].StudentName.length > 3) {
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
-                        'rem;">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '<p style="font-size:.3rem;">' + stuall[k].StudentName + '</p></li>')
+                        'rem;"><span class="name-icon">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '</span><p style="font-size:.3rem;">' + stuall[k].StudentName + '</p><i class="to-tel"></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
                 } else {
-                    $('.studentList ul').append('<li class="swiper-slide">' + stuall[k].StudentName.substring(1, stuall[k].StudentName.length) + '<p >' + stuall[k].StudentName + '</p></li>')
+                    $('.studentList ul').append('<li class="swiper-slide"><span class="name-icon">' + stuall[k].StudentName.substring(1, stuall[k].StudentName.length) + '</span><p >' + stuall[k].StudentName + '</p><i class="to-tel"></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
                 }
             }
 

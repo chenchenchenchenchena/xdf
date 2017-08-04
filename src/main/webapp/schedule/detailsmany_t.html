@@ -43,11 +43,32 @@
 					</ul>
 				</div>
 			</div>
-			<div class="classTeacher studentList">
-				<p><a href="studentlist_t.html">课堂学生<span>(23)</span><img src="images/rightArrow.png" /></a></p>
-				<div class="swiper-container">
-					<ul class="swiper-wrapper">
+			<!--<div class="classTeacher studentList">-->
+				<!--<p><a href="studentlist_t.html">课堂学生<span>(23)</span><img src="images/rightArrow.png" /></a></p>-->
+				<!--<div class="swiper-container">-->
+					<!--<ul class="swiper-wrapper">-->
 
+					<!--</ul>-->
+				<!--</div>-->
+			<!--</div>-->
+			<div class="classTeacher studentList">
+				<p><a href="studentlist_t.html">课堂学生<span>(26)</span><img src="images/rightArrow.png"></a></p>
+				<div class="swiper-container swiper-container-horizontal">
+					<ul class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+						<!--<li class="swiper-slide swiper-slide-active" style="width: 52px; margin-right: 30px;">
+							<span class="name-icon">玉清</span>
+							<p>李伟2</p>
+							<a href="wtai://wp//mc;18182653579" class="to-tel">tel</a>
+							<a class="to-learn">查看学情</a>
+						</li>
+						<li class="swiper-slide swiper-slide-active" style="width: 52px; margin-right: 30px;">
+							<span class="name-icon">玉清</span>
+							<p>曹玉清</p>
+							<i class="to-tel"></i>
+							<button class="to-learn">查看学情</button>
+						</li>-->
+
+						<!--<li class="swiper-slide" style="width: 52px; margin-right: 30px;">胜帅<p>周胜帅</p></li>-->
 					</ul>
 				</div>
 			</div>
@@ -57,4 +78,14 @@
 		</section>
 	</body>
 	<script src="js/teacher-detailsMany.js"></script>
+<!--<script>
+	//跳转到学生个人详情
+	$(document).on('touchstart','.to-learn',function () {
+		sessionStorage.classCode = 'HDXP3ZPA03';
+		localStorage.schoolId = '73';
+		localStorage.setItem('CLASSCODE',sessionStorage.classCode);
+		localStorage.setItem('SCHOOLID',localStorage.schoolId);
+		window.location.href = '../learningSituation/reportstu_t.html?studentNo=SS3895&tCode=1&studentName=王怿格';
+	});
+</script>-->
 </html>
