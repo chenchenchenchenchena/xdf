@@ -16,10 +16,8 @@ $(function () {
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
                         '<span>' + stuInfo[k].studentName + '</span>' +
-                        '<span style="float: right;">电话</span>' +
-                        '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '">' +
-                        '<span style="float: right;margin-right: 10px;">' +
-                        '学情</span></a></li>')
+                        '<span class="callIcon"/></span>' +
+                        '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
 
 
                 }
