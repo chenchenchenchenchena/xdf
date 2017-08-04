@@ -57,6 +57,11 @@ $(function(){
 	});
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
+		// 缓存信息
+		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
+		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
+		localStorage.classcode = $(this).attr('data-classcode') ;//班级code
+
 		// sessionStorage.removeItem('finishhwInfos');
 		var curIndex = $(this).parents('.firstList').index();
 		var classIndex = $(this).index();
@@ -164,7 +169,7 @@ $(function(){
 								// replay=1;
 								break;
 						}
-						hwLessNosHtml +='<li data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span></li>';
+						hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span></li>';
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){

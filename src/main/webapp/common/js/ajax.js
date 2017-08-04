@@ -112,6 +112,7 @@ var homework_s = {
     't_seac': url_o+'teacherData/gainHomeworkFileData.do', // 老师获取学生文件
     's_hwlt': url_o+'studentHWork/assingmentHomework.do',//待交作业学生列表查询
     's_hwfl': url_o+'studentHWork/finishHomework.do',//已完成作业学生列表查询
+    's_hwfldetail': url_o+'studentHWork/finishHomeworkSelectOne.do',//已完成作业学生作业详情
     's_hwrank': url_o+'studentHWork/studentHomeworRank.do',//学生作业排名
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
     's_readstatus': url_o+'studentHWork/updateStuReadstatus.do',//学生端完成作业的学生阅读状态
