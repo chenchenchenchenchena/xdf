@@ -7,7 +7,13 @@ $(function () {
      */
     var fileParams = [];
     var voiceFileParams = [];
-    var homeworkSinfoId = GetRequest('id');
+    var homeworkSinfoId = localStorage.homeworkSinfoId;//学生作业id
+    var homeworkTinfoId = "";//老师作业id
+    if (GetRequest("stuHomeworkId")){//消息推送链接
+        homeworkTinfoId = GetRequest("stuHomeworkId");
+    }else{
+        homeworkTinfoId = localStorage.homeworkTinfoId;
+    }
     var fileName;
     var fileType;
     var fileSize;
@@ -20,103 +26,116 @@ $(function () {
         window.location.href = "studentrank_s.html";
     });
     // 显示作业信息
-    var curIndex = GetRequest("curIndex");//课程index
-    var classIndex = GetRequest("classIndex");//课次index
-    var hwfinishInfos = JSON.parse(localStorage.finishhwInfos).data;
+    // var curIndex = GetRequest("curIndex");//课程index
+    // var classIndex = GetRequest("classIndex");//课次index
+    // var hwfinishInfos = JSON.parse(localStorage.finishhwInfos).data;
     var replyStatus = "";//老师批复状态
     var recordCount = 0;
     // 显示作业信息
-    getHwFinishInfos();
-    function getHwFinishInfos() {
-        loading = layer.load();
-        var datas = hwfinishInfos[curIndex].lessNos[classIndex];
-        localStorage.hwteacherId = datas.homeworkTinfoId;//老师主键id
-        /*******作业信息*******/
-        //知识点
-        if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-            knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
-            for (var i = 0; i < knowledgePoint.length; i++) {
-                kpHtml = '<span>' + knowledgePoint[i] + '</span>';
-                $('.knowPoint').append(kpHtml);
-            }
-        }
-        //作业描述
-        $('.des .hwCon').html(decodeURI(datas.teacherDes));
-        // 判断是否批复，未批复可重新提交答案
-        replyStatus = datas.replyStatus;
-        var myAnswerDes = decodeURI(datas.description);
-        if (replyStatus == 1) {//已批复
-            $('.answer').hide();
+    var reqData = {
+        'stuNum':sessionStorage.stuNumber, //学生编号
+         'classCode':localStorage.classcode,
+         'homeworkTinfoId':homeworkTinfoId
+    };
+    loading = layer.load();
+    ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess);
 
-            /*******作业答案*******/
-            if (myAnswerDes != "") {
-                $('.hmAnswer .anDes').html(myAnswerDes).show();
-            } else {
-                $('.hmAnswer .anDes').hide();
-            }
-
-            // 优秀
-            if (datas.tag == 1) {
-                $('.hw_status').addClass('hw_status_s');
-            } else {
-                $('.hw_status').removeClass('hw_status_s');
-            }
-            /*******老师批注*******/
-            var pizhuHtml = "";
-            if (datas.replyStatus == "0") {
-                pizhuHtml = "暂无批注"
-            } else {
-                var pizhu = decodeURI(datas.replyDesc).split('|>|');
-                for(var i=0;i<pizhu.length;i++){
-                    if(pizhu[i]=='+'||pizhu[i]==undefined||pizhu[i]=='undefined'){
-                        if(pizhu.length>1){
-                            pizhuHtml += '';
-                        }else{
-                            $('.comment .anDes').hide();
-                        }
-                    }else{
-                        pizhuHtml += pizhu[i]+'<br/>';
-                    }
-
+    function getHwFinishDetailSuccess(msg){
+        // loading = layer.load();
+        console.log(JSON.stringify(msg));
+        if(msg.code==200){
+            var datas = msg.data;
+            localStorage.hwteacherId = datas.homeworkTinfoId;//老师主键id
+            /*******作业信息*******/
+            //知识点
+            if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
+                knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
+                var kpHtml="";
+                for (var i = 0; i < knowledgePoint.length; i++) {
+                    kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                    $('.knowPoint').append(kpHtml);
                 }
             }
-            $('.comment .anDes').html(pizhuHtml).show();
-            $('.hmAnswer,.comment').show();
-        } else {
-            $('.hmAnswer,.comment').hide();
-            if (myAnswerDes != "") {
-                $('.teBox').val(myAnswerDes);
+            //作业描述
+            $('.des .hwCon').html(decodeURI(datas.teacherDes));
+            // 判断是否批复，未批复可重新提交答案
+            replyStatus = datas.replyStatus;
+            var myAnswerDes = decodeURI(datas.description);
+            if (replyStatus == 1) {//已批复
+                $('.answer').hide();
+
+                /*******作业答案*******/
+                if (myAnswerDes != "") {
+                    $('.hmAnswer .anDes').html(myAnswerDes).show();
+                } else {
+                    $('.hmAnswer .anDes').hide();
+                }
+
+                // 优秀
+                if (datas.tag == 1) {
+                    $('.hw_status').addClass('hw_status_s');
+                } else {
+                    $('.hw_status').removeClass('hw_status_s');
+                }
+                /*******老师批注*******/
+                var pizhuHtml = "";
+                if (datas.replyStatus == "0") {
+                    pizhuHtml = "暂无批注"
+                } else {
+                    var pizhu = decodeURI(datas.replyDesc).split('|>|');
+                    for(var i=0;i<pizhu.length;i++){
+                        if(pizhu[i]=='+'||pizhu[i]==undefined||pizhu[i]=='undefined'){
+                            if(pizhu.length>1){
+                                pizhuHtml += '';
+                            }else{
+                                $('.comment .anDes').hide();
+                            }
+                        }else{
+                            pizhuHtml += pizhu[i]+'<br/>';
+                        }
+
+                    }
+                }
+                $('.comment .anDes').html(pizhuHtml).show();
+                $('.hmAnswer,.comment').show();
+            } else {
+                $('.hmAnswer,.comment').hide();
+                if (myAnswerDes != "") {
+                    $('.teBox').val(myAnswerDes);
+                }
+                console.log("888--" + $('.teBox').val());
+                $('.answer').show();
             }
-            console.log("888--" + $('.teBox').val());
-            $('.answer').show();
-        }
 
 
-        //语音，图片
-        var allFilePath = {
-            "fileSfullPath": [],//学生作业文件云盘全路径
-            "fileTfullPath": [],//老师作业文件云盘全路径
-            "fileRfullPath": []//老师回复作业文件云盘全路径
-        };
-        if (datas.teaHomeworkFiles.length > 0 || datas.stuHomeworkFiles.length > 0 || datas.teaHomeworkReplyFiles.length > 0) {
-            //老师作业信息---语音，图片
-            $.each(datas.teaHomeworkFiles, function (i, paths) {
-                allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
-            });
-            //学生答案信息--语音，图片
-            $.each(datas.stuHomeworkFiles, function (i, paths) {
-                allFilePath.fileSfullPath.push({"fullPath": paths.diskFilePath});
-            });
-            //老师批复作业信息---语音，图片
-            $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
-                allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
-            });
-            console.log("获取文件排序" + JSON.stringify(allFilePath));
-            ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+            //语音，图片
+            var allFilePath = {
+                "fileSfullPath": [],//学生作业文件云盘全路径
+                "fileTfullPath": [],//老师作业文件云盘全路径
+                "fileRfullPath": []//老师回复作业文件云盘全路径
+            };
+            if (datas.teaHomeworkFiles.length > 0 || datas.stuHomeworkFiles.length > 0 || datas.teaHomeworkReplyFiles.length > 0) {
+                //老师作业信息---语音，图片
+                $.each(datas.teaHomeworkFiles, function (i, paths) {
+                    allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
+                });
+                //学生答案信息--语音，图片
+                $.each(datas.stuHomeworkFiles, function (i, paths) {
+                    allFilePath.fileSfullPath.push({"fullPath": paths.diskFilePath});
+                });
+                //老师批复作业信息---语音，图片
+                $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+                    allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
+                });
+                console.log("获取文件排序" + JSON.stringify(allFilePath));
+                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+            }
+            layer.close(loading);
+        }else{
+            console.log("获取作业详情失败");
         }
         layer.close(loading);
     }
-
 
     var voiceCount = 0;
     //获取文件信息

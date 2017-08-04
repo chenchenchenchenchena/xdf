@@ -14,11 +14,10 @@ $(function () {
             if (stuInfo.length > 0) {
                 for (var k = 0; k < stuInfo.length; k++) {
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
-                        '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span><span>' + stuInfo[k].studentName + '</span>' +
-                        '<span style="float: right;">电话</span>' +
-                        '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '">' +
-                        '<span style="float: right;margin-right: 10px;">' +
-                        '学情</span></a></li>')
+                        '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
+                        '<span>' + stuInfo[k].studentName + '</span>' +
+                        '<span class="callIcon"/></span>' +
+                        '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
 
 
                 }
@@ -39,7 +38,7 @@ $(function () {
         // 		$('.studentList').eq(i).append('<li><i>'+(k+1)+'</i><span>'+stumore[k].substring(0,1)+'</span><span>'+stumore[k]+'</span></li>')
         // 	}
         // }
-        $('.slistTitle').html('课堂同学列表(' + (stuname.length - 1) + ')')
+        $('.slistTitle').html('课堂同学列表(' + (stuInfo.length - 1) + ')')
     }
 
     //打电话
