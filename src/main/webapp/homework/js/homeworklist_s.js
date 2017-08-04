@@ -53,6 +53,10 @@ $(function(){
 	// 点击待交作业列表
 	$(document).on('tap','.hwList',function(){
 		sessionStorage.removeItem('homeworkInfos');
+		// 缓存信息
+		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
+		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
+		localStorage.classcode = $(this).attr('data-classcode') ;//班级code
 		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
 	});
 	// 点击已交作业列表
@@ -115,7 +119,7 @@ $(function(){
 					}
 					var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";
 					console.log(kpHtml);
-					var hwListHtml = '<div class="hwList" data-id="'+item.id+'">'
+					var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
 						+'<div class="hwLeft">'+item.courseName+'</div>'
 						+'<div class="hwRight">'
 						+'<div class="hwTime"><span>'+classTitle+'</span>'
