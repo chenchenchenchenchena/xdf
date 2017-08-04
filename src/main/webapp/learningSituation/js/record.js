@@ -28,6 +28,7 @@ $(function () {
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
+			console.log(e);
             layer.close(firstLoad);
         	if(e.resultMessage=="false"){
             	layer.msg("该班级已结课");
@@ -131,8 +132,20 @@ $(function () {
 						function addS(e) {
 							if(e.result){
 								layer.msg(e.message);
-								var addstudent = "<dl><dt style='background: green'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
-								$(".add").before(addstudent);
+								$(".scoreList").html("");
+								var addstuInfo = {name: $(".addName").val(), scode:$(".addCode").val()};
+								stuArr.push(addstuInfo);
+								stuArr.sort(asc);
+								for (var r = 0; r < stuArr.length; r++) {
+									if(stuArr[r].name==$(".addName").val()){
+										$("dt").css("background","green");
+									}
+									stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+								}
+								$(".add").before(stu);
+								/*var addstudent = "<dl><dt style='background: green'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+								$(".add").before(addstudent);*/
+
 							}else{
 								layer.msg(e.message);
 							}
