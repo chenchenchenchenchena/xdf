@@ -29,7 +29,7 @@
 					<li><span>课次及时间</span><span class="classTime"></span></li>
 					<li><span>满分</span><span><input class="totalScore" value="10" type="tel"  onkeyup="value=value.replace(/[^1234567890-]+/g,'')" /><i class="fen">分</i></span></li>
 				</ul>
-				<div class="txt">成绩录入</div>
+				<div class="txt">成绩录入<span style="margin-left: 200px">点击</span></div>
 				<div class="txtDiv">
 					<p class="scoreTitle"><span></span><i><input  placeholder="请录入分数" type="tel" onkeyup="value=value.replace(/[^1234567890-]+/g,'')"/>分</i></p>
 					<div class="scoreList"></div>
@@ -53,12 +53,18 @@
 			<button class="chooseBtn">确定</button>
 		</div>
 		<div class="mask"></div>
+		<div class="addMask"></div>
 		<div class="recordSucc"><img src="images/7.png" /><p>提交成功</p><button>确定</button></div>
 		<div class="recordSub"><img src="images/redtan.png" /><p>确定提交？</p><button>取消</button><button class="succ">确定</button></div>
 		<div class="noRecord"><img src="images/redtan.png" /><p>仍有同学未打分,确认提交？</p><button>取消</button><button>确定</button></div>
 		<div class="classEmpty"><img src="images/ce.png" /><p>请选择班级</p></div>
 		<div class="classTimeEmpty"><img src="images/ce.png" /><p>请选择课次及时间</p></div>
 		<div class="subFail"><img src="images/redtan.png" /><p>提交失败？</p><button>取消</button><button class="succ">重试</button></div>
+		<div class="addStudent">
+			<p><span>姓名</span><input type="text" class="addName"/> </p>
+			<p><span>学号</span><input type="text" class="addCode"/> </p>
+			<button class="addBtn">提交</button><button class="addCancel">取消</button>
+		</div>
 	</body>
 </html>
 <script src="js/record.js"></script>

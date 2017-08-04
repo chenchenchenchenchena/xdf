@@ -9,6 +9,7 @@ $(function () {
     var stuQuery=[];
     var pushStuent=[];
     var stuOpenId=[];
+	var open=true;
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
          // wechatCode(location.href)
@@ -49,6 +50,22 @@ $(function () {
            
         $(".chooseClass ul").on("click", "li", function () {
             $(".txt").show();
+			//点击按钮收起功能
+			$(".txt").find("span").click(function () {
+				if(open){
+					$(".choose").hide();
+					$(".tab-title").css("margin-bottom","0px");
+					$(".scoreList").css("height","757px");
+					open=false;
+				}else{
+					$(".choose").show();
+					$(".tab-title").css("margin-bottom","20px");
+					$(".scoreList").css("height","312px");
+					open=true;
+				}
+				/*alert("1");*/
+
+			})
             $(".txtDiv").show();
             var stu = "";
             var stuArr = [];
@@ -78,7 +95,52 @@ $(function () {
                     	for (var r = 0; r < stuArr.length; r++) {
 	                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 	                    }
+						var addDl="<div class='add'><p style='background: #ccc;color:#fff;font-weight: 700'>+</p><p>添加学生</p></div>"
                     	$(".scoreList").html(stu);
+						$(".scoreList").append(addDl);
+						//添加学生
+						var reNz=/^[A-Za-z]{2}[0-9]{4}$/;
+						var reCh = /^[\u4e00-\u9fa5]{2,}$/;
+						$(".add p").click(function () {
+							$(".addMask").show();
+							$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
+							$(".addStudent").show();
+						})
+						$(".addBtn").click(function () {
+							if(!reCh.test($(".addName").val())){
+								layer.msg("请输入正确的姓名");
+							}else if($(".addName").val()==""||$(".addName").val()==""&&$(".addCode").val()==""){
+								layer.msg("姓名不能为空");
+							}else if($(".addCode").val()==""){
+								layer.msg("学号不能为空");
+							}else if(!reNz.test($(".addCode").val())){
+								layer.msg("请输入正确的学号");
+							}else{
+								var addStu={
+									"email":localStorage.terEmail,
+									"schoolId":localStorage.schoolId,
+									"classCode":$(".class").html(),
+									"studentNo":$(".addCode").val(),
+									"studentName":$(".addName").val()
+								}
+								ajax_S(url.t_addstu,addStu,addS);
+								$(".addMask").hide();
+								$(".addStudent").hide();
+							}
+						})
+						function addS(e) {
+							if(e.result){
+								layer.msg(e.message);
+								var addstudent = "<dl><dt style='background: green'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+								$(".add").before(addstudent);
+							}else{
+								layer.msg(e.message);
+							}
+						}
+						$(".addCancel").click(function () {
+							$(".addMask").hide();
+							$(".addStudent").hide();
+						})
                     }else{
                     	$(".scoreList").html("暂无学生成绩信息");
                     }
@@ -456,6 +518,7 @@ $(function () {
     $(".chooseClass").hide();
     $(".classNumTime").hide();
     $(".mask").hide();
+	$(".addMask").hide();
     $(".choose li").not("li:last-child").click(function () {
 
         $(".mask").show();
@@ -633,7 +696,11 @@ $(function () {
         var reCh = /[u00-uff]/;
         return !reCh.test(str);
     }
-
+	//判断只能输入数字和字母的组合
+	/*function isNz(str) {
+		var reNz=/^[A-Za-z]{2}[0-9]{4}$/;
+		return !reNz.test(str);
+	}*/
     function lenStat(target) {
         var strlen = 0; //初始定义长度为0
         var txtval = $.trim(target.html());
@@ -673,7 +740,6 @@ $(function () {
 		}
 		return pushinfo;
 	}
-
 
 })
 
