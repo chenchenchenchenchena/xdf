@@ -7,7 +7,14 @@ $(function () {
      */
     var fileParams = [];
     var voiceFileParams = [];
-    var homeworkSinfoId = GetRequest('id');
+    // var homeworkSinfoId = GetRequest('id');
+    var homeworkSinfoId = localStorage.homeworkSinfoId;//学生作业id
+    var homeworkTinfoId = "";//老师作业id
+    if (GetRequest("teaHomeworkId")){//消息推送链接
+        homeworkTinfoId = GetRequest("teaHomeworkId");
+    }else{
+        homeworkTinfoId = localStorage.homeworkTinfoId;
+    }
     var fileName;
     var fileType;
     var fileSize;
@@ -18,61 +25,48 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
-    var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
-    gethwInfos();
-    function gethwInfos() {
-        loading = layer.load();
-        var knowledgePoint, kpHtml;
-        $.each(hwInfos, function (i, item) {
-            if (item.id == GetRequest('id')) {
-                localStorage.hwteacherId = item.homeworkTId;//老师主键id
-                localStorage.hwstudentId = item.id;//学生主键id
-                localStorage.classCode = item.classCode;//学生code
+    loading = layer.load();
+    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+localStorage.classcode, gethwDetailsSuccess);
 
-                //知识点
-                if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
-                    knowledgePoint = splitStrs(item.knowledgePoint);
-                    for (var i = 0; i < knowledgePoint.length; i++) {
-                        kpHtml = '<span>' + knowledgePoint[i] + '</span>';
-                        $('.knowPoint').append(kpHtml);
-                    }
+    // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
+    // gethwInfos();
+    function gethwDetailsSuccess(msg) {
+        if (msg.code == 200) {
+            var knowledgePoint, kpHtml;
+            var item = msg.data;
+            localStorage.hwteacherId = item.homeworkTId;//老师主键id
+            localStorage.hwstudentId = item.id;//学生主键id
+            localStorage.classCode = item.classCode;//学生code
+
+            //知识点
+            if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
+                knowledgePoint = splitStrs(item.knowledgePoint);
+                for (var i = 0; i < knowledgePoint.length; i++) {
+                    kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                    $('.knowPoint').append(kpHtml);
                 }
-                //作业描述
-                $('.hwCon').html(decodeURI(item.description));
-                //语音，图片 TODO
-                //语音，图片 TODO
-                var allFilePath = {
-                    "fileSfullPath": [],
-                    "fileTfullPath": [],
-                    "fileRfullPath": []
-                };
-                if (item.fileContents.length > 0) {
-                    $.each(item.fileContents, function (i, paths) {
-                        allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
-                        // console.log("获取文件排序222"+JSON.stringify(allFilePath.fileTfullPath));
-
-                    });
-                    console.log("获取文件排序" + JSON.stringify(allFilePath));
-                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
-                }
-
-                /*$.each(item.fileContents, function (i, paths) {
-                 var pathUrls = ['1', paths.diskFilePath, paths.fileType];
-                 // 获取语音和图片的预览地址 TODO
-                 console.log(pathUrls);
-                 console.log(paths.diskFilePath);
-                 if(paths.fileType.indexOf("mp3") != -1){
-                 getAudioInfo(paths.diskFilePath);
-                 }else {
-                 getFileInfo(paths.diskFilePath);
-                 }
-
-                 });*/
-
-                return false;
             }
+            //作业描述
+            $('.hwCon').html(decodeURI(item.description));
+            //语音，图片 TODO
+            //语音，图片 TODO
+            var allFilePath = {
+                "fileSfullPath": [],
+                "fileTfullPath": [],
+                "fileRfullPath": []
+            };
+            if (item.fileContents.length > 0) {
+                $.each(item.fileContents, function (i, paths) {
+                    allFilePath.fileTfullPath.push({"fullPath": paths.diskFilePath});
+                    // console.log("获取文件排序222"+JSON.stringify(allFilePath.fileTfullPath));
 
-        });
+                });
+                console.log("获取文件排序" + JSON.stringify(allFilePath));
+                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+            }
+        }else{
+                console.log("获取作业详情失败");
+            }
         layer.close(loading);
     }
 
