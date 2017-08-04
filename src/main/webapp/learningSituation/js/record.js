@@ -142,7 +142,9 @@ $(function () {
 									}
 									stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 								}
-								$(".add").before(stu);
+								var addDl="<div class='add'><p style='background: #ccc;color:#fff;font-weight: 700'>+</p><p>添加学生</p></div>"
+								$(".scoreList").html(stu);
+								$(".scoreList").append(addDl);
 								/*var addstudent = "<dl><dt style='background: green'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 								$(".add").before(addstudent);*/
 
