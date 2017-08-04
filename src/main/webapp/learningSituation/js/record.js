@@ -56,21 +56,21 @@ $(function () {
            
         $(".chooseClass ul").on("click", "li", function () {
             $(".txt").show();
-			$(".up").show();
+			/*$(".up").show();*/
 			//点击按钮收起功能
-			$(".up").find("span").click(function () {
+			$(".txt").find("span").click(function () {
 				if(open){
 					$(".choose").hide();
 					$(".tab-title").css("margin-bottom","0px");
 					$(".scoreList").css("height","757px");
-					$(".up").find("span").css("transform","rotate(180deg)");
+					$(".txt").find("span").css("transform","rotate(180deg)");
 					open=false;
 				}else{
 					$(".choose").show();
 					$(".tab-title").css("margin-bottom","20px");
 					$(".scoreList").css("height","312px");
 					open=true;
-					$(".up").find("span").css("transform","rotate(360deg)")
+					$(".txt").find("span").css("transform","rotate(360deg)")
 				}
 
 			})
