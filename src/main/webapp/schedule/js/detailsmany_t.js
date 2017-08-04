@@ -93,8 +93,12 @@ $(function () {
             var stuall = BeginDate[regionindex[i]].Students;
             var stuListStorage = [];
             for (var k = 0; k < stuall.length; k++) {
-                var stuInfo = {'studentName':stuall[k].StudentName,'studentCode':stuall[k].StudentCode,'classCode':stuall[k].ClassCode,'schoolId':stuall[k].SchoolId};
+                var stuInfo = {'studentName':stuall[k].StudentName,'studentCode':stuall[k].StudentCode};
                 stuListStorage.push(stuInfo);
+
+                localStorage.setItem('CLASSCODE',stuall[k].ClassCode);
+                localStorage.setItem('SCHOOLID',stuall[k].SchoolId);
+
                 //存储学生的名字，在studentlist_t.html页面要用到
                 // sessionStorage.s += stuall[k].StudentName + ',';
                 //存储学生学号

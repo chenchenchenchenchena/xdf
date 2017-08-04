@@ -13,8 +13,6 @@ $(function () {
                 '</li><li class="arrow"></li></ul><ul class="studentList"></ul></li>');
             if (stuInfo.length > 0) {
                 for (var k = 0; k < stuInfo.length; k++) {
-                    localStorage.setItem('CLASSCODE',stuInfo[k].classCode);
-                    localStorage.setItem('SCHOOLID',stuInfo[k].schoolId);
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span><span>' + stuInfo[k].studentName + '</span>' +
                         '<span style="float: right;">电话</span>' +
