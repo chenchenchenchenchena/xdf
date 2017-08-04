@@ -139,10 +139,12 @@ $(function () {
 									skin: '',
 									content:$(".noDel")
 								})
+								$(".addStudent").hide();
 							}
 						})
 						$(".noDel button").eq(0).click(function () {
 							layer.close(layer5);
+							$(".addStudent").show();
 						})
 						$(".noDel button").eq(1).click(function () {
 							var addStu={

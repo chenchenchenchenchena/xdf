@@ -114,7 +114,7 @@ body,html{
 	line-height: 80px;
 	padding: 0 30px;
 	font-size: 30px;
-	font-weight: 700;
+	/*font-weight: 700;*/
 }
 .txt input{
 	width: 96%;
