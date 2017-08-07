@@ -123,6 +123,7 @@ $(function () {
 							$(".addCode").val("");
 						})
 						$(".addBtn").click(function () {
+							$('.addBtn').attr('disabled', true);
 							var judge=0;
 							alert("11111");
 							if(!reCh.test($(".addName").val())){
@@ -163,7 +164,7 @@ $(function () {
 							$(".addStudent").show();
 						})
 						$(".noDel button").eq(1).click(function () {
-							$('.noDel button').attr('disabled', true);
+							$(this).attr('disabled', true);
 							var addStu={
 								"email":localStorage.terEmail,
 								"schoolId":localStorage.schoolId,
@@ -182,7 +183,7 @@ $(function () {
 								var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 								$(".add").before(addstudent);
 								jie();
-								$('.noDel button').attr('disabled', false);
+								$('.noDel button').eq(1).attr('disabled', false);
 							}else{
 								layer.msg(e.message);
 							}
