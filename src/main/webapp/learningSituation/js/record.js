@@ -112,7 +112,7 @@ $(function () {
                     	$(".scoreList").html(stu);
 						$(".scoreList").append(addDl);
 						//添加学生
-						var reNz=/^[A-Za-z]{2}[0-9]{4}$/;
+						var reNz=/^s{2}[0-9]{4}$/;
 						var reCh = /^[\u4e00-\u9fa5]{2,}$/;
 						$(".add p").click(function () {
 							$(".addMask").show();
