@@ -123,7 +123,7 @@ $(function () {
 							$(".addCode").val("");
 						})
 						$(".addBtn").click(function () {
-							$('.addBtn').attr('disabled', true);
+							/*$('.addBtn').attr('disabled', true);*/
 							var judge=0;
 							alert("11111");
 							if(!reCh.test($(".addName").val())){
