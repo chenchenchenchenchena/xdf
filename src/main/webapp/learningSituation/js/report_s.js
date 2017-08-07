@@ -82,13 +82,12 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                   mfInedx = [];
                   timeIndex = [];
                   Cindex = [];
-                if(class_[i][0].className){
-                    html_yh = '<h4>查看课堂数据</h4><img  src="images/rightArrow.png" alt="">'
+                if(true){
+                    html_yh = '<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''
                 }
                 $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s">'+html_yh+'</div>');
-
                 for (var y = 0; y < class_[i].length; y++) {
 
                     $('.reportstu_S').eq(i).find('ul').eq(0).append('<li>' + e.data[i][y].lessonNO + '</li>');
