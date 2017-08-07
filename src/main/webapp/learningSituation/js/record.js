@@ -164,6 +164,7 @@ $(function () {
 								layer.msg(e.message);
 								var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 								$(".add").before(addstudent);
+								jie();
 
 							}else{
 								layer.msg(e.message);
@@ -187,7 +188,7 @@ $(function () {
                 }
 
             }
-            for (var i = 0; i < $(".scoreList dl").length; i++) {
+           /* for (var i = 0; i < $(".scoreList dl").length; i++) {
                 var ddStr = $(".scoreList dd").eq(i);
                 var dtStr = $(".scoreList dt").eq(i);
                 var ddstrLen = lenStat(ddStr);
@@ -199,9 +200,25 @@ $(function () {
                 if (lenStat(ddStr) > 8) {
                     ddStr.css("font-size", "17px");
                 }
-            }
+            }*/
+			jie();
         })
-            
+		//截取名字
+		function jie() {
+			for (var i = 0; i < $(".scoreList dl").length; i++) {
+				var ddStr = $(".scoreList dd").eq(i);
+				var dtStr = $(".scoreList dt").eq(i);
+				var ddstrLen = lenStat(ddStr);
+				if(lenStat(ddStr) >= 8){
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+				}else{
+					dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+				}
+				if (lenStat(ddStr) > 8) {
+					ddStr.css("font-size", "17px");
+				}
+			}
+		}
         //点击课次    
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
