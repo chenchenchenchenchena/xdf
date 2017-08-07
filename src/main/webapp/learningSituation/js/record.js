@@ -11,6 +11,7 @@ $(function () {
     var pushStuent=[];
     var stuOpenId=[];
 	var open=true;
+
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
          // wechatCode(location.href)
@@ -105,14 +106,14 @@ $(function () {
 	                    }
 						if(e.Data[i].extraStudent.length>0){
 							for(var h=0;h<e.Data[i].extraStudent.length;h++){
-								stu += "<dl><dt style='background: #ff6a6a'>" + e.Data[i].extraStudent[h].studentName + "</dt><dd>" + e.Data[i].extraStudent[h].studentName + "</dd><dd style=display:none class=code>" + e.Data[i].extraStudent[h].classCode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+								stu += "<dl><dt style='background: #ff6a6a'>" + e.Data[i].extraStudent[h].studentName + "</dt><dd>" + e.Data[i].extraStudent[h].studentName + "</dd><dd style=display:none class=code>" + e.Data[i].extraStudent[h].studentNo + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 							}
 						}
 						var addDl="<div class='add'><p style='background: #c2c2c2;color:#fff;font-weight: 700;font-size: 28px;'>+</p><p>添加学生</p></div>"
                     	$(".scoreList").html(stu);
 						$(".scoreList").append(addDl);
 						//添加学生
-						var reNz=/^s{2}[0-9]{4}$/;
+						var reNz=/^S{2}[0-9]{4}$/;
 						var reCh = /^[\u4e00-\u9fa5]{2,}$/;
 						$(".add p").click(function () {
 							$(".addMask").show();
@@ -122,6 +123,8 @@ $(function () {
 							$(".addCode").val("");
 						})
 						$(".addBtn").click(function () {
+							var judge=0;
+							alert("11111");
 							if(!reCh.test($(".addName").val())){
 								layer.msg("请输入正确的姓名");
 							}else if($(".addName").val()==""||$(".addName").val()==""&&$(".addCode").val()==""){
@@ -131,15 +134,28 @@ $(function () {
 							}else if(!reNz.test($(".addCode").val())){
 								layer.msg("请输入正确的学号");
 							}else{
-								layer5=layer.open({
-									type: 1,
-									area: ['545px', '400px'],
-									shade:0,
-									title:'',
-									skin: '',
-									content:$(".noDel")
-								})
-								$(".addStudent").hide();
+								for (var i = 0; i < $(".scoreList dl").length; i++) {
+									if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()&&$(".addName").val()==$(".scoreList dl").eq(i).find("dd").eq(0).html()){
+										layer.msg("该学生已存在");
+										break;
+									}
+									if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()){
+										layer.msg("该学号已存在");
+										break;
+									}
+									judge++;
+								}
+								if(judge==$(".scoreList dl").length){
+									layer5=layer.open({
+										type: 1,
+										area: ['545px', '400px'],
+										shade:0,
+										title:'',
+										skin: '',
+										content:$(".noDel")
+									})
+									$(".addStudent").hide();
+								}
 							}
 						})
 						$(".noDel button").eq(0).click(function () {
@@ -147,6 +163,7 @@ $(function () {
 							$(".addStudent").show();
 						})
 						$(".noDel button").eq(1).click(function () {
+							$('.noDel button').attr('disabled', true);
 							var addStu={
 								"email":localStorage.terEmail,
 								"schoolId":localStorage.schoolId,
@@ -155,17 +172,17 @@ $(function () {
 								"studentName":$(".addName").val()
 							}
 							ajax_S(url.t_addstu,addStu,addS);
-							layer.close(layer5);
-							$(".addMask").hide();
-							$(".addStudent").hide();
 						})
 						function addS(e) {
 							if(e.result){
+								layer.close(layer5);
+								$(".addMask").hide();
+								$(".addStudent").hide();
 								layer.msg(e.message);
 								var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 								$(".add").before(addstudent);
 								jie();
-
+								$('.noDel button').attr('disabled', false);
 							}else{
 								layer.msg(e.message);
 							}
