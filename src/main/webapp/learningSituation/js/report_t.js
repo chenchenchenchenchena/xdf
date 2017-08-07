@@ -26,10 +26,7 @@ $(function(){
 $(document).on('touchend','.achievement_s>h4',function(){
     if($('.achievement_s>h4').length>1){
         if($(this).index()==0){
-
-
             location.href = 'class_t.html';
-
         }else{
             var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
             sessionStorage.classcode = $(this).attr('classcode');
@@ -48,7 +45,6 @@ $(document).on('touchend','.achievement_s>h4',function(){
     }
 
 });
-
 
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
@@ -87,7 +83,6 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                 var mfInedx_c = [];
                 var timeIndex  = [];
                 if(true){
-                    // html_yh = ''
                     html_yh = '<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''
