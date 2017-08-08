@@ -125,7 +125,7 @@ $(function () {
 						$(".addBtn").click(function () {
 							/*$('.addBtn').attr('disabled', true);*/
 							var judge=0;
-							alert("11111");
+							/*alert("11111");*/
 							if(!reCh.test($(".addName").val())){
 								layer.msg("请输入正确的姓名");
 							}else if($(".addName").val()==""||$(".addName").val()==""&&$(".addCode").val()==""){
