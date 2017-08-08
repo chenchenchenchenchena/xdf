@@ -685,7 +685,7 @@ $(function () {
 				ddStr.css("font-size", "17px");
 				ddStr.css("margin-top", "23px");
 			}else{
-				dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
 			}
     
 		}
