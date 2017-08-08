@@ -113,85 +113,7 @@ $(function () {
                     	$(".scoreList").html(stu);
 						$(".scoreList").append(addDl);
 						//添加学生
-						var reNz=/^S{2}[0-9]{4}$/;
-						var reCh = /^[\u4e00-\u9fa5]{2,}$/;
-						$(".add p").click(function () {
-							$(".addMask").show();
-							$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
-							$(".addStudent").show();
-							$(".addName").val("");
-							$(".addCode").val("");
-						})
-						$(".addBtn").click(function () {
-							/*$('.addBtn').attr('disabled', true);*/
-							var judge=0;
-							/*alert("11111");*/
-							if(!reCh.test($(".addName").val())){
-								layer.msg("请输入正确的姓名");
-							}else if($(".addName").val()==""||$(".addName").val()==""&&$(".addCode").val()==""){
-								layer.msg("姓名不能为空");
-							}else if($(".addCode").val()==""){
-								layer.msg("学号不能为空");
-							}else if(!reNz.test($(".addCode").val())){
-								layer.msg("请输入正确的学号");
-							}else{
-								for (var i = 0; i < $(".scoreList dl").length; i++) {
-									if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()&&$(".addName").val()==$(".scoreList dl").eq(i).find("dd").eq(0).html()){
-										layer.msg("该学生已存在");
-										break;
-									}
-									if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()){
-										layer.msg("该学号已存在");
-										break;
-									}
-									judge++;
-								}
-								if(judge==$(".scoreList dl").length){
-									layer5=layer.open({
-										type: 1,
-										area: ['545px', '400px'],
-										shade:0,
-										title:'',
-										skin: '',
-										content:$(".noDel")
-									})
-									$(".addStudent").hide();
-								}
-							}
-						})
-						$(".noDel button").eq(0).click(function () {
-							layer.close(layer5);
-							$(".addStudent").show();
-						})
-						$(".noDel button").eq(1).click(function () {
-							$(this).attr('disabled', true);
-							var addStu={
-								"email":localStorage.terEmail,
-								"schoolId":localStorage.schoolId,
-								"classCode":$(".class").html(),
-								"studentNo":$(".addCode").val(),
-								"studentName":$(".addName").val()
-							}
-							ajax_S(url.t_addstu,addStu,addS);
-						})
-						function addS(e) {
-							if(e.result){
-								layer.close(layer5);
-								$(".addMask").hide();
-								$(".addStudent").hide();
-								layer.msg(e.message);
-								var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
-								$(".add").before(addstudent);
-								jie();
-								$('.noDel button').eq(1).attr('disabled', false);
-							}else{
-								layer.msg(e.message);
-							}
-						}
-						$(".addCancel").click(function () {
-							$(".addMask").hide();
-							$(".addStudent").hide();
-						})
+						addStudent();
                     }else{
                     	$(".scoreList").html("暂无学生成绩信息");
                     }
@@ -219,24 +141,9 @@ $(function () {
                     ddStr.css("font-size", "17px");
                 }
             }*/
-			jie();
+			resetData();
         })
-		//截取名字
-		function jie() {
-			for (var i = 0; i < $(".scoreList dl").length; i++) {
-				var ddStr = $(".scoreList dd").eq(i);
-				var dtStr = $(".scoreList dt").eq(i);
-				var ddstrLen = lenStat(ddStr);
-				if(lenStat(ddStr) >= 8){
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-				}else{
-					dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
-				}
-				if (lenStat(ddStr) > 8) {
-					ddStr.css("font-size", "17px");
-				}
-			}
-		}
+
         //点击课次    
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
@@ -261,8 +168,108 @@ $(function () {
 
         })
     }
- 
-   
+	//添加学生信息
+	function addStudent() {
+		var reNz=/^S{2}[0-9]{4}$/;
+		var reCh = /^[\u4e00-\u9fa5]{2,}$/;
+		$(".add p").click(function () {
+			$(".addMask").show();
+			$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
+			$(".addStudent").show();
+			$(".addName").val("");
+			$(".addCode").val("");
+		})
+		$(".addBtn").click(function () {
+			/*$('.addBtn').attr('disabled', true);*/
+			var judge=0;
+			/*alert("11111");*/
+			if(!reCh.test($(".addName").val())){
+				layer.msg("请输入正确的姓名");
+			}else if($(".addName").val()==""||$(".addName").val()==""&&$(".addCode").val()==""){
+				layer.msg("姓名不能为空");
+			}else if($(".addCode").val()==""){
+				layer.msg("学号不能为空");
+			}else if(!reNz.test($(".addCode").val())){
+				layer.msg("请输入正确的学号");
+			}else{
+				for (var i = 0; i < $(".scoreList dl").length; i++) {
+					if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()&&$(".addName").val()==$(".scoreList dl").eq(i).find("dd").eq(0).html()){
+						layer.msg("该学生已存在");
+						break;
+					}
+					if($(".addCode").val()==$(".scoreList dl").eq(i).find(".code").html()){
+						layer.msg("该学号已存在");
+						break;
+					}
+					judge++;
+				}
+				if(judge==$(".scoreList dl").length){
+					layer5=layer.open({
+						type: 1,
+						area: ['545px', '400px'],
+						shade:0,
+						title:'',
+						skin: '',
+						content:$(".noDel")
+					})
+					$(".addStudent").hide();
+				}
+			}
+		})
+		$(".noDel button").eq(0).click(function () {
+			layer.close(layer5);
+			$(".addStudent").show();
+		})
+		$(".noDel button").eq(1).click(function () {
+			$(this).attr('disabled', true);
+			$(this).css('background', "#ccc");
+			var addStu={
+				"email":localStorage.terEmail,
+				"schoolId":localStorage.schoolId,
+				"classCode":$(".class").html(),
+				"studentNo":$(".addCode").val(),
+				"studentName":$(".addName").val()
+			}
+			ajax_S(url.t_addstu,addStu,addS);
+		})
+
+		$(".addCancel").click(function () {
+			$(".addMask").hide();
+			$(".addStudent").hide();
+		})
+	}
+	function addS(e) {
+		if(e.result){
+			layer.close(layer5);
+			$(".addMask").hide();
+			$(".addStudent").hide();
+			layer.msg(e.message);
+			var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+			$(".add").before(addstudent);
+			resetData();
+			$('.noDel button').eq(1).attr('disabled', false);
+			$('.noDel button').eq(1).css('background', "#00b997");
+		}else{
+			layer.msg(e.message);
+		}
+	}
+	//截取名字
+	/*function jie() {
+		for (var i = 0; i < $(".scoreList dl").length; i++) {
+			var ddStr = $(".scoreList dl").eq(i).find("dd").eq(0);
+			var dtStr = $(".scoreList dl").eq(i).find("dt");
+			var ddstrLen = lenStat(ddStr);
+			if(lenStat(ddStr) == 8){
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+			}else if(lenStat(ddStr) > 8){
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+				ddStr.css("font-size", "17px");
+				ddStr.css("margin-top", "23px");
+			}else{
+				dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+			}
+		}
+	}*/
     //录入表单
 	$(".scoreTitle input").keyup(function(){
 		if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
@@ -661,15 +668,25 @@ $(function () {
             var dtStr = $(".scoreList dl").eq(j).find("dt");
             var ddstrLen = lenStat(ddStr);
             /*console.log(strLen);*/
-            if (lenStat(ddStr) > 8) {
+           /* if (lenStat(ddStr) > 8) {
                 ddStr.css("font-size", "17px");
-            }
+				ddStr.css("margin-top", "23px");
+			}
             if (lenStat(ddStr) > 4) {
-               /* dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1);*/
                 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
             }else{
             	 dtStr.html(ddStr.html());
-            }
+            }*/
+			if(lenStat(ddStr) == 8){
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+			}else if(lenStat(ddStr) > 8){
+				var b=(lenStat(ddStr)-8)/2;
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
+				ddStr.css("font-size", "17px");
+				ddStr.css("margin-top", "23px");
+			}else{
+				dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
+			}
     
 		}
     }
