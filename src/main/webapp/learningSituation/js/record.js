@@ -10,7 +10,7 @@ $(function () {
     var stuQuery=[];
     var pushStuent=[];
     var stuOpenId=[];
-
+	var open=true;
 
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
@@ -56,26 +56,8 @@ $(function () {
         }
            
         $(".chooseClass ul").on("click", "li", function () {
-			var open=true;
             $(".txt").show();
 			/*$(".up").show();*/
-			//点击按钮收起功能
-			$(".txt").find("span").click(function () {
-				if(open){
-					$(".choose").hide();
-					$(".tab-title").css("margin-bottom","0px");
-					$(".scoreList").css("height","757px");
-					$(".txt").find("span").css("transform","rotate(180deg)");
-					open=false;
-				}else{
-					$(".choose").show();
-					$(".tab-title").css("margin-bottom","20px");
-					$(".scoreList").css("height","312px");
-					open=true;
-					$(".txt").find("span").css("transform","rotate(360deg)")
-				}
-
-			})
             $(".txtDiv").show();
             var stu = "";
             var stuArr = [];
@@ -276,6 +258,23 @@ $(function () {
 			}
 		}
 	}*/
+	//点击按钮收起功能
+	$(document).on("click",".txt span",function () {
+		if(open){
+			$(".choose").hide();
+			$(".tab-title").css("margin-bottom","0px");
+			$(".scoreList").css("height","757px");
+			$(".txt").find("span").css("transform","rotate(180deg)");
+			open=false;
+		}else{
+			$(".choose").show();
+			$(".tab-title").css("margin-bottom","20px");
+			$(".scoreList").css("height","312px");
+			open=true;
+			$(".txt").find("span").css("transform","rotate(360deg)")
+		}
+
+	})
     //录入表单
 	$(".scoreTitle input").keyup(function(){
 		if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
