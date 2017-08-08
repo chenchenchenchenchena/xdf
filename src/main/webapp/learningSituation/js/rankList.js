@@ -34,19 +34,19 @@ $(function(){
         // getRankList(testState,"shared");//
     });
     // 全选
-    var checkAll = false;//默认不全选
-    $(document).on('touchstart','#check-all',function () {
+    var checkAll = true;//默认全选
+    $(document).on('touchstart','.check-tr',function () {
         if(checkAll){
-            $('.intro-test .check-box').removeClass('checked');
+            $('.intro-test .check-box').addClass('checked');
             checkAll = false;
         }else{
-            $('.intro-test .check-box').addClass('checked');
+            $('.intro-test .check-box').removeClass('checked');
             checkAll = true;
         }
     });
     // 多选
-    $(document).on('touchstart','.intro-test tr td .check-box',function () {
-        $(this).toggleClass('checked');
+    $(document).on('touchstart','.intro-test tr .check-td',function () {
+        $(this).find('.check-box').toggleClass('checked');
     });
     // 传递选中学生号
     var checkStuArry = [];
@@ -86,7 +86,7 @@ $(function(){
         if(msg.code==200){
             if(msg.data!='undefined' && msg.data.length>0){
                 var datas = msg.data;
-                var rankTitleHtml = '<tr><th><i id="check-all" class="check-box"></i></th><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
+                var rankTitleHtml = '<tr><th class="check-tr"><i id="check-all" class="check-box checked"></i></th><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
                     +'<th>名次浮动</th><th class="to-shared"><img  src="images/shareIcon.png" alt="分享"/></th></tr>';
                 $(".intro-test>tbody").html(rankTitleHtml);
                 $.each(datas,function(i,items){
@@ -118,7 +118,7 @@ $(function(){
                     }else{
                         floatRankCss = "state-down";
                     }
-                    var rankListHtml='<tr><td><i class="check-box" data-stuNo="'+items.studentNo+'"></i></td><td><span class="'+rankCss+'">'+items.ranking+'</span></td>'
+                    var rankListHtml='<tr><td class="check-td"><i class="check-box checked" data-stuNo="'+items.studentNo+'"></i></td><td><span class="'+rankCss+'">'+items.ranking+'</span></td>'
                         +'<td>'+items.studentName+'</td><td>'+items.grade+'</td>'
                         +'<td><i class="change-state '+floatGradeCss+'"></i>'+parseInt(Math.abs(gradeFloat))+'分</td>'
                         +'<td><i class="change-state '+floatRankCss+'"></i>'+parseInt(Math.abs(rankFloat))+'名</td>'
