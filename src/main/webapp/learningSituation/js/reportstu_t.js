@@ -3,7 +3,9 @@ $(function(){
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-
+    if(GetRequest('studentName')){
+        $('title').html(GetRequest('studentName'));
+    }
     var Stujson = {
         'teacherEmail':localStorage.terEmail,
         'classCode':localStorage.getItem('CLASSCODE'),
