@@ -114,7 +114,7 @@ $(function () {
                     	$(".scoreList").html(stu);
 						$(".scoreList").append(addDl);
 						//添加学生
-						addStudent();
+						// addStudent();
                     }else{
                     	$(".scoreList").html("暂无学生成绩信息");
                     }
@@ -170,16 +170,16 @@ $(function () {
         })
     }
 	//添加学生信息
-	function addStudent() {
+	// function addStudent() {
 		var reNz=/^S{2}[0-9]{4}$/;
 		var reCh = /^[\u4e00-\u9fa5]{2,}$/;
-		$(".add p").click(function () {
+		$(document).on('click','.add p',function () {
 			$(".addMask").show();
 			$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
 			$(".addStudent").show();
 			$(".addName").val("");
 			$(".addCode").val("");
-		})
+		});
 		$(".addBtn").click(function () {
 			/*$('.addBtn').attr('disabled', true);*/
 			var judge=0;
@@ -204,6 +204,8 @@ $(function () {
 					}
 					judge++;
 				}
+				console.log(judge);
+				console.log($(".scoreList dl").length);
 				if(judge==$(".scoreList dl").length){
 					layer5=layer.open({
 						type: 1,
@@ -237,8 +239,11 @@ $(function () {
 		$(".addCancel").click(function () {
 			$(".addMask").hide();
 			$(".addStudent").hide();
-		})
-	}
+		});
+		$(document).on('click','.layui-layer-close',function(){
+			$('.addMask').hide();
+		});
+	// }
 	function addS(e) {
 		if(e.result){
 			layer.close(layer5);
