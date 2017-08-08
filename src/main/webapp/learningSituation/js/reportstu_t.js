@@ -28,8 +28,10 @@ $(function(){
 
 var maxnumber = 0;
 // tab切换
-
-
+    $('.grade').on('touchend',function(){
+        sessionStorage.stuNumber = getRequest('studentNo').studentNo;
+        location.href = 'common_ts.html'
+    })
     $('.tab-title li').on('touchend',function(){
         $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
