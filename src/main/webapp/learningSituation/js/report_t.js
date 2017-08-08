@@ -26,6 +26,8 @@ $(function(){
 $(document).on('touchend','.achievement_s>h4',function(){
     if($('.achievement_s>h4').length>1){
         if($(this).index()==0){
+            sessionStorage.classcode = $(this).attr('classcode');
+            sessionStorage.schoolid = $(this).attr('schoolid');
             location.href = 'class_t.html';
         }else{
             var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
@@ -57,8 +59,6 @@ $(document).on('touchend','.title_s',function(){
     }
 
 });
-
-
 
 
 

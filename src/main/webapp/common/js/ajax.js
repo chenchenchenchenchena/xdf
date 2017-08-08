@@ -83,7 +83,9 @@ var url = {
     'w_openId':url_o+'teacherAnalysis/queryStudentWechat.do',
     'w_push':url_o+'wechatSignature/sendTemplateMsg.do',//微信推送成绩信息
     'w_email':url_o+'e2Login/queryTeacherInfo.do',//查询老师信息
-    's_select':url_o+'dict/getDictListByTableName.do'//查询校区
+    's_select':url_o+'dict/getDictListByTableName.do',//查询校区
+    'stumo':url_o+'studentClassRoomData/querySdtClassRoomAnswerData.do',//查看单个学生课堂互动
+    't_leyh':url_o+'teacherClassData/queryClassData.do',//老师查看班级课堂互动数据
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
