@@ -10,7 +10,7 @@ $(function () {
     var stuQuery=[];
     var pushStuent=[];
     var stuOpenId=[];
-	var open=true;
+
 
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
@@ -56,6 +56,7 @@ $(function () {
         }
            
         $(".chooseClass ul").on("click", "li", function () {
+			var open=true;
             $(".txt").show();
 			/*$(".up").show();*/
 			//点击按钮收起功能
