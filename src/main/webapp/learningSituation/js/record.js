@@ -21,10 +21,10 @@ $(function () {
     // sessionStorage.schoolId="73";   //
     // sessionStorage.teacherName="曹雪峰";  //
     // sessionStorage.stuNumber = 'SS1508';  //
-	 	/*localStorage.terEmail="guoyilin@xdf.cn";
-		localStorage.teacherId="TC41";
+	 	localStorage.terEmail="hanqifan@xdf.cn";
+		localStorage.teacherId="TC23";
 		localStorage.schoolId="73";
-		localStorage.teacherName="郭祎琳";*/
+		localStorage.teacherName="韩启凡";
 
 
 	$(".txt").hide();
