@@ -3,11 +3,11 @@ $(function(){
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-    // localStorage.terEmail="caoxuefeng@xdf.cn";
-    // sessionStorage.teacherId="TC41";
-    // sessionStorage.schoolId="73";
-    // sessionStorage.teacherName="曹雪峰";
-    // sessionStorage.stuNumber = 'SS1508';
+//     localStorage.terEmail="hanqifan@xdf.cn";
+//     sessionStorage.teacherId="TC41";
+//     sessionStorage.schoolId="73";
+//     sessionStorage.teacherName="韩启凡人";
+//     sessionStorage.stuNumber = 'SS5877';
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
@@ -66,7 +66,7 @@ function Studata(){
 ajaxRequest('post',Study.s_study,Stujson,function(e){
     console.log(e)
         if(e.data.length!=0){
-            var class_ = e.data;
+            var class_ = e.data.studentResultsCase;
 
                 for(var i = 0;i<class_.length;i++) {
                     maxNumber = 0;
@@ -82,26 +82,26 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                   mfInedx = [];
                   timeIndex = [];
                   Cindex = [];
-                if(true){
-                    html_yh = '<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
+                if(e.data.studentClassRoomAnswer[i].sdtInteractState!=false){
+                    html_yh = '<h4 class="grade" classcode="'+e.data.sdtInteractState[i].classCode+'" schoolid="'+e.data.sdtInteractState[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''
                 }
                 $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s">'+html_yh+'</div>');
                 for (var y = 0; y < class_[i].length; y++) {
 
-                    $('.reportstu_S').eq(i).find('ul').eq(0).append('<li>' + e.data[i][y].lessonNO + '</li>');
-                    $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data[i][y].realGrade) + '</li>');
-                    $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data[i][0].studentName);
-                    $('title').html(e.data[i][0].studentName+'同学');
-                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data[i][y].avgGradeView) + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').eq(0).append('<li>' + e.data.studentResultsCase[i][y].lessonNO + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').eq(1).append('<li>' + (e.data.studentResultsCase[i][y].realGrade) + '</li>');
+                    $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data.studentResultsCase[i][0].studentName);
+                    $('title').html(e.data.studentResultsCase[i][0].studentName+'同学');
+                    $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data.studentResultsCase[i][y].avgGradeView) + '</li>');
                     $('.reportstu_S').eq(i).find('ul').css('width',146.5* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
                 $('.tab_record').eq(0).show();
                 $('.title_s').eq(0).find('img').css('transform', 'rotate(-90deg)');
 
-                 Xindex = e.data[i][e.data[i].length - 1].lessonNO;
+                 Xindex = e.data.studentResultsCase[i][e.data.studentResultsCase[i].length - 1].lessonNO;
                 /*
                  Xtwindex   //x轴
                  Cindex     //出门测
@@ -109,25 +109,25 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                  */
                 }
                     $('.reportstu_S ul').css('width',145*(class_[i].length+1));
-                if(Xindex==e.data[i].length){
+                if(Xindex==e.data.studentResultsCase[i].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
-                        Cindex.push(e.data[i][j].avgGradeView);
-                        pjIndex.push(e.data[i][j].realGrade);
-                        mfInedx.push('满分:'+e.data[i][j].fullMarks);
-                        timeIndex.push(e.data[i][j].lessonTime.split(' ')[0]);
+                        Cindex.push(e.data.studentResultsCase[i][j].avgGradeView);
+                        pjIndex.push(e.data.studentResultsCase[i][j].realGrade);
+                        mfInedx.push('满分:'+e.data.studentResultsCase[i][j].fullMarks);
+                        timeIndex.push(e.data.studentResultsCase[i][j].lessonTime.split(' ')[0]);
                     }
                 }else{
 
                         for(var j = 0;j<Xindex;j++){
                             Xtwindex.push(j+1);
                             var buer = false;
-                            for(var k = 0;k<e.data[i].length;k++){
-                                if((j+1)==e.data[i][k].lessonNO){
-                                    Cindex.push(e.data[i][k].avgGradeView);
-                                    pjIndex.push(e.data[i][k].realGrade);
-                                    mfInedx.push('满分:'+e.data[i][k].fullMarks);
-                                    timeIndex.push(e.data[i][k].lessonTime.split(' ')[0]);
+                            for(var k = 0;k<e.data.studentResultsCase[i].length;k++){
+                                if((j+1)==e.data.studentResultsCase[i][k].lessonNO){
+                                    Cindex.push(e.data.studentResultsCase[i][k].avgGradeView);
+                                    pjIndex.push(e.data.studentResultsCase[i][k].realGrade);
+                                    mfInedx.push('满分:'+e.data.studentResultsCase[i][k].fullMarks);
+                                    timeIndex.push(e.data.studentResultsCase[i][k].lessonTime.split(' ')[0]);
                                     buer = true;
                                     break;
                                 }
@@ -165,11 +165,9 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
 })};
 //课堂互动跳转
 $(document).on('touchend','achievement_s',function(){
-
-
-
-
-    location.href = ''
+    sessionStorage.schoolId = $(this).attr('schoolid')
+    sessionStorage.classCode = $(this).attr('classcode')
+    location.href = 'common_ts.html'
 });
 
 
