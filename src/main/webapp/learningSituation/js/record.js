@@ -10,7 +10,7 @@ $(function () {
     var stuQuery=[];
     var pushStuent=[];
     var stuOpenId=[];
-	var open=true;
+
 
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
@@ -260,6 +260,7 @@ $(function () {
 	}*/
 	//点击按钮收起功能
 	$(document).on("click",".txt span",function () {
+		var open=true;
 		if(open){
 			$(".choose").hide();
 			$(".tab-title").css("margin-bottom","0px");
