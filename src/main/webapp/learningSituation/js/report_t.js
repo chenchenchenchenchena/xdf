@@ -82,7 +82,7 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                 var mfInedx_r = [];
                 var mfInedx_c = [];
                 var timeIndex  = [];
-                if(true){
+                if(e.data[i].TeacherclassRoomState!=false){
                     html_yh = '<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''
