@@ -260,7 +260,7 @@ $(function () {
 	}*/
 	//点击按钮收起功能
 	var open=true;
-	$(document).on("click",".txt span",function () {
+	$(".txt span").click(function () {
 		alert("666");
 		if(open){
 			$(".choose").hide();
@@ -275,7 +275,6 @@ $(function () {
 			open=true;
 			$(".txt").find("span").css("transform","rotate(360deg)")
 		}
-
 	})
     //录入表单
 	$(".scoreTitle input").keyup(function(){
