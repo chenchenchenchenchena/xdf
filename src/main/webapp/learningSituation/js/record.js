@@ -261,7 +261,7 @@ $(function () {
 	//点击按钮收起功能
 	var open=true;
 	$(".txt span").click(function () {
-		alert("666");
+		/*alert("666");*/
 		if(open){
 			$(".choose").hide();
 			$(".tab-title").css("margin-bottom","0px");
