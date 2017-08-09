@@ -259,8 +259,9 @@ $(function () {
 		}
 	}*/
 	//点击按钮收起功能
+	var open=true;
 	$(document).on("click",".txt span",function () {
-		var open=true;
+		alert("666");
 		if(open){
 			$(".choose").hide();
 			$(".tab-title").css("margin-bottom","0px");
