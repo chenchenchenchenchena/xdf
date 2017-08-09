@@ -3,11 +3,11 @@ $(function(){
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-//     localStorage.terEmail="hanqifan@xdf.cn";
-//     sessionStorage.teacherId="TC41";
-//     sessionStorage.schoolId="73";
-//     sessionStorage.teacherName="韩启凡人";
-//     sessionStorage.stuNumber = 'SS5877';
+    localStorage.terEmail="hanqifan@xdf.cn";
+    sessionStorage.teacherId="TC41";
+    sessionStorage.schoolId="73";
+    sessionStorage.teacherName="韩启凡";
+    sessionStorage.stuNumber = 'SS5877';
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
@@ -22,7 +22,12 @@ $(document).on('touchend','.title_s',function(){
         $('.tab_record span').eq(0).addClass('tab_recorac').siblings().removeClass('tab_recorac')
     }
 
-});
+})
+    $(document).on('touchend','.grade',function(){
+        sessionStorage.schoolId = $(this).attr('schoolid');
+        sessionStorage.classCode = $(this).attr('classcode');
+        location.href = 'common_ts.html'
+    });
     var Stujson = {'studentNo':sessionStorage.stuNumber,'tCode':'1','schoolId':sessionStorage.schoolId};
     Studata();  //调取
 //切换显示方式
@@ -83,7 +88,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                   timeIndex = [];
                   Cindex = [];
                 if(e.data.studentClassRoomAnswer[i].sdtInteractState!=false){
-                    html_yh = '<h4 class="grade" classcode="'+e.data.sdtInteractState[i].classCode+'" schoolid="'+e.data.sdtInteractState[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
+                    html_yh = '<h4 class="grade" classcode="'+e.data.studentClassRoomAnswer[i].classCode+'" schoolid="'+e.data.studentResultsCase[i][0].schoolId +'" style="left:72%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''
                 }

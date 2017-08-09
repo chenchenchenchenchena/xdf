@@ -1,4 +1,5 @@
 $(function(){
+    $('header,section').hide();
 
     //点击学生
     $(document).on('touchend','.stu_yh li',function(){
@@ -11,6 +12,8 @@ $(function(){
     ajax_S(url.t_leyh,{'schoolId':sessionStorage.schoolid,'classCode':sessionStorage.classcode,'email':localStorage.terEmail},function(e){
         console.log(e)
         if(e.result==true){
+            $('header,section').show();
+
             var classtime = e.dataList;
             var lessdata = e.lessonData;
             var student = lessdata.studentData;
