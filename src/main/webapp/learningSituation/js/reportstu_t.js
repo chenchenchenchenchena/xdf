@@ -31,7 +31,7 @@ var maxnumber = 0;
     $('.grade').on('touchend',function(){
         sessionStorage.stuNumber = getRequest('studentNo').studentNo;
         location.href = 'common_ts.html'
-    })
+    });
     $('.tab-title li').on('touchend',function(){
         $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
@@ -52,7 +52,6 @@ var maxnumber = 0;
     function Studata(){
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
 
-            console.log(e);
 
             var Xindex = '';
             var Thistime = [];
