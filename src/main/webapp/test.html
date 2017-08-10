@@ -3,11 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>      
 </head>
 <body>
-	<script>
-		document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
-	</script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> 
+    <script type="text/javascript">  
+        document.write('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]);
+    </script>
 </body>
 </html>
