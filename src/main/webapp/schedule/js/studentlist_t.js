@@ -62,12 +62,21 @@ $(function () {
             "schoolId":"73",
             "callerid":"83410099",
             "toExtension":"dsd"};
-        ajaxRequest('POST', url.t_call, reqData, function (e) {
-            if(e.result){
-                alert(e.msg);
+        var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+        $.ajax({
+            type: 'POST',
+            url: url_o+'teacherData/teacherCallPhone.do',//老师拨打电话
+            data: JSON.stringify(reqData),
+            success: function (e) {
+                if(e.result){
+                    alert(e.msg);
+                }
+            },
+            error: function (err) {
+                // failureCallback(msg);
+                console.log("err:"+err);
             }
         });
-
     }
 
 })
