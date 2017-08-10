@@ -13,10 +13,11 @@ $(function () {
                 '</li><li class="arrow"></li></ul><ul class="studentList"></ul></li>');
             if (stuInfo.length > 0) {
                 for (var k = 0; k < stuInfo.length; k++) {
+                    var mobile = stuInfo[k].mobile;
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
                         '<span>' + stuInfo[k].studentName + '</span>' +
-                        '<span class="callIcon"/></span>' +
+                        '<span class="callIcon" tel='+mobile+'/></span>' +
                         '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
 
 
@@ -43,12 +44,31 @@ $(function () {
 
     //打电话
     $('.studentList').find('span').eq(2).click(function () {
-        alert("打电话");
+        var tel = $(this).attr("tel");
+        alert("打电话"+tel);
+        call();
     });
     //查看学情
     $('.studentList').find('span').eq(3).click(function () {
         alert("查看学情");
     });
+
+    function call() {
+        var reqData = {
+            "uid":"TC23",
+            "extension":"15101001841",
+            "sid":"SS5336",
+            "sign":"fyLOH9X6vnW0OZ0L23BWI2kcJO4=",
+            "schoolId":"73",
+            "callerid":"83410099",
+            "toExtension":"dsd"};
+        ajaxRequest('POST', url.t_call, reqData, function (e) {
+            if(e.result){
+                alert(e.msg);
+            }
+        });
+
+    }
 
 })
 

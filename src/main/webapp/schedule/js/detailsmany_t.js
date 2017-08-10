@@ -93,7 +93,10 @@ $(function () {
             var stuall = BeginDate[regionindex[i]].Students;
             var stuListStorage = [];
             for (var k = 0; k < stuall.length; k++) {
-                var stuInfo = {'studentName':stuall[k].StudentName,'studentCode':stuall[k].StudentCode};
+
+                //打电话
+                var mobile = stuall[k].Mobile;
+                var stuInfo = {'studentName':stuall[k].StudentName,'studentCode':stuall[k].StudentCode,'mobile':mobile};
                 stuListStorage.push(stuInfo);
 
                 localStorage.setItem('CLASSCODE',stuall[k].ClassCode);
@@ -109,6 +112,16 @@ $(function () {
                 // tCode:2
                 // studentNo:SS6077  sessionStorage.studentCode = stuall[k].StudentCode;
                 // schoolId:73
+
+                // {
+                //     "uid":"TC23",
+                //     "extension":"15101001841",
+                //     "sid":"SS5336",
+                //     "sign":"fyLOH9X6vnW0OZ0L23BWI2kcJO4=",
+                //     "schoolId":"73",
+                //     "callerid":"83410099",
+                //     "toExtension":"dsd"}
+
                 //电话号码
                 if (stuall[k].StudentName.length > 3) {
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
