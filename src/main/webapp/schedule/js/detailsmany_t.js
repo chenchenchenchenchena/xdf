@@ -44,14 +44,24 @@ $(function () {
                 }
             }
         }
-        var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0, BeginDate[timeindex].SectBegin.split(' ')[1].length - 3);
+        if (BeginDate[timeindex].SectBegin != undefined && BeginDate[timeindex].SectBegin != null && BeginDate[timeindex].SectBegin != '') {
+            var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0, BeginDate[timeindex].SectBegin.split(' ')[1].length - 3);
+        } else {
+            var begintime = '';
+        }
+        if (BeginDate[timeindex].SectEnd != undefined && BeginDate[timeindex].SectEnd != null && BeginDate[timeindex].SectEnd != '') {
+            var endtime = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g, '/');
+        } else {
+            var endtime = '';
+        }
+        
+
         if (BeginDate[timeindex].BeginDate != undefined && BeginDate[timeindex].BeginDate != null && BeginDate[timeindex].BeginDate != '') {
             var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g, '/');
 
         } else {
             var begindata = '';
         }
-        var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0, BeginDate[timeindex].SectEnd.split(' ')[1].length - 3)
         if (BeginDate[timeindex].EndDate != undefined && BeginDate[timeindex].EndDate != null && BeginDate[timeindex].EndDat != '') {
             var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g, '/');
         } else {
