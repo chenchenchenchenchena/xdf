@@ -46,33 +46,34 @@ $(function () {
     $('.studentList li').find('span').eq(2).click(function () {
         var tel = $(this).attr("tel");
         alert("打电话"+tel);
-        // call();
+        call();
     });
 
     function call() {
-        // var crypto = require('crypto');
         var appid="ssdf";
+        // var appid="91";
         var signKey= "shuangshidongfang2017APP0810-cs331-0801";
         var callerid= "83410012";
-        var ip= "127.0.0.1";
+        // var ip= "127.0.0.1";
         var uid = "TC23";
-        var str = uid + ip + appid;
+        var sid = "SS6494";
+        var extension = "18182653579";
+        var str = extension + sid + appid;
         var hash = CryptoJS.HmacSHA1(str, signKey);
-        alert(hash);
-        var md5 = CryptoJS.MD5(hash);
-        // var base64 = hash.toString(CryptoJS.enc.Base64);
-        var base64 = CryptoJS.enc.Base64.stringify(md5);
-        alert(base64);
+        var base64 = CryptoJS.enc.Base64.stringify(hash);
+        alert("base64--"+base64);
+        var s = encodeURIComponent(base64);
+        alert("encodeURI--"+s);
         // var hash = crypto.createHmac('sha1', signKey).update(str).digest().toString('base64');
         var reqData = {
             "uid":uid,
-            "extension":"15101001841",
-            "sid":"SS5336",
-            "sign":encodeURI(base64),
+            "extension":extension,
+            "sid":sid,
+            "sign":s,
             "schoolId":"73",
             "callerid":callerid,
             "toExtension":"dsd"};
-        var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+        var url_o = 'http://10.73.84.101:8080/xdfdtmanager/';
         $.ajax({
             type: 'POST',
             url: url_o+'teacherData/teacherCallPhone.do',//老师拨打电话
