@@ -1,6 +1,5 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
-//测试git提交
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
@@ -60,7 +59,6 @@ function teac(e){
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
-
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
 }
