@@ -43,24 +43,34 @@ $(function () {
     }
 
     //打电话
-    $('.studentList').find('span').eq(2).click(function () {
+    $('.studentList li').find('span').eq(2).click(function () {
         var tel = $(this).attr("tel");
         alert("打电话"+tel);
-        call();
-    });
-    //查看学情
-    $('.studentList').find('span').eq(3).click(function () {
-        alert("查看学情");
+        // call();
     });
 
     function call() {
+        // var crypto = require('crypto');
+        var appid="ssdf";
+        var signKey= "shuangshidongfang2017APP0810-cs331-0801";
+        var callerid= "83410012";
+        var ip= "127.0.0.1";
+        var uid = "TC23";
+        var str = uid + ip + appid;
+        var hash = CryptoJS.HmacSHA1(str, signKey);
+        alert(hash);
+        var md5 = CryptoJS.MD5(hash);
+        // var base64 = hash.toString(CryptoJS.enc.Base64);
+        var base64 = CryptoJS.enc.Base64.stringify(md5);
+        alert(base64);
+        // var hash = crypto.createHmac('sha1', signKey).update(str).digest().toString('base64');
         var reqData = {
-            "uid":"TC23",
+            "uid":uid,
             "extension":"15101001841",
             "sid":"SS5336",
-            "sign":"fyLOH9X6vnW0OZ0L23BWI2kcJO4=",
+            "sign":encodeURI(base64),
             "schoolId":"73",
-            "callerid":"83410099",
+            "callerid":callerid,
             "toExtension":"dsd"};
         var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
         $.ajax({
