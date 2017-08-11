@@ -51,7 +51,7 @@ $(function () {
 
     function call() {
         var appid="ssdf";
-        // var appid="91";
+        // var appid="oaCloud";
         var signKey= "shuangshidongfang2017APP0810-cs331-0801";
         var callerid= "83410012";
         // var ip= "127.0.0.1";
