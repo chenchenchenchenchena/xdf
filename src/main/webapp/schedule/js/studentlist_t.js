@@ -43,7 +43,7 @@ $(function () {
     }
 
     //打电话
-    $('.studentList li').find('span').eq(2).click(function () {
+    $('.studentList li').find('.callIcon').click(function () {
         var tel = $(this).attr("tel");
         alert("打电话"+tel);
         call();
