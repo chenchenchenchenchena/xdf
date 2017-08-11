@@ -125,9 +125,9 @@ $(function () {
                 //电话号码
                 if (stuall[k].StudentName.length > 3) {
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
-                        'rem;"><span class="name-icon">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '</span><p style="font-size:.3rem;">' + stuall[k].StudentName + '</p><i class="to-tel"></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
+                        'rem;"><span class="name-icon">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '</span><p style="font-size:.3rem;">' + stuall[k].StudentName + '</p><i class="to-tel" tel="'+mobile+'" stuCode="'+stuall[k].StudentCode+'" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
                 } else {
-                    $('.studentList ul').append('<li class="swiper-slide"><span class="name-icon">' + stuall[k].StudentName.substring(1, stuall[k].StudentName.length) + '</span><p >' + stuall[k].StudentName + '</p><i class="to-tel"></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
+                    $('.studentList ul').append('<li class="swiper-slide"><span class="name-icon">' + stuall[k].StudentName.substring(1, stuall[k].StudentName.length) + '</span><p >' + stuall[k].StudentName + '</p><i class="to-tel" tel="'+mobile+'" stuCode="'+stuall[k].StudentCode+'" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
                 }
             }
 
@@ -143,6 +143,47 @@ $(function () {
             slidesPerView: 5,
             paginationClickable: true,
             spaceBetween: 30
+        });
+    }
+
+    //打电话
+    $(document).on('touchstart','.to-tel',function () {
+        var stuTel = $(this).attr("tel");
+        var stuCode = $(this).attr("stuCode");
+        call(stuCode,stuTel);
+    });
+
+    function call(stuCode,stuTel) {
+        var appid="ssdf";
+        var signKey= "shuangshidongfang2017APP0810-cs331-0801";
+        // var callerid= "83410012";
+        var uid = localStorage.teacherId;
+        var sid = stuCode;
+        var extension = localStorage.teachertel;
+        var str = extension + sid + appid;
+        var hash = CryptoJS.HmacSHA1(str, signKey);
+        var base64 = CryptoJS.enc.Base64.stringify(hash);
+        var rt = encodeURIComponent(base64);
+        // var hash = crypto.createHmac('sha1', signKey).update(str).digest().toString('base64');
+        var reqData = {
+            "uid":uid,
+            "extension":extension,
+            "sid":sid,
+            "sign":rt,
+            "schoolId":localStorage.schoolId,
+            "toExtension":encodeURIComponent(stuTel)};
+        // var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+        $.ajax({
+            type: 'POST',
+            url: url_o+'teacherData/teacherCallPhone.do',//老师拨打电话
+            data: JSON.stringify(reqData),
+            success: function (e) {
+                alert(JSON.parse(e).msg);
+            },
+            error: function (err) {
+                // failureCallback(msg);
+                console.log("err:"+err);
+            }
         });
     }
 

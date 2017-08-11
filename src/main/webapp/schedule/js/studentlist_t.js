@@ -81,9 +81,7 @@ $(function () {
             url: url_o + 'teacherData/teacherCallPhone.do',//老师拨打电话
             data: JSON.stringify(reqData),
             success: function (e) {
-
-                alert(e.msg);
-
+                alert(JSON.parse(e).msg);
             },
             error: function (err) {
                 // failureCallback(msg);
