@@ -3,8 +3,6 @@ $(function () {
     // var stuname = sessionStorage.s.split(',');
     var stuInfo = JSON.parse(sessionStorage.stuList).stuInfoKey;
     var teaname = sessionStorage.t.split(',');
-    var studentNo = sessionStorage.studentCode;
-    var studentName = sessionStorage.studentName;
 
     for (var i = 0; i < teaname.length; i++) {
         if (teaname[i] != '' && teaname[i] != undefined) {
@@ -17,7 +15,7 @@ $(function () {
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
                         '<span>' + stuInfo[k].studentName + '</span>' +
-                        '<span class="callIcon" tel='+mobile+'/></span>' +
+                        '<span class="callIcon" tel=' + mobile + ' stuCode=' + stuInfo[k].studentCode + ' /></span>' +
                         '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
 
 
@@ -44,48 +42,50 @@ $(function () {
 
     //打电话
     $('.studentList li').find('.callIcon').click(function () {
-        var tel = $(this).attr("tel");
-        alert("打电话"+tel);
-        call();
+        var stuTel = $(this).attr("tel");
+        var stuCode = $(this).attr("stuCode");
+        // alert("打电话"+tel);
+        call(stuCode, stuTel);
     });
 
-    function call() {
-        var appid="ssdf";
-        // var appid="91";
-        var signKey= "shuangshidongfang2017APP0810-cs331-0801";
-        var callerid= "83410012";
-        // var ip= "127.0.0.1";
-        var uid = "TC23";
-        var sid = "SS6494";
-        var extension = "18182653579";
+    function call(stuCode, stuTel) {
+        var appid = "ssdf";
+        var signKey = "shuangshidongfang2017APP0810-cs331-0801";
+        // var callerid= "83410012";
+        var uid = localStorage.teacherId;
+        var sid = stuCode;
+        var extension = localStorage.teachertel;
         var str = extension + sid + appid;
         var hash = CryptoJS.HmacSHA1(str, signKey);
         var base64 = CryptoJS.enc.Base64.stringify(hash);
-        alert("base64--"+base64);
-        var s = encodeURIComponent(base64);
-        alert("encodeURI--"+s);
+        var rt = encodeURIComponent(base64);
         // var hash = crypto.createHmac('sha1', signKey).update(str).digest().toString('base64');
         var reqData = {
-            "uid":uid,
-            "extension":extension,
-            "sid":sid,
-            "sign":s,
-            "schoolId":"73",
-            "callerid":callerid,
-            "toExtension":"dsd"};
-        var url_o = 'http://10.73.84.101:8080/xdfdtmanager/';
+            "uid": uid,
+            "extension": extension,
+            "sid": sid,
+            "sign": rt,
+            "schoolId": localStorage.schoolId,
+            "toExtension": encodeURIComponent(stuTel)
+        };
+
+        var onlineUrl = 'dt.xdf.cn';
+        var url_o;
+        if (window.location.host == onlineUrl) {//正式环境
+            url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+        } else {//测试环境
+            url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+        }
         $.ajax({
             type: 'POST',
-            url: url_o+'teacherData/teacherCallPhone.do',//老师拨打电话
+            url: url_o + 'teacherData/teacherCallPhone.do',//老师拨打电话
             data: JSON.stringify(reqData),
             success: function (e) {
-                if(e.result){
-                    alert(e.msg);
-                }
+                alert(JSON.parse(e).msg);
             },
             error: function (err) {
                 // failureCallback(msg);
-                console.log("err:"+err);
+                console.log("err:" + err);
             }
         });
     }
