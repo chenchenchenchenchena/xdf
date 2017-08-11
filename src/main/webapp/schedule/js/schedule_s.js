@@ -8,7 +8,7 @@ $(function() {
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     if (isiOS == true) {
-        $('.nbxs').eq(0).css('margin-top', '-.25rem')
+        $('.nbxs').eq(0).css('margin-t*op', '-.25rem')
     }
     // if (!sessionStorage.openid) {
     //     wechatCode(location.href);

@@ -54,9 +54,6 @@ $(function(){
                 }
             }
         }
-
-        var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3)
-        var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
         if (BeginDate[timeindex].SectBegin != undefined && BeginDate[timeindex].SectBegin != null && BeginDate[timeindex].SectBegin != '') {
             var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3);
         } else {
