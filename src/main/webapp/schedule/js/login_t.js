@@ -59,6 +59,7 @@ function teac(e){
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
+        
         ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
     }
 }
