@@ -15,7 +15,7 @@ $(function () {
                     $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
                         '<span>' + stuInfo[k].studentName + '</span>' +
-                        '<span class="callIcon" tel='+mobile+' stuCode='+stuInfo[k].studentCode+' /></span>' +
+                        '<span class="callIcon" tel=' + mobile + ' stuCode=' + stuInfo[k].studentCode + ' /></span>' +
                         '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
 
 
@@ -45,12 +45,12 @@ $(function () {
         var stuTel = $(this).attr("tel");
         var stuCode = $(this).attr("stuCode");
         // alert("打电话"+tel);
-        call(stuCode,stuTel);
+        call(stuCode, stuTel);
     });
 
-    function call(stuCode,stuTel) {
-        var appid="ssdf";
-        var signKey= "shuangshidongfang2017APP0810-cs331-0801";
+    function call(stuCode, stuTel) {
+        var appid = "ssdf";
+        var signKey = "shuangshidongfang2017APP0810-cs331-0801";
         // var callerid= "83410012";
         var uid = localStorage.teacherId;
         var sid = stuCode;
@@ -61,25 +61,33 @@ $(function () {
         var rt = encodeURIComponent(base64);
         // var hash = crypto.createHmac('sha1', signKey).update(str).digest().toString('base64');
         var reqData = {
-            "uid":uid,
-            "extension":extension,
-            "sid":sid,
-            "sign":rt,
-            "schoolId":localStorage.schoolId,
-            "toExtension":encodeURIComponent(stuTel)};
-        var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+            "uid": uid,
+            "extension": extension,
+            "sid": sid,
+            "sign": rt,
+            "schoolId": localStorage.schoolId,
+            "toExtension": encodeURIComponent(stuTel)
+        };
+
+        var onlineUrl = 'dt.xdf.cn';
+        var url_o;
+        if (window.location.host == onlineUrl) {//正式环境
+            url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+        } else {//测试环境
+            url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+        }
         $.ajax({
             type: 'POST',
-            url: url_o+'teacherData/teacherCallPhone.do',//老师拨打电话
+            url: url_o + 'teacherData/teacherCallPhone.do',//老师拨打电话
             data: JSON.stringify(reqData),
             success: function (e) {
-                if(e.result){
-                    alert(e.msg);
-                }
+
+                alert(e.msg);
+
             },
             error: function (err) {
                 // failureCallback(msg);
-                console.log("err:"+err);
+                console.log("err:" + err);
             }
         });
     }
