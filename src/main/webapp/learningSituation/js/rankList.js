@@ -59,6 +59,15 @@ $(function(){
     // 多选
     $(document).on('touchstart','.intro-test tr .check-td',function () {
         $(this).find('.check-box').toggleClass('checked');
+        if(!$(this).find('.check-box').hasClass('checked')){
+            $('.check-tr .check-box').removeClass('checked');
+            checkAll = true;
+        }else{
+            if($('.intro-test tr td .checked').length== $('.intro-test tr td .check-box').length){
+                $('.intro-test .check-box').addClass('checked');
+                checkAll = false;
+            }
+        }
     });
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
