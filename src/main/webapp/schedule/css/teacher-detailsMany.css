@@ -289,7 +289,7 @@ html body .studentList-t li{
 	text-align: center;
 }
 .to-tel{
-	display: inline-block;
+	display: none;
 	width: 25px;
 	height: 25px;
 	line-height: 25px;

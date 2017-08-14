@@ -41,12 +41,12 @@ $(function () {
     }
 
     //打电话
-    $('.studentList li').find('.callIcon').click(function () {
-        var stuTel = $(this).attr("tel");
-        var stuCode = $(this).attr("stuCode");
-        // alert("打电话"+tel);
-        call(stuCode, stuTel);
-    });
+    // $('.studentList li').find('.callIcon').click(function () {
+    //     var stuTel = $(this).attr("tel");
+    //     var stuCode = $(this).attr("stuCode");
+    //     // alert("打电话"+tel);
+    //     call(stuCode, stuTel);
+    // });
 
     function call(stuCode, stuTel) {
         var appid = "ssdf";
@@ -76,6 +76,7 @@ $(function () {
         } else {//测试环境
             url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
         }
+        // url_o = "http://10.73.84.101:8080/xdfdtmanager/";
         $.ajax({
             type: 'POST',
             url: url_o + 'teacherData/teacherCallPhone.do',//老师拨打电话
