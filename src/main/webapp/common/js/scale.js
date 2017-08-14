@@ -1,5 +1,4 @@
 //缩放比例
-$(function(){
 
 
 if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
@@ -13,4 +12,3 @@ if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
 }else{
     document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
 }
-})
