@@ -234,7 +234,21 @@ $(function () {
 			layer.msg(e.message);
 			var addstudent = "<dl><dt style='background: #ff6a6a'>" + $(".addName").val() + "</dt><dd>" + $(".addName").val() + "</dd><dd style=display:none class=code>" + $(".addCode").val() + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 			$(".add").before(addstudent);
-			resetData();
+			/*resetData();*/
+			var addlen=$(".scoreList dl").length;
+			var ddStr = $(".scoreList dl").eq(addlen-1).find("dd").eq(0);
+			var dtStr = $(".scoreList dl").eq(addlen-1).find("dt");
+			var ddstrLen = lenStat(ddStr);
+			if(lenStat(ddStr) == 8){
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+			}else if(lenStat(ddStr) > 8){
+				var b=(lenStat(ddStr)-8)/2;
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
+				ddStr.css("font-size", "17px");
+				ddStr.css("margin-top", "23px");
+			}else{
+				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+			}
 			$('.noDel button').eq(1).attr('disabled', false);
 			$('.noDel button').eq(1).css('background', "#00b997");
 		}else{
@@ -693,6 +707,8 @@ $(function () {
 			}else{
 				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
 			}
+
+
     
 		}
     }
