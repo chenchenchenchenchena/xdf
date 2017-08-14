@@ -40,6 +40,8 @@ function Wxtea(e){
         localStorage.teacherId = teaname.teacherNo;
         localStorage.schoolId = teaname.schoolId;
         localStorage.teacherName = teaname.teacherName;
+        localStorage.teachertel = teaname.mobile;
+
     }else{
         // etlogin('teacherWX')
     }
@@ -78,6 +80,7 @@ function binding(e){
         localStorage.teacherId = teacontent.teacherNo;
         localStorage.schoolId = teacontent.schoolId;
         localStorage.teacherName = teacontent.teacherName;
+        localStorage.teachertel = teacontent.mobile;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')

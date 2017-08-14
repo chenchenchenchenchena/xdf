@@ -1,30 +1,30 @@
 $(function(){
-    // if(!sessionStorage.openid){
-    //     wechatCode(location.href);
-    // };
-    // if(!localStorage.terEmail){
-    //         var WXnum  = {
-    //             'wechatId':sessionStorage.openid
-    //          };
-    //         ajax_S(url.s_seac,WXnum,function(e){
-    //             if(e.result==true){
-    //                 sessionStorage.stuNumber = e.data.studentNo;
-    //                 sessionStorage.schoolId = e.data.schoolId;
-    //                 location.href = 'report_s.html';
-    //             }else{
-    //                 if(sessionStorage.signal){
-    //                     location.href = '../schedule/login_stu.html'
-    //                 }else{
-    //                     location.href = '../schedule/login_s.html'
-    //                 }
-    //             }
-    //         });
-    // }
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
+    if(!localStorage.terEmail){
+            var WXnum  = {
+                'wechatId':sessionStorage.openid
+             };
+            ajax_S(url.s_seac,WXnum,function(e){
+                if(e.result==true){
+                    sessionStorage.stuNumber = e.data.studentNo;
+                    sessionStorage.schoolId = e.data.schoolId;
+                    location.href = 'report_s.html';
+                }else{
+                    if(sessionStorage.signal){
+                        location.href = '../schedule/login_stu.html'
+                    }else{
+                        location.href = '../schedule/login_s.html'
+                    }
+                }
+            });
+    }
 
 
 //点击查看成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
-    if($('.achievement_s>h4').length>1){
+    if($(this).siblings().length>1){
         if($(this).index()==0){
             sessionStorage.classcode = $(this).attr('classcode');
             sessionStorage.schoolid = $(this).attr('schoolid');
@@ -83,6 +83,7 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                 var mfInedx_c = [];
                 var timeIndex  = [];
                 if(e.data[i].TeacherclassRoomState!=false){
+                // if(true){
                     html_yh = '<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
                 }else{
                     html_yh = ''

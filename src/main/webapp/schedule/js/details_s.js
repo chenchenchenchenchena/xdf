@@ -54,9 +54,18 @@ $(function(){
                 }
             }
         }
+        if (BeginDate[timeindex].SectBegin != undefined && BeginDate[timeindex].SectBegin != null && BeginDate[timeindex].SectBegin != '') {
+            var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3);
+        } else {
+            var begintime = '';
+        }
+        if (BeginDate[timeindex].SectEnd != undefined && BeginDate[timeindex].SectEnd != null && BeginDate[timeindex].SectEnd != '') {
+            var endtime =  BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
+        
+        } else {
+            var endtime = '';
+        }
 
-        var begintime = BeginDate[timeindex].SectBegin.split(' ')[1].substring(0,BeginDate[timeindex].SectBegin.split(' ')[1].length-3)
-        var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0,BeginDate[timeindex].SectEnd.split(' ')[1].length-3)
         if( BeginDate[timeindex].BeginDate!=undefined||BeginDate[timeindex].BeginDate==null|BeginDate[timeindex].BeginDate==''){
             var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g,'/');
 

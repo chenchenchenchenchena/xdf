@@ -296,7 +296,7 @@ html body .studentList-t li{
 	border-radius: 50%;
 	border: 1px solid #f00;
 	color: #666;
-	background: #fff;
+	background: #fff url('../images/tel-red.png') center center/14px 14px no-repeat;
 	position: absolute;
 	top: 40px;
 	right: 0px;

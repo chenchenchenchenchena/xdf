@@ -29,9 +29,9 @@ var time1 = new Date().format("yyyy-MM-dd hh:mm:ss");
 //储存日历本月日期
 var time_this;
 //微信是否授权
-    if(!sessionStorage.openid){
-            wechatCode(location.href)
-    };
+    // if(!sessionStorage.openid){
+    //         wechatCode(location.href)
+    // };
 //判断长按的定时器
 var touchtime;
 var touchtend;
@@ -106,11 +106,11 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次<span class="tx" index="\'+i+\'">\'+htmltx+\'</span></p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             $('.curriculum').show()
         }
     }
-
+// <span class="tx" index="'+i+'">'+htmltx+'</span>
     //按月查课程
     ajax_S(url.s_emai,menu_s,menufunc);
     function menufunc(e){
