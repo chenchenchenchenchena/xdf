@@ -1,4 +1,7 @@
 //缩放比例
+$(function(){
+
+
 if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
     var version = parseFloat(RegExp.$1);
     if(version>2.3){
@@ -10,3 +13,4 @@ if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
 }else{
     document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
 }
+})
