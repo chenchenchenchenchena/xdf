@@ -18,7 +18,19 @@ $(function(){
         $('.main-content').attr('testState',$(".tab-title li").index(this)+1);
     });
     //链接到分享页
+    var checkStuArry = [];// 传递选中学生号
     $(document).on('touchstart','.to-shared',function () {
+        if($('.intro-test tr td .checked').length<=0){
+            layer.msg("请选择要分享的学员");
+            return ;
+        }
+        $('.intro-test tr td .check-box.checked').each(function () {
+            checkStuArry.push($(this).attr('data-stuNo'));
+            console.log(checkStuArry);
+        });
+        localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
+
+
         $('.tab-title,.main-content,.no-data').hide();
         // $('.shared-content').show();
         var testState = $('.main-content').attr('testState');
@@ -47,15 +59,6 @@ $(function(){
     // 多选
     $(document).on('touchstart','.intro-test tr .check-td',function () {
         $(this).find('.check-box').toggleClass('checked');
-    });
-    // 传递选中学生号
-    var checkStuArry = [];
-    $(document).on('touchstart','.to-shared',function () {
-        $('.intro-test tr td .check-box.checked').each(function () {
-            checkStuArry.push($(this).attr('data-stuNo'));
-            console.log(checkStuArry);
-        });
-        localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
     });
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
