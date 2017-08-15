@@ -7,7 +7,7 @@ $(function(){
         'wechatId': sessionStorage.openid
     };
 
-    
+
 
     ajax_S(url.s_seac, WXnum, function(e){
             if (e.result == true){
