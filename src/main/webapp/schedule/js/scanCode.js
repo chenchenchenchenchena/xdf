@@ -32,7 +32,7 @@ $(function(){
                     classSign  += '$';
                     classSign  += key;
 
-                var url = 'http://testxcard.staff.xdf.cn/SkyData/h5/qrCode/teacherCode.html?method='+method+'&studentCode='+studentCode+'&studentName='+studentName+'&schoolId='+schoolId+'&appId='+appId+'&sign='+$.md5(sign.toLowerCase()).toUpperCase()+'&classSign='+$.md5(classSign.toLowerCase()).toUpperCase()+''
+                var url = 'http://testxcard.staff.xdf.cn/SkyData/h5/qrCode/studentCode.html?method='+method+'&studentCode='+studentCode+'&studentName='+studentName+'&schoolId='+schoolId+'&appId='+appId+'&sign='+$.md5(sign.toLowerCase()).toUpperCase()+'&classSign='+$.md5(classSign.toLowerCase()).toUpperCase()+''
 
                 location.href = url
             }else{
