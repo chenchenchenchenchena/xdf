@@ -14,7 +14,7 @@ $(function(){
                 var method      = 'GetStudentLatestPcl';
                 var studentCode = e.data.studentNo;
                 var studentName = e.data.studentName;
-                var schoolId    = '1';
+                var schoolId    = e.data.schoolId;
                 var appId       = '5037';
                 var key         = 'v5k-dfss-dfd89dcc';
                 var sign        = 'GetStudentLatestPcl';
@@ -32,7 +32,7 @@ $(function(){
                     classSign  += '$';
                     classSign  += key;
 
-                var url = 'http://testxcard.staff.xdf.cn/SkyData/h5/qrCode/studentCode.html?method='+method+'&studentCode='+studentCode+'&studentName='+studentName+'&schoolId='+schoolId+'&appId='+appId+'&sign='+$.md5(sign.toLowerCase()).toUpperCase()+'&classSign='+$.md5(classSign.toLowerCase()).toUpperCase()+''
+                var url = 'http://centercard.staff.xdf.cn/SkyData/h5/qrCode/studentCode.html?method='+method+'&studentCode='+studentCode+'&studentName='+studentName+'&schoolId='+schoolId+'&appId='+appId+'&sign='+$.md5(sign.toLowerCase()).toUpperCase()+'&classSign='+$.md5(classSign.toLowerCase()).toUpperCase()+''
 
                 location.href = url
             }else{
