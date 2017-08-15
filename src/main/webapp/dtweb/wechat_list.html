@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双师平台</title>
+    <link rel="stylesheet" href="../common/css/base.css"/>
+    <style>
+        .mainLink li ,.mainLink li a{
+            display:block;
+            width: 400px;
+            height: 120px;
+            line-height: 120px;
+            background: #00b997;
+            text-align: center;
+            font-size: 40px;
+            color: #fff;
+            margin: 45px auto;
+        }
+
+        .mainLink li a {
+            color: #fff;
+        }
+    </style>
+    <script src="../common/js/jquery.js"></script>
+    <script src="../common/js/ajax.js"></script>
+</head>
+<body>
+
+<ul class="mainLink">
+    <li><a id="schedule" href="#">课表</a></li>
+    <li><a id="learn" href="#">学情</a></li>
+    <li><a id="account" href="account/account.html">账号</a></li>
+</ul>
+<script>
+    $(function () {
+//        localStorage.setItem("statusFlag","teacher");
+        if (localStorage.getItem("statusFlag") == "teacher") {
+            $('#schedule').attr('href', "../schedule/schedule_t.html");
+            $('#learn').attr('href', "../learningSituation/report_t.html");
+            if (localStorage.terEmail == undefined) {
+
+                getTeacherInfo();
+            }
+        }
+    });
+    //获取教师信息
+    function getTeacherInfo() {
+        var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+        var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
+        var calbac = {
+            'code': code_s,
+            'e2State': state_s,
+            'state': state_s
+        };
+        ajax_S(url.t_more, calbac, teac);
+    }
+
+    //返回数据解析
+    function teac(e) {
+
+        console.log(e);
+        if (e.result == true) {
+            localStorage.terEmail = e.userId;
+            localStorage.sid = e.sid;
+            sessionStorage.terEmail = e.userId;
+            localStorage.teacherName = e.userName;
+            var calbac = {
+                'teaEmail':localStorage.terEmail
+            };
+            //获取教师schoolId
+            ajaxRequest('POST',url.t_webmore,calbac, function (e) {
+                if(e.code == 200){
+                    localStorage.schoolId = e.data.nSchoolId;
+                    localStorage.teacherName = e.data.sName;
+                    localStorage.teacherId = e.data.sCode;
+                }
+
+            });
+        }
+
+    }
+</script>
+</body>
+</html>

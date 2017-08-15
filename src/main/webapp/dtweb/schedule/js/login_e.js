@@ -11,6 +11,7 @@ $(function () {
         if($(".t_email input").val()==""){
             layer.msg("邮箱不能为空");
         }else{
+            localStorage.statusFlag="teacher";
             ajax_S(url.w_email,temail,terEmail);
         }
 
@@ -31,7 +32,8 @@ $(function () {
                     sessionStorage.nickname=e.wechatData[0].nickName;
                     sessionStorage.headimgurl=e.wechatData[0].headImg;
                     sessionStorage.openid=e.wechatData[0].wechatId;
-                    location.href="../../schedule/login_t.html";
+                    // location.href="../../schedule/login_t.html";
+                    location.href="../wechat_list.html";
                 }
             }else{
                 layer.msg("教师邮箱不存在");
