@@ -14,7 +14,7 @@ $(function(){
                 var method      = 'GetStudentLatestPcl';
                 var studentCode = e.data.studentNo;
                 var studentName = e.data.studentName;
-                var schoolId    = e.data.schoolId;
+                var schoolId    = '1';
                 var appId       = '5037';
                 var key         = 'v5k-dfss-dfd89dcc';
                 var sign        = 'GetStudentLatestPcl';
