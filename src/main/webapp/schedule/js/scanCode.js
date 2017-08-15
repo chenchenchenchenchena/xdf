@@ -7,8 +7,7 @@ $(function(){
         'wechatId': sessionStorage.openid
     };
 
-    ajax_S(url.s_seac, WXnum, function(){
-        function stud(e) {
+    ajax_S(url.s_seac, WXnum, function(e){
             if (e.result == true){
                 var method      = 'GetStudentLatestPcl';
                 var studentCode = e.data.studentNo;
@@ -37,7 +36,6 @@ $(function(){
             }else{
                 layer.msg('您暂未绑定学生微信')
             }
-        }
     });
 
 
