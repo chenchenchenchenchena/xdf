@@ -205,7 +205,11 @@ function getSharedListSuccess(msg){
 }
 // 转化html页面为canvas图像
 function takeScreenshot() {
-    console.log('test');
+    var height = $('.ranklist').outerHeight()+$('.rankImg').outerHeight();
+    if($('.ranklist').outerHeight()+$('.rankImg').outerHeight()<=1244){
+        height = 1244;
+    }
+    console.log($('.ranklist').outerHeight()+$('.rankImg').outerHeight());
     html2canvas($('body'), {
         onrendered: function(canvas) {
             document.body.appendChild(canvas);
@@ -215,7 +219,7 @@ function takeScreenshot() {
                 convertCanvasToImage();
         },
          width: $('body').width(),
-         height: $('.ranklist').outerHeight()+$('.rankImg').outerHeight()
+         height: height
     });
 }
 //	canvas to images

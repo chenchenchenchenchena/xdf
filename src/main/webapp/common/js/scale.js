@@ -1,4 +1,6 @@
 //缩放比例
+
+
 if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
     var version = parseFloat(RegExp.$1);
     if(version>2.3){

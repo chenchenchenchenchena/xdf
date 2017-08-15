@@ -122,7 +122,7 @@ body {
 
 .callIcon {
     float: right;
-    display: inline-block;
+    display: none;
     width: 25px;
     height:1.6rem;
     background: url(../images/icon_call.png) center center no-repeat;
@@ -132,7 +132,7 @@ body {
 
 .learnIcon {
     float: right;
-    margin-right: 24px;
+    /*margin-right: 24px;*/
     display: inline-block;
     width: 25px;
     height:1.6rem;

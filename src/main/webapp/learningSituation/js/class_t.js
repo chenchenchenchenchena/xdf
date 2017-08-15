@@ -10,7 +10,6 @@ $(function(){
     });
 
     ajax_S(url.t_leyh,{'schoolId':sessionStorage.schoolid,'classCode':sessionStorage.classcode,'email':localStorage.terEmail},function(e){
-        console.log(e)
         if(e.result==true){
             $('header,section').show();
 
@@ -33,7 +32,7 @@ $(function(){
                     studentname = student[k].StudentName
                 }
 
-                $('.stu_yh ul').append('<li classCode="'+lessdata.classCode+'" schoolId="'+student[k].SchoolId+'" studentcode="'+student[k].StudentCode+'"><span>'+studentname+'</span><p>'+student[k].StudentName+'</p></li>')
+                $('.stu_yh ul').append('<li classCode="'+lessdata.classCode+'" schoolId="'+student[k].schoolId+'" studentcode="'+student[k].studentNo+'"><span>'+studentname+'</span><p>'+student[k].StudentName+'</p></li>')
             }
         }else{
             $('header,section').hide();
