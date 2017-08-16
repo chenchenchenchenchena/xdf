@@ -12,7 +12,7 @@ $(function(){
     ajax_S(url.t_leyh,{'schoolId':sessionStorage.schoolid,'classCode':sessionStorage.classcode,'email':localStorage.terEmail},function(e){
         if(e.result==true){
             $('header,section').show();
-
+            $('title').html(localStorage.teacherName);
             var classtime = e.dataList;
             var lessdata = e.lessonData;
             var student = lessdata.studentData;
