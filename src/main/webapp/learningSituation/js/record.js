@@ -156,6 +156,7 @@ $(function () {
 		var reNz=/^S{2}[0-9]{4}$/;
 		var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
 		var re=/^[a-zA-Z]{2,}$/;
+		/*var reZ=/^[\u4e00-\u9fa5]{2,}$/;*/
 		$(document).on('click','.add p',function () {
 			$(".addMask").show();
 			$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
@@ -243,7 +244,6 @@ $(function () {
 			if(re.test(ddStr.html())){
 				console.log(ddStr.html());
 				if(lenStat(ddStr) >= 5){
-					// dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr)));
 					if(lenStat(ddStr) >8){
 						ddStr.css("font-size", "17px");
 						ddStr.css("margin-top", "23px");
@@ -262,13 +262,15 @@ $(function () {
 					ddStr.css("font-size", "17px");
 					ddStr.css("margin-top", "23px");
 				}else{
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					/*if(lenStat(ddStr)>4){
+						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr) - 1));
+					}else{*/
+						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					/*}*/
+
 				}
+
 			}
-
-
-
-
 			$('.noDel button').eq(1).attr('disabled', false);
 			$('.noDel button').eq(1).css('background', "#00b997");
 		}else{
@@ -729,10 +731,9 @@ $(function () {
 					ddStr.css("font-size", "17px");
 					ddStr.css("margin-top", "23px");
 				}else{
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
 				}
 			}
-            /*console.log(strLen);*/
            /* if (lenStat(ddStr) > 8) {
                 ddStr.css("font-size", "17px");
 				ddStr.css("margin-top", "23px");
@@ -742,10 +743,6 @@ $(function () {
             }else{
             	 dtStr.html(ddStr.html());
             }*/
-
-
-
-    
 		}
     }
     //0-数据不动   1-添加   2-修改
