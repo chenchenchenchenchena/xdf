@@ -6,7 +6,7 @@ $(function(){
         arr = e;
 
         if(arr.result==true){
-            $('.header_yh').append('<h4>'+arr.className+'<span>共'+arr.LessonCount+'课次</span></h4><p>班号('+sessionStorage.classcode+') <span>'+arr.BeginDate+'-'+arr.EndDate+'</span></p>');
+            $('.header_yh').append('<h4>'+arr.ClassName+'<span>共'+arr.LessonCount+'课次</span></h4><p>班号('+sessionStorage.classcode+') <span>'+arr.BeginDate.split(' ')[0]+'-'+arr.EndDate.split(' ')[0]+'</span></p>');
             var more_ = arr.StudentClassRoomAnswer;
             for(var i = 0;i<more_.length;i++){
                 more_[i].classCorrectRate = parseInt(more_[i].perCorrectCount)*100;
