@@ -783,8 +783,10 @@ $(function () {
 	}
 	//清缓存
 	$(".txt i").click(function () {
-		var redisData={"code":"redis","prefixKey":"teacher_class:$('.class').html()"}
-		ajaxRequest("post",url.t_redis,redisData,redisAjax);
+		var redisData={"code":"redis","prefixKey":"teacher_class:"+$('.class').html()}
+		console.log(redisData)
+		/*ajaxRequest("post",url.t_redis,redisData,redisAjax);*/
+		ajax_S(url.t_redis,redisData,redisAjax)
 	})
 	function redisAjax(e) {
 		console.log(e);
