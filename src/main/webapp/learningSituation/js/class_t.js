@@ -26,10 +26,10 @@ $(function(){
 
             for(var k = 0;k<student.length;k++){
                 var studentname = '';
-                if(student[k].StudentName.length>2){
-                    studentname = student[k].StudentName.substr(student[k].StudentName.length-2,2)
+                if(student[k].studentName.length>2){
+                    studentname = student[k].studentName.substr(student[k].studentName.length-2,2)
                 }else{
-                    studentname = student[k].StudentName
+                    studentname = student[k].studentName
                 }
 
                 $('.stu_yh ul').append('<li classCode="'+lessdata.classCode+'" schoolId="'+student[k].schoolId+'" studentcode="'+student[k].studentNo+'"><span>'+studentname+'</span><p>'+student[k].StudentName+'</p></li>')
