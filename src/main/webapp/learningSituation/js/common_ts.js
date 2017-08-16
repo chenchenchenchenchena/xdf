@@ -7,7 +7,7 @@ $(function(){
 
         if(arr.result==true){
             $('title').html(e.studentName)
-            $('.header_yh').append('<h4>'+arr.ClassName+'<span>共'+arr.LessonCount+'课次</span></h4><p>班号('+sessionStorage.classCode+') <span>'+arr.BeginDate.split(' ')[0]+'-'+arr.EndDate.split(' ')[0]+'</span></p>');
+            $('.header_yh').append('<h4>'+arr.ClassName+'<span>共'+arr.LessonCount+'课次</span></h4><p>班号('+sessionStorage.classCode+') <span>'+arr.BeginDate.split(' ')[0].replace(/\-/g,'/')+'-'+arr.EndDate.split(' ')[0].replace(/\-/g,'/')+'</span></p>');
             var more_ = arr.StudentClassRoomAnswer;
             for(var i = 0;i<more_.length;i++){
                 more_[i].classCorrectRate = parseFloat(more_[i].perCorrectCount)*100;
