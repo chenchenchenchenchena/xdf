@@ -130,7 +130,7 @@ function signOut(e) {
 }
 
     // 配置微信启动项
-    var Wxconfig =  {"url" : location.href,"appid" : "wxab29a3e2000b8d2a","secret": "7739991fcce774c2281147eae3986ad9"};
+    var Wxconfig =  {"url" : location.href,"appid" : appId,"secret": secreT};
     var Wxconfig_h;
     $.ajax({
         url: url.w_xmor,
