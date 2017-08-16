@@ -19,7 +19,7 @@ $(function(){
             $('.header_yh').append('<h4>'+lessdata.className+'<span>共'+lessdata.lessonCount+'课次</span></h4><p>班号('+sessionStorage.classcode+') <span>'+lessdata.beginDate.split(' ')[0].replace(/\-/g,'/')+'-'+lessdata.endDate.split(' ')[0].replace(/\-/g,'/')+'</span></p>');
 
             for(var i = 0;i<classtime.length;i++){
-            var Correct = parseInt(classtime[i].correctRate);
+            var Correct = parseFloat(classtime[i].correctRate);
             $('.reportstu_S').append('<ul><li>'+classtime[i].lessonNo+'</li><li>'+classtime[i].answerCount+'</li><li>'+classtime[i].studentNumber+'</li><li>'+classtime[i].allCount+'</li><li>'+Correct*100+'%</li><li>'+classtime[i].averageTime+'</li></ul>');
 
             }
