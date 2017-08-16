@@ -11,7 +11,6 @@ $(function () {
         if($(".t_email input").val()==""){
             layer.msg("邮箱不能为空");
         }else{
-            localStorage.statusFlag="teacher";
             ajax_S(url.w_email,temail,terEmail);
         }
 
@@ -22,6 +21,7 @@ $(function () {
         if(e.result==true){
             if(e.data!=undefined){
                 // var teaname = jQuery.parseJSON(e.data);
+                localStorage.statusFlag="teacher";
                 localStorage.terEmail = e.data.sEmail;
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
