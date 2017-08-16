@@ -781,6 +781,19 @@ $(function () {
 		}
 		return pushinfo;
 	}
+	//清缓存
+	$(".txt i").click(function () {
+		var redisData={"code":"redis","prefixKey":"teacher_class:$('.class').html()"}
+		ajaxRequest("post",url.t_redis,redisData,redisAjax);
+	})
+	function redisAjax(e) {
+		console.log(e);
+		if(e.result){
+			layer.msg("刷新成功");
+		}else{
+			layer.msg("刷新失败");
+		}
+	}
 
 })
 
