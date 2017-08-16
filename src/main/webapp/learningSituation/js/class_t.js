@@ -32,7 +32,7 @@ $(function(){
                     studentname = student[k].studentName
                 }
 
-                $('.stu_yh ul').append('<li classCode="'+lessdata.classCode+'" schoolId="'+student[k].schoolId+'" studentcode="'+student[k].studentNo+'"><span>'+studentname+'</span><p>'+student[k].StudentName+'</p></li>')
+                $('.stu_yh ul').append('<li classCode="'+lessdata.classCode+'" schoolId="'+student[k].schoolId+'" studentcode="'+student[k].studentNo+'"><span>'+studentname+'</span><p>'+student[k].studentName+'</p></li>')
             }
         }else{
             $('header,section').hide();
