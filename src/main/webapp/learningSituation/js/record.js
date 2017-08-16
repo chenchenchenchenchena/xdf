@@ -154,7 +154,9 @@ $(function () {
 	//添加学生信息
 	// function addStudent() {
 		var reNz=/^S{2}[0-9]{4}$/;
-		var reCh = /^[\u4e00-\u9fa5]{2,}$/;
+		var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
+		var re=/^[a-zA-Z]{2,}$/;
+		/*var reZ=/^[\u4e00-\u9fa5]{2,}$/;*/
 		$(document).on('click','.add p',function () {
 			$(".addMask").show();
 			$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
@@ -239,15 +241,35 @@ $(function () {
 			var ddStr = $(".scoreList dl").eq(addlen-1).find("dd").eq(0);
 			var dtStr = $(".scoreList dl").eq(addlen-1).find("dt");
 			var ddstrLen = lenStat(ddStr);
-			if(lenStat(ddStr) == 8){
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-			}else if(lenStat(ddStr) > 8){
-				var b=(lenStat(ddStr)-8)/2;
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
-				ddStr.css("font-size", "17px");
-				ddStr.css("margin-top", "23px");
+			if(re.test(ddStr.html())){
+				console.log(ddStr.html());
+				if(lenStat(ddStr) >= 5){
+					if(lenStat(ddStr) >8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+					dtStr.html(ddStr.html().substr(- 4, 4));
+				}else{
+					dtStr.html(ddStr.html());
+				}
+
 			}else{
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+				if(lenStat(ddStr) == 8){
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+				}else if(lenStat(ddStr) > 8){
+					var b=(lenStat(ddStr)-8)/2;
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
+					ddStr.css("font-size", "17px");
+					ddStr.css("margin-top", "23px");
+				}else{
+					/*if(lenStat(ddStr)>4){
+						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr) - 1));
+					}else{*/
+						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					/*}*/
+
+				}
+
 			}
 			$('.noDel button').eq(1).attr('disabled', false);
 			$('.noDel button').eq(1).css('background', "#00b997");
@@ -687,7 +709,31 @@ $(function () {
             var ddStr = $(".scoreList dl").eq(j).find("dd").eq(0);
             var dtStr = $(".scoreList dl").eq(j).find("dt");
             var ddstrLen = lenStat(ddStr);
-            /*console.log(strLen);*/
+			if(re.test(ddStr.html())){
+				console.log(ddStr.html());
+				if(lenStat(ddStr) >= 5){
+					// dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr)));
+					if(lenStat(ddStr) >8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+					dtStr.html(ddStr.html().substr(- 4, 4));
+				}else{
+					dtStr.html(ddStr.html());
+				}
+
+			}else{
+				if(lenStat(ddStr) == 8){
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
+				}else if(lenStat(ddStr) > 8){
+					var b=(lenStat(ddStr)-8)/2;
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
+					ddStr.css("font-size", "17px");
+					ddStr.css("margin-top", "23px");
+				}else{
+					 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+				}
+			}
            /* if (lenStat(ddStr) > 8) {
                 ddStr.css("font-size", "17px");
 				ddStr.css("margin-top", "23px");
@@ -697,19 +743,6 @@ $(function () {
             }else{
             	 dtStr.html(ddStr.html());
             }*/
-			if(lenStat(ddStr) == 8){
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-			}else if(lenStat(ddStr) > 8){
-				var b=(lenStat(ddStr)-8)/2;
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
-				ddStr.css("font-size", "17px");
-				ddStr.css("margin-top", "23px");
-			}else{
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
-			}
-
-
-    
 		}
     }
     //0-数据不动   1-添加   2-修改
@@ -780,6 +813,21 @@ $(function () {
 			}
 		}
 		return pushinfo;
+	}
+	//清缓存
+	$(".txt i").click(function () {
+		var redisData={"code":"redis","prefixKey":"teacher_class:"+$('.class').html()}
+		console.log(redisData)
+		/*ajaxRequest("post",url.t_redis,redisData,redisAjax);*/
+		ajax_S(url.t_redis,redisData,redisAjax)
+	})
+	function redisAjax(e) {
+		console.log(e);
+		if(e.result){
+			layer.msg("刷新成功");
+		}else{
+			layer.msg("刷新失败");
+		}
 	}
 
 })

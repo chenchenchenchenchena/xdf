@@ -125,6 +125,14 @@ body,html{
 	color: #d4d3d3;
 	padding-left: 30px;
 }
+/*.txt i{
+	background: url('../images/refresh.png') no-repeat;
+	margin-left: 200px;
+	width: 30px;
+	height: 20px;
+	display: inline-block;
+	font-style: normal;
+}*/
 .txtbox{
 	width: 92%;
 	height: 370px;
