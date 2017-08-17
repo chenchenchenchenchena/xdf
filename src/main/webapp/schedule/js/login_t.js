@@ -41,7 +41,6 @@ function Wxtea(e){
         localStorage.schoolId = teaname.schoolId;
         localStorage.teacherName = teaname.teacherName;
         localStorage.teachertel = teaname.mobile;
-
     }else{
         // etlogin('teacherWX')
     }
