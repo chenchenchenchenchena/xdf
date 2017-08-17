@@ -33,20 +33,14 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
-if(getRequest('state').state=='JT'){
-    //新的appid
-    sessionStorage.signal = 0;
-    appId =  'wx67e16b7247bde1a8';
-    secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
-}else{
-    if(sessionStorage.signal){
-        appId =  'wx559791e14e9ce521';
-        secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        //新的appid
+        sessionStorage.signal = 0;
+        appId =  'wx67e16b7247bde1a8';
+        secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
     }else{
         sessionStorage.removeItem('signal');
     }
-}
-
 // 接口路径
 var url = {
     'e_elog': url_o+'e2Login/login.do',//e2登录

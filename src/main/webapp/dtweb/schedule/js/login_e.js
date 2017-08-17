@@ -16,7 +16,7 @@ $(function () {
 
     })
     function terEmail(e){
-        console.log(e.data)
+        console.log(e.data);
         console.log(e.wechatData)
         if(e.result==true){
             if(e.data!=undefined){
