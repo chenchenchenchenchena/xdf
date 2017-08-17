@@ -86,13 +86,13 @@ $(function() {
             sessionStorage.schoolId = e.data.schoolId
             emailm.studentCode = sessionStorage.stuNum;
             menu_s.studentCode = sessionStorage.stuNum;
+            ajax_S(url.s_stud, emailm, stusea);
             ajax_S(url.s_stud, menu_s, menufunc);
             ajax_S(url.data_s, '1', function (e) {
                 for (var i = 0; i < e.data.length; i++) {
                     masterteacher += e.data[i].teacherName + ','
                     mastertae.push(e.data[i]);
                 }
-                ajax_S(url.s_stud, emailm, stusea);
             });
         }
     }
