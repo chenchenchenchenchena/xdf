@@ -155,7 +155,7 @@ $(function () {
 	// function addStudent() {
 		var reNz=/^S{2}[0-9]{4}$/;
 		var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
-		var re=/^[a-zA-Z]{2,}$/;
+		var re=/^[a-zA-Z]+$/;
 		var reZ=/^[\u4e00-\u9fa5]+$/;
 		$(document).on('click','.add p',function () {
 			$(".addMask").show();
@@ -253,18 +253,54 @@ $(function () {
 					dtStr.html(ddStr.html());
 				}
 
-			}else{
-				if(lenStat(ddStr) == 8){
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-				}else if(lenStat(ddStr) > 8){
-					var b=(lenStat(ddStr)-8)/2;
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
-					ddStr.css("font-size", "17px");
-					ddStr.css("margin-top", "23px");
+			}else if(reZ.test(ddStr.html())){
+				if(lenStat(ddStr) >= 5){
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+					dtStr.html(ddStr.html().substr(- 2, 2));
 				}else{
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					dtStr.html(ddStr.html());
 				}
 
+			}else{
+				console.log(ddStr.html().substr(-1, 1));
+				console.log(ddStr.html().substr(-2, 1));
+				if(reZ.test(ddStr.html().substr(-1, 1))){
+					if(reZ.test(ddStr.html().substr(-2, 1))){
+						dtStr.html(ddStr.html().substr(-2, 2));
+						console.log(ddStr.html().substr(-2, 2));
+					}else{
+						dtStr.html(ddStr.html().substr(-3, 3));
+						console.log(ddStr.html().substr(-3, 3));
+					}
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+
+				}else{
+					if(re.test(ddStr.html().substr(-1, 1))){
+						if(re.test(ddStr.html().substr(-2, 1))){
+							if(re.test(ddStr.html().substr(-3, 1))){
+								if(re.test(ddStr.html().substr(-4, 1))){
+									dtStr.html(ddStr.html().substr(-4, 4));
+								}else{
+									dtStr.html(ddStr.html().substr(-3, 3));
+								}
+							}else{
+								dtStr.html(ddStr.html().substr(-3, 3));
+							}
+						}else{
+							dtStr.html(ddStr.html().substr(-2, 2));
+						}
+					}
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+				}
 			}
 			$('.noDel button').eq(1).attr('disabled', false);
 			$('.noDel button').eq(1).css('background', "#00b997");
@@ -272,23 +308,6 @@ $(function () {
 			layer.msg(e.message);
 		}
 	}
-	//截取名字
-	/*function jie() {
-		for (var i = 0; i < $(".scoreList dl").length; i++) {
-			var ddStr = $(".scoreList dl").eq(i).find("dd").eq(0);
-			var dtStr = $(".scoreList dl").eq(i).find("dt");
-			var ddstrLen = lenStat(ddStr);
-			if(lenStat(ddStr) == 8){
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-			}else if(lenStat(ddStr) > 8){
-				dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-				ddStr.css("font-size", "17px");
-				ddStr.css("margin-top", "23px");
-			}else{
-				dtStr.html(dtStr.html().substring(lenStat(dtStr) - 5, lenStat(dtStr) - 1));
-			}
-		}
-	}*/
 	//点击按钮收起功能
 	var open=true;
 	$(".txt span").click(function () {
@@ -327,9 +346,7 @@ $(function () {
     	}
     	
     })	
-   
-    
-    //满分表单
+	//满分表单
     $(".totalScore").blur(function(){
 		if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
     		$(".totalScore").val("");
@@ -709,7 +726,6 @@ $(function () {
 			if(re.test(ddStr.html())){
 				console.log(ddStr.html());
 				if(lenStat(ddStr) >= 5){
-					// dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr)));
 					if(lenStat(ddStr) >8){
 						ddStr.css("font-size", "17px");
 						ddStr.css("margin-top", "23px");
@@ -719,19 +735,55 @@ $(function () {
 					dtStr.html(ddStr.html());
 				}
 
-			}else{
-				if(lenStat(ddStr) == 8){
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6, lenStat(ddStr) - 1));
-				}else if(lenStat(ddStr) > 8){
-					var b=(lenStat(ddStr)-8)/2;
-					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 6-b, lenStat(ddStr) - 1));
-					ddStr.css("font-size", "17px");
-					ddStr.css("margin-top", "23px");
+			}else if(reZ.test(ddStr.html())){
+				if(lenStat(ddStr) >= 5){
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+					dtStr.html(ddStr.html().substr(- 2, 2));
 				}else{
-					 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
+					dtStr.html(ddStr.html());
+				}
+
+			}else{
+				console.log(ddStr.html().substr(-1, 1));
+				console.log(ddStr.html().substr(-2, 1));
+				if(reZ.test(ddStr.html().substr(-1, 1))){
+					if(reZ.test(ddStr.html().substr(-2, 1))){
+						dtStr.html(ddStr.html().substr(-2, 2));
+						console.log(ddStr.html().substr(-2, 2));
+					}else{
+						dtStr.html(ddStr.html().substr(-3, 3));
+						console.log(ddStr.html().substr(-3, 3));
+					}
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
+
+				}else{
+					if(re.test(ddStr.html().substr(-1, 1))){
+						if(re.test(ddStr.html().substr(-2, 1))){
+							if(re.test(ddStr.html().substr(-3, 1))){
+								if(re.test(ddStr.html().substr(-4, 1))){
+									dtStr.html(ddStr.html().substr(-4, 4));
+								}else{
+									dtStr.html(ddStr.html().substr(-3, 3));
+								}
+							}else{
+								dtStr.html(ddStr.html().substr(-3, 3));
+							}
+						}else{
+							dtStr.html(ddStr.html().substr(-2, 2));
+						}
+					}
+					if(lenStat(ddStr) > 8){
+						ddStr.css("font-size", "17px");
+						ddStr.css("margin-top", "23px");
+					}
 				}
 			}
-
 
 		}
     }
