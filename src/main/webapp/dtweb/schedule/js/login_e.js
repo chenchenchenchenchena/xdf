@@ -4,9 +4,9 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 $(function () {
-    if(!sessionStorage.openid){
+   /* if(!sessionStorage.openid){
         wechatCode(location.href)
-    }
+    }*/
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
@@ -29,7 +29,8 @@ $(function () {
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                if(e.wechatData.length<=0){
+                location.href="../wechat_list.html";
+                /*if(e.wechatData.length<=0){
                     layer.msg("微信未授权");
                 }else{
                     sessionStorage.nickname=e.wechatData[0].nickName;
@@ -37,7 +38,7 @@ $(function () {
                     sessionStorage.openid=e.wechatData[0].wechatId;
                     // location.href="../../schedule/login_t.html";
                     location.href="../wechat_list.html";
-                }
+                }*/
             }else{
                 layer.msg("教师邮箱不存在");
             }
