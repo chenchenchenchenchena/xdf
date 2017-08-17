@@ -242,10 +242,9 @@ $(function () {
 			var dtStr = $(".scoreList dl").eq(addlen-1).find("dt");
 			var ddstrLen = lenStat(ddStr);
 			if(re.test(ddStr.html())){
-				console.log(ddStr.html());
 				if(lenStat(ddStr) >= 5){
 					if(lenStat(ddStr) >8){
-						ddStr.css("font-size", "17px");
+						ddStr.css("font-size", "20px");
 						ddStr.css("margin-top", "23px");
 					}
 					dtStr.html(ddStr.html().substr(- 4, 4));
@@ -265,15 +264,11 @@ $(function () {
 				}
 
 			}else{
-				console.log(ddStr.html().substr(-1, 1));
-				console.log(ddStr.html().substr(-2, 1));
 				if(reZ.test(ddStr.html().substr(-1, 1))){
 					if(reZ.test(ddStr.html().substr(-2, 1))){
 						dtStr.html(ddStr.html().substr(-2, 2));
-						console.log(ddStr.html().substr(-2, 2));
 					}else{
 						dtStr.html(ddStr.html().substr(-3, 3));
-						console.log(ddStr.html().substr(-3, 3));
 					}
 					if(lenStat(ddStr) > 8){
 						ddStr.css("font-size", "17px");
@@ -724,10 +719,9 @@ $(function () {
             var dtStr = $(".scoreList dl").eq(j).find("dt");
             var ddstrLen = lenStat(ddStr);
 			if(re.test(ddStr.html())){
-				console.log(ddStr.html());
 				if(lenStat(ddStr) >= 5){
 					if(lenStat(ddStr) >8){
-						ddStr.css("font-size", "17px");
+						ddStr.css("font-size", "20px");
 						ddStr.css("margin-top", "23px");
 					}
 					dtStr.html(ddStr.html().substr(- 4, 4));
@@ -747,21 +741,16 @@ $(function () {
 				}
 
 			}else{
-				console.log(ddStr.html().substr(-1, 1));
-				console.log(ddStr.html().substr(-2, 1));
 				if(reZ.test(ddStr.html().substr(-1, 1))){
 					if(reZ.test(ddStr.html().substr(-2, 1))){
 						dtStr.html(ddStr.html().substr(-2, 2));
-						console.log(ddStr.html().substr(-2, 2));
 					}else{
 						dtStr.html(ddStr.html().substr(-3, 3));
-						console.log(ddStr.html().substr(-3, 3));
 					}
 					if(lenStat(ddStr) > 8){
 						ddStr.css("font-size", "17px");
 						ddStr.css("margin-top", "23px");
 					}
-
 				}else{
 					if(re.test(ddStr.html().substr(-1, 1))){
 						if(re.test(ddStr.html().substr(-2, 1))){
