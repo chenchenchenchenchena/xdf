@@ -151,6 +151,7 @@ $(function() {
                         }
                     }
                 }
+
                 for (var j = 0; j < arr.length; j++) {
 
                     for (var k = 0; k < dateH.length; k++) {

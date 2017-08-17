@@ -2,7 +2,7 @@ $(function(){
     $('header,section').hide();
 
     //点击学生
-    $(document).on('touchend','.stu_yh li',function(){
+    $(document).on('tap','.stu_yh li',function(){
         sessionStorage.schoolId = $(this).attr('schoolId');
         sessionStorage.stuNumber = $(this).attr('StudentCode');
         sessionStorage.classCode = $(this).attr('classcode');
