@@ -49,6 +49,7 @@ function stud(e){
 //按天查课程
 ajax_S(url.s_emai,emailm,stusea);
 function stusea(e){
+    setInterval(menu_int,10);
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
@@ -308,6 +309,6 @@ $(document).on('click','.H-data li',function(){
             }
         }
     }
-    setInterval(menu_int,10);
+
 
 })
