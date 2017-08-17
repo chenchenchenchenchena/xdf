@@ -156,7 +156,7 @@ $(function () {
 		var reNz=/^S{2}[0-9]{4}$/;
 		var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
 		var re=/^[a-zA-Z]{2,}$/;
-		/*var reZ=/^[\u4e00-\u9fa5]{2,}$/;*/
+		var reZ=/^[\u4e00-\u9fa5]+$/;
 		$(document).on('click','.add p',function () {
 			$(".addMask").show();
 			$("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"});
@@ -262,12 +262,7 @@ $(function () {
 					ddStr.css("font-size", "17px");
 					ddStr.css("margin-top", "23px");
 				}else{
-					/*if(lenStat(ddStr)>4){
-						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 4, lenStat(ddStr) - 1));
-					}else{*/
-						dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
-					/*}*/
-
+					dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
 				}
 
 			}
@@ -299,12 +294,14 @@ $(function () {
 	$(".txt span").click(function () {
 		/*alert("666");*/
 		if(open){
+			$(".scoreList").animate({"scrollTop":0},500);
 			$(".choose").hide();
 			$(".tab-title").css("margin-bottom","0px");
 			$(".scoreList").css("height","757px");
 			$(".txt").find("span").css("transform","rotate(180deg)");
 			open=false;
 		}else{
+			$(".scoreList").animate({"scrollTop":0},500);
 			$(".choose").show();
 			$(".tab-title").css("margin-bottom","20px");
 			$(".scoreList").css("height","312px");
@@ -734,15 +731,8 @@ $(function () {
 					 dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
 				}
 			}
-           /* if (lenStat(ddStr) > 8) {
-                ddStr.css("font-size", "17px");
-				ddStr.css("margin-top", "23px");
-			}
-            if (lenStat(ddStr) > 4) {
-                dtStr.html(ddStr.html().substring(lenStat(ddStr) - 5, lenStat(ddStr) - 1));
-            }else{
-            	 dtStr.html(ddStr.html());
-            }*/
+
+
 		}
     }
     //0-数据不动   1-添加   2-修改
