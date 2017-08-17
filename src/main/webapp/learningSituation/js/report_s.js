@@ -69,8 +69,7 @@ var Cindex = [];
 var maxNumber = 0;
 function Studata(){
 ajaxRequest('post',Study.s_study,Stujson,function(e){
-    console.log(e)
-        if(e.data.length!=0){
+        if(e.data.studentResultsCase.length!=0){
             var class_ = e.data.studentResultsCase;
 
                 for(var i = 0;i<class_.length;i++) {
