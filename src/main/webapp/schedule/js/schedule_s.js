@@ -83,7 +83,7 @@ $(function() {
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
             sessionStorage.schoolId = e.data.schoolId
-            emailm.studentCode = sessionStorage.schoolId;
+            emailm.studentCode = sessionStorage.stuNum;
             menu_s.studentCode = sessionStorage.stuNum;
             ajax_S(url.s_stud, menu_s, menufunc);
             ajax_S(url.data_s, '1', function (e) {
