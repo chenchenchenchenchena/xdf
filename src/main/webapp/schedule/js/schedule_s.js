@@ -182,8 +182,6 @@ $(function() {
     //按天查询课程
 
     function stusea(e) {
-        setInterval(menu_int, 1000);
-
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if (e.result == false) {
@@ -404,6 +402,7 @@ $(function() {
         }
     }
 
+    setInterval(menu_int, 1000);
 
     $('.js_jin').click(function(){
         var time1 = new Date().format("yyyy-MM-dd");
