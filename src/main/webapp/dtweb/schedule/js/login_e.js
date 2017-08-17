@@ -4,9 +4,9 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 $(function () {
-    if(!sessionStorage.openid){
+   /* if(!sessionStorage.openid){
         wechatCode(location.href)
-    }
+    }*/
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
