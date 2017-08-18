@@ -32,25 +32,13 @@ $(function() {
     var touchtime;
     var touchtend;
     var mastertae = [];
-    var color = ''
+    var color = '';
     //存储主讲老师
     var masterteacher = '';
     //当天课程
     ajax_S(url.s_seac, WXnum, stud);
 
-    var emailm = {
-        'studentCode': sessionStorage.stuNum,
-        'beginDate': time1,
-        'endDate': time1,
-        'schoolId':sessionStorage.schoolId
-    };
-    //当月课程
-    var menu_s = {
-        'studentCode': sessionStorage.stuNum,
-        'beginDate': new Date().format("yyyy-MM-01"),
-        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
-        'schoolId':sessionStorage.schoolId
-    };
+
     // 微信查询是否绑定微信  参数：当前微信号 学生
     $('.js_jin').click(function () {
         var emailm = {
@@ -86,6 +74,19 @@ $(function() {
             sessionStorage.schoolId = e.data.schoolId;
             emailm.studentCode = sessionStorage.stuNum;
             menu_s.studentCode = sessionStorage.stuNum;
+            var emailm = {
+                'studentCode': sessionStorage.stuNum,
+                'beginDate': time1,
+                'endDate': time1,
+                'schoolId':sessionStorage.schoolId
+            };
+            //当月课程
+            var menu_s = {
+                'studentCode': sessionStorage.stuNum,
+                'beginDate': new Date().format("yyyy-MM-01"),
+                'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
+                'schoolId':sessionStorage.schoolId
+            };
             ajax_S(url.s_stud, emailm, stusea);
             ajax_S(url.s_stud, menu_s, menufunc);
             ajax_S(url.data_s, '1', function (e) {

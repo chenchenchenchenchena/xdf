@@ -70,7 +70,7 @@ $(function(){
             var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g,'/');
 
         }else{
-            var begindata = '';
+                         var begindata = '';
         }
         if(BeginDate[timeindex].EndDate!=undefined&&BeginDate[timeindex].EndDate!=null&&BeginDate[timeindex].EndDate!=''){
             var enddata = BeginDate[timeindex].EndDate.split(' ')[0].replace(/\-/g,'/');
