@@ -297,7 +297,7 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                                 }
                             }
 
-                            for(var m = 0;m<Rindex_max;m++){
+                            for(var m = 0;m<Cindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
                                     if(m != r){
@@ -766,7 +766,7 @@ ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
                                 }
                             }
 
-                            for(var m = 0;m<Rindex_max;m++){
+                            for(var m = 0;m<Cindex_max;m++){
                                 var Tbuer = false;
                                 for(r in timejson){
                                     if(m != r){
