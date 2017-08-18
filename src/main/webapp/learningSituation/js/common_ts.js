@@ -1,6 +1,8 @@
 $(function(){
     var arr;
-
+    if(!sessionStorage.schoolId){
+        sessionStorage.schoolId = localStorage.getItem('SCHOOLID')
+    }
     ajax_S(url.stumo,{'schoolId':sessionStorage.schoolId,'studentNo':sessionStorage.stuNumber,'classCode':sessionStorage.classCode},function(e){
 
         arr = e;
