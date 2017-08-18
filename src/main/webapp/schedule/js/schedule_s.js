@@ -37,7 +37,19 @@ $(function() {
     var masterteacher = '';
     //当天课程
     ajax_S(url.s_seac, WXnum, stud);
-
+    var emailm = {
+        'studentCode': sessionStorage.stuNum,
+        'beginDate': time1,
+        'endDate': time1,
+        'schoolId':sessionStorage.schoolId
+    };
+    //当月课程
+    var menu_s = {
+        'studentCode': sessionStorage.stuNum,
+        'beginDate': new Date().format("yyyy-MM-01"),
+        'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
+        'schoolId':sessionStorage.schoolId
+    };
 
     // 微信查询是否绑定微信  参数：当前微信号 学生
     $('.js_jin').click(function () {
