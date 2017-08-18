@@ -72,8 +72,8 @@ $(function() {
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
             sessionStorage.schoolId = e.data.schoolId;
-            emailm.studentCode = sessionStorage.stuNum;
-            menu_s.studentCode = sessionStorage.stuNum;
+            emailm.studentCode = e.data.studentNo;
+            menu_s.studentCode = e.data.studentNo;
             var emailm = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate': time1,
