@@ -45,7 +45,6 @@ var maxnumber = 0;
         }else{
             Stujson.tCode='1';
             var url_s = location.href.substr(0,location.href.indexOf('?'));
-            studentNo=SS6647&tCode=1&studentName=%E8%A3%B4%E4%BD%B3%E9%9B%A8
             location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
