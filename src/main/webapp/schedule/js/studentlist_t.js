@@ -37,7 +37,7 @@ $(function () {
         // 		$('.studentList').eq(i).append('<li><i>'+(k+1)+'</i><span>'+stumore[k].substring(0,1)+'</span><span>'+stumore[k]+'</span></li>')
         // 	}
         // }
-        $('.slistTitle').html('课堂同学列表(' + (stuInfo.length - 1) + ')')
+        $('.slistTitle').html('课堂同学列表(' + (stuInfo.length) + ')')
     }
 
     //打电话

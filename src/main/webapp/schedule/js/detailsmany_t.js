@@ -14,7 +14,7 @@ $(function () {
     });
     //所属类别（显示到title）
     var subject_s = '';
-
+    sessionStorage.t = '';
     function stusea(e) {
         var teacindex = 0;
         var BeginDate = e.data.Data
@@ -39,7 +39,8 @@ $(function () {
         for (var j = 0; j < mastertae.length; j++) {
             for (var k = 0; k < masterta.length; k++) {
                 if (mastertae[j].teacherName == masterta[k]) {
-                    masterta[k] = ''
+                    sessionStorage.t = masterta[k];
+                    masterta[k] = '';
                     teacindex = j;
                 }
             }
@@ -49,13 +50,13 @@ $(function () {
         } else {
             var begintime = '';
         }
-        
+
         if (BeginDate[timeindex].SectEnd != undefined && BeginDate[timeindex].SectEnd != null && BeginDate[timeindex].SectEnd != '') {
             var endtime = BeginDate[timeindex].SectEnd.split(' ')[1].substring(0, BeginDate[timeindex].SectEnd.split(' ')[1].length - 3)
         } else {
             var endtime = '';
         }
-        
+
 
         if (BeginDate[timeindex].BeginDate != undefined && BeginDate[timeindex].BeginDate != null && BeginDate[timeindex].BeginDate != '') {
             var begindata = BeginDate[timeindex].BeginDate.split(' ')[0].replace(/\-/g, '/');
@@ -88,17 +89,29 @@ $(function () {
             if (BeginDate[regionindex[i]].AreaName == undefined) {
                 BeginDate[regionindex[i]].AreaName = ''
             }
-            $('.schoolCampus h3').html('上课校区(' + (i + 1) + ')')
-            for (var j = 0; j < masterta.length; j++) {
-                if (masterta[j] != '') {
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>' + masterta[j] + '</p></li>')
-                    $('.schoolCampus').append('<dl><dt>' + BeginDate[regionindex[i]].AreaName + '校区</dt><dd>' + BeginDate[regionindex[i]].RoomName + '</dd><dd class="name">(' + masterta[j] + ':' + BeginDate[regionindex[i]].ClassCode + ')</dd></dl>');
-                } else {
-                    $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>' + mastertae[teacindex].teacherName + '</p></li>')
+            $('.schoolCampus h3').html('上课校区(' + (i + 1) + ')');
+            if(masterta.length==1){
+                for (var j = 0; j < 1; j++) {
+                    if (masterta[j] != '') {
+                        $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>' + masterta[j] + '</p></li>')
+                        $('.schoolCampus').append('<dl><dt>' + BeginDate[regionindex[i]].AreaName + '校区</dt><dd>' + BeginDate[regionindex[i]].RoomName + '</dd><dd class="name">(' + masterta[j] + ':' + BeginDate[regionindex[i]].ClassCode + ')</dd></dl>');
+                    } else {
+                        $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>' + mastertae[teacindex].teacherName + '</p></li>')
+                    }
+                }
+            }else{
+                for (var j = 0; j < masterta.length; j++) {
+                    if (masterta[j] != '') {
+                        $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>' + masterta[j] + '</p></li>')
+                        $('.schoolCampus').append('<dl><dt>' + BeginDate[regionindex[i]].AreaName + '校区</dt><dd>' + BeginDate[regionindex[i]].RoomName + '</dd><dd class="name">(' + masterta[j] + ':' + BeginDate[regionindex[i]].ClassCode + ')</dd></dl>');
+                    } else {
+                        $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>' + mastertae[teacindex].teacherName + '</p></li>')
+                    }
                 }
             }
+
             arr.push(BeginDate[regionindex[i]].Students);
-            sessionStorage.t = masterta;
+            sessionStorage.t += masterta;
             sessionStorage.tm = mastertae[teacindex].teacherName;
             sessionStorage.cc = BeginDate[regionindex[i]].ClassCode;
             var stuall = BeginDate[regionindex[i]].Students;

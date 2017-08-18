@@ -20,8 +20,7 @@ $(function(){
 
             for(var i = 0;i<classtime.length;i++){
             var Correct = parseFloat(classtime[i].correctRate);
-            $('.reportstu_S').append('<ul><li>'+classtime[i].lessonNo+'</li><li>'+classtime[i].answerCount+'</li><li>'+classtime[i].studentNumber+'</li><li>'+classtime[i].allCount+'</li><li>'+Correct*100+'%</li><li>'+classtime[i].averageTime+'"</li></ul>');
-
+            $('.reportstu_S').append('<ul><li>'+classtime[i].lessonNo+'</li><li>'+classtime[i].answerCount+'</li><li>'+classtime[i].stuNum+'</li><li>'+classtime[i].allCount+'</li><li>'+parseInt(Correct*100)+'%</li><li>'+classtime[i].averageTime+'"</li></ul>');
             }
 
             for(var k = 0;k<student.length;k++){

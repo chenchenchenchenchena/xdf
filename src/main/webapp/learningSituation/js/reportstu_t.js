@@ -37,10 +37,15 @@ var maxnumber = 0;
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         if($(this).index()==1){
             Stujson.tCode='2';
+            var url_s = location.href.substr(0,location.href.indexOf('?'));
+            location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
             // $('.class_big').find('.classroom_s').remove();
-            Studata()
+            Studata();
+
         }else{
             Stujson.tCode='1';
+            var url_s = location.href.substr(0,location.href.indexOf('?'));
+            location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
             // $('.class_big').find('.classroom_s').remove();
             Studata()
         }
