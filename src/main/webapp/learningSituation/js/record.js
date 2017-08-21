@@ -151,6 +151,17 @@ $(function () {
 
         })
     }
+	//去重
+	/*function del() {
+		for(var i=0;i<$(".red").length;i++){
+			for(var j=0;j<$(".yellow").length;j++){
+				if($(".red").eq(i).find(".code").html()==$(".yellow").eq(j).find(".code").html()){
+					$(".yellow").eq(j).find("dt").html($(".red").eq(i).find("dt").html());
+					$(".red").eq(i).remove();
+				}
+			}
+		}
+	}*/
 	//添加学生信息
 	// function addStudent() {
 		var reNz=/^S{2}[0-9]{4}$/;
@@ -306,7 +317,6 @@ $(function () {
 	//点击按钮收起功能
 	var open=true;
 	$(".txt span").click(function () {
-		/*alert("666");*/
 		if(open){
 			$(".scoreList").animate({"scrollTop":0},500);
 			$(".choose").hide();
@@ -652,14 +662,17 @@ $(function () {
     //查询数据
     $(".confirmBtn").click(function(){
     	query();
+		/*del();*/
     	
     })
     $(".scoreTypeBtn").click(function(){
     	query();
+		/*del();*/
     	
     })
     $(".chooseBtn").click(function(){
     	query();
+		/*del();*/
     	
     })
     function query(){
@@ -675,8 +688,6 @@ $(function () {
 		    	"schoolId":localStorage.schoolId,
 		    	"lessonNo":$(".classTime").find(".classnum").html()
 		    };
-		    console.log(queryData.lessonNo)
-		     console.log(queryData.classCode)
 		     if ($(".st").html() == "入门测") {
 		        queryData.tCode = 1;
 		    } else {
@@ -701,7 +712,6 @@ $(function () {
 						$(".totalScore").val(msg.data[0].fullmarks);
 						$(".totalScore").attr("readonly","readonly");
 						if(msg.data[i].studentNo==$(".scoreList dl").eq(j).find(".code").html()){
-							console.log("sssss")
 							$(".scoreList dl").eq(j).find("dt").html(msg.data[i].realgrade);
 						}
 					}
