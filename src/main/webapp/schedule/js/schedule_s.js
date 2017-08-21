@@ -111,7 +111,10 @@ $(function() {
     // 微信查询是否绑定微信  参数：当前微信号 老师
     function teac(e) {
         if (e.data == "goE2") {
-            if(sessionStorage.signal){
+            if (localStorage.terEmail) {
+                location.href = 'schedule_t.html';
+                sessionStorage.removeItem('callbackconfig')
+            }else if(sessionStorage.signal){
                 location.href = 'login_stu.html'
             }else{
                 location.href = 'login_s.html'
