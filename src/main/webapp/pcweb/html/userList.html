@@ -16,8 +16,8 @@
     <script src="../js/layer-v2.1/layer/layer.js"></script>
     <script src="../js/util.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/p176.js"></script>
     <script src="../js/userList.js"></script>
+    <script src="../js/p176.js"></script>
 </head>
 <body onload="initMainPage('501')">
 <div class="p176-nav clearfix">
@@ -56,22 +56,21 @@
         <div class="p176-main">
             <div class="inner">
                 <h2 class="p176-tit pdRight20 clearfix"><span class="fz14"><a href="javascript:;"
-                                                                              onclick="changeCenter('./userList.html')">账户管理
-                    > </a>账号列表</span>
+                                                                              onclick="changeCenter('./userList.html')">账户管理> </a>账号列表</span>
                 </h2>
 
                 <!--search-->
                 <div class="clearfix hot-search">
                     <div class="fl search-box">
-                        <form action="javascript:searchByKey();">
-                            <i class="ico-search"></i>
-                            <input type="search" id="searchKey" placeholder="搜索账号" class="inp-s"
-                                   style="margin-right: -5px;height: 30px;"/>
-                            <input type="button" value="搜索" class="search" onclick="searchByKey()"/>
-                        </form>
+                        <!--<form action="javascript:searchByKey();">-->
+                            <!--<i class="ico-search"></i>-->
+                            <!--<input type="search" id="searchKey" placeholder="搜索账号" class="inp-s"-->
+                                   <!--style="margin-right: -5px;height: 30px;"/>-->
+                            <!--<input type="button" value="搜索" class="search" onclick="searchByKey()"/>-->
+                        <!--</form>-->
                     </div>
                     <div class="fr">
-                        <a href="#" class="newSet" onclick="addUser()"><i class="ico-add-new"></i>新建账户</a>
+                        <a href="#" class="newSet" onclick="changeCenter('./addUser.html')"><i class="ico-add-new"></i>新建账户</a>
                     </div>
                 </div>
                 <!--分类-->
