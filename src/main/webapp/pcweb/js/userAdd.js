@@ -1,5 +1,7 @@
 $(function () {
 
+
+
     /**
      * 获取权限列表（学校列表）
      */
@@ -83,37 +85,40 @@ $(function () {
     //     }
     // });
 
-    $("#treeConstant").tree({
-        data: data,
-        checkbox: true,
-        cascadeCheck: false,
-        onClick: function (node) {//单击事件
-            getAreaList(node);
-        },
-        onCheck: function (node, checked) {
-            if (checked) {
-                var parentNode = $("#treeConstant").tree('getParent', node.target);
-                if (parentNode != null) {
-                    $("#treeConstant").tree('check', parentNode.target);
-                }
-            } else {
-                var childNode = $("#treeConstant").tree('getChildren', node.target);
-                if (childNode.length > 0) {
-                    for (var i = 0; i < childNode.length; i++) {
-                        $("#treeConstant").tree('uncheck', childNode[i].target);
-                    }
-                }
-            }
-        }
-    });
+    /*$("#treeConstant").tree({
+     data: data,
+     checkbox: true,
+     cascadeCheck: false,
+     onClick: function (node) {//单击事件
+     getAreaList(node);
+     },
+     onCheck: function (node, checked) {
+     if (checked) {
+     var parentNode = $("#treeConstant").tree('getParent', node.target);
+     if (parentNode != null) {
+     $("#treeConstant").tree('check', parentNode.target);
+     }
+     } else {
+     var childNode = $("#treeConstant").tree('getChildren', node.target);
+     if (childNode.length > 0) {
+     for (var i = 0; i < childNode.length; i++) {
+     $("#treeConstant").tree('uncheck', childNode[i].target);
+     }
+     }
+     }
+     }
+     });*/
 
 
 });
-
-
-var isRepeatLoginId = false;
-
-
+var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";//测试环境
+var actionUrl = {
+    'searchUser':'user/searchUser.do',//通过邮箱前缀获取账号信息
+    'addUser':'user/addUser.do' //添加账号信息
+};
+/*
+ * 清空联动信息
+ * */
 var userInfo_clearInput = function () {
     $("#userName").val("");
     $("#email").val("");
@@ -121,51 +126,20 @@ var userInfo_clearInput = function () {
     $("#position").val("");
     $("#school").val("");
 }
-
-function getUserInfo() {
-    var inputLoginId = $("#inputLoginId").val();
-    if(inputLoginId == ''){
-        userInfo_clearInput();
-        return;
-    }
-    var businessP = {"keyword": $("#inputLoginId").val()};
-    var d = constructionParams(rsaEncryptedString(businessP), "18b868e977054ebcbcb7accc001b2262");
-    jQuery.ajax({
-        type: "POST",
-        url: Global.actionURL,
-        async: false,//同步
-        dataType: 'json',
-        data: JSON.stringify(d),
-        success: function (json) {
-            if (json.result == true) {
-                var data = $.parseJSON(json.data);
-                $("#userName").val(data.Name);
-                $("#email").val(data.AccountID + "@xdf.cn");
-                $("#department").val(data.Department);
-                $("#position").val(data.Title);
-                $("#school").val(data.Company);
-                var loginId = $("#inputLoginId").val();
-                //校验是否当前登录账号
-                verifyRepeat(loginId)
-            } else {
-                userInfo_clearInput();
-                layer.msg("未查询到账户，请重新输入", {icon: 5});
-            }
-        }
-    });
-}
-
+/*
+ * 通过邮箱前缀获取账号信息
+ * */
 function getMoreUserInfo(){
     $("#inputLoginId").autocomplete({
         source: function (request, response) {
             var businessP = {"keyword": $("#inputLoginId").val(), "pageSize": "20", "currentPage": "1"};
-            var d = constructionParams(rsaEncryptedString(businessP), "18b868e977054ebcbcb7accc001b2262");
+            /*var d = constructionParams(rsaEncryptedString(businessP), "18b868e977054ebcbcb7accc001b2262");*/
             jQuery.ajax({
                 type: "POST",
-                url: Global.actionURL,
+                url: baseUrl + actionUrl.searchUser,
                 async: false,//同步
                 dataType: 'json',
-                data: JSON.stringify(d),
+                data: JSON.stringify(businessP),
                 success: function (json) {
                     if (json.result == true) {
                         var data = $.parseJSON(json.data);
@@ -203,6 +177,205 @@ function getMoreUserInfo(){
         }
     });
 }
+
+/*
+ * 保存数据
+ * */
+function saveUser() {
+    layer.load(2,{
+        shade: [0.1,'#fff'] //0.1透明度的白色背景
+    });//遮罩加载
+    /*var loginId = $("#inputLoginId").val();
+     if (isRepeatLoginId) {
+     layer.msg("用户" + loginId + "已经存在，请确认！", {icon: 5});
+     return;
+     }*/
+    /*var arrSchoolId = [];
+     var arrSchoolName = [];
+     var arrAreaCode = [];
+     var arrAreaName = [];
+     var arrDeptCode = [];
+     var arrDeptName = [];
+     var checkeds = $('#treeConstant').tree('getChecked', 'checked');
+     var deptCheckeds = [];
+     if ($("#treeConstant2 li").length > 0) {
+     deptCheckeds = $("#treeConstant2").tree('getChecked', 'checked');
+     }
+     var functionCheckedList = $("#functionTree").tree('getChecked', ['checked', 'indeterminate']);
+     var functionArray = [];
+
+     for (var i = 0; i < functionCheckedList.length; i++) {
+     var functionId = functionCheckedList[i].id;
+     functionArray.push(functionId);
+     }
+
+     for (var i = 0; i < checkeds.length; i++) {
+     var id = checkeds[i].id;
+     var name = checkeds[i].text;
+     var type = checkeds[i].attributes;
+     if (type == 1) {
+     arrSchoolId.push(id);
+     arrSchoolName.push(name);
+     }
+     if (type == 2) {
+     arrAreaCode.push(id);
+     arrAreaName.push(name);
+     }
+     }
+
+     for (var i = 0; i < deptCheckeds.length; i++) {
+     var id = deptCheckeds[i].id;
+     var name = deptCheckeds[i].text;
+
+     arrDeptCode.push(id);
+     arrDeptName.push(name);
+     }
+
+     if($("#category").val() == "0"){
+     layer.msg("请选择分类", {icon: 5});
+     return false;
+     }
+
+     if (arrSchoolId.length <= 0) {
+     layer.msg("请选择学校", {icon: 5});
+     return false;
+     }
+
+     if (arrSchoolId.length > 1) {
+     layer.msg("每个用户只能选择一个地区", {icon: 5});
+     return false;
+     }
+
+     if (arrAreaCode.length < arrSchoolId.length) {
+     layer.msg("请选择" + arrSchoolName[arrAreaCode.length] + "的校区", {icon: 5});
+     return false;
+     }
+
+     if (arrDeptCode.length <= 0) {
+     layer.msg("请选择部门", {icon: 5});
+     return false;
+     }
+
+     if (arrDeptCode.length > 1) {
+     layer.msg("每个用户只能选择一个部门", {icon: 5});
+     return false;
+     }
+
+     if (functionArray.length <= 0) {
+     layer.msg("请选择功能", {icon: 5});
+     return false;
+     }
+
+     var arrSchoolIds = arrSchoolId.join(',');
+     var arrSchoolNames = arrSchoolName.join(',');
+     var arrAreaCodes = arrAreaCode.join(',');
+     var arrAreaNames = arrAreaName.join(',');
+     var arrDeptCodes = arrDeptCode.join(',');
+     var arrDeptNames = arrDeptName.join(',');
+
+     var userId = getCookie("loginId");
+
+     var userName = $("#userName").val();
+     var email = $("#email").val();
+     var department = $("#department").val();
+     var position = $("#position").val();
+     var school = $("#school").val();
+     var nSchoolId = arrSchoolIds;
+     var sSchoolName = arrSchoolNames;
+     var nAreaCode = arrAreaCodes;
+     var sAreaName = arrAreaNames;
+     var nDeptCode = arrDeptCodes;
+     var sDeptName = arrDeptNames;
+     if (loginId == "") {
+     layer.msg("登录账号不能为空！", {icon: 5});
+     return false;
+     }
+
+     if (userName == "") {
+     layer.msg("用户名不能为空！", {icon: 5});
+     return false;
+     }*/
+
+    var resParams = {
+        "userId":$('#inputLoginId').val(),//邮箱前缀
+        "loginId":$('#inputLoginId').val(),//账号
+        "passWord":$('#inputLoginId').val(),//密码
+        "userName":'',//
+        "email":$('#email').val(),//邮箱
+        "department":"集团信息管理部",//
+        "position":$('#position').val(),//职位
+        "school":$('#school').val()//学校
+    };
+    /* var d = constructionParams(rsaEncryptedString(businessP), "3bb45d62a96e494c8033c3fc9d79409b");*/
+    jQuery.ajax({
+        type: "POST",
+        url: baseUrl + actionUrl.addUser,
+        async: true,
+        dataType: 'json',
+        data: JSON.stringify(resParams),
+        success: function (json) {
+            if (json.result == true) {
+                if(json.code==0){
+                    layer.msg("保存成功!", {icon: 6});
+                }else{
+                    layer.msg("用户已存在!", {icon: 6});
+                }
+
+                //window.location.href = 'userList.html';
+                // addCategoryUser(loginId, functionArray);
+            } else {
+                layer.msg("保存失败!", {icon: 5});
+            }
+            layer.closeAll('loading');
+        }
+    });
+
+
+}
+
+
+
+
+
+var isRepeatLoginId = false;
+
+
+
+
+function getUserInfo() {
+    var inputLoginId = $("#inputLoginId").val();
+    if(inputLoginId == ''){
+        userInfo_clearInput();
+        return;
+    }
+    var businessP = {"keyword": $("#inputLoginId").val()};
+    var d = constructionParams(rsaEncryptedString(businessP), "18b868e977054ebcbcb7accc001b2262");
+    jQuery.ajax({
+        type: "POST",
+        url: Global.actionURL,
+        async: false,//同步
+        dataType: 'json',
+        data: JSON.stringify(d),
+        success: function (json) {
+            if (json.result == true) {
+                var data = $.parseJSON(json.data);
+                $("#userName").val(data.Name);
+                $("#email").val(data.AccountID + "@xdf.cn");
+                $("#department").val(data.Department);
+                $("#position").val(data.Title);
+                $("#school").val(data.Company);
+                var loginId = $("#inputLoginId").val();
+                //校验是否当前登录账号
+                verifyRepeat(loginId)
+            } else {
+                userInfo_clearInput();
+                layer.msg("未查询到账户，请重新输入", {icon: 5});
+            }
+        }
+    });
+}
+
+
 
 
 
@@ -315,158 +488,7 @@ function getAreaList(node) {
 }
 
 
-//保存数据
-function saveUser() {
-    layer.load(2,{
-        shade: [0.1,'#fff'] //0.1透明度的白色背景
-    });//遮罩加载
-    var loginId = $("#inputLoginId").val();
-    if (isRepeatLoginId) {
-        layer.msg("用户" + loginId + "已经存在，请确认！", {icon: 5});
-        return;
-    }
-    var arrSchoolId = [];
-    var arrSchoolName = [];
-    var arrAreaCode = [];
-    var arrAreaName = [];
-    var arrDeptCode = [];
-    var arrDeptName = [];
-    var checkeds = $('#treeConstant').tree('getChecked', 'checked');
-    var deptCheckeds = [];
-    if ($("#treeConstant2 li").length > 0) {
-        deptCheckeds = $("#treeConstant2").tree('getChecked', 'checked');
-    }
-    var functionCheckedList = $("#functionTree").tree('getChecked', ['checked', 'indeterminate']);
-    var functionArray = [];
 
-    for (var i = 0; i < functionCheckedList.length; i++) {
-        var functionId = functionCheckedList[i].id;
-        functionArray.push(functionId);
-    }
-
-    for (var i = 0; i < checkeds.length; i++) {
-        var id = checkeds[i].id;
-        var name = checkeds[i].text;
-        var type = checkeds[i].attributes;
-        if (type == 1) {
-            arrSchoolId.push(id);
-            arrSchoolName.push(name);
-        }
-        if (type == 2) {
-            arrAreaCode.push(id);
-            arrAreaName.push(name);
-        }
-    }
-
-    for (var i = 0; i < deptCheckeds.length; i++) {
-        var id = deptCheckeds[i].id;
-        var name = deptCheckeds[i].text;
-
-        arrDeptCode.push(id);
-        arrDeptName.push(name);
-    }
-
-    if($("#category").val() == "0"){
-        layer.msg("请选择分类", {icon: 5});
-        return false;
-    }
-
-    if (arrSchoolId.length <= 0) {
-        layer.msg("请选择学校", {icon: 5});
-        return false;
-    }
-
-    if (arrSchoolId.length > 1) {
-        layer.msg("每个用户只能选择一个地区", {icon: 5});
-        return false;
-    }
-
-    if (arrAreaCode.length < arrSchoolId.length) {
-        layer.msg("请选择" + arrSchoolName[arrAreaCode.length] + "的校区", {icon: 5});
-        return false;
-    }
-
-    if (arrDeptCode.length <= 0) {
-        layer.msg("请选择部门", {icon: 5});
-        return false;
-    }
-
-    if (arrDeptCode.length > 1) {
-        layer.msg("每个用户只能选择一个部门", {icon: 5});
-        return false;
-    }
-
-    if (functionArray.length <= 0) {
-        layer.msg("请选择功能", {icon: 5});
-        return false;
-    }
-
-    var arrSchoolIds = arrSchoolId.join(',');
-    var arrSchoolNames = arrSchoolName.join(',');
-    var arrAreaCodes = arrAreaCode.join(',');
-    var arrAreaNames = arrAreaName.join(',');
-    var arrDeptCodes = arrDeptCode.join(',');
-    var arrDeptNames = arrDeptName.join(',');
-
-    var userId = getCookie("loginId");
-
-    var userName = $("#userName").val();
-    var email = $("#email").val();
-    var department = $("#department").val();
-    var position = $("#position").val();
-    var school = $("#school").val();
-    var nSchoolId = arrSchoolIds;
-    var sSchoolName = arrSchoolNames;
-    var nAreaCode = arrAreaCodes;
-    var sAreaName = arrAreaNames;
-    var nDeptCode = arrDeptCodes;
-    var sDeptName = arrDeptNames;
-    if (loginId == "") {
-        layer.msg("登录账号不能为空！", {icon: 5});
-        return false;
-    }
-
-    if (userName == "") {
-        layer.msg("用户名不能为空！", {icon: 5});
-        return false;
-    }
-
-    var businessP = {
-        "userId": userId,
-        "loginId": loginId,
-        "userName": userName,
-        "email": email,
-        "department": department,
-        "position": position,
-        "school": school,
-        "nSchoolId": nSchoolId,
-        "sSchoolName": sSchoolName,
-        "nAreaCode": nAreaCode,
-        "sAreaName": sAreaName,
-        "nDeptCode": nDeptCode,
-        "sDeptName": sDeptName
-    };
-    var d = constructionParams(rsaEncryptedString(businessP), "3bb45d62a96e494c8033c3fc9d79409b");
-    jQuery.ajax({
-        type: "POST",
-        url: Global.actionURL,
-        async: true,
-        dataType: 'json',
-        data: JSON.stringify(d),
-        success: function (json) {
-            if (json.result == true) {
-                //layer.msg("保存成功!", {icon: 6});
-                //window.location.href = 'userList.html';
-                addCategoryUser(loginId, functionArray);
-            } else {
-                layer.msg("保存失败!", {icon: 5});
-            }
-            layer.closeAll('loading');
-        }
-    });
-
-
-}
 
 function addCategoryUser(loginId, functionArray){
     var param = {
