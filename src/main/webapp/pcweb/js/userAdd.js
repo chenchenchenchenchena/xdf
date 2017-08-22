@@ -5,32 +5,54 @@ $(function () {
     /**
      * 获取权限列表（学校列表）
      */
-    // var data = [];
-    // var d = constructionParams("", "886b657474524a639ea587fc52e48bcf");
-    // jQuery.ajax({
-    //     type: "POST",
-    //     url: Global.actionURL,
-    //     async: false,//同步
-    //     dataType: 'json',
-    //     data: JSON.stringify(d),
-    //     success: function (json) {
-    //         if (json.result == true) {
-    //             var sschoolList = json.dataList;
-    //             for (var i = 0; i < sschoolList.length; i++) {
-    //                 if (sschoolList[i]['sName'] != null && sschoolList[i]['sName'] != "NULL") {
-    //                     var scAdept = {
-    //                         "id": sschoolList[i]['sCode'],
-    //                         "text": sschoolList[i]['sName'],
-    //                         "attributes": 1
-    //                     }
-    //                     data.push(scAdept);
-    //                 }
-    //             }
-    //         } else {
-    //             layer.msg("查询失败!", {icon: 5})
-    //         }
-    //     }
-    // });
+    var data = [];
+    var nSchoolId;
+    var table = {
+            "tableName": "dict_school_info"
+        };
+    ajaxRequest("POST", url.s_select, table, selectData);
+    function selectData(json) {
+        console.log(json);
+        if (json.code == "200") {
+            var sschoolList = json.data;
+            for (var i = 0; i < sschoolList.length; i++) {
+                if (sschoolList[i].tName != null && sschoolList[i].tName != "NULL") {
+                    var scAdept = {
+                        "id": sschoolList[i].tCode,
+                        "text": sschoolList[i].tName,
+                        "attributes": 1
+                    };
+                    data.push(scAdept);
+                }
+            }
+            $("#treeConstant").tree({
+                data: data,
+                checkbox: true,
+                cascadeCheck: true,
+                onClick: function (node) {//单击事件
+                    nSchoolId = node.id;
+                },
+                onCheck: function (node, checked) {
+                    if (checked) {
+                        var parentNode = $("#treeConstant").tree('getParent', node.target);
+                        if (parentNode != null) {
+                            $("#treeConstant").tree('check', parentNode.target);
+                        }
+                    } else {
+                        var childNode = $("#treeConstant").tree('getChildren', node.target);
+                        if (childNode.length > 0) {
+                            for (var i = 0; i < childNode.length; i++) {
+                                $("#treeConstant").tree('uncheck', childNode[i].target);
+                            }
+                        }
+
+                    }
+                }
+            });
+        } else {
+            layer.msg("查询失败!", {icon: 5})
+        }
+    }
 
     /**
      * 获取功能列表
@@ -85,29 +107,7 @@ $(function () {
     //     }
     // });
 
-    /*$("#treeConstant").tree({
-     data: data,
-     checkbox: true,
-     cascadeCheck: false,
-     onClick: function (node) {//单击事件
-     getAreaList(node);
-     },
-     onCheck: function (node, checked) {
-     if (checked) {
-     var parentNode = $("#treeConstant").tree('getParent', node.target);
-     if (parentNode != null) {
-     $("#treeConstant").tree('check', parentNode.target);
-     }
-     } else {
-     var childNode = $("#treeConstant").tree('getChildren', node.target);
-     if (childNode.length > 0) {
-     for (var i = 0; i < childNode.length; i++) {
-     $("#treeConstant").tree('uncheck', childNode[i].target);
-     }
-     }
-     }
-     }
-     });*/
+
 
 
 });
@@ -406,86 +406,85 @@ function verifyRepeat(loginId) {
 function reload() {
     location.reload();
 }
-var nSchoolId;
-function getAreaList(node) {
-    if (node.attributes == 1) {
-        if (!node.children) {
-            nSchoolId = node.id
-            var businessP = {"nSchoolId": node.id};
-            var data = [];
-            var d = constructionParams(rsaEncryptedString(businessP), "41d0a5cd3cb74d9eaf14abfe2e4f139d");
-            jQuery.ajax({
-                type: "POST",
-                url: Global.actionURL,
-                async: false,//同步
-                dataType: 'json',
-                data: JSON.stringify(d),
-                success: function (json) {
-                    if (json.result == true) {
-                        var bsAreaList = json.dataList;
-                        for (var i = 0; i < bsAreaList.length; i++) {
-                            if (bsAreaList[i]['sName'] != null && bsAreaList[i]['sName'] != "NULL") {
-                                var scAdept = {
-                                    "id": bsAreaList[i]['sCode'],
-                                    "text": bsAreaList[i]['sName'],
-                                    "attributes": 2
-                                }
-                                data.push(scAdept);
-                            }
-                        }
-                        var dept = [];
-                        var param = constructionParams(rsaEncryptedString(businessP), "d6ed8c03c2674c72841472009bd35660");
-                        jQuery.ajax({
-                            type: "POST",
-                            url: Global.actionURL,
-                            async: false,//同步
-                            dataType: 'json',
-                            data: JSON.stringify(param),
-                            success: function (json) {
-                                if (json.result == true) {
-                                    var sDeptList = json.dataList;
-                                    for (var i = 0; i < sDeptList.length; i++) {
-                                        if (sDeptList[i]['sName'] != null && sDeptList[i]['sName'] != "NULL") {
-                                            var scDept = {
-                                                "id": sDeptList[i]['sCode'],
-                                                "text": sDeptList[i]['sName'],
-                                                "attributes": 3
-                                            }
-                                            dept.push(scDept);
-                                        }
-                                    }
-                                } else {
-                                    layer.msg("查询失败!", {icon: 5})
-                                }
-                            }
-                        });
-                        $("#treeConstant2").tree({
-                            data: dept,
-                            checkbox: true,
-                            cascadeCheck: false,
-                            onClick: function (node) {
-
-                            },
-                            onCheck: function (node) {
-                                var pNode = $("#treeConstant2").tree('getParent', node.target);
-                                if (pNode != null) {
-                                    $("#treeConstant2").tree('check', pNode.target);
-                                }
-                            }
-                        });
-                    } else {
-                        layer.msg("查询失败!", {icon: 5})
-                    }
-                }
-            });
-            $('#treeConstant').tree('append', {
-                parent: node.target,
-                data: data
-            });
-        }
-    }
-
-}
+// function getAreaList(node) {
+//     if (node.attributes == 1) {
+//         if (!node.children) {
+//             nSchoolId = node.id
+//             var businessP = {"nSchoolId": node.id};
+//             var data = [];
+//             var d = constructionParams(rsaEncryptedString(businessP), "41d0a5cd3cb74d9eaf14abfe2e4f139d");
+//             jQuery.ajax({
+//                 type: "POST",
+//                 url: Global.actionURL,
+//                 async: false,//同步
+//                 dataType: 'json',
+//                 data: JSON.stringify(d),
+//                 success: function (json) {
+//                     if (json.result == true) {
+//                         var bsAreaList = json.dataList;
+//                         for (var i = 0; i < bsAreaList.length; i++) {
+//                             if (bsAreaList[i]['sName'] != null && bsAreaList[i]['sName'] != "NULL") {
+//                                 var scAdept = {
+//                                     "id": bsAreaList[i]['sCode'],
+//                                     "text": bsAreaList[i]['sName'],
+//                                     "attributes": 2
+//                                 }
+//                                 data.push(scAdept);
+//                             }
+//                         }
+//                         var dept = [];
+//                         var param = constructionParams(rsaEncryptedString(businessP), "d6ed8c03c2674c72841472009bd35660");
+//                         jQuery.ajax({
+//                             type: "POST",
+//                             url: Global.actionURL,
+//                             async: false,//同步
+//                             dataType: 'json',
+//                             data: JSON.stringify(param),
+//                             success: function (json) {
+//                                 if (json.result == true) {
+//                                     var sDeptList = json.dataList;
+//                                     for (var i = 0; i < sDeptList.length; i++) {
+//                                         if (sDeptList[i]['sName'] != null && sDeptList[i]['sName'] != "NULL") {
+//                                             var scDept = {
+//                                                 "id": sDeptList[i]['sCode'],
+//                                                 "text": sDeptList[i]['sName'],
+//                                                 "attributes": 3
+//                                             }
+//                                             dept.push(scDept);
+//                                         }
+//                                     }
+//                                 } else {
+//                                     layer.msg("查询失败!", {icon: 5})
+//                                 }
+//                             }
+//                         });
+//                         $("#treeConstant2").tree({
+//                             data: dept,
+//                             checkbox: true,
+//                             cascadeCheck: false,
+//                             onClick: function (node) {
+//
+//                             },
+//                             onCheck: function (node) {
+//                                 var pNode = $("#treeConstant2").tree('getParent', node.target);
+//                                 if (pNode != null) {
+//                                     $("#treeConstant2").tree('check', pNode.target);
+//                                 }
+//                             }
+//                         });
+//                     } else {
+//                         layer.msg("查询失败!", {icon: 5})
+//                     }
+//                 }
+//             });
+//             $('#treeConstant').tree('append', {
+//                 parent: node.target,
+//                 data: data
+//             });
+//         }
+//     }
+//
+// }
 
 
 
