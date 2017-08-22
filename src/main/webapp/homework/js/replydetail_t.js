@@ -285,7 +285,12 @@ $(function () {
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
-
+        if($('.homeGrade').val()==''){
+            layer.msg('作业分数不能为空');
+            $('.areyok').hide();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
+            return false;
+        }
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {
@@ -294,7 +299,7 @@ $(function () {
         need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-
+        need.score = $('.homeGrade').val();
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
