@@ -15,7 +15,7 @@ function toLogin() {
     // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
         // url: baseUrl + "/e2Login/doLogin.do",
-        url: baseUrl+"/e2Login/pcLogin.do",
+        url: baseUrl + "/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -106,7 +106,7 @@ function showFunctionList(json) {
         //     'children': [{
         //         'id': "10401",
         //         'name': "帐号管理",
-        //         'url': 'accountManger.html',
+        //         'url': 'userList.html',
         //         'checked': true
         //     }]
         // }];
