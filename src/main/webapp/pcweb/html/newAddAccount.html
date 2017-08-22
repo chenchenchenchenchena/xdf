@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>东方双师管理平台</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../css/p176.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../../common/js/jquery.js"></script>
+    <script src="../../common/js/etlogin.js"></script>
+    <script src="../../common/js/rem.js"></script>
+    <script src="../../common/js/scale.js"></script>
+    <script src="../../common/js/swiper.min.js"></script>
+    <script src="../../common/js/zepto.min.js"></script>
+    <script src="../js/jqPaginator.min.js"></script>
+    <script src="../js/layer-v2.1/layer/layer.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/jquery.easyui.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/courseList.js"></script>
+    <script src="../js/p176.js"></script>
+    <script src="../js/userAdd.js"></script>
+</head>
+<body onload="initMainPage('10401')">
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"><a href="#" class="p176-logo">发布管理平台</a></div>
+    <div class="p176-nav-left" id="schoolAuthority" style="display: none">
+        <ul>
+            <li class="dropdown js-ads-drop">
+                <a href="#" id="schoolName1" hidden>城市<i class="dropdown-white"></i></a>
+                <ul class="b-sub-menu" id="schoolName"></ul>
+            </li>
+            <li class="dropdown js-area-drop">
+                <a href="#" hidden id="areaName1">校区<i class="dropdown-white"></i></a>
+                <ul class="a-sub-menu" id="areaName"></ul>
+            </li>
+            <li class="dropdown js-item-drop">
+                <a href="#" hidden id="deptName1">部门<i class="dropdown-white"></i></a>
+                <ul class="p-sub-menu" id="deptName"></ul>
+            </li>
+        </ul>
+    </div>
+    <div class="p176-nav-right">
+        <ul>
+            <li>
+                <a href="#" class="p176-nav-usename js-userName"></a>
+                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
+                    <ul>
+                        <li><a href="#" onclick="toLogout()" class="">退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="p176-wrap-all">
+    <div class="p176-mainWrap">
+        <div class="p176-main">
+            <div class="inner">
+                <h2 class="p176-tit pdRight20 clearfix"><span class="fz14"><a href="javascript:;"
+                                                                              onclick="changeCenter('./userList.html')">账号列表 > </a>账号添加</span>
+                </h2>
+                <div class="p176-table-wrap">
+                    <div class="user-li user-li1">
+                        <span>账号</span>
+
+                        <input type='text' class='user-input' id='inputLoginId' onfocus="getMoreUserInfo()"
+                               placeholder="请输入邮箱前缀查询用户!"/>
+                        <!--
+                        <input type='text' class='user-input' id='inputLoginId' onblur="getUserInfo()" placeholder="请输入邮箱前缀查询用户!"/>
+                        -->
+                    </div>
+                    <div class="user-li">
+                        <span>用户名</span>
+                        <input type='text' class='p176-input color-up' id='userName' value="" readonly/>
+                    </div>
+                    <div class="user-li">
+                        <span>邮箱</span>
+                        <input type='text' class='p176-input color-up' id='email' value="" readonly/>
+                    </div>
+                    <div class="user-li">
+                        <span>部门</span>
+                        <input type='text' class='p176-input color-up' id='department' value="" readonly/>
+                    </div>
+                    <div class="user-li">
+                        <span>职位</span>
+                        <input type='text' class='p176-input color-up' id='position' value="" readonly/>
+                    </div>
+                    <div class="user-li">
+                        <span>学校</span>
+                        <input type='text' class='p176-input color-up' id='school' value="" readonly/>
+                    </div>
+                    <div class="user-li">
+                        <span>分类</span>
+                        <select name="category" id="category" class="xdf_select1" style="margin-left: 12px">
+                            <option value="0">请选择分类信息</option>
+                        </select>
+                    </div>
+                    <div class="user-li user-li-last clearfix">
+                        <span class="fl">权限</span>
+                        <div class="user-table-info">
+                            <table class="user-table">
+                                <tr style="text-align:left">
+                                    <th>
+                                        <div id="treeConstant"></div>
+                                    </th>
+                                    <th>
+                                        <div id="treeConstant2"></div>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <!--功能管理-->
+                    <div class="clearfix mtop15">
+                        <div class="fl function-tit">功能管理</div>
+                        <div class="fl jurisdiction-box">
+                            <ul id="functionTree" class="ztree"></ul>
+                        </div>
+                    </div>
+
+
+                    <div class="p176-btn-adduser">
+                        <button type="reset" onclick="reload()" class="reset">取消</button>
+                        <button type="button" onclick="saveUser()" class="sure">确定</button>
+                    </div>
+                </div>
+            </div>
+            <div class="p176-left">
+                <div class="p176-leftmenu">
+                    <ul class="mtop10">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
