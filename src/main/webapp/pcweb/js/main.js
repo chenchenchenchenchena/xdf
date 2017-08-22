@@ -4,35 +4,36 @@ var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
 //访问doLogin.do
 function toLogin() {
 
-    // var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
-    // var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
-    // var calbac = {
-    //     'code': code_s,
-    //     'e2State': state_s,
-    //     'state': state_s
-    // };
-    // // alert("code:" + code_s + "state_s:" + state_s);
-    // $.ajax({
-    //     url: baseUrl + "/e2Login/doLogin.do",
-    //     // url: baseUrl+"/e2Login/pcLogin.do",
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: JSON.stringify(calbac),
-    //     success: function (e) {
-    //         console.log(e);
-    // if (e.result == false) {
-    //
-    //     alert(e.message);
-    //     // clearCookie();
-    //     toLogout();
-    // } else {
-    //         showFunctionList(e);
-    // }
-    //
-    //     }
-    // });
-    var e = {"result": true, "sid": "", "userName": "v_liwei8", "userId": "TC23"}
-    showFunctionList(e);
+    var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
+    var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+    var calbac = {
+        'code': code_s,
+        'e2State': state_s,
+        'state': state_s,
+        'userId': "v_liwei8"
+    };
+    // alert("code:" + code_s + "state_s:" + state_s);
+    $.ajax({
+        url: baseUrl + "/e2Login/doLogin.do",
+        // url: baseUrl+"/e2Login/pcLogin.do",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(calbac),
+        success: function (e) {
+            console.log(e);
+            if (e.result == false) {
+
+                alert(e.message);
+                // clearCookie();
+                toLogout();
+            } else {
+                showFunctionList(e);
+            }
+
+        }
+    });
+    // var e = {"result": true, "sid": "", "userName": "v_liwei8", "userId": "TC23"}
+    // showFunctionList(e);
 }
 
 //定义一个存放功能ID的数组
@@ -47,79 +48,76 @@ function showFunctionList(json) {
         // setCookie("loginId", json.loginId, 1);
         setCookie("userId", json.userId, 1);
 
-        functionIds = [];
-
-        // var functionList = json.functionList;
-
-        var functionList = [{
-            'id': "101",
-            'checked': true,
-            'name': "作业",
-            'className': "HX001",
-            'children': [{
-                'id': "10101",
-                'name': "出门表",
-                'url': 'raiseMain.html',
-                'checked': true
-            }, {
-                'id': "10102",
-                'name': "入门表",
-                'url': 'raiseMain.html',
-                'checked': true
-            }]
-        }, {
-            'id': "102",
-            'checked': true,
-            'name': "课表",
-            'className': "HX001",
-            'children': [{
-                'id': "10201",
-                'name': "出门表",
-                'url': "",
-                'checked': true
-            }, {
-                'id': "10202",
-                'name': "入门表",
-                'url': 'raiseMain.html',
-                'checked': true
-            }]
-        }, {
-            'id': "103",
-            'checked': true,
-            'name': "学情",
-            'className': "HX001",
-            'children': [{
-                'id': "10301",
-                'name': "出门表",
-                'url': 'raiseMain.html',
-                'checked': true
-            }, {
-                'id': "10302",
-                'name': "入门表",
-                'url': 'raiseMain.html',
-                'checked': true
-            }]
-        }, {
-            'id': "104",
-            'checked': true,
-            'name': "账号权限",
-            'className': "HX001",
-            'children': [{
-                'id': "10401",
-                'name': "帐号管理",
-                'url': 'accountManger.html',
-                'checked': true
-            }]
-        }];
+        // functionIds = [];
+        var functionList = json.functionList;
+        // var functionList = [{
+        //     'id': "101",
+        //     'checked': true,
+        //     'name': "作业",
+        //     'className': "HX001",
+        //     'children': [{
+        //         'id': "10101",
+        //         'name': "出门表",
+        //         'url': 'raiseMain.html',
+        //         'checked': true
+        //     }, {
+        //         'id': "10102",
+        //         'name': "入门表",
+        //         'url': 'raiseMain.html',
+        //         'checked': true
+        //     }]
+        // }, {
+        //     'id': "102",
+        //     'checked': true,
+        //     'name': "课表",
+        //     'className': "HX001",
+        //     'children': [{
+        //         'id': "10201",
+        //         'name': "出门表",
+        //         'url': "",
+        //         'checked': true
+        //     }, {
+        //         'id': "10202",
+        //         'name': "入门表",
+        //         'url': 'raiseMain.html',
+        //         'checked': true
+        //     }]
+        // }, {
+        //     'id': "103",
+        //     'checked': true,
+        //     'name': "学情",
+        //     'className': "HX001",
+        //     'children': [{
+        //         'id': "10301",
+        //         'name': "出门表",
+        //         'url': 'raiseMain.html',
+        //         'checked': true
+        //     }, {
+        //         'id': "10302",
+        //         'name': "入门表",
+        //         'url': 'raiseMain.html',
+        //         'checked': true
+        //     }]
+        // }, {
+        //     'id': "104",
+        //     'checked': true,
+        //     'name': "账号权限",
+        //     'className': "HX001",
+        //     'children': [{
+        //         'id': "10401",
+        //         'name': "帐号管理",
+        //         'url': 'accountManger.html',
+        //         'checked': true
+        //     }]
+        // }];
         if (functionList == undefined || functionList.length == 0) {
             alert("当前用户没用功能权限，请切换用户");
-            // clearCookie();
             toLogout();
         } else {
             //获取functionIds
-            setFunctionList(functionList);
+            setFunctionList(json.functionList);
             localStorage.functionCheckedList = JSON.stringify(functionList);
-            jumpPage(functionList);
+            jumpPage(json.functionList);
         }
 
 
@@ -155,9 +153,9 @@ function jumpPage(functionList) {
                 if (checked) {
                     try {
                         console.log(functionList[i].children);
-                        if(functionList[i].children == undefined){
+                        if (functionList[i].children == undefined) {
                             break flag;
-                        }else {
+                        } else {
                             for (var j = 0; j < functionList[i].children.length; j++) {
                                 var childChecked = functionList[i].children[j].checked;
                                 try {
