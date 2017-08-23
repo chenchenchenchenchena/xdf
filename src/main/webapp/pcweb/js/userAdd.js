@@ -33,11 +33,21 @@ $(function () {
             var sschoolList = json.data;
             for (var i = 0; i < sschoolList.length; i++) {
                 if (sschoolList[i].tName != null && sschoolList[i].tName != "NULL") {
-                    var scAdept = {
-                        "id": sschoolList[i].tCode,
-                        "text": sschoolList[i].tName,
-                        "attributes": 1
-                    };
+                    if(GetRequest('auth').indexOf(sschoolList[i].tCode)!=-1){
+                        var scAdept = {
+                            "id": sschoolList[i].tCode,
+                            "text": sschoolList[i].tName,
+                            "attributes": 1,
+                            "checked": true
+                        };
+                    }else{
+                        var scAdept = {
+                            "id": sschoolList[i].tCode,
+                            "text": sschoolList[i].tName,
+                            "attributes": 1
+                        };
+                    }
+
                     data.push(scAdept);
                 }
             }
@@ -73,7 +83,7 @@ $(function () {
     /**
      * 获取功能列表
      */
-    var param = {"userId": "v_liwei8"};
+    var param = {"userId": ""};
     // var param = {"userId": getCookie("userId")};
     jQuery.ajax({
         type: "POST",
