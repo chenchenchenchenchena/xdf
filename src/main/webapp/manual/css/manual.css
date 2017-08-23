@@ -147,7 +147,22 @@ body,html{
     color: #0FB9EF !important;
     border-left: 16px solid #0FB9EF;
 }
+#account{
+    padding:10px 30px;
+}
 #account img{
-    width:100px;
-    height:100px;
+    width:360px;
+    height:600px;
+    margin-left:130px;
+    margin-bottom: 20px;
+}
+h1{
+    font-weight:700;
+    margin-bottom: 10px;
+    font-size:34px;
+}
+#account p{
+    font-size:28px;
+    line-height:40px;
+    margin-bottom: 10px;
 }
