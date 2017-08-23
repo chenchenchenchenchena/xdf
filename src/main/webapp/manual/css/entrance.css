@@ -1,0 +1,35 @@
+body,html{
+    width:100%;
+    height:100%;
+    background:url("../img/tou.jpg") no-repeat;
+    background-size:100% 100%;
+    overflow: hidden;
+    position: relative;
+}
+/*.mask{
+    width: 100%;
+    height:100%;
+    background: #000000;
+    opacity: 0.5;
+    position: absolute;
+    left:0;
+    top:0;
+}*/
+.manual{
+    font-size:34px;
+    width:286px;
+    margin: 478px auto 0;
+}
+.manual a{
+    display: inline-block;
+    width:100%;
+    height:100px;
+    margin-bottom: 100px;
+    background: #00b997;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    line-height: 100px;
+    color: #fff;
+    border-radius:50px;
+}
