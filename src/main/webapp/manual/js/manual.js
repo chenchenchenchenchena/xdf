@@ -2,6 +2,7 @@
  * Created by zyc on 2017/8/22.
  */
 $(document).ready(function() {
+
     $(".menu_list ul li").click(function() {
         //判断对象是显示还是隐藏
         if($(this).children(".div1").is(":hidden")){
@@ -88,5 +89,15 @@ $(document).ready(function() {
         })
         $("body,html").css("overflow","auto");
     })
+    $(window).on('scroll',function(){
+        if($(document).scrollTop()>5){
+            $('.backTop').show();
+        }else if($(document).scrollTop()<5){
+            $('.backTop').hide();
+        }
+    });
 
+    $('.backTop').on('touchend',function(){
+        $('body,html').animate({ scrollTop: 0 }, 500);
+    });
 });
