@@ -13,6 +13,42 @@ $(function () {
     findList(1, currentCityId, currentAreaId, currentDeptId);
     initSwitch();
 });
+
+function initSwitch() {
+    //大开关
+    $("#m1").unbind('click').click(function () {
+        $(this).prev().css("overflow", "hidden");
+        if (switchFlag == false) {
+            $(this).prev().css("height", $('.hot-classes .list1 li').eq(0).height());
+            $(this).css("background-position", "0 -18px");
+            switchFlag = true;
+            $('.shou:visible').click();
+        } else {
+            $(this).prev().css("height", "auto");
+            $(this).css("background-position", "0 0");
+            switchFlag = false;
+        }
+    });
+    $(".open").unbind('click').click(function () {
+        $(this).parent().parent().css("height", "auto");
+        $(this).hide();
+        $(this).next().show();
+        if (switchFlag) {
+            $("#m1").prev().css("height", $('.hot-classes .list1 li').eq(0).height());
+        }
+    });
+    $(".shou").unbind('click').click(function () {
+        $(this).parent().parent().css("height", "30px");
+        $(this).hide();
+        $(this).prev().show();
+        if (switchFlag) {
+            $("#m1").prev().css("height", $('.hot-classes .list1 li').eq(0).height());
+        }
+    });
+
+
+}
+
 function initTopContent() {
 //查询校区
     var table = {
@@ -101,7 +137,7 @@ function findList(page, cityId, areaId, deptId) {
     // var d = constructionParams(rsaEncryptedString(requestJson), "c285388af594406a9306138154453f7a");
     jQuery.ajax({
         type: "POST",
-        url: Global.actionURL,
+        url: url_o+"/user/getUserInfo.do",
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
