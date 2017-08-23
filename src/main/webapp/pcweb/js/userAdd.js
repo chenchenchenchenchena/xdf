@@ -1,15 +1,14 @@
 $(function () {
 
 
-
     /**
      * 获取权限列表（学校列表）
      */
     var data = [];
     var nSchoolId;
     var table = {
-            "tableName": "dict_school_info"
-        };
+        "tableName": "dict_school_info"
+    };
     ajaxRequest("POST", url.s_select, table, selectData);
     function selectData(json) {
         console.log(json);
@@ -57,23 +56,26 @@ $(function () {
     /**
      * 获取功能列表
      */
-    // var param = constructionParams("", "0950b4d52fff4c04a22a38ac4ec4edfc");
-    // jQuery.ajax({
-    //     type: "POST",
-    //     url:url_o+"/function/getAllFunction.do",
-    //     async: false,//同步
-    //     dataType: 'json',
-    //     success: function (e) {
-    //         if (e.result && e.dataList != undefined && e.dataList != null) {
+    var param = {"userId": "v_liwei8"};
+    // var param = {"userId": getCookie("userId")};
+    jQuery.ajax({
+        type: "POST",
+        url: url_o + "/function/getAllFunction.do",
+        async: false,//同步
+        dataType: 'json',
+        // data: getCookie("userId"),
+        data: JSON.stringify(param),
+        success: function (e) {
+            if (e.result && e.dataList != undefined && e.dataList != null) {
                 $("#functionTree").tree({
-                    data: JSON.parse(localStorage.functionCheckedList),
+                    data: e.dataList,
                     checkbox: true,
                     cascadeCheck: true
                 });
-    //         }
-    //
-    //     }
-    // });
+            }
+
+        }
+    });
 
 
     /**
@@ -107,13 +109,11 @@ $(function () {
     // });
 
 
-
-
 });
 var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";//测试环境
 var actionUrl = {
-    'searchUser':'user/searchUser.do',//通过邮箱前缀获取账号信息
-    'addUser':'user/addUser.do' //添加账号信息
+    'searchUser': 'user/searchUser.do',//通过邮箱前缀获取账号信息
+    'addUser': 'user/addUser.do' //添加账号信息
 };
 /*
  * 清空联动信息
@@ -128,7 +128,7 @@ var userInfo_clearInput = function () {
 /*
  * 通过邮箱前缀获取账号信息
  * */
-function getMoreUserInfo(){
+function getMoreUserInfo() {
     $("#inputLoginId").autocomplete({
         source: function (request, response) {
             var businessP = {"keyword": $("#inputLoginId").val(), "pageSize": "20", "currentPage": "1"};
@@ -173,7 +173,7 @@ function getMoreUserInfo(){
             $("#position").val(ui.item.position);
             $("#school").val(ui.item.school);
             /*var loginId = $("#inputLoginId").val();
-            verifyRepeat(loginId);*/
+             verifyRepeat(loginId);*/
         }
     });
 }
@@ -182,8 +182,8 @@ function getMoreUserInfo(){
  * 保存数据
  * */
 function saveUser() {
-    layer.load(2,{
-        shade: [0.1,'#fff'] //0.1透明度的白色背景
+    layer.load(2, {
+        shade: [0.1, '#fff'] //0.1透明度的白色背景
     });//遮罩加载
     /*var loginId = $("#inputLoginId").val();
      if (isRepeatLoginId) {
@@ -297,14 +297,14 @@ function saveUser() {
      }*/
 
     var resParams = {
-        "userId":$('#inputLoginId').val(),//邮箱前缀
-        "loginId":$('#inputLoginId').val(),//账号
-        "passWord":'',//密码
-        "userName":$('#userName').val(),//
-        "email":$('#email').val(),//邮箱
-        "department":'',//
-        "position":$('#position').val(),//职位
-        "school":$('#school').val()//学校
+        "userId": $('#inputLoginId').val(),//邮箱前缀
+        "loginId": $('#inputLoginId').val(),//账号
+        "passWord": '',//密码
+        "userName": $('#userName').val(),//
+        "email": $('#email').val(),//邮箱
+        "department": '',//
+        "position": $('#position').val(),//职位
+        "school": $('#school').val()//学校
     };
     /* var d = constructionParams(rsaEncryptedString(businessP), "3bb45d62a96e494c8033c3fc9d79409b");*/
     jQuery.ajax({
@@ -315,9 +315,9 @@ function saveUser() {
         data: JSON.stringify(resParams),
         success: function (json) {
             if (json.result == true) {
-                if(json.code==0){
+                if (json.code == 0) {
                     layer.msg("保存成功!", {icon: 6});
-                }else{
+                } else {
                     layer.msg("用户已存在!", {icon: 6});
                 }
 
@@ -334,17 +334,12 @@ function saveUser() {
 }
 
 
-
-
-
 var isRepeatLoginId = false;
-
-
 
 
 function getUserInfo() {
     var inputLoginId = $("#inputLoginId").val();
-    if(inputLoginId == ''){
+    if (inputLoginId == '') {
         userInfo_clearInput();
         return;
     }
@@ -365,8 +360,8 @@ function getUserInfo() {
                 $("#position").val(data.Title);
                 $("#school").val(data.Company);
                 /*var loginId = $("#inputLoginId").val();
-                //校验是否当前登录账号
-                verifyRepeat(loginId)*/
+                 //校验是否当前登录账号
+                 verifyRepeat(loginId)*/
             } else {
                 userInfo_clearInput();
                 layer.msg("未查询到账户，请重新输入", {icon: 5});
@@ -374,9 +369,6 @@ function getUserInfo() {
         }
     });
 }
-
-
-
 
 
 function verifyRepeat(loginId) {
@@ -487,12 +479,10 @@ function reload() {
 // }
 
 
-
-
-function addCategoryUser(loginId, functionArray){
+function addCategoryUser(loginId, functionArray) {
     var param = {
-        userId : loginId,
-        categoryId : $("#category").val()
+        userId: loginId,
+        categoryId: $("#category").val()
     }
     var p = constructionParams(rsaEncryptedString(param), "ea5f45cf47f74a11ba3000351471f990");
     jQuery.ajax({
