@@ -8,6 +8,7 @@ $(function () {
         $('#email').val(GetRequest('email'));
         $('#position').val(GetRequest('position'));
         $('#school').val(GetRequest('school'));
+        $('#department').val(GetRequest('department'));
     }
     //确定
     $(document).on('click','.sure',function(){
@@ -170,7 +171,7 @@ function getMoreUserInfo() {
                                     value: item.emailAddr,
                                     username: item.name,
                                     email: item.emailAddr + "@xdf.cn",
-                                    // department: item.deptName,
+                                    department: item.deptName,
                                     position: item.PositionName,
                                     school: item.companyName
                                 }
@@ -235,7 +236,7 @@ function saveUser() {
         "passWord": '',//密码
         "userName": userName,//用户名
         "email":email ,//邮箱
-        "department": '',//
+        "department": $('#department').val(),//部门
         "position": $('#position').val(),//职位
         "school": $('#school').val(),//学校
         "auth":authCodeStr//权限编号
@@ -259,7 +260,7 @@ function saveUser() {
                         functionArray.push(functionId);
                     }
                     var functionIds = functionArray.join(',');
-                    addFunIds(email,functionIds);
+                    addFunIds(userId,functionIds);
                 }else{
                     layer.msg("功能管理不能为空!", {icon: 5});
                 }

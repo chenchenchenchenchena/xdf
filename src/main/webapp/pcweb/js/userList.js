@@ -10,7 +10,7 @@ var currentDeptId = '';
 var switchFlag = false;
 $(function () {
     initTopContent();
-    findList(1, currentCityId, currentAreaId, currentDeptId);
+    findList("");
     initSwitch();
 });
 
@@ -60,15 +60,15 @@ function selectData(json) {
     console.log(json);
     if (json.code == "200") {
         var schoolList = json.data;
-        var cityContent = "<a href='#' onclick='filterByCityId(this, \"\")' >全部</a>";
+        var cityContent = "<a href='#' onclick='filterByCityId(this, \"" + "" + "\")' >全部</a>";
         //var cityContent = "";
         for (var i = 0; i < schoolList.length; i++) {
             var schoolId = schoolList[i].tCode;
             if (schoolId == "1") {
-                cityContent += "<a href='# 'class='cur' onclick='filterByCityId(this, \"" + schoolId + "\")' " +
+                cityContent += "<a href='# 'class='cur' onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")' " +
                     " >" + schoolList[i].tName + "</a>";
             } else {
-                cityContent += "<a href='#' onclick='filterByCityId(this, \"" + schoolId + "\")'" +
+                cityContent += "<a href='#' onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")'" +
                     " >" + schoolList[i].tName + "</a>";
             }
         }
@@ -81,11 +81,11 @@ function selectData(json) {
 function filterByCityId(_this, cityId) {
     $(".xian-wid .cur").removeClass("cur");
     $(_this).addClass("cur");
-    if (cityId != '') {
+    if (cityId != "") {
         $(".list1 li").eq(1).show();
         $(".list1 li").eq(2).show();
         firstIn = true;
-        findList(1, cityId, currentAreaId, currentDeptId);
+        findList(cityId);
     } else {
         currentCityId = '';
         currentAreaId = '';
@@ -94,9 +94,10 @@ function filterByCityId(_this, cityId) {
         $(".list1 li").eq(2).hide();
         $("#userTbody").html("");
         $("#publicPage").html("");
-        if ($("#searchKey").val() != '') {
-            findList(1, cityId, currentAreaId, currentDeptId);
-        }
+        // if ($("#searchKey").val() != '') {
+        //     findList(cityId);
+        // }
+        findList(cityId);
     }
 }
 
@@ -117,7 +118,7 @@ function searchByKey() {
         data: JSON.stringify(requestJson),
         success: function (json) {
             if (json.result == true) {
-                if(undefined == json.data){
+                if (undefined == json.data) {
                     layer.msg("查询失败!", {icon: 5});
                     return;
                 }
@@ -134,6 +135,7 @@ function searchByKey() {
                 var isEnabled = json.data.isEnabled;
                 var schoolCode = json.data.schoolCode;
                 var schoolName = json.data.school;
+                var auth = json.data.auth;
                 str += "<tr class='table-tr-even'>"
                 str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
                 str += "<td style='display: none'>" + pid + "</td>"
@@ -147,7 +149,7 @@ function searchByKey() {
                 str += "<td>"
                 str += "<div class='p176-table-btnGroup'>";
                 str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
                 if (isEnabled == 1) {
                     str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
                 } else {
@@ -167,64 +169,47 @@ function searchByKey() {
 }
 
 var firstIn = true;
-function findList(page, cityId, areaId, deptId) {
-    if (cityId == null) {
-        cityId = "";
-    }
-    if (areaId == null) {
-        areaId = "";
-    }
-    if (deptId == null) {
-        deptId = "";
-    }
-    var searchKey = $("#searchKey").val();
-    if (searchKey == null) {
-        searchKey = "";
+function findList(school) {
+    if (school == null) {
+        school = "";
     }
 
     var requestJson = {
-        cityId: cityId,
-        areaId: areaId,
-        deptId: deptId,
-        searchKey: searchKey,
-        currentPage: page,
-        pageSize: pageSize
+        school: school
     };
-    // var d = constructionParams(rsaEncryptedString(requestJson), "c285388af594406a9306138154453f7a");
     jQuery.ajax({
         type: "POST",
-        url: url_o + "/user/getUserInfo.do",
+        url: url_o + "/user/getMarketPrivilegeList.do",
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
         success: function (json) {
             if (json.result == true) {
                 var userList = json.dataList;
-                totalCounts = json.totalCount;
+                totalCounts = userList.length;
                 if (undefined == totalCounts || totalCounts <= 0) {
                     return;
                 }
                 if (firstIn) {
-                    initPage(totalCounts, page);
+                    initPage(totalCounts, 1);
                     firstIn = false;
                 }
                 var str = "";
                 for (var i = 0; i < userList.length; i++) {
-                    var pid = userList[i]["id"];
-                    var userId = userList[i]["userId"];
-                    var loginId = userList[i]["loginId"];
-                    var userName = userList[i]["userName"];
-                    var email = userList[i]["email"];
-                    var department = userList[i]["department"];
-                    var position = userList[i]["position"];
-                    var school = userList[i]["school"];
-                    var isEnabled = userList[i]["isEnabled"];
-                    var schoolCode = userList[i]["schoolCode"];
-                    var schoolName = userList[i]["schoolName"];
-                    var areaCode = userList[i]["areaCode"];
-                    var areaName = userList[i]["areaName"];
-                    var deptCode = userList[i]["deptCode"];
-                    var deptName = userList[i]["deptName"];
+                    var pid = userList[i].id;
+                    var userId = userList[i].loginId;
+                    var loginId = userList[i].loginId;
+                    var userName = userList[i].userName;
+                    var email = userList[i].email;
+                    var department = userList[i].department;
+                    var position = userList[i].position;
+                    var school = userList[i].school;
+                    var isEnabled = userList[i].isEnabled;
+                    // var schoolCode = userList[i].schoolCode;
+                    var schoolName = userList[i].school;
+                    // var areaCode = userList[i].areaCode;
+                    // var areaName = userList[i].areaName;
+                    var auth = userList[i].auth;
 
                     if (i % 2 == 1) {
                         str += "<tr class='table-tr-odd'>"
@@ -238,14 +223,12 @@ function findList(page, cityId, areaId, deptId) {
                     str += "<td>" + userName + "</td>"
                     str += "<td style='word-wrap:break-word'>" + email + "</td>"
                     str += "<td>" + schoolName + "</td>"
-                    str += "<td>" + areaName + "</td>"
-                    str += "<td>" + deptName + "</td>"
 
 
                     str += "<td>"
                     str += "<div class='p176-table-btnGroup'>";
                     str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + areaCode + "\",\"" + deptCode + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\");'><i></i>编辑</a>";
                     // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
                     if (isEnabled == 1) {
                         str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
@@ -318,8 +301,8 @@ function enabledUser(_this, userId) {
     });
 }
 //修改展示页面
-function updateExhibitionUser(pid, userId, loginId, userName, email, position, school, schoolCode) {
-    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) + "&schoolCode=" + schoolCode;
+function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school,auth) {
+    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) +"&auth=" + auth;
 
 }
 function initPage(totalCounts, currentPage) {
