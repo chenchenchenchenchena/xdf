@@ -3,12 +3,18 @@ $(function () {
     if(GetRequest('oper')!='add'){//编辑
         $('#inputLoginId').attr('disabled','disabled');
         $('#inputLoginId').attr('placeholder','');
-        $('#inputLoginId').val(GetRequest('userId'));
+        var userIdIn = GetRequest('userId');
+        $('#inputLoginId').val(userIdIn);
         $('#userName').val(GetRequest('userName'));
         $('#email').val(GetRequest('email'));
         $('#position').val(GetRequest('position'));
         $('#school').val(GetRequest('school'));
         $('#department').val(GetRequest('department'));
+        var param = {"userId": userIdIn};
+        getFunctions(param);
+    }else{
+        var param = {"userId": ""};
+        getFunctions(param);
     }
     //确定
     $(document).on('click','.sure',function(){
@@ -33,21 +39,21 @@ $(function () {
             var sschoolList = json.data;
             for (var i = 0; i < sschoolList.length; i++) {
                 if (sschoolList[i].tName != null && sschoolList[i].tName != "NULL") {
-                    if(GetRequest('auth').indexOf(sschoolList[i].tCode)!=-1){
-                        var scAdept = {
-                            "id": sschoolList[i].tCode,
-                            "text": sschoolList[i].tName,
-                            "attributes": 1,
-                            "checked": true
-                        };
-                    }else{
-                        var scAdept = {
-                            "id": sschoolList[i].tCode,
-                            "text": sschoolList[i].tName,
-                            "attributes": 1
-                        };
+                    var scAdept = {
+                        "id": sschoolList[i].tCode,
+                        "text": sschoolList[i].tName,
+                        "attributes": 1
+                    };
+                    if(GetRequest('auth')!=""&&GetRequest('auth')!=null){
+                        if(GetRequest('auth').indexOf(sschoolList[i].tCode)!=-1){
+                            var scAdept = {
+                                "id": sschoolList[i].tCode,
+                                "text": sschoolList[i].tName,
+                                "attributes": 1,
+                                "checked": true
+                            };
+                        }
                     }
-
                     data.push(scAdept);
                 }
             }
@@ -83,26 +89,29 @@ $(function () {
     /**
      * 获取功能列表
      */
-    var param = {"userId": ""};
-    // var param = {"userId": getCookie("userId")};
-    jQuery.ajax({
-        type: "POST",
-        url: url_o + "/function/getAllFunction.do",
-        async: false,//同步
-        dataType: 'json',
-        // data: getCookie("userId"),
-        data: JSON.stringify(param),
-        success: function (e) {
-            if (e.result && e.dataList != undefined && e.dataList != null) {
-                $("#functionTree").tree({
-                    data: e.dataList,
-                    checkbox: true,
-                    cascadeCheck: true
-                });
-            }
+    function getFunctions(param){
+        jQuery.ajax({
+            type: "POST",
+            url: url_o + "/function/getAllFunction.do",
+            async: false,//同步
+            dataType: 'json',
+            // data: getCookie("userId"),
+            data: JSON.stringify(param),
+            success: function (e) {
+                if (e.result && e.dataList != undefined && e.dataList != null) {
+                    $("#functionTree").tree({
+                        data: e.dataList,
+                        checkbox: true,
+                        cascadeCheck: false
+                    });
+                }
 
-        }
-    });
+            }
+        });
+    }
+
+    // var param = {"userId": getCookie("userId")};
+
 
 
     /**
