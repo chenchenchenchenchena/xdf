@@ -19,7 +19,7 @@ body,html{
     line-height: 70px;
     font-size: 32px;
     /*text-align: center;*/
-    background: #354045;
+    background: #00ba97;
     color: #fff;
     border-bottom: 1px solid #fff;
 }
@@ -39,7 +39,7 @@ body,html{
 .middle .leftMenu{
     width: 300px;
     height: 94.5%;
-    background-color: #354045;
+    background-color: #00ba97;
     /*float: left;*/
     position: absolute;
     left:-300px;
@@ -110,7 +110,7 @@ body,html{
     line-height: 75px;
     text-align: center;
     width: 300px;
-    border-bottom: 2px solid #586065;
+    border-bottom: 2px solid #fff;
     float: left;
 }
 .menu_list ul li .xiala{
@@ -147,22 +147,21 @@ body,html{
     color: #0FB9EF !important;
     border-left: 16px solid #0FB9EF;
 }
-#account{
+#account,#schedule,#learn{
     padding:10px 30px;
 }
-#account img{
+#account img,#schedule img,#learn img{
     width:360px;
     height:600px;
-    margin-left:130px;
-    margin-bottom: 20px;
+    margin: 10px 0 20px 130px;
 }
 h1{
     font-weight:700;
     margin-bottom: 10px;
     font-size:34px;
 }
-#account p{
+#account p,#schedule p,#learn p{
     font-size:28px;
     line-height:40px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
