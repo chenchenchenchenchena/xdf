@@ -15,7 +15,7 @@ function toLogin() {
     };
     // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
-        // url: baseUrl + "/e2Login/doLogin.do",
+        // url: url_o + "/e2Login/doLogin.do",
         url: url_o + "/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
