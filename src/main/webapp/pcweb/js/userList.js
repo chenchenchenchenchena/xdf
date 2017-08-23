@@ -111,68 +111,53 @@ function searchByKey() {
     };
     jQuery.ajax({
         type: "POST",
-        url: url_o+"/user/getUserInfo.do",
+        url: url_o + "/user/getUserInfo.do",
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
         success: function (json) {
             if (json.result == true) {
-                var userList = json.dataList;
-                totalCounts = json.totalCount;
-                if (firstIn) {
-                    initPage(totalCounts, page);
-                    firstIn = false;
+                if(undefined == json.data){
+                    layer.msg("查询失败!", {icon: 5});
+                    return;
                 }
+
                 var str = "";
-                for (var i = 0; i < userList.length; i++) {
-                    var pid = userList[i]["id"];
-                    var userId = userList[i]["userId"];
-                    var loginId = userList[i]["loginId"];
-                    var userName = userList[i]["userName"];
-                    var email = userList[i]["email"];
-                    var department = userList[i]["department"];
-                    var position = userList[i]["position"];
-                    var school = userList[i]["school"];
-                    var isEnabled = userList[i]["isEnabled"];
-                    var schoolCode = userList[i]["schoolCode"];
-                    var schoolName = userList[i]["schoolName"];
-                    var areaCode = userList[i]["areaCode"];
-                    var areaName = userList[i]["areaName"];
-                    var deptCode = userList[i]["deptCode"];
-                    var deptName = userList[i]["deptName"];
-
-                    if (i % 2 == 1) {
-                        str += "<tr class='table-tr-odd'>"
-                    } else {
-                        str += "<tr class='table-tr-even'>"
-                    }
-                    str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
-                    str += "<td style='display: none'>" + pid + "</td>"
-                    str += "<td style='display: none'>" + userId + "</td>"
-                    str += "<td style='display: none'>" + loginId + "</td>"
-                    str += "<td>" + userName + "</td>"
-                    str += "<td style='word-wrap:break-word'>" + email + "</td>"
-                    str += "<td>" + schoolName + "</td>"
-                    str += "<td>" + areaName + "</td>"
-                    str += "<td>" + deptName + "</td>"
+                var pid = json.data.id;
+                var userId = json.data.loginId;
+                var loginId = json.data.loginId;
+                var userName = json.data.userName;
+                var email = json.data.email;
+                var department = json.data.department;
+                var position = json.data.position;
+                var school = json.data.school;
+                var isEnabled = json.data.isEnabled;
+                var schoolCode = json.data.schoolCode;
+                var schoolName = json.data.school;
+                str += "<tr class='table-tr-even'>"
+                str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
+                str += "<td style='display: none'>" + pid + "</td>"
+                str += "<td style='display: none'>" + userId + "</td>"
+                str += "<td style='display: none'>" + loginId + "</td>"
+                str += "<td>" + userName + "</td>"
+                str += "<td style='word-wrap:break-word'>" + email + "</td>"
+                str += "<td>" + schoolName + "</td>"
 
 
-                    str += "<td>"
-                    str += "<div class='p176-table-btnGroup'>";
-                    str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + areaCode + "\",\"" + deptCode + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
-                    // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
-                    if (isEnabled == 1) {
-                        str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
-                    } else {
-                        str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + userId + "\")'><i></i>启用</a>";
-                    }
-
-                    str += "</div>";
-                    str += "</td>";
-                    str += "</tr>";
-
+                str += "<td>"
+                str += "<div class='p176-table-btnGroup'>";
+                str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
+                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                if (isEnabled == 1) {
+                    str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
+                } else {
+                    str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + userId + "\")'><i></i>启用</a>";
                 }
+
+                str += "</div>";
+                str += "</td>";
+                str += "</tr>";
+
                 $("#userTbody").html(str);
             } else {
                 layer.msg("查询失败!", {icon: 5});
@@ -208,7 +193,7 @@ function findList(page, cityId, areaId, deptId) {
     // var d = constructionParams(rsaEncryptedString(requestJson), "c285388af594406a9306138154453f7a");
     jQuery.ajax({
         type: "POST",
-        url: url_o+"/user/getUserInfo.do",
+        url: url_o + "/user/getUserInfo.do",
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
@@ -216,6 +201,9 @@ function findList(page, cityId, areaId, deptId) {
             if (json.result == true) {
                 var userList = json.dataList;
                 totalCounts = json.totalCount;
+                if (undefined == totalCounts || totalCounts <= 0) {
+                    return;
+                }
                 if (firstIn) {
                     initPage(totalCounts, page);
                     firstIn = false;
@@ -330,7 +318,30 @@ function enabledUser(_this, userId) {
     });
 }
 //修改展示页面
-function updateExhibitionUser(pid, userId, loginId, userName, email, department, position, school, areaCode, deptCode, schoolCode) {
-    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&deptCode=" + deptCode + "&userName=" + encodeURI(userName) + "&areaCode=" + areaCode + "&schoolCode=" + schoolCode;
+function updateExhibitionUser(pid, userId, loginId, userName, email, position, school, schoolCode) {
+    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) + "&schoolCode=" + schoolCode;
 
+}
+function initPage(totalCounts, currentPage) {
+    //console.log("initPage: totalCounts --> " + totalCounts + "\tcurrentPage --> " + currentPage);
+    if (totalCounts != null && totalCounts != 0) {
+        jQuery.jqPaginator("#publicPage", {
+            totalCounts: totalCounts,
+            pageSize: pageSize,
+            visiblePages: 10,
+            currentPage: currentPage,
+            prev: '<a class="pPrev" href="javascript:;">上一页</a>',
+            next: '<a class="pNext" href="javascript:;">下一页</a>',
+            page: '<a href="javascript:;">{{page}}</a>',
+            activeClass: 'pCurrent',
+            onPageChange: function (num, type) {
+                // console.log("type --> " + type + "\tnum --> " + num + "\ttotalCounts --> " + totalCounts + "\tpageSize --> " + pageSize );
+                if (type != "init") {
+                    findList(num, currentCityId, currentAreaId, currentDeptId);
+                }
+            }
+        });
+    } else {
+        $("#publicPage").html("");
+    }
 }
