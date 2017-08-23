@@ -28,11 +28,11 @@ function toLogin() {
                 toLogout();
             } else {
 
-                setCookie("sid", json.sid, 1);
-                setCookie("userName", json.userName, 1);
-                setCookie("userId", json.userId, 1);
+                setCookie("sid", e.sid, 1);
+                setCookie("userName", e.userName, 1);
+                setCookie("userId", e.userId, 1);
 
-                showFunctionList(json.userId);
+                showFunctionList(e.userId);
             }
 
         }
