@@ -185,7 +185,7 @@ function findList(school) {
         success: function (json) {
             if (json.result == true) {
                 var userList = json.dataList;
-                totalCounts = json.totalCount;
+                totalCounts = userList.length;
                 if (undefined == totalCounts || totalCounts <= 0) {
                     return;
                 }
@@ -195,22 +195,20 @@ function findList(school) {
                 }
                 var str = "";
                 for (var i = 0; i < userList.length; i++) {
-                    var pid = userList[i]["id"];
-                    var userId = userList[i]["userId"];
-                    var loginId = userList[i]["loginId"];
-                    var userName = userList[i]["userName"];
-                    var email = userList[i]["email"];
-                    var department = userList[i]["department"];
-                    var position = userList[i]["position"];
-                    var school = userList[i]["school"];
-                    var isEnabled = userList[i]["isEnabled"];
-                    var schoolCode = userList[i]["schoolCode"];
-                    var schoolName = userList[i]["schoolName"];
-                    var areaCode = userList[i]["areaCode"];
-                    var areaName = userList[i]["areaName"];
-                    var deptCode = userList[i]["deptCode"];
-                    var deptName = userList[i]["deptName"];
-                    var auth = userList[i]["auth"];
+                    var pid = userList[i].id;
+                    var userId = userList[i].loginId;
+                    var loginId = userList[i].loginId;
+                    var userName = userList[i].userName;
+                    var email = userList[i].email;
+                    var department = userList[i].department;
+                    var position = userList[i].position;
+                    var school = userList[i].school;
+                    var isEnabled = userList[i].isEnabled;
+                    // var schoolCode = userList[i].schoolCode;
+                    var schoolName = userList[i].school;
+                    // var areaCode = userList[i].areaCode;
+                    // var areaName = userList[i].areaName;
+                    var auth = userList[i].auth;
 
                     if (i % 2 == 1) {
                         str += "<tr class='table-tr-odd'>"
@@ -224,14 +222,12 @@ function findList(school) {
                     str += "<td>" + userName + "</td>"
                     str += "<td style='word-wrap:break-word'>" + email + "</td>"
                     str += "<td>" + schoolName + "</td>"
-                    str += "<td>" + areaName + "</td>"
-                    str += "<td>" + deptName + "</td>"
 
 
                     str += "<td>"
                     str += "<div class='p176-table-btnGroup'>";
                     str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\");'><i></i>编辑</a>";
                     // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
                     if (isEnabled == 1) {
                         str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
@@ -304,8 +300,8 @@ function enabledUser(_this, userId) {
     });
 }
 //修改展示页面
-function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school,auth, schoolCode) {
-    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) +"&auth=" + auth +"&schoolCode=" + schoolCode;
+function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school,auth) {
+    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) +"&auth=" + auth;
 
 }
 function initPage(totalCounts, currentPage) {
