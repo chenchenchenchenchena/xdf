@@ -89,15 +89,5 @@ $(document).ready(function() {
         })
         $("body,html").css("overflow","auto");
     })
-    $(window).on('scroll',function(){
-        if($(document).scrollTop()>5){
-            $('.backTop').show();
-        }else if($(document).scrollTop()<5){
-            $('.backTop').hide();
-        }
-    });
 
-    $('.backTop').on('touchend',function(){
-        $('body,html').animate({ scrollTop: 0 }, 500);
-    });
 });
