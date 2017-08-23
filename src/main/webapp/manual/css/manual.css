@@ -148,20 +148,26 @@ body,html{
     border-left: 16px solid #0FB9EF;
 }
 #account,#schedule,#learn{
+   /* width:92%;*/
     padding:10px 30px;
 }
 #account img,#schedule img,#learn img{
     width:360px;
     height:600px;
-    margin: 10px 0 20px 130px;
+    display: block;
+    margin: 10px auto 20px;
 }
 h1{
     font-weight:700;
     margin-bottom: 10px;
     font-size:34px;
 }
+h2{
+    font-size:30px;
+    margin-bottom: 10px;
+}
 #account p,#schedule p,#learn p{
-    font-size:28px;
+    font-size:27px;
     line-height:40px;
     /*margin-bottom: 10px;*/
 }
