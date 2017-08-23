@@ -147,3 +147,7 @@ body,html{
     color: #0FB9EF !important;
     border-left: 16px solid #0FB9EF;
 }
+#account img{
+    width:100px;
+    height:100px;
+}
