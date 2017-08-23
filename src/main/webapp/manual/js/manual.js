@@ -47,12 +47,46 @@ $(document).ready(function() {
         $(".mask").show();
         $(".leftMenu").css("display","block")
             .animate({"left":"0px"},"slow");
+        $("body,html").css("overflow","hidden");
     })
     $(".mask").click(function(){
         $(this).hide();
         $(".leftMenu").animate({"left":"-300px"},"slow",function(){
             $(".leftMenu").css("display","none")
         })
+        $("body,html").css("overflow","auto");
+    })
+    $("#accountLink").click(function() {
+        /* $("html, body").animate({
+         scrollTop: $("#div1").offset().top }, {duration: 500,easing: "swing"});
+         return false;*/
+        document.getElementById("account").scrollIntoView();
+    });
+    $("#scheduleLink").click(function() {
+        /* $("html, body").animate({
+         scrollTop: $("#div2").offset().top }, {duration: 500,easing: "swing"});
+         return false;*/
+        document.getElementById("schedule").scrollIntoView();
+
+    });
+    $("#learnLink").click(function() {
+        /*$("html, body").animate({
+         scrollTop: $("#div3").offset().top }, {duration: 500,easing: "swing"});
+         return false;*/
+        document.getElementById("learn").scrollIntoView();
+    });
+    $("#homeworkLink").click(function() {
+        /*$("html, body").animate({
+         scrollTop: $("#div3").offset().top }, {duration: 500,easing: "swing"});
+         return false;*/
+        document.getElementById("homework").scrollIntoView();
+    });
+    $(".menu_list ul li").click(function () {
+        $(".mask").hide();
+        $(".leftMenu").animate({"left":"-300px"},"slow",function(){
+            $(".leftMenu").css("display","none")
+        })
+        $("body,html").css("overflow","auto");
     })
 
 });
