@@ -1,0 +1,149 @@
+
+body,html{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.mask{
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    left: 0;
+    top:0;
+    opacity: 0.3;
+    display: none;
+}
+.title{
+    height: 70px;
+    line-height: 70px;
+    font-size: 32px;
+    /*text-align: center;*/
+    background: #354045;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+.title img{
+    margin-left: 30px;
+    width: 50px;
+    height: 30px;
+    margin-top: 20px;
+}
+.title span{
+    margin-left: 200px;
+}
+.middle{
+    height: 100%;
+    width: 100%;
+}
+.middle .leftMenu{
+    width: 300px;
+    height: 94.5%;
+    background-color: #354045;
+    /*float: left;*/
+    position: absolute;
+    left:-300px;
+    top:71px;
+    /*display: none;*/
+}
+
+/*隐藏菜单后的样式*/
+.middle .hidLeftMenu{
+    padding-top: 80px;
+    width: 40px;
+    height: 94%;
+    background-color: #354045;
+    float: left;
+    border-right: 1px solid #49afcd;
+}
+.middle .hidLeftMenu .hidTitle{
+    color: #fff;
+    width: 20px;
+    margin-top: 20px;
+    line-height: 50px;
+    margin-left: 10px;
+    font-size: 23px;
+}
+.middle .hidLeftMenu .openMenu{
+    margin-left: 12px;
+    cursor: pointer;
+}
+/*隐藏菜单后的样式--结束*/
+
+.middle .leftMenu .topMenu{
+    height: 75px;
+    background-color: #586065;
+}
+.middle .leftMenu .topMenu img{
+    margin: 27px 20px 27px 20px;
+    float: left;
+}
+.middle .leftMenu .topMenu .changeMenu{
+    cursor: pointer;
+}
+.middle .leftMenu .topMenu .banshi{
+    padding-left: 23px;
+}
+.middle .leftMenu .topMenu .menuTitle{
+    text-align: center;
+    color: #F2F2F2;
+    float: left;
+    line-height: 75px;
+    font-size: 26px;
+    width: 120px;
+    margin-left: 91px;
+}
+.menu_list {
+    width: 300px;
+    background: #354045;
+}
+.menu_list ul li{
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+.menu_list ul li .fuMenu{
+    color: #F2F2F2;
+    font-size: 26px;
+    cursor: pointer;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    width: 300px;
+    border-bottom: 2px solid #586065;
+    float: left;
+}
+.menu_list ul li .xiala{
+    float: left;
+    margin-left: -50px;
+    margin-top: 33px;
+}
+.menu_list ul li .div1 {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+.menu_list ul li .div1 .zcd{
+    color: #F2F2F2;
+    font-size: 26px;
+    height: 60px;
+    background-color: #586065;
+    margin-bottom: 2px;
+    cursor: pointer;
+    line-height: 60px;
+    text-align: center;
+    width: 300px;
+    display: block;
+}
+.div1 {
+    height: 200px;
+    display: none;
+}
+.menu_list ul li .div1 .zcd:hover{
+    color: #FFFFFF;
+    background-color: #555555;
+}
+.removes{
+    color: #0FB9EF !important;
+    border-left: 16px solid #0FB9EF;
+}
