@@ -304,8 +304,8 @@ function enabledUser(_this, userId) {
     });
 }
 //修改展示页面
-function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school, schoolCode) {
-    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) + "&schoolCode=" + schoolCode;
+function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school,auth, schoolCode) {
+    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) +"&auth=" + auth +"&schoolCode=" + schoolCode;
 
 }
 function initPage(totalCounts, currentPage) {
