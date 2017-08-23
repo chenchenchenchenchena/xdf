@@ -106,8 +106,79 @@ function searchByKey() {
         layer.msg("请输入搜索关键字!", {icon: 5});
         return false;
     }
-    firstIn = true;
-    findList(1, currentCityId, currentAreaId, currentDeptId);
+    var requestJson = {
+        loginId: searchKey,
+    };
+    jQuery.ajax({
+        type: "POST",
+        url: url_o+"/user/getUserInfo.do",
+        async: true,//同步
+        dataType: 'json',
+        data: JSON.stringify(requestJson),
+        success: function (json) {
+            if (json.result == true) {
+                var userList = json.dataList;
+                totalCounts = json.totalCount;
+                if (firstIn) {
+                    initPage(totalCounts, page);
+                    firstIn = false;
+                }
+                var str = "";
+                for (var i = 0; i < userList.length; i++) {
+                    var pid = userList[i]["id"];
+                    var userId = userList[i]["userId"];
+                    var loginId = userList[i]["loginId"];
+                    var userName = userList[i]["userName"];
+                    var email = userList[i]["email"];
+                    var department = userList[i]["department"];
+                    var position = userList[i]["position"];
+                    var school = userList[i]["school"];
+                    var isEnabled = userList[i]["isEnabled"];
+                    var schoolCode = userList[i]["schoolCode"];
+                    var schoolName = userList[i]["schoolName"];
+                    var areaCode = userList[i]["areaCode"];
+                    var areaName = userList[i]["areaName"];
+                    var deptCode = userList[i]["deptCode"];
+                    var deptName = userList[i]["deptName"];
+
+                    if (i % 2 == 1) {
+                        str += "<tr class='table-tr-odd'>"
+                    } else {
+                        str += "<tr class='table-tr-even'>"
+                    }
+                    str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
+                    str += "<td style='display: none'>" + pid + "</td>"
+                    str += "<td style='display: none'>" + userId + "</td>"
+                    str += "<td style='display: none'>" + loginId + "</td>"
+                    str += "<td>" + userName + "</td>"
+                    str += "<td style='word-wrap:break-word'>" + email + "</td>"
+                    str += "<td>" + schoolName + "</td>"
+                    str += "<td>" + areaName + "</td>"
+                    str += "<td>" + deptName + "</td>"
+
+
+                    str += "<td>"
+                    str += "<div class='p176-table-btnGroup'>";
+                    str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
+                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + areaCode + "\",\"" + deptCode + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                    // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
+                    if (isEnabled == 1) {
+                        str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
+                    } else {
+                        str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + userId + "\")'><i></i>启用</a>";
+                    }
+
+                    str += "</div>";
+                    str += "</td>";
+                    str += "</tr>";
+
+                }
+                $("#userTbody").html(str);
+            } else {
+                layer.msg("查询失败!", {icon: 5});
+            }
+        }
+    });
 }
 
 var firstIn = true;

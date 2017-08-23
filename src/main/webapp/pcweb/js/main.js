@@ -10,13 +10,13 @@ function toLogin() {
     var calbac = {
         'code': code_s,
         'e2State': state_s,
-        'state': state_s,
-        'userId': "v_liwei8"
+        'state': state_s
+        // 'userId': "v_liwei8"
     };
     // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
-        // url: baseUrl + "/e2Login/doLogin.do",
-        url: url_o + "/e2Login/pcLogin.do",
+        url: baseUrl + "/e2Login/doLogin.do",
+        // url: url_o + "/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
