@@ -134,6 +134,7 @@ function searchByKey() {
                 var isEnabled = json.data.isEnabled;
                 var schoolCode = json.data.schoolCode;
                 var schoolName = json.data.school;
+                var auth = json.data.auth;
                 str += "<tr class='table-tr-even'>"
                 str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
                 str += "<td style='display: none'>" + pid + "</td>"
@@ -147,7 +148,7 @@ function searchByKey() {
                 str += "<td>"
                 str += "<div class='p176-table-btnGroup'>";
                 str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
                 if (isEnabled == 1) {
                     str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
                 } else {
@@ -209,6 +210,7 @@ function findList(school) {
                     var areaName = userList[i]["areaName"];
                     var deptCode = userList[i]["deptCode"];
                     var deptName = userList[i]["deptName"];
+                    var auth = userList[i]["auth"];
 
                     if (i % 2 == 1) {
                         str += "<tr class='table-tr-odd'>"
@@ -229,7 +231,7 @@ function findList(school) {
                     str += "<td>"
                     str += "<div class='p176-table-btnGroup'>";
                     str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + areaCode + "\",\"" + deptCode + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
+                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
                     // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
                     if (isEnabled == 1) {
                         str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
