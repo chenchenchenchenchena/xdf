@@ -141,18 +141,19 @@ function getMoreUserInfo(){
                 data: JSON.stringify(businessP),
                 success: function (json) {
                     if (json.result == true) {
-                        var data = $.parseJSON(json.data);
+                        // var data = $.parseJSON(json.data);
+                        var data = json.data;
                         if (data.length <= 0) {
                             userInfo_clearInput();
                             layer.msg("未查询到账户，请重新输入", {icon: 5});
                         } else {
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.emailAddr,
-                                    value: item.emailAddr,
+                                    label: item.emplId,
+                                    value: item.emplId,
                                     username: item.name,
-                                    email: item.emailAddr + "@xdf.cn",
-                                    department: item.deptName,
+                                    email: item.emplId + "@xdf.cn",
+                                    // department: item.deptName,
                                     position: item.PositionName,
                                     school: item.companyName
                                 }
@@ -171,8 +172,8 @@ function getMoreUserInfo(){
             $("#department").val(ui.item.department);
             $("#position").val(ui.item.position);
             $("#school").val(ui.item.school);
-            var loginId = $("#inputLoginId").val();
-            verifyRepeat(loginId);
+            /*var loginId = $("#inputLoginId").val();
+            verifyRepeat(loginId);*/
         }
     });
 }
@@ -298,10 +299,10 @@ function saveUser() {
     var resParams = {
         "userId":$('#inputLoginId').val(),//邮箱前缀
         "loginId":$('#inputLoginId').val(),//账号
-        "passWord":$('#inputLoginId').val(),//密码
-        "userName":'',//
+        "passWord":'',//密码
+        "userName":$('#userName').val(),//
         "email":$('#email').val(),//邮箱
-        "department":"集团信息管理部",//
+        "department":'',//
         "position":$('#position').val(),//职位
         "school":$('#school').val()//学校
     };
@@ -363,9 +364,9 @@ function getUserInfo() {
                 $("#department").val(data.Department);
                 $("#position").val(data.Title);
                 $("#school").val(data.Company);
-                var loginId = $("#inputLoginId").val();
+                /*var loginId = $("#inputLoginId").val();
                 //校验是否当前登录账号
-                verifyRepeat(loginId)
+                verifyRepeat(loginId)*/
             } else {
                 userInfo_clearInput();
                 layer.msg("未查询到账户，请重新输入", {icon: 5});
