@@ -60,22 +60,21 @@ $(function () {
     // var param = constructionParams("", "0950b4d52fff4c04a22a38ac4ec4edfc");
     // jQuery.ajax({
     //     type: "POST",
-    //     url: Global.actionURL,
-    //     //url: "http://10.200.80.196:8088/market/function/getAllFunction.do",
+    //     url:url_o+"/function/getAllFunction.do",
     //     async: false,//同步
     //     dataType: 'json',
-    //     data: JSON.stringify(param),
-    //     success: function (result) {
-    //         if (result.result) {
-    //             $("#functionTree").tree({
-    //                 data: result.dataList,
-    //                 checkbox: true,
-    //                 cascadeCheck: true
-    //             });
+    //     success: function (e) {
+    //         if (e.result && e.dataList != undefined && e.dataList != null) {
+                $("#functionTree").tree({
+                    data: JSON.parse(localStorage.functionCheckedList),
+                    checkbox: true,
+                    cascadeCheck: true
+                });
     //         }
     //
     //     }
     // });
+
 
     /**
      * 获取种类

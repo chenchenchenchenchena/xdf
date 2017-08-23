@@ -1,4 +1,5 @@
-var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+// var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
 //访问doLogin.do
@@ -15,7 +16,7 @@ function toLogin() {
     // alert("code:" + code_s + "state_s:" + state_s);
     $.ajax({
         // url: baseUrl + "/e2Login/doLogin.do",
-        url: baseUrl + "/e2Login/pcLogin.do",
+        url: url_o + "/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -304,7 +305,7 @@ function toLogout() {
     jQuery.ajax({
         type: "POST",
         // url: Global.actionURL,
-        url: baseUrl + "logout/doLogout.do",
+        url: url_o + "logout/doLogout.do",
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(businessP),

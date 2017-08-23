@@ -1,4 +1,4 @@
-var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+var baseUrl = url_o;
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 function init() {
     var request = getRequest();
