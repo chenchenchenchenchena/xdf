@@ -10,7 +10,7 @@ var currentDeptId = '';
 var switchFlag = false;
 $(function () {
     initTopContent();
-    findList(1, currentCityId, currentAreaId, currentDeptId);
+    findList("");
     initSwitch();
 });
 
@@ -65,10 +65,10 @@ function selectData(json) {
         for (var i = 0; i < schoolList.length; i++) {
             var schoolId = schoolList[i].tCode;
             if (schoolId == "1") {
-                cityContent += "<a href='# 'class='cur' onclick='filterByCityId(this, \"" + schoolId + "\")' " +
+                cityContent += "<a href='# 'class='cur' onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")' " +
                     " >" + schoolList[i].tName + "</a>";
             } else {
-                cityContent += "<a href='#' onclick='filterByCityId(this, \"" + schoolId + "\")'" +
+                cityContent += "<a href='#' onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")'" +
                     " >" + schoolList[i].tName + "</a>";
             }
         }
@@ -85,7 +85,7 @@ function filterByCityId(_this, cityId) {
         $(".list1 li").eq(1).show();
         $(".list1 li").eq(2).show();
         firstIn = true;
-        findList(1, cityId, currentAreaId, currentDeptId);
+        findList(cityId);
     } else {
         currentCityId = '';
         currentAreaId = '';
@@ -95,7 +95,7 @@ function filterByCityId(_this, cityId) {
         $("#userTbody").html("");
         $("#publicPage").html("");
         if ($("#searchKey").val() != '') {
-            findList(1, cityId, currentAreaId, currentDeptId);
+            findList(cityId);
         }
     }
 }
@@ -117,7 +117,7 @@ function searchByKey() {
         data: JSON.stringify(requestJson),
         success: function (json) {
             if (json.result == true) {
-                if(undefined == json.data){
+                if (undefined == json.data) {
                     layer.msg("查询失败!", {icon: 5});
                     return;
                 }
@@ -167,33 +167,17 @@ function searchByKey() {
 }
 
 var firstIn = true;
-function findList(page, cityId, areaId, deptId) {
-    if (cityId == null) {
-        cityId = "";
-    }
-    if (areaId == null) {
-        areaId = "";
-    }
-    if (deptId == null) {
-        deptId = "";
-    }
-    var searchKey = $("#searchKey").val();
-    if (searchKey == null) {
-        searchKey = "";
+function findList(school) {
+    if (school == null) {
+        school = "";
     }
 
     var requestJson = {
-        cityId: cityId,
-        areaId: areaId,
-        deptId: deptId,
-        searchKey: searchKey,
-        currentPage: page,
-        pageSize: pageSize
+        school: school
     };
-    // var d = constructionParams(rsaEncryptedString(requestJson), "c285388af594406a9306138154453f7a");
     jQuery.ajax({
         type: "POST",
-        url: url_o + "/user/getUserInfo.do",
+        url: url_o + "/user/getMarketPrivilegeList.do",
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(requestJson),
@@ -205,7 +189,7 @@ function findList(page, cityId, areaId, deptId) {
                     return;
                 }
                 if (firstIn) {
-                    initPage(totalCounts, page);
+                    initPage(totalCounts, 1);
                     firstIn = false;
                 }
                 var str = "";
