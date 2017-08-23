@@ -27,101 +27,49 @@ function toLogin() {
                 // clearCookie();
                 toLogout();
             } else {
-                showFunctionList(e);
+
+                setCookie("sid", json.sid, 1);
+                setCookie("userName", json.userName, 1);
+                setCookie("userId", json.userId, 1);
+
+                showFunctionList(json.userId);
             }
 
         }
     });
-    // var e = {"result": true, "sid": "", "userName": "v_liwei8", "userId": "TC23"}
-    // showFunctionList(e);
 }
 
 //定义一个存放功能ID的数组
 var functionIds = [];
 
 //显示功能列表
-function showFunctionList(json) {
-    console.log(json);
-    if (json.result == true) {
-        setCookie("sid", json.sid, 1);
-        setCookie("userName", json.userName, 1);
-        // setCookie("loginId", json.loginId, 1);
-        setCookie("userId", json.userId, 1);
+function showFunctionList(userId) {
+    var param = {"userId": userId};
+    jQuery.ajax({
+        type: "POST",
+        url: url_o + "/function/getAllFunction.do",
+        async: false,//同步
+        dataType: 'json',
+        // data: getCookie("userId"),
+        data: JSON.stringify(param),
+        success: function (e) {
+            if (e.result && e.dataList != undefined && e.dataList != null) {
+                var functionList = e.dataList;
+                if (functionList == undefined || functionList.length == 0) {
+                    alert("当前用户没用功能权限，请切换用户");
+                    toLogout();
+                } else {
+                    //获取functionIds
+                    setFunctionList(e.dataList);
+                    localStorage.functionCheckedList = JSON.stringify(functionList);
+                    jumpPage(e.dataList);
+                }
+            }
 
-        // functionIds = [];
-        var functionList = json.functionList;
-        // var functionList = [{
-        //     'id': "101",
-        //     'checked': true,
-        //     'name': "作业",
-        //     'className': "HX001",
-        //     'children': [{
-        //         'id': "10101",
-        //         'name': "出门表",
-        //         'url': 'raiseMain.html',
-        //         'checked': true
-        //     }, {
-        //         'id': "10102",
-        //         'name': "入门表",
-        //         'url': 'raiseMain.html',
-        //         'checked': true
-        //     }]
-        // }, {
-        //     'id': "102",
-        //     'checked': true,
-        //     'name': "课表",
-        //     'className': "HX001",
-        //     'children': [{
-        //         'id': "10201",
-        //         'name': "出门表",
-        //         'url': "",
-        //         'checked': true
-        //     }, {
-        //         'id': "10202",
-        //         'name': "入门表",
-        //         'url': 'raiseMain.html',
-        //         'checked': true
-        //     }]
-        // }, {
-        //     'id': "103",
-        //     'checked': true,
-        //     'name': "学情",
-        //     'className': "HX001",
-        //     'children': [{
-        //         'id': "10301",
-        //         'name': "出门表",
-        //         'url': 'raiseMain.html',
-        //         'checked': true
-        //     }, {
-        //         'id': "10302",
-        //         'name': "入门表",
-        //         'url': 'raiseMain.html',
-        //         'checked': true
-        //     }]
-        // }, {
-        //     'id': "104",
-        //     'checked': true,
-        //     'name': "账号权限",
-        //     'className': "HX001",
-        //     'children': [{
-        //         'id': "10401",
-        //         'name': "帐号管理",
-        //         'url': 'userList.html',
-        //         'checked': true
-        //     }]
-        // }];
-        if (functionList == undefined || functionList.length == 0) {
-            alert("当前用户没用功能权限，请切换用户");
-            toLogout();
-        } else {
-            //获取functionIds
-            setFunctionList(json.functionList);
-            localStorage.functionCheckedList = JSON.stringify(functionList);
-            jumpPage(json.functionList);
         }
+    });
 
 
-    }
 }
 
 //获取functionIds

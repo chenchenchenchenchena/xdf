@@ -60,7 +60,7 @@ function selectData(json) {
     console.log(json);
     if (json.code == "200") {
         var schoolList = json.data;
-        var cityContent = "<a href='#' onclick='filterByCityId(this, \"\")' >全部</a>";
+        var cityContent = "<a href='#' onclick='filterByCityId(this, \"" + "" + "\")' >全部</a>";
         //var cityContent = "";
         for (var i = 0; i < schoolList.length; i++) {
             var schoolId = schoolList[i].tCode;
@@ -81,7 +81,7 @@ function selectData(json) {
 function filterByCityId(_this, cityId) {
     $(".xian-wid .cur").removeClass("cur");
     $(_this).addClass("cur");
-    if (cityId != '') {
+    if (cityId != "") {
         $(".list1 li").eq(1).show();
         $(".list1 li").eq(2).show();
         firstIn = true;
@@ -94,9 +94,10 @@ function filterByCityId(_this, cityId) {
         $(".list1 li").eq(2).hide();
         $("#userTbody").html("");
         $("#publicPage").html("");
-        if ($("#searchKey").val() != '') {
-            findList(cityId);
-        }
+        // if ($("#searchKey").val() != '') {
+        //     findList(cityId);
+        // }
+        findList(cityId);
     }
 }
 
