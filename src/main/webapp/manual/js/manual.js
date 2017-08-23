@@ -57,28 +57,15 @@ $(document).ready(function() {
         $("body,html").css("overflow","auto");
     })
     $("#accountLink").click(function() {
-        /* $("html, body").animate({
-         scrollTop: $("#div1").offset().top }, {duration: 500,easing: "swing"});
-         return false;*/
         document.getElementById("account").scrollIntoView();
     });
     $("#scheduleLink").click(function() {
-        /* $("html, body").animate({
-         scrollTop: $("#div2").offset().top }, {duration: 500,easing: "swing"});
-         return false;*/
         document.getElementById("schedule").scrollIntoView();
-
     });
     $("#learnLink").click(function() {
-        /*$("html, body").animate({
-         scrollTop: $("#div3").offset().top }, {duration: 500,easing: "swing"});
-         return false;*/
         document.getElementById("learn").scrollIntoView();
     });
     $("#homeworkLink").click(function() {
-        /*$("html, body").animate({
-         scrollTop: $("#div3").offset().top }, {duration: 500,easing: "swing"});
-         return false;*/
         document.getElementById("homework").scrollIntoView();
     });
     $(".menu_list ul li").click(function () {
@@ -87,6 +74,9 @@ $(document).ready(function() {
             $(".leftMenu").css("display","none")
         })
         $("body,html").css("overflow","auto");
+    })
+    $(".back").click(function () {
+        $("body,html").animate({"scrollTop":0},1000);
     })
 
 });
