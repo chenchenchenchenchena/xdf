@@ -89,9 +89,7 @@ $(function () {
     /**
      * 获取功能列表
      */
-
     function getFunctions(param){
-        alert(param.userId);
         jQuery.ajax({
             type: "POST",
             url: url_o + "/function/getAllFunction.do",
