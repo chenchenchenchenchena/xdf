@@ -9,7 +9,7 @@ var switchFlag = false;
 var firstIn = true;
 var currentType = 2;
 var currentStatus = '';
-var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+var baseUrl = url_o;
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
 
 $(function () {
