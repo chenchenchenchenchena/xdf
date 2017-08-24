@@ -1,8 +1,10 @@
 // var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
 
 // var baseUrl = "http://10.73.81.106:8080/xdfdtmanager/";
-var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
+// var loginUrl = "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do";
+
 //访问doLogin.do
+//走e2登陆
 function toLogin() {
 
     var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
@@ -37,6 +39,21 @@ function toLogin() {
 
         }
     });
+}
+
+//不走e2登陆
+function tLogin() {
+    var loginName = $('#loginId').val();
+    var loginPassword = $('#password').val();
+    if(loginName == ""){
+
+        layer.msg("登陆名不能为空", {icon: 5});
+        return;
+    }
+    if(loginPassword == ""){
+        layer.msg("登陆名不能为空", {icon: 5});
+        return;
+    }
 }
 
 //定义一个存放功能ID的数组
