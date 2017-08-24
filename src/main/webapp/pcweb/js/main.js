@@ -26,6 +26,8 @@ function toLogin() {
             if (e.result == false) {
 
                 alert(e.message);
+                // clearCookie();
+                toLogout();
             } else {
 
                 setCookie("sid", e.sid, 1);
@@ -71,7 +73,6 @@ function tLogin() {
             if (e.result == false) {
 
                 alert(e.message);
-                toLogout();
             } else {
 
                 setCookie("sid", e.sid, 1);
