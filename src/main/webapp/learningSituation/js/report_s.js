@@ -99,7 +99,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data.studentResultsCase[i][0].studentName);
                     $('title').html(e.data.studentResultsCase[i][0].studentName+'同学');
                     $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data.studentResultsCase[i][y].avgGradeView) + '</li>');
-                    $('.reportstu_S').eq(i).find('ul').css('width',118*e.data.studentResultsCase[i].length);
+                    // $('.reportstu_S').eq(i).find('ul').css('width',118*e.data.studentResultsCase[i].length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
                 $('.tab_record').eq(0).show();
@@ -112,7 +112,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                  Rindex     //入门测
                  */
                 }
-                    $('.reportstu_S ul').css('width',145*(class_[i].length+1));
+                $('.reportstu_S').eq(i).find('ul').css('width',118*(class_[i].length+1));
                 if(Xindex==e.data.studentResultsCase[i].length){
                     for(var j = 0;j<Xindex;j++){
                         Xtwindex.push(j+1);
