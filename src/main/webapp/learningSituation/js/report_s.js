@@ -99,7 +99,7 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
                     $('.reportstu_S').eq(i).find('ul').eq(1).find('li').eq(0).html(e.data.studentResultsCase[i][0].studentName);
                     $('title').html(e.data.studentResultsCase[i][0].studentName+'同学');
                     $('.reportstu_S').eq(i).find('ul').eq(2).append('<li>' + (e.data.studentResultsCase[i][y].avgGradeView) + '</li>');
-                    $('.reportstu_S').eq(i).find('ul').css('width',146.5* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
+                    $('.reportstu_S').eq(i).find('ul').css('width',118* $('.reportstu_S').eq(i).find('ul').eq(1).find('li').length);
                 $('.tab_sreport').eq(0).find('div').eq(0).show();
                 $('.achievement_s').eq(0).show();
                 $('.tab_record').eq(0).show();
