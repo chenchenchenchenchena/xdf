@@ -61,7 +61,7 @@ function selectData(json) {
     console.log(json);
     if (json.code == "200") {
         var schoolList = json.data;
-        var cityContent = "<a href='#' onclick='filterByCityId(this, \"" + "" + "\")' >全部</a>";
+        var cityContent = "<a href='#' class='cur' onclick='filterByCityId(this, \"" + "" + "\")' >全部</a>";
         //var cityContent = "";
         for (var i = 0; i < schoolList.length; i++) {
             var schoolId = schoolList[i].tCode;
