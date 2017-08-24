@@ -150,7 +150,8 @@ var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";//测试环境
 var actionUrl = {
     'searchUser': 'user/searchUser.do',//通过邮箱前缀获取账号信息
     'addUser': 'user/addUser.do' ,//添加账号信息
-    'addFunction':'function/addFunctionUser.do'//添加账号权限信息
+    'addFunction':'function/addFunctionUser.do',//添加账号权限信息
+    'updateUserFun':'user/updateUser.do'//编辑用户账号权限信息
 };
 /*
  * 清空联动信息
@@ -331,64 +332,45 @@ function updateUser() {
         var id = checkeds[i].id;
         authCodeArr.push(id);
     }
-
-    var userId = $('#inputLoginId').val();
-    var userName = $('#userName').val();
-    var email = $('#email').val();
     var authCodeStr = authCodeArr.join(',');//权限标号 string
-    if (userId == "") {
-        layer.msg("账号不能为空！", {icon: 5});
-        layer.closeAll('loading');
-        return false;
-    }
-    if (userName == "") {
-        layer.msg("用户名不能为空！", {icon: 5});
-        layer.closeAll('loading');
-        return false;
-    }
     if (authCodeStr == "") {
         layer.msg("权限不能为空！", {icon: 5});
         layer.closeAll('loading');
         return false;
     }
+    //添加功能管理权限
+    var functionCheckedList = $("#functionTree").tree('getChecked', ['checked', 'indeterminate']);
+    var functionArray = [];
+    var functionIds = "";
+    if(functionCheckedList.length>0){
+        console.log(functionCheckedList);
+        for (var i = 0; i < functionCheckedList.length; i++) {
+            var functionId = functionCheckedList[i].id;
+            functionArray.push(functionId);
+        }
+        functionIds = functionArray.join(',');
+    }else{
+        layer.msg("功能管理不能为空!", {icon: 5});
+        layer.closeAll('loading');
+        return false;
+    }
     var resParams = {
-        "userId": userId,//邮箱前缀
-        "loginId": userId,//账号
-        "passWord": '',//密码
-        "userName": userName,//用户名
-        "email":email ,//邮箱
-        "department": '',//
-        "position": $('#position').val(),//职位
-        "school": $('#school').val(),//学校
-        "auth":authCodeStr//权限编号
+        "auth":authCodeStr,//权限编号
+        "userid":GetRequest('userId'),//邮箱前缀
+        "functionIds":functionIds//权限编号
     };
-    /* var d = constructionParams(rsaEncryptedString(businessP), "3bb45d62a96e494c8033c3fc9d79409b");*/
     jQuery.ajax({
         type: "POST",
-        url: baseUrl + actionUrl.addUser,
+        url: baseUrl + actionUrl.updateUserFun,
         async: true,
         dataType: 'json',
         data: JSON.stringify(resParams),
         success: function (json) {
             if (json.result == true) {
-                //添加功能管理权限
-                var functionCheckedList = $("#functionTree").tree('getChecked', ['checked', 'indeterminate']);
-                var functionArray = [];
-                if(functionCheckedList.length>0){
-                    console.log(functionCheckedList);
-                    for (var i = 0; i < functionCheckedList.length; i++) {
-                        var functionId = functionCheckedList[i].id;
-                        functionArray.push(functionId);
-                    }
-                    var functionIds = functionArray.join(',');
-                    addFunIds(email,functionIds);
-                }else{
-                    layer.msg("功能管理不能为空!", {icon: 5});
-                }
+                layer.msg("修改成功!", {icon: 6});
                 //window.location.href = 'userList.html';
-                // addCategoryUser(loginId, functionArray);
             } else {
-                layer.msg("保存失败!", {icon: 5});
+                layer.msg("修改失败!", {icon: 5});
             }
             layer.closeAll('loading');
         }
@@ -396,7 +378,9 @@ function updateUser() {
 
 
 }
+function getCheckeds(){
 
+}
 
 
 
