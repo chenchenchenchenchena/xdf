@@ -57,7 +57,7 @@ function tLogin() {
     // ssdf_1234
     var signPassword = $.md5(loginPassword);
 
-    alert(signPassword);
+    // alert(signPassword);
 
     var calbac = {
         'loginId': loginName,
