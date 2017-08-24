@@ -77,6 +77,7 @@ $(document).ready(function() {
         $("body,html").css("overflow","auto");
     })
     $(".back").click(function () {
+        // alert($(document).scrollTop())
         $("body,html").animate({"scrollTop":0},1000);
     })
 
