@@ -166,7 +166,7 @@ function findList(school,searchKey) {
                     } else {
                         str += "<tr class='table-tr-even'>"
                     }
-                    str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
+                    str += "<td id='" + pid + "' style='display: none'>" + isEnabled + "</td>"
                     str += "<td style='display: none'>" + pid + "</td>"
                     str += "<td style='display: none'>" + userId + "</td>"
                     str += "<td style='display: none'>" + loginId + "</td>"
@@ -174,16 +174,15 @@ function findList(school,searchKey) {
                     str += "<td style='word-wrap:break-word'>" + email + "</td>"
                     str += "<td>" + schoolName + "</td>"
 
-
                     str += "<td>"
                     str += "<div class='p176-table-btnGroup'>";
                     str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
                         "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\");'><i></i>编辑</a>";
                     // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
                     if (isEnabled == 1) {
-                        str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
+                        str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
                     } else {
-                        str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + userId + "\")'><i></i>启用</a>";
+                        str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\")'><i></i>启用</a>";
                     }
 
                     str += "</div>";
