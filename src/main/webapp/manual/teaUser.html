@@ -15,6 +15,8 @@
 </head>
 <body>
 <div class="mask"></div>
+<div class="back"><img src="img/back.png" /> </div>
+
 <div class="middle">
     <div class="title">
         <img class="changeMenu" src="img/shou.png" id="hidIcon"/>
@@ -206,18 +208,8 @@
         </div>
     </div>
 </div>
-<img src="img/back.png" alt="" class="backTop">
-<script src="js/manual.js"></script>
-<script>
-    $(window).on('scroll',function(){
-        if($(document).scrollTop()>5){
-            $('.backTop').show();
-        }
-    });
 
-    $('.backTop').on('touchend',function(){
-        $('body,html').animate({ scrollTop: 0 }, 500);
-    });
-</script>
+<script src="js/manual.js"></script>
+
 </body>
 </html>
