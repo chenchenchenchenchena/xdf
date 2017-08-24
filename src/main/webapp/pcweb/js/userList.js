@@ -100,10 +100,10 @@ function filterByCityId(_this, cityId) {
 
     if ($("#searchKey").val() != "") {
         searchKey = $("#searchKey").val();
-        findList(currentCityId,searchKey);
-    }else {
+        findList(currentCityId, searchKey);
+    } else {
         searchKey = "";
-        findList(currentCityId,searchKey);
+        findList(currentCityId, searchKey);
     }
 }
 
@@ -113,18 +113,18 @@ function searchByKey() {
         layer.msg("请输入搜索关键字!", {icon: 5});
         return false;
     }
-    findList(currentCityId,searchKey);
+    findList(currentCityId, searchKey);
 }
 
 var firstIn = true;
-function findList(school,searchKey) {
+function findList(school, searchKey) {
     if (school == null) {
         school = "";
     }
 
     var requestJson = {
         school: school,
-        loginId:searchKey
+        loginId: searchKey
     };
     jQuery.ajax({
         type: "POST",
@@ -176,13 +176,17 @@ function findList(school,searchKey) {
 
                     str += "<td>"
                     str += "<div class='p176-table-btnGroup'>";
-                    str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                        "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\");'><i></i>编辑</a>";
-                    // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
-                    if (isEnabled == 1) {
-                        str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
-                    } else {
-                        str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\")'><i></i>启用</a>";
+                    if (loginId != "ssdf") {
+                        str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
+                            "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\");'><i></i>编辑</a>";
+                        // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
+
+
+                        if (isEnabled == 1) {
+                            str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
+                        } else {
+                            str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\")'><i></i>启用</a>";
+                        }
                     }
 
                     str += "</div>";
@@ -250,8 +254,8 @@ function enabledUser(_this, userId) {
     });
 }
 //修改展示页面
-function updateExhibitionUser(pid, userId, loginId, userName, email,department, position, school,auth) {
-    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) +"&auth=" + auth;
+function updateExhibitionUser(pid, userId, loginId, userName, email, department, position, school, auth) {
+    window.location.href = 'userAdd.html?pid=' + pid + "&userId=" + userId + "&loginId=" + loginId + "&email=" + email + "&department=" + department + "&position=" + position + "&school=" + school + "&userName=" + encodeURI(userName) + "&auth=" + auth;
 
 }
 function initPage(totalCounts, currentPage) {
