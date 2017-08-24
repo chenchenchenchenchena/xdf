@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户使用手册</title>
+    <title>问题集</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -14,6 +14,7 @@
     <script src="../common/js/scale.js"></script>
 </head>
 <body>
+<div class="back"><img src="img/back.png" /> </div>
 <div class="mask"></div>
 <div class="middle">
     <div class="title">
@@ -24,38 +25,63 @@
         <div class="menu_list">
             <ul>
                 <li class="lis">
-                    <p class="fuMenu">登陆</p>
-                    <img class="xiala" src="img/xiala.png" />
+                    <a href="#account">
+                        <p class="fuMenu">课表功能</p>
+                        <img class="xiala" src="img/xiala.png" />
+                    </a>
                 </li>
                 <li class="lis">
-                    <p class="fuMenu">课表</p>
-                    <img class="xiala" src="img/xiala.png" />
-                </li>
-                <li class="lis">
-                    <p class="fuMenu">学情</p>
-                    <img class="xiala" src="img/xiala.png" />
-                </li>
-                <li class="lis">
-                    <p class="fuMenu">作业</p>
-                    <img class="xiala" src="img/xiala.png" />
+                    <a href="#schedule">
+                        <p class="fuMenu">学情功能</p>
+                        <img class="xiala" src="img/xiala.png" />
+                    </a>
+
                 </li>
             </ul>
         </div>
     </div>
     <div class="main">
         <div id="account">
-            <h1>1.教师账号绑定与退出</h1>
-            <h2>1.1教师登录页面</h2>
-            <p>用户关注东方双师微信公众号后，进入公众号主页面如图所示。</p>
-            <img src="img/z1.png" />
-            <p>单击“我的”，则可看到“账号”选项。如图所示。</p>
-            <img src="img/z2.jpg" />
-            <p>选择点击“账号”按钮，则进入到登录页面。如图所示。</p>
-            <img src="img/z3.jpg" />
-            <p>选择点击“账号”按钮，则进入到登录页面。如图所示。</p>
-            <img src="img/z3.jpg" />
+            <h1>1.课表功能</h1>
+            <h2>1.1课程提醒数据一直处于加载状态</h2>
+            <p>答： 请确认当前网络是否健壮，然后点击右上角的“。。。”选择“刷新”刷新页面。</p>
+            <img src="img/f1.png" />
+            <h2>1.2日历日期信息显示有误</h2>
+            <p>答：请确认页面顶部的绿色进度条是否加载完毕。未加载完时：请耐心等待页面进度条加载完毕。加载完毕后：请点击右上角的“。。。”选择“刷新”刷新页面。</p>
+            <img src="img/f2.png" />
+            <h2>1.3e2登录后无法查看课表信息</h2>
+            <p>答：请确认登录用户是否拥有教师编码</p>
+            <h2>1.4课程详情页面无数据</h2>
+            <p>答：关闭当前页面，重新点击“课表”选择课次进入此页面或点击右上角的“。。。”选择“刷新”刷新页面。</p>
+            <img src="img/f3.png" />
         </div>
-
+        <div id="schedule">
+            <h1>2.学情功能</h1>
+            <h2>2.1当天课表内有某班级的课次但是录成绩时却没有该班级</h2>
+            <p>答：请确认课表内该班级是否已开课，录成绩时展示班级的逻辑是：已开课未结课(结课后仍保留七天)的班级信息。</p>
+            <h2>2.2录成绩时成绩类型选择项展示空白</h2>
+            <p>答：确认网络是否健壮，点击右上角的“。。。”选择“刷新”刷新页面。</p>
+            <h2>2.3老师录入学员信息后学员查看无成绩数据</h2>
+            <p>答：请清除微信缓存，并刷新当前页面。</p>
+            <h2>2.4我的班级里有某位同学但是录入成绩时却没有 </h2>
+            <p>答：如果是报名系统新录入的新生，会有一个同步过程需要等待24小时。</p>
+            <h2>2.5录成绩时课次显示有缺失</h2>
+            <p>答：请确认要录入的课时是否已开课，录入成绩时课次展示逻辑：已开课的课次。</p>
+            <h2>2.6成绩录入后提交失败</h2>
+            <p>答：确认当前网络是否健壮或后台同事是否在修改代码。</p>
+            <h2>2.7刷新页面清除缓存后数据依然没有更新</h2>
+            <p>答：退出已登录的账号，重新登录再次刷新页面。</p>
+            <h2>2.8如何分享学员成绩排行榜</h2>
+            <p>答：进入成绩排行榜页面，长按成绩排行榜图片会出现多个选项。如下图：可以选择“发送给朋友”以图片的形式发给朋友，也可以选择“保存到手机”以图片形式保存到手机相册。</p>
+            <img src="img/f4.png" />
+            <h2>2.9课表内有某学员信息但是录成绩时没有该学员信息</h2>
+            <p>答：可能由于缓存未及时更新造成，数据未同步；点击“成绩录入”右侧的刷新按钮，刷新学员数据即可更新。</p>
+            <img src="img/f5.png" />
+            <h2>2.10班级内有某位学员听课但是课表和录入成绩时均未有该学员信息</h2>
+            <p>答：由于数据同步需要一定时间，在此情况下可以手动添加学员进行打分；待数据同步完成后数据将会自动更新。</p>
+            <img src="img/f6.png" />
+            <img src="img/f7.png" />
+        </div>
     </div>
 </div>
 <script src="js/manual.js"></script>
