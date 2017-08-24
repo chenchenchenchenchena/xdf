@@ -8,6 +8,7 @@ var currentCityId = '1';
 var currentAreaId = '';
 var currentDeptId = '';
 var switchFlag = false;
+var searchKey = "";
 $(function () {
     initTopContent();
     findList("");
@@ -85,97 +86,45 @@ function filterByCityId(_this, cityId) {
         $(".list1 li").eq(1).show();
         $(".list1 li").eq(2).show();
         firstIn = true;
-        findList(cityId);
+        currentCityId = cityId;
+
     } else {
-        currentCityId = '';
-        currentAreaId = '';
-        currentDeptId = '';
+        currentCityId = "";
+        currentAreaId = "";
+        currentDeptId = "";
         $(".list1 li").eq(1).hide();
         $(".list1 li").eq(2).hide();
         $("#userTbody").html("");
         $("#publicPage").html("");
-        // if ($("#searchKey").val() != '') {
-        //     findList(cityId);
-        // }
-        findList(cityId);
+    }
+
+    if ($("#searchKey").val() != "") {
+        searchKey = $("#searchKey").val();
+        findList(currentCityId,searchKey);
+    }else {
+        searchKey = "";
+        findList(currentCityId,searchKey);
     }
 }
 
 function searchByKey() {
-    var searchKey = $("#searchKey").val();
+    searchKey = $("#searchKey").val();
     if (searchKey == "") {
         layer.msg("请输入搜索关键字!", {icon: 5});
         return false;
     }
-    var requestJson = {
-        loginId: searchKey,
-    };
-    jQuery.ajax({
-        type: "POST",
-        url: url_o + "/user/getUserInfo.do",
-        async: true,//同步
-        dataType: 'json',
-        data: JSON.stringify(requestJson),
-        success: function (json) {
-            if (json.result == true) {
-                if (undefined == json.data) {
-                    layer.msg("查询失败!", {icon: 5});
-                    return;
-                }
-
-                var str = "";
-                var pid = json.data.id;
-                var userId = json.data.loginId;
-                var loginId = json.data.loginId;
-                var userName = json.data.userName;
-                var email = json.data.email;
-                var department = json.data.department;
-                var position = json.data.position;
-                var school = json.data.school;
-                var isEnabled = json.data.isEnabled;
-                var schoolCode = json.data.schoolCode;
-                var schoolName = json.data.school;
-                var auth = json.data.auth;
-                str += "<tr class='table-tr-even'>"
-                str += "<td id='" + userId + "' style='display: none'>" + isEnabled + "</td>"
-                str += "<td style='display: none'>" + pid + "</td>"
-                str += "<td style='display: none'>" + userId + "</td>"
-                str += "<td style='display: none'>" + loginId + "</td>"
-                str += "<td>" + userName + "</td>"
-                str += "<td style='word-wrap:break-word'>" + email + "</td>"
-                str += "<td>" + schoolName + "</td>"
-
-
-                str += "<td>"
-                str += "<div class='p176-table-btnGroup'>";
-                str += "<a href='javascript:;' class='p176-btn-edit' onclick='javascript:updateExhibitionUser(\"" + pid + "\",\"" + userId + "\",\"" + loginId + "\"," +
-                    "\"" + userName + "\",\"" + email + "\",\"" + department + "\",\"" + position + "\",\"" + school + "\",\"" + auth + "\",\"" + schoolCode + "\");'><i></i>编辑</a>";
-                if (isEnabled == 1) {
-                    str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + userId + "\")'><i></i>禁用</a>";
-                } else {
-                    str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + userId + "\")'><i></i>启用</a>";
-                }
-
-                str += "</div>";
-                str += "</td>";
-                str += "</tr>";
-
-                $("#userTbody").html(str);
-            } else {
-                layer.msg("查询失败!", {icon: 5});
-            }
-        }
-    });
+    findList(currentCityId,searchKey);
 }
 
 var firstIn = true;
-function findList(school) {
+function findList(school,searchKey) {
     if (school == null) {
         school = "";
     }
 
     var requestJson = {
-        school: school
+        school: school,
+        loginId:searchKey
     };
     jQuery.ajax({
         type: "POST",
@@ -188,12 +137,13 @@ function findList(school) {
                 var userList = json.dataList;
                 totalCounts = userList.length;
                 if (undefined == totalCounts || totalCounts <= 0) {
+                    $("#userTbody").html("");
                     return;
                 }
-                if (firstIn) {
-                    initPage(totalCounts, 1);
-                    firstIn = false;
-                }
+                // if (firstIn) {
+                //     initPage(totalCounts, 1);
+                //     firstIn = false;
+                // }
                 var str = "";
                 for (var i = 0; i < userList.length; i++) {
                     var pid = userList[i].id;
