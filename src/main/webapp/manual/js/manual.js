@@ -55,7 +55,7 @@ $(document).ready(function() {
         $(".leftMenu").animate({"left":"-300px"},"slow",function(){
             $(".leftMenu").css("display","none")
         })
-        $("body,html").css("overflow","auto");
+        $("body,html").css("overflow","scroll");
     })
     $("#accountLink").click(function() {
         document.getElementById("account").scrollIntoView();
@@ -74,9 +74,10 @@ $(document).ready(function() {
         $(".leftMenu").animate({"left":"-300px"},"slow",function(){
             $(".leftMenu").css("display","none")
         })
-        $("body,html").css("overflow","auto");
+        $("body,html").css("overflow","scroll");
     })
     $(".back").click(function () {
+        // alert($(document).scrollTop())
         $("body,html").animate({"scrollTop":0},1000);
     })
 
