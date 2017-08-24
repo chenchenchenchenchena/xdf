@@ -30,7 +30,7 @@ function toLogin() {
                 toLogout();
             } else {
 
-                setCookie("sid", e.sid, 1);
+                // setCookie("sid", e.sid, 1);
                 setCookie("userName", e.userName, 1);
                 setCookie("userId", e.userId, 1);
 
