@@ -54,6 +54,37 @@ function tLogin() {
         layer.msg("登陆名不能为空", {icon: 5});
         return;
     }
+    // ssdf_1234
+    var signPassword = $.md5(loginPassword);
+
+    alert(signPassword);
+
+    var calbac = {
+        'loginId': loginName,
+        'password': signPassword
+    };
+    $.ajax({
+        url: url_o + "e2Login/adminLogin.do",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(calbac),
+        success: function (e) {
+            console.log(e);
+            if (e.result == false) {
+
+                alert(e.message);
+                toLogout();
+            } else {
+
+                setCookie("sid", e.sid, 1);
+                setCookie("userName", e.userName, 1);
+                setCookie("userId", e.userId, 1);
+
+                showFunctionList(e.userId);
+            }
+
+        }
+    })
 }
 
 //定义一个存放功能ID的数组
