@@ -61,7 +61,7 @@ $(document).ready(function() {
         $('.leftMenu').hide();
         $('.mask').hide();
         var top =$('.main div').eq($(this).index()).offset().top;
-        $('body,html').animate({'scrollTop':top},0)
+        $('body,html').scrollTop(top)
     });
     $(".menu_list ul li").click(function () {
         $(".mask").hide();
