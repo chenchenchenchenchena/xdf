@@ -57,17 +57,9 @@ $(document).ready(function() {
         })
         $("body,html").css("overflow","scroll");
     })
-    $("#accountLink").click(function() {
-        document.getElementById("account").scrollIntoView();
-    });
-    $("#scheduleLink").click(function() {
-        document.getElementById("schedule").scrollIntoView();
-    });
-    $("#learnLink").click(function() {
-        document.getElementById("learn").scrollIntoView();
-    });
-    $("#homeworkLink").click(function() {
-        document.getElementById("homework").scrollIntoView();
+    $('.menu_list li').on('touchend',function(){
+        var top =$('.main div').eq($(this).index()).offset().top;
+        $('body,html').animate({'scrollTop':top},0)
     });
     $(".menu_list ul li").click(function () {
         $(".mask").hide();

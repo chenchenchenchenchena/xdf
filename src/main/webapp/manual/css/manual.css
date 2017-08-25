@@ -1,7 +1,6 @@
 
 body,html{
     width: 100%;
-    height: 100%;
     position: relative;
 }
 .backTop{
@@ -111,6 +110,9 @@ body,html{
     display: block;
     text-align: center;
     width: 100%;
+}
+.menu_list ul a {
+    display:block;
 }
 .menu_list ul li .fuMenu{
     color: #F2F2F2;
