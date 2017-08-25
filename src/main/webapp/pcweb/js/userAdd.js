@@ -103,10 +103,12 @@ $(function () {
             data: JSON.stringify(param),
             success: function (e) {
                 if (e.result && e.dataList != undefined && e.dataList != null) {
+                    var data = e.dataList;
+                    reChecked(data);
                     $("#functionTree").tree({
                         data: e.dataList,
                         checkbox: true,
-                        cascadeCheck: false
+                        cascadeCheck: true
                     });
                 }
 
@@ -351,4 +353,18 @@ function updateUser() {
 function reload() {
     location.reload();
     window.location.href = 'userList.html';
+}
+function reChecked(data) {
+    if (data == null || data.length == 0) {
+        return;
+    }
+    for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        var checked = item.checked;
+        var children = item.children;
+        if (checked && children != null && children.length > 0) {
+            item.checked = false;
+            reChecked(children);
+        }
+    }
 }
