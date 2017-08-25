@@ -58,6 +58,8 @@ $(document).ready(function() {
         $("body,html").css("overflow","scroll");
     })
     $('.menu_list li').on('touchend',function(){
+        $('.leftMenu').hide();
+        $('.mask').hide();
         var top =$('.main div').eq($(this).index()).offset().top;
         $('body,html').animate({'scrollTop':top},0)
     });
