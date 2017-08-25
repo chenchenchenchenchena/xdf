@@ -57,18 +57,14 @@ $(document).ready(function() {
         })
         $("body,html").css("overflow","scroll");
     })
-    $('.menu_list li').on('touchend',function(){
-        $('.leftMenu').hide();
-        $('.mask').hide();
-        var top =$('.main div').eq($(this).index()).offset().top;
-        $('body,html').scrollTop(top)
-    });
     $(".menu_list ul li").click(function () {
         $(".mask").hide();
         $(".leftMenu").animate({"left":"-300px"},"slow",function(){
             $(".leftMenu").css("display","none")
         })
-        $("body,html").css("overflow","scroll");
+        var top =$('.main div').eq($(this).index()).offset().top;
+        $('body,html').scrollTop(top);
+        $("body,html").css("overflow","auto");
     })
     $(".back").click(function () {
         // alert($(document).scrollTop())
