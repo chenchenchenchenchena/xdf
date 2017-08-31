@@ -853,6 +853,9 @@ $(function () {
 			"stuInfomation":pushStuent
 
 		}
+		if($(".tCode").html()>2&&$(".tCode").html()<6){
+			pushinfo.time=1;
+		}
 		for(var i=0;i<stuOpenId.length;i++){
 			for(var j=0;j<pushinfo.stuInfomation.length;j++){
 				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
