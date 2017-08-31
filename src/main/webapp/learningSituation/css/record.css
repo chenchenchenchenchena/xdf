@@ -195,16 +195,16 @@ body,html{
 	z-index: 10;
 	
 }
-.classNumTime ul,.chooseClass ul{
+.classNumTime ul,.chooseClass ul,.scoreType ul{
 	overflow: auto;
 	height: 240px;
 }
-.scoreType ul{
+/*.scoreType ul{
 	height: 177px;
-}
-.scoreType{
+}*/
+/*.scoreType{
 	height: 347px;
-}
+}*/
 .classNumTime p,.chooseClass p,.scoreType p{
 	margin-bottom: 35px;
 }

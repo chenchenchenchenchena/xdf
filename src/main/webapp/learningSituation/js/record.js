@@ -48,7 +48,7 @@ $(function () {
             }
 
             for (var i = 0; i < e.studycase_grade_type.length; i++) {
-                var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li>";
+                var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li><span style=display:none class=typeCode>" +  e.studycase_grade_type[i].tCode + "</span>";
                 $(".scoreType ul").append(str2);
             }
         }else{
@@ -66,8 +66,10 @@ $(function () {
             $(".classrome").html($(this).html());
             var spanObj = $(this).next();
             $(".class").html(spanObj.html());
-            $(".classTime").html("");
-            $(".scoreTitle input").val("");
+			if($(".tCode").html()>0&&$(".tCode").html()<3){
+				$(".classTime").html("");
+			}
+			$(".scoreTitle input").val("");
             //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
                 if ($(".class").html() == e.Data[i].classCode) {
@@ -139,6 +141,8 @@ $(function () {
             $(".st").html($(this).html());
              $(".scoreTitle input").val("");
              $(".totalScore").val(10);
+			var typeObj = $(this).next();
+			$(".tCode").html(typeObj.html());
         })
 		//点击录成绩
 		$(".scoreList").on("click", "dl", function () {
@@ -370,7 +374,7 @@ $(function () {
         var saveInfo = {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
-            "gradeType": $(".st").html(),
+            "gradeType": $(".tCode").html(),
             "className": $(".classrome").html(),
             "classCode": $(".class").html(),
             "lessonNo": $(".classTime").find(".classnum").html(),
@@ -379,11 +383,12 @@ $(function () {
             "schoolId":localStorage.schoolId,
             "student": student
         }
-        if ($(".st").html() == "入门测") {
+		console.log(saveInfo)
+       /* if ($(".st").html() == "入门测") {
             saveInfo.gradeType = 1;
         } else {
             saveInfo.gradeType = 2;
-        }
+        }*/
        
        ajax_S(url.t_save,saveInfo,saveAjax)
         
@@ -651,6 +656,15 @@ $(function () {
         $(".classNumTime").css("bottom", "-440px");
     })
     $(".scoreTypeBtn").click(function () {
+		if($(".chooseClassActive").html()=="期末"||$(".chooseClassActive").html()=="期中"||$(".chooseClassActive").html()=="入学测"){
+			$(".classTime").html("暂无课次");
+			$(".choose").find("li").eq(2).hide();
+			$(".scoreList").css("height","412px");
+		}else{
+			$(".classTime").html("");
+			$(".choose").find("li").eq(2).show();
+			$(".scoreList").css("height","312px");
+		}
         $(".mask").hide();
         $("body,html").css({"width": "", "height": "", "overflow": ""})
         $(".scoreType").hide();
@@ -684,15 +698,15 @@ $(function () {
 		    var queryData={
 		    	"teacherEmail":localStorage.terEmail,
 		    	"classCode":$(".class").html(),
-		    	"tCode":$(".st").html(),
+		    	"tCode":$(".tCode").html(),
 		    	"schoolId":localStorage.schoolId,
 		    	"lessonNo":$(".classTime").find(".classnum").html()
 		    };
-		     if ($(".st").html() == "入门测") {
+		    /* if ($(".st").html() == "入门测") {
 		        queryData.tCode = 1;
 		    } else {
 		        queryData.tCode = 2;
-		    }
+		    }*/
 		    ajaxRequest("post",url.t_modify,queryData,queryAjax);
 		 }
 			
