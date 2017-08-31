@@ -656,7 +656,7 @@ $(function () {
         $(".classNumTime").css("bottom", "-440px");
     })
     $(".scoreTypeBtn").click(function () {
-		if($(".chooseClassActive").html()=="期末"||$(".chooseClassActive").html()=="期中"||$(".chooseClassActive").html()=="入学测"){
+		if($(".tCode").html()>2&&$(".tCode").html()<6){
 			$(".classTime").html("暂无课次");
 			$(".choose").find("li").eq(2).hide();
 			$(".scoreList").css("height","412px");
