@@ -173,7 +173,13 @@ $(function(){
 								// replay=1;
 								break;
 						}
-						hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span></li>';
+						var score;
+						if(item.score==""||item.score==null||item.score==undefined){
+							score = "";
+						}else{
+							score = item.score+"分";
+						}
+						hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span>'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){
