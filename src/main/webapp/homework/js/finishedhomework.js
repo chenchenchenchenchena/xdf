@@ -78,6 +78,13 @@ $(function () {
                     $('.hw_status').removeClass('hw_status_s');
                 }
                 /*******老师批注*******/
+                var score;
+                if(datas.score==""||datas.score==null||datas.score==undefined){
+                    score = "";
+                }else{
+                    score = datas.score+"分";
+                }
+                $('.score').html(score);
                 var pizhuHtml = "";
                 if (datas.replyStatus == "0") {
                     pizhuHtml = "暂无批注"

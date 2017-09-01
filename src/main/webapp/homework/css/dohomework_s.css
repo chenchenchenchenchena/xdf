@@ -237,6 +237,12 @@ i{font-style: normal;}
 	position: relative;
 	padding-right: 60px;
 }
+.score{
+	font-size: 23px;
+	float: right;
+	color: #808080;
+	padding-right: 60px;
+}
 .excellent-bg{
 	width:100px;
 	height: 100px;
