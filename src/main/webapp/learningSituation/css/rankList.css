@@ -1,3 +1,24 @@
+.tab-title{
+    height: 88px;
+    margin-bottom: 24px;
+    background: #fff;
+    font-size: 32px;
+    color: #666666;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-flow:row nowrap;
+    justify-content:space-around;
+}
+.tab-title li{
+    text-align: center;
+    /*float: left;*/
+    /*width: 164px;*/
+    line-height: 86px;
+}
+.tab-title li:first-child{
+    /*margin: 0 175px 0 129px;*/
+    margin:0;
+}
 body, html{
     height: 98%;
 	max-width:1024px;
