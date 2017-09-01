@@ -3,8 +3,6 @@
  */
 $(function(){
     var loading,loading2;//loading效果
-    console.log("title:"+GetRequest('title'));
-    console.log("title:"+decodeURI(encodeURI(GetRequest('title'))));
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
     getRankList("1");//默认显示出门测排行榜
@@ -12,10 +10,8 @@ $(function(){
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
         $('.main-content,.no-data,.shared-content').hide();
-        // alert($(".tab-title li").index(this));
-        // $('.main-content table').eq($(".tab-title li").index(this)).show();
-        getRankList($(".tab-title li").index(this)+1);
-        $('.main-content').attr('testState',$(".tab-title li").index(this)+1);
+        getRankList($(".tab-title li").index()+1);
+        $('.main-content').attr('testState',$(".tab-title li").index()+1);
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
@@ -29,10 +25,7 @@ $(function(){
             console.log(checkStuArry);
         });
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
-
-
         $('.tab-title,.main-content,.no-data').hide();
-        // $('.shared-content').show();
         var testState = $('.main-content').attr('testState');
         var stateContent;
         if(testState=="1"){
@@ -41,9 +34,6 @@ $(function(){
             stateContent = "出门测";
         }
         window.location.href = "sharedranking_t.html?testState="+testState;
-        // $('title').html(stateContent+"排行榜");//动态获取页面标题
-        // $('.rankTitle>span').html(stateContent);
-        // getRankList(testState,"shared");//
     });
     // 全选
     var checkAll = true;//默认全选
