@@ -634,6 +634,15 @@ $(function () {
  		}
  		if($(".scoreType").show()){
  			$(".scoreType").hide();
+			if($(".tCode").html()>2&&$(".tCode").html()<6){
+				$(".classTime").html("暂无课次");
+				$(".choose").find("li").eq(2).hide();
+				$(".scoreList").css("height","412px");
+			}else{
+				$(".classTime").html("");
+				$(".choose").find("li").eq(2).show();
+				$(".scoreList").css("height","312px");
+			}
  		}
  		if($(".classNumTime").show()){
  			$(".classNumTime").hide();
