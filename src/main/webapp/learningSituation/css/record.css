@@ -14,7 +14,6 @@ body,html{
 }
 .choose{
 	padding: 0 30px;
-	/*margin: 20px 0 10px;*/
 	background: #fff;
 }
 .choose li{
@@ -36,12 +35,10 @@ body,html{
 }
 .choose li>span:nth-child(2){
 	display: inline-block;
-	/*background: url(../images/rightArrow.png) no-repeat right center;*/
 	float: right;
 	padding-right: 30px;
 }
 .choose li>span:nth-child(2) input{
-	/*height: 104px;*/	
 	font-size: 30px;
 	border: none;
 	width:157px;
@@ -51,19 +48,15 @@ body,html{
 .choose li>span:nth-child(2) i{
 	font-style: normal;
 	float: left;
-	/*display: none;*/
 }
 .totalScore{
-	/*color: #d4d3d3;*/
     float: right;
     border: none;
     font-size: 30px;
-   /* line-height: 105px;*/
   margin-top: 32px;
     width: 160px;
     outline: none;
     text-align: right;
-   /* overflow:hidden;*/
 }
 .scoreList{
     overflow: hidden;
@@ -81,10 +74,8 @@ body,html{
 	font-style: normal;
 }
 .scoreTitle input{
-	/*line-height: 104px;*/
 	margin-top: 36px;
     font-size: 30px;
-   /* float: right;*/
     width: 153px;
     outline: none;
     border: none;
@@ -114,7 +105,6 @@ body,html{
 	line-height: 80px;
 	padding: 0 30px;
 	font-size: 30px;
-	/*font-weight: 700;*/
 }
 .txt input{
 	width: 96%;
@@ -125,14 +115,6 @@ body,html{
 	color: #d4d3d3;
 	padding-left: 30px;
 }
-/*.txt i{
-	background: url('../images/refresh.png') no-repeat;
-	margin-left: 200px;
-	width: 30px;
-	height: 20px;
-	display: inline-block;
-	font-style: normal;
-}*/
 .txtbox{
 	width: 92%;
 	height: 370px;
@@ -148,7 +130,6 @@ body,html{
 	position: relative;
 	background: #fff;
 	padding: 0 30px;
-	/*margin-bottom: 30px;*/
 }
 .txtboxNum{
 	position: absolute;
@@ -191,20 +172,19 @@ body,html{
 	background: #fff;
 	padding: 30px 30px 10px;
 	width: 100%;
-	/*display: none;*/
 	z-index: 10;
 	
 }
-.classNumTime ul,.chooseClass ul{
+.classNumTime ul,.chooseClass ul,.scoreType ul{
 	overflow: auto;
 	height: 240px;
 }
-.scoreType ul{
+/*.scoreType ul{
 	height: 177px;
-}
-.scoreType{
+}*/
+/*.scoreType{
 	height: 347px;
-}
+}*/
 .classNumTime p,.chooseClass p,.scoreType p{
 	margin-bottom: 35px;
 }
@@ -269,8 +249,6 @@ body,html{
 	left: 0;
 	top:0;
 	background: rgba(0,0,0,0.2);
-	/*display: none;*/
-	/*overflow: hidden;*/
 }
 .recordSucc,.recordSub,.noRecord,.subFail,.noDel{
 	display: none;

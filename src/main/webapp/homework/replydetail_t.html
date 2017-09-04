@@ -32,9 +32,7 @@
 			padding:0!important;
 			font-size:40px;
 			line-height:80px;
-
 		}
-
 		.layui-layer .layui-layer-content{
 			font-size: 40px !important;
 			line-height: 80px !important;
@@ -80,13 +78,27 @@
 			</div>
 		</div>-->
 	</div>
-
+	<style>
+		.infoTitle h4{
+			float:right;
+			font-size:25px;
+		}
+		.infoTitle input{
+			width:50px;
+			height:40px;
+			margin-top:-10px;
+			font-size:25px;
+			border:1px solid #ccc;
+			outline:none;
+			text-align:center;
+		}
+	</style>
 
 	<div class="answer" style="display: block;">
-		<div class="infoTitle">老师批复</div>
+		<div class="infoTitle">老师批复 <h4>得分：<input type="number" class="homeGrade"></h4></div>
 		<p class="sTitle dh"></p>
 		<textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200" style="resize:none;"></textarea>
-		<input type="number" class="homeGrade">
+
 		<p class="word teacherword"><span>0</span>/<span>200</span>
 		<div class="Media_s">
 			<img src="images/B02-2_10.png" alt="" class="image_s" style="margin-right:20px;">

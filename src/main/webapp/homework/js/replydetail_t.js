@@ -83,9 +83,15 @@ $(function () {
             var arr = decodeURI(e.data.replyDesc).split('|>|');
             for (var L = 0; L < arr.length; L++) {
                 if (arr[L] != '' && arr[L] != undefined && arr[L]!='+' && arr[L] != 'undefined') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    if(L==arr.length-1){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:'+e.data.score+'</h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }else{
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }
                 } else {//描述信息为空
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    if(L==arr.length-1){
+                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:'+e.data.score+'</h4>')
+                    }
                     /*var tea = e.data.File.RevampFile;//老师批注
                     if (tea != undefined) {
                         for (var b = 0; b < tea.length; b++) {
@@ -285,7 +291,7 @@ $(function () {
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
-        if($('.homeGrade').val()==''){
+        if($('.homeGrade').val()==''&&buer==false){
             layer.msg('作业分数不能为空');
             $('.areyok').hide();
             $('.areyok input:last-of-type').css('background', '#00ba97');
@@ -299,7 +305,14 @@ $(function () {
         need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
-        need.score = $('.homeGrade').val();
+        var grade_h = '';
+        if( $('.homeGrade').val()==''){
+            var html_tt =$('.hmAnswer:last-of-type').find('.infoTitle h4').html();
+            grade_h = html_tt.substring(3,html_tt.length)
+        }else{
+            grade_h =$('.homeGrade').val()
+        }
+        need.score = grade_h;
         if($('.tea_sp .hmAnswer').length!=0){
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for(var o = 0;o<$('.tea_sp .hmAnswer').length;o++){
