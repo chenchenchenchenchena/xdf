@@ -41,7 +41,11 @@ $(function () {
             	return false;
             }
         	for (var i = 0; i < e.Data.length; i++) {
-                var str = "<li>" + e.Data[i].className + "</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
+				var sMouth=e.Data[i].beginDate.split(" ")[0].split("-")[1];
+				var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
+				var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
+				var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
+                var str = "<li>" + e.Data[i].className + "("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
                 $(".chooseClass ul").append(str);
             }
 
@@ -63,9 +67,9 @@ $(function () {
             $(".classrome").html($(this).html());
             var spanObj = $(this).next();
             $(".class").html(spanObj.html());
-			if($(".tCode").html()>0&&$(".tCode").html()<3){
+			/*if($(".tCode").html()>0&&$(".tCode").html()<3){
 				$(".classTime").html("");
-			}
+			}*/
 			$(".scoreTitle input").val("");
             //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
@@ -569,6 +573,8 @@ $(function () {
  		$(".mask").hide();
  		if($(".chooseClass").show()){
  			$(".chooseClass").hide();
+			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+			$(".classTime").html($(".classNumTime ul").find(".chooseClassActive").html());
  		}
  		if($(".scoreType").show()){
  			$(".scoreType").hide();
@@ -577,7 +583,9 @@ $(function () {
 				$(".choose").find("li").eq(2).hide();
 				$(".scoreList").css("height","412px");
 			}else{
-				$(".classTime").html("");
+				$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+				$(".classTime").html($(".classNumTime ul").find(".chooseClassActive").html());
+				/*$(".classTime").html("");*/
 				$(".choose").find("li").eq(2).show();
 				$(".scoreList").css("height","312px");
 			}
@@ -594,6 +602,8 @@ $(function () {
         $(".chooseClass").hide();
         $(".chooseClass").css("animation", "");
         $(".chooseClass").css("bottom", "-440px");
+		$(".classTime").html($(".classNumTime ul").find("li").eq(0).html());
+		$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
     })
     $(".confirmBtn").click(function () {
         $(".mask").hide();
@@ -608,7 +618,8 @@ $(function () {
 			$(".choose").find("li").eq(2).hide();
 			$(".scoreList").css("height","412px");
 		}else{
-			$(".classTime").html("");
+			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+			$(".classTime").html($(".classNumTime ul").find(".chooseClassActive").html());
 			$(".choose").find("li").eq(2).show();
 			$(".scoreList").css("height","312px");
 		}
