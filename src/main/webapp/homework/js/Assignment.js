@@ -30,7 +30,8 @@ $(function () {
     var layer1, layer2, loading;
 
 
-
+    //设置当天默认值
+    $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
         var className = e.data;
