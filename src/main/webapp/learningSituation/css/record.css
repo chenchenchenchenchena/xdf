@@ -49,6 +49,10 @@ body,html{
 	font-style: normal;
 	float: left;
 }
+.choose .classrome{
+	width: 360px;
+	line-height:50px;
+}
 .totalScore{
     float: right;
     border: none;
