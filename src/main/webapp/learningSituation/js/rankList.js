@@ -5,13 +5,33 @@ $(function(){
     var loading,loading2;//loading效果
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
+
+    var tabTypes = new Array();
+    tabTypes[0] = "入门测";
+    tabTypes[1] = "出门测";
+    tabTypes[2] = "期中";
+    tabTypes[3] = "期末";
+    tabTypes[4] = "入学测";
+    var tabStr = "";
+    for (var i = 0; i < tabTypes.length; i++){
+        if(i == 0){
+            tabStr += "<li class='tab-active'>"+tabTypes[i]+"</li>";
+        }else {
+            tabStr += "<li>"+tabTypes[i]+"</li>";
+        }
+
+    }
+
+    $('.tab-title').html(tabStr);
+
+
     getRankList("1");//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
         $('.main-content,.no-data,.shared-content').hide();
-        getRankList($(".tab-title li").index()+1);
-        $('.main-content').attr('testState',$(".tab-title li").index()+1);
+        getRankList($(this).index()+1);
+        $('.main-content').attr('testState',$(this).index()+1);
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
@@ -27,12 +47,21 @@ $(function(){
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        var stateContent;
-        if(testState=="1"){
-            stateContent = "入门测";
-        }else{
-            stateContent = "出门测";
-        }
+        // var stateContent;
+        // /**
+        //  * debug
+        //  */
+        // if(testState=="1"){
+        //     stateContent = "入门测";
+        // }else if(testState=="2"){
+        //     stateContent = "出门测";
+        // }else if(testState=="3"){
+        //     stateContent = "期中";
+        // }else if(testState=="4"){
+        //     stateContent = "期末";
+        // }else if(testState=="5"){
+        //     stateContent = "入学测";
+        // }
         window.location.href = "sharedranking_t.html?testState="+testState;
     });
     // 全选

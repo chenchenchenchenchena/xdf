@@ -14,9 +14,7 @@ $(function(){
         'schoolId':localStorage.getItem('SCHOOLID')
     };
     Studata();  //调取
-    if(GetRequest('tCode')=='2'){
-        $('.tab-title li').eq(0).removeClass('tab-active').siblings().addClass('tab-active')
-    }
+    $('.tab-title li').eq(GetRequest('tCode')-1).addClass('tab-active').siblings().removeClass('tab-active')
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
         if(!$(this).hasClass('tab_recorac')){
@@ -35,19 +33,27 @@ var maxnumber = 0;
     $('.tab-title li').on('touchend',function(){
         $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
-        if($(this).index()==1){
-            Stujson.tCode='2';
-            var url_s = location.href.substr(0,location.href.indexOf('?'));
-            location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
-            // $('.class_big').find('.classroom_s').remove();
-            Studata();
-
-        }else{
-            Stujson.tCode='1';
-            var url_s = location.href.substr(0,location.href.indexOf('?'));
-            location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
-            // $('.class_big').find('.classroom_s').remove();
-            Studata()
+        switch($(this).index()){
+            case 0:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
+                break;
+            case 1:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
+                break;
+            case 2:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
+                break;
+            case 3:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
+                break;
+            case 4:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
+                break;
         }
     });
 
