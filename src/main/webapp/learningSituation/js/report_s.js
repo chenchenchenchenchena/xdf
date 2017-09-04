@@ -3,11 +3,8 @@ $(function(){
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-//     localStorage.terEmail="hanqifan@xdf.cn";
-//     sessionStorage.teacherId="TC41";
-//     sessionStorage.schoolId="73";
-//     sessionStorage.teacherName="韩启凡";
-//     sessionStorage.stuNumber = 'SS5877';
+    sessionStorage.schoolId="73";
+    sessionStorage.stuNumber = 'SS5358';
 //点击显示图标
 $(document).on('touchend','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
@@ -22,7 +19,7 @@ $(document).on('touchend','.title_s',function(){
         $('.tab_record span').eq(0).addClass('tab_recorac').siblings().removeClass('tab_recorac')
     }
 
-})
+});
     $(document).on('touchend','.grade',function(){
         sessionStorage.schoolId = $(this).attr('schoolid');
         sessionStorage.classCode = $(this).attr('classcode');
@@ -45,15 +42,33 @@ $(document).on('touchend','.title_s',function(){
 
     $('.tab-title li').on('touchend',function(){
         $('.no-data').hide()
-        $(this).addClass('tab-active').siblings().removeClass('tab-active')
-            if($(this).index()==1){
-                Stujson.tCode = '2';
-                $('.class_big').find('.classroom_s').remove();
-                Studata()
-            }else{
-                Stujson.tCode = '1';
-                $('.class_big').find('.classroom_s').remove();
-                Studata()
+        $(this).addClass('tab-active').siblings().removeClass('tab-active');
+            switch($(this).index()){
+                case 0:
+                    Stujson.tCode = '1';
+                    $('.class_big').find('.classroom_s').remove();
+                    Studata();
+                    break;
+                case 1:
+                    Stujson.tCode = '2';
+                    $('.class_big').find('.classroom_s').remove();
+                    Studata();
+                    break;
+                case 2:
+                    Stujson.tCode = '3';
+                    $('.class_big').find('.classroom_s').remove();
+                    Studata();
+                    break;
+                case 3:
+                    Stujson.tCode = '4';
+                    $('.class_big').find('.classroom_s').remove();
+                    Studata();
+                    break;
+                case 4:
+                    Stujson.tCode = '5';
+                    $('.class_big').find('.classroom_s').remove();
+                    Studata();
+                    break;
             }
     });
 
