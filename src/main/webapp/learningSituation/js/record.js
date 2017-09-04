@@ -41,7 +41,11 @@ $(function () {
             	return false;
             }
         	for (var i = 0; i < e.Data.length; i++) {
-                var str = "<li>" + e.Data[i].className + "</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
+				var sMouth=e.Data[i].beginDate.split(" ")[0].split("-")[1];
+				var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
+				var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
+				var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
+                var str = "<li>" + e.Data[i].className + "("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
                 $(".chooseClass ul").append(str);
             }
 
@@ -63,9 +67,9 @@ $(function () {
             $(".classrome").html($(this).html());
             var spanObj = $(this).next();
             $(".class").html(spanObj.html());
-			if($(".tCode").html()>0&&$(".tCode").html()<3){
+			/*if($(".tCode").html()>0&&$(".tCode").html()<3){
 				$(".classTime").html("");
-			}
+			}*/
 			$(".scoreTitle input").val("");
             //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
@@ -110,6 +114,7 @@ $(function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classTime").html("第<span class=classnum>"+$(this).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(this).find(".sectTime").html()+"</span>)");
             $(".scoreTitle input").val("");
+
         })
         //点击成绩类型
         $(".scoreType ul").on("click", "li", function () {
@@ -341,6 +346,7 @@ $(function () {
             "schoolId":localStorage.schoolId,
             "student": student
         }
+		console.log(saveInfo)
        ajax_S(url.t_save,saveInfo,saveAjax)
 	}
     
@@ -567,23 +573,33 @@ $(function () {
     
  	$(".mask").click(function(){
  		$(".mask").hide();
- 		if($(".chooseClass").show()){
+ 		/*if($(".chooseClass").show()){
  			$(".chooseClass").hide();
- 		}
- 		if($(".scoreType").show()){
+			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+			$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+			query();
+ 		}*/
+		if($(".chooseClass").css("display")=="block"){
+			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+			$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+			$(".chooseClass").css("display","none");
+			query();
+		}
+		if($(".scoreType").show()){
  			$(".scoreType").hide();
 			if($(".tCode").html()>2&&$(".tCode").html()<6){
 				$(".classTime").html("暂无课次");
 				$(".choose").find("li").eq(2).hide();
 				$(".scoreList").css("height","412px");
 			}else{
-				$(".classTime").html("");
+				/*$(".classTime").html("");*/
 				$(".choose").find("li").eq(2).show();
 				$(".scoreList").css("height","312px");
 			}
  		}
  		if($(".classNumTime").show()){
  			$(".classNumTime").hide();
+			query();
  		}
  	})
     
@@ -594,7 +610,9 @@ $(function () {
         $(".chooseClass").hide();
         $(".chooseClass").css("animation", "");
         $(".chooseClass").css("bottom", "-440px");
-    })
+		$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+		$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+	})
     $(".confirmBtn").click(function () {
         $(".mask").hide();
         $("body,html").css({"width": "", "height": "", "overflow": ""});
@@ -608,7 +626,6 @@ $(function () {
 			$(".choose").find("li").eq(2).hide();
 			$(".scoreList").css("height","412px");
 		}else{
-			$(".classTime").html("");
 			$(".choose").find("li").eq(2).show();
 			$(".scoreList").css("height","312px");
 		}
@@ -639,10 +656,12 @@ $(function () {
 		    	"schoolId":localStorage.schoolId,
 		    	"lessonNo":$(".classTime").find(".classnum").html()
 		    };
+			console.log(queryData);
 		    ajaxRequest("post",url.t_modify,queryData,queryAjax);
 		 }
 	}
     function queryAjax(msg){
+		console.log(msg);
     	if(msg.code=="200"){
 			if(msg.data.length==0){
 				$(".totalScore").val(10);
