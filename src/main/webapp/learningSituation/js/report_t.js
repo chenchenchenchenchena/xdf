@@ -66,13 +66,13 @@ $(document).on('touchend','.title_s',function(){
 
 //成绩类型切换
 $(document).on('touchend','.small_tab li',function(){
+    $(this).addClass('active_last').siblings().removeClass();
     switch($(this).index()){
         case 0:
             need_.Tcode = '1';
             Text_Grade = '入门测';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
-
             break;
         case 1:
             need_.Tcode = '2';
@@ -101,14 +101,15 @@ $(document).on('touchend','.small_tab li',function(){
     }
 });
 
+    Interaction();
 
 
-var h_zhou_x =[];
-var time = [];
-var full_max = [];
-var max_Grade_ = '';
-var Grade_eve = [];
 function Interaction(){
+    var h_zhou_x =[];
+    var time = [];
+    var full_max = [];
+    var max_Grade_ = '';
+    var Grade_eve = [];
     ajaxRequest('post',Study.t_self,need_,function(e){
         console.log(e);
         for(var i = 0;i<e.data.length;i++){
@@ -140,10 +141,10 @@ function Interaction(){
                 };
             };
             Echart('chart_S'+i+'',Text_Grade,h_zhou_x,Grade_eve,full_max,time,max_Grade_)
+            $('.classroom_s').eq(0).find('div').show();
         }
         });
 };
-Interaction();
 
 
 
@@ -233,9 +234,16 @@ var option = {
                 },
                 lineStyle:{
                     normal:{
-                        opacity:'0'
+                        opacity:0
+                    }
+                },
+                itemStyle:{
+                    normal:{
+                        opacity:0
+
                     }
                 }
+
 
             },
             {
@@ -246,13 +254,18 @@ var option = {
                     normal:{
                         textStyle:{
                             fontSize:24
-                        },
-                        opacity :'0'
+                        }
                     }
                 },
                 lineStyle:{
                     normal:{
-                        opacity:'0'
+                        opacity:0
+                    }
+                },
+                itemStyle:{
+                    normal:{
+                        opacity:0
+
                     }
                 }
             }
