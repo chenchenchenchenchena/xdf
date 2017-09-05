@@ -39,6 +39,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
             sessionStorage.schoolid = $(this).attr('schoolid');
             localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
             localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
+            sessionStorage.grade_type = $('.active_last').index()+1;
             window.location.href = 'rankinglist_t.html?title='+title;
         }
     }else{
@@ -47,6 +48,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
         sessionStorage.schoolid = $(this).attr('schoolid');
         localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
         localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
+        sessionStorage.grade_type = $('.active_last').index()+1;
         window.location.href = 'rankinglist_t.html?title='+title;
     }
 
