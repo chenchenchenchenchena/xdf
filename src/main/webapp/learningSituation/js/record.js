@@ -580,10 +580,15 @@ $(function () {
 			query();
  		}*/
 		if($(".chooseClass").css("display")=="block"){
-			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-			$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
-			$(".chooseClass").css("display","none");
-			query();
+			if($(".classrome").html()!=""){
+				$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+				$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+				$(".chooseClass").css("display","none");
+				query();
+			}else{
+				$(".chooseClass").css("display","none");
+			}
+
 		}
 		if($(".scoreType").show()){
  			$(".scoreType").hide();
