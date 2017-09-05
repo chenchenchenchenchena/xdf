@@ -18,6 +18,7 @@ $(function(){
                         location.href = '../schedule/login_s.html'
                     }
                 }
+
             });
     }
 
@@ -95,42 +96,42 @@ $(document).on('touchend', '.report_tab li', function () {
     $('.class_big').find('.classroom_s').remove();
     Interaction();
 });
-// //成绩类型切换
-// $(document).on('touchend','.small_tab li',function(){
-//     $(this).addClass('active_last').siblings().removeClass();
-//     switch($(this).index()){
-//         case 0:
-//             need_.tCode = '1';
-//             Text_Grade = '入门测';
-//             $('.class_big').find('.classroom_s').remove();
-//             Interaction();
-//             break;
-//         case 1:
-//             need_.tCode = '2';
-//             Text_Grade = '出门测';
-//             $('.class_big').find('.classroom_s').remove();
-//             Interaction();
-//             break;
-//         case 2:
-//             need_.tCode = '3';
-//             Text_Grade = '期中';
-//             $('.class_big').find('.classroom_s').remove();
-//             Interaction();
-//             break;
-//         case 3:
-//             need_.tCode = '4';
-//             Text_Grade = '期末';
-//             $('.class_big').find('.classroom_s').remove();
-//             Interaction();
-//             break;
-//         case 4:
-//             need_.tCode = '5';
-//             Text_Grade = '入学测';
-//             $('.class_big').find('.classroom_s').remove();
-//             Interaction();
-//             break;
-//     }
-// });
+//成绩类型切换
+$(document).on('touchend','.small_tab li',function(){
+    $(this).addClass('active_last').siblings().removeClass();
+    switch($(this).index()){
+        case 0:
+            need_.tCode = '1';
+            Text_Grade = '入门测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 1:
+            need_.tCode = '2';
+            Text_Grade = '出门测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 2:
+            need_.tCode = '3';
+            Text_Grade = '期中';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 3:
+            need_.tCode = '4';
+            Text_Grade = '期末';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 4:
+            need_.tCode = '5';
+            Text_Grade = '入学测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+    }
+});
 
     Interaction();
 
@@ -138,7 +139,7 @@ $(document).on('touchend', '.report_tab li', function () {
 function Interaction(){
 
     ajaxRequest('post',Study.t_self,need_,function(e){
-        console.log(e);
+        if(e.data.length!=0||e.data!=undefined){
         for(var i = 0;i<e.data.length;i++){
             var h_zhou_x =[];
             var time = [];
@@ -175,6 +176,10 @@ function Interaction(){
             };
             Echart('chart_S'+i+'',Text_Grade,h_zhou_x,Grade_eve,full_max,time,max_Grade_)
             $('.classroom_s').eq(0).find('div').show();
+        }
+        }else{
+            $('.no-data').show();
+            $('.class_big').show();
         }
         });
 };
