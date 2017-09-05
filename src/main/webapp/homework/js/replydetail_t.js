@@ -66,6 +66,7 @@ $(function () {
 
     if (sessionStorage.Teatwo) {//已批复
         sessionStorage.removeItem('Teatwo');
+        var buer_last = true;
         if(sessionStorage.bangbang){
             $('.hmAnswer .infoTitle span').css({
                 'color': '#fff',
@@ -285,7 +286,7 @@ $(function () {
             }
 
         }
-        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false) {
+        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false&&buer_last) {
             layer.msg('批复不能为空');
             $('.areyok').hide();
             $('.areyok input:last-of-type').css('background', '#00ba97');
