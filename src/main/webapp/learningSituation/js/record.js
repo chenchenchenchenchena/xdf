@@ -590,8 +590,8 @@ $(function () {
 			}
 
 		}
-		if($(".scoreType").show()){
- 			$(".scoreType").hide();
+		if($(".scoreType").css("display")=="block"){
+ 			$(".scoreType").css("display","none");
 			if($(".tCode").html()>2&&$(".tCode").html()<6){
 				$(".classTime").html("暂无课次");
 				$(".choose").find("li").eq(2).hide();
@@ -602,10 +602,14 @@ $(function () {
 				$(".scoreList").css("height","312px");
 			}
  		}
- 		if($(".classNumTime").show()){
+ 		/*if($(".classNumTime").show()){
  			$(".classNumTime").hide();
 			query();
- 		}
+ 		}*/
+		if($(".classNumTime").css("display")=="block"){
+			$(".classNumTime").css("display","none");
+			query();
+		}
  	})
     
 
