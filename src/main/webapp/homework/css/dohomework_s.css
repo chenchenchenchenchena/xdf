@@ -235,12 +235,13 @@ i{font-style: normal;}
 	float: right;
 	color: #808080;
 	position: relative;
-	padding-right: 60px;
+	padding-right: 20px;
 }
 .score{
 	font-size: 23px;
 	float: right;
-	color: #808080;
+	/*color: #808080;*/
+	font-weight: bolder;
 	padding-right: 60px;
 }
 .excellent-bg{
