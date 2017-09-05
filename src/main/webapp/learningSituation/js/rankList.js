@@ -6,6 +6,7 @@ $(function(){
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
     /** 获取成绩类型 */
+    var currentType = sessionStorage.grade_type;
     var reqData = {
         'tableName':"studycase_grade_type"
     };
@@ -14,7 +15,7 @@ $(function(){
             var tabTypes =  e.data;
             var tabStr = "";
             for (var i = 0; i < tabTypes.length; i++){
-                if(i == 0){
+                if(tabTypes[i].tCode == currentType){
                     tabStr += "<li class='tab-active' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
                 }else {
                     tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
