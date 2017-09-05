@@ -7,6 +7,7 @@ $(function(){
     $('.shared-content').hide();//隐藏分享页
     /** 获取成绩类型 */
     var currentType = sessionStorage.grade_type;
+    $('.main-content').attr('testState',currentType);
     var reqData = {
         'tableName':"studycase_grade_type"
     };
@@ -27,7 +28,7 @@ $(function(){
         }
     });
 
-    getRankList("1");//默认显示出门测排行榜
+    getRankList(currentType);//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
