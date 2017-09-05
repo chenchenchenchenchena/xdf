@@ -26,6 +26,26 @@ $(function(){
         'tCode':'1'
     };
     var Text_Grade = '入门测';
+    /** 获取成绩类型 */
+    var reqData = {
+        'tableName':"studycase_grade_type"
+    };
+    ajaxRequest('POST', url.t_dictionary,reqData, function(e){
+        if(e.code==200){
+            var tabTypes =  e.data;
+            var tabStr = "";
+            for (var i = 0; i < tabTypes.length; i++){
+                if(i == 0){
+                    //第一次进入页面  默认选中第一个tab
+                    tabStr += "<li class='active_last' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }else {
+                    tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }
+
+            }
+            $('.report_tab').html(tabStr);
+        }
+    });
 //点击查看成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
     if($(this).hasClass('kthd')){
@@ -66,42 +86,51 @@ $(document).on('touchend','.title_s',function(){
 
 });
 
-//成绩类型切换
-$(document).on('touchend','.small_tab li',function(){
-    $(this).addClass('active_last').siblings().removeClass();
-    switch($(this).index()){
-        case 0:
-            need_.tCode = '1';
-            Text_Grade = '入门测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 1:
-            need_.tCode = '2';
-            Text_Grade = '出门测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 2:
-            need_.tCode = '3';
-            Text_Grade = '期中';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 3:
-            need_.tCode = '4';
-            Text_Grade = '期末';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 4:
-            need_.tCode = '5';
-            Text_Grade = '入学测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-    }
+// 成绩类型切换 切换tab
+$(document).on('touchend', '.report_tab li', function () {
+    $(this).addClass('active_last').siblings().removeClass('active_last');
+    need_.tCode = $(this).attr("tCode");
+    Text_Grade = $(this).val();
+    console.log(need_.tCode+"__"+Text_Grade);
+    $('.class_big').find('.classroom_s').remove();
+    Interaction();
 });
+// //成绩类型切换
+// $(document).on('touchend','.small_tab li',function(){
+//     $(this).addClass('active_last').siblings().removeClass();
+//     switch($(this).index()){
+//         case 0:
+//             need_.tCode = '1';
+//             Text_Grade = '入门测';
+//             $('.class_big').find('.classroom_s').remove();
+//             Interaction();
+//             break;
+//         case 1:
+//             need_.tCode = '2';
+//             Text_Grade = '出门测';
+//             $('.class_big').find('.classroom_s').remove();
+//             Interaction();
+//             break;
+//         case 2:
+//             need_.tCode = '3';
+//             Text_Grade = '期中';
+//             $('.class_big').find('.classroom_s').remove();
+//             Interaction();
+//             break;
+//         case 3:
+//             need_.tCode = '4';
+//             Text_Grade = '期末';
+//             $('.class_big').find('.classroom_s').remove();
+//             Interaction();
+//             break;
+//         case 4:
+//             need_.tCode = '5';
+//             Text_Grade = '入学测';
+//             $('.class_big').find('.classroom_s').remove();
+//             Interaction();
+//             break;
+//     }
+// });
 
     Interaction();
 
