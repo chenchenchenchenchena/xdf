@@ -23,7 +23,7 @@ $(function(){
 
     var need_ = {
         'teaEmail':localStorage.terEmail,
-        'Tcode':'1'
+        'tCode':'1'
     };
     var Text_Grade = '入门测';
 //点击查看成绩排行
@@ -69,31 +69,31 @@ $(document).on('touchend','.small_tab li',function(){
     $(this).addClass('active_last').siblings().removeClass();
     switch($(this).index()){
         case 0:
-            need_.Tcode = '1';
+            need_.tCode = '1';
             Text_Grade = '入门测';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
             break;
         case 1:
-            need_.Tcode = '2';
+            need_.tCode = '2';
             Text_Grade = '出门测';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
             break;
         case 2:
-            need_.Tcode = '3';
+            need_.tCode = '3';
             Text_Grade = '期中';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
             break;
         case 3:
-            need_.Tcode = '4';
+            need_.tCode = '4';
             Text_Grade = '期末';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
             break;
         case 4:
-            need_.Tcode = '5';
+            need_.tCode = '5';
             Text_Grade = '入学测';
             $('.class_big').find('.classroom_s').remove();
             Interaction();
@@ -105,38 +105,40 @@ $(document).on('touchend','.small_tab li',function(){
 
 
 function Interaction(){
-    var h_zhou_x =[];
-    var time = [];
-    var full_max = [];
-    var max_Grade_ = '';
-    var Grade_eve = [];
+
     ajaxRequest('post',Study.t_self,need_,function(e){
         console.log(e);
         for(var i = 0;i<e.data.length;i++){
-            var html_yh = '';
+            var h_zhou_x =[];
+            var time = [];
+            var full_max = [];
+            var max_Grade_ = '';
+            var Grade_eve = [];
+
             var Data = e.data[i];
-            var Grade = Data.data[0];
-            var maxGrade = Grade.data[Grade.data.length-1].lessonNO;
+            var Grade = Data;
+            var maxGrade = Data.data[Data.data.length-1].lessonNO;
             max_Grade_ = Grade.fullMarksMax;
             if(Data.TeacherclassRoomState){
                 html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
             }else{
                 html_yh = ''
             }
+
             $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
             for(var c = 0;c<Grade.data.length;c++){
                 var lesson_num = Grade.data[c];
-                for(var b = 0;b<maxGrade+1;b++) {
+                for(var b = 0;b<maxGrade;b++) {
                     if(c==0){
                         h_zhou_x.push(b+1);
                         time.push('0');
                         full_max.push('0');
                         Grade_eve.push('0')
                     }
-                    if(lesson_num.lessonNO==b){
-                        time[b-1] = lesson_num.lessonTime.split(' ')[0];
-                        full_max[b-1] = lesson_num.fullMarks;
-                        Grade_eve[b-1] = lesson_num.avgGrade;
+                    if(lesson_num.lessonNO==b+1){
+                        time[b] = lesson_num.lessonTime.split(' ')[0];
+                        full_max[b] = lesson_num.fullMarks;
+                        Grade_eve[b] = lesson_num.avgGrade;
                     }
                 };
             };
