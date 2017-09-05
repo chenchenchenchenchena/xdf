@@ -5,33 +5,34 @@ $(function(){
     var loading,loading2;//loading效果
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
+    /** 获取成绩类型 */
+    var reqData = {
+        'tableName':"studycase_grade_type"
+    };
+    ajaxRequest('POST', url.t_dictionary,reqData, function(e){
+        if(e.code==200){
+            var tabTypes =  e.data;
+            var tabStr = "";
+            for (var i = 0; i < tabTypes.length; i++){
+                if(i == 0){
+                    tabStr += "<li class='tab-active' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }else {
+                    tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }
 
-    var tabTypes = new Array();
-    tabTypes[0] = "入门测";
-    tabTypes[1] = "出门测";
-    tabTypes[2] = "期中";
-    tabTypes[3] = "期末";
-    tabTypes[4] = "入学测";
-    var tabStr = "";
-    for (var i = 0; i < tabTypes.length; i++){
-        if(i == 0){
-            tabStr += "<li class='tab-active'>"+tabTypes[i]+"</li>";
-        }else {
-            tabStr += "<li>"+tabTypes[i]+"</li>";
+            }
+
+            $('.tab-title').html(tabStr);
         }
-
-    }
-
-    $('.tab-title').html(tabStr);
-
+    });
 
     getRankList("1");//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
         $('.main-content,.no-data,.shared-content').hide();
-        getRankList($(this).index()+1);
-        $('.main-content').attr('testState',$(this).index()+1);
+        getRankList($(this).attr("tCode"));
+        $('.main-content').attr('testState',$(this).attr("tCode"));
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
@@ -47,21 +48,6 @@ $(function(){
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        // var stateContent;
-        // /**
-        //  * debug
-        //  */
-        // if(testState=="1"){
-        //     stateContent = "入门测";
-        // }else if(testState=="2"){
-        //     stateContent = "出门测";
-        // }else if(testState=="3"){
-        //     stateContent = "期中";
-        // }else if(testState=="4"){
-        //     stateContent = "期末";
-        // }else if(testState=="5"){
-        //     stateContent = "入学测";
-        // }
         window.location.href = "sharedranking_t.html?testState="+testState;
     });
     // 全选

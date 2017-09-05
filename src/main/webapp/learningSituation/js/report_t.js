@@ -21,7 +21,11 @@ $(function(){
             });
     }
 
-
+    var need_ = {
+        'teaEmail':localStorage.terEmail,
+        'Tcode':'1'
+    };
+    var Text_Grade = '入门测';
 //点击查看成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
     if($(this).hasClass('kthd')){
@@ -60,853 +64,100 @@ $(document).on('touchend','.title_s',function(){
 
 });
 
-
-
-
-
-var maxNumber;
-var Xindex = '';
-var Thistime = [];
-ajaxRequest('post',Study.t_self,{'teaEmail':localStorage.terEmail},function(e){
-        if(e.data.length!=0){
-            $('title').html(e.data[0].teacherName+'老师');
-            var Xtwindex = [];
-            var Cindex = [];
-            var Rindex = [];
-            var classLen = e.data.length;
-            for(var i = 0;i<classLen;i++){
-                maxNumber = e.data[i].fullMarksMaxOne;
-                var xzhou = [];
-                var yzhou_c = [];
-                var yzhou_r = [];
-                var mfInedx_r = [];
-                var mfInedx_c = [];
-                var timeIndex  = [];
-                if(e.data[i].TeacherclassRoomState!=false){
-                // if(true){
-                    html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
-                }else{
-                    html_yh = ''
-                }
-                if(html_yh!=''){
-                    $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'">查看成绩排名</h4></div></div>');
-                }else{
-                    $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>');
-                }
-                $('.title_s').eq(0).siblings().show();
-                $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
-                var Cindex = e.data[i].data[0].data.length;
-                var Rindex = e.data[i].data[1].data.length;
-                if(Cindex==0&&Rindex!=0){
-                    var Cindex_max = 0;
-                    var Rindex_max = e.data[i].data[1].data[Rindex-1].lessonNO;
-                    if(Rindex_max!=Rindex) {
-                        for (var j = 0; j < Rindex_max; j++) {
-                            xzhou.push(j + 1);
-                            yzhou_r.push('0');
-                            var buer = false;
-                            for (var k = 0; k < Rindex; k++) {
-                                if ((j + 1) == e.data[i].data[1].data[k].lessonNO) {
-                                    yzhou_c.push(e.data[i].data[1].data[k].avgGrade);
-                                    mfInedx_r.push('满分：' + e.data[i].data[1].data[k].fullMarks);
-                                    timeIndex.push(e.data[i].data[1].data[k].lessonTime.split(' ')[0]);
-                                    buer = true;
-                                    break;
-                                }
-                                mfInedx_c.push('满分：0')
-                            }
-                            if (buer != true) {
-                                yzhou_c.push('0');
-                                mfInedx_r.push('满分：0');
-                                timeIndex.push('0');
-                            }
-                            mfInedx_c.push('满分：0')
-                        }
-                    }else {
-                        for (var j = 0; j < Rindex_max; j++) {
-                            xzhou.push(j + 1);
-                            yzhou_c.push('0');
-                            yzhou_r.push(e.data[i].data[1].data[j].avgGrade);
-                            mfInedx_r.push('满分：' + e.data[i].data[1].data[j].fullMarks);
-                            mfInedx_c.push('满分：0');
-                            timeIndex.push(e.data[i].data[1].data[j].lessonTime.split(' ')[0]);
-                        }
-                    }
-                    Echart('chart_S' + i + '', xzhou, yzhou_c, yzhou_r, mfInedx_r, timeIndex, mfInedx_c,maxNumber)
-                    }else if(Cindex!=0&&Rindex==0){
-                    var Cindex_max = e.data[i].data[0].data[Cindex-1].lessonNO;
-                    var Rindex_max = 0;
-                    if(Cindex_max!=Cindex){
-                        for(var j = 0;j<Cindex_max;j++){
-                            xzhou.push(j+1);
-                            yzhou_r.push('0');
-                            var buer = false;
-                            for(var k = 0;k<Cindex;k++){
-                                if((j+1)==e.data[i].data[0].data[k].lessonNO){
-                                    yzhou_c.push(e.data[i].data[0].data[k].avgGrade);
-                                    mfInedx_r.push('满分:'+e.data[i].data[0].data[k].fullMarks);
-                                    timeIndex.push(e.data[i].data[0].data[k].lessonTime.split(' ')[0]);
-                                    buer = true;
-                                    break;
-                                }
-                                mfInedx_c.push('满分：0')
-                            }
-                            if(buer!=true){
-                                yzhou_c.push('0');
-                                mfInedx_r.push('满分：0');
-                                timeIndex.push('0');
-                            }
-                            mfInedx_c.push('满分：0')
-                        }
-                        Echart('chart_S'+i+'',xzhou,yzhou_c,yzhou_r,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                    }else{
-                        for(var j = 0;j<Cindex_max;j++){
-                            xzhou.push(j+1);
-                            yzhou_c.push('0');
-                            yzhou_r.push(e.data[i].data[0].data[j].avgGrade);
-                            mfInedx_r.push('满分：'+e.data[i].data[0].data[j].fullMarks);
-                            mfInedx_c.push('满分：0');
-                            timeIndex.push(e.data[i].data[0].data[j].lessonTime.split(' ')[0]);
-                        }
-                        Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                    }
-                }else if(Cindex==0&&Rindex==0){
-                    var Cindex_max = 0;
-                    var Rindex_max = 0;
-                }else{
-                    var Cindex_max = e.data[i].data[0].data[Cindex-1].lessonNO;
-                    var Rindex_max = e.data[i].data[1].data[Rindex-1].lessonNO;
-                    if(Cindex==Rindex){
-                        if(Cindex_max<Rindex_max){
-                                var Rbuer = false;
-                                var Cbuer = false;
-                                var timejson = {};
-                                var manfjson = {};
-                                var manfjsont = {};
-                                for(var m = 0;m<Rindex_max;m++){
-                                    xzhou.push(m+1);
-                                    //入门
-                                    for(var v = 0;v<Cindex;v++){
-                                        if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                            yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                            timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                            manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                            Rbuer = false;
-                                            break;
-                                        }else{
-                                            Rbuer = true;
-                                            // break;
-                                        }
-                                    }
-
-                                    //出门
-                                    for(var E = 0;E<Rindex;E++){
-                                        if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                            yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                            timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                            manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                            Cbuer = false;
-                                            break;
-                                        }else{
-                                            Cbuer = true;
-                                            // break;
-                                        }
-                                    }
-                                    if(Rbuer == true){
-                                        yzhou_r.push('0')
-                                    }
-                                    if(Cbuer == true){
-                                        yzhou_c.push('0')
-                                    }
-                                }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max>Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Cindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Cindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max==Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Cindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        r = m+1;
-                                        Tbuer = true;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                    }
-                    if(Cindex>Rindex){
-                        if(Cindex_max<Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Rindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max>Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Cindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Cindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m+1 != r){
-                                        r = m+1;
-                                        Tbuer = true;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max==Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Cindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                    }
-                    if(Cindex<Rindex){
-                        if(Cindex_max<Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Rindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max>Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Cindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Cindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                        if(Cindex_max==Rindex_max){
-                            var Rbuer = false;
-                            var Cbuer = false;
-                            var timejson = {};
-                            var manfjson = {};
-                            var manfjsont = {};
-                            for(var m = 0;m<Rindex_max;m++){
-                                xzhou.push(m+1);
-                                //入门
-                                for(var v = 0;v<Cindex;v++){
-                                    if(m+1==e.data[i].data[0].data[v].lessonNO){
-                                        yzhou_r.push(e.data[i].data[0].data[v].avgGrade);
-                                        timejson[m+1] = e.data[i].data[0].data[v].lessonTime.split(' ')[0];
-                                        manfjson[m+1] = e.data[i].data[0].data[v].fullMarks;
-                                        Rbuer = false;
-                                        break;
-                                    }else{
-                                        Rbuer = true;
-                                        // break;
-                                    }
-                                }
-
-                                //出门
-                                for(var E = 0;E<Rindex;E++){
-                                    if(m+1==e.data[i].data[1].data[E].lessonNO){
-                                        yzhou_c.push(e.data[i].data[1].data[E].avgGrade);
-                                        timejson[m+1] = e.data[i].data[1].data[E].lessonTime.split(' ')[0];
-                                        manfjsont[m+1] = e.data[i].data[1].data[E].fullMarks;
-                                        Cbuer = false;
-                                        break;
-                                    }else{
-                                        Cbuer = true;
-                                        // break;
-                                    }
-                                }
-                                if(Rbuer == true){
-                                    yzhou_r.push('0')
-                                }
-                                if(Cbuer == true){
-                                    yzhou_c.push('0')
-                                }
-                            }
-
-                            for(var m = 0;m<Rindex_max;m++){
-                                var Tbuer = false;
-                                for(r in timejson){
-                                    if(m != r){
-                                        Tbuer = true;
-                                        r = m+1;
-                                        break;
-                                    }
-                                }
-                                if(Tbuer==true){
-                                    if(timejson[r]==undefined){
-                                        timeIndex.push('0');
-                                    }else{
-                                        timeIndex.push(timejson[r]);
-
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        mfInedx_r.push('满分：0');
-                                    }else{
-                                        mfInedx_r.push('满分：'+manfjson[r]);
-                                    }
-                                    if(manfjsont[r]==undefined){
-                                        mfInedx_c.push('满分：0');
-                                    }else{
-                                        mfInedx_c.push('满分：'+manfjsont[r]);
-                                    }
-                                    if(manfjson[r]==undefined){
-                                        manfjson[r] = '0'
-                                    }
-                                }else{
-                                    timeIndex.push('0');
-                                    mfInedx_r.push('满分：0');
-                                    mfInedx_c.push('满分：0');
-                                }
-                            }
-                            Echart('chart_S'+i+'',xzhou,yzhou_r,yzhou_c,mfInedx_r,timeIndex,mfInedx_c,maxNumber)
-                        }
-                    }
-                }
-
-
-            }
-            $('.title_s').eq(0).siblings().show();
-            $('.title_s').eq(0).find('img').css('transform','rotate(-90deg)')
-        }else{
-            $('.no-data').show();
-            $('.class_big').show();
-        }
-
+//成绩类型切换
+$(document).on('touchend','.small_tab li',function(){
+    $(this).addClass('active_last').siblings().removeClass();
+    switch($(this).index()){
+        case 0:
+            need_.Tcode = '1';
+            Text_Grade = '入门测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 1:
+            need_.Tcode = '2';
+            Text_Grade = '出门测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 2:
+            need_.Tcode = '3';
+            Text_Grade = '期中';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 3:
+            need_.Tcode = '4';
+            Text_Grade = '期末';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+        case 4:
+            need_.Tcode = '5';
+            Text_Grade = '入学测';
+            $('.class_big').find('.classroom_s').remove();
+            Interaction();
+            break;
+    }
 });
 
+    Interaction();
+
+
+function Interaction(){
+    var h_zhou_x =[];
+    var time = [];
+    var full_max = [];
+    var max_Grade_ = '';
+    var Grade_eve = [];
+    ajaxRequest('post',Study.t_self,need_,function(e){
+        console.log(e);
+        for(var i = 0;i<e.data.length;i++){
+            var html_yh = '';
+            var Data = e.data[i];
+            var Grade = Data.data[0];
+            var maxGrade = Grade.data[Grade.data.length-1].lessonNO;
+            max_Grade_ = Grade.fullMarksMax;
+            if(Data.TeacherclassRoomState){
+                html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
+            }else{
+                html_yh = ''
+            }
+            $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
+            for(var c = 0;c<Grade.data.length;c++){
+                var lesson_num = Grade.data[c];
+                for(var b = 0;b<maxGrade+1;b++) {
+                    if(c==0){
+                        h_zhou_x.push(b+1);
+                        time.push('0');
+                        full_max.push('0');
+                        Grade_eve.push('0')
+                    }
+                    if(lesson_num.lessonNO==b){
+                        time[b-1] = lesson_num.lessonTime.split(' ')[0];
+                        full_max[b-1] = lesson_num.fullMarks;
+                        Grade_eve[b-1] = lesson_num.avgGrade;
+                    }
+                };
+            };
+            Echart('chart_S'+i+'',Text_Grade,h_zhou_x,Grade_eve,full_max,time,max_Grade_)
+            $('.classroom_s').eq(0).find('div').show();
+        }
+        });
+};
 
 
 
-function Echart(id,x,y1,y2,mf,time,mf_c,max){
+function Echart(id,daTatext,x,y1,mf,time,max){
 var myChart = echarts.init(document.getElementById(id));
 var option = {
         tooltip : {
             trigger: 'axis',
             triggerOn:'click',
-            formatter: '{c2}<br />入门测：{c3},平均分：{c}<br />出门测：{c4},平均分：{c1}',
+            formatter: '{c1}<br />总分：{c2},平均分：{c}',
         },
         legend: {
-            data:['入门测','出门测'],
+            data:[daTatext],
             textStyle: {
                 fontSize: 24
             },
@@ -970,28 +221,6 @@ var option = {
                 }
             },
             {
-                name:'出门测',
-                type:'line',
-                data:y2,
-                symbolSize:14,
-                nameTextStyle:{
-                    fontSize:24
-                },
-                axisLabel: {
-                    show: true,
-                    textStyle: {
-                        fontSize: 24
-                    }
-                },
-                lable:{
-                    normal:{
-                        textStyle:{
-                            fontSize:24
-                        }
-                    }
-                }
-            },
-            {
                 name:'日期',
                 type:'line',
                 data:time,
@@ -1000,8 +229,21 @@ var option = {
                         textStyle:{
                             fontSize:24
                         }
+
+                    }
+                },
+                lineStyle:{
+                    normal:{
+                        opacity:0
+                    }
+                },
+                itemStyle:{
+                    normal:{
+                        opacity:0
+
                     }
                 }
+
 
             },
             {
@@ -1014,17 +256,16 @@ var option = {
                             fontSize:24
                         }
                     }
-                }
-            },
-            {
-                name:'总分',
-                type:'line',
-                data:mf_c,
-                lable:{
+                },
+                lineStyle:{
                     normal:{
-                        textStyle:{
-                            fontSize:24
-                        }
+                        opacity:0
+                    }
+                },
+                itemStyle:{
+                    normal:{
+                        opacity:0
+
                     }
                 }
             }
