@@ -5,14 +5,9 @@ $(function(){
     var loading,loading2;//loading效果
     //链接到分享页
     var testState = GetRequest('testState');
-    var stateContent;
-    if(testState=="1"){
-        stateContent = "入门测";
-    }else{
-        stateContent = "出门测";
-    }
-    $('title').html(stateContent+"排行榜");//动态获取页面标题
-    $('.rankTitle>span').html(stateContent);
+    var checkedTypeName = GetRequest('checkedTypeName');
+    $('title').html(checkedTypeName+"排行榜");//动态获取页面标题
+    $('.rankTitle>span').html(checkedTypeName);
     getRankList(testState,"shared");//
 
     weChatData();

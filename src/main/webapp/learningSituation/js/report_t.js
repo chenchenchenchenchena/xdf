@@ -90,7 +90,7 @@ $(document).on('touchend','.title_s',function(){
 $(document).on('touchend', '.report_tab li', function () {
     $(this).addClass('active_last').siblings().removeClass('active_last');
     need_.tCode = $(this).attr("tCode");
-    Text_Grade = $(this).val();
+    Text_Grade = $(this).html();
     console.log(need_.tCode+"__"+Text_Grade);
     $('.class_big').find('.classroom_s').remove();
     Interaction();
