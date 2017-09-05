@@ -183,6 +183,15 @@ $(function () {
         if (regStr.test(html_)) {
             $(this).val(html_.replace(regStr, ""));
         }
+        // if(html_.length>10){
+        //     if(html_.indexOf(',')!=-1||html_.indexOf(';')!=-1||html_.indexOf('，')!=-1||html_.indexOf('；')!=-1){
+        //         if(html_.length>21){
+        //             $(this).val($(this).val().substring(0,21))
+        //         }
+        //         return false;
+        //     }
+        //     $(this).val($(this).val().substring(0,10))
+        // }
         if (html_.indexOf(',') != html_.lastIndexOf(',') && html_.lastIndexOf(',') != -1) {
             $(this).val(html_.substr(0, html_.length - 1))
 
