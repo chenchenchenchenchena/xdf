@@ -789,7 +789,7 @@ $(function () {
 	function pushInfo(){
 		var pushinfo={
 			"courseName":$(".st").html(),
-			"course":$(".classrome").html(),
+			"course":$(".courseName").html(),
 			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
 			"stuInfomation":pushStuent
 		}
