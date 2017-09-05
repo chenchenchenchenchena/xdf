@@ -45,7 +45,7 @@ $(function () {
 				var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
 				var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
 				var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
-                var str = "<li>" + e.Data[i].className + "("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
+                var str = "<li><span class='courseName'>" + e.Data[i].className + "</span><span class='courseTime'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")<span></span></li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
                 $(".chooseClass ul").append(str);
             }
 
@@ -338,7 +338,7 @@ $(function () {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
             "gradeType": $(".tCode").html(),
-            "className": $(".classrome").html(),
+            "className": $(".courseName").html(),
             "classCode": $(".class").html(),
             "lessonNo": $(".classTime").find(".classnum").html(),
             "lessonTime": $(".classTime").find(".lestime").html(),
