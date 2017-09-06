@@ -82,7 +82,7 @@ $(function () {
                 if(datas.score==""||datas.score==null||datas.score==undefined){
                     score = "";
                 }else{
-                    score = datas.score+"分";
+                    score = "得分："+datas.score + "分";
                 }
                 $('.score').html(score);
                 var pizhuHtml = "";

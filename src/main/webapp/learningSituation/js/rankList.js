@@ -5,8 +5,10 @@ $(function(){
     var loading,loading2;//loading效果
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
+    var checkedTypeName = "入门测";
     /** 获取成绩类型 */
     var currentType = sessionStorage.grade_type;
+    $('.main-content').attr('testState',currentType);
     var reqData = {
         'tableName':"studycase_grade_type"
     };
@@ -17,6 +19,7 @@ $(function(){
             for (var i = 0; i < tabTypes.length; i++){
                 if(tabTypes[i].tCode == currentType){
                     tabStr += "<li class='tab-active' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                    checkedTypeName = tabTypes[i].tName;
                 }else {
                     tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
                 }
@@ -27,13 +30,15 @@ $(function(){
         }
     });
 
-    getRankList("1");//默认显示出门测排行榜
+    getRankList(currentType);//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
         $('.main-content,.no-data,.shared-content').hide();
+        currentType = $(this).attr("tCode");
         getRankList($(this).attr("tCode"));
         $('.main-content').attr('testState',$(this).attr("tCode"));
+        checkedTypeName = $(this).html();
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
@@ -49,7 +54,7 @@ $(function(){
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        window.location.href = "sharedranking_t.html?testState="+testState;
+        window.location.href = "sharedranking_t.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
     });
     // 全选
     var checkAll = true;//默认全选
