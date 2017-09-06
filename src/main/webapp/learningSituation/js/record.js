@@ -90,8 +90,6 @@ $(function () {
 						var addDl="<div class='add'><p style='background: #c2c2c2;color:#fff;font-weight: 700;font-size: 28px;'>+</p><p>添加学生</p></div>"
                     	$(".scoreList").html(stu);
 						$(".scoreList").append(addDl);
-						//添加学生
-						// addStudent();
                     }else{
                     	$(".scoreList").html("暂无学生成绩信息");
                     }
@@ -133,8 +131,7 @@ $(function () {
             if ($(".scoreTitle input").val() != "" && parseInt($(".scoreTitle input").val()) <= totalScore) {
                 $(this).find("dt").html($(".scoreTitle input").val());
             }
-
-        })
+		})
     }
 	//添加学生信息
 		var reNz=/^S{2}[0-9]{4}$/;
@@ -573,12 +570,6 @@ $(function () {
     
  	$(".mask").click(function(){
  		$(".mask").hide();
- 		/*if($(".chooseClass").show()){
- 			$(".chooseClass").hide();
-			$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-			$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
-			query();
- 		}*/
 		if($(".chooseClass").css("display")=="block"){
 			if($(".classrome").html()!=""){
 				$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
@@ -602,10 +593,6 @@ $(function () {
 				$(".scoreList").css("height","312px");
 			}
  		}
- 		/*if($(".classNumTime").show()){
- 			$(".classNumTime").hide();
-			query();
- 		}*/
 		if($(".classNumTime").css("display")=="block"){
 			$(".classNumTime").css("display","none");
 			query();
