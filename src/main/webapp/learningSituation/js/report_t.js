@@ -94,7 +94,6 @@ $(document).on('touchend', '.report_tab li', function () {
     Text_Grade = $(this).html();
     console.log(need_.tCode+"__"+Text_Grade);
     $('.class_big').find('.classroom_s').remove();
-    Interaction();
 });
 //成绩类型切换
 $(document).on('touchend','.small_tab li',function(){
