@@ -6,6 +6,16 @@ $(function(){
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
+    var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
+    var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
+    var calbac = {
+        'code':code_s,
+        'e2State':state_s,
+        'state':state_s
+    };
+    ajax_S(url.t_more,calbac,function(e){
+        console.log(e);
+    })
     var teacherlogin=true;
 
     ajax_S(url.s_seac,WXnum,stuc);
