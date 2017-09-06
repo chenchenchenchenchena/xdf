@@ -94,44 +94,8 @@ $(document).on('touchend', '.report_tab li', function () {
     Text_Grade = $(this).html();
     console.log(need_.tCode+"__"+Text_Grade);
     $('.class_big').find('.classroom_s').remove();
+    Interaction();
 });
-//成绩类型切换
-$(document).on('touchend','.small_tab li',function(){
-    $(this).addClass('active_last').siblings().removeClass();
-    switch($(this).index()){
-        case 0:
-            need_.tCode = '1';
-            Text_Grade = '入门测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 1:
-            need_.tCode = '2';
-            Text_Grade = '出门测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 2:
-            need_.tCode = '3';
-            Text_Grade = '期中';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 3:
-            need_.tCode = '4';
-            Text_Grade = '期末';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-        case 4:
-            need_.tCode = '5';
-            Text_Grade = '入学测';
-            $('.class_big').find('.classroom_s').remove();
-            Interaction();
-            break;
-    }
-});
-
     Interaction();
 
 
