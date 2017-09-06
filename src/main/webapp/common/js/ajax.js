@@ -51,7 +51,7 @@ var url = {
     'w_stum': url_o+'studentDataController/getClassDatas.do',// 获取班级信息
     'w_stor': url_o+'studentDataController/syncStudentsData.do',//获取学生信息
     't_more': url_o+'e2Login/doLogin.do',   //老师登录页  查询老师信息
-    't_stulas':ulr_o+'u2Login/login.do',// 查询u2
+    't_stulas':url_o+'u2Login/login.do',// 查询u2
     't_wxmo': url_o+'teacherBind/queryTeacherInfo.do',   //学生登录页  通过微信查询是否登录过
     't_siot': url_o+'teacherBind/unbindTeacherInfo.do',   //解绑
     's_seac': url_o+'studentBind/queryStudentInfo.do',  //学员号查询
