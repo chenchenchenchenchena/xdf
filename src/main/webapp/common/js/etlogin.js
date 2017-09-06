@@ -1,4 +1,5 @@
 function etlogin(callback){
+
 	var  cbconfig = {'callbackFlag':callback};
 	$.ajax({
 	    url: url.e_elog,
