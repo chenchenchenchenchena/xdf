@@ -85,13 +85,13 @@ $(function () {
             for (var L = 0; L < arr.length; L++) {
                 if (arr[L] != '' && arr[L] != undefined && arr[L]!='+' && arr[L] != 'undefined') {
                     if(L==arr.length-1){
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:'+e.data.score+'</h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.data.score+'</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }else{
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                 } else {//描述信息为空
                     if(L==arr.length-1){
-                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:'+e.data.score+'</h4>')
+                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>'+e.data.score+'</i></h4>')
                     }
                     /*var tea = e.data.File.RevampFile;//老师批注
                     if (tea != undefined) {
@@ -308,8 +308,7 @@ $(function () {
         need.fileInfo = arr_s;
         var grade_h = '';
         if( $('.homeGrade').val()==''){
-            var html_tt =$('.hmAnswer:last-of-type').find('.infoTitle h4').html();
-            grade_h = html_tt.substring(3,html_tt.length)
+            grade_h = $('.hmAnswer:last-of-type').find('.infoTitle h4 i').html()
         }else{
             grade_h =$('.homeGrade').val()
         }

@@ -17,7 +17,7 @@ $(function () {
         for (var i = 0; i < data.StudentHomeInfo.length; i++) {
             var music = '';
             var Img = '';
-            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学</h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div><diiv class=""><h4 style="font-size:24px;text-align:right">得分：'+data.StudentHomeInfo[i].score+'</h4></diiv></div>';
+            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学</h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div><diiv class=""><h4 style="font-size:24px;text-align:right;color:#333"><span style="font-size:32px;color:#000;">'+data.StudentHomeInfo[i].score+'</span>分</h4></diiv></div>';
             $('.homework_big').append(hwsharedHtml);
             var Media = data.StudentHomeInfo[i].RevampFile;
             if (Media.length != 0) {
