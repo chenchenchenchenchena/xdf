@@ -19,8 +19,8 @@ $(function(){
             $('.card').show();
             $('.enter').show();
             //判断老师是否绑定
-            ajax_S(url.t_wxmo,WXnum,function(e){
-                if(e.data!='goE2'&&e.result!=false){
+            ajax_S(url.t_wxmo,WXnum,function(daTa){
+                if(daTa.data!='goE2'&&daTa.result!=false){
                     location.href = 'login_t.html'
                 }else{
                     if(!sessionStorage.firstU2){
