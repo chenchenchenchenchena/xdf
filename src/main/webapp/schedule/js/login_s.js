@@ -33,56 +33,55 @@ $(function(){
                     }
                 }
             });
-            return false;
-        }
-
-        if(e.data.userid==undefined||e.data.userid==''){
-            //进行过u2登录
-            if( sessionStorage.firstU2 ){
-                sessionStorage.removeItem('firstU2');
-                ajax_S(url.t_stulas,calbac,function(e){
-                    sessionStorage.userId_stu = e.data.userId
-                })
-            }else{
-                ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                    sessionStorage.firstU2 = '1';
-                    location.href = e.url;
-                    var time_ = new Date().format("yyyy-MM-dd");
-
-                    console.log( getNewDay(time_,10))
-                });
-            }
-        };
-        //学员号查询
-        $('.enter').hide();
-        if(e.data.relatedState=='1'&&e.data.mobile==''){
-            $('.search').show();
-            $('.stuname').html(e.data.studentName);
-            $('.stutel').html('');
-            $('.deterAss').html('解除关联');
-            $('.deterAss').css('background','#fc1010');
-            $('.stuInfo li').eq(0).html('关联结果：');
-            $('.studentTitle').hide();
-            $('.inputBox').hide();
-            $('.search').css('margin-top','.2rem')
         }else{
-            //手机号+姓名查询
-            $('.searchTwo').show();
-            $('.card').hide();
-            $('.studentTitle').hide();
-            $('.inputBox').hide();
-            $('.enter').show();
-            $('.searchTwo li').eq(0).html('关联结果：');
-            $('.stuNum li').eq(1).remove();
-            $('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
-            $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
-            $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-            $('.searchTwo').css('margin-top','.5rem');
-            if(e.data.relatedState=='1'){
-                $('.Relation').html('取消关联')
-            }else{
-                $('.Relation').html('确认关联')
+            if(e.data.userid==undefined||e.data.userid==''){
+                //进行过u2登录
+                if( sessionStorage.firstU2 ){
+                    sessionStorage.removeItem('firstU2');
+                    ajax_S(url.t_stulas,calbac,function(e){
+                        sessionStorage.userId_stu = e.data.userId
+                    })
+                }else{
+                    ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                        sessionStorage.firstU2 = '1';
+                        location.href = e.url;
+                        var time_ = new Date().format("yyyy-MM-dd");
 
+                        console.log( getNewDay(time_,10))
+                    });
+                }
+            };
+
+            $('.enter').hide();
+            if(e.data.relatedState=='1'&&e.data.mobile==''){
+                $('.search').show();
+                $('.stuname').html(e.data.studentName);
+                $('.stutel').html('');
+                $('.deterAss').html('解除关联');
+                $('.deterAss').css('background','#fc1010');
+                $('.stuInfo li').eq(0).html('关联结果：');
+                $('.studentTitle').hide();
+                $('.inputBox').hide();
+                $('.search').css('margin-top','.2rem')
+            }else{
+                //手机号+姓名查询
+                $('.searchTwo').show();
+                $('.card').hide();
+                $('.studentTitle').hide();
+                $('.inputBox').hide();
+                $('.enter').show();
+                $('.searchTwo li').eq(0).html('关联结果：');
+                $('.stuNum li').eq(1).remove();
+                $('.stuNum').append('<li class="new_S"><span style="display:inline-block;width:2rem;text-align:right;">学员号</span><span class="stu_num">'+e.data.studentNo+'</span><button class="Relation"></button></li>');
+                $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
+                $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
+                $('.searchTwo').css('margin-top','.5rem');
+                if(e.data.relatedState=='1'){
+                    $('.Relation').html('取消关联')
+                }else{
+                    $('.Relation').html('确认关联')
+
+                }
             }
         }
     });
