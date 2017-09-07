@@ -37,7 +37,7 @@ $(function(){
                 }
             });
         }else{
-            if(e.data.userid==undefined||e.data.userid==''){
+            if(e.data.userid==undefined||e.data.userid==''||!sessionStorage.userId_stu){
                 //进行过u2登录
                 if( sessionStorage.firstU2 ){
                     sessionStorage.removeItem('firstU2');
