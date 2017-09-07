@@ -1,0 +1,157 @@
+/*
+选择作业*/
+body{
+    background: #fff;
+    /*position: relative;*/
+    overflow: hidden;
+}
+.searchE{
+    padding:0 30px;
+    margin-top: 35px;
+    background: #fff;
+    position: relative;
+}
+.searchE span{
+    display: inline-block;
+    height:56px;
+    border:1px solid #e1e1e1;
+    color: #a9a9a9;
+    width:111px;
+    background: url("../images/ej.png") no-repeat right 10px center;
+    padding-left: 10px;
+    line-height:56px;
+    font-size:24px;
+    margin-right: 10px;
+}
+.searchE span:nth-child(1){
+    width:161px;
+}
+.searchE .sou{
+    display: inline-block;
+    font-style: normal;
+    font-size:24px;
+    width:89px;
+    background: #11bf9e;
+    color: #fff;
+    text-align: center;
+    line-height:56px;
+    height:56px;
+}
+.list{
+    position: absolute;
+    top:93px;
+    color: #333333;
+    padding:7px 4px;
+    font-size:24px;
+    border:1px solid #e1e1e1;
+    display: none;
+    z-index: 10;
+    background: #fff;
+}
+.list li{
+    height:40px;
+    line-height:40px;
+    background: #fff;
+    padding-left: 5px;
+}
+.listOne{
+    width:163px;
+    left:30px;
+}
+.listOne li{
+    width:158px;
+}
+.listTwo{
+    width:113px;
+    left:218px;
+}
+.listTwo li,.listThree li,.listFour li{
+    width:108px;
+}
+.list .active{
+    background: #00ba97;
+}
+.listThree{
+    width:113px;
+    left:355px;
+}
+.listFour{
+    width:113px;
+    left:494px;
+}
+.searchEmpty{
+    width:220px;
+    margin: 110px auto 0;
+    display: none;
+}
+.searchEmpty p{
+    color: #aeadad;
+    margin-left: 40px;
+    font-size:32px;
+}
+.searchCon{
+    padding:0 30px;
+    height: 918px;
+    overflow-y: auto;
+    position: relative;
+}
+.searchCon li{
+    height:115px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-top: 37px;
+}
+.sInfo div{
+    float: left;
+    color: #02bb98;
+    margin-right: 30px;
+}
+.searchCon h3{
+    font-size:32px;
+    margin-bottom: 26px;
+}
+.searchCon img{
+    position: absolute;
+    right: 30px;
+    top:59px;
+}
+.eBtn{
+    width:690px;
+    height:88px;
+    background: #11bf9e;
+    text-align: center;
+    line-height:88px;
+    font-size: 32px;
+    color: #fff;
+   /* position: absolute;
+    left:30px;
+    bottom:20px;*/
+    margin:30px 0 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+/*
+subject*/
+.subject{
+    padding:0 30px;
+    margin-top: 30px;
+}
+.sTitle{
+    height:70px;
+    background: #f5f5f5;
+    font-size:28px;
+}
+.sTitle span{
+    display: inline-block;
+    float: left;
+}
+.sTitle span:nth-child(1){
+    background: url("../images/ju.png") no-repeat;
+    display: inline-block;
+    width:70px;
+    height:70px;
+}
+.sTitle span:nth-child(2),.sTitle span:nth-child(3),.sTitle span:nth-child(3){
+    margin-top: 21px;
+    margin-left: 20px;
+}

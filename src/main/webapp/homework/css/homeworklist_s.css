@@ -273,12 +273,18 @@ html body .tealist_s .more_so{
 	color:#808080;
 	background:#fff;
 }
+.ChoiceE_s{
+	height:315px;
+}
 .Choice_s h4 span img{
 	float: right;
 	margin-top:41px;
 }
 .class_s{
 	border-bottom:1px solid #e1e1e1;
+}
+.content_s{
+	border-top:1px solid #e1e1e1;
 }
 .Knowledge{
 	height:105px;
@@ -622,3 +628,5 @@ html body .esc_s{
 	display:none;
 }
 .fr{float:right;}
+
+
