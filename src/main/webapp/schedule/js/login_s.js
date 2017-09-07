@@ -24,10 +24,10 @@ $(function(){
                     location.href = 'login_t.html'
                 }else{
                     if(!sessionStorage.firstU2){
-                        ajax_S(url.t_stulas,calbac,function(data){
+                        ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                             sessionStorage.firstU2 = '1';
-                            sessionStorage.userId_stu = data.data.userId
-                        })
+                            location.href = e.url;
+                        });
                     }else{
                         sessionStorage.removeItem('firstU2')
                     }
