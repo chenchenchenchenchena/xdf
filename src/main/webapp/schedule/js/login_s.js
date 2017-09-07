@@ -2,7 +2,6 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
-    sessionStorage.openid = '111';
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
