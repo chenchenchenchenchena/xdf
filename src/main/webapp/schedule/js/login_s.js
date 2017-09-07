@@ -54,7 +54,7 @@ $(function(){
                     });
                 }
             };
-
+            sessionStorage.stuNumber = e.data.studentNo
             $('.enter').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
                 $('.search').show();
