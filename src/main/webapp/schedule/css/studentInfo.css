@@ -94,7 +94,7 @@
 
 .content-text-small {
     font-size: 25px;
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
     color: #999999;
     margin-right: 30px;
@@ -130,7 +130,7 @@
     color: #00b187;
     border-radius: 5px;
     font-size:25px;
-    font-weight: 400;
+    font-weight: normal;
     padding: 0px 16px 0px 16px;
     margin-left: 10px;
 }
