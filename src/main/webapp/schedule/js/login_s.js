@@ -24,9 +24,9 @@ $(function(){
                     location.href = 'login_t.html'
                 }else{
                     if(!sessionStorage.firstU2){
-                        ajax_S(url.t_stulas,calbac,function(e){
+                        ajax_S(url.t_stulas,calbac,function(data){
                             sessionStorage.firstU2 = '1';
-                            sessionStorage.userId_stu = e.data.userId
+                            sessionStorage.userId_stu = data.data.userId
                         })
                     }else{
                         sessionStorage.removeItem('firstU2')
