@@ -29,7 +29,10 @@ $(function(){
                             location.href = e.url;
                         });
                     }else{
-                        sessionStorage.removeItem('firstU2')
+                        sessionStorage.removeItem('firstU2');
+                        ajax_S(url.t_stulas,calbac,function(e){
+                            sessionStorage.userId_stu = e.data.userId
+                        })
                     }
                 }
             });
