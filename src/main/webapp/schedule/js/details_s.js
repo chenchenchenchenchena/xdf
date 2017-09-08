@@ -124,7 +124,9 @@ $(function(){
         });
     }
 
-
+    $(document).on('touchstart','.student_home',function () {
+        window.location.href = "studentInfo.html?remark=2&studentNo=" + sessionStorage.stuNum + "&schoolId=" + sessionStorage.schoolId;
+    });
 
 
 
