@@ -24,14 +24,19 @@ $(function(){
                     location.href = 'login_t.html'
                 }else{
                     if(!sessionStorage.firstU2){
-                        ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                            sessionStorage.firstU2 = '1';
-                            location.href = e.url;
-                        });
+                        if(!sessionStorage.welCome){
+                            location.href = 'welcome.html'
+                        }else{
+                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                                sessionStorage.firstU2 = '1';
+                                location.href = e.url;
+                            });
+                        }
+
                     }else{
                         sessionStorage.removeItem('firstU2');
                         ajax_S(url.t_stulas,calbac,function(e){
-                            sessionStorage.userId_stu = e.data.userId
+                            localStorage.userId_stu = e.data.userId
                         })
                     }
                 }
@@ -42,7 +47,7 @@ $(function(){
                 if( sessionStorage.firstU2 ){
                     sessionStorage.removeItem('firstU2');
                     ajax_S(url.t_stulas,calbac,function(e){
-                        sessionStorage.userId_stu = e.data.userId
+                        localStorage.userId_stu = e.data.userId
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
@@ -54,7 +59,7 @@ $(function(){
                     });
                 }
             };
-            sessionStorage.stuNumber = e.data.studentNo
+            sessionStorage.stuNumber = e.data.studentNo;
             $('.enter').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
                 $('.search').show();
