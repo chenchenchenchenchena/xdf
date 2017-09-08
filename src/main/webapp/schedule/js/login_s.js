@@ -32,7 +32,6 @@ $(function(){
                                 location.href = e.url;
                             });
                         }
-
                     }else{
                         sessionStorage.removeItem('firstU2');
                         ajax_S(url.t_stulas,calbac,function(e){
@@ -47,19 +46,25 @@ $(function(){
                 if( sessionStorage.firstU2 ){
                     sessionStorage.removeItem('firstU2');
                     ajax_S(url.t_stulas,calbac,function(e){
-                        localStorage.userId_stu = e.data.userId
+                        localStorage.userId_stu = e.data.userId;
+                        localStorage.Phonenum = e.data.mobile;
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         sessionStorage.firstU2 = '1';
                         location.href = e.url;
                         var time_ = new Date().format("yyyy-MM-dd");
-
-                        console.log( getNewDay(time_,10))
+                        location.useridTime =getNewDay(time_,10)
                     });
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
+            if(e.data.userid!=localStorage.userId_stu){
+                layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
+                setTimeout(function(){
+
+                },1000)
+            }
             $('.enter').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
                 $('.search').show();
