@@ -2,51 +2,47 @@
  * Created by xupingwei on 2017/9/7.
  */
 $(function () {
-    var Text_Grade = "意向";
-    var h_zhou_x =[];
+    var Text_Grade = '成绩';
+    var h_zhou_x = [];
     var Grade_eve = [];
-    h_zhou_x.push("周一");
-    h_zhou_x.push("周二");
-    h_zhou_x.push("周三");
-    h_zhou_x.push("周四");
-    h_zhou_x.push("周五");
-    h_zhou_x.push("周六");
-    h_zhou_x.push("周日");
+    h_zhou_x.push("8-5");
+    h_zhou_x.push("8-10");
+    h_zhou_x.push("8-20");
+    h_zhou_x.push("8-25");
+    h_zhou_x.push("8-30");
 
-    Grade_eve.push(250);
-    Grade_eve.push(1000);
-    Grade_eve.push(500);
-    Grade_eve.push(600);
-    Grade_eve.push(600);
-    Grade_eve.push(800);
-    Grade_eve.push(1500);
-    Echart('chart_S'+0+'',Text_Grade,h_zhou_x,Grade_eve,1500);
-    Echart('chart_S'+1+'',Text_Grade,h_zhou_x,Grade_eve,1500);
+    Grade_eve.push(30);
+    Grade_eve.push(60);
+    Grade_eve.push(50);
+    Grade_eve.push(70);
+    Grade_eve.push(50);
+    Echart('chart_S' + 0 + '', Text_Grade, h_zhou_x, Grade_eve,100);
+    Echart('chart_S' + 1 + '', Text_Grade, h_zhou_x, Grade_eve, 100);
 
-    function Echart(id,daTatext,x,y1,max){
+    function Echart(id, series, x, dataItem,max) {
         var myChart = echarts.init(document.getElementById(id));
         var option = {
-            tooltip : {
+            tooltip: {
                 trigger: 'axis',
-                triggerOn:'click',
-                formatter: '{c1}<br />总分：{c2},平均分：{c}',
+                triggerOn: 'click',
+                formatter: '满分：'+max+'<br />得分：{c}',
             },
             legend: {
-                data:[daTatext],
+                data: [series],
                 textStyle: {
                     fontSize: 24
                 },
-                selectedMode:false
+                selectedMode: false
             },
-            calculable : true,
-            xAxis : [
+            calculable: true,
+            xAxis: [
                 {
-                    name:'',
-                    type : 'category',
-                    boundaryGap : false,
-                    data :x,
-                    nameTextStyle:{
-                        fontSize:24
+                    name: '日期',
+                    type: 'category',
+                    boundaryGap: false,
+                    data: x,
+                    nameTextStyle: {
+                        fontSize: 24
                     },
                     axisLabel: {
                         show: true,
@@ -56,13 +52,13 @@ $(function () {
                     }
                 }
             ],
-            yAxis : [
+            yAxis: [
                 {
-                    name:'',
-                    type : 'value',
-                    max:max,
-                    nameTextStyle:{
-                        fontSize:24
+                    name: '分数',
+                    type: 'value',
+                    max: max,
+                    nameTextStyle: {
+                        fontSize: 24
                     },
                     axisLabel: {
                         show: true,
@@ -72,14 +68,14 @@ $(function () {
                     }
                 }
             ],
-            series : [
+            series: [
                 {
-                    name:Text_Grade,
-                    type:'line',
-                    data:y1,
-                    symbolSize:14,
-                    nameTextStyle:{
-                        fontSize:24
+                    name: series,
+                    type: 'line',
+                    data: dataItem,
+                    symbolSize: 14,
+                    nameTextStyle: {
+                        fontSize: 24
                     },
                     axisLabel: {
                         show: true,
@@ -87,14 +83,15 @@ $(function () {
                             fontSize: 24
                         }
                     },
-                    lable:{
-                        normal:{
-                            textStyle:{
-                                fontSize:24
+                    lable: {
+                        normal: {
+                            textStyle: {
+                                fontSize: 24
                             }
                         }
                     }
                 }
+
             ]
         };
 
