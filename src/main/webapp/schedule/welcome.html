@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="full-screen" content="yes"/>
+		<title>登录</title>
+		<link rel="stylesheet" href="../common/css/base.css"  />
+		<link rel="stylesheet" href="css/student-login.css"  />
+		<script src="../common/js/jquery.js"></script>
+		<script src="../common/js/zepto.min.js"></script>
+		<script src="../common/js/rem.js"></script>
+		<script src="../common/js/ajax.js"></script>
+		<script src="../common/js/layer.js"></script>
+		<script src="js/login_s.js"></script>
+
+	</head>
+	<body>
+		<div class="manual">
+			<img src="images/logo.png" />
+			<a href="javascript:;">学生登录</a><br />
+			<a href="javascript:;">老师登录</a><br />
+		</div>
+		<script>
+			$('.manual a').eq(0).on('touchend',function(){
+			    sessionStorage.welCome = '1';
+				location.href = 'login_s.html';
+			});
+            $('.manual a').eq(1).on('touchend',function(){
+                var  cbconfig = {'callbackFlag':callback};
+                $.ajax({
+                    url: url.e_elog,
+                    type: 'post',
+                    dataType: 'json',
+                    data:JSON.stringify(cbconfig),
+                    success:function(e){
+                        if(e.url==undefined&&cbconfig.callbackFlag=='teacherWX'&&localStorage.terEmail){
+                            location.href = 'login_t.html'
+                        }else if(e.url==undefined&&cbconfig.callbackFlag=='scanCode'){
+                            location.href = 'scanCode.html'
+                        }else if(e.result==false){
+                            layer.msg(e.message);
+                        }else{
+                            location.href = e.url;
+                            localStorage.removeItem('terEmail');
+                        }
+                    }
+                })
+            })
+		</script>
+	</body>
+</html>

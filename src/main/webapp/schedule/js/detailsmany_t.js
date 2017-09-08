@@ -140,9 +140,9 @@ $(function () {
                 //电话号码
                 if (stuall[k].StudentName.length > 3) {
                     $('.studentList ul').append('<li class="swiper-slide" style="font-size:.4' +
-                        'rem;"><span class="name-icon">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '</span><p style="font-size:.3rem;">' + stuall[k].StudentName + '</p><i class="to-tel" tel="'+mobile+'" stuCode="'+stuall[k].StudentCode+'" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
+                        'rem;"><a href="../schedule/studentInfo.html?remark=1"><span class="name-icon">' + stuall[k].StudentName.substring(2, stuall[k].StudentName.length) + '</span></a><p style="font-size:.3rem;">' + stuall[k].StudentName + '</p><i class="to-tel" tel="' + mobile + '" stuCode="' + stuall[k].StudentCode + '" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo=' + stuall[k].StudentCode + '&tCode=1&studentName=' + stuall[k].StudentName + '">查看学情</a></li>')
                 } else {
-                    $('.studentList ul').append('<li class="swiper-slide"><span class="name-icon">' + stuall[k].StudentName.substring(stuall[k].StudentName.length-2, stuall[k].StudentName.length) + '</span><p >' + stuall[k].StudentName + '</p><i class="to-tel" tel="'+mobile+'" stuCode="'+stuall[k].StudentCode+'" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo='+stuall[k].StudentCode+'&tCode=1&studentName='+stuall[k].StudentName+'">查看学情</a></li>')
+                    $('.studentList ul').append('<li class="swiper-slide"><a href="../schedule/studentInfo.html?remark=1"><span class="name-icon" href="../learningSituation/reportstu_t.html?studentNo=' + stuall[k].StudentCode + '&tCode=1&studentName=' + stuall[k].StudentName + '">' + stuall[k].StudentName.substring(stuall[k].StudentName.length - 2, stuall[k].StudentName.length) + '</span></a><p >' + stuall[k].StudentName + '</p><i class="to-tel" tel="' + mobile + '" stuCode="' + stuall[k].StudentCode + '" ></i><a class="to-learn" href="../learningSituation/reportstu_t.html?studentNo=' + stuall[k].StudentCode + '&tCode=1&studentName=' + stuall[k].StudentName + '">查看学情</a></li>')
                 }
             }
 
