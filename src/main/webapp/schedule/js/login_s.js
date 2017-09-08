@@ -1,7 +1,7 @@
 $(function(){
-    if(!sessionStorage.openid){
-        wechatCode(location.href)
-    }
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href)
+    // }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -27,6 +27,7 @@ $(function(){
                         if(!sessionStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
+                            sessionStorage.removeItem('welCome');
                             ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                                 sessionStorage.firstU2 = '1';
                                 location.href = e.url;
@@ -35,19 +36,22 @@ $(function(){
                     }else{
                         sessionStorage.removeItem('firstU2');
                         ajax_S(url.t_stulas,calbac,function(e){
-                            localStorage.userId_stu = e.data.userId
+                            localStorage.userId_stu = e.data.userId;
+                            localStorage.Phonenum = e.data.mobile;
+                            localStorage.SId  =  e.sid;
                         })
                     }
                 }
             });
         }else{
-            if(e.data.userid==undefined||e.data.userid==''||!sessionStorage.userId_stu){
+            if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
                 //进行过u2登录
                 if( sessionStorage.firstU2 ){
                     sessionStorage.removeItem('firstU2');
                     ajax_S(url.t_stulas,calbac,function(e){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
+                        localStorage.SId  =  e.sid;
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
@@ -63,7 +67,15 @@ $(function(){
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
 
-                },1000)
+                },1000);
+                return false;
+            }
+            if(new Date().format("yyyy-MM-dd")>= location.useridTime){
+                layer.msg('当前登录的账号已过期,正在前往重新登陆');
+                setTimeout(function(){
+
+                },1000);
+                return false;
             }
             $('.enter').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
@@ -177,7 +189,7 @@ $(function(){
         }
     }
 
-    function s_bind(e){
+    function s_bind(Data){
         if(e.data==undefined){
             layer.msg(e.message);
             clear();
@@ -215,7 +227,7 @@ $(function(){
     });
     //关联点击
     $('.deterAss').click(function(){
-        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': sessionStorage.userId_stu};
+        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
         if($('.stunum').val()==''){
             stumore.StudentCode = sessionStorage.stuNumber
         }
@@ -301,12 +313,12 @@ $(function(){
     $(document).on('click','.Relation',function(){
         if($(this).html()=='确认关联'){
             var stunum  = $('.stu_num').eq($(this).parent().index()-1).text();
-            var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': sessionStorage.userId_stu}
+            var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'Mobile':sessionStorage.stuTel,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
             ajax_S(url.s_bind,stumore,telbind)
             // $(this).html('解除关联')
         }else{
             var stunum  = $('.stu_num').eq($(this).parent().index()-1).text();
-            var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': sessionStorage.userId_stu}
+            var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
             ajax_S(url.s_nobd,stumore,telbind)
             $(this).html('确认关联')
         }
