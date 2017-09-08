@@ -93,6 +93,8 @@ $(function(){
 				var datas = msg.data;
 				$.each(datas,function(i,item){
 					var classTitle = item.className;
+					//作业类型
+					var homeworkType=item.homeworkType;
 					//课程名称显示控制
 					if (item.className.length>11){
 						classTitle = item.className.substr(0,10)+'...';
@@ -109,24 +111,37 @@ $(function(){
 					homeworkInfosArray.push(homeworkInfos);
 					// localStorage.homeworkInfos = JSON.stringify(homeworkInfos);
 					console.log(typeof homeworkInfosArray);
-					if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
-
-						knowledgePoint =splitStrs(item.knowledgePoint);
-						console.log(knowledgePoint+"----"+knowledgePoint.length);
-						for(var i = 0;i<knowledgePoint.length;i++){
-							kpHtml += '<span>'+knowledgePoint[i]+'</span>';
-						}
-					}
 					var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";
-					console.log(kpHtml);
-					var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
-						+'<div class="hwLeft">'+item.courseName+'</div>'
-						+'<div class="hwRight">'
-						+'<div class="hwTime"><span>'+classTitle+'</span>'
-						+'<span>'+homeworkTime+'</span></div>'
-						+'<div class="hwKon">'+kpHtml+'</div></div></div>';
-					$(".hwContent").append(hwListHtml);
-					$(".hwContent").show();
+					if(homeworkType=="1"){
+						if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
+
+							knowledgePoint =splitStrs(item.knowledgePoint);
+							console.log(knowledgePoint+"----"+knowledgePoint.length);
+							for(var i = 0;i<knowledgePoint.length;i++){
+								kpHtml += '<span>'+knowledgePoint[i]+'</span>';
+							}
+						}
+						/*var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";*/
+						console.log(kpHtml);
+						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+							+'<div class="hwLeft">'+item.courseName+'</div>'
+							+'<div class="hwRight">'
+							+'<div class="hwTime"><span>'+classTitle+'</span>'
+							+'<span>'+homeworkTime+'</span></div>'
+							+'<div class="hwKon">'+kpHtml+'</div></div></div>';
+						$(".hwContent").append(hwListHtml);
+						$(".hwContent").show();
+					}else{
+						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+							+'<div class="hwLeft">'+item.courseName+'<span>电子</span></div>'
+							+'<div class="hwRight">'
+							+'<div class="hwTime"><span>'+classTitle+'</span>'
+							+'<span>'+homeworkTime+'</span></div>'
+							+'<div class="hwS"><span><i>学段:</i><i>小学</i></span> <span><i>年纪:</i><i>一年级</i></span> <span><i>学科:</i><i>物理</i></span></div></div></div>';
+						$(".hwContent").append(hwListHtml);
+						$(".hwContent").show();
+					}
+
 				});
 				localStorage.homeworkInfos = JSON.stringify({
 					'data':homeworkInfosArray
