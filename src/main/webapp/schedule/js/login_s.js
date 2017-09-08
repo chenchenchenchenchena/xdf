@@ -189,7 +189,7 @@ $(function(){
         }
     }
 
-    function s_bind(e){
+    function s_bind(Data){
         if(e.data==undefined){
             layer.msg(e.message);
             clear();
