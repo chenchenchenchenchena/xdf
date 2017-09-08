@@ -286,14 +286,8 @@ $(function () {
             }
 
         }
-        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false&&buer_last) {
+        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false&&buer_last==false) {
             layer.msg('批复不能为空');
-            $('.areyok').hide();
-            $('.areyok input:last-of-type').css('background', '#00ba97');
-            return false;
-        }
-        if($('.homeGrade').val()==''&&buer==false){
-            layer.msg('作业分数不能为空');
             $('.areyok').hide();
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
@@ -308,7 +302,11 @@ $(function () {
         need.fileInfo = arr_s;
         var grade_h = '';
         if( $('.homeGrade').val()==''){
-            grade_h = $('.hmAnswer:last-of-type').find('.infoTitle h4 i').html()
+            if($('.hmAnswer:last-of-type').find('.infoTitle h4 i').html()==''||$('.hmAnswer:last-of-type').find('.infoTitle h4 i').html()==undefined){
+                grade_h = '';
+            }else{
+                grade_h = $('.hmAnswer:last-of-type').find('.infoTitle h4 i').html()
+            }
         }else{
             grade_h =$('.homeGrade').val()
         }
