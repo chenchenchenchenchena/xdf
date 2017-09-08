@@ -286,7 +286,7 @@ $(function () {
             }
 
         }
-        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false&&buer_last) {
+        if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0&&buer==false&&buer_last==false) {
             layer.msg('批复不能为空');
             $('.areyok').hide();
             $('.areyok input:last-of-type').css('background', '#00ba97');
