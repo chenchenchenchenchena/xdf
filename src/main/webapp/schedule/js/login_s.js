@@ -100,6 +100,7 @@ $(function(){
                 $('.stuInfo li').eq(0).html('关联结果：');
                 $('.studentTitle').hide();
                 $('.inputBox').hide();
+                $('.enter').hide();
                 $('.search').css('margin-top','.2rem')
             }else{
                 //手机号+姓名查询
@@ -119,6 +120,7 @@ $(function(){
                     $('.Relation').html('确认关联')
 
                 }
+                $('.enter').hide()
             }
         }
     });
