@@ -34,7 +34,7 @@ $(function () {
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
         // $('.tab-title,.main-content,.no-data').hide();
         // var testState = $('.main-content').attr('testState');
-        // window.location.href = "sharedrankingE.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
+        window.location.href = "sharedrankingE.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
     });
     // 全选
     var checkAll = true;//默认全选
