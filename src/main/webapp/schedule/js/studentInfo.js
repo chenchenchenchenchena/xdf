@@ -13,6 +13,16 @@ $(function () {
         'endDate': sessionStorage.timetoday.split(' ')[0],
         'schoolId': schoolId
     };
+    if (studentName.length > 2) {
+        $('.avatar-icon').html(studentName.substring(studentName.length - 2, studentName.length));
+    } else {
+
+        $('.avatar-icon').html(studentName);
+    }
+    $('#name').html("姓名：" + studentName);
+    var studentNum = stuCode.substring(0,2)+"**"+stuCode.substring(stuCode.length-2,stuCode.length);
+
+    $('#studentNumber').html("学员号：" + studentNum);
     //获取该学生所报班级信息
     ajax_S(url.s_stud, emailm, stusea);
     function stusea(e) {
@@ -38,10 +48,10 @@ $(function () {
                         '<ul class="fr content-lable">';
                     if (remark == 2) {
                         //表示：学生自己查看
-                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode='+tCode+'&studentName='+studentName+'"><li class="lable">学情</li></a><a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
+                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '"><li class="lable">学情</li></a><a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
                     } else {
                         //表示：老师查看学生
-                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode='+tCode+'&studentName='+studentName+'"><li class="lable">学情</li></a>';
+                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '"><li class="lable">学情</li></a>';
                     }
                     classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
                         "<li class='lable'>作业报告</li></a>" +
