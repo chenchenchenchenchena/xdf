@@ -1,13 +1,13 @@
 $(function(){
     /* 测试 */
 
-    if(!sessionStorage.openid){
-        sessionStorage.openid = 'abcd123'
-    }
-
     // if(!sessionStorage.openid){
-    //     wechatCode(location.href)
+    //     sessionStorage.openid = 'abcd123'
     // }
+
+    if(!sessionStorage.openid){
+        wechatCode(location.href)
+    }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -79,7 +79,7 @@ $(function(){
                     })
                 },1000);
                 return false;
-            }
+           }
             if(new Date().format("yyyy-MM-dd")>= location.useridTime){
                 layer.msg('当前登录的账号已过期,正在前往重新登陆');
                 setTimeout(function(){
