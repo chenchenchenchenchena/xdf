@@ -70,6 +70,8 @@ $(function(){
             };
             sessionStorage.stuNumber = e.data.studentNo;
             if(e.data.userid!=localStorage.userId_stu){
+                alert(e.data.userid);
+                alert(localStorage.userId_stu);
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
