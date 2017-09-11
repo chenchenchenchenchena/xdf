@@ -10,6 +10,9 @@
     left: 0;
     padding-top: 30px;
 }
+.check-box{
+    margin-right: 10px;
+}
 .ranklibe li{
     height:80px;
     line-height:80px;
@@ -18,15 +21,14 @@
     margin-bottom: 40px;
 }
 .ranklibe li:nth-child(1){
-    height:88px;
-    line-height:88px;
+    height:30px;
+    line-height:30px;
     font-size: 26px;
     color: #808080;
-    margin-bottom: 0;
+    margin-bottom: 23px;
 }
 .ranklibe span{
     display: inline-block;
-    width:98px;
     text-align: center;
 }
 .ranklibe li span:nth-child(3) i{
@@ -41,6 +43,16 @@
 }
 .ranklibe .name{
     width: 200px;
+    margin: 0 84px 0 30px;
+}
+.ranklibe .useTime{
+    margin-right: 82px;
+}
+.ranklibe .nameLeft{
+    margin: 0 32px 0 30px;
+}
+.ranklibe .stuTime{
+    margin: 0 82px 0 84px;
 }
 .shareBtn{
     width:100%;
