@@ -1,13 +1,13 @@
 $(function(){
     /* 测试 */
 
-    // if(!sessionStorage.openid){
-    //     sessionStorage.openid = 'abcd123'
-    // }
-
     if(!sessionStorage.openid){
-        wechatCode(location.href)
+        sessionStorage.openid = 'abcd123'
     }
+
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href)
+    // }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -20,108 +20,108 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
-    ajax_S(url.s_seac,WXnum,function(e){
-        if(e.result==false){
-            $('.card').show();
-            $('.enter').show();
-            //判断老师是否绑定
-            ajax_S(url.t_wxmo,WXnum,function(daTa){
-                if(daTa.data!='goE2'&&daTa.result!=false){
-                    location.href = 'login_t.html'
-                }else{
-                    if(!sessionStorage.firstU2){
-                        if(!sessionStorage.welCome){
-                            location.href = 'welcome.html'
-                        }else{
-                            sessionStorage.removeItem('welCome');
-                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                                sessionStorage.firstU2 = '1';
-                                location.href = e.url;
-                            });
-                        }
-                    }else{
-                        sessionStorage.removeItem('firstU2');
-                        ajax_S(url.t_stulas,calbac,function(e){
-                            localStorage.userId_stu = e.data.userId;
-                            localStorage.Phonenum = e.data.mobile;
-                            localStorage.SId  =  e.sid;
-                        })
-                    }
-                }
-            });
-        }else{
-            if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
-                //进行过u2登录
-                if( sessionStorage.firstU2 ){
-                    sessionStorage.removeItem('firstU2');
-                    ajax_S(url.t_stulas,calbac,function(e){
-                        localStorage.userId_stu = e.data.userId;
-                        localStorage.Phonenum = e.data.mobile;
-                        localStorage.SId  =  e.sid;
-                    })
-                }else{
-                    ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                        sessionStorage.firstU2 = '1';
-                        location.href = e.url;
-                        var time_ = new Date().format("yyyy-MM-dd");
-                        location.useridTime =getNewDay(time_,10)
-                    });
-                }
-            };
-            sessionStorage.stuNumber = e.data.studentNo;
-            if(e.data.userid!=localStorage.userId_stu){
-                layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
-                setTimeout(function(){
-                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
-                        if(e.result){
-                            location.href = e.logoutUrl;
-                        }
-                    })
-                },1000);
-                return false;
-            }
-            if(new Date().format("yyyy-MM-dd")>= location.useridTime){
-                layer.msg('当前登录的账号已过期,正在前往重新登陆');
-                setTimeout(function(){
-                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':''},function(e){
-                        if(e.result){
-                            location.href = e.logoutUrl;
-                        }
-                    })
-                },1000);
-                return false;
-            }
-            $('.enter').hide();
-            if(e.data.relatedState=='1'&&e.data.mobile==''){
-                $('.search').show();
-                $('.stuname').html(e.data.studentName);
-                $('.stutel').html('');
-                $('.deterAss').hide();
-                $('.stuInfo li').eq(0).html('关联结果：');
-                $('.studentTitle').hide();
-                $('.inputBox').hide();
-                $('.search').css('margin-top','.2rem')
-            }else{
-                //手机号+姓名查询
-                $('.searchTwo').show();
-                $('.card').hide();
-                $('.studentTitle').hide();
-                $('.inputBox').hide();
-                $('.enter').show();
-                $('.searchTwo li').eq(0).html('关联结果：');
-                $('.stuNum li').eq(1).remove();
-                $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
-                $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
-                $('.searchTwo').css('margin-top','.5rem');
-                if(e.data.relatedState=='1'){
-                    $('.Relation').html('取消关联')
-                }else{
-                    $('.Relation').html('确认关联')
-
-                }
-            }
-        }
-    });
+    // ajax_S(url.s_seac,WXnum,function(e){
+    //     if(e.result==false){
+    //         $('.card').show();
+    //         $('.enter').show();
+    //         //判断老师是否绑定
+    //         ajax_S(url.t_wxmo,WXnum,function(daTa){
+    //             if(daTa.data!='goE2'&&daTa.result!=false){
+    //                 location.href = 'login_t.html'
+    //             }else{
+    //                 if(!sessionStorage.firstU2){
+    //                     if(!sessionStorage.welCome){
+    //                         location.href = 'welcome.html'
+    //                     }else{
+    //                         sessionStorage.removeItem('welCome');
+    //                         ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+    //                             sessionStorage.firstU2 = '1';
+    //                             location.href = e.url;
+    //                         });
+    //                     }
+    //                 }else{
+    //                     sessionStorage.removeItem('firstU2');
+    //                     ajax_S(url.t_stulas,calbac,function(e){
+    //                         localStorage.userId_stu = e.data.userId;
+    //                         localStorage.Phonenum = e.data.mobile;
+    //                         localStorage.SId  =  e.sid;
+    //                     })
+    //                 }
+    //             }
+    //         });
+    //     }else{
+    //         if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
+    //             //进行过u2登录
+    //             if( sessionStorage.firstU2 ){
+    //                 sessionStorage.removeItem('firstU2');
+    //                 ajax_S(url.t_stulas,calbac,function(e){
+    //                     localStorage.userId_stu = e.data.userId;
+    //                     localStorage.Phonenum = e.data.mobile;
+    //                     localStorage.SId  =  e.sid;
+    //                 })
+    //             }else{
+    //                 ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+    //                     sessionStorage.firstU2 = '1';
+    //                     location.href = e.url;
+    //                     var time_ = new Date().format("yyyy-MM-dd");
+    //                     location.useridTime =getNewDay(time_,10)
+    //                 });
+    //             }
+    //         };
+    //         sessionStorage.stuNumber = e.data.studentNo;
+    //         if(e.data.userid!=localStorage.userId_stu){
+    //             layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
+    //             setTimeout(function(){
+    //                 ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
+    //                     if(e.result){
+    //                         location.href = e.logoutUrl;
+    //                     }
+    //                 })
+    //             },1000);
+    //             return false;
+    //         }
+    //         if(new Date().format("yyyy-MM-dd")>= location.useridTime){
+    //             layer.msg('当前登录的账号已过期,正在前往重新登陆');
+    //             setTimeout(function(){
+    //                 ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':''},function(e){
+    //                     if(e.result){
+    //                         location.href = e.logoutUrl;
+    //                     }
+    //                 })
+    //             },1000);
+    //             return false;
+    //         }
+    //         $('.enter').hide();
+    //         if(e.data.relatedState=='1'&&e.data.mobile==''){
+    //             $('.search').show();
+    //             $('.stuname').html(e.data.studentName);
+    //             $('.stutel').html('');
+    //             $('.deterAss').hide();
+    //             $('.stuInfo li').eq(0).html('关联结果：');
+    //             $('.studentTitle').hide();
+    //             $('.inputBox').hide();
+    //             $('.search').css('margin-top','.2rem')
+    //         }else{
+    //             //手机号+姓名查询
+    //             $('.searchTwo').show();
+    //             $('.card').hide();
+    //             $('.studentTitle').hide();
+    //             $('.inputBox').hide();
+    //             $('.enter').show();
+    //             $('.searchTwo li').eq(0).html('关联结果：');
+    //             $('.stuNum li').eq(1).remove();
+    //             $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
+    //             $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
+    //             $('.searchTwo').css('margin-top','.5rem');
+    //             if(e.data.relatedState=='1'){
+    //                 $('.Relation').html('取消关联')
+    //             }else{
+    //                 $('.Relation').html('确认关联')
+    //
+    //             }
+    //         }
+    //     }
+    // });
 
 
 
