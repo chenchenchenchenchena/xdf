@@ -53,7 +53,7 @@ function teac(e){
         $('.name_ema').html(e.userId);
         localStorage.terEmail = e.userId;
         localStorage.sid = e.sid;
-        bindingtea0['email'] = localStorage.terEmail;
+        bindingtea0['email'] ='lichen40@xdf.cn';
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
