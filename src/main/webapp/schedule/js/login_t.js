@@ -26,10 +26,9 @@ if(localStorage.terEmail){
     });
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
-
+    var bindingtea0 = {};
     ajax_S(url.t_more,calbac,teac);
 
-    var bindingtea0 = {};
 }
 function Wxtea(e){
     if(e.data!=undefined){
