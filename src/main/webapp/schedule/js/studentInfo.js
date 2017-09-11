@@ -5,6 +5,8 @@ $(function () {
     var stuCode = GetRequest("studentNo");
     var remark = GetRequest("remark");
     var schoolId = GetRequest("schoolId");
+    var tCode = GetRequest("tCode");
+    var studentName = GetRequest("studentName");
     var emailm = {
         'studentCode': stuCode,
         'beginDate': sessionStorage.timetoday.split(' ')[0],
@@ -33,13 +35,13 @@ $(function () {
                         '<p class="content-text-small">授课老师：' + Teachers + '</p>' +
                         '</div>' +
                         '<div class="item-blow">' +
-                        '<ul class="fr content-lable">' +
-                        '<a href="../learningSituation/reportstu_t.html?studentNo="' + stuCode + '><li class="lable">学情</li></a>';
+                        '<ul class="fr content-lable">';
                     if (remark == 2) {
                         //表示：学生自己查看
-                        classListStr += '<a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
+                        classListStr += '<a href="../learningSituation/reportstu_s.html?studentNo=' + stuCode + '&tCode='+tCode+'&studentName='+studentName+'"><li class="lable">学情</li></a><a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
                     } else {
                         //表示：老师查看学生
+                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode='+tCode+'&studentName='+studentName+'"><li class="lable">学情</li></a>';
                     }
                     classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
                         "<li class='lable'>作业报告</li></a>" +
