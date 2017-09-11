@@ -69,8 +69,6 @@ $(function(){
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
-            localStorage.userId_stu = '113151135';
-
             if(e.data.userid!=localStorage.userId_stu){
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
