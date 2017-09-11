@@ -425,6 +425,7 @@ html body .tealist_s .more_so{
 	text-overflow: ellipsis;
 	margin-right:38px;
 	text-align: right;
+	color:#808080;
 }
 .time_S i{
 	font-style:normal;
@@ -685,8 +686,8 @@ i{
 }
 .content_s i{
 	float: right;
-	overflow: hidden;
+	/*overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	width: 397px;
+	width: 397px;*/
 }

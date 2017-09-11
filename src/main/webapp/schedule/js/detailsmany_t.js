@@ -94,11 +94,10 @@ $(function () {
             for (var j = 0; j < masterta.length; j++) {
                 if (masterta[j] != '') {
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">班主任</span><p>' + masterta[j] + '</p></li>')
-
+                    $('.schoolCampus').append('<dl><dt>' + BeginDate[regionindex[i]].AreaName + '校区</dt><dd>' + BeginDate[regionindex[i]].RoomName + '</dd><dd class="name">(' + masterta[j] + ':' + BeginDate[regionindex[i]].ClassCode + ')</dd></dl>');
                 } else {
                     $('.teacherList ul').append('<li class="swiper-slide"><span style="font-size:.36rem;">主讲</span><p>' + mastertae[teacindex].teacherName + '</p></li>')
                 }
-                $('.schoolCampus').append('<dl><dt>' + BeginDate[regionindex[i]].AreaName + '校区</dt><dd>' + BeginDate[regionindex[i]].RoomName + '</dd><dd class="name">(' + masterta[j] + ':' + BeginDate[regionindex[i]].ClassCode + ')</dd></dl>');
             }
 
             arr.push(BeginDate[regionindex[i]].Students);
