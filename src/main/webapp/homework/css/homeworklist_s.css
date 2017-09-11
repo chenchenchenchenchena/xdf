@@ -397,6 +397,8 @@ html body .tealist_s .more_so{
 }
 .class_name>ul>li{
 	line-height:86px;
+	height:86px;
+	overflow:hidden;
 	font-size:32px;
 	color:#333
 }
