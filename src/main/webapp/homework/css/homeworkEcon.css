@@ -183,13 +183,15 @@ subject*/
 }*/
 .sResolve{
     font-size: 24px;
-    margin-left: 600px;
+    margin-left: 580px;
     margin-top: 20px;
     margin-right: 30px;
     background: url("../images/B02-2_03.png") no-repeat right center;
 }
 .sResolve a{
     color: #00ba97;
+    font-size: 30px;
+    margin-right: 10px;
 }
 /*
 .correct{
