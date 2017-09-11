@@ -75,7 +75,6 @@ $(function(){
                 ajax_S(url.s_bind,stumore,function(e){
                     if(e.data==undefined){
                         layer.msg(e.message);
-                        // clear();
                         $('.deterAss').html('立即关联');
                         $('.deterAss').css('background','#00ba97');
                         if(sessionStorage.signal){
@@ -83,8 +82,6 @@ $(function(){
                         }else{
                             location.href = 'login_s.html'
                         }
-
-                        // location.reload()
                     }else{
                         $('.true_last').css('background','#00ba97');
                         sessionStorage.stuNum = $('.stunum').val();
@@ -93,19 +90,11 @@ $(function(){
                         sessionStorage.mobile=e.data.mobile;
                         sessionStorage.schoolId=e.data.schoolId;
                         layer.msg('绑定成功');
-                        if(sessionStorage.studayCanfig=='studay'){
-                            location.href = '../learningSituation/report_t.html';
-                            sessionStorage.removeItem('studayCanfig')
-                        }else{
-                            location.href = 'schedule_s.html';
-                        }
                         $('.deterAss').hide();
                     }
                 })
             }
             if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''){
-                alert(e.data.userid);
-                alert(localStorage.userId_stu);
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
