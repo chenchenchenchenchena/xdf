@@ -22,6 +22,7 @@ $(function () {
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
     $(document).on('touchstart','.shareBtn',function () {
+        checkStuArry = [];
         if($('.ranklibe li .tr.check-box.checked').length<=0){
             layer.msg("请选择要分享的学员");
             return ;
@@ -47,14 +48,14 @@ $(function () {
         }
     });
     // 多选
-    $(document).on('touchstart','.ranklibe li .tr',function () {
-        $(this).toggleClass('checked');
-        if(!$(this).hasClass('checked')){
+    $(document).on('touchstart','.ranklibe .tr',function () {
+        $(this).find('.check-box').toggleClass('checked');
+        if(!$(this).find('.check-box').hasClass('checked')){
             //点击后没有勾选的情况
             $('#check-all').removeClass('checked');
             checkAll = true;
         }else{
-            if($('.ranklibe li .tr.checked').length == $('.ranklibe li .tr.check-box').length){
+            if($('.ranklibe .tr .check-box.checked').length == $('.ranklibe .tr .check-box').length){
                 $('#check-all').addClass('checked');
                 checkAll = false;
             }
