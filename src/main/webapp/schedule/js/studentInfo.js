@@ -29,6 +29,7 @@ $(function () {
         if (e.result) {
 
             var dataList = e.data.Data;
+            var classCodeList = "";
             //判断是否有班级信息
             if (undefined != dataList && dataList.length > 0) {
                 //显示title布局
@@ -38,6 +39,7 @@ $(function () {
                     var className = dataList[i].ClassName;
                     var Teachers = dataList[i].Teachers;
                     var classCode = dataList[i].ClassCode;
+                    classCodeList += classCode+",";
 
                     classListStr += '<div class="item">' +
                         '<div class="item-top">' +
@@ -61,6 +63,7 @@ $(function () {
                         "</div>";
 
                 }
+                sessionStorage.classCodeList = classCodeList;
                 $('.content').append(classListStr);
 
             } else {
