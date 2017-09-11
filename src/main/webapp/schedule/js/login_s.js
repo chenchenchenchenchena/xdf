@@ -6,6 +6,7 @@ $(function(){
     // }
 
     if(!sessionStorage.openid){
+        alert(0)
         wechatCode(location.href)
     }
     var WXnum  = {
