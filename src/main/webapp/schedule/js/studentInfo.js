@@ -61,7 +61,7 @@ $(function () {
                         "</div>";
 
                 }
-                $('.content').html(classListStr);
+                $('.content').append(classListStr);
 
             } else {
                 // 隐藏title布局
