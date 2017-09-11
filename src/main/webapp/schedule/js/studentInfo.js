@@ -6,10 +6,10 @@ $(function () {
     var remark = GetRequest("remark");
     var schoolId = GetRequest("schoolId");
     var emailm = {
-        'studentCode':stuCode,
-        'beginDate':sessionStorage.timetoday.split(' ')[0],
-        'endDate':sessionStorage.timetoday.split(' ')[0],
-        'schoolId':schoolId
+        'studentCode': stuCode,
+        'beginDate': sessionStorage.timetoday.split(' ')[0],
+        'endDate': sessionStorage.timetoday.split(' ')[0],
+        'schoolId': schoolId
     };
     //获取该学生所报班级信息
     ajax_S(url.s_stud, emailm, stusea);
@@ -26,7 +26,6 @@ $(function () {
                     var className = dataList[i].ClassName;
                     var Teachers = dataList[i].Teachers;
                     var classCode = dataList[i].ClassCode;
-                    var schoolId = dataList[i].SchoolId;
 
                     classListStr += '<div class="item">' +
                         '<div class="item-top">' +
@@ -36,17 +35,18 @@ $(function () {
                         '<div class="item-blow">' +
                         '<ul class="fr content-lable">' +
                         '<a href="../learningSituation/reportstu_t.html?studentNo="' + stuCode + '><li class="lable">学情</li></a>';
-                    if (remark == 1) {
+                    if (remark == 2) {
                         //表示：学生自己查看
                         classListStr += '<a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
                     } else {
                         //表示：老师查看学生
                     }
-                    classListStr += '<a href="homework_report.html"?classCode="' + classCode + '"&schoolId="' + schoolId + '"&studentNo="' + stuCode + '"><li class="lable">作业报告</li></a>' +
-                        '</ul>' +
-                        '</div>' +
-                        '<div class="line-light space-30"></div>' +
-                        '</div>';
+                    classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
+                        "<li class='lable'>作业报告</li></a>" +
+                        "</ul>" +
+                        "</div>" +
+                        "<div class='line-light space-30'></div>" +
+                        "</div>";
 
                 }
                 $('.content').html(classListStr);

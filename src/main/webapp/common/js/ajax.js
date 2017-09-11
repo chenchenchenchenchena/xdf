@@ -118,7 +118,8 @@ var homework_s = {
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
     's_readstatus': url_o+'studentHWork/updateStuReadstatus.do',//学生端完成作业的学生阅读状态
     's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
-    's_uploadFiles': url_o+'upload/uploadFileByBase64.do'//文件上传接口
+    's_uploadFiles': url_o+'upload/uploadFileByBase64.do',//文件上传接口
+    's_hw_report': url_o+'studentHWork/querySdtworkStatement.do'//学生作业报告
 
 };
 function wechatCode(url) {
