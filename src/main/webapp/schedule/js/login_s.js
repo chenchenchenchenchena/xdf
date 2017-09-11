@@ -21,9 +21,6 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
-    alert(localStorage.firstU2);
-    alert(localStorage.welCome
-    );
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.result==false){
             $('.card').show();
