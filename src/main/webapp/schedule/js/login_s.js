@@ -21,6 +21,8 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
+    alert(localStorage.firstU2);
+    alert(localStorage.welCome);
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.result==false){
             $('.card').show();
@@ -31,7 +33,6 @@ $(function(){
                     location.href = 'login_t.html'
                 }else{
                     if(!localStorage.firstU2){
-                        alert(0)
                         if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
@@ -62,6 +63,7 @@ $(function(){
                         localStorage.SId  =  e.sid;
                     })
                 }else{
+
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
