@@ -31,6 +31,7 @@ $(function(){
                     location.href = 'login_t.html'
                 }else{
                     if(!localStorage.firstU2){
+                        alert(0)
                         if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
@@ -59,7 +60,6 @@ $(function(){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
                         localStorage.SId  =  e.sid;
-
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
@@ -76,8 +76,6 @@ $(function(){
                 ajax_S(url.s_bind,stumore,function(e){
                     if(e.data==undefined){
                         layer.msg(e.message);
-                        $('.deterAss').html('立即关联');
-                        $('.deterAss').css('background','#00ba97');
                         if(sessionStorage.signal){
                             location.href = 'login_stu.html'
                         }else{
@@ -85,11 +83,6 @@ $(function(){
                         }
                     }else{
                         $('.true_last').css('background','#00ba97');
-                        sessionStorage.stuNum = $('.stunum').val();
-                        sessionStorage.stuNumber=$('.stunum').val();
-                        sessionStorage.studentName=$(".stname").val();
-                        sessionStorage.mobile=e.data.mobile;
-                        sessionStorage.schoolId=e.data.schoolId;
                         layer.msg('绑定成功');
                         $('.deterAss').hide();
                     }
