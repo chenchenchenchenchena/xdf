@@ -34,16 +34,18 @@ $(function () {
         localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
         // $('.tab-title,.main-content,.no-data').hide();
         // var testState = $('.main-content').attr('testState');
-        window.location.href = "sharedrankingE.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
+        var testState = 1;
+        var checkedTypeName = "入门测";
+        window.location.href = "sharedrankingE_t.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
     });
     // 全选
     var checkAll = true;//默认全选
     $(document).on('touchstart','#check-all',function () {
         if(checkAll){
-            $('.ranklibe li .check-box').addClass('checked');
+            $('.ranklibe .tr .check-box').addClass('checked');
             checkAll = false;
         }else{
-            $('.ranklibe li .check-box').removeClass('checked');
+            $('.ranklibe .tr  .check-box').removeClass('checked');
             checkAll = true;
         }
     });
