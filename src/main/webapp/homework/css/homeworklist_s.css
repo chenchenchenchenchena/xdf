@@ -424,6 +424,7 @@ html body .tealist_s .more_so{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	margin-right:38px;
+	text-align: right;
 }
 .time_S i{
 	font-style:normal;
