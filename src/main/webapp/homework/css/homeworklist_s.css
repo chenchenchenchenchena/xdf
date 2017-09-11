@@ -680,3 +680,10 @@ html body .esc_s{
 i{
 	font-style: normal;
 }
+.content_s i{
+	float: right;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 397px;
+}
