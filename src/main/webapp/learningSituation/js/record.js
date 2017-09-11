@@ -40,6 +40,10 @@ $(function () {
             	layer.msg("该班级已结课");
             	return false;
             }
+			for (var i = 0; i < e.studycase_grade_type.length; i++) {
+				var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li><span style=display:none class=typeCode>" +  e.studycase_grade_type[i].tCode + "</span>";
+				$(".scoreType ul").append(str2);
+			}
 			if(e.Data!=undefined&&e.Data.length>0){
 				for (var i = 0; i < e.Data.length; i++) {
 					var sMouth=e.Data[i].beginDate.split(" ")[0].split("-")[1];
@@ -50,10 +54,6 @@ $(function () {
 					$(".chooseClass ul").append(str);
 				}
 			}
-			for (var i = 0; i < e.studycase_grade_type.length; i++) {
-                var str2 = "<li>" + e.studycase_grade_type[i].tName + "</li><span style=display:none class=typeCode>" +  e.studycase_grade_type[i].tCode + "</span>";
-                $(".scoreType ul").append(str2);
-            }
         }else{
             layer.close(firstLoad);
         }
