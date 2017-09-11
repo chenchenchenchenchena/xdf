@@ -194,7 +194,11 @@ $(function(){
 						}else{
 							score = item.score+"分";
 						}
-						hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><!--<i class="dian">电子</i>--><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
+						if(item.homeworkType=="1"){
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
+						}else{
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
+						}
 					});
 					//红点显示判断
 					// if (replay==1&&items.readStatus==0){
