@@ -164,28 +164,28 @@ $(function () {
     $(".searchE span").click(function () {
         $(".list").eq($(this).index()).toggle();
     })
-    $(document).on("click",".listOne li",function () {
+    $(document).on("touchstart",".listOne li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(0).html($(this).html());
         $(".searchE span").eq(0).css("color","#000");
     })
-    $(document).on("click",".listTwo li",function () {
+    $(document).on("touchstart",".listTwo li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(1).html($(this).html());
         $(".searchE span").eq(1).css("color","#000");
     })
-    $(document).on("click",".listThree li",function () {
+    $(document).on("touchstart",".listThree li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(2).html($(this).html());
         $(".searchE span").eq(2).css("color","#000");
     })
-    $(document).on("click",".listFour li",function () {
+    $(document).on("touchstart",".listFour li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(3).html($(this).html());
         $(".searchE span").eq(3).css("color","#000");
     })
     //选择作业内容
-    $(document).on("click",".searchCon img",function () {
+    $(document).on("touchstart",".searchCon img",function () {
         if($(this).attr("src")=="images/yu.png"){
             $(this).attr("src","images/yu2.png");
         }else{
