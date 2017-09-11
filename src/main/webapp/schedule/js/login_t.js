@@ -1,6 +1,5 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
-sessionStorage.openid = 'abcdfg'
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };

@@ -8,6 +8,7 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
+    alert(sessionStorage.openid);
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -20,6 +21,8 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
+    alert(localStorage.firstU2);
+    alert(localStorage.welCome);
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.result==false){
             $('.card').show();
@@ -58,9 +61,9 @@ $(function(){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
                         localStorage.SId  =  e.sid;
-
                     })
                 }else{
+
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
@@ -75,8 +78,6 @@ $(function(){
                 ajax_S(url.s_bind,stumore,function(e){
                     if(e.data==undefined){
                         layer.msg(e.message);
-                        $('.deterAss').html('立即关联');
-                        $('.deterAss').css('background','#00ba97');
                         if(sessionStorage.signal){
                             location.href = 'login_stu.html'
                         }else{
@@ -84,11 +85,6 @@ $(function(){
                         }
                     }else{
                         $('.true_last').css('background','#00ba97');
-                        sessionStorage.stuNum = $('.stunum').val();
-                        sessionStorage.stuNumber=$('.stunum').val();
-                        sessionStorage.studentName=$(".stname").val();
-                        sessionStorage.mobile=e.data.mobile;
-                        sessionStorage.schoolId=e.data.schoolId;
                         layer.msg('绑定成功');
                         $('.deterAss').hide();
                     }
