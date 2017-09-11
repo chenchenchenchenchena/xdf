@@ -29,18 +29,18 @@ $(function(){
                 if(daTa.data!='goE2'&&daTa.result!=false){
                     location.href = 'login_t.html'
                 }else{
-                    if(!sessionStorage.firstU2){
-                        if(!sessionStorage.welCome){
+                    if(!localStorage.firstU2){
+                        if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
-                            sessionStorage.removeItem('welCome');
+                            // sessionStorage.removeItem('welCome');
                             ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                                sessionStorage.firstU2 = '1';
+                                localStorage.firstU2 = '1';
                                 location.href = e.url;
                             });
                         }
                     }else{
-                        sessionStorage.removeItem('firstU2');
+                        // sessionStorage.removeItem('firstU2');
                         ajax_S(url.t_stulas,calbac,function(e){
                             localStorage.userId_stu = e.data.userId;
                             localStorage.Phonenum = e.data.mobile;
@@ -52,8 +52,8 @@ $(function(){
         }else{
             if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
                 //进行过u2登录
-                if( sessionStorage.firstU2 ){
-                    sessionStorage.removeItem('firstU2');
+                if( localStorage.firstU2 ){
+                    // sessionStorage.removeItem('firstU2');
                     ajax_S(url.t_stulas,calbac,function(e){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
@@ -61,7 +61,7 @@ $(function(){
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                        sessionStorage.firstU2 = '1';
+                        localStorage.firstU2 = '1';
                         location.href = e.url;
                         var time_ = new Date().format("yyyy-MM-dd");
                         location.useridTime =getNewDay(time_,10)
@@ -100,6 +100,7 @@ $(function(){
                 $('.stuInfo li').eq(0).html('关联结果：');
                 $('.studentTitle').hide();
                 $('.inputBox').hide();
+                $('.enter').hide();
                 $('.search').css('margin-top','.2rem')
             }else{
                 //手机号+姓名查询
@@ -119,6 +120,7 @@ $(function(){
                     $('.Relation').html('确认关联')
 
                 }
+                $('.enter').hide()
             }
         }
     });
