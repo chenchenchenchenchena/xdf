@@ -62,6 +62,7 @@ var url = {
     's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
     'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
     't_logi': url_o+'logout/doLogout.do',//退出登录
+    'u_loout':url_o+'u2Login/doLogout.do', //u2退出登录
     't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
     't_bckt':url_o2+'/xdfdthome/schedule/login_stu.html', //回调地址
     't_data': url_o+'teacherData/queryCourseRemind.do',  //老师课表提醒
@@ -118,7 +119,8 @@ var homework_s = {
     's_hwcommit': url_o+'studentHWork/commitHomework.do',//学生作业排名
     's_readstatus': url_o+'studentHWork/updateStuReadstatus.do',//学生端完成作业的学生阅读状态
     's_fileRank': url_o+'upload/viewAllFileDetails.do',//集合方式获取云盘信息
-    's_uploadFiles': url_o+'upload/uploadFileByBase64.do'//文件上传接口
+    's_uploadFiles': url_o+'upload/uploadFileByBase64.do',//文件上传接口
+    's_hw_report': url_o+'studentHWork/querySdtworkStatement.do'//学生作业报告
 
 };
 function wechatCode(url) {
