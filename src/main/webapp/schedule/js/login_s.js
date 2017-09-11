@@ -8,6 +8,7 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
+    alert(sessionStorage.openid);
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -20,6 +21,8 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
+    alert(localStorage.firstU2);
+    alert(localStorage.welCome);
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.result==false){
             $('.card').show();
@@ -60,6 +63,7 @@ $(function(){
                         localStorage.SId  =  e.sid;
                     })
                 }else{
+
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
@@ -69,9 +73,24 @@ $(function(){
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
-            if(e.data.userid!=localStorage.userId_stu){
-                alert(e.data.userid);
-                alert(localStorage.userId_stu);
+            if(e.data.userid==''){
+                var stumore  = {'StudentCode':e.data.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
+                ajax_S(url.s_bind,stumore,function(e){
+                    if(e.data==undefined){
+                        layer.msg(e.message);
+                        if(sessionStorage.signal){
+                            location.href = 'login_stu.html'
+                        }else{
+                            location.href = 'login_s.html'
+                        }
+                    }else{
+                        $('.true_last').css('background','#00ba97');
+                        layer.msg('绑定成功');
+                        $('.deterAss').hide();
+                    }
+                })
+            }
+            if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''){
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
