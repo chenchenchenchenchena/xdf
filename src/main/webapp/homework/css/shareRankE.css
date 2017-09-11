@@ -31,6 +31,10 @@
     display: inline-block;
     text-align: center;
 }
+.ranklibe li span:nth-child(2){
+    width:52px;
+    text-align: center;
+}
 .ranklibe li span:nth-child(3) i{
     display: inline-block;
     width:80px;
@@ -43,16 +47,24 @@
 }
 .ranklibe .name{
     width: 200px;
-    margin: 0 84px 0 30px;
+    margin: 0 76px 0 30px;
 }
 .ranklibe .useTime{
+    width:66px;
+    text-align: center;
     margin-right: 82px;
+}
+.ranklibe .stuScore{
+    width: 55px;
+    text-align: center;
 }
 .ranklibe .nameLeft{
     margin: 0 32px 0 30px;
 }
 .ranklibe .stuTime{
-    margin: 0 82px 0 90px;
+    width:90px;
+    text-align: center;
+    margin: 0 73px 0 53px;
 }
 .shareBtn{
     width:100%;
