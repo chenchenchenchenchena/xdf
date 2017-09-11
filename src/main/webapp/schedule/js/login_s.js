@@ -8,7 +8,6 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
-    alert(sessionStorage.openid);
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -21,9 +20,6 @@ $(function(){
     };
     var teacherlogin=true;
     //学生是否绑定
-    alert(localStorage.firstU2);
-    alert(localStorage.welCome
-    );
     ajax_S(url.s_seac,WXnum,function(e){
         if(e.result==false){
             $('.card').show();
@@ -249,7 +245,6 @@ $(function(){
             stumore.StudentCode = sessionStorage.stuNumber
         }
         // 关联点击
-        // alert($(this).html())
         // if($(this).html()=='立即关联'){
             ajax_S(url.s_bind,stumore,function(e){
                 if(e.data==undefined){
