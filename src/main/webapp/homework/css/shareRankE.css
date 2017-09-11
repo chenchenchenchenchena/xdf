@@ -1,0 +1,189 @@
+/*
+排行榜前*/
+.ranklibe{
+    width: 696px;
+    margin: 0 30px;
+    background: #ffffff;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -52px;
+    left: 0;
+    padding-top: 30px;
+}
+.ranklibe li{
+    height:80px;
+    line-height:80px;
+    font-size: 30px;
+    padding: 0 30px;
+    margin-bottom: 40px;
+}
+.ranklibe li:nth-child(1){
+    height:88px;
+    line-height:88px;
+    font-size: 26px;
+    color: #808080;
+    margin-bottom: 0;
+}
+.ranklibe span{
+    display: inline-block;
+    width:98px;
+    text-align: center;
+}
+.ranklibe li span:nth-child(3) i{
+    display: inline-block;
+    width:80px;
+    height:80px;
+    line-height: 80px;
+    text-align: center;
+    border-radius: 50%;
+    background:#ffbb37;
+    color: #fff;
+}
+.ranklibe .name{
+    width: 200px;
+}
+.shareBtn{
+    width:100%;
+    height:100px;
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+}
+.shareBtn button{
+    width: 300px;
+    height:80px;
+    margin: 10px 225px 0;
+    background: #00ba97;
+    font-size:30px;
+    color: #fff;
+    text-align: center;
+    line-height:80px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+/*
+排行榜后*/
+.ranklist-box{
+    width:100%;
+    background: #f1f1f1;
+    position: relative;
+}
+.rankli{
+    width: 696px;
+    margin: 0 30px;
+    background: #ffffff;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -52px;
+    left: 0;
+    padding-top: 30px;
+}
+.rankli li{
+    height: 80px;
+    /* border-bottom: 1px solid #e1e1e1; */
+    line-height: 80px;
+    padding: 10px 0 30px;
+}
+i{
+    font-style: normal;
+    display: inline-block;
+}
+.rankleft{
+    font-size: 30px;
+    float: left;
+}
+.rankleft>i:nth-child(1){
+    color: #808080;
+    width: 66px;
+    height: 74px;
+    margin-left: 44px;
+    vertical-align: middle;
+}
+.rankfirst{
+    background: url("../../learningSituation/images/theFirstIcon.png") left center no-repeat;
+}
+.nofirst{
+    color:#808080;
+    text-align: center;
+}
+.rankleft>i:nth-child(2){
+    height: 80px;
+    width: 80px;
+    background: #ffbc1f;
+    color: #fff;
+    line-height: 80px;
+    /*border-radius: 50%;*/
+    border-radius: 40px;
+    text-align: center;
+    margin: 0 32px 0 20px;
+    vertical-align: middle;
+    font-size: 28px;
+}
+.rankright{
+    font-size: 30px;
+    float: right;
+    color: #333333;
+    margin-right: 34px;
+}
+.rankright>i:nth-child(1){
+    margin-right: 24px;
+    font-size: 26px;
+    color: #808080;
+    width: 137px;
+    text-align: left;
+    /* padding-left: 10px;*/
+}
+.rankright>i:nth-child(2){
+    width:90px;
+}
+canvas{
+    position: absolute;
+    bottom:0;
+    left:0;
+    z-index: -1;
+}
+#imgs>img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 10;
+}
+.check-box{
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url("../images/check2.png") left center no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+}
+.checked{
+    background: url("../images/check1.png") left center no-repeat;
+    background-size: 26px 26px;
+}
+.rankli .rankT{
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+}
+.rankli .rankT span{
+    display: inline-block;
+    margin:0 68px 0 53px;
+    font-size: 26px;
+    color: #808080;
+}
+.rankli .rankT .rTime{
+    margin: 0 43px 0 76px;
+}
+.check-box{
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url("../images/check2.png") left center no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+}
+.checked{
+    background: url("../images/check1.png") left center no-repeat;
+    background-size: 26px 26px;
+}
