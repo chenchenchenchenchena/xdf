@@ -104,6 +104,7 @@ body{
     float: left;
     color: #02bb98;
     margin-right: 30px;
+    font-size: 22px;
 }
 .searchCon h3{
     font-size:32px;
@@ -131,7 +132,7 @@ body{
     border-radius: 10px;
 }
 .eSub,.tSub{
-    margin-top: 600px;
+    margin-top: 711px;
 }
 .gBth{
     position: fixed;
