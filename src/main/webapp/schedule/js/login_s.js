@@ -58,6 +58,7 @@ $(function(){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
                         localStorage.SId  =  e.sid;
+
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
@@ -69,6 +70,39 @@ $(function(){
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
+            if(e.data.userid==''){
+                var stumore  = {'StudentCode':e.data.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
+                ajax_S(url.s_bind,stumore,function(e){
+                    if(e.data==undefined){
+                        layer.msg(e.message);
+                        // clear();
+                        $('.deterAss').html('立即关联');
+                        $('.deterAss').css('background','#00ba97');
+                        if(sessionStorage.signal){
+                            location.href = 'login_stu.html'
+                        }else{
+                            location.href = 'login_s.html'
+                        }
+
+                        // location.reload()
+                    }else{
+                        $('.true_last').css('background','#00ba97');
+                        sessionStorage.stuNum = $('.stunum').val();
+                        sessionStorage.stuNumber=$('.stunum').val();
+                        sessionStorage.studentName=$(".stname").val();
+                        sessionStorage.mobile=e.data.mobile;
+                        sessionStorage.schoolId=e.data.schoolId;
+                        layer.msg('绑定成功');
+                        if(sessionStorage.studayCanfig=='studay'){
+                            location.href = '../learningSituation/report_t.html';
+                            sessionStorage.removeItem('studayCanfig')
+                        }else{
+                            location.href = 'schedule_s.html';
+                        }
+                        $('.deterAss').hide();
+                    }
+                })
+            }
             if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''){
                 alert(e.data.userid);
                 alert(localStorage.userId_stu);
