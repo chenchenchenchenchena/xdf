@@ -8,7 +8,6 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
-    alert(sessionStorage.openid);
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -246,7 +245,6 @@ $(function(){
             stumore.StudentCode = sessionStorage.stuNumber
         }
         // 关联点击
-        // alert($(this).html())
         // if($(this).html()=='立即关联'){
             ajax_S(url.s_bind,stumore,function(e){
                 if(e.data==undefined){

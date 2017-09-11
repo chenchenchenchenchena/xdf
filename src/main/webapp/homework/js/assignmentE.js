@@ -162,7 +162,7 @@ $(function () {
     })
     //列表显示
     $(".searchE span").click(function () {
-        $(".list").eq($(this).index()).toggle();
+        $(".list").eq($(this).index()).toggle().siblings().hide();
     })
     $(document).on("touchstart",".listOne li",function () {
         $(this).addClass("active").siblings().removeClass("active");
