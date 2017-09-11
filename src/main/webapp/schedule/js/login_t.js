@@ -48,12 +48,19 @@ function teac(e){
     if(e.result==false){
         ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
     }else{
+        var Email_val = '';
         // var teaname = jQuery.parseJSON(e.data);
+        if(e.email!=''){
+            Email_val = e.email
+        }
+        else if(e.userId.indexOf('@')!=-1){
+            Email_val = e.userid;
+        }
         $('.name_s').html(e.userName);
-        $('.name_ema').html(e.userId);
-        localStorage.terEmail = e.userId;
+        $('.name_ema').html(Email_val);
+        localStorage.terEmail = Email_val;
         localStorage.sid = e.sid;
-        bindingtea0['email'] ='lichen40@xdf.cn';
+        bindingtea0['email'] = Email_val;
         bindingtea0['wechatId'] = sessionStorage.openid;
         bindingtea0['nickName'] = encodeURIComponent(encodeURIComponent(sessionStorage.nickname));
         bindingtea0['headImg'] = sessionStorage.headimgurl;
