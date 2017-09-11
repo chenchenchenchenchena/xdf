@@ -23,11 +23,11 @@ $(function () {
     var checkStuArry = [];// 传递选中学生号
     $(document).on('touchstart','.shareBtn',function () {
         checkStuArry = [];
-        if($('.ranklibe li .tr.check-box.checked').length<=0){
+        if($('.ranklibe .tr .check-box.checked').length<=0){
             layer.msg("请选择要分享的学员");
             return ;
         }
-        $('.ranklibe li .tr.check-box.checked').each(function () {
+        $('.ranklibe .tr .check-box.checked').each(function () {
             checkStuArry.push($(this).attr('data-stuNo'));
             console.log(checkStuArry);
         });
