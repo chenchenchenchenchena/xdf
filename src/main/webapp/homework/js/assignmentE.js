@@ -14,16 +14,16 @@ $(function () {
     };
     var layer1, layer2, loading;
     //作业内容
-    if (sessionStorage.contentName) {
+    if(sessionStorage.contentName){
         $(".content_s").find("i").html(sessionStorage.contentName);
     }
-    if (sessionStorage.time) {
+    if(sessionStorage.time){
         $('.time_S i').html(sessionStorage.time);
-    } else {
+    }else{
         //设置当天默认值
         $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     }
-    if (sessionStorage.class) {
+    if(sessionStorage.class){
         $(".class_s i").html(sessionStorage.class);
     }
     if (sessionStorage.hxCode) {
@@ -125,7 +125,7 @@ $(function () {
     })
     //点击提交
     $(".tSub").click(function () {
-        if ($(".class_s i").html() == "") {
+        if($(".class_s i").html()==""){
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -136,7 +136,7 @@ $(function () {
                 content: $(".classEmpty")
             })
         }
-        if ($(".content_s i").html() == "") {
+        if($(".content_s i").html()==""){
             layer.open({
                 type: 1,
                 area: ['312px', '194px'],
@@ -147,7 +147,7 @@ $(function () {
                 content: $(".classTime")
             })
         }
-        if ($(".content_s i").html() != "" && $(".class_s i").html() != "" && $(".time_S i").html() != "") {
+        if($(".content_s i").html()!=""&&$(".class_s i").html()!=""&&$(".time_S i").html()!=""){
             sessionStorage.removeItem("contentName");
             sessionStorage.removeItem("time");
             sessionStorage.removeItem("class");
@@ -172,55 +172,162 @@ $(function () {
     $(".searchE span").click(function () {
         $(".list").eq($(this).index()).toggle().siblings().hide();
     })
-    $(document).on("touchstart", ".listOne li", function () {
+    $(document).on("touchstart",".listOne li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(0).html($(this).html());
-        $(".searchE span").eq(0).css("color", "#000");
+        $(".searchE span").eq(0).css("color","#000");
     })
-    $(document).on("touchstart", ".listTwo li", function () {
+    $(document).on("touchstart",".listTwo li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(1).html($(this).html());
-        $(".searchE span").eq(1).css("color", "#000");
+        $(".searchE span").eq(1).css("color","#000");
     })
-    $(document).on("touchstart", ".listThree li", function () {
+    $(document).on("touchstart",".listThree li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(2).html($(this).html());
-        $(".searchE span").eq(2).css("color", "#000");
+        $(".searchE span").eq(2).css("color","#000");
     })
-    $(document).on("touchstart", ".listFour li", function () {
+    $(document).on("touchstart",".listFour li",function () {
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(3).html($(this).html());
-        $(".searchE span").eq(3).css("color", "#000");
+        $(".searchE span").eq(3).css("color","#000");
     })
     //选择作业内容
-    $(document).on("touchstart", ".searchCon img", function () {
-        if ($(this).attr("src") == "images/yu.png") {
-            $(this).attr("src", "images/yu2.png");
-        } else {
-            $(this).attr("src", "images/yu.png");
+    $(document).on("touchstart",".searchCon img",function () {
+        if($(this).attr("src")=="images/yu.png"){
+            $(this).attr("src","images/yu2.png");
+        }else{
+            $(this).attr("src","images/yu.png");
         }
     })
     //点击筛选作业内容按钮
     $(".eBtn").click(function () {
-        var checkNum = 0;
-        var contentName = "";
-        for (var i = 0; i < $(".searchCon li").length; i++) {
-            if ($(".searchCon li").eq(i).find("img").attr("src") == "images/yu2.png") {
-                contentName += $(".searchCon li").eq(i).find("h3").html() + ";";
+        var checkNum=0;
+        var contentName="";
+        for(var i=0;i<$(".searchCon li").length;i++){
+            if($(".searchCon li").eq(i).find("img").attr("src")=="images/yu2.png"){
+                contentName+=$(".searchCon li").eq(i).find("h3").html()+";";
                 checkNum++;
             }
         }
         contentName = contentName.substring(0, contentName.length - 1);
         console.log(contentName);
         console.log(checkNum);
-        if (checkNum == 0) {
+        if(checkNum==0){
             layer.msg("请选择作业内容");
-        } else {
-            sessionStorage.contentName = contentName;
+        }else{
+            sessionStorage.contentName=contentName;
             console.log(sessionStorage.contentName);
-            location.href = "AssignmentE.html";
+           location.href="AssignmentE.html";
         }
     })
+    //作业汇总
+    var summaryData={"Tcid":/*"be0a11d4dde94b2a98c3b4d066baf9f1"*/sessionStorage.Tid}
+    ajax_S(homework_s.t_summary,summaryData,summaryAjax);
+    function summaryAjax(e) {
+        console.log(e);
+        if(e.code=="200"){
+            var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span></dt><dd>完成量(人)</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时(min)</dd></dl>';
+            $(".gHeader").append(recordNum);
+           for(var i=0;i<e.data.data.commitArr.length;i++){
+               var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
+               $("tbody").append(table);
+           }
+            for(var i=0;i<e.data.data.nocommitArr.length;i++){
+                var nocommit='<li><span>'+e.data.data.nocommitArr[i].studentName+'</span><span studentNo='+e.data.data.nocommitArr[i].studentNo+'>'+e.data.data.nocommitArr[i].studentName+'</span></li>';
+                $(".noHw ul").append(nocommit);
+                name();
+            }
+
+        }
+    }
+    //截取名字的长度
+    function name() {
+        var reNz=/^S{2}[0-9]{4}$/;
+        var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
+        var re=/^[a-zA-Z]+$/;
+        var reZ=/^[\u4e00-\u9fa5]+$/;
+        for(var j=0;j<$(".noHw li").length;j++){
+            var ddStr = $(".noHw li").eq(j).find("span").eq(1);
+            var dtStr = $(".noHw li").eq(j).find("span").eq(0);
+            var ddstrLen = lenStat(ddStr);
+            if(re.test(ddStr.html())){
+                if(lenStat(ddStr) >= 5){
+                    if(lenStat(ddStr) >8){
+                        ddStr.css("font-size", "20px");
+                        ddStr.css("margin-top", "23px");
+                    }
+                    dtStr.html(ddStr.html().substr(- 4, 4));
+                }else{
+                    dtStr.html(ddStr.html());
+                }
+
+            }else if(reZ.test(ddStr.html())){
+                if(lenStat(ddStr) >= 5){
+                    if(lenStat(ddStr) > 8){
+                        ddStr.css("font-size", "17px");
+                        ddStr.css("margin-top", "23px");
+                    }
+                    dtStr.html(ddStr.html().substr(- 2, 2));
+                }else{
+                    dtStr.html(ddStr.html());
+                }
+
+            }else{
+                if(reZ.test(ddStr.html().substr(-1, 1))){
+                    if(reZ.test(ddStr.html().substr(-2, 1))){
+                        dtStr.html(ddStr.html().substr(-2, 2));
+                    }else{
+                        dtStr.html(ddStr.html().substr(-3, 3));
+                    }
+                    if(lenStat(ddStr) > 8){
+                        ddStr.css("font-size", "17px");
+                        ddStr.css("margin-top", "23px");
+                    }
+                }else{
+                    if(re.test(ddStr.html().substr(-1, 1))){
+                        if(re.test(ddStr.html().substr(-2, 1))){
+                            if(re.test(ddStr.html().substr(-3, 1))){
+                                if(re.test(ddStr.html().substr(-4, 1))){
+                                    dtStr.html(ddStr.html().substr(-4, 4));
+                                }else{
+                                    dtStr.html(ddStr.html().substr(-3, 3));
+                                }
+                            }else{
+                                dtStr.html(ddStr.html().substr(-3, 3));
+                            }
+                        }else{
+                            dtStr.html(ddStr.html().substr(-2, 2));
+                        }
+                    }
+                    if(lenStat(ddStr) > 8){
+                        ddStr.css("font-size", "17px");
+                        ddStr.css("margin-top", "23px");
+                    }
+                }
+            }
+
+        }
+    }
+    //判断中文长度
+    function isChinese(str) {  //判断是不是中文
+        var reCh = /[u00-uff]/;
+        return !reCh.test(str);
+    }
+    function lenStat(target) {
+        var strlen = 0; //初始定义长度为0
+        var txtval = $.trim(target.html());
+        for (var i = 0; i < txtval.length; i++) {
+            if (isChinese(txtval.charAt(i)) == true) {
+                strlen = strlen + 2;//中文为2个字符
+            } else {
+                strlen = strlen + 1;//英文一个字符
+            }
+        }
+        /*strlen=Math.ceil(strlen/2);*///中英文相加除2取整数
+        return strlen;
+    }
+
 
     /**
      * 提交布置作业
