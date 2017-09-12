@@ -227,7 +227,7 @@ $(function () {
     function summaryAjax(e) {
         console.log(e);
         if(e.code=="200"){
-            var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span></dt><dd>完成量(人)</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时(min)</dd></dl>';
+            var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
             $(".gHeader").append(recordNum);
            for(var i=0;i<e.data.data.commitArr.length;i++){
                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
@@ -241,6 +241,9 @@ $(function () {
 
         }
     }
+    $(".gBth").click(function () {
+        location.href='rankinglistE_t.html';
+    })
     //截取名字的长度
     function name() {
         var reNz=/^S{2}[0-9]{4}$/;
