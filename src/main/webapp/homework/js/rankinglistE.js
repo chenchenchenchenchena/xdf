@@ -42,10 +42,10 @@ $(function () {
     var checkAll = true;//默认全选
     $(document).on('touchstart', '#check-all', function () {
         if (checkAll) {
-            $('.ranklibe .tr .check-box').addClass('checked');
+            $('.ranklibe .check-box').addClass('checked');
             checkAll = false;
         } else {
-            $('.ranklibe .tr  .check-box').removeClass('checked');
+            $('.ranklibe .check-box').removeClass('checked');
             checkAll = true;
         }
     });
@@ -54,11 +54,11 @@ $(function () {
         $(this).find('.check-box').toggleClass('checked');
         if (!$(this).find('.check-box').hasClass('checked')) {
             //点击后没有勾选的情况
-            $('#check-all').removeClass('checked');
+            $('#check-all .check-box').removeClass('checked');
             checkAll = true;
         } else {
             if ($('.ranklibe .tr .check-box.checked').length == $('.ranklibe .tr .check-box').length) {
-                $('#check-all').addClass('checked');
+                $('#check-all .check-box').addClass('checked');
                 checkAll = false;
             }
         }
