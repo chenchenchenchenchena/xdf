@@ -1,13 +1,13 @@
 $(function(){
     /* 测试 */
 
-    if(!sessionStorage.openid){
-        sessionStorage.openid = 'abcd123'
-    }
-
     // if(!sessionStorage.openid){
-    //     wechatCode(location.href)
+    //     sessionStorage.openid = 'abcd123'
     // }
+
+    if(!sessionStorage.openid){
+        wechatCode(location.href)
+    }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -349,7 +349,7 @@ $(function(){
         }else{
             var stunum  = $('.stu_num').eq($(this).parent().index()-1).text();
             var stumore = {'StudentCode':stunum,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
-            ajax_S(url.s_nobd,stumore,telbind)
+            ajax_S(url.s_nobd,stumore,telbind);
             $(this).html('确认关联')
         }
 
@@ -357,6 +357,7 @@ $(function(){
 
     //校区相关
     $(".select p").click(function(e){
+        if(sessionStorage.signal){return false;}
         $(".select").toggleClass('open');
         e.stopPropagation();
     });

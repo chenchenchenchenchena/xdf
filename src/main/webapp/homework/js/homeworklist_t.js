@@ -15,11 +15,8 @@ $(function(){
                 location.href = 'homeworklist_s.html';
             }else{
                 sessionStorage.homeCanfig=='home'
-                if(sessionStorage.signal){
-                    location.href = '../schedule/login_stu.html'
-                }else{
                     location.href = '../schedule/login_s.html'
-                }
+
             }
         });
     }
