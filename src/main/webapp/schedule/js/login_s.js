@@ -263,7 +263,7 @@ $(function(){
                         location.href = '../learningSituation/report_t.html';
                         sessionStorage.removeItem('studayCanfig')
                     }else{
-                        // location.href = 'schedule_s.html';
+                        location.href = 'schedule_s.html';
                     }
                     $('.deterAss').hide();
                 }
@@ -332,11 +332,6 @@ $(function(){
             // layer.msg('关联成功')
             $('.deterAss').html('解除关联');
             $('.deterAss').css('background','#fc1010');
-            if(sessionStorage.signal){
-                location.href = 'login_stu.html'
-            }else{
-                location.href = 'login_s.html'
-            }
             clear();
         }else{
             layer.msg('绑定成功');
