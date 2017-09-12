@@ -57,7 +57,12 @@ $(function(){
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
 		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
 		localStorage.classcode = $(this).attr('data-classcode') ;//班级code
-		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+		if($(this).find(".hwLeft span").html()=="电子"){
+			window.location.href = $(this).attr('data-url');
+		}else{
+			window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+		}
+
 	});
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
@@ -70,16 +75,32 @@ $(function(){
 		var curIndex = $(this).parents('.firstList').index();
 		var classIndex = $(this).index();
 		var id = $(this).attr('data-id');
+		if($(this).find(".dian").html()=="电子"){
+			window.location.href=$(this).attr("data-url");
+		}else{
+			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
+				if(msg.code==200){
+					console.log("阅读成功！"+msg.msg);
+				}else{
+					console.log("阅读失败！"+msg.msg);
+				}
+
+				window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
+
+			});
+		}
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
-		ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
+		/*ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
 			if(msg.code==200){
 				console.log("阅读成功！"+msg.msg);
 			}else{
 				console.log("阅读失败！"+msg.msg);
 			}
+
 			window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
-		});
+
+		});*/
 
 	});
 
@@ -95,6 +116,8 @@ $(function(){
 					var classTitle = item.className;
 					//作业类型
 					var homeworkType=item.homeworkType;
+					//paperurl
+					var paperurl=item.paperUrl;
 					//课程名称显示控制
 					if (item.className.length>11){
 						classTitle = item.className.substr(0,10)+'...';
@@ -132,7 +155,7 @@ $(function(){
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}else{
-						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
 							+'<div class="hwLeft">'+item.courseName+'<span>电子</span></div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
@@ -197,7 +220,7 @@ $(function(){
 						if(item.homeworkType=="1"){
 							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
 						}else{
-							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-url="http://tps.staff.xdf.cn/gwots/weixin/otstest/home/entrance?loginType=ns&clientType=mobile"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="fr">'+score+'</span></li>';
 						}
 					});
 					//红点显示判断

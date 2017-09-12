@@ -215,33 +215,42 @@ subject*/
 }*/
 /*作业汇总*/
 .gHeader{
-    height: 210px;
-    background: #60d0bb;
-    padding: 50px 0 40px 0;
+    height: 192px;
+    background: #fff;
 }
 .gHeader dl{
     float: left;
-    width:49.9%;
-
+    width:330px;
+    height:136px;
+    margin:30px 0 0 30px;
+    border-radius: 10px;
 }
 .gHeader>dl:nth-child(1){
-    border-right: 1px solid #fff;
+    background: url("../images/person.png") no-repeat 30px 42px #7fdccb;
+}
+.gHeader>dl:nth-child(2){
+    background: url("../images/clock.png") no-repeat 30px 42px #7fdccb;
+}
+.gHeader>dl:nth-child(2) dt{
+    font-size:36px;
+}
+.gHeader>dl:nth-child(1) dt{
+    font-size: 30px;
 }
 .gHeader dt{
-    width:152px;
-    height:152px;
-    border-radius: 50%;
-    border:6px solid #fff;
     color: #fff;
-    font-size:40px;
-    line-height:164px;
-    text-align: center;
-    margin: 0 auto 20px;
+    margin: 26px 0 0px 180px;
+}
+.gHeader dt span:nth-child(1){
+    font-size: 38px;
+}
+.gHeader dt span:nth-child(2){
+    font-size: 26px;
 }
 .gHeader dd{
-    font-size:28px;
+    font-size:26px;
     color: #fff;
-    text-align: center;
+    margin-left: 180px;
 }
 .gray{
     height:20px;
