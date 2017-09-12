@@ -1,8 +1,8 @@
 $(function(){
     // //登录相关
-   /* if(!sessionStorage.openid){
+    if(!sessionStorage.openid){
         wechatCode(location.href);
-    };*/
+    };
     if(!localStorage.terEmail){
         var WXnum  = {
             'wechatId':sessionStorage.openid
@@ -15,7 +15,7 @@ $(function(){
                 location.href = 'homeworklist_s.html';
             }else{
                 sessionStorage.homeCanfig=='home'
-                    location.href = '../schedule/login_s.html'
+                location.href = '../schedule/login_s.html'
 
             }
         });

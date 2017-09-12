@@ -168,30 +168,30 @@ $(function () {
     $(".areyok input").eq(1).click(function () {
         submit();
     });
-    //列表显示
-    $(".searchE span").click(function () {
-        $(".list").eq($(this).index()).toggle().siblings().hide();
-    })
-    $(document).on("touchstart",".listOne li",function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        $(".searchE span").eq(0).html($(this).html());
-        $(".searchE span").eq(0).css("color","#000");
-    })
-    $(document).on("touchstart",".listTwo li",function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        $(".searchE span").eq(1).html($(this).html());
-        $(".searchE span").eq(1).css("color","#000");
-    })
-    $(document).on("touchstart",".listThree li",function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        $(".searchE span").eq(2).html($(this).html());
-        $(".searchE span").eq(2).css("color","#000");
-    })
-    $(document).on("touchstart",".listFour li",function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        $(".searchE span").eq(3).html($(this).html());
-        $(".searchE span").eq(3).css("color","#000");
-    })
+    // //列表显示
+    // $(".searchE span").click(function () {
+    //     $(".list").eq($(this).index()).toggle().siblings().hide();
+    // })
+    // $(document).on("touchstart",".listOne li",function () {
+    //     $(this).addClass("active").siblings().removeClass("active");
+    //     $(".searchE span").eq(0).html($(this).html());
+    //     $(".searchE span").eq(0).css("color","#000");
+    // })
+    // $(document).on("touchstart",".listTwo li",function () {
+    //     $(this).addClass("active").siblings().removeClass("active");
+    //     $(".searchE span").eq(1).html($(this).html());
+    //     $(".searchE span").eq(1).css("color","#000");
+    // })
+    // $(document).on("touchstart",".listThree li",function () {
+    //     $(this).addClass("active").siblings().removeClass("active");
+    //     $(".searchE span").eq(2).html($(this).html());
+    //     $(".searchE span").eq(2).css("color","#000");
+    // })
+    // $(document).on("touchstart",".listFour li",function () {
+    //     $(this).addClass("active").siblings().removeClass("active");
+    //     $(".searchE span").eq(3).html($(this).html());
+    //     $(".searchE span").eq(3).css("color","#000");
+    // })
     //选择作业内容
     $(document).on("touchstart",".searchCon img",function () {
         if($(this).attr("src")=="images/yu.png"){
@@ -354,7 +354,7 @@ $(function () {
             'homeworkTime': $('.time_S i').html(),
             'knowledgePoint': "",
             'description': "",
-            'homeworkType': "",
+            'homeworkType': "2",
             'paperId': paperID,
             'paperName': paperName,
             'paperUrl': paperUrl,
@@ -383,4 +383,5 @@ $(function () {
             }
         })
     }
+
 });
