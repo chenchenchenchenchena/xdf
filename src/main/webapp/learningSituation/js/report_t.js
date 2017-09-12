@@ -10,6 +10,7 @@ $(function(){
                 if(e.result==true){
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
+                    sessionStorage.studentName = e.data.studentName;
                     location.href = 'report_s.html';
                 }else{
 
