@@ -114,8 +114,6 @@ $(function() {
             if (localStorage.terEmail) {
                 location.href = 'schedule_t.html';
                 sessionStorage.removeItem('callbackconfig')
-            }else if(sessionStorage.signal){
-                location.href = 'login_stu.html'
             }else{
                 location.href = 'login_s.html'
             }
@@ -124,11 +122,9 @@ $(function() {
             location.href = 'schedule_t.html';
             sessionStorage.removeItem('callbackconfig')
         } else {
-            if(sessionStorage.signal){
-                location.href = 'login_stu.html'
-            }else{
+
                 location.href = 'login_s.html'
-            }
+
         }
     }
 

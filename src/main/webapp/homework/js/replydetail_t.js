@@ -104,6 +104,9 @@ $(function () {
                     }*/
                 }
             }
+            if(arr.length==1){
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复<h4>得分:<i>'+e.data.score+'</i></h4></div></div>')
+            }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
             getHwFilesSucess(e);
         });
