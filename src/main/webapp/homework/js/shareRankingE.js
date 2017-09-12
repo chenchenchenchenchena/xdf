@@ -18,7 +18,7 @@ $(function () {
     //     $('.title_s p').eq(1).html(data.teacherName + '老师');
     //     $('.title_s p').eq(2).html('日期:' + data.homeworkTime);
     // });
-    takeScreenshot();
+   /* takeScreenshot();*/
 
 // 转化html页面为canvas图像
     function takeScreenshot() {

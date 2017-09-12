@@ -118,7 +118,7 @@ i{
     float: left;
 }
 .rankleft>i:nth-child(1){
-    color: #808080;
+    color: #000;
     width: 66px;
     height: 74px;
     margin-left: 44px;
@@ -151,9 +151,9 @@ i{
     margin-right: 34px;
 }
 .rankright>i:nth-child(1){
-    margin-right: 24px;
+    margin-right: 16px;
     font-size: 26px;
-    color: #808080;
+    color: #000;
     width: 137px;
     text-align: left;
     /* padding-left: 10px;*/
