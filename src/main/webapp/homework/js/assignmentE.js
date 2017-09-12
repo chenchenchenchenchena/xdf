@@ -168,7 +168,7 @@ $(function () {
     $(".areyok input").eq(1).click(function () {
         submit();
     });
-    // //列表显示
+    //列表显示
     // $(".searchE span").click(function () {
     //     $(".list").eq($(this).index()).toggle().siblings().hide();
     // })
