@@ -5,7 +5,6 @@ $(function(){
    if(!sessionStorage.openid){
         wechatCode(location.href)
     }
-    // sessionStorage.openid = '111';
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -17,7 +16,7 @@ $(function(){
             $('.enter').show();
             //判断老师是否绑定
             ajax_S(url.t_wxmo,WXnum,function(daTa){
-                if(daTa.data!='goE2'&&daTa.result!=false){
+                if(daTa.data!='goE2'&&daTa.result!=false&&e.result!=undefined){
                     location.href = 'login_t.html'
                 }else{
                     if(!sessionStorage.firstU2){
@@ -151,13 +150,6 @@ $(function(){
     })
     var wxnumber = {'email':'','wechatId':sessionStorage.openid}
 
-    //判断教师是否绑定
-    function Wxtea(e){
-        console.log(e);
-        if(e.data!='goE2'&&e.result!=false){
-            location.href = 'login_t.html'
-        }
-    }
     //查询校区
     function selectData(e) {
         console.log(e);
@@ -172,7 +164,7 @@ $(function(){
 
     //查询学生信息  学员号查询
     function stusea(e){
-        var num = /^\w+$/
+        var num = /^\w+$/;
         if($('.studentLogin input').val()==''){
             layer.msg('请先输入学员号');
             return false;
@@ -190,16 +182,16 @@ $(function(){
             sessionStorage.stuNumber = $('.studentLogin input').val();
             sessionStorage.schoolId = e.data.schoolId;
             if(e.data.relatedState=='0'){
-                $('.deterAss').html('立即关联')
+                $('.deterAss').html('立即关联');
                 $('.deterAss').css('background','#00ba97')
 
             }else{
-                $('.deterAss').html('解除关联')
+                $('.deterAss').html('解除关联');
                 $('.deterAss').css('background','#fc1010')
             }
 
         }else{
-            $('.search').hide()
+            $('.search').hide();
             $('.card').hide();
             $('.noSearch').show();
             layer.msg('没有查到相关信息');
@@ -211,7 +203,7 @@ $(function(){
             layer.msg(e.message);
             clear();
             $('.deterAss').html('立即关联');
-            $('.deterAss').css('background','#00ba97')
+            $('.deterAss').css('background','#00ba97');
             location.href = 'login_s.html'
 
             // location.reload()
@@ -321,7 +313,7 @@ $(function(){
             location.href = 'login_s.html'
             clear();
         }else if(e.result==false){
-            layer.msg(e.message)
+            layer.msg(e.message);
             // layer.msg('关联成功')
             $('.deterAss').html('解除关联');
             $('.deterAss').css('background','#fc1010')
