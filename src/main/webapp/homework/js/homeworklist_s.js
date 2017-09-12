@@ -57,7 +57,12 @@ $(function(){
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
 		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
 		localStorage.classcode = $(this).attr('data-classcode') ;//班级code
-		window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+		if($(this).find(".hwLeft span").html()=="电子"){
+			window.location.href = $(this).attr('data-url');
+		}else{
+			window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+		}
+
 	});
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
@@ -95,6 +100,8 @@ $(function(){
 					var classTitle = item.className;
 					//作业类型
 					var homeworkType=item.homeworkType;
+					//paperurl
+					var paperurl=item.paperUrl;
 					//课程名称显示控制
 					if (item.className.length>11){
 						classTitle = item.className.substr(0,10)+'...';
@@ -132,7 +139,7 @@ $(function(){
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}else{
-						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
 							+'<div class="hwLeft">'+item.courseName+'<span>电子</span></div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
