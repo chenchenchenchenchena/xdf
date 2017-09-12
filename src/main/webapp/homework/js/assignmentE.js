@@ -242,7 +242,7 @@ $(function () {
         }
     }
     $(".gBth").click(function () {
-        location.href='rankinglistE_t.html';
+        location.href='rankinglistE_t.html?tid='+sessionStorage.Tid;
     })
     //截取名字的长度
     function name() {
