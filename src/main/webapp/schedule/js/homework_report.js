@@ -31,9 +31,9 @@ $(function () {
         //获取学生所有已报班级的班级信息
         var classCodes = classCodeList.split(",");
         var data = {
-            classCode: classCodes,
-            schoolId: schoolId,
-            studentNo: studentNo
+            'classCode': classCodes,
+            'schoolId': schoolId,
+            'studentNo': studentNo
         };
         ajaxRequest("POST", homework_s.s_hw_report, JSON.stringify(data), getReport);
 
@@ -41,9 +41,9 @@ $(function () {
         //老师只能查看单个班级的学生作业报告
         //图表接口访问参数
         var data = {
-            classCode: [classCode],
-            schoolId: schoolId,
-            studentNo: studentNo
+            'classCode': [classCode],
+            'schoolId:':schoolId,
+            'studentNo': studentNo
         };
         ajaxRequest("POST", homework_s.s_hw_report, JSON.stringify(data), getReport);
     }

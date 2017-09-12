@@ -19,49 +19,94 @@ $(function () {
     //     $('.title_s p').eq(2).html('日期:' + data.homeworkTime);
     // });
     /*** 测试数据*/
-    //链接到分享页
+        //链接到分享页
     var checkStuArry = [];// 传递选中学生号
-    $(document).on('touchstart','.shareBtn',function () {
+    $(document).on('touchstart', '.shareBtn', function () {
         checkStuArry = [];
-        if($('.ranklibe .tr .check-box.checked').length<=0){
+        if ($('.ranklibe .tr .check-box.checked').length <= 0) {
             layer.msg("请选择要分享的学员");
-            return ;
+            return;
         }
         $('.ranklibe .tr .check-box.checked').each(function () {
             checkStuArry.push($(this).attr('data-stuNo'));
             console.log(checkStuArry);
         });
-        localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
+        localStorage.studentNos = JSON.stringify({'checkStuArry': checkStuArry});
         // $('.tab-title,.main-content,.no-data').hide();
         // var testState = $('.main-content').attr('testState');
         var testState = 1;
         var checkedTypeName = "入门测";
-        window.location.href = "sharedrankingE_t.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
+        window.location.href = "sharedrankingE_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
     });
     // 全选
     var checkAll = true;//默认全选
-    $(document).on('touchstart','#check-all',function () {
-        if(checkAll){
+    $(document).on('touchstart', '#check-all', function () {
+        if (checkAll) {
             $('.ranklibe .tr .check-box').addClass('checked');
             checkAll = false;
-        }else{
+        } else {
             $('.ranklibe .tr  .check-box').removeClass('checked');
             checkAll = true;
         }
     });
     // 多选
-    $(document).on('touchstart','.ranklibe .tr',function () {
+    $(document).on('touchstart', '.ranklibe .tr', function () {
         $(this).find('.check-box').toggleClass('checked');
-        if(!$(this).find('.check-box').hasClass('checked')){
+        if (!$(this).find('.check-box').hasClass('checked')) {
             //点击后没有勾选的情况
             $('#check-all').removeClass('checked');
             checkAll = true;
-        }else{
-            if($('.ranklibe .tr .check-box.checked').length == $('.ranklibe .tr .check-box').length){
+        } else {
+            if ($('.ranklibe .tr .check-box.checked').length == $('.ranklibe .tr .check-box').length) {
                 $('#check-all').addClass('checked');
                 checkAll = false;
             }
         }
     });
+    //获取电子作业排行数据
+    getRankingData();
 
-})
+    function getRankingData() {
+
+        var params = {'Tcid': "be0a11d4dde94b2a98c3b4d066baf9f1"};
+        ajaxRequest("POST", homework_s.s_hw_rank_e, params, function (e) {
+            if (e.result) {
+                var homeworkTime = e.homeworkTime;
+                var excellenHomrWork = e.excellenHomrWork;
+                if (undefined != excellenHomrWork) {
+                    var strHtml = "";
+                    for (var i = 0; i < excellenHomrWork.length; i++) {
+                        // {
+                        //     "score": "100",
+                        //     "times": "27:05",
+                        //     "studentName": "程巾哲",
+                        //     "ranking": 1
+                        // }
+                        var ranking = excellenHomrWork[i].ranking;
+                        var studentName = excellenHomrWork[i].studentName;
+                        var times = excellenHomrWork[i].times;
+                        var score = excellenHomrWork[i].score;
+                        var avater = "";
+                        if (studentName.length > 2) {
+
+                            avater = studentName.substring(studentName.length - 2, studentName.length);
+                        } else {
+
+                            avater = studentName;
+                        }
+
+                        strHtml += "<li class='tr'><span><i class='check-box checked' data-stuNo='SS4648'></i></span>" +
+                            "<span><span class='first-num'>" + ranking + "</span></span>" +
+                            "<span class='nameLeft'><i>" + avater + "</i></span>" +
+                            "<span>" + studentName + "</span>" +
+                            "<span class='stuTime'>" + times + "</span>" +
+                            "<span class='stuScore'>" + score + "</span></li>";
+                    }
+                    $('.ranklibe').append(strHtml);
+                }
+            }
+        });
+
+    }
+
+});
