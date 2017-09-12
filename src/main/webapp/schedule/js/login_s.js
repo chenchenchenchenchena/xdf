@@ -20,6 +20,20 @@ $(function(){
         $(".select").removeClass("open");
         e.stopPropagation();
     });
+    var table={
+        "tableName":"dict_school_info"
+    }
+    ajaxRequest("POST", url.s_select, table , selectData);
+    function selectData(e) {
+        console.log(e);
+        $(".select ul").html("");
+        if(e.code=="200"){
+            for(var i=0;i<e.data.length;i++){
+                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                $(".select ul").append(str);
+            }
+        }
+    }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -273,9 +287,8 @@ $(function(){
                     // location.reload()
                 }else{
                     $('.true_last').css('background','#00ba97');
-                    sessionStorage.stuNum = $('.stunum').val();
-                    sessionStorage.stuNumber=$('.stunum').val();
-                    sessionStorage.studentName=$(".stname").val();
+                    sessionStorage.stuNum = e.data.studentNo;
+                    sessionStorage.studentName=e.data.studentName;
                     sessionStorage.mobile=e.data.mobile;
                     sessionStorage.schoolId=e.data.schoolId;
                     layer.msg('绑定成功');
@@ -283,7 +296,7 @@ $(function(){
                         location.href = '../learningSituation/report_t.html';
                         sessionStorage.removeItem('studayCanfig')
                     }else{
-                        location.href = 'schedule_s.html';
+                        // location.href = 'schedule_s.html';
                     }
                     $('.deterAss').hide();
                 }
