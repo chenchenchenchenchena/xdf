@@ -3,9 +3,9 @@
  */
 $(function () {
     sessionStorage.paperId = "32273901-279E-450F-AAFD-BB96E292AF26";
-    sessionStorage.paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId="+sessionStorage.paperId;
-    if(sessionStorage.paperUrl){
-        $('.sResolve a').attr("href",sessionStorage.paperUrl);
+    sessionStorage.paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
+    if (sessionStorage.paperUrl) {
+        $('.sResolve a').attr("href", sessionStorage.paperUrl);
     }
     var trardata = {
         'teacherCode': localStorage.teacherId,
@@ -26,11 +26,11 @@ $(function () {
     if (sessionStorage.class) {
         $(".class_s i").html(sessionStorage.class);
     }
-    if(sessionStorage.hxCode){
-        $(".class_s i").attr("classcode",sessionStorage.hxCode);
+    if (sessionStorage.hxCode) {
+        $(".class_s i").attr("classcode", sessionStorage.hxCode);
     }
-    if(sessionStorage.hxName){
-        $(".class_s i").attr("className",sessionStorage.hxName);
+    if (sessionStorage.hxName) {
+        $(".class_s i").attr("className", sessionStorage.hxName);
     }
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
@@ -210,6 +210,7 @@ $(function () {
                 checkNum++;
             }
         }
+        contentName = contentName.substring(0, contentName.length - 1);
         console.log(contentName);
         console.log(checkNum);
         if (checkNum == 0) {
@@ -226,7 +227,7 @@ $(function () {
      */
     function submit() {
         var hwName_ = $('.content_s i').html();
-        var paperName = hwName_.substring(0,hwName_.length-1);
+        var paperName = hwName_.substring(0, hwName_.length - 1);
         var paperID = sessionStorage.paperId;
         var paperUrl = sessionStorage.paperUrl;
         //URL字段待定
@@ -266,7 +267,7 @@ $(function () {
                     content: $(".succ")
                 });
 
-            }else {
+            } else {
                 layer.close(layer1);
                 layer.msg(e.message);
             }
