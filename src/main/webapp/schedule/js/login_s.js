@@ -357,7 +357,7 @@ $(function(){
 
     //校区相关
     $(".select p").click(function(e){
-        if(sessionStorage.signal){return false;}
+        if(!sessionStorage.signal){return false;}
         $(".select").toggleClass('open');
         e.stopPropagation();
     });
