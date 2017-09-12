@@ -11,7 +11,6 @@ $(function () {
     var classCode = GetRequest("classCode");
     var schoolId = GetRequest("schoolId");
     var remark = GetRequest("remark");
-    var currentIndex = 0;
 
 
     //点击折叠切换
@@ -26,10 +25,11 @@ $(function () {
 
     });
     var classCodeList = sessionStorage.classCodeList;
+    var classCodes = [];
     if (remark == 2) {
         //表示：学生自己查看
         //获取学生所有已报班级的班级信息
-        var classCodes = classCodeList.split(",");
+        classCodes = classCodeList.split(",");
         var data = {
             'classCode': classCodes,
             'schoolId': schoolId,
@@ -40,27 +40,24 @@ $(function () {
     } else {
         //老师只能查看单个班级的学生作业报告
         //图表接口访问参数
+        classCodes.push(classCode);
         var data = {
             'classCode': [classCode],
-            'schoolId:':schoolId,
+            'schoolId:': schoolId,
             'studentNo': studentNo
         };
         ajaxRequest("POST", homework_s.s_hw_report, JSON.stringify(data), getReport);
     }
 
-    function getReport(result) {
-        if (result.result) {
+    function getReport(e) {
+        e = JSON.parse(e);
+        if (e.result) {
 
             $('.no-data').hide();
             $('.class_big').show();
             var str = '';
-            var data = result.date;
-            // var data = [];
-            // data.push({score: 90, HomeworkTimes: "09-05"});
-            // data.push({score: 50, HomeworkTimes: "09-06"});
-            // data.push({score: 60, HomeworkTimes: "09-07"});
-            // data.push({score: 10, HomeworkTimes: "09-08"});
-            // data.push({score: 80, HomeworkTimes: "09-09"});
+            var data = e.data;
+
             for (var i = 0; i < data.length; i++) {
                 if (data[i].length > 0) {
                     str += '<div class="classroom_s">' +
@@ -71,32 +68,34 @@ $(function () {
                         '<div id="chart_S' + i + '" style="width: 690px; height: 360px;"></div>'
                     '</div>';
                     $('.class_big').append(str);
+                    var maxScore = 0;
                     for (var j = 0; j < data[i].length; j++) {
                         var scoreDay = data[i][j];
                         if (undefined != scoreDay) {
-                            var score = scoreDay.score;
+                            var score = parseInt(scoreDay.score);
                             var HomeworkTimes = scoreDay.HomeworkTimes;
                             var className = scoreDay.className;
-                            $('.chart_S'+i).siblings('.title_s').find("h4").html(className);
+                            $('#chart_S' + i).siblings('.title_s').find("h4").html(className);
                             Grade_eve.push(score);
                             h_zhou_x.push(HomeworkTimes);
+                            if (score > maxScore) {
+                                maxScore = score;
+                            }
                         }
+                    }
+
+                    Echart('chart_S' + i + '', Text_Grade, h_zhou_x, Grade_eve, maxScore);
+
+                    if (undefined != classCodes && classCodes != "" && classCodes[i] == classCode) {
+                        //表示当前班级的图标展示其他的折叠
+                        $('#chart_S' + i).show();
+                    } else {
+                        $('#chart_S' + i).hide();
                     }
                 }
 
 
             }
-
-            Echart('chart_S' + currentIndex + '', Text_Grade, h_zhou_x, Grade_eve, 100);
-
-            if (classList[currentIndex].classCode == classCode) {
-                //表示当前班级的图标展示其他的折叠
-                $('#chart_S' + currentIndex).show();
-            } else {
-                $('#chart_S' + currentIndex).hide();
-            }
-
-            currentIndex++;
         } else {
             $('.no-data').show();
             $('.class_big').hide();
