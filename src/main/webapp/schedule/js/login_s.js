@@ -385,7 +385,8 @@ $(function(){
                 var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
                 $(".select ul").append(str);
             }
-            $('.select').find('.select li').eq(0).addClass('Selected');
+            $('.content').find('li').eq(0).addClass('Selected');
+            $('.content').find('p').eq(0).html(e.data[0].tName);
         }
     }
 
