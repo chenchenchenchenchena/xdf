@@ -1,13 +1,25 @@
 $(function(){
     /* 测试 */
 
-    // if(!sessionStorage.openid){
-    //     sessionStorage.openid = 'abcd123'
-    // }
-
     if(!sessionStorage.openid){
-        wechatCode(location.href)
+        sessionStorage.openid = 'abcd123'
     }
+
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href)
+    // }
+    $(".select p").click(function(e){
+        $(".select").toggleClass('open');
+        e.stopPropagation();
+    });
+    $(document).on('click','.content .select ul li',function(e){
+        /* $(".content .select ul li").click(function(e){*/
+        var _this=$(this);
+        $(".select > p").text(_this.attr('data-value'));
+        _this.addClass("Selected").siblings().removeClass("Selected");
+        $(".select").removeClass("open");
+        e.stopPropagation();
+    });
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
