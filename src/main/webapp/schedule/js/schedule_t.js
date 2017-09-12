@@ -40,6 +40,8 @@ ajax_S(url.s_seac,WXnum,stud);
 function stud(e){
     if(e.result!=false){
         sessionStorage.stuNum = e.data.studentNo;
+        sessionStorage.schoolId = e.data.schoolId;
+        sessionStorage.studentName = e.data.studentName;
     }
 }
 

@@ -39,7 +39,7 @@ $(function () {
         window.location.href = "sharedrankingE_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
     });
     // 全选
-    var checkAll = true;//默认全选
+    var checkAll = false;//由于添加UI布局默认全选，则第一次点击"取消全选"初始值为false
     $(document).on('touchstart', '#check-all', function () {
         if (checkAll) {
             $('.ranklibe .check-box').addClass('checked');
