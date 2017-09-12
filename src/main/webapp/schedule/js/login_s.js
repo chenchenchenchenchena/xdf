@@ -8,32 +8,6 @@ $(function(){
     // if(!sessionStorage.openid){
     //     wechatCode(location.href)
     // }
-    $(".select p").click(function(e){
-        $(".select").toggleClass('open');
-        e.stopPropagation();
-    });
-    $(document).on('click','.content .select ul li',function(e){
-        /* $(".content .select ul li").click(function(e){*/
-        var _this=$(this);
-        $(".select > p").text(_this.attr('data-value'));
-        _this.addClass("Selected").siblings().removeClass("Selected");
-        $(".select").removeClass("open");
-        e.stopPropagation();
-    });
-    var table={
-        "tableName":"dict_school_info"
-    }
-    ajaxRequest("POST", url.s_select, table , selectData);
-    function selectData(e) {
-        console.log(e);
-        $(".select ul").html("");
-        if(e.code=="200"){
-            for(var i=0;i<e.data.length;i++){
-                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
-                $(".select ul").append(str);
-            }
-        }
-    }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -59,14 +33,12 @@ $(function(){
                         if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
-                            // sessionStorage.removeItem('welCome');
                             ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                                 localStorage.firstU2 = '1';
                                 location.href = e.url;
                             });
                         }
                     }else{
-                        // sessionStorage.removeItem('firstU2');
                         ajax_S(url.t_stulas,calbac,function(e){
                             localStorage.userId_stu = e.data.userId;
                             localStorage.Phonenum = e.data.mobile;
@@ -79,7 +51,6 @@ $(function(){
             if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
-                    // sessionStorage.removeItem('firstU2');
                     ajax_S(url.t_stulas,calbac,function(e){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
@@ -101,11 +72,6 @@ $(function(){
                 ajax_S(url.s_bind,stumore,function(e){
                     if(e.data==undefined){
                         layer.msg(e.message);
-                        if(sessionStorage.signal){
-                            location.href = 'login_stu.html'
-                        }else{
-                            location.href = 'login_s.html'
-                        }
                     }else{
                         $('.true_last').css('background','#00ba97');
                         layer.msg('绑定成功');
@@ -136,6 +102,7 @@ $(function(){
                 return false;
             }
             $('.enter').hide();
+            $('.content').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
                 $('.search').show();
                 $('.stuname').html(e.data.studentName);
@@ -249,7 +216,7 @@ $(function(){
 
     //学员号查询点击
     $('.numb_log').click(function(){
-        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':'73'}
+        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')};
         ajax_S(url.s_seac,stumore,stusea)
     });
     //关联点击
@@ -392,5 +359,37 @@ $(function(){
         }
 
     })
+
+    //校区相关
+    $(".select p").click(function(e){
+        $(".select").toggleClass('open');
+        e.stopPropagation();
+    });
+    $(document).on('click','.content .select ul li',function(e){
+        /* $(".content .select ul li").click(function(e){*/
+        var _this=$(this);
+        $(".select > p").text(_this.attr('data-value'));
+        _this.addClass("Selected").siblings().removeClass("Selected");
+        $(".select").removeClass("open");
+        e.stopPropagation();
+    });
+    var table={
+        "tableName":"dict_school_info"
+    }
+    ajaxRequest("POST", url.s_select, table , selectData);
+    function selectData(e) {
+        console.log(e);
+        $(".select ul").html("");
+        if(e.code=="200"){
+            for(var i=0;i<e.data.length;i++){
+                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                $(".select ul").append(str);
+            }
+            $('.select').find('.select li').eq(0).addClass('Selected');
+        }
+    }
+
+
+
 
 });
