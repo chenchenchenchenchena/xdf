@@ -18,36 +18,32 @@ $(function () {
     //     $('.title_s p').eq(1).html(data.teacherName + '老师');
     //     $('.title_s p').eq(2).html('日期:' + data.homeworkTime);
     // });
-   /* takeScreenshot();*/
+    takeScreenshot();
     //获取电子作业排行数据
     getRankingData();
 
     function getRankingData() {
-
-        var params = {'Tcid': "be0a11d4dde94b2a98c3b4d066baf9f1"};
+        var params = {
+            'Tcid': getRequest('tid').tid,
+            'studentNos':JSON.parse(localStorage.studentNos).checkStuArry
+        };
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
-                var homeworkTime = e.homeworkTime;
                 var excellenHomrWork = e.excellenHomrWork;
+                $('.title_s i').html(e.className);
+                $('.title_s p').eq(1).html(e.teacherName + '老师');
+                $('.title_s p').eq(2).html('日期:' + e.homeworkTime);
                 if (undefined != excellenHomrWork) {
                     var strHtml = "";
                     for (var i = 0; i < excellenHomrWork.length; i++) {
-                        // {
-                        //     "score": "100",
-                        //     "times": "27:05",
-                        //     "studentName": "程巾哲",
-                        //     "ranking": 1
-                        // }
                         var ranking = excellenHomrWork[i].ranking;
                         var studentName = excellenHomrWork[i].studentName;
                         var times = excellenHomrWork[i].times;
                         var score = excellenHomrWork[i].score;
                         var avater = "";
                         if (studentName.length > 2) {
-
                             avater = studentName.substring(studentName.length - 2, studentName.length);
                         } else {
-
                             avater = studentName;
                         }
                         if(ranking=="1"){

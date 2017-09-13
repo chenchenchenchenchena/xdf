@@ -168,30 +168,6 @@ $(function () {
     $(".areyok input").eq(1).click(function () {
         submit();
     });
-    //列表显示
-    // $(".searchE span").click(function () {
-    //     $(".list").eq($(this).index()).toggle().siblings().hide();
-    // })
-    // $(document).on("touchstart",".listOne li",function () {
-    //     $(this).addClass("active").siblings().removeClass("active");
-    //     $(".searchE span").eq(0).html($(this).html());
-    //     $(".searchE span").eq(0).css("color","#000");
-    // })
-    // $(document).on("touchstart",".listTwo li",function () {
-    //     $(this).addClass("active").siblings().removeClass("active");
-    //     $(".searchE span").eq(1).html($(this).html());
-    //     $(".searchE span").eq(1).css("color","#000");
-    // })
-    // $(document).on("touchstart",".listThree li",function () {
-    //     $(this).addClass("active").siblings().removeClass("active");
-    //     $(".searchE span").eq(2).html($(this).html());
-    //     $(".searchE span").eq(2).css("color","#000");
-    // })
-    // $(document).on("touchstart",".listFour li",function () {
-    //     $(this).addClass("active").siblings().removeClass("active");
-    //     $(".searchE span").eq(3).html($(this).html());
-    //     $(".searchE span").eq(3).css("color","#000");
-    // })
     //选择作业内容
     $(document).on("touchstart",".searchCon img",function () {
         if($(this).attr("src")=="images/yu.png"){
@@ -222,116 +198,47 @@ $(function () {
         }
     })
     //作业汇总
-    var summaryData={"Tcid":/*"be0a11d4dde94b2a98c3b4d066baf9f1"*/sessionStorage.Tid}
+    var summaryData={"Tcid":sessionStorage.Tid}
     ajax_S(homework_s.t_summary,summaryData,summaryAjax);
     function summaryAjax(e) {
         console.log(e);
         if(e.code=="200"){
             var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
             $(".gHeader").append(recordNum);
-           for(var i=0;i<e.data.data.commitArr.length;i++){
-               var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
-               $("tbody").append(table);
-           }
-            for(var i=0;i<e.data.data.nocommitArr.length;i++){
-                var nocommit='<li><span>'+e.data.data.nocommitArr[i].studentName+'</span><span studentNo='+e.data.data.nocommitArr[i].studentNo+'>'+e.data.data.nocommitArr[i].studentName+'</span></li>';
-                $(".noHw ul").append(nocommit);
-                name();
+            if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
+                for(var i=0;i<e.data.data.commitArr.length;i++){
+                    var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
+                    $("tbody").append(table);
+                }
+            }else{
+                var table='<tr>没有已交作业的学生</tr>';
+                $("tbody").append(table);
             }
 
+            if(e.data.data.nocommitArr!=undefined&&e.data.data.nocommitArr.length>0){
+                for(var i=0;i<e.data.data.nocommitArr.length;i++){
+                    var nocommit='<li><span>'+e.data.data.nocommitArr[i].studentName+'</span><span studentNo='+e.data.data.nocommitArr[i].studentNo+'>'+e.data.data.nocommitArr[i].studentName+'</span></li>';
+                    $(".noHw ul").append(nocommit);
+                    for(var i=0;i<$(".noHw li").length;i++){
+                        var nameHtml=$(".noHw li").eq(i).find("span").eq(0).html();
+                        if (nameHtml.length > 2) {
+                            var avater = nameHtml.substring(nameHtml.length - 2, nameHtml.length);
+                            $(".noHw li").eq(i).find("span").eq(0).html(avater)
+                        } else {
+                            var avater = nameHtml;
+                            $(".noHw li").eq(i).find("span").eq(0).html(avater);
+                        }
+                    }
+                }
+            }else{
+                var nocommit='<li>没有未交作业的学生</li>';
+                $(".noHw ul").append(nocommit);
+            }
         }
     }
     $(".gBth").click(function () {
         location.href='rankinglistE_t.html?tid='+sessionStorage.Tid;
     })
-    //截取名字的长度
-    function name() {
-        var reNz=/^S{2}[0-9]{4}$/;
-        var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
-        var re=/^[a-zA-Z]+$/;
-        var reZ=/^[\u4e00-\u9fa5]+$/;
-        for(var j=0;j<$(".noHw li").length;j++){
-            var ddStr = $(".noHw li").eq(j).find("span").eq(1);
-            var dtStr = $(".noHw li").eq(j).find("span").eq(0);
-            var ddstrLen = lenStat(ddStr);
-            if(re.test(ddStr.html())){
-                if(lenStat(ddStr) >= 5){
-                    if(lenStat(ddStr) >8){
-                        ddStr.css("font-size", "20px");
-                        ddStr.css("margin-top", "23px");
-                    }
-                    dtStr.html(ddStr.html().substr(- 4, 4));
-                }else{
-                    dtStr.html(ddStr.html());
-                }
-
-            }else if(reZ.test(ddStr.html())){
-                if(lenStat(ddStr) >= 5){
-                    if(lenStat(ddStr) > 8){
-                        ddStr.css("font-size", "17px");
-                        ddStr.css("margin-top", "23px");
-                    }
-                    dtStr.html(ddStr.html().substr(- 2, 2));
-                }else{
-                    dtStr.html(ddStr.html());
-                }
-
-            }else{
-                if(reZ.test(ddStr.html().substr(-1, 1))){
-                    if(reZ.test(ddStr.html().substr(-2, 1))){
-                        dtStr.html(ddStr.html().substr(-2, 2));
-                    }else{
-                        dtStr.html(ddStr.html().substr(-3, 3));
-                    }
-                    if(lenStat(ddStr) > 8){
-                        ddStr.css("font-size", "17px");
-                        ddStr.css("margin-top", "23px");
-                    }
-                }else{
-                    if(re.test(ddStr.html().substr(-1, 1))){
-                        if(re.test(ddStr.html().substr(-2, 1))){
-                            if(re.test(ddStr.html().substr(-3, 1))){
-                                if(re.test(ddStr.html().substr(-4, 1))){
-                                    dtStr.html(ddStr.html().substr(-4, 4));
-                                }else{
-                                    dtStr.html(ddStr.html().substr(-3, 3));
-                                }
-                            }else{
-                                dtStr.html(ddStr.html().substr(-3, 3));
-                            }
-                        }else{
-                            dtStr.html(ddStr.html().substr(-2, 2));
-                        }
-                    }
-                    if(lenStat(ddStr) > 8){
-                        ddStr.css("font-size", "17px");
-                        ddStr.css("margin-top", "23px");
-                    }
-                }
-            }
-
-        }
-    }
-    //判断中文长度
-    function isChinese(str) {  //判断是不是中文
-        var reCh = /[u00-uff]/;
-        return !reCh.test(str);
-    }
-    function lenStat(target) {
-        var strlen = 0; //初始定义长度为0
-        var txtval = $.trim(target.html());
-        for (var i = 0; i < txtval.length; i++) {
-            if (isChinese(txtval.charAt(i)) == true) {
-                strlen = strlen + 2;//中文为2个字符
-            } else {
-                strlen = strlen + 1;//英文一个字符
-            }
-        }
-        /*strlen=Math.ceil(strlen/2);*///中英文相加除2取整数
-        return strlen;
-    }
-
-
     /**
      * 提交布置作业
      */

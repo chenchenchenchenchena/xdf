@@ -234,18 +234,14 @@ Date.prototype.format = function(fmt) {
 };
 //日期加上天数得到新的日期
 //dateTemp 需要参加计算的日期，days要添加的天数，返回新的日期，日期格式：YYYY-MM-DD
-function getNewDay(dateTemp, days) {
-    var dateTemp = dateTemp.split("-");
-    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式
-    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
-    var rDate = new Date(millSeconds);
-    var year = rDate.getFullYear();
-    var month = rDate.getMonth() + 1;
-    if (month < 10) month = "0" + month;
-    var date = rDate.getDate();
-    if (date < 10) date = "0" + date;
-    return (year + "-" + month + "-" + date);
-}
+    function judgFailTime(time_s) {
+        var x = time_s; // 取得的TextBox中的时间
+        var time = new Date(x.replace("-","/"));
+
+        var b = 2; //分钟数
+        time.setMinutes(time.getMinutes() + b, time.getSeconds(), 0);
+        return time
+    }
 
 // 获取路径的参数
 function getRequest() {
