@@ -219,7 +219,7 @@ $(function () {
                     time: 3000,
                     content: $(".succ")
                 });
-
+                location.href = "homeworklist_t.html";
             } else {
                 layer.close(layer1);
                 layer.msg(e.message);
