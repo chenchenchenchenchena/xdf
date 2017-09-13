@@ -3,7 +3,7 @@
  */
 $(function () {
     var voiceCount = 0;
-    ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
+   /* ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
         var Month = e.data.homeworkTime.substr(5, 2);
         var Day = e.data.homeworkTime.substr(8, 2);
         var teaName = e.data.teacherName;
@@ -17,7 +17,7 @@ $(function () {
         $('.title_s i').html(data.className);
         $('.title_s p').eq(1).html(data.teacherName + '老师');
         $('.title_s p').eq(2).html('日期:' + data.homeworkTime);
-    });
+    });*/
     /*** 测试数据*/
         //链接到分享页
     var checkStuArry = [];// 传递选中学生号
@@ -72,8 +72,11 @@ $(function () {
         var params = {'Tcid': "be0a11d4dde94b2a98c3b4d066baf9f1"};
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
-                var homeworkTime = e.homeworkTime;
+               /* var homeworkTime = e.homeworkTime;*/
                 var excellenHomrWork = e.excellenHomrWork;
+                $('.title_s i').html(e.className);
+                $('.title_s p').eq(1).html(e.teacherName + '老师');
+                $('.title_s p').eq(2).html('日期:' + e.homeworkTime);
                 if (undefined != excellenHomrWork) {
                     var strHtml = "";
                     for (var i = 0; i < excellenHomrWork.length; i++) {
