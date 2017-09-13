@@ -68,6 +68,10 @@ $(function () {
                     $('.listThree').html(tabStr);
                 }
 
+            }else {
+                $('.listOne').hide();
+                $('.listTwo').hide();
+                $('.listThree').hide();
             }
         });
     }
@@ -98,22 +102,30 @@ $(function () {
         $('.listThree').show();
     });
     $(document).on("touchstart", ".listOne li", function () {
-
+        $('.listOne').hide();
+        $('.listTwo').hide();
+        $('.listThree').hide();
         $(this).addClass("active").siblings().removeClass("active");
         currentStage = {'stageCode': $(this).attr("tCode"), 'stageName': $(this).attr("tName")};
         $(".searchE span").eq(0).html($(this).html());
         $(".searchE span").eq(0).css("color", "#000");
         $('#grade').html("年级");
         $('#grade').css("color","#a9a9a9");
-        currentGrade = {};
+        currentGrade = "";
     });
     $(document).on("touchstart", ".listTwo li", function () {
+        $('.listOne').hide();
+        $('.listTwo').hide();
+        $('.listThree').hide();
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(1).html($(this).html());
         $(".searchE span").eq(1).css("color", "#000");
         currentGrade = {'gradeCode': $(this).attr("tCode"), 'gradeName': $(this).attr("tName")};
     });
     $(document).on("touchstart", ".listThree li", function () {
+        $('.listOne').hide();
+        $('.listTwo').hide();
+        $('.listThree').hide();
         $(this).addClass("active").siblings().removeClass("active");
         $(".searchE span").eq(2).html($(this).html());
         $(".searchE span").eq(2).css("color", "#000");
