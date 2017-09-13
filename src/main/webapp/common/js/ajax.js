@@ -243,9 +243,18 @@ Date.prototype.format = function(fmt) {
         var b = 2; //分钟数
         time.setMinutes(time.getMinutes() + b, time.getSeconds(), 0);
         var time_t = time.toLocaleString().replace(/\//g,'-');
-        var time_o =time_t.substring(0,10);
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        var time_l =year+'-'+month+'-'+day;
         var time_m = time_t.substring(time_t.indexOf('午')+1,time.length);
-        return time_o+time_m
+        return time_l+time_m
     }
 // 获取路径的参数
 function getRequest() {
