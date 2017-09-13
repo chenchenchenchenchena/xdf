@@ -40,9 +40,13 @@ $(function(){
                         }
                     }else{
                         ajax_S(url.t_stulas,calbac,function(e){
-                            localStorage.userId_stu = e.data.userId;
-                            localStorage.Phonenum = e.data.mobile;
-                            localStorage.SId  =  e.sid;
+                            if(e.result==true){
+                                localStorage.userId_stu = e.data.userId;
+                                localStorage.Phonenum = e.data.mobile;
+                                localStorage.SId  =  e.sid;
+                                var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                                location.useridTime =judgFailTime(time_)
+                            }
                         })
                     }
                 }
@@ -52,16 +56,18 @@ $(function(){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
                     ajax_S(url.t_stulas,calbac,function(e){
-                        localStorage.userId_stu = e.data.userId;
-                        localStorage.Phonenum = e.data.mobile;
-                        localStorage.SId  =  e.sid;
+                        if(e.result==true){
+                            localStorage.userId_stu = e.data.userId;
+                            localStorage.Phonenum = e.data.mobile;
+                            localStorage.SId  =  e.sid;
+                            var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                            location.useridTime =judgFailTime(time_)
+                        }
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
-                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                        location.useridTime =judgFailTime(time_)
                     });
                 }
             };
