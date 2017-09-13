@@ -79,8 +79,8 @@ $(function(){
                         localStorage.userId_stu = daTa.data.userId;
                         localStorage.Phonenum = daTa.data.mobile;
                         localStorage.SId  =  daTa.sid;
-                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                        localStorage.useridTime =judgFailTime(time_);
+                        var b = a.getTime()+1000*60*2;
+                        localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                     }
                 })
             }
@@ -275,8 +275,8 @@ $(function(){
                         location.href = 'login_s.html'
                     // location.reload()
                 }else{
-                    var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                    localStorage.useridTime =judgFailTime(time_)
+                    var b = a.getTime()+1000*60*2;
+                    localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                     $('.true_last').css('background','#00ba97');
                     sessionStorage.stuNum = e.data.studentNo;
                     sessionStorage.studentName=e.data.studentName;
