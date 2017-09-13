@@ -45,7 +45,7 @@ if (window.location.host == onlineUrl) {//正式环境
     }
 // 接口路径
 var url = {
-    'e_elog': 'http://10.73.33.63:8080/xdfdtmanagere2Login/login.do',//e2登录
+    'e_elog': url_o+'e2Login/login.do',//e2登录
     'e_elast':url_o+'u2Login/login.do', //u2Dengl
     'w_xmor': url_o+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_open': url_o+'wechatSignature/getUserInfo.do',//获取openid
@@ -64,7 +64,7 @@ var url = {
     's_stud': url_o+'studentData/queryStudentData.do',    //学生查询课程
     'data_s': url_o+'teacherData/queryAllSpeakerTeachers.do', //主讲查询
     't_logi': url_o+'logout/doLogout.do',//退出登录
-    'u_loout':'http://10.73.33.63:8080/xdfdtmanager/u2Login/doLogout.do', //u2退出登录
+    'u_loout':url_o+'u2Login/doLogout.do', //u2退出登录
     't_back':url_o2+'/xdfdthome/schedule/login_s.html', //回调地址
     't_bckt':url_o2+'/xdfdthome/schedule/login_stu.html', //回调地址
     't_data': url_o+'teacherData/queryCourseRemind.do',  //老师课表提醒
