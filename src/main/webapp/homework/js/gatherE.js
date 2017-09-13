@@ -16,7 +16,7 @@ function summaryAjax(e) {
         $(".gHeader").show();
         if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
             for(var i=0;i<e.data.data.commitArr.length;i++){
-                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report"><img src="images/clipboard.png" /></td></tr>';
+                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report" data-testId='+e.data.data.commitArr[i].testId+'><img src="images/clipboard.png" /></td></tr>';
                 $("tbody").append(table);
             }
             $("table").show();
