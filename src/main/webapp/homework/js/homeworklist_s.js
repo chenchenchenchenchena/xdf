@@ -16,14 +16,15 @@ $(function(){
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	loading = layer.load();
-	var reqData = 'stuNum='+sessionStorage.stuNumber;
+	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
+	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
 	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
 			$(".hwFinish,.hwEmpty").hide();
 			loading = layer.load();
-			ajaxRequest('GET', homework_s.s_hwlt, 'stuNum='+sessionStorage.stuNumber, getHwContentSuccess);
+			ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
