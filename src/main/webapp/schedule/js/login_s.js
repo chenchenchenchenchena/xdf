@@ -39,7 +39,7 @@ $(function(){
                         }
                     }else{
                         ajax_S(url.t_stulas,calbac,function(Json){
-                            if(e.result==true){
+                            if(Json.result==true){
                                 localStorage.userId_stu = Json.data.userId;
                                 localStorage.Phonenum = Json.data.mobile;
                                 localStorage.SId  =  Json.sid;
@@ -56,7 +56,7 @@ $(function(){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
                     ajax_S(url.t_stulas,calbac,function(daTa){
-                        if(e.result==true){
+                        if(daTa.result==true){
                             localStorage.userId_stu = daTa.data.userId;
                             localStorage.Phonenum = daTa.data.mobile;
                             localStorage.SId  =  daTa.sid;
@@ -75,7 +75,7 @@ $(function(){
             sessionStorage.stuNumber = e.data.studentNo;
             if(!localStorage.useridTime){
                 ajax_S(url.t_stulas,calbac,function(daTa){
-                    if(e.result==true){
+                    if(daTa.result==true){
                         localStorage.userId_stu = daTa.data.userId;
                         localStorage.Phonenum = daTa.data.mobile;
                         localStorage.SId  =  daTa.sid;
