@@ -15,7 +15,7 @@ function summaryAjax(e) {
         $(".gHeader").show();
         if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
             for(var i=0;i<e.data.data.commitArr.length;i++){
-                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
+                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report"><a href=""><img src="images/clipboard.png" /></a></td></tr>';
                 $("tbody").append(table);
             }
             $("table").show();
@@ -110,3 +110,15 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
     })
 
 });
+$(document).on("touchstart",".report",function () {
+    var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/getStudentReportUrl.do";
+    var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};
+    ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+        if (e.result) {
+            if(e.url!=undefined && e.url != ""){
+                window.location.href = e.url;
+            }
+        }
+    });
+})
+
