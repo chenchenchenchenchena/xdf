@@ -127,10 +127,10 @@ $(function () {
         $('.listOne').hide();
         $('.listTwo').hide();
         $('.listThree').hide();
-        if ($('.searchE input').val() == "") {
-            layer.msg("请先填写试卷内容");
-            return;
-        }
+        // if ($('.searchE input').val() == "") {
+        //     layer.msg("请先填写试卷内容");
+        //     return;
+        // }
         if (undefined == currentStage  || currentStage == "") {
             layer.msg("请先选择学段");
             return;
@@ -156,8 +156,9 @@ $(function () {
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
             if (e.result) {
                 var dataList = e.data;
-                if (dataList.length > 0) {
-                    $('.searchEmpty').hide();
+                if (dataList != undefined && dataList.length > 0) {
+                    hideEmptyHtml();
+
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
                         strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
@@ -170,15 +171,25 @@ $(function () {
                     }
                     $('.searchCon ul').html(strHtml_);
                 } else {
-                    $('.searchEmpty').show();
+                    showEmptyHtml();
                     layer.msg(e.message);
                 }
             }else {
-                $('.searchEmpty').show();
+                showEmptyHtml();
                 layer.msg(e.message);
             }
         });
     });
+    function showEmptyHtml() {
+        $('.searchCon').hide();
+        $('.searchEmpty').show();
+        $('.eBtn').hide();
+    }
+    function hideEmptyHtml() {
+        $('.searchCon').show();
+        $('.searchEmpty').hide();
+        $('.eBtn').show();
+    }
 
     var paperUrl = "";
     var stageName = "";
@@ -203,7 +214,7 @@ $(function () {
         var checkNum = 0;
         var contentName = "";
         for (var i = 0; i < $(".searchCon li").length; i++) {
-            if ($(".searchCon li").eq(i).find("i").hasClass('checked-img')) {
+            if ($(".searchCon li").eq(i).find("img").attr('src') == "images/yu2.png") {
                 contentName += $(".searchCon li").eq(i).find("h3").html() + ";";
                 checkNum++;
             }
