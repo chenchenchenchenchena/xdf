@@ -32,19 +32,20 @@ $(function(){
                         if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
-                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
                                 localStorage.firstU2 = '1';
-                                location.href = e.url;
+                                location.href = Json.url;
                             });
                         }
                     }else{
-                        ajax_S(url.t_stulas,calbac,function(daTa){
-                            if(e.result==true){
-                                localStorage.userId_stu = daTa.data.userId;
-                                localStorage.Phonenum = daTa.data.mobile;
-                                localStorage.SId  =  daTa.sid;
-                                var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                                localStorage.useridTime =judgFailTime(time_)
+                        ajax_S(url.t_stulas,calbac,function(Json){
+                            if(Json.result==true){
+                                localStorage.userId_stu = Json.data.userId;
+                                localStorage.Phonenum = Json.data.mobile;
+                                localStorage.SId  =  Json.sid;
+                                var a = new Date();
+                                var b = a.getTime()+1000*60*2;
+                                localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                             }
                         })
                     }
@@ -55,12 +56,13 @@ $(function(){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
                     ajax_S(url.t_stulas,calbac,function(daTa){
-                        if(e.result==true){
+                        if(daTa.result==true){
                             localStorage.userId_stu = daTa.data.userId;
                             localStorage.Phonenum = daTa.data.mobile;
                             localStorage.SId  =  daTa.sid;
-                            var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                            localStorage.useridTime =judgFailTime(time_)
+                            var a = new Date();
+                            var b = a.getTime()+1000*60*2;
+                            localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                         }
                     })
                 }else{
@@ -73,7 +75,7 @@ $(function(){
             sessionStorage.stuNumber = e.data.studentNo;
             if(!localStorage.useridTime){
                 ajax_S(url.t_stulas,calbac,function(daTa){
-                    if(e.result==true){
+                    if(daTa.result==true){
                         localStorage.userId_stu = daTa.data.userId;
                         localStorage.Phonenum = daTa.data.mobile;
                         localStorage.SId  =  daTa.sid;
@@ -84,9 +86,9 @@ $(function(){
             }
             if(e.data.userid==''){
                 var stumore  = {'StudentCode':e.data.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
-                ajax_S(url.s_bind,stumore,function(e){
-                    if(e.data==undefined){
-                        layer.msg(e.message);
+                ajax_S(url.s_bind,stumore,function(Json){
+                    if(Json.data==undefined){
+                        layer.msg(Json.message);
                     }else{
                         $('.true_last').css('background','#00ba97');
                         layer.msg('绑定成功');
@@ -94,12 +96,12 @@ $(function(){
                     }
                 })
             }
-            if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''){
+            if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''&&localStorage.userId_stu!=undefined){
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
-                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
-                        if(e.result){
-                            location.href = e.logoutUrl;
+                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
+                        if(Json.result){
+                            location.href = Json.logoutUrl;
                             localStorage.removeItem('useridTime')
                         }
                     })
@@ -109,10 +111,10 @@ $(function(){
             if(new Date().format("yyyy-MM-dd hh:mm:ss")>= localStorage.useridTime){
                 layer.msg('当前登录的账号已过期,正在前往重新登陆');
                 setTimeout(function(){
-                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
-                        if(e.result){
+                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
+                        if(Json.result){
                             localStorage.removeItem('useridTime');
-                            location.href = e.logoutUrl;
+                            location.href = Json.logoutUrl;
                         }
                     })
                 },1000);
