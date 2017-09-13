@@ -252,7 +252,7 @@ Date.prototype.format = function(fmt) {
         if(day<10){
             day = '0'+day
         }
-        var time_l =year+'-'+month+'-'+day;
+        var time_l =year+'-'+month+'-'+day+' ';
         var time_m = time_t.substring(time_t.indexOf('午')+1,time.length);
         return time_l+time_m
     }
