@@ -32,19 +32,20 @@ $(function(){
                         if(!localStorage.welCome){
                             location.href = 'welcome.html'
                         }else{
-                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
                                 localStorage.firstU2 = '1';
-                                location.href = e.url;
+                                location.href = Json.url;
                             });
                         }
                     }else{
-                        ajax_S(url.t_stulas,calbac,function(daTa){
+                        ajax_S(url.t_stulas,calbac,function(Json){
                             if(e.result==true){
-                                localStorage.userId_stu = daTa.data.userId;
-                                localStorage.Phonenum = daTa.data.mobile;
-                                localStorage.SId  =  daTa.sid;
-                                var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                                localStorage.useridTime =judgFailTime(time_)
+                                localStorage.userId_stu = Json.data.userId;
+                                localStorage.Phonenum = Json.data.mobile;
+                                localStorage.SId  =  Json.sid;
+                                var a = new Date();
+                                var b = a.getTime()+1000*60*2;
+                                localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                             }
                         })
                     }
@@ -59,8 +60,9 @@ $(function(){
                             localStorage.userId_stu = daTa.data.userId;
                             localStorage.Phonenum = daTa.data.mobile;
                             localStorage.SId  =  daTa.sid;
-                            var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                            localStorage.useridTime =judgFailTime(time_)
+                            var a = new Date();
+                            var b = a.getTime()+1000*60*2;
+                            localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                         }
                     })
                 }else{
@@ -94,7 +96,7 @@ $(function(){
                     }
                 })
             }
-            if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''){
+            if(e.data.userid!=localStorage.userId_stu&&e.data.userid!=''&&localStorage.userId_stu!=undefined){
                 layer.msg('当前登录的账号与学员绑定的账号不一致,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){

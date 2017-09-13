@@ -235,27 +235,7 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
-//日期加上天数得到新的日期
-//dateTemp 需要参加计算的日期，days要添加的天数，返回新的日期，日期格式：YYYY-MM-DD
-    function judgFailTime(time_s) {
-        var x = time_s; // 取得的TextBox中的时间
-        var time = new Date(x.replace("-","/"));
-        var b = 2; //分钟数
-        time.setMinutes(time.getMinutes() + b, time.getSeconds(), 0);
-        var time_t = time.toLocaleString().replace(/\//g,'-');
-        var year = time.getFullYear();
-        var month = time.getMonth()+1;
-        var day = time.getDate();
-        if(month<10){
-            month = '0'+month
-        }
-        if(day<10){
-            day = '0'+day
-        }
-        var time_l =year+'-'+month+'-'+day+' ';
-        var time_m = time_t.substring(time_t.indexOf('午')+1,time.length);
-        return time_l+time_m
-    }
+
 // 获取路径的参数
 function getRequest() {
     var url = location.search; //获取url中"?"符后的字串
