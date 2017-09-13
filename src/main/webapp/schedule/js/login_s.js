@@ -79,6 +79,7 @@ $(function(){
                         localStorage.userId_stu = daTa.data.userId;
                         localStorage.Phonenum = daTa.data.mobile;
                         localStorage.SId  =  daTa.sid;
+                        var a = new Date();
                         var b = a.getTime()+1000*60*2;
                         localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                     }
@@ -275,6 +276,7 @@ $(function(){
                         location.href = 'login_s.html'
                     // location.reload()
                 }else{
+                    var a = new Date();
                     var b = a.getTime()+1000*60*2;
                     localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                     $('.true_last').css('background','#00ba97');
