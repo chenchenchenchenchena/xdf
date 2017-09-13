@@ -11,9 +11,12 @@ function summaryAjax(e) {
     loading=layer.load();
     console.log(e);
     if(e.code=="200"){
-        var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
-        $(".gHeader").append(recordNum);
-        $(".gHeader").show();
+        if(e.data.result){
+            var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
+            $(".gHeader").append(recordNum);
+            $(".gHeader").show();
+        }
+
         if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
             for(var i=0;i<e.data.data.commitArr.length;i++){
                 var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report" data-testId='+e.data.data.commitArr[i].testId+'><img src="images/clipboard.png" /></td></tr>';
