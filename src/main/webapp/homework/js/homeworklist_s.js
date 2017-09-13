@@ -6,9 +6,9 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	/*sessionStorage.stuNumber = 'SS5786';
-	sessionStorage.studentName = '郭紫楚';
-	sessionStorage.schoolId = '73';*/
+	sessionStorage.stuNumber = 'SS6889';
+	sessionStorage.studentName = '王子豪';
+	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
