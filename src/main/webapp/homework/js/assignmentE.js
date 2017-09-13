@@ -168,7 +168,7 @@ $(function () {
     $(".areyok input").eq(1).click(function () {
         submit();
     });
-    // //列表显示
+    //列表显示
     // $(".searchE span").click(function () {
     //     $(".list").eq($(this).index()).toggle().siblings().hide();
     // })
@@ -242,7 +242,7 @@ $(function () {
         }
     }
     $(".gBth").click(function () {
-        location.href='rankinglistE_t.html';
+        location.href='rankinglistE_t.html?tid='+sessionStorage.Tid;
     })
     //截取名字的长度
     function name() {

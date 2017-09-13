@@ -36,7 +36,8 @@ $(function () {
         // var testState = $('.main-content').attr('testState');
         var testState = 1;
         var checkedTypeName = "入门测";
-        window.location.href = "sharedrankingE_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
+        /*window.location.href = "sharedrankingE_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;*/
+        window.location.href = "sharedrankingE_t.html?tid="+sessionStorage.Tid;
     });
     // 全选
     var checkAll = false;//由于添加UI布局默认全选，则第一次点击"取消全选"初始值为false
