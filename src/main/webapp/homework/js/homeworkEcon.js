@@ -17,13 +17,14 @@ $(function () {
         getDictionary(stageType);
     });
     $(document).on("touchstart", "#grade", function () {
-        currentStage.stageCode = currentStage.stageCode.substring(0, 2);
         if (undefined == currentStage || currentStage== '') {
             layer.msg("请先选择学段");
         } else {
-
+            currentStage.stageCode = currentStage.stageCode.substring(0, 2);
             getDictionary(gradeType);
+
         }
+
     });
     $(document).on("touchstart", "#subject", function () {
 
@@ -62,10 +63,26 @@ $(function () {
 
                 if (type == stageType) {
                     $('.listOne').html(tabStr);
+                    $('.listOne').show();
+                    $('.listTwo').hide();
+                    $('.listThree').hide();
                 } else if (type == gradeType) {
                     $('.listTwo').html(tabStr);
+                    if($('.listTwo').find('li').length == 0){
+                        layer.msg("暂无数据");
+                        $('.listOne').hide();
+                        $('.listTwo').hide();
+                        $('.listThree').hide();
+                    }else {
+                        $('.listOne').hide();
+                        $('.listTwo').show();
+                        $('.listThree').hide();
+                    }
                 } else if (type == subjectType) {
                     $('.listThree').html(tabStr);
+                    $('.listOne').hide();
+                    $('.listTwo').hide();
+                    $('.listThree').show();
                 }
 
             }else {
@@ -75,32 +92,6 @@ $(function () {
             }
         });
     }
-
-    // //点击学段
-    $("#stage").click(function () {
-        $('.listOne').show();
-        $('.listTwo').hide();
-        $('.listThree').hide();
-    });
-    //点击年级
-    $("#grade").click(function () {
-        if($('.listTwo').find('li').length == 0){
-            layer.msg("暂无数据");
-            $('.listOne').hide();
-            $('.listTwo').hide();
-            $('.listThree').hide();
-        }else {
-            $('.listOne').hide();
-            $('.listTwo').show();
-            $('.listThree').hide();
-        }
-    });
-    //点击科目
-    $("#subject").click(function () {
-        $('.listOne').hide();
-        $('.listTwo').hide();
-        $('.listThree').show();
-    });
     $(document).on("touchstart", ".listOne li", function () {
         $('.listOne').hide();
         $('.listTwo').hide();
@@ -136,10 +127,10 @@ $(function () {
         $('.listOne').hide();
         $('.listTwo').hide();
         $('.listThree').hide();
-        // if ($('.searchE input').val() == "") {
-        //     layer.msg("请先填写试卷内容");
-        //     return;
-        // }
+        if ($('.searchE input').val() == "") {
+            layer.msg("请先填写试卷内容");
+            return;
+        }
         if (undefined == currentStage  || currentStage == "") {
             layer.msg("请先选择学段");
             return;
@@ -158,7 +149,11 @@ $(function () {
             'paperSubject': currentSubject.subjectCode,
             'paperName': $('.searchE input').val()
         };
-        ajaxRequest("POST", homework_s.t_getExcellent, JSON.stringify(params), function (e) {
+
+        // var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/queryExcellentHomeWorkContent.do";
+        // var url = "http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryExcellentHomeWorkContent.do";
+        var url = homework_s.t_getExcellent;
+        ajaxRequest("POST", url, JSON.stringify(params), function (e) {
             if (e.result) {
                 var dataList = e.data;
                 if (dataList.length > 0) {
@@ -190,7 +185,7 @@ $(function () {
     var gradeName = "";
     var subjectName = "";
     //选择作业列表点击事件
-    $('.searchCon ul li').click(function () {
+    $(document).on("touchstart",".searchCon ul li",function () {
         if ($(this).find('img').attr('src') == "images/yu2.png") {
             $(this).find('img').attr('src',"images/yu.png");
         } else {
