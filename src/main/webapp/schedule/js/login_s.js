@@ -26,7 +26,7 @@ $(function(){
             $('.enter').show();
             //判断老师是否绑定
             ajax_S(url.t_wxmo,WXnum,function(daTa){
-                if(daTa.data!='goE2'&&daTa.result!=false){
+                if(daTa.data!='goE2'&&daTa.result!=false&&daTa.result!=undefined){
                     location.href = 'login_t.html'
                 }else{
                     if(!localStorage.firstU2){
@@ -89,7 +89,7 @@ $(function(){
                 },1000);
                 return false;
            }
-            if(new Date().format("yyyy-MM-dd")>= location.useridTime){
+            if(new Date().format("yyyy-MM-dd hh:mm:ss")>= location.useridTime){
                 layer.msg('当前登录的账号已过期,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':''},function(e){
