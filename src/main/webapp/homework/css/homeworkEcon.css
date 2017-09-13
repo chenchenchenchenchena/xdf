@@ -328,3 +328,10 @@ tbody tr:nth-of-type(even){
     line-height:120px;
     margin-left: 20px;
 }
+.checked-img{
+    background: url("../images/yu2.png");
+}
+.no-checked-img{
+    background: url("../images/yu2.png");
+
+}
