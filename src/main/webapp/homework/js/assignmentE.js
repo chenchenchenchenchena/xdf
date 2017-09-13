@@ -2,8 +2,6 @@
  * Created by zyc on 2017/9/7.
  */
 $(function () {
-    sessionStorage.paperId = "32273901-279E-450F-AAFD-BB96E292AF26";
-    sessionStorage.paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
     if (sessionStorage.paperUrl) {
         $('.sResolve a').attr("href", sessionStorage.paperUrl);
     }
@@ -176,27 +174,6 @@ $(function () {
             $(this).attr("src","images/yu.png");
         }
     })
-    //点击筛选作业内容按钮
-    $(".eBtn").click(function () {
-        var checkNum=0;
-        var contentName="";
-        for(var i=0;i<$(".searchCon li").length;i++){
-            if($(".searchCon li").eq(i).find("img").attr("src")=="images/yu2.png"){
-                contentName+=$(".searchCon li").eq(i).find("h3").html()+";";
-                checkNum++;
-            }
-        }
-        contentName = contentName.substring(0, contentName.length - 1);
-        console.log(contentName);
-        console.log(checkNum);
-        if(checkNum==0){
-            layer.msg("请选择作业内容");
-        }else{
-            sessionStorage.contentName=contentName;
-            console.log(sessionStorage.contentName);
-           location.href="AssignmentE.html";
-        }
-    })
     //作业汇总
     var summaryData={"Tcid":sessionStorage.Tid}
     ajax_S(homework_s.t_summary,summaryData,summaryAjax);
@@ -265,9 +242,9 @@ $(function () {
             'paperId': paperID,
             'paperName': paperName,
             'paperUrl': paperUrl,
-            'paperClass': "四年级",
-            'paperStage': "第一阶段",
-            'paperSubject': "第三课次",
+            'paperClass': sessionStorage.gradeName,
+            'paperStage': sessionStorage.stageName,
+            'paperSubject': sessionStorage.subjectName,
             'fileInfo': ""
         };
         ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
