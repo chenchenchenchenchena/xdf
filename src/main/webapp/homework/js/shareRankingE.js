@@ -2,6 +2,7 @@
  * Created by zyc on 2017/9/10.
  */
 $(function () {
+    var loading;
     // var voiceCount = 0;
     // ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
     //     var Month = e.data.homeworkTime.substr(5, 2);
@@ -18,23 +19,23 @@ $(function () {
     //     $('.title_s p').eq(1).html(data.teacherName + '老师');
     //     $('.title_s p').eq(2).html('日期:' + data.homeworkTime);
     // });
-    takeScreenshot();
+    /*takeScreenshot();*/
     //获取电子作业排行数据
     getRankingData();
-
     function getRankingData() {
         var params = {
-            'Tcid': getRequest('tid').tid,
+            /*'Tcid': getRequest('tid').tid,*/
+            'Tcid':"0fa99b19470c414abb65239c477f2ff9",
             'studentNos':JSON.parse(localStorage.studentNos).checkStuArry
         };
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
+            loading=layer.load();
             if (e.result) {
                 var excellenHomrWork = e.excellenHomrWork;
                 $('.title_s i').html(e.className);
                 $('.title_s p').eq(1).html(e.teacherName + '老师');
                 $('.title_s p').eq(2).html('日期:' + e.homeworkTime);
                 if (undefined != excellenHomrWork) {
-                    var strHtml = "";
                     for (var i = 0; i < excellenHomrWork.length; i++) {
                         var ranking = excellenHomrWork[i].ranking;
                         var studentName = excellenHomrWork[i].studentName;
@@ -47,20 +48,26 @@ $(function () {
                             avater = studentName;
                         }
                         if(ranking=="1"){
-                            strHtml='<li>'+
+                            var strHtml='<li>'+
                                 '<span class="rankleft"><i class="rankfirst"></i><i>'+avater+'</i><i>'+studentName+'</i></span>'+
                                 '<span class="rankright"><i>'+times+'</i><i>'+score+'</i></span>'+
                                 '</li>';
                         }else{
-                            strHtml='<li>'+
+                            var strHtml='<li>'+
                                 '<span class="rankleft"><i>'+ranking+'</i><i>'+avater+'</i><i>'+studentName+'</i></span>'+
                                 '<span class="rankright"><i>'+times+'</i><i>'+score+'</i></span>'+
                                 '</li>';
                         }
-
                         $('.rankli').append(strHtml);
-                    }
 
+                    }
+                    $(".rankli,.shared-content").show();
+                    layer.close(loading);
+                    takeScreenshot();
+                }else{
+                    layer.close(loading);
+                    $('.shared-content').hide();
+                    $('.no-data').show();
                 }
             }
         });

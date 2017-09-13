@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>分享后排行榜</title>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -26,12 +25,21 @@
         .none {
             display: none;
         }
+        /*无数据*/
+        .no-data{
+            margin: 126px 0 0 262px;
+        }
+        .no-data p{
+            font-size: 30px;
+            color: #aeadad;
+            margin: 22px 0 0 18px;
+        }
     </style>
     <script src="../common/js/jquery.js"></script>
     <script src="../common/js/scale.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="../common/js/ajax.js"></script>
-    <script src="../common/js/layer.js"></script>
+    <script src="../common/js/layer-v2.1/layer/layer.js"></script>
     <script src="../learningSituation/js/jquery.base64.js"></script>
     <script src="../learningSituation/js/html2canvas.js"></script>
     <script src="../learningSituation/js/canvas2image.js"></script>
@@ -41,14 +49,14 @@
 <div id="imgs">
     <img src=""/>
 </div>
-<div class="shared-content">
+<div class="shared-content none">
     <div class="title_s">
         <p><i></i></p>
         <p></p>
         <p></p>
     </div>
     <div class="ranklist-box">
-        <ul class="rankli" style="">
+        <ul class="rankli none">
             <li class="rankT">
                 <span>排名</span><span>姓名</span><span class="rTime">用时</span><span>分数</span>
             </li>
@@ -59,33 +67,10 @@
         </ul>
     </div>
 </div>
-<!--<div class="homework_big">
-	<div class="homework_small">
-        <div class="homework_small_title">
-            <h4></h4>
-        </div>
-        <div class="answer_s">
-            <p></p>
-        </div>
-        <div class="imgBox_s">
-                <ul id="audio_2" style="">
-                    <li class="audio_box">
-                        <div><audio id="audio_audio21" preload="auto"><source src="http://dt.staff.xdf.cn/xdfdtmanager/homework/73/HDXP3EB03/2017-07-25/b2a4b8b2090a404387389deb7bc30c87.mp3" type="audio/mpeg"></audio><i class="play-icon"></i></div><span class="voice_lenth">1''</span>
-                    </li>
-                </ul>
-                <div class="imgBox" id="imagBox_2" style="display:block;">
-                    <div>
-                        <img src="homework/73/HDXP3EB03/2017-07-25/3N61_RURG0DZA_Kwa2QLB5TgInDZNcWNHnf2uHMGLLVhqzHojPb79uj8R2udbhOl.jpg" alt="">
-                    </div>
-                    <div>
-                        <img src="homework/73/HDXP3EB03/2017-07-25/rx2fPhObM3OYJ9R9uU8b7MxcAXTOHSuiLvVfRoA97zLY7LuzCGjhj2ATy4CnnUdL.jpg" alt="">
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>-->
-<!--<script src="js/voice_check.js"></script>-->
-
+<div class="no-data none">
+    <img src="images/noDatas.png"  />
+    <p>暂无排行信息</p>
+</div>
 <script src="js/shareRankingE.js"></script>
 </body>
 </html>
