@@ -112,7 +112,7 @@ $(function(){
                             localStorage.removeItem('userId_stu');
                             localStorage.removeItem('SId');
                             localStorage.removeItem('Phonenum');
-                            // localStorage.removeItem('firstU2');
+                            localStorage.removeItem('firstU2');
                             location.href = Json.logoutUrl;
                         }
                     })
@@ -128,7 +128,7 @@ $(function(){
                             localStorage.removeItem('userId_stu');
                             localStorage.removeItem('SId');
                             localStorage.removeItem('Phonenum');
-                            // localStorage.removeItem('firstU2');
+                            localStorage.removeItem('firstU2');
                             location.href = Json.logoutUrl;
                         }
                     })
