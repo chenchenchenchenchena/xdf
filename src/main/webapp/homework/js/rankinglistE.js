@@ -3,6 +3,7 @@
  */
 $(function () {
     var voiceCount = 0;
+    var loading;
    /* ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
         var Month = e.data.homeworkTime.substr(5, 2);
         var Day = e.data.homeworkTime.substr(8, 2);
@@ -68,8 +69,9 @@ $(function () {
     getRankingData();
 
     function getRankingData() {
-
-        var params = {'Tcid': "be0a11d4dde94b2a98c3b4d066baf9f1"};
+        loading=layer.load();
+        /*var params = {'Tcid':getRequest('tid').tid};*/
+        var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
                /* var homeworkTime = e.homeworkTime;*/
@@ -107,6 +109,16 @@ $(function () {
                             "<span class='stuScore'>" + score + "</span></li>";
                     }
                     $('.ranklibe').append(strHtml);
+                    layer.close(loading);
+                    $('.ranklist-box').show();
+                    $('.title_s').show();
+                    $('.shareBtn').show();
+                }else{
+                    layer.close(loading);
+                    $('.ranklist-box').hide();
+                    $('.title_s').hide();
+                    $('.shareBtn').hide();
+                    $('.no-data').show();
                 }
             }
         });

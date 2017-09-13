@@ -4,7 +4,6 @@ $(function(){
     // if(!sessionStorage.openid){
     //     sessionStorage.openid = 'abcd123'
     // }
-    debugger;
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
@@ -39,13 +38,13 @@ $(function(){
                             });
                         }
                     }else{
-                        ajax_S(url.t_stulas,calbac,function(e){
+                        ajax_S(url.t_stulas,calbac,function(daTa){
                             if(e.result==true){
-                                localStorage.userId_stu = e.data.userId;
-                                localStorage.Phonenum = e.data.mobile;
-                                localStorage.SId  =  e.sid;
+                                localStorage.userId_stu = daTa.data.userId;
+                                localStorage.Phonenum = daTa.data.mobile;
+                                localStorage.SId  =  daTa.sid;
                                 var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                                location.useridTime =judgFailTime(time_)
+                                localStorage.useridTime =judgFailTime(time_)
                             }
                         })
                     }
@@ -55,13 +54,13 @@ $(function(){
             if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
-                    ajax_S(url.t_stulas,calbac,function(e){
+                    ajax_S(url.t_stulas,calbac,function(daTa){
                         if(e.result==true){
-                            localStorage.userId_stu = e.data.userId;
-                            localStorage.Phonenum = e.data.mobile;
-                            localStorage.SId  =  e.sid;
+                            localStorage.userId_stu = daTa.data.userId;
+                            localStorage.Phonenum = daTa.data.mobile;
+                            localStorage.SId  =  daTa.sid;
                             var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                            location.useridTime =judgFailTime(time_)
+                            localStorage.useridTime =judgFailTime(time_)
                         }
                     })
                 }else{
@@ -72,6 +71,17 @@ $(function(){
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
+            if(!localStorage.useridTime){
+                ajax_S(url.t_stulas,calbac,function(daTa){
+                    if(e.result==true){
+                        localStorage.userId_stu = daTa.data.userId;
+                        localStorage.Phonenum = daTa.data.mobile;
+                        localStorage.SId  =  daTa.sid;
+                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                        localStorage.useridTime =judgFailTime(time_)
+                    }
+                })
+            }
             if(e.data.userid==''){
                 var stumore  = {'StudentCode':e.data.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
                 ajax_S(url.s_bind,stumore,function(e){
@@ -90,16 +100,18 @@ $(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
                         if(e.result){
                             location.href = e.logoutUrl;
+                            localStorage.removeItem('useridTime')
                         }
                     })
                 },1000);
                 return false;
            }
-            if(new Date().format("yyyy-MM-dd hh:mm:ss")>= location.useridTime){
+            if(new Date().format("yyyy-MM-dd hh:mm:ss")>= localStorage.useridTime){
                 layer.msg('当前登录的账号已过期,正在前往重新登陆');
                 setTimeout(function(){
-                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':''},function(e){
+                    ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
                         if(e.result){
+                            localStorage.removeItem('useridTime');
                             location.href = e.logoutUrl;
                         }
                     })

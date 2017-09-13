@@ -28,7 +28,7 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o = "http://10.73.33.63:8080/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -243,9 +243,18 @@ Date.prototype.format = function(fmt) {
         var b = 2; //分钟数
         time.setMinutes(time.getMinutes() + b, time.getSeconds(), 0);
         var time_t = time.toLocaleString().replace(/\//g,'-');
-        var time_o =time_t.substring(0,10);
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        var time_l =year+'-'+month+'-'+day+' ';
         var time_m = time_t.substring(time_t.indexOf('午')+1,time.length);
-        return time_o+time_m
+        return time_l+time_m
     }
 // 获取路径的参数
 function getRequest() {
