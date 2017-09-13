@@ -2,8 +2,6 @@
  * Created by zyc on 2017/9/7.
  */
 $(function () {
-    sessionStorage.paperId = "32273901-279E-450F-AAFD-BB96E292AF26";
-    sessionStorage.paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
     if (sessionStorage.paperUrl) {
         $('.sResolve a').attr("href", sessionStorage.paperUrl);
     }
@@ -176,69 +174,7 @@ $(function () {
             $(this).attr("src","images/yu.png");
         }
     })
-    //点击筛选作业内容按钮
-    $(".eBtn").click(function () {
-        var checkNum=0;
-        var contentName="";
-        for(var i=0;i<$(".searchCon li").length;i++){
-            if($(".searchCon li").eq(i).find("img").attr("src")=="images/yu2.png"){
-                contentName+=$(".searchCon li").eq(i).find("h3").html()+";";
-                checkNum++;
-            }
-        }
-        contentName = contentName.substring(0, contentName.length - 1);
-        console.log(contentName);
-        console.log(checkNum);
-        if(checkNum==0){
-            layer.msg("请选择作业内容");
-        }else{
-            sessionStorage.contentName=contentName;
-            console.log(sessionStorage.contentName);
-           location.href="AssignmentE.html";
-        }
-    })
-    //作业汇总
-    var summaryData={"Tcid":sessionStorage.Tid}
-    ajax_S(homework_s.t_summary,summaryData,summaryAjax);
-    function summaryAjax(e) {
-        console.log(e);
-        if(e.code=="200"){
-            var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
-            $(".gHeader").append(recordNum);
-            if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
-                for(var i=0;i<e.data.data.commitArr.length;i++){
-                    var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th></tr>';
-                    $("tbody").append(table);
-                }
-            }else{
-                var table='<tr>没有已交作业的学生</tr>';
-                $("tbody").append(table);
-            }
 
-            if(e.data.data.nocommitArr!=undefined&&e.data.data.nocommitArr.length>0){
-                for(var i=0;i<e.data.data.nocommitArr.length;i++){
-                    var nocommit='<li><span>'+e.data.data.nocommitArr[i].studentName+'</span><span studentNo='+e.data.data.nocommitArr[i].studentNo+'>'+e.data.data.nocommitArr[i].studentName+'</span></li>';
-                    $(".noHw ul").append(nocommit);
-                    for(var i=0;i<$(".noHw li").length;i++){
-                        var nameHtml=$(".noHw li").eq(i).find("span").eq(0).html();
-                        if (nameHtml.length > 2) {
-                            var avater = nameHtml.substring(nameHtml.length - 2, nameHtml.length);
-                            $(".noHw li").eq(i).find("span").eq(0).html(avater)
-                        } else {
-                            var avater = nameHtml;
-                            $(".noHw li").eq(i).find("span").eq(0).html(avater);
-                        }
-                    }
-                }
-            }else{
-                var nocommit='<li>没有未交作业的学生</li>';
-                $(".noHw ul").append(nocommit);
-            }
-        }
-    }
-    $(".gBth").click(function () {
-        location.href='rankinglistE_t.html?tid='+sessionStorage.Tid;
-    })
     /**
      * 提交布置作业
      */
@@ -265,9 +201,9 @@ $(function () {
             'paperId': paperID,
             'paperName': paperName,
             'paperUrl': paperUrl,
-            'paperClass': "四年级",
-            'paperStage': "第一阶段",
-            'paperSubject': "第三课次",
+            'paperClass': sessionStorage.gradeName,
+            'paperStage': sessionStorage.stageName,
+            'paperSubject': sessionStorage.subjectName,
             'fileInfo': ""
         };
         ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
