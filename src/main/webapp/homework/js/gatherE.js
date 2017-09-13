@@ -119,7 +119,7 @@ $(document).on("touchstart",".report",function () {
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
-                window.location.href = e.url+'?paperId=32273901-279E-450F-AAFD-BB96E292AF26';
+                window.location.href = e.url;
             }
         }
     });
