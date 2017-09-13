@@ -72,11 +72,11 @@ $(function(){
             };
             sessionStorage.stuNumber = e.data.studentNo;
             if(!localStorage.useridTime){
-                ajax_S(url.t_stulas,calbac,function(e){
+                ajax_S(url.t_stulas,calbac,function(daTa){
                     if(e.result==true){
-                        localStorage.userId_stu = e.data.userId;
-                        localStorage.Phonenum = e.data.mobile;
-                        localStorage.SId  =  e.sid;
+                        localStorage.userId_stu = daTa.data.userId;
+                        localStorage.Phonenum = daTa.data.mobile;
+                        localStorage.SId  =  daTa.sid;
                         var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
                         localStorage.useridTime =judgFailTime(time_)
                     }
