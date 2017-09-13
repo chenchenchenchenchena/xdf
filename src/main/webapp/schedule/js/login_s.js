@@ -95,7 +95,7 @@ $(function(){
                 },1000);
                 return false;
            }
-            if(new Date().format("yyyy-MM-dd hh:mm:ss")>= location.useridTime){
+            if(new Date().format("yyyy-MM-dd hh:mm:ss")>= localStorage.useridTime){
                 layer.msg('当前登录的账号已过期,正在前往重新登陆');
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':''},function(e){
