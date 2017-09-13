@@ -64,7 +64,13 @@ $(function(){
                             var b = a.getTime()+1000*60*2;
                             localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
                         }
-                    })
+                    });
+                    if(!localStorage.userId_stu){
+                        ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                            localStorage.firstU2 = '1';
+                            location.href = e.url;
+                        });
+                    }
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
@@ -285,13 +291,13 @@ $(function(){
                     sessionStorage.mobile=e.data.mobile;
                     sessionStorage.schoolId=e.data.schoolId;
                     layer.msg('绑定成功');
+                    $('.deterAss').hide();
                     if(sessionStorage.studayCanfig=='studay'){
                         location.href = '../learningSituation/report_t.html';
                         sessionStorage.removeItem('studayCanfig')
                     }else{
                         location.href = 'schedule_s.html';
                     }
-                    $('.deterAss').hide();
                 }
             })
         // }
