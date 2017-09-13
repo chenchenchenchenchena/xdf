@@ -114,6 +114,7 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 $(document).on("touchstart",".report",function () {
     var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/getStudentReportUrl.do";
     var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};
+    /*var params = {"testId":$(this).attr("data-testId")};*/
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
