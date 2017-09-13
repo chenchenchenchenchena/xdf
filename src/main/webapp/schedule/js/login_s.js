@@ -101,8 +101,12 @@ $(function(){
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
                         if(Json.result){
+                            localStorage.removeItem('useridTime');
+                            localStorage.removeItem('userId_stu');
+                            localStorage.removeItem('SId');
+                            localStorage.removeItem('Phonenum');
+                            localStorage.removeItem('firstU2');
                             location.href = Json.logoutUrl;
-                            localStorage.removeItem('useridTime')
                         }
                     })
                 },1000);
@@ -114,6 +118,10 @@ $(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
                         if(Json.result){
                             localStorage.removeItem('useridTime');
+                            localStorage.removeItem('userId_stu');
+                            localStorage.removeItem('SId');
+                            localStorage.removeItem('Phonenum');
+                            localStorage.removeItem('firstU2');
                             location.href = Json.logoutUrl;
                         }
                     })
