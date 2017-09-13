@@ -28,7 +28,7 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o = "http://10.73.33.63:8080/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -36,8 +36,10 @@ if (window.location.host == onlineUrl) {//正式环境
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         //新的appid
         sessionStorage.signal = 0;
-        appId =  'wx67e16b7247bde1a8';
-        secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
+        // appId =  'wx67e16b7247bde1a8';
+        // secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
+        appId =  'wx559791e14e9ce521';
+        secreT = 'baa4373d5a8750c69b9d1655a2e31370';
     }else{
         sessionStorage.removeItem('signal');
     }
@@ -232,17 +234,28 @@ Date.prototype.format = function(fmt) {
     }
     return fmt;
 };
+
 //日期加上天数得到新的日期
 //dateTemp 需要参加计算的日期，days要添加的天数，返回新的日期，日期格式：YYYY-MM-DD
     function judgFailTime(time_s) {
         var x = time_s; // 取得的TextBox中的时间
         var time = new Date(x.replace("-","/"));
-
         var b = 2; //分钟数
         time.setMinutes(time.getMinutes() + b, time.getSeconds(), 0);
-        return time
+        var time_t = time.toLocaleString().replace(/\//g,'-');
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        if(month<10){
+            month = '0'+month
+        }
+        if(day<10){
+            day = '0'+day
+        }
+        var time_l =year+'-'+month+'-'+day+' ';
+        var time_m = time_t.substring(time_t.indexOf('午')+1,time.length);
+        return time_l+time_m
     }
-
 // 获取路径的参数
 function getRequest() {
     var url = location.search; //获取url中"?"符后的字串
