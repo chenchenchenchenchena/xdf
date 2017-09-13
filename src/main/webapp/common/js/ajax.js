@@ -45,7 +45,7 @@ if (window.location.host == onlineUrl) {//正式环境
     }
 // 接口路径
 var url = {
-    'e_elog': url_o+'e2Login/login.do',//e2登录
+    'e_elog': 'http://10.73.33.63:8080/xdfdtmanagere2Login/login.do',//e2登录
     'e_elast':url_o+'u2Login/login.do', //u2Dengl
     'w_xmor': url_o+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_open': url_o+'wechatSignature/getUserInfo.do',//获取openid
