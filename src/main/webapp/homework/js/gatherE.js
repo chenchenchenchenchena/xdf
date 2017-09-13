@@ -4,8 +4,9 @@
 //作业汇总
 var loading;
 var arr;
-var summaryData={"Tcid":/*sessionStorage.Tid*/"0fa99b19470c414abb65239c477f2ff9"}
-ajax_S(homework_s.t_summary,summaryData,summaryAjax);
+var summaryData={"Tcid":"0fa99b19470c414abb65239c477f2ff9"};
+/*ajax_S(homework_s.t_summary,summaryData,summaryAjax);*/
+ajaxRequest("POST", homework_s.t_summary,summaryData,summaryAjax)
 function summaryAjax(e) {
     loading=layer.load();
     console.log(e);
@@ -15,7 +16,7 @@ function summaryAjax(e) {
         $(".gHeader").show();
         if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
             for(var i=0;i<e.data.data.commitArr.length;i++){
-                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report"><a href=""><img src="images/clipboard.png" /></a></td></tr>';
+                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report"><img src="images/clipboard.png" /></td></tr>';
                 $("tbody").append(table);
             }
             $("table").show();
