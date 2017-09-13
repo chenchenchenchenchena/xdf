@@ -20,7 +20,7 @@ $(function () {
         $('.avatar-icon').html(studentName);
     }
     $('#name').html("姓名：" + studentName);
-    var studentNum = stuCode.substring(0,2)+"**"+stuCode.substring(stuCode.length-2,stuCode.length);
+    var studentNum = stuCode.substring(0, 2) + "**" + stuCode.substring(stuCode.length - 2, stuCode.length);
 
     $('#studentNumber').html("学员号：" + studentNum);
     //获取该学生所报班级信息
@@ -39,7 +39,7 @@ $(function () {
                     var className = dataList[i].ClassName;
                     var Teachers = dataList[i].Teachers;
                     var classCode = dataList[i].ClassCode;
-                    classCodeList += classCode+",";
+                    classCodeList += classCode + ",";
 
                     classListStr += '<div class="item">' +
                         '<div class="item-top">' +
@@ -50,17 +50,22 @@ $(function () {
                         '<ul class="fr content-lable">';
                     if (remark == 2) {
                         //表示：学生自己查看
-                        classListStr += '<a href="../learningSituation/report_s.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '"><li class="lable">学情</li></a><a href="../homework/homeworklist_s.html"><li class="lable">作业详情</li></a>';
+                        classListStr += '<a href="../learningSituation/report_s.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
+                            '<li class="lable">学情</li></a>' +
+                            '<a href="../homework/homeworklist_s.html">' +
+                            '<li class="lable">作业详情</li></a>';
+                        classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
+                            "<li class='lable'>作业报告</li></a>"
                     } else {
                         //表示：老师查看学生
-                        classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '"><li class="lable">学情</li></a>';
+                        if (Teachers.indexOf(localStorage.teacherName) >= 0) {
+                            classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
+                                '<li class="lable">学情</li></a>';
+                            classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
+                                "<li class='lable'>作业报告</li></a>";
+                        }
                     }
-                    classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
-                        "<li class='lable'>作业报告</li></a>" +
-                        "</ul>" +
-                        "</div>" +
-                        "<div class='line-light space-30'></div>" +
-                        "</div>";
+                    classListStr += "</ul></div><div class='line-light space-30'></div></div>";
 
                 }
                 sessionStorage.classCodeList = classCodeList;
