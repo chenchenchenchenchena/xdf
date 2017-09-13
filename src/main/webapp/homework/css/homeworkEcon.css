@@ -66,34 +66,34 @@ body{
     padding-left: 5px;
 }
 .listOne{
-    width:163px;
-    left:30px;
+    width: 112px;
+    left: 169px;
 }
 .listOne li{
-    width:158px;
+    width: 107px;
 }
 .listTwo{
-    width:113px;
-    left:218px;
+    width: 113px;
+    left: 308px;
 }
 .listTwo li,.listThree li,.listFour li{
-    width:108px;
+    width: 108px;
 }
 .list .active{
     background: #00ba97;
 }
 .listThree{
-    width:113px;
-    left:355px;
+    width: 114px;
+    left: 445px;
 }
 .listFour{
-    width:113px;
+    width: 105px;
     left:494px;
 }
 .searchEmpty{
     width:220px;
     margin: 110px auto 0;
-    display: none;
+    display: block;
 }
 .searchEmpty p{
     color: #aeadad;
@@ -327,11 +327,4 @@ tbody tr:nth-of-type(even){
     color: #000;
     line-height:120px;
     margin-left: 20px;
-}
-.checked-img{
-    background: url("../images/yu2.png");
-}
-.no-checked-img{
-    background: url("../images/yu2.png");
-
 }
