@@ -38,11 +38,11 @@ $(function(){
                             });
                         }
                     }else{
-                        ajax_S(url.t_stulas,calbac,function(e){
+                        ajax_S(url.t_stulas,calbac,function(daTa){
                             if(e.result==true){
-                                localStorage.userId_stu = e.data.userId;
-                                localStorage.Phonenum = e.data.mobile;
-                                localStorage.SId  =  e.sid;
+                                localStorage.userId_stu = daTa.data.userId;
+                                localStorage.Phonenum = daTa.data.mobile;
+                                localStorage.SId  =  daTa.sid;
                                 var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
                                 localStorage.useridTime =judgFailTime(time_)
                             }
@@ -54,11 +54,11 @@ $(function(){
             if(e.data.userid==undefined||e.data.userid==''||!localStorage.userId_stu){
                 //进行过u2登录
                 if( localStorage.firstU2 ){
-                    ajax_S(url.t_stulas,calbac,function(e){
+                    ajax_S(url.t_stulas,calbac,function(daTa){
                         if(e.result==true){
-                            localStorage.userId_stu = e.data.userId;
-                            localStorage.Phonenum = e.data.mobile;
-                            localStorage.SId  =  e.sid;
+                            localStorage.userId_stu = daTa.data.userId;
+                            localStorage.Phonenum = daTa.data.mobile;
+                            localStorage.SId  =  daTa.sid;
                             var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
                             localStorage.useridTime =judgFailTime(time_)
                         }
@@ -111,8 +111,8 @@ $(function(){
                 setTimeout(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
                         if(e.result){
+                            localStorage.removeItem('useridTime');
                             location.href = e.logoutUrl;
-
                         }
                     })
                 },1000);
