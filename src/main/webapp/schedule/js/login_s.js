@@ -4,7 +4,7 @@ $(function(){
     // if(!sessionStorage.openid){
     //     sessionStorage.openid = 'abcd123'
     // }
-
+    debugger;
     if(!sessionStorage.openid){
         wechatCode(location.href)
     }
