@@ -6,6 +6,7 @@ $(function () {
     var gradeType = "dict_tps_class_info"; //年级
     var subjectType = "dict_tps_subject_info"; //科目
     var stageList = [];
+    var gradeList = [];
     var subjectList = [];
     var currentStage;
     var currentGrade;
@@ -13,22 +14,37 @@ $(function () {
 
 
     $(document).on("touchstart", "#stage", function () {
+        if (stageList == undefined || stageList.length == 0) {
 
-        getDictionary(stageType);
+            getDictionary(stageType);
+        } else {
+            dealClassData(stageList, stageType);
+        }
+
     });
     $(document).on("touchstart", "#grade", function () {
-        if (undefined == currentStage || currentStage== '') {
+        if (undefined == currentStage || currentStage == '') {
             layer.msg("请先选择学段");
         } else {
             currentStage.stageCode = currentStage.stageCode.substring(0, 2);
-            getDictionary(gradeType);
+            if (gradeList == undefined || gradeList.length == 0) {
+
+                getDictionary(gradeType);
+            } else {
+                dealClassData(gradeList, gradeType);
+            }
 
         }
 
     });
     $(document).on("touchstart", "#subject", function () {
 
-        getDictionary(subjectType);
+        if (subjectList == undefined || subjectList.length == 0) {
+
+            getDictionary(subjectType);
+        } else {
+            dealClassData(subjectList, subjectType);
+        }
     });
     function getDictionary(type) {
         var type = type;
@@ -39,59 +55,71 @@ $(function () {
             if (e.code == 200) {
                 stageList = [];
                 subjectList = [];
-
+                gradeList = [];
                 var tabTypes = e.data;
-                var tabStr = "";
-                if(undefined == tabTypes || tabTypes.length <=0 ){
+                if (undefined == tabTypes || tabTypes.length <= 0) {
                     layer.msg("暂无数据");
                     return;
                 }
-                for (var i = 0; i < tabTypes.length; i++) {
-                    //将获取的tCode保存
-                    if (type == stageType) {
-                        stageList.push(tabTypes[i].tCode);
-                        tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
-                    } else if (type == gradeType) {
-                        if (tabTypes[i].tCode.indexOf(currentStage.stageCode) >= 0) {
-                            tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
-                        }
-                    } else if (type == subjectType) {
-                        subjectList.push(tabTypes[i].tCode);
-                        tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
-                    }
-                }
-
                 if (type == stageType) {
-                    $('.listOne').html(tabStr);
-                    $('.listOne').show();
-                    $('.listTwo').hide();
-                    $('.listThree').hide();
+                    stageList = tabTypes;
                 } else if (type == gradeType) {
-                    $('.listTwo').html(tabStr);
-                    if($('.listTwo').find('li').length == 0){
-                        layer.msg("暂无数据");
-                        $('.listOne').hide();
-                        $('.listTwo').hide();
-                        $('.listThree').hide();
-                    }else {
-                        $('.listOne').hide();
-                        $('.listTwo').show();
-                        $('.listThree').hide();
-                    }
-                } else if (type == subjectType) {
-                    $('.listThree').html(tabStr);
-                    $('.listOne').hide();
-                    $('.listTwo').hide();
-                    $('.listThree').show();
+                    gradeList = tabTypes;
                 }
+                if (type == subjectType) {
+                    subjectList = tabTypes;
+                }
+                dealClassData(tabTypes,type);
 
-            }else {
+            } else {
                 $('.listOne').hide();
                 $('.listTwo').hide();
                 $('.listThree').hide();
             }
         });
     }
+
+    function dealClassData(tabTypes, type) {
+
+        var tabStr = "";
+        for (var i = 0; i < tabTypes.length; i++) {
+            //将获取的tCode保存
+            if (type == stageType) {
+                tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
+            } else if (type == gradeType) {
+                if (tabTypes[i].tCode.indexOf(currentStage.stageCode) >= 0) {
+                    tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
+                }
+            } else if (type == subjectType) {
+                tabStr += "<li tCode='" + tabTypes[i].tCode + "' tName='" + tabTypes[i].tName + "'>" + tabTypes[i].tName + "</li>";
+            }
+        }
+
+        if (type == stageType) {
+            $('.listOne').html(tabStr);
+            $('.listOne').show();
+            $('.listTwo').hide();
+            $('.listThree').hide();
+        } else if (type == gradeType) {
+            $('.listTwo').html(tabStr);
+            if ($('.listTwo').find('li').length == 0) {
+                layer.msg("暂无数据");
+                $('.listOne').hide();
+                $('.listTwo').hide();
+                $('.listThree').hide();
+            } else {
+                $('.listOne').hide();
+                $('.listTwo').show();
+                $('.listThree').hide();
+            }
+        } else if (type == subjectType) {
+            $('.listThree').html(tabStr);
+            $('.listOne').hide();
+            $('.listTwo').hide();
+            $('.listThree').show();
+        }
+    }
+
     $(document).on("touchstart", ".listOne li", function () {
         $('.listOne').hide();
         $('.listTwo').hide();
@@ -101,7 +129,7 @@ $(function () {
         $(".searchE span").eq(0).html($(this).html());
         $(".searchE span").eq(0).css("color", "#000");
         $('#grade').html("年级");
-        $('#grade').css("color","#a9a9a9");
+        $('#grade').css("color", "#a9a9a9");
         currentGrade = "";
     });
     $(document).on("touchstart", ".listTwo li", function () {
@@ -131,11 +159,11 @@ $(function () {
         //     layer.msg("请先填写试卷内容");
         //     return;
         // }
-        if (undefined == currentStage  || currentStage == "") {
+        if (undefined == currentStage || currentStage == "") {
             layer.msg("请先选择学段");
             return;
         }
-        if (undefined ==  currentGrade || currentGrade == "") {
+        if (undefined == currentGrade || currentGrade == "") {
             layer.msg("请先选择年级");
             return;
         }
@@ -174,7 +202,7 @@ $(function () {
                     showEmptyHtml();
                     layer.msg(e.message);
                 }
-            }else {
+            } else {
                 showEmptyHtml();
                 layer.msg(e.message);
             }
@@ -185,6 +213,7 @@ $(function () {
         $('.searchEmpty').show();
         $('.eBtn').hide();
     }
+
     function hideEmptyHtml() {
         $('.searchCon').show();
         $('.searchEmpty').hide();
@@ -196,12 +225,13 @@ $(function () {
     var gradeName = "";
     var subjectName = "";
     //选择作业列表点击事件
-    $(document).on("touchstart",".searchCon ul li",function () {
+    $(document).on("touchstart", ".searchCon ul li", function () {
         if ($(this).find('img').attr('src') == "images/yu2.png") {
-            $(this).find('img').attr('src',"images/yu.png");
+            $(this).find('img').attr('src', "images/yu.png");
         } else {
-            $('.searchCon ul li').find('img').attr('src',"images/yu.png");
-            $(this).find('img').attr('src',"images/yu2.png");;
+            $('.searchCon ul li').find('img').attr('src', "images/yu.png");
+            $(this).find('img').attr('src', "images/yu2.png");
+            ;
             paperUrl = $(this).find('h3').attr("paperId");
             stageName = $(this).find('.stage-').html();
             gradeName = $(this).find('.grade-').html();
