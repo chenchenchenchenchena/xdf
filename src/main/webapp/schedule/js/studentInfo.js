@@ -45,27 +45,34 @@ $(function () {
                         '<div class="item-top">' +
                         '<p class="content-text-font">' + className + '</p>' +
                         '<p class="content-text-small">授课老师：' + Teachers + '</p>' +
-                        '</div>' +
-                        '<div class="item-blow">' +
-                        '<ul class="fr content-lable">';
+                        '</div>';
                     if (remark == 2) {
                         //表示：学生自己查看
-                        classListStr += '<a href="../learningSituation/report_s.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
+                        classListStr += '<div class="item-blow">' +
+                        '<ul class="fr content-lable"><a href="../learningSituation/report_s.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
                             '<li class="lable">学情</li></a>' +
                             '<a href="../homework/homeworklist_s.html">' +
                             '<li class="lable">作业详情</li></a>';
                         classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
-                            "<li class='lable'>作业报告</li></a>"
+                            "<li class='lable'>作业报告</li></a>";
+
+                        classListStr += "</ul></div><div class='line-light space-30'></div></div>";
                     } else {
                         //表示：老师查看学生
                         if (Teachers.indexOf(localStorage.teacherName) >= 0) {
-                            classListStr += '<a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
+                            classListStr += '<div class="item-blow">' +
+                                '<ul class="fr content-lable"><a href="../learningSituation/reportstu_t.html?studentNo=' + stuCode + '&tCode=' + tCode + '&studentName=' + studentName + '">' +
                                 '<li class="lable">学情</li></a>';
                             classListStr += "<a href= 'homework_report.html?classCode=" + classCode + "&schoolId=" + schoolId + "&studentNo=" + stuCode + "&className=" + className + "&remark=" + remark + "'>" +
                                 "<li class='lable'>作业报告</li></a>";
+
+                            classListStr += "</ul></div><div class='line-light space-30'></div></div>";
+                        }else {
+                            classListStr += "</ul><div class='line-light space-30'></div></div>";
                         }
+
                     }
-                    classListStr += "</ul></div><div class='line-light space-30'></div></div>";
+
 
                 }
                 sessionStorage.classCodeList = classCodeList;
