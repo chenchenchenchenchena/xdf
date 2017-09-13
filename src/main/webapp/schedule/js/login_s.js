@@ -43,6 +43,8 @@ $(function(){
                             localStorage.userId_stu = e.data.userId;
                             localStorage.Phonenum = e.data.mobile;
                             localStorage.SId  =  e.sid;
+                            var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                            location.useridTime =judgFailTime(time_)
                         })
                     }
                 }
@@ -55,8 +57,6 @@ $(function(){
                         localStorage.userId_stu = e.data.userId;
                         localStorage.Phonenum = e.data.mobile;
                         localStorage.SId  =  e.sid;
-                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                        location.useridTime =judgFailTime(time_)
                     })
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
