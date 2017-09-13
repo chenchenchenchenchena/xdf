@@ -291,13 +291,13 @@ $(function(){
                     sessionStorage.mobile=e.data.mobile;
                     sessionStorage.schoolId=e.data.schoolId;
                     layer.msg('绑定成功');
+                    $('.deterAss').hide();
                     if(sessionStorage.studayCanfig=='studay'){
                         location.href = '../learningSituation/report_t.html';
                         sessionStorage.removeItem('studayCanfig')
                     }else{
                         location.href = 'schedule_s.html';
                     }
-                    $('.deterAss').hide();
                 }
             })
         // }
