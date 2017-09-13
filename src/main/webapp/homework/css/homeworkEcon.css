@@ -335,3 +335,44 @@ tbody tr:nth-of-type(even){
     background: url("../images/yu2.png");
 
 }
+.picFail button,.homeworkSub button,.homeworkFail button,.homeworkSucc button,.submitHwFail button{
+    width: 175px;
+    height: 72px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    background: #00ba97;
+    outline: none;
+    border: none;
+    margin: 40px 0 0 185px;
+    border-radius: 10px;
+}
+.picFail button,.homeworkFail button,.submitHwFail button{
+    margin: 40px 0 0 60px;
+}
+.picFail>button:nth-child(3),.homeworkFail>button:nth-child(3),.submitHwFail>button:nth-child(3){
+    background: #e4eaf1;
+    color: #aeb1b7;
+}
+.picFail img,.homeworkSub img,.homeworkFail img,.homeworkSucc img,.submitHwFail img{
+    margin: 38px 0 0 224px;
+}
+.picFail p,.homeworkSub p,.homeworkFail p,.homeworkSucc p,.submitHwFail p{
+    font-size: 30px;
+    color: #333333;
+    text-align: center;
+    margin-top: 30px;
+}
+.none {
+    display: none;
+}
+/*无数据*/
+.no-data{
+    margin: 126px 0 0 262px;
+}
+.no-data p{
+    font-size: 30px;
+    color: #aeadad;
+    margin: 22px 0 0 18px;
+}

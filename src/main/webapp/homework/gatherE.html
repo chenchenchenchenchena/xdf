@@ -9,16 +9,16 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="full-screen" content="yes"/>
     <link rel="stylesheet" href="../common/css/base.css"  />
-    <link rel="stylesheet" href="css/hwcommon.css"  />
+    <!--<link rel="stylesheet" href="css/hwcommon.css"  />-->
     <link rel="stylesheet" href="css/homeworkEcon.css" />
     <script src="../common/js/jquery.js"></script>
     <script src="../common/js/scale.js"></script>
     <script src="../common/js/ajax.js"></script>
     <script src="../common/js/layer-v2.1/layer/layer.js"></script>
-    <script src="js/gatherE.js"></script>
 </head>
 <body style="overflow: auto">
-    <div class="gHeader">
+<div class="summary">
+    <div class="gHeader none">
         <!--<dl>
             <dt><span></span>/<span></span></dt>
             <dd>完成量(人)</dd>
@@ -28,27 +28,27 @@
             <dd>平均用时(min)</dd>
         </dl>-->
     </div>
-    <div class="gray"></div>
-    <table>
+    <div class="gray none"></div>
+    <table class="none">
         <tbody>
-            <tr>
-                <th>姓名</th>
-                <th>分数</th>
-                <th>提交时间</th>
-                <th>用时</th>
-                <!--<th>报告</th>-->
-            </tr>
-            <!--<tr>
-                <td>姓名</td>
-                <td>分数</td>
-                <td>提交时间</td>
-                <td>用时</td>
-                &lt;!&ndash;<td><a href=""><img src="images/clipboard.png" /></a></td>&ndash;&gt;
-            </tr>-->
+        <tr>
+            <th>姓名</th>
+            <th>分数</th>
+            <th>提交时间</th>
+            <th>用时</th>
+            <!--<th>报告</th>-->
+        </tr>
+        <!--<tr>
+            <td>姓名</td>
+            <td>分数</td>
+            <td>提交时间</td>
+            <td>用时</td>
+            &lt;!&ndash;<td><a href=""><img src="images/clipboard.png" /></a></td>&ndash;&gt;
+        </tr>-->
         </tbody>
     </table>
-    <div class="gray"></div>
-    <div class="noHw">
+    <div class="gray none"></div>
+    <div class="noHw none">
         <div class="noHwTitle">
             <span>未交</span>
             <span>催交作业</span>
@@ -62,6 +62,14 @@
             <li><span>城南街</span><span>城南街</span></li>-->
         </ul>
     </div>
-    <button class="gBth">提交</button>
+    <button class="gBth ss none">提交</button>
+</div>
+<div class="homeworkSucc" style="display:none;"><img src="images/7.png" /><p>催交作业成功</p><button class="layui-layer-close">确定</button></div>
+<div class="submitHwFail" style="display:none;"><img src="images/redtan.png" /><p>催交作业失败</p><button>取消</button><button>重试</button></div>
+<div class="no-data none">
+    <img src="images/kong.png"  />
+    <p>暂无作业汇总信息</p>
+</div>
+<script src="js/gatherE.js"></script>
 </body>
 </html>

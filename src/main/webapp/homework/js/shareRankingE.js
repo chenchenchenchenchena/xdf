@@ -35,7 +35,7 @@ $(function () {
                 $('.title_s i').html(e.className);
                 $('.title_s p').eq(1).html(e.teacherName + '老师');
                 $('.title_s p').eq(2).html('日期:' + e.homeworkTime);
-                if (undefined != excellenHomrWork) {
+                if (excellenHomrWork!=undefined&&excellenHomrWork.length>0) {
                     for (var i = 0; i < excellenHomrWork.length; i++) {
                         var ranking = excellenHomrWork[i].ranking;
                         var studentName = excellenHomrWork[i].studentName;

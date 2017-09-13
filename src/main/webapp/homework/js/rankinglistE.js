@@ -92,6 +92,7 @@ $(function () {
                         var studentName = excellenHomrWork[i].studentName;
                         var times = excellenHomrWork[i].times;
                         var score = excellenHomrWork[i].score;
+                        var studentNo=excellenHomrWork[i].studentNo;
                         var avater = "";
                         if (studentName.length > 2) {
 
@@ -101,7 +102,7 @@ $(function () {
                             avater = studentName;
                         }
 
-                        strHtml += "<li class='tr'><span><i class='check-box checked' data-stuNo='SS4648'></i></span>" +
+                        strHtml += "<li class='tr'><span><i class='check-box checked' data-stuNo="+studentNo+"></i></span>" +
                             "<span><span class='first-num'>" + ranking + "</span></span>" +
                             "<span class='nameLeft'><i>" + avater + "</i></span>" +
                             "<span>" + studentName + "</span>" +

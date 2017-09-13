@@ -124,6 +124,7 @@ i{
     height: 74px;
     margin-left: 44px;
     vertical-align: middle;
+    text-align: center;
 }
 .rankfirst{
     background: url("../../learningSituation/images/theFirstIcon.png") left center no-repeat;
