@@ -4,7 +4,7 @@
 //作业汇总
 var loading;
 var arr;
-var summaryData={"Tcid":"0fa99b19470c414abb65239c477f2ff9"};
+var summaryData={"Tcid":sessionStorage.Tid};
 /*ajax_S(homework_s.t_summary,summaryData,summaryAjax);*/
 ajaxRequest("POST", homework_s.t_summary,summaryData,summaryAjax)
 function summaryAjax(e) {
@@ -16,7 +16,7 @@ function summaryAjax(e) {
         $(".gHeader").show();
         if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
             for(var i=0;i<e.data.data.commitArr.length;i++){
-                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report"><img src="images/clipboard.png" /></td></tr>';
+                var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report" data-testId='+e.data.data.commitArr[i].testId+'><img src="images/clipboard.png" /></td></tr>';
                 $("tbody").append(table);
             }
             $("table").show();
@@ -114,6 +114,8 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 $(document).on("touchstart",".report",function () {
     var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/getStudentReportUrl.do";
     var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};
+    /*var params = {"testId":"32273901-279E-450F-AAFD-BB96E292AF26"};*/
+    /*var params = {"testId":$(this).attr("data-testId")};*/
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
