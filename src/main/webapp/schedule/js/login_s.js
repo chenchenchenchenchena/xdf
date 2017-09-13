@@ -80,7 +80,7 @@ $(function(){
                         localStorage.Phonenum = daTa.data.mobile;
                         localStorage.SId  =  daTa.sid;
                         var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
-                        localStorage.useridTime =judgFailTime(time_)
+                        localStorage.useridTime =judgFailTime(time_);
                     }
                 })
             }
@@ -272,14 +272,11 @@ $(function(){
                     // clear();
                     $('.deterAss').html('立即关联');
                     $('.deterAss').css('background','#00ba97');
-                    if(sessionStorage.signal){
-                        location.href = 'login_stu.html'
-                    }else{
                         location.href = 'login_s.html'
-                    }
-
                     // location.reload()
                 }else{
+                    var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                    localStorage.useridTime =judgFailTime(time_)
                     $('.true_last').css('background','#00ba97');
                     sessionStorage.stuNum = e.data.studentNo;
                     sessionStorage.studentName=e.data.studentName;
