@@ -71,6 +71,17 @@ $(function(){
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
+            if(!localStorage.useridTime){
+                ajax_S(url.t_stulas,calbac,function(e){
+                    if(e.result==true){
+                        localStorage.userId_stu = e.data.userId;
+                        localStorage.Phonenum = e.data.mobile;
+                        localStorage.SId  =  e.sid;
+                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                        localStorage.useridTime =judgFailTime(time_)
+                    }
+                })
+            }
             if(e.data.userid==''){
                 var stumore  = {'StudentCode':e.data.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'userid': localStorage.userId_stu,'Mobile': localStorage.Phonenum};
                 ajax_S(url.s_bind,stumore,function(e){
@@ -89,6 +100,7 @@ $(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
                         if(e.result){
                             location.href = e.logoutUrl;
+                            localStorage.removeItem('useridTime')
                         }
                     })
                 },1000);
@@ -100,6 +112,7 @@ $(function(){
                     ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(e){
                         if(e.result){
                             location.href = e.logoutUrl;
+
                         }
                     })
                 },1000);
