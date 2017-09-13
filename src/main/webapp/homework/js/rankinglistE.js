@@ -70,8 +70,8 @@ $(function () {
 
     function getRankingData() {
         loading=layer.load();
-        /*var params = {'Tcid':getRequest('tid').tid};*/
-        var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};
+        var params = {'Tcid':getRequest('tid').tid};
+        /*var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};*/
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
                /* var homeworkTime = e.homeworkTime;*/

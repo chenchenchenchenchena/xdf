@@ -24,8 +24,7 @@ $(function () {
     getRankingData();
     function getRankingData() {
         var params = {
-            /*'Tcid': getRequest('tid').tid,*/
-            'Tcid':"0fa99b19470c414abb65239c477f2ff9",
+            'Tcid': getRequest('tid').tid,
             'studentNos':JSON.parse(localStorage.studentNos).checkStuArry
         };
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
