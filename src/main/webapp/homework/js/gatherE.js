@@ -2,7 +2,7 @@
  * Created by zyc on 2017/9/13.
  */
 //作业汇总
-var summaryData={"Tcid":sessionStorage.Tid}
+var summaryData={"Tcid":/*sessionStorage.Tid*/"0fa99b19470c414abb65239c477f2ff9"}
 ajax_S(homework_s.t_summary,summaryData,summaryAjax);
 function summaryAjax(e) {
     console.log(e);

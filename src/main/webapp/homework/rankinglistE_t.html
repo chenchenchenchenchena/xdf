@@ -20,21 +20,33 @@
 		.imgBox div img, .imgBox li img{
 			width:196px;
 		}
+		.none{
+			display: none;
+		}
+		/*无数据*/
+		.no-data{
+			margin: 126px 0 0 262px;
+		}
+		.no-data p{
+			font-size: 30px;
+			color: #aeadad;
+			margin: 22px 0 0 18px;
+		}
 	</style>
 	<script src="../common/js/jquery.js"></script>
 	<script src="../common/js/scale.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script src="../common/js/ajax.js"></script>
-	<script src="../common/js/layer.js"></script>
+	<script src="../common/js/layer-v2.1/layer/layer.js"></script>
 	<script src="js/rankinglistE.js"></script>
 </head>
 <body>
-<div class="title_s">
+<div class="title_s none">
 	<p><i></i></p>
 	<p></p>
 	<p></p>
 </div>
-<div class="ranklist-box">
+<div class="ranklist-box none">
 	<ul class="ranklibe">
 		<li id="check-all">
             <span><i class="check-box checked"></i></span>
@@ -61,34 +73,12 @@
         </li>-->
 	</ul>
 </div>
-<!--<div class="homework_big">
-	<div class="homework_small">
-        <div class="homework_small_title">
-            <h4></h4>
-        </div>
-        <div class="answer_s">
-            <p></p>
-        </div>
-        <div class="imgBox_s">
-                <ul id="audio_2" style="">
-                    <li class="audio_box">
-                        <div><audio id="audio_audio21" preload="auto"><source src="http://dt.staff.xdf.cn/xdfdtmanager/homework/73/HDXP3EB03/2017-07-25/b2a4b8b2090a404387389deb7bc30c87.mp3" type="audio/mpeg"></audio><i class="play-icon"></i></div><span class="voice_lenth">1''</span>
-                    </li>
-                </ul>
-                <div class="imgBox" id="imagBox_2" style="display:block;">
-                    <div>
-                        <img src="homework/73/HDXP3EB03/2017-07-25/3N61_RURG0DZA_Kwa2QLB5TgInDZNcWNHnf2uHMGLLVhqzHojPb79uj8R2udbhOl.jpg" alt="">
-                    </div>
-                    <div>
-                        <img src="homework/73/HDXP3EB03/2017-07-25/rx2fPhObM3OYJ9R9uU8b7MxcAXTOHSuiLvVfRoA97zLY7LuzCGjhj2ATy4CnnUdL.jpg" alt="">
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>-->
-<div class="shareBtn">
+<div class="shareBtn none">
 	<button>马上分享</button>
 </div>
-<!--<script src="js/voice_check.js"></script>-->
+<div class="no-data none">
+	<img src="images/noDatas.png"  />
+	<p>暂无排行信息</p>
+</div>
 </body>
 </html>
