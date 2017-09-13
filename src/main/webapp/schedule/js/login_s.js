@@ -57,12 +57,11 @@ $(function(){
                         localStorage.SId  =  e.sid;
                     })
                 }else{
-
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
-                        var time_ = new Date().format("yyyy-MM-dd");
-                        location.useridTime =getNewDay(time_,10)
+                        var time_ = new Date().format("yyyy-MM-dd hh:mm:ss");
+                        location.useridTime =judgFailTime(time_)
                     });
                 }
             };
