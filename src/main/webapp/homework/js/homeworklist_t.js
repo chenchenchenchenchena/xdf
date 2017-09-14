@@ -12,7 +12,7 @@ $(function(){
                 sessionStorage.stuNumber = e.data.studentNo;
                 sessionStorage.schoolId = e.data.schoolId;
                 sessionStorage.studentName = e.data.studentName;
-                location.href = 'homeworklist_s.html';
+                location.href = 'homeworkl ist_s.html';
             }else{
                 sessionStorage.homeCanfig=='home'
                 location.href = '../schedule/login_s.html'

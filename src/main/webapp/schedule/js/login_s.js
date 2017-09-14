@@ -34,7 +34,7 @@ $(function(){
                         }else{
                             ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
                                 localStorage.firstU2 = '1';
-                                location.href = Json.url;
+                                // location.href = Json.url;
                             });
                         }
                     }else{
@@ -68,13 +68,13 @@ $(function(){
                     if(!localStorage.userId_stu){
                         ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                             localStorage.firstU2 = '1';
-                            location.href = e.url;
+                            // location.href = e.url;
                         });
                     }
                 }else{
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
-                        location.href = e.url;
+                        // location.href = e.url;
                     });
                 }
             };
@@ -113,7 +113,7 @@ $(function(){
                             localStorage.removeItem('SId');
                             localStorage.removeItem('Phonenum');
                             localStorage.removeItem('firstU2');
-                            location.href = Json.logoutUrl;
+                            // location.href = Json.logoutUrl;
                         }
                     })
                 },1000);
@@ -129,7 +129,7 @@ $(function(){
                             localStorage.removeItem('SId');
                             localStorage.removeItem('Phonenum');
                             localStorage.removeItem('firstU2');
-                            location.href = Json.logoutUrl;
+                            // location.href = Json.logoutUrl;
                         }
                     })
                 },1000);
