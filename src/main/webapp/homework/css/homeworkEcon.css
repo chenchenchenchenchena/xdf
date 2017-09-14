@@ -16,7 +16,7 @@ body{
     height:56px;
     border:1px solid #e1e1e1;
     color: #a9a9a9;
-    width:111px;
+    width:139px;
     padding-left: 10px;
     line-height:56px;
     font-size:24px;
@@ -27,7 +27,7 @@ body{
     height:56px;
     border:1px solid #e1e1e1;
     color: #a9a9a9;
-    width:111px;
+    width:117px;
     background: url("../images/ej.png") no-repeat right 10px center;
     padding-left: 10px;
     line-height:56px;
@@ -66,25 +66,25 @@ body{
     padding-left: 5px;
 }
 .listOne{
-    width: 112px;
-    left: 169px;
+    width: 116px;
+    left: 197px;
 }
 .listOne li{
     width: 107px;
 }
 .listTwo{
-    width: 113px;
-    left: 308px;
+    width: 119px;
+    left: 342px;
 }
 .listTwo li,.listThree li,.listFour li{
-    width: 108px;
+    width: 109px;
 }
 .list .active{
     background: #00ba97;
 }
 .listThree{
-    width: 114px;
-    left: 445px;
+    width: 118px;
+    left: 487px;
 }
 .listFour{
     width: 105px;
@@ -93,6 +93,7 @@ body{
 .searchEmpty{
     width:220px;
     margin: 110px auto 0;
+    height: 954px;
     display: block;
 }
 .searchEmpty p{
@@ -104,6 +105,7 @@ body{
     padding:0 30px;
     height: 954px;
     overflow-y: auto;
+    display: none;
 }
 .searchCon li{
     height:115px;
@@ -141,6 +143,7 @@ body{
     border: none;
     outline: none;
     border-radius: 10px;
+    display: none;
 }
 .eSub,.tSub{
     margin-top: 711px;

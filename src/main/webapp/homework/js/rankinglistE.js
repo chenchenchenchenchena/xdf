@@ -70,8 +70,8 @@ $(function () {
 
     function getRankingData() {
         loading=layer.load();
-        /*var params = {'Tcid':getRequest('tid').tid};*/
-        var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};
+        var params = {'Tcid':getRequest('tid').tid};
+        /*var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};*/
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
                /* var homeworkTime = e.homeworkTime;*/
@@ -79,7 +79,7 @@ $(function () {
                 $('.title_s i').html(e.className);
                 $('.title_s p').eq(1).html(e.teacherName + '老师');
                 $('.title_s p').eq(2).html('日期:' + e.homeworkTime);
-                if (undefined != excellenHomrWork) {
+                if (undefined != excellenHomrWork && excellenHomrWork.length > 0) {
                     var strHtml = "";
                     for (var i = 0; i < excellenHomrWork.length; i++) {
                         // {
