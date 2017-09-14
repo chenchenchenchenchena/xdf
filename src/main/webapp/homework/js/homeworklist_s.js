@@ -152,7 +152,9 @@ $(function(){
 						classTitle = item.className.substr(0,10)+'...';
 					}
 					if (item.readStatus==0){//未读
-						// readCss = "state_st";
+						readCss = "state_st";
+					}else{
+                                                 readCss = ''
 					}
 					var knowledgePoint, kpHtml = "";
 					var homeworkInfos ={//作业信息：知识点，描述，图片，语音
@@ -178,21 +180,21 @@ $(function(){
 						}
 						/*var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";*/
 						console.log(kpHtml);
-						var hwListHtml = '<div class="hwList '+readCss+'" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+						var hwListHtml = '<div class="hwList " data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
 							+'<div class="hwLeft">'+item.courseName+'</div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
 							+'<span>'+homeworkTime+'</span></div>'
-							+'<div class="hwKon">'+kpHtml+'</div></div></div>';
+							+'<div class="hwKon">'+kpHtml+'</div></div><span class='+readCss+' style="margin-top: 12px"></span></div>';
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}else{
-						var hwListHtml = '<div class="hwList '+readCss+'" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
+						var hwListHtml = '<div class="hwList data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
 							+'<div class="hwLeft">'+item.courseName+'<span>电子</span></div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
 							+'<span>'+homeworkTime+'</span></div>'
-							+'<div class="hwS"><span><i>学段:</i><i>小学</i></span> <span><i>年纪:</i><i>一年级</i></span> <span><i>学科:</i><i>物理</i></span></div></div></div>';
+							+'<div class="hwS"><span><i>学段:</i><i>小学</i></span> <span><i>年纪:</i><i>一年级</i></span> <span><i>学科:</i><i>物理</i></span></div></div><span class='+readCss+' style="margin-top: 12px"></span></div>';
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}
