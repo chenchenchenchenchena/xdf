@@ -10,7 +10,7 @@ function summaryAjax(e) {
     loading=layer.load();
     console.log(e);
     if(e.code=="200"){
-        if(e.data.result){
+        if(e.data!=undefined){
             var recordNum='<dl><dt><span>'+e.data.commitNum+'</span>/<span>'+e.data.StudentNum+'</span>人</dt><dd>完成量</dd></dl><dl><dt>'+e.data.avgTimes+'</dt><dd>平均用时</dd></dl>';
             $(".gHeader").append(recordNum);
             $(".gHeader").show();
@@ -57,11 +57,11 @@ function summaryAjax(e) {
                 $(".gBth").show();
             }
             layer.close(loading);
+        }else{
+            layer.close(loading);
+            $(".no-data").show();
+            $(".summary").hide();
         }
-    }else{
-        layer.close(loading);
-        $(".no-data").show();
-        $(".summary").hide();
     }
 }
 $(document).on("touchstart",".ss",function () {

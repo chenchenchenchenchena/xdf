@@ -67,6 +67,7 @@ $(function(){
 	});
 	// 点击已交作业列表
 	$(document).on('touchend','.secul>li',function(){
+		var that=$(this);
 		// 缓存信息
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
 		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
@@ -77,7 +78,17 @@ $(function(){
 		var classIndex = $(this).index();
 		var id = $(this).attr('data-id');
 		if($(this).find(".dian").html()=="电子"){
-			window.location.href=$(this).attr("data-url");
+			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
+				if(msg.code==200){
+					console.log("阅读成功！"+msg.msg);
+				}else{
+					console.log("阅读失败！"+msg.msg);
+				}
+
+				window.location.href=that.attr("data-url");
+
+			});
+
 		}else{
 			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
 				if(msg.code==200){

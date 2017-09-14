@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes"/>
+    <script src="../common/js/jquery.js"></script>
+    <script src="../common/js/scale.js"></script>
+    <script src="../common/js/layer-v2.1/layer/layer.js"></script>
+    <script src="../common/js/ajax.js"></script>
+</head>
+<body>
+<script>
+    var loading = layer.load();
+    if (GetRequest("teaHomeworkId")){//消息推送链接
+        homeworkTinfoId = GetRequest("teaHomeworkId");
+    }
+    if (GetRequest("classCode")){//消息推送链接
+        classCode = GetRequest("classCode");
+    }
+    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
+    function gethwDetailsSuccess(msg) {
+        if (msg.code == 200) {
+            layer.close(loading);
+            var item = msg.data;
+            if(item != undefined){
+                window.location.href=item.paperUrl;
+            }
+        }else{
+            console.log("获取作业失败");
+        }
+    }
+
+
+</script>
+</body>
+</html>
