@@ -2,6 +2,22 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
+    var WXnum  = {
+        'wechatId':sessionStorage.openid
+    };
+    ajax_S(url.s_seac,WXnum,function(e){
+        if(e.result==true){
+            sessionStorage.stuNumber = e.data.studentNo;
+            sessionStorage.schoolId = e.data.schoolId;
+            sessionStorage.studentName = e.data.studentName;
+        }else{
+            sessionStorage.homeCanfig=='home'
+            location.href = '../schedule/login_s.html'
+        }
+    });
     /**
      * 作业提交需要的参数
      */

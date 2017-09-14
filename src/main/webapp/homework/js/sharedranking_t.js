@@ -1,5 +1,7 @@
 $(function () {
     var voiceCount = 0;
+    var Index = 0;
+    var arr_I = [];
     ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
         var Month = e.data.homeworkTime.substr(5, 2);
         var Day = e.data.homeworkTime.substr(8, 2);
@@ -17,7 +19,7 @@ $(function () {
         for (var i = 0; i < data.StudentHomeInfo.length; i++) {
             var music = '';
             var Img = '';
-            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学</h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div><diiv class=""><h4 style="font-size:24px;text-align:right;color:#333"><span style="font-size:32px;color:#000;">'+data.StudentHomeInfo[i].score+'</span>分</h4></diiv></div>';
+            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学 <span style="float:right;font-size:40px;">'+data.StudentHomeInfo[i].score+'<i style="font-style:normal;font-size:25px;">分</i><img src="images/del_w.png" alt="" style="margin-left:20px;"></span></h4> </div><div class="answer_s"><p>' + decodeURI(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div></div>';
             $('.homework_big').append(hwsharedHtml);
             var Media = data.StudentHomeInfo[i].RevampFile;
             if (Media.length != 0) {
@@ -32,6 +34,16 @@ $(function () {
                 }
             }
 
+        }
+        if(GetRequest("LS")=='0'){
+            $('.frend').hide();
+            $('.homework_small_title img').hide();
+            if(GetRequest("Num")){
+                var Number = GetRequest("Num").split('');
+                for(var i = 0;i<Number.length;i++){
+                    $('.homework_small').eq(Number[i]).hide();
+                }
+            }
         }
     });
 
@@ -100,4 +112,27 @@ $(function () {
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
-})
+    $(document).on('touchend','.homework_small_title img',function(){
+        $('.erro').show();
+        Index =  $(this).parents('.homework_small').index();
+        arr_I.push(Index);
+    });
+    $('.erro input:first-of-type').on('touchend',function(){
+        $('.erro').hide();
+        arr_I[Index] = '';
+        Index = 0;
+    });
+    $('.erro input:last-of-type').on('touchend',function(){
+        $('.homework_small').eq(Index).hide();
+        $('.erro').hide();
+    });
+    $('.frend input').on('touchend',function(){
+        $('.frend').hide();
+        if(arr_I==''){
+            location.href = location.href+'&LS=0'
+        }else{
+            location.href = location.href+'&Num='+arr_I+'&LS=0'
+        }
+    })
+
+});
