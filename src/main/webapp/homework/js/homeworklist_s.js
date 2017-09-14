@@ -58,10 +58,27 @@ $(function(){
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
 		localStorage.homeworkSinfoId = $(this).attr('data-id') ;//学生作业id
 		localStorage.classcode = $(this).attr('data-classcode') ;//班级code
+		var id = $(this).attr('data-id');
 		if($(this).find(".hwLeft span").html()=="电子"){
-			window.location.href = $(this).attr('data-url');
+			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
+				if(msg.code==200){
+					console.log("阅读成功！"+msg.msg);
+				}else{
+					console.log("阅读失败！"+msg.msg);
+				}
+				window.location.href = $(this).attr('data-url');
+			});
+
 		}else{
-			window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
+				if(msg.code==200){
+					console.log("阅读成功！"+msg.msg);
+				}else{
+					console.log("阅读失败！"+msg.msg);
+				}
+				window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+			});
+
 		}
 
 	});
