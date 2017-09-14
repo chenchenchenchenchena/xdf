@@ -316,3 +316,24 @@ html body .imgBox_s>div>img{
 	width:199px;
 	height:199px;
 }
+.frend{
+	width:100%;
+	height:119px;
+	border-top:1px solid #e1e1e1;
+	position: fixed;
+	bottom:0;
+	background:#fff;
+}
+.frend input{
+	display:block;
+	width:400px;
+	height:88px;
+	border-radius:8px;
+	border:none;
+	background:#00ba97;
+	font-size:32px;
+	color:#fff;
+	margin:15px auto;
+	line-height:88px;
+	text-align:center;
+}
