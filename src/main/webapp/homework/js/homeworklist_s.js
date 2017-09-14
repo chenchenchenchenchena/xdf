@@ -154,7 +154,7 @@ $(function(){
 					if (item.readStatus==0){//未读
 						readCss = "state_st";
 					}else{
-                                                 readCss = ''
+						readCss = ''
 					}
 					var knowledgePoint, kpHtml = "";
 					var homeworkInfos ={//作业信息：知识点，描述，图片，语音
