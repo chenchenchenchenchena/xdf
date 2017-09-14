@@ -2,7 +2,6 @@
  * Created by zyc on 2017/9/10.
  */
 $(function () {
-    var voiceCount = 0;
     var loading;
    /* ajaxRequest('post', homework_s.t_mmmm, {Tcid: getRequest('tid').tid}, function (e) {
         var Month = e.data.homeworkTime.substr(5, 2);
@@ -71,7 +70,6 @@ $(function () {
     function getRankingData() {
         loading=layer.load();
         var params = {'Tcid':getRequest('tid').tid};
-        /*var params = {"Tcid":"0fa99b19470c414abb65239c477f2ff9"};*/
         ajaxRequest("POST", homework_s.s_hw_rank_e, JSON.stringify(params), function (e) {
             if (e.result) {
                /* var homeworkTime = e.homeworkTime;*/
@@ -95,13 +93,10 @@ $(function () {
                         var studentNo=excellenHomrWork[i].studentNo;
                         var avater = "";
                         if (studentName.length > 2) {
-
                             avater = studentName.substring(studentName.length - 2, studentName.length);
                         } else {
-
                             avater = studentName;
                         }
-
                         strHtml += "<li class='tr'><span><i class='check-box checked' data-stuNo="+studentNo+"></i></span>" +
                             "<span><span class='first-num'>" + ranking + "</span></span>" +
                             "<span class='nameLeft'><i>" + avater + "</i></span>" +

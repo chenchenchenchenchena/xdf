@@ -43,7 +43,7 @@ $(function () {
         classCodes.push(classCode);
         var data = {
             'classCode': [classCode],
-            'schoolId:': schoolId,
+            'schoolId': schoolId,
             'studentNo': studentNo
         };
         ajaxRequest("POST", homework_s.s_hw_report, JSON.stringify(data), getReport);
