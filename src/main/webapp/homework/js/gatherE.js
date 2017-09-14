@@ -5,7 +5,6 @@
 var loading;
 var arr;
 var summaryData={"Tcid":sessionStorage.Tid};
-/*ajax_S(homework_s.t_summary,summaryData,summaryAjax);*/
 ajaxRequest("POST", homework_s.t_summary,summaryData,summaryAjax)
 function summaryAjax(e) {
     loading=layer.load();
@@ -116,7 +115,6 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 $(document).on("touchstart",".report",function () {
     var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/getStudentReportUrl.do";
     var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};
-    /*var params = {"testId":"32273901-279E-450F-AAFD-BB96E292AF26"};*/
     /*var params = {"testId":$(this).attr("data-testId")};*/
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
