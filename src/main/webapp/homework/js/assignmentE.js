@@ -187,7 +187,7 @@ $(function () {
         var params = {
             'appid': Global.appid,
             'secret': Global.secret,
-            'url': "http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html",
+            'url': url_o2+"/xdfdthome/homework/pushhomeworkE.html",
             'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
             'teacherEmail': localStorage.terEmail,
             'teacherName': localStorage.teacherName,
