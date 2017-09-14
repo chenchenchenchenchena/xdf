@@ -10,10 +10,16 @@ $(function () {
     // var homeworkSinfoId = GetRequest('id');
     var homeworkSinfoId = localStorage.homeworkSinfoId;//学生作业id
     var homeworkTinfoId = "";//老师作业id
+    var classCode="";//班号
     if (GetRequest("teaHomeworkId")){//消息推送链接
         homeworkTinfoId = GetRequest("teaHomeworkId");
     }else{
         homeworkTinfoId = localStorage.homeworkTinfoId;
+    }
+    if (GetRequest("classCode")){//消息推送链接
+        classCode = GetRequest("classCode");
+    }else{
+        classCode = localStorage.classcode;
     }
     var fileName;
     var fileType;
@@ -26,7 +32,7 @@ $(function () {
         window.location.href = "studentrank_s.html";
     });
     loading = layer.load();
-    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+localStorage.classcode, gethwDetailsSuccess);
+    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode, gethwDetailsSuccess);
 
     // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     // gethwInfos();
