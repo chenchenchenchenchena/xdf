@@ -151,6 +151,9 @@ $(function(){
 					if (item.className.length>11){
 						classTitle = item.className.substr(0,10)+'...';
 					}
+					if (item.readStatus==0){//未读
+						// readCss = "state_st";
+					}
 					var knowledgePoint, kpHtml = "";
 					var homeworkInfos ={//作业信息：知识点，描述，图片，语音
 						'id':item.id,//学生作业主键id
@@ -175,7 +178,7 @@ $(function(){
 						}
 						/*var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";*/
 						console.log(kpHtml);
-						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
+						var hwListHtml = '<div class="hwList '+readCss+'" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'">'
 							+'<div class="hwLeft">'+item.courseName+'</div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
@@ -184,7 +187,7 @@ $(function(){
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}else{
-						var hwListHtml = '<div class="hwList" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
+						var hwListHtml = '<div class="hwList '+readCss+'" data-homeworkTinfoId="'+item.homeworkTId+'"  data-id="'+item.id+'" data-classCode="'+item.classCode+'" data-url="'+paperurl+'">'
 							+'<div class="hwLeft">'+item.courseName+'<span>电子</span></div>'
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
