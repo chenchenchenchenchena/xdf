@@ -6,29 +6,37 @@ $(function () {
     var paperIdSub;
 
     var isModify = GetRequest("isModify");
+    var isUpdata = GetRequest("isUpdata");
     var Tcid = GetRequest("id");
-    if(isModify == 1){
-        ajaxRequest('post', homework_s.t_seac, {'Tcid': Tcid}, function (e) {
-            if(e.code == 200){
-                var data = e.data;
-                if(undefined != data && data != ""){
+    var hwId = "";
+    if(isUpdata == 1){
 
-                    paperIdSub = data.paperId;
+    }else {
+        if(isModify == 1){
+            ajaxRequest('post', homework_s.t_seac, {'Tcid': Tcid}, function (e) {
+                if(e.code == 200){
+                    var data = e.data;
+                    if(undefined != data && data != ""){
 
-                    $(".class_s i").attr("classcode",data.classCode);
-                    $(".class_s i").attr("classname",data.className);
-                    sessionStorage.paperId = data.paperId;
-                    sessionStorage.paperUrl = data.paperUrl;
-                    sessionStorage.gradeName = data.paperName;
-                    sessionStorage.stageName = data.paperStage;
-                    sessionStorage.subjectName = data.paperSubject;
+                        paperIdSub = data.paperId;
+                        hwId = data.id;
 
-                    $(".class_s i").html(data.className);
-                    $(".content_s").find("i").html(data.paperName);
-                    $('.time_S i').html(data.homeworkTime);
+                        $(".class_s i").attr("classcode",data.classCode);
+                        $(".class_s i").attr("classname",data.className);
+                        sessionStorage.paperId = data.paperId;
+                        sessionStorage.paperUrl = data.paperUrl;
+                        sessionStorage.gradeName = data.paperName;
+                        sessionStorage.stageName = data.paperStage;
+                        sessionStorage.subjectName = data.paperSubject;
+
+                        $(".class_s i").html(data.className);
+                        $(".content_s").find("i").html(data.paperName);
+                        $('.time_S i').html(data.homeworkTime);
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     if (sessionStorage.paperUrl) {
@@ -156,7 +164,7 @@ $(function () {
         sessionStorage.class = $(".class_s i").html();
         sessionStorage.hxCode = $('.class_s i').attr('classcode');
         sessionStorage.hxName = $('.class_s i').attr('classname');
-        location.href = "homeworkEcon.html?paperId="+paperIdSub;
+        location.href = "homeworkEcon.html?paperId="+paperIdSub+"&isModify="+isModify+"&id="+Tcid;
 
     });
     //点击提交
@@ -222,33 +230,24 @@ $(function () {
         var paperID = sessionStorage.paperId;
         var paperUrl = sessionStorage.paperUrl;
 
-        //URL字段待定
-        var params = {
-            'appid': Global.appid,
-            'secret': Global.secret,
-            'url': "http://dt.staff.xdf.cn/xdfdthome/homework/pushhomeworkE.html",
-            'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
-            'teacherEmail': localStorage.terEmail,
-            'teacherName': localStorage.teacherName,
-            'schoolId': localStorage.schoolId,
-            'classCode': $(".class_s i").attr("classcode"),
-            'className': $(".class_s i").attr("classname"),
-            'homeworkTime': $('.time_S i').html(),
-            'knowledgePoint': "",
-            'description': "",
-            'homeworkType': "2",
-            'paperId': paperID,
-            'paperName': paperName,
-            'paperUrl': paperUrl,
-            'paperClass': sessionStorage.gradeName,
-            'paperStage': sessionStorage.stageName,
-            'paperSubject': sessionStorage.subjectName,
-            'fileInfo': ""
-        };
+
 
         if(isModify == 1){
+            var params1 = {
+                'id':hwId,
+                'homeworkType': "2",
+                'paperId': paperID,
+                'paperName': paperName,
+                'paperUrl': paperUrl,
+                'paperClass': sessionStorage.gradeName,
+                'paperStage': sessionStorage.stageName,
+                'paperSubject': sessionStorage.subjectName,
+                'knowledgePoint': "",
+                'description': "",
+                'fileInfo': ""
+            }
 
-            ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params), function (e) {
+            ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params1), function (e) {
                 if (e.result) {
 
                     layer.close(layer1);
@@ -268,6 +267,29 @@ $(function () {
                 }
             })
         }else {
+            //URL字段待定
+            var params = {
+                'appid': Global.appid,
+                'secret': Global.secret,
+                'url': "http://dt.staff.xdf.cn/xdfdthome/homework/pushhomeworkE.html",
+                'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
+                'teacherEmail': localStorage.terEmail,
+                'teacherName': localStorage.teacherName,
+                'schoolId': localStorage.schoolId,
+                'classCode': $(".class_s i").attr("classcode"),
+                'className': $(".class_s i").attr("classname"),
+                'homeworkTime': $('.time_S i').html(),
+                'knowledgePoint': "",
+                'description': "",
+                'homeworkType': "2",
+                'paperId': paperID,
+                'paperName': paperName,
+                'paperUrl': paperUrl,
+                'paperClass': sessionStorage.gradeName,
+                'paperStage': sessionStorage.stageName,
+                'paperSubject': sessionStorage.subjectName,
+                'fileInfo': ""
+            };
 
             // homework_s.t_sbim
             // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";

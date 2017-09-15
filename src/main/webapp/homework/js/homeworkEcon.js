@@ -2,7 +2,7 @@
  * Created by xupingwei on 2017/9/12.
  */
 $(function () {
-    var paperIdSub = getRequest("paperIdSub");//修改作业跳转过来的
+    var paperIdSub = GetRequest("paperIdSub");//修改作业跳转过来的
     var stageType = "dict_tps_stage_info"; //学段
     var gradeType = "dict_tps_class_info"; //年级
     var subjectType = "dict_tps_subject_info"; //科目
@@ -21,6 +21,8 @@ $(function () {
     var subjectName = "";
 
 
+    var isModify = GetRequest("isModify");
+    var Tcid = GetRequest("id");
 
     $(document).on("touchstart", "#stage", function () {
         if (stageList == undefined || stageList.length == 0) {
@@ -282,12 +284,12 @@ $(function () {
         } else {
             sessionStorage.contentName = contentName;
             console.log(sessionStorage.contentName);
-            location.href = "AssignmentE.html";
+            location.href = "AssignmentE.html?isModify="+isModify+"&id="+Tcid+"&isUpdata="+1;
             sessionStorage.paperId = paperId;
             sessionStorage.paperUrl = url_ + "/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
-            sessionStorage.gradeName = stageName;
-            sessionStorage.subjectName = stageName;
+            sessionStorage.gradeName = gradeName;
+            sessionStorage.subjectName = subjectName;
         }
     })
 
