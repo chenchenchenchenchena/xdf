@@ -100,11 +100,12 @@ $(function () {
         classCode = '';
         $(this).parent().find('li').each(function () {
             if ($(this).find('img').attr('src') == 'images/C0503.png') {
-                className += $(this).text() + '；';
+                className += $(this).find('.cn').html() + '；';
                 classCode += $(this).attr('ClassCode') + ',';
             }
         });
         classCode = classCode.substr(0, classCode.length - 1);
+        className = className.substr(0, className.length - 1);
         if (className == '') {
             layer.open({
                 type: 1,
@@ -119,7 +120,7 @@ $(function () {
         if ($('.class_name i').html() != '0') {
             $('.class_s i').html('已选择' + $('.class_name i').html() + '个班&nbsp;&nbsp;' + className + ' ');
             $('.class_s i').attr("classcode", classCode);
-            var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+            var class_n = className.replace(/\；/g, ',');
             $('.class_s i').attr("classname", class_n);
             $('.class_name').animate({'bottom': '-438px'});
             $('.big_back').hide();
@@ -275,8 +276,8 @@ $(function () {
             };
 
             // homework_s.t_sbim
-            // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";
-            ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
+            var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
+            ajaxRequest("POST", url1, JSON.stringify(params), function (e) {
                 if (e.result) {
 
                     layer.close(layer1);
