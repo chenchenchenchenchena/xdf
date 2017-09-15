@@ -2,6 +2,10 @@
  * Created by zyc on 2017/9/7.
  */
 $(function () {
+
+    // sessionStorage.contentName = "五年级数学";
+
+
     if (sessionStorage.paperUrl) {
         $('.sResolve a').attr("href", sessionStorage.paperUrl);
     }
@@ -173,7 +177,7 @@ $(function () {
         }else{
             $(this).attr("src","images/yu.png");
         }
-    })
+    });
 
     /**
      * 提交布置作业
@@ -183,6 +187,14 @@ $(function () {
         var paperName = hwName_.substring(0, hwName_.length - 1);
         var paperID = sessionStorage.paperId;
         var paperUrl = sessionStorage.paperUrl;
+
+        // var paperID = "32273901-279E-450F-AAFD-BB96E292AF26";
+        // var paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=32273901-279E-450F-AAFD-BB96E292AF26";
+        //
+        // sessionStorage.gradeName = "五年级";
+        // sessionStorage.stageName = "小学";
+        // sessionStorage.subjectName = "数学";
+
         //URL字段待定
         var params = {
             'appid': Global.appid,
@@ -206,6 +218,8 @@ $(function () {
             'paperSubject': sessionStorage.subjectName,
             'fileInfo': ""
         };
+        // homework_s.t_sbim
+        // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";
         ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
             if (e.result) {
 
