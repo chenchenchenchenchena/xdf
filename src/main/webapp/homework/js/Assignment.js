@@ -538,9 +538,9 @@ $(function () {
             //小于1000ms，不录音
             clearTimeout(recordTimer);
             alert("录制时间太短");
+            $('#record').on('touchcancle');
             wx.stopRecord({
                 success: function (res) {
-                    $('#record').on('touchcancle');
                 }
             });
             return;
