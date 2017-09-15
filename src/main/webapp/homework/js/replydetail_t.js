@@ -1018,6 +1018,11 @@ $(function () {
             }
         }
     }
-
+    $('.homeGrade').on('keyup',function(){
+        if(parseInt($(this).val())>100)
+        {
+            $(this).val('100')
+        }
+    })
 
 });
