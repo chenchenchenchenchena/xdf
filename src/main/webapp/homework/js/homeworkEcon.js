@@ -172,7 +172,7 @@ $(function () {
             return;
         }
         var params = {
-            'schoolId': "4688",
+            'schNum': "4688",
             'paperClass': currentGrade.gradeCode,
             'paperSubject': currentSubject.subjectCode,
             'paperName': $('.searchE input').val()
