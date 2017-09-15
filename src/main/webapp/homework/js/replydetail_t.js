@@ -23,8 +23,10 @@ $(function () {
             $('.hwRankTitle').css('background-image', 'url(../homework/images/jiao22222.png)');
         }
 
-    })
-
+    });
+    if(GetRequest('Id')){
+        sessionStorage.Teatwo = '0'
+    }
 
     //输入验证
     $('.teBox').on('keyup change', function () {
@@ -463,7 +465,7 @@ $(function () {
                 }, 1000);
             },
             cancel: function () {
-                alert('用户拒绝授权录音');
+                layer.msg('用户拒绝授权录音');
                 wx.stopRecord({
                     success: function (res) {
                         clearInterval(timeds);
@@ -485,7 +487,7 @@ $(function () {
             START = 0;
             //小于1000ms，不录音
             clearTimeout(recordTimer);
-            alert("录制时间太短");
+            layer.msg("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
                 }
