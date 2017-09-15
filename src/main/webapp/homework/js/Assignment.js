@@ -537,10 +537,10 @@ $(function () {
             START = 0;
             //小于1000ms，不录音
             clearTimeout(recordTimer);
+            $('#record').on('touchcancle');
             alert("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
-                    $('#record').on('touchcancle');
                 }
             });
             return;
