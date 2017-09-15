@@ -20,7 +20,8 @@ $(function(){
 	loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
 	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
-	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+    alert(JSON.stringify(reqData));
+    ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
@@ -139,8 +140,8 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
-		alert(0)
-		alert(JSON.stringify(msg));
+             alert(JSON.stringify(msg));
+             alert(JSON.stringify(reqData));
 		loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
