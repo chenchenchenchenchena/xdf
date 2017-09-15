@@ -3,8 +3,6 @@
  */
 $(function () {
 
-    var paperIdSub;
-
     var isModify = GetRequest("isModify");
     var isUpdata = GetRequest("isUpdata");
     var Tcid = GetRequest("id");
@@ -16,8 +14,6 @@ $(function () {
                 if(e.code == 200){
                     var data = e.data;
                     if(undefined != data && data != ""){
-
-                        paperIdSub = data.paperId;
 
                         $(".class_s i").attr("classcode",data.classCode);
                         $(".class_s i").attr("classname",data.className);
@@ -162,7 +158,7 @@ $(function () {
         sessionStorage.class = $(".class_s i").html();
         sessionStorage.hxCode = $('.class_s i').attr('classcode');
         sessionStorage.hxName = $('.class_s i').attr('classname');
-        location.href = "homeworkEcon.html?paperId="+paperIdSub+"&isModify="+isModify+"&id="+Tcid;
+        location.href = "homeworkEcon.html?paperId="+sessionStorage.paperId+"&isModify="+isModify+"&id="+Tcid;
 
     });
     //点击提交
@@ -209,14 +205,6 @@ $(function () {
     });
     $(".areyok input").eq(1).click(function () {
         submit();
-    });
-    //选择作业内容
-    $(document).on("touchstart",".searchCon img",function () {
-        if($(this).attr("src")=="images/yu.png"){
-            $(this).attr("src","images/yu2.png");
-        }else{
-            $(this).attr("src","images/yu.png");
-        }
     });
 
     /**
