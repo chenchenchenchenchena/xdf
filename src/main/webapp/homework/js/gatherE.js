@@ -36,14 +36,14 @@ function summaryAjax(e) {
                 for(var i=0;i<e.data.data.nocommitArr.length;i++){
                     var nocommit='<li><span>'+e.data.data.nocommitArr[i].studentName+'</span><span studentNo='+e.data.data.nocommitArr[i].studentNo+'>'+e.data.data.nocommitArr[i].studentName+'</span></li>';
                     $(".noHw ul").append(nocommit);
-                    for(var i=0;i<$(".noHw li").length;i++){
-                        var nameHtml=$(".noHw li").eq(i).find("span").eq(0).html();
+                    for(var j=0;j<$(".noHw li").length;j++){
+                        var nameHtml=$(".noHw li").eq(j).find("span").eq(0).html();
                         if (nameHtml.length > 2) {
                             var avater = nameHtml.substring(nameHtml.length - 2, nameHtml.length);
-                            $(".noHw li").eq(i).find("span").eq(0).html(avater)
+                            $(".noHw li").eq(j).find("span").eq(0).html(avater)
                         } else {
                             var avater = nameHtml;
-                            $(".noHw li").eq(i).find("span").eq(0).html(avater);
+                            $(".noHw li").eq(j).find("span").eq(0).html(avater);
                         }
                     }
                 }
@@ -115,8 +115,8 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 });
 $(document).on("touchstart",".report",function () {
     var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/getStudentReportUrl.do";
-    var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};
-    /*var params = {"testId":$(this).attr("data-testId")};*/
+    /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
+    var params = {"testId":$(this).attr("data-testId")};
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
