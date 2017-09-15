@@ -102,8 +102,18 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
-
-				window.location.href=that.attr("data-url")+"&roleType=";
+				var params = {
+					"testId":$(this).attr("data-testid"),
+					"roleType":""
+				};
+				ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+					if (e.result) {
+						if(e.url!=undefined && e.url != ""){
+							window.location.href = e.url;
+						}
+					}
+				});
+				window.location.href=that.attr("data-url");
 
 			});
 

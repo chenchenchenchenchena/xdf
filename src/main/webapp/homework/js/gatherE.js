@@ -116,14 +116,14 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 $(document).on("touchstart",".report",function () {
     /*var url = "http://"+url_o+"/xdfdtmanager/teacherData/getStudentReportUrl.do";*/
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
-    /*var params = {"testId":$(this).attr("data-testid")};*/
-   /* ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+    var params = {"testId":$(this).attr("data-testid"),"roleType":"teacher"};
+    ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
                 window.location.href = e.url;
             }
         }
-    });*/
-    location.href=$(this).attr("data-paperReportUrl")+"&roleType=teacher";
+    });
+    location.href=$(this).attr("data-paperReportUrl");
 })
 
