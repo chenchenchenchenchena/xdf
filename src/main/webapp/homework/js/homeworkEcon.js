@@ -249,6 +249,13 @@ $(function () {
                 checkNum++;
             }
         }
+        var onlineUrl = 'dt.xdf.cn';
+        var url_ = "";
+        if (window.location.host == onlineUrl) {//正式环境
+            url_ = "http://tps.xdf.cn";
+        } else {//测试环境
+            url_ = "http://tps.staff.xdf.cn";
+        }
         contentName = contentName.substring(0, contentName.length - 1);
         console.log(contentName);
         console.log(checkNum);
@@ -259,7 +266,7 @@ $(function () {
             console.log(sessionStorage.contentName);
             location.href = "AssignmentE.html";
             sessionStorage.paperId = "32273901-279E-450F-AAFD-BB96E292AF26";
-            sessionStorage.paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
+            sessionStorage.paperUrl = url_ + "/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = stageName;
             sessionStorage.subjectName = stageName;
