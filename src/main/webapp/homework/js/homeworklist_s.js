@@ -53,6 +53,7 @@ $(function(){
 	});
 	// 点击待交作业列表
 	$(document).on('tap','.hwList',function(){
+		var that = $(this);
 		sessionStorage.removeItem('homeworkInfos');
 		// 缓存信息
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
@@ -66,7 +67,7 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
-				window.location.href = $(this).attr('data-url');
+				window.location.href = that.attr('data-url');
 			});
 
 		}else{
@@ -76,7 +77,7 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
-				window.location.href = 'dohomework_s.html?id='+$(this).attr('data-id');
+				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
 			});
 
 		}
