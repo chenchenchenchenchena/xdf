@@ -10,6 +10,7 @@ $(function(){
 	sessionStorage.studentName = '王子豪';
 	sessionStorage.schoolId = '73';*/
 	// localStorage.classCode = 'hx001';
+    alert(sessionStorage.stuNumber)
 	var loading;
 	//点击待交作业
 	$(".secul").hide();
