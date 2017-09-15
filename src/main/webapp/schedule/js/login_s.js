@@ -138,6 +138,7 @@ $(function(){
             $('.enter').hide();
             $('.content').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
+                sessionStorage.stuNumber = e.data.studentNo;
                 $('.search').show();
                 $('.stuname').html(e.data.studentName);
                 $('.stutel').html('');
@@ -148,6 +149,7 @@ $(function(){
                 $('.enter').hide();
                 $('.search').css('margin-top','.2rem')
             }else{
+                sessionStorage.stuNumber = e.data.studentNo;
                 //手机号+姓名查询
                 $('.searchTwo').show();
                 $('.card').hide();
