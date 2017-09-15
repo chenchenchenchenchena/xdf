@@ -124,6 +124,6 @@ $(document).on("touchstart",".report",function () {
             }
         }
     });*/
-    location.href=$(this).attr("data-paperReportUrl");
+    location.href=$(this).attr("data-paperReportUrl")+"&roleType=teacher";
 })
 

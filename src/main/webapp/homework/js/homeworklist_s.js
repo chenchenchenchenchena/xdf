@@ -103,7 +103,7 @@ $(function(){
 					console.log("阅读失败！"+msg.msg);
 				}
 
-				window.location.href=that.attr("data-url");
+				window.location.href=that.attr("data-url")+"&roleType=";
 
 			});
 
