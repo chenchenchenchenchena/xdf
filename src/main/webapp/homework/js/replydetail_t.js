@@ -895,7 +895,7 @@ $(function () {
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/png") + "'/></li>");
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
             //上传文件到服务器
