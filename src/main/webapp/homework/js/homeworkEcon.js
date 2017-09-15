@@ -206,7 +206,7 @@ $(function () {
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
-                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu2.png'/></li>";
                             paperId = dataList[i].paperID;
                             stageName = currentStage.stageName;
@@ -218,7 +218,7 @@ $(function () {
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
-                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu.png'/></li>";
                         }
 
