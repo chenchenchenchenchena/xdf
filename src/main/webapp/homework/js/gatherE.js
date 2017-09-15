@@ -23,11 +23,12 @@ function summaryAjax(e) {
                 $(".gray").show();
                 $(".gBth").show();
             }else{
-                var table='<tr>没有已交作业的学生</tr>';
+                var table='<tr><th colspan="5">没有已交作业的学生</th></tr>';
                 $("tbody").append(table);
                 $("table").show();
                 $(".gray").show();
-                $(".gBth").show();
+                /*$(".gBth").show();
+                $(".summary .gBth").css("background","ccc");*/
             }
 
             if(e.data.data.nocommitArr!=undefined&&e.data.data.nocommitArr.length>0){
@@ -48,13 +49,13 @@ function summaryAjax(e) {
                 }
                 $(".noHw").show();
                 $(".gray").show();
-                $(".gBth").show();
+                /*$(".gBth").show();*/
             }else{
                 var nocommit='<li>没有未交作业的学生</li>';
                 $(".noHw ul").append(nocommit);
                 $(".noHw").show();
                 $(".gray").show();
-                $(".gBth").show();
+                /*$(".gBth").show();*/
             }
             layer.close(loading);
         }else{
