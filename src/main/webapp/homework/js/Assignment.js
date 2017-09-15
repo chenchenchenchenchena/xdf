@@ -516,6 +516,13 @@ $(function () {
             },
             cancel: function () {
                 alert('用户拒绝授权录音');
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                    }
+                });
             }
         });
     });
@@ -539,7 +546,7 @@ $(function () {
                 // if (timeds > 1) {
                 //     $('.big_s').append('<div class="music_s"><span></span> </div>');
                 // }
-                localId = res.localId;
+                var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
@@ -559,7 +566,7 @@ $(function () {
             success: function (res) {
                 // alert(JSON.stringify(res));
                 //把录音在微信服务器上的id（res.serverId）发送到自己的服务器供下载。
-                serverId = res.serverId;
+                var serverId = res.serverId;
                 uploadVoice(serverId);
             },
             complete: function () {
