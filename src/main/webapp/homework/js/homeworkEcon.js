@@ -265,7 +265,7 @@ $(function () {
         var contentName = "";
         for (var i = 0; i < $(".searchCon li").length; i++) {
             if ($(".searchCon li").eq(i).find("img").attr('src') == "images/yu2.png") {
-                contentName += $(".searchCon li").eq(i).find("h3").html() + ";";
+                contentName += $(".searchCon li").eq(i).find("h3").html();
                 checkNum++;
             }
         }
@@ -276,7 +276,7 @@ $(function () {
         } else {//测试环境
             url_ = "http://tps.staff.xdf.cn";
         }
-        contentName = contentName.substring(0, contentName.length - 1);
+        // contentName = contentName.substring(0, contentName.length - 1);
         console.log(contentName);
         console.log(checkNum);
         if (checkNum == 0) {
