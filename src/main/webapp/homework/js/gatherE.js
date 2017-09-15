@@ -117,6 +117,7 @@ $(document).on("touchstart",".report",function () {
     /*var url = "http://"+url_o+"/xdfdtmanager/teacherData/getStudentReportUrl.do";*/
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
     var params = {"testId":$(this).attr("data-testid"),"roleType":"teacher"};
+    var that=$(this);
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
@@ -124,6 +125,6 @@ $(document).on("touchstart",".report",function () {
             }
         }
     });
-    location.href=$(this).attr("data-paperReportUrl");
+    location.href=that.attr("data-paperReportUrl");
 })
 
