@@ -540,9 +540,7 @@ $(function () {
             alert("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
-                    clearInterval(timeds);
-                    $('.song_s').hide();
-                    $('.big_whit').hide();
+                    $('#record').on('touchcancle');
                 }
             });
             return;
