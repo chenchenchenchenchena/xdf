@@ -10,8 +10,6 @@ $(function(){
 	sessionStorage.studentName = '王子豪';
 	sessionStorage.schoolId = '73';*/
 	// localStorage.classCode = 'hx001';
-    alert(sessionStorage.stuNumber);
-    alert(localStorage.userId_stu);
 	var loading;
 	//点击待交作业
 	$(".secul").hide();
@@ -20,7 +18,7 @@ $(function(){
 	loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
 	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
-	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+    ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
@@ -139,8 +137,6 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
-		alert(0)
-		alert(JSON.stringify(msg));
 		loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
