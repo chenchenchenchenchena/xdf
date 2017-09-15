@@ -731,11 +731,11 @@ $(function () {
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
         layer.close(layer2);
-        if ($('.imgBox').find('li').length <= 1) {
+        if ($('.imgBox').find('li').length < 1) {
             $('.imgBox').hide();
         }
 
-        $('.imgBox li:eq(' + index + ')').remove();
+        $('.notsubmit .imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
             $('.image_s').show();
