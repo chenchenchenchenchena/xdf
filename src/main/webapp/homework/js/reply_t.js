@@ -67,7 +67,7 @@ $(function() {
 
     $(document).on('tap', '.home_t li', function () {
         sessionStorage.stuid = $(this).attr('Id');
-        location.href = 'replydetail_t.html';
+        location.href = 'replydetail_t.html'
     });
 
     $('.noreplyTitle span:last-of-type').on('touchend', function () {
@@ -123,7 +123,7 @@ $(function() {
         }
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');
-        location.href = 'replydetail_t.html';
+        location.href = 'replydetail_t.html?Id='+$(this).attr('Id');
     })
 
 

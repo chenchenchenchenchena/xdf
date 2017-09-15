@@ -10,6 +10,7 @@ $(function(){
 	sessionStorage.studentName = '王子豪';
 	sessionStorage.schoolId = '73';*/
 	// localStorage.classCode = 'hx001';
+    alert(sessionStorage.stuNumber)
 	var loading;
 	//点击待交作业
 	$(".secul").hide();
@@ -195,7 +196,7 @@ $(function(){
 							+'<div class="hwRight">'
 							+'<div class="hwTime"><span>'+classTitle+'</span>'
 							+'<span>'+homeworkTime+'</span></div>'
-							+'<div class="hwS"><span><i>学段:</i><i>小学</i></span> <span><i>年纪:</i><i>一年级</i></span> <span><i>学科:</i><i>物理</i></span></div></div><span class='+readCss+' style="margin-top: 12px"></span></div>';
+							+'<div class="hwS"><span><i>学段:</i><i>'+item.paperStage+'</i></span> <span><i>年级:</i><i>'+item.paperClass+'</i></span> <span><i>学科:</i><i>'+item.paperSubject+'</i></span></div></div><span class='+readCss+' style="margin-top: 12px"></span></div>';
 						$(".hwContent").append(hwListHtml);
 						$(".hwContent").show();
 					}
