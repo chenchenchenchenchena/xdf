@@ -8,7 +8,6 @@ $(function () {
     var isModify = GetRequest("isModify");
     var isUpdata = GetRequest("isUpdata");
     var Tcid = GetRequest("id");
-    var hwId = "";
     if(isUpdata == 1){
 
     }else {
@@ -19,7 +18,6 @@ $(function () {
                     if(undefined != data && data != ""){
 
                         paperIdSub = data.paperId;
-                        hwId = data.id;
 
                         $(".class_s i").attr("classcode",data.classCode);
                         $(".class_s i").attr("classname",data.className);
@@ -226,7 +224,8 @@ $(function () {
      */
     function submit() {
         var hwName_ = $('.content_s i').html();
-        var paperName = hwName_.substring(0, hwName_.length - 1);
+        // var paperName = hwName_.substring(0, hwName_.length - 1);
+        var paperName = hwName_;
         var paperID = sessionStorage.paperId;
         var paperUrl = sessionStorage.paperUrl;
 
@@ -234,18 +233,14 @@ $(function () {
 
         if(isModify == 1){
             var params1 = {
-                'id':hwId,
-                'homeworkType': "2",
+                'Tcid':Tcid,
                 'paperId': paperID,
                 'paperName': paperName,
                 'paperUrl': paperUrl,
                 'paperClass': sessionStorage.gradeName,
                 'paperStage': sessionStorage.stageName,
-                'paperSubject': sessionStorage.subjectName,
-                'knowledgePoint': "",
-                'description': "",
-                'fileInfo': ""
-            }
+                'paperSubject': sessionStorage.subjectName
+            };
 
             ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params1), function (e) {
                 if (e.result) {
