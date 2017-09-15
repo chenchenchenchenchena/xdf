@@ -3,8 +3,32 @@
  */
 $(function () {
 
-    // sessionStorage.contentName = "五年级数学";
+    var paperIdSub;
 
+    var isModify = GetRequest("isModify");
+    var Tcid = GetRequest("id");
+    if(isModify == 1){
+        ajaxRequest('post', homework_s.t_seac, {'Tcid': Tcid}, function (e) {
+            if(e.code == 200){
+                var data = e.data;
+                if(undefined != data && data != ""){
+
+                    paperIdSub = data.paperId;
+
+                    $(".class_s i").attr("classcode",data.classCode);
+                    $(".class_s i").attr("classname",data.className);
+                    sessionStorage.paperId = data.paperId;
+                    sessionStorage.paperUrl = data.paperUrl;
+                    sessionStorage.gradeName = data.paperName;
+                    sessionStorage.stageName = data.paperStage;
+                    sessionStorage.subjectName = data.paperSubject;
+
+                    $(".content_s").find("i").html(data.className);
+                    $('.time_S i').html(data.homeworkTime);
+                }
+            }
+        });
+    }
 
     if (sessionStorage.paperUrl) {
         $('.sResolve a').attr("href", sessionStorage.paperUrl);
@@ -43,10 +67,13 @@ $(function () {
     });
     //选择班
     $('.class_s').on('touchend click', function () {
-        $('.class_name').show();
-        $('.class_name').animate({'bottom': '0px'});
-        $('.class_name').show();
-        $('.big_back').show();
+        if(isModify == 1){
+        }else {
+            $('.class_name').show();
+            $('.class_name').animate({'bottom': '0px'});
+            $('.class_name').show();
+            $('.big_back').show();
+        }
     });
 
     $(document).on('tap', '.class_name li', function () {
@@ -99,7 +126,12 @@ $(function () {
     });
     //作业时间
     $('.Choice_s input').on('change', function () {
-        $('.time_S i').html($(this).val());
+        if(isModify == 1){
+            //修改作业不可选
+        }else {
+            $('.time_S i').html($(this).val());
+        }
+
     });
     //点击蒙层
     $('.big_back').on('touchstart', function () {
@@ -123,8 +155,9 @@ $(function () {
         sessionStorage.class = $(".class_s i").html();
         sessionStorage.hxCode = $('.class_s i').attr('classcode');
         sessionStorage.hxName = $('.class_s i').attr('classname');
-        location.href = "homeworkEcon.html";
-    })
+        location.href = "homeworkEcon.html?paperId="+paperIdSub;
+
+    });
     //点击提交
     $(".tSub").click(function () {
         if($(".class_s i").html()==""){
@@ -188,13 +221,6 @@ $(function () {
         var paperID = sessionStorage.paperId;
         var paperUrl = sessionStorage.paperUrl;
 
-        // var paperID = "32273901-279E-450F-AAFD-BB96E292AF26";
-        // var paperUrl = "http://tps.staff.xdf.cn/gwots/testprocess/weixin/static/testing/index?paperId=32273901-279E-450F-AAFD-BB96E292AF26";
-        //
-        // sessionStorage.gradeName = "五年级";
-        // sessionStorage.stageName = "小学";
-        // sessionStorage.subjectName = "数学";
-
         //URL字段待定
         var params = {
             'appid': Global.appid,
@@ -218,27 +244,53 @@ $(function () {
             'paperSubject': sessionStorage.subjectName,
             'fileInfo': ""
         };
-        // homework_s.t_sbim
-        // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";
-        ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
-            if (e.result) {
 
-                layer.close(layer1);
-                layer.open({
-                    type: 1,
-                    area: ['312px', '194px'],
-                    shade: [0.2, '#000'],
-                    title: '',
-                    skin: '',
-                    time: 3000,
-                    content: $(".succ")
-                });
-                location.href = "homeworklist_t.html";
-            } else {
-                layer.close(layer1);
-                layer.msg(e.message);
-            }
-        })
+        if(isModify == 1){
+
+            ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params), function (e) {
+                if (e.result) {
+
+                    layer.close(layer1);
+                    layer.open({
+                        type: 1,
+                        area: ['312px', '194px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".succ")
+                    });
+                    location.href = "homeworklist_t.html";
+                } else {
+                    layer.close(layer1);
+                    layer.msg(e.message);
+                }
+            })
+        }else {
+
+            // homework_s.t_sbim
+            // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";
+            ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
+                if (e.result) {
+
+                    layer.close(layer1);
+                    layer.open({
+                        type: 1,
+                        area: ['312px', '194px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".succ")
+                    });
+                    location.href = "homeworklist_t.html";
+                } else {
+                    layer.close(layer1);
+                    layer.msg(e.message);
+                }
+            });
+        }
+
     }
 
 });

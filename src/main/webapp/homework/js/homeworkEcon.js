@@ -2,6 +2,7 @@
  * Created by xupingwei on 2017/9/12.
  */
 $(function () {
+    var paperIdSub = getRequest("paperIdSub");//修改作业跳转过来的
     var stageType = "dict_tps_stage_info"; //学段
     var gradeType = "dict_tps_class_info"; //年级
     var subjectType = "dict_tps_subject_info"; //科目
@@ -69,7 +70,7 @@ $(function () {
                 if (type == subjectType) {
                     subjectList = tabTypes;
                 }
-                dealClassData(tabTypes,type);
+                dealClassData(tabTypes, type);
 
             } else {
                 $('.listOne').hide();
@@ -189,13 +190,27 @@ $(function () {
 
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
-                        strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
-                            "<div class='sInfo'>" +
-                            "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
-                            "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
-                            "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
-                            "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
-                            "<img src='images/yu.png'/></li>";
+                        if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
+                            strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                                "<div class='sInfo'>" +
+                                "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
+                                "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
+                                "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
+                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<img src='images/yu2.png'/></li>";
+                            stageName = currentStage.stageName;
+                            gradeName = currentGrade.gradeName;
+                            subjectName = currentSubject.subjectName;
+                        } else {
+                            strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                                "<div class='sInfo'>" +
+                                "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
+                                "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
+                                "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
+                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<img src='images/yu.png'/></li>";
+                        }
+
                     }
                     $('.searchCon ul').html(strHtml_);
                 } else {
@@ -231,7 +246,6 @@ $(function () {
         } else {
             $('.searchCon ul li').find('img').attr('src', "images/yu.png");
             $(this).find('img').attr('src', "images/yu2.png");
-            ;
             paperUrl = $(this).find('h3').attr("paperId");
             stageName = $(this).find('.stage-').html();
             gradeName = $(this).find('.grade-').html();
