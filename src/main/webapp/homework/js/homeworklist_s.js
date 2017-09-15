@@ -139,7 +139,8 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
-		alert(Json.stringify(msg))
+		alert(0)
+		alert(Json.stringify(msg));
 		loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
