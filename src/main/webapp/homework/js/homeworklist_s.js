@@ -140,7 +140,7 @@ $(function(){
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
 		alert(0)
-		alert(Json.stringify(msg));
+		alert(JSON.stringify(msg));
 		loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
