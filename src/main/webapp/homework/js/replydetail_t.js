@@ -23,8 +23,10 @@ $(function () {
             $('.hwRankTitle').css('background-image', 'url(../homework/images/jiao22222.png)');
         }
 
-    })
-
+    });
+    if(GetRequest('Id')){
+        sessionStorage.Teatwo = '0'
+    }
 
     //输入验证
     $('.teBox').on('keyup change', function () {
