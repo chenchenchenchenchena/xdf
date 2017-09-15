@@ -173,23 +173,6 @@ $(function () {
     var END;
     var recordTimer;
     $('#record_bg').on('touchstart', function (event) {
-        /*timeInedex = 0;
-        START = new Date().getTime();
-        $(this).attr('src', 'images/speak.gif');
-        event.preventDefault();
-        recordTimer = setTimeout(function () {
-            wx.startRecord({
-                success: function () {
-                    localStorage.rainAllowRecord = 'true';
-                    timeds = setInterval(function () {
-                        timeInedex++
-                    }, 1000);
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        }, 300);*/
         START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
@@ -203,7 +186,14 @@ $(function () {
                 }, 1000);
             },
             cancel: function () {
-                alert('用户拒绝授权录音');
+                layer.msg('用户拒绝授权录音');
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                    }
+                });
             }
         });
     });
@@ -212,32 +202,6 @@ $(function () {
      * 松手结束录音
      */
     $('#record_bg').on('touchend', function (event) {
-        /*$(this).attr('src', 'images/C04-03.png');
-        event.preventDefault();
-        END = new Date().getTime();
-        if ((END - START) < 1000) {
-            END = 0;
-            START = 0;
-            //小于1000ms，不录音
-            clearTimeout(recordTimer);
-            alert("录制时间太短");
-            return;
-        }
-        wx.stopRecord({
-            success: function (res) {
-                clearInterval(timeds);
-                localId = res.localId;
-                $('.song_s').hide();
-                uploadVoiceWX(localId);
-
-            }, complete: function () {
-                //接口调用完成（失败成功）
-
-            },
-            fail: function (res) {
-            }
-        });*/
-
 
         $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
@@ -247,7 +211,11 @@ $(function () {
             START = 0;
             //小于1000ms，不录音
             clearTimeout(recordTimer);
-            alert("录制时间太短");
+            layer.msg("录制时间太短");
+            wx.stopRecord({
+                success: function (res) {
+                }
+            });
             return;
         }
         wx.stopRecord({

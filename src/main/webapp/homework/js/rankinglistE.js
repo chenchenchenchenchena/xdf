@@ -100,7 +100,7 @@ $(function () {
                         strHtml += "<li class='tr'><span><i class='check-box checked' data-stuNo="+studentNo+"></i></span>" +
                             "<span><span class='first-num'>" + ranking + "</span></span>" +
                             "<span class='nameLeft'><i>" + avater + "</i></span>" +
-                            "<span>" + studentName + "</span>" +
+                            "<span class='nameRight'>" + studentName + "</span>" +
                             "<span class='stuTime'>" + times + "</span>" +
                             "<span class='stuScore'>" + score + "</span></li>";
                     }

@@ -46,6 +46,9 @@
     background:#ffbb37;
     color: #fff;
 }
+.nameRight{
+    width:150px;
+}
 .ranklibe .name{
     width: 200px;
     margin: 0 76px 0 30px;
@@ -53,19 +56,19 @@
 .ranklibe .useTime{
     width:66px;
     text-align: center;
-    margin-right: 72px;
+    margin-right: 62px;
 }
 .ranklibe .stuScore{
-    width: 55px;
+    width: 100px;
     text-align: center;
 }
 .ranklibe .nameLeft{
-    margin: 0 32px 0 30px;
+    margin: 0 0 0 43px;
 }
 .ranklibe .stuTime{
-    width:90px;
+    width:152px;
     text-align: center;
-    margin: 0 50px 0 53px;
+    margin: 0 2px 0 13px;
 }
 .shareBtn{
     width:100%;

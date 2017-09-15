@@ -150,6 +150,7 @@ input{
 	border-top: 1px solid #e1e1e1;
 	color: #949494;
 	font-size: 25px;
+	position: relative;
 }
 /*.secul li>span:nth-child(2){
 	display: inline-block;
@@ -644,7 +645,10 @@ html body .esc_s{
 	display:none;
 }
 .fr{float:right;}
-
+.stuScore{
+	position: absolute;
+	right: 0;
+}
 .hwLeft span{
 	position: absolute;
 	display: inline-block;

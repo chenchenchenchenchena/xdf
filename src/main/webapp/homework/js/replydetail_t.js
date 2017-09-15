@@ -465,7 +465,14 @@ $(function () {
                 }, 1000);
             },
             cancel: function () {
-                alert('用户拒绝授权录音');
+                layer.msg('用户拒绝授权录音');
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                    }
+                });
             }
         });
     });
@@ -480,7 +487,11 @@ $(function () {
             START = 0;
             //小于1000ms，不录音
             clearTimeout(recordTimer);
-            alert("录制时间太短");
+            layer.msg("录制时间太短");
+            wx.stopRecord({
+                success: function (res) {
+                }
+            });
             return;
         }
         wx.stopRecord({
@@ -505,8 +516,7 @@ $(function () {
             localId: upId, // 需要上传的音频的本地ID，由stopRecord接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
-                serverId = res.serverId;
-                uploadVoice(serverId);
+                uploadVoice(res.serverId);
             },
             complete: function () {
                 //接口调用完成（失败成功）

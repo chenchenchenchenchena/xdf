@@ -265,7 +265,7 @@ $(function () {
             sessionStorage.contentName = contentName;
             console.log(sessionStorage.contentName);
             location.href = "AssignmentE.html";
-            sessionStorage.paperId = "32273901-279E-450F-AAFD-BB96E292AF26";
+            sessionStorage.paperId = paperUrl;
             sessionStorage.paperUrl = url_ + "/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = stageName;
