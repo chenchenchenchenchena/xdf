@@ -424,7 +424,7 @@ html body .tealist_s .more_so{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	margin-right:38px;
+	margin-right:20px;
 	text-align: right;
 	color:#808080;
 }
@@ -695,4 +695,5 @@ i{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	width: 397px;*/
+	margin-right: 20px;
 }

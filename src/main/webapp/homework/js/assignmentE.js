@@ -23,7 +23,8 @@ $(function () {
                     sessionStorage.stageName = data.paperStage;
                     sessionStorage.subjectName = data.paperSubject;
 
-                    $(".content_s").find("i").html(data.className);
+                    $(".class_s i").html(data.className);
+                    $(".content_s").find("i").html(data.paperName);
                     $('.time_S i').html(data.homeworkTime);
                 }
             }
