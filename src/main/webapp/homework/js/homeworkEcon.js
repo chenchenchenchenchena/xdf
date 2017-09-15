@@ -14,6 +14,14 @@ $(function () {
     var currentSubject;
 
 
+
+    var paperId = "";
+    var stageName = "";
+    var gradeName = "";
+    var subjectName = "";
+
+
+
     $(document).on("touchstart", "#stage", function () {
         if (stageList == undefined || stageList.length == 0) {
 
@@ -198,6 +206,7 @@ $(function () {
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
                                 "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
                                 "<img src='images/yu2.png'/></li>";
+                            paperId = dataList[i].paperID;
                             stageName = currentStage.stageName;
                             gradeName = currentGrade.gradeName;
                             subjectName = currentSubject.subjectName;
@@ -234,11 +243,6 @@ $(function () {
         $('.searchEmpty').hide();
         $('.eBtn').show();
     }
-
-    var paperUrl = "";
-    var stageName = "";
-    var gradeName = "";
-    var subjectName = "";
     //选择作业列表点击事件
     $(document).on("touchstart", ".searchCon ul li", function () {
         if ($(this).find('img').attr('src') == "images/yu2.png") {
@@ -246,7 +250,7 @@ $(function () {
         } else {
             $('.searchCon ul li').find('img').attr('src', "images/yu.png");
             $(this).find('img').attr('src', "images/yu2.png");
-            paperUrl = $(this).find('h3').attr("paperId");
+            paperId = $(this).find('h3').attr("paperId");
             stageName = $(this).find('.stage-').html();
             gradeName = $(this).find('.grade-').html();
             subjectName = $(this).find('.subject-').html();
@@ -279,7 +283,7 @@ $(function () {
             sessionStorage.contentName = contentName;
             console.log(sessionStorage.contentName);
             location.href = "AssignmentE.html";
-            sessionStorage.paperId = paperUrl;
+            sessionStorage.paperId = paperId;
             sessionStorage.paperUrl = url_ + "/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = stageName;
