@@ -10,7 +10,8 @@ $(function(){
 	sessionStorage.studentName = '王子豪';
 	sessionStorage.schoolId = '73';*/
 	// localStorage.classCode = 'hx001';
-    alert(sessionStorage.stuNumber)
+    alert(sessionStorage.stuNumber);
+    alert(localStorage.userId_stu);
 	var loading;
 	//点击待交作业
 	$(".secul").hide();
@@ -138,6 +139,8 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
+		alert(0)
+		alert(Json.stringify(msg));
 		loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
