@@ -102,8 +102,9 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
+				var url = url_o+"/teacherData/getStudentReportUrl.do";
 				var params = {
-					"testId":$(this).attr("data-testid"),
+					"testId":"1590D9EF-4F39-4D46-926E-DF9A41F76966",
 					"roleType":""
 				};
 				ajaxRequest("POST", url, JSON.stringify(params), function (e) {
@@ -113,7 +114,7 @@ $(function(){
 						}
 					}
 				});
-				window.location.href=that.attr("data-url");
+				/*window.location.href=that.attr("data-url");*/
 
 			});
 

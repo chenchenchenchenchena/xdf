@@ -114,17 +114,19 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 
 });
 $(document).on("touchstart",".report",function () {
-    var url = "http://"+url_o+"/xdfdtmanager/teacherData/getStudentReportUrl.do";
+    var url = url_o+"/teacherData/getStudentReportUrl.do";
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
     var params = {"testId":"1590D9EF-4F39-4D46-926E-DF9A41F76966","roleType":"teacher"};
     var that=$(this);
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+        alert("111");
         if (e.result) {
+            alert("222");
             if(e.url!=undefined && e.url != ""){
                 window.location.href = e.url;
             }
         }
     });
-    location.href=that.attr("data-paperReportUrl");
+   /* location.href=that.attr("data-paperReportUrl");*/
 })
 
