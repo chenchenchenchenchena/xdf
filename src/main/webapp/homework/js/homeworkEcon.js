@@ -2,7 +2,7 @@
  * Created by xupingwei on 2017/9/12.
  */
 $(function () {
-    var paperIdSub = GetRequest("paperIdSub");//修改作业跳转过来的
+    var paperIdSub = GetRequest("paperId");//修改作业跳转过来的
     var stageType = "dict_tps_stage_info"; //学段
     var gradeType = "dict_tps_class_info"; //年级
     var subjectType = "dict_tps_subject_info"; //科目
