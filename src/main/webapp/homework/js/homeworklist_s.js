@@ -17,6 +17,7 @@ $(function(){
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
+	alert(sessionStorage.stuNumber);
 	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
     ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
