@@ -74,7 +74,7 @@
     border-radius: 10px;
 }
 .submitFail button,.tips-box button{
-    margin: 40px 0 0 60px;
+    margin: 23px 0 0 60px;
 }
 .submitFail>button:nth-child(3),
 .tips-box>button:nth-child(3){
@@ -89,7 +89,7 @@
     font-size: 30px;
     color: #333333;
     text-align: center;
-    margin-top: 30px;
+   /* margin-top: 30px;*/
 }
 .layui-layer{
     border-radius: 10px!important;
