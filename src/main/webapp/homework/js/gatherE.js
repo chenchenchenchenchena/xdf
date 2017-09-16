@@ -16,7 +16,7 @@ function summaryAjax(e) {
             $(".gHeader").show();
             if(e.data.data.commitArr!=undefined&&e.data.data.commitArr.length>0){
                 for(var i=0;i<e.data.data.commitArr.length;i++){
-                    var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report" data-paperReportUrl='+e.data.data.commitArr[i].paperReportUrl+'><img src="images/clipboard.png" /></td></tr>';
+                    var table='<tr><th>'+e.data.data.commitArr[i].studentName+'</th><th>'+e.data.data.commitArr[i].score+'</th><th>'+e.data.data.commitArr[i].replyTime+'</th><th>'+e.data.data.commitArr[i].times+'</th><td class="report" data-testId='+e.data.data.commitArr[i].testId+'><img src="images/clipboard.png" /></td></tr>';
                     $("tbody").append(table);
                 }
                 $("table").show();
@@ -116,13 +116,12 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 $(document).on("touchstart",".report",function () {
     var url = url_o+"/teacherData/getStudentReportUrl.do";
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
-    var params = {"testId":"1590D9EF-4F39-4D46-926E-DF9A41F76966","roleType":"teacher"};
+    var params = {"testId":$(this).attr("data-testId"),"roleType":"teacher"};
     var that=$(this);
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
-        alert("111");
         if (e.result) {
-            alert("222");
             if(e.url!=undefined && e.url != ""){
+                console.log(e.url);
                 window.location.href = e.url;
             }
         }
