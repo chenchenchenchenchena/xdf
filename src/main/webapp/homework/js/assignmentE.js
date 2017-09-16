@@ -3,24 +3,21 @@
  */
 $(function () {
 
-    var paperIdSub;
-
     var isModify = GetRequest("isModify");
     var isUpdata = GetRequest("isUpdata");
     var Tcid = GetRequest("id");
-    if(isUpdata == 1){
+    var isRequesting = false;
+    if (isUpdata == 1) {
 
-    }else {
-        if(isModify == 1){
+    } else {
+        if (isModify == 1) {
             ajaxRequest('post', homework_s.t_seac, {'Tcid': Tcid}, function (e) {
-                if(e.code == 200){
+                if (e.code == 200) {
                     var data = e.data;
-                    if(undefined != data && data != ""){
+                    if (undefined != data && data != "") {
 
-                        paperIdSub = data.paperId;
-
-                        $(".class_s i").attr("classcode",data.classCode);
-                        $(".class_s i").attr("classname",data.className);
+                        $(".class_s i").attr("classcode", data.classCode);
+                        $(".class_s i").attr("classname", data.className);
                         sessionStorage.paperId = data.paperId;
                         sessionStorage.paperUrl = data.paperUrl;
                         sessionStorage.gradeName = data.paperName;
@@ -47,16 +44,16 @@ $(function () {
     };
     var layer1, layer2, loading;
     //作业内容
-    if(sessionStorage.contentName){
+    if (sessionStorage.contentName) {
         $(".content_s").find("i").html(sessionStorage.contentName);
     }
-    if(sessionStorage.time){
+    if (sessionStorage.time) {
         $('.time_S i').html(sessionStorage.time);
-    }else{
+    } else {
         //设置当天默认值
         $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     }
-    if(sessionStorage.class){
+    if (sessionStorage.class) {
         $(".class_s i").html(sessionStorage.class);
     }
     if (sessionStorage.hxCode) {
@@ -69,13 +66,13 @@ $(function () {
     ajax_S(homework_s.t_clas, trardata, function (e) {
         var className = e.data;
         for (var a = 0; a < className.length; a++) {
-            $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt="">' + className[a].ClassName + '</li>')
+            $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt=""><span class="cn">' + className[a].ClassName + '</span></li><div style="padding-left: 70px;font-size: 32px">(' + className[a].ClassCode + ')</div>')
         }
     });
     //选择班
     $('.class_s').on('touchend click', function () {
-        if(isModify == 1){
-        }else {
+        if (isModify == 1) {
+        } else {
             $('.class_name').show();
             $('.class_name').animate({'bottom': '0px'});
             $('.class_name').show();
@@ -104,11 +101,12 @@ $(function () {
         classCode = '';
         $(this).parent().find('li').each(function () {
             if ($(this).find('img').attr('src') == 'images/C0503.png') {
-                className += $(this).text() + '；';
+                className += $(this).find('.cn').html() + '；';
                 classCode += $(this).attr('ClassCode') + ',';
             }
         });
         classCode = classCode.substr(0, classCode.length - 1);
+        className = className.substr(0, className.length - 1);
         if (className == '') {
             layer.open({
                 type: 1,
@@ -123,7 +121,7 @@ $(function () {
         if ($('.class_name i').html() != '0') {
             $('.class_s i').html('已选择' + $('.class_name i').html() + '个班&nbsp;&nbsp;' + className + ' ');
             $('.class_s i').attr("classcode", classCode);
-            var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+            var class_n = className.replace(/\；/g, ',');
             $('.class_s i').attr("classname", class_n);
             $('.class_name').animate({'bottom': '-438px'});
             $('.big_back').hide();
@@ -133,9 +131,9 @@ $(function () {
     });
     //作业时间
     $('.Choice_s input').on('change', function () {
-        if(isModify == 1){
+        if (isModify == 1) {
             //修改作业不可选
-        }else {
+        } else {
             $('.time_S i').html($(this).val());
         }
 
@@ -162,45 +160,51 @@ $(function () {
         sessionStorage.class = $(".class_s i").html();
         sessionStorage.hxCode = $('.class_s i').attr('classcode');
         sessionStorage.hxName = $('.class_s i').attr('classname');
-        location.href = "homeworkEcon.html?paperId="+paperIdSub+"&isModify="+isModify+"&id="+Tcid;
+        location.href = "homeworkEcon.html?paperId=" + sessionStorage.paperId + "&isModify=" + isModify + "&id=" + Tcid;
 
     });
     //点击提交
     $(".tSub").click(function () {
-        if($(".class_s i").html()==""){
-            layer.open({
-                type: 1,
-                area: ['312px', '194px'],
-                shade: 0,
-                title: '',
-                skin: '',
-                time: 3000,
-                content: $(".classEmpty")
-            })
-        }
-        if($(".content_s i").html()==""){
-            layer.open({
-                type: 1,
-                area: ['312px', '194px'],
-                shade: 0,
-                title: '',
-                skin: '',
-                time: 3000,
-                content: $(".classTime")
-            })
-        }
-        if($(".content_s i").html()!=""&&$(".class_s i").html()!=""&&$(".time_S i").html()!=""){
-            sessionStorage.removeItem("contentName");
-            sessionStorage.removeItem("time");
-            sessionStorage.removeItem("class");
-            layer1 = layer.open({
-                type: 1,
-                area: ['312px', '194px'],
-                shade: [0.2, '#000'],
-                title: '',
-                skin: '',
-                content: $(".areyok")
-            })
+        if (isRequesting) {
+            $('.tSub').css("background","#e1e1e1");
+
+        } else {
+            $('.tSub').css("background","#11bf9e");
+            if ($(".class_s i").html() == "") {
+                layer.open({
+                    type: 1,
+                    area: ['312px', '194px'],
+                    shade: 0,
+                    title: '',
+                    skin: '',
+                    time: 3000,
+                    content: $(".classEmpty")
+                })
+            }
+            if ($(".content_s i").html() == "") {
+                layer.open({
+                    type: 1,
+                    area: ['312px', '194px'],
+                    shade: 0,
+                    title: '',
+                    skin: '',
+                    time: 3000,
+                    content: $(".classTime")
+                })
+            }
+            if ($(".content_s i").html() != "" && $(".class_s i").html() != "" && $(".time_S i").html() != "") {
+                sessionStorage.removeItem("contentName");
+                sessionStorage.removeItem("time");
+                sessionStorage.removeItem("class");
+                layer1 = layer.open({
+                    type: 1,
+                    area: ['312px', '194px'],
+                    shade: [0.2, '#000'],
+                    title: '',
+                    skin: '',
+                    content: $(".areyok")
+                })
+            }
         }
     });
 
@@ -208,21 +212,15 @@ $(function () {
         layer.close(layer1);
     });
     $(".areyok input").eq(1).click(function () {
+
         submit();
-    });
-    //选择作业内容
-    $(document).on("touchstart",".searchCon img",function () {
-        if($(this).attr("src")=="images/yu.png"){
-            $(this).attr("src","images/yu2.png");
-        }else{
-            $(this).attr("src","images/yu.png");
-        }
     });
 
     /**
      * 提交布置作业
      */
     function submit() {
+        isRequesting = true;
         var hwName_ = $('.content_s i').html();
         // var paperName = hwName_.substring(0, hwName_.length - 1);
         var paperName = hwName_;
@@ -230,10 +228,9 @@ $(function () {
         var paperUrl = sessionStorage.paperUrl;
 
 
-
-        if(isModify == 1){
+        if (isModify == 1) {
             var params1 = {
-                'Tcid':Tcid,
+                'Tcid': Tcid,
                 'paperId': paperID,
                 'paperName': paperName,
                 'paperUrl': paperUrl,
@@ -244,7 +241,7 @@ $(function () {
 
             ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params1), function (e) {
                 if (e.result) {
-
+                    isRequesting = false;
                     layer.close(layer1);
                     layer.open({
                         type: 1,
@@ -257,16 +254,17 @@ $(function () {
                     });
                     location.href = "homeworklist_t.html";
                 } else {
+                    isRequesting = false;
                     layer.close(layer1);
                     layer.msg(e.message);
                 }
             })
-        }else {
+        } else {
             //URL字段待定
             var params = {
                 'appid': Global.appid,
                 'secret': Global.secret,
-                'url': "http://dt.staff.xdf.cn/xdfdthome/homework/pushhomeworkE.html",
+                'url': url_o2+"/xdfdthome/homework/pushhomeworkE.html",
                 'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
                 'teacherEmail': localStorage.terEmail,
                 'teacherName': localStorage.teacherName,
@@ -287,10 +285,11 @@ $(function () {
             };
 
             // homework_s.t_sbim
-            // var url1 = "http://10.200.80.120:8080/xdfdtmanager/teacherData/addHomeWork.do";
+            // var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
             ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
                 if (e.result) {
 
+                    isRequesting = false;
                     layer.close(layer1);
                     layer.open({
                         type: 1,
@@ -303,6 +302,7 @@ $(function () {
                     });
                     location.href = "homeworklist_t.html";
                 } else {
+                    isRequesting = false;
                     layer.close(layer1);
                     layer.msg(e.message);
                 }

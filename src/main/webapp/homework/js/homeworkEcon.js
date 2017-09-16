@@ -2,7 +2,7 @@
  * Created by xupingwei on 2017/9/12.
  */
 $(function () {
-    var paperIdSub = GetRequest("paperIdSub");//修改作业跳转过来的
+    var paperIdSub = GetRequest("paperId");//修改作业跳转过来的
     var stageType = "dict_tps_stage_info"; //学段
     var gradeType = "dict_tps_class_info"; //年级
     var subjectType = "dict_tps_subject_info"; //科目
@@ -206,7 +206,7 @@ $(function () {
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
-                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu2.png'/></li>";
                             paperId = dataList[i].paperID;
                             stageName = currentStage.stageName;
@@ -218,7 +218,7 @@ $(function () {
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
-                                "<div><span>发布人：</span><span>" + localStorage.teacherName + "</span></div></div>" +
+                                "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu.png'/></li>";
                         }
 

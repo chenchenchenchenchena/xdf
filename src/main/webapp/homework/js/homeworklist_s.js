@@ -103,9 +103,21 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
+				/*window.location.href=that.attr("data-url");*/
 
-				window.location.href=that.attr("data-url");
-
+			});
+			var url = url_o+"/teacherData/getStudentReportUrl.do";
+			var params = {
+				"testId":$(this).attr("data-testId"),
+				"roleType":""
+			};
+			ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+				if (e.result) {
+					if(e.url!=undefined && e.url != ""){
+						console.log(e.url);
+						window.location.href = e.url;
+					}
+				}
 			});
 
 		}else{
@@ -256,7 +268,7 @@ $(function(){
 						if(item.homeworkType=="1"){
 							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}else{
-							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-url="http://tps.staff.xdf.cn/gwots/weixin/otstest/home/entrance?loginType=ns&clientType=mobile"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-testId="'+item.testId+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}
 					});
 					//红点显示判断

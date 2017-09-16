@@ -72,7 +72,7 @@ $(document).on("touchstart",".ss",function () {
 var Homework = {
     'appid': Global.appid,
     'secret': Global.secret,
-    'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+    'url': url_o2+'/xdfdthome/homework/homeworklist_s.html',
     'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
 };
 $('.noHwTitle span:last-of-type').on('touchend', function () {
@@ -114,15 +114,18 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
 
 });
 $(document).on("touchstart",".report",function () {
-    var url = "http://"+url_o+"/xdfdtmanager/teacherData/getStudentReportUrl.do";
+    var url = url_o+"/teacherData/getStudentReportUrl.do";
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
-    var params = {"testId":$(this).attr("data-testid")};
+    var params = {"testId":$(this).attr("data-testId"),"roleType":"teacher"};
+    var that=$(this);
     ajaxRequest("POST", url, JSON.stringify(params), function (e) {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
+                console.log(e.url);
                 window.location.href = e.url;
             }
         }
     });
+   /* location.href=that.attr("data-paperReportUrl");*/
 })
 
