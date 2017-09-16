@@ -14,11 +14,15 @@ $(function () {
     var currentSubject;
 
 
-
     var paperId = "";
     var stageName = "";
     var gradeName = "";
     var subjectName = "";
+
+    var pageNo = 1;
+    var maxPage;
+    var isLoading = false;
+    var isEnd = false;
 
 
     var isModify = GetRequest("isModify");
@@ -182,22 +186,37 @@ $(function () {
             layer.msg("请先选择科目");
             return;
         }
+        pageNo = 1;
+        getHwList();
+        isEnd = false;
+
+    });
+
+    /**
+     * 加载作业列表
+     */
+    function getHwList() {
+        if (isEnd || isLoading) {
+            //表示已经加载完成
+            return;
+        }
+
+        isLoading = true;
         var params = {
             'schNum': "4688",
             'paperClass': currentGrade.gradeCode,
             'paperSubject': currentSubject.subjectCode,
-            'paperName': $('.searchE input').val()
+            'paperName': $('.searchE input').val(),
+            'pageNo': pageNo
         };
-
-        // var url = "http://10.200.80.120:8080/xdfdtmanager/teacherData/queryExcellentHomeWorkContent.do";
-        // var url = "http://dt.staff.xdf.cn/xdfdtmanager/teacherData/queryExcellentHomeWorkContent.do";
         var url = homework_s.t_getExcellent;
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
             if (e.result) {
                 var dataList = e.data;
                 if (dataList != undefined && dataList.length > 0) {
                     hideEmptyHtml();
-
+                    maxPage = e.maxPage;
+                    // maxPage = 5;
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
                         if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
@@ -223,17 +242,65 @@ $(function () {
                         }
 
                     }
-                    $('.searchCon ul').html(strHtml_);
+                    // for (var i = 0; i < 8; i++) {
+                    //     strHtml_ += "<li><h3 paperId='" + 1233342 + "'>韩国</h3>" +
+                    //         "<div class='sInfo'>" +
+                    //         "<div><span>学段：</span><span class='stage-'>就哈</span></div>" +
+                    //         "<div><span>年级：</span><span class='grade-'>北京阿卡</span></div>" +
+                    //         "<div><span>学科：</span><span class='subject-'>哈哈</span></div>" +
+                    //         "<div><span>发布人：</span><span>啊</span></div></div>" +
+                    //         "<img src='images/yu.png'/></li>";
+                    //
+                    //
+                    // }
+                    if(pageNo == 1){
+                        $('.searchCon ul').find('li').remove();
+                    }
+
+                    $('.searchCon ul').append(strHtml_);
+                    if (pageNo < maxPage) {
+                        isEnd = false;
+                        pageNo++;
+                    } else {
+                        isEnd = true;
+                    }
+                    isLoading = false;
                 } else {
-                    showEmptyHtml();
-                    layer.msg(e.message);
+                    isEnd = true;
+                    if(pageNo == 1){
+                        showEmptyHtml();
+                        layer.msg(e.message);
+                    }else {
+
+                        layer.msg("暂无数据");
+                    }
+
+                    isLoading = false;
                 }
             } else {
+                isLoading = false;
                 showEmptyHtml();
                 layer.msg(e.message);
             }
         });
+    }
+
+    /**
+     * 监听滚动
+     */
+    $('.searchCon').scroll(function () {
+        //已经滚动到上面的页面高度
+        var scrollTop = $(this).scrollTop();
+        //页面高度
+        var scrollHeight = $('.searchCon ul').height();
+        //浏览器窗口高度
+        var windowHeight = $('.searchCon').height();
+        //此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+        if (scrollTop + windowHeight >= scrollHeight) {
+            getHwList();
+        }
     });
+
     function showEmptyHtml() {
         $('.searchCon').hide();
         $('.searchEmpty').show();
@@ -245,6 +312,7 @@ $(function () {
         $('.searchEmpty').hide();
         $('.eBtn').show();
     }
+
     //选择作业列表点击事件
     $(document).on("touchstart", ".searchCon ul li", function () {
         if ($(this).find('img').attr('src') == "images/yu2.png") {
@@ -284,7 +352,7 @@ $(function () {
         } else {
             sessionStorage.contentName = contentName;
             console.log(sessionStorage.contentName);
-            location.href = "AssignmentE.html?isModify="+isModify+"&id="+Tcid+"&isUpdata="+1;
+            location.href = "AssignmentE.html?isModify=" + isModify + "&id=" + Tcid + "&isUpdata=" + 1;
             sessionStorage.paperId = paperId;
             sessionStorage.paperUrl = url_ + "/gwots/testprocess/weixin/static/testing/index?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
