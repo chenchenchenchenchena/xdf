@@ -30,6 +30,7 @@ $(function(){
 			var reqData = {
 				'stuNum':sessionStorage.stuNumber //学生编号
 			};
+			$('title').html('学生已交作业列表')
 			loading = layer.load();
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 		}
