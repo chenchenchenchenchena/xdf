@@ -22,7 +22,26 @@ $(function(){
             $(this).parent().prev().children('div').eq($(this).index()).show().siblings().hide()
         }
     });
+    /** 获取成绩类型 */
+    var reqData = {
+        'tableName':"studycase_grade_type"
+    };
+    ajaxRequest('POST', url.t_dictionary,reqData, function(e){
+        if(e.code==200){
+            var tabTypes =  e.data;
+            var tabStr = "";
+            for (var i = 0; i < tabTypes.length; i++){
+                if(i == 0){
+                    //第一次进入页面  默认选中第一个tab
+                    tabStr += "<li class='active_last' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }else {
+                    tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                }
 
+            }
+            $('.report_tab').html(tabStr);
+        }
+    });
 
 var maxnumber = 0;
 // tab切换
