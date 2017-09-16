@@ -12,6 +12,7 @@ $(function(){
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
+    alert(localStorage.userId_stu)
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();

@@ -82,7 +82,7 @@ $(function() {
 
         } else {
             if(!localStorage.userId_stu){
-                location.href = '../schedule/login_s.html'
+                location.href = 'login_s.html'
             }
             //存储学员号
             sessionStorage.stuNum = e.data.studentNo;
