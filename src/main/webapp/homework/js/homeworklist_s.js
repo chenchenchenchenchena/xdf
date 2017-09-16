@@ -102,8 +102,19 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
-
-				window.location.href=that.attr("data-url")+"&roleType=";
+				var url = url_o+"/teacherData/getStudentReportUrl.do";
+				var params = {
+					"testId":"1590D9EF-4F39-4D46-926E-DF9A41F76966",
+					"roleType":""
+				};
+				ajaxRequest("POST", url, JSON.stringify(params), function (e) {
+					if (e.result) {
+						if(e.url!=undefined && e.url != ""){
+							window.location.href = e.url;
+						}
+					}
+				});
+				/*window.location.href=that.attr("data-url");*/
 
 			});
 
