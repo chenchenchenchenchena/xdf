@@ -12,13 +12,11 @@ $(function(){
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
-    alert(localStorage.userId_stu)
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
-	alert(sessionStorage.stuNumber);
 	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
     ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
