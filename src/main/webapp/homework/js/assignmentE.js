@@ -264,7 +264,7 @@ $(function () {
             var params = {
                 'appid': Global.appid,
                 'secret': Global.secret,
-                'url': "http://dt.staff.xdf.cn/xdfdthome/homework/pushhomeworkE.html",
+                'url': url_o2+"/xdfdthome/homework/pushhomeworkE.html",
                 'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
                 'teacherEmail': localStorage.terEmail,
                 'teacherName': localStorage.teacherName,
@@ -285,8 +285,8 @@ $(function () {
             };
 
             // homework_s.t_sbim
-            var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
-            ajaxRequest("POST", url1, JSON.stringify(params), function (e) {
+            // var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
+            ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
                 if (e.result) {
 
                     isRequesting = false;

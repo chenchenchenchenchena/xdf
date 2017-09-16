@@ -59,10 +59,18 @@
         
     $(".aaa").on("touchstart",function(event){
     	alert("1111");
+        var onlineUrl = 'dt.xdf.cn';
+        var url_0 ="";
+        if (window.location.host == onlineUrl) {//正式环境
+            url_o = "http://dt.xdf.cn";
+
+        } else {//测试环境
+            url_o = "http://dt.staff.xdf.cn";
+        }
     	wx.onMenuShareTimeline({  
 	         title: '1111111', // 分享标题  
 	         link:"http://movie.douban.com/subject/25785114/",  
-	         imgUrl: "http://dt.staff.xdf.cn/xdfdthome/share/c2.png", // 分享图标  
+	         imgUrl: url_o+"/xdfdthome/share/c2.png", // 分享图标
 	         success: function () {  
 	    // 分享成功执行此回调函数  
 	            alert('success');  

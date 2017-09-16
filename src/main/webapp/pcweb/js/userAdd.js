@@ -116,7 +116,13 @@ $(function () {
         });
     }
 });
+var onlineUrl = 'dt.xdf.cn';
 var baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";//测试环境
+if (window.location.host == onlineUrl) {//正式环境
+    baseUrl = 'http://dt.xdf.cn/xdfdtmanager/';
+} else {//测试环境
+    baseUrl = "http://dt.staff.xdf.cn/xdfdtmanager/";
+}
 var actionUrl = {
     'searchUser': 'user/searchUser.do',//通过邮箱前缀获取账号信息
     'addUser': 'user/addUser.do' ,//添加账号信息

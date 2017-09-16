@@ -72,7 +72,7 @@ $(document).on("touchstart",".ss",function () {
 var Homework = {
     'appid': Global.appid,
     'secret': Global.secret,
-    'url': 'http://dt.staff.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+    'url': url_o2+'/xdfdthome/homework/homeworklist_s.html',
     'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
 };
 $('.noHwTitle span:last-of-type').on('touchend', function () {

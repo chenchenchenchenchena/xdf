@@ -46,11 +46,19 @@
 
     //文件保存接口
     function save() {
+        var onlineUrl = 'dt.xdf.cn';
+        var url_0 ="";
+        if (window.location.host == onlineUrl) {//正式环境
+            url_o = "http://dt.xdf.cn/xdfdtmanager/";
+
+        } else {//测试环境
+            url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+        }
         var fileName = $('#fileName').val();
         var fileUrl = $('#fileUrl').val();
         var cbconfig = {'fileName': fileName, 'fileUrl': fileUrl};
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/saveVideoFileInfo.do",
+            url: url_0+"videofile/saveVideoFileInfo.do",
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(cbconfig),
@@ -65,8 +73,16 @@
     }
     //显示已经录入的数据
     function showList() {
+        var onlineUrl = 'dt.xdf.cn';
+        var url_0 ="";
+        if (window.location.host == onlineUrl) {//正式环境
+            url_o = "http://dt.xdf.cn/xdfdtmanager/";
+
+        } else {//测试环境
+            url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+        }
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/videofile/getAllVideoFiles.do",
+            url: url_o + "videofile/getAllVideoFiles.do",
             type: 'post',
             dataType: 'json',
             success: function (e) {
