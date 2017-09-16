@@ -8,6 +8,9 @@ $(function(){
              };
             ajax_S(url.s_seac,WXnum,function(e){
                 if(e.result==true){
+                    if(!localStorage.userId_stu){
+                        location.href = '../schedule/login_s.html'
+                    }
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;

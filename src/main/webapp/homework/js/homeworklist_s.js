@@ -12,6 +12,7 @@ $(function(){
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
+    alert(localStorage.userId_stu)
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
@@ -22,7 +23,8 @@ $(function(){
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
-			$(".hwFinish,.hwEmpty").hide();
+                      $('title').html('学生待交作业列表')
+                      $(".hwFinish,.hwEmpty").hide();
 			loading = layer.load();
 			ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 		}else{
@@ -30,6 +32,7 @@ $(function(){
 			var reqData = {
 				'stuNum':sessionStorage.stuNumber //学生编号
 			};
+			$('title').html('学生已交作业列表')
 			loading = layer.load();
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 		}
@@ -267,7 +270,7 @@ $(function(){
 						if(item.homeworkType=="1"){
 							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}else{
-							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-url="'+item.testId+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-testId="'+item.testId+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}
 					});
 					//红点显示判断
