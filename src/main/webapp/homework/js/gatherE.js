@@ -73,7 +73,9 @@ var Homework = {
     'appid': Global.appid,
     'secret': Global.secret,
     'url': url_o2+'/xdfdthome/homework/homeworklist_s.html',
-    'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
+    /*'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'*/
+    'templateId':TemplateId_home
+
 };
 $('.noHwTitle span:last-of-type').on('touchend', function () {
     var Arr = [];
