@@ -6,6 +6,7 @@ $(function () {
     var Text_Grade = '成绩';
     var h_zhou_x = [];
     var Grade_eve = [];
+    var hwType = [];
     var className = GetRequest("className");
     var studentNo = GetRequest("studentNo");
     var classCode = GetRequest("classCode");
@@ -74,17 +75,27 @@ $(function () {
                         if (undefined != scoreDay) {
                             var score = parseInt(scoreDay.score);
                             var HomeworkTimes = scoreDay.HomeworkTimes;
+                            var homeworkType = scoreDay.homeworkType;
+                            var hwTypeText = "";
+                            if (homeworkType == 2 || homeworkType == "2") {
+                                hwTypeText = "电子作业";
+                            } else {
+                                hwTypeText = "普通作业";
+                            }
+
                             var className = scoreDay.className;
                             $('#chart_S' + i).siblings('.title_s').find("h4").html(className);
-                            Grade_eve.push(score);
+                            var d = {name: hwTypeText, value: score};
+                            Grade_eve.push(d);
                             h_zhou_x.push(HomeworkTimes);
+                            hwType.push(hwTypeText);
                             if (score > maxScore) {
                                 maxScore = score;
                             }
                         }
                     }
 
-                    Echart('chart_S' + i + '', Text_Grade, h_zhou_x, Grade_eve, maxScore);
+                    Echart('chart_S' + i + '', Text_Grade, h_zhou_x, Grade_eve, maxScore, hwType);
 
                     if (undefined != classCodes && classCodes != "" && classCodes[i] == classCode) {
                         //表示当前班级的图标展示其他的折叠
@@ -102,13 +113,15 @@ $(function () {
         }
     }
 
-    function Echart(id, series, x, dataItem, max) {
+    function Echart(id, series, x, dataItem, max, hwType) {
         var myChart = echarts.init(document.getElementById(id));
         var option = {
             tooltip: {
                 trigger: 'axis',
                 triggerOn: 'click',
-                formatter: '满分：' + max + '<br />得分：{c}',
+                formatter: function (params) {
+                    return '' + params[0].data.name +':'+params[0].data.value;
+                }
             },
             legend: {
                 data: [series],
@@ -124,6 +137,9 @@ $(function () {
                     type: 'category',
                     boundaryGap: false,
                     data: x,
+                    axisLine: {
+                        onZero: true
+                    },
                     nameTextStyle: {
                         fontSize: 24
                     },
@@ -157,6 +173,7 @@ $(function () {
                     type: 'line',
                     data: dataItem,
                     symbolSize: 14,
+                    smooth: true,
                     nameTextStyle: {
                         fontSize: 24
                     },
@@ -177,6 +194,7 @@ $(function () {
 
             ]
         };
+
 
         // 为echarts对象加载数据
         myChart.setOption(option);
