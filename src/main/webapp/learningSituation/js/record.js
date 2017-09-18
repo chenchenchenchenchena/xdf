@@ -50,7 +50,7 @@ $(function () {
 					var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
 					var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
 					var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
-					var str = "<li><span class='courseName'>" + e.Data[i].className + "</span><br /><span class='courseTime'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span></li><span style=display:none class=classCode>" + e.Data[i].classCode + "</span>";
+					var str = "<li><span class='courseName'>" + e.Data[i].className + "</span><br /><span class=classCode>(" + e.Data[i].classCode + ")</span></li><span class='courseTime' style='display: none'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span>";
 					$(".chooseClass ul").append(str);
 				}
 			}
