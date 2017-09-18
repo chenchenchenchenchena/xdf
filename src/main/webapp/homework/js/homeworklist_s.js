@@ -117,7 +117,7 @@ $(function(){
 					if(e.url!=undefined && e.url != ""){
 						alert(e.url);
 						console.log(e.url);
-						window.location.href = e.url;
+						/*window.location.href = e.url;*/
 					}
 				}
 			});
