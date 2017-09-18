@@ -10,6 +10,7 @@ $(function(){
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
+    alert(sessionStorage.openid)
     var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
     var calbac = {
@@ -348,18 +349,14 @@ $(function(){
     }
 
     $('.tel_log').click(function(){
-        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':'73'}
+        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')}
         ajax_S(url.s_nafu,stuname,name_se)//ajax请求
     })
 
     function telbind(e){
         if(e.result==true&&e.data==undefined){
             layer.msg(e.message)
-            if(sessionStorage.signal){
-                location.href = 'login_stu.html'
-            }else{
-                location.href = 'login_s.html'
-            }
+            location.href = 'login_s.html'
             clear();
         }else if(e.result==false){
             layer.msg(e.message)
