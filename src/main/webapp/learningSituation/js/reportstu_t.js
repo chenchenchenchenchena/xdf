@@ -33,13 +33,13 @@ $(function(){
             for (var i = 0; i < tabTypes.length; i++){
                 if(i == 0){
                     //第一次进入页面  默认选中第一个tab
-                    tabStr += "<li class='active_last' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
+                    tabStr += "<li class='tab-active' tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
                 }else {
                     tabStr += "<li tCode='"+tabTypes[i].tCode+"'>"+tabTypes[i].tName+"</li>";
                 }
 
             }
-            $('.report_tab').html(tabStr);
+            $('.tab-title').html(tabStr);
         }
     });
 
