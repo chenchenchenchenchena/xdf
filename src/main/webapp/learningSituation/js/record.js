@@ -65,8 +65,8 @@ $(function () {
             var stuArr = [];
             var str1 = "";
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-            $(".classrome").html($(".courseName").html());
-			$(".class").html($(".classCode").html());
+            $(".classrome").html($(this).find(".courseName").html());
+			$(".class").html($(this).find(".classCode").html());
             /*var spanObj = $(this).next();
             $(".class").html(spanObj.html());*/
 			/*if($(".tCode").html()>0&&$(".tCode").html()<3){
