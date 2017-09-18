@@ -49,7 +49,7 @@ var maxnumber = 0;
         sessionStorage.stuNumber = getRequest('studentNo').studentNo;
         location.href = 'common_ts.html'
     });
-    $('.tab-title li').on('touchend',function(){
+    $(document).on('touchend','.tab-title li',function(){
         $('.no-data').hide();
         $(this).addClass('tab-active').siblings().removeClass('tab-active')
         switch($(this).index()){
@@ -81,12 +81,11 @@ var maxnumber = 0;
 
     function Studata(){
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
-
-
+            $('.tab-active li').eq(GetRequest('tCode')).addClass('tab-active').sibling().removeClass('tab-active')
             var Xindex = '';
             var Thistime = [];
             var Xtwindex = [];
-            var pjIndex = [];
+            var pjIndex0 = [];
             var mfInedx = [];
             var timeIndex = [];
             var Cindex = [];

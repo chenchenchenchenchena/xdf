@@ -24,7 +24,7 @@ $(function () {
         'appid': Global.appid,
         'secret': Global.secret,
         'url': 'http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html',
-        'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'
+        'templateId': TemplateId
     };
 
     var layer1, layer2, loading;
