@@ -6,6 +6,7 @@ $(function(){
     // }
     if(!sessionStorage.openid){
         wechatCode(location.href)
+        alert(sessionStorage.openid)
     }
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -355,11 +356,7 @@ $(function(){
     function telbind(e){
         if(e.result==true&&e.data==undefined){
             layer.msg(e.message)
-            if(sessionStorage.signal){
-                location.href = 'login_stu.html'
-            }else{
-                location.href = 'login_s.html'
-            }
+            location.href = 'login_s.html'
             clear();
         }else if(e.result==false){
             layer.msg(e.message)
