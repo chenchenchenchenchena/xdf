@@ -113,6 +113,7 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
     })
 
 });
+//已交学生报告
 $(document).on("touchstart",".report",function () {
     var url = url_o+"/teacherData/getStudentReportUrl.do";
     /*var params = {"testId":"A072187E-0B7C-4370-8305-BAD6FDD0B697"};*/
