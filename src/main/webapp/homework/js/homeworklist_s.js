@@ -22,8 +22,8 @@ $(function(){
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
-                      $('title').html('学生待交作业列表')
-                      $(".hwFinish,.hwEmpty").hide();
+		  $('title').html('学生待交作业列表')
+		  $(".hwFinish,.hwEmpty").hide();
 			loading = layer.load();
 			ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 		}else{
@@ -116,6 +116,7 @@ $(function(){
 				if (e.result) {
 					if(e.url!=undefined && e.url != ""){
 						alert(e.url);
+						console.log(e.url);
 						window.location.href = e.url;
 					}
 				}
