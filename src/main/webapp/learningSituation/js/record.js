@@ -65,7 +65,8 @@ $(function () {
             var stuArr = [];
             var str1 = "";
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-            $(".classrome").html($(this).html());
+            $(".classrome").html($(".courseName").html());
+			$(".class").html($(".classCode").html());
             /*var spanObj = $(this).next();
             $(".class").html(spanObj.html());*/
 			/*if($(".tCode").html()>0&&$(".tCode").html()<3){
@@ -75,7 +76,7 @@ $(function () {
 			$(".scoreTitle input").val("");
             //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
-                if ($(".classCode").html() == e.Data[i].classCode) {
+                if ($(".class").html() == e.Data[i].classCode) {
                 	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
                     	for (var j = 0; j < e.Data[i].studentData.length; j++) {
                     		var stuInfo = {name: e.Data[i].studentData[j].StudentName, scode: e.Data[i].studentData[j].StudentCode};
