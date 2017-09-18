@@ -22,6 +22,7 @@ $(function(){
             $(this).parent().prev().children('div').eq($(this).index()).show().siblings().hide()
         }
     });
+    var Text_Grade = '入门测';
     /** 获取成绩类型 */
     var reqData = {
         'tableName':"studycase_grade_type"
@@ -43,6 +44,7 @@ $(function(){
         }
     });
 
+
 var maxnumber = 0;
 // tab切换
     $('.grade').on('touchend',function(){
@@ -51,29 +53,31 @@ var maxnumber = 0;
     });
     $(document).on('touchend','.tab-title li',function(){
         $('.no-data').hide();
-        $(this).addClass('tab-active').siblings().removeClass('tab-active')
-        switch($(this).index()){
-            case 0:
-                var url_s = location.href.substr(0,location.href.indexOf('?'));
-                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
-                break;
-            case 1:
-                var url_s = location.href.substr(0,location.href.indexOf('?'));
-                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
-                break;
-            case 2:
-                var url_s = location.href.substr(0,location.href.indexOf('?'));
-                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
-                break;
-            case 3:
-                var url_s = location.href.substr(0,location.href.indexOf('?'));
-                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
-                break;
-            case 4:
-                var url_s = location.href.substr(0,location.href.indexOf('?'));
-                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
-                break;
-        }
+        $(this).addClass('tab-active').siblings().removeClass('tab-active');
+        Stujson.tCode = $(this).attr("tCode");
+        Studata();
+        // switch($(this).index()){
+        //     case 0:
+        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
+        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
+        //         break;
+        //     case 1:
+        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
+        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
+        //         break;
+        //     case 2:
+        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
+        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
+        //         break;
+        //     case 3:
+        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
+        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
+        //         break;
+        //     case 4:
+        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
+        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
+        //         break;
+        // }
     });
 
 
@@ -81,11 +85,11 @@ var maxnumber = 0;
 
     function Studata(){
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
-            $('.tab-active li').eq(GetRequest('tCode')).addClass('tab-active').sibling().removeClass('tab-active')
+            // $('.tab-active li').eq(GetRequest('tCode')).addClass('tab-active').sibling().removeClass('tab-active')
             var Xindex = '';
             var Thistime = [];
             var Xtwindex = [];
-            var pjIndex0 = [];
+            var pjIndex = [];
             var mfInedx = [];
             var timeIndex = [];
             var Cindex = [];
