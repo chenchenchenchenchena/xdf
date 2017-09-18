@@ -12,7 +12,7 @@ $(function () {
             if (stuInfo.length > 0) {
                 for (var k = 0; k < stuInfo.length; k++) {
                     var mobile = stuInfo[k].mobile;
-                    $('.studentList').eq(i - 1).append('<li><i>' + (k + 1) + '</i>' +
+                    $('.studentList').eq(i).append('<li><i>' + (k + 1) + '</i>' +
                         '<span>' + stuInfo[k].studentName.substring(0, 1) + '</span>' +
                         '<span>' + stuInfo[k].studentName + '</span>' +
                         '<span class="callIcon" tel=' + mobile + ' stuCode=' + stuInfo[k].studentCode + ' /></span>' +
