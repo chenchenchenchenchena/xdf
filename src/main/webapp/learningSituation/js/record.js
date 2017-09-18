@@ -514,7 +514,7 @@ $(function () {
 					  "remark":"发送人:"+push.course+""+localStorage.teacherName+"老师感谢您对我们的支持。",
 					  "courseName":push.courseName,
 					  "time":push.time,
-					  "templateId":TemplateId,
+					  "templateId":TemplateId_grade,
 					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html",
 					  "info":classmate
 					};

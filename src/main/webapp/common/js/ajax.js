@@ -21,30 +21,36 @@ var _hmt = _hmt || [];
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
-var TemplateId = '' ;
+
 
 if (window.location.host == onlineUrl) {//正式环境
     url_o = 'http://dt.xdf.cn/xdfdtmanager/';
     url_o2 = 'http://dt.xdf.cn';
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
-    TemplateId = 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'   //邯郸
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
-    TemplateId = 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'   //邯郸
 }
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         //新的appid
         sessionStorage.signal = 0;
         appId =  'wx67e16b7247bde1a8';      //双师东方
         secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
-        TemplateId = 'oc7BrTXxZaFvcoy994qpQgg-M6sfrHEYULylR5l6qxA'   //双师东方
     }else{
         sessionStorage.removeItem('signal');
     }
+var TemplateId_home = '' ;
+var TemplateId_grade = '';
+if(getRequest('state').state=='JT'||sessionStorage.signal){
+    TemplateId_home = '8Sjj8hUex_Gk-FtTJ7Ag91aWEDLTBYtGffYa69lIUqw';   //双师东方   作业通知
+    TemplateId_grade = 'b8_SUx7vwt-CV1pxXJRljODJL15Z_A9G0dAnIU-Xl7g'; //双师东方   考试成绩
+}else{
+    TemplateId_home = 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M';   //邯郸  作业通知
+    TemplateId_grade = 'Sf2zd-_p0lb15hNE9H-DN4a-14rjGKX_u1Nvf1iMqLQ'; //邯郸   考试成绩
+}
 // 接口路径
 var url = {
     'e_elog': url_o+'e2Login/login.do',//e2登录
