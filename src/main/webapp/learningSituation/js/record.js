@@ -50,7 +50,7 @@ $(function () {
 					var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
 					var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
 					var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
-					var str = "<li><span class='courseName'>" + e.Data[i].className + "</span><br /><span class=classCode>(" + e.Data[i].classCode + ")</span></li><span class='courseTime' style='display: none'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span>";
+					var str = "<li><span class='courseName'>" + e.Data[i].className + "</span><br />(<span class=classCode>" + e.Data[i].classCode + "</span>)</li><span class='courseTime' style='display: none'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span>";
 					$(".chooseClass ul").append(str);
 				}
 			}
@@ -66,15 +66,16 @@ $(function () {
             var str1 = "";
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classrome").html($(this).html());
-            var spanObj = $(this).next();
-            $(".class").html(spanObj.html());
+            /*var spanObj = $(this).next();
+            $(".class").html(spanObj.html());*/
 			/*if($(".tCode").html()>0&&$(".tCode").html()<3){
 				$(".classTime").html("");
 			}*/
+			/*$(".class").html($(".classCode").html());*/
 			$(".scoreTitle input").val("");
             //班级及学生
             for (var i = 0; i < e.Data.length; i++) {
-                if ($(".class").html() == e.Data[i].classCode) {
+                if ($(".classCode").html() == e.Data[i].classCode) {
                 	if(e.Data[i].studentData!=undefined&&e.Data[i].studentData.length>0){
                     	for (var j = 0; j < e.Data[i].studentData.length; j++) {
                     		var stuInfo = {name: e.Data[i].studentData[j].StudentName, scode: e.Data[i].studentData[j].StudentCode};
