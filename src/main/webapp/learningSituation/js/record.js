@@ -339,7 +339,7 @@ $(function () {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
             "gradeType": $(".tCode").html(),
-            "className": $(".courseName").html(),
+            "className": $(".classrome").html(),
             "classCode": $(".class").html(),
             "lessonNo": $(".classTime").find(".classnum").html(),
             "lessonTime": $(".classTime").find(".lestime").html(),
