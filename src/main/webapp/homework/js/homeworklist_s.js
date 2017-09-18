@@ -115,7 +115,7 @@ $(function(){
 			ajaxRequest("POST", url, JSON.stringify(params), function (e) {
 				if (e.result) {
 					if(e.url!=undefined && e.url != ""){
-						console.log(e.url);
+						alert(e.url);
 						window.location.href = e.url;
 					}
 				}
