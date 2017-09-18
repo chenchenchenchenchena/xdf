@@ -137,7 +137,8 @@ $(function () {
 		})
     }
 	//添加学生信息
-		var reNz=/^S{2}[0-9]{4}$/;
+		/*var reNz=/^S{2}[0-9]{4}$/;*/
+		var reNz=/^[a-zA-Z0-9]+$/;
 		var reCh = /^[a-zA-Z\u4e00-\u9fa5]{2,}$/;
 		var re=/^[a-zA-Z]+$/;
 		var reZ=/^[\u4e00-\u9fa5]+$/;
@@ -575,10 +576,15 @@ $(function () {
  		$(".mask").hide();
 		if($(".chooseClass").css("display")=="block"){
 			if($(".classrome").html()!=""){
-				$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
-				$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
-				$(".chooseClass").css("display","none");
-				query();
+				if($(".classNumTime ul span").html()=="暂无课次"){
+					return false;
+				}else{
+					$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+					$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+					$(".chooseClass").css("display","none");
+					query();
+				}
+
 			}else{
 				$(".chooseClass").css("display","none");
 			}
