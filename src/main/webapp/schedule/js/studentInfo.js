@@ -20,7 +20,8 @@ $(function () {
         $('.avatar-icon').html(studentName);
     }
     $('#name').html("姓名：" + studentName);
-    var studentNum = stuCode.substring(0, 2) + "**" + stuCode.substring(stuCode.length - 2, stuCode.length);
+    // var studentNum = stuCode.substring(0, 2) + "**" + stuCode.substring(stuCode.length - 2, stuCode.length);
+    var studentNum = stuCode;
 
     $('#studentNumber').html("学员号：" + studentNum);
     //获取该学生所报班级信息
