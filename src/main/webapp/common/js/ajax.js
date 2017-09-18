@@ -21,25 +21,27 @@ var _hmt = _hmt || [];
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();
+var TemplateId = '' ;
 
 if (window.location.host == onlineUrl) {//正式环境
     url_o = 'http://dt.xdf.cn/xdfdtmanager/';
     url_o2 = 'http://dt.xdf.cn';
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
+    TemplateId = 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'   //邯郸
 } else {//测试环境
     url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+    TemplateId = 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'   //邯郸
 }
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         //新的appid
         sessionStorage.signal = 0;
-        // appId =  'wx67e16b7247bde1a8';
-        // secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
-        appId =  'wx559791e14e9ce521';
-        secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+        appId =  'wx67e16b7247bde1a8';      //双师东方
+        secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
+        TemplateId = 'oc7BrTXxZaFvcoy994qpQgg-M6sfrHEYULylR5l6qxA'   //双师东方
     }else{
         sessionStorage.removeItem('signal');
     }
