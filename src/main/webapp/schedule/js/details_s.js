@@ -8,9 +8,9 @@ $(function(){
     var mastertae = [];
 	sessionStorage.s ='';
 	ajax_S(url.s_stud,emailm,stusea);
-    ajax_S(url.data_s,'',function(e){
-        for(var i = 0;i<e.data.length;i++){
-            mastertae.push(e.data[i]);
+    ajax_S(url.data_s,'',function(JSON){
+        for(var i = 0;i<JSON.data.length;i++){
+            mastertae.push(JSON.data[i]);
         }
     });
     var subject_s = '';

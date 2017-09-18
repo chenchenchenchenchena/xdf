@@ -11,7 +11,6 @@ $(function () {
         $('#image_s').show();
     }
 
-
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -24,7 +23,7 @@ $(function () {
         'appid': Global.appid,
         'secret': Global.secret,
         'url': 'http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html',
-        'templateId': TemplateId
+        'templateId': TemplateId_home
     };
 
     var layer1, layer2, loading;
