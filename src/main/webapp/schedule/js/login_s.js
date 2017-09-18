@@ -10,7 +10,6 @@ $(function(){
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
-    alert(sessionStorage.openid)
     var code_s = location.search.substring(location.search.indexOf('code')+5,location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state')+6,location.search.length);
     var calbac = {
