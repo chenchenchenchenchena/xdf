@@ -549,20 +549,20 @@ $(function () {
         $("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"})
         if ($(this).index() == 0) {
             $(".scoreType").show()
-            $(".scoreType").css("animation", "move 0.5s linear");
+            $(".scoreType").css("animation", "move 0.3s linear");
             $(".scoreType").css("bottom", "0px");
             $(".chooseClass").hide();
             $(".classNumTime").hide();
         } else if ($(this).index() == 1) {
             $(".chooseClass").show();
-            $(".chooseClass").css("animation", "move 0.5s linear");
+            $(".chooseClass").css("animation", "move 0.3s linear");
             $(".chooseClass").css("bottom", "0px");
             $(".classNumTime").hide();
             $(".scoreType").hide();
 
         } else if ($(this).index() == 2) {
             $(".classNumTime").show();
-            $(".classNumTime").css("animation", "move 0.5s linear");
+            $(".classNumTime").css("animation", "move 0.3s linear");
             $(".classNumTime").css("bottom", "0px");
             $(".chooseClass").hide();
             $(".scoreType").hide();
