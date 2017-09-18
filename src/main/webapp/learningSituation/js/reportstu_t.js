@@ -93,7 +93,7 @@ var maxnumber = 0;
             var mfInedx = [];
             var timeIndex = [];
             var Cindex = [];
-            if(e.data.sdtInteractState==false){
+            if(e.data.sdtInteractState==false&&e.data.sdtInteractState!=undefined){
                 $('.grade').hide();
             }
             if(e.data.AvgrealGrade!=undefined){
