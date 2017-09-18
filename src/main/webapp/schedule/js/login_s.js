@@ -72,6 +72,12 @@ $(function(){
                         });
                     }
                 }else{
+                    if(!localStorage.userId_stu){
+                        ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                            localStorage.firstU2 = '1';
+                            location.href = e.url;
+                        });
+                    }
                     ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
                         localStorage.firstU2 = '1';
                         location.href = e.url;
