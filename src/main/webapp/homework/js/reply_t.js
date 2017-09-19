@@ -6,7 +6,7 @@ $(function() {
         'appid': Global.appid,
         'secret': Global.secret,
         'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_s.html',
-        'templateId':TemplateId
+        'templateId':TemplateId_home
     };
     $('.frend').hide();
     var arr;
