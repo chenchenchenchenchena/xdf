@@ -980,7 +980,7 @@ $(function () {
             });
             // console.log("ok:"+JSON.stringify(arr_image));
         } else {
-            console.log("文件上传失败！");
+            alert("文件上传失败！");
         }
     }
 
