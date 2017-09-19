@@ -1,12 +1,12 @@
 $(function(){
     /* 测试 */
 
-    if(!sessionStorage.openid){
-        sessionStorage.openid = 'abcd123'
-    }
     // if(!sessionStorage.openid){
-    //     wechatCode(location.href)
+    //     sessionStorage.openid = 'abcd123'
     // }
+    if(!sessionStorage.openid){
+        wechatCode(location.href)
+    }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
