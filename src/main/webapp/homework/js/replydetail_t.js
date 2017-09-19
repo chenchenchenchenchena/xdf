@@ -1005,7 +1005,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].thumbnail+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].url+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
 
                 }
             }
