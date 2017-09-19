@@ -772,7 +772,7 @@ $(function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src', previewUrl);
@@ -786,9 +786,15 @@ $(function () {
                 'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
 
-
         }, 300)
 
+    });
+    $(document).on('tap', '.notsubmit .imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
     });
     // $('.big_back_s').on('touchend', function () {
     //     if($('.true_s').css('display')!='block'&&event.touches.length==0){
