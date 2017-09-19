@@ -435,7 +435,7 @@ $(function () {
      * 显示未提交图片布局
      */
     function showNotImg(localId) {
-        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + localId + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img data-img='"+localId+"' src='" + localId + "'/></li>";
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
         imageCount++;
@@ -527,7 +527,7 @@ $(function () {
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
     $(document).on('tap', '.imgBox img', function () {
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
