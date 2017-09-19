@@ -133,9 +133,9 @@ $(function () {
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-img="'+stu[a].thumbnail+'" src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-img="'+stu[a].thumbnail+'" src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
@@ -146,7 +146,7 @@ $(function () {
                 if (tea[b].fileType == 'mp3') {
                     getAudioInfo([1, tea[b].diskFilePath, tea[b].playTime, "mp3"]);
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea[b].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img data-img="'+tea[b].thumbnail+'" src="' + tea[b].url + '" alt="" /></div>')
 
                 }
             }
@@ -696,7 +696,7 @@ $(function () {
 
     function showUpdataImage(url) {
 
-        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + url + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img data-img='"+url+"' src='" + url + "'/></li>";
 
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
@@ -789,7 +789,7 @@ $(function () {
 
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -908,7 +908,7 @@ $(function () {
             clearInterval(time_s);
             str = b.encode(canvas.toDataURL("image/png"));
 
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='"+canvas.toDataURL("image/jpeg",0.5)+"' src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
 
 
 
