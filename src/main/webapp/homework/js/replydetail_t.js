@@ -133,9 +133,9 @@ $(function () {
                 } else {
                     var onlineUrl = 'dt.xdf.cn';
                     if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img data-img="'+stu[a].thumbnail+'" src="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img src="'+stu[a].thumbnail+'" data-img="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img data-img="'+stu[a].thumbnail+'" src="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img src="'+stu[a].thumbnail+'" data-img="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
                     }
                     // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
                     // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
@@ -146,7 +146,7 @@ $(function () {
                 if (tea[b].fileType == 'mp3') {
                     getAudioInfo([1, tea[b].diskFilePath, tea[b].playTime, "mp3"]);
                 } else {
-                    $('.imgBox').eq(0).append('<div><img data-img="'+tea[b].thumbnail+'" src="' + tea[b].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img src="'+tea[b].thumbnail+'" data-img="' + tea[b].url + '" alt="" /></div>')
 
                 }
             }
