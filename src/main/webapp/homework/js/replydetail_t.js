@@ -906,16 +906,19 @@ $(function () {
             clearInterval(time_s);
 
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
-            var b = new Base64();
-            var str = b.encode(canvas.toDataURL("image/png"));
-            //上传文件到服务器
-            var reqData = {
-                'base64Str': str,
-                'schoolId': localStorage.schoolId,
-                'classId': sessionStorage.classCode_s
-            };
-            // console.log(reqData);
-            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
+
+
+
+            // var b = new Base64();
+            // var str = b.encode(canvas.toDataURL("image/png"));
+            // //上传文件到服务器
+            // var reqData = {
+            //     'base64Str': str,
+            //     'schoolId': localStorage.schoolId,
+            //     'classId': sessionStorage.classCode_s
+            // };
+            // // console.log(reqData);
+            // ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
 
         });
