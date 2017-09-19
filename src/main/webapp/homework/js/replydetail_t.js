@@ -885,16 +885,18 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            $('.big_back_s').hide();
+            alert(0)
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
             $('.big_back_s .esc_s').hide();
             $('.big_back_s .true_s').hide();
             $('.big_back_s span:last-of-type').show();
-            $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
+
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
             var b = new Base64();
             var str = b.encode(canvas.toDataURL("image/png"));
@@ -958,7 +960,7 @@ $(function () {
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
         if (msg.data.success) {
-            console.log("文件上传成功！");
+           alert("文件上传成功！");
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
