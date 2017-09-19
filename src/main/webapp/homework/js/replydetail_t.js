@@ -959,7 +959,7 @@ $(function () {
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
         if (msg.data.success) {
-            console.log("文件上传成功！");
+           alert("文件上传成功！");
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
