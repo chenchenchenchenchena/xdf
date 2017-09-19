@@ -907,7 +907,7 @@ $(function () {
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
             // var b = new Base64();
-            str = canvas.toDataURL("image/png")
+            str = b.encode(canvas.toDataURL("image/png"));
 
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='"+canvas.toDataURL("image/jpeg",0.5)+"' src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
 
