@@ -98,6 +98,9 @@ $(function () {
                     if(L==arr.length-1){
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
+                    if(arr.length==1&&e.data.score!=''){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.data.score+'</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }
                     /*var tea = e.data.File.RevampFile;//老师批注
                     if (tea != undefined) {
                         for (var b = 0; b < tea.length; b++) {
@@ -835,6 +838,8 @@ $(function () {
     });
     $('.esc_s').show();
     var  time_s;
+    var b = new Base64();
+    var str;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -884,6 +889,7 @@ $(function () {
                 clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
+                 str = b.encode(canvas.toDataURL("image/png"));
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -903,16 +909,18 @@ $(function () {
             clearInterval(time_s);
 
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
-            var b = new Base64();
-            var str = b.encode(canvas.toDataURL("image/png"));
-            //上传文件到服务器
-            var reqData = {
-                'base64Str': str,
-                'schoolId': localStorage.schoolId,
-                'classId': sessionStorage.classCode_s
-            };
-            // console.log(reqData);
-            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
+
+
+
+
+            // //上传文件到服务器
+            // var reqData = {
+            //     'base64Str': str,
+            //     'schoolId': localStorage.schoolId,
+            //     'classId': sessionStorage.classCode_s
+            // };
+            // // console.log(reqData);
+            // ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
 
         });
