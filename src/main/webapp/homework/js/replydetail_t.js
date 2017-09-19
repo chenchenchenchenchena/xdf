@@ -826,7 +826,6 @@ $(function () {
     stopDrop();
     $('.esc_s').on('touchend', function () {
         clearInterval(time_s);
-
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
@@ -897,7 +896,10 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
-            if(ber_L==false)return false;
+            if(ber_L==false){
+                layer.msg('正在处理请求');
+                return false;
+            }
             ber_L = false;
             $('.big_back_s').hide();
             $('.notsubmit .imgBox').show();
