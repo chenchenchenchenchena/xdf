@@ -115,9 +115,8 @@ $(function(){
 			ajaxRequest("POST", url, JSON.stringify(params), function (e) {
 				if (e.result) {
 					if(e.url!=undefined && e.url != ""){
-						alert(e.url);
 						console.log(e.url);
-						/*window.location.href = e.url;*/
+						window.location.href = e.url;
 					}
 				}
 			});
@@ -278,7 +277,7 @@ $(function(){
 					if (items.readStatus==0){//未读
 						readStatus = "redCircle";
 					}
-					console.log(hwLessNosHtml);
+					/*console.log(hwLessNosHtml);*/
 					var className = items.className;
 					if (items.className.length>18){
 						className = items.className.substr(0,15)+"...";
