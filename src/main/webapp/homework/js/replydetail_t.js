@@ -96,7 +96,7 @@ $(function () {
                         $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>'+e.data.score+'</i></h4>')
                     }
                     if(L==arr.length-1){
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                     /*var tea = e.data.File.RevampFile;//老师批注
                     if (tea != undefined) {
