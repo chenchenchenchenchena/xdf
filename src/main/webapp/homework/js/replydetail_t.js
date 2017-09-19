@@ -909,8 +909,8 @@ $(function () {
 
 
 
-            var b = new Base64();
-            var str = b.encode(canvas.toDataURL("image/png"));
+            // var b = new Base64();
+            // var str = b.encode(canvas.toDataURL("image/png"));
             // //上传文件到服务器
             // var reqData = {
             //     'base64Str': str,
