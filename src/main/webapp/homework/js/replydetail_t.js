@@ -852,7 +852,7 @@ $(function () {
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
-        var previewUrl = $('.big_back_s img').attr('src');
+        var previewUrl = $('.big_back_s img').attr('data-img');
         var img = new Image();
         img.crossOrigin = "Anonymous";
         img.src = previewUrl;
@@ -889,7 +889,6 @@ $(function () {
                 clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
-                 str = b.encode(canvas.toDataURL("image/png"));
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -907,6 +906,8 @@ $(function () {
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
+            // var b = new Base64();
+            str = canvas.toDataURL("image/png")
 
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
 

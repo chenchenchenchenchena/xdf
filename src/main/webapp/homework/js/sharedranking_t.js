@@ -29,7 +29,7 @@ $(function () {
                         showAudio(Media[k].playTime, url_o + Media[k].url, "audio_" + i, "audio" + i + "" + voiceCount);
                     } else {
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
-                        showImage(url_o + Media[k].url, "imagBox_" + i);
+                        showImage(url_o + Media[k].url, "imagBox_" + i,Media[k].thumbnail);
                     }
                 }
             }
@@ -50,11 +50,11 @@ $(function () {
     /**
      * 显示获取到的图片
      */
-    function showImage(previewUrl, imageId) {
+    function showImage(previewUrl, imageId,url) {
         $('#' + imageId).show();
         var str = "";
         // str += "<div class = 'imgBox'>";
-        str += "<div><img src='" + previewUrl + "'/></div>";
+        str += "<div><img data-img='"+previewUrl+"' src='" + url + "'/></div>";
         // str += "</div>";
         $('#' + imageId).append(str);
     }
@@ -106,7 +106,7 @@ $(function () {
 
     /*--------------------图片预览----------------------------------*/
     $(document).on('tap', '.imgBox img', function () {
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
