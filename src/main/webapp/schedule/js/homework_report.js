@@ -120,7 +120,7 @@ $(function () {
                 trigger: 'axis',
                 triggerOn: 'click',
                 formatter: function (params) {
-                    return '' + params[0].data.name +':'+params[0].data.value;
+                    return '' + params[0].data.name +':'+params[0].data.value+'分';
                 }
             },
             legend: {
