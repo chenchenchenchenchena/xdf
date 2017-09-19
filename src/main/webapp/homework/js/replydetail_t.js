@@ -746,14 +746,14 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap','.hwInfo img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
     $(document).on('tap','.tea_sp img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -982,7 +982,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '"alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img data-ramke="2" data-img="'+url_o + stu[a].url+'" src="' + stu[a].thumbnail + '"alt="" /></div>')
                 }
             }
         }
@@ -992,7 +992,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].thumbnail+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
 
                 }
             }
@@ -1003,7 +1003,7 @@ $(function () {
                     if (item.fileType == 'mp3') {
                         getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img data-ramke="3" data-img="'+item.url+'" src="'+item.thumbnail + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });
