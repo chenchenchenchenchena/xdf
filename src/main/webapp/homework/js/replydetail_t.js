@@ -785,6 +785,13 @@ $(function () {
         }, 300)
 
     });
+    $(document).on('tap', '.notsubmit .imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
+    });
     // $('.big_back_s').on('touchend', function () {
     //     if($('.true_s').css('display')!='block'&&event.touches.length==0){
     //         $(this).find('canvas').hide();
