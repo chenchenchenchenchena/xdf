@@ -115,7 +115,7 @@ $(function () {
                         audioCount++;
                     } else {
                         //显示老师作业信息图片
-                        showImage(paths.fileUrl);
+                        showImage(paths.fileUrl,paths.thumbnail);
                     }
                 });
             }
@@ -128,10 +128,10 @@ $(function () {
     /**
      * 显示获取到的作业信息图片
      */
-    function showImage(previewUrl) {
+    function showImage(url,previewUrl) {
         $('#imagBox_1').show();
         var str = "";
-        str += "<div><img src='" + previewUrl + "'/></div>";
+        str += "<div><img data-img='"+url+"' src='" + previewUrl + "'/></div>";
         $('#imagBox_1').append(str);
 
 

@@ -49,7 +49,7 @@ $(function () {
             /*******作业信息*******/
             //知识点
             if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-                knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
+                var knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
                 var kpHtml="";
                 for (var i = 0; i < knowledgePoint.length; i++) {
                     kpHtml = '<span>' + knowledgePoint[i] + '</span>';
@@ -161,7 +161,7 @@ $(function () {
                             showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 1, "audio" + 1 + "" + voiceCount);
                         } else {
                             //将文件显示到布局中
-                            showImage(paths.fileUrl, "imagBox_" + 1);
+                            showImage(paths.fileUrl, "imagBox_" + 1,paths.thumbnail);
                         }
                     }
 
@@ -195,9 +195,9 @@ $(function () {
                     } else {
                         //将图片文件显示到布局中
                         if (replyStatus == 1) {//已批复
-                            showImage(paths.fileUrl, "imagBox_" + 2);
+                            showImage(paths.fileUrl, "imagBox_" + 2,paths.thumbnail);
                         } else {
-                            str += "<li><span class='stuImg' img-index='" + i + "'></span><img src='" + paths.fileUrl + "'/></li>";
+                            str += "<li><span class='stuImg' img-index='" + i + "'></span><img data-img='"+paths.fileUrl +"' src='" + paths.thumbnail+ "'/></li>";
                             // $(".notsubmit .imgBox").show();
                             $(".notsubmit .imgBox").html(str).show();
                             //界面样式控制
@@ -227,7 +227,7 @@ $(function () {
                         showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 3, "audio" + 3 + "" + voiceCount);
                     } else {
                         //将文件显示到布局中
-                        showImage(paths.fileUrl, "imagBox_" + 3);
+                        showImage(paths.fileUrl, "imagBox_" + 3,paths.thumbnail);
                     }
                 });
             }
@@ -277,11 +277,11 @@ $(function () {
     /**
      * 显示获取到的图片
      */
-    function showImage(previewUrl, imageId) {
+    function showImage(previewUrl, imageId,thumbnail) {
         $('#' + imageId).show();
         var str = "";
         // str += "<div class = 'imgBox'>";
-        str += "<div><img src='" + previewUrl + "'/></div>";
+        str += "<div><img data-img='"+thumbnail+"' src='" + previewUrl + "'/></div>";
         // str += "</div>";
         $('#' + imageId).append(str);
     }
@@ -581,7 +581,7 @@ $(function () {
      * 显示未提交图片布局
      */
     function showNotImg(localId) {
-        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img src='" + localId + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imageCount + "'></span><img data-img='"+localId+"' src='" + localId + "'/></li>";
         $(".notsubmit .imgBox").append(str);
         $(".notsubmit .imgBox").show();
 
@@ -675,7 +675,7 @@ $(function () {
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
     $(document).on('tap', '.imgBox img', function () {
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
