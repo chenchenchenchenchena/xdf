@@ -852,7 +852,7 @@ $(function () {
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
-        var previewUrl = $('.big_back_s img').attr('src');
+        var previewUrl = $('.big_back_s img').attr('data-img');
         var img = new Image();
         img.crossOrigin = "Anonymous";
         img.src = previewUrl;

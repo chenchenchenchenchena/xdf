@@ -281,7 +281,7 @@ $(function () {
         $('#' + imageId).show();
         var str = "";
         // str += "<div class = 'imgBox'>";
-        str += "<div><img data-img='"+thumbnail+"' src='" + previewUrl + "'/></div>";
+        str += "<div><img data-img='"+previewUrl+"' src='" + thumbnail + "'/></div>";
         // str += "</div>";
         $('#' + imageId).append(str);
     }
