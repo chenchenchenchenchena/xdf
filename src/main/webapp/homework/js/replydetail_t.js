@@ -840,6 +840,7 @@ $(function () {
     var  time_s;
     var b = new Base64();
     var str;
+    var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -896,6 +897,8 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            if(ber_L==false)return false;
+            ber_L = false;
             $('.big_back_s').hide();
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
@@ -970,6 +973,8 @@ $(function () {
 
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
+        ber_L = true;
+
         if (msg.data.success) {
             layer.closeAll('loading');
             arr_image.push({
