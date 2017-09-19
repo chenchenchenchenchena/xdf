@@ -916,7 +916,7 @@ $(function () {
                 'schoolId': localStorage.schoolId,
                 'classId': sessionStorage.classCode_s
             };
-            alert('上传开始')
+            layer.load();
             // console.log(reqData);
             ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
@@ -971,7 +971,7 @@ $(function () {
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
         if (msg.data.success) {
-           alert("文件上传成功！");
+            layer.closeAll('loading');
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
