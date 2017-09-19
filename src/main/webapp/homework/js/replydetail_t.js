@@ -910,13 +910,13 @@ $(function () {
             str = canvas.toDataURL("image/png");
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='"+canvas.toDataURL("image/jpeg",0.5)+"' src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
 
-
             //上传文件到服务器
             var reqData = {
                 'base64Str': str,
                 'schoolId': localStorage.schoolId,
                 'classId': sessionStorage.classCode_s
             };
+            alert('上传开始')
             // console.log(reqData);
             ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
