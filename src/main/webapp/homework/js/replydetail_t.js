@@ -838,6 +838,8 @@ $(function () {
     });
     $('.esc_s').show();
     var  time_s;
+    var b = new Base64();
+    var str;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -887,6 +889,7 @@ $(function () {
                 clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
+                 str = b.encode(canvas.toDataURL("image/png"));
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -909,8 +912,7 @@ $(function () {
 
 
 
-            // var b = new Base64();
-            // var str = b.encode(canvas.toDataURL("image/png"));
+
             // //上传文件到服务器
             // var reqData = {
             //     'base64Str': str,
