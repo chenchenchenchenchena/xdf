@@ -886,6 +886,7 @@ $(function () {
 
         $('.true_s').on('touchend', function () {
             $('.big_back_s').hide();
+            alert(0)
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
