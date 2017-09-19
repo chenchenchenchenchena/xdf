@@ -768,7 +768,7 @@ $(function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src', previewUrl);
@@ -781,7 +781,6 @@ $(function () {
                 'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
                 'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
-
 
         }, 300)
 
