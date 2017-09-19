@@ -1,5 +1,7 @@
 $(function(){
     // //登录相关
+    alert(sessionStorage.openid);
+    alert(location.href)
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
