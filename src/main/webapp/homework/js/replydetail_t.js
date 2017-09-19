@@ -92,8 +92,14 @@ $(function () {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                 } else {//描述信息为空
-                    if(L==arr.length-1){
+                    if(L==arr.length-1&&e.data.score!=''){
                         $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>'+e.data.score+'</i></h4>')
+                    }
+                    if(L==arr.length-1){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }
+                    if(arr.length==1&&e.data.score!=''){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.data.score+'</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                     /*var tea = e.data.File.RevampFile;//老师批注
                     if (tea != undefined) {
@@ -105,9 +111,6 @@ $(function () {
                         }
                     }*/
                 }
-            }
-            if(arr.length==1){
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复<h4>得分:<i>'+e.data.score+'</i></h4></div></div>')
             }
             $('.hwCon').eq(0).html(decodeURI(e.data.description));
             getHwFilesSucess(e);
@@ -746,14 +749,14 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap','.hwInfo img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
     $(document).on('tap','.tea_sp img',function(){
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
             urls: [previewUrl] // 需要预览的图片http链接列表
@@ -768,7 +771,7 @@ $(function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('src');
+        var previewUrl = $(this).attr('data-img');
         $('.big_back_s canvas').hide();
         $('.big_back_s').show();
         $('.big_back_s img').attr('src', previewUrl);
@@ -782,9 +785,15 @@ $(function () {
                 'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
             });
 
-
         }, 300)
 
+    });
+    $(document).on('tap', '.notsubmit .imgBox img', function () {
+        var previewUrl = $(this).attr('src');
+        wx.previewImage({
+            current: previewUrl, // 当前显示图片的http链接
+            urls: [previewUrl] // 需要预览的图片http链接列表
+        });
     });
     // $('.big_back_s').on('touchend', function () {
     //     if($('.true_s').css('display')!='block'&&event.touches.length==0){
@@ -829,6 +838,8 @@ $(function () {
     });
     $('.esc_s').show();
     var  time_s;
+    var b = new Base64();
+    var str;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -878,6 +889,7 @@ $(function () {
                 clearInterval(time_s);
                 ctx.closePath();
                 $('.big_back_s').show();
+                 str = b.encode(canvas.toDataURL("image/png"));
             });
             // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -885,27 +897,30 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            $('.big_back_s').hide();
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
             $('.big_back_s .esc_s').hide();
             $('.big_back_s .true_s').hide();
             $('.big_back_s span:last-of-type').show();
-            $('.big_back_s').hide();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
+
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
-            var b = new Base64();
-            var str = b.encode(canvas.toDataURL("image/png"));
-            //上传文件到服务器
-            var reqData = {
-                'base64Str': str,
-                'schoolId': localStorage.schoolId,
-                'classId': sessionStorage.classCode_s
-            };
-            // console.log(reqData);
-            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
+
+
+
+
+            // //上传文件到服务器
+            // var reqData = {
+            //     'base64Str': str,
+            //     'schoolId': localStorage.schoolId,
+            //     'classId': sessionStorage.classCode_s
+            // };
+            // // console.log(reqData);
+            // ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
 
         });
@@ -958,7 +973,7 @@ $(function () {
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
         if (msg.data.success) {
-            console.log("文件上传成功！");
+           alert("文件上传成功！");
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
@@ -982,7 +997,7 @@ $(function () {
                     getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(1).append('<div><img src="' + url_o + stu[a].url + '"alt="" /></div>')
+                    $('.imgBox').eq(1).append('<div><img data-ramke="2" data-img="'+url_o + stu[a].url+'" src="' + stu[a].thumbnail + '"alt="" /></div>')
                 }
             }
         }
@@ -992,7 +1007,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img src="' + tea_t[c].url + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].thumbnail+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
 
                 }
             }
@@ -1003,7 +1018,7 @@ $(function () {
                     if (item.fileType == 'mp3') {
                         getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
                     } else {
-                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img src="'+item.url + '" alt="" /></div>');
+                        $('.tea_sp .hmAnswer:eq('+parseInt(item.replyTimes - 1)+')').find('.imgBox').append('<div><img data-ramke="3" data-img="'+item.url+'" src="'+item.thumbnail + '" alt="" /></div>');
                         // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                     }
                 });

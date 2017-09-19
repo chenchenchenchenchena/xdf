@@ -38,6 +38,12 @@ $(function(){
                             });
                         }
                     }else{
+                        if(!localStorage.userId_stu){
+                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
+                                localStorage.firstU2 = '1';
+                                location.href = Json.url;
+                            });
+                        }
                         ajax_S(url.t_stulas,calbac,function(Json){
                             if(Json.result==true){
                                 localStorage.userId_stu = Json.data.userId;
