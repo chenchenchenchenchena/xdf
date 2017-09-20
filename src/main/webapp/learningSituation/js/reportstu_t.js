@@ -41,6 +41,8 @@ $(function(){
 
             }
             $('.tab-title').html(tabStr);
+            $('.tab-title li').eq(GetRequest('tCode')).addClass('tab-active').siblings().removeClass('tab-active');
+
         }
     });
 
@@ -51,7 +53,6 @@ var maxnumber = 0;
         sessionStorage.stuNumber = getRequest('studentNo').studentNo;
         location.href = 'common_ts.html'
     });
-    $('.tab-title li').eq(GetRequest('tCode')).addClass('tab-active').siblings().removeClass('tab-active');
     $(document).on('touchend','.tab-title li',function(){
         $('.no-data').hide();
         // $(this).addClass('tab-active').siblings().removeClass('tab-active');
