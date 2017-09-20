@@ -380,7 +380,7 @@ $(function(){
     function telbind(e){
         if(e.result==true&&e.data==undefined){
             layer.msg(e.message)
-            location.href = 'login_s.html'
+            location.href = 'schedule_s.html'
             clear();
         }else if(e.result==false){
             layer.msg(e.message)
