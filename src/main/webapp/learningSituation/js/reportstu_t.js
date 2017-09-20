@@ -96,6 +96,8 @@ var maxnumber = 0;
             var Cindex = [];
             if(e.data.sdtInteractState==false&&e.data.sdtInteractState!=undefined){
                 $('.grade').hide();
+            }else{
+                $('.grade').show();
             }
             if(e.data.AvgrealGrade!=undefined){
                 $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove();
