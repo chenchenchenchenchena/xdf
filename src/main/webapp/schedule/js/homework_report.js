@@ -74,6 +74,9 @@ $(function () {
                         var scoreDay = data[i][j];
                         if (undefined != scoreDay) {
                             var score = parseInt(scoreDay.score);
+                            if(score == undefined || score == ""){
+                                score = "0";
+                            }
                             var HomeworkTimes = scoreDay.HomeworkTimes;
                             var homeworkType = scoreDay.homeworkType;
                             var hwTypeText = "";
