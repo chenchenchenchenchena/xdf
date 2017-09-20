@@ -74,6 +74,9 @@ $(function () {
                         var scoreDay = data[i][j];
                         if (undefined != scoreDay) {
                             var score = parseInt(scoreDay.score);
+                            if(scoreDay.score == undefined || scoreDay.score == ""){
+                                score = 0;
+                            }
                             var HomeworkTimes = scoreDay.HomeworkTimes;
                             var homeworkType = scoreDay.homeworkType;
                             var hwTypeText = "";
@@ -131,6 +134,10 @@ $(function () {
                 selectedMode: false
             },
             calculable: true,
+            dataZoom: [{
+                type: 'inside',
+                throttle: 50
+            }],
             xAxis: [
                 {
                     name: '日期',
@@ -143,7 +150,7 @@ $(function () {
                     nameTextStyle: {
                         fontSize: 24
                     },
-                    axisLabel: {
+                    axisLabel:{
                         show: true,
                         textStyle: {
                             fontSize: 24
@@ -175,7 +182,7 @@ $(function () {
                     symbolSize: 14,
                     smooth: true,
                     nameTextStyle: {
-                        fontSize: 24
+                        fontSize: 2
                     },
                     axisLabel: {
                         show: true,

@@ -3,6 +3,7 @@
  */
 $(function () {
     if(!sessionStorage.openid){
+        localStorage.homeId = GetRequest('teaHomeworkId');
         wechatCode(location.href);
     };
     var WXnum  = {

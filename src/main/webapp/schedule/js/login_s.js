@@ -1,8 +1,7 @@
 $(function(){
     /* 测试 */
-
     // if(!sessionStorage.openid){
-    //     sessionStorage.openid = 'abcd123'
+    //     sessionStorage.openid = 'abcd123444'
     // }
     if(!sessionStorage.openid){
         wechatCode(location.href)
@@ -253,7 +252,7 @@ $(function(){
             layer.msg('请输入正确格式学员号');
             return false;
         }
-        if(e.result==true){
+        if(e.result==true&&e.data!=''){
             $('.noSearch').hide();
             $('.card').hide();
             $('.search').show();
@@ -280,7 +279,7 @@ $(function(){
 
     //学员号查询点击
     $('.numb_log').click(function(){
-        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')};
+        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolId':$('.Selected').attr('data-code')};
         ajax_S(url.s_seac,stumore,stusea)
     });
     //关联点击
@@ -348,42 +347,37 @@ $(function(){
         console.log(e);
         var  studentNo =  e.data
         var tel  = /^1[34578]\d{9}$/
-        if($('.phoneNumber').val()==''||$('.stname').val()==''){
-            layer.msg('请先将信息填写完整');
-            return false;
-        }
+        // if($('.phoneNumber').val()==''||$('.stname').val()==''){
+        //     layer.msg('请先将信息填写完整');
+        //     return false;
+        // }
         if(!tel.test($('.phoneNumber').val())){
             layer.msg('请输入正确格式手机号');
             return false;
         }
-        if(e.result==false){
+        if(e.result==false||e.data==''){
             $('.noSearch').show()
             return false;
         }
-        $('.searchTwo').show()
+        $('.searchTwo').show();
         var  num = 0;
-        var  bindz = ''
+        var  bindz = '';
         for(var i = 0;i<studentNo.length;i++){
-            if(studentNo[i].state=='0'){
-                bindz = '确认关联'
-            }else{
-                bindz = '取消关联'
-            }
-            $('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
+            $('.stuNum').append('<li class="new_S"><span>学员号'+(i+1)+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><span style="margin-left:.5rem">'+studentNo[i].stName+'</span><button class="Relation">确认关联</button></li>')
             sessionStorage.stuTel = $('.phoneNumber').val()
         }
         $('.enter').hide()
     }
 
     $('.tel_log').click(function(){
-        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')}
+        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolId':$('.Selected').attr('data-code')}
         ajax_S(url.s_nafu,stuname,name_se)//ajax请求
     })
 
     function telbind(e){
         if(e.result==true&&e.data==undefined){
             layer.msg(e.message)
-            location.href = 'login_s.html'
+            location.href = 'schedule_s.html'
             clear();
         }else if(e.result==false){
             layer.msg(e.message)
