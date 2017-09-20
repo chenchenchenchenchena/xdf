@@ -363,10 +363,7 @@ $(function(){
         var  num = 0;
         var  bindz = '';
         for(var i = 0;i<studentNo.length;i++){
-            if(studentNo[i].state=='0'){
-                bindz = '确认关联'
-            }
-            $('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
+            $('.stuNum').append('<li class="new_S"><span>学员号'+(i+1)+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><span style="margin-left:.5rem">'+studentNo[i].stName+'</span><button class="Relation">确认关联</button></li>')
             sessionStorage.stuTel = $('.phoneNumber').val()
         }
         $('.enter').hide()
@@ -380,7 +377,7 @@ $(function(){
     function telbind(e){
         if(e.result==true&&e.data==undefined){
             layer.msg(e.message)
-            location.href = 'login_s.html'
+            location.href = 'schedule_s.html'
             clear();
         }else if(e.result==false){
             layer.msg(e.message)
