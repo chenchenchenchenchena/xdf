@@ -1051,7 +1051,7 @@ $(function () {
         for (var i = 0; i < $('.tea_sp .hmAnswer').length; i++) {
             // alert($('.tea_sp .hmAnswer:eq('+i+')').find('.anDes').length);
             if ($('.tea_sp .hmAnswer:eq(' + i + ')').find('.voiceBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.imgBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.anDes').length <= 0) {
-                $('.tea_sp .hmAnswer:eq(' + i + ')').hide();
+                // $('.tea_sp .hmAnswer:eq(' + i + ')').hide();
             }
         }
     }
