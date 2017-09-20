@@ -1,12 +1,12 @@
 $(function(){
     /* 测试 */
 
-    // if(!sessionStorage.openid){
-    //     sessionStorage.openid = 'abcd123'
-    // }
     if(!sessionStorage.openid){
-        wechatCode(location.href)
+        sessionStorage.openid = 'abcd123'
     }
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href)
+    // }
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -376,7 +376,7 @@ $(function(){
     }
 
     $('.tel_log').click(function(){
-        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')}
+        var stuname = {'name':$('.stname').val(),'mobile':$('.phoneNumber').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolId':$('.Selected').attr('data-code')}
         ajax_S(url.s_nafu,stuname,name_se)//ajax请求
     })
 
