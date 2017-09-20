@@ -826,7 +826,6 @@ $(function () {
     stopDrop();
     $('.esc_s').on('touchend', function () {
         clearInterval(time_s);
-
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
@@ -840,6 +839,7 @@ $(function () {
     var  time_s;
     var b = new Base64();
     var str;
+    var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -896,6 +896,11 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            if(ber_L==false){
+                layer.msg('正在处理请求');
+                return false;
+            }
+            ber_L = false;
             $('.big_back_s').hide();
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
@@ -907,21 +912,18 @@ $(function () {
             $('.true_s').unbind('touchend');
             clearInterval(time_s);
             // var b = new Base64();
-            str = canvas.toDataURL("image/png")
-
+            str = canvas.toDataURL("image/png");
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='"+canvas.toDataURL("image/jpeg",0.5)+"' src='" + canvas.toDataURL("image/jpeg",0.5) + "'/></li>");
 
-
-
-
-            // //上传文件到服务器
-            // var reqData = {
-            //     'base64Str': str,
-            //     'schoolId': localStorage.schoolId,
-            //     'classId': sessionStorage.classCode_s
-            // };
-            // // console.log(reqData);
-            // ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
+            //上传文件到服务器
+            var reqData = {
+                'base64Str': str,
+                'schoolId': localStorage.schoolId,
+                'classId': sessionStorage.classCode_s
+            };
+            layer.load();
+            // console.log(reqData);
+            ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
 
         });
@@ -973,8 +975,10 @@ $(function () {
 
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
+        ber_L = true;
+
         if (msg.data.success) {
-           alert("文件上传成功！");
+            layer.closeAll('loading');
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
@@ -983,7 +987,7 @@ $(function () {
             });
             // console.log("ok:"+JSON.stringify(arr_image));
         } else {
-            console.log("文件上传失败！");
+            alert("文件上传失败！");
         }
     }
 
@@ -1008,7 +1012,7 @@ $(function () {
                     getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
                 } else {
-                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].thumbnail+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
+                    $('.imgBox').eq(0).append('<div><img data-ramke="1" data-img="'+tea_t[c].url+'" src="' + tea_t[c].thumbnail + '" alt="" /></div>')
 
                 }
             }
