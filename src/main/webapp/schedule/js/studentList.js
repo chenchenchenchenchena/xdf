@@ -1,7 +1,7 @@
 $(function(){
 	var flag=true;
 	$(".studentList").hide();
-	$(".slist .listCon").tap(function(event){
+	$(".slist .listCon .teClass").tap(function(event){
 		if($(".studentList").eq($(this).index()).css("display")=="none"){
 			$(".arrow").eq($(this).index()).css("background","url(images/upArrow.png)");
 			// $(".studentList").eq($(this).index()).show();
