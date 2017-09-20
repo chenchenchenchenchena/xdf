@@ -116,7 +116,7 @@ function Interaction(){
             var maxGrade = Data.data[Data.data.length-1].lessonNO;
             max_Grade_ = Grade.fullMarksMax;
             if(Data.TeacherclassRoomState){
-                html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;display:block;">查看课堂数据</h4>'
+                html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
             }else{
                 html_yh = ''
             }
