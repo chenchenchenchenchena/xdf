@@ -826,7 +826,6 @@ $(function () {
     stopDrop();
     $('.esc_s').on('touchend', function () {
         clearInterval(time_s);
-
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
@@ -840,6 +839,7 @@ $(function () {
     var  time_s;
     var b = new Base64();
     var str;
+    var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
 
@@ -896,6 +896,11 @@ $(function () {
         });
 
         $('.true_s').on('touchend', function () {
+            if(ber_L==false){
+                layer.msg('正在处理请求');
+                return false;
+            }
+            ber_L = false;
             $('.big_back_s').hide();
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
@@ -916,7 +921,7 @@ $(function () {
                 'schoolId': localStorage.schoolId,
                 'classId': sessionStorage.classCode_s
             };
-            alert('上传开始')
+            layer.load();
             // console.log(reqData);
             ajaxRequest('POST', homework_s.s_uploadFiles, JSON.stringify(reqData), uploadFilesSuccess);
 
@@ -970,8 +975,10 @@ $(function () {
 
 //    上传文件到服务器
     function uploadFilesSuccess(msg) {
+        ber_L = true;
+
         if (msg.data.success) {
-           alert("文件上传成功！");
+            layer.closeAll('loading');
             arr_image.push({
                 'fileName': msg.data.fileName,
                 'fileType': msg.data.fileType,
