@@ -54,7 +54,7 @@ $(function () {
         $('#' + imageId).show();
         var str = "";
         // str += "<div class = 'imgBox'>";
-        str += "<div><img data-img='"+previewUrl+"' src='" + url + "'/></div>";
+        str += "<div><img onerror=javascript:this.src='images/error-image.png' data-img='"+previewUrl+"' src='" + url + "'/></div>";
         // str += "</div>";
         $('#' + imageId).append(str);
     }

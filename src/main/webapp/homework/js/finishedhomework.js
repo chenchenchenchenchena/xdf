@@ -197,7 +197,7 @@ $(function () {
                         if (replyStatus == 1) {//已批复
                             showImage(paths.fileUrl, "imagBox_" + 2,paths.thumbnail);
                         } else {
-                            str += "<li><span class='stuImg' img-index='" + i + "'></span><img data-img='"+paths.fileUrl +"' src='" + paths.thumbnail+ "'/></li>";
+                            str += "<li><span class='stuImg' img-index='" + i + "'></span><img onerror=javascript:this.src='images/error-image.png' data-img='"+paths.fileUrl +"' src='" + paths.thumbnail+ "'/></li>";
                             // $(".notsubmit .imgBox").show();
                             $(".notsubmit .imgBox").html(str).show();
                             //界面样式控制
@@ -281,7 +281,7 @@ $(function () {
         $('#' + imageId).show();
         var str = "";
         // str += "<div class = 'imgBox'>";
-        str += "<div><img data-img='"+previewUrl+"' src='" + thumbnail + "'/></div>";
+        str += "<div><img onerror=javascript:this.src='images/error-image.png' data-img='"+previewUrl+"' src='" + thumbnail + "'/></div>";
         // str += "</div>";
         $('#' + imageId).append(str);
     }

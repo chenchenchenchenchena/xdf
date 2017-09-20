@@ -132,7 +132,7 @@ $(function () {
     function showImage(url,previewUrl) {
         $('#imagBox_1').show();
         var str = "";
-        str += "<div><img data-img='"+url+"' src='" + previewUrl + "'/></div>";
+        str += "<div><img onerror=javascript:this.src='images/error-image.png' data-img='"+url+"' src='" + previewUrl + "' /></div>";
         $('#imagBox_1').append(str);
 
 
