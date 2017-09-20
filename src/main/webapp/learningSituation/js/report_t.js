@@ -103,7 +103,7 @@ $(document).on('touchend', '.report_tab li', function () {
 function Interaction(){
 
     ajaxRequest('post',Study.t_self,need_,function(e){
-        if(e.data.length!=0||e.data!=undefined){
+        if(e.data.length!=0||e.data!=undefined||e.data!=''){
         for(var i = 0;i<e.data.length;i++){
             var h_zhou_x =[];
             var time = [];
