@@ -6,6 +6,7 @@ $(function(){
     if(GetRequest('studentName')){
         $('title').html(GetRequest('studentName'));
     }
+    $('body').hide();
     var Stujson = {
         'teacherEmail':localStorage.terEmail,
         'classCode':localStorage.getItem('CLASSCODE'),
@@ -96,9 +97,8 @@ var maxnumber = 0;
             var Cindex = [];
             if(e.data.sdtInteractState==false&&e.data.sdtInteractState!=undefined){
                 $('.grade').hide();
-            }else{
-                $('.grade').show();
             }
+            $('body').show();
             if(e.data.AvgrealGrade!=undefined){
                 $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove();
                 $('.reportstu_S ul').eq(1).find('li').eq(1).siblings().remove();
