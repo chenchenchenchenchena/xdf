@@ -252,7 +252,7 @@ $(function(){
             layer.msg('请输入正确格式学员号');
             return false;
         }
-        if(e.result==true){
+        if(e.result==true&&e.data!=''){
             $('.noSearch').hide();
             $('.card').hide();
             $('.search').show();
@@ -347,26 +347,24 @@ $(function(){
         console.log(e);
         var  studentNo =  e.data
         var tel  = /^1[34578]\d{9}$/
-        if($('.phoneNumber').val()==''||$('.stname').val()==''){
-            layer.msg('请先将信息填写完整');
-            return false;
-        }
+        // if($('.phoneNumber').val()==''||$('.stname').val()==''){
+        //     layer.msg('请先将信息填写完整');
+        //     return false;
+        // }
         if(!tel.test($('.phoneNumber').val())){
             layer.msg('请输入正确格式手机号');
             return false;
         }
-        if(e.result==false){
+        if(e.result==false||e.data==''){
             $('.noSearch').show()
             return false;
         }
-        $('.searchTwo').show()
+        $('.searchTwo').show();
         var  num = 0;
-        var  bindz = ''
+        var  bindz = '';
         for(var i = 0;i<studentNo.length;i++){
             if(studentNo[i].state=='0'){
                 bindz = '确认关联'
-            }else{
-                bindz = '取消关联'
             }
             $('.stuNum').append('<li class="new_S"><span>学员号'+i+1+':</span><span class="stu_num">'+studentNo[i].stNo+'</span><button class="Relation">'+bindz+'</button></li>')
             sessionStorage.stuTel = $('.phoneNumber').val()
