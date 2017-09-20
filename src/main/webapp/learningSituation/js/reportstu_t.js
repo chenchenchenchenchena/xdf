@@ -14,7 +14,6 @@ $(function(){
         'schoolId':localStorage.getItem('SCHOOLID')
     };
     Studata();  //调取
-    $('.tab-title li').eq(GetRequest('tCode')-1).addClass('tab-active').siblings().removeClass('tab-active')
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
         if(!$(this).hasClass('tab_recorac')){
@@ -41,6 +40,8 @@ $(function(){
 
             }
             $('.tab-title').html(tabStr);
+            $('.tab-title li').eq(GetRequest('tCode')-1).addClass('tab-active').siblings().removeClass('tab-active');
+
         }
     });
 
@@ -53,31 +54,31 @@ var maxnumber = 0;
     });
     $(document).on('touchend','.tab-title li',function(){
         $('.no-data').hide();
-        $(this).addClass('tab-active').siblings().removeClass('tab-active');
-        Stujson.tCode = $(this).attr("tCode");
-        Studata();
-        // switch($(this).index()){
-        //     case 0:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 1:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 2:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 3:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 4:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
-        //         break;
-        // }
+        // $(this).addClass('tab-active').siblings().removeClass('tab-active');
+        // Stujson.tCode = $(this).attr("tCode");
+        // Studata();
+        switch($(this).index()){
+            case 0:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
+                break;
+            case 1:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
+                break;
+            case 2:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
+                break;
+            case 3:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
+                break;
+            case 4:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
+                break;
+        }
     });
 
 
@@ -95,6 +96,8 @@ var maxnumber = 0;
             var Cindex = [];
             if(e.data.sdtInteractState==false&&e.data.sdtInteractState!=undefined){
                 $('.grade').hide();
+            }else{
+                $('.grade').show();
             }
             if(e.data.AvgrealGrade!=undefined){
                 $('.reportstu_S ul').eq(0).find('li').eq(0).siblings().remove();
