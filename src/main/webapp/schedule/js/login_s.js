@@ -387,8 +387,7 @@ $(function(){
             clear();
         }else{
             layer.msg('绑定成功');
-            $('.deterAss').html('解除关联');
-            ajax_S(url.s_seac,WXnum,stuc);
+            location.href = 'schedule_s.html'
         }
     }
 
