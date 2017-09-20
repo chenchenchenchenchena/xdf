@@ -177,6 +177,10 @@ ajaxRequest('post',Study.s_study,Stujson,function(e){
             }
         },
         calculable : true,
+        dataZoom: [{
+            type: 'inside',
+            throttle: 50
+        }],
         xAxis : [
             {
                 name:'课次',
