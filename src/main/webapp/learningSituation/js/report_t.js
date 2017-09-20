@@ -121,7 +121,8 @@ function Interaction(){
                 html_yh = ''
             }
 
-            $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;display:block;">查看成绩排名</h4></div></div>')
+            $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
+            $('.grade').show();
             for(var c = 0;c<Grade.data.length;c++){
                 var lesson_num = Grade.data[c];
                 for(var b = 0;b<maxGrade;b++) {
