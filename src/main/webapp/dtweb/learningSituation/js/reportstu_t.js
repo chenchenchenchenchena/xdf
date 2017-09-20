@@ -165,6 +165,10 @@ var maxnumber = 0;
                 selectedMode:false
             },
             calculable : true,
+            dataZoom: [{
+                type: 'inside',
+                throttle: 50
+            }],
             xAxis : [
                 {
                     name:'课次',
