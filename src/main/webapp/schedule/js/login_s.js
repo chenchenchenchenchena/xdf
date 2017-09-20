@@ -280,7 +280,7 @@ $(function(){
 
     //学员号查询点击
     $('.numb_log').click(function(){
-        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolid':$('.Selected').attr('data-code')};
+        var stumore  = {'StudentCode':$('.stunum').val(),'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl,'schoolId':$('.Selected').attr('data-code')};
         ajax_S(url.s_seac,stumore,stusea)
     });
     //关联点击
