@@ -14,7 +14,6 @@ $(function(){
         'schoolId':localStorage.getItem('SCHOOLID')
     };
     Studata();  //调取
-    $('.tab-title li').eq(GetRequest('tCode')-1).addClass('tab-active').siblings().removeClass('tab-active')
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){
         if(!$(this).hasClass('tab_recorac')){
@@ -41,7 +40,7 @@ $(function(){
 
             }
             $('.tab-title').html(tabStr);
-            $('.tab-title li').eq(GetRequest('tCode')).addClass('tab-active').siblings().removeClass('tab-active');
+            $('.tab-title li').eq(GetRequest('tCode')-1).addClass('tab-active').siblings().removeClass('tab-active');
 
         }
     });
