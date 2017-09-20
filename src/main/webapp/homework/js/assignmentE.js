@@ -66,7 +66,7 @@ $(function () {
     ajax_S(homework_s.t_clas, trardata, function (e) {
         var className = e.data;
         for (var a = 0; a < className.length; a++) {
-            $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt=""><span class="cn">' + className[a].ClassName + '</span></li><div style="padding-left: 70px;font-size: 32px">(' + className[a].ClassCode + ')</div>')
+            $('.class_name ul').append('<li style="white-space: nowrap;overflow-x:auto;"  classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt=""><span class="cn">' + className[a].ClassName + '</span><span style="font-size: 32px">(' + className[a].ClassCode + ')</span></li>')
         }
     });
     //选择班
