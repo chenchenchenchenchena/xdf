@@ -2,7 +2,7 @@
 选择作业*/
 body {
     background: #fff;
-    /*position: relative;*/
+    position: relative;
     overflow: hidden;
 }
 
@@ -190,7 +190,10 @@ input::-webkit-input-placeholder {
 }
 
 .eSub, .tSub {
-    margin-top: 711px;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    /*margin-top: 711px;*/
 }
 
 .gBth {
