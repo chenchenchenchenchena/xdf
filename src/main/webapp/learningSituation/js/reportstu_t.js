@@ -53,31 +53,31 @@ var maxnumber = 0;
     });
     $(document).on('touchend','.tab-title li',function(){
         $('.no-data').hide();
-        $(this).addClass('tab-active').siblings().removeClass('tab-active');
-        Stujson.tCode = $(this).attr("tCode");
-        Studata();
-        // switch($(this).index()){
-        //     case 0:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 1:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 2:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 3:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
-        //         break;
-        //     case 4:
-        //         var url_s = location.href.substr(0,location.href.indexOf('?'));
-        //         location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
-        //         break;
-        // }
+        // $(this).addClass('tab-active').siblings().removeClass('tab-active');
+        // Stujson.tCode = $(this).attr("tCode");
+        // Studata();
+        switch($(this).index()){
+            case 0:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=1&studentName='+GetRequest('studentName')+'';
+                break;
+            case 1:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=2&studentName='+GetRequest('studentName')+'';
+                break;
+            case 2:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=3&studentName='+GetRequest('studentName')+'';
+                break;
+            case 3:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=4&studentName='+GetRequest('studentName')+'';
+                break;
+            case 4:
+                var url_s = location.href.substr(0,location.href.indexOf('?'));
+                location.href = url_s+'?studentNo='+GetRequest('studentNo')+'&tCode=5&studentName='+GetRequest('studentName')+'';
+                break;
+        }
     });
 
 
