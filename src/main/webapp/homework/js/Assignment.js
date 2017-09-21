@@ -30,9 +30,6 @@ $(function () {
         'url': urlPush,
         'templateId': TemplateId_home
     };
-    if(getRequest('state').state=='JT'||sessionStorage.signal){
-        homeworksubm.url =  'http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html?state=JT'
-    }
     var layer1, layer2, loading;
 
 
