@@ -9,7 +9,7 @@ $(function () {
     var isRequesting = false;
     var ePush;
     var AppId = appId;
-    var SecreT  = secreT;
+    var SecreT = secreT;
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html?state=JT";
     }else{

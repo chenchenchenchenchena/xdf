@@ -5,8 +5,16 @@ $(function () {
     var stuAnwersFiles = [];
     var teaReplyFiles = [];
 
+    var replyTimes = [];
+
 
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
+    var urlPush;
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
+    }else{
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
+    }
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid,
@@ -74,7 +82,6 @@ $(function () {
     });
 
     if (sessionStorage.Teatwo) {//已批复
-        sessionStorage.removeItem('Teatwo');
         var buer_last = true;
         if(sessionStorage.bangbang){
             $('.hmAnswer .infoTitle span').css({
@@ -84,17 +91,17 @@ $(function () {
         }
         $('title').html('已批复');
         //获取文件信息
-        ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
+        // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
+        var e = JSON.parse(sessionStorage.detailsStrYes);
+            $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
+            console.log(decodeURI(e.replyDesc));
 
-            $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
-            $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
-            console.log(decodeURI(e.data.replyDesc));
-
-            var arr = decodeURI(e.data.replyDesc).split('|>|');
+            var arr = decodeURI(e.replyDesc).split('|>|');
             for (var L = 0; L < arr.length; L++) {
-                if (arr[L] != '' && arr[L] != undefined && arr[L]!='+' && arr[L] != 'undefined') {
+                if (arr[L] != '' && arr[L] != " " &&arr[L] != undefined && arr[L]!='+' && arr[L] != 'undefined') {
                     if(L==arr.length-1){
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.data.score+'</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.score+'</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }else{
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
@@ -103,26 +110,139 @@ $(function () {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
 
-                    if(L==arr.length-1&&e.data.score!=''){
-                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>'+e.data.score+'</i></h4>')
+                    if(L==arr.length-1&&e.score!=''){
+                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>'+e.score+'</i></h4>')
                     }
 
-                    if(arr.length==1&&e.data.score!=''){
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.data.score+'</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    if(arr.length==1&&e.score!=''){
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>'+e.score+'</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
-                    /*var tea = e.data.File.RevampFile;//老师批注
-                    if (tea != undefined) {
-                        for (var b = 0; b < tea.length; b++) {
-                            if(parseInt(L+1) == parseInt(tea[b][0].replyTimes)){
-                                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                            }
-
-                        }
-                    }*/
                 }
             }
-            $('.hwCon').eq(0).html(decodeURI(e.data.description));
-            getHwFilesSucess(e);
+            $('.hwCon').eq(0).html(decodeURI(e.description));
+            getFileInfo(e);
+
+        // });
+
+    } else {//待批复
+        $('.hmAnswer').eq(1).hide();
+        //获取文件信息
+        // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
+        var e = JSON.parse(sessionStorage.detailsStrNot);
+        console.log(e);
+            classYHname = e.className;
+            $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
+            $('.hwCon').eq(0).html(decodeURI(e.description));
+            // var stu = e.File.StudentHomeworkFile;
+            // var tea = e.File.TeacherHomeworkFile;
+            // for (var a = 0; a < stu.length; a++) {
+            //     stuAnwersFiles.push(stu[a].diskFilePath);
+            // }
+            // for (var b = 0; b < tea.length; b++) {
+            //     hwFiles.push(tea[b].diskFilePath);
+            // }
+            getFileInfo(e);
+        // });
+    }
+    /**
+     * 调取接口获取文件展示信息
+     * @param e
+     */
+    function getFileInfo(e) {
+        var tea = e.File.RevampFile;//老师批注
+        var stu = e.File.StudentHomeworkFile;//学生答案
+        var tea_t = e.File.TeacherHomeworkFile;//作业信息
+        if (stu != undefined) {
+            for (var a = 0; a < stu.length; a++) {
+                stuAnwersFiles.push({'fullPath':stu[a].diskFilePath});
+            }
+        }
+        if (tea_t != undefined) {
+            for (var c = 0; c < tea_t.length; c++) {
+                hwFiles.push({'fullPath':tea_t[c].diskFilePath});
+
+            }
+        }
+        if (tea != undefined) {
+            for (var b = 0; b < tea.length; b++) {
+                teaReplyFiles.push({'fullPath':tea[b].diskFilePath});
+                replyTimes.push(parseInt(tea[b].replyTimes));
+
+            }
+        }
+        var params = {
+            'fileSfullPath':stuAnwersFiles,
+            'fileTfullPath':hwFiles,
+            'fileRfullPath':teaReplyFiles
+        };
+
+
+        ajaxRequest("POST",homework_s.t_getFileDetails,JSON.stringify(params),getHwFilesSucess);
+    }
+
+
+    /**
+     * 获取文件信息接口回调函数
+     * @param e
+     */
+    function getHwFilesSucess(e) {
+        if (e.code == 200) {
+
+            var stu = e.data.fileS;//学生答案
+            var tea_t = e.data.fileT;//作业信息
+            if (stu != undefined) {
+                for (var a = 0; a < stu.length; a++) {
+                    if (stu[a].fileType == 'mp3') {
+                        getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
+                    } else {
+                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].url + '" src="images/error-image.png" alt="" /></div>')
+                    }
+                }
+            }
+            if (tea_t != undefined) {
+                for (var c = 0; c < tea_t.length; c++) {
+                    if (tea_t[c].fileType == 'mp3') {
+                        getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
+                    } else {
+                        $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].url + '" src="images/error-image.png" alt="" /></div>')
+
+                    }
+                }
+            }
+            if (sessionStorage.Teatwo) {
+
+                sessionStorage.removeItem('Teatwo');
+                var tea = e.data.fileR;//老师批注
+                if (tea != undefined) {
+                    for (var b = 0; b < tea.length; b++) {
+                        if (tea[b].fileType == 'mp3') {
+                            getAudioInfo([3, tea[b].diskFilePath, tea[b].playTime, "mp3"], ['replayT', parseInt(tea[b].replyTimes - 1)]);
+                        } else {
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].url + '" src="images/error-image.png" alt="" /></div>');
+                            // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
+                        }
+
+
+                    }
+                }
+                for (var i = 0; i < $('.tea_sp .hmAnswer').length; i++) {
+                    if ($('.tea_sp .hmAnswer:eq(' + i + ')').find('.voiceBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.imgBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.anDes').length <= 0) {
+                        // $('.tea_sp .hmAnswer:eq(' + i + ')').hide();
+                    }
+                }
+                //将页面里的img默认图片换成图片的缩略地址
+                //老师批复
+                for (var k = 0; k < $('.tea_sp .hmAnswer').length; k++) {
+                    var l = $('.tea_sp .hmAnswer').eq(k).find('img').length;
+                    for (var g = 0; g < l; g++) {
+                        $('.tea_sp .hmAnswer').eq(k).find('img').eq(g).attr('src', $('.tea_sp .hmAnswer').eq(k).find('img').eq(g).attr('data-thumbnail'));
+                    }
+                }
+            }
+
+            //将页面里的img默认图片换成图片的缩略地址
+            //作业信息、学生答案
             for (var i = 0; i < 2; i++) {
                 for (var j = 0; j < $('.imgBox').eq(i).find('img').length; j++) {
 
@@ -130,51 +250,12 @@ $(function () {
 
                 }
             }
-            for (var k = 0; k < $('.tea_sp .hmAnswer').length; k++) {
-                var l = $('.tea_sp .hmAnswer').eq(k).find('img').length;
-                for (var g = 0; g < l; g++) {
-                    $('.tea_sp .hmAnswer').eq(k).find('img').eq(g).attr('src', $('.tea_sp .hmAnswer').eq(k).find('img').eq(g).attr('data-thumbnail'));
-                }
-            }
 
-        });
-
-    } else {//待批复
-        $('.hmAnswer').eq(1).hide();
-        //获取文件信息
-        ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            console.log(e)
-            classYHname = e.data.className
-            $('.anDes').eq(0).html(decodeURI(e.data.StudentAnswer));
-            $('.kon p:last-of-type').html(decodeURI(e.data.knowledgePoint));
-            $('.hwCon').eq(0).html(decodeURI(e.data.description));
-            var stu = e.data.File.StudentHomeworkFile;
-            var tea = e.data.File.TeacherHomeworkFile;
-            for (var a = 0; a < stu.length; a++) {
-                if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
-                } else {
-                    var onlineUrl = 'dt.xdf.cn';
-                    if (window.location.host == onlineUrl) {//正式环境
-                        $('.imgBox').eq(1).append('<div><img onerror=javascript:this.src="images/error-image.png" src="'+stu[a].thumbnail+'" data-img="http://dt.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
-                    } else {//测试环境
-                        $('.imgBox').eq(1).append('<div><img onerror=javascript:this.src="images/error-image.png" src="'+stu[a].thumbnail+'" data-img="http://dt.staff.xdf.cn/xdfdtmanager/' + stu[a].url + '" alt="" /></div>')
-                    }
-                    // $('.imgBox').eq(1).append('<div><img src="' + stu[a].url + '" alt="" /></div>')
-                    // $('.imgBox').eq(1).append('<div><img src="http://dt.staff.xdf.cn/xdfdtmanager/homework/koala.jpg" /></div>')
-                    // $('.')
-                }
-            }
-            for (var b = 0; b < tea.length; b++) {
-                if (tea[b].fileType == 'mp3') {
-                    getAudioInfo([1, tea[b].diskFilePath, tea[b].playTime, "mp3"]);
-                } else {
-                    $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" src="'+tea[b].thumbnail+'" data-img="' + tea[b].url + '" alt="" /></div>')
-
-                }
-            }
-        });
+        }
     }
+
+
+    /*----------------------------------以上是接口处理方法--------------------------------------------*/
 
     var voiceCount = 0;
 
@@ -1013,60 +1094,6 @@ $(function () {
         } else {
             alert("文件上传失败！");
         }
-    }
-
-//    获取作业文件信息（图片/语音）
-    function getHwFilesSucess(e) {
-        var tea = e.data.File.RevampFile;//老师批注
-        var stu = e.data.File.StudentHomeworkFile;//学生答案
-        var tea_t = e.data.File.TeacherHomeworkFile;//作业信息
-        if (stu != undefined) {
-            for (var a = 0; a < stu.length; a++) {
-                if (stu[a].fileType == 'mp3') {
-                    getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
-                    // $('.big_ss').eq(1).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
-                } else {
-                    $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].url + '" src="images/error-image.png" alt="" /></div>')
-                }
-            }
-        }
-        if (tea_t != undefined) {
-            for (var c = 0; c < tea_t.length; c++) {
-                if (tea_t[c].fileType == 'mp3') {
-                    getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
-                    // $('.big_ss').eq(0).append('<div class="music_s"><span>10"</span> <audio  src="http://dt.staff.xdf.cn/xdfdtmanager/mp3/you.mp3" id="bgMusic"></audio ></div>')
-                } else {
-                    $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].url + '" src="images/error-image.png" alt="" /></div>')
-
-                }
-            }
-        }
-        if (tea != undefined) {
-            for (var b = 0; b < tea.length; b++) {
-                $.each(tea[b], function (i, item) {
-                    if (item.fileType == 'mp3') {
-                        getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
-                    } else {
-                        $('.tea_sp .hmAnswer:eq(' + parseInt(item.replyTimes - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + item.thumbnail + '" data-ramke="3" data-img="' + item.url + '" src="images/error-image.png" alt="" /></div>');
-                        // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
-                    }
-                });
-
-            }
-        }
-        var str = "";
-        for (var i = 0; i < $('.tea_sp .hmAnswer').length; i++) {
-            // alert($('.tea_sp .hmAnswer:eq('+i+')').find('.anDes').length);
-            if ($('.tea_sp .hmAnswer:eq(' + i + ')').find('.voiceBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.imgBox').html() == "" && $('.tea_sp .hmAnswer:eq(' + i + ')').find('.anDes').length <= 0) {
-                // $('.tea_sp .hmAnswer:eq(' + i + ')').hide();
-            }
-        }
-    }
-
-    function onErrorHandle(obj){
-        obj.src="images/excellent_icon.jpg";
-        obj.width=216;
-        obj.height=216;
     }
 
     $('.homeGrade').on('keyup', function () {
