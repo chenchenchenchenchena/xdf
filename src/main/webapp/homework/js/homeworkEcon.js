@@ -342,8 +342,7 @@ $(function () {
         if (window.location.host == onlineUrl) {//正式环境
             url_ = "http://tps.xdf.cn";
         } else {//测试环境
-            url_ = "http://tps.xdf.cn";
-            /*url_ = "http://tps.staff.xdf.cn";*/
+            url_ = "http://tps.staff.xdf.cn";
         }
         // contentName = contentName.substring(0, contentName.length - 1);
         console.log(contentName);
