@@ -62,7 +62,6 @@
         if (msg.code == 200) {
             layer.close(loading);
             var item = msg.data;
-            alert(item.paperUrl);
             if(item != undefined){
                 window.location.href=item.paperUrl;
             }
