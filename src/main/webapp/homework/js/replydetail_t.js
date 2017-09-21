@@ -5,6 +5,8 @@ $(function () {
     var stuAnwersFiles = [];
     var teaReplyFiles = [];
 
+    var replyTimes = [];
+
 
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
     var urlPush;
@@ -80,7 +82,6 @@ $(function () {
     });
 
     if (sessionStorage.Teatwo) {//已批复
-        sessionStorage.removeItem('Teatwo');
         var buer_last = true;
         if(sessionStorage.bangbang){
             $('.hmAnswer .infoTitle span').css({
@@ -141,11 +142,9 @@ $(function () {
             // for (var b = 0; b < tea.length; b++) {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
-            getFileInfo(e)
+            getFileInfo(e);
         // });
     }
-
-
     /**
      * 调取接口获取文件展示信息
      * @param e
@@ -167,8 +166,8 @@ $(function () {
         }
         if (tea != undefined) {
             for (var b = 0; b < tea.length; b++) {
-
-                    teaReplyFiles.push({'fullPath':tea[b].diskFilePath});
+                teaReplyFiles.push({'fullPath':tea[b].diskFilePath});
+                replyTimes.push(parseInt(tea[b].replyTimes));
 
             }
         }
@@ -197,7 +196,7 @@ $(function () {
                     if (stu[a].fileType == 'mp3') {
                         getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].url + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].fileUrl + '" src="images/error-image.png" alt="" /></div>')
                     }
                 }
             }
@@ -206,23 +205,24 @@ $(function () {
                     if (tea_t[c].fileType == 'mp3') {
                         getAudioInfo([1, tea_t[c].diskFilePath, tea_t[c].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].url + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
 
                     }
                 }
             }
             if (sessionStorage.Teatwo) {
+
+                sessionStorage.removeItem('Teatwo');
                 var tea = e.data.fileR;//老师批注
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
-                        $.each(tea[b], function (i, item) {
-                            if (item.fileType == 'mp3') {
-                                getAudioInfo([3, item.diskFilePath, item.playTime, "mp3"], ['replayT', parseInt(item.replyTimes - 1)]);
-                            } else {
-                                $('.tea_sp .hmAnswer:eq(' + parseInt(item.replyTimes - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + item.thumbnail + '" data-ramke="3" data-img="' + item.url + '" src="images/error-image.png" alt="" /></div>');
-                                // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
-                            }
-                        });
+                        if (tea[b].fileType == 'mp3') {
+                            getAudioInfo([3, tea[b].diskFilePath, tea[b].playTime, "mp3"], ['replayT', parseInt(tea[b].replyTimes - 1)]);
+                        } else {
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
+                            // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
+                        }
+
 
                     }
                 }
