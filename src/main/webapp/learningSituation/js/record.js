@@ -818,13 +818,21 @@ $(function () {
 		if($(".tCode").html()>2&&$(".tCode").html()<6){
 			pushinfo.time=1;
 		}
-		for(var i=0;i<stuOpenId.length;i++){
+		/*for(var i=0;i<stuOpenId.length;i++){
 			for(var j=0;j<pushinfo.stuInfomation.length;j++){
 				if(stuOpenId[i].stuNo==pushinfo.stuInfomation[j].sNo){
 					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
 				}
 			}
-	 	}
+	 	}*/
+		for(var j=0;j<pushinfo.stuInfomation.length;j++){
+			for(var i=0;i<stuOpenId.length;i++){
+				if(pushinfo.stuInfomation[j].sNo==stuOpenId[i].stuNo){
+					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
+					return false;
+				}
+			}
+		}
 		console.log(pushinfo.stuInfomation);
 		for(var j=0;j<pushinfo.stuInfomation.length;j++){
 			if(!pushinfo.stuInfomation[j].openId){
