@@ -35,31 +35,24 @@ $(function() {
             $('.emptyOne').show()
         } else {
             for (var c = 0; c < data.notCorrect.length; c++) {
-                var timet = data.notCorrect[c].updateTime;
-                var montht = timet.substring(5,timet.indexOf(' ')).replace('-','.');
-                var dayt = timet.split(' ')[1].substring(0,5);
-                if(data.notCorrect[c].studentName.length==2){
-                    var name_ = data.notCorrect[c].studentName
-                }else{
-                    var name_ = data.notCorrect[c].studentName.substr(data.notCorrect[c].studentName.length-2, 2);
-                }
-                $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + decodeURI(data.notCorrect[c].replydescription) + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + decodeURI(data.notCorrect[c].description) + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
-
                 var sdthomFile = e.data.notCorrect[c].sdthomFile;
 
                 var stuFiles = sdthomFile.sdtCommitHomFile;
                 var teaFiles = e.data.notCorrect[c].tchomFile;
+                var knowledgePoint  = encodeURI(e.data.notCorrect[c].knowledgePoint).replace(/'\+'/,'%20');
+                // var replyDesc  = encodeURI(e.data.notCorrect[c].replyDesc).replace(/'\+'/,'%20');
+                var updateTime  = encodeURI(e.data.notCorrect[c].updateTime).replace(/'\+'/,'%20');
 
                 var details = {
                     'StudentAnswer': e.data.notCorrect[c].replydescription,
                     'classCode': e.data.notCorrect[c].classCode,
                     'description': e.data.notCorrect[c].description,
-                    'knowledgePoint':e.data.notCorrect[c].knowledgePoint,
+                    'knowledgePoint':knowledgePoint,
                     'replyDesc':e.data.notCorrect[c].replyDesc,
                     'score':e.data.notCorrect[c].score,
                     'studentName':e.data.notCorrect[c].studentName,
                     'tag':e.data.notCorrect[c].tag,
-                    'updateTime':e.data.notCorrect[c].replyTime,
+                    'updateTime':updateTime,
                     'homeworkTinfoId':e.data.notCorrect[c].homeworkTinfoId,
                     'className':e.data.notCorrect[c].className,
                     'File': {
@@ -68,7 +61,17 @@ $(function() {
                     }
                 };
                 var detailStr = JSON.stringify(details);
-                sessionStorage.detailsStrNot = detailStr;
+
+                var timet = data.notCorrect[c].updateTime;
+                var montht = timet.substring(5,timet.indexOf(' ')).replace('-','.');
+                var dayt = timet.split(' ')[1].substring(0,5);
+                if(data.notCorrect[c].studentName.length==2){
+                    var name_ = data.notCorrect[c].studentName
+                }else{
+                    var name_ = data.notCorrect[c].studentName.substr(data.notCorrect[c].studentName.length-2, 2);
+                }
+                $('.Pending').eq(0).append('<li detailStr='+detailStr+' Id="' + data.notCorrect[c].id + '" text="' + decodeURI(data.notCorrect[c].replydescription) + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + decodeURI(data.notCorrect[c].description) + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
+
             }
 
         }
@@ -76,21 +79,7 @@ $(function() {
             $('.emptyTwo').show()
         } else {
             for (var d = 0; d < data.yesCorrect.length; d++) {
-                var time = data.yesCorrect[d].replyTime;
-                var month = time.substring(5,time.indexOf(' ')).replace('-','.');
-                var day = time.split(' ')[1].substring(0,5);
-                if(data.yesCorrect[d].studentName.length==2){
-                    var name_t = data.yesCorrect[d].studentName
-                }else{
-                    var name_t = data.yesCorrect[d].studentName.substr(data.yesCorrect[d].studentName.length-2, 2)
-                }
-                if (data.yesCorrect[d].tag == '1') {
-                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'" text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + decodeURI(data.yesCorrect[d].replydescription) + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>');
-                    $('.frend').show();
-                    $('.noreply').css('padding-bottom','120px')
-                } else {
-                    $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'"  text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + data.yesCorrect[d].replydescription + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
-                }
+
                 var stuFiles = [];
                 var teaFiles = [];
                 var ReplyFiles = [];
@@ -100,16 +89,20 @@ $(function() {
                 ReplyFiles = sdthomFile.sdtcCommitReply;
                 teaFiles = e.data.yesCorrect[d].tchomFile;
 
+                var knowledgePoint  = encodeURI(e.data.yesCorrect[d].knowledgePoint).replace(/'\+'/,'%20');
+                // var replyDesc  = encodeURI(e.data.yesCorrect[d].replyDesc).replace(/'\+'/,'%20');
+                var updateTime  = encodeURI(e.data.yesCorrect[d].updateTime).replace(/'\+'/,'%20');
+
                 var details = {
                     'StudentAnswer': e.data.yesCorrect[d].replydescription,
                     'classCode': e.data.yesCorrect[d].classCode,
                     'description': e.data.yesCorrect[d].description,
-                    'knowledgePoint':e.data.yesCorrect[d].knowledgePoint,
+                    'knowledgePoint':knowledgePoint,
                     'replyDesc':e.data.yesCorrect[d].replyDesc,
                     'score':e.data.yesCorrect[d].score,
                     'studentName':e.data.yesCorrect[d].studentName,
                     'tag':e.data.yesCorrect[d].tag,
-                    'updateTime':e.data.yesCorrect[d].replyTime,
+                    'updateTime':updateTime,
                     'homeworkTinfoId':e.data.yesCorrect[d].homeworkTinfoId,
                     'className':e.data.yesCorrect[d].className,
                     'File': {
@@ -119,13 +112,30 @@ $(function() {
                     }
                 };
                 var detailStr = JSON.stringify(details);
-                sessionStorage.detailsStrYes = detailStr;
+
+                var time = data.yesCorrect[d].replyTime;
+                var month = time.substring(5,time.indexOf(' ')).replace('-','.');
+                var day = time.split(' ')[1].substring(0,5);
+                if(data.yesCorrect[d].studentName.length==2){
+                    var name_t = data.yesCorrect[d].studentName
+                }else{
+                    var name_t = data.yesCorrect[d].studentName.substr(data.yesCorrect[d].studentName.length-2, 2)
+                }
+                if (data.yesCorrect[d].tag == '1') {
+                    $('.Pending').eq(1).append('<li detailStr='+detailStr+' Id="'+data.yesCorrect[d].id+'" text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + decodeURI(data.yesCorrect[d].replydescription) + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t+ '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span><i>优秀</i></li>');
+                    $('.frend').show();
+                    $('.noreply').css('padding-bottom','120px')
+                } else {
+                    $('.Pending').eq(1).append('<li detailStr='+detailStr+' Id="'+data.yesCorrect[d].id+'"  text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + data.yesCorrect[d].replydescription + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
+                }
+
             }
         }
     });
 
 
     $(document).on('tap', '.home_t li', function () {
+
         sessionStorage.stuid = $(this).attr('Id');
         location.href = 'replydetail_t.html'
     });
@@ -181,6 +191,8 @@ $(function() {
                 sessionStorage.removeItem('bangbang');
             }
         }
+
+        sessionStorage.detailsStrYes = $(this).attr('detailStr');
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');
         location.href = 'replydetail_t.html?Id='+$(this).attr('Id');
