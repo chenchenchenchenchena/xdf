@@ -35,11 +35,12 @@
         var WXnum  = {
             'wechatId':sessionStorage.openid
         };
-        ajax_S(url.s_seac,WXnum,function(e){
+    localStorage.userId_stu = '2323'
+    ajax_S(url.s_seac,WXnum,function(e){
             if(e.result==true){
                 if(!localStorage.userId_stu){
                     sessionStorage.homeCanfig=='home'
-                    location.href = '../schedule/login_s.html'
+//                    location.href = '../schedule/login_s.html'
                 }else{
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
