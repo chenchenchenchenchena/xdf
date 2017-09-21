@@ -517,7 +517,7 @@ $(function () {
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":TemplateId_grade,
-					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html?state=JT",
+					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html",
 					  "info":classmate
 					};
      	ajax_S(url.w_push,pushwei,pushMsg);
