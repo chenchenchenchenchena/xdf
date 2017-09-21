@@ -10,10 +10,16 @@ $(function () {
     var stuQuery=[];
     var pushStuent=[];
     var stuOpenId=[];
+	var url;
 	/*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
          // wechatCode(location.href)
      }
+	if(getRequest('state').state=='JT'||sessionStorage.signal){
+		url=url_o2+"/xdfdthome/learningSituation/report_t.html?state=JT";
+	}else{
+		url=url_o2+"/xdfdthome/learningSituation/report_t.html";
+	}
     // localStorage.terEmail="caoxuefeng@xdf.cn";  //
     // sessionStorage.teacherId="TC41"; //
     // sessionStorage.schoolId="73";   //
@@ -515,7 +521,8 @@ $(function () {
 					  "courseName":push.courseName,
 					  "time":push.time,
 					  "templateId":TemplateId_grade,
-					  "url":url_o2+"/xdfdthome/learningSituation/report_t.html",
+					  /*"url":url_o2+"/xdfdthome/learningSituation/report_t.html",*/
+					  "url":url,
 					  "info":classmate
 					};
      	ajax_S(url.w_push,pushwei,pushMsg);
