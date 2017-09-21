@@ -310,7 +310,8 @@ $(function () {
                         time: 3000,
                         content: $(".succ")
                     });
-                    location.href = "homeworklist_t.html";
+                    alert('chenggong')
+                    // location.href = "homeworklist_t.html";
                 } else {
                     isRequesting = false;
                     layer.close(layer1);
