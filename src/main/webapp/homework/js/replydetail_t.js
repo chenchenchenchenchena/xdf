@@ -5,7 +5,7 @@ $(function () {
         'homeworkTinfoId': sessionStorage.Tid,
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.xdf.cn/xdfdthome/homework/finishedhomework_s.html',
+        'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html',
         'templateId': TemplateId_home
     };
     var classYHname;
