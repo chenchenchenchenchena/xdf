@@ -196,7 +196,7 @@ $(function () {
                     if (stu[a].fileType == 'mp3') {
                         getAudioInfo([2, stu[a].diskFilePath, stu[a].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].fileUrl + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + stu[a].fileUrl + '" src="images/error-image.png" alt="" /></div>')
                     }
                 }
             }
