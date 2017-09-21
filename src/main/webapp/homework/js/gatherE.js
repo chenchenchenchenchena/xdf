@@ -4,7 +4,15 @@
 //作业汇总
 var loading;
 var arr;
+var ecPush;
 var summaryData={"Tcid":sessionStorage.Tid};
+var AppId = appId;
+var SecreT  = secreT;
+if(getRequest('state').state=='JT'||sessionStorage.signal){
+    ecPush=url_o2+"/xdfdthome/homework/homeworklist_s.html?state=JT";
+}else{
+    ecPush=url_o2+"/xdfdthome/homework/homeworklist_s.html";
+}
 ajaxRequest("POST", homework_s.t_summary,summaryData,summaryAjax)
 function summaryAjax(e) {
     loading=layer.load();
@@ -70,13 +78,14 @@ $(document).on("touchstart",".ss",function () {
 })
 //催交作业
 var Homework = {
-    'appid': Global.appid,
-    'secret': Global.secret,
-    'url': url_o2+'/xdfdthome/homework/homeworklist_s.html',
+    'appid': AppId,
+    'secret': SecreT,
+    'url': ecPush,
     /*'templateId': 'X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M'*/
     'templateId':TemplateId_home
 
 };
+
 $('.noHwTitle span:last-of-type').on('touchend', function () {
     var Arr = [];
     Homework.schoolId = arr[0].schoolId;

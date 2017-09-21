@@ -7,6 +7,14 @@ $(function () {
     var isUpdata = GetRequest("isUpdata");
     var Tcid = GetRequest("id");
     var isRequesting = false;
+    var ePush;
+    var AppId = appId;
+    var SecreT  = secreT;
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html?state=JT";
+    }else{
+        ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html";
+    }
     if (isUpdata == 1) {
 
     } else {
@@ -262,10 +270,12 @@ $(function () {
         } else {
             //URL字段待定
             var params = {
-                'appid': Global.appid,
-                'secret': Global.secret,
-                'url': url_o2+"/xdfdthome/homework/pushhomeworkE.html",
-                'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",
+                'appid':AppId,
+                'secret':SecreT,
+               /* 'url': url_o2+"/xdfdthome/homework/pushhomeworkE.html",*/
+                'url':ePush,
+                /*'templateId': "X9u2z5OF33JCPXDuTGnw06fUt0n-7CSjCe5otNgXO6M",*/
+                'templateId': TemplateId_home,
                 'teacherEmail': localStorage.terEmail,
                 'teacherName': localStorage.teacherName,
                 'schoolId': localStorage.schoolId,
