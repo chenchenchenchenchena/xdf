@@ -44,7 +44,8 @@
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;
-                    location.href = 'homeworklist_s.html';
+                    alert('stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu);
+                    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
                 }
             }else{
                 sessionStorage.homeCanfig=='home'
@@ -56,8 +57,8 @@
     var classCode="AYP6EB02";
     sessionStorage.stuNumber="SS6889";
     localStorage.userId_stu="xdf0050008894";*/
-    alert('stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu);
-    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
+
+
     function gethwDetailsSuccess(msg) {
         if (msg.code == 200) {
             layer.close(loading);
