@@ -29,13 +29,11 @@
         homeworkTinfoId = localStorage.Class_D
     }
     if(!sessionStorage.openid){
-//        wechatCode(location.href);
-        sessionStorage.openid = 'o5sWL09IPvmjsd29QvIBYbhkU40M'
+        wechatCode(location.href);
     };
         var WXnum  = {
             'wechatId':sessionStorage.openid
         };
-    localStorage.userId_stu = '2323'
     ajax_S(url.s_seac,WXnum,function(e){
             if(e.result==true){
                 if(!localStorage.userId_stu){
@@ -45,7 +43,7 @@
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;
-                    alert('stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu);
+//                    alert('stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu);
                     ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
                 }
             }else{

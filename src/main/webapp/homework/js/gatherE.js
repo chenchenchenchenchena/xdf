@@ -9,9 +9,9 @@ var summaryData={"Tcid":sessionStorage.Tid};
 var AppId = appId;
 var SecreT  = secreT;
 if(getRequest('state').state=='JT'||sessionStorage.signal){
-    ecPush=url_o2+"/xdfdthome/homework/homeworklist_s.html?state=JT";
+    ecPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
 }else{
-    ecPush=url_o2+"/xdfdthome/homework/homeworklist_s.html";
+    ecPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
 }
 ajaxRequest("POST", homework_s.t_summary,summaryData,summaryAjax)
 function summaryAjax(e) {
@@ -101,7 +101,7 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
         })
     }
     console.log(Homework)
-    ajax_S(homework_s.t_quck, {'params': Homework}, function (e) {
+    ajax_S(homework_s.t_quck, {'params': [Homework]}, function (e) {
         if (e.result == true) {
             layer.open({
                 type: 1,
