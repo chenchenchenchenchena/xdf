@@ -28,9 +28,11 @@
     localStorage.userId_stu="xdf0050008894";*/
     ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
     function gethwDetailsSuccess(msg) {
+
         if (msg.code == 200) {
             layer.close(loading);
             var item = msg.data;
+            alert(item.paperUrl);
             if(item != undefined){
                 window.location.href=item.paperUrl;
             }
