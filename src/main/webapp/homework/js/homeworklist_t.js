@@ -1,9 +1,7 @@
 $(function(){
     // //登录相关
     if(!sessionStorage.openid){
-        // wechatCode(location.href);
-        sessionStorage.openid = 'o5sWL09IPvmjsd29QvIBYbhkU40M'
-        localStorage.userId_stu = '1111111111'
+        wechatCode(location.href);
     };
     if(!localStorage.terEmail){
         var WXnum  = {
@@ -14,11 +12,12 @@ $(function(){
                 if(!localStorage.userId_stu){
                     sessionStorage.homeCanfig=='home'
                     location.href = '../schedule/login_s.html'
+                }else{
+                    sessionStorage.stuNumber = e.data.studentNo;
+                    sessionStorage.schoolId = e.data.schoolId;
+                    sessionStorage.studentName = e.data.studentName;
+                    location.href = 'homeworklist_s.html';
                 }
-                sessionStorage.stuNumber = e.data.studentNo;
-                sessionStorage.schoolId = e.data.schoolId;
-                sessionStorage.studentName = e.data.studentName;
-                location.href = 'homeworklist_s.html';
             }else{
                 sessionStorage.homeCanfig=='home'
                 location.href = '../schedule/login_s.html'
