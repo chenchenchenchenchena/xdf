@@ -10,7 +10,12 @@ $(function () {
     } else {
         $('#image_s').show();
     }
-
+    var urlPush = '';
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
+    }else{
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
+    }
     var trardata = {
         'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
@@ -22,12 +27,9 @@ $(function () {
         'schoolId': localStorage.schoolId,
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html',
+        'url': urlPush,
         'templateId': TemplateId_home
     };
-    if(getRequest('state').state=='JT'||sessionStorage.signal){
-        homeworksubm.url =  'http://dt.xdf.cn/xdfdthome/homework/dohomework_s.html?state=JT'
-    }
     var layer1, layer2, loading;
 
 
