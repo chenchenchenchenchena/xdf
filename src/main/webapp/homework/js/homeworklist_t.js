@@ -1,7 +1,9 @@
 $(function(){
     // //登录相关
     if(!sessionStorage.openid){
-        wechatCode(location.href);
+        // wechatCode(location.href);
+        sessionStorage.openid = 'o5sWL09IPvmjsd29QvIBYbhkU40M'
+
     };
     if(!localStorage.terEmail){
         var WXnum  = {
