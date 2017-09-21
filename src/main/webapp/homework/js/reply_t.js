@@ -2,10 +2,16 @@ $(function() {
     var need = {
         "Tcid": sessionStorage.Tid
     };
+    var urlPush;
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
+    }else{
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
+    }
     var Homework = {
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_s.html',
+        'url': urlPush,
         'templateId':TemplateId_home
     };
     $('.frend').hide();
@@ -84,7 +90,7 @@ $(function() {
                 flag: 1
             })
         }
-        ajax_S(homework_s.t_quck, {'params': Homework}, function (e) {
+        ajax_S(homework_s.t_quck, {'params':[Homework]}, function (e) {
             if (e.result == true) {
                 layer.open({
                     type: 1,

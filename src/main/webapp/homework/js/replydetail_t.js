@@ -1,11 +1,17 @@
 $(function () {
     var layer1, layer2, loading;
+    var urlPush;
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
+    }else{
+        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
+    }
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid,
         'appid': Global.appid,
         'secret': Global.secret,
-        'url': 'http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html',
+        'url': urlPush,
         'templateId': TemplateId_home
     };
     var classYHname;
