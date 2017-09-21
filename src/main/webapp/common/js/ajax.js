@@ -135,7 +135,8 @@ var homework_s = {
     's_hw_report': url_o+'studentHWork/querySdtworkStatement.do',//学生作业报告
     's_hw_rank_e': url_o+'teacherData/queryShareExcellentHomrWork.do',//学生电子作业排行
     't_summary':url_o+'teacherData/queryWorksummary.do',//作业汇总
-    't_getExcellent':url_o+'teacherData/queryExcellentHomeWorkContent.do'//获取试卷内容
+    't_getExcellent':url_o+'teacherData/queryExcellentHomeWorkContent.do',//获取试卷内容
+    't_getFileDetails':url_o+'upload/viewAllFileDetails.do'//获取试卷内容
 
 };
 function wechatCode(url) {
