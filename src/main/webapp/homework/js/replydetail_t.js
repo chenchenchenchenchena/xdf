@@ -1,11 +1,12 @@
 $(function () {
     var layer1, layer2, loading;
-    var urlPush;
-    if(getRequest('state').state=='JT'||sessionStorage.signal){
-        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
-    }else{
-        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
-    }
+    /*------------------------------------定义存储文件信息变量-----------start-----------------------------*/
+    var hwFiles = [];
+    var stuAnwersFiles = [];
+    var teaReplyFiles = [];
+
+
+    /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
         'homeworkTinfoId': sessionStorage.Tid,

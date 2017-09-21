@@ -44,7 +44,33 @@ $(function() {
                     var name_ = data.notCorrect[c].studentName.substr(data.notCorrect[c].studentName.length-2, 2);
                 }
                 $('.Pending').eq(0).append('<li Id="' + data.notCorrect[c].id + '" text="' + decodeURI(data.notCorrect[c].replydescription) + '" knowledgePoint="' + data.notCorrect[c].knowledgePoint + '"  description = "' + decodeURI(data.notCorrect[c].description) + '"><span class="yeCircle">' + name_ + '</span><span>' +  data.notCorrect[c].studentName + '</span><span>' + montht+'    '+dayt + '</span></li>')
+
+                var sdthomFile = e.data.notCorrect[c].sdthomFile;
+
+                var stuFiles = sdthomFile.sdtCommitHomFile;
+                var teaFiles = e.data.notCorrect[c].tchomFile;
+
+                var details = {
+                    'StudentAnswer': e.data.notCorrect[c].replydescription,
+                    'classCode': e.data.notCorrect[c].classCode,
+                    'description': e.data.notCorrect[c].description,
+                    'knowledgePoint':e.data.notCorrect[c].knowledgePoint,
+                    'replyDesc':e.data.notCorrect[c].replyDesc,
+                    'score':e.data.notCorrect[c].score,
+                    'studentName':e.data.notCorrect[c].studentName,
+                    'tag':e.data.notCorrect[c].tag,
+                    'updateTime':e.data.notCorrect[c].replyTime,
+                    'homeworkTinfoId':e.data.notCorrect[c].homeworkTinfoId,
+                    'className':e.data.notCorrect[c].className,
+                    'File': {
+                        'StudentHomeworkFile':stuFiles,
+                        'TeacherHomeworkFile':teaFiles
+                    }
+                };
+                var detailStr = JSON.stringify(details);
+                sessionStorage.detailsStrNot = detailStr;
             }
+
         }
         if (data.yesCorrect.length == 0) {
             $('.emptyTwo').show()
@@ -65,7 +91,35 @@ $(function() {
                 } else {
                     $('.Pending').eq(1).append('<li Id="'+data.yesCorrect[d].id+'"  text_t="'+decodeURI(data.yesCorrect[d].replyDesc)+'" text="' + data.yesCorrect[d].replydescription + '" knowledgePoint="' + data.yesCorrect[d].knowledgePoint + '"  description = "' + decodeURI(data.yesCorrect[d].description) + '"><span class="yeCircle">' + name_t + '</span><span>' + data.yesCorrect[d].studentName + '</span><span>' + month+'    '+day + '</span></li>')
                 }
+                var stuFiles = [];
+                var teaFiles = [];
+                var ReplyFiles = [];
+                var sdthomFile = e.data.yesCorrect[d].sdthomFile;
 
+                stuFiles = sdthomFile.sdtCommitHomFile;
+                ReplyFiles = sdthomFile.sdtcCommitReply;
+                teaFiles = e.data.yesCorrect[d].tchomFile;
+
+                var details = {
+                    'StudentAnswer': e.data.yesCorrect[d].replydescription,
+                    'classCode': e.data.yesCorrect[d].classCode,
+                    'description': e.data.yesCorrect[d].description,
+                    'knowledgePoint':e.data.yesCorrect[d].knowledgePoint,
+                    'replyDesc':e.data.yesCorrect[d].replyDesc,
+                    'score':e.data.yesCorrect[d].score,
+                    'studentName':e.data.yesCorrect[d].studentName,
+                    'tag':e.data.yesCorrect[d].tag,
+                    'updateTime':e.data.yesCorrect[d].replyTime,
+                    'homeworkTinfoId':e.data.yesCorrect[d].homeworkTinfoId,
+                    'className':e.data.yesCorrect[d].className,
+                    'File': {
+                        'RevampFile':ReplyFiles,
+                        'StudentHomeworkFile':stuFiles,
+                        'TeacherHomeworkFile':teaFiles
+                    }
+                };
+                var detailStr = JSON.stringify(details);
+                sessionStorage.detailsStrYes = detailStr;
             }
         }
     });
