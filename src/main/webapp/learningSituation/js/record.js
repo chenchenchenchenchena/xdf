@@ -829,7 +829,7 @@ $(function () {
 			for(var i=0;i<stuOpenId.length;i++){
 				if(pushinfo.stuInfomation[j].sNo==stuOpenId[i].stuNo){
 					pushinfo.stuInfomation[j].openId=stuOpenId[i].openId;
-					return false;
+					break;
 				}
 			}
 		}

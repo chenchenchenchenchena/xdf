@@ -1,7 +1,6 @@
 $(function(){
     if(!sessionStorage.openid){
-        // wechatCode(location.href);
-        sessionStorage.openid = 'o5sWL09IPvmjsd29QvIBYbhkU40M'
+        wechatCode(location.href);
     };
     if(!localStorage.terEmail){
             var WXnum  = {
