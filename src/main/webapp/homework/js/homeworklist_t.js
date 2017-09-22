@@ -10,11 +10,9 @@ $(function(){
         ajax_S(url.s_seac,WXnum,function(e){
             if(e.result==true){
                 if(!localStorage.userId_stu){
-                    localStorage.userId_stu="xdf005766786";
                     sessionStorage.homeCanfig=='home'
                     location.href = '../schedule/login_s.html'
                 }else{
-                    localStorage.userId_stu="xdf005766786";
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;
