@@ -110,16 +110,18 @@ $(function () {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                 }
             } else {//描述信息为空
-                // if (L == arr.length - 1) {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                // }
 
-                if (L == arr.length - 1 && e.score != '') {
-                    $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
-                }
 
                 if (arr.length == 1 && e.score != '') {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                }else {
+                    // if (L == arr.length - 1) {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    // }
+
+                    if (L == arr.length - 1 && e.score != '') {
+                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
+                    }
                 }
             }
         }
