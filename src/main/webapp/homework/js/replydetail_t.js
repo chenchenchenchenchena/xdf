@@ -132,7 +132,7 @@ $(function () {
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-        var e = JSON.parse(sessionStorage.detailsStrNot);
+        var e = JSON.parse(sessionStorage.detailsStrYes);
         console.log(e);
         classYHname = e.className;
         $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
