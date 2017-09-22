@@ -331,7 +331,7 @@ $(function () {
     $(".eBtn").click(function () {
         var checkNum = 0;
         var contentName = "";
-        for (var i = 0; i < $(".searchCon li").length; i++) {
+        for (var i = 0; i < $(".searchCon li").length; i++) { 
             if ($(".searchCon li").eq(i).find("img").attr('src') == "images/yu2.png") {
                 contentName += $(".searchCon li").eq(i).find("h3").html();
                 checkNum++;
