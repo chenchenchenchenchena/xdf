@@ -150,7 +150,7 @@ function wechatCode(url) {
                 "appid": Global.appid,
                 "secret": Global.secret,
                 "code": code
-            }
+            };
             // var d = constructionParams(rsaEncryptedString(businessP), "249161eae3a94042ba1f0331b510534d");
             jQuery.ajax({
                 type: "POST",
