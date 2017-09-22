@@ -93,6 +93,7 @@ $(function () {
         //获取文件信息
         // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
         var e = JSON.parse(sessionStorage.detailsStrYes);
+        sessionStorage.removeItem('detailsStrYes');
         if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
             $('.anDes').eq(0).html("");
         } else {
@@ -132,8 +133,9 @@ $(function () {
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-        var e = JSON.parse(sessionStorage.detailsStrYes);
+        var e = JSON.parse(sessionStorage.detailsStrNot);
         console.log(e);
+        sessionStorage.removeItem('detailsStrNot');
         classYHname = e.className;
         $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
         $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
