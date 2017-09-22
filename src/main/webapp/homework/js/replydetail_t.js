@@ -177,8 +177,6 @@ $(function () {
 
             }
         }
-
-        replyTimes.sort();
         var params = {
             'fileSfullPath': stuAnwersFiles,
             'fileTfullPath': hwFiles,
