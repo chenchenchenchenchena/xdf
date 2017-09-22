@@ -35,7 +35,7 @@ $(function () {
             });
             //调用失败
             wx.error(function (res) {
-                alert("出错了" + res.errMsg)
+                // alert("出错了" + res.errMsg)
             });
 
         }
