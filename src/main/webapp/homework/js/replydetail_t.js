@@ -198,7 +198,7 @@ $(function () {
             if (stu != undefined) {
                 for (var a = 0; a < stu.length; a++) {
                     if (stu[a].fileType == 'mp3') {
-                        getAudioInfo([2, stu[a].relativePath, stu[a].playTime, "mp3"]);
+                        getAudioInfo([2, url_o+stu[a].relativePath, stu[a].playTime, "mp3"]);
                     } else {
                         $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
                     }
@@ -207,7 +207,7 @@ $(function () {
             if (tea_t != undefined) {
                 for (var c = 0; c < tea_t.length; c++) {
                     if (tea_t[c].fileType == 'mp3') {
-                        getAudioInfo([1, tea_t[c].relativePath, tea_t[c].playTime, "mp3"]);
+                        getAudioInfo([1, url_o+tea_t[c].relativePath, tea_t[c].playTime, "mp3"]);
                     } else {
                         $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
 
@@ -221,7 +221,7 @@ $(function () {
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
                         if (tea[b].fileType == 'mp3') {
-                            getAudioInfo([3, tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(tea[b].replyTimes - 1)]);
+                            getAudioInfo([3, url_o+tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - 1)]);
                         } else {
                             $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
