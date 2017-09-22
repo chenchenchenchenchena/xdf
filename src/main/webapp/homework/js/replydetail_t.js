@@ -102,6 +102,9 @@ $(function () {
         console.log(decodeURI(e.replyDesc));
 
         var arr = decodeURIComponent(e.replyDesc).split('|>|');
+        if(e.score == undefined || e.score == null || e.score == 'undefined'){
+            e.score = '';
+        }
         for (var L = 0; L < arr.length; L++) {
             if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
                 if (L == arr.length - 1) {
