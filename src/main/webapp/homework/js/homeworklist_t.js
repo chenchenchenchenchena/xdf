@@ -14,7 +14,7 @@ $(function(){
                     sessionStorage.homeCanfig=='home'
                     location.href = '../schedule/login_s.html'
                 }else{
-
+                    localStorage.userId_stu="xdf005766786";
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;
