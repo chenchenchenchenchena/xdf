@@ -137,6 +137,8 @@ $(function() {
     $(document).on('tap', '.home_t li', function () {
 
         sessionStorage.stuid = $(this).attr('Id');
+        sessionStorage.removeItem('detailsStrNot');
+        sessionStorage.detailsStrNot = $(this).attr('detailStr');
         location.href = 'replydetail_t.html'
     });
 
@@ -192,6 +194,7 @@ $(function() {
             }
         }
 
+        sessionStorage.removeItem('detailsStrYes');
         sessionStorage.detailsStrYes = $(this).attr('detailStr');
         sessionStorage.Teatwo = 1;
         sessionStorage.stuid = $(this).attr('Id');

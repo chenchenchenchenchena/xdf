@@ -110,16 +110,18 @@ $(function () {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                 }
             } else {//描述信息为空
-                if (L == arr.length - 1) {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                }
 
-                if (L == arr.length - 1 && e.score != '') {
-                    $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
-                }
 
                 if (arr.length == 1 && e.score != '') {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                }else {
+                    // if (L == arr.length - 1) {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    // }
+
+                    if (L == arr.length - 1 && e.score != '') {
+                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
+                    }
                 }
             }
         }
@@ -200,7 +202,7 @@ $(function () {
                     if (stu[a].fileType == 'mp3') {
                         getAudioInfo([2, url_o+stu[a].relativePath, stu[a].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
                     }
                 }
             }
