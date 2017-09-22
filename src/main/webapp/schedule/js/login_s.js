@@ -99,10 +99,6 @@ $(function(){
                             location.href = e.url;
                         });
                     }
-                    ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                        localStorage.firstU2 = '1';
-                        location.href = e.url;
-                    });
                 }
             };
             sessionStorage.stuNumber = e.data.studentNo;
