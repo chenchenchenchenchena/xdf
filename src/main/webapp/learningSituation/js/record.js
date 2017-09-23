@@ -609,6 +609,8 @@ $(function () {
 				if($(".classrome").html()!=""){
 					$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
 					$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+				}else{
+					$(".classTime").html(" ");
 				}
 				/*$(".classTime").html("");*/
 				$(".choose").find("li").eq(2).show();
@@ -647,6 +649,8 @@ $(function () {
 			if($(".classrome").html()!=""){
 				$(".classNumTime ul").find("li").eq(0).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
 				$(".classTime").html("第<span class=classnum>"+$(".classNumTime ul").find("li").eq(0).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(".classNumTime ul").find("li").eq(0).find(".sectTime").html()+"</span>)");
+			}else{
+				$(".classTime").html(" ");
 			}
 			$(".choose").find("li").eq(2).show();
 			$(".scoreList").css("height","312px");
