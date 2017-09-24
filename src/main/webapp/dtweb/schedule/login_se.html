@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes"/>
+    <title>登录</title>
+    <link rel="stylesheet" href="../../common/css/base.css?v=4dffd2e"  />
+    <link rel="stylesheet" href="css/student-login.css?v=a933202"  />
+    <script src="../../common/js/jquery.js?v=aba2985"></script>
+   <!-- <script src="../../common/js/zepto.min.js?v=3b51bfc"></script>-->
+    <script src="../../common/js/rem.js?v=f8841e6"></script>
+   <!-- <script src="../../common/js/etlogin.js?v=d1848df"></script>-->
+    <script src="../../common/js/ajax.js?v=f741181"></script>
+    <script src="../../common/js/layer-v2.1/layer/layer.js?v=4cfafd5"></script>
+    <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>-->
+</head>
+<body>
+<section>
+   <div class="t_title">学生邮箱登陆</div>
+    <div class="t_email">
+        <input type="text" placeholder="输入学员号哈"><span></span>
+        <input type="text" placeholder="输入userid"><span></span>
+        <button>绑定</button>
+    </div>
+</section>
+</body>
+<script>
+
+    if(!sessionStorage.openid){
+        wechatCode(location.href)
+    }
+    var WXnum  = {
+        'wechatId':sessionStorage.openid
+    };
+    ajax_S(url.s_seac,WXnum,function(e){
+        if(e.result==true){
+                sessionStorage.stuNumber = e.data.studentNo;
+                sessionStorage.schoolId = e.data.schoolId;
+                sessionStorage.studentName = e.data.studentName;
+                location.href = 'homeworklist_s.html';
+        }
+        }else{
+            sessionStorage.homeCanfig=='home'
+            location.href = '../schedule/login_s.html'
+        }
+    });
+</script>
+</html>

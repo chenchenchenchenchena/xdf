@@ -492,9 +492,9 @@ function bind_click(a) {
 
 function set_top(a) {
 	if (!a) {
-		var weeks = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+		var weeks = ['星期日','星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 		var data = new Date();
-		var weekk = weeks[data.getDay() - 1];
+		var weekk = weeks[data.getDay()];
 		var yue = LunarDate.GetLunarDay(data.getFullYear(), data.getMonth(), data.getDate());
 		var shu = data.getDate();
 		document.getElementById("top_shu").innerHTML = shu;

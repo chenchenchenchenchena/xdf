@@ -17,8 +17,23 @@ $(function(){
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
-	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}
-    ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+    var WXnum  = {
+        'wechatId':sessionStorage.openid
+    };
+    ajax_S(url.s_seac,WXnum,function(e){
+        if(e.result==true){
+		if(!localStorage.userId_stu){
+		    location.href = '../schedule/login_s.html';
+		    return false;
+		}
+                sessionStorage.stuNumber = e.data.studentNo;
+                sessionStorage.schoolId = e.data.schoolId;
+                sessionStorage.studentName = e.data.studentName;
+            var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu};
+            ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+        }
+    });
+
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){

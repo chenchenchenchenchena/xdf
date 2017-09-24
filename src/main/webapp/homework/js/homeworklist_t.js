@@ -3,7 +3,7 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
-    if(!localStorage.terEmail){
+    if(!localStorage.terEmail&&sessionStorage.openid){
         var WXnum  = {
             'wechatId':sessionStorage.openid
         };
