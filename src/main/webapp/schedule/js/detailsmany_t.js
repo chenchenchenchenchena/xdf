@@ -15,6 +15,7 @@ $(function () {
     //所属类别（显示到title）
     var subject_s = '';
     sessionStorage.t = '';
+    sessionStorage.teachers = '';
     function stusea(e) {
         var teacindex = 0;
         var BeginDate = e.data.Data
@@ -28,6 +29,7 @@ $(function () {
         }
         //搭班老师
         var masterta = e.data.Data[timeindex].Teachers.split(',');
+        sessionStorage.teachers = e.data.Data[timeindex].Teachers;
         //当前的课程编号
         var subject = e.data.Data[timeindex].ClassCode;
         for (var v = 0; v < e.subject.length; v++) {

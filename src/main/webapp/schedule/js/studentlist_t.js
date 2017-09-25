@@ -2,7 +2,7 @@ $(function () {
 
     // var stuname = sessionStorage.s.split(',');
     var stuInfo = JSON.parse(sessionStorage.stuList).stuInfoKey;
-    var teaname = sessionStorage.t.split(',');
+    var teaname = sessionStorage.teachers.split(',');
 
     for (var i = 0; i < teaname.length; i++) {
         if (teaname[i] != '' && teaname[i] != undefined) {
