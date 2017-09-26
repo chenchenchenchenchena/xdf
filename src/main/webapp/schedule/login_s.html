@@ -17,7 +17,19 @@
 		<script src="../common/js/etlogin.js?v=d1848df"></script>
         <script src="../common/my/layer.js?v=4cfafd5"></script>
 		<script src="js/login_s.js?v=1ca730e"></script>
-
+		<style>
+			.del_last{
+				width:9.2rem;
+				height: 1.17rem;
+				background:red;
+				border: none;
+				margin-left: 0.4rem;
+				border-radius: 5px;
+				font-size: 0.4rem;
+				color:#fff;
+				display:none;
+			}
+		</style>
 	</head>
 	<body>
 		<section>
@@ -84,7 +96,9 @@
 				<p>未搜索到用户</p>
 			</div>
             <div class="noRecord"><img src="images/redtan.png?v=e8c7965" /><p>一旦绑定,暂无法解绑,确认提交?</p><button class="Esc_last">取消</button><button class="true_last">确定</button></div>
-
+			<button class="del_last">
+				解除绑定
+			</button>
 		</section>
 	</body>
 </html>
