@@ -179,6 +179,11 @@ $(function () {
 			var avater = deName;
 			that.find("dt").html(avater);
 		}
+		var del={
+			"studentNo":that.find(".code").html(),
+			"flag":"4"
+		}
+		student.push(del);
 	})
 	//添加学生信息
 		/*var reNz=/^S{2}[0-9]{4}$/;*/
