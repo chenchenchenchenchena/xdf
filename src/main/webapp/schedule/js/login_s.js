@@ -323,7 +323,7 @@ $(function(){
                         location.href = '../learningSituation/report_t.html';
                         sessionStorage.removeItem('studayCanfig')
                     }else{
-                        // location.href = 'schedule_s.html';
+                        location.href = 'schedule_s.html';
                     }
                 }
             })
