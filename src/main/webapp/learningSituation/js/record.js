@@ -172,6 +172,7 @@ $(function () {
 	$(".deleteScore button").eq(1).click(function () {
 		layer.close(layer6);
 		var deName=that.find("dd").html();
+		that.find(".flag").html(4);
 		if (deName.length > 2) {
 			var avater = deName.substring(deName.length - 2, deName.length);
 			that.find("dt").html(avater)
@@ -181,7 +182,7 @@ $(function () {
 		}
 		var del={
 			"studentNo":that.find(".code").html(),
-			"flag":"4"
+			"flag":that.find(".flag").html()
 		}
 		student.push(del);
 	})
