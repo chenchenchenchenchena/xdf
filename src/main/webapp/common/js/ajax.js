@@ -29,7 +29,7 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.xdf.cn/xdfdtmanager/";
+    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -102,7 +102,8 @@ var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
     't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
     't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do',  //老师查看班级成绩
-    't_getStudyDate':url_o+'teacherAnalysis/getStudyDate.do'   //学情成绩排名时间获取-学情
+    't_getStudyDate':url_o+'teacherAnalysis/getStudyDate.do',   //学情成绩排名时间获取-学情
+    's_gradeByLessonNo':url_o+'teacherAnalysis/getStudentFloatGradeByLessonNo.do'//查看成绩排行榜
 };
 var Global = {
     "appid": appId,

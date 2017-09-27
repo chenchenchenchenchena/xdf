@@ -123,9 +123,9 @@ $(function () {
                     timeIndex = [];
                     Cindex = [];
                     if (e.data.studentClassRoomAnswer[i].sdtInteractState != false) {
-                        html_yh = '<h4 class="grade" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="margin-right:20px;">查看课堂数据</h4><h4 class="rank-btn" style="margin-right:20px;">查看成绩排行</h4>'
+                        html_yh = '<h4 class="grade" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="margin-right:20px;">查看课堂数据</h4><h4 class="rank-btn" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="margin-right:20px;">查看成绩排行</h4>'
                     } else {
-                        html_yh = '<h4 class="rank-btn" style="left: 72% ; margin-right:20px;">查看成绩排行</h4>';
+                        html_yh = '<h4 class="rank-btn" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="left: 72% ; margin-right:20px;">查看成绩排行</h4>';
                     }
 
                     $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s">' + html_yh + '</div>');
@@ -207,9 +207,61 @@ $(function () {
         location.href = 'common_ts.html'
     });
 //家长查看成绩排行
-    $(document).on('touchend','.rank-btn',function(){
-      alert('sdc');
-    });
+    $(document).on("click",".rank-btn",function () {
+        var rankData={
+            "classCode":$(this).attr("classcode"),
+            "tCode":$(".tab-active").attr("tcode"),
+            "schoolId":$(this).attr("schoolid")
+        }
+        console.log(rankData);
+        ajaxRequest("POST",Study.t_getStudyDate,rankData,function (e) {
+            if(e.code=="200"){
+                if(e.data!=undefined&&e.data.length!=0){
+                     for (var i = 0; i < e.data.length; i++) {
+                         var str2 = "<li>" + e.data[i].date + "(<span class=lessonNo>" +  e.data[i].lessonNo + "</span>课次)</li>";
+                         $(".classNumTime ul").append(str2);
+                     }
+                }
+            }else{
+                var str2 = "<li>暂无课次时间</li>";
+                $(".classNumTime ul").append(str2);
+            }
+        });
+    })
+
+    $(".classNumTime ul").on("click", "li", function () {
+        $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
+    })
+    $(document).on("click",".rank-btn",function () {
+        $(".mask").show();
+        $("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"})
+       /* $(".classNumTime").show();*/
+        $(".classNumTime").css("animation", "move 0.3s linear");
+        $(".classNumTime").css("bottom", "0px");
+    })
+    $(document).on("click",".classNumTime p span",function () {
+        $(".mask").hide();
+        $("body,html").css({"width": "", "height": "", "overflow": ""});
+        /*$(".classNumTime").hide();*/
+        $(".classNumTime").css("animation", "");
+        $(".classNumTime").css("bottom", "-440px");
+        $(".classNumTime ul").html(" ");
+    })
+    $(document).on("click",".mask",function () {
+        $(".mask").hide();
+        $("body,html").css({"width": "", "height": "", "overflow": ""});
+        /*$(".classNumTime").hide();*/
+        $(".classNumTime").css("animation", "");
+        $(".classNumTime").css("bottom", "-440px");
+        $(".classNumTime ul").html(" ");
+    })
+    $(document).on("click",".confirmBtn",function () {
+         if($(".classNumTime ul li").hasClass("chooseClassActive")){
+            location.href="sharedranking_t.html?testState="+$(".tab-active").attr("tcode")+"&checkedTypeName="+$(".tab-active").html()+"&type=student&lessonNo="+$(".chooseClassActive .lessonNo").html();
+         }else{
+            layer.msg("请输入课次");
+         }
+    })
 
 
     function Echart(id, x, y1, y2, y3, y4, max) {
@@ -351,6 +403,4 @@ $(function () {
         myChart.setOption(option);
 
     }
-
-
 });
