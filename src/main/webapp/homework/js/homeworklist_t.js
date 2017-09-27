@@ -1,8 +1,8 @@
 $(function(){
     // //登录相关
-    // if(!sessionStorage.openid){
-    //     wechatCode(location.href);
-    // };
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
     if(!localStorage.terEmail&&sessionStorage.openid){
         var WXnum  = {
             'wechatId':sessionStorage.openid
