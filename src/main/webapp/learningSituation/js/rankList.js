@@ -63,7 +63,12 @@ $(function(){
         sessionStorage.lessonNo = JSON.stringify(checkedLesson);
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName+"&type=student";
+        if(checkedLesson.length == 0){
+            window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName+"&type=";
+        }else {
+            window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName+"&type=student";
+        }
+
     });
     // 全选
     var checkAll = true;//默认全选
