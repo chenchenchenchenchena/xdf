@@ -2,6 +2,7 @@
  * Created by zsj on 2017-06-28.
  */
 $(function(){
+    sessionStorage.removeItem('dayList');
     var loading,loading2;//loading效果
     $('title').html(GetRequest('title'));//动态获取页面标题
     $('.shared-content').hide();//隐藏分享页
@@ -42,19 +43,19 @@ $(function(){
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
-    $(document).on('touchstart','.to-shared',function () {
-        if($('.intro-test tr td .checked').length<=0){
+    $('.shareBtn').click(function () {
+        if ($('.intro-test tr td .checked').length <= 0) {
             layer.msg("请选择要分享的学员");
-            return ;
+            return;
         }
         $('.intro-test tr td .check-box.checked').each(function () {
             checkStuArry.push($(this).attr('data-stuNo'));
             console.log(checkStuArry);
         });
-        localStorage.studentNos = JSON.stringify({'checkStuArry':checkStuArry});
+        localStorage.studentNos = JSON.stringify({'checkStuArry': checkStuArry});
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        window.location.href = "sharedranking_t.html?testState="+testState+"&checkedTypeName="+checkedTypeName;
+        window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
     });
     // 全选
     var checkAll = true;//默认全选
@@ -80,6 +81,81 @@ $(function(){
             }
         }
     });
+
+    var checkedCode = [];
+    //更换日期
+    $(document).on('touchstart', '.change-day', function () {
+        if ($(".classNumTime").css("display") == "block") {
+            $(".classNumTime").css("display", "none");
+            $('#checkNumber').html("已选中0个日期");
+        } else {
+            $(".classNumTime").css("display", "block");
+            //获取课次列表
+            if (sessionStorage.dayList) {
+                var list = JSON.parse(sessionStorage.dayList);
+                var strHtml_ = "";
+                for (var i = 0; i < list.length; i++) {
+                    strHtml_ = "<li date='"+list[i].date+"'><span>" + list[i].date + "   （第" + list[i].lessonNo + "课次）</span></li>";
+                }
+                $('.classNumTime').find('ul').html(strHtml_);
+            } else {
+                var params = {
+                    'classCode': localStorage.getItem('CLASSCODE'),
+                    'tCode': currentType,
+                    'schoolId': localStorage.getItem('SCHOOLID')
+                };
+                ajaxRequest("POST", Study.t_getStudyDate, params, function (e) {
+                    if (e.code == 200) {
+                        // {
+                        //     "gradeType": "1",
+                        //     "classCode": "AYP5EB02",
+                        //     "schoolId": "73",
+                        //     "date": "2017-09-16",
+                        //     "lessonNo": "1"
+                        // }
+                        if (e.data != undefined && e.data.length != 0) {
+                            sessionStorage.dayList = JSON.stringify(e.data);
+                            var strHtml_ = "";
+                            for (var i = 0; i < e.data.length; i++) {
+                                strHtml_ = "<li date='"+e.data[i].date+"'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+                            }
+                            $('.classNumTime').find('ul').html(strHtml_);
+                        }
+                    }
+                })
+            }
+        }
+
+
+    });
+    $(document).on('touchstart','.classNumTime ul li',function () {
+        var checkNum = $('.classNumTime ul .chooseClassActive').length;
+        if($(this).hasClass('chooseClassActive')){
+            $(this).removeClass("chooseClassActive");
+            checkNum--;
+            $('#checkNumber').html("已选中"+checkNum+"个日期");
+        }else {
+
+            if(checkNum<2){
+                $(this).addClass("chooseClassActive");
+                checkedCode.push("")
+                checkNum++;
+                $('#checkNumber').html("已选中"+checkNum+"个日期");
+            }
+        }
+
+    });
+
+    $(".confirmBtn").click(function () {
+        getRankList(currentType);
+        $("body,html").css({"width": "", "height": "", "overflow": ""});
+        $(".classNumTime").hide();
+        $(".classNumTime").css("animation", "");
+        $(".classNumTime").css("bottom", "0px");
+        $('#checkNumber').html("已选中0个日期");
+
+    });
+
     // 获取入门测,出门测排行列表
     function getRankList(testState,pageState) {
         var reqData = {
@@ -110,7 +186,7 @@ $(function(){
             if(msg.data!='undefined' && msg.data.length>0){
                 var datas = msg.data;
                 var rankTitleHtml = '<tr><th class="check-tr"><i id="check-all" class="check-box checked"></i></th><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
-                    +'<th>名次浮动</th><th class="to-shared"><img  src="images/shareIcon.png" alt="分享"/></th></tr>';
+                    +'<th>名次浮动</th><th class="change-day"><img  src="images/change_day.png" alt="分享"/></th></tr>';
                 $(".intro-test>tbody").html(rankTitleHtml);
                 $.each(datas,function(i,items){
                     var rankCss,floatGradeCss,floatRankCss;

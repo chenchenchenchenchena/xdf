@@ -243,3 +243,72 @@ canvas{
     background: url("../images/check1.png") left center no-repeat;
     background-size: 26px 26px;
 }
+.classNumTime{
+    height: 400px;
+    left: 0;
+    background: #fff;
+    padding: 30px 30px 10px;
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    bottom:0;
+
+}
+.confirmBtn{
+    width: 690px;
+    height: 88px;
+    line-height: 88px;
+    color: #fff;
+    font-size: 30px;
+    background: #00ba97;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 16px;
+}
+.shareBtn{
+    width: 690px;
+    height: 88px;
+    color: #fff;
+    font-size: 30px;
+    background: #00ba97;
+    margin-left: 30px;
+    border-radius: 10px;
+    margin-top: 15px;
+    border: none;
+    outline: none;
+}
+.share-big{
+    width:100%;
+    height:119px;
+    border-top:1px solid #e1e1e1;
+    position: fixed;
+    bottom:0;
+    background:#fff;
+}
+.classNumTime .chooseClassActive{
+    background:url(../images/C0503.png) no-repeat left top ;
+    padding-left: 72px;
+    margin-bottom: 40px;
+    line-height: 40px;
+}
+.classNumTime ul{
+    overflow: auto;
+    height: 240px;
+}
+.classNumTime ul li{
+    background:url(../images/C05_06.png) no-repeat left top ;
+    padding-left: 72px;
+    margin-bottom: 40px;
+    line-height: 40px;
+}
+.classNumTime p{
+    font-size: 30px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+.classNumTime ul li span{
+    font-size: 30px;
+    color: #000000;
+}
