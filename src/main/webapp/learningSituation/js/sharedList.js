@@ -96,8 +96,8 @@ $(function(){
     }
     function getStuRankList(testState,lessonNo) {
         var studentNos;
-        if(sessionStorage.sNo){
-            studentNos=JSON.parse(sessionStorage.sNo);
+        if(localStorage.studentNos){
+            studentNos=JSON.parse(localStorage.studentNos);
         }else{
             studentNos=[];
         }
