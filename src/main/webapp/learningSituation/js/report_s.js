@@ -123,10 +123,11 @@ $(function () {
                     timeIndex = [];
                     Cindex = [];
                     if (e.data.studentClassRoomAnswer[i].sdtInteractState != false) {
-                        html_yh = '<h4 class="grade" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="left:72%;margin-right:20px;">查看课堂数据</h4>'
+                        html_yh = '<h4 class="grade" classcode="' + e.data.studentClassRoomAnswer[i].classCode + '" schoolid="' + e.data.studentResultsCase[i][0].schoolId + '" style="margin-right:20px;">查看课堂数据</h4><h4 class="rank-btn" style="margin-right:20px;">查看成绩排行</h4>'
                     } else {
-                        html_yh = ''
+                        html_yh = '<h4 class="rank-btn" style="left: 72% ; margin-right:20px;">查看成绩排行</h4>';
                     }
+
                     $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + class_[i][0].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div class="tab_sreport"><div id="chart_S' + i + '"></div><div class="reportstu_S"> <ul> <li>课次</li> </ul> <ul> <li>常效新</li> </ul> <ul> <li>平均分</li> </ul> </div></div><div class="tab_record"> <span class="tab_recorac">趋势图</span> <span>报表</span> </div><div class="achievement_s">' + html_yh + '</div>');
                     for (var y = 0; y < class_[i].length; y++) {
 
@@ -204,6 +205,10 @@ $(function () {
         sessionStorage.schoolId = $(this).attr('schoolid')
         sessionStorage.classCode = $(this).attr('classcode')
         location.href = 'common_ts.html'
+    });
+//家长查看成绩排行
+    $(document).on('touchend','.rank-btn',function(){
+      alert('sdc');
     });
 
 

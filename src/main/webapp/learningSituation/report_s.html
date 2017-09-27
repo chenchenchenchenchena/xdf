@@ -1,75 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta name="full-screen" content="yes"/>
-	<link rel="stylesheet" href="../common/css/base.css?v=4dffd2e"  />
-	<link rel="stylesheet" href="css/common.css?v=ad0f3e0"  />
-	<script src="../common/js/jquery.js?v=aba2985"></script>
-	<script src="../common/js/scale.js?v=f7ae470"></script>
-	<script src="../common/js/layer.js?v=f135ffa"></script>
-	<script src="../common/js/ajax.js?v=f741181"></script>
-	<script src="../common/js/echarts.min.js?v=6ccf04b"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-	<script src="js/report_s.js?v=7e659ac"></script>
-	<style>
-		.tab-title{
-			display: flex;
-			flex-flow: row nowrap;
-			justify-content: space-around;
-		}
-		.tab-title li:first-child{
-			margin:0;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes"/>
+    <link rel="stylesheet" href="../common/css/base.css?v=4dffd2e"/>
+    <link rel="stylesheet" href="css/common.css?v=ad0f3e0"/>
+    <script src="../common/js/jquery.js?v=aba2985"></script>
+    <script src="../common/js/scale.js?v=f7ae470"></script>
+    <script src="../common/js/layer.js?v=f135ffa"></script>
+    <script src="../common/js/ajax.js?v=f741181"></script>
+    <script src="../common/js/echarts.min.js?v=6ccf04b"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="js/report_s.js?v=7e659ac"></script>
+    <style>
+        .tab-title {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+        }
+
+        .tab-title li:first-child {
+            margin: 0;
+        }
+        .achievement_s .rank-btn{
+            background: #00ba97;
+            line-height: 53px;
+            padding: 0 10px;
+            border-radius: 8px;
+            font-size: 28px;
+            text-align: right;
+            display: inline-block;
+            position: relative;
+            left: 42%;
+            width:auto;
+            color:#fff;
+        }
+    </style>
 </head>
 <body>
 <ul class="tab-title">
-	<!--<li class="tab-active"><a href="javascript:;">入门测</a></li>-->
-	<!--<li><a href="javascript:;">出门测</a></li>-->
-	<!--<li><a href="javascript:;">期中</a></li>-->
-	<!--<li><a href="javascript:;">期末</a></li>-->
-	<!--<li><a href="javascript:;">入学测</a></li>-->
+    <!--<li class="tab-active"><a href="javascript:;">入门测</a></li>-->
+    <!--<li><a href="javascript:;">出门测</a></li>-->
+    <!--<li><a href="javascript:;">期中</a></li>-->
+    <!--<li><a href="javascript:;">期末</a></li>-->
+    <!--<li><a href="javascript:;">入学测</a></li>-->
 </ul>
 <div class="class_big">
-	<div class="classroom_s">
-		<!--<div class="title_s">-->
-			<!--<h4>高中英语拔高班</h4>-->
-			<!--<img src="images/rightArrow.png?v=4ade278" alt=""/>-->
-		<!--</div>-->
-		<!--<div class="tab_sreport">-->
-			<!--<div class="reportstu_S">-->
-				<!--<ul>-->
-					<!--<li>课次</li>-->
-				<!--</ul>-->
-				<!--<ul>-->
-					<!--<li>常效新</li>-->
-				<!--</ul>-->
-				<!--<ul>-->
-					<!--<li>平均分</li>-->
-				<!--</ul>-->
-			<!--</div>-->
-			<!--<div id="chart_S"></div>-->
-		<!--</div>-->
-		<!--<div class="tab_record">-->
-			<!--<span class="tab_recorac">趋势图</span>-->
-			<!--<span>报表</span>-->
-		<!--</div>-->
-		<!--<div class="achievement_s">-->
-			<!--<h4>查看成绩排行</h4>-->
-			<!--<img src="images/rightArrow.png?v=4ade278" alt="">-->
-		<!--</div>-->
-	<!--</div>-->
-	</div>
-</div>
-<div class="no-data" style="display: none">
-	<img src="images/noDatas.png?v=b9e71f4"  />
-	<p>您还没有录成绩</p>
-</div>
+    <div class="classroom_s">
+        <!--<div class="title_s">-->
+        <!--<h4>高中英语拔高班</h4>-->
+        <!--<img src="images/rightArrow.png?v=4ade278" alt=""/>-->
+        <!--</div>-->
+        <!--<div class="tab_sreport">-->
+        <!--<div class="reportstu_S">-->
+        <!--<ul>-->
+        <!--<li>课次</li>-->
+        <!--</ul>-->
+        <!--<ul>-->
+        <!--<li>常效新</li>-->
+        <!--</ul>-->
+        <!--<ul>-->
+        <!--<li>平均分</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--<div id="chart_S"></div>-->
+        <!--</div>-->
+        <!--<div class="tab_record">-->
+        <!--<span class="tab_recorac">趋势图</span>-->
+        <!--<span>报表</span>-->
+        <!--</div>-->
+        <!--<div class="achievement_s">-->
+        <!--<h4>查看成绩排行</h4>-->
+        <!--<img src="images/rightArrow.png?v=4ade278" alt="">-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+    <!--<div class="classroom_s">-->
+        <!--<div class="title_s"><h4>高中英语拔高班</h4> <img src="images/rightArrow.png" alt=""/></div>-->
+        <!--<div class="tab_sreport">-->
+            <!--<div id="chart_S1"></div>-->
+            <!--<div class="reportstu_S">-->
+                <!--<ul>-->
+                    <!--<li>课次</li>-->
+                <!--</ul>-->
+                <!--<ul>-->
+                    <!--<li>常效新</li>-->
+                <!--</ul>-->
+                <!--<ul>-->
+                    <!--<li>平均分</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="tab_record"><span class="tab_recorac">趋势图</span> <span>报表</span></div>-->
+        <!--<div class="achievement_s">-->
+            <!--<h4 class="grade" style="left:72%;margin-right:20px;">查看课堂数据</h4>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="no-data" style="display: none">
+        <img src="images/noDatas.png?v=b9e71f4"/>
+        <p>您还没有录成绩</p>
+    </div>
 </body>
 </html>

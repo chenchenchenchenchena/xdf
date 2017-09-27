@@ -101,7 +101,8 @@ var url = {
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
     't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
-    't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do'   //老师查看班级成绩
+    't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do',  //老师查看班级成绩
+    't_getStudyDate':url_o+'teacherAnalysis/getStudyDate.do'   //学情成绩排名时间获取-学情
 };
 var Global = {
     "appid": appId,
