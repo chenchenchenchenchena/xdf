@@ -191,7 +191,7 @@ $(function(){
 						'id':item.id,//学生作业主键id
 						'homeworkTId':item.homeworkTId,//老师作业主键id
 						'classCode':item.classCode,
-						'knowledgePoint':item.knowledgePoint,
+						'knowledgePoint':decodeURIComponent(item.knowledgePoint),
 						'description':item.description,
 						'fileContents':item.fileContents
 					};
@@ -200,9 +200,9 @@ $(function(){
 					console.log(typeof homeworkInfosArray);
 					var homeworkTime = item.homeworkTime.substr(0,4)+"年"+item.homeworkTime.substr(5,2)+"月"+item.homeworkTime.substr(8,2)+"日";
 					if(homeworkType=="1"){
-						if(item.knowledgePoint!="" && item.knowledgePoint!=null && item.knowledgePoint!=undefined){
+						if(decodeURIComponent(item.knowledgePoint)!="" && decodeURIComponent(item.knowledgePoint)!=null && decodeURIComponent(item.knowledgePoint)!=undefined){
 
-							knowledgePoint =splitStrs(item.knowledgePoint);
+							knowledgePoint =splitStrs(decodeURIComponent(item.knowledgePoint));
 							console.log(knowledgePoint+"----"+knowledgePoint.length);
 							for(var i = 0;i<knowledgePoint.length;i++){
 								kpHtml += '<span>'+knowledgePoint[i]+'</span>';
