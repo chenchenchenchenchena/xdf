@@ -45,6 +45,10 @@ $(function () {
 
     //输入验证
     $('.teBox').on('keyup change', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         $('.teacherword').html('' + $(this).val().length + '/200');
         if ($(this).val().length > 200) {
             $('.teacherword').css('color', 'red');
@@ -91,45 +95,44 @@ $(function () {
         }
         $('title').html('已批复');
         //获取文件信息
-        // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid},function(e){
-        var e = JSON.parse(sessionStorage.detailsStrYes);
-        if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
-            $('.anDes').eq(0).html("");
-        } else {
-            $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
-        }
-        $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
-        console.log(decodeURI(e.replyDesc));
+        // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
+            var e = JSON.parse(sessionStorage.detailsStrYes);
+            if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
+                $('.anDes').eq(0).html("");
+            } else {
+                $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
+            }
+            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
+            console.log(decodeURI(e.replyDesc));
 
-        var arr = decodeURIComponent(e.replyDesc).split('|>|');
-        if(e.score == undefined || e.score == null || e.score == 'undefined'){
-            e.score = '';
-        }
-        for (var L = 0; L < arr.length; L++) {
-            if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
-                if (L == arr.length - 1) {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                } else {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                }
-            } else {//描述信息为空
+            var arr = decodeURIComponent(e.replyDesc).split('|>|');
+            if (e.score == undefined || e.score == null || e.score == 'undefined') {
+                e.score = '';
+            }
+            for (var L = 0; L < arr.length; L++) {
+                if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
+                    if (L == arr.length - 1) {
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    } else {
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    }
+                } else {//描述信息为空
 
+                    if (arr.length == 1 && e.score != '') {
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    } else {
+                        // if (L == arr.length - 1) {
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        // }
 
-                if (arr.length == 1 && e.score != '') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                }else {
-                    // if (L == arr.length - 1) {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                    // }
-
-                    if (L == arr.length - 1 && e.score != '') {
-                        $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
+                        if (L == arr.length - 1 && e.score != '') {
+                            $('.hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
+                        }
                     }
                 }
             }
-        }
-        $('.hwCon').eq(0).html(decodeURI(e.description));
-        getFileInfo(e);
+            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
+            getFileInfo(e);
 
         // });
 
@@ -137,23 +140,24 @@ $(function () {
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-        var e = JSON.parse(sessionStorage.detailsStrNot);
-        console.log(e);
-        classYHname = e.className;
-        $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
-        $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
-        $('.hwCon').eq(0).html(decodeURI(e.description));
-        // var stu = e.File.StudentHomeworkFile;
-        // var tea = e.File.TeacherHomeworkFile;
-        // for (var a = 0; a < stu.length; a++) {
-        //     stuAnwersFiles.push(stu[a].diskFilePath);
-        // }
-        // for (var b = 0; b < tea.length; b++) {
-        //     hwFiles.push(tea[b].diskFilePath);
-        // }
-        getFileInfo(e);
+            var e = JSON.parse(sessionStorage.detailsStrNot);
+            console.log(e);
+            classYHname = e.className;
+            $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
+            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
+            // var stu = e.File.StudentHomeworkFile;
+            // var tea = e.File.TeacherHomeworkFile;
+            // for (var a = 0; a < stu.length; a++) {
+            //     stuAnwersFiles.push(stu[a].diskFilePath);
+            // }
+            // for (var b = 0; b < tea.length; b++) {
+            //     hwFiles.push(tea[b].diskFilePath);
+            // }
+            getFileInfo(e);
         // });
     }
+
     /**
      * 调取接口获取文件展示信息
      * @param e
@@ -187,10 +191,8 @@ $(function () {
             'fileRfullPath': teaReplyFiles
         };
 
-
         ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess);
     }
-
 
     /**
      * 获取文件信息接口回调函数
@@ -204,18 +206,18 @@ $(function () {
             if (stu != undefined) {
                 for (var a = 0; a < stu.length; a++) {
                     if (stu[a].fileType == 'mp3') {
-                        getAudioInfo([2, url_o+stu[a].relativePath, stu[a].playTime, "mp3"]);
+                        getAudioInfo([2, url_o + stu[a].relativePath, stu[a].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(1).append('<div><img data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(1).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
                     }
                 }
             }
             if (tea_t != undefined) {
                 for (var c = 0; c < tea_t.length; c++) {
                     if (tea_t[c].fileType == 'mp3') {
-                        getAudioInfo([1, url_o+tea_t[c].relativePath, tea_t[c].playTime, "mp3"]);
+                        getAudioInfo([1, url_o + tea_t[c].relativePath, tea_t[c].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(0).append('<div><img onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(0).append('<div><img data-id="'+tea_t[c].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
 
                     }
                 }
@@ -227,9 +229,9 @@ $(function () {
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
                         if (tea[b].fileType == 'mp3') {
-                            getAudioInfo([3, url_o+tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - 1)]);
+                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - 1)]);
                         } else {
-                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                         }
 
@@ -263,6 +265,7 @@ $(function () {
 
         }
     }
+
 
 
     /*----------------------------------以上是接口处理方法--------------------------------------------*/
@@ -443,10 +446,10 @@ $(function () {
                         if (curDesc == "" || curDesc == undefined) {
                             curDesc = " ";
                         }
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc);
+                        need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc).replace(/'\+'/,'%20');
                     } else {
                         if ($('.anDes').eq(o)) {
-                            need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|');
+                            need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|').replace(/'\+'/,'%20');
                         } else {
                             need.replyDesc += ' |>|'
                         }
@@ -457,7 +460,7 @@ $(function () {
                         if (curDesc == "" || curDesc == undefined) {
                             curDesc = " ";
                         }
-                        need.replyDesc += encodeURI($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc);
+                        need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc).replace(/'\+'/,'%20');
                     } else {
                         need.replyDesc += ' |>|';
                     }
@@ -470,7 +473,7 @@ $(function () {
             if (curDesc == "" || curDesc == undefined) {
                 need.replyDesc = ' ';
             } else {
-                need.replyDesc = encodeURI(curDesc);
+                need.replyDesc = encodeURIComponent(curDesc).replace(/'\+'/,'%20');
             }
             need.replyTimes = '1'
         }
@@ -864,18 +867,13 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
-        var previewUrl = $(this).attr('data-img');
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
+        var previewUrl = $(this).attr('data-id');
+        lookBigImage(previewUrl,false);
+
     });
     $(document).on('tap', '.tea_sp img', function () {
-        var previewUrl = $(this).attr('data-img');
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
+        var previewUrl = $(this).attr('data-id');
+        lookBigImage(previewUrl,false);
     });
 
     $('.pinch-zoom').each(function () {
@@ -886,21 +884,11 @@ $(function () {
         $('.pinch-zoom-container').eq(0).show();
         $('.esc_s').show()
         Index_Last = $(this).parent().index();
-        var previewUrl = $(this).attr('data-img');
-        $('.big_back_s canvas').hide();
-        $('.big_back_s').show();
-        $('.big_back_s img').attr('src', previewUrl);
-        setTimeout(function () {
-            $('.big_back_s img').css({
-                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
-                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
-            });
-            $('.big_back_s canvas').css({
-                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
-                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
-            });
 
-        }, 300)
+        var previewUrl = $(this).attr('data-id');
+        lookBigImage(previewUrl,true);
+
+
 
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
@@ -910,6 +898,40 @@ $(function () {
             urls: [previewUrl] // 需要预览的图片http链接列表
         });
     });
+
+    function lookBigImage(diskPath,saveServer) {
+        var params = {
+            'fullPath':diskPath,
+            'saveServer':saveServer
+        }
+        ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
+            var previewUrl = e;
+            if (saveServer) {
+                //true:返回服务器所在的地址，false:返回云盘的预览地址
+                previewUrl = url_o + previewUrl;
+                $('.big_back_s canvas').hide();
+                $('.big_back_s').show();
+                $('.big_back_s img').attr('src', previewUrl);
+                setTimeout(function () {
+                    $('.big_back_s img').css({
+                        'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                        'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+                    });
+                    $('.big_back_s canvas').css({
+                        'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                        'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+                    });
+
+                }, 300)
+            } else {
+                wx.previewImage({
+                    current: previewUrl, // 当前显示图片的http链接
+                    urls: [previewUrl] // 需要预览的图片http链接列表
+                });
+            }
+        });
+    }
+
     // $('.big_back_s').on('touchend', function () {
     //     if($('.true_s').css('display')!='block'&&event.touches.length==0){
     //         $(this).find('canvas').hide();

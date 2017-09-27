@@ -33,17 +33,35 @@ $(function(){
 
     //tab切换
     $('.tab-title li').on('touchend',function(){
-       
+       if(!$(this).hasClass('tab-active')){
+          $(this).addClass('tab-active').siblings().removeClass('tab-active')
+          $('.canvs_hour_big').children('div').eq($(this).index()).show().siblings().hide();
+       }
     })
+    //名词说明显示
+    $('.canvs_more_tit img').on('touchend',function(){
+        $('.big_back').show();
+    })
+    //名词说明隐藏
+    $('.big_center img').on('touchend',function(){
+        $('.big_back').hide();
+    })
+    $('.big_back').on('touchend',function(){
+        $('.big_back').hide();
+    })
+    $('.big_center').on('touchend',function(){
+        event.stopPropagation();
+    })
+    
+    cnv('can_o')
     //环形图
     function cnv(id){
         var bian = 0    //这里改数值~
         var canvas = document.getElementById(id);
         var ctx = canvas.getContext("2d");
-        var W = canvas.width;
-        var H = canvas.height;
+        var W = 168;
+        var H = 168;
         var text,text_w;
-        
         function init(){
             ctx.clearRect(0,0,W,H);
             ctx.beginPath();

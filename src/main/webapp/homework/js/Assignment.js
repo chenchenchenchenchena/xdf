@@ -49,8 +49,8 @@ $(function () {
                 $('.class_s i').html('已选择1个班' + e.data.className + ';');
                 $('.time_S i').html(e.data.homeworkTime);
                 $('.class_name i').html('1');
-                $('.Knowledge input').val(e.data.knowledgePoint);
-                $('.home_text textarea').val(decodeURI(e.data.description));
+                $('.Knowledge input').val(decodeURIComponent(e.data.knowledgePoint));
+                $('.home_text textarea').val(decodeURIComponent(e.data.description));
                 classCode = e.data.classCode;
 
                 $('.class_s').unbind();
@@ -163,6 +163,10 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
@@ -363,9 +367,9 @@ $(function () {
         if (sessionStorage.Classname_x) {
             arr_s = arr_voice.concat(arr_image);
             var errohome = {};
-            errohome.knowledgePoint = $('.Knowledge input').val();
+            errohome.knowledgePoint = encodeURIComponent($('.Knowledge input').val()).replace(/'\+'/,'%20');
             errohome.id = sessionStorage.id_x;
-            errohome.description = encodeURI($('.home_text textarea').val());
+            errohome.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro, errohome, function (e) {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
@@ -393,8 +397,8 @@ $(function () {
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
-            homeworksubm.knowledgePoint = $('.Knowledge input').val();
-            homeworksubm.description = encodeURI($('.home_text textarea').val());
+            homeworksubm.knowledgePoint = encodeURIComponent($('.Knowledge input').val()).replace(/'\+'/,'%20');
+            homeworksubm.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.areyok input:last-of-type').css('background','#00ba97');

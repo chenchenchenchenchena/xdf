@@ -49,7 +49,7 @@ $(function () {
             /*******作业信息*******/
             //知识点
             if (datas.teacherKnowledgePoint != "" && datas.teacherKnowledgePoint != null && datas.teacherKnowledgePoint != undefined) {
-                var knowledgePoint = splitStrs(datas.teacherKnowledgePoint);
+                var knowledgePoint = splitStrs(decodeURIComponent(datas.teacherKnowledgePoint));
                 var kpHtml="";
                 for (var i = 0; i < knowledgePoint.length; i++) {
                     kpHtml = '<span>' + knowledgePoint[i] + '</span>';
@@ -57,10 +57,10 @@ $(function () {
                 }
             }
             //作业描述
-            $('.des .hwCon').html(decodeURI(datas.teacherDes));
+            $('.des .hwCon').html(decodeURIComponent(datas.teacherDes));
             // 判断是否批复，未批复可重新提交答案
             replyStatus = datas.replyStatus;
-            var myAnswerDes = decodeURI(datas.description);
+            var myAnswerDes = decodeURIComponent(datas.description);
             if (replyStatus == 1) {//已批复
                 $('.answer').hide();
 
@@ -89,7 +89,7 @@ $(function () {
                 if (datas.replyStatus == "0") {
                     pizhuHtml = "暂无批注"
                 } else {
-                    var pizhu = decodeURI(datas.replyDesc).split('|>|');
+                    var pizhu = decodeURIComponent(datas.replyDesc).split('|>|');
                     for(var i=0;i<pizhu.length;i++){
                         if(pizhu[i]=='+'||pizhu[i]==undefined||pizhu[i]=='undefined'){
                             if(pizhu.length>1){
