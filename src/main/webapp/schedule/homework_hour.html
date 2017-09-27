@@ -19,10 +19,36 @@
 </head>
 <body>
     <ul class="tab-title">
-        <li class="tab-active"><a href="javascript:;">成绩报告</a></li>
-        <li><a href="record.html">录成绩</a></li>
+        <li class="tab-active"><a href="javascript:;">作业率</a></li>
+        <li><a href="record.html">课时</a></li>
     </ul>
-    
+    <div class="canvs_hour_big">
+        <div class="canvs_hour">
+            <div>
+                <canvas id="can_o"></canvas>
+                <h4>总提交率</h4>
+                <p>手动：70%</p>
+                <p>手动：70%</p>
+            </div>
+        </div>
+        <div class="canvs_more">
+            <h4 class="canvs_more_tit">各班情况 <img src="images/more_s.png" alt=""></h4>
+            <ul>
+                <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
+                <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="big_back">
+        <div class="big_center">
+                <img src="images/esc_s.png" alt="">
+                <h4>名词说明</h4>
+                <p><span>总提交率</span>：学生收到作业并提交作业的总体占比(不区分作业类型)</p>
+                <p><span>提交率</span>:学生收到作业并提交作业的总体占比(手动作业或电子作业)</p>
+                <p><span>批复率</span>：学生提交作业，老师完成批复的占比。(这里仅表示手动作业，电子作业批复率为100%)</p>
+                <p><span>正确率</span>：学生对于电子作业的做题正确率。</p>
+            </div>
+    </div>
 </body>
 
 </html>
