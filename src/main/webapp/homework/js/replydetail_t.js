@@ -96,9 +96,9 @@ $(function () {
             if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
                 $('.anDes').eq(0).html("");
             } else {
-                $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
+                $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
             }
-            $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
+            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
             console.log(decodeURI(e.replyDesc));
 
             var arr = decodeURIComponent(e.replyDesc).split('|>|');
@@ -127,7 +127,7 @@ $(function () {
                     }
                 }
             }
-            $('.hwCon').eq(0).html(decodeURI(e.description));
+            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
             getFileInfo(e);
 
         // });
@@ -139,9 +139,9 @@ $(function () {
             var e = JSON.parse(sessionStorage.detailsStrNot);
             console.log(e);
             classYHname = e.className;
-            $('.anDes').eq(0).html(decodeURI(e.StudentAnswer));
-            $('.kon p:last-of-type').html(decodeURI(e.knowledgePoint));
-            $('.hwCon').eq(0).html(decodeURI(e.description));
+            $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
+            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
+            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
             // var stu = e.File.StudentHomeworkFile;
             // var tea = e.File.TeacherHomeworkFile;
             // for (var a = 0; a < stu.length; a++) {

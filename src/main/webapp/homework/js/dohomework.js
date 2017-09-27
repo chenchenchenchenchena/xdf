@@ -63,7 +63,7 @@ $(function () {
 
                 //知识点
                 if (item.knowledgePoint != "" && item.knowledgePoint != null && item.knowledgePoint != undefined) {
-                    knowledgePoint = splitStrs(item.knowledgePoint);
+                    knowledgePoint = splitStrs(decodeURIComponent(item.knowledgePoint));
                     for (var i = 0; i < knowledgePoint.length; i++) {
                         kpHtml = '<span>' + knowledgePoint[i] + '</span>';
                         $('.knowPoint').append(kpHtml);
@@ -71,7 +71,7 @@ $(function () {
                 }
                 if(item.description != undefined && item.description != ""){
                     //作业描述
-                    $('.hwCon').html(decodeURI(item.description));
+                    $('.hwCon').html(decodeURIComponent(item.description));
                 }
                 //语音，图片 TODO
                 //语音，图片 TODO
