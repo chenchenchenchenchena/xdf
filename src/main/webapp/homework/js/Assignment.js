@@ -365,7 +365,7 @@ $(function () {
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
-            errohome.description = encodeURI($('.home_text textarea').val());
+            errohome.description = encodeURI($('.home_text textarea').val()).replace(/'\+'/,'%20');
             errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro, errohome, function (e) {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
