@@ -363,7 +363,7 @@ $(function () {
         if (sessionStorage.Classname_x) {
             arr_s = arr_voice.concat(arr_image);
             var errohome = {};
-            errohome.knowledgePoint = $('.Knowledge input').val();
+            errohome.knowledgePoint = encodeURIComponent($('.Knowledge input').val()).replace(/'\+'/,'%20');
             errohome.id = sessionStorage.id_x;
             errohome.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             errohome.fileInfo = arr_s;
@@ -393,7 +393,7 @@ $(function () {
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
-            homeworksubm.knowledgePoint = $('.Knowledge input').val();
+            homeworksubm.knowledgePoint = encodeURIComponent($('.Knowledge input').val()).replace(/'\+'/,'%20');
             homeworksubm.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
