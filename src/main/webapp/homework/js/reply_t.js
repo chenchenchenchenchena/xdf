@@ -143,6 +143,11 @@ $(function() {
     });
 
     $('.noreplyTitle span:last-of-type').on('touchend', function () {
+        if($(this).attr('one')){
+            layer.msg('已催交成功，1分钟内仅能催交一次')
+            return false;
+        }
+        $(this).attr('one','true')
         var Arr = [];
         Homework.schoolId = arr[0].schoolId;
         Homework.classCode = arr[0].classCode;
@@ -158,6 +163,9 @@ $(function() {
         }
         ajax_S(homework_s.t_quck, {'params':[Homework]}, function (e) {
             if (e.result == true) {
+                setTimeout(function(){
+                    $(this).attr('one','false')
+                },60000)
                 layer.open({
                     type: 1,
                     area: ['548px', '345px'],
@@ -167,6 +175,7 @@ $(function() {
                     content: $(".homeworkSucc")
                 })
             } else {
+                $(this).attr('one','false')
                 layer.open({
                     type: 1,
                     area: ['548px', '345px'],

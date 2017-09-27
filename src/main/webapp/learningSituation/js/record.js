@@ -4,6 +4,7 @@ $(function () {
     var layer3;
     var layer4;
 	var layer5;
+	var layer6;
     var load;
     var flag = 1;
     var student = [];
@@ -13,6 +14,9 @@ $(function () {
     var AppId = appId;
     var SecreT  = secreT;
 	var urlPush;
+	var start;
+	var end;
+	var that;
 	/*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
          // wechatCode(location.href)
@@ -144,6 +148,44 @@ $(function () {
             }
 		})
     }
+	//删除学生
+	$(document).on("touchstart",".scoreList dl",function (event) {
+		start = new Date().getTime();
+	})
+	$(document).on("touchend",".scoreList dl",function (event) {
+		end = new Date().getTime();
+		that=$(this);
+		if((end-start)>1000){
+			layer6=layer.open({
+				type: 1,
+				area: ['548px', '345px'],
+				shade:[0.2,'#000'],
+				title:'',
+				skin: '',
+				content:$(".deleteScore")
+			})
+		}
+	})
+	$(".deleteScore button").eq(0).click(function () {
+		layer.close(layer6);
+	})
+	$(".deleteScore button").eq(1).click(function () {
+		layer.close(layer6);
+		var deName=that.find("dd").html();
+		that.find(".flag").html(4);
+		if (deName.length > 2) {
+			var avater = deName.substring(deName.length - 2, deName.length);
+			that.find("dt").html(avater)
+		} else {
+			var avater = deName;
+			that.find("dt").html(avater);
+		}
+		var del={
+			"studentNo":that.find(".code").html(),
+			"flag":that.find(".flag").html()
+		}
+		student.push(del);
+	})
 	//添加学生信息
 		/*var reNz=/^S{2}[0-9]{4}$/;*/
 		var reNz=/^[a-zA-Z0-9]+$/;

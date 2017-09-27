@@ -80,6 +80,7 @@ $(function () {
         $('.date span').html(begindata + '-' + enddata);
         $('.classHour i').eq(0).html(LessonNo);
         $('.classHour i').eq(1).html(LessonCount);
+        $('.stuNum').html(BeginDate[timeindex].ClassCode)
         $('.progressBar p').css('width', LessonNo / LessonCount * 100 + '%');
         var arr = [];
         for (var i = 0; i < regionindex.length; i++) {
@@ -212,5 +213,8 @@ $(function () {
         });
     }
 
-
+    $('.student_home').on('touchend',function(){
+        sessionStorage.s = ''
+    //    location.href = '';
+    })
 })

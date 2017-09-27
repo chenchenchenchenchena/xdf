@@ -206,7 +206,7 @@ body,html{
 .chooseClass .chooseClassActive,.scoreType .chooseClassActive,.classNumTime .chooseClassActive{
 	background:url(../images/c2.png) no-repeat left top ;
 }
-.recordSub button,.recordSucc button,.noRecord button,.subFail button,.noDel button{
+.recordSub button,.recordSucc button,.noRecord button,.subFail button,.noDel button,.deleteScore button{
 	width: 175px;
 	height: 72px;
 	line-height: 72px;
@@ -219,17 +219,17 @@ body,html{
 	margin: 40px 0 0 185px;
 	border-radius: 10px;
 }
-.recordSub button,.noRecord button,.subFail button,.noDel button{
+.recordSub button,.noRecord button,.subFail button,.noDel button,.deleteScore button{
 	margin: 40px 0 0 60px;
 }
-.recordSub>button:nth-child(3),.noRecord>button:nth-child(3),.subFail>button:nth-child(3),.noDel>button:nth-child(4){
+.recordSub>button:nth-child(3),.noRecord>button:nth-child(3),.subFail>button:nth-child(3),.noDel>button:nth-child(4),.deleteScore>button:nth-child(3){
 	background: #e4eaf1;
 	color: #aeb1b7;
 }
-.recordSub img,.recordSucc img,.noRecord img,.subFail img,.noDel img{
+.recordSub img,.recordSucc img,.noRecord img,.subFail img,.noDel img,.deleteScore img{
 	margin: 38px 0 0 224px;
 }
-.recordSub p,.recordSucc p,.noRecord p,.subFail p,.noDel p{
+.recordSub p,.recordSucc p,.noRecord p,.subFail p,.noDel p,.deleteScore p{
 	font-size: 30px;
 	color: #333333;
 	text-align: center;
@@ -254,7 +254,7 @@ body,html{
 	top:0;
 	background: rgba(0,0,0,0.2);
 }
-.recordSucc,.recordSub,.noRecord,.subFail,.noDel{
+.recordSucc,.recordSub,.noRecord,.subFail,.noDel,.deleteScore{
 	display: none;
 }
 .classEmpty,.classTimeEmpty,.numFail{

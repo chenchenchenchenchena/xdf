@@ -161,6 +161,7 @@ $(function(){
             $('.enter').hide();
             $('.content').hide();
             if(e.data.relatedState=='1'&&e.data.mobile==''){
+                $('.del_last').show();
                 sessionStorage.stuNumber = e.data.studentNo;
                 $('.search').show();
                 $('.stuname').html(e.data.studentName);
@@ -172,6 +173,7 @@ $(function(){
                 $('.enter').hide();
                 $('.search').css('margin-top','.2rem')
             }else{
+                $('.del_last').show();
                 sessionStorage.stuNumber = e.data.studentNo;
                 //手机号+姓名查询
                 $('.searchTwo').show();
@@ -433,6 +435,14 @@ $(function(){
         }
     }
 
+    $('.del_last').on('touchend',function(){
+        ajax_S(url.s_nobd,{'StudentCode': sessionStorage.stuNumber ,'wechatId': sessionStorage.openid},function(e){
+          if(e.result){
+              layer.msg('解绑成功');
+              location.reload()
+          }
+        })
+    });
 
 
 

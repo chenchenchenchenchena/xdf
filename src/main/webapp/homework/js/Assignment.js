@@ -10,6 +10,7 @@ $(function () {
     } else {
         $('#image_s').show();
     }
+
     var urlPush = '';
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
