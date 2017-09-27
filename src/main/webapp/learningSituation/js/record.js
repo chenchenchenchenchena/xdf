@@ -122,7 +122,7 @@ $(function () {
 			resetData();
         })
 
-        //点击课次    
+        //点击课次
         $(".classNumTime ul").on("click", "li", function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classTime").html("第<span class=classnum>"+$(this).find(".lessonNo").html()+"</span>课次(<span class=lestime>"+$(this).find(".sectTime").html()+"</span>)");

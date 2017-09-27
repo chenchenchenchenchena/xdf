@@ -19,6 +19,12 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="js/report_s.js?v=7e659ac"></script>
     <style>
+		body,html{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+			position: relative;
+		}
         .tab-title {
             display: flex;
             flex-flow: row nowrap;
@@ -41,9 +47,63 @@
             width:auto;
             color:#fff;
         }
+		.classNumTime{
+			height: 400px;
+			position: absolute;
+			bottom:-440px;
+			left: 0;
+			background: #fff;
+			padding: 30px 30px 10px;
+			width: 690px;
+			z-index: 10;
+		}
+		.classNumTime ul{
+			overflow: auto;
+			height: 240px;
+		}
+		.classNumTime p{
+			margin-bottom: 35px;
+			font-size: 32px;
+		}
+		.classNumTime ul li{
+			background:url(images/c3.png) no-repeat left top ;
+			padding-left: 72px;
+			margin-bottom: 40px;
+			line-height: 40px;
+			font-size: 32px;
+		}
+		.confirmBtn{
+			width: 690px;
+			height: 88px;
+			line-height: 88px;
+			color: #fff;
+			font-size: 30px;
+			background: #00ba97;
+			border: none;
+			outline: none;
+			border-radius: 10px;
+		}
+		.classNumTime .chooseClassActive{
+			background:url(images/c2.png) no-repeat left top ;
+		}
+		.mask{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top:0;
+			background: rgba(0,0,0,0.2);
+			display: none;
+			z-index: 5;
+		}
+		@keyframes move{
+			0%{bottom:-440px}
+			100%{bottom:0px}
+		}
     </style>
 </head>
 <body>
+<div class="mask"></div>
 <ul class="tab-title">
     <!--<li class="tab-active"><a href="javascript:;">入门测</a></li>-->
     <!--<li><a href="javascript:;">出门测</a></li>-->
@@ -102,9 +162,15 @@
             <!--<h4 class="grade" style="left:72%;margin-right:20px;">查看课堂数据</h4>-->
         <!--</div>-->
     <!--</div>-->
+</div>
     <div class="no-data" style="display: none">
         <img src="images/noDatas.png?v=b9e71f4"/>
         <p>您还没有录成绩</p>
     </div>
+	<div class="classNumTime">
+		<p><span>取消</span></p>
+		<ul></ul>
+		<button class="confirmBtn">确定</button>
+	</div>
 </body>
 </html>
