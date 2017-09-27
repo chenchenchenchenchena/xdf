@@ -54,8 +54,9 @@ $(function () {
                 for (var i = 0; i < knowledgePoint.length; i++) {
                     if(knowledgePoint[i]!=''){
                         kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                        $('.knowPoint').append(kpHtml);
+                    
                     }
-                    $('.knowPoint').append(kpHtml);
                 }
             }
             //作业描述
