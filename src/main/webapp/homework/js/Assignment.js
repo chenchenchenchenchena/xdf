@@ -186,6 +186,10 @@ $(function () {
     });
     //知识点验证
     $('.Knowledge input').on('keyup', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         var html_ = $(this).val();
         var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
         if (regStr.test(html_)) {
@@ -200,6 +204,7 @@ $(function () {
             }
             $(this).val($(this).val().substring(0,10))
         }
+        
         if (html_.indexOf(',') != html_.lastIndexOf(',') && html_.lastIndexOf(',') != -1) {
             $(this).val(html_.substr(0, html_.length - 1))
 
