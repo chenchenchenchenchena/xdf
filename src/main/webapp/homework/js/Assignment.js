@@ -49,7 +49,7 @@ $(function () {
                 $('.class_s i').html('已选择1个班' + e.data.className + ';');
                 $('.time_S i').html(e.data.homeworkTime);
                 $('.class_name i').html('1');
-                $('.Knowledge input').val(e.data.knowledgePoint);
+                $('.Knowledge input').val(decodeURIComponent(e.data.knowledgePoint));
                 $('.home_text textarea').val(decodeURIComponent(e.data.description));
                 classCode = e.data.classCode;
 
