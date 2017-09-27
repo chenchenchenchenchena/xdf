@@ -2,6 +2,9 @@
  * Created by zsj on 2017-06-28.
  */
 $(function(){
+
+    var checkedLesson = [];
+
     sessionStorage.removeItem('dayList');
     var loading,loading2;//loading效果
     $('title').html(GetRequest('title'));//动态获取页面标题
@@ -52,7 +55,8 @@ $(function(){
             checkStuArry.push($(this).attr('data-stuNo'));
             console.log(checkStuArry);
         });
-        localStorage.studentNos = JSON.stringify({'checkStuArry': checkStuArry});
+        localStorage.studentNos = JSON.stringify(checkStuArry);
+        sessionStorage.lessonNo = JSON.stringify(checkedLesson);
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
         window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
@@ -81,8 +85,6 @@ $(function(){
             }
         }
     });
-
-    var checkedCode = [];
     //更换日期
     $(document).on('touchstart', '.change-day', function () {
         if ($(".classNumTime").css("display") == "block") {
@@ -117,7 +119,7 @@ $(function(){
                             sessionStorage.dayList = JSON.stringify(e.data);
                             var strHtml_ = "";
                             for (var i = 0; i < e.data.length; i++) {
-                                strHtml_ = "<li date='"+e.data[i].date+"'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+                                strHtml_ = "<li data-lesson='"+e.data[i].lessonNo+"' date='"+e.data[i].date+"'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
                             }
                             $('.classNumTime').find('ul').html(strHtml_);
                         }
@@ -138,7 +140,6 @@ $(function(){
 
             if(checkNum<2){
                 $(this).addClass("chooseClassActive");
-                checkedCode.push("")
                 checkNum++;
                 $('#checkNumber').html("已选中"+checkNum+"个日期");
             }
@@ -153,6 +154,24 @@ $(function(){
         $(".classNumTime").css("animation", "");
         $(".classNumTime").css("bottom", "0px");
         $('#checkNumber').html("已选中0个日期");
+        var len = $('.classNumTime ul li').length;
+        for (var i = 0;i<len;i++){
+            if($('.classNumTime ul li').eq(i).hasClass('chooseClassActive')){
+                var lessonNo = $('.classNumTime ul li').eq(i).attr('data-lensson');
+                checkedLesson.push(lessonNo);
+            }
+        }
+
+
+        var params = {
+            'classCode':localStorage.getItem('CLASSCODE'),
+            'gradeType':currentType,
+            'schoolId':localStorage.getItem('SCHOOLID'),
+            'lessonNos':checkedLesson,
+            'studentNos':[]
+        };
+        ajaxRequest("POST",Study.s_gradeByLessonNo,params,getRankListSuccess)
+
 
     });
 
