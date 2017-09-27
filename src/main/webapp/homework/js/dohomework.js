@@ -723,7 +723,7 @@ $(function () {
 
         var reqData = {
             "id": GetRequest('id'),
-            "description": encodeURI($('.teBox').val()),
+            "description": encodeURI($('.teBox').val()).replace(/'\+'/,'%20'),
             "fileStuhomeworks": fileStuhomeworks,
             "modify": false
         };
