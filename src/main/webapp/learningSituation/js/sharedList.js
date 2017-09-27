@@ -7,11 +7,10 @@ $(function(){
     var testState = GetRequest('testState');
     var checkedTypeName = GetRequest('checkedTypeName');
     var type=GetRequest('type');
-    var lessonNo=GetRequest('lessonNo')
+    var lessonNo=sessionStorage.lessonNo;
     $('title').html(checkedTypeName+"排行榜");//动态获取页面标题
     $('.rankTitle>span').html(checkedTypeName);
     if(type=="student"){
-        alert("1111");
         getStuRankList(testState,lessonNo);
     }else{
         getRankList(testState,"shared");
@@ -96,12 +95,18 @@ $(function(){
 
     }
     function getStuRankList(testState,lessonNo) {
+        var studentNos;
+        if(sessionStorage.sNo){
+            studentNos=JSON.parse(sessionStorage.sNo);
+        }else{
+            studentNos=[];
+        }
         var reqData = {
             'classCode':localStorage.getItem('CLASSCODE'), //班级编号
             'schoolId':localStorage.getItem('SCHOOLID'), //校区id
             'gradeType':testState, // 成绩类型 1 入门测 2 出门测
-            'lessonNos':[lessonNo],
-            'studentNos':[]
+            'lessonNos':JSON.parse(lessonNo),
+            'studentNos':studentNos
         };
         console.log(reqData);
         $('.main-content,.no-data').hide();

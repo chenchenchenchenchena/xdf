@@ -257,7 +257,8 @@ $(function () {
     })
     $(document).on("click",".confirmBtn",function () {
          if($(".classNumTime ul li").hasClass("chooseClassActive")){
-            location.href="sharedranking_t.html?testState="+$(".tab-active").attr("tcode")+"&checkedTypeName="+$(".tab-active").html()+"&type=student&lessonNo="+$(".chooseClassActive .lessonNo").html();
+             sessionStorage.lessonNo="["+$(".chooseClassActive .lessonNo").html()+"]";
+            location.href="sharedranking_t.html?testState="+$(".tab-active").attr("tcode")+"&checkedTypeName="+$(".tab-active").html()+"&type=student";
          }else{
             layer.msg("请输入课次");
          }
