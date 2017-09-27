@@ -50,7 +50,7 @@ $(function () {
                 $('.time_S i').html(e.data.homeworkTime);
                 $('.class_name i').html('1');
                 $('.Knowledge input').val(e.data.knowledgePoint);
-                $('.home_text textarea').val(decodeURI(e.data.description));
+                $('.home_text textarea').val(decodeURIComponent(e.data.description));
                 classCode = e.data.classCode;
 
                 $('.class_s').unbind();
