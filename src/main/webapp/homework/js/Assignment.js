@@ -163,6 +163,10 @@ $(function () {
 
     //作业描述验证
     $('.home_text textarea').on('keyup', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         if ($(this).val().length > 200) {
             $('.home_text span').css('color', 'red');
             $(this).val($(this).val().substring(0, 200));
