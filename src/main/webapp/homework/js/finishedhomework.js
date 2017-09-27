@@ -52,7 +52,9 @@ $(function () {
                 var knowledgePoint = splitStrs(decodeURIComponent(datas.teacherKnowledgePoint));
                 var kpHtml="";
                 for (var i = 0; i < knowledgePoint.length; i++) {
-                    kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                    if(knowledgePoint[i]!=''){
+                        kpHtml = '<span>' + knowledgePoint[i] + '</span>';
+                    }
                     $('.knowPoint').append(kpHtml);
                 }
             }
