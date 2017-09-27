@@ -45,6 +45,10 @@ $(function () {
 
     //输入验证
     $('.teBox').on('keyup change', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         $('.teacherword').html('' + $(this).val().length + '/200');
         if ($(this).val().length > 200) {
             $('.teacherword').css('color', 'red');
