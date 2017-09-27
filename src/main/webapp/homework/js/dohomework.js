@@ -625,6 +625,10 @@ $(function () {
     });
 //作业描述验证
     $('.teBox').on('keyup', function () {
+        if($(this).val().indexOf('"')!=-1){
+            layer.msg('请输入中文双引号')
+            $(this).val($(this).val().substr(0,$(this).val().length-1))
+        }
         if ($(this).val().length > 200) {
             $('.word').css('color', 'red');
             $('.teBox').val($(this).val().substr(0, 200));
