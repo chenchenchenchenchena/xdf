@@ -16,30 +16,57 @@
     <script src="../common/js/scale.js?v=f8841e6"></script>
     <script src="../common/js/swiper.min.js?v=287fddc"></script>
     <script src="../common/js/ajax.js?v=f741181"></script>
+    <script src="js/homework_hour.js"></script>
 </head>
 <body>
     <ul class="tab-title">
         <li class="tab-active"><a href="javascript:;">作业率</a></li>
-        <li><a href="record.html">课时</a></li>
+        <li><a href="javascript:;">课时</a></li>
     </ul>
     <div class="canvs_hour_big">
-        <div class="canvs_hour">
-            <div>
-                <canvas id="can_o"></canvas>
-                <h4>总提交率</h4>
-                <p>手动：70%</p>
-                <p>手动：70%</p>
+        <div>
+            <div class="canvs_hour">
+                <div>
+                    <canvas id="can_o"></canvas>
+                    <h4>总提交率</h4>
+                    <p>手动：70%</p>
+                    <p>手动：70%</p>
+                </div>
+            </div>
+            <div class="canvs_more clearfix">
+                <h4 class="canvs_more_tit">各班情况 <img src="images/more_s.png" alt=""></h4>
+                <ul>
+                    <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
+                    <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
+                </ul>
             </div>
         </div>
-        <div class="canvs_more">
-            <h4 class="canvs_more_tit">各班情况 <img src="images/more_s.png" alt=""></h4>
-            <ul>
-                <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
-                <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
-            </ul>
+        <div style="display:none;"> 
+            <div class="lesso_cav">
+                <div>
+                    <span>1222</span>
+                    <h4>总课时</h4>
+                </div>
+                <div>
+                    <span>1222</span>
+                    <h4>当月课时</h4>
+                </div>
+                <div>
+                    <span>1222</span>
+                    <h4>今日课时</h4>
+                </div>
+            </div>
+            <div class="lesson_more clearfix">
+                <h4 class="canvs_more_tit" >历月课时 <span>仅展示近半年的课时</span></h4>
+                <ul>
+                    <li><span>月份</span><span>月课时</span><span>班课量</span></li>
+                    <li><span>月份</span><span>月课时</span><span>班课量</span></li>
+                    <li><span>月份</span><span>月课时</span><span>班课量</span></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="big_back">
+    <div class="big_back" style="display:none;">
         <div class="big_center">
                 <img src="images/esc_s.png" alt="">
                 <h4>名词说明</h4>
