@@ -365,7 +365,7 @@ $(function () {
             var errohome = {};
             errohome.knowledgePoint = $('.Knowledge input').val();
             errohome.id = sessionStorage.id_x;
-            errohome.description = encodeURI($('.home_text textarea').val()).replace(/'\+'/,'%20');
+            errohome.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             errohome.fileInfo = arr_s;
             ajax_S(homework_s.t_erro, errohome, function (e) {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
@@ -394,7 +394,7 @@ $(function () {
             homeworksubm.className = class_n;
             homeworksubm.homeworkTime = $('.time_S i').html();
             homeworksubm.knowledgePoint = $('.Knowledge input').val();
-            homeworksubm.description = encodeURI($('.home_text textarea').val()).replace(/'\+'/,'%20');
+            homeworksubm.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             homeworksubm.fileInfo = arr_s;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.areyok input:last-of-type').css('background','#00ba97');
