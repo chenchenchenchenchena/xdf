@@ -103,49 +103,53 @@ $(document).on('touchend', '.report_tab li', function () {
 function Interaction(){
 
     ajaxRequest('post',Study.t_self,need_,function(e){
-        if(e.data.length!=0&&e.data!=undefined){
-        for(var i = 0;i<e.data.length;i++){
-            var h_zhou_x =[];
-            var time = [];
-            var full_max = [];
-            var max_Grade_ = '';
-            var Grade_eve = [];
+        if (e.data.length != 0 && e.data != undefined) {
+            $('.no-data').hide();
+            $('.class_big').show();
+            for (var i = 0; i < e.data.length; i++) {
+                var h_zhou_x = [];
+                var time = [];
+                var full_max = [];
+                var max_Grade_ = '';
+                var Grade_eve = [];
 
-            var Data = e.data[i];
-            var Grade = Data;
-            var maxGrade = Data.data[Data.data.length-1].lessonNO;
-            max_Grade_ = Grade.fullMarksMax;
-            if(Data.TeacherclassRoomState){
-                html_yh = '<h4 class="grade kthd" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
-            }else{
-                html_yh = ''
+                var Data = e.data[i];
+                var Grade = Data;
+                var maxGrade = Data.data[Data.data.length - 1].lessonNO;
+                max_Grade_ = Grade.fullMarksMax;
+                if (Data.TeacherclassRoomState) {
+                    html_yh = '<h4 class="grade kthd" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" style="left:40%;margin-right:20px;">查看课堂数据</h4>'
+                } else {
+                    html_yh = ''
+                }
+
+                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + e.data[i].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S' + i + '" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">' + html_yh + '<h4 class="grade" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
+                for (var c = 0; c < Grade.data.length; c++) {
+                    var lesson_num = Grade.data[c];
+                    for (var b = 0; b < maxGrade; b++) {
+                        if (c == 0) {
+                            h_zhou_x.push(b + 1);
+                            time.push('0');
+                            full_max.push('0');
+                            Grade_eve.push('0')
+                        }
+                        if (lesson_num.lessonNO == b + 1) {
+                            time[b] = lesson_num.lessonTime.split(' ')[0];
+                            full_max[b] = lesson_num.fullMarks;
+                            Grade_eve[b] = lesson_num.avgGrade;
+                        }
+                    }
+                    ;
+                }
+                ;
+                Echart('chart_S' + i + '', Text_Grade, h_zhou_x, Grade_eve, full_max, time, max_Grade_)
+                $('.classroom_s').eq(0).find('div').show();
             }
-
-            $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>'+e.data[i].className+'</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S'+i+'" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">'+html_yh+'<h4 class="grade" classcode="'+e.data[i].classCode+'" schoolid="'+e.data[i].schoolId +'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
-            for(var c = 0;c<Grade.data.length;c++){
-                var lesson_num = Grade.data[c];
-                for(var b = 0;b<maxGrade;b++) {
-                    if(c==0){
-                        h_zhou_x.push(b+1);
-                        time.push('0');
-                        full_max.push('0');
-                        Grade_eve.push('0')
-                    }
-                    if(lesson_num.lessonNO==b+1){
-                        time[b] = lesson_num.lessonTime.split(' ')[0];
-                        full_max[b] = lesson_num.fullMarks;
-                        Grade_eve[b] = lesson_num.avgGrade;
-                    }
-                };
-            };
-            Echart('chart_S'+i+'',Text_Grade,h_zhou_x,Grade_eve,full_max,time,max_Grade_)
-            $('.classroom_s').eq(0).find('div').show();
-        }
-        }else{
+        } else {
             $('.no-data').show();
             $('.class_big').show();
         }
-        });
+    });
 };
 
 
