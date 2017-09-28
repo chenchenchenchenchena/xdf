@@ -150,7 +150,7 @@ $(function () {
     }
 	//删除学生
 	$(document).on("touchstart",".scoreList dl",function (event) {
-		$(".scoreList dl").addEventListener('contextmenu', function(e){
+		$(".scoreList dl").bind('contextmenu', function(e){
 			e.preventDefault();
 		});
 		start = new Date().getTime();
