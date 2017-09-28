@@ -8,6 +8,20 @@ body,html{
     position: relative;
 	max-width:1024px;
 }
+*{
+	-webkit-touch-callout:none;  /*系统默认菜单被禁用*/
+	-webkit-user-select:none; /*webkit浏览器*/
+	-khtml-user-select:none; /*早期浏览器*/
+	-moz-user-select:none;/*火狐*/
+	-ms-user-select:none; /*IE10*/
+	user-select:none;
+}
+input,textarea {
+	-webkit-user-select:auto; /*webkit浏览器*/
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+}
 .record{
 	overflow: hidden;
 	height:100%;
@@ -38,6 +52,13 @@ body,html{
 	float: right;
 	padding-right: 30px;
 }
+.choose .classrome,.choose .classTime,.choose .st{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width:510px;
+	text-align: right;
+}
 .choose li>span:nth-child(2) input{
 	font-size: 30px;
 	border: none;
@@ -49,15 +70,11 @@ body,html{
 	font-style: normal;
 	float: left;
 }
-.choose .classrome{
-	/*width: 360px;*/
-	/*line-height:50px;*/
-}
 .totalScore{
     float: right;
     border: none;
     font-size: 30px;
-  margin-top: 32px;
+  	margin-top: 32px;
     width: 160px;
     outline: none;
     text-align: right;
