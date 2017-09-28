@@ -37,6 +37,10 @@ $(function(){
     getRankList(currentType);//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
+        $(".classNumTime").hide();
+        $(".classNumTime").css("animation", "");
+        $(".classNumTime").css("bottom", "0px");
+        $('#checkNumber').html("已选中0个日期");
         $(this).addClass('tab-active').siblings().removeClass('tab-active');
         $('.main-content,.no-data,.shared-content').hide();
         currentType = $(this).attr("tCode");
@@ -59,7 +63,12 @@ $(function(){
         sessionStorage.lessonNo = JSON.stringify(checkedLesson);
         $('.tab-title,.main-content,.no-data').hide();
         var testState = $('.main-content').attr('testState');
-        window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName;
+        if(checkedLesson.length == 0){
+            window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName+"&type=";
+        }else {
+            window.location.href = "sharedranking_t.html?testState=" + testState + "&checkedTypeName=" + checkedTypeName+"&type=student";
+        }
+
     });
     // 全选
     var checkAll = true;//默认全选
@@ -148,7 +157,6 @@ $(function(){
     });
 
     $(".confirmBtn").click(function () {
-        getRankList(currentType);
         $("body,html").css({"width": "", "height": "", "overflow": ""});
         $(".classNumTime").hide();
         $(".classNumTime").css("animation", "");
@@ -157,7 +165,7 @@ $(function(){
         var len = $('.classNumTime ul li').length;
         for (var i = 0;i<len;i++){
             if($('.classNumTime ul li').eq(i).hasClass('chooseClassActive')){
-                var lessonNo = $('.classNumTime ul li').eq(i).attr('data-lensson');
+                var lessonNo = $('.classNumTime ul li').eq(i).attr('data-lesson');
                 checkedLesson.push(lessonNo);
             }
         }
