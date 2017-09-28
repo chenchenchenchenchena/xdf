@@ -15,6 +15,7 @@ $(function () {
 
 
     var paperId = "";
+    var paperTotalScore = "";
     var stageName = "";
     var gradeName = "";
     var subjectName = "";
@@ -220,7 +221,7 @@ $(function () {
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
                         if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
-                            strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                            strHtml_ += "<li><h3 paperTotalScore='"+dataList[i].paperTotalScore+"' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
@@ -232,7 +233,7 @@ $(function () {
                             gradeName = currentGrade.gradeName;
                             subjectName = currentSubject.subjectName;
                         } else {
-                            strHtml_ += "<li><h3 paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                            strHtml_ += "<li><h3 paperTotalScore='"+dataList[i].paperTotalScore+"' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
@@ -242,17 +243,6 @@ $(function () {
                         }
 
                     }
-                    // for (var i = 0; i < 8; i++) {
-                    //     strHtml_ += "<li><h3 paperId='" + 1233342 + "'>韩国</h3>" +
-                    //         "<div class='sInfo'>" +
-                    //         "<div><span>学段：</span><span class='stage-'>就哈</span></div>" +
-                    //         "<div><span>年级：</span><span class='grade-'>北京阿卡</span></div>" +
-                    //         "<div><span>学科：</span><span class='subject-'>哈哈</span></div>" +
-                    //         "<div><span>发布人：</span><span>啊</span></div></div>" +
-                    //         "<img src='images/yu.png'/></li>";
-                    //
-                    //
-                    // }
                     if(pageNo == 1){
                         $('.searchCon ul').find('li').remove();
                     }
@@ -321,6 +311,7 @@ $(function () {
             $('.searchCon ul li').find('img').attr('src', "images/yu.png");
             $(this).find('img').attr('src', "images/yu2.png");
             paperId = $(this).find('h3').attr("paperId");
+            paperTotalScore = $(this).find('h3').attr("paperTotalScore");
             stageName = $(this).find('.stage-').html();
             gradeName = $(this).find('.grade-').html();
             subjectName = $(this).find('.subject-').html();
@@ -358,6 +349,7 @@ $(function () {
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = gradeName;
             sessionStorage.subjectName = subjectName;
+            sessionStorage.paperTotalScore = paperTotalScore;
         }
     })
 

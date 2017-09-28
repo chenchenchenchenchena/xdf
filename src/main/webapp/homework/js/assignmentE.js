@@ -244,7 +244,8 @@ $(function () {
                 'paperUrl': paperUrl,
                 'paperClass': sessionStorage.gradeName,
                 'paperStage': sessionStorage.stageName,
-                'paperSubject': sessionStorage.subjectName
+                'paperSubject': sessionStorage.subjectName,
+                'fullScore': sessionStorage.paperTotalScore
             };
 
             ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params1), function (e) {
@@ -291,7 +292,8 @@ $(function () {
                 'paperClass': sessionStorage.gradeName,
                 'paperStage': sessionStorage.stageName,
                 'paperSubject': sessionStorage.subjectName,
-                'fileInfo': ""
+                'fileInfo': "",
+                'fullScore': sessionStorage.paperTotalScore
             };
 
             // homework_s.t_sbim
