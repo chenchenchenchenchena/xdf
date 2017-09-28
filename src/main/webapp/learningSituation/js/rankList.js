@@ -4,6 +4,7 @@
 $(function(){
 
     var checkedLesson = [];
+    var currentCheckedDay = {};
 
     sessionStorage.removeItem('dayList');
     var loading,loading2;//loading效果
@@ -102,39 +103,38 @@ $(function(){
         } else {
             $(".classNumTime").css("display", "block");
             //获取课次列表
-            if (sessionStorage.dayList) {
-                var list = JSON.parse(sessionStorage.dayList);
-                var strHtml_ = "";
-                for (var i = 0; i < list.length; i++) {
-                    strHtml_ = "<li date='"+list[i].date+"'><span>" + list[i].date + "   （第" + list[i].lessonNo + "课次）</span></li>";
-                }
-                $('.classNumTime').find('ul').html(strHtml_);
-            } else {
-                var params = {
-                    'classCode': localStorage.getItem('CLASSCODE'),
-                    'tCode': currentType,
-                    'schoolId': localStorage.getItem('SCHOOLID')
-                };
-                ajaxRequest("POST", Study.t_getStudyDate, params, function (e) {
-                    if (e.code == 200) {
-                        // {
-                        //     "gradeType": "1",
-                        //     "classCode": "AYP5EB02",
-                        //     "schoolId": "73",
-                        //     "date": "2017-09-16",
-                        //     "lessonNo": "1"
-                        // }
-                        if (e.data != undefined && e.data.length != 0) {
-                            sessionStorage.dayList = JSON.stringify(e.data);
-                            var strHtml_ = "";
-                            for (var i = 0; i < e.data.length; i++) {
-                                strHtml_ = "<li data-lesson='"+e.data[i].lessonNo+"' date='"+e.data[i].date+"'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+
+            var params = {
+                'classCode': localStorage.getItem('CLASSCODE'),
+                'tCode': currentType,
+                'schoolId': localStorage.getItem('SCHOOLID')
+            };
+            ajaxRequest("POST", Study.t_getStudyDate, params, function (e) {
+                if (e.code == 200) {
+                    // {
+                    //     "gradeType": "1",
+                    //     "classCode": "AYP5EB02",
+                    //     "schoolId": "73",
+                    //     "date": "2017-09-16",
+                    //     "lessonNo": "1"
+                    // }
+                    if (e.data != undefined && e.data.length != 0) {
+                        // sessionStorage.dayList = JSON.stringify(e.data);
+                        var strHtml_ = "";
+                        var num = 0;
+                        for (var i = 0; i < e.data.length; i++) {
+                            if(e.data[i].lessonNo == currentCheckedDay.lessonNO && e.data[i].date.indexOf(currentCheckedDay.lessonTime) > -1){
+                                strHtml_ = "<li class='chooseClassActive' data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+                                num++;
+                            }else {
+                                strHtml_ = "<li data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
                             }
-                            $('.classNumTime').find('ul').html(strHtml_);
                         }
+                        $('#checkNumber').html("已选中"+num+"个日期");
+                        $('.classNumTime').find('ul').html(strHtml_);
                     }
-                })
-            }
+                }
+            })
         }
 
 
@@ -216,6 +216,9 @@ $(function(){
                     +'<th>名次浮动</th><th class="change-day"><img  src="images/change_day.png" alt="分享"/></th></tr>';
                 $(".intro-test>tbody").html(rankTitleHtml);
                 $.each(datas,function(i,items){
+                    //记住当前年级类型下默认日期
+                    currentCheckedDay = {'lessonNO':items.lessonNO,'lessonTime':items.lessonTime.split(' ')[0]};
+
                     var rankCss,floatGradeCss,floatRankCss;
                     //名次样式
                     if(items.ranking==1){
