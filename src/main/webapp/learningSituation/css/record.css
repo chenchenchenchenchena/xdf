@@ -38,6 +38,13 @@ body,html{
 	float: right;
 	padding-right: 30px;
 }
+.choose .classrome,.choose .classTime,.choose .st{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width:510px;
+	text-align: right;
+}
 .choose li>span:nth-child(2) input{
 	font-size: 30px;
 	border: none;
