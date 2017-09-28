@@ -95,7 +95,7 @@ $(function () {
                         	stuArr.push(stuInfo);
                     	}
 						for (var r = 0; r < stuArr.length; r++) {
-	                        stu += "<dl><dt><a href='javasscipt:;' ontouchstart = 'return false;'>" + stuArr[r].name + "</a></dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
+	                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 	                    }
 						if(e.Data[i].extraStudent.length>0){
 							for(var h=0;h<e.Data[i].extraStudent.length;h++){
@@ -150,6 +150,9 @@ $(function () {
     }
 	//删除学生
 	$(document).on("touchstart",".scoreList dl",function (event) {
+		$(".scoreList dl").addEventListener('contextmenu', function(e){
+			e.preventDefault();
+		});
 		start = new Date().getTime();
 	})
 	$(document).on("touchend",".scoreList dl",function (event) {
