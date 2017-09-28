@@ -208,6 +208,8 @@ $(function () {
     });
 //家长查看成绩排行
     $(document).on("click",".rank-btn",function () {
+        localStorage.CLASSCODE=$(this).attr("classcode");
+        localStorage.SCHOOLID=$(this).attr("schoolid");
         var rankData={
             "classCode":$(this).attr("classcode"),
             "tCode":$(".tab-active").attr("tcode"),
