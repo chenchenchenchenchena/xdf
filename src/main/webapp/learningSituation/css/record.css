@@ -56,15 +56,11 @@ body,html{
 	font-style: normal;
 	float: left;
 }
-.choose .classrome{
-	/*width: 360px;*/
-	/*line-height:50px;*/
-}
 .totalScore{
     float: right;
     border: none;
     font-size: 30px;
-  margin-top: 32px;
+  	margin-top: 32px;
     width: 160px;
     outline: none;
     text-align: right;
