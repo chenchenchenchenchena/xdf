@@ -124,10 +124,10 @@ $(function(){
                         var num = 0;
                         for (var i = 0; i < e.data.length; i++) {
                             if(e.data[i].lessonNo == currentCheckedDay.lessonNO && e.data[i].date.indexOf(currentCheckedDay.lessonTime) > -1){
-                                strHtml_ = "<li class='chooseClassActive' data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+                                strHtml_ += "<li class='chooseClassActive' data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
                                 num++;
                             }else {
-                                strHtml_ = "<li data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
+                                strHtml_ += "<li data-lesson='" + e.data[i].lessonNo + "' date='" + e.data[i].date + "'><span>" + e.data[i].date + "   （第" + e.data[i].lessonNo + "课次）</span></li>";
                             }
                         }
                         $('#checkNumber').html("已选中"+num+"个日期");
