@@ -120,7 +120,7 @@ $(function(){
         init()
         var times = setInterval(function(){
             bian +=1;
-            if(bian==30){
+            if(bian>=num){
                 clearInterval(times)
             }
             init()
