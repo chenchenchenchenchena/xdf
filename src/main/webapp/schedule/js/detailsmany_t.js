@@ -214,7 +214,6 @@ $(function () {
     }
 
     $('.student_home').on('touchend',function(){
-        sessionStorage.s = ''
-    //    location.href = '';
+       location.href = 'homework_hour.html';
     })
 })
