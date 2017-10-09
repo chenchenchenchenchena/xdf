@@ -50,9 +50,6 @@ $(function(){
 
 
 
-
-
-
     //tab切换
     $('.tab-title li').on('touchend',function(){
        if(!$(this).hasClass('tab-active')){
