@@ -42,6 +42,7 @@ $(function(){
         })
         //按月获取月课时
         ajax_S(url.t_hourmonth,less_need,function(e){
+            $('.lesson_more li').eq(0).siblings().remove()
             for(var i = 0;i<e.Data.length;i++){
                 $('.lesson_more ul').append('<li><span>'+e.Data[i].hisYear+'.'+e.Data[i].hisMonth+'</span><span>'+e.Data[i].lessonHours+'</span><span>'+e.Data[i].lessonNos+'</span></li>')
             }
