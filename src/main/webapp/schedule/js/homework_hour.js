@@ -23,6 +23,7 @@ $(function(){
                 $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt*100)+'%')
                 //正确率
                 $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
+                $('.canvs_more li').eq(0).siblings().remove();
                 for(var i = 0;i<e.data.length;i++){
                     $('.canvs_more ul').append('<li><span>'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+e.data[i].classcommitReplyt*100+'%</span><span>'+e.data[i].classcorrectReplyt*100+'%</span><span>'+e.data[i].classDzCorcsReplyt*100+'%</span></li>')
                 }
