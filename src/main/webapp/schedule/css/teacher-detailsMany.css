@@ -381,10 +381,7 @@ a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
 	width:50%;
 }
 .canvs_hour canvas{
-	width:168px;
-	height:168px;
 	margin-top:40px;
-	background:pink;
 }
 .canvs_hour h4{
 	font-size:30px;
@@ -524,4 +521,16 @@ a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
 .lesso_cav div h4{
 	font-size:30px;
 	padding-top:16px;
+}
+
+.no-data{
+    text-align:center;
+}
+.no-data img{
+	margin:40px 0;
+}
+.no-data p{
+    font-size: 30px;
+    color: #aeadad;
+    margin: 22px 0 0 18px;
 }

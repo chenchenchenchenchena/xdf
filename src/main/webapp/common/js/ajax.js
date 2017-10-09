@@ -96,7 +96,10 @@ var url = {
     'stumo':url_o+'studentClassRoomData/querySdtClassRoomAnswerData.do',//查看单个学生课堂互动
     't_leyh':url_o+'teacherClassData/queryClassData.do',//老师查看班级课堂互动数据
     't_redis':url_o+'redis/clearCacheByPrefixKey.do',//清redis缓存
-    't_dictionary':url_o+'dict/getDictListByTableName.do'//获取字典信息
+    't_dictionary':url_o+'dict/getDictListByTableName.do',//获取字典信息
+    't_hour':url_o+'teacherData/queryTeacherClassHour.do',//获取老师课时数据
+    't_hourmonth':url_o+'teacherData/queryTeacherMonthClassHour.do',//获取历史月份课时数据
+    't_houehome':url_o+'teacherData/querTcHomeWorkRate.do',//获取老师作业率
 };
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩

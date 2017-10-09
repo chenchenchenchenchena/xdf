@@ -27,16 +27,27 @@
         <div>
             <div class="canvs_hour">
                 <div>
-                    <canvas id="can_o"></canvas>
+                    <canvas id="can_o" width="168" height="168"></canvas>
                     <h4>总提交率</h4>
-                    <p>手动：70%</p>
-                    <p>手动：70%</p>
+                    <p class="sdsumcommitReplyt"></p>
+                    <p class="dzsumcommitReplyt"></p>
+                </div>
+                <div>
+                    <canvas id="can_t" width="168" height="168"></canvas>
+                    <h4>总批复率</h4>
+                    <p class="sdpfsumReplyt"></p>
+                    <p>电子：100%</p>
+                </div>
+                <div>
+                    <canvas id="can_h" width="168" height="168"></canvas>
+                    <h4>总正确率</h4>
+                    <p>（电子特有）</p>
+                    <p class="dzsumcorrectReplyt">电子：70%</p>
                 </div>
             </div>
             <div class="canvs_more clearfix">
                 <h4 class="canvs_more_tit">各班情况 <img src="images/more_s.png" alt=""></h4>
                 <ul>
-                    <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
                     <li><span>班级</span><span>班号</span><span>提交率</span><span>批复率</span><span>正确率</span></li>
                 </ul>
             </div>
@@ -44,19 +55,17 @@
         <div style="display:none;"> 
             <div class="lesso_cav">
                 <div>
-                    <span>1222</span>
+                    <span class="monthHours"></span>
                     <h4>当月课时</h4>
                 </div>
                 <div>
-                    <span>1222</span>
+                    <span class="lessonHours"></span>
                     <h4>今日课时</h4>
                 </div>
             </div>
             <div class="lesson_more clearfix">
                 <h4 class="canvs_more_tit" >历月课时 <span>仅展示近半年的课时</span></h4>
                 <ul>
-                    <li><span>月份</span><span>月课时</span><span>班课量</span></li>
-                    <li><span>月份</span><span>月课时</span><span>班课量</span></li>
                     <li><span>月份</span><span>月课时</span><span>班课量</span></li>
                 </ul>
             </div>
@@ -71,6 +80,10 @@
                 <p><span>批复率</span>：学生提交作业，老师完成批复的占比。(这里仅表示手动作业，电子作业批复率为100%)</p>
                 <p><span>正确率</span>：学生对于电子作业的做题正确率。</p>
             </div>
+    </div>
+    <div class="no-data" style="display: none;">
+        <img src="images/search.png?v=eafc48d" />
+        <p>未搜索到用户</p>
     </div>
 </body>
 
