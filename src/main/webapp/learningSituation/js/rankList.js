@@ -48,6 +48,9 @@ $(function(){
         getRankList($(this).attr("tCode"));
         $('.main-content').attr('testState',$(this).attr("tCode"));
         checkedTypeName = $(this).html();
+        checkedLesson = [];
+        sessionStorage.removeItem('lessonNo');
+
     });
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
