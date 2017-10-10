@@ -439,9 +439,9 @@ $(function(){
         ajax_S(url.s_nobd,{'StudentCode': sessionStorage.stuNumber ,'wechatId': sessionStorage.openid},function(e){
           if(e.result){
               layer.msg('解绑成功');
-              localStorage.clear();
               ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
                 if(Json.result){
+                    localStorage.clear();              
                       location.reload();
                 }
             })
