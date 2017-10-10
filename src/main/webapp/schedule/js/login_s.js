@@ -441,8 +441,8 @@ $(function(){
               layer.msg('解绑成功');
               ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
                 if(Json.result){
-                    localStorage.clear();              
-                      location.reload();
+                    localStorage.useridTime = '2014-10-17 16:00:00'          
+                    location.reload();
                 }
             })
           }
