@@ -160,6 +160,8 @@ $(function(){
     });
 
     $(".confirmBtn").click(function () {
+        checkedLesson = [];
+        sessionStorage.removeItem('lessonNo');
         $("body,html").css({"width": "", "height": "", "overflow": ""});
         $(".classNumTime").hide();
         $(".classNumTime").css("animation", "");
