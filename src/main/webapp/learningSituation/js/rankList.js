@@ -176,14 +176,18 @@ $(function(){
         }
 
 
-        var params = {
-            'classCode':localStorage.getItem('CLASSCODE'),
-            'gradeType':currentType,
-            'schoolId':localStorage.getItem('SCHOOLID'),
-            'lessonNos':checkedLesson,
-            'studentNos':[]
-        };
-        ajaxRequest("POST",Study.s_gradeByLessonNo,params,getRankListSuccess)
+        if(checkedLesson.length == 0){
+            getRankList(currentType);//默认显示出门测排行榜
+        }else {
+            var params = {
+                'classCode':localStorage.getItem('CLASSCODE'),
+                'gradeType':currentType,
+                'schoolId':localStorage.getItem('SCHOOLID'),
+                'lessonNos':checkedLesson,
+                'studentNos':[]
+            };
+            ajaxRequest("POST",Study.s_gradeByLessonNo,params,getRankListSuccess)
+        }
 
 
     });
