@@ -439,7 +439,8 @@ $(function(){
         ajax_S(url.s_nobd,{'StudentCode': sessionStorage.stuNumber ,'wechatId': sessionStorage.openid},function(e){
           if(e.result){
               layer.msg('解绑成功');
-              location.reload()
+              localStorage.clear();
+              location.reload();
           }
         })
     });
