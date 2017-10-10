@@ -266,18 +266,21 @@ $(function(){
                     $(".no-data").hide();
                     layer.close(loading);
                     $(".main-content").show();
+                    $('.share-big').show();
                 });
             }else{
                 // $('.hwEmpty p').html("您没有已交作业哦~");
                 $('.main-content').hide();
                 layer.close(loading);
                 $('.no-data').show();
+                $('.share-big').hide();
             }
         }else{
             console.log("err:"+JSON.stringify(msg));
             $('.main-content').hide();
             layer.close(loading);
             $('.no-data').show();
+            $('.share-big').hide();
         }
         // layer.close(loading);
     }
