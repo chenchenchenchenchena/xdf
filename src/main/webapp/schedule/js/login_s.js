@@ -440,7 +440,11 @@ $(function(){
           if(e.result){
               layer.msg('解绑成功');
               localStorage.clear();
-              location.reload();
+              ajax_S(url.u_loout,{'sid':localStorage.SId,'returnUrl':url.t_back},function(Json){
+                if(Json.result){
+                      location.reload();
+                }
+            })
           }
         })
     });
