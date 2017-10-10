@@ -207,7 +207,7 @@ $(function () {
         location.href = 'common_ts.html'
     });
 //家长查看成绩排行
-    $(document).on("click",".rank-btn",function () {
+    $(document).on("touchend",".rank-btn",function () {
         localStorage.CLASSCODE=$(this).attr("classcode");
         localStorage.SCHOOLID=$(this).attr("schoolid");
         var rankData={
@@ -231,17 +231,17 @@ $(function () {
         });
     })
 
-    $(".classNumTime ul").on("click", "li", function () {
+    $(".classNumTime ul").on("touchend", "li", function () {
         $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
     })
-    $(document).on("click",".rank-btn",function () {
+    $(document).on("touchend",".rank-btn",function () {
         $(".mask").show();
         $("body,html").css({"width": "100%", "height": "100%", "overflow": "hidden"})
        /* $(".classNumTime").show();*/
         $(".classNumTime").css("animation", "move 0.3s linear");
         $(".classNumTime").css("bottom", "0px");
     })
-    $(document).on("click",".classNumTime p span",function () {
+    $(document).on("touchend",".classNumTime p span",function () {
         $(".mask").hide();
         $("body,html").css({"width": "", "height": "", "overflow": ""});
         /*$(".classNumTime").hide();*/
@@ -249,7 +249,7 @@ $(function () {
         $(".classNumTime").css("bottom", "-440px");
         $(".classNumTime ul").html(" ");
     })
-    $(document).on("click",".mask",function () {
+    $(document).on("touchend",".mask",function () {
         $(".mask").hide();
         $("body,html").css({"width": "", "height": "", "overflow": ""});
         /*$(".classNumTime").hide();*/
@@ -257,7 +257,7 @@ $(function () {
         $(".classNumTime").css("bottom", "-440px");
         $(".classNumTime ul").html(" ");
     })
-    $(document).on("click",".confirmBtn",function () {
+    $(document).on("touchend",".confirmBtn",function () {
          if($(".classNumTime ul li").hasClass("chooseClassActive")){
              sessionStorage.lessonNo="["+$(".chooseClassActive .lessonNo").html()+"]";
             location.href="sharedranking_t.html?testState="+$(".tab-active").attr("tcode")+"&checkedTypeName="+$(".tab-active").html()+"&type=student";
