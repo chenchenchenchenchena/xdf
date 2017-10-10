@@ -4,6 +4,30 @@
 */
 
 $(function(){
+    if(!sessionStorage.openid){
+        wechatCode(location.href);
+    };
+
+    if(!localStorage.terEmail){
+            var WXnum  = {
+                'wechatId':sessionStorage.openid
+             };
+            ajax_S(url.s_seac,WXnum,function(e){
+                if(e.result==true){
+                    if(!localStorage.userId_stu){
+                        location.href = 'login_s.html'
+                    }
+                    sessionStorage.stuNumber = e.data.studentNo;
+                    sessionStorage.schoolId = e.data.schoolId;
+                    sessionStorage.studentName = e.data.studentName;
+                    sessionStorage.timetoday = new Date().format("yyyy-MM-dd")
+                    location.href = "studentInfo.html?remark=2&studentNo=" + sessionStorage.stuNum + "&schoolId=" + sessionStorage.schoolId+"&tCode=1&studentName=" + sessionStorage.studentName;
+                }else{
+                    location.href = 'login_s.html'
+                }
+
+            });
+    }
 
     var less_need = {
         'email':localStorage.terEmail,
@@ -25,7 +49,7 @@ $(function(){
                 $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
                 $('.canvs_more li').eq(0).siblings().remove();
                 for(var i = 0;i<e.data.length;i++){
-                    $('.canvs_more ul').append('<li><span>'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+e.data[i].classcommitReplyt*100+'%</span><span>'+e.data[i].classcorrectReplyt*100+'%</span><span>'+e.data[i].classDzCorcsReplyt*100+'%</span></li>')
+                    $('.canvs_more ul').append('<li><span>'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
                 }
             }else{
                 $('.no-data').show();
