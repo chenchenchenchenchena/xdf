@@ -176,6 +176,8 @@ $(function () {
 		layer.close(layer6);
 		alert("1");
 		var deName=that.find("dd").html();
+		alert(that+"3t");
+		alert(that.find("dd")+"p");
 		alert(deName+"1");
 		that.find(".flag").html(4);
 
