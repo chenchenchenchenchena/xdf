@@ -174,6 +174,7 @@ $(function () {
 	})
 	$(".deleteScore button").eq(1).click(function () {
 		layer.close(layer6);
+		alert("1");
 		var deName=that.find("dd").html();
 		alert(deName+"1");
 		that.find(".flag").html(4);
