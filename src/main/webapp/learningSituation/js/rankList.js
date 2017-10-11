@@ -220,7 +220,6 @@ $(function(){
         $(".main-content>table>tbody").html(" ");
         if(msg.code==200){
             if(msg.data!='undefined' && msg.data.length>0){
-                alert(JSON.stringify(msg.data));
                 var datas = msg.data;
                 var rankTitleHtml = '<tr><th class="check-tr"><i id="check-all" class="check-box checked"></i></th><th>排名</th><th>姓名</th><th>本次分数</th><th>分数浮动</th>'
                     +'<th>名次浮动</th><th class="change-day"><img  src="images/change_day.png" alt="分享"/></th></tr>';
