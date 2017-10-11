@@ -174,25 +174,19 @@ $(function () {
 	})
 	$(".deleteScore button").eq(1).click(function () {
 		layer.close(layer6);
-		alert("1");
-		var deName=that.find("dd").html();
-		alert(deName+"1");
-		that.find(".flag").html(4);
+		var deName=that.siblings("dd").html();
+		that.siblings(".flag").html(4);
 
 		if (deName.length > 2) {
-			alert(">2");
 			var avater = deName.substring(deName.length - 2, deName.length);
-			that.find("dt").html(avater)
+			that.html(avater)
 		} else {
-			alert("<2");
 			var avater = deName;
-			that.find("dt").html(avater);
+			that.html(avater);
 		}
-		alert("ok");
-		alert(that.find("dt").html());
 		var del={
-			"studentNo":that.find(".code").html(),
-			"flag":that.find(".flag").html()
+			"studentNo":that.siblings(".code").html(),
+			"flag":that.siblings(".flag").html()
 		}
 		student.push(del);
 	})
