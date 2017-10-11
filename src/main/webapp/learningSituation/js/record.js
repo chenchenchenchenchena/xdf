@@ -155,7 +155,7 @@ $(function () {
 		});
 		start = new Date().getTime();
 	})
-	$(document).on("touchend",".scoreList dl",function (event) {
+	$(document).on("touchend",".scoreList dl dt",function (event) {
 		end = new Date().getTime();
 		that=$(this);
 		if((end-start)>1000){
