@@ -37,9 +37,9 @@ $(function(){
     function homework(){
         ajax_S(url.t_houehome,less_need,function(e){
             if(e.result!=false&&e.data.length!=0){
-                cnv('can_o',e.sumcommitReplyt*100,'#ffbb37')
-                cnv('can_t',e.sdpfsumReplyt*100,'#ff6a6a')
-                cnv('can_h',e.dzsumcorrectReplyt*100,'#6ab4ff')
+                cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37')
+                cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a')
+                cnv('can_h',parseInt(e.dzsumcorrectReplyt*100),'#6ab4ff')
                 //提交率
                 $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt*100)+'%')
                 $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt*100)+'%')
