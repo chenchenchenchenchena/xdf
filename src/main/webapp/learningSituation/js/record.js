@@ -169,6 +169,20 @@ $(function () {
 			})
 		}
 	})
+	$(document).on("touchend",".scoreList dl dt",function (event) {
+		end = new Date().getTime();
+		that=$(this);
+		if((end-start)>1000){
+			layer6=layer.open({
+				type: 1,
+				area: ['548px', '345px'],
+				shade:[0.2,'#000'],
+				title:'',
+				skin: '',
+				content:$(".deleteScore")
+			})
+		}
+	})
 	$(".deleteScore button").eq(0).click(function () {
 		layer.close(layer6);
 	})
