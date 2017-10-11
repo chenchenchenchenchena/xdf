@@ -175,14 +175,20 @@ $(function () {
 	$(".deleteScore button").eq(1).click(function () {
 		layer.close(layer6);
 		var deName=that.find("dd").html();
+		alert(deName+"1");
 		that.find(".flag").html(4);
+
 		if (deName.length > 2) {
+			alert(">2");
 			var avater = deName.substring(deName.length - 2, deName.length);
 			that.find("dt").html(avater)
 		} else {
+			alert("<2");
 			var avater = deName;
 			that.find("dt").html(avater);
 		}
+		alert("ok");
+		alert(that.find("dt").html());
 		var del={
 			"studentNo":that.find(".code").html(),
 			"flag":that.find(".flag").html()
