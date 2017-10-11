@@ -124,7 +124,7 @@ $(function(){
             ctx.arc(W/2,H/2,80,0,Math.PI*2,false);
             ctx.stroke();
             
-            var r = bian*4.5*Math.PI/180;
+            var r = bian*2*Math.PI/100;
             ctx.beginPath();
             var linear = ctx.createLinearGradient(100,100,200,100); 
             linear.addColorStop(0,color); 
