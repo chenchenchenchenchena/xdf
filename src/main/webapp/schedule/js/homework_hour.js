@@ -45,6 +45,9 @@ $(function(){
                 $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt*100)+'%')
                 //批复率
                 $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt*100)+'%')
+                if(parseInt(e.sdpfsumReplyt*100)==0){
+                    $('.sdpfsumReplyt').siblings('p').html('电子：0%')
+                }
                 //正确率
                 $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
                 $('.canvs_more li').eq(0).siblings().remove();
