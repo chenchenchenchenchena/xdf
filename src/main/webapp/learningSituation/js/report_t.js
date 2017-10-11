@@ -1,7 +1,7 @@
 $(function(){
-    if(!sessionStorage.openid){
-        wechatCode(location.href);
-    };
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href);
+    // };
     if(!localStorage.terEmail){
             var WXnum  = {
                 'wechatId':sessionStorage.openid
