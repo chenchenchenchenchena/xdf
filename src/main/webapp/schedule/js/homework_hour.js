@@ -65,8 +65,13 @@ $(function(){
     function lessontime(){
         //获取月课时 日课时
         ajax_S(url.t_hour,less_need,function(e){
-            $('.monthHours').html(e.Data[0].monthHours)
-            $('.lessonHours').html(e.Data[0].lessonHours)
+            if(e.Data==undefined){
+                $('.monthHours').html('0')
+                $('.lessonHours').html('0')
+            }else{
+                $('.monthHours').html(e.Data[0].monthHours)
+                $('.lessonHours').html(e.Data[0].lessonHours)
+            }
         })
         //按月获取月课时
         ajax_S(url.t_hourmonth,less_need,function(e){
