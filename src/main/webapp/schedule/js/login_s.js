@@ -178,19 +178,12 @@ $(function(){
                 $('.card').hide();
                 $('.studentTitle').hide();
                 $('.inputBox').hide();
-                $('.enter').show();
+                $('.enter').hide();
                 $('.searchTwo li').eq(0).html('关联结果：');
                 $('.stuNum li').eq(1).remove();
                 $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">姓名</span><span class="stu_num">'+e.data.studentName+'</span></li>');
                 $('.stuNum').append('<li class="new_S"><span  style="display:inline-block;width:2rem;text-align:right;">手机号</span><span class="stu_num">'+e.data.mobile+'</span></li>');
                 $('.searchTwo').css('margin-top','.5rem');
-                if(e.data.relatedState=='1'){
-                    $('.Relation').html('取消关联')
-                }else{
-                    $('.Relation').html('确认关联')
-
-                }
-                $('.enter').hide()
             }
         }
     });
