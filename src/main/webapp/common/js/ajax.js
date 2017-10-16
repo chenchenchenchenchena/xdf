@@ -106,6 +106,7 @@ var Study = {
     't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
     't_self':url_o+'teacherAnalysis/queryScoreReportByTeacherEmail.do',  //老师查看班级成绩
     't_getStudyDate':url_o+'teacherAnalysis/getStudyDate.do',   //学情成绩排名时间获取-学情
+    's_getStudyDate':url_o+'studentData/getStudyDate.do',   //学情成绩排名时间获取-学情
     's_gradeByLessonNo':url_o+'teacherAnalysis/getStudentFloatGradeByLessonNo.do'//查看成绩排行榜
 };
 var Global = {
