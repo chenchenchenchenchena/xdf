@@ -102,7 +102,7 @@ $(function () {
             } else {
                 $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
             }
-            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
+            $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
             console.log(decodeURI(e.replyDesc));
 
             var arr = decodeURIComponent(e.replyDesc).split('|>|');
@@ -144,7 +144,7 @@ $(function () {
             console.log(e);
             classYHname = e.className;
             $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
-            $('.kon p:last-of-type').html(decodeURIComponent(e.knowledgePoint));
+            $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
             $('.hwCon').eq(0).html(decodeURIComponent(e.description));
             // var stu = e.File.StudentHomeworkFile;
             // var tea = e.File.TeacherHomeworkFile;
