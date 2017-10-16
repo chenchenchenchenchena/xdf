@@ -37,10 +37,10 @@ if (window.location.host == onlineUrl) {//正式环境
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         //新的appid
         sessionStorage.signal = 0;
-        // appId =  'wx559791e14e9ce521';
-        // secreT = 'baa4373d5a8750c69b9d1655a2e31370';
-        appId =  'wx67e16b7247bde1a8';      //双师东方
-        secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
+        appId =  'wx559791e14e9ce521';
+        secreT = 'baa4373d5a8750c69b9d1655a2e31370';
+        // appId =  'wx67e16b7247bde1a8';      //双师东方
+        // secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
     }else{
         sessionStorage.removeItem('signal');
     }
