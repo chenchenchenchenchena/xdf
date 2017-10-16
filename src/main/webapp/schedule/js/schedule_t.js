@@ -124,7 +124,7 @@ function stusea(e){
         $('.month_hour i').html('0');
     }else{
         var moth = e.data.Data;
-        $('.month_hour i').html(moth.length*2);
+        $('.month_hour i').html(moth.length);
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
     }
