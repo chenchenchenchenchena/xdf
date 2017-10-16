@@ -217,6 +217,7 @@ $(function () {
             "studentNo":sessionStorage.stuNumber
         }
         console.log(rankData);
+        localStorage.removeItem('studentNos');
         ajaxRequest("POST",Study.s_getStudyDate,rankData,function (e) {
             if(e.code=="200"){
                 if(e.data!=undefined&&e.data.length!=0){
