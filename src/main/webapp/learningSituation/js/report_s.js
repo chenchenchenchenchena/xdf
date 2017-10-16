@@ -213,10 +213,11 @@ $(function () {
         var rankData={
             "classCode":$(this).attr("classcode"),
             "tCode":$(".tab-active").attr("tcode"),
-            "schoolId":$(this).attr("schoolid")
+            "schoolId":$(this).attr("schoolid"),
+            "studentNo":sessionStorage.stuNumber
         }
         console.log(rankData);
-        ajaxRequest("POST",Study.t_getStudyDate,rankData,function (e) {
+        ajaxRequest("POST",Study.s_getStudyDate,rankData,function (e) {
             if(e.code=="200"){
                 if(e.data!=undefined&&e.data.length!=0){
                      for (var i = 0; i < e.data.length; i++) {
