@@ -530,7 +530,7 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 timeds = setInterval(function () {
                     timeInedex++
-                    if(timeInedex == 20){
+                    if(timeInedex == 50){
                         djs(10, function () {
                             isCanStopRecord = true;
                             stopRecordBack(this_);
