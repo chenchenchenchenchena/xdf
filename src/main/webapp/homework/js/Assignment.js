@@ -492,6 +492,8 @@ $(function () {
     var START;
     var END;
     var recordTimer;
+    var isCanStopRecord = false;
+    var isCanStartRecord = true;
     //语音
     $('.Voice').on('touchend', function () {
         if (recordCount >= 3) {
@@ -514,9 +516,13 @@ $(function () {
         }
     });
     $('#record').on('touchstart', function (event) {
+        if(!isCanStartRecord){
+            return;
+        }
         START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
+        var this_ = $(this);
         $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
         wx.startRecord({
@@ -524,6 +530,11 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 timeds = setInterval(function () {
                     timeInedex++
+                    if(timeInedex == 50){
+                        djs(10, function () {
+                            stopRecordBack(this_);
+                        });
+                    }
                 }, 1000);
             },
             cancel: function () {
@@ -533,15 +544,55 @@ $(function () {
                         clearInterval(timeds);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
+                    }
+                });
+            },
+            fail: function () {
+                alert("+++++++");
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
                     }
                 });
             }
         });
     });
+    function djs(t, callback) {
+        var ts = setInterval(function () {
+
+            layer.msg(""+ts);
+            t -= 1;
+            if (t == 0) {
+                clearInterval(ts);
+                callback(callback);
+            }
+        },1000)
+    }
+
+    //10s后弹出 xx
+    //$(function () {
+    //
+    //});
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
-        $(this).siblings('img').attr('src', 'images/C04-03.png');
+        var this_ = $(this);
+        stopRecordBack(this_);
+    });
+
+    function stopRecordBack(this_){
+        if(!isCanStopRecord){
+            return;
+        }
+        this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 1000) {
@@ -552,6 +603,8 @@ $(function () {
             layer.msg("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
+                    isCanStartRecord = true;
+                    isCanStopRecord = false;
                 }
             });
             return;
@@ -567,10 +620,11 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                isCanStartRecord = true;
+                isCanStopRecord = false;
             }
         });
-
-    });
+    }
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
