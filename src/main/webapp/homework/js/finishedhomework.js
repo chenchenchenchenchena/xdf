@@ -20,7 +20,7 @@ $(function () {
     var diskFilePath;
     var uploadUser = sessionStorage.studentName;
     var layer1, layer2, loading;
-
+    var subtime = 1;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -65,18 +65,21 @@ $(function () {
             replyStatus = datas.replyStatus;
             var myAnswerDes = decodeURIComponent(datas.description);
             if (replyStatus == 1) {//已批复
-                $('.answer').hide();
+                // $('.answer').hide();
 
                 /*******作业答案*******/
                 if (myAnswerDes != "") {
-                    $('.hmAnswer .anDes').html(myAnswerDes).show();
+                    var homeworkText = myAnswerDes.split('|>|');
+                    for(var p = 0;p<homeworkText.length;p++){
+                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(p+1)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                    }
                 } else {
                     $('.hmAnswer .anDes').hide();
                 }
 
                 // 优秀
                 if (datas.tag == 1) {
-                    $('.hw_status').addClass('hw_status_s');
+                    $('.hw_status:last').addClass('hw_status_s');
                 } else {
                     $('.hw_status').removeClass('hw_status_s');
                 }
@@ -872,12 +875,22 @@ $(function () {
         var fileStuhomeworks;
 
         fileStuhomeworks = fileParams.concat(voiceFileParams);
-
+        var homeText = '';
+        for(var o = 0;o<$('.hmAnswer').length;o++){
+            var Text = $('.hmAnswer').eq(o).find('.anDes').html()
+            if(Text!=undefined||Text!=null||Text!=''){
+                homeText+=$('.hmAnswer').eq(o).find('.anDes').html()+'|>|';
+            }else{
+                homeText = '|>|'
+            }
+        }
+        homeText+=$('.teBox').val();
         var reqData = {
             "id": GetRequest('id'),
-            "description": encodeURI($('.teBox').val()),
+            "description": encodeURI(homeText),
             "fileStuhomeworks": fileStuhomeworks,
-            "modify": true
+            "modify": true,
+            'commitTimes':$('.hmAnswer').length
         };
         // console.log(JSON.stringify(reqData));
         loading = layer.load();
