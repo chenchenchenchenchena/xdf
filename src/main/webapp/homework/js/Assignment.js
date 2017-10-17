@@ -522,6 +522,7 @@ $(function () {
         START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
+        var this_ = $(this);
         $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
         wx.startRecord({
@@ -531,7 +532,7 @@ $(function () {
                     timeInedex++
                     if(timeInedex == 50){
                         djs(10, function () {
-                            stopRecordBack($(this));
+                            stopRecordBack(this_);
                         });
                     }
                 }, 1000);
@@ -543,7 +544,7 @@ $(function () {
                         clearInterval(timeds);
                         $('.song_s').hide();
                         $('.big_whit').hide();
-                        $(this).siblings('img').attr('src', 'images/C04-03.png');
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
                     }
@@ -556,7 +557,7 @@ $(function () {
                         clearInterval(timeds);
                         $('.song_s').hide();
                         $('.big_whit').hide();
-                        $(this).siblings('img').attr('src', 'images/C04-03.png');
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
                     }
