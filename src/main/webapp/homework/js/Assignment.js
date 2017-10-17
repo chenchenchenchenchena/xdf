@@ -524,6 +524,11 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 timeds = setInterval(function () {
                     timeInedex++
+                    if(timeInedex == 50){
+                        djs(10, function () {
+                            stopRecordBack();
+                        });
+                    }
                 }, 1000);
             },
             cancel: function () {
@@ -535,12 +540,42 @@ $(function () {
                         $('.big_whit').hide();
                     }
                 });
+            },
+            fail: function () {
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(timeds);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                    }
+                });
             }
         });
     });
+    function djs(t, callback) {
+        var ts = setInterval(function () {
+
+            layer.msg(""+ts);
+            t -= 1;
+            if (t == 0) {
+                clearInterval(ts);
+                callback(callback);
+            }
+        },1000)
+    }
+
+    //10s后弹出 xx
+    //$(function () {
+    //
+    //});
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
+
+        stopRecordBack();
+    });
+
+    function stopRecordBack(){
         $(this).siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
@@ -569,8 +604,7 @@ $(function () {
                 $('.big_whit').hide();
             }
         });
-
-    });
+    }
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
