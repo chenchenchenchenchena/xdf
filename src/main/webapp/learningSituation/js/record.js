@@ -574,11 +574,12 @@ $(function () {
 					  "info":classmate
 					};
      	ajax_S(url.w_push,pushwei,pushMsg);
-   		location.href="report_t.html";
+   		
      })
     function pushMsg(e){
     	if(e.result){
-    		console.log(e)
+			console.log(e)
+			location.href="report_t.html";
     	}else{
     		console.log(message);
     	}
