@@ -492,6 +492,8 @@ $(function () {
     var START;
     var END;
     var recordTimer;
+    var isCanStopRecord = false;
+    var isCanStartRecord = true;
     //语音
     $('.Voice').on('touchend', function () {
         if (recordCount >= 3) {
@@ -514,6 +516,9 @@ $(function () {
         }
     });
     $('#record').on('touchstart', function (event) {
+        if(!isCanStartRecord){
+            return;
+        }
         START = new Date().getTime();
         Index_s++;
         timeInedex = 0;
@@ -526,7 +531,7 @@ $(function () {
                     timeInedex++
                     if(timeInedex == 50){
                         djs(10, function () {
-                            stopRecordBack();
+                            stopRecordBack($(this));
                         });
                     }
                 }, 1000);
@@ -538,6 +543,9 @@ $(function () {
                         clearInterval(timeds);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $(this).siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
                     }
                 });
             },
@@ -547,6 +555,9 @@ $(function () {
                         clearInterval(timeds);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $(this).siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
                     }
                 });
             }
@@ -571,12 +582,15 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
-
-        stopRecordBack();
+        var this_ = $(this);
+        stopRecordBack(this_);
     });
 
-    function stopRecordBack(){
-        $(this).siblings('img').attr('src', 'images/C04-03.png');
+    function stopRecordBack(this_){
+        if(!isCanStopRecord){
+            return;
+        }
+        this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
         END = new Date().getTime();
         if ((END - START) < 1000) {
@@ -587,6 +601,8 @@ $(function () {
             layer.msg("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
+                    isCanStartRecord = true;
+                    isCanStopRecord = false;
                 }
             });
             return;
@@ -602,6 +618,8 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                isCanStartRecord = true;
+                isCanStopRecord = false;
             }
         });
     }
