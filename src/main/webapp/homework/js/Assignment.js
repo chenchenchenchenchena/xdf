@@ -550,6 +550,7 @@ $(function () {
                 });
             },
             fail: function () {
+                alert("+++++++");
                 wx.stopRecord({
                     success: function (res) {
                         clearInterval(timeds);
