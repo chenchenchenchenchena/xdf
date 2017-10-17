@@ -71,7 +71,7 @@ $(function () {
                 if (myAnswerDes != "") {
                     var homeworkText = myAnswerDes.split('|>|');
                     for(var p = 0;p<homeworkText.length;p++){
-                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(p+1)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(p+2)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
                     }
                 } else {
                     $('.hmAnswer .anDes').hide();
@@ -134,10 +134,11 @@ $(function () {
                 });
                 //学生答案信息--语音，图片
                 $.each(datas.stuHomeworkFiles, function (i, paths) {
-                    allFilePath.fileSfullPath.push({"fullPath": paths.diskFilePath});
+                    allFilePath.fileSfullPath.push({"fullPath": paths.diskFilePath,"fileTimes": paths.commitTimes});
                 });
                 //老师批复作业信息---语音，图片
-                $.each(datas.teaHomeworkReplyFiles, function (i, paths) {
+                $.each(datas.teaHomeworkReplyFiles, function (i, paths) {+
+                    
                     allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
                 });
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
@@ -177,13 +178,14 @@ $(function () {
             if (msg.data.fileS != "" && msg.data.fileS != null && msg.data.fileS != undefined) {
                 var str = "";//添加图片html
                 $.each(msg.data.fileS, function (i, paths) {
+                    var numLast = paths.fileTimes+1
                     var pathUrls = ['2', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址
                     console.log(i + "---" + pathUrls);
                     if (paths.fileType.indexOf("mp3") != -1) {
                         if (replyStatus == 1) {//已批复
                             voiceCount++;
-                            showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 2, "audio" + 2 + "" + voiceCount);
+                            showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + numLast, "audio" + numLast + "" + voiceCount);
                         } else {
                             //显示可修改语音布局
                             showRecordAudio(paths.playTime,url_o + paths.diskFilePath, $('#record_audio_box'), recordCount, 1);
@@ -201,7 +203,7 @@ $(function () {
                     } else {
                         //将图片文件显示到布局中
                         if (replyStatus == 1) {//已批复
-                            showImage(paths.fileUrl, "imagBox_" + 2,paths.thumbnail);
+                            showImage(paths.fileUrl, "imagBox_" + numLast,paths.thumbnail);
                         } else {
                             str += "<li><span class='stuImg' img-index='" + i + "'></span><img onerror=javascript:this.src='images/error-image.png' data-img='"+paths.fileUrl +"' src='" + paths.thumbnail+ "'/></li>";
                             // $(".notsubmit .imgBox").show();
@@ -889,8 +891,7 @@ $(function () {
             "id": GetRequest('id'),
             "description": encodeURI(homeText),
             "fileStuhomeworks": fileStuhomeworks,
-            "modify": true,
-            'commitTimes':$('.hmAnswer').length
+            'commitTimes':$('.hmAnswer').length+1
         };
         // console.log(JSON.stringify(reqData));
         loading = layer.load();
@@ -925,6 +926,7 @@ $(function () {
         layer.close(layer1);
         layer.close(layer2);
         if (msg.code == 200) {
+            homeText = '';
             //提交成功
             layer2 = layer.open({
                 type: 1,

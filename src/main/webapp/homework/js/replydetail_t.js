@@ -100,10 +100,14 @@ $(function () {
             if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
                 $('.anDes').eq(0).html("");
             } else {
-                $('.anDes').eq(0).html(decodeURIComponent(e.StudentAnswer));
+                var homeworkText = decodeURI( e.StudentAnswer).split('|>|');
+                console.log(homeworkText)
+                for(var p = 0;p<homeworkText.length;p++){
+                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul><div class="imgBox" id="imagBox_2" style="display:block;"></div></div></div>')
+                }
+                $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             }
             $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
-            console.log(decodeURI(e.replyDesc));
 
             var arr = decodeURIComponent(e.replyDesc).split('|>|');
             if (e.score == undefined || e.score == null || e.score == 'undefined') {
@@ -168,7 +172,7 @@ $(function () {
         var tea_t = e.File.TeacherHomeworkFile;//作业信息
         if (stu != undefined) {
             for (var a = 0; a < stu.length; a++) {
-                stuAnwersFiles.push({'fullPath': stu[a].diskFilePath});
+                stuAnwersFiles.push({'fullPath': stu[a].diskFilePath,'fileTimes': stu[a].commitTimes});
             }
         }
         if (tea_t != undefined) {
@@ -200,7 +204,6 @@ $(function () {
      */
     function getHwFilesSucess(e) {
         if (e.code == 200) {
-
             var stu = e.data.fileS;//学生答案
             var tea_t = e.data.fileT;//作业信息
             if (stu != undefined) {
@@ -208,7 +211,7 @@ $(function () {
                     if (stu[a].fileType == 'mp3') {
                         getAudioInfo([2, url_o + stu[a].relativePath, stu[a].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(1).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(stu[a].fileTimes).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
                     }
                 }
             }
