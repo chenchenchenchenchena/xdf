@@ -532,6 +532,7 @@ $(function () {
                     timeInedex++
                     if(timeInedex == 50){
                         djs(10, function () {
+                            isCanStopRecord = true;
                             stopRecordBack(this_);
                         });
                     }
@@ -551,7 +552,7 @@ $(function () {
                 });
             },
             fail: function () {
-                alert("+++++++");
+                layer.msg("+++++++");
                 wx.stopRecord({
                     success: function (res) {
                         clearInterval(timeds);
@@ -568,7 +569,7 @@ $(function () {
     function djs(t, callback) {
         var ts = setInterval(function () {
 
-            layer.msg(""+ts);
+            layer.msg(""+t);
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
@@ -585,6 +586,7 @@ $(function () {
     //松手结束录音
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
+        isCanStopRecord = true;
         stopRecordBack(this_);
     });
 
