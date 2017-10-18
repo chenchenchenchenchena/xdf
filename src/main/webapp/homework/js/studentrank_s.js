@@ -32,9 +32,11 @@ $(function(){
                             break;
                     }
                     //优秀
+                    var style_y = ''
                     var excellentTag = '';
                     if(items.tag==1){
                         excellentTag = 'excellent-bg';
+                        style_y = 'padding-right: 83px;'
                     }
                     //分数
                     var score;
@@ -43,10 +45,10 @@ $(function(){
                     }else{
                         score = items.score+"分";
                     }
-
+                    
                     var rankListHtml='<li><span class="rankleft"><i class="'+rankCss+'">'+parseInt(i+1)+'</i><i>'
                         +items.stuName.substr(-2,2)+'</i><i>'+items.stuName
-                        +'</i></span><span class="rankright"><i class="'+excellentTag+'"></i><i>'+items.updateTime.substr(0,16)+'</i></span><span class="score">'+score+'</span></li>';
+                        +'</i></span><span class="rankright"><i class="'+excellentTag+'"></i><i>'+items.updateTime.substr(0,16)+'</i></span><span class="score" style="'+style_y+'">'+score+'</span></li>';
                     $(".ranklist").append(rankListHtml);
                     $(".ranklist").show();
                     // layer.close(loading);

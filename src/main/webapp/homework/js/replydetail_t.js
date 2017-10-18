@@ -104,7 +104,12 @@ $(function () {
                 for(var p = 0;p<homeworkText.length;p++){
                     $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(p+3)+'" style="display:none;"></ul><div class="imgBox" id="imagBox_'+(p+3)+'" style="display:block;"></div></div></div>')
                 }
-                $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
+                if(sessionStorage.bangbang=='1'){
+                    $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')
+                }else{
+                    $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
+                }
+                
             }
             $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
 
@@ -428,7 +433,6 @@ $(function () {
         } else {
             need.tag = '1'
         }
-        alert($('.infoTitle span').css('color'))
         need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
