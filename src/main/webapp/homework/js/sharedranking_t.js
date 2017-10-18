@@ -19,7 +19,13 @@ $(function () {
         for (var i = 0; i < data.StudentHomeInfo.length; i++) {
             var music = '';
             var Img = '';
-            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学 <span style="float:right;font-size:40px;">'+data.StudentHomeInfo[i].score+'<i style="font-style:normal;font-size:25px;">分</i><img src="images/del_w.png" alt="" style="margin-left:20px;"></span></h4> </div><div class="answer_s"><p>' + decodeURIComponent(data.StudentHomeInfo[i].description) + '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div></div>';
+            if(data.StudentHomeInfo[i].score==''){
+                html_t = ''
+            }else{
+                html_t = '<i style="font-style:normal;font-size:25px;">分</i>'
+            }
+            var stuText = decodeURIComponent(data.StudentHomeInfo[i].description).split('|>|')
+            var hwsharedHtml = '<div class="homework_small"><div class="homework_small_title"><h4>' + data.StudentHomeInfo[i].studentName + '同学 <span style="float:right;font-size:40px;">'+data.StudentHomeInfo[i].score+''+html_t+'<img src="images/del_w.png" alt="" style="margin-left:20px;"></span></h4> </div><div class="answer_s"><p>' + stuText[stuText.length-1]+ '</p></div><div class="imgBox_s"><ul id="audio_' + i + '"></ul><div class="imgBox" id="imagBox_' + i + '" style="display:block;"></div></div></div>';
             $('.homework_big').append(hwsharedHtml);
             var Media = data.StudentHomeInfo[i].RevampFile;
             if (Media.length != 0) {

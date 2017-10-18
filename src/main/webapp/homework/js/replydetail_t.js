@@ -63,7 +63,7 @@ $(function () {
 
     //优秀作业
 
-    $('.infoTitle span').on('touchend', function () {
+    $(document).on('touchend', '.infoTitle span',function () {
         if ($(this).css('color') == 'rgb(255, 106, 106)') {
             $(this).css({
                 'color': '#fff',
