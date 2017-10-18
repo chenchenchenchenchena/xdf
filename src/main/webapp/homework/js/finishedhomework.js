@@ -71,13 +71,13 @@ $(function () {
                 /*******作业答案*******/
                 if (myAnswerDes != "") {
                     var homeworkText = myAnswerDes.split('|>|');
+                    console.log(homeworkText)
                     for(var p = 0;p<homeworkText.length;p++){
-                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(p+2)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(parseFloat(p)+3)+'" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(parseFloat(p)+3)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
                     }
                 } else {
                     buer_s = true;
                     $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes"></div><div><ul id="audio_0" style="display:none;"></ul> <div class="imgBox" id="imagBox_0" style="display:none;"></div></div><i class="hw_status"></i></div>')
-                    
                 }
 
                 // 优秀
@@ -182,9 +182,9 @@ $(function () {
                 var str = "";//添加图片html
                 $.each(msg.data.fileS, function (i, paths) {
                     if(buer_s==true){
-                        var numLast = 0
+                        var numLast = 0;
                     }else{
-                     var numLast = paths.fileTimes+1
+                     var numLast = paths.fileTimes+2
                     }
                     var pathUrls = ['2', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址
