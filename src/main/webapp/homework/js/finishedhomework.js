@@ -21,6 +21,7 @@ $(function () {
     var uploadUser = sessionStorage.studentName;
     var layer1, layer2, loading;
     var subtime = 1;
+    var buer_s = false;
     //点击作业排行榜
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
@@ -74,7 +75,9 @@ $(function () {
                         $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(p+2)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
                     }
                 } else {
-                    $('.hmAnswer .anDes').hide();
+                    buer_s = true;
+                    $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes"></div><div><ul id="audio_0" style="display:none;"></ul> <div class="imgBox" id="imagBox_0" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                    
                 }
 
                 // 优秀
@@ -178,7 +181,11 @@ $(function () {
             if (msg.data.fileS != "" && msg.data.fileS != null && msg.data.fileS != undefined) {
                 var str = "";//添加图片html
                 $.each(msg.data.fileS, function (i, paths) {
-                    var numLast = paths.fileTimes+1
+                    if(buer_s==true){
+                        var numLast = 0
+                    }else{
+                     var numLast = paths.fileTimes+1
+                    }
                     var pathUrls = ['2', paths.diskFilePath, paths.fileType];
                     // 获取语音和图片的预览地址
                     console.log(i + "---" + pathUrls);
