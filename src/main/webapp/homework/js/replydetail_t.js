@@ -159,7 +159,7 @@ $(function () {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
             $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul id="audio_2" style="display:none;"></ul><div class="imgBox" id="imagBox_2" style="display:block;"></div></div></div>')
-            
+            $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             getFileInfo(e);
         // });
     }
@@ -415,7 +415,6 @@ $(function () {
             } else {
                 buer = true;
             }
-
         }
         if ($('.teBox').val() == '' && $('.notsubmit li').length == 0 && $('#record_audio_box li').length == 0 && buer == false && buer_last == false) {
             layer.msg('批复不能为空');
