@@ -897,11 +897,12 @@ $(function () {
         var reqData = {
             "id": GetRequest('id'),
             "description": encodeURI(homeText),
-            "modify":true,
             "fileStuhomeworks": fileStuhomeworks,
         };
         if($('.hmAnswer').length!=0){
             reqData.commitTimes = $('.hmAnswer').length+1
+        }else{
+            reqData.modify = true;
         }
         // console.log(JSON.stringify(reqData));
         loading = layer.load();
