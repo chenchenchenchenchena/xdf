@@ -427,6 +427,7 @@ $(function () {
         } else {
             need.tag = '1'
         }
+        alert($('.infoTitle span').css('color'))
         need.replyDesc = '';
         arr_s = arr_voice.concat(arr_image);
         need.fileInfo = arr_s;
