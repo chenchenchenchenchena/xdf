@@ -101,9 +101,8 @@ $(function () {
                 $('.anDes').eq(0).html("");
             } else {
                 var homeworkText = decodeURI( e.StudentAnswer).split('|>|');
-                console.log(homeworkText)
                 for(var p = 0;p<homeworkText.length;p++){
-                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_2" style="display:none;"></ul><div class="imgBox" id="imagBox_2" style="display:block;"></div></div></div>')
+                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(p+3)+'" style="display:none;"></ul><div class="imgBox" id="imagBox_'+(p+3)+'" style="display:block;"></div></div></div>')
                 }
                 $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             }
@@ -294,7 +293,8 @@ $(function () {
         } else {
             //将文件显示到布局中
             voiceCount++;
-            showAudio(playTime, diskFileUrl, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
+            var numa = flag+1
+            showAudio(playTime, diskFileUrl, $("#audio_" + numa), "audio" + numa + "" + voiceCount, 2);
         }
 
     }
