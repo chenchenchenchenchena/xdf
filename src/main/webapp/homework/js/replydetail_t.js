@@ -210,7 +210,7 @@ $(function () {
             if (stu != undefined) {
                 for (var a = 0; a < stu.length; a++) {
                     if (stu[a].fileType == 'mp3') {
-                        getAudioInfo([2, url_o + stu[a].relativePath, stu[a].playTime, "mp3"]);
+                        getAudioInfo([stu[a].fileTimes, url_o + stu[a].relativePath, stu[a].playTime, "mp3"]);
                     } else {
                         $('.imgBox').eq(stu[a].fileTimes).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
                     }
@@ -293,7 +293,8 @@ $(function () {
         } else {
             //将文件显示到布局中
             voiceCount++;
-            var numa = flag+1
+            var numa = flag+2;
+            console.log(flag)
             showAudio(playTime, diskFileUrl, $("#audio_" + numa), "audio" + numa + "" + voiceCount, 2);
         }
 
