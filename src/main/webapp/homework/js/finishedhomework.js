@@ -897,9 +897,12 @@ $(function () {
         var reqData = {
             "id": GetRequest('id'),
             "description": encodeURI(homeText),
+            "modify":true,
             "fileStuhomeworks": fileStuhomeworks,
-            'commitTimes':$('.hmAnswer').length+1
         };
+        if($('.hmAnswer').length!=0){
+            reqData.commitTimes = $('.hmAnswer').length+1
+        }
         // console.log(JSON.stringify(reqData));
         loading = layer.load();
         $('#HWsubmit,.confirm-sub .confirmBtn').attr('disabled', "true");//禁用按钮
