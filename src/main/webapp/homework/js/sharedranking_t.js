@@ -30,10 +30,12 @@ $(function () {
             var Media = data.StudentHomeInfo[i].RevampFile;
             if (Media.length != 0) {
                 for (var k = 0; k < Media.length; k++) {
-                    if (Media[k].fileType == 'mp3') {
+                    console.log(Media[k].commitTimes)
+                    console.log(stuText.length)
+                    if (Media[k].fileType == 'mp3'&& Media[k].commitTimes==stuText.length) {
                         voiceCount++;
                         showAudio(Media[k].playTime, url_o + Media[k].url, "audio_" + i, "audio" + i + "" + voiceCount);
-                    } else {
+                    } else if(Media[k].commitTimes==stuText.length){
                         // Img += '<div><img src="' + Media[k].url + '" alt=""></div>'
                         showImage(url_o + Media[k].url, "imagBox_" + i,Media[k].thumbnail);
                     }
