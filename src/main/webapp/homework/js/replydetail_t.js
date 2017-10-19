@@ -42,7 +42,11 @@ $(function () {
     if (GetRequest('Id')) {
         sessionStorage.Teatwo = '0'
     }
-
+    //权限判断
+    if(localStorage.mastTeater){
+        $('.answer:last').css('display','none');
+        alert('您当前的账户为主讲老师，暂仅能查看哦。')
+    }
     //输入验证
     $('.teBox').on('keyup change', function () {
         if($(this).val().indexOf('"')!=-1){
@@ -64,6 +68,10 @@ $(function () {
     //优秀作业
 
     $(document).on('touchend', '.infoTitle span',function () {
+        if(localStorage.mastTeater){
+            alert('您当前的账户为主讲老师，暂仅能查看哦。')
+            return false;
+        }
         if ($(this).css('color') == 'rgb(255, 106, 106)') {
             $(this).css({
                 'color': '#fff',
@@ -119,7 +127,7 @@ $(function () {
             }
             for (var L = 0; L < arr.length; L++) {
                 if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
-                    if (L == arr.length - 1) {
+                    if (L == arr.length - 1&& e.score!='') {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     } else {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');

@@ -16,6 +16,7 @@ $(function() {
     };
     $('.frend').hide();
     var arr;
+  
     ajax_S(homework_s.t_more, need, function (e) {
         var data = e.data;
         arr = e.data.notCommit;
@@ -143,6 +144,10 @@ $(function() {
     });
 
     $('.noreplyTitle span:last-of-type').on('touchend', function () {
+        if(localStorage.mastTeater){
+            alert('您当前的账户为主讲老师，暂仅能查看哦。')
+            return false;
+        }
         if($(this).attr('one')){
             layer.msg('已催交成功，1分钟内仅能催交一次')
             return false;
@@ -191,6 +196,10 @@ $(function() {
     });
 
     $('.frend input').on('tap',function(){
+        if(localStorage.mastTeater){
+            alert('您当前的账户为主讲老师，暂仅能查看哦。')
+            return false;
+        }
         location.href = 'sharedranking_t.html?tid='+sessionStorage.Tid
     });
 

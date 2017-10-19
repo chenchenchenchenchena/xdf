@@ -25,14 +25,15 @@ $(function(){
         });
     }
     //tab
+    $('.hwHeader').on('touchend',function(){
+        if(localStorage.mastTeater){
+            alert('您当前的账户为主讲老师，暂仅能查看哦。')
+        }else{
+            $(this).find('a').attr('href','workIndex.html')
+        }
+    })
 	$(document).on('touchend','.firstList>p',function(){
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
-            // if($('.firstList.').eq($(this).parent().index()).find('.state_st').length!=0){
-            //     ajaxRequest('post',homework_s.t_stat,{teacherEmail:'hanqifan@xdf.cn',classCode:$('.firstList').eq($(this).parent().index()).attr('classCode'),schoolId:'73'},function(e){
-            //
-            //     });
-            // }
-            // $('.firstList').eq($(this).parent().index()).find('.state_st').hide();
             $('.firstList').eq($(this).parent().index()).find('ul').show();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
         }else{
@@ -53,6 +54,10 @@ $(function(){
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
                 if(begin_s-move_s>=20){
+                    if(localStorage.mastTeater){
+                        alert('您当前的账户为主讲老师，暂仅能查看哦。')
+                        return false;
+                    }
                     $(this).siblings().css('margin-left','0px');
                     $(this).siblings().find('.remove_s').css('right','-270px');
                     $(this).css('margin-left','-181px');

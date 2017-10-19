@@ -2,7 +2,7 @@
  * Created by use1 on 2017-07-10.
  */
 $(function () {
-    if(!sessionStorage.openid){
+    // if(!sessionStorage.openid){
         wechatCode(location.href);
     };
     var WXnum  = {
