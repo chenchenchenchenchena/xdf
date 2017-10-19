@@ -168,6 +168,10 @@ $.ajax({
 
 // 绑定点击事件
 $(document).on('touchend',"#scanQRCode",function() {
+    if(localStorage.mastTeater){
+        alert('您当前的账户为主讲老师，暂仅能查看哦。')
+        return false;
+    }
     // alert(0)
     wx.scanQRCode({
         needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
