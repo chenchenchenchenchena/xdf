@@ -299,7 +299,10 @@ $(function () {
             //将文件显示到布局中
             voiceCount++;
             var numa = flag+2;
-            console.log(flag)
+            if(flag==1){
+                 numa = 1;
+            }
+            console.log(numa)
             showAudio(playTime, diskFileUrl, $("#audio_" + numa), "audio" + numa + "" + voiceCount, 2);
         }
 
