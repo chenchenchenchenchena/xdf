@@ -239,10 +239,10 @@ $(function () {
                     console.log(pathUrls);
                     if (paths.fileType.indexOf("mp3") != -1) {
                         voiceCount++;
-                        showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 3, "audio" + 3 + "" + voiceCount);
+                        showAudio(paths.playTime,url_o + paths.diskFilePath, "audio_" + 0, "audio" +0 + "" + voiceCount);
                     } else {
                         //将文件显示到布局中
-                        showImage(paths.fileUrl, "imagBox_" + 3,paths.thumbnail);
+                        showImage(paths.fileUrl, "imagBox_" + 0,paths.thumbnail);
                     }
                 });
             }
