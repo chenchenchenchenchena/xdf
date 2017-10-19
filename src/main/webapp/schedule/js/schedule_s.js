@@ -142,6 +142,7 @@ $(function() {
             $('.N-data').show();
             $('.month_hour i').html('0');
         } else {
+            setInterval(menu_int, 1000);
             var moth = e.data.Data;
             $('.month_hour i').html(moth.length);
             for (var i = 0; i < moth.length; i++) {
@@ -302,6 +303,10 @@ $(function() {
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
         if (touchtend <= 1) {
+            if($('#now2')){
+                alert('日历控件加载失败，请刷新后重试');
+                return false;
+            }
             setTimeout(function () {
                 $('.CHour_s_title span:last-of-type').html('周' + $('#top_week').html().substring(2, 3))
             }, 1000)
@@ -419,7 +424,6 @@ $(function() {
         }
     }
 
-    setInterval(menu_int, 1000);
 
     $('.js_jin').click(function(){
         var time1 = new Date().format("yyyy-MM-dd");
