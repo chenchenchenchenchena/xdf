@@ -17,6 +17,7 @@ $(function(){
     var reqData = {
         'tableName':"studycase_grade_type"
     };
+    
     ajaxRequest('POST', url.t_dictionary,reqData, function(e){
         if(e.code==200){
             var tabTypes =  e.data;
@@ -34,7 +35,6 @@ $(function(){
             $('.tab-title').html(tabStr);
         }
     });
-
     getRankList(currentType);//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
@@ -52,9 +52,12 @@ $(function(){
         sessionStorage.removeItem('lessonNo');
 
     });
+    if(localStorage.mastTeater){
+        $('.shareBtn').hide();
+    }
     //链接到分享页
     var checkStuArry = [];// 传递选中学生号
-    $('.shareBtn').click(function () {
+    $('.shareBtn').on('touchend',function () {
         if ($('.intro-test tr td .checked').length <= 0) {
             layer.msg("请选择要分享的学员");
             return;
@@ -268,6 +271,9 @@ $(function(){
                     $(".main-content").show();
                     $('.share-big').show();
                 });
+                if(localStorage.mastTeater){
+                     $('.check-tr,.check-td').hide();
+                }
             }else{
                 // $('.hwEmpty p').html("您没有已交作业哦~");
                 $('.main-content').hide();

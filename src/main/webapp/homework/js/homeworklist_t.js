@@ -25,7 +25,7 @@ $(function(){
         });
     }
     //tab
-    $('.hwHeader').on('touchend',function(){
+    $('.hwHeader li:last').on('touchend',function(){
         if(localStorage.mastTeater){
             alert('您当前的账户为主讲老师，暂仅能查看哦。')
         }else{

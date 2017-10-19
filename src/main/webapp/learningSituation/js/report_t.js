@@ -22,7 +22,7 @@ $(function(){
 
             });
     }
-
+                        
     var need_ = {
         'teaEmail':localStorage.terEmail,
         'tCode':'1'
@@ -48,6 +48,13 @@ $(function(){
             $('.report_tab').html(tabStr);
         }
     });
+    $('.tab-title li:last').on('touchend',function(){
+        if(!localStorage.mastTeater){
+          $(this).find('a:last').attr('href','record.html')
+        }else{
+            alert('您当前的账户为主讲老师，暂仅能查看哦。')
+        }
+    })
 //点击查看成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
     if($(this).hasClass('kthd')){
