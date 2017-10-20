@@ -590,12 +590,14 @@ $(function () {
 
     function stopRecordBack(this_){
         clearInterval(ts);
-        layer.msg("!!!!!!!!")
+        layer.msg("11111111111")
         if(!isCanStopRecord){
             return;
         }
         this_.siblings('img').attr('src', 'images/C04-03.png');
+        layer.msg("222222222");
         event.preventDefault();
+        layer.msg("3333333333")
         if (timeInedex < 1) {
             END = 0;
             START = 0;
@@ -613,11 +615,11 @@ $(function () {
             return;
         }
         clearInterval(recordTimer);
-        layer.msg("22222222");
+        layer.msg("444444444444");
         wx.stopRecord({
             success: function (res) {
 
-                layer.msg("33333333333");
+                layer.msg("55555555555");
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
