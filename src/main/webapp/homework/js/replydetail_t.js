@@ -143,11 +143,9 @@ $(function () {
                         if (L == arr.length - 1 && e.score != '') {
                             $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                         }
-                        if (arr[L] == 'undefined') {
+                        if (arr[L] != 'undefined') {
                             $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                         }
-
-
                     }
                 }
             }
@@ -645,67 +643,118 @@ $(function () {
 
     //按下开始录音
     var timeInedex = 0;
-    var Index_s = -1;
-    var timeds;
-    var START;
-    var END;
     var recordTimer;
+    var isCanStopRecord = false;
+    var isCanStartRecord = true;
     $('#record').on('touchstart', function (event) {
-        START = new Date().getTime();
-        Index_s++;
+        if(!isCanStartRecord){
+            return;
+        }
         timeInedex = 0;
+        var this_ = $(this);
         $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
         wx.startRecord({
             success: function () {
                 localStorage.rainAllowRecord = 'true';
-                timeds = setInterval(function () {
-                    timeInedex++
+                recordTimer = setInterval(function () {
+                    timeInedex++;
+                    if(timeInedex == 51){
+                        layer.msg("语音录制长度最大限度为60s");
+                        djs(10, function () {
+                            //$(".timeTip").hide();
+                            isCanStopRecord = true;
+                            stopRecordBack(this_,event);
+                        });
+                    }
                 }, 1000);
             },
             cancel: function () {
                 layer.msg('用户拒绝授权录音');
                 wx.stopRecord({
                     success: function (res) {
-                        clearInterval(timeds);
+                        clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
+                    }
+                });
+            },
+            fail: function () {
+                wx.stopRecord({
+                    success: function (res) {
+                        clearInterval(recordTimer);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
                     }
                 });
             }
         });
     });
+    var ts;
+    function djs(t, callback) {
+        ts = setInterval(function () {
+            t -= 1;
+            if (t == 0) {
+                clearInterval(ts);
+                callback(callback);
+            }
+        },1000)
+    }
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
-        $(this).siblings('img').attr('src', 'images/C04-03.png');
+        var this_ = $(this);
+        if(timeInedex == 0){
+            //表示录制刚结束
+            return;
+        } else {
+            isCanStopRecord = true;
+            stopRecordBack(this_, event);
+        }
+
+    });
+
+    function stopRecordBack(this_,event){
+        clearInterval(ts);
+        if(!isCanStopRecord){
+            return;
+        }
+        this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
-        END = new Date().getTime();
-        if ((END - START) < 1000) {
-            END = 0;
-            START = 0;
+
+        if (timeInedex < 1) {
             //小于1000ms，不录音
-            clearTimeout(recordTimer);
+            clearInterval(recordTimer);
+            timeInedex = 0;
             layer.msg("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
+                    isCanStartRecord = true;
+                    isCanStopRecord = false;
                 }
             });
             return;
         }
+        clearInterval(recordTimer);
+        timeInedex = 0;
         wx.stopRecord({
             success: function (res) {
-                clearInterval(timeds);
-                // var localId = res.localId;
-                // song_s = localId;
-                uploadVoiceWX(res.localId);
-                // showAudio();
+                var localId = res.localId;
+                song_s = localId;
+                uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                isCanStartRecord = true;
+                isCanStopRecord = false;
             }
         });
-
-    });
+    }
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {

@@ -524,15 +524,13 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
                     timeInedex++;
-                    if(timeInedex == 5){
+                    if(timeInedex == 51){
                         layer.msg("语音录制长度最大限度为60s");
                         djs(10, function () {
                             //$(".timeTip").hide();
                             isCanStopRecord = true;
                             stopRecordBack(this_,event);
                         });
-                    }else {
-
                     }
                 }, 1000);
             },
@@ -565,20 +563,7 @@ $(function () {
     });
     var ts;
     function djs(t, callback) {
-        //layer.open({
-        //    type: 1,
-        //    area: ['312px', '194px'],
-        //    shade: 0,
-        //    title: '',
-        //    skin: '',
-        //    time: 10000,
-        //    content: $(".timeTip")
-        //});
         ts = setInterval(function () {
-
-            //layer.msg(""+t);
-            //$(".timeTip").find('p').html(""+t);
-
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
@@ -590,7 +575,6 @@ $(function () {
     //松手结束录音
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
-        //$(".timeTip").hide();
         if(timeInedex == 0){
             //表示录制刚结束
             return;
@@ -609,8 +593,6 @@ $(function () {
         event.preventDefault();
 
         if (timeInedex < 1) {
-            //END = 0;
-            //START = 0;
             //小于1000ms，不录音
             clearInterval(recordTimer);
             timeInedex = 0;
