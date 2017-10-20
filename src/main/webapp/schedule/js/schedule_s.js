@@ -1,8 +1,8 @@
 $(function() {
-    if (!sessionStorage.openid) {
-        //微信授权判断
-        wechatCode(location.href);
-    };
+    // if (!sessionStorage.openid) {
+    //     //微信授权判断
+    //     wechatCode(location.href);
+    // };
 
     //判断ios
     var u = navigator.userAgent;
@@ -124,7 +124,7 @@ $(function() {
             }
             sessionStorage.callbackconfig = 'schedule'
         } else if (localStorage.terEmail) {
-            location.href = 'schedule_t.html';
+            // location.href = 'schedule_t.html';
             sessionStorage.removeItem('callbackconfig')
         } else {
 
