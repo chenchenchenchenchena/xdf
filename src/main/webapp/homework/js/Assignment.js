@@ -524,9 +524,9 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
                     timeInedex++
-                    if(timeInedex == 10){
+                    if(timeInedex == 5){
                         djs(10, function () {
-                            alert("00000000");
+                            layer.msg("00000000");
                             isCanStopRecord = true;
                             stopRecordBack(this_);
                         });
