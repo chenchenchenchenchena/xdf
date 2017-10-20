@@ -524,14 +524,14 @@ $(function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
                     timeInedex++;
-                    //if(timeInedex == 60){
-                    //    layer.msg("语音录制长度最大限度为60s");
-                    //    djs(10, function () {
-                    //        //$(".timeTip").hide();
-                    //        isCanStopRecord = true;
-                    //        stopRecordBack(this_,event);
-                    //    });
-                    //}
+                    if(timeInedex == 49){
+                        layer.msg("语音录制长度最大限度为60s");
+                        djs(10, function () {
+                            //$(".timeTip").hide();
+                            isCanStopRecord = true;
+                            stopRecordBack(this_,event);
+                        });
+                    }
                 }, 1000);
             },
             cancel: function () {
