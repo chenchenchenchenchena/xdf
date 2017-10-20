@@ -106,51 +106,59 @@ $(function () {
         $('title').html('已批复');
         //获取文件信息
         // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            var e = JSON.parse(sessionStorage.detailsStrYes);
-            if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
-                $('.anDes').eq(0).html("");
+        var e = JSON.parse(sessionStorage.detailsStrYes);
+        if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
+            $('.anDes').eq(0).html("");
+        } else {
+            var homeworkText = decodeURI(e.StudentAnswer).split('|>|');
+            answerT = homeworkText.length;
+            for (var p = 0; p < homeworkText.length; p++) {
+                $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + homeworkText[p] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>')
+            }
+            if (sessionStorage.bangbang == '1') {
+                $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')
             } else {
-                var homeworkText = decodeURI( e.StudentAnswer).split('|>|');
-                answerT = homeworkText.length;
-                for(var p = 0;p<homeworkText.length;p++){
-                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>')
-                }
-                if(sessionStorage.bangbang=='1'){
-                    $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')
-                }else{
-                    $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
-                }
-                
+                $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             }
-            $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
 
-            var arr = decodeURIComponent(e.replyDesc).split('|>|');
-            if (e.score == undefined || e.score == null || e.score == 'undefined') {
-                e.score = '';
-            }
-            for (var L = 0; L < arr.length; L++) {
-                if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
-                    if (L == arr.length - 1&& e.score!='') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                    } else {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+        }
+        $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
+
+        var arr = decodeURIComponent(e.replyDesc).split('|>|');
+        if (e.score == undefined || e.score == null || e.score == 'undefined') {
+            e.score = '';
+        }
+        for (var L = 0; L < arr.length; L++) {
+            if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
+                if (L == arr.length - 1 && e.score != '') {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                } else {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+                }
+            } else {//描述信息为空
+
+                if (arr.length == 1 && e.score != '') {
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+                } else {
+                    if (L == arr.length - 1 && e.score != '') {
+                        $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                     }
-                } else {//描述信息为空
-
-                    if (arr.length == 1 && e.score != '') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
-                    } else {
-                        if (L == arr.length - 1 && e.score != '') {
-                            $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
-                        }
-                        if (arr[L] != 'undefined') {
-                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                        }
+                    if (arr[L] != 'undefined') {
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                 }
             }
-            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
-            getFileInfo(e);
+        }
+        if (arr.length > 0 && $('.tea_sp .hmAnswer').length == 0) {
+            if (e.score != '') {
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+            } else {
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+            }
+        }
+
+        $('.hwCon').eq(0).html(decodeURIComponent(e.description));
+        getFileInfo(e);
 
         // });
 
@@ -506,35 +514,34 @@ $(function () {
         if ($('.tea_sp .hmAnswer').length != 0) {
             // alert("已批复长度"+$('.tea_sp .hmAnswer').length);
             for (var o = 0; o < $('.tea_sp .hmAnswer').length; o++) {
-                if ($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != undefined) {
-                    if (o == $('.tea_sp .hmAnswer').length - 1) {
-                        var curDesc = $('.answer textarea').val();
-                        if (curDesc == "" || curDesc == undefined) {
-                            if(arr_s.length == 0){
-                                curDesc = "undefined"
-                            }else {
-                                curDesc = " ";
-                            }
+                if ($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != undefined && $('.tea_sp .hmAnswer').eq(o).find('.anDes').html() != "") {
 
-                        }
-                        need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc).replace(/'\+'/,'%20');
-                    } else {
-                        if ($('.anDes').eq(o)) {
-                            need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|').replace(/'\+'/,'%20');
-                        } else {
-                            need.replyDesc += ' |>|'
-                        }
-                    }
+                    need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|').replace(/'\+'/, '%20');
                 } else {
-                    if (o == $('.tea_sp .hmAnswer').length - 1) {
-                        var curDesc = $('.answer textarea').val();
-                        if (curDesc == "" || curDesc == undefined) {
-                            curDesc = " ";
-                        }
-                        need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc).replace(/'\+'/,'%20');
+                    if ($('.tea_sp .hmAnswer').eq(o).find('div .voiceBox').html() == "" && $('.tea_sp .hmAnswer').eq(o).find('.imgBox').html() == "") {
+
+                        //if ($('.tea_sp .hmAnswer').length == 1) {
+                        //    need.replyDesc += ' |>|';
+                        //}else {
+                            need.replyDesc += 'undefined|>|';
+                        //}
+
                     } else {
                         need.replyDesc += ' |>|';
                     }
+
+                }
+                if (o == $('.tea_sp .hmAnswer').length - 1) {
+                    var curDesc = $('.answer textarea').val();
+                    if (curDesc == "" || curDesc == undefined) {
+                        if (arr_s.length == 0) {
+                            curDesc = "undefined"
+                        } else {
+                            curDesc = " ";
+                        }
+
+                    }
+                    need.replyDesc += encodeURIComponent(curDesc).replace(/'\+'/, '%20');
                 }
 
             }
@@ -542,12 +549,11 @@ $(function () {
         } else {
             var curDesc = $('.answer textarea').val();
             if (curDesc == "" || curDesc == undefined) {
-                if(arr_s.length == 0){
+                if (arr_s.length == 0) {
                     need.replyDesc = 'undefined';
-                }else {
+                } else {
                     need.replyDesc = ' ';
                 }
-                need.replyDesc = ' ';
             } else {
                 need.replyDesc = encodeURIComponent(curDesc).replace(/'\+'/,'%20');
             }
