@@ -525,8 +525,9 @@ $(function () {
                 recordTimer = setInterval(function () {
                     timeInedex++;
                     if(timeInedex == 5){
+                        //$(".timeTip").show();
                         djs(10, function () {
-                            $(".timeTip").hide();
+                            //$(".timeTip").hide();
                             isCanStopRecord = true;
                             stopRecordBack(this_,event);
                         });
@@ -564,20 +565,20 @@ $(function () {
     });
     var ts;
     function djs(t, callback) {
+        layer.open({
+            type: 1,
+            area: ['312px', '194px'],
+            shade: 0,
+            title: '',
+            skin: '',
+            time: 10000,
+            content: $(".timeTip")
+        });
         ts = setInterval(function () {
 
             //layer.msg(""+t);
-            $(".timeTip").show();
             $(".timeTip").find('p').html(""+t);
-            //layer.open({
-            //    type: 1,
-            //    area: ['312px', '194px'],
-            //    shade: 0,
-            //    title: '',
-            //    skin: '',
-            //    time: 2000,
-            //    content: $(".timeTip")
-            //});
+
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
@@ -589,7 +590,7 @@ $(function () {
     //松手结束录音
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
-        $(".timeTip").hide();
+        //$(".timeTip").hide();
         if(timeInedex == 0){
             //表示录制刚结束
             return;
