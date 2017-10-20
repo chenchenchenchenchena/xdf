@@ -128,25 +128,26 @@ $(function () {
             if (e.score == undefined || e.score == null || e.score == 'undefined') {
                 e.score = '';
             }
-            for (var L = 0; L < arr.length-1; L++) {
+            for (var L = 0; L < arr.length; L++) {
                 if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
-                    if (L == arr.length - 2&& e.score!='') {
+                    if (L == arr.length - 1&& e.score!='') {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     } else {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                     }
                 } else {//描述信息为空
 
-                    if (arr.length == 2 && e.score != '') {
+                    if (arr.length == 1 && e.score != '') {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                     } else {
-                        // if (L == arr.length - 1) {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
-                        // }
-
-                        if (L == arr.length - 2 && e.score != '') {
+                        if (L == arr.length - 1 && e.score != '') {
                             $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                         }
+                        if (arr[L] == 'undefined') {
+                            $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        }
+
+
                     }
                 }
             }
@@ -511,7 +512,12 @@ $(function () {
                     if (o == $('.tea_sp .hmAnswer').length - 1) {
                         var curDesc = $('.answer textarea').val();
                         if (curDesc == "" || curDesc == undefined) {
-                            curDesc = " ";
+                            if(arr_s.length == 0){
+                                curDesc = "undefined"
+                            }else {
+                                curDesc = " ";
+                            }
+
                         }
                         need.replyDesc += encodeURIComponent($('.tea_sp .hmAnswer').eq(o).find('.anDes').html() + '|>|' + curDesc).replace(/'\+'/,'%20');
                     } else {
@@ -538,6 +544,11 @@ $(function () {
         } else {
             var curDesc = $('.answer textarea').val();
             if (curDesc == "" || curDesc == undefined) {
+                if(arr_s.length == 0){
+                    need.replyDesc = 'undefined';
+                }else {
+                    need.replyDesc = ' ';
+                }
                 need.replyDesc = ' ';
             } else {
                 need.replyDesc = encodeURIComponent(curDesc).replace(/'\+'/,'%20');

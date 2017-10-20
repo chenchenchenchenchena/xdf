@@ -525,7 +525,7 @@ $(function () {
                 recordTimer = setInterval(function () {
                     timeInedex++;
                     if(timeInedex == 5){
-                        //$(".timeTip").show();
+                        layer.msg("语音录制长度最大限度为60s");
                         djs(10, function () {
                             //$(".timeTip").hide();
                             isCanStopRecord = true;
@@ -565,19 +565,19 @@ $(function () {
     });
     var ts;
     function djs(t, callback) {
-        layer.open({
-            type: 1,
-            area: ['312px', '194px'],
-            shade: 0,
-            title: '',
-            skin: '',
-            time: 10000,
-            content: $(".timeTip")
-        });
+        //layer.open({
+        //    type: 1,
+        //    area: ['312px', '194px'],
+        //    shade: 0,
+        //    title: '',
+        //    skin: '',
+        //    time: 10000,
+        //    content: $(".timeTip")
+        //});
         ts = setInterval(function () {
 
             //layer.msg(""+t);
-            $(".timeTip").find('p').html(""+t);
+            //$(".timeTip").find('p').html(""+t);
 
             t -= 1;
             if (t == 0) {
@@ -609,8 +609,8 @@ $(function () {
         event.preventDefault();
 
         if (timeInedex < 1) {
-            END = 0;
-            START = 0;
+            //END = 0;
+            //START = 0;
             //小于1000ms，不录音
             clearInterval(recordTimer);
             timeInedex = 0;
