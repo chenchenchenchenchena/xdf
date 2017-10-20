@@ -583,13 +583,14 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
-        clearInterval(ts);
         var this_ = $(this);
         isCanStopRecord = true;
         stopRecordBack(this_);
     });
 
     function stopRecordBack(this_){
+        clearInterval(ts);
+        layer.msg("!!!!!!!!")
         if(!isCanStopRecord){
             return;
         }
@@ -611,9 +612,12 @@ $(function () {
             });
             return;
         }
+        clearInterval(recordTimer);
+        layer.msg("22222222");
         wx.stopRecord({
             success: function (res) {
-                clearInterval(recordTimer);
+
+                layer.msg("33333333333");
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
