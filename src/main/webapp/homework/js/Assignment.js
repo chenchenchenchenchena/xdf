@@ -523,10 +523,9 @@ $(function () {
             success: function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
-                    timeInedex++
+                    timeInedex++;
                     if(timeInedex == 5){
                         djs(10, function () {
-                            layer.msg("00000000");
                             isCanStopRecord = true;
                             stopRecordBack(this_,event);
                         });
@@ -549,7 +548,6 @@ $(function () {
                 });
             },
             fail: function () {
-                layer.msg("+++++++");
                 wx.stopRecord({
                     success: function (res) {
                         clearInterval(recordTimer);
@@ -567,7 +565,17 @@ $(function () {
     function djs(t, callback) {
         ts = setInterval(function () {
 
-            layer.msg(""+t);
+            //layer.msg(""+t);
+            $(".timeTip").find('p').html(""+t);
+            layer.open({
+                type: 1,
+                area: ['312px', '194px'],
+                shade: 0,
+                title: '',
+                skin: '',
+                time: 2000,
+                content: $(".timeTip")
+            });
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
@@ -575,11 +583,6 @@ $(function () {
             }
         },1000)
     }
-
-    //10s后弹出 xx
-    //$(function () {
-    //
-    //});
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
@@ -590,19 +593,15 @@ $(function () {
 
     function stopRecordBack(this_,event){
         clearInterval(ts);
-        layer.msg("11111111111");
         if(!isCanStopRecord){
             return;
         }
         this_.siblings('img').attr('src', 'images/C04-03.png');
-        layer.msg("222222222");
         event.preventDefault();
-        layer.msg("3333333333");
         if (timeInedex < 1) {
             END = 0;
             START = 0;
             //小于1000ms，不录音
-            //clearTimeout(recordTimer);
             clearInterval(recordTimer);
             timeInedex = 0;
             layer.msg("录制时间太短");
@@ -615,11 +614,9 @@ $(function () {
             return;
         }
         clearInterval(recordTimer);
-        layer.msg("444444444444");
+        timeInedex = 0;
         wx.stopRecord({
             success: function (res) {
-
-                layer.msg("55555555555");
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
