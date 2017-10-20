@@ -6,6 +6,8 @@ $(function () {
     var teaReplyFiles = [];
 
     var replyTimes = [];
+    var answerTimes = [];
+    var answerT;
 
 
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
@@ -109,8 +111,9 @@ $(function () {
                 $('.anDes').eq(0).html("");
             } else {
                 var homeworkText = decodeURI( e.StudentAnswer).split('|>|');
+                answerT = homeworkText.length;
                 for(var p = 0;p<homeworkText.length;p++){
-                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(p+3)+'" style="display:none;"></ul><div class="imgBox" id="imagBox_'+(p+3)+'" style="display:block;"></div></div></div>')
+                    $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+homeworkText[p]+'</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>')
                 }
                 if(sessionStorage.bangbang=='1'){
                     $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')
@@ -130,12 +133,12 @@ $(function () {
                     if (L == arr.length - 2&& e.score!='') {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     } else {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                     }
                 } else {//描述信息为空
 
                     if (arr.length == 2 && e.score != '') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                     } else {
                         // if (L == arr.length - 1) {
                         $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
@@ -223,9 +226,17 @@ $(function () {
             if (stu != undefined) {
                 for (var a = 0; a < stu.length; a++) {
                     if (stu[a].fileType == 'mp3') {
-                        getAudioInfo([stu[a].fileTimes, url_o + stu[a].relativePath, stu[a].playTime, "mp3"]);
+                        getAudioInfo([2, url_o + stu[a].relativePath, stu[a].playTime, "mp3"],['ansT',parseInt(stu[a].fileTimes-1)]);
                     } else {
-                        $('.imgBox').eq(stu[a].fileTimes).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                        //$('.imgBox').eq(stu[a].fileTimes).append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                        $('.anSwer .hmAnswer:eq(' + parseInt(stu[a].fileTimes-1) + ')').find('.imgBox').append('<div><img data-id="'+stu[a].diskFilePath+'" data-ramke="2"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + stu[a].thumbnail + '" data-img="' + url_o + stu[a].relativePath + '" src="images/error-image.png" alt="" /></div>')
+                    }
+                }
+
+                for (var k = 0; k < $('.anSwer .hmAnswer').length; k++) {
+                    var l = $('.anSwer .hmAnswer').eq(k).find('img').length;
+                    for (var g = 0; g < l; g++) {
+                        $('.anSwer .hmAnswer').eq(k).find('img').eq(g).attr('src', $('.anSwer .hmAnswer').eq(k).find('img').eq(g).attr('data-thumbnail'));
                     }
                 }
             }
@@ -237,6 +248,11 @@ $(function () {
                         $('.imgBox').eq(0).append('<div><img data-id="'+tea_t[c].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
 
                     }
+                }
+                for (var j = 0; j < $('.imgBox').eq(i).find('img').length; j++) {
+
+                    $('.imgBox').eq(i).find('img').eq(j).attr('src', $('.imgBox').eq(i).find('img').eq(j).attr('data-thumbnail'));
+
                 }
             }
             if (sessionStorage.Teatwo) {
@@ -251,8 +267,6 @@ $(function () {
                             $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                         }
-
-
                     }
                 }
                 for (var i = 0; i < $('.tea_sp .hmAnswer').length; i++) {
@@ -270,15 +284,6 @@ $(function () {
                 }
             }
 
-            //将页面里的img默认图片换成图片的缩略地址
-            //作业信息、学生答案
-            for (var i = 0; i < 2; i++) {
-                for (var j = 0; j < $('.imgBox').eq(i).find('img').length; j++) {
-
-                    $('.imgBox').eq(i).find('img').eq(j).attr('src', $('.imgBox').eq(i).find('img').eq(j).attr('data-thumbnail'));
-
-                }
-            }
 
         }
     }
@@ -302,17 +307,21 @@ $(function () {
         if (hwFlag != undefined && hwFlag[0] == 'replayT') {//老师批复
             //将文件显示到布局中
             voiceCount++;
-            replayTShowAudio(playTime, diskFileUrl, hwFlag[1] + "_" + voiceCount, hwFlag[1]);
-        } else {
+            replayTShowAudio(playTime, diskFileUrl, "audio" + flag + "" + hwFlag[1] + "_" + voiceCount, hwFlag[1]);
+        } else if(hwFlag != undefined && hwFlag[0] == 'ansT'){
+            voiceCount++;
+            answerTShowAudio(playTime, diskFileUrl, "audio" + flag + "" + hwFlag[1] + "_" + voiceCount, hwFlag[1]);
+        }else {
             //将文件显示到布局中
             voiceCount++;
-            var numa = flag+2;
-            if(flag==1){
-                 numa = 1;
-            }
-            console.log(numa)
-            showAudio(playTime, diskFileUrl, $("#audio_" + numa), "audio" + numa + "" + voiceCount, 2);
+            //var numa = flag;
+            //if(flag==1){
+            //     numa = 1;
+            //}
+            //console.log(flag)
+            showAudio(playTime, diskFileUrl, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
         }
+
 
     }
 
@@ -401,6 +410,43 @@ $(function () {
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
 
         $('.tea_sp .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
+
+        $('.song_s,.mask').hide();
+    }
+
+    /**
+     * 显示语音布局
+     * @param playTime  语音播放时长
+     * @param url 语音播放地址
+     * @param id  语音控件id，播放时需要
+     * @param domIndex 学生回答次数 显示布局用
+     */
+    function answerTShowAudio(playTime, url, id, domIndex) {
+        //console.log(id + "---" + domIndex);
+        var strVoice = "";
+        var idChildren;
+        var length = parseInt(playTime);
+        var voiceLen = "";
+        var hh = parseInt(length / 3600);
+        var mm = parseInt((length % 3600) / 60);
+        var ss = parseInt((length % 3600) % 60);
+        if (hh > 0) {
+            voiceLen = hh + "'" + mm + "'" + ss + "''";
+        } else if (mm > 0) {
+            voiceLen = mm + "'" + ss + "''";
+        } else {
+            if (ss == 0) {
+
+                voiceLen = "1''";
+            } else {
+                voiceLen = ss + "''";
+            }
+        }
+        idChildren = "audio_" + id;
+        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
+
+        $('.anSwer .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
 
         $('.song_s,.mask').hide();
     }
