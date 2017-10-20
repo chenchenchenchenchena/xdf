@@ -487,10 +487,6 @@ $(function () {
 
     //按下开始录音
     var timeInedex = 0;
-    var Index_s = -1;
-    var timeds;
-    var START;
-    var END;
     var recordTimer;
     var isCanStopRecord = false;
     var isCanStartRecord = true;
@@ -519,8 +515,6 @@ $(function () {
         if(!isCanStartRecord){
             return;
         }
-        START = new Date().getTime();
-        Index_s++;
         timeInedex = 0;
         var this_ = $(this);
         $(this).siblings('img').attr('src', 'images/speak.gif');
@@ -528,13 +522,16 @@ $(function () {
         wx.startRecord({
             success: function () {
                 localStorage.rainAllowRecord = 'true';
-                timeds = setInterval(function () {
+                recordTimer = setInterval(function () {
                     timeInedex++
-                    if(timeInedex == 50){
+                    if(timeInedex == 10){
                         djs(10, function () {
+                            alert("00000000");
                             isCanStopRecord = true;
                             stopRecordBack(this_);
                         });
+                    }else {
+
                     }
                 }, 1000);
             },
@@ -542,7 +539,7 @@ $(function () {
                 layer.msg('用户拒绝授权录音');
                 wx.stopRecord({
                     success: function (res) {
-                        clearInterval(timeds);
+                        clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
@@ -555,7 +552,7 @@ $(function () {
                 layer.msg("+++++++");
                 wx.stopRecord({
                     success: function (res) {
-                        clearInterval(timeds);
+                        clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
@@ -566,8 +563,9 @@ $(function () {
             }
         });
     });
+    var ts;
     function djs(t, callback) {
-        var ts = setInterval(function () {
+        ts = setInterval(function () {
 
             layer.msg(""+t);
             t -= 1;
@@ -585,6 +583,7 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
+        clearInterval(ts);
         var this_ = $(this);
         isCanStopRecord = true;
         stopRecordBack(this_);
@@ -596,12 +595,13 @@ $(function () {
         }
         this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
-        END = new Date().getTime();
-        if ((END - START) < 1000) {
+        if (timeInedex < 1) {
             END = 0;
             START = 0;
             //小于1000ms，不录音
-            clearTimeout(recordTimer);
+            //clearTimeout(recordTimer);
+            clearInterval(recordTimer);
+            timeInedex = 0;
             layer.msg("录制时间太短");
             wx.stopRecord({
                 success: function (res) {
@@ -613,10 +613,7 @@ $(function () {
         }
         wx.stopRecord({
             success: function (res) {
-                clearInterval(timeds);
-                // if (timeds > 1) {
-                //     $('.big_s').append('<div class="music_s"><span></span> </div>');
-                // }
+                clearInterval(recordTimer);
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
