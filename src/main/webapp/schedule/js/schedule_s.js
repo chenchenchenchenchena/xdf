@@ -216,6 +216,7 @@ $(function() {
             // 录入开始时间
             for (var i = 0; i < curr_e.length; i++) {
                 var masterta = e.data.Data[i].Teachers.split(',');
+                masterta.push('我是班主任哈')
                 var masteaname = '';
                 for (var j = 0; j < mastertae.length; j++) {
                     for (var k = 0; k < masterta.length; k++) {
