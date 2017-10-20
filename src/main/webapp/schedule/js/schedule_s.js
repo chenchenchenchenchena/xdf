@@ -1,8 +1,8 @@
 $(function() {
-    // if (!sessionStorage.openid) {
-    //     //微信授权判断
-    //     wechatCode(location.href);
-    // };
+    if (!sessionStorage.openid) {
+        //微信授权判断
+        wechatCode(location.href);
+    };
 
     //判断ios
     var u = navigator.userAgent;
@@ -112,7 +112,6 @@ $(function() {
             });
         }
     }
-
     // 微信查询是否绑定微信  参数：当前微信号 老师
     function teac(e) {
         if (e.data == "goE2") {
@@ -222,7 +221,7 @@ $(function() {
                     for (var k = 0; k < masterta.length; k++) {
                         if (mastertae[j].teacherName == masterta[k]) {
                             jteaname = masterta[k]
-                            masterta[k] = ''
+                            masterta.splice(k,1)
                         }
                     }
                 }
