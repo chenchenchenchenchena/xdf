@@ -433,7 +433,7 @@ html body .tealist_s .more_so{
 	float:right;
 	margin-right:20px;
 }
-.classEmpty,.classTime,.classKnow,.classHome,.classText{
+.classEmpty,.classTime,.classKnow,.classHome,.classText,.timeTip{
 	background: rgba(0,0,0,0.7);
 	text-align: center;
 	height: 194px;
