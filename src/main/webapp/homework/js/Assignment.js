@@ -528,7 +528,7 @@ $(function () {
                         djs(10, function () {
                             layer.msg("00000000");
                             isCanStopRecord = true;
-                            stopRecordBack(this_);
+                            stopRecordBack(this_,event);
                         });
                     }else {
 
@@ -585,19 +585,19 @@ $(function () {
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
         isCanStopRecord = true;
-        stopRecordBack(this_);
+        stopRecordBack(this_,event);
     });
 
-    function stopRecordBack(this_){
+    function stopRecordBack(this_,event){
         clearInterval(ts);
-        layer.msg("11111111111")
+        layer.msg("11111111111");
         if(!isCanStopRecord){
             return;
         }
         this_.siblings('img').attr('src', 'images/C04-03.png');
         layer.msg("222222222");
         event.preventDefault();
-        layer.msg("3333333333")
+        layer.msg("3333333333");
         if (timeInedex < 1) {
             END = 0;
             START = 0;
