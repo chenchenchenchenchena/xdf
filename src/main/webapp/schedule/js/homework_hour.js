@@ -35,11 +35,12 @@ $(function(){
         }
         homework() // 作业率请求
     }else{
-        $('.big_select').show();
+        // $('.big_select').show();
         var less_need = {
             'masterTeacherEmail':localStorage.terEmail,
             'ifmore':'1'
         }
+        homework() // 作业率请求
     }
     //校区相关
     $(document).on('touchend',".select p",function(e){
