@@ -29,6 +29,10 @@ $(function(){
             });
     }
     if(!localStorage.mastTeater){
+        var less_need_ = {
+            'email':localStorage.terEmail,
+            'schoolId':localStorage.schoolId
+        }
         var less_need = {
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId
@@ -36,9 +40,13 @@ $(function(){
         homework() // 作业率请求
     }else{
         // $('.big_select').show();
-        var less_need = {
+        var less_need_ = {
             'masterTeacherEmail':localStorage.terEmail,
             'ifmore':'1'
+        }
+        var less_need = {
+            'email':localStorage.terEmail,
+            'schoolId':localStorage.schoolId,
         }
         homework() // 作业率请求
     }
@@ -73,11 +81,11 @@ $(function(){
     }
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();
-            less_need.schoolId  =  $('.Selected').attr('data-code');
+            less_need_.schoolId  =  $('.Selected').attr('data-code');
             homework() // 作业率请求
     })
     function homework(){
-        ajax_S(url.t_houehome,less_need,function(e){
+        ajax_S(url.t_houehome,less_need_,function(e){
             if(e.result!=false&&e.data.length!=0){
                 cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37')
                 cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a')
@@ -138,6 +146,9 @@ $(function(){
             homework();
             break;
             case 1:
+            if(localStorage.mastTeater){
+                less_need.mainspeaker = '1'
+            }
             lessontime();
             break;
         }
