@@ -29,7 +29,7 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o = "http://10.162.7.148:8080/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -101,6 +101,7 @@ var url = {
     't_hourmonth':url_o+'teacherData/queryTeacherMonthClassHour.do',//获取历史月份课时数据
     't_houehome':url_o+'teacherData/querTcHomeWorkRate.do',//获取老师作业率
 };
+
 var Study = {
     's_study':url_o+'studentAnalysis/scoreStdIdlReportStatus.do',  //学生获取个人成绩
     't_studt':url_o+'teacherAnalysis/scoreStdReport.do',   //老师查看学生成绩
@@ -149,6 +150,7 @@ var homework_s = {
 if(localStorage.mastTeater){
     homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
     url.t_houehome = url_o+'masterTeacher/querMasterTeacherCurrentHmWorkRate.do';
+    Study.t_self = url_o+'masterTeacher/queryMasterTeacherScoreReport.do'
        
 }
 //权限限制

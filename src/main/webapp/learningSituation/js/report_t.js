@@ -26,10 +26,20 @@ $(function(){
     if(localStorage.mastTeater){
         $('.big_select').show();
     }
-    var need_ = {
-        'teaEmail':localStorage.terEmail,
-        'tCode':'1'
-    };
+    if(localStorage.mastTeater){
+        var need_ = {
+            'masterTeacherEmail':localStorage.terEmail,
+            'gradeType':'1',
+            'ifmore':'1'
+        };
+    }else{
+        var need_ = {
+            'teaEmail':localStorage.terEmail,
+            'tCode':'1'
+        };
+        Interaction();
+    }
+   
     if(localStorage.mastTeater){
         // need_ = Shchool
     }
@@ -110,12 +120,16 @@ $(document).on('touchend', '.report_tab li', function () {
     $('.class_big').find('.classroom_s').remove();
     Interaction();
 });
-    Interaction();
-
+   
+function Interaction_master(){
+        ajax_S(Study.t_self,need_,less_Inter);
+    };
 
 function Interaction(){
 
-    ajaxRequest('post',Study.t_self,need_,function(e){
+    ajaxRequest('post',Study.t_self,need_,less_Inter);
+};
+function less_Inter(e){
         if (e.data.length != 0 && e.data != undefined) {
             $('.no-data').hide();
             $('.class_big').show();
@@ -162,8 +176,7 @@ function Interaction(){
             $('.no-data').show();
             $('.class_big').show();
         }
-    });
-};
+}
  //校区相关
  $(document).on('touchend',".select p",function(e){
     $(".select").toggleClass('open');
@@ -194,10 +207,9 @@ function selectData(e) {
     }
 }
 $('.truorfal input').on('touchend',function(){
-        Shchool = $('.Selected').attr('data-code');
+        need_.schoolId =  $('.Selected').attr('data-code');
         $('.big_select').hide();
-        ajax_S(url.s_emai,emailm,stusea);
-        ajax_S(url.s_emai,menu_s,menufunc);
+        Interaction_master();
 })
 
 
