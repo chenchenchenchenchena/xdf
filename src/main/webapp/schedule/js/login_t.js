@@ -111,10 +111,7 @@ function logout(){
     ajax_S(url.t_siot, bindingtea, signOut)
 }
 function clear(){
-    localStorage.removeItem("teacherId");
-    localStorage.removeItem("terEmail");
-    localStorage.removeItem("schoolId");
-    localStorage.removeItem("teacherName");
+    localStorage.clear();
 }
 // 退出登录
 function signOut(e) {
