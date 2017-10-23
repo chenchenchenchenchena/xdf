@@ -109,7 +109,8 @@ function showFunctionList(userId) {
                     //获取functionIds
                     setFunctionList(e.dataList);
                     localStorage.functionCheckedList = JSON.stringify(functionList);
-                    jumpPage(e.dataList);
+                    // jumpPage(e.dataList);
+                    window.location = "mainPage/main_page.html";
                 }
             }
 

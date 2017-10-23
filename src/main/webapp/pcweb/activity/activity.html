@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>东方双师管理平台</title>
+    <link rel="stylesheet" href="../common/css/core.css?v=0699530">
+    <link rel="stylesheet" href="../common/css/p176.css?v=67e60ff">
+    <link rel="stylesheet" href="../common/css/index.css?v=004c224">
+    <script src="../mainPage/js/main.js?v=a00ea35"></script>
+    <script src="../../common/js/jquery.js?v=aba2985"></script>
+    <script src ="../../common/js/layer.js"></script>
+    <script src ="../../common/js/etlogin.js"></script>
+    <script src ="../../common/js/rem.js"></script>
+    <script src ="../../common/js/scale.js"></script>
+    <script src ="../../common/js/swiper.min.js"></script>
+    <script src ="../../common/js/zepto.min.js"></script>
+    <script src ="../common/js/util.js"></script>
+    <script src="../common/js/p176.js?v=5693c59"></script>
+</head>
+<body onload="initMainPage('102');showList()">
+
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"><a href="#" class="p176-logo">双师东方管理平台</a></div>
+    <div class="p176-nav-left" id="schoolAuthority" style="display: none">
+        <ul>
+            <li class="dropdown js-ads-drop">
+                <a href="#" id="schoolName1" hidden>城市<i class="dropdown-white"></i></a>
+                <ul class="b-sub-menu" id="schoolName"></ul>
+            </li>
+            <li class="dropdown js-area-drop">
+                <a href="#" hidden id="areaName1">校区<i class="dropdown-white"></i></a>
+                <ul class="a-sub-menu" id="areaName"></ul>
+            </li>
+            <li class="dropdown js-item-drop">
+                <a href="#" hidden id="deptName1">部门<i class="dropdown-white"></i></a>
+                <ul class="p-sub-menu" id="deptName"></ul>
+            </li>
+        </ul>
+    </div>
+    <div class="p176-nav-right">
+        <ul>
+            <li>
+                <a href="#" class="p176-nav-usename js-userName"></a>
+                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
+                    <ul>
+                        <li><a href="#" onclick="toLogout()" class="">退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="p176-wrap-all">
+    <div class="p176-mainWrap">
+        <div class="p176-main">
+            <div class="inner">
+                <p style="font-size: 18px">活动内容</p>
+
+            </div>
+        </div>
+        <div class="p176-left">
+            <div class="p176-leftmenu">
+                <ul class="mtop10">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
