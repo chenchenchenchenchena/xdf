@@ -7,6 +7,7 @@ $(function(){
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
+var Shchool;
 var time1 = new Date().format("yyyy-MM-dd");
 //当天课程
 var emailm = {
@@ -35,21 +36,11 @@ var time_this;
 //判断长按的定时器
 var touchtime;
 var touchtend;
-//微信查询是否绑定微信  参数：当前微信号 学生
-ajax_S(url.s_seac,WXnum,stud);
-function stud(e){
-    if(e.result!=false){
-        sessionStorage.stuNum = e.data.studentNo;
-        sessionStorage.schoolId = e.data.schoolId;
-        sessionStorage.studentName = e.data.studentName;
-    }
-}
-
     $('.js_jin').click(menu_int);
     // $(document).on('touchstart','.tc-bot-right',menu_int);
 
 //按天查课程
-ajax_S(url.s_emai,emailm,stusea);
+
 function stusea(e){
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
@@ -62,7 +53,31 @@ function stusea(e){
             $('.H-data').show();
             $('.loading_s').hide();
         }
-        curr_e = e.data.Data;
+        if(localStorage.mastTeater){
+            Dta_d= e.data.Data;
+            var curr_e = [];
+            for(var v = 0;v<Dta_d.length;v++){
+                var bure = false;
+                if(v==0&&curr_e.length==0){
+                    curr_e.push(Dta_d[v]);
+                }else{
+                    for(var f = 0;f<curr_e.length;f++){
+                        if(Dta_d[v].SectBegin!=curr_e[f].SectBegin&&Dta_d[v].SectEnd!=curr_e[f].SectEnd){
+                            bure = true;
+                        }else{
+                            bure = false;
+                        }
+                    }
+                    if(bure){
+                        curr_e.push(Dta_d[v]);
+                    }
+                }
+               
+            }
+        }else{
+            curr_e = e.data.Data
+        }
+      
         var time_old = [];
         var old;
         var Index =[];
@@ -108,26 +123,73 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
-            $('.curriculum').show()
+            //主讲判断
+            if(Shchool!=undefined){
+                console.log(Shchool)
+                if(curr_e[i].SchoolId==Shchool){
+                    $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                }
+            }else{
+                $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+            }
+            $('.curriculum').show();
+        }
+        if($('.curriculum li').length==0){
+            $('.N-data').show();
+            $('.H-data').hide();
+            $('.loading_s').hide();
         }
     }
 // <span class="tx" index="'+i+'">'+htmltx+'</span>
     //按月查课程
-    ajax_S(url.s_emai,menu_s,menufunc);
+
     function menufunc(e){
     var arr = [];
+    var arr_schoolid = [];
+    var strIndex = '';
     dateH = [];
     if(e.result==false||e.message!=undefined){
         $('.H-data').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');
     }else{
-        setInterval(menu_int,10);
-        var moth = e.data.Data;
-        $('.month_hour i').html(moth.length);
+        if(localStorage.mastTeater){
+            var Data_ = e.data.Data;
+            var moth = [];
+            var moth_less = 0;
+            for(var v = 0;v<Data_.length;v++){
+                var bure = false;
+                if(Data_[v].SchoolId==Shchool&&Shchool!=undefined){
+                    moth_less++
+                }
+                if(v==0&&moth.length==0){
+                    moth.push(Data_[v]);
+                }else{
+                    for(var f = 0;f<moth.length;f++){
+                        if(Data_[v].SectBegin!=moth[f].SectBegin&&Data_[v].SectEnd!=moth[f].SectEnd){
+                            bure = true;
+                        }else{
+                            bure = false;
+                        }
+                    }
+                    if(bure){
+                        moth.push(Data_[v]);
+                    }
+                }
+            }
+            if(Shchool==undefined){
+                $('.month_hour i').html(moth.length);
+            }else{
+                $('.month_hour i').html(moth_less);
+             }
+        }else{
+            moth = e.data.Data
+            $('.month_hour i').html(moth.length);
+        }
+    
     for(var i = 0;i<moth.length;i++){
        arr.push( moth[i].SectBegin.split(' ')[0])
+       arr_schoolid.push( moth[i].SchoolId)
     }
     setTimeout(function(){
     var html_s = $('.swiper-slide-active table').find('td');
@@ -149,20 +211,34 @@ function stusea(e){
             }
         }
     }
+    //有课的标志
     for(var j = 0;j<arr.length;j++){
 
             for(var k = 0;k<dateH.length;k++){
                 if(dateH[k]==arr[j]){
                     if(arr[j]>new Date().format("yyyy-MM-dd")){
+                        if(Shchool!=undefined){
+                            if(arr_schoolid[k]==Shchool){
+                             html_s.eq(k+number).addClass('inter_S')
+                            }
+                        }else{
                             html_s.eq(k+number).addClass('inter_S')
+                        }
                     }else{
-                        html_s.eq(k+number).addClass('innet_S');
+                        if(Shchool!=undefined){
+                            if(arr_schoolid[k]==Shchool){
+                                html_s.eq(k+number).addClass('innet_S');
+                            }
+                        }else{
+                            html_s.eq(k+number).addClass('innet_S');
+                        }
                     }
               }
             }
 
     }
 },100)
+setInterval(menu_int,10);
 }
 }
 //赋值今天是周几
@@ -225,6 +301,12 @@ setTimeout(function(){
         }
 
     });
+    if(!localStorage.mastTeater){
+        ajax_S(url.s_emai,emailm,stusea);
+        ajax_S(url.s_emai,menu_s,menufunc);
+    }else{
+        $('.big_select').show();
+    }
 //点击查看详情
 $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
@@ -314,6 +396,39 @@ $(document).on('click','.H-data li',function(){
             }
         }
     }
-    
-
+     //校区相关
+     $(document).on('touchend',".select p",function(e){
+        $(".select").toggleClass('open');
+        e.stopPropagation();
+    });
+    $(document).on('touchend','.content_t .select ul li',function(e){
+        var _this=$(this);
+        $(".select > p").text(_this.attr('data-value'));
+        _this.addClass("Selected").siblings().removeClass("Selected");
+        $(".select").removeClass("open");
+        e.stopPropagation();
+    });
+    var table={
+        "tableName":"dict_school_info"
+    }
+    ajaxRequest("POST", url.s_select, table , selectData);
+    function selectData(e) {
+        console.log(e);
+        $(".select ul").html("");
+        if(e.code=="200"){
+            $(".select ul").append('<li>全部校区</li>')
+            for(var i=0;i<e.data.length;i++){
+                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                $(".select ul").append(str);
+            }
+            $('.content_t').find('li').eq(0).addClass('Selected');
+            $('.content_t').find('p').eq(0).html('全部校区');
+        }
+    }
+    $('.truorfal input').on('touchend',function(){
+            Shchool = $('.Selected').attr('data-code');
+            $('.big_select').hide();
+            ajax_S(url.s_emai,emailm,stusea);
+            ajax_S(url.s_emai,menu_s,menufunc);
+    })
 })

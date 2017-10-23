@@ -22,11 +22,17 @@ $(function(){
 
             });
     }
-                        
+    var Shchool;
+    if(localStorage.mastTeater){
+        $('.big_select').show();
+    }
     var need_ = {
         'teaEmail':localStorage.terEmail,
         'tCode':'1'
     };
+    if(localStorage.mastTeater){
+        // need_ = Shchool
+    }
     var Text_Grade = '入门测';
     /** 获取成绩类型 */
     var reqData = {
@@ -84,7 +90,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
 });
 
 //点击显示图标
-$(document).on('touchend','.title_s',function(){
+$(document).on('tap','.title_s',function(){
     if($(this).siblings('.achievement_s').css('display')=='none'){
         $(this).siblings().show()
         $(this).find('img').css('transform','rotate(-90deg)')
@@ -158,7 +164,41 @@ function Interaction(){
         }
     });
 };
-
+ //校区相关
+ $(document).on('touchend',".select p",function(e){
+    $(".select").toggleClass('open');
+    e.stopPropagation();
+});
+$(document).on('touchend','.content_t .select ul li',function(e){
+    var _this=$(this);
+    $(".select > p").text(_this.attr('data-value'));
+    _this.addClass("Selected").siblings().removeClass("Selected");
+    $(".select").removeClass("open");
+    e.stopPropagation();
+});
+var table={
+    "tableName":"dict_school_info"
+}
+ajaxRequest("POST", url.s_select, table , selectData);
+function selectData(e) {
+    console.log(e);
+    $(".select ul").html("");
+    if(e.code=="200"){
+        $(".select ul").append('<li>全部校区</li>')
+        for(var i=0;i<e.data.length;i++){
+            var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+            $(".select ul").append(str);
+        }
+        $('.content_t').find('li').eq(0).addClass('Selected');
+        $('.content_t').find('p').eq(0).html('全部校区');
+    }
+}
+$('.truorfal input').on('touchend',function(){
+        Shchool = $('.Selected').attr('data-code');
+        $('.big_select').hide();
+        ajax_S(url.s_emai,emailm,stusea);
+        ajax_S(url.s_emai,menu_s,menufunc);
+})
 
 
 function Echart(id,daTatext,x,y1,mf,time,max){

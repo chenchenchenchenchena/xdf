@@ -146,6 +146,11 @@ var homework_s = {
     't_getImgeUrl':url_o+'upload/previewUrl.do'//获取试卷内容
 
 };
+if(localStorage.mastTeater){
+    homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
+    url.t_houehome = url_o+'masterTeacher/querMasterTeacherCurrentHmWorkRate.do';
+       
+}
 //权限限制
 if(localStorage.terEmail&&!localStorage.mastTeater&&!localStorage.Assistant){
     // 获取主讲

@@ -4,9 +4,9 @@
 */
 
 $(function(){
-    if(!sessionStorage.openid){
-        wechatCode(location.href);
-    };
+    // if(!sessionStorage.openid){
+    //     wechatCode(location.href);
+    // };
 
     if(!localStorage.terEmail){
             var WXnum  = {
@@ -28,12 +28,53 @@ $(function(){
 
             });
     }
-
-    var less_need = {
-        'email':localStorage.terEmail,
-        'schoolId':localStorage.schoolId
+    if(!localStorage.mastTeater){
+        var less_need = {
+            'email':localStorage.terEmail,
+            'schoolId':localStorage.schoolId
+        }
+        homework() // 作业率请求
+    }else{
+        $('.big_select').show();
+        var less_need = {
+            'masterTeacherEmail':localStorage.terEmail,
+            'ifmore':'1'
+        }
     }
-    homework() // 作业率请求
+    //校区相关
+    $(document).on('touchend',".select p",function(e){
+        $(".select").toggleClass('open');
+        e.stopPropagation();
+    });
+    $(document).on('touchend','.content_t .select ul li',function(e){
+        var _this=$(this);
+        $(".select > p").text(_this.attr('data-value'));
+        _this.addClass("Selected").siblings().removeClass("Selected");
+        $(".select").removeClass("open");
+        e.stopPropagation();
+    });
+    var table={
+        "tableName":"dict_school_info"
+    }
+    ajaxRequest("POST", url.s_select, table , selectData);
+    function selectData(e) {
+        console.log(e);
+        $(".select ul").html("");
+        if(e.code=="200"){
+            $(".select ul").append('<li>全部校区</li>')
+            for(var i=0;i<e.data.length;i++){
+                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                $(".select ul").append(str);
+            }
+            $('.content_t').find('li').eq(0).addClass('Selected');
+            $('.content_t').find('p').eq(0).html('全部校区');
+        }
+    }
+    $('.truorfal input').on('touchend',function(){
+            $('.big_select').hide();
+            less_need.schoolId  =  $('.Selected').attr('data-code');
+            homework() // 作业率请求
+    })
     function homework(){
         ajax_S(url.t_houehome,less_need,function(e){
             if(e.result!=false&&e.data.length!=0){
