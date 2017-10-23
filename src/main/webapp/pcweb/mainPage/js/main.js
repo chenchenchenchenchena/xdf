@@ -209,7 +209,12 @@ function initMenu(funcId) {
             }
             if (checked) {
                 menu += "<li>";
-                menu += "<a href='javascript:;' title='" + functionName + "' data-functionId='" + functionId + "'>";
+                if(children == null || (children != undefined && children.length == 0)){
+                    menu += "<a href='javascript:;' title='" + functionName + "' data-functionId='" + functionId + "' onclick='changeMenu(this)' data-url='" + functionList[i].url + "'>"
+                }else {
+                    menu += "<a href='javascript:;' title='" + functionName + "' data-functionId='" + functionId + "'>";
+                }
+
                 menu += "<i class='" + className + "'></i>";
                 menu += "<span class='collapse-hide fz18'>" + functionName + "</span>";
                 menu += "</a>";
