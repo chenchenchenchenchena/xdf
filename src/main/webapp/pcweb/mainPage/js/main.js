@@ -34,7 +34,7 @@ function toLogin() {
                 setCookie("userName", e.userName, 1);
                 setCookie("userId", e.userId, 1);
 
-                showFunctionList(e.userId);
+                showFunctionList(e.userName);
             }
 
         }
