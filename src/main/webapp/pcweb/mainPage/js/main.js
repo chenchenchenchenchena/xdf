@@ -33,8 +33,10 @@ function toLogin() {
                 // setCookie("sid", e.sid, 1);
                 setCookie("userName", e.userName, 1);
                 setCookie("userId", e.userId, 1);
+                var userId = e.userId;
+                userId = userId.split('@')[0];
 
-                showFunctionList(e.userName);
+                showFunctionList(userId);
             }
 
         }
