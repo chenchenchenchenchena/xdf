@@ -22,6 +22,7 @@ $(function(){
 
             });
     }
+    $('body').css('height',$(window).height())
     var Shchool;
     if(localStorage.mastTeater){
         $('.big_select').show();
