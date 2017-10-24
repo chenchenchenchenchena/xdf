@@ -259,7 +259,7 @@ function initMenu(funcId) {
 }
 
 function changeMenu(this_){
-    var url = $(_this)[0].dataset.url;
+    var url = $(this_)[0].dataset.url;
     window.top.location.href = window.location.host+"xdfdthome/pcweb/"+url;
 }
 
