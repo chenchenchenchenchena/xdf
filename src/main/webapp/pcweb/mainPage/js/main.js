@@ -260,7 +260,8 @@ function initMenu(funcId) {
 
 function changeMenu(this_){
     var url = $(this_)[0].dataset.url;
-    window.location.href = window.location.host+"/xdfdthome/pcweb/"+url;
+    var host = window.location.host;
+    window.location.href = "http://"+host+"/xdfdthome/pcweb/"+url;
 }
 
 function initNavigationBar() {
