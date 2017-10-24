@@ -208,6 +208,9 @@ $(function(){
             'gradeType':testState, // 成绩类型 1 入门测 2 出门测
             'studentNos':[] //选中的学生号
         };
+        if(localStorage.terEmail){
+            reqData.teaEmail = sessionStorage.banzhutea
+        }
         $('.main-content,.no-data').hide();
 
         // if(pageState=="shared"){

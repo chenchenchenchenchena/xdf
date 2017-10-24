@@ -16,8 +16,7 @@ $(function(){
                     sessionStorage.studentName = e.data.studentName;
                     location.href = 'report_s.html';
                 }else{
-
-                        location.href = '../schedule/login_s.html'
+                    location.href = '../schedule/login_s.html'
                 }
 
             });
@@ -72,7 +71,7 @@ $(function(){
             alert('您当前的账户为主讲老师，暂仅能查看哦。')
         }
     })
-//点击查看成绩排行
+//点击查看成绩排行成绩排行
 $(document).on('touchend','.achievement_s>h4',function(){
     if($(this).hasClass('kthd')){
         if($(this).index()==0){
@@ -95,6 +94,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
         localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
         localStorage.setItem('SCHOOLID',$(this).attr('schoolid'));
         sessionStorage.grade_type = $('.active_last').index()+1;
+        sessionStorage.banzhutea = $(this).attr('teaemail')
         window.location.href = 'rankinglist_t.html?title='+title;
     }
 
@@ -156,7 +156,7 @@ function less_Inter(e){
                     html_yh = ''
                 }
 
-                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + e.data[i].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S' + i + '" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">' + html_yh + '<h4 class="grade" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
+                $('.class_big').append('<div class="classroom_s"><div class="title_s"><h4>' + e.data[i].className + '</h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S' + i + '" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">' + html_yh + '<h4 class="grade" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" teaemail="'+e.data[i].teacherEmail+'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
                 for (var c = 0; c < Grade.data.length; c++) {
                     var lesson_num = Grade.data[c];
                     for (var b = 0; b < maxGrade; b++) {
