@@ -119,7 +119,11 @@ $(document).on('touchend', '.report_tab li', function () {
     Text_Grade = $(this).html();
     console.log(need_.tCode+"__"+Text_Grade);
     $('.class_big').find('.classroom_s').remove();
-    Interaction();
+    if(localStorage.mastTeater){
+        Interaction_master();
+    }else{
+     Interaction();
+    }
 });
    
 function Interaction_master(){
@@ -132,6 +136,7 @@ function Interaction(){
 };
 function less_Inter(e){
         if (e.data.length != 0 && e.data != undefined) {
+        
             $('.no-data').hide();
             $('.class_big').show();
             for (var i = 0; i < e.data.length; i++) {
