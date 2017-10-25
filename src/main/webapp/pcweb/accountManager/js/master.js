@@ -135,7 +135,7 @@ $(function () {
                 console.log(e)
                 if(e.result==true){
                     alert('操作成功');
-                    // Olddata();
+                    Olddata();
                 }
             });
         }else{
@@ -145,7 +145,6 @@ $(function () {
                     id:$(this).attr('id'),
                };
                ajax_S(pcweb.t_dele,need_,function(e){
-                   console.log(e);
                    if(e.result){
                        alert('删除成功')
                    }
@@ -162,9 +161,14 @@ $(function () {
             email:sessionStorage.teaneamail
         };
         ajax_S(pcweb.old_data,need,function(e){
-            console.log(e);
-            $('.old_s').children().remove();
-            $('.old_s').append('<p><span>ddddd</span><span>dwdawd</span><i>-</i></p>')
+            if(e.Data.length!=0&&e.result!=false){
+                $('.old_s').children().remove();
+                for(var i = 0;i<e.Data.length;i++){
+                    $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
+                }
+            }else{
+                $('.old_s').hide();
+            }
         })
     };
 })
@@ -206,4 +210,17 @@ function edite_s(self){
     var teaname    = $(self).attr('userName')
     sessionStorage.teaneamail = $(self).attr('email')
     $('.edit_s p b').html(teaname);
+    var need = {
+        email:sessionStorage.teaneamail
+    };
+    ajax_S(pcweb.old_data,need,function(e){
+        if(e.Data.length!=0&&e.result!=false){
+            $('.old_s').children().remove();
+            for(var i = 0;i<e.Data.length;i++){
+                $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
+            }
+        }else{
+            $('.old_s').hide();
+        }
+    })
 }
