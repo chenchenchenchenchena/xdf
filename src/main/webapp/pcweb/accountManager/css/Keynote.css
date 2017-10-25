@@ -1,0 +1,62 @@
+input{
+    border:none;
+    outline:none;
+}
+.back_big{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:10;
+}
+.add_l{
+    width:400px;
+    height:260px;
+    padding-top:40px;
+    background:#fff;
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin:-150px 0 0 -200px;
+    border-radius:8px;
+    z-index:11;
+}
+.add_l p {
+    line-height:50px;
+    font-size:15px;
+    color:#000;
+}
+.add_l span{
+    display:inline-block;
+    width:100px;
+    text-align:right;
+    margin-right: 20px;
+}
+.add_l p input{
+    display:inline-block;
+    width:210px;
+    padding-left:10px;
+    height:35px;
+    border:1px solid #ccc;
+    border-radius:5PX;
+}
+.add_l .true_l,.add_l .false_l{
+    display:inline-block;
+    width:80px;
+    height:40px;
+    background: #00ba97;
+    font-size:15px;
+    color:#fff;
+    position: absolute;;
+    bottom:40px;
+    border-radius:8px;
+}
+.true_l{
+    right:50px;
+}
+.false_l{
+    left:50px;
+    background:#ccc!important;
+}
