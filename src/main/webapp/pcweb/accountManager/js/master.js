@@ -62,11 +62,43 @@ $(function () {
 
     }
 
-    /**
-     * 新建账号
-     */
-    function addMaster() {
 
-    }
+    $('.false_l').click(function () {
+        $('.back_big').hide();
+        $('.add_l').hide();
+    });
+    $('.true_l').click(function () {
+        var name = $('#add-name').val();
+        var email = $('#add-email').val();
+        var subject = $('#add-subject').val();
+        if (name == undefined || name == "") {
+            alert("主讲名称不为空！")
+            return;
+        }
+        if (email == undefined || email == "") {
+            alert("邮箱不为空！")
+            return;
+        }
+        if (subject == undefined || subject == "") {
+            alert("科目不为空！")
+            return;
+        }
+
+        // ajax_S(url.data_s, '', function (json) {
+        //     // if(json){
+        //     //
+        //     // }
+        // });
+    });
 
 })
+
+
+/**
+ * 新建账号
+ */
+function addMaster() {
+    $('.back_big').show();
+    $('.add_l').show();
+}
+
