@@ -181,6 +181,7 @@ $(function () {
                 for(var i = 0;i<e.Data.length;i++){
                     $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
                 }
+               $('.edit_s').css('margin-top',-$('.edit_s').height()/2-40)
             }else{
                 $('.old_s').hide();
             }
@@ -294,6 +295,7 @@ function edite_s(self){
             for(var i = 0;i<e.Data.length;i++){
                 $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
             }
+            $('.edit_s').css('margin-top',-$('.edit_s').height()/2-40)
         }else{
             $('.old_s').hide();
         }
