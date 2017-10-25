@@ -32,15 +32,11 @@ $(function () {
 
                     str += "<td>";
                     str += "<div class='p176-table-btnGroup'>";
-<<<<<<< HEAD
                     // if (loginId != "ssdf") {
                         str += "<a href='javascript:;' class='p176-btn-edit' onclick='edite_s()' ><i></i>编辑</a>";
                         // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
 
 
-=======
-                        str += "<a href='javascript:;' class='p176-btn-edit'><i></i>编辑</a>";
->>>>>>> bd7bb9070e39c4dd1dc916a21e4b941feb7b32e8
                         if (isEnabled == 1) {
                             str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
                         } else {
