@@ -10,6 +10,7 @@ input{
     height:100%;
     background:rgba(0,0,0,0.5);
     z-index:10;
+    display:none;
 }
 .add_l{
     width:400px;
@@ -22,6 +23,7 @@ input{
     margin:-150px 0 0 -200px;
     border-radius:8px;
     z-index:11;
+    display:none;
 }
 .add_l p {
     line-height:50px;
