@@ -63,7 +63,7 @@ input{
     background:#ccc!important;
 }
 .edit_s{
-    position: absolute;
+    position: fixed;
     left:50%;
     top:50%;
     margin:-85px 0 0 -200px;
@@ -126,3 +126,7 @@ input{
     margin-top:20px;
     border-top:1px solid #ccc;
 }
+/* .old_s p span{
+    display:inline-block;
+    width:300px;
+} */
