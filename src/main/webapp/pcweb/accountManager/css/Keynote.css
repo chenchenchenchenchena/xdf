@@ -44,7 +44,7 @@ input{
     border:1px solid #ccc;
     border-radius:5PX;
 }
- .true_l, .false_l{
+ .true_l, .false_l,.false_s,.true_s{
     display:inline-block;
     width:80px;
     height:40px;
@@ -55,10 +55,10 @@ input{
     bottom:40px;
     border-radius:8px;
 }
-.true_l{
+.true_l,.true_s{
     right:50px;
 }
-.false_l{
+.false_l,.false_s{
     left:50px;
     background:#ccc!important;
 }
@@ -114,6 +114,15 @@ input{
     padding-left:20px;
     margin-left:20px;
 }
-.edit_s .false_l,.edit_s .true_l{
+.edit_s .false_s,.edit_s .true_s{
     bottom:20px;
+    cursor:pointer;
+}
+.edit_s p b{
+    font-family:normal;
+    color:#00ba97;
+}
+.old_s{
+    margin-top:20px;
+    border-top:1px solid #ccc;
 }
