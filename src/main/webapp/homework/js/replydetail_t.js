@@ -252,9 +252,14 @@ $(function () {
                     if (tea_t[c].fileType == 'mp3') {
                         getAudioInfo([1, url_o + tea_t[c].relativePath, tea_t[c].playTime, "mp3"]);
                     } else {
-                        $('.imgBox').eq(0).append('<div><img data-id="'+tea_t[c].diskFilePath+'"  onerror=javascript:this.src="' + tea_t[c].thumbnail + '" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
+                        $('.imgBox').eq(0).append('<div><img data-id="'+tea_t[c].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + tea_t[c].thumbnail + '"  data-img="' + tea_t[c].fileUrl + '" src="images/error-image.png" alt="" /></div>')
 
                     }
+                }
+                for (var j = 0; j < $('.imgBox').eq(0).find('img').length; j++) {
+
+                    $('.imgBox').eq(0).find('img').eq(j).attr('src', $('.imgBox').eq(i).find('img').eq(j).attr('data-thumbnail'));
+
                 }
             }
             if (sessionStorage.Teatwo) {
