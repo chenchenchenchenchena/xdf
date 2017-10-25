@@ -94,6 +94,7 @@ $(function () {
                 $('.back_big').hide();
                 $('.add_l').hide();
                 layer.msg("添加成功!", {icon: 6});
+                findList();
             }else {
 
                 $('.back_big').hide();
