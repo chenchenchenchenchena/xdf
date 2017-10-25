@@ -147,6 +147,11 @@ var homework_s = {
     't_getImgeUrl':url_o+'upload/previewUrl.do'//获取试卷内容
 
 };
+var pcweb = {
+    't_add':url_o+'backEndMasterTeacherManager/addMasterTeacherCode.do',
+    'old_data':url_o+'backEndMasterTeacherManager/getTeacherAllCode.do',
+    't_dele':url_o+'backEndMasterTeacherManager/editMasterTeacherCode.do',
+}
 if(localStorage.mastTeater){
     homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
     url.t_houehome = url_o+'masterTeacher/querMasterTeacherCurrentHmWorkRate.do';

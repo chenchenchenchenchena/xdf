@@ -38,9 +38,8 @@ $(function () {
                     str += "<td>";
                     str += "<div class='p176-table-btnGroup'>";
                     // if (loginId != "ssdf") {
-                        str += "<a href='javascript:;' class='p176-btn-edit' onclick='edite_s()' ><i></i>编辑</a>";
+                        str += "<a href='javascript:;' class='p176-btn-edit' onclick='edite_s(this)' email="+email+" username="+userName+"><i></i>编辑</a>";
                         // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
-
 
                         if (isEnabled == 1) {
                             str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
@@ -104,7 +103,88 @@ $(function () {
             }
         });
     });
+    //获取校区信息
+    function campus(){
+        var table={
+            "tableName":"dict_school_info"
+        }
+        ajaxRequest("POST", url.s_select, table , selectData);
+        function selectData(e) {
+            for(var i = 0;i<e.data.length;i++){
+                $('#campus').append('<option value="'+e.data[i].tCode+'">'+e.data[i].tName+'</option>');
+            }
+        }
+    }
+    campus();
+    //编辑 确认 或者取消
+    $('.false_s,.true_s').click(function(){
+        $('.back_big').hide();
+        $('.edit_s').hide();
+        $('.edit_s select').val('1');
+        $('.tccode').val('');
+        $('.old_s').children().remove();
+    });
+   //编辑下 增加或者删除
+    $(document).on('click','.edit_s i',function(){
+        if($(this).html()=='+'){
+            //增加新编号
+            if($('#campus').val()=='1'){
+                alert('校区未选择');
+                return false;
+            };
+            if($('.tccode').val()==''){
+                alert('主讲编号未输入');
+                return false;
+            }
+            var need = {
+                masterCodeData:[{
+                    name:$('.edit_s b').html(),
+                    code:$('.tccode').val(),
+                    schoolId:$('#campus').val(),
+                    schoolName:$('#campus option:selected').html(),
+                    email:sessionStorage.teaneamail
+                }]
+            };
+            ajax_S(pcweb.t_add,need,function(e){
+                console.log(e)
+                if(e.result==true){
+                    alert('操作成功');
+                    Olddata();
+                }
+            });
+        }else{
+            //删除编号
+           if(confirm('确定删除吗？')){
+               var need_ = {
+                    id:$(this).attr('id'),
+               };
+               ajax_S(pcweb.t_dele,need_,function(e){
+                   if(e.result){
+                       alert('删除成功')
+                   }
+                   $('.old_s').children().remove();
+                   Olddata();
+               });
+           }
 
+        }
+    })
+    //请求旧的教师编号
+    function Olddata(){
+        var need = {
+            email:sessionStorage.teaneamail
+        };
+        ajax_S(pcweb.old_data,need,function(e){
+            if(e.Data.length!=0&&e.result!=false){
+                $('.old_s').children().remove();
+                for(var i = 0;i<e.Data.length;i++){
+                    $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
+                }
+            }else{
+                $('.old_s').hide();
+            }
+        })
+    };
 })
 
 /**
@@ -175,3 +255,45 @@ function addMaster() {
     $('.add_l').show();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//编辑
+function edite_s(self){
+    $('.back_big').show();
+    $('.edit_s').show();
+    var teaname    = $(self).attr('userName')
+    sessionStorage.teaneamail = $(self).attr('email')
+    $('.edit_s p b').html(teaname);
+    var need = {
+        email:sessionStorage.teaneamail
+    };
+    ajax_S(pcweb.old_data,need,function(e){
+        if(e.Data.length!=0&&e.result!=false){
+            $('.old_s').children().remove();
+            for(var i = 0;i<e.Data.length;i++){
+                $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
+            }
+        }else{
+            $('.old_s').hide();
+        }
+    })
+}
