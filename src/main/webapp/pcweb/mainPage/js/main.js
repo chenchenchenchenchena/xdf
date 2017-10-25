@@ -65,6 +65,7 @@ function tLogin() {
         'loginId': loginName,
         'password': signPassword
     };
+    var url_o = "http://10.162.7.138:8080/xdfdtmanager/";
     $.ajax({
         url: url_o + "e2Login/adminLogin.do",
         type: 'post',
