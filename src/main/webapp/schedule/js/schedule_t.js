@@ -301,12 +301,8 @@ setTimeout(function(){
         }
 
     });
-    if(!localStorage.mastTeater){
         ajax_S(url.s_emai,emailm,stusea);
         ajax_S(url.s_emai,menu_s,menufunc);
-    }else{
-        $('.big_select').show();
-    }
 //点击查看详情
 $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
@@ -428,7 +424,6 @@ $(document).on('click','.H-data li',function(){
     $('.truorfal input').on('touchend',function(){
             Shchool = $('.Selected').attr('data-code');
             $('.big_select').hide();
-            ajax_S(url.s_emai,emailm,stusea);
-            ajax_S(url.s_emai,menu_s,menufunc);
+            
     })
 })
