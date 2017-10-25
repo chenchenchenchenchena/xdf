@@ -150,7 +150,7 @@ var homework_s = {
 var pcweb = {
     't_add':url_o+'backEndMasterTeacherManager/addMasterTeacherCode.do',
     'old_data':url_o+'backEndMasterTeacherManager/getTeacherAllCode.do',
-    't_dele':url_o+'backEndMasterTeacherManager/enabledMasterTeacher.do',
+    't_dele':url_o+'backEndMasterTeacherManager/editMasterTeacherCode.do',
 }
 if(localStorage.mastTeater){
     homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
