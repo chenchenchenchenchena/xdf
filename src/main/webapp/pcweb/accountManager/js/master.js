@@ -42,9 +42,9 @@ $(function () {
                         // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
 
                         if (isEnabled == 1) {
-                            str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\")'><i></i>禁用</a>";
+                            str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\",\"" + email + "\")'><i></i>禁用</a>";
                         } else {
-                            str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\")'><i></i>启用</a>";
+                            str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\",\"" + email + "\")'><i></i>启用</a>";
                         }
                     str += "</div>";
                     str += "</td>";
@@ -192,7 +192,7 @@ $(function () {
  * 启用／禁用
  * @param pid
  */
-function enabledUser(_this,pid) {
+function enabledUser(_this,pid,email) {
     var isEnable = $("#" + pid).html();
     var text;
     var buttons = [];
@@ -208,7 +208,8 @@ function enabledUser(_this,pid) {
     }, function () {
         var params = {
             'id':pid,
-            'invalid':isEnable
+            'invalid':isEnable,
+            'email':email
         };
 
         jQuery.ajax({
