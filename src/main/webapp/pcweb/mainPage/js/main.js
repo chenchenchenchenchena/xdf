@@ -33,8 +33,10 @@ function toLogin() {
                 // setCookie("sid", e.sid, 1);
                 setCookie("userName", e.userName, 1);
                 setCookie("userId", e.userId, 1);
+                var userId = e.userId;
+                userId = userId.split('@')[0];
 
-                showFunctionList(e.userId);
+                showFunctionList(userId);
             }
 
         }
@@ -109,8 +111,8 @@ function showFunctionList(userId) {
                     //获取functionIds
                     setFunctionList(e.dataList);
                     localStorage.functionCheckedList = JSON.stringify(functionList);
-                    // jumpPage(e.dataList);
-                    window.location = "mainPage/main_page.html";
+                    jumpPage(e.dataList);
+                    // window.location = "mainPage/main_page.html";
                 }
             }
 
@@ -256,6 +258,11 @@ function initMenu(funcId) {
 
 }
 
+function changeMenu(this_){
+    var url = $(this_)[0].dataset.url;
+    var host = window.location.host;
+    window.location.href = "http://"+host+"/xdfdthome/pcweb/"+url;
+}
 
 function initNavigationBar() {
     var navigationList = $("[data-functionId]");
