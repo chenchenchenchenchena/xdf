@@ -258,7 +258,7 @@ $(function () {
                 }
                 for (var j = 0; j < $('.imgBox').eq(0).find('img').length; j++) {
 
-                    $('.imgBox').eq(0).find('img').eq(j).attr('src', $('.imgBox').eq(i).find('img').eq(j).attr('data-thumbnail'));
+                    $('.imgBox').eq(0).find('img').eq(j).attr('src', $('.imgBox').eq(0).find('img').eq(j).attr('data-thumbnail'));
 
                 }
             }
