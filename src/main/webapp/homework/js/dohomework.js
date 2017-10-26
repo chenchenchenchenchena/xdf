@@ -138,7 +138,7 @@ $(function () {
     }
 
     /*------------------录制语音开始------------------------------------*/
-
+    var recordCount = 0;
     $('#record').click(function () {
         if (recordCount >= 3) {
             alert("最多录制三条语音");
