@@ -1138,9 +1138,10 @@ $(function () {
         $(this).hide();
         $('.true_s').show();
         $('body').css('height', '100%');
-        $('body').css('overflow-y', 'hidden');
-        $('body').css('position', 'relative');
-        $('body').attr('scroll', 'no');
+        // $('body').css('overflow-y', 'hidden');
+        // $('body').css('position', 'relative');
+        // $('body').attr('scroll', 'no');
+        $('.doHomework').hide();
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
