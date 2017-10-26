@@ -1139,6 +1139,7 @@ $(function () {
         $('.true_s').show();
         $('body').css('height', '100%');
         $('body').css('overflow', 'hidden');
+        $('body').css('position', 'relative');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
@@ -1171,6 +1172,7 @@ $(function () {
                 ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
+
                     event.stopPropagation();
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
