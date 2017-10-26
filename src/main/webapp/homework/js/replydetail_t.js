@@ -1008,9 +1008,11 @@ $(function () {
         var previewUrl = $(this).attr('data-id');
         lookBigImage(previewUrl,false);
     });
-    $(document).on('tap', '.anSwer img', function () {
+    $(document).on('touchend', '.anSwer img', function () {
         var previewUrl = $(this).attr('data-id');
-        lookBigImage(previewUrl,false);
+        $('.load').show();
+        cnv(0,'load_one',20)
+        lookBigImage(previewUrl,true);
     });
 
     $('.pinch-zoom').each(function () {
@@ -1044,12 +1046,15 @@ $(function () {
         ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
             var previewUrl = e;
             if (saveServer) {
+                cnv(20,'load_one',60)
                 //true:返回服务器所在的地址，false:返回云盘的预览地址
-                previewUrl = url_o + previewUrl;
+                previewUrl =   url_o+   previewUrl;
                 $('.big_back_s canvas').hide();
                 $('.big_back_s').show();
                 $('.big_back_s img').attr('src', previewUrl);
-                setTimeout(function () {
+              
+                $('.big_back_s img').load(function(){
+                    cnv(60,'load_one',100);
                     $('.big_back_s img').css({
                         'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
                         'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
@@ -1058,8 +1063,18 @@ $(function () {
                         'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
                         'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
                     });
+                   setTimeout(function(){
+                    $('.load').hide();
+                   },500)
+                })
+                $('.big_back_s img').error(function(){
+                    alert('图片加载失败，正在重新加载');
+                    location.reload();
+                })
+                // setTimeout(function () {
+                   
 
-                }, 300)
+                // }, 300)
             } else {
                 wx.previewImage({
                     current: previewUrl, // 当前显示图片的http链接
@@ -1117,13 +1132,11 @@ $(function () {
     var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
         clearInterval(time_s);
-
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
         $('.true_s').show();
         $('body').css('height', '100%');
-
         $('body').css('overflow', 'hidden');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
@@ -1271,5 +1284,42 @@ $(function () {
             $(this).val('100')
         }
     })
+    function cnv(index,id,num){
+        clearInterval(times);
+        var bian = index;    //这里改数值~
+        var canvas = document.getElementById(id);
+        var ctx = canvas.getContext("2d");
+        var W = canvas.width;
+        var H = canvas.height;
+        var text,text_w;
+        function init(){
+            ctx.clearRect(0,0,W,H);
+            ctx.beginPath();
+            ctx.strokeStyle="#eee";
+            ctx.lineWidth=4;
+            ctx.arc(W/2,H/2,80,0,Math.PI*2,false);
+            ctx.stroke();
+            
+            var r = bian*2*Math.PI/100;
+            console.log(r);
+            ctx.beginPath();
+            var linear = ctx.createLinearGradient(100,100,200,100); 
+            linear.addColorStop(0,'#00ba97'); 
+            linear.addColorStop(1,'#00ba97'); 
+            ctx.strokeStyle =linear;
 
+            ctx.lineCap = 'round'
+            ctx.lineWidth=10;
+            ctx.arc(W/2,H/2,80,0-90*Math.PI/180,r-90*Math.PI/180,false);
+            ctx.stroke();
+        }
+        init();
+        var times = setInterval(function(){
+            bian +=3;
+            if(bian>=num){
+                clearInterval(times)
+            }
+            init()
+        },1)
+    }
 });
