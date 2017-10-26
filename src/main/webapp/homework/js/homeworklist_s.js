@@ -6,9 +6,9 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	/*sessionStorage.stuNumber = 'SS6889';
-	sessionStorage.studentName = '王子豪';
-	sessionStorage.schoolId = '73';*/
+	sessionStorage.stuNumber = 'SS5923';
+	sessionStorage.studentName = '刘一硕';
+	sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
@@ -33,7 +33,8 @@ $(function(){
             ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
         }
     });
-
+	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu};
+	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
@@ -135,6 +136,7 @@ $(function(){
 					}
 				}
 			});
+			return false;
 
 		}else{
 			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
@@ -147,6 +149,7 @@ $(function(){
 				window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
 
 			});
+			return false;
 		}
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
 		//点击已完成列表-阅读
@@ -264,6 +267,7 @@ $(function(){
 						if (item.readStatus==0){//未读
 							readCss = "redCircle";
 						}
+						console.log(item)
 						switch (item.replyStatus){
 							case 0:
 								replyStatus = '未批';
@@ -284,7 +288,7 @@ $(function(){
 						if(item.homeworkType=="1"){
 							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'"><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}else{
-							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-testId="'+item.testId+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
+							hwLessNosHtml +='<li data-homeworkTinfoId="'+item.homeworkTinfoId+'"  data-id="'+item.id+'" data-classCode="'+items.classCode+'" data-testId="'+item.testId+'"><i class="dian">电子</i><span class="hwDate">'+item.homeworkTime.substr(5)+'日作业</span><span class="'+statusCss+'">'+replyStatus+'</span><span class="'+statusCss+' beging_s" style="float:right;margin-top: 35px;" url_="'+item.paperUrl+'">重做</span><span class="'+readCss+'"></span><span class="stuScore">'+score+'</span></li>';
 						}
 					});
 					//红点显示判断
@@ -317,6 +321,21 @@ $(function(){
 		$(".hwHeader ul li:eq(1)").addClass("hwShow").siblings("li").removeClass("hwShow");
 		layer.close(loading);
 	}
+
+
+	$(document).on('touchend','.beging_s',function(){
+		location.href = $(this).attr('url_')
+		return false;
+	});
+
+
+
+
+
+
+
+
+
 
 })
 
