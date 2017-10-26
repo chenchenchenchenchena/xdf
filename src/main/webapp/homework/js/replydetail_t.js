@@ -1138,7 +1138,7 @@ $(function () {
         $(this).hide();
         $('.true_s').show();
         $('body').css('height', '100%');
-        $('body').css('overflow', 'hidden');
+        $('body').css('overflow-y', 'hidden');
         $('body').css('position', 'relative');
         $('body').attr('scroll', 'no');
         $('.esc_s').show();
