@@ -1115,7 +1115,7 @@ $(function () {
 
     stopDrop();
     $('.esc_s').on('touchend', function () {
-        // clearInterval(time_s);
+        clearInterval(time_s);
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
@@ -1125,6 +1125,8 @@ $(function () {
         $('.big_back_s').hide();
         $('body').css('overflow-y', 'auto');
         $('.true_s').unbind('touchend');
+        $('.doHomework').show();
+        
     });
     $('.esc_s').show();
     var time_s;
@@ -1132,15 +1134,12 @@ $(function () {
     var str;
     var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
-        // clearInterval(time_s);
+        clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
         $(this).hide();
         $('.true_s').show();
         $('body').css('height', '100%');
-        // $('body').css('overflow-y', 'hidden');
-        // $('body').css('position', 'relative');
-        // $('body').attr('scroll', 'no');
         $('.doHomework').hide();
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
@@ -1168,10 +1167,10 @@ $(function () {
             event.stopPropagation();
             if (event.touches.length == 1) {
                 $(window).scrollTop(0);
-                // clearInterval(time_s);
-                // time_s = setInterval(function () {
-                //     $(window).scrollTop(0);
-                // }, 100);
+                clearInterval(time_s);
+                time_s = setInterval(function () {
+                    $(window).scrollTop(0);
+                }, 100);
                 ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
@@ -1184,7 +1183,7 @@ $(function () {
                 $('#myCanvas').on('touchend', function () {
                     $(window).scrollTop(0);
                     event.stopPropagation();
-                    // clearInterval(time_s);
+                    clearInterval(time_s);
                     ctx.closePath();
                     $('.big_back_s').show();
                 });
@@ -1200,6 +1199,7 @@ $(function () {
             }
             ber_L = false;
             $('.big_back_s').hide();
+            $('.doHomework').show();
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
@@ -1209,7 +1209,7 @@ $(function () {
             $('.big_back_s span:last-of-type').show();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
-            // clearInterval(time_s);
+            clearInterval(time_s);
             // var b = new Base64();
             str = canvas.toDataURL("image/jpeg", 0.5);
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
