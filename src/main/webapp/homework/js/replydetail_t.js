@@ -1140,6 +1140,7 @@ $(function () {
         $('body').css('height', '100%');
         $('body').css('overflow', 'hidden');
         $('body').css('position', 'relative');
+        $('body').attr('scroll', 'no');
         $('.esc_s').show();
         $('.pinch-zoom-container').eq(0).hide();
         var previewUrl = $('.big_back_s img').attr('src');
