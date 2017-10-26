@@ -1119,6 +1119,7 @@ $(function () {
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
+        $('.pinch-zoom-container').show();
         $('.big_back_s .true_s').hide();
         $('.big_back_s span:last-of-type').show();
         $('.big_back_s').hide();
