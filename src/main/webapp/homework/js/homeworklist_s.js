@@ -6,9 +6,9 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	sessionStorage.stuNumber = 'SS5923';
-	sessionStorage.studentName = '刘一硕';
-	sessionStorage.schoolId = '73';
+	// sessionStorage.stuNumber = 'SS5923';
+	// sessionStorage.studentName = '刘一硕';
+	// sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	var loading;
 	//点击待交作业
@@ -33,8 +33,7 @@ $(function(){
             ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
         }
     });
-	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu};
-	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
@@ -45,7 +44,8 @@ $(function(){
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
-				'stuNum':sessionStorage.stuNumber //学生编号
+				'stuNum':sessionStorage.stuNumber ,//学生编号
+				'userId':localStorage.userId_stu
 			};
 			$('title').html('学生已交作业列表')
 			loading = layer.load();

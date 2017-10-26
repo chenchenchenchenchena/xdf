@@ -30,7 +30,7 @@ $(function(){
         var need_ = {
             'masterTeacherEmail':localStorage.terEmail,
             'gradeType':'1',
-            'ifmore':'1'
+            'ifmore':'1',
         };
     }else{
         var need_ = {
@@ -214,6 +214,9 @@ function selectData(e) {
 }
 $('.truorfal input').on('touchend',function(){
         need_.schoolId =  $('.Selected').attr('data-code');
+        if( $('.Selected').attr('data-code')==undefined){
+            need_.schoolId =''
+        }
         $('.big_select').hide();
         Interaction_master();
 })

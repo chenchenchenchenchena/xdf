@@ -36,7 +36,8 @@ $(function () {
     var reqData = {
         'stuNum':sessionStorage.stuNumber, //学生编号
          'classCode':localStorage.classcode,
-         'homeworkTinfoId':homeworkTinfoId
+         'homeworkTinfoId':homeworkTinfoId,
+         'userId':localStorage.userId_stu
     };
     loading = layer.load();
     ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess);

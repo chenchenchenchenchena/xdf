@@ -111,6 +111,9 @@ $(function(){
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();
             need_mas.schoolId  =  $('.Selected').attr('data-code');
+            if($('.Selected').attr('data-code')==undefined){
+                need_mas.schoolId = '';
+            }
             ajax_S(homework_s.t_list,need_mas,function(e){
 
                 if(e.data==undefined){

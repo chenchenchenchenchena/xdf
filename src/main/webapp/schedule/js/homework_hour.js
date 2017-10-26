@@ -39,7 +39,7 @@ $(function(){
         }
         homework() // 作业率请求
     }else{
-        // $('.big_select').show();
+        $('.big_select').show();
         var less_need_ = {
             'masterTeacherEmail':localStorage.terEmail,
             'ifmore':'1'
@@ -48,7 +48,6 @@ $(function(){
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId,
         }
-        homework() // 作业率请求
     }
     //校区相关
     $(document).on('touchend',".select p",function(e){
@@ -82,6 +81,9 @@ $(function(){
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();
             less_need_.schoolId  =  $('.Selected').attr('data-code');
+             if($('.Selected').attr('data-code')==undefined){
+                less_need_.schoolId = '';
+            }
             homework() // 作业率请求
     })
     function homework(){

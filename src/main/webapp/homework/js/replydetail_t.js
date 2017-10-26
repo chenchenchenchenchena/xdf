@@ -42,11 +42,13 @@ $(function () {
 
     });
     if (GetRequest('Id')) {
-        sessionStorage.Teatwo = '0'
+        sessionStorage.Teatwo = '0';
     }
     //权限判断
     if(localStorage.mastTeater){
         $('.answer:last').css('display','none');
+        $('.hwInfo').show();
+        $('.hwRankTitle').css('background-image', 'url(../homework/images/jiao11.png)');
         alert('您当前的账户为主讲老师，暂仅能查看哦。')
     }
     //输入验证
