@@ -1193,8 +1193,9 @@ $(function () {
             $('.notsubmit .imgBox').show();
             $('.big_back_s canvas').hide();
             $('.big_back_s img').show();
-            $('.big_back_s .esc_s').hide();
+            $('.big_back_s .esc_s').show();
             $('.big_back_s .true_s').hide();
+            $('.pinch-zoom-container').show();
             $('.big_back_s span:last-of-type').show();
             $('body').css('overflow-y', 'auto');
             $('.true_s').unbind('touchend');
