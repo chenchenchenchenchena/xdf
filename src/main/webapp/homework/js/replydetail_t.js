@@ -503,6 +503,16 @@ $(function () {
             $('.areyok input:last-of-type').css('background', '#00ba97');
             return false;
         }
+
+        if(arr_voice.length > 3){
+            layer.msg('语音最多只能录制三条');
+            return false;
+        }
+        if(arr_voice.length > 3){
+            layer.msg('图片最多上传三张');
+            return false;
+        }
+
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
         } else {

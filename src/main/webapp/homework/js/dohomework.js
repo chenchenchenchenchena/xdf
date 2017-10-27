@@ -715,7 +715,7 @@ $(function () {
             return;
         }
         // 语音最多可上传*个，图片最多可上传3个
-        if ($('#record_audio_box li').length > 3) {
+        if ($('#record_audio_box li').length > 3 || voiceFileParams.length > 3) {
             layer.open({
                 type: 1,
                 area: ['310px', '195px'],
@@ -727,7 +727,7 @@ $(function () {
             });
             return;
         }
-        if ($('.notsubmit .imgBox li').length > 3) {
+        if ($('.notsubmit .imgBox li').length > 3 || fileParams.length > 3) {
             layer.open({
                 type: 1,
                 area: ['310px', '195px'],
@@ -749,6 +749,7 @@ $(function () {
             skin: '',
             content: $(".confirm-sub")
         })
+
 
     });
 //    提交二次确认---确认
