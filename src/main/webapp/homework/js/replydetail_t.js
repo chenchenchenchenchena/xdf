@@ -742,37 +742,39 @@ $(function () {
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
         if(timeInedex == 0){
-            if ((END - START) < 1000) {
-                END = 0;
-                START = 0;
-                //小于1000ms，不录音
-                clearTimeout(recordTimer);
-                wx.stopRecord({
-                    success: function (res) {
-                        clearInterval(recordTimer);
-                        $('.song_s').hide();
-                        $('.big_whit').hide();
-                        this_.siblings('img').attr('src', 'images/C04-03.png');
-                        isCanStartRecord = true;
-                        isCanStopRecord = false;
-                        layer.msg("录制时间太短");
-                    },
-                    fail: function(){
-                        layer.msg("录制时间太短");
-                        clearInterval(recordTimer);
-                        $('.song_s').hide();
-                        $('.big_whit').hide();
-                        this_.siblings('img').attr('src', 'images/C04-03.png');
-                        isCanStartRecord = true;
-                        isCanStopRecord = false;
-                    }
-                });
-                return false;
-            } else {
+            setTimeout(function () {
+                if ((END - START) < 1000) {
+                    END = 0;
+                    START = 0;
+                    //小于1000ms，不录音
+                    clearTimeout(recordTimer);
+                    wx.stopRecord({
+                        success: function (res) {
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                            layer.msg("录制时间太短");
+                        },
+                        fail: function () {
+                            layer.msg("录制时间太短");
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                        }
+                    });
+                    return false;
+                } else {
 
-                //表示录制刚结束
-                return false;
-            }
+                    //表示录制刚结束
+                    return false;
+                }
+            }, 300);
         } else {
             isCanStopRecord = true;
             stopRecordBack(this_, event);
