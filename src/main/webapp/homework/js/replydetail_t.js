@@ -1179,6 +1179,7 @@ $(function () {
                 });
                 $('#myCanvas').on('touchend', function () {
                     // ctx.closePath();
+                    cxt.clearRect(0,0,width_,height); 
                 });
                 // upLoadWxImage(canvas.toDataURL("image/png"));
             }
