@@ -458,8 +458,17 @@ function weChatData(Json) {
 
 $(function(){
         $('body').append('<div class="load_t" style="display:none;"><div class="loading_s"><span></span><span></span><span></span><span></span><span></span></div></div>')
-})
+       var newTime = new Date().format("yyyy-MM-dd hh:mm:ss");
+    //    if(oldtime>newTime){
+    //        $('body').append('')
+    //    }
+    })
 
+$(document).ready(function(){
+    var a = new Date();
+    var b = a.getTime()+1000*5;
+    var oldtime =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
+})
 
 
 
