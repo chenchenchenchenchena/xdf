@@ -22,6 +22,7 @@ var menu_s = {
     'beginDate':new Date().format("yyyy-MM-01"),
     'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
 };
+    sessionStorage.removeItem("classData");
 //储存课程信息
 var curr_e = [];
 //储存当月的日期
