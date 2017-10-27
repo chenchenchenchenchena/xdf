@@ -1226,6 +1226,10 @@ $(function () {
             clearInterval(time_s);
             // var b = new Base64();
             str = canvas.toDataURL("image/jpeg", 0.5);
+            if($('.notsubmit .imgBox').length >= 3){
+                layer.msg('最多只能批复三张');
+                return false;
+            }
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
 
             //上传文件到服务器
