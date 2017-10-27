@@ -820,6 +820,7 @@ $(function () {
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
+        $('.big_back').show();
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
         //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
         wx.uploadVoice({
@@ -830,9 +831,10 @@ $(function () {
             },
             complete: function () {
                 //接口调用完成（失败成功）
-
+                $('.big_back').hide();
             },
             fail: function (res) {
+                $('.big_back').hide();
             }
         });
     }
@@ -855,6 +857,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
+                $('.big_back').hide();
                 if (e.status == "failure") {
                     layer.msg(e.msg);
                 } else {
@@ -940,6 +943,7 @@ $(function () {
             alert('请先使用 chooseImage 接口选择图片');
             return;
         }
+        $('.big_back').show();
         var i = 0, length = images.localIds.length;
 
         function upload() {
@@ -955,6 +959,7 @@ $(function () {
                     }
                 },
                 fail: function (res) {
+                    $('.big_back').hide();
                 }
             });
         }
@@ -979,6 +984,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
+                $('.big_back').hide();
                 if (e.status == "failure") {
                     // alert(e.msg);
                     layer.msg('图片上传失败');
