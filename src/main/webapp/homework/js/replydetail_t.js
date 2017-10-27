@@ -1172,10 +1172,10 @@ $(function () {
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                     ctx.stroke();
-                    ctx.closePath();
                     
                 });
                 $('#myCanvas').on('touchend', function () {
+                    // ctx.closePath();
                 });
                 // upLoadWxImage(canvas.toDataURL("image/png"));
             }
