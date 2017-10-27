@@ -1011,6 +1011,9 @@ $(function () {
         lookBigImage(previewUrl,false);
     });
     $(document).on('touchend', '.anSwer img', function () {
+        if(localStorage.mastTeater){
+            return false;
+        }
         var previewUrl = $(this).attr('data-id');
         $('.load').show();
         cnv(0,'load_one',20)
@@ -1166,28 +1169,16 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-            event.stopPropagation();
             if (event.touches.length == 1) {
-                $(window).scrollTop(0);
-                clearInterval(time_s);
-                time_s = setInterval(function () {
-                    $(window).scrollTop(0);
-                }, 100);
-                ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
-                    $(window).scrollTop(0);
-                    event.stopPropagation();
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                     ctx.stroke();
+                    
                 });
                 $('#myCanvas').on('touchend', function () {
-                    $(window).scrollTop(0);
-                    event.stopPropagation();
-                    clearInterval(time_s);
-                    ctx.closePath();
-                    $('.big_back_s').show();
+                    // ctx.closePath();
                 });
                 // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -1335,4 +1326,22 @@ $(function () {
             init()
         },1)
     }
+    function stopDrop() {
+        var lastY;//最后一次y坐标点
+        $(document.body).on('touchstart', function(event) {
+            lastY = event.originalEvent.changedTouches[0].clientY;//点击屏幕时记录最后一次Y度坐标。
+        });
+        $(document.body).on('touchmove', function(event) {
+            var y = event.originalEvent.changedTouches[0].clientY;
+            var st = $(this).scrollTop(); //滚动条高度  
+            if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
+                lastY = y;
+                event.preventDefault();
+            }
+            lastY = y;
+     
+        });
+    }
+    stopDrop();
 });
+

@@ -220,45 +220,6 @@ var calbac = {
     'e2State':sessionStorage.e2state,
 };
 //e2登陆回传的值
-
-
-// ajax封装
-function ajax_S(link,more,func){
-    $.ajax({
-        url:link,
-        type: 'post',
-        asyns:false,
-        dataType: 'json',
-        data:JSON.stringify(more),
-        success:function(e){
-            func(e)
-        }
-    });
-}
-
-/** @brief  封装ajax请求 create by Gws
- *  @param  targetUrl     请求接口
- *  @param  requestData        请求接口传参
- *  @param  successCallback     回调方法
- *  @param  failureCallback     失败方法
- */
-function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
-    $.ajax({
-        type: typeIn,
-        url: targetUrl,
-        data: requestData,
-        success: function (msg) {
-            successCallback(msg);
-        },
-        error: function (err) {
-            // failureCallback(msg);
-            console.log("err:"+err);
-        }
-    });
-};
-
-
-
 //时间格式化
 Date.prototype.format = function(fmt) {
     var o = {
@@ -280,6 +241,114 @@ Date.prototype.format = function(fmt) {
     }
     return fmt;
 };
+
+
+// ajax封装
+function ajax_S(link,more,func){
+    var time_ ;
+    $.ajax({
+        url:link,
+        type: 'post',
+        asyns:false,
+        dataType: 'json',
+        data:JSON.stringify(more),
+        beforeSend:function(e){
+            //时间格式化
+            Date.prototype.format = function(fmt) {
+                var o = {
+                    "M+" : this.getMonth()+1,                 //月份
+                    "d+" : this.getDate(),                    //日
+                    "h+" : this.getHours(),                   //小时
+                    "m+" : this.getMinutes(),                 //分
+                    "s+" : this.getSeconds(),                 //秒
+                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                    "S"  : this.getMilliseconds()             //毫秒
+                };
+                if(/(y+)/.test(fmt)) {
+                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                }
+                for(var k in o) {
+                    if(new RegExp("("+ k +")").test(fmt)){
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                    }
+                }
+                return fmt;
+            };
+            var a = new Date();
+            var b = a.getTime()+1000*5;
+            sessionStorage.oldtime_D =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
+            time_ = setInterval(function(){
+                if(sessionStorage.oldtime_D<new Date().format("yyyy-MM-dd hh:mm:ss")){
+                   $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+                }
+            },1000)
+        },
+        success:function(e){
+            func(e);
+            clearInterval(time_);
+        }
+        
+    });
+}
+
+/** @brief  封装ajax请求 create by Gws
+ *  @param  targetUrl     请求接口
+ *  @param  requestData        请求接口传参
+ *  @param  successCallback     回调方法
+ *  @param  failureCallback     失败方法
+ */
+function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
+    var time_;
+    $.ajax({
+        type: typeIn,
+        url: targetUrl,
+        data: requestData,
+        beforeSend:function(e){
+            //时间格式化
+            Date.prototype.format = function(fmt) {
+                var o = {
+                    "M+" : this.getMonth()+1,                 //月份
+                    "d+" : this.getDate(),                    //日
+                    "h+" : this.getHours(),                   //小时
+                    "m+" : this.getMinutes(),                 //分
+                    "s+" : this.getSeconds(),                 //秒
+                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                    "S"  : this.getMilliseconds()             //毫秒
+                };
+                if(/(y+)/.test(fmt)) {
+                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                }
+                for(var k in o) {
+                    if(new RegExp("("+ k +")").test(fmt)){
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                    }
+                }
+                return fmt;
+            };
+            var a = new Date();
+            var b = a.getTime()+1000*5;
+            sessionStorage.oldtime_D =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
+            time_ = setInterval(function(){
+                if(sessionStorage.oldtime_D<new Date().format("yyyy-MM-dd hh:mm:ss")){
+                   $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+                }
+            },1000)
+        },
+
+        success: function (msg) {
+            successCallback(msg);
+            clearInterval(time_);
+        },
+        
+        error: function (err) {
+            // failureCallback(msg);
+            console.log("err:"+err);
+        }
+    });
+};
+
+
+
 
 
 // 获取路径的参数
@@ -459,18 +528,15 @@ function weChatData(Json) {
 $(function(){
         $('body').append('<div class="load_t" style="display:none;"><div class="loading_s"><span></span><span></span><span></span><span></span><span></span></div></div>')
        var newTime = new Date().format("yyyy-MM-dd hh:mm:ss");
-    //    if(oldtime>newTime){
-    //        $('body').append('')
-    //    }
+       if(sessionStorage.oldtime<newTime){
+           $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+       }
     })
 
-$(document).ready(function(){
     var a = new Date();
     var b = a.getTime()+1000*5;
-    var oldtime =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
-})
-
-
+    sessionStorage.oldtime =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
+    console.log(sessionStorage.oldtime)
 
 
 
