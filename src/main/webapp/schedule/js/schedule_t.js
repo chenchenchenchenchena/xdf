@@ -138,7 +138,7 @@ function stusea(e){
             }
             $('.curriculum').show();
         }
-
+        $('.loading_s').hide();
         if($('.curriculum li').length==0){
             $('.N-data').show();
             $('.H-data').hide();
