@@ -1176,7 +1176,6 @@ $(function () {
                 });
                 $('#myCanvas').on('touchend', function () {
                     ctx.closePath();
-                    $('.big_back_s').show();
                 });
                 // upLoadWxImage(canvas.toDataURL("image/png"));
             }
@@ -1339,7 +1338,6 @@ $(function () {
             lastY = y;
      
         });
-        alert(0)
     }
     stopDrop();
 });
