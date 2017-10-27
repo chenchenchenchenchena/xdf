@@ -14,6 +14,9 @@ $(function(){
         'studentNo':GetRequest('studentNo'),
         'schoolId':localStorage.getItem('SCHOOLID')
     };
+    if(localStorage.mastTeater){
+        Stujson.teacherEmail=sessionStorage.banzhutea
+    }
     Studata();  //调取
 //切换显示方式
     $(document).on('touchend','.tab_record span',function(){

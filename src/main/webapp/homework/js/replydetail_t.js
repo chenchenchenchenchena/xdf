@@ -1011,6 +1011,9 @@ $(function () {
         lookBigImage(previewUrl,false);
     });
     $(document).on('touchend', '.anSwer img', function () {
+        if(localStorage.mastTeater){
+            return false;
+        }
         var previewUrl = $(this).attr('data-id');
         $('.load').show();
         cnv(0,'load_one',20)
