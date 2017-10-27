@@ -456,7 +456,9 @@ function weChatData(Json) {
 
 
 
-
+$(function(){
+        $('body').append('<div class="load_t" style="display:none;"><div class="loading_s"><span></span><span></span><span></span><span></span><span></span></div></div>')
+})
 
 
 

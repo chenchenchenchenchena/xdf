@@ -3,6 +3,7 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
+    $('.load_t').show();        
     if(!localStorage.terEmail&&sessionStorage.openid){
         var WXnum  = {
             'wechatId'  :sessionStorage.openid
@@ -107,6 +108,8 @@ $(function(){
             $('.content_t').find('li').eq(0).addClass('Selected');
             $('.content_t').find('p').eq(0).html('全部校区');
         }
+    $('.load_t').hide();        
+    
     }
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();

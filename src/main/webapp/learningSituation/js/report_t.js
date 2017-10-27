@@ -2,6 +2,7 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
+    $('.load_t').show();
     if(!localStorage.terEmail){
             var WXnum  = {
                 'wechatId':sessionStorage.openid
@@ -182,6 +183,8 @@ function less_Inter(e){
             $('.no-data').show();
             $('.class_big').show();
         }
+    $('.load_t').hide();
+    
 }
  //校区相关
  $(document).on('touchend',".select p",function(e){

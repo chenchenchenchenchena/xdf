@@ -5,6 +5,8 @@ $(function(){
         'endDate':sessionStorage.timetoday.split(' ')[0],
         'schoolId':sessionStorage.schoolId
     };
+    $('.load_t').show();        
+    
     var mastertae = [];
 	sessionStorage.s ='';
 	ajax_S(url.s_stud,emailm,stusea);
@@ -122,6 +124,8 @@ $(function(){
             paginationClickable: true,
             spaceBetween: 30
         });
+     $('.load_t').hide();        
+    
     }
 
     $(document).on('touchstart','.student_home',function () {

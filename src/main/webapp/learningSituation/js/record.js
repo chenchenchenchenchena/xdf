@@ -17,6 +17,8 @@ $(function () {
 	var start;
 	var end;
 	var that;
+	$('.load_t').show();
+	
 	/*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
      if(!sessionStorage.openid){
          // wechatCode(location.href)
@@ -40,14 +42,14 @@ $(function () {
 	$(".txt").hide();
 	$(".up").hide();
     $(".txtDiv").hide();
-    var firstLoad = layer.load();
+    // var firstLoad = layer.load();
     //录入数据
     var inputData = {"sCode": localStorage.teacherId, "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
     	if(e.result){
 			console.log(e);
-            layer.close(firstLoad);
+            // layer.close(firstLoad);
         	if(e.resultMessage=="false"){
             	layer.msg("该班级已结课");
             	return false;
@@ -67,7 +69,7 @@ $(function () {
 				}
 			}
         }else{
-            layer.close(firstLoad);
+            // layer.close(firstLoad);
         }
            
         $(".chooseClass ul").on("click", "li", function () {
@@ -147,6 +149,8 @@ $(function () {
                 $(this).find("dt").html($(".scoreTitle input").val());
             }
 		})
+		$('.load_t').hide();
+	
     }
 	//删除学生
 	$(document).on("touchstart",".scoreList dl",function (event) {

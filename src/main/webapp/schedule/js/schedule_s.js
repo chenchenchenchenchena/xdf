@@ -3,7 +3,8 @@ $(function() {
         //微信授权判断
         wechatCode(location.href);
     };
-
+    $('.load_t').show();        
+    
     //判断ios
     var u = navigator.userAgent;
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -140,7 +141,9 @@ $(function() {
             $('.H-data').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
+            $('.load_t').hide();        
         } else {
+            $('.load_t').hide();                    
             setInterval(menu_int, 1000);
             var moth = e.data.Data;
             $('.month_hour i').html(moth.length);

@@ -4,6 +4,8 @@ $(function () {
         'beginDate': sessionStorage.timetoday.split(' ')[0],
         'endDate': sessionStorage.timetoday.split(' ')[0]
     }
+    $('.load_t').show();        
+    
     sessionStorage.s = ''
     var mastertae = [];
     ajax_S(url.s_emai, emailm, stusea);

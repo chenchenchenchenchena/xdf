@@ -4,7 +4,8 @@ $(function () {
     var arr_image = [];
     var recordCount = 0;//判断录制语音的条数
     var imgCount = 0;
-
+    $('.load_t').show();        
+    
     if (imgCount >= 3) {
         $('#image_s').hide();
     } else {
@@ -88,6 +89,8 @@ $(function () {
                 }
             });
         }
+    $('.load_t').hide();        
+    
     });
 
     function showUpdataImage(url) {

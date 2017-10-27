@@ -6,6 +6,8 @@ $(function () {
 //     sessionStorage.schoolId="73";
 //     sessionStorage.stuNumber = 'SS5358';
 //点击显示图标
+    $('.load_t').show();
+
     $(document).on('touchend', '.title_s', function () {
         if ($(this).siblings('.achievement_s').css('display') == 'none') {
             $(this).siblings().show()
@@ -197,7 +199,8 @@ $(function () {
                 $('.classroom_s').css('border', 'none')
             }
 
-
+            $('.load_t').hide();
+            
         })
     };
 //课堂互动跳转

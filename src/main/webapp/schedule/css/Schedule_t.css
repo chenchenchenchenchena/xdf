@@ -874,8 +874,9 @@ html body .stu_data li{
 .stu_data .CHour_s_more span{
     margin-left:.3rem;
 }
+
 .loading_s{
-    width: 150px;
+    width: 260px;
     height: 15px;
     margin: 0 auto;
     margin-top:2rem;
@@ -884,7 +885,7 @@ html body .stu_data li{
     display: inline-block;
     width: 15px;
     height: 100%;
-    margin-right: 5px;
+    margin-right: 30px;
     background: lightgreen;
     -webkit-transform-origin: right bottom;
     -webkit-animation: load 1s ease infinite;

@@ -4,6 +4,8 @@
 */
 
 $(function(){
+    $('.load_t').show();        
+    
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
@@ -77,6 +79,8 @@ $(function(){
             $('.content_t').find('li').eq(0).addClass('Selected');
             $('.content_t').find('p').eq(0).html('全部校区');
         }
+        $('.load_t').hide();        
+        
     }
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();
@@ -111,7 +115,7 @@ $(function(){
                 $('.no-data p').html(e.message);
                 $('.canvs_hour_big div').eq(0).hide();
             }
-        
+        $('.load_t').hide()
         })
     }
     function lessontime(){
@@ -131,6 +135,8 @@ $(function(){
             for(var i = 0;i<e.Data.length;i++){
                 $('.lesson_more ul').append('<li><span>'+e.Data[i].hisYear+'.'+e.Data[i].hisMonth+'</span><span>'+e.Data[i].lessonHours+'</span><span>'+e.Data[i].lessonNos+'</span></li>')
             }
+            $('.load_t').hide();        
+            
         })
     }
 
@@ -145,12 +151,14 @@ $(function(){
        }
         switch($(this).index()){
             case 0:
+            $('.load_t').show();        
             homework();
             break;
             case 1:
             if(localStorage.mastTeater){
                 less_need.mainspeaker = '1'
             }
+            $('.load_t').show();        
             lessontime();
             break;
         }

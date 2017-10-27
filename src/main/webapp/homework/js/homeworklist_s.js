@@ -10,6 +10,8 @@ $(function(){
 	// sessionStorage.studentName = '刘一硕';
 	// sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
+	$('.load_t').show();        
+	
 	var loading;
 	//点击待交作业
 	$(".secul").hide();
@@ -169,7 +171,7 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
-		loading = layer.load();
+		// loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
 			if(msg.data.length>0){
@@ -245,7 +247,8 @@ $(function(){
 			$('.hwEmpty').show();
 		}
 		$(".hwHeader ul li:eq(0)").addClass("hwShow").siblings("li").removeClass("hwShow");
-		layer.close(loading);
+		$('.load_t').show();        
+		
 	}
 //获取已完成作业列表
 	function getHwFinishSuccess(msg){

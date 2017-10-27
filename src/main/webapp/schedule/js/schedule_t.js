@@ -4,6 +4,7 @@ $(function(){
     // localStorage.terEmail = 'hanqifan@xdf.cn'
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
+$('.load_t').show();        
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
@@ -46,12 +47,12 @@ function stusea(e){
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
             $('.H-data').hide();
-            $('.loading_s').hide();
+            // $('.load_t').hide();
             return;
         }else{
             $('.N-data').hide();
             $('.H-data').show();
-            $('.loading_s').hide();
+            // $('.load_t').hide();
         }
         if(localStorage.mastTeater){
             Dta_d= e.data.Data;
@@ -152,6 +153,7 @@ function stusea(e){
         $('.H-data').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');
+        $('.load_t').hide();
     }else{
         if(localStorage.mastTeater){
             var Data_ = e.data.Data;
@@ -239,6 +241,8 @@ function stusea(e){
     }
 },100)
 setInterval(menu_int,10);
+$('.load_t').hide();        
+
 }
 }
 //赋值今天是周几
@@ -253,6 +257,7 @@ setTimeout(function(){
         },100)
     });
     $(document).on('touchend','.content td',function(){
+        
         clearInterval(touchtime);
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
@@ -299,7 +304,7 @@ setTimeout(function(){
             ajax_S(url.s_emai,emailm,stusea);
             // ajax_S(url.s_emai,menu_s,menufunc);
         }
-
+        
     });
         ajax_S(url.s_emai,emailm,stusea);
         ajax_S(url.s_emai,menu_s,menufunc);
