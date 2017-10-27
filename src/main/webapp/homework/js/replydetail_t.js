@@ -1166,27 +1166,15 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-            event.stopPropagation();
+           
             if (event.touches.length == 1) {
-                $(window).scrollTop(0);
-                clearInterval(time_s);
-                time_s = setInterval(function () {
-                    $(window).scrollTop(0);
-                }, 100);
-                ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
-                    $(window).scrollTop(0);
-                    event.stopPropagation();
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                     ctx.stroke();
-                    return fasle;
                 });
                 $('#myCanvas').on('touchend', function () {
-                    $(window).scrollTop(0);
-                    event.stopPropagation();
-                    clearInterval(time_s);
                     ctx.closePath();
                     $('.big_back_s').show();
                 });
