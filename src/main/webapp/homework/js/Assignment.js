@@ -547,12 +547,30 @@ $(function () {
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
+                    },
+                    fail: function(){
+                        clearInterval(recordTimer);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
                     }
+
+
                 });
             },
             fail: function () {
                 wx.stopRecord({
                     success: function (res) {
+                        clearInterval(recordTimer);
+                        $('.song_s').hide();
+                        $('.big_whit').hide();
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
+                    },
+                    fail: function(){
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
@@ -567,6 +585,7 @@ $(function () {
     var ts;
     function djs(t, callback) {
         ts = setInterval(function () {
+            layer.msg(t);
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
