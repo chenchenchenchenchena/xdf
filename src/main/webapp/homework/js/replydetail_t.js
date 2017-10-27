@@ -1166,7 +1166,7 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-           
+            ctx.closePath();
             if (event.touches.length == 1) {
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
