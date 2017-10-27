@@ -107,7 +107,6 @@ $(function () {
         }
 
     }
-
     //选择班
     $('.class_s').on('touchend click', function () {
         $('.class_name').show();
