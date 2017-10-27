@@ -504,6 +504,7 @@ $(function () {
 
             wx.uploadImage({
                 localId: images.localIds[i],
+                sizeType: ['compressed'],
                 success: function (res) {
                     i++;
                     // serverIds.push(res.serverId);
