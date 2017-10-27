@@ -71,13 +71,14 @@ $(function(){
         console.log(e);
         $(".select ul").html("");
         if(e.code=="200"){
-            $(".select ul").append('<li>全部校区</li>')
+            // $(".select ul").append('<li>全部校区</li>')
             for(var i=0;i<e.data.length;i++){
                 var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
                 $(".select ul").append(str);
             }
             $('.content_t').find('li').eq(0).addClass('Selected');
-            $('.content_t').find('p').eq(0).html('全部校区');
+            $('.content_t').find('p').eq(0).html(e.data[0].tName);
+            
         }
         $('.load_t').hide();        
         
