@@ -10,6 +10,7 @@ $(function () {
     var ePush;
     var AppId = appId;
     var SecreT = secreT;
+    
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html?state=JT";
     }else{
@@ -173,9 +174,16 @@ $(function () {
     });
     //点击提交
     $(".tSub").click(function () {
+        layer1 = layer.open({
+            type: 1,
+            area: ['312px', '194px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".areyok")
+        })
         if (isRequesting) {
             $('.tSub').css("background","#e1e1e1");
-
         } else {
             $('.tSub').css("background","#11bf9e");
             if ($(".class_s i").html() == "") {
@@ -219,8 +227,9 @@ $(function () {
     $(".areyok input").eq(0).click(function () {
         layer.close(layer1);
     });
+    var loading_;
     $(".areyok input").eq(1).click(function () {
-
+        loading_ = layer.load(0, {shade: false})
         submit();
     });
 
@@ -249,6 +258,7 @@ $(function () {
             };
 
             ajaxRequest("POST", homework_s.t_erro, JSON.stringify(params1), function (e) {
+                layer.close(loading_);
                 if (e.result) {
                     isRequesting = false;
                     layer.close(layer1);
@@ -264,6 +274,7 @@ $(function () {
                     location.href = "homeworklist_t.html";
                 } else {
                     isRequesting = false;
+                    layer.close(loading_);
                     layer.close(layer1);
                     layer.msg(e.message);
                 }
@@ -299,6 +310,9 @@ $(function () {
             // homework_s.t_sbim
             // var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
             ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
+                    layer.close(loading_);
+                layer.close(layer1);
+                
                 if (e.result) {
 
                     isRequesting = false;
