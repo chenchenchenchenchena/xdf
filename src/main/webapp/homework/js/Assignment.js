@@ -606,7 +606,6 @@ $(function () {
                 START = 0;
                 //小于1000ms，不录音
                 clearTimeout(recordTimer);
-                layer.msg("录制时间太短");
                 wx.stopRecord({
                     success: function (res) {
                         clearInterval(recordTimer);
@@ -615,8 +614,10 @@ $(function () {
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
+                        layer.msg("录制时间太短");
                     },
                     fail: function(){
+                        layer.msg("录制时间太短");
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
