@@ -1181,6 +1181,7 @@ $(function () {
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                     ctx.stroke();
+                    return fasle;
                 });
                 $('#myCanvas').on('touchend', function () {
                     $(window).scrollTop(0);
