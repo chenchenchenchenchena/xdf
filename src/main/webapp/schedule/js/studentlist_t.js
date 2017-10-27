@@ -5,6 +5,7 @@ $(function () {
     var teaname = sessionStorage.teachers.split(',');
 
     for (var i = 0; i < teaname.length; i++) {
+        
         if (teaname[i] != '' && teaname[i] != undefined) {
             $('.slist').append('<li class="listCon"><ul class="teClass">' +
                 '<li>' + teaname[i] + '老师班(' + sessionStorage.cc + ')' +
@@ -17,11 +18,12 @@ $(function () {
                         '<span>' + stuInfo[k].studentName + '</span>' +
                         '<span class="callIcon" tel=' + mobile + ' stuCode=' + stuInfo[k].studentCode + ' /></span>' +
                         '<a class="learnIcon" href="../learningSituation/reportstu_t.html?studentNo=' + stuInfo[k].studentCode + '&tCode=1&studentName=' + stuInfo[k].studentName + '"></a></li>');
-
-
                 }
             }
-
+           
+        }
+        if(teaname[i]==localStorage.teacherName){
+            $('.slist>li').eq(i).hide();
         }
         // else{
         //    $('.slist').append('<li class="listCon"><ul class="teClass"><li>'+sessionStorage.tm+'老师班('+sessionStorage.cc+')</li><li class="arrow"></li></ul><ul class="studentList"></ul></li>');
@@ -38,8 +40,10 @@ $(function () {
         // 	}
         // }
         $('.slistTitle').html('课堂同学列表(' + (stuInfo.length) + ')')
+       
     }
 
+   
     //打电话
     // $('.studentList li').find('.callIcon').click(function () {
     //     var stuTel = $(this).attr("tel");

@@ -107,7 +107,6 @@ $(function () {
         }
 
     }
-
     //选择班
     $('.class_s').on('touchend click', function () {
         $('.class_name').show();
@@ -496,7 +495,7 @@ $(function () {
     //语音
     $('.Voice').on('touchend', function () {
         if (recordCount >= 3) {
-            alert("最多录制三条语音");
+            layer.msg("最多录制三条语音");
         } else {
             if (classCode == "") {
                 layer.open({
@@ -877,7 +876,7 @@ $(function () {
     function upLoadWxImage(images) {
 
         if (images.localIds.length == 0) {
-            alert('请先选择图片');
+            layer1.msg('请先选择图片');
             return;
         }
         var i = 0, length = images.localIds.length;
