@@ -1179,6 +1179,7 @@ $(function () {
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
             if (event.touches.length == 1) {
+                ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
                     var ev = ev || event;
@@ -1188,7 +1189,7 @@ $(function () {
                 });
                 $('#myCanvas').on('touchend', function () {
                     // ctx.closePath();
-                    cxt.clearRect(0,0,width_,height); 
+                    // cxt.clearRect(0,0,width_,height); 
                 });
                 // upLoadWxImage(canvas.toDataURL("image/png"));
             }
