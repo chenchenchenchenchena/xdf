@@ -17,7 +17,7 @@ $(function(){
 	$(".secul").hide();
 	// $(".hwContent").show();
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
-	loading = layer.load();
+	// loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
     var WXnum  = {
         'wechatId':sessionStorage.openid
@@ -41,7 +41,7 @@ $(function(){
 		if($(this).index()==0){
 		  $('title').html('学生待交作业列表')
 		  $(".hwFinish,.hwEmpty").hide();
-			loading = layer.load();
+			// loading = layer.load();
 			ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 		}else{
 			$(".hwContent,.hwEmpty").hide();
@@ -50,7 +50,7 @@ $(function(){
 				'userId':localStorage.userId_stu
 			};
 			$('title').html('学生已交作业列表')
-			loading = layer.load();
+			// loading = layer.load();
 			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 		}
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
@@ -322,7 +322,7 @@ $(function(){
 			$('.hwEmpty').show();
 		}
 		$(".hwHeader ul li:eq(1)").addClass("hwShow").siblings("li").removeClass("hwShow");
-		layer.close(loading);
+		// layer.close(loading);
 	}
 
 
