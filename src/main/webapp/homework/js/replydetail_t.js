@@ -8,6 +8,7 @@ $(function () {
     var replyTimes = [];
     var answerTimes = [];
     var answerT;
+    var maxTimesR = 0;//老师最大批复次数
 
 
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
@@ -208,10 +209,13 @@ $(function () {
             }
         }
         if (tea != undefined) {
+
             for (var b = 0; b < tea.length; b++) {
                 teaReplyFiles.push({'fullPath': tea[b].diskFilePath});
                 replyTimes.push(parseInt(tea[b].replyTimes));
-
+                if(parseInt(tea[b].replyTimes) > maxTimesR){
+                    maxTimesR = parseInt(tea[b].replyTimes);
+                }
             }
         }
         replyTimes.sort();
@@ -270,10 +274,15 @@ $(function () {
                 var tea = e.data.fileR;//老师批注
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
+                        var lenR = $('.tea_sp .hmAnswer').length;
+                        var delt = 1;
+                        if (maxTimesR > lenR) {
+                            delt = maxTimesR - lenR +1;
+                        }
                         if (tea[b].fileType == 'mp3') {
-                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - 1)]);
+                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - delt)]);
                         } else {
-                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - 1) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - delt) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                         }
                     }
