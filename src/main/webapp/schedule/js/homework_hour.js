@@ -204,7 +204,7 @@ $(function(){
             ctx.strokeStyle =linear;
 
             ctx.lineCap = 'round'
-            ctx.lineWidth=10;
+            ctx.lineWidth=8;
             ctx.arc(W/2,H/2,80,0-90*Math.PI/180,r-90*Math.PI/180,false);
             ctx.stroke();
             ctx.fillStyle="#333";
