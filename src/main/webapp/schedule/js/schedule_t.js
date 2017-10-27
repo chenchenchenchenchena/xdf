@@ -43,6 +43,7 @@ var touchtend;
 //按天查课程
 
 function stusea(e){
+    sessionStorage.setItem("classData",JSON.stringify(e));
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
@@ -124,9 +125,6 @@ function stusea(e){
             }else{
                 old = 'activ_c'
             }
-            //存储数据
-            var item = JSON.stringify(curr_e[i])+"@"+ JSON.stringify(e.subject);
-            sessionStorage.setItem(curr_e[i].ClassCode,item);
 
             //主讲判断
             if(Shchool!=undefined){

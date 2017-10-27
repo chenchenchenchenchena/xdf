@@ -4,27 +4,25 @@ $(function () {
         'beginDate': sessionStorage.timetoday.split(' ')[0],
         'endDate': sessionStorage.timetoday.split(' ')[0]
     }
-    $('.load_t').show();        
-    
+    $('.load_t').show();
+
     sessionStorage.s = ''
     var mastertae = [];
     //ajax_S(url.s_emai, emailm, stusea);
-    var data = sessionStorage.getItem(sessionStorage.classCode)+"";
-    var result = JSON.parse(data.split('@')[0]);
-    var subjects = JSON.parse(data.split('@')[1]);
-    stusea(result);
     ajax_S(url.data_s, '', function (e) {
         for (var i = 0; i < e.data.length; i++) {
             mastertae.push(e.data[i]);
         }
+        var e = sessionStorage.getItem("classData");
+        stusea(JSON.parse(e));
     });
     //所属类别（显示到title）
     var subject_s = '';
     sessionStorage.t = '';
     sessionStorage.teachers = '';
-    function stusea(result) {
+    function stusea(e) {
         var teacindex = 0;
-        var BeginDate = result;
+        var BeginDate = e.data.Data
         var timeindex = 0;
         var regionindex = [];
         for (var i = 0; i < BeginDate.length; i++) {
@@ -34,13 +32,13 @@ $(function () {
             }
         }
         //搭班老师
-        var masterta = result[timeindex].Teachers.split(',');
-        sessionStorage.teachers = result[timeindex].Teachers;
+        var masterta = e.data.Data[timeindex].Teachers.split(',');
+        sessionStorage.teachers = e.data.Data[timeindex].Teachers;
         //当前的课程编号
-        var subject = result[timeindex].ClassCode;
-        for (var v = 0; v < subjects.length; v++) {
-            if (subjects[v].classCode == subject) {
-                subject_s = subjectst[v].subject
+        var subject = e.data.Data[timeindex].ClassCode;
+        for (var v = 0; v < e.subject.length; v++) {
+            if (e.subject[v].classCode == subject) {
+                subject_s = e.subject[v].subject
             }
         }
         var masteaname = '';
@@ -220,6 +218,6 @@ $(function () {
     }
 
     $('.student_home').on('touchend',function(){
-       location.href = 'homework_hour.html';
+        location.href = 'homework_hour.html';
     })
 })
