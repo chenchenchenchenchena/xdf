@@ -247,7 +247,7 @@ $(function(){
 			$('.hwEmpty').show();
 		}
 		$(".hwHeader ul li:eq(0)").addClass("hwShow").siblings("li").removeClass("hwShow");
-		$('.load_t').show();        
+		$('.load_t').hide();        
 		
 	}
 //获取已完成作业列表
