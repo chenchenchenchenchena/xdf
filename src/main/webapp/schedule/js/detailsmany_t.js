@@ -8,7 +8,11 @@ $(function () {
     
     sessionStorage.s = ''
     var mastertae = [];
-    ajax_S(url.s_emai, emailm, stusea);
+    //ajax_S(url.s_emai, emailm, stusea);
+    var data = sessionStorage.getItem(sessionStorage.classCode)+"";
+    var result = JSON.parse(data.split('@')[0]);
+    var subjects = JSON.parse(data.split('@')[1]);
+    stusea(result);
     ajax_S(url.data_s, '', function (e) {
         for (var i = 0; i < e.data.length; i++) {
             mastertae.push(e.data[i]);
@@ -18,9 +22,9 @@ $(function () {
     var subject_s = '';
     sessionStorage.t = '';
     sessionStorage.teachers = '';
-    function stusea(e) {
+    function stusea(result) {
         var teacindex = 0;
-        var BeginDate = e.data.Data
+        var BeginDate = result;
         var timeindex = 0;
         var regionindex = [];
         for (var i = 0; i < BeginDate.length; i++) {
@@ -30,13 +34,13 @@ $(function () {
             }
         }
         //搭班老师
-        var masterta = e.data.Data[timeindex].Teachers.split(',');
-        sessionStorage.teachers = e.data.Data[timeindex].Teachers;
+        var masterta = result[timeindex].Teachers.split(',');
+        sessionStorage.teachers = result[timeindex].Teachers;
         //当前的课程编号
-        var subject = e.data.Data[timeindex].ClassCode;
-        for (var v = 0; v < e.subject.length; v++) {
-            if (e.subject[v].classCode == subject) {
-                subject_s = e.subject[v].subject
+        var subject = result[timeindex].ClassCode;
+        for (var v = 0; v < subjects.length; v++) {
+            if (subjects[v].classCode == subject) {
+                subject_s = subjectst[v].subject
             }
         }
         var masteaname = '';
