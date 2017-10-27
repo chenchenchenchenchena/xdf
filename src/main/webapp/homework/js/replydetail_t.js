@@ -1226,7 +1226,7 @@ $(function () {
             clearInterval(time_s);
             // var b = new Base64();
             str = canvas.toDataURL("image/jpeg", 0.5);
-            if($('.notsubmit .imgBox').length >= 3){
+            if($('.notsubmit .imgBox li') != undefined && $('.notsubmit .imgBox li').length >= 3){
                 layer.msg('最多只能批复三张');
                 return false;
             }
