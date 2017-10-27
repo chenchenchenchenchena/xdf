@@ -39,7 +39,7 @@ $(function () {
          'homeworkTinfoId':homeworkTinfoId,
          'userId':localStorage.userId_stu
     };
-    loading = layer.load();
+    // loading = layer.load();
     ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess);
 
     function getHwFinishDetailSuccess(msg){
@@ -148,11 +148,11 @@ $(function () {
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
                 ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
             }
-            layer.close(loading);
+            // layer.close(loading);
         }else{
             console.log("获取作业详情失败");
         }
-        layer.close(loading);
+        // layer.close(loading);
     }
 
     var voiceCount = 0;
@@ -938,7 +938,7 @@ $(function () {
             reqData.modify = true;
         }
         // console.log(JSON.stringify(reqData));
-        loading = layer.load();
+        // loading = layer.load();
         $('#HWsubmit,.confirm-sub .confirmBtn').attr('disabled', "true");//禁用按钮
         $('#HWsubmit,.confirm-sub .confirmBtn').addClass('btn-grey');
         ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
@@ -993,7 +993,7 @@ $(function () {
         }
         $('#HWsubmit,.confirm-sub .confirmBtn').removeAttr("disabled");
         $('#HWsubmit,.confirm-sub .confirmBtn').removeClass('btn-grey');
-        layer.close(loading);
+        // layer.close(loading);
     }
 
 })
