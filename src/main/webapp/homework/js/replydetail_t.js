@@ -1351,6 +1351,7 @@ $(function () {
             lastY = y;
      
         });
+        alert(0)
     }
     stopDrop();
 });
