@@ -112,7 +112,7 @@ $(function () {
         $('.class_name').show();
         $('.class_name').animate({'bottom': '0px'});
         $('.class_name').show();
-        $('.big_back').show();
+        //$('.big_back').show();
     });
 
     $(document).on('tap', '.class_name li', function () {
@@ -247,7 +247,7 @@ $(function () {
     });
     //提交确认
     $('.Submit_s').on('touchend', function () {
-        $('.big_back').show();
+        //$('.big_back').show();
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
@@ -382,7 +382,7 @@ $(function () {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.areyok input:last-of-type').css('background','#00ba97');
-                    $('.big_back').show();
+                    //$('.big_back').show();
                     $('.succ').show();
                     $('.areyok').hide();
                     $('.Submit_s').css('background', '#00ba97');
@@ -393,7 +393,7 @@ $(function () {
                     sessionStorage.removeItem('id_x');
                 } else {
                     $('.erro p').html(e.message);
-                    $('.big_back').show();
+                    //$('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -412,13 +412,13 @@ $(function () {
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
                     $('.areyok').hide();
-                    $('.big_back').show();
+                    //$('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background', '#00ba97');
                 } else {
                     $('.areyok').hide();
                     $('.erro p').html(e.message);
-                    $('.big_back').show();
+                    //$('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -444,10 +444,10 @@ $(function () {
         $('.erro').hide();
         ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
             if (e.result == true) {
-                $('.big_back').show();
+                //$('.big_back').show();
                 $('.succ').show();
             } else {
-                $('.big_back').show();
+                //$('.big_back').show();
                 $('.erro').show();
             }
         })
