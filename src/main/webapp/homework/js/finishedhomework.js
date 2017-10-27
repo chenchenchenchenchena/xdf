@@ -381,12 +381,15 @@ $(function () {
     var recordTimer;
     var isCanStopRecord = false;
     var isCanStartRecord = true;
+    var START = "";
+    var END = "";
 
     $('#record_bg').on('touchstart', function (event) {
         if(!isCanStartRecord){
             return;
         }
         timeInedex = 0;
+        START = new Date().getTime();
         var this_ = $(this);
         $(this).siblings('img').attr('src', 'images/speak.gif');
         event.preventDefault();
@@ -437,6 +440,7 @@ $(function () {
     var ts;
     function djs(t, callback) {
         ts = setInterval(function () {
+            layer.msg(t);
             t -= 1;
             if (t == 0) {
                 clearInterval(ts);
@@ -452,8 +456,39 @@ $(function () {
 
         var this_ = $(this);
         if(timeInedex == 0){
-            //表示录制刚结束
-            return;
+            setTimeout(function () {
+                if ((END - START) < 1000) {
+                    END = 0;
+                    START = 0;
+                    //小于1000ms，不录音
+                    clearTimeout(recordTimer);
+                    wx.stopRecord({
+                        success: function (res) {
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                            layer.msg("录制时间太短");
+                        },
+                        fail: function () {
+                            layer.msg("录制时间太短");
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                        }
+                    });
+                    return false;
+                } else {
+
+                    //表示录制刚结束
+                    return false;
+                }
+            }, 300);
         } else {
             isCanStopRecord = true;
             stopRecordBack(this_, event);

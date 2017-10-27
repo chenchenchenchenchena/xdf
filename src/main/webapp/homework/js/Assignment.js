@@ -4,8 +4,8 @@ $(function () {
     var arr_image = [];
     var recordCount = 0;//判断录制语音的条数
     var imgCount = 0;
-    $('.load_t').show();        
-    
+    $('.load_t').show();
+
     if (imgCount >= 3) {
         $('#image_s').hide();
     } else {
@@ -89,8 +89,8 @@ $(function () {
                 }
             });
         }
-    $('.load_t').hide();        
-    
+    $('.load_t').hide();
+
     });
 
     function showUpdataImage(url) {
@@ -205,7 +205,7 @@ $(function () {
             }
             $(this).val($(this).val().substring(0,10))
         }
-        
+
         if (html_.indexOf(',') != html_.lastIndexOf(',') && html_.lastIndexOf(',') != -1) {
             $(this).val(html_.substr(0, html_.length - 1))
 
@@ -599,38 +599,43 @@ $(function () {
     var song_s = '';
     //松手结束录音
     $('#record').on('touchend', function (event) {
+
         var this_ = $(this);
         if (timeInedex == 0) {
-            if ((END - START) < 1000) {
-                END = 0;
-                START = 0;
-                //小于1000ms，不录音
-                clearTimeout(recordTimer);
-                layer.msg("录制时间太短");
-                wx.stopRecord({
-                    success: function (res) {
-                        clearInterval(recordTimer);
-                        $('.song_s').hide();
-                        $('.big_whit').hide();
-                        this_.siblings('img').attr('src', 'images/C04-03.png');
-                        isCanStartRecord = true;
-                        isCanStopRecord = false;
-                    },
-                    fail: function(){
-                        clearInterval(recordTimer);
-                        $('.song_s').hide();
-                        $('.big_whit').hide();
-                        this_.siblings('img').attr('src', 'images/C04-03.png');
-                        isCanStartRecord = true;
-                        isCanStopRecord = false;
-                    }
-                });
-                return;
-            } else {
+            setTimeout(function () {
+                if ((END - START) < 1000) {
+                    END = 0;
+                    START = 0;
+                    //小于1000ms，不录音
+                    clearTimeout(recordTimer);
+                    wx.stopRecord({
+                        success: function (res) {
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                            layer.msg("录制时间太短");
+                        },
+                        fail: function(){
+                            layer.msg("录制时间太短");
+                            clearInterval(recordTimer);
+                            $('.song_s').hide();
+                            $('.big_whit').hide();
+                            this_.siblings('img').attr('src', 'images/C04-03.png');
+                            isCanStartRecord = true;
+                            isCanStopRecord = false;
+                        }
+                    });
+                    return;
+                } else {
 
-                //表示录制刚结束
-                return false;
-            }
+                    //表示录制刚结束
+                    return false;
+                }
+            }, 300);
+
         } else {
             isCanStopRecord = true;
             stopRecordBack(this_, event);
