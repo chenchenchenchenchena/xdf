@@ -48,6 +48,7 @@
                 this.setupMarkup();
                 this.bindEvents();
                 this.update();
+              
                 // default enable.
                 this.enable();
 
@@ -593,7 +594,12 @@
              * Enables event handling for gestures
              */
             enable: function() {
-              this.enabled = true;
+                if(localStorage.enlarge){
+                      this.enabled = false;
+                }else{
+                      this.enabled = true;
+                }
+            
             },
 
             /**
