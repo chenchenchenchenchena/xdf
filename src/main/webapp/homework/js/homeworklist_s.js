@@ -57,7 +57,7 @@ $(function(){
 	})
 	//点击已交作业列表
 	var flag=true;
-	$(document).on('touchend','.firstList',function(){
+	$(document).on('tap','.firstList',function(){
 		if(flag){
 			$(this).css("background","url(images/jiao11.png) no-repeat right 55px");
 			flag=false;
