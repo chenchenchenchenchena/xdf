@@ -1081,7 +1081,7 @@ $(function () {
     });
 
     $('.pinch-zoom').each(function () {
-        new RTP.PinchZoom($(this), {disable});
+        new RTP.PinchZoom($(this), {});
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer #imagBox_2 img', function () {
