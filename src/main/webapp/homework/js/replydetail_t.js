@@ -1091,7 +1091,7 @@ $(function () {
     });
 
     $('.pinch-zoom').each(function () {
-        new RTP.PinchZoom($(this), {});
+        new RTP.PinchZoom($(this), {enabled:true});
     });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer #imagBox_2 img', function () {
@@ -1201,6 +1201,7 @@ $(function () {
         $('body').css('overflow-y', 'auto');
         $('.true_s').unbind('touchend');
         $('.doHomework').show();
+        localStorage.removeItem(enlarge)
         
     });
     $('.esc_s').show();
@@ -1212,6 +1213,10 @@ $(function () {
         // $('.pinch-zoom').each(function () {
         //     // new RTP.PinchZoom($(this), {disable});
         // });
+        $('.pinch-zoom').each(function () {
+            localStorage.enlarge = '0'
+            new RTP.PinchZoom($(this), {enabled:true});
+        });
         clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
