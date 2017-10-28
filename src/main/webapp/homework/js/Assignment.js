@@ -112,14 +112,14 @@ $(function () {
         $('.class_name').show();
         $('.class_name').animate({'bottom': '0px'});
         $('.class_name').show();
-        //$('.big_back').show();
+        $('.big_back').show();
     });
 
     $(document).on('tap', '.class_name li', function () {
         var html_ = $('.class_name i').html();
         if ($(this).find('img').attr('src') == 'images/C05_06.png') {
             $(this).find('img').attr('src', 'images/C0503.png');
-            html_++;
+             html_++;
             $('.class_name i').html(html_);
         } else {
             $(this).find('img').attr('src', 'images/C05_06.png');
@@ -247,7 +247,7 @@ $(function () {
     });
     //提交确认
     $('.Submit_s').on('touchend', function () {
-        //$('.big_back').show();
+        $('.big_back').show();
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
@@ -382,7 +382,7 @@ $(function () {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.areyok input:last-of-type').css('background','#00ba97');
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.succ').show();
                     $('.areyok').hide();
                     $('.Submit_s').css('background', '#00ba97');
@@ -393,7 +393,7 @@ $(function () {
                     sessionStorage.removeItem('id_x');
                 } else {
                     $('.erro p').html(e.message);
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -412,13 +412,13 @@ $(function () {
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
                     $('.areyok').hide();
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background', '#00ba97');
                 } else {
                     $('.areyok').hide();
                     $('.erro p').html(e.message);
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -444,10 +444,10 @@ $(function () {
         $('.erro').hide();
         ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
             if (e.result == true) {
-                //$('.big_back').show();
+                $('.big_back').show();
                 $('.succ').show();
             } else {
-                //$('.big_back').show();
+                $('.big_back').show();
                 $('.erro').show();
             }
         })
@@ -680,7 +680,7 @@ $(function () {
 
     //上传微信服务器，获取保存的serverId
     function uploadVoiceWX(upId) {
-        $('.big_back').show();
+        $('.back_model').show();
         //调用微信的上传录音接口把本地录音先上传到微信的服务器
         //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
         wx.uploadVoice({
@@ -694,11 +694,11 @@ $(function () {
             },
             complete: function () {
                 //接口调用完成（失败成功）
-                $('.big_back').hide();
+                $('.back_model').hide();
 
             },fail:function () {
                 //接口调用完成（失败）
-                $('.big_back').hide();
+                $('.back_model').hide();
                 layer.msg("微信上传失败，请重新录制");
             }
         });
@@ -719,7 +719,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                $('.big_back').hide();
+                $('.back_model').hide();
                 if (e.status == "failure") {
                     layer.msg(e.msg);
                 } else {
@@ -922,7 +922,7 @@ $(function () {
         }
 
         var i = 0, length = images.localIds.length;
-        $('.big_back').show();
+        $('.back_model').show();
         function upload() {
             wx.uploadImage({
                 localId: images.localIds[i],
@@ -936,7 +936,7 @@ $(function () {
                     }
                 },
                 fail: function (res) {
-                    $('.big_back').hide();
+                    $('.back_model').hide();
                 }
             });
         }
@@ -961,7 +961,7 @@ $(function () {
             dataType: 'json',
             data: cbconfig,
             success: function (e) {
-                $('.big_back').hide();
+                $('.back_model').hide();
                 if (e.status == "failure") {
                     layer.msg('图片上传失败');
                 } else if (e.status == "succeed") {
