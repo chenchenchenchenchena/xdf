@@ -57,7 +57,7 @@ $(function(){
 	})
 	//点击已交作业列表
 	var flag=true;
-	$(document).on('touchend','.firstList',function(){
+	$(document).on('tap','.firstList',function(){
 		if(flag){
 			$(this).css("background","url(images/jiao11.png) no-repeat right 55px");
 			flag=false;
@@ -104,7 +104,7 @@ $(function(){
 
 	});
 	// 点击已交作业列表
-	$(document).on('touchend','.secul>li',function(){
+	$(document).on('tap','.secul>li',function(){
 		var that=$(this);
 		// 缓存信息
 		localStorage.homeworkTinfoId = $(this).attr('data-homeworkTinfoId') ;//老师作业id
