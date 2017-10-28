@@ -174,14 +174,14 @@ $(function () {
     });
     //点击提交
     $(".tSub").click(function () {
-        layer1 = layer.open({
-            type: 1,
-            area: ['312px', '194px'],
-            shade: [0.2, '#000'],
-            title: '',
-            skin: '',
-            content: $(".areyok")
-        })
+        //layer1 = layer.open({
+        //    type: 1,
+        //    area: ['312px', '194px'],
+        //    shade: [0.2, '#000'],
+        //    title: '',
+        //    skin: '',
+        //    content: $(".areyok")
+        //})
         if (isRequesting) {
             $('.tSub').css("background","#e1e1e1");
         } else {

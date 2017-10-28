@@ -112,14 +112,14 @@ $(function () {
         $('.class_name').show();
         $('.class_name').animate({'bottom': '0px'});
         $('.class_name').show();
-        //$('.big_back').show();
+        $('.big_back').show();
     });
 
     $(document).on('tap', '.class_name li', function () {
         var html_ = $('.class_name i').html();
         if ($(this).find('img').attr('src') == 'images/C05_06.png') {
             $(this).find('img').attr('src', 'images/C0503.png');
-            html_++;
+             html_++;
             $('.class_name i').html(html_);
         } else {
             $(this).find('img').attr('src', 'images/C05_06.png');
@@ -247,7 +247,7 @@ $(function () {
     });
     //提交确认
     $('.Submit_s').on('touchend', function () {
-        //$('.big_back').show();
+        $('.big_back').show();
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
@@ -382,7 +382,7 @@ $(function () {
                 // ajax_S("http://10.73.32.97:8080/xdfdtmanager/teacherData/updateTeaHomework.do", errohome, function (e) {
                 if (e.result == true) {
                     $('.areyok input:last-of-type').css('background','#00ba97');
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.succ').show();
                     $('.areyok').hide();
                     $('.Submit_s').css('background', '#00ba97');
@@ -393,7 +393,7 @@ $(function () {
                     sessionStorage.removeItem('id_x');
                 } else {
                     $('.erro p').html(e.message);
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -412,13 +412,13 @@ $(function () {
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
                     $('.areyok').hide();
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.succ').show();
                     $('.Submit_s').css('background', '#00ba97');
                 } else {
                     $('.areyok').hide();
                     $('.erro p').html(e.message);
-                    //$('.big_back').show();
+                    $('.big_back').show();
                     $('.erro').show();
                 }
             })
@@ -444,10 +444,10 @@ $(function () {
         $('.erro').hide();
         ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
             if (e.result == true) {
-                //$('.big_back').show();
+                $('.big_back').show();
                 $('.succ').show();
             } else {
-                //$('.big_back').show();
+                $('.big_back').show();
                 $('.erro').show();
             }
         })
@@ -485,6 +485,7 @@ $(function () {
             $('.big_whit').hide();
         }, 300);
         $('.song_s').hide();
+        $('.big_back').hide();
     });
 
 
@@ -511,6 +512,7 @@ $(function () {
             } else {
                 $('.big_whit').show();
                 $('.song_s').show();
+                $('.big_back').show();
             }
         }
     });
@@ -547,6 +549,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -555,6 +558,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -569,6 +573,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -577,6 +582,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -613,6 +619,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -623,6 +630,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -672,6 +680,7 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                $('.big_back').hide();
                 isCanStartRecord = true;
                 isCanStopRecord = false;
             }
@@ -823,6 +832,7 @@ $(function () {
         parentId.append(strVoice);
 
         $('.song_s,.mask').hide();
+        $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
