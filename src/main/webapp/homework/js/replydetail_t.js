@@ -9,8 +9,10 @@ $(function () {
     var answerTimes = [];
     var answerT;
     var maxTimesR = 0;//老师最大批复次数
-
-
+    if(localStorage.enlarge){
+        localStorage.removeItem('enlarge')
+    }
+    
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
     var urlPush;
     if (getRequest('state').state == 'JT' || sessionStorage.signal) {
@@ -1191,22 +1193,21 @@ $(function () {
         $('body').css('overflow-y', 'auto');
         $('.true_s').unbind('touchend');
         $('.doHomework').show();
-        localStorage.removeItem(enlarge)
-        
+        localStorage.removeItem('enlarge')
+        clearInterval(time_t);
     });
     $('.esc_s').show();
     var time_s;
     var b = new Base64();
     var str;
     var ber_L = true;
+    var time_t;
     $('.big_back_s span:last-of-type').on('touchend', function () {
-        // $('.pinch-zoom').each(function () {
-        //     // new RTP.PinchZoom($(this), {disable});
-        // });
-        $('.pinch-zoom').each(function () {
-            localStorage.enlarge = '0'
-            new RTP.PinchZoom($(this), {enabled:true});
-        });
+        time_t = setInterval(function(){
+            $('.pinch-zoom').css({
+                'transform':'scale(1, 1) translate(5.01821e-14px, 1.39888e-13px)'
+            })
+        },1)
         clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
