@@ -1199,9 +1199,9 @@ $(function () {
     var str;
     var ber_L = true;
     $('.big_back_s span:last-of-type').on('touchend', function () {
-        $('.pinch-zoom').each(function () {
-            // new RTP.PinchZoom($(this), {disable});
-        });
+        // $('.pinch-zoom').each(function () {
+        //     // new RTP.PinchZoom($(this), {disable});
+        // });
         clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
@@ -1232,6 +1232,10 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
+            $('.pinch-zoom').css({
+                'width':'100%',
+                'height':'100%'
+            })
             if (event.touches.length == 1) {
                 ctx.beginPath();
                 ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
@@ -1239,7 +1243,7 @@ $(function () {
                     var ev = ev || event;
                     ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
                     ctx.stroke();
-                    
+                    console.log(canvas.scrollLeft+'      '+canvas.scrollTop)
                 });
                 $('#myCanvas').on('touchend', function () {
                     // ctx.closePath();

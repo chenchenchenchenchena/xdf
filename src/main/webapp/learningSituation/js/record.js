@@ -905,6 +905,7 @@ $(function () {
 	function redisAjax(e) {
 		if(e.result){
 			layer.msg("刷新成功");
+			location.reload();
 		}else{
 			layer.msg("刷新失败");
 		}
