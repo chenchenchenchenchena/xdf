@@ -1238,12 +1238,12 @@ $(function () {
             })
             if (event.touches.length == 1) {
                 ctx.beginPath();
-                ctx.moveTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+                ctx.moveTo(event.touches[0].pageX - +$('#myCanvas').offset().left, event.touches[0].pageY -+$('#myCanvas').offset().top);
                 $('#myCanvas').on('touchmove', function () {
                     var ev = ev || event;
-                    ctx.lineTo(event.touches[0].pageX - canvas.offsetLeft, event.touches[0].pageY - canvas.offsetTop);
+                    ctx.lineTo(event.touches[0].pageX - +$('#myCanvas').offset().left, event.touches[0].pageY - +$('#myCanvas').offset().top);
                     ctx.stroke();
-                    console.log(canvas.scrollLeft+'      '+canvas.scrollTop)
+                    console.log($('#myCanvas').offset().top+'      '+$('#myCanvas').offset().top)
                 });
                 $('#myCanvas').on('touchend', function () {
                     // ctx.closePath();
