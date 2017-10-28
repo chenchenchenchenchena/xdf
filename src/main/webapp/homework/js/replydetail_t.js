@@ -136,7 +136,7 @@ $(function () {
         for (var L = 0; L < arr.length; L++) {
             if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
                 if (L == arr.length - 1 && e.score != '') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                 } else {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                 }
@@ -149,7 +149,7 @@ $(function () {
                         $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                     }
                     if (arr[L] != 'undefined') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
                     }
                 }
             }
@@ -158,7 +158,7 @@ $(function () {
             if (e.score != '') {
                 $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
             } else {
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
             }
         }
 
@@ -185,7 +185,7 @@ $(function () {
             // for (var b = 0; b < tea.length; b++) {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
-            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul id="audio_3" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
             $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             getFileInfo(e);
         // });
@@ -391,7 +391,6 @@ $(function () {
         parentId.append(strVoice);
 
         $('.song_s,.mask').hide();
-        $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
@@ -433,7 +432,6 @@ $(function () {
         $('.tea_sp .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
 
         $('.song_s,.mask').hide();
-        $('.big_back').hide();
     }
 
     /**
@@ -471,7 +469,6 @@ $(function () {
         $('.anSwer .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
 
         $('.song_s,.mask').hide();
-        $('.big_back').hide();
     }
 
     //提交确认
@@ -633,7 +630,6 @@ $(function () {
             $('.big_whit').hide();
         }, 300);
         $('.song_s').hide();
-        $('.big_back').hide();
     });
 
     $('.big_back').on('touchstart', function () {
@@ -671,7 +667,6 @@ $(function () {
         } else {
             $('.big_whit').show();
             $('.song_s').show();
-            $('.big_back').show();
         }
     });
 
@@ -713,7 +708,6 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
-                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -726,7 +720,6 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
-                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -762,7 +755,6 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
-                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -773,7 +765,6 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
-                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -823,7 +814,6 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
-                $('.big_back').hide();
                 isCanStartRecord = true;
                 isCanStopRecord = false;
             }
@@ -1092,9 +1082,9 @@ $(function () {
         lookBigImage(previewUrl,true);
     });
 
-    $('.pinch-zoom').each(function () {
-        new RTP.PinchZoom($(this), {enabled:true});
-    });
+    // $('.pinch-zoom').each(function () {
+    //     new RTP.PinchZoom($(this), {enabled:true});
+    // });
     /*--------------------图片预览----------------------------------*/
     $(document).on('touchend', '.hmAnswer #imagBox_2 img', function () {
         $('.pinch-zoom-container').eq(0).show();
@@ -1204,20 +1194,14 @@ $(function () {
         $('.true_s').unbind('touchend');
         $('.doHomework').show();
         localStorage.removeItem('enlarge')
-        clearInterval(time_t);
+        
     });
     $('.esc_s').show();
     var time_s;
     var b = new Base64();
     var str;
     var ber_L = true;
-    var time_t;
     $('.big_back_s span:last-of-type').on('touchend', function () {
-        time_t = setInterval(function(){
-            $('.pinch-zoom').css({
-                'transform':'scale(1, 1) translate(5.01821e-14px, 1.39888e-13px)'
-            })
-        },1)
         clearInterval(time_s);
         var width_ = parseInt($('.big_back_s img').css('width'));
         var height = parseInt($('.big_back_s img').css('height'));
