@@ -185,7 +185,7 @@ $(function () {
             // for (var b = 0; b < tea.length; b++) {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
-            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
             $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             getFileInfo(e);
         // });
