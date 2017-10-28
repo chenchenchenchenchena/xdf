@@ -81,7 +81,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
             sessionStorage.schoolid = $(this).attr('schoolid');
             location.href = 'class_t.html';
         }else{
-            var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
+            var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4>span').html();
             sessionStorage.classcode = $(this).attr('classcode');
             sessionStorage.schoolid = $(this).attr('schoolid');
             localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
@@ -90,7 +90,7 @@ $(document).on('touchend','.achievement_s>h4',function(){
             window.location.href = 'rankinglist_t.html?title='+title;
         }
     }else{
-        var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4').html();
+        var title = $(this).parents('.achievement_s').siblings('.title_s').find('h4>span').html();
         sessionStorage.classcode = $(this).attr('classcode');
         sessionStorage.schoolid = $(this).attr('schoolid');
         localStorage.setItem('CLASSCODE',$(this).attr('classcode'));
@@ -159,7 +159,7 @@ function less_Inter(e){
                     html_yh = ''
                 }
 
-                $('.class_big').append('<div class="classroom_s"><div class="title_s" style="height:112px;"><h4 style="width:670px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">' + e.data[i].className + '<i style="font-size:24px;font-style:normal;">('+e.data[i].classCode+')</i></h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S' + i + '" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">' + html_yh + '<h4 class="grade" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" teaemail="'+e.data[i].teacherEmail+'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
+                $('.class_big').append('<div class="classroom_s"><div class="title_s" style="height:112px;"><h4 style="width:670px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"><span>' + e.data[i].className + '</span><i style="font-size:24px;font-style:normal;">('+e.data[i].classCode+')</i></h4> <img src="images/rightArrow.png" alt=""/> </div><div id="chart_S' + i + '" style="width: 690px;height: 360px;display:none;"></div><div class="achievement_s" style="margin-top: -20px;">' + html_yh + '<h4 class="grade" classcode="' + e.data[i].classCode + '" schoolid="' + e.data[i].schoolId + '" teaemail="'+e.data[i].teacherEmail+'" style="left:70%;margin-right:20px;">查看成绩排名</h4></div></div>')
                 for (var c = 0; c < Grade.data.length; c++) {
                     var lesson_num = Grade.data[c];
                     for (var b = 0; b < maxGrade; b++) {
