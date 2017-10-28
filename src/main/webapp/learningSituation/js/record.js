@@ -99,7 +99,7 @@ $(function () {
 						for (var r = 0; r < stuArr.length; r++) {
 	                        stu += "<dl><dt>" + stuArr[r].name + "</dt><dd>" + stuArr[r].name + "</dd><dd style=display:none class=code>" + stuArr[r].scode + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 	                    }
-						if(e.Data[i].extraStudent.length>0){
+						if(e.Data[i].extraStudent != undefined && e.Data[i].extraStudent.length>0){
 							for(var h=0;h<e.Data[i].extraStudent.length;h++){
 								stu += "<dl><dt style='background: #ff6a6a'>" + e.Data[i].extraStudent[h].studentName + "</dt><dd>" + e.Data[i].extraStudent[h].studentName + "</dd><dd style=display:none class=code>" + e.Data[i].extraStudent[h].studentNo + "</dd><dd style=display:none class=flag>" + flag + "</dd></dl>";
 							}
