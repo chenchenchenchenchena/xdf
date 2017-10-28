@@ -136,7 +136,7 @@ $(function () {
         for (var L = 0; L < arr.length; L++) {
             if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
                 if (L == arr.length - 1 && e.score != '') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
                 } else {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                 }
@@ -149,7 +149,7 @@ $(function () {
                         $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                     }
                     if (arr[L] != 'undefined') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
                     }
                 }
             }
@@ -158,7 +158,7 @@ $(function () {
             if (e.score != '') {
                 $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
             } else {
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox" id="audio_3"></ul><div class="imgBox"></div></div></div>');
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
             }
         }
 
@@ -185,7 +185,7 @@ $(function () {
             // for (var b = 0; b < tea.length; b++) {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
-            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul id="audio_3" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox" style="display:none;"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
             $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             getFileInfo(e);
         // });
@@ -391,6 +391,7 @@ $(function () {
         parentId.append(strVoice);
 
         $('.song_s,.mask').hide();
+        $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
@@ -432,6 +433,7 @@ $(function () {
         $('.tea_sp .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
 
         $('.song_s,.mask').hide();
+        $('.big_back').hide();
     }
 
     /**
@@ -469,6 +471,7 @@ $(function () {
         $('.anSwer .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
 
         $('.song_s,.mask').hide();
+        $('.big_back').hide();
     }
 
     //提交确认
@@ -630,6 +633,7 @@ $(function () {
             $('.big_whit').hide();
         }, 300);
         $('.song_s').hide();
+        $('.big_back').hide();
     });
 
     $('.big_back').on('touchstart', function () {
@@ -667,6 +671,7 @@ $(function () {
         } else {
             $('.big_whit').show();
             $('.song_s').show();
+            $('.big_back').show();
         }
     });
 
@@ -708,6 +713,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -720,6 +726,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -755,6 +762,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -765,6 +773,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -814,6 +823,7 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                $('.big_back').hide();
                 isCanStartRecord = true;
                 isCanStopRecord = false;
             }
