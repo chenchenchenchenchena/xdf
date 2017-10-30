@@ -273,6 +273,9 @@ $(function () {
                 time: 3000,
                 content: $(".classEmpty")
             });
+            setTimeout(function(){
+                $('.big_back').hide();
+            },2000)
             return false;
         }
         if ($('.time_S i').html() == '') {
@@ -287,6 +290,9 @@ $(function () {
                 time: 3000,
                 content: $(".classTime")
             });
+            setTimeout(function(){
+                $('.big_back').hide();
+            },2000)
             return false;
         }
         if ($('.Knowledge input').val() == '') {
@@ -301,6 +307,9 @@ $(function () {
                 time: 3000,
                 content: $(".classKnow")
             });
+            setTimeout(function(){
+                $('.big_back').hide();
+            },2000)
             return false;
         }
         if ($('.home_text textarea').val() == '') {
@@ -315,6 +324,9 @@ $(function () {
                 time: 3000,
                 content: $(".classHome")
             });
+            setTimeout(function(){
+                $('.big_back').hide();
+            },2000)
             return false;
         }
         if ($('.home_text span').css('color') == 'rgb(255, 0, 0)') {
@@ -329,6 +341,9 @@ $(function () {
                 time: 3000,
                 content: $(".classText")
             });
+            setTimeout(function(){
+                $('.big_back').hide();
+            },2000)
             return false;
         }
         if ($('.Knowledge input').val().indexOf(',') != -1) {
@@ -481,7 +496,6 @@ $(function () {
             }, 300);
             $('.erro').hide();
         }
-        $(this).hide();
     });
     $('.big_whit').on('touchend', function () {
         setTimeout(function () {
