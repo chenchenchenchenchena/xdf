@@ -81,6 +81,7 @@ $(function(){
     });
 
     //校区相关
+   if(localStorage.mastTeater){
     $(document).on('touchend',".select p",function(e){
         $(".select").toggleClass('open');
         e.stopPropagation();
@@ -112,6 +113,7 @@ $(function(){
     $('.load_t').hide();        
     
     }
+   }
     $('.truorfal input').on('touchend',function(){
             $('.big_select').hide();
             need_mas.schoolId  =  $('.Selected').attr('data-code');
