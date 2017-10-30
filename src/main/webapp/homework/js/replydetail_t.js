@@ -1099,10 +1099,11 @@ $(function () {
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
         var previewUrl = $(this).attr('data-img');
-        wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
-        });
+        //wx.previewImage({
+        //    current: previewUrl, // 当前显示图片的http链接
+        //    urls: [previewUrl] // 需要预览的图片http链接列表
+        //});
+        lookBigImage(previewUrl,false);
     });
 
     function lookBigImage(diskPath,saveServer) {
