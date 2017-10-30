@@ -1011,7 +1011,7 @@ $(function () {
 
     function showUpdataImage(url) {
 
-        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img data-img='" + url + "' src='" + url + "'/></li>";
+        var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img isEdit='0' data-img='" + url + "' src='" + url + "'/></li>";
 
         $(".notsubmit .imgBox").show();
         $(".notsubmit .imgBox").append(str);
@@ -1099,11 +1099,18 @@ $(function () {
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
         var previewUrl = $(this).attr('data-img');
-        //wx.previewImage({
-        //    current: previewUrl, // 当前显示图片的http链接
-        //    urls: [previewUrl] // 需要预览的图片http链接列表
-        //});
-        lookBigImage(previewUrl,false);
+        var isEdit = $(this).attr('isEdit');
+
+        //isEdit==1 表示老师编辑后的图片；
+        if(isEdit == 1){
+            lookBig(previewUrl);
+        }else {
+            // isEdit== 0或者undefind  表示从本地相册选的图片
+            wx.previewImage({
+                current: previewUrl, // 当前显示图片的http链接
+                urls: [previewUrl] // 需要预览的图片http链接列表
+            });
+        }
     });
 
     function lookBigImage(diskPath,saveServer) {
@@ -1117,28 +1124,7 @@ $(function () {
                 cnv(20,'load_one',60)
                 //true:返回服务器所在的地址，false:返回云盘的预览地址
                 previewUrl =   url_o+   previewUrl;
-                $('.big_back_s canvas').hide();
-                $('.big_back_s').show();
-                $('.big_back_s img').attr('src', previewUrl);
-              
-                $('.big_back_s img').load(function(){
-                    cnv(60,'load_one',100);
-                    $('.big_back_s img').css({
-                        'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
-                        'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
-                    });
-                    $('.big_back_s canvas').css({
-                        'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
-                        'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
-                    });
-                   setTimeout(function(){
-                    $('.load').hide();
-                   },500)
-                })
-                $('.big_back_s img').error(function(){
-                    alert('图片加载失败，正在重新加载');
-                    location.reload();
-                })
+                lookBig(previewUrl);
                 // setTimeout(function () {
                    
 
@@ -1150,6 +1136,32 @@ $(function () {
                 });
             }
         });
+
+
+    }
+    function lookBig(previewUrl){
+        $('.big_back_s canvas').hide();
+        $('.big_back_s').show();
+        $('.big_back_s img').attr('src', previewUrl);
+
+        $('.big_back_s img').load(function(){
+            cnv(60,'load_one',100);
+            $('.big_back_s img').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+            });
+            $('.big_back_s canvas').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+            });
+            setTimeout(function(){
+                $('.load').hide();
+            },500)
+        })
+        $('.big_back_s img').error(function(){
+            alert('图片加载失败，正在重新加载');
+            location.reload();
+        })
     }
 
     // $('.big_back_s').on('touchend', function () {
@@ -1279,7 +1291,7 @@ $(function () {
                 layer.msg('最多只能批复三张');
                 return false;
             }
-            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
+            $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img isEdit='1' data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
 
             //上传文件到服务器
             var reqData = {
