@@ -476,7 +476,8 @@ $(function () {
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
-        $(".areyok").hide()
+        $(".areyok").hide();
+        $('.big_back').hide();
     });
     //批改作业提交
     $('.areyok input:last-of-type').on('touchend', function () {
