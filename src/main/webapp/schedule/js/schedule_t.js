@@ -345,6 +345,7 @@ $(document).on('click','.H-data li',function(){
     if(isiOS==true){
         $('.nbxs').eq(0).css('margin-top','-.25rem')
     }
+    alert($('body').css('width'))
     //存储今天时间
     var todaythis;
     //储存当前月期
