@@ -481,6 +481,7 @@ $(function () {
             }, 300);
             $('.erro').hide();
         }
+        $(this).hide();
     });
     $('.big_whit').on('touchend', function () {
         setTimeout(function () {
