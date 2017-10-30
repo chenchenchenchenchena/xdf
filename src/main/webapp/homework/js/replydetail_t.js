@@ -1080,6 +1080,7 @@ $(function () {
         var previewUrl = $(this).attr('data-id');
         $('.load').show();
         cnv(0,'load_one',20)
+        
         lookBigImage(previewUrl,true);
     });
 
