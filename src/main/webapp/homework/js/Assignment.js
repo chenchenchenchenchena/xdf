@@ -612,6 +612,7 @@ $(function () {
             setTimeout(function () {
 
                 END = new Date().getTime();
+                alert(END - START);
                 if ((END - START) < 1000 ) {
                     END = 0;
                     START = 0;
