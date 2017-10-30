@@ -613,7 +613,7 @@ $(function () {
 
                 END = new Date().getTime();
                 alert(END - START);
-                if ((END - START) < 1000 ) {
+                if ((END - START) < 1500 ) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
