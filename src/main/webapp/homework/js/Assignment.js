@@ -610,7 +610,10 @@ $(function () {
         var this_ = $(this);
         if (timeInedex == 0) {
             setTimeout(function () {
-                if ((END - START) < 1000) {
+
+                END = new Date().getTime();
+                alert(END - START);
+                if ((END - START) < 1000 ) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
@@ -624,10 +627,10 @@ $(function () {
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
-                            layer.msg("录制时间太短");
+                            layer.msg("录制时间太短1");
                         },
                         fail: function(){
-                            layer.msg("录制时间太短");
+                            layer.msg("录制时间太短2");
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();

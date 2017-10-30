@@ -234,6 +234,7 @@ $(function () {
         var this_ = $(this);
         if (timeInedex == 0) {
             setTimeout(function () {
+                END = new Date().getTime();
                 if ((END - START) < 1000) {
                     END = 0;
                     START = 0;
