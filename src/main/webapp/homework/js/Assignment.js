@@ -533,7 +533,7 @@ $(function () {
                 recordTimer = setInterval(function () {
                     timeInedex++;
                     if(timeInedex == 49){
-                        layer.msg("语音录制长度最大限度为60s");
+                        //layer.msg("语音录制长度最大限度为60s");
                         djs(10, function () {
                             //$(".timeTip").hide();
                             isCanStopRecord = true;
@@ -658,19 +658,19 @@ $(function () {
         this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
 
-        if (timeInedex < 1) {
-            //小于1000ms，不录音
-            clearInterval(recordTimer);
-            timeInedex = 0;
-            layer.msg("录制时间太短");
-            wx.stopRecord({
-                success: function (res) {
-                    isCanStartRecord = true;
-                    isCanStopRecord = false;
-                }
-            });
-            return false;
-        }
+        //if (timeInedex < 1) {
+        //    //小于1000ms，不录音
+        //    clearInterval(recordTimer);
+        //    timeInedex = 0;
+        //    layer.msg("录制时间太短");
+        //    wx.stopRecord({
+        //        success: function (res) {
+        //            isCanStartRecord = true;
+        //            isCanStopRecord = false;
+        //        }
+        //    });
+        //    return false;
+        //}
         clearInterval(recordTimer);
         timeInedex = 0;
         wx.stopRecord({
