@@ -22,8 +22,6 @@ var secreT = '';
 //     s.parentNode.insertBefore(hm, s);
 // })();
 
-sessionStorage.removeItem('oldtime_T')
-sessionStorage.removeItem('oldtime_D')
 if (window.location.host == onlineUrl) {//正式环境
     url_o = 'http://dt.xdf.cn/xdfdtmanager/';
     url_o2 = 'http://dt.xdf.cn';
@@ -281,8 +279,8 @@ function ajax_S(link,more,func){
             sessionStorage.oldtime_D =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
             time_ = setInterval(function(){
                 if(sessionStorage.oldtime_D<new Date().format("yyyy-MM-dd hh:mm:ss")){
-                   $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
-                clearInterval(time_);
+                //    $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+                    clearInterval(time_);
                 }
             },1000)
         },
