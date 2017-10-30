@@ -82,7 +82,7 @@ $(function(){
 
     //校区相关
    if(localStorage.mastTeater){
-    $(document).on('touchend',".select p",function(e){
+        $(document).on('touchend',".select p",function(e){
         $(".select").toggleClass('open');
         e.stopPropagation();
     });
@@ -110,7 +110,6 @@ $(function(){
             $('.content_t').find('p').eq(0).html(e.data[0].tName);
             
         }
-    $('.load_t').hide();        
     
     }
    }
@@ -191,6 +190,7 @@ $(function(){
         need_mas.ifmore  = '2';
         ajax_S(homework_s.t_list,need_mas,function(e){
                             if(e.data==undefined){
+                                
                               $('.mor_home p').html('您暂时没有更多啦！！！')
                               setTimeout(function(){
                                  $('.mor_home').hide()
@@ -274,6 +274,8 @@ $(function(){
                 $('.hwFinish').hide();
                 $('.Prompt_s').hide();
             }
+            $('.load_t').hide();
+            
             var list_s = e.data;
             $('.Prompt_s i').html(e.SumUpnotCorrect);
             for(var a = 0;a<list_s.length;a++){
