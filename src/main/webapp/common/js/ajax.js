@@ -290,7 +290,6 @@ function ajax_S(link,more,func){
         }
         
     });
-    clearInterval(time_);
 }
 
 /** @brief  封装ajax请求 create by Gws
@@ -349,7 +348,6 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
             console.log("err:"+err);
         }
     });
-    clearInterval(time_);
 };
 
 
