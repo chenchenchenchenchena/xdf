@@ -332,7 +332,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
             var b = a.getTime()+1000*5;
             sessionStorage.oldtime_T =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
             time_ = setInterval(function(){
-                if(sessionStorage.oldtime_T<new Date().format("yyyy-MM-dd hh:mm:ss")&&targetUrl.indexOf('updateSeveralStatus.do')==-1){
+                if(sessionStorage.oldtime_T<new Date().format("yyyy-MM-dd hh:mm:ss")&&targetUrl.indexOf('updateSeveralStatus.do')<0){
                    $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
                  clearInterval(time_);
                  alert('2'+sessionStorage.oldtime_T) 
