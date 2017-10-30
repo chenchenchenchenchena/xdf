@@ -746,8 +746,7 @@ $(function () {
         var this_ = $(this);
         if(timeInedex == 0){
             setTimeout(function () {
-                END = new Date().getTime();
-                if ((END - START) < 1500) {
+                if ((END - START) < 1000) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
@@ -1247,18 +1246,13 @@ $(function () {
 
         // canvas事件
         $('#myCanvas').on('touchstart', function () {
-            $('.pinch-zoom').css({
-                'width':'100%',
-                'height':'100%'
-            })
             if (event.touches.length == 1) {
                 ctx.beginPath();
-                ctx.moveTo(event.touches[0].pageX - +$('#myCanvas').offset().left, event.touches[0].pageY -+$('#myCanvas').offset().top);
+                ctx.moveTo(event.touches[0].pageX - +canvas.offsetLeft, event.touches[0].pageY -+canvas.offsetTop);
                 $('#myCanvas').on('touchmove', function () {
                     var ev = ev || event;
-                    ctx.lineTo(event.touches[0].pageX - +$('#myCanvas').offset().left, event.touches[0].pageY - +$('#myCanvas').offset().top);
+                    ctx.lineTo(event.touches[0].pageX - +canvas.offsetLeft, event.touches[0].pageY - +canvas.offsetTop);
                     ctx.stroke();
-                    console.log($('#myCanvas').offset().top+'      '+$('#myCanvas').offset().top)
                 });
                 $('#myCanvas').on('touchend', function () {
                     // ctx.closePath();
