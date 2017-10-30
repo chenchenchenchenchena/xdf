@@ -37,12 +37,6 @@ $(function(){
                             });
                         }
                     }else{
-                        if(!localStorage.userId_stu){
-                            ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
-                                localStorage.firstU2 = '1';
-                                location.href = Json.url;
-                            });
-                        }
                         ajax_S(url.t_stulas,calbac,function(Json){
                             if(Json.result==true){
                                 localStorage.userId_stu = Json.data.userId;
@@ -51,8 +45,16 @@ $(function(){
                                 var a = new Date();
                                 var b = a.getTime()+1000*60*60*24*20;
                                 localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
+                            }else{
+                                if(!localStorage.userId_stu){
+                                    ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(Json){
+                                        localStorage.firstU2 = '1';
+                                        location.href = Json.url;
+                                    });
+                                }
                             }
                         })
+                        
                     }
                     if(new Date().format("yyyy-MM-dd hh:mm:ss")>= localStorage.useridTime){
                         setTimeout(function(){
@@ -83,14 +85,16 @@ $(function(){
                             var a = new Date();
                             var b = a.getTime()+1000*60*60*24*20;
                             localStorage.useridTime =new Date(b).format("yyyy-MM-dd hh:mm:ss")
+                        }else{
+                            if(!localStorage.userId_stu){
+                                ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
+                                    localStorage.firstU2 = '1';
+                                    location.href = e.url;
+                                });
+                            }
                         }
                     });
-                    if(!localStorage.userId_stu){
-                        ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){
-                            localStorage.firstU2 = '1';
-                            location.href = e.url;
-                        });
-                    }
+                    
                 }else{
                     if(!localStorage.userId_stu){
                         ajax_S(url.e_elast,{'callbackFlag':'schedule'},function(e){

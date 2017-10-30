@@ -157,6 +157,7 @@ $(function () {
             $('.class_s i').html('已选择' + $('.class_name i').html() + '个班&nbsp;&nbsp;' + className + ' ');
             $('.class_name').animate({'bottom': '-438px'});
             $('.big_back').hide();
+            $('.class_name').hide();
         } else {
             $('.class_s i').html('');
         }
