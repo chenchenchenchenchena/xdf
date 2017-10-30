@@ -458,6 +458,7 @@ $(function () {
             $('.class_name').animate({'bottom': '-438px'});
             setTimeout(function () {
                 $('.big_back').hide();
+                $('.class_name').hide();
             }, 300);
             if ($('.class_s i').html() == '') {
                 $('.class_name i').html('0');
