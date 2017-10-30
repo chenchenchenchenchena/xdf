@@ -22,7 +22,8 @@ var secreT = '';
 //     s.parentNode.insertBefore(hm, s);
 // })();
 
-
+sessionStorage.removeItem('oldtime_T')
+sessionStorage.removeItem('oldtime_D')
 if (window.location.host == onlineUrl) {//正式环境
     url_o = 'http://dt.xdf.cn/xdfdtmanager/';
     url_o2 = 'http://dt.xdf.cn';
@@ -276,6 +277,7 @@ function ajax_S(link,more,func){
             };
             var a = new Date();
             var b = a.getTime()+1000*5;
+            
             sessionStorage.oldtime_D =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
             time_ = setInterval(function(){
                 if(sessionStorage.oldtime_D<new Date().format("yyyy-MM-dd hh:mm:ss")){
@@ -328,6 +330,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
             };
             var a = new Date();
             var b = a.getTime()+1000*5;
+
             sessionStorage.oldtime_T =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
             time_ = setInterval(function(){
                 if(sessionStorage.oldtime_T<new Date().format("yyyy-MM-dd hh:mm:ss")){
