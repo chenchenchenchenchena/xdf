@@ -346,7 +346,7 @@ $(document).on('click','.H-data li',function(){
         $('.nbxs').eq(0).css('margin-top','-.25rem')
     }
     if(parseInt($('body').css('width'))<380){
-        $('.nbxs').eq(0).css('margin-top','-.5rem');
+        $('.nbxs').eq(0).css('margin-top','0rem');
     }
     //存储今天时间
     var todaythis;
