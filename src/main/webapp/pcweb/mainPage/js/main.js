@@ -32,9 +32,10 @@ function toLogin() {
 
                 // setCookie("sid", e.sid, 1);
                 setCookie("userName", e.userName, 1);
-                setCookie("userId", e.userId, 1);
                 var userId = e.userId;
                 userId = userId.split('@')[0];
+
+                setCookie("userId", userId, 1);
 
                 showFunctionList(userId);
             }
@@ -309,18 +310,28 @@ function getRequest() {
 }
 
 function toLogout() {
-    var businessP = {"returnUrl": getRootPath(), "sid": getCookie("sid")};
+    var url = "";
+    var returnUrl = getRootPath();
+    var currentUser = getCookie("userId");
+    if(currentUser == "ssdf"){
+        //表示当前用户为超级管理员
+        returnUrl = returnUrl + "/pcweb/login_web.html";
+        url = url_o + "logout/doAdminLogout.do"
+    }else {
+        url = url_o + "logout/doLogout.do";
+    }
+
+    var businessP = {"returnUrl": returnUrl, "sid": getCookie("sid")};
     jQuery.ajax({
         type: "POST",
-        // url: Global.actionURL,
-        url: url_o + "logout/doLogout.do",
+        url: url,
         async: false,//同步
         dataType: 'json',
         data: JSON.stringify(businessP),
         success: function (json) {
             if (json.result == true) {
                 clearCookie();
-                window.top.location.href = json.logoutUrl;
+                window.top.location.href = returnUrl;
             }
         }
     });
