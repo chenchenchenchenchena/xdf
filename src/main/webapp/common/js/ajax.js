@@ -160,7 +160,7 @@ if(localStorage.mastTeater){
 //权限限制
 if(localStorage.terEmail&&!localStorage.mastTeater&&!localStorage.Assistant){
     // 获取主讲
-        (url.data_s, '1', function (e) {
+        ajax_S(url.data_s, '1', function (e) {
             for (var i = 0; i < e.data.length; i++) {
                 if(localStorage.terEmail==e.data[i].accountId){
                     localStorage.mastTeater = 'true'
