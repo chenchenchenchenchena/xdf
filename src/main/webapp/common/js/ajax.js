@@ -5,22 +5,22 @@ var url_o2 = 'http://dt.xdf.cn';
 var appId = '';
 var secreT = '';
 
-// (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-//         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-//     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-// })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-// ga('create', 'UA-20005525-5', 'auto');
-// ga('send', 'pageview');
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20005525-5', 'auto');
+ga('send', 'pageview');
 
 
 
-// var _hmt = _hmt || [];
-// (function() {
-//     var hm = document.createElement("script");
-//     hm.src = "https://hm.baidu.com/hm.js?55f7f2243b727e03faa4a3be905928f3";
-//     var s = document.getElementsByTagName("script")[0];
-//     s.parentNode.insertBefore(hm, s);
-// })();
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?55f7f2243b727e03faa4a3be905928f3";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
 
 if (window.location.host == onlineUrl) {//正式环境
     url_o = 'http://dt.xdf.cn/xdfdtmanager/';
@@ -160,7 +160,7 @@ if(localStorage.mastTeater){
 //权限限制
 if(localStorage.terEmail&&!localStorage.mastTeater&&!localStorage.Assistant){
     // 获取主讲
-        (url.data_s, '1', function (e) {
+        ajax_S(url.data_s, '1', function (e) {
             for (var i = 0; i < e.data.length; i++) {
                 if(localStorage.terEmail==e.data[i].accountId){
                     localStorage.mastTeater = 'true'
