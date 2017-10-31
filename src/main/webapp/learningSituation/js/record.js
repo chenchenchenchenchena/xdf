@@ -583,7 +583,7 @@ $(function () {
     function pushMsg(e){
     	if(e.result){
 			console.log(e)
-			location.href="report_t.html";
+			// location.href="report_t.html";
     	}else{
     		console.log(message);
     	}
@@ -866,7 +866,7 @@ $(function () {
 	function pushInfo(){
 		var pushinfo={
 			"courseName":$(".st").html(),
-			"course":$(".courseName").html(),
+			"course":$(".classrome").html(),
 			"time":"第"+$(".classnum").html()+"课次"+$(".lestime").html(),
 			"stuInfomation":pushStuent
 		}
