@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-ui-router.js"></script>
+	<script src="js/require.js" data-main="js/requireConfig"></script>
+</head>
+<body>
+<div class="header">
+	<h1>双师东方数据管理平台</h1>
+	<span class="user_name">朱环环</span>
+	<div class="usermenu">
+		<span></span>
+		<input type="button" value="退出">
+	</div>
+</div>
+<div class="content clearfix">
+	<div class="left_nav">
+		<h2>管理中心</h2>
+		<ul>
+			<li class="activ_nav"><a href="#/index">概况</a></li>
+			<li><a href="#/homework">作业统计</a></li>
+			<li><a href="#/lesstime">课时统计</a></li>
+			<li><a href="#/power">权限统计</a></li>
+		</ul>
+	</div>
+	
+	<div class="right_content" ui-view>
+		
+	</div>
+
+
+</div>
+<script>
+	/*配置项*/
+	var app = angular.module('myApp',['ui.router']);
+		app.config(function($stateProvider,$urlRouterProvider){
+			$stateProvider.state("index",{
+						url:"/index",
+						templateUrl:"indexmodule.html",
+						controller:'index'					
+					 }).state("homework",{
+						url:"/homework",
+						templateUrl:"homework.html",
+						controller:'homework'					
+					 }).state("lesstime",{
+						url:"/lesstime",
+						templateUrl:"lesstime.html",
+						controller:'lesstime'					
+					 }).state("power",{
+						url:"/power",
+						templateUrl:"power.html",
+						controller:'power'					
+					 })
+			$urlRouterProvider.otherwise("/index")
+		}).controller('index',function(){
+
+			require(['index'],function(){
+
+			})
+
+		})
+		.controller('homework',function(){
+
+			require(['homework'],function(){
+
+			})
+
+		})
+		.controller('lesstime',function(){
+
+			require(['lesstime'],function(){
+
+			})
+
+		})
+		.controller('power',function(){
+
+			require(['power'],function(){
+
+			})
+
+		})
+</script>
+</body>
+</html>
