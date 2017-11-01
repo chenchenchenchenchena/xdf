@@ -168,13 +168,6 @@ body{
 	line-height:45px;
 	border-bottom:1px solid #e6e7ed;
 }
-.index_forms li:nth-child(odd){
-	background:#f5fbfa;
-}
-.index_forms li:first-of-type{
-	background:#fff;
-	color:#bababa;
-}
 .index_forms li span{
 	display:inline-block;
 	width:19%;
