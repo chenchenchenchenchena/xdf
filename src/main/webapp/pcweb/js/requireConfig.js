@@ -15,7 +15,7 @@ require(['jquery-1.11.0.min'],function(){
         $('.usermenu').show();
         // $('.user_name').css('background-images','url(../images/img_3.png)')
     },function(){
-        $('.usermenu').hide();
+        // $('.usermenu').hide();
     })
    
 })
