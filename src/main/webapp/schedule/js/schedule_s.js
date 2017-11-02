@@ -4,6 +4,7 @@ $(function() {
     //     wechatCode(location.href);
     // };
     $('.load_t').show();        
+    $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
     
     //判断ios
     var u = navigator.userAgent;
@@ -138,7 +139,7 @@ $(function() {
         var arr = [];
         dateH = [];
         if (e.result == false || e.message!=undefined) {
-            $('.H-data').hide();
+            $('.loading_s').hide();
             $('.N-data').show();
             $('.month_hour i').html('0');
             $('.load_t').hide();        
@@ -205,7 +206,7 @@ $(function() {
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if (e.result == false) {
-            $('.H-data').hide();
+            $('.loading_s').hide();
             $('.N-data').show();
         } else {
             $('.H-data').show();
@@ -349,8 +350,12 @@ $(function() {
             } else {
                 $(this).addClass('xuanzhong_s')
             }
+            $('.H-data').show();
+            $('.N-data').hide();
+            $('.curriculum').hide();
+            $('.loading_s').show();
             ajax_S(url.s_stud, emailm, stusea);
-            ajax_S(url.s_stud, menu_s, menufunc);
+            // ajax_S(url.s_stud, menu_s, menufunc);
         }
     });
     //点击查看详情
@@ -392,12 +397,14 @@ $(function() {
         $('.not_this').css('opacity', '0');
     }, 100);
     function menu_int() {
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
         $('.not_this').css('opacity', '0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年') + 1, $('#ymym').html().indexOf('月'));
         if (month < 10) {
             month = '0' + month
         }
         if (monththis != month) {
+            $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var day = new Date($('#ymym').html().substring(0, 4), month, '0');
             var daycount = day.getDate();
             var menu_s = {

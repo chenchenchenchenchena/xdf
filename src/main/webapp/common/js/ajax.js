@@ -251,43 +251,8 @@ function ajax_S(link,more,func){
         asyns:false,
         dataType: 'json',
         data:JSON.stringify(more),
-        beforeSend:function(e){
-            //时间格式化
-            Date.prototype.format = function(fmt) {
-                var o = {
-                    "M+" : this.getMonth()+1,                 //月份
-                    "d+" : this.getDate(),                    //日
-                    "h+" : this.getHours(),                   //小时
-                    "m+" : this.getMinutes(),                 //分
-                    "s+" : this.getSeconds(),                 //秒
-                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
-                    "S"  : this.getMilliseconds()             //毫秒
-                };
-                if(/(y+)/.test(fmt)) {
-                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-                }
-                for(var k in o) {
-                    if(new RegExp("("+ k +")").test(fmt)){
-                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-                    }
-                }
-                return fmt;
-            };
-            var a = new Date();
-            var b = a.getTime()+1000*5;
-            
-            sessionStorage.oldtime_D =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
-            time_ = setInterval(function(){
-                if(sessionStorage.oldtime_D<new Date().format("yyyy-MM-dd hh:mm:ss")){
-                   $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
-                    clearInterval(time_);
-                }
-            },1000)
-            
-        },
         success:function(e){
             func(e);
-            clearInterval(time_);
         }
         
     });
@@ -305,42 +270,8 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
         type: typeIn,
         url: targetUrl,
         data: requestData,
-        beforeSend:function(e){
-            //时间格式化
-            Date.prototype.format = function(fmt) {
-                var o = {
-                    "M+" : this.getMonth()+1,                 //月份
-                    "d+" : this.getDate(),                    //日
-                    "h+" : this.getHours(),                   //小时
-                    "m+" : this.getMinutes(),                 //分
-                    "s+" : this.getSeconds(),                 //秒
-                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
-                    "S"  : this.getMilliseconds()             //毫秒
-                };
-                if(/(y+)/.test(fmt)) {
-                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-                }
-                for(var k in o) {
-                    if(new RegExp("("+ k +")").test(fmt)){
-                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-                    }
-                }
-                return fmt;
-            };
-            var a = new Date();
-            var b = a.getTime()+1000*5;
-            sessionStorage.oldtime_T =  new Date(b).format("yyyy-MM-dd hh:mm:ss");
-            time_ = setInterval(function(){
-                if(sessionStorage.oldtime_T<new Date().format("yyyy-MM-dd hh:mm:ss")&&targetUrl.indexOf('updateSeveralStatus.do')<0){
-                   $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
-                 clearInterval(time_);
-                }
-            },1000)
-        },
-
         success: function (msg) {
             successCallback(msg);
-            clearInterval(time_);
         },
         
         error: function (err) {
