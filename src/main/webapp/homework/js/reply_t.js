@@ -23,7 +23,7 @@ $(function() {
             arr = data.notCommit;
             if (data.notCommit.length == 0) {
                 $('.emptyThree').show()
-                $('.loading').hide();
+                $('.loading-back').hide();
             } else {
                 for (var b = 0; b < data.notCommit.length; b++) {
                     if (data.notCommit[b].studentName.length == 2) {
@@ -33,11 +33,11 @@ $(function() {
                     }
                     $('.Pending').eq(2).append('<li><span class="yeCircle">' + name + '</span><span>' + data.notCommit[b].studentName + '</span></li>')
                 }
-                $('.loading').hide();
+                $('.loading-back').hide();
             }
             if (data.notCorrect.length == 0) {
                 $('.emptyOne').show()
-                $('.loading').hide();
+                $('.loading-back').hide();
             } else {
                 for (var c = 0; c < data.notCorrect.length; c++) {
                     var sdthomFile = e.data.notCorrect[c].sdthomFile;
@@ -79,12 +79,12 @@ $(function() {
 
                 }
 
-                $('.loading').hide();
+                $('.loading-back').hide();
 
             }
             if (data.yesCorrect.length == 0) {
                 $('.emptyTwo').show()
-                $('.loading').hide();
+                $('.loading-back').hide();
             } else {
                 for (var d = 0; d < data.yesCorrect.length; d++) {
 
@@ -138,7 +138,7 @@ $(function() {
                     }
 
                 }
-                $('.loading').hide();
+                $('.loading-back').hide();
             }
 
         }
