@@ -6,9 +6,9 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	sessionStorage.stuNumber = 'ss40';
-	sessionStorage.studentName = '刘一硕';
-	sessionStorage.schoolId = '73';
+	//sessionStorage.stuNumber = 'ss40';
+	//sessionStorage.studentName = '刘一硕';
+	//sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
 	$('.load_t').show();        
 	
