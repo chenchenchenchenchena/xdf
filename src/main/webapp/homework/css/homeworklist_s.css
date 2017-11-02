@@ -873,3 +873,8 @@ i{
 .load_t .loading_s{
     margin-top:80%;
 }
+.loading-back{
+	display: block;
+	width: 80px;
+	height: auto;
+}
