@@ -207,6 +207,7 @@ $(function() {
         $('.stu_data li').remove();
         if (e.result == false) {
             $('.loading_s').hide();
+            $('.curriculum').hide();
             $('.N-data').show();
         } else {
             $('.H-data').show();
