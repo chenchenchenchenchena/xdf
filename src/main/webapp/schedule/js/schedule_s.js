@@ -206,7 +206,7 @@ $(function() {
         var teacherr_m = masterteacher.split(',');
         $('.stu_data li').remove();
         if (e.result == false) {
-            $('.H-data').hide();
+            $('.loading_s').hide();
             $('.N-data').show();
         } else {
             $('.H-data').show();

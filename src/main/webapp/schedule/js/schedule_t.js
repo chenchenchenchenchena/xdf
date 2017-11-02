@@ -51,7 +51,7 @@ function stusea(e){
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
-            $('.H-data').hide();
+            $('.loading_s').hide();
             // $('.load_t').hide();
             return;
         }else{
