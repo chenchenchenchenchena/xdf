@@ -1,3 +1,4 @@
+$(function(){
 //全局的年月日，适用于任何时候获取今天的年月日。（很重要）
 var sev_m, sev_y, sev_d, active = 3;
 var mySwiper = new Swiper('.swiper-container', {
@@ -778,3 +779,4 @@ setInterval(function(){
 	$('.calenda').css('height',$('.swiper-slide-active').css('height'))
 	$('.calenda').css('padding-bottom','20px')
 },100)
+})

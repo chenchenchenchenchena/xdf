@@ -25,6 +25,8 @@ var menu_s = {
     sessionStorage.removeItem("classData");
 //储存课程信息
 var curr_e = [];
+$('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
+
 //储存当月的日期
 var dateH = [];
 //储存当前日期
@@ -44,6 +46,7 @@ var touchtend;
 //按天查课程
 
 function stusea(e){
+
     sessionStorage.setItem("classData",JSON.stringify(e));
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
@@ -185,11 +188,13 @@ function stusea(e){
             }
             if(Shchool==undefined){
                 $('.month_hour i').html(moth.length);
+
             }else{
                 $('.month_hour i').html(moth_less);
              }
         }else{
             moth = e.data.Data
+            
             $('.month_hour i').html(moth.length);
         }
 
@@ -243,10 +248,9 @@ function stusea(e){
             }
 
     }
+    $('.load_t').hide();
 },100)
 setInterval(menu_int,10);
-$('.load_t').hide();
-
 }
 }
 //赋值今天是周几
@@ -267,7 +271,7 @@ setTimeout(function(){
         $('.content td').removeClass('xuanzhong_s');
         if(touchtend<=1){
             if($('#now2').length!=0){
-                alert('日历控件加载失败，请刷新后重试');
+                layer.msg('日历控件加载失败，请刷新后重试');
                 return false;
             }
             setTimeout(function(){
@@ -305,6 +309,10 @@ setTimeout(function(){
             }else{
                 $(this).addClass('xuanzhong_s')
             }
+            $('.H-data').show();
+            $('.N-data').hide();
+            $('.curriculum').hide();
+            $('.loading_s').show();
             ajax_S(url.s_emai,emailm,stusea);
             // ajax_S(url.s_emai,menu_s,menufunc);
         }
@@ -373,6 +381,7 @@ $(document).on('click','.H-data li',function(){
             month = '0'+month
         }
         if(monththis!=month){
+            $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
             var menu_s = {
