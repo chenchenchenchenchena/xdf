@@ -47,7 +47,7 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
-    loading = layer.load();
+    //loading = layer.load();
     ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
 
     // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
@@ -94,7 +94,8 @@ $(function () {
         }else{
                 console.log("获取作业详情失败");
             }
-        layer.close(loading);
+        //layer.close(loading);
+        $('.waiting').hide();
     }
 
     var audioCount = 0;
