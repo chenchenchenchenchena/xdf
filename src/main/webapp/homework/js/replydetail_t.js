@@ -118,7 +118,7 @@ $(function () {
             var homeworkText = decodeURI(e.StudentAnswer).split('|>|');
             answerT = homeworkText.length;
             for (var p = 0; p < homeworkText.length; p++) {
-                $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + homeworkText[p] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>')
+                $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + homeworkText[p] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div><img class="loading-back" src="../common/images/loading.gif" /></div>')
             }
             if (sessionStorage.bangbang == '1') {
                 $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')
@@ -136,29 +136,29 @@ $(function () {
         for (var L = 0; L < arr.length; L++) {
             if (arr[L] != '' && arr[L] != " " && arr[L] != undefined && arr[L] != '+' && arr[L] != 'undefined') {
                 if (L == arr.length - 1 && e.score != '') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox"></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>');
                 } else {
                     $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes">' + arr[L] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
                 }
             } else {//描述信息为空
 
                 if (arr.length == 1 && e.score != '') {
-                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+                    $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>');
                 } else {
                     if (L == arr.length - 1 && e.score != '') {
                         $('.tea_sp .hmAnswer:last-of-type').find('.infoTitle').append('<h4>得分:<i>' + e.score + '</i></h4>')
                     }
                     if (arr[L] != 'undefined') {
-                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                        $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>');
                     }
                 }
             }
         }
         if (arr.length > 0 && $('.tea_sp .hmAnswer').length == 0) {
             if (e.score != '') {
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div></div>');
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 <h4>得分:<i>' + e.score + '</i></h4></div><div class="anDes"></div><div><ul class="voiceBox" ></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>');
             } else {
-                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div></div></div>');
+                $('.tea_sp').append('<div class="hmAnswer"><div class="infoTitle">老师批复 </div><div class="anDes"></div><div><ul class="voiceBox"></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>');
             }
         }
 
@@ -185,7 +185,7 @@ $(function () {
             // for (var b = 0; b < tea.length; b++) {
             //     hwFiles.push(tea[b].diskFilePath);
             // }
-            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div></div></div>')
+            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>')
             $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
             getFileInfo(e);
         // });
@@ -304,7 +304,7 @@ $(function () {
                 }
             }
 
-
+            $('.loading-back').hide();
         }
     }
 
@@ -386,7 +386,6 @@ $(function () {
             strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
         }
-
 
         parentId.append(strVoice);
 
