@@ -348,48 +348,41 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
-                $('.big_back').hide();
-                if (e.status == "failure") {
-                    layer.msg(e.msg);
+        ajax_S(url_o + "upload/uploadAudio.do",cbconfig,function(e){
+            $('.big_back').hide();
+            if (e.status == "failure") {
+                layer.msg(e.msg);
+            } else {
+                if (e.data.success) {
+                    fileName = e.data.fileName;
+                    fileSize = e.data.fileSize;
+                    fileType = e.data.fileType;
+                    diskFilePath = e.data.diskFilePath;
+                    var voiceFile = {
+                        "homeworkSinfoId": homeworkSinfoId,
+                        "fileName": fileName,
+                        "fileType": fileType,
+                        "fileSize": fileSize,
+                        "diskFilePath": diskFilePath,
+                        "uploadUser": uploadUser
+                    };
+                    voiceFileParams.push(voiceFile);
+                    layer.open({
+                        type: 1,
+                        area: ['548px', '345px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
+                    getRecordInfo(diskFilePath);
                 } else {
-                    if (e.data.success) {
-                        fileName = e.data.fileName;
-                        fileSize = e.data.fileSize;
-                        fileType = e.data.fileType;
-                        diskFilePath = e.data.diskFilePath;
-                        var voiceFile = {
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        };
-                        voiceFileParams.push(voiceFile);
-                        layer.open({
-                            type: 1,
-                            area: ['548px', '345px'],
-                            shade: [0.2, '#000'],
-                            title: '',
-                            skin: '',
-                            time: 3000,
-                            content: $(".music_succ")
-                        });
-                        getRecordInfo(diskFilePath);
-                    } else {
-                        layer.msg("语音上传失败");
-                    }
-
+                    layer.msg("语音上传失败");
                 }
 
-
             }
+
         });
     }
 
@@ -400,14 +393,9 @@ $(function () {
      */
     function getRecordInfo(diskFileUrl) {
         var optionFile = {"fullPath": diskFileUrl};
-        $.ajax({
-            url: url_o + "upload/getMp3Url.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                /**
-                 *{
+        ajax_S(url_o + "upload/getMp3Url.do",optionFile,function(e){
+            /**
+             *{
                  *  "code": "200",
                  *  "data": {
                  *     "playTime": 5,
@@ -415,15 +403,14 @@ $(function () {
                  *  },
                  *  "status": "success"
                  *  }
-                 */
-                if (e.status == "success") {
-                    //显示语音布局
-                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
-                    recordCount++;
+             */
+            if (e.status == "success") {
+                //显示语音布局
+                showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
+                recordCount++;
 
-                } else {
-                    layer.msg("语音获取失败");
-                }
+            } else {
+                layer.msg("语音获取失败");
             }
         });
     }
@@ -574,37 +561,31 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        $.ajax({
-            url: url_o + "upload/uploadFileByWeiChat.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
-                $('.big_back').hide();
-                // alert(JSON.stringify(data));
-                if (e.status == "failure") {
-                    layer.msg('图片上传失败');
-                } else if (e.status == "succeed") {
+        ajax_S(url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
 
-                    showNotImg(localID);
-                    fileName = e.data.fileName;
-                    fileSize = e.data.fileSize;
-                    fileType = e.data.fileType;
-                    diskFilePath = e.data.diskFilePath;
-                    fileParams.push({
-                        "homeworkSinfoId": homeworkSinfoId,
-                        "fileName": fileName,
-                        "fileType": fileType,
-                        "fileSize": fileSize,
-                        "diskFilePath": diskFilePath,
-                        "uploadUser": uploadUser
-                    });
+            $('.big_back').hide();
+            // alert(JSON.stringify(data));
+            if (e.status == "failure") {
+                layer.msg('图片上传失败');
+            } else if (e.status == "succeed") {
 
-
-                }
+                showNotImg(localID);
+                fileName = e.data.fileName;
+                fileSize = e.data.fileSize;
+                fileType = e.data.fileType;
+                diskFilePath = e.data.diskFilePath;
+                fileParams.push({
+                    "homeworkSinfoId": homeworkSinfoId,
+                    "fileName": fileName,
+                    "fileType": fileType,
+                    "fileSize": fileSize,
+                    "diskFilePath": diskFilePath,
+                    "uploadUser": uploadUser
+                });
 
 
             }
+
         });
 
     }

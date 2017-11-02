@@ -569,12 +569,7 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
+        ajax_S(url_o + "upload/uploadAudio.do",cbconfig,function(e){
                 $('.big_back').hide();
                 if (e.status == "failure") {
                     layer.msg(e.msg);
@@ -609,8 +604,6 @@ $(function () {
                     }
                 }
 
-
-            }
         });
     }
 
@@ -620,21 +613,15 @@ $(function () {
      */
     function getRecordInfo(diskFileUrl) {
         var optionFile = {"fullPath": diskFileUrl};
-        $.ajax({
-            url: url_o + "upload/getMp3Url.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
+        ajax_S(url_o + "upload/getMp3Url.do",optionFile,function(e){
 
-                if (e.status == "success") {
-                    //显示语音布局
-                    showRecordAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
-                    recordCount++;
+            if (e.status == "success") {
+                //显示语音布局
+                showRecordAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount, 1);
+                recordCount++;
 
-                } else {
-                    layer.msg("语音获取失败");
-                }
+            } else {
+                layer.msg("语音获取失败");
             }
         });
     }
@@ -727,37 +714,30 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        $.ajax({
-                url: url_o + "upload/uploadFileByWeiChat.do",
-                type: 'post',
-                dataType: 'json',
-                data: cbconfig,
-                success: function (e) {
-                    $('.big_back').hide();
-                    // alert(JSON.stringify(data));
-                    if (e.status == "failure") {
-                        layer.msg('图片上传失败');
-                    } else if (e.status == "succeed") {
+        ajax_S(url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
+            $('.big_back').hide();
+            // alert(JSON.stringify(data));
+            if (e.status == "failure") {
+                layer.msg('图片上传失败');
+            } else if (e.status == "succeed") {
 
-                        showNotImg(localID);
-                        fileName = e.data.fileName;
-                        fileSize = e.data.fileSize;
-                        fileType = e.data.fileType;
-                        diskFilePath = e.data.diskFilePath;
-                        fileParams.push({
-                            "homeworkSinfoId": homeworkSinfoId,
-                            "fileName": fileName,
-                            "fileType": fileType,
-                            "fileSize": fileSize,
-                            "diskFilePath": diskFilePath,
-                            "uploadUser": uploadUser
-                        });
+                showNotImg(localID);
+                fileName = e.data.fileName;
+                fileSize = e.data.fileSize;
+                fileType = e.data.fileType;
+                diskFilePath = e.data.diskFilePath;
+                fileParams.push({
+                    "homeworkSinfoId": homeworkSinfoId,
+                    "fileName": fileName,
+                    "fileType": fileType,
+                    "fileSize": fileSize,
+                    "diskFilePath": diskFilePath,
+                    "uploadUser": uploadUser
+                });
 
 
-                    }
+            }
 
-
-                }
             }
         );
 

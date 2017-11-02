@@ -741,39 +741,33 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': classCode.split(',')[0]
         };
-        $.ajax({
-            url: url_o + "upload/uploadAudio.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
-                $('.big_back').hide();
-                if (e.status == "failure") {
-                    layer.msg(e.msg);
-                } else {
-                    if (e.data.success) {
-                        $('.teBox').val(e.data.fileUrl);
-                        arr_voice.push({
-                            'fileName': e.data.fileName,
-                            'fileType': e.data.fileType,
-                            'fileSize': e.data.fileSize,
-                            'diskFilePath': e.data.diskFilePath,
-                            'id': ""
-                        });
-                        layer.open({
-                            type: 1,
-                            area: ['548px', '345px'],
-                            shade: [0.2, '#000'],
-                            title: '',
-                            skin: '',
-                            time: 3000,
-                            content: $(".music_succ")
-                        });
-                        getRecordInfo(e.data.diskFilePath);
-                    }
-                    else {
-                        layer.msg("语音上传失败");
-                    }
+        ajax_S(url_o + "upload/uploadAudio.do",cbconfig,function(e){
+            $('.big_back').hide();
+            if (e.status == "failure") {
+                layer.msg(e.msg);
+            } else {
+                if (e.data.success) {
+                    $('.teBox').val(e.data.fileUrl);
+                    arr_voice.push({
+                        'fileName': e.data.fileName,
+                        'fileType': e.data.fileType,
+                        'fileSize': e.data.fileSize,
+                        'diskFilePath': e.data.diskFilePath,
+                        'id': ""
+                    });
+                    layer.open({
+                        type: 1,
+                        area: ['548px', '345px'],
+                        shade: [0.2, '#000'],
+                        title: '',
+                        skin: '',
+                        time: 3000,
+                        content: $(".music_succ")
+                    });
+                    getRecordInfo(e.data.diskFilePath);
+                }
+                else {
+                    layer.msg("语音上传失败");
                 }
             }
         });
@@ -795,20 +789,14 @@ $(function () {
          *  }
          */
         var optionFile = {"fullPath": diskFileUrl};
-        $.ajax({
-            url: url_o + "upload/getMp3Url.do",
-            type: 'post',
-            dataType: 'json',
-            data: optionFile,
-            success: function (e) {
-                if (e.status == "failed") {
-                    layer.msg("语音获取失败");
-                } else {
-                    //显示语音布局
-                    showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
-                    recordCount++;
+        ajax_S(url_o + "upload/getMp3Url.do",optionFile,function(e){
+            if (e.status == "failed") {
+                layer.msg("语音获取失败");
+            } else {
+                //显示语音布局
+                showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
+                recordCount++;
 
-                }
             }
         });
     }
@@ -984,30 +972,23 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': classCode.split(',')[0]
         };
-        $.ajax({
-            url: url_o + "upload/uploadFileByWeiChat.do",
-            type: 'post',
-            dataType: 'json',
-            data: cbconfig,
-            success: function (e) {
-                $('.big_back').hide();
-                if (e.status == "failure") {
-                    layer.msg('图片上传失败');
-                } else if (e.status == "succeed") {
+        ajax_S(url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
+            $('.big_back').hide();
+            if (e.status == "failure") {
+                layer.msg('图片上传失败');
+            } else if (e.status == "succeed") {
 
-                    showUpdataImage(localID);
-                    arr_image.push({
-                        'fileName': e.data.fileName,
-                        'fileType': e.data.fileType,
-                        'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath,
-                        'id': ""
-                    });
-
-
-                }
+                showUpdataImage(localID);
+                arr_image.push({
+                    'fileName': e.data.fileName,
+                    'fileType': e.data.fileType,
+                    'fileSize': e.data.fileSize,
+                    'diskFilePath': e.data.diskFilePath,
+                    'id': ""
+                });
 
             }
+
         });
 
     }
