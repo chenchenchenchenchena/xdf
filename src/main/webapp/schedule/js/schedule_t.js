@@ -157,7 +157,7 @@ function stusea(e){
     var strIndex = '';
     dateH = [];
     if(e.result==false||e.message!=undefined){
-        $('.H-data').hide();
+        $('.loading_s').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');
         $('.load_t').hide();
