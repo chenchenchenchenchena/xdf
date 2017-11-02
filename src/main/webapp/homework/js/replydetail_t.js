@@ -390,6 +390,7 @@ $(function () {
         parentId.append(strVoice);
 
         $('.song_s,.mask').hide();
+        $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
         if ($('.notsubmit #record_audio_box li').length >= 3) {
             $('#record').hide();
@@ -667,6 +668,7 @@ $(function () {
         } else {
             $('.big_whit').show();
             $('.song_s').show();
+            $('.big_back').show();
         }
     });
 
@@ -708,6 +710,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -720,6 +723,7 @@ $(function () {
                         clearInterval(recordTimer);
                         $('.song_s').hide();
                         $('.big_whit').hide();
+                        $('.big_back').hide();
                         this_.siblings('img').attr('src', 'images/C04-03.png');
                         isCanStartRecord = true;
                         isCanStopRecord = false;
@@ -756,6 +760,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -766,6 +771,7 @@ $(function () {
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
+                            $('.big_back').hide();
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
@@ -815,6 +821,7 @@ $(function () {
                 uploadVoiceWX(localId);
                 $('.song_s').hide();
                 $('.big_whit').hide();
+                $('.big_back').hide();
                 isCanStartRecord = true;
                 isCanStopRecord = false;
             }
