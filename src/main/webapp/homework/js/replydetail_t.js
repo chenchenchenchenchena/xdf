@@ -631,6 +631,7 @@ $(function () {
             $('.big_whit').hide();
         }, 300);
         $('.song_s').hide();
+        $('.big_back').hide();
     });
 
     $('.big_back').on('touchstart', function () {
