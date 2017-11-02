@@ -1066,7 +1066,7 @@ $(function () {
         }
         var previewUrl = $(this).attr('data-id');
         var preview = $(this).attr('data-thumbnail');
-        $('.load').css('backgroundImg',preview);
+        $('.load img').attr(src,preview);
         $('.load').show();
         cnv(0,'load_one',20)
         
