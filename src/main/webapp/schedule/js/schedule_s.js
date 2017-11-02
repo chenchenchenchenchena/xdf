@@ -404,6 +404,7 @@ $(function() {
             month = '0' + month
         }
         if (monththis != month) {
+            $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var day = new Date($('#ymym').html().substring(0, 4), month, '0');
             var daycount = day.getDate();
             var menu_s = {
