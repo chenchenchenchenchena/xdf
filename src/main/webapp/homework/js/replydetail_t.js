@@ -1056,6 +1056,8 @@ $(function () {
             return false;
         }
         var previewUrl = $(this).attr('data-id');
+        var preview = $(this).attr('data-thumbnail');
+        $('.load').css('backgroundImg',preview);
         $('.load').show();
         cnv(0,'load_one',20)
         
