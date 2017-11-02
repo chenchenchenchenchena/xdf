@@ -248,6 +248,7 @@ function ajax_S(link,more,func){
     $.ajax({
         url:link,
         type: 'post',
+        timeout:5000,
         asyns:false,
         dataType: 'json',
         data:JSON.stringify(more),
@@ -288,6 +289,12 @@ function ajax_S(link,more,func){
         success:function(e){
             func(e);
             clearInterval(time_);
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+                clearInterval(time_);
+            }
         }
         
     });
@@ -304,6 +311,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
     $.ajax({
         type: typeIn,
         url: targetUrl,
+        timeout:5000,
         data: requestData,
         beforeSend:function(e){
             //时间格式化
@@ -346,6 +354,12 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
         error: function (err) {
             // failureCallback(msg);
             console.log("err:"+err);
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
+                clearInterval(time_);
+            }
         }
     });
 };
