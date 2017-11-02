@@ -116,11 +116,11 @@ $(document).on('tap','.title_s',function(){
 
 // 成绩类型切换 切换tab
 $(document).on('touchend', '.report_tab li', function () {
+    $('.load_t').show();
     $(this).addClass('active_last').siblings().removeClass('active_last');
     need_.tCode = $(this).attr("tCode");
     need_.gradeType = $(this).attr("tCode")
     Text_Grade = $(this).html();
-    console.log(need_.tCode+"__"+Text_Grade);
     $('.class_big').find('.classroom_s').remove();
     if(localStorage.mastTeater){
         Interaction_master();
