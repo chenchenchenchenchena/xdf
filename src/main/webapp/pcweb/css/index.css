@@ -38,6 +38,7 @@ body{
 	border:1px solid #e8e8e8;
 	background:#fff;
 	display:none;
+	z-index:5;
 }
 .usermenu input{
 	display:block;
@@ -55,9 +56,9 @@ body{
 	width:10px;
 	height:10px;
 	background:red;
-	position:absolute;
-	top:-8px;
-	right:5px;
+	margin-top:-8px;
+	float:right;
+	margin-right:5px;
 	background:url(../images/img_2.png) no-repeat center center;
 }
 .content{
