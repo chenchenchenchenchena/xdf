@@ -28,8 +28,8 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.xdf.cn/xdfdtmanager/";
-    url_o2 = 'http://dt.xdf.cn';
+    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
 }
@@ -38,7 +38,7 @@ if (window.location.host == onlineUrl) {//正式环境
         sessionStorage.signal = 0;
         // appId =  'wx559791e14e9ce521';
         // secreT = 'baa4373d5a8750c69b9d1655a2e31370';
-        appId =  'wx67e16b7247bzde1a8';      //双师东方
+        appId =  'wx67e16b7247bde1a8';      //双师东方
         secreT = '85e12b7eb0627c8c0fd5ef45e084667c';
     }else{
         sessionStorage.removeItem('signal');
@@ -248,7 +248,6 @@ function ajax_S(link,more,func){
     $.ajax({
         url:link,
         type: 'post',
-        timeout:5000,
         asyns:false,
         dataType: 'json',
         data:JSON.stringify(more),
@@ -289,12 +288,6 @@ function ajax_S(link,more,func){
         success:function(e){
             func(e);
             clearInterval(time_);
-        },
-        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-            if(status=='timeout'){//超时,status还有success,error等值的情况
-                $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
-                clearInterval(time_);
-            }
         }
         
     });
@@ -311,7 +304,6 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
     $.ajax({
         type: typeIn,
         url: targetUrl,
-        timeout:5000,
         data: requestData,
         beforeSend:function(e){
             //时间格式化
@@ -354,12 +346,6 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
         error: function (err) {
             // failureCallback(msg);
             console.log("err:"+err);
-        },
-        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-            if(status=='timeout'){//超时,status还有success,error等值的情况
-                $('body').append('<div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:20;background:#f1f1f1;"><img src="../common/images/erro_w.png" alt="" style="display:block;margin:335px auto 0;"><p style="display:block;width:213px;height:88px;background:#00ba97;color:#fff;border-radius:8px;text-align:center;font-size:32px;line-height:88px;margin:50px auto 0;" onclick="location.reload();">重新加载</p></div>')
-                clearInterval(time_);
-            }
         }
     });
 };
