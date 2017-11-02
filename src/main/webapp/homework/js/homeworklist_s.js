@@ -35,8 +35,6 @@ $(function(){
             ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
         }
     });
-	var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu};
-	ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
 		if($(this).index()==0){
