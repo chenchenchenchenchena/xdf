@@ -745,7 +745,8 @@ $(function () {
         var this_ = $(this);
         if(timeInedex == 0){
             setTimeout(function () {
-                if ((END - START) < 1000) {
+                END = new Date().getTime();
+                if ((END - START) < 1500) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
@@ -853,7 +854,7 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': sessionStorage.classCode_s
         };
-        ajax_S(url_o + "upload/uploadAudio.do",cbconfig,function(e){
+        ajaxRequest("Post",url_o + "upload/uploadAudio.do",cbconfig,function(e){
             $('.big_back').hide();
             if (e.status == "failure") {
                 layer.msg(e.msg);
@@ -888,7 +889,7 @@ $(function () {
      */
     function getRecordInfo(diskFileUrl) {
         var optionFile = {"fullPath": diskFileUrl};
-        ajax_S(url_o + "upload/getMp3Url.do",optionFile,function(e){
+        ajaxRequest("Post",url_o + "upload/getMp3Url.do",optionFile,function(e){
             if (e.status == "failed") {
                 layer.msg("语音获取失败");
             } else {
@@ -966,7 +967,7 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': sessionStorage.classCode_s
         };
-        ajax_S(url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
+        ajaxRequest("Post",url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
             $('.big_back').hide();
             if (e.status == "failure") {
                 // alert(e.msg);
