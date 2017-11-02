@@ -9,7 +9,7 @@
 	<script src="js/angular-ui-router.js"></script>
 	<script src="js/require.js" data-main="js/requireConfig"></script>
 </head>
-<body>
+<body onload="loadMenu()">
 <div class="header">
 	<h1>双师东方数据管理平台</h1>
 	<span class="user_name">朱环环</span>
@@ -22,10 +22,10 @@
 	<div class="left_nav">
 		<h2>管理中心</h2>
 		<ul>
-			<li class="activ_nav"><a href="#/index">概况</a></li>
-			<li><a href="#/homework">作业统计</a></li>
-			<li><a href="#/lesstime">课时统计</a></li>
-			<li><a href="#/power">权限统计</a></li>
+			<li class="activ_nav"><a id="101" href="#/index">概况</a></li>
+			<li><a id="102" href="#/homework">作业统计</a></li>
+			<li><a id="103" href="#/lesstime">课时统计</a></li>
+			<li><a id="104" href="#/power">权限统计</a></li>
 		</ul>
 	</div>
 	
