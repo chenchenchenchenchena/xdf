@@ -85,26 +85,7 @@ function tLogin() {
 
     //});
 
-    //$.ajax({
-    //    url: url_o + "e2Login/adminLogin.do",
-    //    type: 'post',
-    //    dataType: 'json',
-    //    data: JSON.stringify(calbac),
-    //    success: function (e) {
-    //        console.log(e);
-    //        if (e.result == false) {
-    //
-    //            alert(e.message);
-    //        } else {
-    //
-    //            sessionStorage.setItem("sid", e.sid, 1);
-    //            sessionStorage.setItem("userName", e.userName, 1);
-    //            sessionStorage.setItem("userId", e.userId, 1);
-    //
-    //        }
-    //
-    //    }
-    //})
+
 }
 
 //定义一个存放功能ID的数组

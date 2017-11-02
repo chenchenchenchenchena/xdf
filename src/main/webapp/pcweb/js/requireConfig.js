@@ -1,13 +1,13 @@
 /* 配置文件*/
 
 /*Life without love crt 2017-11-1 G*/
+
+
+var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
     var global = {
-    
     }
-    
-    
     
     /*用户下拉*/
     var timeout; 
