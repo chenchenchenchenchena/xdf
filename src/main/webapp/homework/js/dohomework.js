@@ -47,7 +47,7 @@ $(function () {
     $(document).on('touchend', '.hwRankTitle', function () {
         window.location.href = "studentrank_s.html";
     });
-    //loading = layer.load();
+    loading = layer.load();
     ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
 
     // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
@@ -56,7 +56,7 @@ $(function () {
         if (msg.code == 200) {
             var knowledgePoint, kpHtml;
             var item = msg.data;
-            if(item != undefined){
+            if (item != undefined) {
                 localStorage.hwteacherId = item.homeworkTId;//老师主键id
                 localStorage.hwstudentId = item.id;//学生主键id
                 localStorage.classCode = item.classCode;//学生code
@@ -69,7 +69,7 @@ $(function () {
                         $('.knowPoint').append(kpHtml);
                     }
                 }
-                if(item.description != undefined && item.description != ""){
+                if (item.description != undefined && item.description != "") {
                     //作业描述
                     $('.hwCon').html(decodeURIComponent(item.description));
                 }
@@ -91,11 +91,11 @@ $(function () {
                 }
             }
 
-        }else{
-                console.log("获取作业详情失败");
-            }
-        //layer.close(loading);
-        $('.waiting').hide();
+        } else {
+            console.log("获取作业详情失败");
+        }
+        layer.close(loading);
+        //$('.waiting').hide();
     }
 
     var audioCount = 0;
