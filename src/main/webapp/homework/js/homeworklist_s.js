@@ -40,13 +40,13 @@ $(function(){
     });
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
-		tabChange();
+		tabChange($(this));
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 	})
 
-	function tabChange(){
+	function tabChange(this_){
 		$('.reload').hide();
-		if($(this).index()==0){
+		if(this_.index()==0){
 			$('title').html('学生待交作业列表')
 			$(".hwFinish,.hwEmpty").hide();
 			if(loading == undefined){
@@ -306,7 +306,7 @@ $(function(){
 						if (item.readStatus==0){//未读
 							readCss = "redCircle";
 						}
-						console.log(item)
+						//console.log(item)
 						switch (item.replyStatus){
 							case 0:
 								replyStatus = '未批';
