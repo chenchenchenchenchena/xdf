@@ -40,9 +40,14 @@ $(function(){
     });
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
+		tabChange();
+		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
+	})
+
+	function tabChange(){
 		if($(this).index()==0){
-		  $('title').html('学生待交作业列表')
-		  $(".hwFinish,.hwEmpty").hide();
+			$('title').html('学生待交作业列表')
+			$(".hwFinish,.hwEmpty").hide();
 			if(loading == undefined){
 				loading = layer.load();
 			}
@@ -71,8 +76,8 @@ $(function(){
 				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
 			}
 		}
-		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
-	})
+	}
+
 	//点击已交作业列表
 	var flag=true;
 	$(document).on('tap','.firstList',function(){
@@ -361,7 +366,13 @@ $(function(){
 
 	function error(){
 		layer.close(loading);
+		$('.reload').show();
 	}
+
+	//重新加载页面
+	$('.reload .empty img').click(function(){
+		tabChange();
+	})
 
 	$(document).on('touchend','.beging_s',function(){
 		location.href = $(this).attr('url_')
