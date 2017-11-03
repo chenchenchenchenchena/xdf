@@ -226,6 +226,17 @@ $(function(){
 
     }
     $(document).on('touchend','.reload',function(){
+        var reqData = {
+            'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
+            'classCode':localStorage.getItem('CLASSCODE'), //班级编号
+            'schoolId':localStorage.getItem('SCHOOLID'), //校区id
+            'gradeType':$('.tab-active').index()+1, // 成绩类型 1 入门测 2 出门测
+            'studentNos':[] //选中的学生号
+        };
+        if(localStorage.terEmail){
+            reqData.teaEmail = sessionStorage.banzhutea
+        }
+        $('.reload').hide();
         ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
             layer.close(loading);
             $('.reload').hide();

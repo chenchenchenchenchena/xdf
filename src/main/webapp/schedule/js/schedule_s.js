@@ -9,6 +9,7 @@ $(function() {
     }
     function erro_d(){
         if($('.month_hour i')){
+            $('.reload_d').hide();
             // $('.month_hour i').html('<img src="images/reload.png" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
             $('.H-data').append('<img src="images/reload.png" class="reload_d" style="width:1.5rem;height:1.1rem;display:block;margin:1rem auto;">')
             $('.loading_s').eq(0).hide();
