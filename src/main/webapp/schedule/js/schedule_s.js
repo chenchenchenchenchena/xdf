@@ -73,7 +73,7 @@ $(function() {
             'endDate': time,
             'schoolId':sessionStorage.schoolId
         };
-        ajax_S(url.s_emai,emailm,stusea,erro_d);
+        ajax_S(url.s_seac,emailm,stusea,erro_d);
     })
     if (!sessionStorage.openid) {
         wechatCode(location.href);
