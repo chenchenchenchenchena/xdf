@@ -48,7 +48,7 @@ $(function () {
         window.location.href = "studentrank_s.html";
     });
     loading = layer.load();
-    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess);
+    ajaxRequest('GET', homework_s.s_hwltdetail, 'stuNum='+sessionStorage.stuNumber+'&homeworkTinfoId='+homeworkTinfoId+'&classId='+classCode+'&userId='+localStorage.userId_stu, gethwDetailsSuccess,error);
 
     // var hwInfos = JSON.parse(localStorage.homeworkInfos).data;
     // gethwInfos();
@@ -125,6 +125,9 @@ $(function () {
         }
     }
 
+    function error(){
+        layer.close(loading);
+    }
 
     /**
      * 显示获取到的作业信息图片

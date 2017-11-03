@@ -265,10 +265,10 @@ function ajax_S(link,more,func,errof){
         complete:function(XMLHttpRequest,status){
             if(status=='timeout'){//超时,status还有success,error等值的情况
                if(length_!=3){
+                   errof();
                }else{
                 alert('数据访问超时，请切换网络环境')
                }
-                errof();
             }
         }
         
@@ -301,10 +301,10 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
         complete:function(XMLHttpRequest,status){
             if(status=='timeout'){//超时,status还有success,error等值的情况
                 if(length_!=4){
+                    errof();
                 }else{
                  alert('数据访问超时，请切换网络环境');
                 }
-                errof();
              }
         }
     });
