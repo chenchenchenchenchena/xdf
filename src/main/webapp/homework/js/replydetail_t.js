@@ -118,7 +118,7 @@ $(function () {
             var homeworkText = decodeURI(e.StudentAnswer).split('|>|');
             answerT = homeworkText.length;
             for (var p = 0; p < homeworkText.length; p++) {
-                $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + homeworkText[p] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div></div><img class="loading-back" src="../common/images/loading.gif" /></div>')
+                $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + homeworkText[p] + '</div><div><ul class="voiceBox" ></ul><div class="imgBox"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>')
             }
             if (sessionStorage.bangbang == '1') {
                 $('.hmAnswer:last .infoTitle').append('<span style="color: rgb(255, 255, 255); background: rgb(255, 106, 106);">优秀</span>')

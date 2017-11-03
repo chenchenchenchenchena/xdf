@@ -39,7 +39,7 @@ $(function () {
          'homeworkTinfoId':homeworkTinfoId,
          'userId':localStorage.userId_stu
     };
-    // loading = layer.load();
+     loading = layer.load();
     ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess);
 
     function getHwFinishDetailSuccess(msg){
@@ -74,11 +74,11 @@ $(function () {
                     var homeworkText = myAnswerDes.split('|>|');
                     console.log(homeworkText)
                     for(var p = 0;p<homeworkText.length;p++){
-                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(parseFloat(p)+3)+'" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(parseFloat(p)+3)+'" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                        $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes">'+homeworkText[p]+'</div><div><ul id="audio_'+(parseFloat(p)+3)+'" style="display:none;"></ul> <div class="imgBox" id="imagBox_'+(parseFloat(p)+3)+'" style="display:none;"></div><img class="loading-back" src="../common/images/loading.gif" /></div><i class="hw_status"></i></div>')
                     }
                 } else {
                     buer_s = true;
-                    $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes"></div><div><ul id="audio_0" style="display:none;"></ul> <div class="imgBox" id="imagBox_0" style="display:none;"></div></div><i class="hw_status"></i></div>')
+                    $('.answerT').append( '<div class="hmAnswer" style="display: block;"><div class="infoTitle">作业答案</div><div class="anDes"></div><div><ul id="audio_0" style="display:none;"></ul> <div class="imgBox" id="imagBox_0" style="display:none;"></div><img class="loading-back" src="../common/images/loading.gif" /></div><i class="hw_status"></i></div>')
                 }
 
                 // 优秀
@@ -148,11 +148,11 @@ $(function () {
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
                 ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
             }
-            // layer.close(loading);
+             //layer.close(loading);
         }else{
             console.log("获取作业详情失败");
         }
-        // layer.close(loading);
+         layer.close(loading);
     }
 
     var voiceCount = 0;
@@ -247,6 +247,7 @@ $(function () {
                     }
                 });
             }
+            $('.loading-back').hide();
         } else {
             alert("获取文件失败");
         }

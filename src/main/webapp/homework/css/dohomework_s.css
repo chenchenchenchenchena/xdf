@@ -467,3 +467,8 @@ i{font-style: normal;}
 	height:100%;
 	background: rgba(0,0,0,0.5);
 }
+.loading-back{
+	display: block;
+	width: 100px;
+	height: auto;
+}
