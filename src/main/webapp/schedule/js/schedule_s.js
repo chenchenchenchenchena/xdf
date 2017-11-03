@@ -26,7 +26,8 @@ $(function() {
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
         var menu_s = {
-            'teacherEmail':localStorage.terEmail,
+            'studentCode': sessionStorage.stuNum,
+            'schoolId':sessionStorage.schoolId,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
