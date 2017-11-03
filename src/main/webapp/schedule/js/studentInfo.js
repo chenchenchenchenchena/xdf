@@ -25,7 +25,13 @@ $(function () {
 
     $('#studentNumber').html("学员号：" + studentNum);
     //获取该学生所报班级信息
-    ajax_S(url.s_stud, emailm, stusea);
+    ajax_S(url.s_stud, emailm, stusea,function(){
+        $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
+    });
+    $(document).on('touchend','.reload',function(){
+        location.reload();
+    });
+
     function stusea(e) {
         if (e.result) {
 
