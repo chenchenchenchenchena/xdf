@@ -879,5 +879,14 @@ i{
 	height: auto;
 }
 .reload{
-	margin: 110px 0 0 239px;
+	margin:  140px 0 0 319px;
+}
+.reload img{
+	width: 100px;
+	height: 74px;
+}
+.reload p{
+	margin-left: -18px;
+	font-size: 30px;
+	color: #aeadad;
 }
