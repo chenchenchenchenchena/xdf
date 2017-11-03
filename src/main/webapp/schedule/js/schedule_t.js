@@ -10,6 +10,7 @@ $(function(){
     function erro_d(){
         if($('.month_hour i')){
             // $('.month_hour i').html('<img src="images/reload.png" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
+            $('.reload_d').hide();
             $('.H-data').append('<img src="images/reload.png" class="reload_d" style="width:1.5rem;height:1.1rem;display:block;margin:1rem auto;">')
             $('.loading_s').eq(0).hide();
         }

@@ -145,7 +145,7 @@ function Interaction(){
     });
 };
 $(document).on('touchend','.reload_s',function(){
-    console.log(need_)
+
 })
 function less_Inter(e){
         if (e.data.length != 0 && e.data != undefined) {
