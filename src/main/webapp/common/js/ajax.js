@@ -267,7 +267,7 @@ function ajax_S(link,more,func,errof){
                if(length_!=3){
                     errof();
                }else{
-                    alert('数据访问超时，请切换网络环境')
+                    // alert('数据访问超时，请切换网络环境')
                }
             }
         }
@@ -304,7 +304,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
                     errof();
                     
                 }else{
-                 alert('数据访问超时，请切换网络环境');
+                 // alert('数据访问超时，请切换网络环境');
                 }
              }
         }

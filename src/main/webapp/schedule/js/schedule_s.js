@@ -26,12 +26,13 @@ $(function() {
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
         var menu_s = {
-            'teacherEmail':localStorage.terEmail,
+            'studentCode': sessionStorage.stuNum,
+            'schoolId':sessionStorage.schoolId,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
         monththis = month;
-        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+        ajax_S(url.s_stud,menu_s,menufunc,erro_f);
     })
     $(document).on('touchend','.reload_d',function(){
         $(this).hide();
@@ -73,7 +74,7 @@ $(function() {
             'endDate': time,
             'schoolId':sessionStorage.schoolId
         };
-        ajax_S(url.s_emai,emailm,stusea,erro_d);
+        ajax_S(url.s_seac,emailm,stusea,erro_d);
     })
     if (!sessionStorage.openid) {
         wechatCode(location.href);
