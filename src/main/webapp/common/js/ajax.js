@@ -251,15 +251,19 @@ function ajax_S(link,more,func,errof){
         url:link,
         type: 'post',
         asyns:false,
-        timeout:100000,
+        timeout:5000,
         dataType: 'json',
         data:JSON.stringify(more),
         success:function(e){
             func(e);
         },
         complete:function(XMLHttpRequest,status){
-            if(status=='timeout'&&length_!=3){//超时,status还有success,error等值的情况
-               errof();
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+               if(length_!=3){
+                errof();
+               }else{
+                alert('数据访问超时，请切换网络环境')
+               }
             }
         }
         
@@ -278,7 +282,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
         type: typeIn,
         url: targetUrl,
         data: requestData,
-        tiemout:100000,
+        tiemout:5000,
         success: function (msg) {
             successCallback(msg);
         },
@@ -288,8 +292,12 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){
-            if(status=='timeout'&&length_!=3){//超时,status还有success,error等值的情况
-                errof();
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                if(length_!=3){
+                 errof();
+                }else{
+                 alert('数据访问超时，请切换网络环境')
+                }
              }
         }
     });
