@@ -368,6 +368,7 @@ $(function(){
 	function error(){
 		layer.close(loading);
 		$('.reload').show();
+		$('.load_t').hide();
 	}
 
 	//重新加载页面
