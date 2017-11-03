@@ -19,6 +19,9 @@ $(function(){
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	// loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
+
+	sessionStorage.removeItem("unfinishHw");
+	sessionStorage.removeItem("finishHw");
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -43,11 +46,11 @@ $(function(){
 			if(loading == undefined){
 				loading = layer.load();
 			}
-			if(sessionStorage.getItem("finishHw") == undefined){
+			if(sessionStorage.getItem("unfinishHw") == undefined){
 
 				ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 			}else {
-				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
+				getHwContentSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
 			}
 
 		}else{
@@ -61,11 +64,11 @@ $(function(){
 				loading = layer.load();
 			}
 
-			if(sessionStorage.getItem("unfinishHw") == undefined){
+			if(sessionStorage.getItem("finishHw") == undefined){
 
 				ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 			}else {
-				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
+				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
 			}
 		}
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
@@ -104,6 +107,7 @@ $(function(){
 				}
 				window.location.href = that.attr('data-url');
 				sessionStorage.removeItem("unfinishHw");
+				sessionStorage.removeItem("finishHw");
 			});
 
 		}else{
@@ -115,6 +119,7 @@ $(function(){
 				}
 				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
 				sessionStorage.removeItem("unfinishHw");
+				sessionStorage.removeItem("finishHw");
 			});
 
 		}
@@ -153,6 +158,7 @@ $(function(){
 						console.log(e.url);
 						window.location.href = e.url;
 						sessionStorage.removeItem("finishHw");
+						sessionStorage.removeItem("unfinishHw");
 					}
 				}
 			});
@@ -169,6 +175,7 @@ $(function(){
 				window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
 
 				sessionStorage.removeItem("finishHw");
+				sessionStorage.removeItem("unfinishHw");
 
 			});
 			return false;
