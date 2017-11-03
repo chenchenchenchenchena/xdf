@@ -11,15 +11,13 @@ require(['jquery-1.11.0.min'], function () {
     /**
      * 获取左侧兰功能列表
      */
-    var functionList = localStorage.functionCheckedList;
-    //function loadMenu() {
+    var functionList = JSON.parse(localStorage.functionCheckedList);
     if (functionList != undefined && functionList.length > 0) {
 
         for (var i = 0; i < functionList.length; i++) {
             $('#' + functionList[i].id).html(functionList[i].text);
         }
     }
-    //}
 
     $('#logout').click(function(){
         toLogout();

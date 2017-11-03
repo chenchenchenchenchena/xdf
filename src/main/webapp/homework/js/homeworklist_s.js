@@ -40,8 +40,16 @@ $(function(){
 		if($(this).index()==0){
 		  $('title').html('学生待交作业列表')
 		  $(".hwFinish,.hwEmpty").hide();
-			// loading = layer.load();
-			ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
+			if(loading == undefined){
+				loading = layer.load();
+			}
+			if(sessionStorage.getItem("finishHw") == undefined){
+
+				ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
+			}else {
+				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
+			}
+
 		}else{
 			$(".hwContent,.hwEmpty").hide();
 			var reqData = {
@@ -49,8 +57,16 @@ $(function(){
 				'userId':localStorage.userId_stu
 			};
 			$('title').html('学生已交作业列表')
-			// loading = layer.load();
-			ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
+			if(loading == undefined){
+				loading = layer.load();
+			}
+
+			if(sessionStorage.getItem("unfinishHw") == undefined){
+
+				ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
+			}else {
+				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
+			}
 		}
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 	})
@@ -87,6 +103,7 @@ $(function(){
 					console.log("阅读失败！"+msg.msg);
 				}
 				window.location.href = that.attr('data-url');
+				sessionStorage.removeItem("unfinishHw");
 			});
 
 		}else{
@@ -97,6 +114,7 @@ $(function(){
 					console.log("阅读失败！"+msg.msg);
 				}
 				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
+				sessionStorage.removeItem("unfinishHw");
 			});
 
 		}
@@ -134,6 +152,7 @@ $(function(){
 					if(e.url!=undefined && e.url != ""){
 						console.log(e.url);
 						window.location.href = e.url;
+						sessionStorage.removeItem("finishHw");
 					}
 				}
 			});
@@ -148,6 +167,8 @@ $(function(){
 				}
 
 				window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
+
+				sessionStorage.removeItem("finishHw");
 
 			});
 			return false;
@@ -170,6 +191,7 @@ $(function(){
 	//获取待交作业列表
 	var homeworkInfosArray=[];
 	function getHwContentSuccess(msg) {
+		sessionStorage.setItem("unfinishHw",JSON.stringify(msg));
 		// loading = layer.load();
 		$(".hwContent").html(" ");
 		if(msg.code==200){
@@ -246,11 +268,13 @@ $(function(){
 			$('.hwEmpty').show();
 		}
 		$(".hwHeader ul li:eq(0)").addClass("hwShow").siblings("li").removeClass("hwShow");
-		$('.load_t').hide();        
+		$('.load_t').hide();
+		layer.close(loading);
 		
 	}
 //获取已完成作业列表
 	function getHwFinishSuccess(msg){
+		sessionStorage.setItem("finishHw",JSON.stringify(msg));
 		$(".hwFinish>ul").html(" ");
 		if(msg.code==200){
 			if(msg.data.length>0){
@@ -325,7 +349,7 @@ $(function(){
 			$('.hwEmpty').show();
 		}
 		$(".hwHeader ul li:eq(1)").addClass("hwShow").siblings("li").removeClass("hwShow");
-		// layer.close(loading);
+		 layer.close(loading);
 	}
 
 
