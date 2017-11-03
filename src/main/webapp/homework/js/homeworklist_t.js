@@ -3,7 +3,8 @@ $(function(){
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
-    $('.load_t').show();        
+    $('.load_t').show();
+    var loading;
     if(!localStorage.terEmail&&sessionStorage.openid){
         var WXnum  = {
             'wechatId'  :sessionStorage.openid
@@ -135,7 +136,7 @@ $(function(){
             'ifmore':'1'
         }
     }else{
-        var need_mas = {
+        need_mas = {
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId
         }
@@ -143,7 +144,12 @@ $(function(){
     }
 
     function getList(need_mas){
+        if(loading == undefined){
+            loading = layer.load();
+        }
         ajax_S(homework_s.t_list, need_mas, function (e) {
+
+            layer.close(loading);
             if (e.data == undefined) {
 
                 $('.mor_home p').html('您暂时没有更多啦！！！')
@@ -212,10 +218,13 @@ $(function(){
 
     function error(){
         $('.reload').show();
+        layer.close(loading);
     }
     $('.reload img').click(function(){
+        $('.reload').hide();
+        getList(need_mas);
 
-    })
+    });
 
     
     //查看更多
