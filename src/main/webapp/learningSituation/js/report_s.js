@@ -3,8 +3,8 @@ $(function () {
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-//     sessionStorage.schoolId="73";
-//     sessionStorage.stuNumber = 'SS5358';
+    sessionStorage.schoolId="73";
+    sessionStorage.stuNumber = 'SS5358';
 //点击显示图标
     $('.load_t').show();
 
@@ -201,12 +201,24 @@ $(function () {
 
             $('.load_t').hide();
             
+        },function(){
+            $('body').show();
+            $('.load_t').hide();
+            $('.reload').remove();
+            $('.class_big').hide();
+            $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
         })
     };
+    $(document).on('touchend','.reload',function(){
+        $('.load_t').show();
+        $('.class_big').show();
+        $('.reload').remove();
+        Studata();
+    });
 //课堂互动跳转
     $(document).on('touchend', 'achievement_s', function () {
-        sessionStorage.schoolId = $(this).attr('schoolid')
-        sessionStorage.classCode = $(this).attr('classcode')
+        sessionStorage.schoolId = $(this).attr('schoolid');
+        sessionStorage.classCode = $(this).attr('classcode');
         location.href = 'common_ts.html'
     });
 //家长查看成绩排行

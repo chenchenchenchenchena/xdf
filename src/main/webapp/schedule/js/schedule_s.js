@@ -31,7 +31,7 @@ $(function() {
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
         monththis = month;
-        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+        ajax_S(url.s_stud,menu_s,menufunc,erro_f);
     })
     $(document).on('touchend','.reload_d',function(){
         $(this).hide();

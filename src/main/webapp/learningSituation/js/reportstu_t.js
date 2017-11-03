@@ -196,6 +196,7 @@ var maxnumber = 0;
         },function(){
             $('body').show();
             $('.load_t').hide();
+            $('.reload').remove();
             $('.class_big').hide();
             $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
         })
