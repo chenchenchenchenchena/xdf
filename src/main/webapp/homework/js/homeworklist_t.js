@@ -120,12 +120,12 @@ $(function(){
         if ($('.Selected').attr('data-code') == undefined) {
             need_mas.schoolId = '';
         }
-        getList(need_mas);
+        getList(need_mas,1);
     })
     //加载更多
     $('.mor_home').on('touchend',function(){
         need_mas.ifmore  = '2';
-        getList(need_mas);
+        getList(need_mas,2);
     })
     var Read = '';
     // 获取老师作业列表
@@ -140,10 +140,10 @@ $(function(){
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId
         }
-        getList(need_mas);
+        getList(need_mas,2);
     }
 
-    function getList(need_mas){
+    function getList(need_mas,flag){
         if(loading == undefined){
             loading = layer.load();
         }
@@ -152,14 +152,22 @@ $(function(){
             layer.close(loading);
             $('.load_t').hide();
             if (e.data == undefined) {
-
-                $('.mor_home p').html('您暂时没有更多啦！！！')
-                setTimeout(function () {
+                if(flag == 1){
+                    $('.empty').show();
+                    $('.hwFinish').hide();
+                    $('.Prompt_s').hide();
                     $('.mor_home').hide()
-                }, 2000)
-                return false;
+                    return false;
+                }else {
+                    $('.mor_home p').html('您暂时没有更多啦！！！')
+                    setTimeout(function () {
+                        $('.mor_home').hide()
+                    }, 2000)
+                    return false;
+                }
             }
             $('.mor_home').show();
+
             var list_s = e.data;
             $('.Prompt_s i').html(e.SumUpnotCorrect);
             for (var a = 0; a < list_s.length; a++) {
