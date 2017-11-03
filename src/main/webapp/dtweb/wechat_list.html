@@ -31,15 +31,17 @@
     <li><a id="learn" href="#">学情</a></li>
     <li><a id="homework" href="#">作业</a></li>
     <li><a id="account" href="../schedule/login_t.html">账号</a></li>
-    <li><a id="accodunt" href="../schedule/homework_hour.html">我的主页</a></li>
+    <li><a id="iam" href="../schedule/homework_hour.html">我的主页</a></li>
 </ul>
 <script>
     $(function () {
 //        localStorage.setItem("statusFlag","teacher");
         if (localStorage.getItem("statusFlag") == "teacher") {
-            $('#schedule').attr('href', "../schedule/schedule_t.html");
-            $('#learn').attr('href', "../learningSituation/report_t.html");
-            $('#homework').attr('href', "../homework/homeworklist_t.html");
+            $('#schedule').attr('href', "../schedule/schedule_t.html?"+(new Date()).getTime()+"");
+            $('#learn').attr('href', "../learningSituation/report_t.html?"+(new Date()).getTime()+"");
+            $('#homework').attr('href', "../homework/homeworklist_t.html?"+(new Date()).getTime()+"");
+            $('#account').attr('href', "../schedule/login_t.html?"+(new Date()).getTime()+"");
+            $('#iam').attr('href', "../schedule/homework_hour.html?"+(new Date()).getTime()+"");
             if (localStorage.terEmail == undefined) {
 
                 getTeacherInfo();
