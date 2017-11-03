@@ -35,6 +35,7 @@ if (window.location.host == onlineUrl) {//正式环境
 }
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         //新的appid
+        
         sessionStorage.signal = 0;
         // appId =  'wx559791e14e9ce521';
         // secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -243,16 +244,23 @@ Date.prototype.format = function(fmt) {
 
 
 // ajax封装
-function ajax_S(link,more,func){
+function ajax_S(link,more,func,errof){
     var time_ ;
+    var length_ = arguments.length;
     $.ajax({
         url:link,
         type: 'post',
         asyns:false,
+        timeout:100000,
         dataType: 'json',
         data:JSON.stringify(more),
         success:function(e){
             func(e);
+        },
+        complete:function(XMLHttpRequest,status){
+            if(status=='timeout'&&length_!=3){//超时,status还有success,error等值的情况
+               errof();
+            }
         }
         
     });
@@ -264,12 +272,13 @@ function ajax_S(link,more,func){
  *  @param  successCallback     回调方法
  *  @param  failureCallback     失败方法
  */
-function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
+function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
     var time_;
     $.ajax({
         type: typeIn,
         url: targetUrl,
         data: requestData,
+        tiemout:100000,
         success: function (msg) {
             successCallback(msg);
         },
@@ -277,6 +286,11 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback) {
         error: function (err) {
             // failureCallback(msg);
             console.log("err:"+err);
+        },
+        complete:function(XMLHttpRequest,status){
+            if(status=='timeout'&&length_!=3){//超时,status还有success,error等值的情况
+                errof();
+             }
         }
     });
 };
