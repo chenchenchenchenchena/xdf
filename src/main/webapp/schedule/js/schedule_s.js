@@ -2,7 +2,6 @@ $(function() {
      //请求整月数据超时处理
      function erro_f(){
         if($('.month_hour i')){
-            console.log(0)
             $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
             $('.load_t').hide();
             setInterval(menu_int,10);
@@ -10,6 +9,7 @@ $(function() {
     }
     function erro_d(){
         if($('.month_hour i')){
+            $('.reload_d').hide();
             // $('.month_hour i').html('<img src="images/reload.png" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
             $('.H-data').append('<img src="images/reload.png" class="reload_d" style="width:1.5rem;height:1.1rem;display:block;margin:1rem auto;">')
             $('.loading_s').eq(0).hide();
@@ -68,9 +68,10 @@ $(function() {
             var time = ''+$('.xuanzhong_s').attr('data_y')+'-'+month+'-'+day+'';
         }
         var emailm = {
-            'teacherEmail':localStorage.terEmail,
-            'beginDate':time,
-            'endDate':time
+            'studentCode': sessionStorage.stuNum,
+            'beginDate': time1,
+            'endDate': time1,
+            'schoolId':sessionStorage.schoolId
         };
         ajax_S(url.s_emai,emailm,stusea,erro_d);
     })

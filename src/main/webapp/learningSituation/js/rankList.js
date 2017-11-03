@@ -219,12 +219,30 @@ $(function(){
             loading = layer.load();
             ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
                 layer.close(loading);
-                $('body').append('<img src="images/reload.png" style="width:230px;height:150px;margin:0 auto;display:">')
+                $('.reload').hide();
+                $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
             });
         // }
 
     }
-
+    $(document).on('touchend','.reload',function(){
+        var reqData = {
+            'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
+            'classCode':localStorage.getItem('CLASSCODE'), //班级编号
+            'schoolId':localStorage.getItem('SCHOOLID'), //校区id
+            'gradeType':$('.tab-active').index()+1, // 成绩类型 1 入门测 2 出门测
+            'studentNos':[] //选中的学生号
+        };
+        if(localStorage.terEmail){
+            reqData.teaEmail = sessionStorage.banzhutea
+        }
+        $('.reload').hide();
+        ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
+            layer.close(loading);
+            $('.reload').hide();
+            $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
+        });
+    });
     function getRankListSuccess(msg){
         $(".main-content>table>tbody").html(" ");
         if(msg.code==200){
