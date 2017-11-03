@@ -7,6 +7,7 @@ $(function(){
         $('title').html(GetRequest('studentName'));
     }
     $('body').hide();
+    $('.load_t').show();
     var Stujson = {
         'teacherEmail':localStorage.terEmail,
         'classCode':localStorage.getItem('CLASSCODE'),
@@ -90,6 +91,8 @@ var maxnumber = 0;
 
     function Studata(){
         ajaxRequest('post',Study.t_studt,Stujson,function(e){
+            $('.load_t').hide();
+
             // $('.tab-active li').eq(GetRequest('tCode')).addClass('tab-active').sibling().removeClass('tab-active')
             var Xindex = '';
             var Thistime = [];
@@ -190,7 +193,9 @@ var maxnumber = 0;
 
 
 
-        })};
+        }),function(){
+            $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
+        }};
 
 
 

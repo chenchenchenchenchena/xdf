@@ -259,7 +259,7 @@ function ajax_S(link,more,func,errof){
         },
         error: function (err) {
             // failureCallback(msg);
-            errof();
+            // errof();
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){
@@ -295,7 +295,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
         
         error: function (err) {
             // failureCallback(msg);
-            errof();
+            // errof();
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){
