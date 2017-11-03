@@ -182,3 +182,11 @@ body{
 	font-size:14px;
 }
 
+/*作业*/
+.homework_title{
+	height:31px;
+	background:#ccf1ea;
+	font-size:14px;
+	padding-left:10px;
+	line-height:31px;
+}

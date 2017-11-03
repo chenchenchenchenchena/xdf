@@ -1,8 +1,81 @@
 $(function() {
-    // if (!sessionStorage.openid) {
-    //     //微信授权判断
-    //     wechatCode(location.href);
-    // };
+     //请求整月数据超时处理
+     function erro_f(){
+        if($('.month_hour i')){
+            $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
+            $('.load_t').hide();
+            // setInterval(menu_int,10);
+        }
+    }
+    function erro_d(){
+        if($('.month_hour i')){
+            // $('.month_hour i').html('<img src="images/reload.png" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
+            $('.H-data').append('<img src="images/reload.png" class="reload_d" style="width:1.5rem;height:1.1rem;display:block;margin:1rem auto;">')
+            $('.loading_s').eq(0).hide();
+        }
+    }
+    $(document).on('touchend','.reload_f',function(){
+        $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        monththis = month;
+        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+    })
+    $(document).on('touchend','.reload_d',function(){
+        $(this).hide();
+        $('.loading_s').eq(0).show();
+        if($('.xuanzhong')){
+            var month  = $('.xuanzhong').attr('data_m');
+            var day = $('.xuanzhong').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.xuanzhong').attr('data_y')+'-'+month+'-'+day+'';
+        }else if($('.today')){
+            var month  = $('.today').attr('data_m');
+            var day = $('.today').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+        }else if($('.xuanzhong_s')){
+            var month  = $('.xuanzhong_s').attr('data_m');
+            var day = $('.xuanzhong_s').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.xuanzhong_s').attr('data_y')+'-'+month+'-'+day+'';
+        }
+        var emailm = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':time,
+            'endDate':time
+        };
+        ajax_S(url.s_emai,emailm,stusea,erro_d);
+    })
+    if (!sessionStorage.openid) {
+        wechatCode(location.href);
+    };
     $('.load_t').show();        
     $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
     
@@ -12,11 +85,7 @@ $(function() {
     if (isiOS == true) {
         $('.nbxs').eq(0).css('margin-t*op', '-.25rem')
     }
-    // if (!sessionStorage.openid) {
-    //     wechatCode(location.href);
-    //     return false;
-    // }
-    // sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
+    sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
     // 当前微信号
     var WXnum = {
         'wechatId': sessionStorage.openid
@@ -62,7 +131,7 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
-        ajax_S(url.s_stud, emailm, stusea);
+        ajax_S(url.s_stud, emailm, stusea,erro_d);
         var month = $('.today').attr('data_m');
         var day = new Date($('#ymym').html().substring(0, 4), month, '0');
         var daycount = day.getDate();
@@ -104,8 +173,8 @@ $(function() {
                 'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
                 'schoolId':sessionStorage.schoolId
             };
-            ajax_S(url.s_stud, emailm, stusea);
-            ajax_S(url.s_stud, menu_s, menufunc);
+            ajax_S(url.s_stud, emailm, stusea,erro_d);
+            ajax_S(url.s_stud, menu_s, menufunc,erro_f);
             ajax_S(url.data_s, '1', function (e) {
                 for (var i = 0; i < e.data.length; i++) {
                     masterteacher += e.data[i].teacherName + ','
@@ -355,7 +424,7 @@ $(function() {
             $('.N-data').hide();
             $('.curriculum').hide();
             $('.loading_s').show();
-            ajax_S(url.s_stud, emailm, stusea);
+            ajax_S(url.s_stud, emailm, stusea,erro_d);
             // ajax_S(url.s_stud, menu_s, menufunc);
         }
     });
@@ -415,7 +484,7 @@ $(function() {
                 'schoolId':sessionStorage.schoolId
 
             };
-            ajax_S(url.s_stud, menu_s, menufunc);
+            ajax_S(url.s_stud, menu_s, menufunc,erro_f);
             monththis = month
         }
         var html_s = $('.swiper-slide-active table').find('td');
@@ -445,7 +514,7 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
-        ajax_S(url.s_emai,emailm,stusea);
+        ajax_S(url.s_emai,emailm,stusea,erro_d);
         var month  = $('.today').attr('data_m');
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
@@ -456,7 +525,7 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
-        ajax_S(url.s_emai,menu_s,menufunc);
+        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
         monththis = month
     });
     $(document).on('touchstart','.tc-bot-right',function(){
@@ -468,7 +537,7 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
-        ajax_S(url.s_emai,emailm,stusea);
+        ajax_S(url.s_emai,emailm,stusea,erro_d);
         var month  = $('.today').attr('data_m');
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
         var daycount = day.getDate();
@@ -479,7 +548,7 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
-        ajax_S(url.s_emai,menu_s,menufunc);
+        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
         monththis = month
     });
 });

@@ -1,4 +1,78 @@
 $(function(){
+    //请求整月数据超时处理
+    function erro_f(){
+        if($('.month_hour i')){
+            $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
+            $('.load_t').hide();
+            // setInterval(menu_int,10);
+        }
+    }
+    function erro_d(){
+        if($('.month_hour i')){
+            // $('.month_hour i').html('<img src="images/reload.png" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
+            $('.H-data').append('<img src="images/reload.png" class="reload_d" style="width:1.5rem;height:1.1rem;display:block;margin:1rem auto;">')
+            $('.loading_s').eq(0).hide();
+        }
+    }
+    $(document).on('touchend','.reload_f',function(){
+        $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month<10){
+            month = '0'+month
+        }
+        var  day = new Date($('#ymym').html().substring(0,4),month,'0');
+        var daycount = day.getDate();
+        var menu_s = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+            'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+        };
+        monththis = month;
+        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+    })
+    $(document).on('touchend','.reload_d',function(){
+        $(this).hide();
+        $('.loading_s').eq(0).show();
+        if($('.xuanzhong')){
+            var month  = $('.xuanzhong').attr('data_m');
+            var day = $('.xuanzhong').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.xuanzhong').attr('data_y')+'-'+month+'-'+day+'';
+        }else if($('.today')){
+            var month  = $('.today').attr('data_m');
+            var day = $('.today').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
+        }else if($('.xuanzhong_s')){
+            var month  = $('.xuanzhong_s').attr('data_m');
+            var day = $('.xuanzhong_s').attr('data_d');
+            if(month<10){
+                month = '0'+month
+            }
+            if(day<10){
+                day = '0'+day
+            }
+            var time = ''+$('.xuanzhong_s').attr('data_y')+'-'+month+'-'+day+'';
+        }
+        var emailm = {
+            'teacherEmail':localStorage.terEmail,
+            'beginDate':time,
+            'endDate':time
+        };
+        ajax_S(url.s_emai,emailm,stusea,erro_d);
+    })
 // 本地测试数据
 // sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtsC5Wx5wZrA';
     // localStorage.terEmail = 'hanqifan@xdf.cn'
@@ -51,7 +125,7 @@ function stusea(e){
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
             $('.N-data').show();
-            $('.loading_s').hide();
+            $('.loading_s').eq(0).hide();
             // $('.load_t').hide();
             return;
         }else{
@@ -141,7 +215,7 @@ function stusea(e){
             }
             $('.curriculum').show();
         }
-        $('.loading_s').hide();
+        $('.loading_s').eq(0).hide();
         if($('.curriculum li').length==0){
             $('.N-data').show();
             $('.H-data').hide();
@@ -194,7 +268,6 @@ function stusea(e){
              }
         }else{
             moth = e.data.Data
-            
             $('.month_hour i').html(moth.length);
         }
 
@@ -265,7 +338,7 @@ setTimeout(function(){
         },100)
     });
     $(document).on('touchend','.content td',function(){
-
+        $('.reload_d').hide();
         clearInterval(touchtime);
         $('.content td').removeClass('xuanzhong');
         $('.content td').removeClass('xuanzhong_s');
@@ -296,12 +369,6 @@ setTimeout(function(){
                 'beginDate':time,
                 'endDate':time
             };
-            //当月课程
-            var menu_s = {
-                'teacherEmail':localStorage.terEmail,
-                'beginDate':time.substring(0,7)+'-01',
-                'endDate':time.substring(0,7)+'-'+daycount
-            };
             if(time1.split(' ')[0]>time){
                 $(this).addClass('xuanzhong')
             }else if(time1.split(' ')[0]==time){
@@ -313,13 +380,13 @@ setTimeout(function(){
             $('.N-data').hide();
             $('.curriculum').hide();
             $('.loading_s').show();
-            ajax_S(url.s_emai,emailm,stusea);
+            ajax_S(url.s_emai,emailm,stusea,erro_d);
             // ajax_S(url.s_emai,menu_s,menufunc);
         }
 
     });
-        ajax_S(url.s_emai,emailm,stusea);
-        ajax_S(url.s_emai,menu_s,menufunc);
+        ajax_S(url.s_emai,emailm,stusea,erro_d);
+        ajax_S(url.s_emai,menu_s,menufunc,erro_f);
 //点击查看详情
 $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
@@ -390,7 +457,7 @@ $(document).on('click','.H-data li',function(){
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
             monththis = month;
-            ajax_S(url.s_emai,menu_s,menufunc);
+            ajax_S(url.s_emai,menu_s,menufunc,erro_d);
         }
         var html_s = $('.swiper-slide-active table').find('td');
         for(var k = 0;k<html_s.length;k++){
@@ -447,4 +514,5 @@ $(document).on('click','.H-data li',function(){
             $('.big_select').hide();
 
     })
+    
 })
