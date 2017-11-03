@@ -2,9 +2,10 @@ $(function() {
      //请求整月数据超时处理
      function erro_f(){
         if($('.month_hour i')){
+            console.log(0)
             $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
             $('.load_t').hide();
-            // setInterval(menu_int,10);
+            setInterval(menu_int,10);
         }
     }
     function erro_d(){
@@ -85,7 +86,7 @@ $(function() {
     if (isiOS == true) {
         $('.nbxs').eq(0).css('margin-t*op', '-.25rem')
     }
-    sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
+    // sessionStorage.openid='ofZfFwn_wASl8ax5WPoEZ5-ssPU0';
     // 当前微信号
     var WXnum = {
         'wechatId': sessionStorage.openid
@@ -155,7 +156,7 @@ $(function() {
             if(!localStorage.userId_stu){
                 location.href = 'login_s.html'
             }
-            //存储学员号
+            存储学员号
             sessionStorage.stuNum = e.data.studentNo;
             sessionStorage.stuNumber = e.data.studentNo;
             sessionStorage.schoolId = e.data.schoolId;
@@ -381,6 +382,7 @@ $(function() {
                 alert('日历控件加载失败，请刷新后重试');
                 return false;
             }
+            $('.reload_d').hide();
             setTimeout(function () {
                 $('.CHour_s_title span:last-of-type').html('周' + $('#top_week').html().substring(2, 3))
             }, 1000)

@@ -203,7 +203,10 @@ $(document).on('touchend','.content_t .select ul li',function(e){
 var table={
     "tableName":"dict_school_info"
 }
-ajaxRequest("POST", url.s_select, table , selectData);
+if(localStorage.mastTeater){
+    ajaxRequest("POST", url.s_select, table , selectData);
+}
+
 function selectData(e) {
     console.log(e);
     $(".select ul").html("");

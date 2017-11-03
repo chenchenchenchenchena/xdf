@@ -4,7 +4,7 @@ $(function(){
         if($('.month_hour i')){
             $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
             $('.load_t').hide();
-            // setInterval(menu_int,10);
+            setInterval(menu_int,10);
         }
     }
     function erro_d(){
