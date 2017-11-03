@@ -1,8 +1,8 @@
 $(function(){
     //登录相关
-    if(!sessionStorage.openid){
-        wechatCode(location.href);
-    };
+    //if(!sessionStorage.openid){
+    //    wechatCode(location.href);
+    //};
     $('.load_t').show();
     var loading;
     if(!localStorage.terEmail&&sessionStorage.openid){
@@ -150,6 +150,7 @@ $(function(){
         ajax_S(homework_s.t_list, need_mas, function (e) {
 
             layer.close(loading);
+            $('.load_t').show();
             if (e.data == undefined) {
 
                 $('.mor_home p').html('您暂时没有更多啦！！！')
@@ -219,6 +220,7 @@ $(function(){
     function error(){
         $('.reload').show();
         layer.close(loading);
+        $('.load_t').show();
     }
     $('.reload img').click(function(){
         $('.reload').hide();
