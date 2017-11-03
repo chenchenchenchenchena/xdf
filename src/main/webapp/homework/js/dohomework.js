@@ -87,7 +87,7 @@ $(function () {
 
                     });
                     console.log("获取文件排序" + JSON.stringify(allFilePath));
-                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,error);
                 }
             }
 
@@ -97,6 +97,11 @@ $(function () {
         layer.close(loading);
         //$('.waiting').hide();
     }
+
+    function error(){
+        layer.close(loading);
+    }
+
 
     var audioCount = 0;
 
@@ -123,10 +128,6 @@ $(function () {
         } else {
             alert("获取文件失败");
         }
-    }
-
-    function error(){
-        layer.close(loading);
     }
 
     /**
@@ -387,6 +388,8 @@ $(function () {
 
             }
 
+        },function(){
+            $('.big_back').hide();
         });
     }
 
@@ -590,6 +593,8 @@ $(function () {
 
             }
 
+        },function(){
+            $('.big_back').hide();
         });
 
     }
@@ -806,7 +811,7 @@ $(function () {
         $('#HWsubmit,.confirm-sub .confirmBtn').attr('disabled', "true");//禁用按钮
         $('#HWsubmit,.confirm-sub .confirmBtn').addClass('btn-grey');
 
-        ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess);
+        ajaxRequest('POST', homework_s.s_hwcommit, JSON.stringify(reqData), hwCommitSuccess,errorSumbit);
     }
 
 //提交作业--成功--确定
@@ -864,6 +869,16 @@ $(function () {
                 content: $(".submitFail")
             })
         }
+        $('#HWsubmit,.confirm-sub .confirmBtn').removeAttr("disabled");
+        $('#HWsubmit,.confirm-sub .confirmBtn').removeClass('btn-grey');
+        layer.close(loading);
+    }
+    function errorSumbit(){
+        $('#HWsubmit,.confirm-sub .confirmBtn').attr('disabled', "true");//禁用按钮
+        $('#HWsubmit,.confirm-sub .confirmBtn').addClass('btn-grey');
+        // layer.close(layer);
+        layer.close(layer1);
+        layer.close(layer2);
         $('#HWsubmit,.confirm-sub .confirmBtn').removeAttr("disabled");
         $('#HWsubmit,.confirm-sub .confirmBtn').removeClass('btn-grey');
         layer.close(loading);
