@@ -145,11 +145,15 @@ $(function() {
             }
         },function(){
             $('.reload').show();
+            $('.replyOne').hide();
+            $('.noreply').hide();
         });
     }
 
     $('.reload img').click(function(){
         $('.reload').hide();
+        $('.replyOne').show();
+        $('.noreply').show();
         getMore();
     })
 
