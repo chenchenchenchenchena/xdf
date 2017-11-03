@@ -36,7 +36,7 @@ $(function() {
     $(document).on('touchend','.reload_d',function(){
         $(this).hide();
         $('.loading_s').eq(0).show();
-        if($('.xuanzhong')){
+        if($('.xuanzhong').length!=0){
             var month  = $('.xuanzhong').attr('data_m');
             var day = $('.xuanzhong').attr('data_d');
             if(month<10){
@@ -46,7 +46,7 @@ $(function() {
                 day = '0'+day
             }
             var time = ''+$('.xuanzhong').attr('data_y')+'-'+month+'-'+day+'';
-        }else if($('.today')){
+        }else if($('.today').length!=0){
             var month  = $('.today').attr('data_m');
             var day = $('.today').attr('data_d');
             if(month<10){
@@ -56,7 +56,7 @@ $(function() {
                 day = '0'+day
             }
             var time = ''+$('.today').attr('data_y')+'-'+month+'-'+day+'';
-        }else if($('.xuanzhong_s')){
+        }else if($('.xuanzhong_s').length!=0){
             var month  = $('.xuanzhong_s').attr('data_m');
             var day = $('.xuanzhong_s').attr('data_d');
             if(month<10){
