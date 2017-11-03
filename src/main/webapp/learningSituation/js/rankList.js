@@ -38,6 +38,7 @@ $(function(){
     getRankList(currentType);//默认显示出门测排行榜
     // 切换tab
     $(document).on('touchend','.tab-title li', function () {
+        $('.reload').remove();
         $(".classNumTime").hide();
         $(".classNumTime").css("animation", "");
         $(".classNumTime").css("bottom", "0px");
@@ -219,7 +220,7 @@ $(function(){
             loading = layer.load();
             ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
                 layer.close(loading);
-                $('.reload').hide();
+                $('.reload').remove();
                 $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
             });
         // }
@@ -230,16 +231,16 @@ $(function(){
             'teaEmail':localStorage.terEmail,   //教师邮箱  localStorage.terEmail
             'classCode':localStorage.getItem('CLASSCODE'), //班级编号
             'schoolId':localStorage.getItem('SCHOOLID'), //校区id
-            'gradeType':$('.tab-active').index()+1, // 成绩类型 1 入门测 2 出门测
+            'gradeType':$('.tab-active').attr('tcode'), // 成绩类型 1 入门测 2 出门测
             'studentNos':[] //选中的学生号
         };
         if(localStorage.terEmail){
             reqData.teaEmail = sessionStorage.banzhutea
         }
-        $('.reload').hide();
+        $('.reload').remove();
         ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
             layer.close(loading);
-            $('.reload').hide();
+            $('.reload').remove();
             $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
         });
     });

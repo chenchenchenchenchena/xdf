@@ -69,8 +69,8 @@ $(function() {
         }
         var emailm = {
             'studentCode': sessionStorage.stuNum,
-            'beginDate': time1,
-            'endDate': time1,
+            'beginDate': time,
+            'endDate': time,
             'schoolId':sessionStorage.schoolId
         };
         ajax_S(url.s_emai,emailm,stusea,erro_d);
