@@ -150,7 +150,7 @@ $(function(){
         ajax_S(homework_s.t_list, need_mas, function (e) {
 
             layer.close(loading);
-            $('.load_t').show();
+            $('.load_t').hide();
             if (e.data == undefined) {
 
                 $('.mor_home p').html('您暂时没有更多啦！！！')
@@ -220,7 +220,7 @@ $(function(){
     function error(){
         $('.reload').show();
         layer.close(loading);
-        $('.load_t').show();
+        $('.load_t').hide();
     }
     $('.reload img').click(function(){
         $('.reload').hide();
