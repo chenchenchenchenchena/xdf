@@ -1,7 +1,4 @@
-/**
- * Created by liwei on 2017/11/1.
- */
-//走e2登录
+var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
 function toLogin() {
     var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
@@ -12,7 +9,6 @@ function toLogin() {
     };
     $.ajax({
         url: url_o + "/e2Login/doLogin.do",
-        // url: url_o + "/e2Login/pcLogin.do",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify(calbac),
@@ -29,62 +25,52 @@ function toLogin() {
                 userId = userId.split('@')[0];
 
                 sessionStorage.setItem("userId", userId, 1);
-
+                showFunctionList(userId);
             }
-
         }
     });
 }
+
 
 //不走e2登陆
 function tLogin() {
     var loginName = document.getElementById("loginId").value;
     var loginPassword = document.getElementById("password").value;
-    if(loginName == ""){
+    if (loginName == "") {
 
         layer.msg("登陆名不能为空", {icon: 5});
         return;
     }
-    if(loginPassword == ""){
+    if (loginPassword == "") {
         layer.msg("登陆名不能为空", {icon: 5});
         return;
     }
-    var signPassword;
-    var DiagnoseApp = angular.module('DiagnoseApp',['ui.router','ngCookies','ngFileUpload','Encrypt']);
-    DiagnoseApp.controller('signPassword', function($scope, $rootScope, $http,$location, $timeout, $interval,Md5,Base64,Sha1) {
-        // MD5加密当前日期
-        $scope.md5vule = Md5.hex_md5(loginPassword);
-    });
-
+    var signPassword = "";
+    signPassword = $.md5(loginPassword);
     var calbac = {
         'loginId': loginName,
         'password': signPassword
     };
 
-    var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
-    var url = url_o + "e2Login/adminLogin.do";
+    $.ajax({
+        url: url_o + "e2Login/adminLogin.do",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(calbac),
+        success: function (e) {
+            console.log(e);
+            if (e.result == false) {
 
-    //app.controller('myCtrl', function($scope, $http) {
-    //
-    //    $scope.firstName= "John";
-    //    $scope.lastName= "Doe";
+                alert(e.message);
+            } else {
+                sessionStorage.setItem("sid", e.sid, 1);
+                sessionStorage.setItem("userName", e.userName, 1);
+                sessionStorage.setItem("userId", e.userId, 1);
+                showFunctionList(e.userId);
+            }
 
-        //$http.post(url, calbac).success(function (response){
-        //    console.log(e);
-        //    if (e.result == false) {
-        //
-        //        alert(e.message);
-        //    } else {
-        //
-        //        sessionStorage.setItem("sid", e.sid, 1);
-        //        sessionStorage.setItem("userName", e.userName, 1);
-        //        sessionStorage.setItem("userId", e.userId, 1);
-        //
-        //    }
-        //});
-
-    //});
-
+        }
+    })
 
 }
 
@@ -109,31 +95,46 @@ function showFunctionList(userId) {
                     toLogout();
                 } else {
                     //获取functionIds
-                    setFunctionList(e.dataList);
+                    //setFunctionList(e.dataList);
                     localStorage.functionCheckedList = JSON.stringify(functionList);
+                    window.location.href = "index.html"
                 }
             }
 
         }
     });
-
-
 }
 
-//获取functionIds
-function setFunctionList(f) {
-    if (f.length > 0) {
-        for (var i = 0; i < f.length; i++) {
-            var functionId = f[i].id;
-            var checked = f[i].checked;
-            if (checked) {
-                functionIds.push(functionId);
-                if (f[i].children != undefined) {
-                    setFunctionList(f[i].children);
-                }
+/**
+ * 退出登录
+ */
+function toLogout() {
+    var url = "";
+    var returnUrl = window.location.host;
+    var currentUser = sessionStorage.getItem("userId");
+    if(currentUser == "ssdf"){
+        //表示当前用户为超级管理员
+        returnUrl = returnUrl + "/pcweb/login_web.html";
+        url = url_o + "logout/doAdminLogout.do"
+    }else {
+        url = url_o + "logout/doLogout.do";
+    }
+
+    var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
+    jQuery.ajax({
+        type: "POST",
+        url: url,
+        async: false,//同步
+        dataType: 'json',
+        data: JSON.stringify(businessP),
+        success: function (json) {
+            if (json.result == true) {
+                //clearCookie();
+                sessionStorage.removeItem("sid")
+                sessionStorage.removeItem("userId")
+                sessionStorage.removeItem("userName")
+                window.top.location.href = returnUrl;
             }
         }
-    }
-    //保存功能列表functionIds
-    sessionStorage.setItem("functionIds", functionIds);
+    });
 }

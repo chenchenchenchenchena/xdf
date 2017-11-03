@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>双师东方管理平台</title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-ui-router.js"></script>
-    <script src="js/require.js" data-main="js/requireConfig"></script>
-    <script src="js/encrypt.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/login.js"></script>
 </head>
 <body>
-<div ng-controller="myCtrl">
-</div>
 <div class="lg-nav clearfix">
     <div class="lg-logo-left"><a href="#" class="lg-logo">双师东方管理平台</a></div>
 </div>
@@ -45,12 +41,10 @@
                 </div>
             </div>
             <div class="mtop20">
-                <a class="loginBtn" href="#">登录</a>
+                <a class="loginBtn" href="#" onclick="tLogin()">登录</a>
             </div>
         </form>
     </div>
 </div>
-
-<!--</div>-->
 </body>
 </html>
