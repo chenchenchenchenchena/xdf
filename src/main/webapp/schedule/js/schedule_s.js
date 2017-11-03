@@ -156,7 +156,7 @@ $(function() {
             if(!localStorage.userId_stu){
                 location.href = 'login_s.html'
             }
-            存储学员号
+            // 存储学员号
             sessionStorage.stuNum = e.data.studentNo;
             sessionStorage.stuNumber = e.data.studentNo;
             sessionStorage.schoolId = e.data.schoolId;
