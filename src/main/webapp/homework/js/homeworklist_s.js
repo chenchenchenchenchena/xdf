@@ -43,11 +43,11 @@ $(function(){
 			if(loading == undefined){
 				loading = layer.load();
 			}
-			if(sessionStorage.getItem("finishHw") == undefined){
+			if(sessionStorage.getItem("unfinishHw") == undefined){
 
 				ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
 			}else {
-				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
+				getHwContentSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
 			}
 
 		}else{
@@ -61,11 +61,11 @@ $(function(){
 				loading = layer.load();
 			}
 
-			if(sessionStorage.getItem("unfinishHw") == undefined){
+			if(sessionStorage.getItem("finishHw") == undefined){
 
 				ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
 			}else {
-				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
+				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
 			}
 		}
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
