@@ -217,7 +217,10 @@ $(function(){
         //     ajaxRequest('POST', url.t_rankl,reqData, getSharedListSuccess);
         // }else{
             loading = layer.load();
-            ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess);
+            ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
+                layer.close(loading);
+                $('body').append('<img src="images/reload.png" style="width:230px;height:150px;margin:0 auto;display:">')
+            });
         // }
 
     }

@@ -65,9 +65,6 @@ $(function(){
             }
             $('.report_tab').html(tabStr);
         }
-    },function(){
-        //字典请求失败 处理方法
-        $('.small_tab').append('<img src="images/reload.png" style="width:90px;height:50px;">')
     });
     $('.tab-title li:last').on('touchend',function(){
         if(!localStorage.mastTeater){
@@ -145,8 +142,13 @@ function Interaction(){
     });
 };
 $(document).on('touchend','.reload_s',function(){
-
-})
+    ajaxRequest('post',Study.t_self,need_,less_Inter,function(){
+        //列表请求失败方法
+        $('.load_t').hide();
+        $('.reload_s').hide();
+        $('body').append('<img src="images/reload.png" class="reload_s" alt="" style="width:230px;height:160px;display:block;margin:25% auto 0;">')
+    });
+});
 function less_Inter(e){
         if (e.data.length != 0 && e.data != undefined) {
         
