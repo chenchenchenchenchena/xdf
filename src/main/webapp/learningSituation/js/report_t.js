@@ -142,6 +142,8 @@ function Interaction(){
     });
 };
 $(document).on('touchend','.reload_s',function(){
+    $('.load_t').show();
+    $('.reload_s').remove();
     ajaxRequest('post',Study.t_self,need_,less_Inter,function(){
         //列表请求失败方法
         $('.load_t').hide();
