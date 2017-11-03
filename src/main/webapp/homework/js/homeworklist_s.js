@@ -35,7 +35,7 @@ $(function(){
                 sessionStorage.schoolId = e.data.schoolId;
                 sessionStorage.studentName = e.data.studentName;
             var reqData={"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu};
-            ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess);
+            ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess,error);
         }
     });
 	$(".hwHeader ul li").click(function(){
@@ -48,7 +48,7 @@ $(function(){
 			}
 			if(sessionStorage.getItem("unfinishHw") == undefined){
 
-				ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess);
+				ajaxRequest('GET', homework_s.s_hwlt, {"stuNum":sessionStorage.stuNumber,"userId":localStorage.userId_stu}, getHwContentSuccess,error);
 			}else {
 				getHwContentSuccess(JSON.parse(sessionStorage.getItem("unfinishHw")));
 			}
@@ -66,7 +66,7 @@ $(function(){
 
 			if(sessionStorage.getItem("finishHw") == undefined){
 
-				ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess);
+				ajaxRequest('POST', homework_s.s_hwfl, reqData, getHwFinishSuccess,error);
 			}else {
 				getHwFinishSuccess(JSON.parse(sessionStorage.getItem("finishHw")));
 			}
@@ -108,7 +108,7 @@ $(function(){
 				window.location.href = that.attr('data-url');
 				sessionStorage.removeItem("unfinishHw");
 				sessionStorage.removeItem("finishHw");
-			});
+			},error);
 
 		}else{
 			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
@@ -120,7 +120,7 @@ $(function(){
 				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
 				sessionStorage.removeItem("unfinishHw");
 				sessionStorage.removeItem("finishHw");
-			});
+			},error);
 
 		}
 
@@ -146,7 +146,7 @@ $(function(){
 				}
 				/*window.location.href=that.attr("data-url");*/
 
-			});
+			},error);
 			var url = url_o+"/teacherData/getStudentReportUrl.do";
 			var params = {
 				"testId":$(this).attr("data-testId"),
@@ -161,7 +161,7 @@ $(function(){
 						sessionStorage.removeItem("unfinishHw");
 					}
 				}
-			});
+			},error);
 			return false;
 
 		}else{
@@ -177,7 +177,7 @@ $(function(){
 				sessionStorage.removeItem("finishHw");
 				sessionStorage.removeItem("unfinishHw");
 
-			});
+			},error);
 			return false;
 		}
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
@@ -359,6 +359,9 @@ $(function(){
 		 layer.close(loading);
 	}
 
+	function error(){
+		layer.close(loading);
+	}
 
 	$(document).on('touchend','.beging_s',function(){
 		location.href = $(this).attr('url_')

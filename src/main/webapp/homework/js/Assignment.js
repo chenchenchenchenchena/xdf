@@ -87,10 +87,14 @@ $(function () {
                         // $('.imgBox').eq(0).append('<img src="' + tea[b].thumbnail + '" alt="" fileName="' + tea[b].fileName + '" fileType="' + tea[b].fileType + '" fileSize="' + tea[b].fileSize + '" diskFilePath="' + tea[b].diskFilePath + '"/>')
                     }
                 }
+            },function(){
+                //请求错误处理
             });
         }
-    $('.load_t').hide();
+        $('.load_t').hide();
 
+    },function(){
+        $('.load_t').hide();
     });
 
     function showUpdataImage(url) {
@@ -412,6 +416,10 @@ $(function () {
                     $('.big_back').show();
                     $('.erro').show();
                 }
+            },function(){
+                $('.erro p').html(e.message);
+                $('.big_back').show();
+                $('.erro').show();
             })
         } else {
             var class_c = classCode;
@@ -437,6 +445,11 @@ $(function () {
                     $('.big_back').show();
                     $('.erro').show();
                 }
+            },function(){
+                $('.areyok').hide();
+                $('.erro p').html(e.message);
+                $('.big_back').show();
+                $('.erro').show();
             })
         }
 
@@ -466,6 +479,9 @@ $(function () {
                 $('.big_back').show();
                 $('.erro').show();
             }
+        },function(){
+            $('.big_back').show();
+            $('.erro').show();
         })
     });
 
