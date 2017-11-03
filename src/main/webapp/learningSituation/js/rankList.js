@@ -219,12 +219,19 @@ $(function(){
             loading = layer.load();
             ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
                 layer.close(loading);
-                $('body').append('<img src="images/reload.png" style="width:230px;height:150px;margin:0 auto;display:">')
+                $('.reload').hide();
+                $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
             });
         // }
 
     }
-
+    $(document).on('touchend','.reload',function(){
+        ajaxRequest('POST', url.t_rankl,reqData, getRankListSuccess,function(){
+            layer.close(loading);
+            $('.reload').hide();
+            $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
+        });
+    });
     function getRankListSuccess(msg){
         $(".main-content>table>tbody").html(" ");
         if(msg.code==200){
