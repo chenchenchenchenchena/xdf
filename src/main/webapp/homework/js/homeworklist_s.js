@@ -19,6 +19,9 @@ $(function(){
 	$(".hwFinish,.hwContent,.hwEmpty").hide();
 	// loading = layer.load();
 	/*var reqData = 'stuNum='+sessionStorage.stuNumber;*/
+
+	sessionStorage.removeItem("unfinishHw");
+	sessionStorage.removeItem("finishHw");
     var WXnum  = {
         'wechatId':sessionStorage.openid
     };
@@ -104,6 +107,7 @@ $(function(){
 				}
 				window.location.href = that.attr('data-url');
 				sessionStorage.removeItem("unfinishHw");
+				sessionStorage.removeItem("finishHw");
 			});
 
 		}else{
@@ -115,6 +119,7 @@ $(function(){
 				}
 				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
 				sessionStorage.removeItem("unfinishHw");
+				sessionStorage.removeItem("finishHw");
 			});
 
 		}
@@ -153,6 +158,7 @@ $(function(){
 						console.log(e.url);
 						window.location.href = e.url;
 						sessionStorage.removeItem("finishHw");
+						sessionStorage.removeItem("unfinishHw");
 					}
 				}
 			});
@@ -169,6 +175,7 @@ $(function(){
 				window.location.href = 'finishedhomework_s.html?curIndex='+curIndex+'&classIndex='+classIndex+'&id='+id;
 
 				sessionStorage.removeItem("finishHw");
+				sessionStorage.removeItem("unfinishHw");
 
 			});
 			return false;
