@@ -38,6 +38,8 @@ $(function () {
                         $('.time_S i').html(data.homeworkTime);
                     }
                 }
+            },function(){
+                //请求失败处理
             });
         }
 
@@ -278,6 +280,8 @@ $(function () {
                     layer.close(layer1);
                     layer.msg(e.message);
                 }
+            },function(){
+                layer.close(loading_);
             })
         } else {
             //URL字段待定
@@ -310,7 +314,7 @@ $(function () {
             // homework_s.t_sbim
             // var url1 = "http://10.73.33.63:8080/xdfdtmanager/teacherData/addHomeWork.do";
             ajaxRequest("POST", homework_s.t_sbim, JSON.stringify(params), function (e) {
-                    layer.close(loading_);
+                layer.close(loading_);
                 layer.close(layer1);
                 
                 if (e.result) {
@@ -332,7 +336,14 @@ $(function () {
                     layer.close(layer1);
                     layer.msg(e.message);
                 }
+            },function(){
+                layer.close(loading_);
+                layer.close(layer1);
+                isRequesting = false;
+                layer.close(layer1);
+                layer.msg(e.message);
             });
+
         }
 
     }

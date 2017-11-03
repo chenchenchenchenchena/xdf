@@ -786,6 +786,9 @@ $(function () {
                     layer.msg("语音上传失败");
                 }
             }
+        },function(){
+            $('.big_back').hide();
+            layer.msg("请求失败，请重试");
         });
     }
 
