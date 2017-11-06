@@ -294,6 +294,7 @@ body{
 	margin-top:5px;
 	text-align:center;
 	cursor: pointer;
+	margin:0 -1px;
 }
 html body .homework_active{
 	background:#00ba97;
@@ -451,4 +452,103 @@ html body .homework_operation{
 }
 .detail_s ul li span{
 	width:134px;
+}
+.lesstme_condition ul{
+	float:left;
+}
+.lesstiime_chart{
+	width:956px;
+	height:424px;
+	border:1px solid #e8e8e8;
+	bnorder-right:none;
+	margin-top:15px;
+	margin-bottom:65px;
+}
+.lesstiime_chart li{
+	display:block;
+	float:left;
+	width:317.8px;
+	height:424px;
+	border-right:1px solid #e8e8e8;
+}
+.lesstiime_chart_top{
+	width:100%;
+	height:100px;
+	text-align:center;
+	border-bottom:1px solid #e8e8e8;
+}
+.lesstiime_chart_top h4{
+	font-size:18px;
+	color:#333;
+	padding-top:20px;
+}
+.lesstiime_chart_top h1{
+	font-size:28px;
+	color:#00ba97;
+	padding-top:10px;
+}
+.lesstiime_chart_bottom p{
+	padding-top:21px;
+	padding-left:10px;
+	font-size:14px;
+	color:#333;
+}
+.echarts_one{
+	width:316px;
+	height:260px;
+	background:pink;
+	margin-top:21px;
+}
+.lesstiime_chart_bottom{
+	position:relative;
+}
+.lesstiime_chart_bottom p a{
+	font-size:12px;
+	color:#00ba97;
+	padding-top:22px;
+	margin-top:-21px;
+	position: absolute;
+	right:13px;
+}
+.lesstime_list span{
+	width:201px;
+}
+.last_lesstime_chart{
+	width:954px;
+	height:309px;
+	border:1px solid #e8e8e8;
+	margin-top:40px;
+}
+.last_lesstime_chart div{
+	width:49.9%;
+	height:100%;
+	border-right:1px solid #e8e8e8;
+	float:left;
+	background:pink;
+}
+.lesstime_detail ul{
+	float:left;
+}
+.lesstime_detail .homewor_big_selecet{
+	margin-right:20px;
+}
+.lesstime_detail_list span{
+	width:268px;
+}
+.lesstime_Result{
+	padding:36px 0;
+	font-size:14px;
+	color:#666;
+	text-align:center;
+}
+.lesstime_noseach{
+	font-size:19px;
+	text-align: center;
+	padding-bottom:36px;
+	color:#aeadad;
+	display:none;
+}
+.lesstime_noseach img{
+	display:block;
+	margin:82px auto 18px;
 }
