@@ -60,8 +60,11 @@
 						url:"/detail",
 						templateUrl:"homework._detail.html",
 						controller:'detail'
+					}).state("lesstime_detail",{
+						url:"/lesstime_detail",
+						templateUrl:"lesstime_detail.html",
+						controller:'lesstime_detail'
 					});
-
 
 			$urlRouterProvider.otherwise("/index")
 		}).controller('index',function(){
@@ -84,12 +87,18 @@
 			})
 
 		})
-		.controller('power',function(){
+		.controller('detail',function(){
                 require(['jquery-1.11.0.min'],function(){
                     require(['detail'],function(){})
                 })
 
-            })
+		})
+        .controller('lesstime_detail',function(){
+                require(['jquery-1.11.0.min'],function(){
+                    require(['lesstime_detail'],function(){})
+                })
+
+		})
 </script>
 </body>
 </html>
