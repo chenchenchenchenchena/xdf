@@ -35,8 +35,8 @@ $(function(){
             $(this).find('a').attr('href','workIndex.html')
         }
     })
-	$(document).on('tap','.firstList',function(){
-        var this_ = $(this);
+	$(document).on('tap','.firstList>p',function(){
+        var this_ = $(this).parent();
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
             $('.firstList').eq($(this).parent().index()).find('ul').show();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
@@ -199,8 +199,6 @@ $(function(){
      * @param this_
      */
     function getListDetails(this_){
-        this_.find('.secul .tealist_s').find('.loading-back');
-        this_.find('.secul .tealist_s').find('.load_fail');
         var classCode = this_.attr('classCode');
         var studentNum = this_.attr('studentNum');
         var className = this_.attr('className');
@@ -210,6 +208,9 @@ $(function(){
         ajax_S(homework_s.t_hw_getClassDetails, params, function (e) {
             if(e.data != undefined && e.data.length > 0){
                 var list = e.data;
+                var str = this_.find('ul li').eq(0).html();
+                this_.find('ul li').remove();
+                this_.find('ul').append("<li>"+str+"</li>");
                 for (var i = 0; i < list.length; i++) {
                     var courseCode = "";
                     if(list[i].courseCode == undefined){
@@ -219,7 +220,7 @@ $(function(){
                     }
                     if ((parseInt(list[i].yescommit) + parseInt(list[i].nocorrect)) == studentNum || list[i].yescommit == studentNum) {
                         if (list[i].nocorrect == 0 && list[i].notcommit == 0) {
-                            if (list[i].homeworkType == "") {
+                            if (list[i].homeworkType == "1") {
                                 this_.find('ul').append(' <li><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
                                     '<span class="more_so"  classCode="' + list[i].classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             } else {
@@ -229,7 +230,7 @@ $(function(){
                             }
 
                         } else {
-                            if (list[i].homeworkType == "") {
+                            if (list[i].homeworkType == "1") {
                                 this_.find('ul').append(' <li style="color:#000;"><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
                                     '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             } else {
@@ -245,7 +246,7 @@ $(function(){
                             dis_l = '';
                         }
                         if (list[i].nocorrect == 0 && list[i].notcommit == 0) {
-                            if (list[i].homeworkType == "") {
+                            if (list[i].homeworkType == "1") {
                                 this_.find('ul').append(' <li>' +
                                     '<span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
                                     '<span class=' + dis_l + '></span><span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s">' +
@@ -259,9 +260,9 @@ $(function(){
                             }
 
                         } else {
-                            if (list[i].homeworkType == "") {
-                                this_.find('ul').append(' <li style="color:#000;' +
-                                    '>\<span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
+                            if (list[i].homeworkType == "1") {
+                                this_.find('ul').append(' <li style="color:#000;" >' +
+                                    '<span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
                                     '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
                                     '<div class="remove_s"><span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '" classCode="' + classCode + '">修改</span>' +
                                     '<span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
@@ -275,16 +276,17 @@ $(function(){
                         }
                     }
                 }
-                this_.find('.secul .tealist_s').find('.loading-back').hide();
+                this_.find('ul').find('.loading-back').hide();
+                this_.find('ul li').eq(0).hide();
             }
         },function(){
 
-            this_.find('.secul .tealist_s').find('.loading-back').hide();
-            this_.find('.secul .tealist_s').find('.load_fail').show();
+            this_.find('ul').find('.loading-back').hide();
+            this_.find('ul').find('.load_fail').show();
         });
 
         //局部刷新
-        $(document).on('tap','.secul .tealist_s .load_fail',function(){
+        $(document).on('tap','ul .load_fail',function(){
             getListDetails(this_);
         });
 
