@@ -55,8 +55,14 @@
 					 }).state("power",{
 						url:"/power",
 						templateUrl:"power.html",
-						controller:'power'					
-					 });
+						controller:'power'
+					 }).state("detail",{
+						url:"/detail",
+						templateUrl:"homework._detail.html",
+						controller:'detail'
+					});
+
+
 			$urlRouterProvider.otherwise("/index")
 		}).controller('index',function(){
 			
@@ -78,6 +84,12 @@
 			})
 
 		})
+		.controller('power',function(){
+                require(['jquery-1.11.0.min'],function(){
+                    require(['detail'],function(){})
+                })
+
+            })
 </script>
 </body>
 </html>

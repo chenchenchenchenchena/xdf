@@ -6,7 +6,9 @@ body{
 	width:100%;
 	height:51px;
 	background:#00ba97;
-	position:relative;
+	position:fixed;
+	top:0;
+	z-index:10;
 }
 .header h1{
 	display:inline-block;
@@ -73,6 +75,7 @@ body{
 	background:#f7faf7;
 	overflow:hidden;
 	position:fixed;
+	top:51px;
 }
 .left_nav h2{
 	line-height:50px;
@@ -98,7 +101,7 @@ body{
 	float:left;
 	width:85%;
 	margin-left:170px;
-	margin-top:10px;
+	margin-top:61px;
 }
 .index_title{
 	margin-bottom:20px;
@@ -210,6 +213,7 @@ body{
 }
 .homework_select{
 	padding-left:10px;
+	margin-bottom:40px;
 }
 .homework_samll_title{
 	font-size:13px;
@@ -218,7 +222,7 @@ body{
 	float: left;
 	margin-right:16px;
 }
-.homewor_big_selecet{
+.homewor_big_selecet,.homework_samll_one{
 	min-width:175px;
 	padding-right:18px;
 	height:28px;
@@ -229,9 +233,222 @@ body{
 	font-size:14px;
 	color:#666;
 	float: left;
-	background:url(../images/img_1.png) no-repeat center 5px;
+	background:url(../images/img_5.png) no-repeat right 8px center;
+	cursor: pointer;
+}
+.homewor_big_selecet input{
+	float:left;
+	display:none;
 }
 .homework_samll_one{
 	float:left;
+	min-width:60px;
+	text-align:left;
+	margin-right:20px;
+}
+.homewor_small_selecet{
 	width:100%;
+}
+.homework_samll_one h4{
+	display:inline-block;
+	font-size:14px;
+	color:#999;
+	line-height:28px;
+	text-indent:.5em;
+}
+.homework_samll_one ul{
+	width:100%;
+	border:1px solid #dfdfdf;
+	position:relative;
+	background:#fff;
+	display:none;
+}
+.homework_samll_one li{
+	min-width:73px;
+	height:23px;
+	line-height:23px;
+	font-size:12px;
+	text-align:center;
+}
+.homework_samll_one li:hover{
+	background:#00ba97;
+	color:#fff;
+}
+.homework_see p{
+	position:relative;;
+	margin-left:535px;
+	top:-31px;
+	font-size:14px;
+	color:#999;
+	line-height:31px;
+}
+.homework_see span{
+	display:inline-block;
+	width:42px;
+	height:18px;
+	background:#fff;
+	border:1px solid #dfdfdf;
+	color:#999;
+	font-size:12px;
+	line-height:18px;
+	margin-top:5px;
+	text-align:center;
+	cursor: pointer;
+}
+html body .homework_active{
+	background:#00ba97;
+	color:#fff;
+	border:none;
+	padding:.5px 1px;
+	margin:0 -1px;
+	z-index:2;
+}
+.homework_Statistics{
+	width:722px;
+	margin-bottom:40px;
+}
+.homework_Statistics div{
+	width:329px;
+	height:138px;
+	border:1px solid #e8e8e8;
+	background:#fafafa;
+	padding-left:20px;
+	margin-top:20px;
+	float:left;
+}
+
+.homework_Statistics div h4{
+	padding-top:21px;
+	font-size:18px;
+	color:#333;
+}
+.homework_Statistics div h1{
+	font-size:28px;
+	color:#00ba97;
+	padding-top:17px;
+}
+.homework_Statistics div h1 i{
+	font-style:normal;
+	margin-left:-12px;
+}
+.homework_Statistics div h1 span{
+	font-size:12px;
+	color:#333;
+	margin-left:14px;
+}
+.homework_Statistics div p{
+	font-size:14px;
+	color:#333;
+	padding-top:15px;
+
+}
+.homework_Statistics div p span{
+	display:inline-block;
+	width:105px;
+	margin-left:5px;
+}
+.homework_explain img{
+	margin-left:747px;
+	position: absolute;
+	margin-top: 2px;
+	cursor: pointer;
+}
+.homework_list{
+	width:831px;
+	padding-left:10px;
+	margin-top:21px;
+}
+.homework_list li{
+	padding-left:27px;
+	border-bottom:1px solid #e6e7ed;
+}
+
+.homework_list span{
+	display:inline-block;
+	width:114px;
+	text-align:center;
+	height:46px;
+	line-height:46px;
+	font-size:12px;
+}
+.homework_list_title{
+	font-size:14px;
+	background:#ccf1ea!important;
+	color:#666;
+}
+html body .homework_operation{
+	font-size:14px;
+	color:#00ba97;
+	cursor: pointer;
+}
+.back_big{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	z-index:11;
+	display:none;
+}
+.operation_s{
+	width:882px;
+	height:555px;
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin:-277px 0 0 -441px;
+	background:#fff;
+	z-index:12;
+	border:1px solid #dfdfdf;
+	display:none;
+}
+.operation_s img{
+	position:absolute;
+	right:0;
+	top:0;
+	padding:26px;
+}
+.operation_s h4{
+	padding-top:36px;
+	text-align:center;
+	font-size:18px;
+	color:#333;
+}
+.operation_s p{
+	font-size:16px;
+	color:#333;
+	line-height:25px;
+	padding:25px 26px 0 39px;
+}
+.homework_sea{
+	width:351px;
+	height:37px;
+	border:1px solid #dfdfdf;
+	margin-top:11px;
+	margin-bottom:19px;
+}
+.homework_sea input{
+	width:311px;
+	height:37px;
+	line-height:37px;
+	font-size:12px;
+	padding-left:10px;
+	float:left;
+}
+.homework_sea img{
+	margin-right:9px;
+	float:right;
+	margin-top:10px;
+	cursor: pointer;
+}
+.homework_explain a{
+	position:absolute;
+	margin-left:709px;
+	font-size:14px;
+	color:#00ba97;
+
+}
+.detail_s ul li span{
+	width:134px;
 }

@@ -17,16 +17,17 @@
         <h4>筛选查询</h4>
     </div>
     <div class="homework_select">
+        <div class="clearfix">
         <span class="homework_samll_title">时间段</span>
         <div class="homewor_big_selecet clearfix">
             <span>2017-06-01~2017-12-01</span>
             <input type="date" class="homework_begin">
             <input type="date" class="homework_end">
-        </div>
+        </div></div>
         <div class="homewor_small_selecet clearfix">
-            <ul>
+            <ul class="clearfix">
                 <li>
-                    <span class="homework_samll_title">时间段</span>
+                    <span class="homework_samll_title">校区</span>
                     <div class="homework_samll_one">
                         <h4>全部</h4>
                         <ul>
@@ -37,7 +38,90 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <span class="homework_samll_title">学段</span>
+                    <div class="homework_samll_one">
+                        <h4>全部</h4>
+                        <ul>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span class="homework_samll_title">年级</span>
+                    <div class="homework_samll_one">
+                        <h4>全部</h4>
+                        <ul>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span class="homework_samll_title">科目</span>
+                    <div class="homework_samll_one">
+                        <h4>全部</h4>
+                        <ul>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                            <li>全部</li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
+    <div class="homework_title homework_see">
+        <h4>结果列表</h4>
+        <p>查看方式 <span class="homework_active">近半年</span><span>近半年</span></p>
+    </div>
+    <div class="homework_Statistics clearfix">
+        <div>
+            <h4>总用户量</h4>
+            <h1>10000 <i>人</i><span>(总送达3000人次)</span></h1>
+            <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
+        </div>
+        <div>
+            <h4>总提交率</h4>
+            <h1>10000 <i>%</i><span>(2400条)</span></h1>
+            <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
+        </div>
+        <div>
+            <h4>总批复率</h4>
+            <h1>10000 <i>%</i><span>(2400条)</span></h1>
+            <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
+        </div>
+        <div>
+            <h4>总正确率</h4>
+            <h1>80 <i>%</i></h1>
+            <p>仅指电子作业</p>
+        </div>
+    </div>
+    <div class="homework_title homework_explain">
+        <h4>校区对比 <img src="images/img_6.png" alt=""></h4>
+    </div>
+    <ul class="homework_list">
+        <li class="homework_list_title"><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>
+        <li><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span ><a
+                href="#/detail" class="homework_operation">查看明细</a></span></li>
+    </ul>
+</div>
+<div class="back_big"></div>
+<div class="operation_s">
+    <img src="images/close.png" alt="">
+    <h4>名词定义</h4>
+    <p>1.总布置次数：在该作业类型内，老师发布作业的所有次数，创建并成功发布即为发布一次，次数+1 。</p>
+    <p>2.总送达人次：在该作业类型内，学生收到作业的所有次数，例如a班主任布置了一次，发送给两个班，每班30人。两个班的学生全部收到。及送达人次为60.</p>
+    <p>3.总提交率：在该作业类型内，学生收到作业，并提交了作业的概率。提交率=提交条数/送达人次。例如100人收到了共200人次（条）的作业，但只提交了150人次（条），则提交率为150/200=75% 。总提交率包含电子和手动。   </p>
+    <p>4.总批复率：在该作业类型内，老师收到并批复了学生作业的概率。批复率=批复条数/提交条数。例如学生一共提交了150条作业，老师批改了90条，则批复率为90/150=60% 。总批复率包含电子和手动。 </p>
+    <p>5.总正确率：在该作业类型内，特指电子作业。学生提交了电子作业的总的正确率。（TPS系统评定）</p>
+    <p>6.图片占比：仅手动作业有。在老师布置作业或学生提交作业或教师提交批复的内容中，含有图片的提交中图片所占的比重。</p>
+    <p>7.语音占比：仅手动作业有。在老师布置作业或学生提交作业或教师提交批复的内容中，含有图片的提交中语音所占的比重。</p>
 </div>
