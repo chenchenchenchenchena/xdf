@@ -3,7 +3,7 @@ $(function(){
     function erro_f(){
         if($('.month_hour i')){
             $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
-            $('.load_t').hide();
+            // $('. ').hide();
             setInterval(menu_int,10);
         }
     }
@@ -79,7 +79,7 @@ $(function(){
     // localStorage.terEmail = 'hanqifan@xdf.cn'
 // sessionStorage.stuNum= 'sy1';
 // 当前微信号
-$('.load_t').show();
+// $('.load_t').show();
 var WXnum  = {
     'wechatId':sessionStorage.openid
 };
@@ -235,7 +235,7 @@ function stusea(e){
         $('.loading_s').hide();
         $('.N-data').show();
         $('.month_hour i').html('0');
-        $('.load_t').hide();
+        // $('.load_t').hide();
     }else{
         if(localStorage.mastTeater){
             var Data_ = e.data.Data;
@@ -322,7 +322,7 @@ function stusea(e){
             }
 
     }
-    $('.load_t').hide();
+    // $('.load_t').hide();
 },100)
 setInterval(menu_int,10);
 }
@@ -515,5 +515,10 @@ $(document).on('click','.H-data li',function(){
             $('.big_select').hide();
 
     })
-    
+    $('body').ready(function(){
+        $('.load_t').show();
+    })
+    $(function(){
+        $('.load_t').hide();
+    })
 })

@@ -197,7 +197,7 @@ $(function() {
             }
             sessionStorage.callbackconfig = 'schedule'
         } else if (localStorage.terEmail) {
-            // location.href = 'schedule_t.html';
+            location.href = 'schedule_t.html';
             sessionStorage.removeItem('callbackconfig')
         } else {
 
