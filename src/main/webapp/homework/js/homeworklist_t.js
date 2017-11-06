@@ -40,12 +40,12 @@ $(function(){
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
             $('.firstList').eq($(this).parent().index()).find('ul').show();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
+            getListDetails(this_);
         }else{
             $('.firstList').eq($(this).parent().index()).find('ul').hide();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao22222.png) no-repeat right 55px");
             $('.firstList').eq($(this).parent().index()).find('ul li').css('margin-left','0px');
             $('.firstList').eq($(this).parent().index()).find('ul li').find('.remove_s').css('right','-270px');
-            getListDetails(this_);
         }
 
     });
