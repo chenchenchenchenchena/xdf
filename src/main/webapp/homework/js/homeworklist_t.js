@@ -35,7 +35,7 @@ $(function(){
             $(this).find('a').attr('href','workIndex.html')
         }
     })
-	$(document).on('tap','.firstList>p',function(){
+	$(document).on('tap','.firstList',function(){
         var this_ = $(this);
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
             $('.firstList').eq($(this).parent().index()).find('ul').show();
