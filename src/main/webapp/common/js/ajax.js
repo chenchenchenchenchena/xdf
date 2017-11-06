@@ -144,7 +144,11 @@ var homework_s = {
     't_summary':url_o+'teacherData/queryWorksummary.do',//作业汇总
     't_getExcellent':url_o+'teacherData/queryExcellentHomeWorkContent.do',//获取试卷内容
     't_getFileDetails':url_o+'upload/viewAllFileDetails.do',//获取试卷内容
-    't_getImgeUrl':url_o+'upload/previewUrl.do'//获取试卷内容
+    't_getImgeUrl':url_o+'upload/previewUrl.do',//获取试卷内容
+    's_hw_getFinishList':url_o+'studentHWork/finishHomeworkClassList.do',//获取学生作业班级列表
+    's_hw_getClassDetails':url_o+'studentHWork/finishHomeworkClassListData.do',//获取学生作业班级详情列表
+    't_hw_getClassList':url_o+'teacherData/queryHomeWorkListClassData.do',//获取老师作业班级列表
+    't_hw_getClassDetails':url_o+'teacherData/queryHomeWorkListClassInfo.do',//获取老师作业班级详情列表
 
 };
 var pcweb = {

@@ -36,6 +36,7 @@ $(function(){
         }
     })
 	$(document).on('tap','.firstList>p',function(){
+        var this_ = $(this);
 	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
             $('.firstList').eq($(this).parent().index()).find('ul').show();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
@@ -44,6 +45,7 @@ $(function(){
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao22222.png) no-repeat right 55px");
             $('.firstList').eq($(this).parent().index()).find('ul li').css('margin-left','0px');
             $('.firstList').eq($(this).parent().index()).find('ul li').find('.remove_s').css('right','-270px');
+            getListDetails(this_);
         }
 
     });
@@ -147,7 +149,7 @@ $(function(){
         if(loading == undefined){
             loading = layer.load();
         }
-        ajax_S(homework_s.t_list, need_mas, function (e) {
+        ajax_S(homework_s.t_hw_getClassList, need_mas, function (e) {
 
             layer.close(loading);
             $('.load_t').hide();
@@ -168,61 +170,125 @@ $(function(){
             }
             $('.mor_home').show();
 
-            var list_s = e.data;
+            var list_s = e.data[0];
             $('.Prompt_s i').html(e.SumUpnotCorrect);
-            for (var a = 0; a < list_s.length; a++) {
-                for (var c = 0; c < list_s[a].length; c++) {
-                    if (list_s[a][c].readStatus == 0) {
-                        Read = 'state_st';
-                        break;
-                    } else {
-                        Read = '';
-                    }
+            for (var i = 0; i < list_s.length; i++) {
+
+                if (list_s[i].readStatus == 0) {
+                    Read = 'state_st';
+                } else {
+                    Read = '';
                 }
-                $('.hwFinish>ul').append('<li class="firstList" classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '"> <p style="display: inline-block;height: 100%;width: 100%;">' + list_s[a][0].className + '&nbsp;(' + list_s[a][0].studentNum + '人)</p><span class=' + Read + '></span><ul class="secul tealist_s"></ul></li>');
-                for (var b = 0; b < list_s[a].length; b++) {
-                    if ((parseInt(list_s[a][b].yescommit) + parseInt(list_s[a][b].nocorrect)) == list_s[a][0].studentNum || list_s[a][b].yescommit == list_s[a][0].studentNum) {
-                        if (list_s[a][b].nocorrect == 0 && list_s[a][b].notcommit == 0) {
-                            if (list_s[a][b].homeworkType == "") {
-                                $('.tealist_s').eq(a).append(' <li><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
+                var courseCode = "";
+                if(list_s[i].courseCode == undefined){
+                    courseCode = "";
+                }else {
+                    courseCode = list_s[i].courseCode;
+                }
+
+                $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                    '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
+                    '<span class=' + Read + '></span><ul class="secul tealist_s"><li><img class="loading-back" src="../common/images/loading.gif" />' +
+                    '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></li></ul></li>');
+            }
+        }, error);
+    }
+
+    /**
+     * 获取列表详情
+     * @param this_
+     */
+    function getListDetails(this_){
+        this_.find('.secul .tealist_s').find('.loading-back');
+        this_.find('.secul .tealist_s').find('.load_fail');
+        var classCode = this_.attr('classCode');
+        var studentNum = this_.attr('studentNum');
+        var className = this_.attr('className');
+        var params = {
+            'classCode':classCode
+        };
+        ajax_S(homework_s.t_hw_getClassDetails, params, function (e) {
+            if(e.data != undefined && e.data.length > 0){
+                var list = e.data;
+                for (var i = 0; i < list.length; i++) {
+                    var courseCode = "";
+                    if(list[i].courseCode == undefined){
+                        courseCode = "";
+                    }else {
+                        courseCode = list[i].courseCode;
+                    }
+                    if ((parseInt(list[i].yescommit) + parseInt(list[i].nocorrect)) == studentNum || list[i].yescommit == studentNum) {
+                        if (list[i].nocorrect == 0 && list[i].notcommit == 0) {
+                            if (list[i].homeworkType == "") {
+                                this_.find('.secul .tealist_s').append(' <li><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class="more_so"  classCode="' + list[i].classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             } else {
-                                $('.tealist_s').eq(a).append(' <li><span class="dian">电子</span><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
+                                this_.find('.secul .tealist_s').append(' <li><span class="dian">电子</span><span>' + list[i].homeworkTime + '</span>' +
+                                    '<p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             }
 
                         } else {
-                            if (list_s[a][b].homeworkType == "") {
-                                $('.tealist_s').eq(a).append(' <li style="color:#000;"><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
+                            if (list[i].homeworkType == "") {
+                                this_.find('.secul .tealist_s').append(' <li style="color:#000;"><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             } else {
-                                $('.tealist_s').eq(a).append(' <li style="color:#000;"><span class="dian">电子</span><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
+                                this_.find('.secul .tealist_s').append(' <li style="color:#000;"><span class="dian">电子</span><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span></li> ')
                             }
 
                         }
                     } else {
-                        if (list_s[a][b].readStatus == 0) {
+                        if (list[i].readStatus == 0) {
                             dis_l = 'state_st';
                         } else {
                             dis_l = '';
                         }
-                        if (list_s[a][b].nocorrect == 0 && list_s[a][b].notcommit == 0) {
-                            if (list_s[a][b].homeworkType == "") {
-                                $('.tealist_s').eq(a).append(' <li><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class=' + dis_l + '></span><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="' + list_s[a][b].className + '" time="' + list_s[a][b].homeworkTime + '" know="' + list_s[a][b].knowledgePoint + '" text="' + decodeURI(list_s[a][b].description) + '" Id="' + list_s[a][b].id + '"  classCode="' + list_s[a][b].classCode + '">修改</span><span class="delete_s" id="' + list_s[a][b].id + '">删除</span></div></li> ')
+                        if (list[i].nocorrect == 0 && list[i].notcommit == 0) {
+                            if (list[i].homeworkType == "") {
+                                this_.find('.secul .tealist_s').append(' <li>' +
+                                    '<span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class=' + dis_l + '></span><span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s">' +
+                                    '<span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '"  classCode="' + classCode + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
                             } else {
-                                $('.tealist_s').eq(a).append(' <li><span class="dian">电子</span><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class=' + dis_l + '></span><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span class="changeHw" Id="' + list_s[a][b].id + '">修改</span><span class="delete_s" id="' + list_s[a][b].id + '">删除</span></div></li> ')
+                                this_.find('.secul .tealist_s').append(' <li>' +
+                                    '<span class="dian">电子</span><span>' + list[i].homeworkTime + '</span>' +
+                                    '<p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
+                                    '<span class=' + dis_l + '></span><span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
+                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
                             }
 
                         } else {
-                            if (list_s[a][b].homeworkType == "") {
-                                $('.tealist_s').eq(a).append(' <li style="color:#000;"><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class=' + dis_l + '></span><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span name="' + list_s[a][b].className + '" time="' + list_s[a][b].homeworkTime + '" know="' + list_s[a][b].knowledgePoint + '" text="' + decodeURI(list_s[a][b].description) + '" Id="' + list_s[a][b].id + '" classCode="' + list_s[a][b].classCode + '">修改</span><span class="delete_s" id="' + list_s[a][b].id + '">删除</span></div></li> ')
+                            if (list[i].homeworkType == "") {
+                                this_.find('.secul .tealist_s').append(' <li style="color:#000;' +
+                                    '>\<span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
+                                    '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
+                                    '<div class="remove_s"><span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '" classCode="' + classCode + '">修改</span>' +
+                                    '<span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
                             } else {
-                                $('.tealist_s').eq(a).append(' <li style="color:#000;"><span class="dian">电子</span><span>' + list_s[a][b].homeworkTime + '</span><p class="state_s">已批:' + list_s[a][b].yescorrect + '/未批:' + list_s[a][b].nocorrect + '/未交:' + list_s[a][b].notcommit + '</p><span class=' + dis_l + '></span><span class="more_so"  classCode="' + list_s[a][0].classCode + '" courseCode="' + list_s[a][0].courseCode + '" homeworkTime="' + list_s[a][b].homeworkTime + '" Tid="' + list_s[a][b].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s"><span class="changeHw" Id="' + list_s[a][b].id + '">修改</span><span class="delete_s" id="' + list_s[a][b].id + '">删除</span></div></li> ')
+                                this_.find('.secul .tealist_s').append(' <li style="color:#000;">' +
+                                    '<span class="dian">电子</span><span>' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
+                                    '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
+                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
                             }
 
                         }
                     }
                 }
-
+                this_.find('.secul .tealist_s').find('.loading-back').hide();
             }
-        }, error);
+        },function(){
+
+            this_.find('.secul .tealist_s').find('.loading-back').hide();
+            this_.find('.secul .tealist_s').find('.load_fail').show();
+        });
+
+        //局部刷新
+        $(document).on('tap','.secul .tealist_s .load_fail',function(){
+            getListDetails(this_);
+        });
+
+
     }
 
     function error(){
