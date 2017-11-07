@@ -10,6 +10,9 @@ require(['jquery-1.11.0.min'], function () {
         'color': '#bababa'
     });
     layer.closeAll('loading');
+    var usernumarr;
+
+    //获取概况列表
     $.ajax({
         url:global.indexAll,
         type: 'post',
@@ -24,31 +27,59 @@ require(['jquery-1.11.0.min'], function () {
             $('.teacherTotal').html(usernum.teacherTotal+'<span>人</span>');
             $('.studentTotal').html(usernum.studentTotal+'<span>人</span>');
             for(var i = 0;i<usernum.data.length;i++){
-                $.ajax({
-                    url:global.indexForm,
-                    type: 'post',
-                    asyns:false,
-                    dataType: 'json',
-                    data:JSON.stringify({'schoolId':usernum.data[i].schoolId,'schoolName':usernum.data[i].schoolName}),
-                    success:function(e){
-                        formurl.push(e.downloadUrl)
-                    }
-                });
-                console.log(formurl)
-                $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="'+formurl[i]+'">导出教师列表</a></span> </li>')
+                $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+usernum.data[i].schoolId+'"schoolName="'+usernum.data[i].schoolName+'" index = '+i+' >导出教师列表</a></span> </li>')
             }
-
         }
+    });
+
+    //导出列表
+    $(document).on('click','.export_s',function(){
+        var newTab=window.open();
+        $.ajax({
+            url:global.indexForm,
+            type: 'post',
+            asyns:false,
+            dataType: 'json',
+            data:JSON.stringify({'schoolId':$(this).attr('schoolId'),'schoolName':$(this).attr('schoolName')}),
+            success:function(e){
+                console.log(e)
+                if(e.result){
+                    newTab.location.href=e.downloadUrl;
+                }else{
+                    layer.msg('暂无列表');
+                }
+            }
+        });
+    });
+     //导出总表
+        $.ajax({
+            url:global.indexFormAll,
+            type: 'post',
+            asyns:false,
+            dataType: 'json',
+            data:JSON.stringify({'schoolId':$(this).attr('schoolId'),'schoolName':$(this).attr('schoolName')}),
+            success:function(e){
+                if(e.result){
+                    $('.index_formtit a').attr('href',e.downloadUrl)
+                }else{
+                    $('.index_formtit a').attr('href','javascript:;')
+                }
+            }
+        });
+        //导出总表点击
+        $(document).on('click','.index_formtit a',function(){
+            if($(this).attr('href')==''){
+                layer.msg('正在请求总表链接')
+            }else if($(this).attr('href')=='javascript:;'){
+                layer.msg('暂无总表链接')
+            }
+        })
+
+
+
 
     })
-
-
-
-
-
-
-    })
-})
+});
 
 
 

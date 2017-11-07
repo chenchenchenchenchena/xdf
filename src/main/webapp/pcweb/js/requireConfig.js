@@ -13,6 +13,8 @@ if(window.location.host == onlineUrl){   //正式环境
 var global = {
     'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
+    'indexFormAll':url_o+'backEndHome/exportCountUserAnalyseListExcel.do', //导出概况总表
+    'left_nav':url_o+'/function/getAllFunction.do',  //左侧导航
 
 };
 require(['jquery-1.11.0.min'],function(){
@@ -74,14 +76,35 @@ require(['jquery-1.11.0.min'],function(){
             }
         });
     }
-    /**
-     * 获取左侧兰功能列表
-     */
-    //var functionList = JSON.parse(localStorage.functionCheckedList);
-    //if (functionList != undefined && functionList.length > 0) {
-    //
-    //    for (var i = 0; i < functionList.length; i++) {
-    //        $('#' + functionList[i].id).html(functionList[i].text);
-    //    }
-    //}
+    //左侧菜单栏
+    $.ajax({
+        url:global.left_nav,
+        type: 'post',
+        asyns:false,
+        dataType: 'json',
+        data:JSON.stringify({'userId':'v_kouchen'}),
+        success:function(e){
+            console.log(e);
+            if(e.result){
+                var onelist = e.dataList;
+                for(var i = 0;i<onelist.length;i++){
+                    var onelistbure = onelist[i];
+                    if(onelistbure.isValid ==1){
+                        $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
+                        for(var k = 0;k<onelistbure.children.length;k++){
+                            var twolist = onelistbure.children[k];
+                            if(twolist.isValid ==1){
+                                $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
+                            }
+                        }
+                        var $bure_true = $('.left_nav ul li').eq(0);
+                        $bure_true.addClass('activ_nav')
+                        location.href+=$bure_true.attr('href')
+                    }
+                }
+            }else{
+            }
+        }
+    });
+
 });
