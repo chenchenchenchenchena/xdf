@@ -118,20 +118,20 @@ $(function(){
 					for (var i = 0; i < list.length; i++) {
 						var item = list[i];
 						var hwLessNosHtml = '', readStatus = '', replay = 0;
-						var replyStatus = "",statusCss="",readCss="";
-						readStatus = item.readStatus;
-						replyStatus = item.replyStatus;
+						var replayStatus = "",statusCss="",readCss="";
+						readStatus = parseInt(item.readStatus);
+						replayStatus = parseInt(item.replayStatus);
 						//红点显示判断
 						if (readStatus == 0) {//未读
 							readCss = "redCircle";
 						}
-						switch (replyStatus) {
+						switch (replayStatus) {
 							case 0:
-								replyStatus = '未批';
+								replayStatus = '未批';
 								statusCss = 'grey';
 								break;
 							case 1:
-								replyStatus = '已批';
+								replayStatus = '已批';
 								statusCss = 'blue';
 								break;
 						}
@@ -142,13 +142,13 @@ $(function(){
 							score = item.score + "分";
 						}
 						if (item.homeworkType == "1") {
-							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '"><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + readCss + '"></span><span class="stuScore">' + score + '</span></li>';
+							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '"><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replayStatus + '</span><span class="' + readCss + '"></span><span class="stuScore">' + score + '</span></li>';
 						} else {
-							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '" data-testId="' + item.testId + '"><i class="dian">电子</i><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + statusCss + ' beging_s" style="float:right;margin-top: 35px;margin-left:10px;width:110px;" url_="' + item.paperUrl + '">再做一次</span><span class="' + readCss + '"></span><span class="stuScore" style="right:134px;">' + score + '</span></li>';
+							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '" data-testId="' + item.testId + '"><i class="dian">电子</i><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replayStatus + '</span><span class="' + statusCss + ' beging_s" style="float:right;margin-top: 35px;margin-left:10px;width:110px;" url_="' + item.paperUrl + '">再做一次</span><span class="' + readCss + '"></span><span class="stuScore" style="right:134px;">' + score + '</span></li>';
 						}
+						this_.find('.secul').append(hwLessNosHtml);
 
 					}
-					this_.find('.secul').append(hwLessNosHtml);
 
 				}
 				this_.find('.secul li .loading-back').hide();
