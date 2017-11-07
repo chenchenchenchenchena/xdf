@@ -110,9 +110,9 @@ $(function(){
 			if(e.code == 200){
 				if(e.data != undefined && e.data.length > 0){
 
-					var str = this_.find('secul li').eq(0).html();
-					this_.find('secul li').remove();
-					this_.find('secul').append("<li>"+str+"</li>");
+					var str = this_.find('.secul li').eq(0).html();
+					this_.find('.secul li').remove();
+					this_.find('.secul').append("<li>"+str+"</li>");
 
 					var list = e.data;
 					for (var i = 0; i < list.length; i++) {
@@ -152,7 +152,7 @@ $(function(){
 
 				}
 				this_.find('.secul li .loading-back').hide();
-				this_.find('secul li').eq(0).hide();
+				this_.find('.secul li').eq(0).hide();
 			}
 		},function(){
 			this_.find('.secul li .loading-back').hide();
