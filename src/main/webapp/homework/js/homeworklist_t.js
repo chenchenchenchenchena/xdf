@@ -213,6 +213,7 @@ $(function(){
         };
         ajax_S(homework_s.t_hw_getClassDetails, params, function (e) {
             if(e.data != undefined && e.data.length > 0){
+                this_.find('ul li').remove;
                 var list = e.data;
                 for (var i = 0; i < list.length; i++) {
                     var courseCode = "";

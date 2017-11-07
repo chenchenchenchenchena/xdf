@@ -111,7 +111,7 @@ $(function(){
 			//班级详情
 			if(e.code == 200){
 				if(e.data != undefined && e.data.length > 0){
-
+					this_.find('.secul li').remove;
 					var list = e.data;
 					for (var i = 0; i < list.length; i++) {
 						var item = list[i];
