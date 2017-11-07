@@ -38,15 +38,17 @@ $(function(){
             ajaxRequest('GET', homework_s.s_hwlt, reqData, getHwContentSuccess,error);
         }
     });
+	var currentTab = 0;
 	$(".hwHeader ul li").click(function(){
 		$(".hwFinish,.hwContent,.hwEmpty").hide();
-		tabChange($(this));
+		currentTab = $(this).index();
+		tabChange();
 		// $(this).addClass("hwShow").siblings("li").removeClass("hwShow");
 	})
 
-	function tabChange(this_){
+	function tabChange(){
 		$('.reload').hide();
-		if(this_.index()==0){
+		if(currentTab==0){
 			$('title').html('学生待交作业列表')
 			$(".hwFinish,.hwEmpty").hide();
 			if(loading == undefined){
@@ -392,7 +394,7 @@ $(function(){
 	}
 
 	//重新加载页面
-	$('.reload .empty img').click(function(){
+	$('.reload img').click(function(){
 		tabChange();
 	})
 
