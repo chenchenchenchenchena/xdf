@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 选择器格式为：html #layui_layer_skin文件stylecss */
+html #layui_layer_skinxdfskinstylecss{display:none; position: absolute; width:1989px;}
+
+body .layer-ext-xdfskin .layui-layer-title{ border:none; background:#fff;}
+body .layui-ext-xdfskin .layui-layer-btn{}
+body .layui-ext-xdfskin .xubox_title{background:none; border-bottom:none;}
+.layui-layer-setwin .layui-layer-close1{background-image:url(pop-close.png)!important; background-position:no-repeat;width:17px; height:16px; display:block; position:absolute; right:10px;width:17px; height:16px;background-position:0 0;}
+.layui-layer-setwin .layui-layer-close1:hover{background-image:url(pop-close.png); background-position:no-repeat;width:17px; height:16px; display:block; position:absolute; right:10px;width:17px; height:16px;background-position:0 -19px;}
+
+.layui-layer-btn{text-align: center;}
+.layui-layer-btn .layui-layer-btn0{background: #4fb2c7;border:1px solid #ececec;}
+
+.layui-layer-btn a{background:#4fb2c7;border:1px solid #4fb2c7;margin-bottom:10px;padding:0 24px;font-size:14px; font-weight:normal; border-radius:3px;}
+.layui-layer-btn .layui-layer-btn1{ background:#f0f0f0; color:#444; border:1px solid #e0e0e0;}
