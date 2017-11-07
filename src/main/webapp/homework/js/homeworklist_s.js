@@ -6,7 +6,7 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	//sessionStorage.stuNumber = 'ss40';
+	sessionStorage.stuNumber = 'ss2856';
 	//sessionStorage.studentName = '刘一硕';
 	//sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
@@ -83,14 +83,14 @@ $(function(){
 	$(document).on('tap','.firstList',function(){
 		var this_ = $(this);
 		if(flag){
-			$(this).find(".secul").hide();
+			$(this).find(".secul").show();
+			getClassDetails(this_);
 			$(this).css("background","url(images/jiao11.png) no-repeat right 55px");
 			flag=false;
 		}else{
 			$(this).css("background","url(images/jiao22222.png) no-repeat right 55px");
 			flag=true;
-			$(this).find(".secul").show();
-			getClassDetails(this_);
+			$(this).find(".secul").hide();
 		}
 	});
 	/**
@@ -109,6 +109,11 @@ $(function(){
 			//班级详情
 			if(e.code == 200){
 				if(e.data != undefined && e.data.length > 0){
+
+					var str = this_.find('secul li').eq(0).html();
+					this_.find('secul li').remove();
+					this_.find('secul').append("<li>"+str+"</li>");
+
 					var list = e.data;
 					for (var i = 0; i < list.length; i++) {
 						var item = list[i];
@@ -137,9 +142,9 @@ $(function(){
 							score = item.score + "分";
 						}
 						if (item.homeworkType == "1") {
-							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTinfoId + '"  data-id="' + item.id + '" data-classCode="' + items.classCode + '"><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + readCss + '"></span><span class="stuScore">' + score + '</span></li>';
+							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '"><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + readCss + '"></span><span class="stuScore">' + score + '</span></li>';
 						} else {
-							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTinfoId + '"  data-id="' + item.id + '" data-classCode="' + items.classCode + '" data-testId="' + item.testId + '"><i class="dian">电子</i><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + statusCss + ' beging_s" style="float:right;margin-top: 35px;margin-left:10px;width:110px;" url_="' + item.paperUrl + '">再做一次</span><span class="' + readCss + '"></span><span class="stuScore" style="right:134px;">' + score + '</span></li>';
+							hwLessNosHtml += '<li data-homeworkTinfoId="' + item.homeworkTid + '"  data-id="' + item.id + '" data-classCode="' + classCode + '" data-testId="' + item.testId + '"><i class="dian">电子</i><span class="hwDate">' + item.homeworkTime.substr(5) + '日作业</span><span class="' + statusCss + '">' + replyStatus + '</span><span class="' + statusCss + ' beging_s" style="float:right;margin-top: 35px;margin-left:10px;width:110px;" url_="' + item.paperUrl + '">再做一次</span><span class="' + readCss + '"></span><span class="stuScore" style="right:134px;">' + score + '</span></li>';
 						}
 
 					}
@@ -147,6 +152,7 @@ $(function(){
 
 				}
 				this_.find('.secul li .loading-back').hide();
+				this_.find('secul li').eq(0).hide();
 			}
 		},function(){
 			this_.find('.secul li .loading-back').hide();

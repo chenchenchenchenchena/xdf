@@ -170,7 +170,7 @@ $(function(){
             }
             $('.mor_home').show();
 
-            var list_s = e.data[0];
+            var list_s = e.data;
             $('.Prompt_s i').html(e.SumUpnotCorrect);
             for (var i = 0; i < list_s.length; i++) {
 
