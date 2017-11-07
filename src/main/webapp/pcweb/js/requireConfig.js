@@ -9,12 +9,15 @@ if(window.location.host == onlineUrl){   //正式环境
 }else{    //测试环境
     var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 }
+
+var global = {
+    'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
+    'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
+
+};
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
-    var global = {
-        'indexAll':url_o+'backEndHome/queryCountUser.do',
 
-    };
     
     /*用户下拉*/
     var timeout; 

@@ -179,6 +179,7 @@ body{
 	height:45px;
 	font-size:14px;
 	color:#666;
+	overflow:hidden;
 }
 .index_forms li span a{
 	color:#00ba97;
