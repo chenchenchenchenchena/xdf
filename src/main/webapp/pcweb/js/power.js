@@ -1,10 +1,5 @@
 /* 权限管理 */
 
-
-
-/**
- * Created by xupingwei on 2017/8/22.
- */
 var totalCounts = 0;
 var currentPage = 1;
 var pageSize = 15;
@@ -13,11 +8,11 @@ var currentAreaId = '';
 var currentDeptId = '';
 var switchFlag = false;
 var searchKey = "";
-$(function () {
+//$(function () {
     initTopContent();
     findList("");
     initSwitch();
-});
+//});
 
 function initSwitch() {
     //大开关
@@ -58,7 +53,14 @@ function initTopContent() {
     var table = {
         "tableName": "dict_school_info"
     };
-    ajaxRequest("POST", url.s_select, table, selectData);
+    $.ajax({
+        type: "POST",
+        url: url_o+'dict/getDictListByTableName.do',
+        async: true,//同步
+        dataType: 'json',
+        data: table,
+        success: selectData
+    })
 }
 function selectData(json) {
     console.log(json);
@@ -129,7 +131,7 @@ function findList(school, searchKey) {
         school: school,
         loginId: searchKey
     };
-    jQuery.ajax({
+    $.ajax({
         type: "POST",
         url: url_o + "/user/getMarketPrivilegeList.do",
         async: true,//同步
@@ -143,10 +145,6 @@ function findList(school, searchKey) {
                     $("#userTbody").html("");
                     return;
                 }
-                // if (firstIn) {
-                //     initPage(totalCounts, 1);
-                //     firstIn = false;
-                // }
                 var str = "";
                 for (var i = 0; i < userList.length; i++) {
                     var pid = userList[i].id;
@@ -281,4 +279,9 @@ function initPage(totalCounts, currentPage) {
     } else {
         $("#publicPage").html("");
     }
+}
+
+function changeCenter(url){
+    window.location.href = url;
+
 }

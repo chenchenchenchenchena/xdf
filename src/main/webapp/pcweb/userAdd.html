@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>双师东方管理平台</title>
+    <!--<link rel="stylesheet" href="../common/css/core.css?v=0699530">-->
+    <!--<link rel="stylesheet" href="../common/css/p176.css?v=67e60ff">-->
+    <!--<link rel="stylesheet" href="../common/css/index.css?v=004c224">-->
+    <!--<link rel="stylesheet" href="../common/css/jquery-ui.min.css?v=7de3ceb">-->
+    <!--<link rel="stylesheet" href="../common/css/easyUi/easyui.css?v=06df26e">-->
+    <!--<link rel="stylesheet" href="../common/css/easyUi/icon.css?v=0a02bf6">-->
+    <script src="../common/js/jquery.js?v=aba2985"></script>
+    <script src="../common/js/etlogin.js?v=d1848df"></script>
+    <script src="../common/js/rem.js?v=f8841e6"></script>
+    <script src="../common/js/scale.js?v=f7ae470"></script>
+    <script src="../common/js/swiper.min.js?v=287fddc"></script>
+    <script src="../common/js/zepto.min.js?v=3b51bfc"></script>
+    <!--<script src="../common/js/jqPaginator.min.js?v=3e4ac5c"></script>-->
+    <script src="../common/js/layer-v2.1/layer/layer.js?v=5252ba6"></script>
+    <script src="../common/js/ajax.js?v=f741181"></script>
+    <!--<script src="../common/js/jquery.easyui.min.js?v=ae4a9f3"></script>-->
+    <!--<script src="../common/js/jquery-ui.min.js?v=b847eaf"></script>-->
+    <!--<script src="../common/js/util.js?v=5d97cbd"></script>-->
+    <!--<script src="../mainPage/js/main.js?v=a00ea35"></script>-->
+    <script src="js/userAdd.js?v=4f4a64d"></script>
+    <!--<script src="../common/js/p176.js?v=5693c59"></script>-->
+    <style>
+        ul li {
+            float: left;
+            padding-left: 11px;
+            padding-right: 11px;
+        }
+
+        .checked {
+            width: 16px;
+            height: 16px;
+            background-image: url('images/tree_checkbox_1.gif')
+        }
+
+        .unchecked {
+            width: 16px;
+            height: 16px;
+            background-image: url('images/tree_checkbox_0.gif')
+        }
+        .content{
+            height: auto;
+            width: 100%;
+        }
+        .inline-div {
+            display: inline-block;
+            width:   16%; /*一行5个*/
+            margin: auto;
+        }
+    </style>
+    <!--<script src="../../js/loginStatus.js"></script>-->
+</head>
+<body onload="initMainPage('401');">
+<input type="text" id="loginId" hidden>
+<input type="text" id="userId" hidden>
+<input type="text" id="tokenId" hidden>
+<input type="text" id="schoolIdFinal" hidden>
+<input type="text" id="areaIdFinal" hidden>
+<input type="text" id="deptIdFinal" hidden>
+<div class="p176-nav clearfix">
+    <div class="p176-logo-left"><a href="#" class="p176-logo">双师东方管理平台</a></div>
+    <div class="p176-nav-left" id="schoolAuthority" style="display: none">
+        <ul>
+            <li class="dropdown js-ads-drop">
+                <a href="#" id="schoolName1" hidden>城市<i class="dropdown-white"></i></a>
+                <ul class="b-sub-menu" id="schoolName"></ul>
+            </li>
+            <li class="dropdown js-area-drop">
+                <a href="#" hidden id="areaName1">校区<i class="dropdown-white"></i></a>
+                <ul class="a-sub-menu" id="areaName"></ul>
+            </li>
+            <li class="dropdown js-item-drop">
+                <a href="#" hidden id="deptName1">部门<i class="dropdown-white"></i></a>
+                <ul class="p-sub-menu" id="deptName"></ul>
+            </li>
+        </ul>
+    </div>
+    <div class="p176-nav-right">
+        <ul>
+            <li>
+                <a href="#" class="p176-nav-usename js-userName"></a>
+                <div class="p176-usename-menu js-userName-menu" style="z-index: 1000;">
+                    <ul>
+                        <li><a href="#" onclick="toLogout('91411a1a05fd4571859044ed18892ac1')" class="">退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="p176-wrap-all">
+    <div class="p176-mainWrap">
+        <div class="p176-main">
+            <div class="inner">
+                <h2 class="p176-tit pdRight20 clearfix"><span class="fz14"><a href="javascript:;"
+                                                                              onclick="changeCenter('./userList.html')">账号列表> </a>新增用户</span>
+                </h2>
+                <div class="p176-table-wrap">
+                    <div class="hot-classes" style="margin-top: 30px">
+                        <div class="user-li user-li1">
+                            <span>账号:</span>
+                            <input type='text'
+                                   class='user-input'
+                                   id='inputLoginId'
+                                   onfocus="getMoreUserInfo()"
+                                   placeholder="请输入邮箱前缀查询用户!"/>
+                        </div>
+                        <div class="user-li user-li-last clearfix">
+                            <span class="fl">校区:</span>
+                            <ul class="content" id="content-school">
+
+                            </ul>
+                        </div>
+
+                        <div class="user-li user-li-last clearfix">
+                            <span class="fl">权限:</span>
+                            <ul class="content" id="content-permission">
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="p176-btn-adduser">
+                        <button type="reset" onclick="reload()" class="reset">取消</button>
+                        <button type="button" class="sure">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p176-left">
+            <div class="p176-leftmenu">
+                <ul class="mtop10">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

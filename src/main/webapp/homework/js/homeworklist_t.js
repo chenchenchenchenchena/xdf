@@ -295,6 +295,7 @@ $(function(){
     //局部刷新
     $(document).on('tap','ul .load_html .load_fail',function(){
         $(this).parent().parent().find('.loading-back').show();
+        $(this).hide();
         getListDetails($(this).parent().parent().parent());
     });
 
