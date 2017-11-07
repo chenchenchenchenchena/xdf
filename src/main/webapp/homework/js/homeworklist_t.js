@@ -294,7 +294,7 @@ $(function(){
 
     //局部刷新
     $(document).on('tap','ul .load_html .load_fail',function(){
-        getListDetails($(this).parent().parent());
+        getListDetails($(this).parent().parent().parent());
     });
 
     function error(){
