@@ -99,7 +99,7 @@ $(function () {
             });
         }
     });
-
+    var e;
     if (sessionStorage.Teatwo) {//已批复
         var buer_last = true;
         if (sessionStorage.bangbang) {
@@ -111,7 +111,7 @@ $(function () {
         $('title').html('已批复');
         //获取文件信息
         // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-        var e = JSON.parse(sessionStorage.detailsStrYes);
+        e = JSON.parse(sessionStorage.detailsStrYes);
         if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
             $('.anDes').eq(0).html("");
         } else {
@@ -171,7 +171,7 @@ $(function () {
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
         // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            var e = JSON.parse(sessionStorage.detailsStrNot);
+            e = JSON.parse(sessionStorage.detailsStrNot);
             console.log(e);
             classYHname = e.className;
             $('.anDes').eq(0).html();
@@ -227,7 +227,7 @@ $(function () {
             'fileRfullPath': teaReplyFiles
         };
 
-        ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess);
+        ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess,errorFile);
     }
 
     /**
@@ -307,6 +307,29 @@ $(function () {
             $('.loading-back').hide();
         }
     }
+    var layerE;
+    function errorFile(){
+        layerE = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".file-fail")
+        })
+
+    }
+
+    // 删除语音-取消
+    $(document).on('touchend', '.file-fail .cancelBtn', function () {
+        layer.close(layerE);
+        $('.loading-back').hide();
+    });
+    // 删除语音-确定
+    $(document).on('touchend', '.file-fail .confirmBtn', function () {
+        getFileInfo(e);
+
+    });
 
 
 
