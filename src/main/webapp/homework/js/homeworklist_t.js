@@ -142,7 +142,7 @@ $(function(){
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId
         }
-        getList(need_mas,2);
+        getList(need_mas,3);
     }
 
     function getList(need_mas,flag){
@@ -158,17 +158,23 @@ $(function(){
                     $('.empty').show();
                     $('.hwFinish').hide();
                     $('.Prompt_s').hide();
-                    $('.mor_home').hide()
+                    $('.mor_home').hide();
                     return false;
-                }else {
+                }else if(flag == 2){
                     $('.mor_home p').html('您暂时没有更多啦！！！')
                     setTimeout(function () {
                         $('.mor_home').hide()
                     }, 2000)
                     return false;
+                }else {
+                    $('.empty').show();
+                    $('.hwFinish').hide();
+                    $('.Prompt_s').hide();
                 }
             }
-            $('.mor_home').show();
+            if(flag != 3){
+                $('.mor_home').show();
+            }
 
             var list_s = e.data;
             $('.Prompt_s i').html(e.SumUpnotCorrect);
