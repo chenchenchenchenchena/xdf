@@ -162,6 +162,7 @@ $(function(){
 
 
 	$(document).on('tap','.secul .load_html .load_fail',function(){
+		$(this).parent().find('.loading-back').show();
 		getClassDetails($(this).parent().parent());
 	});
 
