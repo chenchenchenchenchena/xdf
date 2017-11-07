@@ -110,10 +110,6 @@ $(function(){
 			if(e.code == 200){
 				if(e.data != undefined && e.data.length > 0){
 
-					var str = this_.find('.secul li').eq(0).html();
-					this_.find('.secul li').remove();
-					this_.find('.secul').append("<li>"+str+"</li>");
-
 					var list = e.data;
 					for (var i = 0; i < list.length; i++) {
 						var item = list[i];
@@ -152,14 +148,14 @@ $(function(){
 
 				}
 				this_.find('.secul li .loading-back').hide();
-				this_.find('.secul li').eq(0).hide();
+				this_.find('.secul .load_html').hide();
 			}
 		},function(){
 			this_.find('.secul li .loading-back').hide();
 			this_.find('.secul li .load_fail').show();
 
 		});
-		$(document).on('tap','.secul li .load_fail',function(){
+		$(document).on('tap','.secul .load_html .load_fail',function(){
 			getClassDetails(this_);
 		});
 
@@ -189,7 +185,7 @@ $(function(){
 				window.location.href = that.attr('data-url');
 				sessionStorage.removeItem("unfinishHw");
 				sessionStorage.removeItem("finishHw");
-			},error);
+			});
 
 		}else{
 			ajaxRequest('GET', homework_s.s_readstatus, 'id='+id, function(msg){
@@ -201,7 +197,7 @@ $(function(){
 				window.location.href = 'dohomework_s.html?id='+localStorage.homeworkSinfoId ;
 				sessionStorage.removeItem("unfinishHw");
 				sessionStorage.removeItem("finishHw");
-			},error);
+			});
 
 		}
 
@@ -224,7 +220,7 @@ $(function(){
 				}else{
 					console.log("阅读失败！"+msg.msg);
 				}
-			},error);
+			});
 			var url = url_o+"/teacherData/getStudentReportUrl.do";
 			var params = {
 				"testId":$(this).attr("data-testId"),
@@ -239,7 +235,7 @@ $(function(){
 						sessionStorage.removeItem("unfinishHw");
 					}
 				}
-			},error);
+			});
 			return false;
 
 		}else{
@@ -255,7 +251,7 @@ $(function(){
 				sessionStorage.removeItem("finishHw");
 				sessionStorage.removeItem("unfinishHw");
 
-			},error);
+			});
 			return false;
 		}
 		console.log($(this).parents('.firstList').index()+"---"+$(this).index());
@@ -368,7 +364,7 @@ $(function(){
 					}
 					var hwListFinishHtml = '<li data-classCode="'+classCode+'" data-Tid="'+Tid+'" class="firstList">'
 						+'<p>'+className+'('+teacherName+')<span class="'+readStatus+'"></span></p>'
-						+'<ul class="secul"><li><img class="loading-back" src="../common/images/loading.gif" /><div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></li></ul>'
+						+'<ul class="secul"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" /><div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul>'
 						+'</li>';
 				}
 

@@ -1,0 +1,49 @@
+<div class="index_title">
+    <span></span>
+    <h4>权限统计</h4>
+</div>
+
+<!--search-->
+<div class="clearfix hot-search">
+    <div class="fl search-box">
+        <form action="javascript:searchByKey();">
+            <i class="ico-search"></i>
+            <input type="search" id="searchKey" placeholder="搜索账号" class="inp-s"
+                   style="height: 30px;"/>
+            <input type="button" value="搜索" class="search" onclick="searchByKey()"/>
+        </form>
+    </div>
+    <div class="fr">
+        <a href="#" class="newSet" onclick="changeCenter('./userAdd.html?oper=add')"><i class="ico-add-new"></i>新建账户</a>
+    </div>
+</div>
+<!--分类-->
+<div class="hot-classes">
+    <ul class="list1">
+        <li>
+            <span class="tit">地区：</span>
+            <span class="xian-wid"></span>
+            <span>
+                <em class="open">展开<i class="ico-open"></i></em>
+                <em class="shou">收起<i class="ico-shou"></i></em>
+            </span>
+        </li>
+    </ul>
+    <div class="botton" id="m1"></div>
+</div>
+<div class="p176-table-wrap">
+    <table class="p176-table p176-table02 p176-table04 fz14">
+        <thead>
+        <tr>
+            <th style="width:55px;display:none;">账号</th>
+            <th width="20%">用户名</th>
+            <th width="20%">邮箱</th>
+            <th width="25%">地区</th>
+            <th width="35%">设置</th>
+        </tr>
+        </thead>
+        <tbody id="userTbody">
+        </tbody>
+    </table>
+    <div class="PublicPage" id="publicPage"></div>
+</div>

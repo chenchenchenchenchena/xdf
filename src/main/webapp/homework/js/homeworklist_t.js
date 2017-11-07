@@ -194,8 +194,8 @@ $(function(){
 
                 $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
                     '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
-                    '<span class=' + Read + '></span><ul class="secul tealist_s"><li><img class="loading-back" src="../common/images/loading.gif" />' +
-                    '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></li></ul></li>');
+                    '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
+                    '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
             }
         }, error);
     }
@@ -214,9 +214,6 @@ $(function(){
         ajax_S(homework_s.t_hw_getClassDetails, params, function (e) {
             if(e.data != undefined && e.data.length > 0){
                 var list = e.data;
-                var str = this_.find('ul li').eq(0).html();
-                this_.find('ul li').remove();
-                this_.find('ul').append("<li>"+str+"</li>");
                 for (var i = 0; i < list.length; i++) {
                     var courseCode = "";
                     if(list[i].courseCode == undefined){
@@ -283,7 +280,7 @@ $(function(){
                     }
                 }
                 this_.find('ul').find('.loading-back').hide();
-                this_.find('ul li').eq(0).hide();
+                this_.find('ul .load_html').hide();
             }
         },function(){
 
@@ -292,7 +289,7 @@ $(function(){
         });
 
         //局部刷新
-        $(document).on('tap','ul .load_fail',function(){
+        $(document).on('tap','ul .load_html .load_fail',function(){
             getListDetails(this_);
         });
 
