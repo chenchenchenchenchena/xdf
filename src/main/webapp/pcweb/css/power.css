@@ -228,3 +228,35 @@
 .fr {
     float: right;
 }
+
+ul li {
+    float: left;
+    padding-left: 11px;
+    padding-right: 11px;
+    }
+
+.checked {
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/tree_checkbox_1.gif')
+}
+
+.unchecked {
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/tree_checkbox_0.gif')
+}
+
+.content {
+    height: auto;
+    width: 100%;
+}
+
+.inline-div {
+    display: inline-block;
+    width: 16%; /*一行5个*/
+    margin: auto;
+}
+.auto-list{
+
+}

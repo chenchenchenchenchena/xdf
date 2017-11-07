@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/p176.css">
+    <link rel="stylesheet" href="css/p12.css">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/power.css">
@@ -10,8 +13,7 @@
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.js"></script>
 	<script src="js/require.js" data-main="js/requireConfig"></script>
-	<!--<script src="js/index.js"></script>-->
-	<!--<script src="js/power.js"></script>-->
+	<script src="js/index.js"></script>
 </head>
 <body>
 <div class="header">
@@ -108,7 +110,9 @@
         })
         .controller('userAdd', function () {
             require(['jquery-1.11.0.min'], function () {
-                require(['userAdd'], function () {
+                require(['jquery-ui.min'], function () {
+                    require(['userAdd'], function () {
+                    })
                 })
             })
 

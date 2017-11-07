@@ -1,15 +1,16 @@
-$(function () {
+//$(function () {
+//require(['layer','requireConfig'],function() {
     /** 判断是否编辑 **/
-    if(GetRequest('oper')!='add'){//编辑
+    if(sessionStorage.oper != 'add'){//编辑
         $('#inputLoginId').attr('disabled','disabled');
         $('#inputLoginId').attr('placeholder','');
-        var userIdIn = GetRequest('userId');
+        var userIdIn = sessionStorage.userId;
         $('#inputLoginId').val(userIdIn);
-        $('#userName').val(GetRequest('userName'));
-        $('#email').val(GetRequest('email'));
-        $('#position').val(GetRequest('position'));
-        $('#school').val(GetRequest('school'));
-        var department = GetRequest('department');
+        $('#userName').val(sessionStorage.userName);
+        $('#email').val(sessionStorage.email);
+        $('#position').val(sessionStorage.position);
+        $('#school').val(sessionStorage.school);
+        var department = sessionStorage.department;
         if(department==""||department==null||department==undefined||department=='undefined'){
             department = "";
         }
@@ -22,7 +23,7 @@ $(function () {
     }
     //确定
     $(document).on('click','.sure',function(){
-        if(GetRequest('oper')!='add'){//编辑
+        if(sessionStorage.oper !='add'){//编辑
             updateUser();
         }else{//添加
             saveUser();
@@ -36,7 +37,14 @@ $(function () {
     var table = {
         "tableName": "dict_school_info"
     };
-    ajaxRequest("POST", url.s_select, table, selectData);
+    jQuery.ajax({
+        type: "POST",
+        url: url_o+'dict/getDictListByTableName.do',
+        async: false,//同步
+        dataType: 'json',
+        data: table,
+        success: selectData
+    })
     function selectData(json) {
         console.log(json);
         if (json.code == "200") {
@@ -79,7 +87,7 @@ $(function () {
             }
         });
     }
-});
+//});
 
 $(document).on("click","li img",function(){
     if($(this).hasClass('unchecked')){
