@@ -151,15 +151,17 @@ $(function(){
 				this_.find('.secul .load_html').hide();
 			}
 		},function(){
-			this_.find('.secul li .loading-back').hide();
-			this_.find('.secul li .load_fail').show();
+			this_.find('.secul .load_html .loading-back').hide();
+			this_.find('.secul .load_html .load_fail').show();
 
-		});
-		$(document).on('tap','.secul .load_html .load_fail',function(){
-			getClassDetails(this_);
 		});
 
 	}
+
+
+	$(document).on('tap','.secul .load_html .load_fail',function(){
+		getClassDetails($(this).parent().parent());
+	});
 
 
 	//点击作业排行榜

@@ -288,13 +288,13 @@ $(function(){
             this_.find('ul').find('.load_fail').show();
         });
 
-        //局部刷新
-        $(document).on('tap','ul .load_html .load_fail',function(){
-            getListDetails(this_);
-        });
-
 
     }
+
+    //局部刷新
+    $(document).on('tap','ul .load_html .load_fail',function(){
+        getListDetails($(this).parent().parent());
+    });
 
     function error(){
         $('.reload').show();
