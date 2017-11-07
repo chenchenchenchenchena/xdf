@@ -39,6 +39,10 @@ $(function () {
     $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     //获取班级信息
     ajax_S(homework_s.t_clas, trardata, function (e) {
+        if(e.data==undefined||e.data==null){
+            $('.load_t').hide();
+            return false;
+        }
         var className = e.data;
         for (var a = 0; a < className.length; a++) {
             $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className[a].ClassName + '</span>（'+className[a].ClassCode+'）</b></li>')
