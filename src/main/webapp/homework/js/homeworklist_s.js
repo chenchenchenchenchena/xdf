@@ -83,10 +83,10 @@ $(function(){
 	$(document).on('tap','.firstList',function(){
 		var this_ = $(this);
 		if(flag){
-			$(this).find(".secul").show();
-			getClassDetails(this_);
 			$(this).css("background","url(images/jiao11.png) no-repeat right 55px");
 			flag=false;
+			$(this).find(".secul").show();
+			getClassDetails(this_);
 		}else{
 			$(this).css("background","url(images/jiao22222.png) no-repeat right 55px");
 			flag=true;
