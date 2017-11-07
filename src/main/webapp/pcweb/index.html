@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/power.css">
+	<link rel="stylesheet" href="js/skin/layer.css">
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.js"></script>
 	<script src="js/require.js" data-main="js/requireConfig"></script>
@@ -70,12 +71,13 @@
 
 			$urlRouterProvider.otherwise("/index")
 		}).controller('index',function(){
-			
-				require(['index'],function(){})
-		})
+                require(['index'],function(){})
+            })
 		.controller('homework',function(){
 			require(['jquery-1.11.0.min'],function(){
-				require(['homework'],function(){})
+				require(['homework'],function(){
+
+				})
 			})
 		})
 		.controller('lesstime',function(){
