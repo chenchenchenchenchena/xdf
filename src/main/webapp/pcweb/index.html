@@ -67,6 +67,10 @@
             url:"/lesstime_detail",
             templateUrl:"lesstime_detail.html",
             controller:'lesstime_detail'
+        }).state("userAdd",{
+            url:"/userAdd",
+            templateUrl:"userAdd.html",
+            controller:'userAdd'
         });
         $urlRouterProvider.otherwise("/index")
     }).controller('index',function(){
@@ -99,6 +103,13 @@
         .controller('lesstime_detail',function(){
             require(['jquery-1.11.0.min'],function(){
                 require(['lesstime_detail'],function(){})
+            })
+
+        })
+        .controller('userAdd', function () {
+            require(['jquery-1.11.0.min'], function () {
+                require(['userAdd'], function () {
+                })
             })
 
         })

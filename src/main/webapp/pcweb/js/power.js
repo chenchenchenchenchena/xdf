@@ -282,6 +282,7 @@ function initPage(totalCounts, currentPage) {
 }
 
 function changeCenter(url){
-    window.location.href = url;
+    sessionStorage.oper = "add";
+    $('.left_nav ul li').eq(3).find('a').href = url;
 
 }
