@@ -40,10 +40,16 @@ $(function () {
          'userId':localStorage.userId_stu
     };
      loading = layer.load();
-    ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess);
+    ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess,error);
+
+    //语音，图片
+    var allFilePath = {
+        "fileSfullPath": [],//学生作业文件云盘全路径
+        "fileTfullPath": [],//老师作业文件云盘全路径
+        "fileRfullPath": []//老师回复作业文件云盘全路径
+    };
 
     function getHwFinishDetailSuccess(msg){
-        // loading = layer.load();
         console.log(JSON.stringify(msg));
         if(msg.code==200){
             var datas = msg.data;
@@ -125,12 +131,7 @@ $(function () {
             }
 
 
-            //语音，图片
-            var allFilePath = {
-                "fileSfullPath": [],//学生作业文件云盘全路径
-                "fileTfullPath": [],//老师作业文件云盘全路径
-                "fileRfullPath": []//老师回复作业文件云盘全路径
-            };
+
             if (datas.teaHomeworkFiles.length > 0 || datas.stuHomeworkFiles.length > 0 || datas.teaHomeworkReplyFiles.length > 0) {
                 //老师作业信息---语音，图片
                 $.each(datas.teaHomeworkFiles, function (i, paths) {
@@ -146,14 +147,34 @@ $(function () {
                     allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
                 });
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
-                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess);
+                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
             }
              //layer.close(loading);
-        }else{
-            console.log("获取作业详情失败");
         }
          layer.close(loading);
     }
+
+    var layerED;
+    function error(){
+
+        layerED = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".file-fail")
+        })
+    }
+    // 取消
+    $(document).on('touchend', '.file-fail .cancelBtn', function () {
+        layer.close(loading);
+    });
+    // 确定
+    $(document).on('touchend', '.file-fail .confirmBtn', function () {
+        ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess,error);
+
+    });
 
     var voiceCount = 0;
     //获取文件信息
@@ -248,10 +269,33 @@ $(function () {
                 });
             }
             $('.loading-back').hide();
-        } else {
-            alert("获取文件失败");
         }
     }
+
+    var layerE;
+    function errorFile(){
+        layerE = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".file-fail")
+        })
+
+    }
+
+    // 取消
+    $(document).on('touchend', '.file-fail .cancelBtn', function () {
+        layer.close(layerE);
+        $('.loading-back').hide();
+    });
+    // 确定
+    $(document).on('touchend', '.file-fail .confirmBtn', function () {
+
+        ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
+
+    });
 
     /**
      *

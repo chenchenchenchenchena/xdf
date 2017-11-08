@@ -47,7 +47,8 @@ $(function(){
 	})
 
 	function tabChange(){
-		$('.reload').hide();
+		//$('.reload').hide();
+		$('.reload').show();
 		if(currentTab==0){
 			$('title').html('学生待交作业列表')
 			$(".hwFinish,.hwEmpty").hide();

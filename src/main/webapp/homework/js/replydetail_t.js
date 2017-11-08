@@ -320,12 +320,12 @@ $(function () {
 
     }
 
-    // 删除语音-取消
+    // 取消
     $(document).on('touchend', '.file-fail .cancelBtn', function () {
         layer.close(layerE);
         $('.loading-back').hide();
     });
-    // 删除语音-确定
+    // 确定
     $(document).on('touchend', '.file-fail .confirmBtn', function () {
         getFileInfo(e);
 
