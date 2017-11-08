@@ -1,303 +1,197 @@
-/**
- * Created by xupingwei on 2017/10/25.
- */
-$(function () {
-    var mastertae = [];
-    var firstIn = true;
-    findList();
-    function findList() {
+/* 主讲权限 */
 
-        ajax_S(url.data_s, '', function (json) {
 
-            if (json.data.length > 0) {
-                var userList = json.data;
-                var str = "";
-                for (var i = 0; i < userList.length; i++) {
-                    var pid = userList[i].teacherId;
-                    var userName = userList[i].loginName;
-                    var email = userList[i].accountId;
-                    var gradeCourse = userList[i].gradeCourse;
-                    var isEnabled = userList[i].invalid;
-
-                    if(gradeCourse == undefined){
-                        gradeCourse = "";
+require(['jquery-1.11.0.min'], function () {
+    require(['layer'],function() {
+        //请求主讲列表
+        $.ajax({
+            url:global.master_All,
+            type: 'post',
+            asyns:false,
+            dataType: 'json',
+            data:JSON.stringify(),
+            success:function(e){
+                if(e.data){
+                    var masterlist = e.data;
+                    for(var i = 0;i<masterlist.length;i++){
+                        if(masterlist[i].gradeCourse==undefined){
+                            masterlist[i].gradeCourse = '暂无科目'
+                        };
+                        $('.master_list').append('<li><span>'+masterlist[i].teacherName+'</span><span>'+masterlist[i].accountId+'</span><span>'+masterlist[i].gradeCourse+'</span><span><a  href="javascript:;" class="master_edit" userName="'+masterlist[i].teacherName+'" email="'+masterlist[i].accountId+'">编辑</a><a href="javascript:;" class="master_confrim">禁用</a></span></li>')
                     }
-
-                    if (i % 2 == 1) {
-                        str += "<tr class='table-tr-odd'>"
-                    } else {
-                        str += "<tr class='table-tr-even'>"
+                }
+            }
+        });
+        //请求校区
+        $.ajax({
+            url:global.school_All,
+            type: 'post',
+            asyns:false,
+            dataType: 'json',
+            data:{"tableName":"dict_school_info"},
+            success:function(e){
+                if(e.data){
+                    for(var i = 0;i<e.data.length;i++){
+                        $('#campus').append('<option value="'+e.data[i].tCode+'">'+e.data[i].tName+'</option>');
                     }
-                    str += "<td id='" + pid + "' style='display: none'>" + isEnabled + "</td>"
-                    str += "<td id='" + pid + "' style='display: none'></td>";
-                    str += "<td style='display: none'>" + pid + "</td>";
-                    str += "<td>" + userName + "</td>";
-                    str += "<td style='word-wrap:break-word'>" + email + "</td>";
-                    str += "<td>" + gradeCourse + "</td>";
-
-                    str += "<td>";
-                    str += "<div class='p176-table-btnGroup'>";
-                    // if (loginId != "ssdf") {
-                        str += "<a href='javascript:;' class='p176-btn-edit' onclick='edite_s(this)' email="+email+" username="+userName+"><i></i>编辑</a>";
-                        // str += "<a href='javascript:;' class='p176-btn-delete js-deleteBtn' onclick='javascript:deleteUser(\""+pid+"\",\""+userId+"\",this);'><i></i>删除</a> "
-
-                        if (isEnabled == 1) {
-                            str += "<a href='javascript:;' class='p176-btn-able' onclick='enabledUser(this,\"" + pid + "\",\"" + email + "\")'><i></i>禁用</a>";
-                        } else {
-                            str += "<a href='javascript:;' class='p176-btn-disable' onclick='enabledUser(this,\"" + pid + "\",\"" + email + "\")'><i></i>启用</a>";
+                }
+            }
+        });
+        //编辑点击
+        $(document).on('click','.master_edit',function(){
+            $('.edit_s ').show();
+            $('.back_big').show();
+            var teaname    = $(this).attr('userName')
+            sessionStorage.teaneamail = $(this).attr('email')
+            $('.edit_s p b').html(teaname);
+            Olddata();
+        });
+        //新增主讲校区
+        $(document).on('click','.edit_s i',function(){
+            if($(this).html()=='+'){
+                //增加新编号
+                if($('#campus').val()=='1'){
+                    layer.msg('校区未选择');
+                    return false;
+                };
+                if($('.tccode').val()==''){
+                    layer.msg('主讲编号未输入');
+                    return false;
+                }
+                var need = {
+                    masterCodeData:[{
+                        name:$('.edit_s b').html(),
+                        code:$('.tccode').val(),
+                        schoolId:$('#campus').val(),
+                        schoolName:$('#campus option:selected').html(),
+                        email:sessionStorage.teaneamail
+                    }]
+                };
+                $.ajax({
+                    url:global.master_add,
+                    type: 'post',
+                    asyns:false,
+                    dataType: 'json',
+                    data:JSON.stringify(need),
+                    success:function(e){
+                        if(e.result==true){
+                            layer.msg('操作成功');
+                            Olddata();
                         }
-                    str += "</div>";
-                    str += "</td>";
-                    str += "</tr>";
-
+                    }
+                });
+            }else{
+                //删除编号
+                if(confirm('确定删除吗？')){
+                    var need_ = {
+                        id:$(this).attr('id'),
+                    };
+                    $.ajax({
+                        url:global.master_reduce,
+                        type: 'post',
+                        asyns:false,
+                        dataType: 'json',
+                        data:JSON.stringify(need_),
+                        success:function(e){
+                            if(e.result){
+                                layer.msg('删除成功')
+                            }
+                            $('.old_s').children().remove();
+                            Olddata();
+                        }
+                    });
                 }
-                $("#userTbody").html(str);
-            } else {
-                layer.msg("查询失败!", {icon: 5});
+
             }
         });
-    }
-
-
-    $('.false_l').click(function () {
-        $('.back_big').hide();
-        $('.add_l').hide();
-    });
-    $('.true_l').click(function () {
-        var name = $('#add-name').val();
-        var email = $('#add-email').val();
-        var subject = $('#add-subject').val();
-        if (name == undefined || name == "") {
-            alert("主讲名称不为空！")
-            return;
-        }
-        if (email == undefined || email == "") {
-            alert("邮箱不为空！")
-            return;
-        }
-        if (subject == undefined || subject == "") {
-            alert("科目不为空！")
-            return;
-        }
-        var params = {
-            'masterTeacherData':[
-                {
-                    'name':name,
-                    'email':email,
-                    'gradeCourse':subject
-                }
-            ]
-        }
-        var url = url_o + "backEndMasterTeacherManager/addMasterTeacher.do";
-        ajax_S(url, params, function (json) {
-            if(json.result){
-                $('.back_big').hide();
-                $('.add_l').hide();
-                layer.msg("添加成功!", {icon: 6});
-                findList();
-            }else {
-
-                $('.back_big').hide();
-                $('.add_l').hide();
-                layer.msg("添加失败!", {icon: 6});
-                // alert(json.message);
-            }
+        //编辑取消
+        $('.false_s,.true_s').on('click',function(){
+            $('.back_big').hide();
+            $('.edit_s').hide();
+            $('.edit_s select').val('1');
+            $('.tccode').val('');
+            $('.old_s').children().remove();
         });
-    });
-    //获取校区信息
-    function campus(){
-        var table={
-            "tableName":"dict_school_info"
-        }
-        ajaxRequest("POST", url.s_select, table , selectData);
-        function selectData(e) {
-            for(var i = 0;i<e.data.length;i++){
-                $('#campus').append('<option value="'+e.data[i].tCode+'">'+e.data[i].tName+'</option>');
+        //新建账户
+        $('.master_adduser').on('click',function(){
+            $('.add_l ').show();
+            $('.back_big').show();
+        });
+        //新建 取消
+        $('.false_l').on('click',function () {
+            $('.back_big').hide();
+            $('.add_l').hide();
+        });
+        //新建  确认
+        $('.true_l').on('click',function () {
+            var name = $('#add-name').val();
+            var email = $('#add-email').val();
+            var subject = $('#add-subject').val();
+            if (name == undefined || name == "") {
+                layer.msg("主讲名称不为空！")
+                return;
             }
-        }
-    }
-    campus();
-    //编辑 确认 或者取消
-    $('.false_s,.true_s').click(function(){
-        $('.back_big').hide();
-        $('.edit_s').hide();
-        $('.edit_s select').val('1');
-        $('.tccode').val('');
-        $('.old_s').children().remove();
-    });
-   //编辑下 增加或者删除
-    $(document).on('click','.edit_s i',function(){
-        if($(this).html()=='+'){
-            //增加新编号
-            if($('#campus').val()=='1'){
-                alert('校区未选择');
-                return false;
-            };
-            if($('.tccode').val()==''){
-                alert('主讲编号未输入');
-                return false;
+            if (email == undefined || email == "") {
+                layer.msg("邮箱不为空！")
+                return;
             }
-            var need = {
-                masterCodeData:[{
-                    name:$('.edit_s b').html(),
-                    code:$('.tccode').val(),
-                    schoolId:$('#campus').val(),
-                    schoolName:$('#campus option:selected').html(),
-                    email:sessionStorage.teaneamail
-                }]
-            };
-            ajax_S(pcweb.t_add,need,function(e){
-                console.log(e)
-                if(e.result==true){
-                    alert('操作成功');
-                    Olddata();
+            if (subject == undefined || subject == "") {
+                layer.msg("科目不为空！")
+                return;
+            }
+            var params = {
+                'masterTeacherData':[
+                    {
+                        'name':name,
+                        'email':email,
+                        'gradeCourse':subject
+                    }
+                ]
+            }
+            $.ajax({
+                url:global.master_new,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify(params),
+                success:function(json){
+                    if(json.result){
+                        $('.back_big').hide();
+                        $('.add_l').hide();
+                        layer.msg("添加成功!", {icon: 6});
+                        findList();
+                    }else {
+                        $('.back_big').hide();
+                        $('.add_l').hide();
+                        layer.msg("添加失败!", {icon: 6});
+                        // alert(json.message);
+                    }
                 }
             });
-        }else{
-            //删除编号
-           if(confirm('确定删除吗？')){
-               var need_ = {
-                    id:$(this).attr('id'),
-               };
-               ajax_S(pcweb.t_dele,need_,function(e){
-                   if(e.result){
-                       alert('删除成功')
-                   }
-                   $('.old_s').children().remove();
-                   Olddata();
-               });
-           }
-
-        }
-    })
-    //请求旧的教师编号
-    function Olddata(){
-        var need = {
-            email:sessionStorage.teaneamail
-        };
-        ajax_S(pcweb.old_data,need,function(e){
-            if(e.Data.length!=0&&e.result!=false){
-                $('.old_s').children().remove();
-                for(var i = 0;i<e.Data.length;i++){
-                    $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
-                }
-               $('.edit_s').css('margin-top',-$('.edit_s').height()/2-40)
-            }else{
-                $('.old_s').hide();
-            }
-        })
-    };
-})
-
-/**
- * 启用／禁用
- * @param pid
- */
-function enabledUser(_this,pid,email) {
-    var isEnable = $("#" + pid).html();
-    var text;
-    var buttons = [];
-    if (isEnable == 1) {
-        text = "确定禁用该数据?";
-        buttons.push('禁用', '取消');
-    } else {
-        text = "确定启用该数据?";
-        buttons.push('启用', '取消')
-    }
-    layer.confirm(text, {
-        btn: buttons //按钮
-    }, function () {
-        var params = {
-            'id':pid,
-            'invalid':isEnable,
-            'email':email
-        };
-
-        jQuery.ajax({
-            type: "POST",
-            url: url_o + "backEndMasterTeacherManager/enabledMasterTeacher.do",
-            async: false,//同步
-            dataType: 'json',
-            data: JSON.stringify(params),
-            success: function (json) {
-                if (json.result == true) {
-                    if (isEnable == 1) {
-                        layer.msg("禁用成功!", {icon: 6});
-                        $(_this).html("<i></i>启用");
-                        $(_this).removeClass();
-                        $(_this).addClass('p176-btn-disable');
-                        $("#" + pid).html(0)
-                    } else {
-                        layer.msg("启用成功!", {icon: 6});
-                        $(_this).html("<i></i>禁用");
-                        $(_this).removeClass();
-                        $(_this).addClass('p176-btn-able');
-                        $("#" + pid).html(1)
-                    }
-                    //findList(1, currentCityId, currentAreaId, currentDeptId);
-                } else {
-                    if (isEnable == 1) {
-                        layer.msg("禁用失败!", {icon: 5});
-                    } else {
-                        layer.msg("启用失败!", {icon: 5});
-                    }
-                }
-            }
         });
-    }, function () {
-
+        //老的教师编号
+        function Olddata(){
+            var need = {
+                email:sessionStorage.teaneamail
+            };
+            $.ajax({
+                url:global.master_data,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify({email:sessionStorage.teaneamail}),
+                success:function(e){
+                    if(e.Data.length!=0&&e.result!=false){
+                        $('.old_s').children().remove();
+                        for(var i = 0;i<e.Data.length;i++){
+                            $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
+                        }
+                        $('.edit_s').css('margin-top',-$('.edit_s').height()/2-40)
+                    }else{
+                        $('.old_s').hide();
+                    }
+                }
+            });
+        };
     });
-}
-
-
-/**
- * 新建账号
- */
-function addMaster() {
-    $('.back_big').show();
-    $('.add_l').show();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//编辑
-function edite_s(self){
-    $('.back_big').show();
-    $('.edit_s').show();
-    var teaname    = $(self).attr('userName')
-    sessionStorage.teaneamail = $(self).attr('email')
-    $('.edit_s p b').html(teaname);
-    var need = {
-        email:sessionStorage.teaneamail
-    };
-    ajax_S(pcweb.old_data,need,function(e){
-        if(e.Data.length!=0&&e.result!=false){
-            $('.old_s').children().remove();
-            for(var i = 0;i<e.Data.length;i++){
-                $('.old_s').append('<p><span>'+e.Data[i].schoolName+'</span><span>'+e.Data[i].mtCode+'</span><i id="'+e.Data[i].id+'">-</i></p>')
-            }
-            $('.edit_s').css('margin-top',-$('.edit_s').height()/2-40)
-        }else{
-            $('.old_s').hide();
-        }
-    })
-}
+});

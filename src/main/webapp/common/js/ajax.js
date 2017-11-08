@@ -255,7 +255,7 @@ function ajax_S(link,more,func,errof){
         url:link,
         type: 'post',
         asyns:false,
-        timeout:1000,
+        // timeout:1000,
         dataType: 'json',
         data:JSON.stringify(more),
         success:function(e){
@@ -263,7 +263,7 @@ function ajax_S(link,more,func,errof){
         },
         error: function (err) {
             // failureCallback(msg);
-            errof();
+            // errof();
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){

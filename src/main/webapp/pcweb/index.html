@@ -73,6 +73,10 @@
             url:"/userAdd",
             templateUrl:"userAdd.html",
             controller:'userAdd'
+        }).state("master",{
+            url:"/master",
+            templateUrl:"master.html",
+            controller:'master'
         });
         $urlRouterProvider.otherwise("/index")
     })
@@ -103,7 +107,11 @@
         .controller('userAdd', function () {
             clear();
             require(['userAdd'], function () {})
-        });
+        })
+		.controller('master', function () {
+			clear();
+			require(['master'], function () {})
+		});
 		function clear(){
             requirejs.undef('index');
             requirejs.undef('homework');
@@ -112,6 +120,7 @@
             requirejs.undef('detail');
             requirejs.undef('lesstime_detail');
             requirejs.undef('userAdd');
+            requirejs.undef('master');
 		}
 </script>
 </body>

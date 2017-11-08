@@ -1,36 +1,49 @@
-<div class="index_title">
+<div class="index_title ">
     <span></span>
-    <h4>权限统计</h4>
+    <h4>账户列表 > 编辑账户</h4>
 </div>
-<div class="p176-table-wrap">
-    <div class="hot-classes" style="margin-top: 30px">
-        <div class="user-li user-li1" style="width: 215px;">
-            <span>账号:</span>
-            <input type='text' class='user-input' id='inputLoginId' onfocus="getMoreUserInfo()"
-                   placeholder="请输入邮箱前缀查询用户" autofocus="autofocus" />
-        </div>
-        <div class="user-li user-li-last clearfix">
-            <span class="fl">校区:</span>
-            <ul class="content" id="content-school">
 
-            </ul>
-        </div>
-
-        <div class="user-li user-li-last clearfix">
-            <span class="fl">权限:</span>
-            <ul class="content" id="content-permission">
-
-            </ul>
+<div class="power_search userAdd">
+    <div class="power_screen clearfix">
+        <h4>账号:</h4>
+        <div class="homework_sea">
+            <input type="text" placeholder="请输入老师名称">
+            <img src="images/seach.png" alt="">
         </div>
     </div>
-
-
-    <div class="p176-btn-adduser">
-        <button type="reset" onclick="reload()" class="reset">取消</button>
-        <button type="button" class="sure">确定</button>
+    <div class="power_screen clearfix">
+        <h4>校区:</h4>
+        <ul>
+            <li><img src="images/tree_checkbox_0.gif" alt="">秦皇岛</li>
+            <li><img src="images/tree_checkbox_1.gif" alt="">秦皇岛</li>
+            <li><img src="images/tree_checkbox_1.gif" alt="">秦皇岛</li>
+        </ul>
+    </div>
+    <div class="power_screen clearfix">
+        <h4>权限:</h4>
+        <ul>
+            <li><img src="images/tree_checkbox_0.gif" alt="">秦皇岛</li>
+            <li><img src="images/tree_checkbox_1.gif" alt="">秦皇岛</li>
+            <li><img src="images/tree_checkbox_1.gif" alt="">秦皇岛</li>
+        </ul>
+    </div>
+    <div class="user_operation">
+        <a href="" class="user_operation_cancel">取消</a>
+        <a href="" class="user_operation_confirm">启用</a>
+    </div>
+    <div class="user_Prompt">
+        <p>确认禁用？</p>
+        <input type="button" value="禁用" class="user_Prompt_confirm">
+        <input type="button" value="取消">
+    </div>
+    <div class="user_Prompt user_Enable">
+        <p>确认启用？</p>
+        <input type="button" value="禁用" class="user_Prompt_confirm">
+        <input type="button" value="取消">
+    </div>
+    <div class="user_Prompt user_none">
+        <p>未搜索到此用户</p>
+        <input type="button" value="确认" class="user_Prompt_confirm user_none">
     </div>
 </div>
-<div>
-    <ul class="auto-list">
-    </ul>
-</div>
+<div class="back_big"></div>

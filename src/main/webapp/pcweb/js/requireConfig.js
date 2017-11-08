@@ -15,7 +15,12 @@ var global = {
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
     'indexFormAll':url_o+'backEndHome/exportCountUserAnalyseListExcel.do', //导出概况总表
     'left_nav':url_o+'/function/getAllFunction.do',  //左侧导航
-
+    'master_All':url_o+'teacherData/queryAllSpeakerTeachers.do', //获取所有主讲列表
+    'school_All':url_o+'dict/getDictListByTableName.do',//获取校区
+    'master_data':url_o+'backEndMasterTeacherManager/getTeacherAllCode.do', //获取主讲校区信息
+    'master_add':url_o+'backEndMasterTeacherManager/addMasterTeacherCode.do',//新增老师编号
+    'master_reduce':url_o+'backEndMasterTeacherManager/editMasterTeacherCode.do',//删除老师编号
+    'master_new':url_o+'backEndMasterTeacherManager/addMasterTeacher.do',//新建主讲
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
@@ -99,7 +104,7 @@ require(['jquery-1.11.0.min'],function(){
                         }
                         var $bure_true = $('.left_nav ul li').eq(0);
                         $bure_true.addClass('activ_nav')
-                        location.href+=$bure_true.attr('href')
+                        // location.href+=$bure_true.attr('href')
                     }
                 }
             }else{

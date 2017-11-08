@@ -105,6 +105,8 @@ body{
 }
 .index_title{
 	margin-bottom:20px;
+	height:39px;
+	overflow: hidden;
 }
 .index_title span{
 	display:inline-block;
@@ -458,6 +460,8 @@ html body .homework_operation{
 .lesstme_condition ul{
 	float:left;
 }
+
+/*课时*/
 .lesstiime_chart{
 	width:956px;
 	height:424px;
@@ -553,4 +557,255 @@ html body .homework_operation{
 .lesstime_noseach img{
 	display:block;
 	margin:82px auto 18px;
+}
+/*权限*/
+.power_radiu li img{
+	top:3px;
+}
+.power_list{
+	padding-left:0;
+}
+.power_list li span{
+	width:134px;
+}
+.index_title a{
+	display:block;
+	float: left;
+	position:relative;
+	top:-39px;
+	left:727px;
+	width:100px;
+	height:30px;
+	background:#00b997;
+	line-height:30px;
+	color:#fff;
+	font-size:14px;
+	text-align:center;
+}
+.index_title a img{
+	margin-right:8px;
+}
+.power_search{
+	width:829px;
+	background:#fafafa;
+	border:1px solid #e8e8e8;
+	padding-bottom:25px;
+}
+.power_screen{
+	margin-left:26px;
+	margin-top:25px;
+}
+.power_screen .homework_sea{
+	float:left;
+	margin:0;
+	background:#fff;
+}
+.power_screen h4{
+	display:block;
+	float:left;
+	width:55px;
+	height:38px;
+	line-height:38px;
+	font-size:16px;
+	color:#666;
+}
+.power_screen li{
+	display:inline-block;
+	font-size:14px;
+	color:#999;
+	line-height:38px;
+}
+.power_screen li img{
+	position:relative;
+	top:4px;
+	margin-right:8px;
+}
+.userAdd{
+	min-height:407px;
+	padding:0;
+}
+.user_operation{
+	width:252px;
+	height:40px;
+	margin:110px auto 0;
+}
+.user_operation a{
+	display:block;
+	float:right;
+	width:89px;
+	height:38px;
+	background:#00ba97;
+	font-size:14px;
+	color:#fff;
+	line-height:38px;
+	text-align:center;
+}
+.user_operation .user_operation_cancel{
+	float:left;
+	background:#dfdfdf;
+}
+.user_Prompt{
+	width:379px;
+	height:189px;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin:-94px 0 0 -189px;
+	background:#fff;
+	border:1px solid #dcdcdc;
+	display:none;
+}
+.user_Prompt p{
+	font-size:18px;
+	color:#333;
+	padding-top:56px;
+	text-align:center;
+}
+.user_Prompt input{
+	display:inline-block;
+	margin:49px auto 0;
+	width:92px;
+	height:38px;
+	background:#fff;
+	border:1px solid  #00b997;
+	color:#00b997;
+	font-size:16px;
+	line-height:38px;
+	cursor: pointer;
+}
+.user_Prompt .user_Prompt_confirm{
+	margin-left:90px;
+	background:#00b997;
+	border:1px solid  #fff;
+	color:#fff;
+}
+.user_Prompt .user_none{
+	margin-left:143px;
+}
+.master_edit,.master_confrim{
+	margin-right:10px;
+	font-size:14px;
+	line-height:46px;
+	color:#00ba97
+}
+/*主讲样式*/
+.add_l{
+	width:400px;
+	height:260px;
+	padding-top:40px;
+	background:#fff;
+	position: fixed;
+	left:50%;
+	top:50%;
+	margin:-150px 0 0 -200px;
+	border-radius:8px;
+	z-index:11;
+	display:none;
+}
+.add_l p {
+	line-height:50px;
+	font-size:15px;
+	color:#000;
+}
+.add_l span{
+	display:inline-block;
+	width:100px;
+	text-align:right;
+	margin-right: 20px;
+}
+.add_l p input{
+	display:inline-block;
+	width:210px;
+	padding-left:10px;
+	height:35px;
+	border:1px solid #ccc;
+	border-radius:5PX;
+}
+.true_l, .false_l,.false_s,.true_s{
+	display:inline-block;
+	width:80px;
+	height:40px;
+	background: #00ba97;
+	font-size:15px;
+	color:#fff;
+	position: absolute;;
+	bottom:40px;
+	border-radius:8px;
+}
+.true_l,.true_s{
+	right:50px;
+	cursor: pointer;
+}
+.false_l,.false_s{
+	left:50px;
+	background:#ccc!important;
+	cursor: pointer;
+}
+.edit_s{
+	position: fixed;
+	left:50%;
+	top:50%;
+	margin:-85px 0 0 -200px;
+	width:400px;
+	min-height:90px;
+	background:#fff;
+	z-index:11;
+	border-radius:10px;
+	padding-bottom:80px;
+	display:none;
+}
+.edit_s p{
+	line-height:50px;
+	font-size:15px;
+	color:#000;
+}
+.edit_s p span{
+	padding-left:30px;
+	margin-right:20px;
+}
+.edit_s p i{
+	display:block;
+	float:right;
+	width:20px;
+	height:20px;
+	border:2px solid #ccc;
+	color:#00ba97;
+	border-radius:50%;
+	line-height:20px;
+	text-align:center;
+	font-size:15px;
+	font-style:normal;
+	margin-top:15px;
+	margin-right:20px;
+	cursor:pointer;
+}
+.edit_s p select{
+	border:1px solid #ccc;
+	margin-left:28px;
+	display:inline-block;
+	width:100px;
+	height:25px;
+}
+.edit_s p input{
+	border:1px solid #00ba97;
+	display:inline-block;
+	width:160px;
+	height:25px;
+	padding-left:20px;
+	margin-left:20px;
+}
+.edit_s .false_s,.edit_s .true_s{
+	bottom:20px;
+	cursor:pointer;
+}
+.edit_s p b{
+	font-family:normal;
+	color:#00ba97;
+}
+.old_s{
+	margin-top:20px;
+	border-top:1px solid #ccc;
+}
+html body .master_list{
+	padding:0;
 }
