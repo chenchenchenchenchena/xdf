@@ -169,6 +169,7 @@ $(function () {
 
     } else {//待批复
         $('.hmAnswer').eq(1).hide();
+        errorFile();
         //获取文件信息
         // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
             e = JSON.parse(sessionStorage.detailsStrNot);

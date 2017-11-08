@@ -147,6 +147,7 @@ $(function () {
                     allFilePath.fileRfullPath.push({"fullPath": paths.diskFilePath});
                 });
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
+                $('.loading-back').show();
                 ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
             }
              //layer.close(loading);
@@ -163,15 +164,19 @@ $(function () {
             shade: [0.2, '#000'],
             title: '',
             skin: '',
-            content: $(".file-fail")
+            content: $(".hwdetail-fail")
         })
     }
     // 取消
-    $(document).on('touchend', '.file-fail .cancelBtn', function () {
+    $(document).on('touchend', '.hwdetail-fail .cancelBtn', function () {
         layer.close(loading);
+        layer.close(layerED);
+        $('.loading-back').hide();
     });
     // 确定
-    $(document).on('touchend', '.file-fail .confirmBtn', function () {
+    $(document).on('touchend', '.hwdetail-fail .confirmBtn', function () {
+        loading = layer.load();
+        layer.close(layerED);
         ajaxRequest('POST', homework_s.s_hwfldetail, reqData, getHwFinishDetailSuccess,error);
 
     });
