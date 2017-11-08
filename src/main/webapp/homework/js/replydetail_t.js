@@ -196,6 +196,7 @@ $(function () {
      * @param e
      */
     function getFileInfo(e) {
+        $('.loading-back').show();
         var tea = e.File.RevampFile;//老师批注
         var stu = e.File.StudentHomeworkFile;//学生答案
         var tea_t = e.File.TeacherHomeworkFile;//作业信息
@@ -330,6 +331,7 @@ $(function () {
     });
     // 确定
     $(document).on('touchend', '.file-fail .confirmBtn', function () {
+        layer.close(layerE);
         getFileInfo(e);
 
     });

@@ -1,17 +1,9 @@
 /* 课时统计 */
 require(['jquery-1.11.0.min'], function () {
-    require(['layer'], function () {
-        //layer.msg('1261645')
-
-        $('.homewor_big_selecet .homework_begin').onblur = function(){
-            beginTime = $('.homewor_big_selecet .homework_begin').val();
-        }
-        $('.homewor_big_selecet .homework_end').onblur = function(){
-            endTime = $('.homewor_big_selecet .homework_end').val();
-        }
-
-        SelectData();
-        //$('.homewor_big_selecet .homework_begin').
+    require(['jquery-ui.min'], function () {
+        require(['layer'], function () {
+            SelectData();
+        });
     });
 });
 
@@ -63,7 +55,7 @@ var currentCityId;
 //点击选择校区
 function filterByCityId(_this, cityId) {
     currentCity = cityId;
-    currentCityId = _this.attr('data-schoolId');
+    currentCityId = $(_this).attr('data-schoolId');
     if(currentCity == ""){
         currentCity = "全部";
     }
@@ -80,6 +72,18 @@ function selectDate(){
     $('.homewor_big_selecet span').hide();
     $('.homewor_big_selecet .homework_begin').show();
     $('.homewor_big_selecet .homework_end').show();
+    //$("#start").datepicker({
+    //    onSelect:function(dateText,inst){
+    //        layer.msg(dateText);
+    //        $("#end").datepicker("option","minDate",dateText);
+    //    }
+    //});
+    //$("#end").datepicker({
+    //    onSelect:function(dateText,inst){
+    //        layer.msg(dateText);
+    //        $("#start").datepicker("option","maxDate",dateText);
+    //    }
+    //});
 }
 function getDate(){
     if(beginTime != "" && endTime != ""){
@@ -89,6 +93,7 @@ function getDate(){
 
 }
 
+//筛选数据接口实现
 function SelectData(){
     beginTime = "2017-11-01";
     endTime = "2017-11-01";
