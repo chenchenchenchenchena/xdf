@@ -309,14 +309,17 @@ $(function () {
     }
     var layerE;
     function errorFile(){
-        layerE = layer.open({
-            type: 1,
-            area: ['548px', '345px'],
-            shade: [0.2, '#000'],
-            title: '',
-            skin: '',
-            content: $(".file-fail")
-        })
+        if(layerE == undefined){
+            layerE = layer.open({
+                type: 1,
+                area: ['548px', '345px'],
+                shade: [0.2, '#000'],
+                title: '',
+                skin: '',
+                content: $(".file-fail")
+            })
+        }
+
 
     }
 
