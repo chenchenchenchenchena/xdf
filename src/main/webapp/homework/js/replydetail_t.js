@@ -310,7 +310,7 @@ $(function () {
     }
     var layerE;
     function errorFile(){
-        if(layerE == undefined){
+        //if(layerE == undefined){
             layerE = layer.open({
                 type: 1,
                 area: ['548px', '345px'],
@@ -319,7 +319,7 @@ $(function () {
                 skin: '',
                 content: $(".file-fail")
             })
-        }
+        //}
 
 
     }
