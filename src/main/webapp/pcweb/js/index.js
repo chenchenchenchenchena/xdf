@@ -1,7 +1,7 @@
 /* 概况 */
 
 require(['jquery-1.11.0.min'], function () {
-    require(['layer','requireConfig'],function() {
+    require(['layer'],function() {
      layer.load();
     /*css 兼容*/
     $('.index_forms li:nth-child(odd)').css('background', '#f5fbfa')
