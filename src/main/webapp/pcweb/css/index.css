@@ -263,6 +263,7 @@ body{
 	position:relative;
 	background:#fff;
 	display:none;
+	z-index: 1;
 }
 .homework_samll_one li{
 	min-width:73px;

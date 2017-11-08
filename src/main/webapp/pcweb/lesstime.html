@@ -11,21 +11,21 @@
             <li>
                 <span class="homework_samll_title">校区</span>
                 <div class="homework_samll_one">
-                    <h4>全部</h4>
+                    <h4 onfocus="getSchool()" tabindex="1">全部</h4>
                     <ul>
-                        <li>全部</li>
-                        <li>全部</li>
-                        <li>全部</li>
-                        <li>全部</li>
+                        <!--<li>全部</li>-->
+                        <!--<li>全部</li>-->
+                        <!--<li>全部</li>-->
+                        <!--<li>全部</li>-->
                     </ul>
                 </div>
             </li>
             </ul>
         <span class="homework_samll_title">时间段</span>
         <div class="homewor_big_selecet clearfix">
-            <span>2017-06-01~2017-12-01</span>
-            <input type="date" class="homework_begin">
-            <input type="date" class="homework_end">
+            <span onfocus="selectDate()" tabindex="1" onblur="getDate()">2017-06-01~2017-12-01</span>
+            <input type="date" class="homework_begin" tabindex="1">
+            <input type="date" class="homework_end" tabindex="1">
         </div>
     </div>
 
