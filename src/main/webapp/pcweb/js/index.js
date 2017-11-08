@@ -17,7 +17,6 @@ require(['jquery-1.11.0.min'], function () {
         dataType: 'json',
         data:JSON.stringify({'userId':'123'}),
         success:function(e){
-            console.log(e);
             var usernum = e.Data;
             var formurl = [];
             $('.totalUser').html(usernum.totalUser+'<span>人</span>');
@@ -39,7 +38,6 @@ require(['jquery-1.11.0.min'], function () {
             dataType: 'json',
             data:JSON.stringify({'schoolId':$(this).attr('schoolId'),'schoolName':$(this).attr('schoolName')}),
             success:function(e){
-                console.log(e)
                 if(e.result){
                     newTab.location.href=e.downloadUrl;
                 }else{
