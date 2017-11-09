@@ -121,6 +121,10 @@ function filterByCityId(_this, cityId) {
 //筛选数据接口实现
 function SelectData(){
 
+    var time = $('#date_input').val();
+
+    beginTime = time.substring(0,10);
+    endTime = time.substring(13,time.length);
     if(currentCityId == undefined || currentCityId == ""){
         layer.msg("请先选择校区");
         return false;

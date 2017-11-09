@@ -337,7 +337,7 @@ $(function () {
     // 确定
     $(document).on('touchend', '.file-fail .confirmBtn', function () {
         layer.close(layerE);
-        getFileInfo(e);
+        window.location.reload();
 
     });
 
