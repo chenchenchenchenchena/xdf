@@ -74,7 +74,7 @@ $(function () {
             var myAnswerDes = decodeURIComponent(datas.description);
             if (replyStatus == 1) {//已批复
                 // $('.answer').hide();
-
+                $('.answerT .hmAnswer').remove();
                 /*******作业答案*******/
                 if (myAnswerDes != "") {
                     var homeworkText = myAnswerDes.split('|>|');
