@@ -150,7 +150,10 @@ $(function () {
                 $('.loading-back').show();
                 if(!(allFilePath.fileTfullPath.length == 0 && allFilePath.fileSfullPath.length == 0 && allFilePath.fileRfullPath.length == 0)){
                     ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
+                }else {
+                    $('.loading-back').hide();
                 }
+
             }
              //layer.close(loading);
         }

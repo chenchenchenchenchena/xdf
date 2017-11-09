@@ -255,7 +255,7 @@ function ajax_S(link,more,func,errof){
         url:link,
         type: 'post',
         asyns:false,
-         timeout:5000,
+         timeout:50000,
         dataType: 'json',
         data:JSON.stringify(more),
         success:function(e){
@@ -291,7 +291,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
     $.ajax({
         type: typeIn,
         url: targetUrl,
-        timeout:5000,
+        timeout:50000,
         data: requestData,
         success: function (msg) {
             successCallback(msg);

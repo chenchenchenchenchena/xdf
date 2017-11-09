@@ -230,6 +230,8 @@ $(function () {
                 'fileRfullPath': teaReplyFiles
             };
             ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess,errorFile);
+        }else {
+            $('.loading-back').hide();
         }
 
     }
