@@ -222,13 +222,16 @@ $(function () {
             }
         }
         replyTimes.sort();
-        var params = {
-            'fileSfullPath': stuAnwersFiles,
-            'fileTfullPath': hwFiles,
-            'fileRfullPath': teaReplyFiles
-        };
+        if(!(stuAnwersFiles.length == 0 && hwFiles.length == 0 && teaReplyFiles.length == 0)){
 
-        ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess,errorFile);
+            var params = {
+                'fileSfullPath': stuAnwersFiles,
+                'fileTfullPath': hwFiles,
+                'fileRfullPath': teaReplyFiles
+            };
+            ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess,errorFile);
+        }
+
     }
 
     /**

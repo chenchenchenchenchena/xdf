@@ -148,7 +148,9 @@ $(function () {
                 });
                 console.log("获取文件排序" + JSON.stringify(allFilePath));
                 $('.loading-back').show();
-                ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
+                if(!(allFilePath.fileTfullPath.length == 0 && allFilePath.fileSfullPath.length == 0 && allFilePath.fileRfullPath.length == 0)){
+                    ajaxRequest('POST', homework_s.s_fileRank, JSON.stringify(allFilePath), getAllFileRankSuccess,errorFile);
+                }
             }
              //layer.close(loading);
         }

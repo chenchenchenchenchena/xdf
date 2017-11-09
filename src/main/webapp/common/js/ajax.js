@@ -255,7 +255,7 @@ function ajax_S(link,more,func,errof){
         url:link,
         type: 'post',
         asyns:false,
-        // timeout:1000,
+         timeout:5000,
         dataType: 'json',
         data:JSON.stringify(more),
         success:function(e){
@@ -269,7 +269,7 @@ function ajax_S(link,more,func,errof){
         complete:function(XMLHttpRequest,status){
             if(status=='timeout'){//超时,status还有success,error等值的情况
                if(length_!=3){
-                    errof();
+                    //errof();
                }else{
                     // alert('数据访问超时，请切换网络环境')
                }
@@ -291,7 +291,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
     $.ajax({
         type: typeIn,
         url: targetUrl,
-        timeout:1000,
+        timeout:5000,
         data: requestData,
         success: function (msg) {
             successCallback(msg);
