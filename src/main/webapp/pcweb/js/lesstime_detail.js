@@ -165,10 +165,9 @@ function SelectData(){
         'beginDate':beginTime,
         'endDate':endTime,
         'masterTeacherFlag':masterTeacherFlag,
-        'teacherName':seacherKey,
         'pageNum':page,
         'pageSize':pageSize,
-        'teacherEmail':""
+        'teacherEmail':seacherKey
     };
     $.ajax({
         type: "POST",
