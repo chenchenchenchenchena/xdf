@@ -1,8 +1,8 @@
 /* 概况 */
 
-require(['jquery-1.11.0.min'], function () {
+require(['jquery-1.11.0.min','requireConfig'], function () {
     require(['layer'], function () {
-        $('.user_name').html(sessionStorage.getItem('userName'));
+     $('.user_name').html(sessionStorage.getItem('userName'));
      layer.load();
     /*css 兼容*/
     $('.index_forms li:nth-child(odd)').css('background', '#f5fbfa')
