@@ -9,8 +9,8 @@
     <div class="homework_radiu">
         <ul>
             <li><img src="images/checked.png" alt="">全部</li>
-            <li><img src="images/check.png" alt="">全部</li>
-            <li><img src="images/check.png" alt="">全部</li>
+            <li><img src="images/check.png" alt="">普通作业</li>
+            <li><img src="images/check.png" alt="">电子作业</li>
         </ul>
     </div>
     <div class="homework_title">
@@ -20,57 +20,39 @@
         <div class="clearfix">
         <span class="homework_samll_title">时间段</span>
         <div class="homewor_big_selecet clearfix">
-            <span>2017-06-01~2017-12-01</span>
-            <input type="date" class="homework_begin">
-            <input type="date" class="homework_end">
+            <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block" >
         </div></div>
         <div class="homewor_small_selecet clearfix">
             <ul class="clearfix">
                 <li>
                     <span class="homework_samll_title">校区</span>
                     <div class="homework_samll_one">
-                        <h4>全部</h4>
+                        <h4 onfocus="getSelectList(this,'dict_school_info')" tabindex="1">全部</h4>
                         <ul>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <span class="homework_samll_title">学段</span>
                     <div class="homework_samll_one">
-                        <h4>全部</h4>
+                        <h4 onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
                         <ul>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <span class="homework_samll_title">年级</span>
                     <div class="homework_samll_one">
-                        <h4>全部</h4>
+                        <h4 onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
                         <ul>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <span class="homework_samll_title">科目</span>
                     <div class="homework_samll_one">
-                        <h4>全部</h4>
+                        <h4 onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
                         <ul>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
-                            <li>全部</li>
                         </ul>
                     </div>
                 </li>
