@@ -1,13 +1,12 @@
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer'], function () {
-            //require(['laydate/laydate'], function () {
-                laydate.render({
-                    elem: '#test1',
-                    range: true //指定元素
-                });
-                SelectData();
-            //});
+
+            laydate.render({
+                elem: '#test1',
+                range: true //指定元素
+            });
+            SelectData();
         });
     });
 });
