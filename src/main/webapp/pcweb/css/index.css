@@ -827,3 +827,74 @@ html body .master_list{
 	margin-left: 20px;
 	margin-top: 12px;
 }
+.PublicPage {
+	text-align: right;
+	font-size: 12px;
+	padding: 10px 20px 0;
+	margin-bottom: 30px;
+}
+
+.PublicPage a,
+.PublicPage .pCurrent,
+.PublicPage .pPrev,
+.PublicPage .pNext {
+	border: 1px solid #dcdcdc;
+	padding: 5px 10px;
+	margin-left: 3px;
+}
+
+.PublicPage a:hover {
+	text-decoration: none;
+	background: #00ba97;
+	color: #fff;
+	border: 1px solid #00ba97;
+}
+
+.PublicPage .pCurrent {
+	background: #00ba97;
+	color: #fff;
+	border: 1px solid #00ba97;
+	cursor: pointer;
+}
+
+.PublicPage .pGray {
+	background: #ebebeb;
+	color: #9f9f9f;
+	border: 1px solid #dcdcdc;
+}
+
+.PublicPage .pAdorn {
+	height: 22px;
+	line-height: 22px;
+	padding: 2px 6px;
+	margin-left: 8px;
+	text-align: center;
+}
+
+.PublicPage .pFirst,
+.PublicPage .pPrev,
+.PublicPage .pNext,
+.PublicPage .pLast {
+}
+
+.PublicPage .pSelect {
+}
+
+.PublicPage .pPrev i,
+.PublicPage .pNext i {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.PublicPage input {
+	border: 1px solid #dcdcdc;
+	line-height: 12px;
+	height: 12px;
+	padding: 6px 2px;
+	width: 28px;
+	text-align: center;
+}

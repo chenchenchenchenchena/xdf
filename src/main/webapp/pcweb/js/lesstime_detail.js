@@ -8,10 +8,11 @@ var endTime = '';
 var seacherKey = "";
 var masterTeacherFlag = 0;
 var page = 1;
-var pageSize = "15";
+var pageSize = 15;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
+    require(['jqPaginator.min'], function () {
         require(['layer'], function () {
 
             laydate.render({
@@ -32,7 +33,30 @@ require(['jquery-1.11.0.min'], function () {
 
         });
     });
+    });
 });
+function initPage(totalCounts, currentPage) {
+    if (totalCounts != null && totalCounts != 0) {
+        $.jqPaginator("#publicPage", {
+            totalCounts: totalCounts,
+            pageSize: pageSize,
+            visiblePages: pageSize,
+            currentPage: currentPage,
+            prev: '<a class="pPrev" href="javascript:;">上一页</a>',
+            next: '<a class="pNext" href="javascript:;">下一页</a>',
+            page: '<a href="javascript:;">{{page}}</a>',
+            activeClass: 'pCurrent',
+            onPageChange: function (num, type) {
+                if (type != "init") {
+                    page = num - 1;
+                    SelectData();
+                }
+            }
+        });
+    } else {
+        $("#publicPage").html("");
+    }
+}
 
 // 输入教师名称筛选数据
 function seacherByName(){
@@ -152,9 +176,13 @@ function SelectData(){
         success: function (e) {
             var data = e.Data;
             if (data != undefined) {
-                var list = data.data;
+                var list = data.list;
                 if(list != undefined && list.length > 0 ){
                     $('.homework_list li').remove();
+
+                    totalCounts = data.total;
+                    var currentPage = data.pageNum;
+                    initPage(totalCounts, currentPage + 1);
 
                     var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）</span><span>当月课时（h）</span></li>';
                     $('.homework_list').append(str_th);
