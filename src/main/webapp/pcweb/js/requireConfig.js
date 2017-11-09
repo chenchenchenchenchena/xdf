@@ -8,39 +8,9 @@ if(window.location.host == onlineUrl){   //正式环境
     var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
 }else{    //测试环境
     var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+    onlineUrl = 'dt.staff.xdf.cn'
 }
- //登陆
-function toLogin() {
-    var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
-    var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
-    var calbac = {
-        'code': code_s,
-        'e2State': state_s,
-        'state': state_s
-    };
-    $.ajax({
-        url: url_o + "/e2Login/doLogin.do",
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify(calbac),
-        success: function (e) {
-            console.log(e);
-            if (e.result == false) {
 
-                alert(e.message);
-                toLogout();
-            } else {
-
-                sessionStorage.setItem("userName", e.userName);
-                var userId = e.userId;
-                userId = userId.split('@')[0];
-
-                sessionStorage.setItem("userId", userId);
-                // showFunctionList(userId);
-            }
-        }
-    });
-}
 var global = {
     'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
@@ -97,6 +67,8 @@ require(['jquery-1.11.0.min'],function(){
             returnUrl = returnUrl + "/pcweb/login_web.html";
             url = url_o + "logout/doAdminLogout.do"
         }else {
+            returnUrl = 'http://'+onlineUrl+'/xdfdthome'
+
             url = url_o + "logout/doLogout.do";
         }
 
@@ -176,5 +148,36 @@ require(['jquery-1.11.0.min'],function(){
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+    //登陆
+    function toLogin() {
+        var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
+        var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+        var calbac = {
+            'code': code_s,
+            'e2State': state_s,
+            'state': state_s
+        };
+        $.ajax({
+            url: url_o + "/e2Login/doLogin.do",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(calbac),
+            success: function (e) {
+                console.log(e);
+                if (e.result == false) {
 
+                    alert(e.message);
+                    toLogout();
+                } else {
+
+                    sessionStorage.setItem("userName", e.userName);
+                    var userId = e.userId;
+                    userId = userId.split('@')[0];
+
+                    sessionStorage.setItem("userId", userId);
+                    // showFunctionList(userId);
+                }
+            }
+        });
+    }
 });
