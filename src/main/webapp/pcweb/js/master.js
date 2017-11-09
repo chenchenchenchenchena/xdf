@@ -17,7 +17,10 @@ require(['jquery-1.11.0.min'], function () {
                         if(masterlist[i].gradeCourse==undefined){
                             masterlist[i].gradeCourse = '暂无科目'
                         };
-                        $('.master_list').append('<li><span>'+masterlist[i].teacherName+'</span><span>'+masterlist[i].accountId+'</span><span>'+masterlist[i].gradeCourse+'</span><span><a  href="javascript:;" class="master_edit" userName="'+masterlist[i].teacherName+'" email="'+masterlist[i].accountId+'">编辑</a><a href="javascript:;" class="master_confrim">禁用</a></span></li>')
+                        var email = masterlist[i].accountId;
+                        var invalid = masterlist[i].invalid;
+                        var pid = masterlist[i].teacherId;
+                        $('.master_list').append('<li><span>'+masterlist[i].teacherName+'</span><span>'+masterlist[i].accountId+'</span><span>'+masterlist[i].gradeCourse+'</span><span><a  href="javascript:;" class="master_edit" userName="'+masterlist[i].teacherName+'" email="'+email+'">编辑</a><a data-email="'+email+'" data-invalid="'+invalid+'" data-pid="'+pid+'" href="javascript:;" class="master_confrim">禁用</a></span></li>')
                     }
                 }
             }
@@ -193,5 +196,60 @@ require(['jquery-1.11.0.min'], function () {
                 }
             });
         };
+        //禁用点击
+        $(document).on('click','.master_confrim',function(){
+            var _this = this;
+            var pid = $(this).attr('data-pid');
+            var email = $(this).attr('data-email');
+            var isEnable = $(this).attr('data-invalid');
+
+            var text;
+            var buttons = [];
+            if (isEnable == 1) {
+                text = "确定禁用该数据?";
+                buttons.push('禁用', '取消');
+            } else {
+                text = "确定启用该数据?";
+                buttons.push('启用', '取消')
+            }
+            layer.confirm(text, {
+                btn: buttons //按钮
+            }, function () {
+                var params = {
+                    'id':pid,
+                    'invalid':isEnable,
+                    'email':email
+                };
+
+                jQuery.ajax({
+                    type: "POST",
+                    url: url_o + "backEndMasterTeacherManager/enabledMasterTeacher.do",
+                    async: false,//同步
+                    dataType: 'json',
+                    data: JSON.stringify(params),
+                    success: function (json) {
+                        if (json.result == true) {
+                            if (isEnable == 1) {
+                                layer.msg("禁用成功!", {icon: 6});
+                                $(_this).html("启用");
+                                $(_this).attr('data-invalid',0);
+                            } else {
+                                layer.msg("启用成功!", {icon: 6});
+                                $(_this).html("禁用");
+                                $(_this).attr('data-invalid',1);
+                            }
+                        } else {
+                            if (isEnable == 1) {
+                                layer.msg("禁用失败!", {icon: 5});
+                            } else {
+                                layer.msg("启用失败!", {icon: 5});
+                            }
+                        }
+                    }
+                });
+            }, function () {
+
+            });
+        });
     });
 });
