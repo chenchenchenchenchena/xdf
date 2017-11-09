@@ -81,7 +81,12 @@ require(['jquery-1.11.0.min'],function(){
             data: JSON.stringify(businessP),
             success: function (json) {
                 if (json.result == true) {
-                    //clearCookie();
+                    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+                    if (keys) {
+
+                        for (var i = keys.length; i--;)
+                            setCookie(keys[i], 1, -1);
+                    }
                     sessionStorage.removeItem("sid")
                     sessionStorage.removeItem("userId")
                     sessionStorage.removeItem("userName")
