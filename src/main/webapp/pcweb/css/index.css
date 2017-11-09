@@ -809,3 +809,14 @@ html body .homework_operation{
 html body .master_list{
 	padding:0;
 }
+
+.date-input {
+	padding-left: 10px;
+	height: 38px;
+	min-width: 262px;
+	line-height: 38px;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	border-radius: 2px;
+	display: inline;
+}
