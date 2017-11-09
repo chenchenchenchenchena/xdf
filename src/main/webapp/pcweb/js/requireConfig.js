@@ -97,46 +97,46 @@ require(['jquery-1.11.0.min'],function(){
     }
     //左侧菜单栏
 
-    $.ajax({
-        url:global.left_nav,
-        type: 'post',
-        asyns:false,
-        dataType: 'json',
-        data:JSON.stringify({'userId':sessionStorage.userId}),
-        success:function(e){
-            if(e.result){
-                var onelist = e.dataList;
-                for(var i = 0;i<onelist.length;i++){
-                    var onelistbure = onelist[i];
-                    if(onelistbure.isValid ==1){
-                        $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
-                        for(var k = 0;k<onelistbure.children.length;k++){
-                            var twolist = onelistbure.children[k];
-                            if(twolist.isValid ==1){
-                                $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
-                            }
-                        }
-                        var url_l =  location.href;
-                        var number_l = 0;
-                        if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
-                            number_l = 1;
-                        }
-                        else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
-                            number_l = 2;
-                        }
-                        else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-                            number_l = 3
-                        }
-                        else if(url_l.indexOf('master')!=-1){
-                            number_l = 4
-                        }
-                        var $bure_true = $('.left_nav ul li').eq(number_l);
-                        $bure_true.addClass('activ_nav')
-                    }
-                }
-            }
-        }
-    });
+    //$.ajax({
+    //    url:global.left_nav,
+    //    type: 'post',
+    //    asyns:false,
+    //    dataType: 'json',
+    //    data:JSON.stringify({'userId':sessionStorage.userId}),
+    //    success:function(e){
+    //        if(e.result){
+    //            var onelist = e.dataList;
+    //            for(var i = 0;i<onelist.length;i++){
+    //                var onelistbure = onelist[i];
+    //                if(onelistbure.isValid ==1){
+    //                    $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
+    //                    for(var k = 0;k<onelistbure.children.length;k++){
+    //                        var twolist = onelistbure.children[k];
+    //                        if(twolist.isValid ==1){
+    //                            $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
+    //                        }
+    //                    }
+    //                    var url_l =  location.href;
+    //                    var number_l = 0;
+    //                    if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+    //                        number_l = 1;
+    //                    }
+    //                    else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+    //                        number_l = 2;
+    //                    }
+    //                    else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+    //                        number_l = 3
+    //                    }
+    //                    else if(url_l.indexOf('master')!=-1){
+    //                        number_l = 4
+    //                    }
+    //                    var $bure_true = $('.left_nav ul li').eq(number_l);
+    //                    $bure_true.addClass('activ_nav')
+    //                }
+    //            }
+    //        }
+    //    }
+    //});
 
     Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
@@ -184,11 +184,45 @@ require(['jquery-1.11.0.min'],function(){
 
                     sessionStorage.setItem("sid",e.sid)
                     $('.user_name').html(sessionStorage.getItem('userName'));
-                    // showFunctionList(userId);
+                    showFunctionList(e.functionList);
+
                 }
             }
         });
     }
+
+    function showFunctionList(e){
+        var onelist = e;
+        for(var i = 0;i<onelist.length;i++){
+            var onelistbure = onelist[i];
+            if(onelistbure.isValid ==1){
+                $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
+                for(var k = 0;k<onelistbure.children.length;k++){
+                    var twolist = onelistbure.children[k];
+                    if(twolist.isValid ==1){
+                        $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
+                    }
+                }
+                var url_l =  location.href;
+                var number_l = 0;
+                if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+                    number_l = 1;
+                }
+                else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+                    number_l = 2;
+                }
+                else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+                    number_l = 3
+                }
+                else if(url_l.indexOf('master')!=-1){
+                    number_l = 4
+                }
+                var $bure_true = $('.left_nav ul li').eq(number_l);
+                $bure_true.addClass('activ_nav')
+            }
+        }
+    }
+
     function setCookie(name, value, days) {
         var exp = new Date();
         exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
