@@ -175,6 +175,9 @@ require(['jquery-1.11.0.min'],function(){
                     userId = userId.split('@')[0];
 
                     sessionStorage.setItem("userId", userId);
+
+
+                    sessionStorage.setItem("sid",e.sid)
                     // showFunctionList(userId);
                 }
             }
