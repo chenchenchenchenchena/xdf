@@ -9,6 +9,7 @@ var seacherKey = "";
 var masterTeacherFlag = 0;
 var page = 1;
 var pageSize = 15;
+var totalCounts = 0;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -30,6 +31,7 @@ require(['jquery-1.11.0.min'], function () {
 
                 $('#date_input').val(params.beginTime+" - "+params.endTime);
             }
+            initPage(totalCounts, page);
 
         });
     });
@@ -48,7 +50,7 @@ function initPage(totalCounts, currentPage) {
             activeClass: 'pCurrent',
             onPageChange: function (num, type) {
                 if (type != "init") {
-                    page = num - 1;
+                    page = num;
                     SelectData();
                 }
             }
@@ -164,8 +166,9 @@ function SelectData(){
         'endDate':endTime,
         'masterTeacherFlag':masterTeacherFlag,
         'teacherName':seacherKey,
-        'nextPage':page,
-        'pageSize':pageSize
+        'pageNum':page,
+        'pageSize':pageSize,
+        'teacherEmail':""
     };
     $.ajax({
         type: "POST",
@@ -179,10 +182,10 @@ function SelectData(){
                 var list = data.list;
                 if(list != undefined && list.length > 0 ){
                     $('.homework_list li').remove();
-
-                    totalCounts = data.total;
+                    totalCounts = data.total;//总条数
+                    $('.lesstime_Result').html("共"+data.total+"条数据");
                     var currentPage = data.pageNum;
-                    initPage(totalCounts, currentPage + 1);
+                    initPage(totalCounts, currentPage);
 
                     var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）</span><span>当月课时（h）</span></li>';
                     $('.homework_list').append(str_th);
