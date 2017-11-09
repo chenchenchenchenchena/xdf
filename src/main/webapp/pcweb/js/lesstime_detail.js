@@ -30,8 +30,15 @@ require(['jquery-1.11.0.min'], function () {
             if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
 
                 $('#date_input').val(params.beginTime+" - "+params.endTime);
+            }else {
+                beginTime = "2017-01-01";
+                var myDate = new Date();
+                endTime = myDate.format('Y-m-t');
+                $('#date_input').val(beginTime+" - "+endTime);
             }
             initPage(totalCounts, page);
+
+            SelectData();
 
         });
     });
@@ -167,6 +174,7 @@ function SelectData(){
         'masterTeacherFlag':masterTeacherFlag,
         'pageNum':page,
         'pageSize':pageSize,
+        'teacherName':seacherKey,
         'teacherEmail':seacherKey
     };
     $.ajax({

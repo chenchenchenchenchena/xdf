@@ -14,6 +14,11 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
+
+            beginTime = "2017-01-01";
+            endTime = new Date().Format("yyyy-MM-dd");
+            $('#date_input').val(beginTime+" - "+endTime);
+            SelectData();
             $('.select-btn').click(function(){
                 //获取筛选条件
                 SelectData();
