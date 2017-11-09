@@ -567,6 +567,9 @@ html body .homework_operation{
 }
 .power_list li span{
 	width:134px;
+	height:39px;
+	line-height:39px;
+	overflow:hidden;
 }
 .index_title a{
 	display:block;

@@ -13,8 +13,23 @@ require(['jquery-1.11.0.min'], function () {
                 if(e.data){
                     $('.user_schoollist').find('li').eq(0).siblings().remove();
                     $('.user_schoollist ul').prepend('<li class="user_schoolall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
+                    var school_sess = sessionStorage.schoolId.split(',');
                     for(var i = 0;i<e.data.length;i++){
-                        $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
+                        var bure = false;
+                        for(var k= 0;k<school_sess.length;k++){
+                            if(school_sess[k]==e.data[i].tCode){
+                                $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'" class="checked_school"><img src="images/tree_checkbox_1.gif" alt="">'+e.data[i].tName+'</li>')
+                                bure = true;
+                                break;
+                            }
+                        }
+                        if(bure==false){
+                            $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
+                        }
+                    }
+                    if($('.checked_school').length==e.data.length){
+                        $('.user_schoolall').find('img').attr('src','images/tree_checkbox_1.gif');
+                        $('.user_schoollist li').addClass('checked_school')
                     }
                 }
             }
@@ -25,27 +40,39 @@ require(['jquery-1.11.0.min'], function () {
             type: 'post',
             asyns:false,
             dataType: 'json',
-            data:JSON.stringify({'userId':'v_kouchen'}),
+            data:JSON.stringify({'userId':sessionStorage.loginId}),
             success:function(e){
                 if(e.result){
                     var onelist = e.dataList;
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
-                            $('.user_powerlist ul').prepend('<li class="user_powerall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
-                            for(var k = 0;k<onelistbure.children.length;k++){
-                                var twolist = onelistbure.children[k];
-                                if(twolist.isValid ==1){
-                                    $('.user_powerlist ul').append('<li id="'+twolist.id+'"><img src="images/tree_checkbox_0.gif" alt="">'+twolist.text+'</li>')
-                                }
+                        $('.user_powerlist ul').prepend('<li class="user_powerall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
+                        for(var k = 0;k<onelistbure.children.length;k++){
+                            var twolist = onelistbure.children[k];
+                            if(twolist.isValid==1){
+                            if(twolist.checked ==true){
+                                $('.user_powerlist ul').append('<li id="'+twolist.id+'" class="checked_power"><img src="images/tree_checkbox_1.gif" alt="">'+twolist.text+'</li>')
+                            }else{
+                                $('.user_powerlist ul').append('<li id="'+twolist.id+'"><img src="images/tree_checkbox_0.gif" alt="">'+twolist.text+'</li>')
                             }
+                            }
+                        }
                     }
+                    if($('.checked_power').length==onelistbure.children.length){
+                        $('.user_powerall').find('img').attr('src','images/tree_checkbox_1.gif')
+                        $('.user_powerlist li').addClass('checked_power')
+                    }
+
                 }
             }
         });
 
-        //搜索框事件
-        $('.homework_sea img').on('click',seachUser);
-        $('.homework_sea input').on('keyup',seachUser);
+
+        //名字重置
+        $('.homework_sea input').val(sessionStorage.loginId);
+        $('.homework_sea input').attr('disabled',true);
+        $('.homework_sea').css('background','rgb(235, 235, 228)');
+
         //选取邮箱
         $(document).on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
@@ -106,10 +133,10 @@ require(['jquery-1.11.0.min'], function () {
             if($(this).hasClass('user_powerall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_powerlist li').addClass('checked_school')
+                    $('.user_powerlist li').addClass('checked_power')
                 }else{
                     $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_powerlist li').removeClass('checked_school')
+                    $('.user_powerlist li').removeClass('checked_power')
                 }
             }else if($(this).find('img').attr('src').indexOf('0')!=-1){
                 $(this).addClass('checked_power');
@@ -127,17 +154,8 @@ require(['jquery-1.11.0.min'], function () {
             }
         })
 
-        //新建用户提交
+        //编辑用户提交
         $('.user_operation_confirm').on('click',function(){
-            var emailtest =  /[^\u4e00-\u9fa5]/;
-            if( $(this).attr('checked')){
-                layer.msg('正在提交');
-                return false;
-            }
-            if($('.homework_sea input').val()==''){
-                layer.msg('请输入账号');
-                return false;
-            }
             if($('.checked_power').length==0){
                 layer.msg('请选择相关权限');
                 return false;
@@ -146,15 +164,9 @@ require(['jquery-1.11.0.min'], function () {
                 layer.msg('请选择相关校区');
                 return false;
             }
-            if(!emailtest.test($('.homework_sea input').val())){
-                layer.msg('请输入合法账号');
-                return false;
-            }
             $(this).attr('checked',true);
             var config = {
-                loginId:$('.homework_sea input').val(),
-                userName:$('.homework_sea input').attr('name'),
-                email:$('.homework_sea input').val()+'@xdf.cn',
+                userid:$('.homework_sea input').val(),
             };
             var schoolId = [];
             var powerId = [];
@@ -169,31 +181,23 @@ require(['jquery-1.11.0.min'], function () {
                 }
             }
             config.auth = schoolId.join(',');
+            config.functionIds = powerId.join(',');
             $.ajax({
-                url:global.user_addnew,
+                url:global.user_edit,
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
                 data:JSON.stringify(config),
                 success:function(e){
-                   if(e.result){
-                       $.ajax({
-                           url:global.user_power,
-                           type: 'post',
-                           asyns:false,
-                           dataType: 'json',
-                           data:JSON.stringify({userId:$('.homework_sea input').val(),functionIds:powerId.join(',')}),
-                           success:function(e){
-                                if(e.result){
-                                    $('.user_operation_confirm').removeAttr('checked');
-                                    layer.msg('新建成功')
-                                }else{
-                                    $('.user_operation_confirm').removeAttr('checked');
-                                    layer.msg('新建失败')
-                                }
-                           }
-                       });
-                   }
+                    if(e.result){
+                        if(e.result){
+                            $(this).removeAttr('checked');
+                            layer.msg('修改成功')
+                        }else{
+                            $(this).removeAttr('checked');
+                            layer.msg('修改失败')
+                        }
+                    }
                 }
             });
         })

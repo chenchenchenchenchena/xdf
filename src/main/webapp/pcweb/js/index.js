@@ -10,6 +10,7 @@ require(['jquery-1.11.0.min'], function () {
         'background': '#fff',
         'color': '#bababa'
     });
+
     layer.closeAll('loading');
     //请求列表
     $.ajax({
@@ -17,7 +18,7 @@ require(['jquery-1.11.0.min'], function () {
         type: 'post',
         asyns:false,
         dataType: 'json',
-        data:JSON.stringify({'userId':'123'}),
+        data:JSON.stringify({'userId':sessionStorage.userId}),
         success:function(e){
             var usernum = e.Data;
             var formurl = [];
@@ -26,13 +27,17 @@ require(['jquery-1.11.0.min'], function () {
             $('.studentTotal').html(usernum.studentTotal+'<span>人</span>');
             $('.index_forms').find('li').eq(0).siblings().remove();
             for(var i = 0;i<usernum.data.length;i++){
-                $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+usernum.data[i].schoolId+'"schoolName="'+usernum.data[i].schoolName+'" index = '+i+' >导出教师列表</a></span> </li>')
+                $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+usernum.data[i].schoolId+'"schoolName="'+usernum.data[i].schoolName+'" index = '+i+' tea_num = "'+usernum.data[i].teacherCount+'">导出教师列表</a></span> </li>')
             }
         }
     });
 
     //导出列表
     $(document).on('click','.export_s',function(){
+        if($(this).attr('tea_num')==0){
+            layer.msg('暂无列表');
+            return false;
+        }
         var newTab=window.open();
         $.ajax({
             url:global.indexForm,

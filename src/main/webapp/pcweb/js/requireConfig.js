@@ -9,7 +9,39 @@ if(window.location.host == onlineUrl){   //正式环境
 }else{    //测试环境
     var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 }
+ //登陆
+function toLogin() {
+    var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
+    var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+    var calbac = {
+        'code': code_s,
+        'e2State': state_s,
+        'state': state_s
+    };
+    $.ajax({
+        url: url_o + "/e2Login/doLogin.do",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(calbac),
+        success: function (e) {
+            console.log(e);
+            if (e.result == false) {
 
+                alert(e.message);
+                toLogout();
+            } else {
+
+                sessionStorage.setItem("userName", e.userName);
+                var userId = e.userId;
+                userId = userId.split('@')[0];
+
+                sessionStorage.setItem("userId", userId);
+                // showFunctionList(userId);
+            }
+        }
+    });
+}
+toLogin();
 var global = {
     'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
@@ -25,6 +57,7 @@ var global = {
     'user_seac':url_o+'user/searchUser.do',  //搜索集团用户
     'user_addnew':url_o+'user/addUser.do',//新建用户
     'user_power':url_o+'function/addFunctionUser.do',//增加权限
+    'user_edit':url_o+'user/updateUser.do',//编辑用户
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
@@ -86,12 +119,13 @@ require(['jquery-1.11.0.min'],function(){
         });
     }
     //左侧菜单栏
+
     $.ajax({
         url:global.left_nav,
         type: 'post',
         asyns:false,
         dataType: 'json',
-        data:JSON.stringify({'userId':'v_kouchen'}),
+        data:JSON.stringify({'userId':sessionStorage.userId}),
         success:function(e){
             if(e.result){
                 var onelist = e.dataList;
@@ -105,12 +139,24 @@ require(['jquery-1.11.0.min'],function(){
                                 $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
                             }
                         }
-                        var $bure_true = $('.left_nav ul li').eq(0);
+                        var url_l =  location.href;
+                        var number_l = 0;
+                        if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+                            number_l = 1;
+                        }
+                        else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+                            number_l = 2;
+                        }
+                        else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+                            number_l = 3
+                        }
+                        else if(url_l.indexOf('master')!=-1){
+                            number_l = 4
+                        }
+                        var $bure_true = $('.left_nav ul li').eq(number_l);
                         $bure_true.addClass('activ_nav')
-                        // location.href+=$bure_true.attr('href')
                     }
                 }
-            }else{
             }
         }
     });

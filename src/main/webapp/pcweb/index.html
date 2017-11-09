@@ -10,7 +10,7 @@
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.js"></script>
 	<script src="js/require.js" data-main="js/requireConfig"></script>
-	<script src="js/index.js"></script>
+	<!--<script src="js/index.js"></script>-->
 </head>
 <body>
 <div class="header">
@@ -74,6 +74,10 @@
             url:"/master",
             templateUrl:"master.html",
             controller:'master'
+        }).state("useredit",{
+            url:"/useredit",
+            templateUrl:"useredit.html",
+            controller:'useredit'
         });
         $urlRouterProvider.otherwise("/index")
     })
@@ -108,7 +112,12 @@
 		.controller('master', function () {
 			clear();
 			require(['master'], function () {})
+		})
+		.controller('useredit', function () {
+			clear();
+			require(['useredit'], function () {})
 		});
+
 		function clear(){
             requirejs.undef('index');
             requirejs.undef('homework');
@@ -118,6 +127,7 @@
             requirejs.undef('lesstime_detail');
             requirejs.undef('userAdd');
             requirejs.undef('master');
+            requirejs.undef('useredit');
 		}
 </script>
 </body>
