@@ -819,3 +819,11 @@ html body .master_list{
 	display: inline;
 	color: #666;
 }
+.select-btn{
+	background-color: #ccf1ea;
+	padding-left: 8px;
+	padding-right: 8px;
+	height: 30px;
+	margin-left: 20px;
+	margin-top: 12px;
+}

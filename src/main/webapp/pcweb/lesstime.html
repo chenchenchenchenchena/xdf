@@ -19,11 +19,10 @@
             </ul>
         <span class="homework_samll_title">时间段</span>
         <div class="homewor_big_selecet clearfix">
-            <!--<span onfocus="selectDate()" tabindex="1" onblur="getDate()">2017-06-01~2017-12-01</span>-->
-            <!--<input type="date" class="homework_begin" id="start">-->
-            <!--<input type="date" class="homework_end" id="end">-->
             <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block" >
         </div>
+        <button class="select-btn">确定</button>
+
     </div>
 
 </div>
@@ -52,7 +51,7 @@
                 <h1>10000</h1>
             </div>
             <div class="lesstiime_chart_bottom">
-                <p>班主任课时趋势： <a href="#/lesstime_detail">查看教师明细</a></p>
+                <p>班主任课时趋势： <a href="#" onclick="lookDetails(this,0)">查看教师明细</a></p>
                 <div class="echarts_one">
 
                 </div>
@@ -65,7 +64,7 @@
                 <h1>10000</h1>
             </div>
             <div class="lesstiime_chart_bottom">
-                <p>主讲课时趋势： <a href="#/lesstime_detail">查看教师明细</a></p>
+                <p>主讲课时趋势： <a href="#" onclick="lookDetails(this,1)">查看教师明细</a></p>
                 <div class="echarts_one">
 
                 </div>

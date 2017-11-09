@@ -1,4 +1,12 @@
 /* 课时统计 */
+
+/*全局参数*/
+var currentCity = '全部';
+var currentCityId = '-1';
+var beginTime = '';
+var endTime = '';
+
+
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer'], function () {
@@ -6,7 +14,10 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
-            SelectData();
+            $('.select-btn').click(function(){
+                //获取筛选条件
+                SelectData();
+            })
         });
     });
 });
@@ -54,30 +65,31 @@ function showSchoolList(json){
     $('.homework_samll_one ul').show();
 }
 
-var currentCity;
-var currentCityId;
 //点击选择校区
 function filterByCityId(_this, cityId) {
     currentCity = cityId;
     currentCityId = $(_this).attr('data-schoolId');
     if(currentCity == ""){
         currentCity = "全部";
+        currentCityId = "-1";
     }
     $(".homework_samll_one h4").html(currentCity);
     $('.homework_samll_one ul').hide();
 }
 
-
-var beginTime = '';
-var endTime = '';
-
 //筛选数据接口实现
 function SelectData(){
-    beginTime = "2017-10-01";
-    endTime = "2017-11-01";
-    currentCityId = "73"
+    var time = $('#date_input').val();
+
+    beginTime = time.substring(0,10);
+    endTime = time.substring(13,time.length);
+    if(currentCityId == undefined || currentCityId == ""){
+        layer.msg("请先选择校区");
+        return false;
+    }
+
     if(beginTime == "" && endTime == ""){
-        //layer.msg("请先选择日期");
+        layer.msg("请先选择日期");
         return false;
     }
     var params = {
@@ -116,5 +128,20 @@ function SelectData(){
         }
     })
 }
+
+//查看明细
+function lookDetails(this_,flag){
+    //flag:0表示班主任；1表示主讲
+    $(this_).attr('href',"#/lesstime_detail");
+    var params = {
+        'currentCityId':currentCityId,
+        'currentCity':currentCity,
+        'beginTime':beginTime,
+        'endTime':endTime,
+        'flag':flag
+    }
+    sessionStorage.lesstimeDetailParams = JSON.stringify(params);
+}
+
 
 

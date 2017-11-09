@@ -1,3 +1,15 @@
+/*全局参数*/
+
+var currentCity = '全部';
+var currentCityId = '-1';
+var beginTime = '';
+var endTime = '';
+
+var seacherKey = "";
+var masterTeacherFlag = 0;
+var page = 1;
+var pageSize = "15";
+
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer'], function () {
@@ -6,20 +18,50 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
-            SelectData();
+            var params = JSON.parse(sessionStorage.lesstimeDetailParams);
+            currentCity = params.currentCity;
+            currentCityId = params.currentCityId;
+            beginTime = params.beginTime;
+            endTime = params.endTime;
+            masterTeacherFlag = params.flag;
+            $('#select-school h4').html(params.currentCity);
+            if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
+
+                $('#date_input').val(params.beginTime+" - "+params.endTime);
+            }
+
         });
     });
 });
+
+// 输入教师名称筛选数据
+function seacherByName(){
+    seacherKey = $('.homework_sea input').val();
+    if(seacherKey == undefined || seacherKey == ""){
+        layer.msg("请先填写老师名称");
+        return false;
+    }
+    if(currentCityId == undefined || currentCityId == ""){
+        layer.msg("请先选择校区");
+        return false;
+    }
+
+    if(beginTime == "" && endTime == ""){
+        layer.msg("请先选择日期");
+        return false;
+    }
+    SelectData();
+}
 
 //时间筛选
 function selectTime(){
     $('#select-time ul').show();
 }
+//时间筛选点击事件
 function timeClick(this_){
 
     $('#select-time h4').html(this_);
     $('#select-time ul').hide();
-    SelectData();
 }
 
 //获取校区
@@ -64,32 +106,28 @@ function showSchoolList(json){
     $('#select-school ul').show();
 }
 
-var currentCity;
-var currentCityId;
 //点击选择校区
 function filterByCityId(_this, cityId) {
     currentCity = cityId;
     currentCityId = $(_this).attr('data-schoolId');
     if(currentCity == ""){
         currentCity = "全部";
+        currentCityId = "-1";
     }
     $("#select-school h4").html(currentCity);
     $('#select-school ul').hide();
 }
 
-
-var seacherKey = "";
-var masterTeacherFlag = 0;
-var page = 1;
-var pageSize = "15";
-
 //筛选数据接口实现
 function SelectData(){
-    beginTime = "2017-10-01";
-    endTime = "2017-11-01";
-    currentCityId = "73"
+
+    if(currentCityId == undefined || currentCityId == ""){
+        layer.msg("请先选择校区");
+        return false;
+    }
+
     if(beginTime == "" && endTime == ""){
-        //layer.msg("请先选择日期");
+        layer.msg("请先选择日期");
         return false;
     }
     var params = {
@@ -122,7 +160,10 @@ function SelectData(){
                         $('.homework_list').append(html_);
                     }
                 }
+            }else {
+                layer.msg("暂无数据");
             }
+
         }
     })
 }
