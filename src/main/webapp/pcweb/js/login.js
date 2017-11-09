@@ -134,7 +134,7 @@ function toLogout() {
                         for (var i = keys.length; i--;)
                             setCookie(keys[i], 1, -1);
                     }
-                }
+                sessionStorage.removeItem("sid")
                 sessionStorage.removeItem("userId")
                 sessionStorage.removeItem("userName")
                 window.top.location.href = returnUrl;
