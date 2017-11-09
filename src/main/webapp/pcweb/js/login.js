@@ -131,6 +131,7 @@ function toLogout() {
             if (json.result == true) {
                     var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
                     if (keys) {
+
                         for (var i = keys.length; i--;)
                             setCookie(keys[i], 1, -1);
                     }
