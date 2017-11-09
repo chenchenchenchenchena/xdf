@@ -2,6 +2,10 @@
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer'], function () {
+            laydate.render({
+                elem: '#date_input',
+                range: true //指定元素
+            });
             SelectData();
         });
     });
@@ -66,32 +70,6 @@ function filterByCityId(_this, cityId) {
 
 var beginTime = '';
 var endTime = '';
-
-//选择日期
-function selectDate(){
-    $('.homewor_big_selecet span').hide();
-    $('.homewor_big_selecet .homework_begin').show();
-    $('.homewor_big_selecet .homework_end').show();
-    //$("#start").datepicker({
-    //    onSelect:function(dateText,inst){
-    //        layer.msg(dateText);
-    //        $("#end").datepicker("option","minDate",dateText);
-    //    }
-    //});
-    //$("#end").datepicker({
-    //    onSelect:function(dateText,inst){
-    //        layer.msg(dateText);
-    //        $("#start").datepicker("option","maxDate",dateText);
-    //    }
-    //});
-}
-function getDate(){
-    if(beginTime != "" && endTime != ""){
-        var time = beginTime+"~"+endTime;
-        $('.homewor_big_selecet span').html(time)
-    }
-
-}
 
 //筛选数据接口实现
 function SelectData(){

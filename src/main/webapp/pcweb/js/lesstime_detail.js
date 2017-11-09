@@ -3,7 +3,7 @@ require(['jquery-1.11.0.min'], function () {
         require(['layer'], function () {
 
             laydate.render({
-                elem: '#test1',
+                elem: '#date_input',
                 range: true //指定元素
             });
             SelectData();
