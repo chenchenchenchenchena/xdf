@@ -95,7 +95,7 @@ function getDate(){
 
 //筛选数据接口实现
 function SelectData(){
-    beginTime = "2017-11-01";
+    beginTime = "2017-10-01";
     endTime = "2017-11-01";
     currentCityId = "73"
     if(beginTime == "" && endTime == ""){
@@ -118,8 +118,10 @@ function SelectData(){
             if (data != undefined) {
                 var masterTeacherTotal = data.masterTeacherTotal;
                 var classTeacherTotal = data.classTeacherTotal;
+                var total = parseInt(masterTeacherTotal)+parseInt(classTeacherTotal);
                 $('#head_lesstime h1').html(classTeacherTotal);
                 $('#master_lesstime h1').html(masterTeacherTotal);
+                $('#teacher_lesstime h1').html(total);
                 var list = data.data;
                 if(list != undefined && list.length > 0 ){
                     $('.homework_list li').remove();
