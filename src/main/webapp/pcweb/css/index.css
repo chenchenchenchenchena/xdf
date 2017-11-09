@@ -812,11 +812,10 @@ html body .master_list{
 
 .date-input {
 	padding-left: 10px;
-	height: 38px;
-	min-width: 262px;
+	height: 28px;
+	min-width: 141px;
 	line-height: 38px;
-	border: 1px solid #e6e6e6;
 	background-color: #fff;
-	border-radius: 2px;
 	display: inline;
+	color: #666;
 }
