@@ -129,8 +129,12 @@ function toLogout() {
         data: JSON.stringify(businessP),
         success: function (json) {
             if (json.result == true) {
-                //clearCookie();
-                sessionStorage.removeItem("sid")
+                    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+                    if (keys) {
+                        for (var i = keys.length; i--;)
+                            setCookie(keys[i], 1, -1);
+                    }
+                }
                 sessionStorage.removeItem("userId")
                 sessionStorage.removeItem("userName")
                 window.top.location.href = returnUrl;
