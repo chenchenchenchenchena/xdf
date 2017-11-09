@@ -41,7 +41,6 @@ function toLogin() {
         }
     });
 }
-toLogin();
 var global = {
     'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
@@ -62,7 +61,8 @@ var global = {
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
 
-    
+    toLogin();
+
     /*用户下拉*/
     var timeout; 
     $('.user_name').hover(function(){
