@@ -183,6 +183,7 @@ require(['jquery-1.11.0.min'],function(){
 
 
                     sessionStorage.setItem("sid",e.sid)
+                    $('.user_name').html(sessionStorage.getItem('userName'));
                     // showFunctionList(userId);
                 }
             }
