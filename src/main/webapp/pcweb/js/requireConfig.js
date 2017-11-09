@@ -14,13 +14,17 @@ var global = {
     'indexAll':url_o+'backEndHome/queryCountUser.do',   //概况列表
     'indexForm':url_o+'backEndHome/exportBranchUserListExcel.do',  //导出概况列表
     'indexFormAll':url_o+'backEndHome/exportCountUserAnalyseListExcel.do', //导出概况总表
-    'left_nav':url_o+'/function/getAllFunction.do',  //左侧导航
+    'left_nav':url_o+'function/getAllFunction.do',  //左侧导航
     'master_All':url_o+'teacherData/queryAllSpeakerTeachers.do', //获取所有主讲列表
     'school_All':url_o+'dict/getDictListByTableName.do',//获取校区
     'master_data':url_o+'backEndMasterTeacherManager/getTeacherAllCode.do', //获取主讲校区信息
     'master_add':url_o+'backEndMasterTeacherManager/addMasterTeacherCode.do',//新增老师编号
     'master_reduce':url_o+'backEndMasterTeacherManager/editMasterTeacherCode.do',//删除老师编号
     'master_new':url_o+'backEndMasterTeacherManager/addMasterTeacher.do',//新建主讲
+    'user_list':url_o+'user/getMarketPrivilegeList.do', //获取用户列表
+    'user_seac':url_o+'user/searchUser.do',  //搜索集团用户
+    'user_addnew':url_o+'user/addUser.do',//新建用户
+    'user_power':url_o+'function/addFunctionUser.do',//增加权限
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
@@ -89,7 +93,6 @@ require(['jquery-1.11.0.min'],function(){
         dataType: 'json',
         data:JSON.stringify({'userId':'v_kouchen'}),
         success:function(e){
-            console.log(e);
             if(e.result){
                 var onelist = e.dataList;
                 for(var i = 0;i<onelist.length;i++){

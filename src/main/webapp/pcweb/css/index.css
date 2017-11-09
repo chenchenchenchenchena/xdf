@@ -809,7 +809,42 @@ html body .homework_operation{
 html body .master_list{
 	padding:0;
 }
-
+.power_screen ul{
+	float: left;
+	display: block;
+	width: 746px;
+}
+.power_screen ul li{
+	margin-right:10px;
+	cursor: pointer;
+}
+html body .adduser_list{
+	width:351px;
+	max-height:500px;
+	margin-left:-1px;
+	display:block;
+	position:relative;
+	background:#fff;
+	border: 1px solid #dfdfdf;
+	z-index:10;
+	overflow:auto;
+	display:none;
+}
+html body .adduser_list li{
+	display:block;
+	line-height:30px;
+	font-size:14px;
+	padding-left:10px;
+	margin-right:0;
+}
+.adduser_list li:hover{
+	background:#00ba97;
+	color:#fff;
+}
+html body .adduser_list_active{
+	background:#00ba97;
+	color:#fff;
+}
 .date-input {
 	padding-left: 10px;
 	height: 28px;
