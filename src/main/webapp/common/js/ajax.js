@@ -263,7 +263,7 @@ function ajax_S(link,more,func,errof){
         },
         error: function (err) {
             // failureCallback(msg);
-            // errof();
+             errof();
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){
@@ -305,7 +305,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
         complete:function(XMLHttpRequest,status){
             if(status=='timeout'){//超时,status还有success,error等值的情况
                 if(length_!=4){
-                    errof();
+                    //errof();
                     
                 }else{
                  // alert('数据访问超时，请切换网络环境');
