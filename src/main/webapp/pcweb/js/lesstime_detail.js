@@ -1,7 +1,7 @@
 /*全局参数*/
 
 var currentCity = '全部';
-var currentCityId = '-1';
+var currentCityId = '';
 var beginTime = '';
 var endTime = '';
 
@@ -20,6 +20,8 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
+
+            //从上个页面获取筛选数据
             var params = JSON.parse(sessionStorage.lesstimeDetailParams);
             currentCity = params.currentCity;
             currentCityId = params.currentCityId;
@@ -28,17 +30,18 @@ require(['jquery-1.11.0.min'], function () {
             masterTeacherFlag = params.flag;
             $('#select-school h4').html(params.currentCity);
             if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
-
                 $('#date_input').val(params.beginTime+" - "+params.endTime);
-            }else {
-                beginTime = "2017-01-01";
-                var myDate = new Date();
-                endTime = myDate.format('Y-m-t');
-                $('#date_input').val(beginTime+" - "+endTime);
             }
+            //初始化分页控件
             initPage(totalCounts, page);
 
+            //查询数据
             SelectData();
+
+            //导出教师列表
+            $('#expor_hour').click(function(){
+                exporHourList();
+            })
 
         });
     });
@@ -98,15 +101,46 @@ function timeClick(this_){
 }
 
 //获取校区
+function getSchool() {
+    if (sessionStorage.schoolList) {
+        var json = JSON.parse(sessionStorage.schoolList);
+        showSchoolList(json);
+    } else {
+        var table = {
+            "tableName": "dict_school_info"
+        };
+        $.ajax({
+            type: "POST",
+            url: url_o + 'dict/getDictListByTableName.do',
+            async: true,//同步
+            dataType: 'json',
+            data: table,
+            success: function (e) {
+                sessionStorage.schoolList = JSON.stringify(e);
+                showSchoolList(e)
+            }
+        })
+    }
+
+}
+
 //筛选校区列表显示
-function showSchoolList(){
-    var schoolList = localStorage.schoolList;
+function showSchoolList(e){
+    var schoolStr = localStorage.schoolList;// 全部的校区ID
+    var schoolIdList = schoolStr.split(',');
+
+    var schoolList = e.data;
     if (schoolList != undefined && schoolList.length > 0 ) {
         $("#select-school ul").html("");
-        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='' ><span>全部</span></li>";
-        for (var i = 0; i < schoolList.length; i++) {
-            var schoolId = schoolList[i].tCode;
-            cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[i].tName + "</span></li>";
+        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='"+schoolStr+"'><span>全部</span></li>";
+        for (var i = 0; i < schoolIdList.length; i++) {
+            for(var j = 0;j < schoolList.length;j++){
+                var schoolId = schoolList[j].tCode;
+                if(schoolIdList[i] == schoolId){
+                    cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[j].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[j].tName + "</span></li>";
+                }
+            }
+
         }
         $("#select-school ul").html(cityContent);
     } else {
@@ -128,18 +162,11 @@ function filterByCityId(_this, cityName) {
 function SelectData(){
 
     var time = $('#date_input').val();
-
-    beginTime = time.substring(0,10);
-    endTime = time.substring(13,time.length);
-    if(currentCityId == undefined || currentCityId == ""){
-        layer.msg("请先选择校区");
-        return false;
+    if(time != undefined && time != "") {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
     }
 
-    if(beginTime == "" && endTime == ""){
-        layer.msg("请先选择日期");
-        return false;
-    }
     var params = {
         "schoolId": currentCityId,
         'beginDate':beginTime,
@@ -151,7 +178,7 @@ function SelectData(){
     };
     $.ajax({
         type: "POST",
-        url: url_o + 'backEndClassHourCount/queryClassTeacherList.do',
+        url: global.lesstime_detail,
         async: true,//同步
         dataType: 'json',
         data: JSON.stringify(params),
@@ -180,4 +207,28 @@ function SelectData(){
 
         }
     })
+}
+
+function exporHourList(){
+   var params = {
+       'schoolId':currentCityId,
+       'beginDate':beginTime,
+       'endDate':endTime,
+       'masterTeacherFlag':masterTeacherFlag,
+       'teacherName':seacherKey,
+       'nextPage':page,
+       'pageSize':pageSize,
+       'schoolName':currentCity,
+   }
+    $.ajax({
+        type: "POST",
+        url: global.expor_hour,
+        async: true,//同步
+        dataType: 'json',
+        data: JSON.stringify(params),
+        success: function (e) {
+            alert("导出成功");
+        }
+    })
+
 }
