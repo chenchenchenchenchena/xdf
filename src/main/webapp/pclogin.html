@@ -21,13 +21,7 @@
 //
 //            }
 //        });
-        setCookie('E2Token','0');
-        function setCookie(name,value)
-        {
-            var Days = 0;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + Days*24*60*60*1000);
-            document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+"; path=/";
-        }
+        date.setTime(date.getTime() - 10000);
+        document.cookie = "E2Token" + "=a; expires=" + date.toGMTString()+"; path=/";
     })
 </script><body></body></html>
