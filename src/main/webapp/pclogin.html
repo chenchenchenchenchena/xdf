@@ -1,9 +1,14 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>双师东方管理平台</title><script src="common/js/jquery.js?v=aba2985"></script></head><script>
     $(function() {
-        alert("nknjknjk");
+        var onlineUrl = 'dt.xdf.cn';
+        if(window.location.host == onlineUrl){   //正式环境
+            var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+        }else{    //测试环境
+            var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+        }
         var  cbconfig = {'callbackFlag':'webBackground'};
         $.ajax({
-            url: "http://dt.staff.xdf.cn/xdfdtmanager/e2Login/login.do",
+            url: url_o+'e2Login/login.do',
             type: 'post',
             dataType: 'json',
             data:JSON.stringify(cbconfig),

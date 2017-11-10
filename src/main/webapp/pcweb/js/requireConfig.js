@@ -72,7 +72,7 @@ require(['jquery-1.11.0.min'],function(){
                         var childlist = onelistbure.children;
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
-                             $('.left_nav ul').append('<li href="'+childlist[k].url+'"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
+                             $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
                             }else{
                                 $('.left_nav ul').append('<li></li>')
                             }
@@ -83,9 +83,9 @@ require(['jquery-1.11.0.min'],function(){
                         alert('您暂无权限,请联系管理员')
                     }
                     var number_l = 0;
-        var url_l =  location.href;
+                    var url_l =  location.href;
 
-        if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+                    if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
                         number_l = 1;
                     }
                     else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
@@ -98,7 +98,7 @@ require(['jquery-1.11.0.min'],function(){
                         number_l = 4
                     }
                     var $bure_true = $('.left_nav ul li').eq(number_l);
-                    var $url_ = $('.left_nav ul li').eq(number_l).attr('href');
+                    var $url_ = $('.left_nav ul .active_me').eq(0).attr('href');
                     location.href =url_l+$url_;
                     $bure_true.addClass('activ_nav')
                 }
