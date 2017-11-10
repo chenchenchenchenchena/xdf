@@ -5,7 +5,9 @@
         if(window.location.host == onlineUrl){   //正式环境
             var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
         }else{    //测试环境
-            var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+            var url_o = 'http://10.162.7.138:8080/xdfdtmanager/';
+
+//            var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
         }
         var  cbconfig = {'callbackFlag':'webBackground'};
         $.ajax({
