@@ -50,6 +50,7 @@ require(['jquery-1.11.0.min'], function () {
         $(document).on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
             $('.homework_sea input').attr('name',$(this).attr('name'));
+            $('.new_username').show().html('姓名：'+$('.homework_sea input').attr('name'));
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
         });
