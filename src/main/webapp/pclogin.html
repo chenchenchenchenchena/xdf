@@ -1,4 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>双师东方管理平台</title><script src="common/js/jquery.js?v=aba2985"></script></head><script>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>双师东方管理平台</title>
+
+
+    <script src="jquery.cookie.js"></script>
+    <script src="common/js/jquery.js?v=aba2985"></script></head><script>
     $(function() {
         var onlineUrl = 'dt.xdf.cn';
 
@@ -21,8 +25,6 @@
 //
 //            }
 //        });
-        var date =  new  Date();
-        date.setTime(date.getTime() - 10000);
-        document.cookie = "E2Token" + "=a; expires=" + date.toGMTString()+"; path=/";
+        $.cookie('E2Token',null);
     })
 </script><body></body></html>
