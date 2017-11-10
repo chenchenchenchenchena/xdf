@@ -11,25 +11,25 @@ require(['jquery-1.11.0.min'], function () {
             data:{"tableName":"dict_school_info"},
             success:function(e){
                 if(e.data){
-                    $('.user_schoollist').find('li').eq(0).siblings().remove();
-                    $('.user_schoollist ul').prepend('<li class="user_schoolall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
+                    $('.user_editlist').find('li').eq(0).siblings().remove();
+                    $('.user_editlist ul').prepend('<li class="user_schoolall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
                     var school_sess = sessionStorage.schoolId.split(',');
                     for(var i = 0;i<e.data.length;i++){
                         var bure = false;
                         for(var k= 0;k<school_sess.length;k++){
                             if(school_sess[k]==e.data[i].tCode){
-                                $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'" class="checked_school"><img src="images/tree_checkbox_1.gif" alt="">'+e.data[i].tName+'</li>')
+                                $('.user_editlist ul').append('<li schoolId="'+e.data[i].tCode+'" class="checked_school"><img src="images/tree_checkbox_1.gif" alt="">'+e.data[i].tName+'</li>')
                                 bure = true;
                                 break;
                             }
                         }
                         if(bure==false){
-                            $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
+                            $('.user_editlist ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
                         }
                     }
                     if($('.checked_school').length==e.data.length){
                         $('.user_schoolall').find('img').attr('src','images/tree_checkbox_1.gif');
-                        $('.user_schoollist li').addClass('checked_school')
+                        $('.user_editlist li').addClass('checked_school')
                     }
                 }
             }
@@ -46,21 +46,21 @@ require(['jquery-1.11.0.min'], function () {
                     var onelist = e.dataList;
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
-                        $('.user_powerlist ul').prepend('<li class="user_powerall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
+                        $('.user_editp_powerlist ul').prepend('<li class="user_powerall"><img src="images/tree_checkbox_0.gif" alt="">全部</li>');
                         for(var k = 0;k<onelistbure.children.length;k++){
                             var twolist = onelistbure.children[k];
                             if(twolist.isValid==1){
                             if(twolist.checked ==true){
-                                $('.user_powerlist ul').append('<li id="'+twolist.id+'" class="checked_power"><img src="images/tree_checkbox_1.gif" alt="">'+twolist.text+'</li>')
+                                $('.user_editp_powerlist ul').append('<li id="'+twolist.id+'" class="checked_power"><img src="images/tree_checkbox_1.gif" alt="">'+twolist.text+'</li>')
                             }else{
-                                $('.user_powerlist ul').append('<li id="'+twolist.id+'"><img src="images/tree_checkbox_0.gif" alt="">'+twolist.text+'</li>')
+                                $('.user_editp_powerlist ul').append('<li id="'+twolist.id+'"><img src="images/tree_checkbox_0.gif" alt="">'+twolist.text+'</li>')
                             }
                             }
                         }
                     }
                     if($('.checked_power').length==onelistbure.children.length){
-                        $('.user_powerall').find('img').attr('src','images/tree_checkbox_1.gif')
-                        $('.user_powerlist li').addClass('checked_power')
+                        $('.user_editp_powerlist').find('img').attr('src','images/tree_checkbox_1.gif')
+                        $('.user_editp_powerlist li').addClass('checked_power')
                     }
 
                 }
@@ -104,14 +104,14 @@ require(['jquery-1.11.0.min'], function () {
             }
         }
         //选取事件
-        $(document).on('click','.user_schoollist li',function(){
+        $(document).on('click','.user_editlist li',function(){
             if($(this).hasClass('user_schoolall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_schoollist li').addClass('checked_school')
+                    $('.user_editlist li').addClass('checked_school')
                 }else{
                     $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_schoollist li').removeClass('checked_school')
+                    $('.user_editlist li').removeClass('checked_school')
                 }
             }else if($(this).find('img').attr('src').indexOf('0')!=-1){
                 $(this).addClass('checked_school');
@@ -133,10 +133,10 @@ require(['jquery-1.11.0.min'], function () {
             if($(this).hasClass('user_powerall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_powerlist li').addClass('checked_power')
+                    $('.user_editp_powerlist li').addClass('checked_power')
                 }else{
                     $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_powerlist li').removeClass('checked_power')
+                    $('.user_editp_powerlist li').removeClass('checked_power')
                 }
             }else if($(this).find('img').attr('src').indexOf('0')!=-1){
                 $(this).addClass('checked_power');

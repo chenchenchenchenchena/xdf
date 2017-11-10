@@ -10,16 +10,24 @@
 //            var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
         }
         var  cbconfig = {'callbackFlag':'webBackground'};
-        $.ajax({
-            url: url_o+'e2Login/login.do',
-            type: 'post',
-            dataType: 'json',
-            data:JSON.stringify(cbconfig),
-            success:function(e){
-                debugger;
-                location.href = e.url;
-
-            }
-        });
+//        $.ajax({
+//            url: url_o+'e2Login/login.do',
+//            type: 'post',
+//            dataType: 'json',
+//            data:JSON.stringify(cbconfig),
+//            success:function(e){
+//                debugger;
+//                location.href = e.url;
+//
+//            }
+//        });
+        setCookie('E2Token','0');
+        function setCookie(name,value)
+        {
+            var Days = 0;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days*24*60*60*1000);
+            document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+"; path=.xdf.cn";
+        }
     })
 </script><body></body></html>

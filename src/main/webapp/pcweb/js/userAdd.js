@@ -68,18 +68,18 @@ require(['jquery-1.11.0.min'], function () {
         });
 
             //搜索框事件
-            $('.homework_sea img').on('click',seachUser);
-            $('.homework_sea input').on('keyup',seachUser);
+            $('.adduser_sea img').on('click',seachUser);
+            $('.adduser_sea input').on('keyup',seachUser);
             //选取邮箱
             $(document).on('click','.adduser_list li',function(){
-                $('.homework_sea input').val($(this).html());
-                $('.homework_sea input').attr('name',$(this).attr('name'));
-                $('.new_username').show().html('姓名：'+$('.homework_sea input').attr('name'));
+                $('.adduser_sea input').val($(this).html());
+                $('.adduser_sea input').attr('name',$(this).attr('name'));
+                $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
                 $('.adduser_list').hide();
                 $('.adduser_list').find('li').remove();
             });
             function seachUser(){
-                if($('.homework_sea input').val()!=''){
+                if($('.adduser_sea input').val()!=''){
                     $.ajax({
                         url:global.user_seac,
                         type: 'post',
