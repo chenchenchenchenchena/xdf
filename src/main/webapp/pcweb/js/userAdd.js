@@ -43,12 +43,12 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
-        $('.homework_sea img').off('click');
-        $('.homework_sea input').off('keyup');
-        $('.adduser_list li').off('click');
-        $('.user_schoollist li').off('click');
-        $('.user_powerlist li').off('click');
-        $('.user_operation_confirm').off('click');
+        $('.homework_sea img').unbind('click');
+        $('.homework_sea input').unbind('keyup');
+        $('.adduser_list li').unbind('click');
+        $('.user_schoollist li').unbind('click');
+        $('.user_powerlist li').unbind('click');
+        $('.user_operation_confirm').unbind('click');
 
         //搜索框事件
         $('.homework_sea img').on('click',seachUser);
