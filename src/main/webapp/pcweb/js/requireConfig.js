@@ -117,73 +117,72 @@ require(['jquery-1.11.0.min'],function(){
         document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString()+"; path=/";
     }
 
-});
-
-
-function toLogout() {
-    var url = "";
-    var returnUrl = window.location.host;
-    var currentUser = sessionStorage.getItem("userId");
-    if(sessionStorage.superstar){
-        //表示当前用户为超级管理员
-       sessionStorage.clear();
-       location.href = 'login_web.html';
-    }else {
-        returnUrl = 'http://'+onlineUrl+'/xdfdthome';
-        url = url_o + "logout/doLogout.do";
-    };
-    var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
-    jQuery.ajax({
-        type: "POST",
-        url: url,
-        async: false,//同步
-        dataType: 'json',
-        data: JSON.stringify(businessP),
-        success: function (json) {
-            if (json.result == true) {
-                var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-                if (keys) {
-                    for (var i = keys.length; i--;)
-                        setCookie(keys[i], 1, -1);
+    function toLogout() {
+        var url = "";
+        var returnUrl = window.location.host;
+        var currentUser = sessionStorage.getItem("userId");
+        if(sessionStorage.superstar){
+            //表示当前用户为超级管理员
+            sessionStorage.clear();
+            location.href = 'login_web.html';
+        }else {
+            returnUrl = 'http://'+onlineUrl+'/xdfdthome';
+            url = url_o + "logout/doLogout.do";
+        };
+        var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            async: false,//同步
+            dataType: 'json',
+            data: JSON.stringify(businessP),
+            success: function (json) {
+                if (json.result == true) {
+                    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+                    if (keys) {
+                        for (var i = keys.length; i--;)
+                            setCookie(keys[i], 1, -1);
+                    }
+                    sessionStorage.removeItem("sid")
+                    sessionStorage.removeItem("userId")
+                    sessionStorage.removeItem("userName")
+                    window.top.location.href = returnUrl;
                 }
-                sessionStorage.removeItem("sid")
-                sessionStorage.removeItem("userId")
-                sessionStorage.removeItem("userName")
-                window.top.location.href = returnUrl;
             }
-        }
-    });
-}
+        });
+    }
 
 
 //e2登陆回调
-function e2Login() {
-    var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
-    var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
-    var calbac = {
-        'code': code_s,
-        'e2State': state_s,
-        'state': state_s
-    };
-    $.ajax({
-        url: url_o + "/e2Login/doLogin.do",
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify(calbac),
-        success: function (e) {
-            console.log(e);
-            if (e.result == false) {
-                alert(e.message);
-                toLogout();
-            } else {
-                sessionStorage.setItem("userName", e.userName);
-                var userId = e.userId;
-                userId = userId.split('@')[0];
-                sessionStorage.setItem("userId", userId);
-                sessionStorage.setItem("sid",e.sid);
-                $('.user_name').html(sessionStorage.getItem('userName'));
-                left_navlist(e.functionList)
+    function e2Login() {
+        var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
+        var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
+        var calbac = {
+            'code': code_s,
+            'e2State': state_s,
+            'state': state_s
+        };
+        $.ajax({
+            url: url_o + "/e2Login/doLogin.do",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(calbac),
+            success: function (e) {
+                console.log(e);
+                if (e.result == false) {
+                    alert(e.message);
+                    toLogout();
+                } else {
+                    sessionStorage.setItem("userName", e.userName);
+                    var userId = e.userId;
+                    userId = userId.split('@')[0];
+                    sessionStorage.setItem("userId", userId);
+                    sessionStorage.setItem("sid",e.sid);
+                    $('.user_name').html(sessionStorage.getItem('userName'));
+                    left_navlist(e.functionList)
+                }
             }
-        }
-    });
-}
+        });
+    }
+});
+
