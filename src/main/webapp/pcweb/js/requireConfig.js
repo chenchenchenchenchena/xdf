@@ -142,7 +142,7 @@ require(['jquery-1.11.0.min'],function(){
             sessionStorage.clear();
             location.href = 'login_web.html';
         }else {
-            returnUrl = 'http://'+onlineUrl+'/xdfdthome/pclogin.html';
+            returnUrl = 'http://'+onlineUrl+'/xdfdthome/pcweb/pclogin.html';
             url = url_o + "logout/doLogout.do";
         };
         var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
