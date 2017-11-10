@@ -840,9 +840,6 @@ html body .adduser_list li{
 	padding-left:10px;
 	margin-right:0;
 }
-.adduser_list ul li span{
-	float:right;
-}
 .adduser_list li:hover{
 	background:#00ba97;
 	color:#fff;

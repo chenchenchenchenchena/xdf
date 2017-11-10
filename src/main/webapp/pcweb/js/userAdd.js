@@ -50,6 +50,7 @@ require(['jquery-1.11.0.min'], function () {
         $(document).on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
             $('.homework_sea input').attr('name',$(this).attr('name'));
+            $('.new_username').show().html('姓名：'+$('.homework_sea input').attr('name'));
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
         });
@@ -66,7 +67,7 @@ require(['jquery-1.11.0.min'], function () {
                             $('.adduser_list').find('li').remove();
                             for(var i = 0;i<e.data.length;i++){
                                 $('.adduser_list').show();
-                                $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+' <span>'+e.data[i].name+'</span></li>')
+                                $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+'</li>')
                             }
                         }
                     }
