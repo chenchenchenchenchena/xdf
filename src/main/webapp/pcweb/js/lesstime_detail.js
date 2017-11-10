@@ -209,6 +209,7 @@ function SelectData(){
     })
 }
 
+//导出
 function exporHourList(){
     if ($('.homework_list li') == undefined || $('.homework_list li').length == 0) {
         layer.msg("暂无列表");
@@ -224,7 +225,7 @@ function exporHourList(){
         'pageSize': pageSize,
         'schoolName': currentCity,
     }
-    var newTab = window.open();
+    //var newTab = window.open();
     $.ajax({
         type: "POST",
         url: global.expor_hour,
@@ -233,7 +234,10 @@ function exporHourList(){
         data: JSON.stringify(params),
         success: function (e) {
             if (e.downloadUrl != undefined) {
-                newTab.location.href = e.downloadUrl;
+                //newTab.location.href = e.downloadUrl;
+                //var downloadUrl = e.downloadUrl;
+                //downloadUrl.
+                //window.location.href = getRootPath_web() + "/backEndDownload/downFile.do?filePath=/作业统计全部.txt";
             } else {
                 layer.msg('暂无列表');
             }

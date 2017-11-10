@@ -29,7 +29,8 @@ var global = {
     'user_edit':url_o+'user/updateUser.do',//编辑用户
     'expor_hour':url_o+'backEndClassHourCount/exportTeacherDetailExcel.do',//课时统计明细导出
     'lesstime_detail':url_o+'backEndClassHourCount/queryClassTeacherList.do',//课时统计查看明细
-    'hw_total':url_o+'/backEndHomework/queryHomeWorkTotal.do',//作业统计
+    'hw_total':url_o+'backEndHomework/queryHomeWorkTotal.do',//作业统计
+    'hw_details':url_o+'backEndHomework/queryHomeWorkTeacherDetail.do',//作业统计
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
