@@ -1,10 +1,13 @@
 /* 课时统计 */
 
 /*全局参数*/
-var currentCity = '全部';
-var currentCityId = '-1';
+var currentCity = '';
+var currentCityId = '';
 var beginTime = '';
 var endTime = '';
+
+
+localStorage.schoolList = "73,505";
 
 
 require(['jquery-1.11.0.min'], function () {
@@ -14,13 +17,17 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
-            //默认查询事件段
-            beginTime = "2017-01-01";
-            endTime = new Date().Format("yyyy-MM-dd");
-            $('#date_input').val(beginTime+" - "+endTime);
+            //默认是全部校区
+            currentCityId = localStorage.schoolList;
+            currentCity = "全部";
             SelectData();
             $('.select-btn').click(function(){
                 //获取筛选条件
+                var time = $('#date_input').val();
+                if(time != undefined && time != ""){
+                    beginTime = time.substring(0,10);
+                    endTime = time.substring(13,time.length);
+                }
                 SelectData();
             })
         });
@@ -28,15 +35,45 @@ require(['jquery-1.11.0.min'], function () {
 });
 
 //获取校区
+function getSchool() {
+    if (sessionStorage.schoolList) {
+        var json = JSON.parse(sessionStorage.schoolList);
+        showSchoolList(json);
+    } else {
+        var table = {
+            "tableName": "dict_school_info"
+        };
+        $.ajax({
+            type: "POST",
+            url: url_o + 'dict/getDictListByTableName.do',
+            async: true,//同步
+            dataType: 'json',
+            data: table,
+            success: function (e) {
+                sessionStorage.schoolList = JSON.stringify(e);
+                showSchoolList(e)
+            }
+        })
+    }
+
+}
+
 //筛选校区列表显示
-function showSchoolList(){
-    var schoolList = localStorage.schoolList;
+function showSchoolList(e){
+    var schoolStr = localStorage.schoolList;// 全部的校区ID
+    var schoolIdList = schoolStr.split(',');
+
+    var schoolList = e.data;
     if (schoolList != undefined && schoolList.length > 0 ) {
         $(".homework_samll_one ul").html("");
-        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId=''><span>全部</span></li>";
-        for (var i = 0; i < schoolList.length; i++) {
-            var schoolId = schoolList[i].tCode;
-            cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[i].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[i].tName + "</span></li>";
+        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='"+schoolStr+"'><span>全部</span></li>";
+        for (var i = 0; i < schoolIdList.length; i++) {
+            for(var j = 0;j < schoolList.length;j++){
+                var schoolId = schoolList[j].tCode;
+                if(schoolIdList[i] == schoolId){
+                    cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[j].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[j].tName + "</span></li>";
+                }
+            }
 
         }
         $(".homework_samll_one ul").html(cityContent);
@@ -57,19 +94,7 @@ function filterByCityId(_this, cityName) {
 
 //筛选数据接口实现
 function SelectData(){
-    var time = $('#date_input').val();
 
-    beginTime = time.substring(0,10);
-    endTime = time.substring(13,time.length);
-    if(currentCityId == undefined || currentCityId == ""){
-        layer.msg("请先选择校区");
-        return false;
-    }
-
-    if(beginTime == "" && endTime == ""){
-        layer.msg("请先选择日期");
-        return false;
-    }
     var params = {
         "schoolId": currentCityId,
         'beginDate':beginTime,

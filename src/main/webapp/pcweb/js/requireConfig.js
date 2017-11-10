@@ -27,6 +27,8 @@ var global = {
     'user_addnew':url_o+'user/addUser.do',//新建用户
     'user_power':url_o+'function/addFunctionUser.do',//增加权限
     'user_edit':url_o+'user/updateUser.do',//编辑用户
+    'expor_hour':url_o+'backEndClassHourCount/exportTeacherDetailExcel.do.do',//课时统计明细导出
+    'lesstime_detail':url_o+'backEndClassHourCount/queryClassTeacherList.do',//课时统计查看明细
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
