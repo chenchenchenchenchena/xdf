@@ -43,6 +43,13 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
+        $('.homework_sea img').off('click');
+        $('.homework_sea input').off('keyup');
+        $('.adduser_list li').off('click');
+        $('.user_schoollist li').off('click');
+        $('.user_powerlist li').off('click');
+        $('.user_operation_confirm').off('click');
+
         //搜索框事件
         $('.homework_sea img').on('click',seachUser);
         $('.homework_sea input').on('keyup',seachUser);
