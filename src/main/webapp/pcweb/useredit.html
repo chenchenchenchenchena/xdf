@@ -25,23 +25,24 @@
 
         </ul>
     </div>
-    <div class="user_operation">
+    <div class="user_operation" style="width:280px;">
         <a href="" class="user_operation_cancel">取消</a>
+        <a href="" class="user_operation_cancel user_edite_two" style="background: #00ba97;color:#fff;margin-left:7px;">修改</a>
         <a href="" class="user_operation_confirm">启用</a>
     </div>
-    <div class="user_Prompt">
+    <div class="user_Prompt user_erro">
         <p>确认禁用？</p>
-        <input type="button" value="禁用" class="user_Prompt_confirm">
-        <input type="button" value="取消">
+        <input type="button" value="禁用" class="user_Prompt_confirm user_erro_true">
+        <input type="button" value="取消" class="user_esc">
     </div>
     <div class="user_Prompt user_Enable">
         <p>确认启用？</p>
-        <input type="button" value="禁用" class="user_Prompt_confirm">
-        <input type="button" value="取消">
+        <input type="button" value="启用" class="user_Prompt_confirm user_Enable_true">
+        <input type="button" value="取消" class="user_esc">
     </div>
     <div class="user_Prompt user_none">
         <p>未搜索到此用户</p>
-        <input type="button" value="确认" class="user_Prompt_confirm user_none">
+        <input type="button" value="确认" class="user_Prompt_confirm user_none" class="user_esc">
     </div>
 </div>
 <div class="back_big"></div>

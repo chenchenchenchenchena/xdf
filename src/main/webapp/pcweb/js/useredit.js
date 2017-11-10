@@ -67,7 +67,6 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
-        $('.index_title h4').css('cursor','pointer');
         //名字重置
         $('.homework_sea input').val(sessionStorage.loginId);
         $('.homework_sea input').attr('disabled',true);
@@ -77,15 +76,69 @@ require(['jquery-1.11.0.min'], function () {
         }else{
             $('.user_operation_confirm').html('启用')
         }
+        $('.index_title h4').css('cursor','pointer');
         $('.index_title h4').click(function(){
             history.go(-1)
-        })
+        });
         //选取邮箱
         $(document).on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
             $('.homework_sea input').attr('name',$(this).attr('name'));
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
+        });
+        //禁用或启用
+        $('.user_operation_confirm').click(function(){
+            if($(this).html()=='禁用'){
+                $('.user_erro').show();
+            }else{
+                $('.user_Enable').show();
+            }
+        });
+        //确认禁用
+        $('.user_erro_true').click(function(){
+            $.ajax({
+                url:global.user_power_,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'0'}),
+                success:function(e){
+                    if(e.result){
+                        layer.msg('禁用成功');
+                        $('.user_operation_confirm').html('启用')
+                        $('.user_erro').hide();
+                        sessionStorage.edite_bur = 0;
+                    }
+                }
+            });
+
+        });
+        //确认启用
+        $('.user_Enable_true').click(function(){
+            $.ajax({
+                url:global.user_power_,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'1'}),
+                success:function(e){
+                    if(e.result){
+                        layer.msg('启用成功');
+                        $('.user_operation_confirm').html('启用');
+                        $('.user_Enable').hide();
+                        sessionStorage.edite_bur = 1;
+                    }
+                }
+            });
+        });
+
+        //取消
+        $('.user_esc').click(function(){
+            $(this).parent().hide();
+        });
+        $('.user_operation_cancel').eq(0).click(function(){
+            history.go(-1)
         });
         function seachUser(){
             if($('.homework_sea input').val()!=''){
@@ -162,7 +215,7 @@ require(['jquery-1.11.0.min'], function () {
         })
 
         //编辑用户提交
-        $('.user_operation_confirm').on('click',function(){
+        $('.user_edite_two').on('click',function(){
             if($('.checked_power').length==0){
                 layer.msg('请选择相关权限');
                 return false;

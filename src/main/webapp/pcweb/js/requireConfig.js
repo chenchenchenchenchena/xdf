@@ -30,10 +30,12 @@ var global = {
     'expor_hour':url_o+'backEndClassHourCount/exportTeacherDetailExcel.do',//课时统计明细导出
     'lesstime_detail':url_o+'backEndClassHourCount/queryClassTeacherList.do',//课时统计查看明细
     'hw_total':url_o+'/backEndHomework/queryHomeWorkTotal.do',//作业统计
+    'user_power_':url_o+'user/enableUser.do', //用户禁用
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
         if(sessionStorage.superstar){
+            $('.user_name').html(sessionStorage.getItem('userName'));
             left_navlist(JSON.parse(sessionStorage.superstar));
             localStorage.schoolList = '-1'
 

@@ -104,7 +104,14 @@ require(['jquery-1.11.0.min'], function () {
                 }
             }
             //选取事件
-
+            //面包屑
+            $('.index_title h4').css('cursor','pointer');
+            $('.index_title h4').click(function(){
+                history.go(-1)
+            });
+            $('.user_operation_cancel').eq(0).click(function(){
+                history.go(-1)
+            });
             // 权限事件
             $(document).on('click','.user_powerlist li',function(){
                 if($(this).hasClass('user_powerall')){
@@ -133,77 +140,81 @@ require(['jquery-1.11.0.min'], function () {
 
             //新建用户提交
             $('.user_operation_confirm').on('click',function(){
-                var emailtest =  /[^\u4e00-\u9fa5]/;
-                if( $(this).attr('checked')){
-                    layer.msg('正在提交');
-                    return false;
-                }
-                if($('.homework_sea input').val()==''){
-                    layer.msg('请输入账号');
-                    return false;
-                }
-                if($('.checked_power').length==0){
-                    layer.msg('请选择相关权限');
-                    return false;
-                }
-                if($('.checked_school').length==0){
-                    layer.msg('请选择相关校区');
-                    return false;
-                }
-                if(!emailtest.test($('.homework_sea input').val())){
-                    layer.msg('请输入合法账号');
-                    return false;
-                }
-                $(this).attr('checked',true);
-                var config = {
-                    loginId:$('.homework_sea input').val(),
-                    userName:$('.homework_sea input').attr('name'),
-                    email:$('.homework_sea input').val()+'@xdf.cn',
-                    department:$('.homework_sea input').attr('deptName'),
-                    school:$('.homework_sea input').attr('comname')
-                };
-                var schoolId = [];
-                var powerId = [];
-                for(var k = 0;k<$('.checked_school').length;k++){
-                    if($('.checked_school').eq(k).attr('schoolid')!=undefined){
-                        schoolId.push($('.checked_school').eq(k).attr('schoolid'))
-                    }
-                }
-                for(var k = 0;k<$('.checked_power').length;k++){
-                    if($('.checked_power').eq(k).attr('id')!=undefined){
-                        powerId.push($('.checked_power').eq(k).attr('id'))
-                    }
-                }
-                config.auth = schoolId.join(',');
-                $.ajax({
-                    url:global.user_addnew,
-                    type: 'post',
-                    asyns:false,
-                    dataType: 'json',
-                    data:JSON.stringify(config),
-                    success:function(e){
-                        if(e.result){
-                            $.ajax({
-                                url:global.user_power,
-                                type: 'post',
-                                asyns:false,
-                                dataType: 'json',
-                                data:JSON.stringify({userId:$('.homework_sea input').val(),functionIds:powerId.join(',')}),
-                                success:function(e){
-                                    if(e.result){
-                                        $('.user_operation_confirm').removeAttr('checked');
-                                        layer.msg('新建成功')
-                                    }else{
-                                        $('.user_operation_confirm').removeAttr('checked');
-                                        layer.msg('新建失败')
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
+                $('.user_Enable').show();
             })
-
+        $('.usernew_true').click(function(){
+            var emailtest =  /[^\u4e00-\u9fa5]/;
+            if( $(this).attr('checked')){
+                layer.msg('正在提交');
+                return false;
+            }
+            if($('.homework_sea input').val()==''){
+                layer.msg('请输入账号');
+                return false;
+            }
+            if($('.checked_power').length==0){
+                layer.msg('请选择相关权限');
+                return false;
+            }
+            if($('.checked_school').length==0){
+                layer.msg('请选择相关校区');
+                return false;
+            }
+            if(!emailtest.test($('.homework_sea input').val())){
+                layer.msg('请输入合法账号');
+                return false;
+            }
+            $(this).attr('checked',true);
+            var config = {
+                loginId:$('.homework_sea input').val(),
+                userName:$('.homework_sea input').attr('name'),
+                email:$('.homework_sea input').val()+'@xdf.cn',
+                department:$('.homework_sea input').attr('deptName'),
+                school:$('.homework_sea input').attr('comname')
+            };
+            var schoolId = [];
+            var powerId = [];
+            for(var k = 0;k<$('.checked_school').length;k++){
+                if($('.checked_school').eq(k).attr('schoolid')!=undefined){
+                    schoolId.push($('.checked_school').eq(k).attr('schoolid'))
+                }
+            }
+            for(var k = 0;k<$('.checked_power').length;k++){
+                if($('.checked_power').eq(k).attr('id')!=undefined){
+                    powerId.push($('.checked_power').eq(k).attr('id'))
+                }
+            }
+            config.auth = schoolId.join(',');
+            $.ajax({
+                url:global.user_addnew,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify(config),
+                success:function(e){
+                    if(e.result){
+                        $.ajax({
+                            url:global.user_power,
+                            type: 'post',
+                            asyns:false,
+                            dataType: 'json',
+                            data:JSON.stringify({userId:$('.homework_sea input').val(),functionIds:powerId.join(',')}),
+                            success:function(e){
+                                if(e.result){
+                                    $('.user_operation_confirm').removeAttr('checked');
+                                    layer.msg('新建成功');
+                                    history.go(-1)
+                                }else{
+                                    $('.user_operation_confirm').removeAttr('checked');
+                                    layer.msg('新建失败');
+                                    $('.user_Enable').hide();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
 
 
 
