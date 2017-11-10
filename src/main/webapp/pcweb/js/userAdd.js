@@ -16,6 +16,30 @@ require(['jquery-1.11.0.min'], function () {
                     for(var i = 0;i<e.data.length;i++){
                         $('.user_schoollist ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
                     }
+                    $('.user_schoollist li').on('click',function(){
+                        if($(this).hasClass('user_schoolall')){
+                            if($(this).find('img').attr('src').indexOf('0')!=-1){
+                                $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
+                                $('.user_schoollist li').addClass('checked_school')
+                            }else{
+                                $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
+                                $('.user_schoollist li').removeClass('checked_school')
+                            }
+                        }else if($(this).find('img').attr('src').indexOf('0')!=-1){
+                            $(this).addClass('checked_school');
+                            $(this).find('img').attr('src','images/tree_checkbox_1.gif');
+                            if($('.checked_school').length==$('.user_schoollist li').length-1){
+                                $('.user_schoolall').find('img').attr('src','images/tree_checkbox_1.gif')
+                            }
+
+                        }else{
+                            if($('.user_schoolall').find('img').attr('src').indexOf('1')!=-1){
+                                $('.user_schoolall').find('img').attr('src','images/tree_checkbox_0.gif')
+                            }
+                            $(this).find('img').attr('src','images/tree_checkbox_0.gif')
+                            $(this).removeClass('checked_school')
+                        }
+                    });
                 }
             }
         });
@@ -43,168 +67,140 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
-        $('.homework_sea img').unbind('click');
-        $('.homework_sea input').unbind('keyup');
-        $('.adduser_list li').unbind('click');
-        $('.user_schoollist li').unbind('click');
-        $('.user_powerlist li').unbind('click');
-        $('.user_operation_confirm').unbind('click');
+            //搜索框事件
+            $('.homework_sea img').on('click',seachUser);
+            $('.homework_sea input').on('keyup',seachUser);
+            //选取邮箱
+            $(document).on('click','.adduser_list li',function(){
+                $('.homework_sea input').val($(this).html());
+                $('.homework_sea input').attr('name',$(this).attr('name'));
+                $('.new_username').show().html('姓名：'+$('.homework_sea input').attr('name'));
+                $('.adduser_list').hide();
+                $('.adduser_list').find('li').remove();
+            });
+            function seachUser(){
+                if($('.homework_sea input').val()!=''){
+                    $.ajax({
+                        url:global.user_seac,
+                        type: 'post',
+                        asyns:false,
+                        dataType: 'json',
+                        data:JSON.stringify({"keyword":$('.power_screen input').val()}),
+                        success:function(e){
+                            if(e.data&&e.data.length!=0){
+                                $('.adduser_list').find('li').remove();
+                                for(var i = 0;i<e.data.length;i++){
+                                    $('.adduser_list').show();
+                                    $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+'</li>')
+                                }
+                            }
+                        }
+                    });
+                }else{
+                    $('.adduser_list').hide();
+                    $('.adduser_list').find('li').remove();
+                }
+            }
+            //选取事件
 
-        //搜索框事件
-        $('.homework_sea img').on('click',seachUser);
-        $('.homework_sea input').on('keyup',seachUser);
-        //选取邮箱
-        $(document).on('click','.adduser_list li',function(){
-            $('.homework_sea input').val($(this).html());
-            $('.homework_sea input').attr('name',$(this).attr('name'));
-            $('.new_username').show().html('姓名：'+$('.homework_sea input').attr('name'));
-            $('.adduser_list').hide();
-            $('.adduser_list').find('li').remove();
-        });
-        function seachUser(){
-            if($('.homework_sea input').val()!=''){
+            // 权限事件
+            $(document).on('click','.user_powerlist li',function(){
+                if($(this).hasClass('user_powerall')){
+                    if($(this).find('img').attr('src').indexOf('0')!=-1){
+                        $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
+                        $('.user_powerlist li').addClass('checked_power')
+                    }else{
+                        $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
+                        $('.user_powerlist li').removeClass('checked_power')
+                    }
+                }else if($(this).find('img').attr('src').indexOf('0')!=-1){
+                    $(this).addClass('checked_power');
+                    $(this).find('img').attr('src','images/tree_checkbox_1.gif')
+                    if($('.checked_power').length==$('.user_powerlist li').length-1){
+                        $('.user_powerall').find('img').attr('src','images/tree_checkbox_1.gif')
+                    }
+                }else{
+                    if($('.user_powerall').find('img').attr('src').indexOf('1')!=-1){
+                        $('.user_powerall').find('img').attr('src','images/tree_checkbox_0.gif')
+                        $('.user_powerall').removeClass('checked_power')
+                    }
+                    $(this).find('img').attr('src','images/tree_checkbox_0.gif')
+                    $(this).removeClass('checked_power')
+                }
+            })
+
+            //新建用户提交
+            $('.user_operation_confirm').on('click',function(){
+                var emailtest =  /[^\u4e00-\u9fa5]/;
+                if( $(this).attr('checked')){
+                    layer.msg('正在提交');
+                    return false;
+                }
+                if($('.homework_sea input').val()==''){
+                    layer.msg('请输入账号');
+                    return false;
+                }
+                if($('.checked_power').length==0){
+                    layer.msg('请选择相关权限');
+                    return false;
+                }
+                if($('.checked_school').length==0){
+                    layer.msg('请选择相关校区');
+                    return false;
+                }
+                if(!emailtest.test($('.homework_sea input').val())){
+                    layer.msg('请输入合法账号');
+                    return false;
+                }
+                $(this).attr('checked',true);
+                var config = {
+                    loginId:$('.homework_sea input').val(),
+                    userName:$('.homework_sea input').attr('name'),
+                    email:$('.homework_sea input').val()+'@xdf.cn',
+                };
+                var schoolId = [];
+                var powerId = [];
+                for(var k = 0;k<$('.checked_school').length;k++){
+                    if($('.checked_school').eq(k).attr('schoolid')!=undefined){
+                        schoolId.push($('.checked_school').eq(k).attr('schoolid'))
+                    }
+                }
+                for(var k = 0;k<$('.checked_power').length;k++){
+                    if($('.checked_power').eq(k).attr('id')!=undefined){
+                        powerId.push($('.checked_power').eq(k).attr('id'))
+                    }
+                }
+                config.auth = schoolId.join(',');
                 $.ajax({
-                    url:global.user_seac,
+                    url:global.user_addnew,
                     type: 'post',
                     asyns:false,
                     dataType: 'json',
-                    data:JSON.stringify({"keyword":$('.power_screen input').val()}),
+                    data:JSON.stringify(config),
                     success:function(e){
-                        if(e.data&&e.data.length!=0){
-                            $('.adduser_list').find('li').remove();
-                            for(var i = 0;i<e.data.length;i++){
-                                $('.adduser_list').show();
-                                $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+'</li>')
-                            }
+                        if(e.result){
+                            $.ajax({
+                                url:global.user_power,
+                                type: 'post',
+                                asyns:false,
+                                dataType: 'json',
+                                data:JSON.stringify({userId:$('.homework_sea input').val(),functionIds:powerId.join(',')}),
+                                success:function(e){
+                                    if(e.result){
+                                        $('.user_operation_confirm').removeAttr('checked');
+                                        layer.msg('新建成功')
+                                    }else{
+                                        $('.user_operation_confirm').removeAttr('checked');
+                                        layer.msg('新建失败')
+                                    }
+                                }
+                            });
                         }
                     }
                 });
-            }else{
-                $('.adduser_list').hide();
-                $('.adduser_list').find('li').remove();
-            }
-        }
-        //选取事件
-        $(document).on('click','.user_schoollist li',function(){
-            if($(this).hasClass('user_schoolall')){
-                if($(this).find('img').attr('src').indexOf('0')!=-1){
-                    $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_schoollist li').addClass('checked_school')
-                }else{
-                    $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_schoollist li').removeClass('checked_school')
-                }
-            }else if($(this).find('img').attr('src').indexOf('0')!=-1){
-                $(this).addClass('checked_school');
-                $(this).find('img').attr('src','images/tree_checkbox_1.gif');
-                if($('.checked_school').length==$('.user_schoollist li').length-1){
-                    $('.user_schoolall').find('img').attr('src','images/tree_checkbox_1.gif')
-                }
+            })
 
-            }else{
-                if($('.user_schoolall').find('img').attr('src').indexOf('1')!=-1){
-                    $('.user_schoolall').find('img').attr('src','images/tree_checkbox_0.gif')
-                }
-                $(this).find('img').attr('src','images/tree_checkbox_0.gif')
-                $(this).removeClass('checked_school')
-            }
-        });
-        // 权限事件
-        $(document).on('click','.user_powerlist li',function(){
-            if($(this).hasClass('user_powerall')){
-                if($(this).find('img').attr('src').indexOf('0')!=-1){
-                    $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_powerlist li').addClass('checked_power')
-                }else{
-                    $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_powerlist li').removeClass('checked_power')
-                }
-            }else if($(this).find('img').attr('src').indexOf('0')!=-1){
-                $(this).addClass('checked_power');
-                $(this).find('img').attr('src','images/tree_checkbox_1.gif')
-                if($('.checked_power').length==$('.user_powerlist li').length-1){
-                    $('.user_powerall').find('img').attr('src','images/tree_checkbox_1.gif')
-                }
-            }else{
-                if($('.user_powerall').find('img').attr('src').indexOf('1')!=-1){
-                    $('.user_powerall').find('img').attr('src','images/tree_checkbox_0.gif')
-                    $('.user_powerall').removeClass('checked_power')
-                }
-                $(this).find('img').attr('src','images/tree_checkbox_0.gif')
-                $(this).removeClass('checked_power')
-            }
-        })
 
-        //新建用户提交
-        $('.user_operation_confirm').on('click',function(){
-            var emailtest =  /[^\u4e00-\u9fa5]/;
-            if( $(this).attr('checked')){
-                layer.msg('正在提交');
-                return false;
-            }
-            if($('.homework_sea input').val()==''){
-                layer.msg('请输入账号');
-                return false;
-            }
-            if($('.checked_power').length==0){
-                layer.msg('请选择相关权限');
-                return false;
-            }
-            if($('.checked_school').length==0){
-                layer.msg('请选择相关校区');
-                return false;
-            }
-            if(!emailtest.test($('.homework_sea input').val())){
-                layer.msg('请输入合法账号');
-                return false;
-            }
-            $(this).attr('checked',true);
-            var config = {
-                loginId:$('.homework_sea input').val(),
-                userName:$('.homework_sea input').attr('name'),
-                email:$('.homework_sea input').val()+'@xdf.cn',
-            };
-            var schoolId = [];
-            var powerId = [];
-            for(var k = 0;k<$('.checked_school').length;k++){
-                if($('.checked_school').eq(k).attr('schoolid')!=undefined){
-                    schoolId.push($('.checked_school').eq(k).attr('schoolid'))
-                }
-            }
-            for(var k = 0;k<$('.checked_power').length;k++){
-                if($('.checked_power').eq(k).attr('id')!=undefined){
-                    powerId.push($('.checked_power').eq(k).attr('id'))
-                }
-            }
-            config.auth = schoolId.join(',');
-            $.ajax({
-                url:global.user_addnew,
-                type: 'post',
-                asyns:false,
-                dataType: 'json',
-                data:JSON.stringify(config),
-                success:function(e){
-                   if(e.result){
-                       $.ajax({
-                           url:global.user_power,
-                           type: 'post',
-                           asyns:false,
-                           dataType: 'json',
-                           data:JSON.stringify({userId:$('.homework_sea input').val(),functionIds:powerId.join(',')}),
-                           success:function(e){
-                                if(e.result){
-                                    $('.user_operation_confirm').removeAttr('checked');
-                                    layer.msg('新建成功')
-                                }else{
-                                    $('.user_operation_confirm').removeAttr('checked');
-                                    layer.msg('新建失败')
-                                }
-                           }
-                       });
-                   }
-                }
-            });
-        })
 
 
     })
