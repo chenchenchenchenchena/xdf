@@ -34,7 +34,8 @@ var global = {
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
         if(sessionStorage.superstar){
-            left_navlist(JSON.parse(sessionStorage.superstar))
+            left_navlist(JSON.parse(sessionStorage.superstar));
+            localStorage.schoolList = '-1'
         }else{
             e2Login();
         }
