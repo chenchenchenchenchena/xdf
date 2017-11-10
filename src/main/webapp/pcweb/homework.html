@@ -27,7 +27,7 @@
                 <li>
                     <span class="homework_samll_title">校区</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSchoolList()" tabindex="1">全部</h4>
+                        <h4 id="school" school-id="" onfocus="getSchoolList()" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                 <li>
                     <span class="homework_samll_title">学段</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
+                        <h4 id="stage" onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                 <li>
                     <span class="homework_samll_title">年级</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
+                        <h4 id="grade" onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -51,12 +51,14 @@
                 <li>
                     <span class="homework_samll_title">科目</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
+                        <h4 id="subject" onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
                 </li>
-
+                <li>
+                    <button class="select-btn">确定</button>
+                </li>
             </ul>
         </div>
     </div>
