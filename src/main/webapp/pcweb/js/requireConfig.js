@@ -195,7 +195,9 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem("userId", userId);
                     sessionStorage.setItem("sid",e.sid);
                     $('.user_name').html(sessionStorage.getItem('userName'));
-                    localStorage.schoolList = e.userList.split('')[0].schoolId;
+                    if(e.userList){
+                        localStorage.schoolList = e.userList.split('')[0].schoolId;
+                    }
                     left_navlist(e.functionList)
                 }
             }
