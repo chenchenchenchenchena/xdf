@@ -100,7 +100,11 @@ require(['jquery-1.11.0.min'],function(){
                     var $bure_true = $('.left_nav ul li').eq(number_l);
                     var $url_ = $('.left_nav ul .active_me').eq(0).attr('href');
                     location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
-                    $bure_true.addClass('activ_nav')
+                    if($bure_true.hasClass('.active_me')){
+                        $bure_true.addClass('activ_nav')
+                    }else{
+                        $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
+                    }
                 }
     Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
