@@ -66,7 +66,7 @@ require(['jquery-1.11.0.min'], function () {
                             $('.adduser_list').find('li').remove();
                             for(var i = 0;i<e.data.length;i++){
                                 $('.adduser_list').show();
-                                $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+'</li>')
+                                $('.adduser_list').append('<li name="'+e.data[i].name+'">'+e.data[i].emailAddr+' <span>'+e.data[i].name+'</span></li>')
                             }
                         }
                     }
