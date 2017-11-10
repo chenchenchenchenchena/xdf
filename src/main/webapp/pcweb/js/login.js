@@ -34,6 +34,7 @@ function tLogin() {
                 sessionStorage.setItem("userName", e.userName, 1);
                 sessionStorage.setItem("userId", e.userId, 1);
                 var functionList = e.functionList;
+                window.location.href = "index.html"
                 localStorage.functionCheckedList = JSON.stringify(functionList);
             }
 
