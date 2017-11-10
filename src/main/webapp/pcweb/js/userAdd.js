@@ -43,6 +43,13 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
+        $('.homework_sea img').unbind('click');
+        $('.homework_sea input').unbind('keyup');
+        $('.adduser_list li').unbind('click');
+        $('.user_schoollist li').unbind('click');
+        $('.user_powerlist li').unbind('click');
+        $('.user_operation_confirm').unbind('click');
+
         //搜索框事件
         $('.homework_sea img').on('click',seachUser);
         $('.homework_sea input').on('keyup',seachUser);
@@ -107,10 +114,10 @@ require(['jquery-1.11.0.min'], function () {
             if($(this).hasClass('user_powerall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
-                    $('.user_powerlist li').addClass('checked_school')
+                    $('.user_powerlist li').addClass('checked_power')
                 }else{
                     $(this).parent().find('img').attr('src','images/tree_checkbox_0.gif');
-                    $('.user_powerlist li').removeClass('checked_school')
+                    $('.user_powerlist li').removeClass('checked_power')
                 }
             }else if($(this).find('img').attr('src').indexOf('0')!=-1){
                 $(this).addClass('checked_power');
