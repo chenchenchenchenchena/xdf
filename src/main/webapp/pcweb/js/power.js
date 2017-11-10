@@ -80,9 +80,9 @@ require(['jquery-1.11.0.min'], function () {
                                 str = '已禁用'
                             }
                             if(allLength[i].loginId=='ssdf'){
-                                $('.power_list').append('<li><span>'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span></span></li>')
+                                $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span></span></li>')
                             }else{
-                                $('.power_list').append('<li><span>'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
+                                $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
                             }
                         }
                     }
