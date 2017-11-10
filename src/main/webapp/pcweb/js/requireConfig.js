@@ -76,6 +76,10 @@ require(['jquery-1.11.0.min'],function(){
                             }
                         }
                     }
+                    if( $('.left_nav ul li').length=='0'){
+                        $('body').hide();
+                        alert('您暂无权限,请联系管理员')
+                    }
                     var url_l =  location.href;
                     var number_l = 0;
                     if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
