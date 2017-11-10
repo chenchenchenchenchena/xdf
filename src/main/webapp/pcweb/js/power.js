@@ -9,9 +9,9 @@ require(['jquery-1.11.0.min'], function () {
             data:{"tableName":"dict_school_info"},
             success:function(e){
               if(e.data){
-                  $('.power_screen').find('li').eq(0).siblings().remove();
+                  $('.power_index').find('li').eq(0).siblings().remove();
                   for(var i = 0;i<e.data.length;i++){
-                    $('.power_screen ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
+                    $('.power_index ul').append('<li schoolId="'+e.data[i].tCode+'"><img src="images/tree_checkbox_0.gif" alt="">'+e.data[i].tName+'</li>')
                   }
               }
             }
@@ -39,7 +39,7 @@ require(['jquery-1.11.0.min'], function () {
         //     }
         // });
         //校区筛选点击
-        $(document).on('click','.power_screen li',function(){
+        $(document).on('click','.power_index li',function(){
             if($('.homework_sea input').val()!=''){
                 var schoolid = $('.checkedschool').attr('schoolid')
             }else{
@@ -79,7 +79,7 @@ require(['jquery-1.11.0.min'], function () {
 
         });
 
-        $('.homework_sea img').on('click',function(){
+        $('.powerindex_sea img').on('click',function(){
             if($('.checkedschool').length==0){
                 layer.msg('请选择校区');
                 return false;

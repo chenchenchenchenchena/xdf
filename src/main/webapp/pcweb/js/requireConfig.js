@@ -99,10 +99,11 @@ require(['jquery-1.11.0.min'],function(){
                     else if(url_l.indexOf('master')!=-1){
                         number_l = 4
                     }
+
                     var $bure_true = $('.left_nav ul li').eq(number_l);
                     var $url_ = $('.left_nav ul .active_me').eq(0).attr('href');
-                    location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
-                    if($bure_true.hasClass('.active_me')){
+                    // location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
+                    if($bure_true.hasClass('active_me')){
                         $bure_true.addClass('activ_nav')
                     }else{
                         $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
@@ -141,7 +142,7 @@ require(['jquery-1.11.0.min'],function(){
             sessionStorage.clear();
             location.href = 'login_web.html';
         }else {
-            returnUrl = 'http://'+onlineUrl+'/xdfdthome';
+            returnUrl = 'http://'+onlineUrl+'/xdfdthome/pclogin.html';
             url = url_o + "logout/doLogout.do";
         };
         var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
@@ -194,6 +195,7 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem("userId", userId);
                     sessionStorage.setItem("sid",e.sid);
                     $('.user_name').html(sessionStorage.getItem('userName'));
+                    localStorage.schoolList = e.userList.split('')[0].schoolId;
                     left_navlist(e.functionList)
                 }
             }

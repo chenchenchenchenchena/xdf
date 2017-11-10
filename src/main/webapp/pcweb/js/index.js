@@ -18,7 +18,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
         type: 'post',
         asyns:false,
         dataType: 'json',
-        data:JSON.stringify({'userId':sessionStorage.userId}),
+        data:JSON.stringify({schoolId:localStorage.schoolList}),
         success:function(e){
             if(e.result){
                 var usernum = e.Data;
@@ -62,7 +62,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
             type: 'post',
             asyns:false,
             dataType: 'json',
-            data:JSON.stringify({'schoolId':$(this).attr('schoolId'),'schoolName':$(this).attr('schoolName')}),
+            data:JSON.stringify({'schoolId':localStorage.schoolList}),
             success:function(e){
                 if(e.result){
                     $('.index_formtit a').attr('href',e.downloadUrl)
