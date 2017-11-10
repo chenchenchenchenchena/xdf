@@ -55,30 +55,30 @@ require(['jquery-1.11.0.min'], function () {
         //     $(this).addClass('checkedschool');
         //     $(this).siblings().removeClass('checkedschool');
         //     $(this).siblings().find('img').attr('src','images/tree_checkbox_0.gif');
-        //     $.ajax({
-        //         url:global.user_list,
-        //         type: 'post',
-        //         asyns:false,
-        //         dataType: 'json',
-        //         data:JSON.stringify({"schoolId":schoolid,'loginId':$('.homework_sea input').val()}),
-        //         success:function(e){
-        //             if(e.dataList){
-        //                 $('.power_list').find('li').eq(0).siblings().remove();
-        //                 for(var i = 0;i<e.dataList.length;i++){
-        //                     if(e.dataList[i].isEnabled==1){
-        //                         str = '已启用'
-        //                     }else{
-        //                         str = '已禁用'
-        //                     }
-        //                     if(e.dataList[i].id==1){
-        //                         $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span></span></li>')
-        //                     }else{
-        //                         $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+e.dataList[i].auth+'" loginId="'+e.dataList[i].loginId+'">编辑</a></span></li>')
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     });
+            $.ajax({
+                url:global.user_list,
+                type: 'post',
+                asyns:false,
+                dataType: 'json',
+                data:JSON.stringify('1'),
+                success:function(e){
+                    if(e.dataList){
+                        $('.power_list').find('li').eq(0).siblings().remove();
+                        for(var i = 0;i<e.dataList.length;i++){
+                            if(e.dataList[i].isEnabled==1){
+                                str = '已启用'
+                            }else{
+                                str = '已禁用'
+                            }
+                            if(e.dataList[i].id==1){
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span></span></li>')
+                            }else{
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+e.dataList[i].auth+'" loginId="'+e.dataList[i].loginId+'">编辑</a></span></li>')
+                            }
+                        }
+                    }
+                }
+            });
         //
         //
         // });
@@ -103,10 +103,12 @@ require(['jquery-1.11.0.min'], function () {
                             }else{
                                 str = '已禁用'
                             }
-                            $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="#/userAdd" class="homework_operation">编辑</a></span></li>')
+                            if(e.dataList[i].id==1){
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span></span></li>')
+                            }else{
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+e.dataList[i].auth+'" loginId="'+e.dataList[i].loginId+'">编辑</a></span></li>')
+                            }
                         }
-                    }else{
-                        layer.msg('暂无用户')
                     }
                 }
             });
