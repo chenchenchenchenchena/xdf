@@ -29,6 +29,20 @@
 //            }
 
 //        });
-        $.cookie('E2Token','==',{expires:7,path:'/',domain: '.xdf.cn',secure: false,raw:false});
+        deleteDomainCookies('.xdf.cn');
+        function deleteDomainCookies(domain) {
+            var cookies = document.cookie.split(/; */);
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                if ( cookie.indexOf( domain ) !=-1 )
+                {
+                    var eqPos = cookie.indexOf("=");
+                    var name = cookie.substr(0, eqPos);
+                    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=" + domain;
+                }
+            }
+        }
+//        $.cookie('E2Token','==',{expires:7,path:'/',domain: '.xdf.cn',secure: false,raw:false});
     })
 </script><body></body></html>
