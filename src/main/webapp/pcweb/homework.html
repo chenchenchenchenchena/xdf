@@ -27,7 +27,7 @@
                 <li>
                     <span class="homework_samll_title">校区</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_school_info')" tabindex="1">全部</h4>
+                        <h4 id="school" school-id="" onfocus="getSchoolList()" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                 <li>
                     <span class="homework_samll_title">学段</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
+                        <h4 id="stage" onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                 <li>
                     <span class="homework_samll_title">年级</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
+                        <h4 id="grade" onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -51,36 +51,40 @@
                 <li>
                     <span class="homework_samll_title">科目</span>
                     <div class="homework_samll_one">
-                        <h4 onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
+                        <h4 id="subject" onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
                 </li>
-
+                <li>
+                    <button class="select-btn">确定</button>
+                </li>
             </ul>
         </div>
     </div>
     <div class="homework_title homework_see">
         <h4>结果列表</h4>
-        <p>查看方式 <span class="homework_active">近半年</span><span>近半年</span></p>
+        <p>查看方式
+            <span onclick="lookType(this,1)" class="homework_active">近半年</span><span onclick="lookType(this,2)">近一年
+            </span></p>
     </div>
     <div class="homework_Statistics clearfix">
-        <div>
+        <div id="publish">
             <h4>总用户量</h4>
             <h1>10000 <i>人</i><span>(总送达3000人次)</span></h1>
             <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
         </div>
-        <div>
+        <div id="commit">
             <h4>总提交率</h4>
             <h1>10000 <i>%</i><span>(2400条)</span></h1>
             <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
         </div>
-        <div>
+        <div id="reply">
             <h4>总批复率</h4>
             <h1>10000 <i>%</i><span>(2400条)</span></h1>
             <p>手动:<span>20%（2000条）</span>电子:<span>80%(800次)</span></p>
         </div>
-        <div>
+        <div id="correctRateAll">
             <h4>总正确率</h4>
             <h1>80 <i>%</i></h1>
             <p>仅指电子作业</p>
