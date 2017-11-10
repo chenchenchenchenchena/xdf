@@ -67,12 +67,19 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
 
-
+        $('.index_title h4').css('cursor','pointer');
         //名字重置
         $('.homework_sea input').val(sessionStorage.loginId);
         $('.homework_sea input').attr('disabled',true);
         $('.homework_sea').css('background','rgb(235, 235, 228)');
-
+        if(sessionStorage.edite_bur==1){
+            $('.user_operation_confirm').html('禁用')
+        }else{
+            $('.user_operation_confirm').html('启用')
+        }
+        $('.index_title h4').click(function(){
+            history.go(-1)
+        })
         //选取邮箱
         $(document).on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
