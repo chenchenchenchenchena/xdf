@@ -1,4 +1,9 @@
-var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+var onlineUrl = 'dt.xdf.cn';
+if(window.location.host == onlineUrl){   //正式环境
+    var url_o = 'http://dt.xdf.cn/xdfdtmanager/';
+}else{    //测试环境
+    var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
+}
 //不走e2登陆
 function tLogin() {
     var loginName = document.getElementById("loginId").value;
@@ -27,17 +32,15 @@ function tLogin() {
         success: function (e) {
             console.log(e);
             if (e.result == false) {
-
                 alert(e.message);
             } else {
                 sessionStorage.setItem("sid", e.sid, 1);
                 sessionStorage.setItem("userName", e.userName, 1);
                 sessionStorage.setItem("userId", e.userId, 1);
                 var functionList = e.functionList;
-                window.location.href = "index.html"
-                localStorage.functionCheckedList = JSON.stringify(functionList);
+                sessionStorage.superstar = JSON.stringify(functionList);
+                location.href = 'index.html#/index'
             }
-
         }
     })
 

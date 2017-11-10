@@ -30,8 +30,12 @@ var global = {
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/
+        if(sessionStorage.superstar){
+            left_navlist(JSON.parse(sessionStorage.superstar))
+        }else{
+            e2Login();
+        }
 
-    toLogin();
 
     /*用户下拉*/
     var timeout; 
@@ -43,7 +47,7 @@ require(['jquery-1.11.0.min'],function(){
             $('.usermenu').stop().fadeOut();
              $('.user_name').css('background-image','url(../images/img_1.png)')
         },500)
-    })
+    });
     $('.usermenu').hover(function(){
         clearTimeout(timeout)
     },function(){
@@ -59,49 +63,36 @@ require(['jquery-1.11.0.min'],function(){
      */
     $('#logout').click(toLogout);
     //左侧菜单栏
-    showFunctionList();
-
-    //$.ajax({
-    //    url:global.left_nav,
-    //    type: 'post',
-    //    asyns:false,
-    //    dataType: 'json',
-    //    data:JSON.stringify({'userId':sessionStorage.userId}),
-    //    success:function(e){
-    //        if(e.result){
-    //            var onelist = e.dataList;
-    //            for(var i = 0;i<onelist.length;i++){
-    //                var onelistbure = onelist[i];
-    //                if(onelistbure.isValid ==1){
-    //                    $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
-    //                    for(var k = 0;k<onelistbure.children.length;k++){
-    //                        var twolist = onelistbure.children[k];
-    //                        if(twolist.isValid ==1){
-    //                            $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
-    //                        }
-    //                    }
-    //                    var url_l =  location.href;
-    //                    var number_l = 0;
-    //                    if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
-    //                        number_l = 1;
-    //                    }
-    //                    else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
-    //                        number_l = 2;
-    //                    }
-    //                    else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-    //                        number_l = 3
-    //                    }
-    //                    else if(url_l.indexOf('master')!=-1){
-    //                        number_l = 4
-    //                    }
-    //                    var $bure_true = $('.left_nav ul li').eq(number_l);
-    //                    $bure_true.addClass('activ_nav')
-    //                }
-    //            }
-    //        }
-    //    }
-    //});
-
+    function left_navlist(onelist){
+                    for(var i = 0;i<onelist.length;i++){
+                        var onelistbure = onelist[i];
+                        if(onelistbure.isValid ==1&&onelistbure.checked ==true){
+                            $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
+                        };
+                        var childlist = onelistbure.children;
+                        for(var k = 0;k<childlist.length;k++){
+                            if(childlist[k].isValid ==1&&childlist[k].checked ==true){
+                             $('.left_nav ul').append('<li><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
+                            }
+                        }
+                    }
+                    var url_l =  location.href;
+                    var number_l = 0;
+                    if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+                        number_l = 1;
+                    }
+                    else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+                        number_l = 2;
+                    }
+                    else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+                        number_l = 3
+                    }
+                    else if(url_l.indexOf('master')!=-1){
+                        number_l = 4
+                    }
+                    var $bure_true = $('.left_nav ul li').eq(number_l);
+                    $bure_true.addClass('activ_nav')
+                }
     Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
             "M+": this.getMonth() + 1, //月份
@@ -133,16 +124,14 @@ function toLogout() {
     var url = "";
     var returnUrl = window.location.host;
     var currentUser = sessionStorage.getItem("userId");
-    if(currentUser == "ssdf"){
+    if(sessionStorage.superstar){
         //表示当前用户为超级管理员
-        returnUrl = returnUrl + "/pcweb/login_web.html";
-        url = url_o + "logout/doAdminLogout.do"
+       sessionStorage.clear();
+       location.href = 'login_web.html';
     }else {
-        returnUrl = 'http://'+onlineUrl+'/xdfdthome'
-
+        returnUrl = 'http://'+onlineUrl+'/xdfdthome';
         url = url_o + "logout/doLogout.do";
-    }
-
+    };
     var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
     jQuery.ajax({
         type: "POST",
@@ -154,7 +143,6 @@ function toLogout() {
             if (json.result == true) {
                 var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
                 if (keys) {
-
                     for (var i = keys.length; i--;)
                         setCookie(keys[i], 1, -1);
                 }
@@ -167,46 +155,9 @@ function toLogout() {
     });
 }
 
-function showFunctionList(){
 
-    var onelist = JSON.parse(localStorage.functionCheckedList);
-    if (onelist == undefined || onelist.length == 0) {
-        alert("该用户没有权限");
-        return false;
-    }
-    for(var i = 0;i<onelist.length;i++){
-        var onelistbure = onelist[i];
-        if(onelistbure.isValid ==1){
-            $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
-            for(var k = 0;k<onelistbure.children.length;k++){
-                var twolist = onelistbure.children[k];
-                if(twolist.isValid ==1){
-                    $('.left_nav ul').append('<li><a href="'+twolist.url+'">'+twolist.text+'</a></li>')
-                }
-            }
-            var url_l =  location.href;
-            var number_l = 0;
-            if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
-                number_l = 1;
-            }
-            else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
-                number_l = 2;
-            }
-            else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-                number_l = 3
-            }
-            else if(url_l.indexOf('master')!=-1){
-                number_l = 4
-            }
-            var $bure_true = $('.left_nav ul li').eq(number_l);
-            $bure_true.addClass('activ_nav')
-        }
-    }
-}
-
-
-//走e2登陆
-function toLogin() {
+//e2登陆回调
+function e2Login() {
     var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
     var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
     var calbac = {
@@ -222,22 +173,16 @@ function toLogin() {
         success: function (e) {
             console.log(e);
             if (e.result == false) {
-
                 alert(e.message);
                 toLogout();
             } else {
-
                 sessionStorage.setItem("userName", e.userName);
                 var userId = e.userId;
                 userId = userId.split('@')[0];
-
                 sessionStorage.setItem("userId", userId);
-
-
-                sessionStorage.setItem("sid",e.sid)
+                sessionStorage.setItem("sid",e.sid);
                 $('.user_name').html(sessionStorage.getItem('userName'));
-                localStorage.functionCheckedList = JSON.stringify(functionList);
-
+                left_navlist(e.functionList)
             }
         }
     });
