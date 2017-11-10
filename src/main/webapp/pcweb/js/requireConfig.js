@@ -83,7 +83,9 @@ require(['jquery-1.11.0.min'],function(){
                         alert('您暂无权限,请联系管理员')
                     }
                     var number_l = 0;
-                    if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+        var url_l =  location.href;
+
+        if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
                         number_l = 1;
                     }
                     else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
@@ -97,8 +99,7 @@ require(['jquery-1.11.0.min'],function(){
                     }
                     var $bure_true = $('.left_nav ul li').eq(number_l);
                     var $url_ = $('.left_nav ul li').eq(number_l).attr('href');
-                    var url_l =  location.href+$url_;
-                    location.href =url_l;
+                    location.href =url_l+$url_;
                     $bure_true.addClass('activ_nav')
                 }
     Date.prototype.Format = function (fmt) { //author: meizz
