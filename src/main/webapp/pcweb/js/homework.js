@@ -111,7 +111,7 @@ function filterByDrownId(_this, name) {
 function selectHwData() {
     var params = {
         'dateMonth': "6"
-    }
+    };
     $.ajax({
         type: "POST",
         url: url_o + '/backEndHomework/queryHomeWorkTotal.do',
@@ -120,7 +120,59 @@ function selectHwData() {
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {
+            if(e.code = 200){
+                var data = e.data;
+                if(data != undefined){
+                    var resultCommit = data.resultCommit; //总提交率
+                    var resultPublish = data.resultPublish;//总用户量
+                    var resultReply = data.resultReply;//总批复量
+                    var schoolComparsion = data.schoolComparsion;//校区对比数据
 
+                    /*用户量数据处理*/
+                    var publishAll = resultPublish.resultPublish;//总用户量
+                    var publishEAll = resultPublish.publishEAll;//电子作业数量
+                    var publishEAllRate = resultPublish.publishEAllRate;//电子作业率
+                    var reachAll = resultPublish.reachAll;//总送达人次
+                    var normalRate = 1- publishEAllRate;//手动作业率
+
+                    /*批复量数据处理*/
+                    var replyAll = resultReply.replyAll;//
+                    var replyAllRate = resultReply.replyAllRate;
+                    var replyEAll = resultReply.replyEAll;
+                    var replyEAllRate = resultReply.replyEAllRate;
+
+
+                    /*提交率数据处理*/
+                    var commitAll = resultCommit.commitAll;
+                    var commitAllRate = resultCommit.commitAllRate;
+                    var commitEAll = resultCommit.commitEAll;
+                    var commitEAllRate = resultCommit.commitEAllRate;
+
+                    /*总正确率数据处理*/
+
+
+                    /*校区对比数据展示*/
+                    $('#schoolComparsion li').remove();
+
+                    var str = '<li class="homework_list_title"><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                    $('#schoolComparsion').append(str);
+                    for(var i = 0;i<schoolComparsion.length;i++){
+
+                        var schoolName = schoolComparsion[i].schoolName;//校区
+                        var replyRate = schoolComparsion[i].replyRate;//批复率
+                        var commitCount = schoolComparsion[i].commitCount;//提交人数
+                        var commitRate = schoolComparsion[i].commitRate;//提交率
+                        var publishCount = schoolComparsion[i].publishCount;//布置次数
+                        var correctRate = schoolComparsion[i].correctRate;//正确率
+                        var reachCount = schoolComparsion[i].reachCount;//送达人数
+                        var html_ = '<li><span>'+schoolName+'</span><span>'+publishCount+'</span><span>'+reachCount+'</span><span>'+commitRate+'</span><span>'+replyRate+'</span><span>'+correctRate+'</span><span >' +
+                            '<a href="#/detail" class="homework_operation">查看明细</a></span></li>';
+                        $('#schoolComparsion').append(html_);
+
+                    }
+                }
+
+            }
         }
     })
 }
