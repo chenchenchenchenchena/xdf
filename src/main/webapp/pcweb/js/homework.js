@@ -224,7 +224,7 @@ function selectHwData() {
     };
     $.ajax({
         type: "POST",
-        url: url_o + '/backEndHomework/queryHomeWorkTotal.do',
+        url: global.hw_total,
         async: true,//同步
         contentType: "application/json",
         dataType: 'json',

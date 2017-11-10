@@ -210,16 +210,21 @@ function SelectData(){
 }
 
 function exporHourList(){
-   var params = {
-       'schoolId':currentCityId,
-       'beginDate':beginTime,
-       'endDate':endTime,
-       'masterTeacherFlag':masterTeacherFlag,
-       'teacherName':seacherKey,
-       'nextPage':page,
-       'pageSize':pageSize,
-       'schoolName':currentCity,
-   }
+    if ($('.homework_list li') == undefined || $('.homework_list li').length == 0) {
+        layer.msg("暂无列表");
+        return false;
+    }
+    var params = {
+        'schoolId': currentCityId,
+        'beginDate': beginTime,
+        'endDate': endTime,
+        'masterTeacherFlag': masterTeacherFlag,
+        'teacherName': seacherKey,
+        'nextPage': page,
+        'pageSize': pageSize,
+        'schoolName': currentCity,
+    }
+    var newTab = window.open();
     $.ajax({
         type: "POST",
         url: global.expor_hour,
@@ -227,7 +232,13 @@ function exporHourList(){
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {
-            alert("导出成功");
+            if (e.downloadUrl != undefined) {
+                newTab.location.href = e.downloadUrl;
+            } else {
+                layer.msg('暂无列表');
+            }
+
+
         }
     })
 
