@@ -79,6 +79,7 @@ require(['jquery-1.11.0.min'], function () {
                             }else{
                                 str = '已禁用'
                             }
+
                             if(allLength[i].loginId=='ssdf'){
                                 $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span></span></li>')
                             }else{
