@@ -70,7 +70,11 @@ require(['jquery-1.11.0.min'], function () {
                             }else{
                                 str = '已禁用'
                             }
-                            $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+e.dataList[i].auth+'" loginId="'+e.dataList[i].loginId+'">编辑</a></span></li>')
+                            if(e.dataList[i].id==1){
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span></span></li>')
+                            }else{
+                                $('.power_list').append('<li><span>'+e.dataList[i].school+'</span><span>'+e.dataList[i].userName+'</span><span>'+e.dataList[i].email+'</span><span>'+e.dataList[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+e.dataList[i].auth+'" loginId="'+e.dataList[i].loginId+'">编辑</a></span></li>')
+                            }
                         }
                     }
                 }
