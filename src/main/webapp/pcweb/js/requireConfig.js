@@ -36,6 +36,7 @@ require(['jquery-1.11.0.min'],function(){
         if(sessionStorage.superstar){
             left_navlist(JSON.parse(sessionStorage.superstar));
             localStorage.schoolList = '-1'
+
         }else{
             e2Login();
         }
