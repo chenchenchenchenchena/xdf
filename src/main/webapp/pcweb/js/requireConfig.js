@@ -115,6 +115,10 @@ require(['jquery-1.11.0.min'],function(){
                     }else{
                         $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
                     }
+                    if(url_l.indexOf($bure_true.attr('href'))<0){
+                        alert(0)
+                    }
+
                 }
     Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
