@@ -49,7 +49,7 @@ require(['jquery-1.11.0.min'], function () {
             type: 'post',
             asyns:false,
             dataType: 'json',
-            data:JSON.stringify({'userId':'v_kouchen'}),
+            data:JSON.stringify({'userId':sessionStorage.userId}),
             success:function(e){
                 if(e.result){
                     var onelist = e.dataList;
@@ -68,18 +68,10 @@ require(['jquery-1.11.0.min'], function () {
         });
 
             //搜索框事件
-            $('.adduser_sea img').on('click',seachUser);
-            $('.adduser_sea input').on('keyup',seachUser);
-            //选取邮箱
-            $(document).on('click','.adduser_list li',function(){
-                $('.adduser_sea input').val($(this).html());
-                $('.adduser_sea input').attr('name',$(this).attr('name'));
-                $('.adduser_sea input').attr('comname',$(this).attr('comname'));
-                $('.adduser_sea input').attr('deptName',$(this).attr('deptName'));
-                $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
-                $('.adduser_list').hide();
-                $('.adduser_list').find('li').remove();
-            });
+            $('.adduser_sea img').off("click").on('click',seachUser);
+            $('.adduser_sea input').off("keyup").on('keyup',seachUser);
+
+            //搜索用户
             function seachUser(){
                 if($('.adduser_sea input').val()!=''){
                     $.ajax({
@@ -103,7 +95,18 @@ require(['jquery-1.11.0.min'], function () {
                     $('.adduser_list').find('li').remove();
                 }
             }
+
             //选取事件
+            $('.adduser_list').off('click').on('click','li',function(){
+
+                $('.adduser_sea input').val($(this).html());
+                $('.adduser_sea input').attr('name',$(this).attr('name'));
+                $('.adduser_sea input').attr('comname',$(this).attr('comname'));
+                $('.adduser_sea input').attr('deptName',$(this).attr('deptName'));
+                $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
+                $('.adduser_list').hide();
+                $('.adduser_list').find('li').remove();
+            });
             //面包屑
             $('.index_title h4').css('cursor','pointer');
             $('.index_title h4').click(function(){
@@ -112,8 +115,10 @@ require(['jquery-1.11.0.min'], function () {
             $('.user_operation_cancel').eq(0).click(function(){
                 history.go(-1)
             });
+
+
             // 权限事件
-            $(document).on('click','.user_powerlist li',function(){
+            $(document).off("click").on('click','.user_powerlist li',function(){
                 if($(this).hasClass('user_powerall')){
                     if($(this).find('img').attr('src').indexOf('0')!=-1){
                         $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
@@ -141,8 +146,8 @@ require(['jquery-1.11.0.min'], function () {
             //新建用户提交
             $('.user_operation_confirm').on('click',function(){
                 $('.user_Enable').show();
-            })
-        $('.usernew_true').click(function(){
+            });
+            $('.usernew_true').click(function(){
             var emailtest =  /[^\u4e00-\u9fa5]/;
             if( $(this).attr('checked')){
                 layer.msg('正在提交');
@@ -215,7 +220,9 @@ require(['jquery-1.11.0.min'], function () {
                 }
             });
         });
-
+            $('.user_Enable input:last-of-type').click(function(){
+                $(this).parent().hide();
+            })
 
 
     })

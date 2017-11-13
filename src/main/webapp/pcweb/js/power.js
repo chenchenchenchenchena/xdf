@@ -94,7 +94,7 @@ require(['jquery-1.11.0.min'], function () {
         //
         // });
 
-        $('.powerindex_sea img').on('click',seachlist);
+        $('.powerindex_sea img').off("click").on('click',seachlist);
         function seachlist(){
             page++;
             $.ajax({
@@ -122,7 +122,7 @@ require(['jquery-1.11.0.min'], function () {
                 }
             });
         }
-        $(document).on('click','.homework_operation',function(){
+        $(document).off("click").on('click','.homework_operation',function(){
             sessionStorage.loginId = $(this).attr('loginId');
             sessionStorage.schoolId = $(this).attr('schoolId');
             sessionStorage.id_s = $(this).attr('id_s');
@@ -130,8 +130,44 @@ require(['jquery-1.11.0.min'], function () {
             var url =  location.href;
             location.href =url.substr(0,url.indexOf('?'))+'#/useredit'
         });
+        //搜索框事件
+        $('.powerindex_sea img').off("click").on('click',seachUser);
+        $('.powerindex_sea input').off("keyup").on('keyup',seachUser);
 
-
+        //搜索用户
+        function seachUser(){
+            if($('.powerindex_sea input').val()!=''){
+                $.ajax({
+                    url:global.user_seac,
+                    type: 'post',
+                    asyns:false,
+                    dataType: 'json',
+                    data:JSON.stringify({"keyword":$('.powerindex_sea input').val()}),
+                    success:function(e){
+                        if(e.data&&e.data.length!=0){
+                            $('.adduser_list').find('li').remove();
+                            for(var i = 0;i<e.data.length;i++){
+                                $('.adduser_list').show();
+                                $('.adduser_list').append('<li name="'+e.data[i].name+'" comname="'+e.data[i].companyName+'" deptName="'+e.data[i].deptName+'">'+e.data[i].emailAddr+'</li>')
+                            }
+                        }
+                    }
+                });
+            }else{
+                $('.adduser_list').hide();
+                $('.adduser_list').find('li').remove();
+            }
+        }
+        //选取用户列表
+        $(document).off("click").on('click','.adduser_list li',function(){
+            $('.adduser_sea input').val($(this).html());
+            $('.adduser_sea input').attr('name',$(this).attr('name'));
+            $('.adduser_sea input').attr('comname',$(this).attr('comname'));
+            $('.adduser_sea input').attr('deptName',$(this).attr('deptName'));
+            $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
+            $('.adduser_list').hide();
+            $('.adduser_list').find('li').remove();
+        });
     });
 });
 function initPage(totalCounts, currentPage) {

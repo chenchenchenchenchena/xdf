@@ -41,7 +41,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
         //编辑点击
-        $(document).on('click','.master_edit',function(){
+        $(document).off("click").on('click','.master_edit',function(){
             $('.edit_s ').show();
             $('.back_big').show();
             var teaname    = $(this).attr('userName')
@@ -50,7 +50,7 @@ require(['jquery-1.11.0.min'], function () {
             Olddata();
         });
         //新增主讲校区
-        $(document).on('click','.edit_s i',function(){
+        $(document).off("click").on('click','.edit_s i',function(){
             if($(this).html()=='+'){
                 //增加新编号
                 if($('#campus').val()=='1'){
@@ -108,7 +108,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
         //编辑取消
-        $('.false_s,.true_s').on('click',function(){
+        $('.false_s,.true_s').off("click").on('click',function(){
             $('.back_big').hide();
             $('.edit_s').hide();
             $('.edit_s select').val('1');
@@ -116,17 +116,17 @@ require(['jquery-1.11.0.min'], function () {
             $('.old_s').children().remove();
         });
         //新建账户
-        $('.master_adduser').on('click',function(){
+        $('.master_adduser').off("click").on('click',function(){
             $('.add_l ').show();
             $('.back_big').show();
         });
         //新建 取消
-        $('.false_l').on('click',function () {
+        $('.false_l').off("click").on('click',function () {
             $('.back_big').hide();
             $('.add_l').hide();
         });
         //新建  确认
-        $('.true_l').on('click',function () {
+        $('.true_l').off("click").on('click',function () {
             var name = $('#add-name').val();
             var email = $('#add-email').val();
             var subject = $('#add-subject').val();
@@ -197,7 +197,7 @@ require(['jquery-1.11.0.min'], function () {
             });
         };
         //禁用点击
-        $(document).on('click','.master_confrim',function(){
+        $(document).off("click").on('click','.master_confrim',function(){
             var _this = this;
             var pid = $(this).attr('data-pid');
             var email = $(this).attr('data-email');
