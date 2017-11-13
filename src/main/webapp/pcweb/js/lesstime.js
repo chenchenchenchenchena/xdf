@@ -9,10 +9,9 @@ var endTime = '';
 
 localStorage.schoolList = "73,505";
 
-
 require(['jquery-1.11.0.min'], function () {
-    require(['jquery-ui.min','echarts.common.min'], function () {
-        require(['layer'], function () {
+    require(['jquery-ui.min','layer'], function () {
+        require(['echarts.min'], function (echarts) {
             laydate.render({
                 elem: '#date_input',
                 range: true //指定元素
@@ -30,7 +29,55 @@ require(['jquery-1.11.0.min'], function () {
                 }
                 SelectData();
             });
-            line_echar('teacher_echart',['11.01','11.02','11.03'],[{'11.01':'8'},{'11.02':'5'},{'11.03':'9'}])
+            line_echar('teacher_echart',['11.01','11.02','11.03'],[8,9,10])
+            function line_echar(id,campus,value){
+                var myChart = echarts.init(document.getElementById(id));
+                option = {
+                    color: ['#3398DB'],
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {
+
+                            type : 'shadow'
+
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : campus,
+                            axisTick: {
+                                alignWithLabel: true
+
+                            },
+                            name:'校区',
+                            nameGap:'-5',
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            name:'班课量',
+
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'班课量',
+                            type:'bar',
+                            barWidth: '60%',
+                            data:value
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            }
         });
     });
 });
@@ -130,54 +177,54 @@ function graph(id, x, dataItem, max) {
  * @param campus: 校区数组
  * @param value: 班课量数组
  */
-function line_echar(id,campus,value){
-    var myChart = echarts.init(document.getElementById(id));
-    option = {
-        color: ['#3398DB'],
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {
-
-                type : 'shadow'
-
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : campus,
-                axisTick: {
-                    alignWithLabel: true
-
-                },
-                name:'校区',
-                nameGap:'-5',
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                name:'班课量',
-
-            }
-        ],
-        series : [
-            {
-                name:'班课量',
-                type:'bar',
-                barWidth: '60%',
-                data:value
-            }
-        ]
-    };
-    myChart.setOption(option);
-}
+// function line_echar(id,campus,value){
+//     var myChart = echarts.init(document.getElementById(id));
+//     option = {
+//         color: ['#3398DB'],
+//         tooltip : {
+//             trigger: 'axis',
+//             axisPointer : {
+//
+//                 type : 'shadow'
+//
+//             }
+//         },
+//         grid: {
+//             left: '3%',
+//             right: '4%',
+//             bottom: '3%',
+//             containLabel: true
+//         },
+//         xAxis : [
+//             {
+//                 type : 'category',
+//                 data : campus,
+//                 axisTick: {
+//                     alignWithLabel: true
+//
+//                 },
+//                 name:'校区',
+//                 nameGap:'-5',
+//             }
+//         ],
+//         yAxis : [
+//             {
+//                 type : 'value',
+//                 name:'班课量',
+//
+//             }
+//         ],
+//         series : [
+//             {
+//                 name:'班课量',
+//                 type:'bar',
+//                 barWidth: '60%',
+//                 data:value
+//             }
+//         ]
+//     };
+//     myChart.setOption(option);
+// }
 
 //获取校区
 function getSchool() {

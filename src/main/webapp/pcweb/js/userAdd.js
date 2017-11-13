@@ -222,6 +222,7 @@ require(['jquery-1.11.0.min'], function () {
         });
             $('.user_Enable input:last-of-type').click(function(){
                 $(this).parent().hide();
+                $('.user_operation_confirm').removeAttr('checked');
             })
 
 

@@ -102,13 +102,14 @@ require(['jquery-1.11.0.min'], function () {
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
-                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'0'}),
+                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'1'}),
                 success:function(e){
                     if(e.result){
                         layer.msg('禁用成功');
                         $('.user_operation_confirm').html('启用')
                         $('.user_erro').hide();
                         sessionStorage.edite_bur = 0;
+                        history.go(-1)
                     }
                 }
             });
@@ -121,13 +122,14 @@ require(['jquery-1.11.0.min'], function () {
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
-                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'1'}),
+                data:JSON.stringify({"id":sessionStorage.id_s,'isEnabled':'0'}),
                 success:function(e){
                     if(e.result){
                         layer.msg('启用成功');
                         $('.user_operation_confirm').html('启用');
                         $('.user_Enable').hide();
                         sessionStorage.edite_bur = 1;
+                        history.go(-1);
                     }
                 }
             });
@@ -252,7 +254,8 @@ require(['jquery-1.11.0.min'], function () {
                     if(e.result){
                         if(e.result){
                             $(this).removeAttr('checked');
-                            layer.msg('修改成功')
+                            layer.msg('修改成功');
+                            history.go(-1);
                         }else{
                             $(this).removeAttr('checked');
                             layer.msg('修改失败')

@@ -64,7 +64,7 @@ require(['jquery-1.11.0.min'],function(){
         $('.user_name').css('background-image','url(../images/img_1.png)')
     });
     /* 导航侧边栏 */
-    $(document).on('click','.left_nav li',function(){
+    $('.left_nav').on('click','li',function(){
         $(this).addClass('activ_nav').siblings().removeClass('activ_nav');
     });
     /**
