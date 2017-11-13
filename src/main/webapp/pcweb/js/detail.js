@@ -12,8 +12,8 @@ var endTime = "";//默认全部
 var homeworkType = "0"//默认作业类型全部 0表示查询所以 1表示查询普通 2表示查询电子
 var seacherName = "";
 var totalCounts = "0";
-var page = "1";
-var pageSize = "15";
+var page = 1;
+var pageSize = 15;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -272,8 +272,12 @@ function SelectTeacherList(){
 
             if(e.list != undefined && e.list.length > 0){
                 var teacherList = e.list;
+                totalCounts = e.total;//总条数
+                $('.lesstime_Result').html("共"+totalCounts+"条数据");
+                var currentPage = e.pageNum;
+                initPage(totalCounts, currentPage);
                 $('#teacher-list li').remove();
-                var str = '<li class="homework_list_title"><span>姓名</span><span>带班量</span><span>布置量</span><span>提交率</span><span>批复率</span><span>正确率（电子）</span></li>';
+                var str = '<li class="homework_list_title"><span>姓名</span><span>布置量</span><span>提交率</span><span>批复率</span><span>正确率（电子）</span></li>';
                 $('#teacher-list').append(str);
                 for (var i = 0; i < teacherList.length; i++) {
                     var teacherName = teacherList[i].teacherName;
@@ -282,7 +286,7 @@ function SelectTeacherList(){
                     var publishCount = teacherList[i].publishCount;
                     var replyRate = teacherList[i].replyRate;
                     var teacherEmail = teacherList[i].teacherEmail;
-                    var itemHtml_ = '<li><span>'+teacherName+'</span><span>'+"带班量"+'</span><span>'+publishCount+'</span><span>'+parseInt((commitRate*100))+'%</span><span>'+parseInt((replyRate*100))+'%</span><span>'+parseInt((correctRate*100))+'%</span></li>';
+                    var itemHtml_ = '<li><span>'+teacherName+'</span><span>'+publishCount+'</span><span>'+parseInt((commitRate*100))+'%</span><span>'+parseInt((replyRate*100))+'%</span><span>'+parseInt((correctRate*100))+'%</span></li>';
                     $('#teacher-list').append(itemHtml_);
                 }
             }
