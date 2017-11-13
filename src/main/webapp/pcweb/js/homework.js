@@ -367,6 +367,7 @@ function selectHwData() {
                     for (var i = 0; i < schoolComparsion.length; i++) {
 
                         var schoolName = schoolComparsion[i].schoolName;//校区
+                        var schoolId = schoolComparsion[i].schoolId;//校区id
                         var replyRate = schoolComparsion[i].replyRate;//批复率
                         var commitCount = schoolComparsion[i].commitCount;//提交人数
                         var commitRate = schoolComparsion[i].commitRate;//提交率
@@ -374,7 +375,7 @@ function selectHwData() {
                         var correctRate = schoolComparsion[i].correctRate;//正确率
                         var reachCount = schoolComparsion[i].reachCount;//送达人数
                         var html_ = '<li><span>' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span >' +
-                            '<a href="#/detail" onclick="lookHwDetails(this)" class="homework_operation">查看明细</a></span></li>';
+                            '<a href="#/detail" onclick="lookHwDetails(this,'+schoolId+')" class="homework_operation">查看明细</a></span></li>';
                         $('#schoolComparsion').append(html_);
 
                     }
@@ -386,17 +387,16 @@ function selectHwData() {
 }
 
 //查看明细
-function lookHwDetails(this_) {
+function lookHwDetails(this_,schoolId) {
     var params = {
         'homeworkType': homeworkType,
-        'schoolId': currentSchoolId,
+        'schoolId': schoolId,
         'dateMonth': dateMonth,
         'beginTime': beginTime,
         'endTime': endTime,
         'paperSubject': subject,
         'paperClass': grade,
-        'paperStage': stage,
-        'currentSchool': currentSchool
+        'paperStage': stage
     };
     sessionStorage.homeworkDetailParams = JSON.stringify(params);
 }

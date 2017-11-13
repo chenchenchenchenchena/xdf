@@ -25,19 +25,6 @@ require(['jquery-1.11.0.min'], function () {
                     range: true //指定元素
                 });
 
-                var params = {
-                    'homeworkType': homeworkType,
-                    'schoolId': currentSchoolId,
-                    'dateMonth': dateMonth,
-                    'beginTime': beginTime,
-                    'endTime': endTime,
-                    'paperSubject': subject,
-                    'paperClass': grade,
-                    'paperStage': stage
-                };
-                sessionStorage.homeworkDetailParams = JSON.stringify(params);
-
-
                 //从上个页面获取筛选数据
                 var params = JSON.parse(sessionStorage.homeworkDetailParams);
                 homeworkType = params.homeworkType;
@@ -54,9 +41,21 @@ require(['jquery-1.11.0.min'], function () {
                 }
                 //初始化分页控件
                 initPage(totalCounts, page);
-
                 //查询数据
                 SelectTeacherList();
+
+                //搜素点击事件
+                $('#seacher_hw').parent().find('img').click(function(){
+                    seacherName = $('#seacher_hw').val();
+                    if(seacherName == undefined || seacherName == ""){
+                        layer.msg("请先填写教师名称");
+                        return false;
+                    }
+                    SelectTeacherList();
+                });
+                $('#hw_selectBtn').click(function(){
+                    SelectTeacherList();
+                });
 
                 //导出教师列表
                 $('#expor_teacher').click(function(){
@@ -105,64 +104,6 @@ function lookType(this_,flag){
         }
         SelectTeacherList();
     }
-}
-
-//校区展示
-function getSchool() {
-    if (sessionStorage.schoolList) {
-        var json = JSON.parse(sessionStorage.schoolList);
-        showSchoolList(json);
-    } else {
-        var table = {
-            "tableName": "dict_school_info"
-        };
-        $.ajax({
-            type: "POST",
-            url: url_o + 'dict/getDictListByTableName.do',
-            async: true,//同步
-            dataType: 'json',
-            data: table,
-            success: function (e) {
-                sessionStorage.schoolList = JSON.stringify(e);
-                showSchoolList(e)
-            }
-        })
-    }
-
-}
-
-//筛选校区列表显示
-function showSchoolList(e){
-    var schoolStr = localStorage.schoolList;// 全部的校区ID
-    var schoolIdList = schoolStr.split(',');
-
-    var schoolList = e.data;
-    if (schoolList != undefined && schoolList.length > 0 ) {
-        $("#school").parent().find("ul").html("");
-        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='"+schoolStr+"'><span>全部</span></li>";
-        for (var i = 0; i < schoolIdList.length; i++) {
-            for(var j = 0;j < schoolList.length;j++){
-                var schoolId = schoolList[j].tCode;
-                if(schoolIdList[i] == schoolId){
-                    cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[j].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[j].tName + "</span></li>";
-                }
-            }
-
-        }
-        $("#school").parent().find("ul").html(cityContent);
-    } else {
-        layer.msg("查询失败!")
-    }
-
-    $("#school").parent().find("ul").show();
-}
-
-//点击选择校区
-function filterByCityId(_this, schoolName) {
-    currentSchool = schoolName;
-    currentSchoolId = $(_this).attr('data-schoolId');
-    $("#school").html(currentSchool);
-    $("#school").parent().find("ul").hide();
 }
 
 //获取学段／年级／科目
@@ -250,20 +191,34 @@ function SelectTeacherList(){
         endTime = time.substring(13,time.length);
     }
 
-    currentSchoolId = $("#school").attr('school-id');
-    if(currentSchoolId == ""){
-        currentSchoolId = localStorage.schoolList
-        currentSchool = "全部";
+    seacherName = $('#seacher_hw').val();
+    if(seacherName == undefined){
+        seacherName = "";
     }
-    if (currentSchoolId == "-1") {
-        currentSchoolId = "";
+
+    if(stage == "全部"){
+        stage = "";
+    }
+    if(grade == "全部"){
+        grade = "";
+    }
+    if(subject == "全部"){
+        subject = "";
     }
 
     var params = {
         'schoolId':currentSchoolId,
+        'teacher':seacherName,
+        'dateMonth':dateMonth,
+        'paperStage':stage,
+        'paperClass':grade,
+        'paperSubject':subject,
         'pageNum':page,
-        'pageSize':pageSize
-    }
+        'pageSize':pageSize,
+        'beginTime':beginTime,
+        'endTime':endTime,
+        'homeworkType':homeworkType
+    };
     $.ajax({
         type: "POST",
         url: global.hw_details,
@@ -275,6 +230,7 @@ function SelectTeacherList(){
             if(e.list != undefined && e.list.length > 0){
                 var teacherList = e.list;
                 totalCounts = e.total;//总条数
+                $('.lesstime_Result').show();
                 $('.lesstime_Result').html("共"+totalCounts+"条数据");
                 var currentPage = e.pageNum;
                 initPage(totalCounts, currentPage);
@@ -291,6 +247,11 @@ function SelectTeacherList(){
                     var itemHtml_ = '<li><span>'+teacherName+'</span><span>'+publishCount+'</span><span>'+parseInt((commitRate*100))+'%</span><span>'+parseInt((replyRate*100))+'%</span><span>'+parseInt((correctRate*100))+'%</span></li>';
                     $('#teacher-list').append(itemHtml_);
                 }
+            }else {
+                layer.msg("暂无数据");
+                $('#teacher-list li').remove();
+                $('.lesstime_Result').hide();
+                initPage(0, 1);
             }
 
         }

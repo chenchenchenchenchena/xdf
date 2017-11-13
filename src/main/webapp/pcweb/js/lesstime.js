@@ -269,7 +269,11 @@ function SelectData(){
                         var html_ = "<li><span>"+list[i].schoolName+"</span><span>"+list[i].headTeacherTotal+"</span><span>"+list[i].totalLessonNos+"</span><span>"+list[i].totalLessonHour+"</span></li>";
                         $('.homework_list').append(html_);
                     }
+                }else {
+                    $('.homework_list li').remove();
+                    layer.msg("暂无数据");
                 }
+
             }
         }
     })
