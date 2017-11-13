@@ -81,7 +81,7 @@ require(['jquery-1.11.0.min'], function () {
             history.go(-1)
         });
         //选取邮箱
-        $(document).on('click','.adduser_list li',function(){
+        $(document).off("click").on('click','.adduser_list li',function(){
             $('.homework_sea input').val($(this).html());
             $('.homework_sea input').attr('name',$(this).attr('name'));
             $('.adduser_list').hide();
@@ -164,7 +164,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         }
         //选取事件
-        $(document).on('click','.user_editlist li',function(){
+        $(document).off("click").on('click','.user_editlist li',function(){
             if($(this).hasClass('user_schoolall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
@@ -189,7 +189,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
         // 权限事件
-        $(document).on('click','.user_powerlist li',function(){
+        $(document).off("click").on('click','.user_powerlist li',function(){
             if($(this).hasClass('user_powerall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
@@ -215,7 +215,7 @@ require(['jquery-1.11.0.min'], function () {
         })
 
         //编辑用户提交
-        $('.user_edite_two').on('click',function(){
+        $('.user_edite_two').off("click").on('click',function(){
             if($('.checked_power').length==0){
                 layer.msg('请选择相关权限');
                 return false;
