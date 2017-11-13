@@ -1,6 +1,6 @@
 body{
 	height:100%;
-	min-width:1024px;
+	min-width:1200px;
 }
 .header{
 	width:100%;
@@ -261,12 +261,13 @@ body{
 }
 .homework_samll_one ul{
 	width:100%;
+	padding-bottom:10px;
 	border:1px solid #dfdfdf;
 	position:relative;
 	background:#fff;
 	display:none;
 	z-index: 1;
-	padding:0 9px;
+	padding:5px 9px;
 	left:-1px;
 }
 #schoolComparsion ul li span{
@@ -285,11 +286,12 @@ body{
 }
 .homework_see p{
 	position:relative;;
-	margin-left:79.5%;
 	top:-31px;
 	font-size:14px;
 	color:#999;
 	line-height:31px;
+	float:right;
+	margin-right:25px;
 }
 .homework_see span{
 	display:inline-block;
@@ -525,12 +527,12 @@ html body .homework_operation{
 	width:25%;
 }
 .last_lesstime_chart{
-	width:99%;
+	width:98%;
 	height:309px;
 	border:1px solid #e8e8e8;
 	margin-top:40px;
 }
-.last_lesstime_chart div{
+#class_echart,#lesstime_echart{
 	width:49.9%;
 	height:100%;
 	border-right:1px solid #e8e8e8;
