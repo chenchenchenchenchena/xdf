@@ -77,15 +77,6 @@ function seacherByName(){
         layer.msg("请先填写老师名称");
         return false;
     }
-    if(currentCityId == undefined || currentCityId == ""){
-        layer.msg("请先选择校区");
-        return false;
-    }
-
-    if(beginTime == "" && endTime == ""){
-        layer.msg("请先选择日期");
-        return false;
-    }
     SelectData();
 }
 
@@ -165,7 +156,10 @@ function SelectData(){
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
-
+    seacherKey = $('.homework_sea input').val();
+    if(seacherKey == undefined){
+        seacherKey = "";
+    }
     var params = {
         "schoolId": currentCityId,
         'beginDate':beginTime,
@@ -187,6 +181,7 @@ function SelectData(){
                 if(list != undefined && list.length > 0 ){
                     $('.homework_list li').remove();
                     totalCounts = data.total;//总条数
+                    $('.lesstime_Result').show();
                     $('.lesstime_Result').html("共"+data.total+"条数据");
                     var currentPage = data.pageNum;
                     initPage(totalCounts, currentPage);
@@ -201,6 +196,9 @@ function SelectData(){
                 }
             }else {
                 layer.msg("暂无数据");
+                $('.homework_list li').remove();
+                $('.lesstime_Result').hide();
+                initPage(0, 1);
             }
 
         }
