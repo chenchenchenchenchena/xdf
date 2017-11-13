@@ -29,7 +29,7 @@ require(['jquery-1.11.0.min'], function () {
                 }
                 SelectData();
             });
-            line_echar('teacher_echart',['11.01','11.02','11.03'],[8,9,10])
+            line_echar('teacher_echart',['11.01','11.02','11.03'],[8,9,10]);
             function line_echar(id,campus,value){
                 var myChart = echarts.init(document.getElementById(id));
                 option = {

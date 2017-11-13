@@ -41,7 +41,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         });
         //编辑点击
-        $(document).off("click").on('click','.master_edit',function(){
+        $('.master_list').on('click','.master_edit',function(){
             $('.edit_s ').show();
             $('.back_big').show();
             var teaname    = $(this).attr('userName')
@@ -50,7 +50,7 @@ require(['jquery-1.11.0.min'], function () {
             Olddata();
         });
         //新增主讲校区
-        $(document).off("click").on('click','.edit_s i',function(){
+        $('.edit_s').on('click','i',function(){
             if($(this).html()=='+'){
                 //增加新编号
                 if($('#campus').val()=='1'){

@@ -68,7 +68,7 @@ body{
 	height:100%;
 }
 .left_nav{
-	width:150px;
+	width:10%;
 	height:100%;
 	display:block;
 	float:left;
@@ -98,9 +98,8 @@ body{
 	background:#00ba97;
 }
 .right_content{
-	float:left;
-	width:85%;
-	margin-left:170px;
+	float:right;
+	width:88%;
 	margin-top:61px;
 }
 .index_title{
