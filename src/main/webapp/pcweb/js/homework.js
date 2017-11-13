@@ -279,7 +279,7 @@ function selectHwData() {
                         var replyNomalRate = (1 - replyEAllRate) * 100;// 普通作业批复率
 
                         $('#reply h1 i').html(replyAllRate * 100 + "%");
-                        $('#reply h1 span').html(replyAll + "条");
+                        $('#reply h1 span').html("("+replyAll + "条)");
                         $('#reply .all span').eq(0).html(replyNomalRate + "%(" + replyEAll + "条)");
                         $('#reply .all span').eq(1).html((replyEAllRate * 100) + "%(" + replyNomal + "条)");
 
@@ -292,7 +292,7 @@ function selectHwData() {
                         var commitNormalRate = (1 - commitEAllRate) * 100;//普通作业提交率
 
                         $('#commit h1 i').html(commitAllRate * 100 + "%");
-                        $('#commit h1 span').html(commitAll + "条");
+                        $('#commit h1 span').html("("+commitAll + "条)");
                         $('#commit .all span').eq(0).html(commitNormalRate + "%(" + commitNormal + "条)");
                         $('#commit .all span').eq(1).html((commitEAllRate * 100) + "%(" + commitEAll + "条)");
                     } else if (homeworkType == "1") {//手动
@@ -311,7 +311,7 @@ function selectHwData() {
                         $('#publish h1 i').html(totalAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
                         $('#publish .normal span').eq(0).html(publishAudioRate + "%(" + publishAudio + "条)");
-                        $('#publish .all span').eq(1).html((publishPictureRate) + "%(" + publishPicture + "条)");
+                        $('#publish .normal span').eq(1).html((publishPictureRate) + "%(" + publishPicture + "条)");
 
 
                         replyAll = data.replyAll;//总批复数
@@ -321,10 +321,10 @@ function selectHwData() {
                         var replyPicture = data.replyPicture;//总批复图片数
                         var replyPictureRate = parseInt(parseFloat((replyPicture/replyAll))*100);//总批复图片率
 
-                        $('#reply h1 i').html(replyAllRate * 100 + "%");
-                        $('#reply h1 span').html(replyAll + "条");
-                        $('#reply .all span').eq(0).html(replyAudioRate + "%(" + replyAudio + "条)");
-                        $('#reply .all span').eq(1).html(replyPictureRate + "%(" + replyPicture + "条)");
+                        $('#reply h1 i').html(replyAllRate + "%");
+                        $('#reply h1 span').html("("+replyAll + "条)");
+                        $('#reply .normal span').eq(0).html(replyAudioRate + "%(" + replyAudio + "条)");
+                        $('#reply .normal span').eq(1).html(replyPictureRate + "%(" + replyPicture + "条)");
 
 
                         commitAll = data.commitAll;//总提交数
@@ -335,9 +335,9 @@ function selectHwData() {
                         var commitPictureRate = parseInt(parseFloat((commitPicture/commitAll))*100);//总提交图片率
 
                         $('#commit h1 i').html(commitAllRate + "%");
-                        $('#commit h1 span').html(commitAll + "条");
-                        $('#commit .all span').eq(0).html(commitAudioRate + "%(" + commitAudio + "条)");
-                        $('#commit .all span').eq(1).html(commitPictureRate + "%(" + commitPicture + "条)");
+                        $('#commit h1 span').html("("+commitAll + "条)");
+                        $('#commit .normal span').eq(0).html(commitAudioRate + "%(" + commitAudio + "条)");
+                        $('#commit .normal span').eq(1).html(commitPictureRate + "%(" + commitPicture + "条)");
 
                     } else if (homeworkType == "2") {//电子
                         $('#reply').hide();
@@ -353,7 +353,7 @@ function selectHwData() {
                         $('#publish span').html("(总送达" + reachAll + "人次)");
 
                         $('#commit h1 i').html(commitAllRate + "%");
-                        $('#commit span').html(commitAll + "条");
+                        $('#commit span').html("("+commitAll + "条)");
                     }
 
 
