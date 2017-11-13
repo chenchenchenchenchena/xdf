@@ -11,7 +11,7 @@ localStorage.schoolList = "73,505";
 
 
 require(['jquery-1.11.0.min'], function () {
-    require(['jquery-ui.min'], function () {
+    require(['jquery-ui.min','echarts.common.min'], function () {
         require(['layer'], function () {
             laydate.render({
                 elem: '#date_input',
@@ -33,6 +33,58 @@ require(['jquery-1.11.0.min'], function () {
         });
     });
 });
+//柱形图
+// id  接受id
+// campus 校区数组
+// value  班课量数组
+function line_echar(id,campus,value){
+    var myChart = echarts.init(document.getElementById(id));
+    option = {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {
+
+                type : 'shadow'
+
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : campus,
+                axisTick: {
+                    alignWithLabel: true
+
+                },
+                name:'校区',
+                nameGap:'-5',
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                name:'班课量',
+
+            }
+        ],
+        series : [
+            {
+                name:'班课量',
+                type:'bar',
+                barWidth: '60%',
+                data:value
+            }
+        ]
+    };
+    myChart.setOption(option);
+}
 
 //获取校区
 function getSchool() {
