@@ -519,17 +519,17 @@ html body .homework_operation{
 	width:201px;
 }
 .last_lesstime_chart{
-	width:954px;
+	width:938px;
 	height:309px;
 	border:1px solid #e8e8e8;
 	margin-top:40px;
 }
 .last_lesstime_chart div{
-	width:49.9%;
+	width:468px;
 	height:100%;
 	border-right:1px solid #e8e8e8;
 	float:left;
-	background:pink;
+	/*background:pink;*/
 }
 .lesstime_detail ul{
 	float:left;

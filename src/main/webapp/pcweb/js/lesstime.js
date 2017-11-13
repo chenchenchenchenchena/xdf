@@ -29,8 +29,13 @@ require(['jquery-1.11.0.min'], function () {
                 }
                 SelectData();
             });
-            line_echar('teacher_echart',['11.01','11.02','11.03'],[8,9,10]);
-            function line_echar(id,campus,value){
+            line_echar('teacher_echart',['11.01','11.02','11.03'],[8,9,15],'line');
+            line_echar('head_echart',['11.01','11.02','11.03'],[8,9,15],'line');
+            line_echar('master_echart',['11.01','11.02','11.03'],[8,9,15],'line');
+            line_echar('class_echart',['11.01','11.02','11.03'],[8,9,15],'bar');
+            line_echar('lesstime_echart',['11.01','11.02','11.03'],[8,9,15],'bar');
+
+            function line_echar(id,campus,value,type){
                 var myChart = echarts.init(document.getElementById(id));
                 option = {
                     color: ['#3398DB'],
@@ -38,7 +43,7 @@ require(['jquery-1.11.0.min'], function () {
                         trigger: 'axis',
                         axisPointer : {
 
-                            type : 'shadow'
+                            //type : 'shadow'
 
                         }
                     },
@@ -70,10 +75,63 @@ require(['jquery-1.11.0.min'], function () {
                     series : [
                         {
                             name:'班课量',
-                            type:'bar',
+                            type:type,
                             barWidth: '60%',
                             data:value
                         }
+                    ]
+                };
+                myChart.setOption(option);
+            }
+
+
+            /**
+             * 曲线图
+             * @param id :布局ID
+             * @param x :x轴的数据list
+             * @param dataItem :要绘制的数据点(x,y)
+             * @param max :y轴最大值
+             * @constructor
+             */
+            function graph(id, x, dataItem, max) {
+                var myChart = echarts.init(document.getElementById(id));
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        triggerOn: 'click'
+                    },
+                    xAxis: [
+                        {
+                            name: '日期',
+                            type: 'category',
+                            boundaryGap: false,
+                            data: x,
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: '课时',
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: "课时",
+                            type: 'line',
+                            data: dataItem,
+                            symbolSize: 14,
+                            smooth: true,
+                            nameTextStyle: {
+                                fontSize: 2
+                            },
+                            axisLabel: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: 12
+                                }
+                            }
+                        }
+
                     ]
                 };
                 myChart.setOption(option);
@@ -82,149 +140,6 @@ require(['jquery-1.11.0.min'], function () {
     });
 });
 
-/**
- * 曲线图
- * @param id :布局ID
- * @param x :x轴的数据list
- * @param dataItem :要绘制的数据点(x,y)
- * @param max :y轴最大值
- * @constructor
- */
-function graph(id, x, dataItem, max) {
-    var myChart = echarts.init(document.getElementById(id));
-    var option = {
-        tooltip: {
-            trigger: 'axis',
-            triggerOn: 'click',
-            formatter: function (params) {
-                return '' + params[0].data.name +':'+params[0].data.value+'h';
-            }
-        },
-        calculable: true,
-        dataZoom: [{
-            type: 'inside',
-            throttle: 50
-        }],
-        xAxis: [
-            {
-                name: '日期',
-                type: 'category',
-                boundaryGap: false,
-                data: x,
-                axisLine: {
-                    onZero: true
-                },
-                nameTextStyle: {
-                    fontSize: 24
-                },
-                axisLabel:{
-                    show: true,
-                    textStyle: {
-                        fontSize: 24
-                    }
-                }
-            }
-        ],
-        yAxis: [
-            {
-                name: '分数',
-                type: 'value',
-                max: max,
-                nameTextStyle: {
-                    fontSize: 24
-                },
-                axisLabel: {
-                    show: true,
-                    textStyle: {
-                        fontSize: 24
-                    }
-                }
-            }
-        ],
-        series: [
-            {
-                name: series,
-                type: 'line',
-                data: dataItem,
-                symbolSize: 14,
-                smooth: true,
-                nameTextStyle: {
-                    fontSize: 2
-                },
-                axisLabel: {
-                    show: true,
-                    textStyle: {
-                        fontSize: 24
-                    }
-                },
-                lable: {
-                    normal: {
-                        textStyle: {
-                            fontSize: 24
-                        }
-                    }
-                }
-            }
-
-        ]
-    };
-    myChart.setOption(option);
-}
-
-/**
- * 柱形图
- * @param id: 接受id
- * @param campus: 校区数组
- * @param value: 班课量数组
- */
-// function line_echar(id,campus,value){
-//     var myChart = echarts.init(document.getElementById(id));
-//     option = {
-//         color: ['#3398DB'],
-//         tooltip : {
-//             trigger: 'axis',
-//             axisPointer : {
-//
-//                 type : 'shadow'
-//
-//             }
-//         },
-//         grid: {
-//             left: '3%',
-//             right: '4%',
-//             bottom: '3%',
-//             containLabel: true
-//         },
-//         xAxis : [
-//             {
-//                 type : 'category',
-//                 data : campus,
-//                 axisTick: {
-//                     alignWithLabel: true
-//
-//                 },
-//                 name:'校区',
-//                 nameGap:'-5',
-//             }
-//         ],
-//         yAxis : [
-//             {
-//                 type : 'value',
-//                 name:'班课量',
-//
-//             }
-//         ],
-//         series : [
-//             {
-//                 name:'班课量',
-//                 type:'bar',
-//                 barWidth: '60%',
-//                 data:value
-//             }
-//         ]
-//     };
-//     myChart.setOption(option);
-// }
 
 //获取校区
 function getSchool() {

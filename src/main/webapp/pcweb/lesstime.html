@@ -16,10 +16,10 @@
                     </ul>
                 </div>
             </li>
-            </ul>
+        </ul>
         <span class="homework_samll_title">时间段</span>
         <div class="homewor_big_selecet clearfix">
-            <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block" >
+            <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block">
         </div>
         <button class="select-btn">确定</button>
 
@@ -35,7 +35,7 @@
         <li>
             <div id="teacher_lesstime" class="lesstiime_chart_top">
                 <h4>教师总课时</h4>
-                <h1>10000</h1>
+                <h1>0</h1>
             </div>
             <div class="lesstiime_chart_bottom">
                 <p>教师总课趋势：</p>
@@ -48,7 +48,7 @@
         <li>
             <div id="head_lesstime" class="lesstiime_chart_top">
                 <h4>班主任总课时</h4>
-                <h1>10000</h1>
+                <h1>0</h1>
             </div>
             <div class="lesstiime_chart_bottom">
                 <p>班主任课时趋势： <a href="#" onclick="lookDetails(this,0)">查看教师明细</a></p>
@@ -61,7 +61,7 @@
         <li style="border:none">
             <div id="master_lesstime" class="lesstiime_chart_top">
                 <h4>主讲总课时</h4>
-                <h1>10000</h1>
+                <h1>0</h1>
             </div>
             <div class="lesstiime_chart_bottom">
                 <p>主讲课时趋势： <a href="#" onclick="lookDetails(this,1)">查看教师明细</a></p>
@@ -84,6 +84,6 @@
 </ul>
 
 <div class="last_lesstime_chart">
-    <div></div>
-    <div style="border:none;"></div>
+    <div id="class_echart"></div>
+    <div id="lesstime_echart" style="border:none;"></div>
 </div>
