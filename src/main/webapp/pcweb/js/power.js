@@ -69,7 +69,6 @@ require(['jquery-1.11.0.min'], function () {
                         var allLength = e.Data.list;
                         initPage(allLength.length, e.Data.pageNum);
                         $('.PublicPage ').css({
-                            'width':'812px',
                             'margin-top':'20px'
                         })
                         $('.power_list').find('li').eq(0).siblings().remove();

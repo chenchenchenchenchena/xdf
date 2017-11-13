@@ -36,7 +36,16 @@ require(['jquery-1.11.0.min'], function () {
             $('#hw_selectBtn').click(function () {
                 selectHwData();
             });
-
+            //名词解释
+            $('.homework_explain img').click(function(){
+                $('.back_big ').show();
+                $('.operation_s ').show();
+            });
+            //名词解释关闭
+            $('.operation_s  img').click(function(){
+                $('.back_big ').hide();
+                $('.operation_s ').hide();
+            })
         });
     });
 });
@@ -362,7 +371,7 @@ function selectHwData() {
 
                     /*校区对比数据展示*/
                     $('#schoolComparsion li').remove();
-                    var str = '<li class="homework_list_title"><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                    var str = '<li class="homework_list_title "><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
                     for (var i = 0; i < schoolComparsion.length; i++) {
 
@@ -374,7 +383,7 @@ function selectHwData() {
                         var publishCount = schoolComparsion[i].publishCount;//布置次数
                         var correctRate = schoolComparsion[i].correctRate;//正确率
                         var reachCount = schoolComparsion[i].reachCount;//送达人数
-                        var html_ = '<li><span>' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span >' +
+                        var html_ = '<li><span title="'+schoolName+'">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span >' +
                             '<a href="#/detail" onclick="lookHwDetails(this,'+schoolId+')" class="homework_operation">查看明细</a></span></li>';
                         $('#schoolComparsion').append(html_);
 
