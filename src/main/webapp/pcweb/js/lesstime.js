@@ -29,14 +29,107 @@ require(['jquery-1.11.0.min'], function () {
                     endTime = time.substring(13,time.length);
                 }
                 SelectData();
-            })
+            });
+            line_echar('teacher_echart',['11.01','11.02','11.03'],[{'11.01':'8'},{'11.02':'5'},{'11.03':'9'}])
         });
     });
 });
-//柱形图
-// id  接受id
-// campus 校区数组
-// value  班课量数组
+
+/**
+ * 曲线图
+ * @param id :布局ID
+ * @param x :x轴的数据list
+ * @param dataItem :要绘制的数据点(x,y)
+ * @param max :y轴最大值
+ * @constructor
+ */
+function graph(id, x, dataItem, max) {
+    var myChart = echarts.init(document.getElementById(id));
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            triggerOn: 'click',
+            formatter: function (params) {
+                return '' + params[0].data.name +':'+params[0].data.value+'h';
+            }
+        },
+        calculable: true,
+        dataZoom: [{
+            type: 'inside',
+            throttle: 50
+        }],
+        xAxis: [
+            {
+                name: '日期',
+                type: 'category',
+                boundaryGap: false,
+                data: x,
+                axisLine: {
+                    onZero: true
+                },
+                nameTextStyle: {
+                    fontSize: 24
+                },
+                axisLabel:{
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                name: '分数',
+                type: 'value',
+                max: max,
+                nameTextStyle: {
+                    fontSize: 24
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: series,
+                type: 'line',
+                data: dataItem,
+                symbolSize: 14,
+                smooth: true,
+                nameTextStyle: {
+                    fontSize: 2
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 24
+                    }
+                },
+                lable: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 24
+                        }
+                    }
+                }
+            }
+
+        ]
+    };
+    myChart.setOption(option);
+}
+
+/**
+ * 柱形图
+ * @param id: 接受id
+ * @param campus: 校区数组
+ * @param value: 班课量数组
+ */
 function line_echar(id,campus,value){
     var myChart = echarts.init(document.getElementById(id));
     option = {
