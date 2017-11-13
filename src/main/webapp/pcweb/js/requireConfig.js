@@ -32,6 +32,7 @@ var global = {
     'hw_total':url_o+'/backEndHomework/queryHomeWorkTotal.do',//作业统计
     'user_power_':url_o+'user/enableUser.do', //用户禁用
     'hw_details':url_o+'backEndHomework/queryHomeWorkTeacherDetail.do',//作业统计
+    'hw_expor':url_o+'backEndHomework/exportHomeWorkTeacherDetail.do',//作业统计导出
 };
 require(['jquery-1.11.0.min'],function(){
 /*数据交互请求地址*/

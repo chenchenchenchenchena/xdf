@@ -313,13 +313,13 @@ html body .homework_active{
 	margin-bottom:40px;
 }
 .homework_Statistics div{
-	width:329px;
-	height:138px;
-	border:1px solid #e8e8e8;
-	background:#fafafa;
-	padding-left:20px;
-	margin-top:20px;
-	float:left;
+	width: 340px;
+	height: 138px;
+	border: 1px solid #e8e8e8;
+	background: #fafafa;
+	padding-left: 15px;
+	margin-top: 20px;
+	float: left;
 }
 
 .homework_Statistics div h4{
@@ -330,7 +330,7 @@ html body .homework_active{
 .homework_Statistics div h1{
 	font-size:28px;
 	color:#00ba97;
-	padding-top:17px;
+	padding-top:8px;
 }
 .homework_Statistics div h1 i{
 	font-style:normal;
@@ -344,7 +344,7 @@ html body .homework_active{
 .homework_Statistics div p{
 	font-size:14px;
 	color:#333;
-	padding-top:15px;
+	padding-top:10px;
 
 }
 .homework_Statistics div p span{

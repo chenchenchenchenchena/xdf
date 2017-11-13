@@ -46,7 +46,6 @@ function getSchool() {
         $.ajax({
             type: "POST",
             url: url_o + 'dict/getDictListByTableName.do',
-            async: true,//同步
             dataType: 'json',
             data: table,
             success: function (e) {
@@ -103,7 +102,6 @@ function SelectData(){
     $.ajax({
         type: "POST",
         url: url_o + 'backEndClassHourCount/queryClassHourCount.do',
-        async: true,//同步
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {

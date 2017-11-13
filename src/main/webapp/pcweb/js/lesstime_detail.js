@@ -112,7 +112,6 @@ function getSchool() {
         $.ajax({
             type: "POST",
             url: url_o + 'dict/getDictListByTableName.do',
-            async: true,//同步
             dataType: 'json',
             data: table,
             success: function (e) {
@@ -179,7 +178,6 @@ function SelectData(){
     $.ajax({
         type: "POST",
         url: global.lesstime_detail,
-        async: true,//同步
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {
@@ -225,19 +223,23 @@ function exporHourList(){
         'pageSize': pageSize,
         'schoolName': currentCity,
     }
-    //var newTab = window.open();
+    var newTab = window.open();
     $.ajax({
         type: "POST",
         url: global.expor_hour,
-        async: true,//同步
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {
             if (e.downloadUrl != undefined) {
-                //newTab.location.href = e.downloadUrl;
-                //var downloadUrl = e.downloadUrl;
-                //downloadUrl.
-                //window.location.href = getRootPath_web() + "/backEndDownload/downFile.do?filePath=/作业统计全部.txt";
+                //http://dt.staff.xdf.cn:80/xdfdtmanager/excelFile/全部校区双师课堂教师列表20171113093639.xlsx
+                var downloadUrl = e.downloadUrl;
+                var str = "xdfdtmanager";
+                var start = downloadUrl.indexOf('xdfdtmanager');
+                start = start + str.length;
+                var end = downloadUrl.length;
+                var filePath = downloadUrl.substring(start,end);
+                var rootPath_web = downloadUrl.substring(0,start);
+                newTab.location.href = rootPath_web + "/backEndDownload/downFile.do?filePath=" + filePath;
             } else {
                 layer.msg('暂无列表');
             }

@@ -245,7 +245,7 @@ function SelectTeacherList(){
     subject = $("#subject").html();
 
     var time = $('#date_input').val();
-    if(time != "" || time != undefined){
+    if(time != "" && time != undefined){
         beginTime = time.substring(0,10);
         endTime = time.substring(13,time.length);
     }
@@ -254,6 +254,9 @@ function SelectTeacherList(){
     if(currentSchoolId == ""){
         currentSchoolId = localStorage.schoolList
         currentSchool = "全部";
+    }
+    if (currentSchoolId == "-1") {
+        currentSchoolId = "";
     }
 
     var params = {
@@ -264,7 +267,6 @@ function SelectTeacherList(){
     $.ajax({
         type: "POST",
         url: global.hw_details,
-        async: true,//同步
         dataType: 'json',
         contentType: "application/json",
         data: JSON.stringify(params),
@@ -298,7 +300,7 @@ function SelectTeacherList(){
 
 //导出教师列表
 function exporTeacherList(){
-    layer.msg("导出");
+    window.location.href = global.hw_expor;
 }
 
 
