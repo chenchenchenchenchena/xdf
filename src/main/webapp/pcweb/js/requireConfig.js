@@ -66,6 +66,7 @@ require(['jquery-1.11.0.min'],function(){
     /* 导航侧边栏 */
     $('.left_nav').on('click','li',function(){
         $(this).addClass('activ_nav').siblings().removeClass('activ_nav');
+        location.reload();
     });
     /**
      * 退出登录
