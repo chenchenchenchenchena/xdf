@@ -84,58 +84,6 @@ require(['jquery-1.11.0.min'], function () {
                 myChart.setOption(option);
             }
 
-
-            /**
-             * 曲线图
-             * @param id :布局ID
-             * @param x :x轴的数据list
-             * @param dataItem :要绘制的数据点(x,y)
-             * @param max :y轴最大值
-             * @constructor
-             */
-            function graph(id, x, dataItem, max) {
-                var myChart = echarts.init(document.getElementById(id));
-                var option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        triggerOn: 'click'
-                    },
-                    xAxis: [
-                        {
-                            name: '日期',
-                            type: 'category',
-                            boundaryGap: false,
-                            data: x,
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            name: '课时',
-                            type: 'value'
-                        }
-                    ],
-                    series: [
-                        {
-                            name: "课时",
-                            type: 'line',
-                            data: dataItem,
-                            symbolSize: 14,
-                            smooth: true,
-                            nameTextStyle: {
-                                fontSize: 2
-                            },
-                            axisLabel: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: 12
-                                }
-                            }
-                        }
-
-                    ]
-                };
-                myChart.setOption(option);
-            }
         });
     });
 });

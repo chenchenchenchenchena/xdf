@@ -12,20 +12,23 @@
     </div>
     <div class="homework_title homework_see">
         <h4>筛选查询 </h4>
-        <p>查看方式 <span onclick="lookType(this,1)" class="homework_active">近半年</span><span  onclick="lookType(this,1)">近半年</span></p>
+        <p>查看方式 <span onclick="lookType(this,1)" class="homework_active">近半年</span><span  onclick="lookType(this,1)">
+            近一年</span></p>
     </div>
     <div class="homework_select">
         <div class="clearfix">
-        <span class="homework_samll_title">时间段</span>
-        <div class="homewor_big_selecet clearfix">
-            <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block" >
-        </div></div>
+            <span class="homework_samll_title">时间段</span>
+            <div class="homewor_big_selecet clearfix">
+                <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block">
+            </div>
+            <button id="hw_selectBtn" class="select-btn">确定</button>
+        </div>
         <div class="homewor_small_selecet clearfix">
             <ul class="clearfix">
                 <li>
                     <span class="homework_samll_title">学段</span>
                     <div class="homework_samll_one">
-                        <h4 id="stage" onfocus="getSelectList(this,'dict_tps_stage_info')" tabindex="1">全部</h4>
+                        <h4 id="stage" onfocus="getSelectList(this,'dict_tps_stage_info',0)" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -33,7 +36,7 @@
                 <li>
                     <span class="homework_samll_title">年级</span>
                     <div class="homework_samll_one">
-                        <h4 id="grade" onfocus="getSelectList(this,'dict_tps_class_info')" tabindex="1">全部</h4>
+                        <h4 id="grade" onfocus="getSelectList(this,'dict_tps_class_info',1)" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
@@ -41,13 +44,10 @@
                 <li>
                     <span class="homework_samll_title">科目</span>
                     <div class="homework_samll_one">
-                        <h4 id="subject" onfocus="getSelectList(this,'dict_tps_subject_info')" tabindex="1">全部</h4>
+                        <h4 id="subject" onfocus="getSelectList(this,'dict_tps_subject_info',2)" tabindex="1">全部</h4>
                         <ul>
                         </ul>
                     </div>
-                </li>
-                <li>
-                    <button id="hw_selectBtn" class="select-btn">确定</button>
                 </li>
             </ul>
         </div>

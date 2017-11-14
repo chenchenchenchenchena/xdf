@@ -14,6 +14,7 @@ var seacherName = "";
 var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
+var currentStageCode;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -25,7 +26,7 @@ require(['jquery-1.11.0.min'], function () {
                     range: true //指定元素
                 });
 
-                //从上个页面获取筛选数据
+                //从上个页面获取筛选数据,初始化页面
                 var params = JSON.parse(sessionStorage.homeworkDetailParams);
                 homeworkType = params.homeworkType;
                 currentSchoolId = params.schoolId;
@@ -35,6 +36,18 @@ require(['jquery-1.11.0.min'], function () {
                 subject = params.paperSubject;
                 grade = params.paperClass;
                 stage = params.paperStage;
+
+                if(homeworkType == 1){
+                    $('.homewor_small_selecet ul li').eq(0).hide();
+                    $('.homewor_small_selecet ul li').eq(1).hide();
+                    $('.homewor_small_selecet ul li').eq(2).hide();
+                }else {
+
+                    $('.homewor_small_selecet ul li').eq(0).show();
+                    $('.homewor_small_selecet ul li').eq(1).show();
+                    $('.homewor_small_selecet ul li').eq(2).show();
+                }
+
                 $('#select-school h4').html(params.currentCity);
                 if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
                     $('#date_input').val(params.beginTime+" - "+params.endTime);
@@ -111,18 +124,23 @@ function getSelectList(this_, type, flag) {
 
     var json;
     switch (flag) {
+        case 0:
+            json = sessionStorage.stageList;
+            break;
         case 1:
-            json = JSON.parse(sessionStorage.stageList);
+            if(currentStageCode == undefined){
+                layer.msg("请先选择学段");
+                return false;
+            }
+            json = sessionStorage.gradelList;
             break;
         case 2:
-            json = JSON.parse(sessionStorage.gradelList);
-            break;
-        case 3:
-            json = JSON.parse(sessionStorage.subjectList);
+            json = sessionStorage.subjectList;
             break;
     }
     if (json != undefined) {
-        showDrownList(json, this_);
+        json = JSON.parse(json);
+        showDrownList(json, this_,flag);
     } else {
         var table = {
             "tableName": type
@@ -135,17 +153,17 @@ function getSelectList(this_, type, flag) {
             data: table,
             success: function (e) {
                 switch (flag) {
-                    case 1:
+                    case 0:
                         sessionStorage.stageList = JSON.stringify(e);
                         break;
-                    case 2:
+                    case 1:
                         sessionStorage.gradelList = JSON.stringify(e);
                         break;
-                    case 3:
+                    case 2:
                         sessionStorage.subjectList = JSON.stringify(e);
                         break;
                 }
-                showDrownList(e, this_);
+                showDrownList(e, this_,flag);
             }
         })
     }
@@ -153,14 +171,23 @@ function getSelectList(this_, type, flag) {
 }
 
 //筛选学段／年级／科目列表显示
-function showDrownList(json, this_) {
+function showDrownList(json, this_,flag) {
+    $(this_).parent().find('ul').show();
+    $(this_).parent().parent().siblings().find('ul').hide();
     if (json.code == "200") {
         $(this_).siblings().find('ul').html("");
         var list = json.data;
-        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\")' data-tCode=''><span>全部</span></li>";
+        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\","+flag+")' data-tCode=''><span>全部</span></li>";
         for (var i = 0; i < list.length; i++) {
             var tCode = list[i].tCode;
-            content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+            if(flag == 1){
+                if (tCode.indexOf(currentStageCode) >= 0) {
+                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+                }
+            }else {
+                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+            }
+
 
         }
         $(this_).parent().find('ul').html(content);
@@ -172,11 +199,25 @@ function showDrownList(json, this_) {
 }
 
 //点击选择学段／年级／科目
-function filterByDrownId(_this, name) {
+function filterByDrownId(_this, name,flag) {
+
     var id = $(_this).attr('data-tCode');
     $(_this).parent().parent().find('h4').html(name);
     $(_this).parent().parent().find('h4').attr('tCode', id);
     $(_this).parent().hide();
+    if(flag == 0){
+        if(id == ""){
+            //如果学段选择全部，则将年级科目也置成全部
+            currentStageCode = "";
+            $('#grade').html("全部");
+            $('#grade').attr('tCode', "");
+            $('#subject').html("全部");
+            $('#subject').attr('tCode', "");
+        }else {
+            //保存被选学段，联动匹配年级
+            currentStageCode = id.substring(0, 2);
+        }
+    }
 }
 
 //作业统计-教师明细接口实现
