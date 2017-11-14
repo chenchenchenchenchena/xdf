@@ -22,7 +22,7 @@ $(function(){
                     sessionStorage.stuNumber = e.data.studentNo;
                     sessionStorage.schoolId = e.data.schoolId;
                     sessionStorage.studentName = e.data.studentName;
-                    sessionStorage.timetoday = new Date().format("yyyy-MM-dd")
+                    sessionStorage.timetoday = new Date().format("yyyy-MM-dd");
                     location.href = "studentInfo.html?remark=2&studentNo=" + sessionStorage.stuNumber + "&schoolId=" + sessionStorage.schoolId+"&tCode=1&studentName=" + sessionStorage.studentName;
                 }else{
                     location.href = 'login_s.html'
