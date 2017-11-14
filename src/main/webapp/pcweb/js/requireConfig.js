@@ -201,6 +201,15 @@ require(['jquery-1.11.0.min'],function(){
                     alert(e.message);
                     toLogout();
                 } else {
+                    $.ajax({
+                        url: url_o + "/e2Login/doLogin.do",
+                        type: 'post',
+                        dataType: 'json',
+                        data: JSON.stringify(calbac),
+                        success: function (e) {
+
+                        }
+                    });
                     sessionStorage.setItem("userName", e.userName);
                     var userId = e.userId;
                     userId = userId.split('@')[0];
