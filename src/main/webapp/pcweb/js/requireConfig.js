@@ -179,8 +179,6 @@ require(['jquery-1.11.0.min'],function(){
             }
         });
     }
-
-
 //e2登陆回调
     function e2Login() {
         var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
