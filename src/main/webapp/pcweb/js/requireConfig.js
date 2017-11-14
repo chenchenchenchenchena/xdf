@@ -40,8 +40,6 @@ require(['jquery-1.11.0.min'],function(){
         if(sessionStorage.superstar){
             $('.user_name').html(sessionStorage.getItem('userName'));
             left_navlist(JSON.parse(sessionStorage.superstar));
-            localStorage.schoolList = ''
-
         }else{
             e2Login();
         }
@@ -110,7 +108,7 @@ require(['jquery-1.11.0.min'],function(){
                     }
 
                     var $bure_true = $('.left_nav ul li').eq(number_l);
-                    var $url_ = $('.left_nav ul .active_me').eq(0).attr('href');
+                    var $url_ = $('.left_nav ul .active_me').eq(number_l).attr('href');
                     // location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
                     if($bure_true.hasClass('active_me')){
                         $bure_true.addClass('activ_nav')
@@ -193,7 +191,7 @@ require(['jquery-1.11.0.min'],function(){
             'state': state_s
         };
         $.ajax({
-            url: url_o + "/e2Login/doLogin.do",
+            url: url_o + "e2Login/doLogin.do",
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(calbac),
@@ -204,7 +202,7 @@ require(['jquery-1.11.0.min'],function(){
                     toLogout();
                 } else {
                     $.ajax({
-                        url: url_o + "/e2Login/doLogin.do",
+                        url: url_o + "e2Login/doLogin.do",
                         type: 'post',
                         dataType: 'json',
                         data: JSON.stringify(calbac),

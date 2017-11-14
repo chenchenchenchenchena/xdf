@@ -103,13 +103,13 @@ require(['jquery-1.11.0.min'], function () {
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
-                data:JSON.stringify({'loginId':$('.powerindex_sea input').val(),'pageNum':page,'pageSize':'15'}),
+                data:JSON.stringify({'loginId':$('.powerindex_sea input').val(),'pageNum':'1','pageSize':'15'}),
                 success:function(e){
                     if(!e.message){
                         var allLength = e.Data.list;
-                        initPage(allLength.length, e.Data.pageNum);
+                        initPage(e.Data.total, e.Data.pageNum);
                         $('.PublicPage ').css({
-                            'width':'812px',
+                            // 'width':'812px',
                             'margin-top':'20px'
                         })
                         $('.power_list').find('li').eq(0).siblings().remove();
@@ -128,12 +128,9 @@ require(['jquery-1.11.0.min'], function () {
                         }
                         $('#publicPage').show();
                     }else{
-                        if($('.power_list li').length==1){
-                            alert(0)
-                        }
                         $('.user_Prompt').show();
                         $('.adduser_list').find('li').remove();
-                        $('#publicPage').hide();
+                        // $('#publicPage').hide();
                     }
                 }
             });

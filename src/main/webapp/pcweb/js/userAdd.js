@@ -85,7 +85,7 @@ require(['jquery-1.11.0.min'], function () {
                                 $('.adduser_list').find('li').remove();
                                 for(var i = 0;i<e.data.length;i++){
                                     $('.adduser_list').show();
-                                    $('.adduser_list').append('<li name="'+e.data[i].name+'" comname="'+e.data[i].companyName+'" deptName="'+e.data[i].deptName+'">'+e.data[i].emailAddr+'</li>')
+                                    $('.adduser_list').append('<li name="'+e.data[i].name+'" comname="'+e.data[i].companyName+'" deptName="'+e.data[i].deptName+'" userId="'+e.data[i].emailAddr+'">'+e.data[i].emailAddr+'</li>')
                                 }
                             }
                         }
@@ -103,6 +103,7 @@ require(['jquery-1.11.0.min'], function () {
                 $('.adduser_sea input').attr('name',$(this).attr('name'));
                 $('.adduser_sea input').attr('comname',$(this).attr('comname'));
                 $('.adduser_sea input').attr('deptName',$(this).attr('deptName'));
+                $('.adduser_sea input').attr('userId',$(this).attr('userId'));
                 $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
                 $('.adduser_list').hide();
                 $('.adduser_list').find('li').remove();
@@ -118,7 +119,7 @@ require(['jquery-1.11.0.min'], function () {
 
 
             // 权限事件
-            $(document).off("click").on('click','.user_powerlist li',function(){
+            $('.user_powerlist').off("click").on('click','li',function(){
                 if($(this).hasClass('user_powerall')){
                     if($(this).find('img').attr('src').indexOf('0')!=-1){
                         $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');
@@ -167,6 +168,12 @@ require(['jquery-1.11.0.min'], function () {
             }
             if(!emailtest.test($('.homework_sea input').val())){
                 layer.msg('请输入合法账号');
+                return false;
+            }
+
+            if($('.homework_sea input').val()!=$('.homework_sea input').attr('userId')){
+                layer.msg('已选账户与输入账户不符');
+                $('.user_Enable').hide();
                 return false;
             }
             $(this).attr('checked',true);
