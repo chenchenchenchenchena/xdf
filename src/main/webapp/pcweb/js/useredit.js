@@ -166,7 +166,7 @@ require(['jquery-1.11.0.min'], function () {
             }
         }
         //选取事件
-        $(document).off("click").on('click','.user_editlist li',function(){
+        $('.user_editlist').off("click").on('click','li',function(){
             if($(this).hasClass('user_schoolall')){
                 if($(this).find('img').attr('src').indexOf('0')!=-1){
                     $(this).parent().find('img').attr('src','images/tree_checkbox_1.gif');

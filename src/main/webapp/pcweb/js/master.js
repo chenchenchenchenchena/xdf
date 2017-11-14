@@ -44,8 +44,8 @@ require(['jquery-1.11.0.min'], function () {
         $('.master_list').on('click','.master_edit',function(){
             $('.edit_s ').show();
             $('.back_big').show();
-            var teaname    = $(this).attr('userName')
-            sessionStorage.teaneamail = $(this).attr('email')
+            var teaname    = $(this).attr('userName');
+            sessionStorage.teaneamail = $(this).attr('email');
             $('.edit_s p b').html(teaname);
             Olddata();
         });
@@ -70,6 +70,11 @@ require(['jquery-1.11.0.min'], function () {
                         email:sessionStorage.teaneamail
                     }]
                 };
+                if($(this).attr('checked')){
+                    layer.msg('正在提交');
+                    return false;
+                }
+                $(this).attr('checked',true);
                 $.ajax({
                     url:global.master_add,
                     type: 'post',
@@ -79,7 +84,11 @@ require(['jquery-1.11.0.min'], function () {
                     success:function(e){
                         if(e.result==true){
                             layer.msg('操作成功');
+                            $(this).removeAttr('checked');
                             Olddata();
+                        }else{
+                            layer.msg('操作失败');
+                            $(this).removeAttr('checked')
                         }
                     }
                 });
@@ -139,7 +148,7 @@ require(['jquery-1.11.0.min'], function () {
                 return;
             }
             if (subject == undefined || subject == "") {
-                layer.msg("科目不为空！")
+                layer.msg("科目不为空！");
                 return;
             }
             var params = {
@@ -150,7 +159,7 @@ require(['jquery-1.11.0.min'], function () {
                         'gradeCourse':subject
                     }
                 ]
-            }
+            };
             $.ajax({
                 url:global.master_new,
                 type: 'post',
@@ -162,7 +171,8 @@ require(['jquery-1.11.0.min'], function () {
                         $('.back_big').hide();
                         $('.add_l').hide();
                         layer.msg("添加成功!", {icon: 6});
-                        findList();
+                        location.reload();
+                        // findList();
                     }else {
                         $('.back_big').hide();
                         $('.add_l').hide();
@@ -231,18 +241,22 @@ require(['jquery-1.11.0.min'], function () {
                         if (json.result == true) {
                             if (isEnable == 1) {
                                 layer.msg("禁用成功!", {icon: 6});
-                                $(_this).html("启用");
+                                // $(_this).html("启用");
                                 $(_this).attr('data-invalid',0);
+                                location.reload();
                             } else {
                                 layer.msg("启用成功!", {icon: 6});
                                 $(_this).html("禁用");
                                 $(_this).attr('data-invalid',1);
+                                location.reload();
                             }
                         } else {
                             if (isEnable == 1) {
                                 layer.msg("禁用失败!", {icon: 5});
+                                location.reload();
                             } else {
                                 layer.msg("启用失败!", {icon: 5});
+                                location.reload();
                             }
                         }
                     }
