@@ -27,6 +27,7 @@ var global = {
     'user_addnew':url_o+'user/addUser.do',//新建用户
     'user_power':url_o+'function/addFunctionUser.do',//增加权限
     'user_edit':url_o+'user/updateUser.do',//编辑用户
+    'lesstime_total':url_o + 'backEndClassHourCount/queryTeacherViewMode.do',//课时统计
     'expor_hour':url_o+'backEndClassHourCount/exportTeacherDetailExcel.do',//课时统计明细导出
     'lesstime_detail':url_o+'backEndClassHourCount/queryClassTeacherList.do',//课时统计查看明细
     'hw_total':url_o+'/backEndHomework/queryHomeWorkTotal.do',//作业统计

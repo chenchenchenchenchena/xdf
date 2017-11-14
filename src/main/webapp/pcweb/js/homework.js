@@ -194,16 +194,15 @@ function filterByDrownId(_this, name,flag) {
     $(_this).parent().hide();
     if(flag == 0){
         if(id == ""){
-            //如果学段选择全部，则将年级科目也置成全部
             currentStageCode = "";
-            $('#grade').html("全部");
-            $('#grade').attr('tCode', "");
-            $('#subject').html("全部");
-            $('#subject').attr('tCode', "");
-            $(_this).parent().parent().parent().siblings().find('ul h4').attr('data-tCode',"");
         }else {
             currentStageCode = id.substring(0, 2);
         }
+        //如果切换学段，则将年级科目置成默认值："全部"
+        $('#grade').html("全部");
+        $('#grade').attr('tCode', "");
+        $('#subject').html("全部");
+        $('#subject').attr('tCode', "");
 
     }
 }

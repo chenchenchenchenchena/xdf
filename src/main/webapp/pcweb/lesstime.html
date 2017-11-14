@@ -22,13 +22,15 @@
             <input type="text" class="date-input" placeholder="请选择日期" id="date_input" style="display: inline-block">
         </div>
         <button class="select-btn">确定</button>
-
     </div>
 
 </div>
 <div class="homework_title homework_see">
     <h4>结果列表</h4>
-    <p>查看方式 <span class="homework_active">日</span><span>周</span><span>月</span><span>年</span></p>
+    <p>查看方式 <span onclick="resultLookType(this,1)" >日</span><span
+            onclick="resultLookType(this,2)">周</span><span onclick="resultLookType(this,3)" class="homework_active">月</span><span
+            onclick="resultLookType(this,4)">年
+    </span></p>
 </div>
 <div class="lesstiime_chart">
     <ul>
@@ -69,21 +71,22 @@
 
                 </div>
             </div>
-
         </li>
     </ul>
 </div>
 
 <div class="homework_title homework_see">
     <h4>校区对比</h4>
-    <p style="margin-left:84.2%;">查看方式 <span class="homework_active">近半年</span><span>近半年</span></p>
+    <p style="margin-left:84.2%;">查看方式 <span onclick="schoolLookType(this,1)" class="homework_active">列表</span><span
+            onclick="schoolLookType(this,2)">柱状图
+    </span></p>
 </div>
 <ul class="homework_list lesstime_list">
     <!--<li class="homework_list_title"><span>校区</span><span>班主任数量（人）</span><span>班课量（个）</span><span>课时量（h）</span></li>-->
     <!--<li><span>校区</span><span>班主任数量（人）</span><span>班课量（个）</span><span>课时量（h）</span></li>-->
 </ul>
 
-<div class="last_lesstime_chart">
+<div style="display: none" class="last_lesstime_chart">
     <div id="class_echart"></div>
     <div id="lesstime_echart" style="border:none;"></div>
 </div>
