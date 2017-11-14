@@ -8,9 +8,7 @@ $(function () {
     var tCode = GetRequest("tCode");
     var studentName = GetRequest("studentName");
     var emailm = {
-        'studentCode': stuCode,
-        'beginDate': sessionStorage.timetoday.split(' ')[0],
-        'endDate': sessionStorage.timetoday.split(' ')[0],
+        'stuNo': stuCode,
         'schoolId': schoolId
     };
     if (studentName.length > 2) {
@@ -20,12 +18,11 @@ $(function () {
         $('.avatar-icon').html(studentName);
     }
     $('#name').html("姓名：" + studentName);
-    // var studentNum = stuCode.substring(0, 2) + "**" + stuCode.substring(stuCode.length - 2, stuCode.length);
     var studentNum = stuCode;
 
     $('#studentNumber').html("学员号：" + studentNum);
     //获取该学生所报班级信息
-    ajax_S(url.s_stud, emailm, stusea,function(){
+    ajax_S(url.s_classList, emailm, stusea,function(){
         $('body').append('<img src="images/reload.png" class="reload" style="width:150px;height:100px;margin:50% auto;display:block;">')
     });
     $(document).on('touchend','.reload',function(){
@@ -35,7 +32,7 @@ $(function () {
     function stusea(e) {
         if (e.result) {
 
-            var dataList = e.data.Data;
+            var dataList = e.classData;
             var classCodeList = "";
             //判断是否有班级信息
             if (undefined != dataList && dataList.length > 0) {

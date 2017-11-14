@@ -100,6 +100,7 @@ var url = {
     't_hour':url_o+'teacherData/queryTeacherClassHour.do',//获取老师课时数据
     't_hourmonth':url_o+'teacherData/queryTeacherMonthClassHour.do',//获取历史月份课时数据
     't_houehome':url_o+'teacherData/querTcHomeWorkRate.do',//获取老师作业率
+    's_classList':url_o+'studentData/queryStudentClassInfo.do',//获取老师作业率
 };
 
 var Study = {
