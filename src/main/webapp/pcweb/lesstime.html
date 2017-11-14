@@ -27,9 +27,10 @@
 </div>
 <div class="homework_title homework_see">
     <h4>结果列表</h4>
-    <p>查看方式 <span onclick="resultLookType(this,1)" >日</span><span
-            onclick="resultLookType(this,2)">周</span><span onclick="resultLookType(this,3)" class="homework_active">月</span><span
-            onclick="resultLookType(this,4)">年
+    <p>查看方式 <span onclick="resultLookType(this,0)" >日</span><span
+            onclick="resultLookType(this,1)">周</span><span onclick="resultLookType(this,2)" class="homework_active">月
+    </span><span
+            onclick="resultLookType(this,3)">年
     </span></p>
 </div>
 <div class="lesstiime_chart">
@@ -86,7 +87,7 @@
     <!--<li><span>校区</span><span>班主任数量（人）</span><span>班课量（个）</span><span>课时量（h）</span></li>-->
 </ul>
 
-<div style="display: none" class="last_lesstime_chart">
+<div style="opacity: 0;" class="last_lesstime_chart">
     <div id="class_echart"></div>
     <div id="lesstime_echart" style="border:none;"></div>
 </div>
