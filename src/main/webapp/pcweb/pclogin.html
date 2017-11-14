@@ -13,18 +13,18 @@
             var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
         }
         var  cbconfig = {'callbackFlag':'webBackground'};
-//        $.ajax({
-//            url: url_o+'e2Login/login.do',
-//            type: 'post',
-//            dataType: 'json',
-//            data:JSON.stringify(cbconfig),
-//            success:function(e){
-//                debugger;
-//                location.href = e.url;
-//
-//            }
-//
-//
-//        });
+        $.ajax({
+            url: url_o+'e2Login/login.do',
+            type: 'post',
+            dataType: 'json',
+            data:JSON.stringify(cbconfig),
+            success:function(e){
+                debugger;
+                location.href = e.url;
+
+            }
+
+
+        });
     })
 </script><body></body></html>
