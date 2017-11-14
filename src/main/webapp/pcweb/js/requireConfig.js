@@ -159,7 +159,7 @@ require(['jquery-1.11.0.min'],function(){
         };
         var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
         var begin = window.open();
-        begin.location.href =location.href;
+        begin.location.href ='http://dt.staff.xdf.cn/xdfdthome/pcweb/pclogin.html';
         jQuery.ajax({
             type: "post",
             url: url,
