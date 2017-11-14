@@ -16,11 +16,11 @@ body{
     float: left;
 }
 .lg-logo {
-    height: 52px;
-    background: url(../images/logo.png) no-repeat left center;
-    text-indent: -9999px;
-    display: block;
-    margin-left: 8px;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+    line-height: 51px;
+    padding-left: 13px;
 }
 .lg-content{
     border-radius: 3px;
@@ -32,13 +32,14 @@ body{
     margin-left: 10%;
 }
 .lg-login-right{
-    float: left;
     width: 340px;
     border: 1px solid #d9d9d9;
     border-top: 3px solid #00ba97;
     border-radius: 3px;
     padding: 0 20px 30px 20px;
-    margin: 100px 0 0 390px;
+    float:right;
+    margin:70px 50px 0 0;
+    background:#fff;
 }
 .lg-login-title {
     padding-top: 30px;
