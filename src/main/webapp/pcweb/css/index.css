@@ -195,6 +195,7 @@ body{
 	font-size:14px;
 	padding-left:10px;
 	line-height:31px;
+	overflow:hidden;
 }
 .homework_radiu{
 	height:38px;
