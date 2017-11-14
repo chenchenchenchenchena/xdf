@@ -63,11 +63,11 @@ require(['jquery-1.11.0.min'], function () {
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
-                data:JSON.stringify({'loginId':'','pageNum':page,'pageSize':'10'}),
+                data:JSON.stringify({'loginId':'','pageNum':page,'pageSize':'15'}),
                 success:function(e){
                     if(e.Data.list){
                         var allLength = e.Data.list;
-                        initPage(allLength.length, e.Data.pageNum);
+                        initPage(e.Data.total, e.Data.pageNum);
                         $('.PublicPage ').css({
                             'margin-top':'20px'
                         })
@@ -97,13 +97,13 @@ require(['jquery-1.11.0.min'], function () {
         function seachlist(){
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
-            page++;
+            // page++;
             $.ajax({
                 url:global.user_list,
                 type: 'post',
                 asyns:false,
                 dataType: 'json',
-                data:JSON.stringify({'loginId':$('.powerindex_sea input').val(),'pageNum':page,'pageSize':'10'}),
+                data:JSON.stringify({'loginId':$('.powerindex_sea input').val(),'pageNum':page,'pageSize':'15'}),
                 success:function(e){
                     if(!e.message){
                         var allLength = e.Data.list;
@@ -128,8 +128,11 @@ require(['jquery-1.11.0.min'], function () {
                         }
                         $('#publicPage').show();
                     }else{
+                        if($('.power_list li').length==1){
+                            alert(0)
+                        }
                         $('.user_Prompt').show();
-                        $('.power_list').find('li').remove();
+                        $('.adduser_list').find('li').remove();
                         $('#publicPage').hide();
                     }
                 }
@@ -150,7 +153,7 @@ require(['jquery-1.11.0.min'], function () {
         // $('.powerindex_sea img').off("click").on('click',function(){
         //
         // });
-        $('.powerindex_sea input').off("keyup").on('keyup',seachUser);
+        // $('.powerindex_sea input').off("keyup").on('keyup',seachUser);
 
         //搜索用户
         function seachUser(){
@@ -192,7 +195,7 @@ function initPage(totalCounts, currentPage) {
     if (totalCounts != null && totalCounts != 0) {
         $.jqPaginator("#publicPage", {
             totalCounts: totalCounts,
-            pageSize: 10,
+            pageSize: 15,
             visiblePages: 10,
             currentPage: currentPage,
             prev: '<a class="pPrev" href="javascript:;">上一页</a>',
@@ -202,11 +205,52 @@ function initPage(totalCounts, currentPage) {
             onPageChange: function (num, type) {
                 if (type != "init") {
                     page = num;
-                    seachlist();
+                    seachlist_(page);
                 }
             }
         });
     } else {
         $("#publicPage").html("");
     }
+}
+function seachlist_(page){
+    $('.adduser_list').hide();
+    $('.adduser_list').find('li').remove();
+    // page++;
+    $.ajax({
+        url:global.user_list,
+        type: 'post',
+        asyns:false,
+        dataType: 'json',
+        data:JSON.stringify({'loginId':$('.powerindex_sea input').val(),'pageNum':page,'pageSize':'15'}),
+        success:function(e){
+            if(!e.message){
+                var allLength = e.Data.list;
+                // initPage(allLength.length, e.Data.page);
+                $('.PublicPage ').css({
+                    // 'width':'812px',
+                    'margin-top':'20px'
+                })
+                $('.power_list').find('li').eq(0).siblings().remove();
+                for(var i = 0;i<allLength.length;i++){
+                    if(allLength[i].isEnabled==1){
+                        str = '已启用'
+                    }else{
+                        str = '已禁用'
+                    }
+
+                    if(allLength[i].loginId=='ssdf'){
+                        $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span></span></li>')
+                    }else{
+                        $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
+                    }
+                }
+                $('#publicPage').show();
+            }else{
+                $('.user_Prompt').show();
+                $('.adduser_list').find('li').remove();
+                $('#publicPage').hide();
+            }
+        }
+    });
 }
