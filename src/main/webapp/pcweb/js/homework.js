@@ -12,9 +12,6 @@ var endTime = "";//默认全部
 var homeworkType = "0"//默认作业类型全部 0表示查询所以 1表示查询普通 2表示查询电子
 var currentStageCode;
 
-
-localStorage.schoolList = "73";
-
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer'], function () {
@@ -254,16 +251,6 @@ function selectHwData() {
     if (time != "" && time != undefined) {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
-    }
-
-    currentSchoolId = $("#school").attr('school-id');
-    if (currentSchoolId == "") {
-        currentSchoolId = localStorage.schoolList
-        currentSchool = "全部";
-    }
-
-    if (currentSchoolId == "-1") {
-        currentSchoolId = "";
     }
 
     var params = {

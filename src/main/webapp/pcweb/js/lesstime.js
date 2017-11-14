@@ -7,6 +7,7 @@ var beginTime = '';
 var endTime = '';
 var lookType = '2';
 var ECharts;
+var schoolLookType_ = 1;//柱形图和列表的标志
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min', 'layer'], function () {
@@ -17,8 +18,7 @@ require(['jquery-1.11.0.min'], function () {
             });
 
             //默认是全部校区
-            //currentCityId = localStorage.schoolList;
-            currentCityId = "73";
+            currentCityId = localStorage.schoolList;
             currentCity = "全部";
             SelectData();//根据默认筛选数据
             //筛选条件确定点击事件
@@ -163,7 +163,6 @@ function filterByCityId(_this, cityName) {
  * @constructor
  */
 function SelectData() {
-
     var params = {
         "schoolId": currentCityId,
         'beginDate': beginTime,
@@ -176,7 +175,7 @@ function SelectData() {
         dataType: 'json',
         data: JSON.stringify(params),
         success: function (e) {
-            if (e != undefined) {
+            if (e.result) {
                 var teacherTotalData = e.TeacherTotalData;//校区对比集合
                 var viewClassTeacherData = e.ViewClassTeacherData;//班主任集合
                 var viewMasterTeacherData = e.ViewMasterTeacherData;//主讲老师集合
@@ -190,12 +189,12 @@ function SelectData() {
                 var masterTeacherYList = [];//主讲趋势图数据Y轴值
                 for (var i = 0; i < viewClassTeacherData.length; i++) {
                     classTeacherTotal += parseInt(viewClassTeacherData[i].classTeacherViewTotal);
-                    headTeacherXList.push(parseInt(viewClassTeacherData[i].classTeacherViewTime));
+                    headTeacherXList.push(viewClassTeacherData[i].classTeacherViewTime);
                     headTeacherYList.push(parseInt(viewClassTeacherData[i].classTeacherViewTotal));
                 }
                 for (var j = 0; j < viewMasterTeacherData.length; j++) {
                     masterTeacherTotal += parseInt(viewMasterTeacherData[j].masterTeacherViewTotal);
-                    masterTeacherXList.push(parseInt(viewMasterTeacherData[j].masterTeacherViewTime));
+                    masterTeacherXList.push(viewMasterTeacherData[j].masterTeacherViewTime);
                     masterTeacherYList.push(parseInt(viewMasterTeacherData[j].masterTeacherViewTotal));
                 }
                 total = parseInt(masterTeacherTotal) + parseInt(classTeacherTotal);
@@ -236,6 +235,11 @@ function SelectData() {
                     /*班课量/课时量趋势图展示*/
                     line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课量", "日期");
                     line_echar('lesstime_echart', schoolList, lessonHourList, 'bar', "课时量", "日期");
+                    if(schoolLookType_ == 1){
+                        //隐藏柱状图
+                        $('.last_lesstime_chart').css('opacity',1);
+                        $('.last_lesstime_chart').hide();
+                    }
 
                 } else {
                     $('.lesstime_list li').remove();
@@ -276,6 +280,7 @@ function schoolLookType(this_, flag) {
     } else {
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
+        schoolLookType_ = flag;
         if (flag == 1) {
             $('.last_lesstime_chart').hide();
             $('.lesstime_list').show();
@@ -298,8 +303,8 @@ function resultLookType(this_, flag) {
     } else {
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
-        lookType = flag;
-        selectHwData();
+        lookType = flag+"";
+        SelectData();
     }
 }
 
