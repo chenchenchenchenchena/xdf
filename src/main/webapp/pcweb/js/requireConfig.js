@@ -158,6 +158,8 @@ require(['jquery-1.11.0.min'],function(){
             url = url_o + "logout/doLogout.do";
         };
         var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
+        var begin = window.open();
+        begin.location.href =location.href;
         jQuery.ajax({
             type: "post",
             url: url,
@@ -174,7 +176,7 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.removeItem("sid")
                     sessionStorage.removeItem("userId")
                     sessionStorage.removeItem("userName")
-                    window.top.location.href = returnUrl;
+                    // window.top.location.href = returnUrl;
                 }
             }
         });
