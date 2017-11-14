@@ -40,7 +40,7 @@ require(['jquery-1.11.0.min'],function(){
         if(sessionStorage.superstar){
             $('.user_name').html(sessionStorage.getItem('userName'));
             left_navlist(JSON.parse(sessionStorage.superstar));
-            localStorage.schoolList = '-1'
+            localStorage.schoolList = ''
 
         }else{
             e2Login();
@@ -154,6 +154,7 @@ require(['jquery-1.11.0.min'],function(){
             //表示当前用户为超级管理员
             sessionStorage.clear();
             location.href = 'login_web.html';
+            return false;
         }else {
             returnUrl = 'http://'+onlineUrl+'/xdfdthome/pcweb/pclogin.html';
             url = url_o + "logout/doLogout.do";
