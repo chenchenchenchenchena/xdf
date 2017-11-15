@@ -208,7 +208,8 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem("sid",e.sid);
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
-                        console.log(e.userList.split(''))
+
+                        console.log($.parseJSON(e.userList))
                         localStorage.schoolList = e.userList.split('')[0].schoolId;
                     }
                     left_navlist(e.functionList)
