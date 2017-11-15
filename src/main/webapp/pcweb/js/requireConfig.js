@@ -171,9 +171,9 @@ require(['jquery-1.11.0.min'],function(){
                         for (var i = keys.length; i--;)
                             setCookie(keys[i], 1, -1);
                     }
-                    sessionStorage.removeItem("sid")
-                    sessionStorage.removeItem("userId")
-                    sessionStorage.removeItem("userName")
+                    sessionStorage.removeItem("sid");
+                    sessionStorage.removeItem("userId");
+                    sessionStorage.removeItem("userName");
                     window.top.location.href = json.logoutUrl;
                 }
             }
@@ -208,6 +208,7 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem("sid",e.sid);
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
+                        console.log(e.userList.split(''))
                         localStorage.schoolList = e.userList.split('')[0].schoolId;
                     }
                     left_navlist(e.functionList)
