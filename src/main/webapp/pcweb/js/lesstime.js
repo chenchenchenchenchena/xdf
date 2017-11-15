@@ -47,6 +47,25 @@ require(['jquery-1.11.0.min'], function () {
  * @param xName :x轴显示的名字
  */
 function line_echar(id, campus, value, type, yName, xName) {
+    var x = xName;
+    if(xName == "日期"){
+        var xType = parseInt(lookType);
+        switch (xType){
+            case 0:
+                x = "日";
+                break;
+            case 1:
+                x = "周";
+                break;
+            case 2:
+                x = "月";
+                break;
+            case 3:
+                x = "年";
+                break;
+        }
+
+    }
     var myChart = ECharts.init(document.getElementById(id));
     option = {
         color: ['#3398DB'],
@@ -72,7 +91,7 @@ function line_echar(id, campus, value, type, yName, xName) {
                     alignWithLabel: true
 
                 },
-                name: xName,
+                name: x,
                 nameGap: '-5',
             }
         ],
@@ -249,8 +268,8 @@ function SelectData() {
                         $('.lesstime_list').append(html_);
                     }
                     /*班课量/课时量趋势图展示*/
-                    line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课量", "日期");
-                    line_echar('lesstime_echart', schoolList, lessonHourList, 'bar', "课时量", "日期");
+                    line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课量", "校区");
+                    line_echar('lesstime_echart', schoolList, lessonHourList, 'bar', "课时量", "校区");
                     if (schoolLookType_ == 1) {
                         //隐藏柱状图
                         $('.last_lesstime_chart').css('opacity', 1);
