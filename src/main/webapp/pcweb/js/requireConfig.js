@@ -200,7 +200,7 @@ require(['jquery-1.11.0.min'],function(){
                         toLogout();
                     }else{
                         $('.user_name').html(sessionStorage.getItem('userName'));
-                        left_navlist(e.functionList)
+                        left_navlist(sessionStorage.getItem('functionList'))
                     }
                 } else {
                     sessionStorage.setItem("userName", e.userName);
@@ -208,6 +208,7 @@ require(['jquery-1.11.0.min'],function(){
                     userId = userId.split('@')[0];
                     sessionStorage.setItem("userId", userId);
                     sessionStorage.setItem("sid",e.sid);
+                    sessionStorage.setItem('functionList',e.functionList);
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
                         var $schoolId_ = $.parseJSON(e.userList)
