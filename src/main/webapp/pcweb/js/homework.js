@@ -27,20 +27,20 @@ require(['jquery-1.11.0.min'], function () {
             //默认首次查询校区为全部
             currentSchoolId = localStorage.schoolList;
             currentSchool = "全部";
-            selectHwData();
+            selectHwData(1);
 
 
             //筛选"确定"按钮点击事件
             $('#hw_selectBtn').click(function () {
-                selectHwData();
+                selectHwData(0);
             });
             //名词解释
-            $('.homework_explain img').click(function(){
+            $('.homework_explain img').click(function () {
                 $('.back_big ').show();
                 $('.operation_s ').show();
             });
             //名词解释关闭
-            $('.operation_s  img').click(function(){
+            $('.operation_s  img').click(function () {
                 $('.back_big ').hide();
                 $('.operation_s ').hide();
             })
@@ -115,7 +115,7 @@ function getSelectList(this_, type, flag) {
             json = sessionStorage.stageList;
             break;
         case 1:
-            if(currentStageCode == undefined){
+            if (currentStageCode == undefined) {
                 layer.msg("请先选择学段");
                 return false;
             }
@@ -127,7 +127,7 @@ function getSelectList(this_, type, flag) {
     }
     if (json != undefined) {
         json = JSON.parse(json);
-        showDrownList(json, this_,flag);
+        showDrownList(json, this_, flag);
     } else {
         var table = {
             "tableName": type
@@ -149,7 +149,7 @@ function getSelectList(this_, type, flag) {
                         sessionStorage.subjectList = JSON.stringify(e);
                         break;
                 }
-                showDrownList(e, this_,flag);
+                showDrownList(e, this_, flag);
             }
         })
     }
@@ -157,21 +157,21 @@ function getSelectList(this_, type, flag) {
 }
 
 //筛选学段／年级／科目列表显示
-function showDrownList(json, this_,flag) {
+function showDrownList(json, this_, flag) {
     $(this_).parent().find('ul').show();
     $(this_).parent().parent().siblings().find('ul').hide();
     if (json.code == "200") {
         $(this_).siblings().find('ul').html("");
         var list = json.data;
-        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\","+flag+")' data-tCode=''><span>全部</span></li>";
+        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\"," + flag + ")' data-tCode=''><span>全部</span></li>";
         for (var i = 0; i < list.length; i++) {
             var tCode = list[i].tCode;
-            if(flag == 1){
+            if (flag == 1) {
                 if (tCode.indexOf(currentStageCode) >= 0) {
-                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
                 }
-            }else {
-                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+            } else {
+                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
             }
         }
 
@@ -184,15 +184,15 @@ function showDrownList(json, this_,flag) {
 }
 
 //点击选择学段／年级／科目
-function filterByDrownId(_this, name,flag) {
+function filterByDrownId(_this, name, flag) {
     var id = $(_this).attr('data-tCode');
     $(_this).parent().parent().find('h4').html(name);
     $(_this).parent().parent().find('h4').attr('tCode', id);
     $(_this).parent().hide();
-    if(flag == 0){
-        if(id == ""){
+    if (flag == 0) {
+        if (id == "") {
             currentStageCode = "";
-        }else {
+        } else {
             currentStageCode = id.substring(0, 2);
         }
         //如果切换学段，则将年级科目置成默认值："全部"
@@ -216,7 +216,7 @@ function lookType(this_, flag) {
         } else {
             dateMonth = '12';
         }
-        selectHwData();
+        selectHwData(1);
     }
 }
 
@@ -225,34 +225,53 @@ function changeHomeworkType(this_, flag) {
     homeworkType = flag;
     $(this_).find('img').attr('src', "images/checked.png");
     $(this_).siblings().find('img').attr('src', "images/check.png");
-    if(flag == 1){
+    if (flag == 1) {
+        //手动作业不能选择学段／年级／科目
         $('.homewor_small_selecet ul li').eq(1).hide();
         $('.homewor_small_selecet ul li').eq(2).hide();
         $('.homewor_small_selecet ul li').eq(3).hide();
-    }else {
+    } else {
 
         $('.homewor_small_selecet ul li').eq(1).show();
         $('.homewor_small_selecet ul li').eq(2).show();
         $('.homewor_small_selecet ul li').eq(3).show();
     }
+    /*重置筛选条件*/
+    $('#school').html("全部");
+    $('#stage').html("全部");
+    $('#grade').html("全部");
+    $('#subject').html("全部");
+    stage = "";
+    grade = "";
+    subject = "";
+    currentSchoolId = localStorage.schoolList;
+    currentSchool = "全部";
+    beginTime = "";
+    endTime = "";
+    dateMonth = '6';
+    $('#date_input').val("");
+    selectHwData(1);
 
-
-    selectHwData();
 }
 
-//作业统计接口实现
-function selectHwData() {
+/**
+ * 作业统计接口实现
+ * @param timeType 0:表示时间段查询，1：表示半年或一年查询
+ */
+function selectHwData(timeType) {
+
     //获取筛选条件
-    stage = $("#stage").html();
-    grade = $("#grade").html();
-    subject = $("#subject").html();
-
-    var time = $('#date_input').val();
-    if (time != "" && time != undefined) {
-        beginTime = time.substring(0, 10);
-        endTime = time.substring(13, time.length);
+    if (timeType == 0) {
+        var time = $('#date_input').val();
+        if (time != "" && time != undefined) {
+            beginTime = time.substring(0, 10);
+            endTime = time.substring(13, time.length);
+        }
+        dateMonth = "";
+    } else {
+        beginTime = "";
+        endTime = "";
     }
-
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
@@ -291,19 +310,19 @@ function selectHwData() {
 
                         var schoolName = schoolComparsion[i].schoolName;//校区
                         var schoolId = schoolComparsion[i].schoolId;//校区id
-                        var replyRate = parseInt(schoolComparsion[i].replyRate*100);//批复率
+                        var replyRate = parseInt(schoolComparsion[i].replyRate * 100);//批复率
                         var commitCount = schoolComparsion[i].commitCount;//提交人数
-                        var commitRate = parseInt(schoolComparsion[i].commitRate*100);//提交率
+                        var commitRate = parseInt(schoolComparsion[i].commitRate * 100);//提交率
                         var publishCount = schoolComparsion[i].publishCount;//布置次数
                         var correctRate = schoolComparsion[i].correctRate;//正确率
                         var reachCount = schoolComparsion[i].reachCount;//送达人数
                         correctRateAll += correctRate;
-                        if(homeworkType == "1"){
+                        if (homeworkType == "1") {
                             //手动作业，正确率显示空
                             correctRate = "暂无";
                         }
-                        var html_ = '<li><span title="'+schoolName+'">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate*100) + '%</span><span >' +
-                            '<a href="#/detail" onclick="lookHwDetails(this,'+schoolId+')" class="homework_operation">查看明细</a></span></li>';
+                        var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
+                            '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
                         $('#schoolComparsion').append(html_);
 
                     }
@@ -341,7 +360,7 @@ function selectHwData() {
                         var replyNomalRate = (1 - replyEAllRate) * 100;// 普通作业批复率
 
                         $('#reply h1 i').html(replyAllRate * 100 + "%");
-                        $('#reply h1 span').html("("+replyAll + "条)");
+                        $('#reply h1 span').html("(" + replyAll + "条)");
                         $('#reply .all span').eq(0).html(replyNomalRate + "%(" + replyEAll + "条)");
                         $('#reply .all span').eq(1).html((replyEAllRate * 100) + "%(" + replyNomal + "条)");
 
@@ -354,12 +373,12 @@ function selectHwData() {
                         var commitNormalRate = (1 - commitEAllRate) * 100;//普通作业提交率
 
                         $('#commit h1 i').html(commitAllRate * 100 + "%");
-                        $('#commit h1 span').html("("+commitAll + "条)");
+                        $('#commit h1 span').html("(" + commitAll + "条)");
                         $('#commit .all span').eq(0).html(commitNormalRate + "%(" + commitNormal + "条)");
                         $('#commit .all span').eq(1).html((commitEAllRate * 100) + "%(" + commitEAll + "条)");
 
                         /*总正确率数据处理*/
-                        $('#correctRateAll h1 i').html(parseInt(correctRateAll*100)+"%");
+                        $('#correctRateAll h1 i').html(parseInt(correctRateAll * 100) + "%");
 
                     } else if (homeworkType == "1") {//手动
                         $('#reply').show();
@@ -371,9 +390,9 @@ function selectHwData() {
                         var totalAll = data.totalAll;//总布置数
                         var reachAll = data.reachAll;//总送达人数
                         var publishAudio = data.publishAudio;//总布置语音数
-                        var publishAudioRate = parseInt(parseFloat((publishAudio/totalAll))*100);//总布置语音率
+                        var publishAudioRate = parseInt(parseFloat((publishAudio / totalAll)) * 100);//总布置语音率
                         var publishPicture = data.publishPicture;//总布置图片数
-                        var publishPictureRate = parseInt(parseFloat((publishPicture/totalAll))*100);//总布置图片率
+                        var publishPictureRate = parseInt(parseFloat((publishPicture / totalAll)) * 100);//总布置图片率
 
                         $('#publish h1 i').html(totalAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
@@ -382,27 +401,27 @@ function selectHwData() {
 
 
                         replyAll = data.replyAll;//总批复数
-                        var replyAllRate = parseInt(parseFloat((replyAll/totalAll))*100);//总批复率
+                        var replyAllRate = parseInt(parseFloat((replyAll / totalAll)) * 100);//总批复率
                         var replyAudio = data.replyAudio;//总批复语音数
-                        var replyAudioRate = parseInt(parseFloat((replyAudio/replyAll))*100);//总批复语音率
+                        var replyAudioRate = parseInt(parseFloat((replyAudio / replyAll)) * 100);//总批复语音率
                         var replyPicture = data.replyPicture;//总批复图片数
-                        var replyPictureRate = parseInt(parseFloat((replyPicture/replyAll))*100);//总批复图片率
+                        var replyPictureRate = parseInt(parseFloat((replyPicture / replyAll)) * 100);//总批复图片率
 
                         $('#reply h1 i').html(replyAllRate + "%");
-                        $('#reply h1 span').html("("+replyAll + "条)");
+                        $('#reply h1 span').html("(" + replyAll + "条)");
                         $('#reply .normal span').eq(0).html(replyAudioRate + "%(" + replyAudio + "条)");
                         $('#reply .normal span').eq(1).html(replyPictureRate + "%(" + replyPicture + "条)");
 
 
                         commitAll = data.commitAll;//总提交数
-                        var commitAllRate = parseInt(parseFloat((commitAll/totalAll))*100);//总提交率
+                        var commitAllRate = parseInt(parseFloat((commitAll / totalAll)) * 100);//总提交率
                         var commitAudio = data.commitAudio;//总提交语音数
-                        var commitAudioRate = parseInt(parseFloat((commitAudio/commitAll))*100);//总提交语音率
+                        var commitAudioRate = parseInt(parseFloat((commitAudio / commitAll)) * 100);//总提交语音率
                         var commitPicture = data.commitPicture;//总提交图片数
-                        var commitPictureRate = parseInt(parseFloat((commitPicture/commitAll))*100);//总提交图片率
+                        var commitPictureRate = parseInt(parseFloat((commitPicture / commitAll)) * 100);//总提交图片率
 
                         $('#commit h1 i').html(commitAllRate + "%");
-                        $('#commit h1 span').html("("+commitAll + "条)");
+                        $('#commit h1 span').html("(" + commitAll + "条)");
                         $('#commit .normal span').eq(0).html(commitAudioRate + "%(" + commitAudio + "条)");
                         $('#commit .normal span').eq(1).html(commitPictureRate + "%(" + commitPicture + "条)");
 
@@ -415,15 +434,15 @@ function selectHwData() {
                         commitAll = data.commitAll;//总提交数
                         publishAll = data.publishAll;//总布置次数
                         reachAll = data.reachAll;//总送达人次
-                        var commitAllRate = parseInt(parseFloat((commitAll/reachAll)) * 100);
-                        $('#publish h1 i').html(publishAll+"次");
+                        var commitAllRate = parseInt(parseFloat((commitAll / reachAll)) * 100);
+                        $('#publish h1 i').html(publishAll + "次");
                         $('#publish span').html("(总送达" + reachAll + "人次)");
 
                         $('#commit h1 i').html(commitAllRate + "%");
-                        $('#commit span').html("("+commitAll + "条)");
+                        $('#commit span').html("(" + commitAll + "条)");
 
                         /*总正确率数据处理*/
-                        $('#correctRateAll h1 i').html(parseInt(correctRateAll*100)+"%");
+                        $('#correctRateAll h1 i').html(parseInt(correctRateAll * 100) + "%");
                     }
 
                 }
@@ -434,7 +453,7 @@ function selectHwData() {
 }
 
 //查看明细
-function lookHwDetails(this_,schoolId) {
+function lookHwDetails(this_, schoolId) {
     var params = {
         'homeworkType': homeworkType,
         'schoolId': schoolId,
