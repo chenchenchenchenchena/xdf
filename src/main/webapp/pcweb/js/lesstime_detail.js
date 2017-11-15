@@ -211,16 +211,7 @@ function exporHourList(){
         layer.msg("暂无列表");
         return false;
     }
-    window.location.href = global.expor_hour + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
-    var params = {
-        'schoolId': currentCityId,
-        'beginDate': beginTime,
-        'endDate': endTime,
-        'masterTeacherFlag': masterTeacherFlag,
-        'teacherName': seacherKey,
-        'nextPage': page,
-        'pageSize': pageSize,
-        'schoolName': currentCity,
-    }
+    window.location.href = global.expor_hour + "?schoolName=" + currentCity + "&schoolId=" + currentCityId + "&masterTeacherFlag=" + masterTeacherFlag  + "&teacherName=" + seacherKey + "&beginTime=" + beginTime + "&endTime=" + endTime + "&nextPage=" + page + "&pageSize=" + pageSize ;
+
 
 }
