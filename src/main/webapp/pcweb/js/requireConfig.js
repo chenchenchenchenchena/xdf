@@ -88,8 +88,8 @@ require(['jquery-1.11.0.min'],function(){
                         }
                     }
                     if( $('.left_nav ul li').length=='0'){
-                        $('body').hide();
-                        alert('您暂无权限,请联系管理员')
+                        $('.content ').hide();
+                        layer.msg('您暂无权限,请联系管理员');
                     }
                     var number_l = 0;
                     var url_l =  location.href;
@@ -196,8 +196,8 @@ require(['jquery-1.11.0.min'],function(){
             success: function (e) {
                 console.log(e);
                 if (e.result == false) {
-                    alert(e.message);
-                    if(sessionStorage.getItem('sid')){
+                    if(!sessionStorage.getItem('sid')){
+                        layer.msg(e.message);
                         toLogout();
                     };
                 } else {
@@ -207,19 +207,19 @@ require(['jquery-1.11.0.min'],function(){
                         dataType: 'json',
                         data: JSON.stringify(calbac),
                         success: function (e) {
-
+                            sessionStorage.setItem("userName", e.userName);
+                            var userId = e.userId;
+                            userId = userId.split('@')[0];
+                            sessionStorage.setItem("userId", userId);
+                            sessionStorage.setItem("sid",e.sid);
+                            $('.user_name').html(sessionStorage.getItem('userName'));
+                            if(e.userList){
+                                localStorage.schoolList = e.userList.split('')[0].schoolId;
+                            }
+                            left_navlist(e.functionList)
                         }
                     });
-                    sessionStorage.setItem("userName", e.userName);
-                    var userId = e.userId;
-                    userId = userId.split('@')[0];
-                    sessionStorage.setItem("userId", userId);
-                    sessionStorage.setItem("sid",e.sid);
-                    $('.user_name').html(sessionStorage.getItem('userName'));
-                    if(e.userList){
-                        localStorage.schoolList = e.userList.split('')[0].schoolId;
-                    }
-                    left_navlist(e.functionList)
+
                 }
             }
         });
