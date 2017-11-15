@@ -319,10 +319,13 @@ function selectHwData(timeType) {
                         correctRateAll += correctRate;
                         if (homeworkType == "1") {
                             //手动作业，正确率显示空
-                            correctRate = "暂无";
+                            var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>暂无</span><span >' +
+                                '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
+
+                        }else {
+                            var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
+                                '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
                         }
-                        var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
-                            '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
                         $('#schoolComparsion').append(html_);
 
                     }
