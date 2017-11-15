@@ -174,7 +174,7 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.removeItem("sid")
                     sessionStorage.removeItem("userId")
                     sessionStorage.removeItem("userName")
-                    window.top.location.href = returnUrl;
+                    window.top.location.href = json.logoutUrl;
                 }
             }
         });
