@@ -201,25 +201,16 @@ require(['jquery-1.11.0.min'],function(){
                         toLogout();
                     };
                 } else {
-                    $.ajax({
-                        url: url_o + "e2Login/doLogin.do",
-                        type: 'post',
-                        dataType: 'json',
-                        data: JSON.stringify(calbac),
-                        success: function (e) {
-                            sessionStorage.setItem("userName", e.userName);
-                            var userId = e.userId;
-                            userId = userId.split('@')[0];
-                            sessionStorage.setItem("userId", userId);
-                            sessionStorage.setItem("sid",e.sid);
-                            $('.user_name').html(sessionStorage.getItem('userName'));
-                            if(e.userList){
-                                localStorage.schoolList = e.userList.split('')[0].schoolId;
-                            }
-                            left_navlist(e.functionList)
-                        }
-                    });
-
+                    sessionStorage.setItem("userName", e.userName);
+                    var userId = e.userId;
+                    userId = userId.split('@')[0];
+                    sessionStorage.setItem("userId", userId);
+                    sessionStorage.setItem("sid",e.sid);
+                    $('.user_name').html(sessionStorage.getItem('userName'));
+                    if(e.userList){
+                        localStorage.schoolList = e.userList.split('')[0].schoolId;
+                    }
+                    left_navlist(e.functionList)
                 }
             }
         });
