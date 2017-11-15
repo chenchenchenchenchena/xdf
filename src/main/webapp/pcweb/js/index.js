@@ -41,38 +41,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
             return false;
         }
         window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId')+'&schoolName='+$(this).attr('schoolName');
-
-        // var newTab=window.open();
-        // $.ajax({
-        //     url:global.indexForm,
-        //     type: 'post',
-        //     asyns:false,
-        //     dataType: 'json',
-        //     data:JSON.stringify({'schoolId':$(this).attr('schoolId'),'schoolName':$(this).attr('schoolName')}),
-        //     success:function(e){
-        //         if(e.result){
-        //             newTab.location.href=e.downloadUrl;
-        //         }else{
-        //             layer.msg('暂无列表');
-        //         }
-        //     }
-        // });
     });
-     // //导出总表
-     //    $.ajax({
-     //        url:global.indexFormAll,
-     //        type: 'post',
-     //        asyns:false,
-     //        dataType: 'json',
-     //        data:JSON.stringify({'schoolId':localStorage.schoolList}),
-     //        success:function(e){
-     //            if(e.result){
-     //                $('.index_formtit a').attr('href',e.downloadUrl)
-     //            }else{
-     //                $('.index_formtit a').attr('href','javascript:;')
-     //            }
-     //        }
-     //    });
         //导出总表点击
         $(document).on('click','.index_formtit a',function(){
             window.location.href = global.indexFormAll + "?schoolId=" + localStorage.schoolList
