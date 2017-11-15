@@ -75,10 +75,10 @@ require(['jquery-1.11.0.min'],function(){
     function left_navlist(onelist){
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
-                        if(onelistbure.isValid ==1&&onelistbure.checked ==true){
+                        var childlist = onelistbure.children;
+                        if(onelistbure.isValid ==1&&childlist.length!=0){
                             $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         };
-                        var childlist = onelistbure.children;
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
                              $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
@@ -88,8 +88,8 @@ require(['jquery-1.11.0.min'],function(){
                         }
                     }
                     if( $('.left_nav ul li').length=='0'){
-                        $('body').hide();
-                        alert('您暂无权限,请联系管理员')
+                        $('.content ').hide();
+                        layer.msg('您暂无权限,请联系管理员');
                     }
                     var number_l = 0;
                     var url_l =  location.href;
@@ -171,9 +171,9 @@ require(['jquery-1.11.0.min'],function(){
                         for (var i = keys.length; i--;)
                             setCookie(keys[i], 1, -1);
                     }
-                    sessionStorage.removeItem("sid")
-                    sessionStorage.removeItem("userId")
-                    sessionStorage.removeItem("userName")
+                    sessionStorage.removeItem("sid");
+                    sessionStorage.removeItem("userId");
+                    sessionStorage.removeItem("userName");
                     window.top.location.href = json.logoutUrl;
                 }
             }
@@ -196,18 +196,11 @@ require(['jquery-1.11.0.min'],function(){
             success: function (e) {
                 console.log(e);
                 if (e.result == false) {
-                    alert(e.message);
-                    toLogout();
+                    if(!sessionStorage.getItem('sid')){
+                        layer.msg(e.message);
+                        toLogout();
+                    };
                 } else {
-                    $.ajax({
-                        url: url_o + "e2Login/doLogin.do",
-                        type: 'post',
-                        dataType: 'json',
-                        data: JSON.stringify(calbac),
-                        success: function (e) {
-
-                        }
-                    });
                     sessionStorage.setItem("userName", e.userName);
                     var userId = e.userId;
                     userId = userId.split('@')[0];
@@ -215,6 +208,7 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem("sid",e.sid);
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
+                        console.log(e.userList.split(''))
                         localStorage.schoolList = e.userList.split('')[0].schoolId;
                     }
                     left_navlist(e.functionList)

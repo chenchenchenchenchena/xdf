@@ -94,10 +94,17 @@ require(['jquery-1.11.0.min'], function () {
                 });
             }else{
                 //删除编号
-                if(confirm('确定删除吗？')){
-                    var need_ = {
-                        id:$(this).attr('id'),
-                    };
+
+                var need_ = {
+                    id:$(this).attr('id'),
+                };
+                    var text = "确定删除该数据?";
+                    var buttons = [];
+                    buttons.push('确认', '取消');
+                layer.confirm(text, {
+                    btn: buttons //按钮
+                }, function () {
+
                     $.ajax({
                         url:global.master_reduce,
                         type: 'post',
@@ -112,8 +119,9 @@ require(['jquery-1.11.0.min'], function () {
                             Olddata();
                         }
                     });
-                }
+                }, function () {
 
+                });
             }
         });
         //编辑取消
