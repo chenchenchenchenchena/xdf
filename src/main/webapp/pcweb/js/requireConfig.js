@@ -72,7 +72,8 @@ require(['jquery-1.11.0.min'],function(){
      */
     $('#logout').click(toLogout);
     //左侧菜单栏
-    function left_navlist(onelist){
+    function left_navlist(list){
+                    var onelist = list;
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
@@ -194,22 +195,25 @@ require(['jquery-1.11.0.min'],function(){
             dataType: 'json',
             data: JSON.stringify(calbac),
             success: function (e) {
-                console.log(e);
                 if (e.result == false) {
                     if(!sessionStorage.getItem('sid')){
                         layer.msg(e.message);
                         toLogout();
-                    };
+                    }else{
+                        $('.user_name').html(sessionStorage.getItem('userName'));
+                        left_navlist(JSON.parse(sessionStorage.getItem('functionList')))
+                    }
                 } else {
                     sessionStorage.setItem("userName", e.userName);
                     var userId = e.userId;
                     userId = userId.split('@')[0];
                     sessionStorage.setItem("userId", userId);
                     sessionStorage.setItem("sid",e.sid);
+                    sessionStorage.setItem('functionList',JSON.stringify(e.functionList));
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
-                        console.log(e.userList.split(''))
-                        localStorage.schoolList = e.userList.split('')[0].schoolId;
+                        var $schoolId_ = $.parseJSON(e.userList)
+                        localStorage.schoolList = $schoolId_[0].schoolId;
                     }
                     left_navlist(e.functionList)
                 }
