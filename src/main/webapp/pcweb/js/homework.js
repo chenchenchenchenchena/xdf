@@ -343,7 +343,12 @@ function selectHwData(timeType) {
                         var publishEAll = resultPublish.publishEAll;//电子作业数量
                         var publishEAllRate = resultPublish.publishEAllRate;//电子作业率
                         reachAll = resultPublish.reachAll;//总送达人次
-                        var normalRate = (1 - publishEAllRate) * 100;//手动作业率
+                        var normalRate;//手动作业率
+                        if(publishAll == 0){
+                            normalRate = 0;
+                        }else {
+                            normalRate = (1 - publishEAllRate) * 100;
+                        }
                         var normalAll = publishAll - publishEAll;//手动作业用户量
 
                         $('#publish h1 i').html(publishAll + "次");
@@ -357,7 +362,12 @@ function selectHwData(timeType) {
                         var replyEAll = resultReply.replyEAll;//电子作业批复量
                         var replyEAllRate = resultReply.replyEAllRate;//电子普通作业批复率
                         var replyNomal = replyAll - replyEAll;//普通作业批复量
-                        var replyNomalRate = (1 - replyEAllRate) * 100;// 普通作业批复率
+                        var replyNomalRate;// 普通作业批复率
+                        if(replyAll == 0){
+                            replyNomalRate = 0;
+                        }else {
+                            replyNomalRate = (1 - replyEAllRate) * 100;
+                        }
 
                         $('#reply h1 i').html(replyAllRate * 100 + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
@@ -370,7 +380,12 @@ function selectHwData(timeType) {
                         var commitEAll = resultCommit.commitEAll;// 电子作业提交量
                         var commitEAllRate = resultCommit.commitEAllRate;// 电子作业提交率
                         var commitNormal = commitAll - commitEAll;//普通作业提交量
-                        var commitNormalRate = (1 - commitEAllRate) * 100;//普通作业提交率
+                        var commitNormalRate;//普通作业提交率
+                        if(commitAll == 0){
+                            commitNormalRate = 0;
+                        }else {
+                            commitNormalRate = (1 - commitEAllRate) * 100;
+                        }
 
                         $('#commit h1 i').html(commitAllRate * 100 + "%");
                         $('#commit h1 span').html("(" + commitAll + "条)");
