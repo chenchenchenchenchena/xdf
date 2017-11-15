@@ -48,14 +48,10 @@ body{
 	height:23px;
 	margin:7px auto 0;
 	font-size:12px;
-	background:#fff;
-	color:#000;
-	text-align:center;
-	cursor:pointer;
-}
-.usermenu input:hover{
-	background:#00ba97;
 	color:#fff;
+	text-align:center;
+	background:#00ba97;
+	cursor:pointer;
 }
 .usermenu span{
 	display:block;
@@ -232,7 +228,6 @@ body{
 }
 .homewor_big_selecet,.homework_samll_one{
 	min-width:175px;
-	padding-right:18px;
 	height:28px;
 	line-height:28px;
 	text-align: center;
@@ -263,6 +258,8 @@ body{
 	color:#999;
 	line-height:28px;
 	text-indent:.5em;
+	padding-right:18px;
+
 }
 .homework_samll_one ul{
 	width:100%;
