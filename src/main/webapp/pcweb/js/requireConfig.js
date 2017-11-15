@@ -121,6 +121,7 @@ require(['jquery-1.11.0.min'],function(){
                     }
 
                 }
+
     Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
             "M+": this.getMonth() + 1, //月份
@@ -220,5 +221,139 @@ require(['jquery-1.11.0.min'],function(){
             }
         });
     }
+
+
 });
+
+/**
+ * 获取半年前／一年前的时间
+ * @returns {*[]}
+ */
+function getlastmonth() {
+    var myDate = new Date();
+    var currentYear=myDate.getFullYear();
+    var currentMonth=myDate.getMonth()+1;
+    var lastMonth=myDate.getMonth();
+    var currentDate=myDate.getDate();
+    var lastDate;
+    //一个月前的时间
+    var prevCurrentYear=0;
+    var prevCurrentMonth=0;
+    var preDay = 0;
+    //三个月前的时间
+    var tmY =0;
+    var tmM = 0;
+    var tmD = 0;
+
+    //半年前的时间
+    var halfY =0;
+    var halfM = 0;
+    var halD = 0;
+
+    //一年前的时间
+    var oneY = 0;
+    var oneM = 0;
+    var oneD  = 0;
+    var daysInMonth = new Array(0,31,28,31,30,31,30,31,31,30,31,30,31);
+    isYears(currentYear);
+    if(currentMonth==0){
+        //一月前的时间
+        prevCurrentYear=currentYear-1;
+        prevCurrentMonth=12;
+        isYears(prevCurrentYear)
+        preDay = monthTime(prevCurrentMonth,currentDate)
+
+        //三个月前的时间
+        tmY = currentYear-1;
+        tmM = 10;
+        tmD = monthTime(tmM,currentDate);
+
+        //半年前的时间
+        halfY = currentYear-1;
+        halfM = 6;
+        halfD = monthTime(halfM,currentDate);
+
+        //一年前的时间
+        oneY = currentYear-1;
+        oneM = 0;
+        oneD = monthTime(oneM,currentDate);
+
+    }else{
+        //一个月前的时间
+        prevCurrentYear=currentYear;
+        prevCurrentMonth=isZero(currentMonth-1);
+        preDay = monthTime(prevCurrentMonth,currentDate);
+
+        //三个月前的时间
+        if(currentMonth-3 < 0){
+            tmY = currentYear-1;
+            tmM = isZero(12+(currentMonth-3));
+            isYears(tmY);
+            tmD = monthTime(tmM,currentDate)
+        }else{
+            tmY = currentYear;
+            tmM = isZero(currentMonth-3);
+            isZero(tmM);
+            isYears(tmY);
+            tmD = monthTime(tmM,currentDate)
+        }
+
+        //半年前的时间
+        if(currentMonth -6 < 3){
+            halfY = currentYear-1;
+            halfM = isZero(12+(currentMonth-6));
+            isZero(halfM);
+            isYears(halfM);
+            halfD =monthTime(halfM,currentDate)
+        }else{
+            halfY = currentYear;
+            halfM = isZero(currentMonth-6);
+            isZero(halfM);
+            isYears(halfM);
+            halfD =monthTime(halfM,currentDate)
+        }
+
+        //一年前的时间
+        oneY = currentYear-1;
+        oneM =12+(currentMonth-12);
+        isYears(halfM);
+        oneD =monthTime(oneM,currentDate)
+    }
+    function isYears(years){
+        if(years%4 == 0 && years%100 != 0  || years%400 == 0 ){
+            daysInMonth[2]= 29;
+        }
+    }
+    function monthTime(a,b){
+        if(daysInMonth[a] < b){
+            lastDate =  daysInMonth[a]
+        }else{
+            lastDate = b;
+        }
+        return lastDate;
+    }
+
+    function isZero(s){
+        if(s ==0 ){
+            return s =12;
+        }else{
+            return s;
+        }
+    }
+    var now=currentYear+'-'+p(currentMonth)+"-"+p(currentDate);
+    var priceLastMonth = prevCurrentYear+"-"+p(prevCurrentMonth)+"-"+p(lastDate);
+    //三个月前的时间
+    var threeMonth = tmY + "-" + p(tmM) + '-' + p(tmD);
+
+    //半年期的时间
+    var halfTime = halfY +"-" + p(halfM) + "-" + p(halfD);
+
+    //一年前的时间
+    var oneTime = oneY + "-" + p(oneM) + "-" + p(oneD)
+    var timeArr=[now,priceLastMonth,threeMonth,halfTime,oneTime]
+    return timeArr;
+}
+function p(s) {
+    return s < 10 ? '0' + s: s;
+}
 

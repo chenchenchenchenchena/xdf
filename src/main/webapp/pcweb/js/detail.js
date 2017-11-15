@@ -19,7 +19,7 @@ var currentStageCode;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['jqPaginator.min'], function () {
-            require(['layer'], function () {
+            require(['layer','requireConfig'], function () {
 
                 laydate.render({
                     elem: '#date_input',
@@ -36,12 +36,13 @@ require(['jquery-1.11.0.min'], function () {
                 subject = params.paperSubject;
                 grade = params.paperClass;
                 stage = params.paperStage;
+                currentSchool = params.schoolName;
 
-                if(homeworkType == 1){
+                if (homeworkType == 1) {
                     $('.homewor_small_selecet ul li').eq(0).hide();
                     $('.homewor_small_selecet ul li').eq(1).hide();
                     $('.homewor_small_selecet ul li').eq(2).hide();
-                }else {
+                } else {
 
                     $('.homewor_small_selecet ul li').eq(0).show();
                     $('.homewor_small_selecet ul li').eq(1).show();
@@ -49,8 +50,8 @@ require(['jquery-1.11.0.min'], function () {
                 }
 
                 $('#select-school h4').html(params.currentCity);
-                if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
-                    $('#date_input').val(params.beginTime+" - "+params.endTime);
+                if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
+                    $('#date_input').val(params.beginTime + " - " + params.endTime);
                 }
                 //初始化分页控件
                 initPage(totalCounts, page);
@@ -58,20 +59,20 @@ require(['jquery-1.11.0.min'], function () {
                 SelectTeacherList();
 
                 //搜素点击事件
-                $('#seacher_hw').parent().find('img').click(function(){
+                $('#seacher_hw').parent().find('img').click(function () {
                     seacherName = $('#seacher_hw').val();
-                    if(seacherName == undefined || seacherName == ""){
+                    if (seacherName == undefined || seacherName == "") {
                         layer.msg("请先填写教师名称");
                         return false;
                     }
                     SelectTeacherList();
                 });
-                $('#hw_selectBtn').click(function(){
+                $('#hw_selectBtn').click(function () {
                     SelectTeacherList();
                 });
 
                 //导出教师列表
-                $('#expor_teacher').click(function(){
+                $('#expor_teacher').click(function () {
                     exporTeacherList();
                 })
 
@@ -104,16 +105,24 @@ function initPage(totalCounts, currentPage) {
 }
 
 //查看方式切换
-function lookType(this_,flag){
-    if($(this_).hasClass("homework_active")){
+function lookType(this_, flag) {
+    if ($(this_).hasClass("homework_active")) {
         //如果已选中，则不做处理
-    }else {
+    } else {
+
+        var today = new Date().Format("yyyy-MM-dd");
+        var timeArray = getlastmonth();
+        var halfYear = timeArray[3];
+        var oneYear = timeArray[4];
+
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
-        if(flag == 1){
+        if (flag == 1) {
             dateMonth = '6';
-        }else {
+            $('#date_input').val(today + " - " + halfYear);
+        } else {
             dateMonth = '12';
+            $('#date_input').val(today + " - " + oneYear);
         }
         SelectTeacherList();
     }
@@ -128,7 +137,7 @@ function getSelectList(this_, type, flag) {
             json = sessionStorage.stageList;
             break;
         case 1:
-            if(currentStageCode == undefined){
+            if (currentStageCode == undefined) {
                 layer.msg("请先选择学段");
                 return false;
             }
@@ -140,7 +149,7 @@ function getSelectList(this_, type, flag) {
     }
     if (json != undefined) {
         json = JSON.parse(json);
-        showDrownList(json, this_,flag);
+        showDrownList(json, this_, flag);
     } else {
         var table = {
             "tableName": type
@@ -163,7 +172,7 @@ function getSelectList(this_, type, flag) {
                         sessionStorage.subjectList = JSON.stringify(e);
                         break;
                 }
-                showDrownList(e, this_,flag);
+                showDrownList(e, this_, flag);
             }
         })
     }
@@ -171,21 +180,21 @@ function getSelectList(this_, type, flag) {
 }
 
 //筛选学段／年级／科目列表显示
-function showDrownList(json, this_,flag) {
+function showDrownList(json, this_, flag) {
     $(this_).parent().find('ul').show();
     $(this_).parent().parent().siblings().find('ul').hide();
     if (json.code == "200") {
         $(this_).siblings().find('ul').html("");
         var list = json.data;
-        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\","+flag+")' data-tCode=''><span>全部</span></li>";
+        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\"," + flag + ")' data-tCode=''><span>全部</span></li>";
         for (var i = 0; i < list.length; i++) {
             var tCode = list[i].tCode;
-            if(flag == 1){
+            if (flag == 1) {
                 if (tCode.indexOf(currentStageCode) >= 0) {
-                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
                 }
-            }else {
-                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\","+flag+")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+            } else {
+                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
             }
 
 
@@ -199,16 +208,16 @@ function showDrownList(json, this_,flag) {
 }
 
 //点击选择学段／年级／科目
-function filterByDrownId(_this, name,flag) {
+function filterByDrownId(_this, name, flag) {
 
     var id = $(_this).attr('data-tCode');
     $(_this).parent().parent().find('h4').html(name);
     $(_this).parent().parent().find('h4').attr('tCode', id);
     $(_this).parent().hide();
-    if(flag == 0){
-        if(id == ""){
+    if (flag == 0) {
+        if (id == "") {
             currentStageCode = "";
-        }else {
+        } else {
             //保存被选学段，联动匹配年级
             currentStageCode = id.substring(0, 2);
         }
@@ -221,45 +230,48 @@ function filterByDrownId(_this, name,flag) {
     }
 }
 
-//作业统计-教师明细接口实现
-function SelectTeacherList(){
+/**
+ * 作业统计-教师明细接口实现
+ */
+function SelectTeacherList() {
     stage = $("#stage").html();
     grade = $("#grade").html();
     subject = $("#subject").html();
 
+    //获取筛选条件
     var time = $('#date_input').val();
-    if(time != "" && time != undefined){
-        beginTime = time.substring(0,10);
-        endTime = time.substring(13,time.length);
+    if (time != "" && time != undefined) {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
     }
 
     seacherName = $('#seacher_hw').val();
-    if(seacherName == undefined){
+    if (seacherName == undefined) {
         seacherName = "";
     }
 
-    if(stage == "全部"){
+    if (stage == "全部") {
         stage = "";
     }
-    if(grade == "全部"){
+    if (grade == "全部") {
         grade = "";
     }
-    if(subject == "全部"){
+    if (subject == "全部") {
         subject = "";
     }
 
     var params = {
-        'schoolId':currentSchoolId,
-        'teacher':seacherName,
-        'dateMonth':dateMonth,
-        'paperStage':stage,
-        'paperClass':grade,
-        'paperSubject':subject,
-        'pageNum':page,
-        'pageSize':pageSize,
-        'beginTime':beginTime,
-        'endTime':endTime,
-        'homeworkType':homeworkType
+        'schoolId': currentSchoolId,
+        'teacher': seacherName,
+        'dateMonth': dateMonth,
+        'paperStage': stage,
+        'paperClass': grade,
+        'paperSubject': subject,
+        'pageNum': page,
+        'pageSize': pageSize,
+        'beginTime': beginTime,
+        'endTime': endTime,
+        'homeworkType': homeworkType
     };
     $.ajax({
         type: "POST",
@@ -269,11 +281,11 @@ function SelectTeacherList(){
         data: JSON.stringify(params),
         success: function (e) {
 
-            if(e.list != undefined && e.list.length > 0){
+            if (e.list != undefined && e.list.length > 0) {
                 var teacherList = e.list;
                 totalCounts = e.total;//总条数
                 $('.lesstime_Result').show();
-                $('.lesstime_Result').html("共"+totalCounts+"条数据");
+                $('.lesstime_Result').html("共" + totalCounts + "条数据");
                 var currentPage = e.pageNum;
                 initPage(totalCounts, currentPage);
                 $('#teacher-list li').remove();
@@ -286,10 +298,10 @@ function SelectTeacherList(){
                     var publishCount = teacherList[i].publishCount;
                     var replyRate = teacherList[i].replyRate;
                     var teacherEmail = teacherList[i].teacherEmail;
-                    var itemHtml_ = '<li><span>'+teacherName+'</span><span>'+publishCount+'</span><span>'+parseInt((commitRate*100))+'%</span><span>'+parseInt((replyRate*100))+'%</span><span>'+parseInt((correctRate*100))+'%</span></li>';
+                    var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>' + parseInt((correctRate * 100)) + '%</span></li>';
                     $('#teacher-list').append(itemHtml_);
                 }
-            }else {
+            } else {
                 layer.msg("暂无数据");
                 $('#teacher-list li').remove();
                 $('.lesstime_Result').hide();
@@ -302,8 +314,9 @@ function SelectTeacherList(){
 }
 
 //导出教师列表
-function exporTeacherList(){
-    window.location.href = global.hw_expor;
+function exporTeacherList() {
+    var url = "http://10.162.7.139:8080/xdfdtmanager/backEndHomework/exportHomeWorkTeacherDetail.do"
+    window.location.href = url + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
 }
 
 

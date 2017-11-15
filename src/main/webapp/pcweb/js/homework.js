@@ -14,7 +14,7 @@ var currentStageCode;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-        require(['layer'], function () {
+        require(['layer','requireConfig'], function () {
 
             /*默认导航选中样式*/
             $('.homework_Statistics div:nth-child(even)').css('float', 'right');
@@ -24,15 +24,22 @@ require(['jquery-1.11.0.min'], function () {
                 elem: '#date_input',
                 range: true //指定元素
             });
+
+            //默认为半年，与时间段为正向半联动。
+            var today = new Date().Format("yyyy-MM-dd");
+            var timeArray = getlastmonth();
+            var halfYear = timeArray[3];
+            $('#date_input').val(halfYear + " - " + today);
+
             //默认首次查询校区为全部
             currentSchoolId = localStorage.schoolList;
             currentSchool = "全部";
-            selectHwData(1);
+            selectHwData();
 
 
             //筛选"确定"按钮点击事件
             $('#hw_selectBtn').click(function () {
-                selectHwData(0);
+                selectHwData();
             });
             //名词解释
             $('.homework_explain img').click(function () {
@@ -43,6 +50,11 @@ require(['jquery-1.11.0.min'], function () {
             $('.operation_s  img').click(function () {
                 $('.back_big ').hide();
                 $('.operation_s ').hide();
+            })
+            $(document).on('click','.look_details',function(){
+                var schoolId = $(this).attr('data-schoolId');
+                var schoolName = $(this).attr('data-schoolName');
+                lookHwDetails(this,schoolId,schoolName);
             })
         });
     });
@@ -209,14 +221,21 @@ function lookType(this_, flag) {
     if ($(this_).hasClass("homework_active")) {
         //如果已选中，则不做处理
     } else {
+        //默认为半年，与时间段为正向半联动。
+        var today = new Date().Format("yyyy-MM-dd");
+        var timeArray = getlastmonth();
+        var halfYear = timeArray[3];
+        var oneYear = timeArray[4];
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
         if (flag == 1) {
             dateMonth = '6';
+            $('#date_input').val(halfYear + " - " + today);
         } else {
             dateMonth = '12';
+            $('#date_input').val(today + " - " + oneYear);
         }
-        selectHwData(1);
+        selectHwData();
     }
 }
 
@@ -249,29 +268,26 @@ function changeHomeworkType(this_, flag) {
     beginTime = "";
     endTime = "";
     dateMonth = '6';
-    $('#date_input').val("");
-    selectHwData(1);
+    var today = new Date().Format("yyyy-MM-dd");
+    var timeArray = getlastmonth();
+    var halfYear = timeArray[3];
+    $('#date_input').val(halfYear + " - " + today);
+    selectHwData();
 
 }
 
 /**
  * 作业统计接口实现
- * @param timeType 0:表示时间段查询，1：表示半年或一年查询
  */
-function selectHwData(timeType) {
+function selectHwData() {
 
     //获取筛选条件
-    if (timeType == 0) {
-        var time = $('#date_input').val();
-        if (time != "" && time != undefined) {
-            beginTime = time.substring(0, 10);
-            endTime = time.substring(13, time.length);
-        }
-        dateMonth = "";
-    } else {
-        beginTime = "";
-        endTime = "";
+    var time = $('#date_input').val();
+    if (time != "" && time != undefined) {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
     }
+
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
@@ -320,11 +336,11 @@ function selectHwData(timeType) {
                         if (homeworkType == "1") {
                             //手动作业，正确率显示空
                             var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>暂无</span><span >' +
-                                '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
+                                '<span style="width: auto"  data-schoolId="'+schoolId+'" data-schoolName="'+schoolName+'" class="look_details homework_operation">查看明细</span></span></li>';
 
-                        }else {
+                        } else {
                             var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
-                                '<a href="#/detail" onclick="lookHwDetails(this,' + schoolId + ')" class="homework_operation">查看明细</a></span></li>';
+                                '<span style="width: auto" data-schoolId="'+schoolId+'" data-schoolName="'+schoolName+'" class="look_details homework_operation">查看明细</span></span></li>';
                         }
                         $('#schoolComparsion').append(html_);
 
@@ -347,9 +363,9 @@ function selectHwData(timeType) {
                         var publishEAllRate = resultPublish.publishEAllRate;//电子作业率
                         reachAll = resultPublish.reachAll;//总送达人次
                         var normalRate;//手动作业率
-                        if(publishAll == 0){
+                        if (publishAll == 0) {
                             normalRate = 0;
-                        }else {
+                        } else {
                             normalRate = (1 - publishEAllRate) * 100;
                         }
                         var normalAll = publishAll - publishEAll;//手动作业用户量
@@ -366,9 +382,9 @@ function selectHwData(timeType) {
                         var replyEAllRate = resultReply.replyEAllRate;//电子普通作业批复率
                         var replyNomal = replyAll - replyEAll;//普通作业批复量
                         var replyNomalRate;// 普通作业批复率
-                        if(replyAll == 0){
+                        if (replyAll == 0) {
                             replyNomalRate = 0;
-                        }else {
+                        } else {
                             replyNomalRate = (1 - replyEAllRate) * 100;
                         }
 
@@ -384,9 +400,9 @@ function selectHwData(timeType) {
                         var commitEAllRate = resultCommit.commitEAllRate;// 电子作业提交率
                         var commitNormal = commitAll - commitEAll;//普通作业提交量
                         var commitNormalRate;//普通作业提交率
-                        if(commitAll == 0){
+                        if (commitAll == 0) {
                             commitNormalRate = 0;
-                        }else {
+                        } else {
                             commitNormalRate = (1 - commitEAllRate) * 100;
                         }
 
@@ -471,7 +487,12 @@ function selectHwData(timeType) {
 }
 
 //查看明细
-function lookHwDetails(this_, schoolId) {
+function lookHwDetails(this_, schoolId, schoolName) {
+    var time = $('#date_input').val();
+    if (time != "" && time != undefined) {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
+    }
     var params = {
         'homeworkType': homeworkType,
         'schoolId': schoolId,
@@ -480,9 +501,11 @@ function lookHwDetails(this_, schoolId) {
         'endTime': endTime,
         'paperSubject': subject,
         'paperClass': grade,
-        'paperStage': stage
+        'paperStage': stage,
+        'schoolName': schoolName
     };
     sessionStorage.homeworkDetailParams = JSON.stringify(params);
+    window.location.href = "#/detail";
 }
 
 

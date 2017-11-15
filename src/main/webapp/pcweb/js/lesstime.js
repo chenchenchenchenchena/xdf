@@ -211,7 +211,7 @@ function SelectData() {
                 var masterTeacherYList = [];//主讲趋势图数据Y轴值
                 /*班主任趋势图数据*/
                 for (var i = 0; i < viewClassTeacherData.length; i++) {
-                    if (viewClassTeacherData[i].classTeacherViewTime != " " && viewClassTeacherData[i].classTeacherViewTime != "") {
+                    if (viewClassTeacherData[i].classTeacherViewTime != " " && viewClassTeacherData[i].classTeacherViewTime != ""&& viewClassTeacherData[i].classTeacherViewTime != undefined) {
                         classTeacherTotal += parseInt(viewClassTeacherData[i].classTeacherViewTotal);
                         headTeacherXList.push(viewClassTeacherData[i].classTeacherViewTime);
                         headTeacherYList.push(parseInt(viewClassTeacherData[i].classTeacherViewTotal));
@@ -219,7 +219,7 @@ function SelectData() {
                 }
                 /*主讲趋势图数据*/
                 for (var j = 0; j < viewMasterTeacherData.length; j++) {
-                    if (viewMasterTeacherData[j].masterTeacherViewTime != " " && viewMasterTeacherData[j].masterTeacherViewTime != "") {
+                    if (viewMasterTeacherData[j].masterTeacherViewTime != " " && viewMasterTeacherData[j].masterTeacherViewTime != "" && viewMasterTeacherData[j].masterTeacherViewTime != undefined) {
                         masterTeacherTotal += parseInt(viewMasterTeacherData[j].masterTeacherViewTotal);
                         masterTeacherXList.push(viewMasterTeacherData[j].masterTeacherViewTime);
                         masterTeacherYList.push(parseInt(viewMasterTeacherData[j].masterTeacherViewTotal));
@@ -228,9 +228,9 @@ function SelectData() {
                 total = parseInt(masterTeacherTotal) + parseInt(classTeacherTotal);
                 /*老师趋势图数据*/
                 for (var i = 0; i < teacherData.length; i++) {
-                    if(teacherData[i].time != " " && teacherData[i].time != ""){
+                    if(teacherData[i].time != " " && teacherData[i].time != "" && teacherData[i].time != undefined){
                         teacherXList.push(teacherData[i].time);
-                        //teacherYList.push(teacherData[i].time);
+                        teacherYList.push(teacherData[i].total);
                     }
                 }
 
@@ -238,7 +238,7 @@ function SelectData() {
                 $('#head_lesstime h1').html(classTeacherTotal);//班主任
                 $('#master_lesstime h1').html(masterTeacherTotal);//主讲
                 $('#teacher_lesstime h1').html(total);//老师
-                line_echar('teacher_echart', teacherXList, headTeacherYList, 'line', "课时", "日期");
+                line_echar('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
                 line_echar('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
                 line_echar('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
 

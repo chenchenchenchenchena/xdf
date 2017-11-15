@@ -211,6 +211,7 @@ function exporHourList(){
         layer.msg("暂无列表");
         return false;
     }
+    window.location.href = global.expor_hour + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
     var params = {
         'schoolId': currentCityId,
         'beginDate': beginTime,
@@ -221,29 +222,5 @@ function exporHourList(){
         'pageSize': pageSize,
         'schoolName': currentCity,
     }
-    var newTab = window.open();
-    $.ajax({
-        type: "POST",
-        url: global.expor_hour,
-        dataType: 'json',
-        data: JSON.stringify(params),
-        success: function (e) {
-            if (e.downloadUrl != undefined) {
-                //http://dt.staff.xdf.cn:80/xdfdtmanager/excelFile/全部校区双师课堂教师列表20171113093639.xlsx
-                var downloadUrl = e.downloadUrl;
-                var str = "xdfdtmanager";
-                var start = downloadUrl.indexOf('xdfdtmanager');
-                start = start + str.length;
-                var end = downloadUrl.length;
-                var filePath = downloadUrl.substring(start,end);
-                var rootPath_web = downloadUrl.substring(0,start);
-                newTab.location.href = rootPath_web + "/backEndDownload/downFile.do?filePath=" + filePath;
-            } else {
-                layer.msg('暂无列表');
-            }
-
-
-        }
-    })
 
 }
