@@ -315,8 +315,7 @@ function SelectTeacherList() {
 
 //导出教师列表
 function exporTeacherList() {
-    var url = "http://10.162.7.139:8080/xdfdtmanager/backEndHomework/exportHomeWorkTeacherDetail.do"
-    window.location.href = url + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
+    window.location.href = global.hw_expor + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
 }
 
 
