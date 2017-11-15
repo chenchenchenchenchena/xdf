@@ -72,7 +72,8 @@ require(['jquery-1.11.0.min'],function(){
      */
     $('#logout').click(toLogout);
     //左侧菜单栏
-    function left_navlist(onelist){
+    function left_navlist(list){
+                    var onelist =$.parseJSON(list)
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
