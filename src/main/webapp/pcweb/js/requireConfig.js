@@ -75,10 +75,10 @@ require(['jquery-1.11.0.min'],function(){
     function left_navlist(onelist){
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
-                        if(onelistbure.isValid ==1&&onelistbure.checked ==true){
+                        var childlist = onelistbure.children;
+                        if(onelistbure.isValid ==1&&childlist.length!=0){
                             $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         };
-                        var childlist = onelistbure.children;
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
                              $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
@@ -197,7 +197,9 @@ require(['jquery-1.11.0.min'],function(){
                 console.log(e);
                 if (e.result == false) {
                     alert(e.message);
-                    toLogout();
+                    if(sessionStorage.getItem('sid')){
+                        toLogout();
+                    };
                 } else {
                     $.ajax({
                         url: url_o + "e2Login/doLogin.do",
