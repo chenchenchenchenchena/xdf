@@ -194,12 +194,14 @@ require(['jquery-1.11.0.min'],function(){
             dataType: 'json',
             data: JSON.stringify(calbac),
             success: function (e) {
-                console.log(e);
                 if (e.result == false) {
                     if(!sessionStorage.getItem('sid')){
                         layer.msg(e.message);
                         toLogout();
-                    };
+                    }else{
+                        $('.user_name').html(sessionStorage.getItem('userName'));
+                        left_navlist(e.functionList)
+                    }
                 } else {
                     sessionStorage.setItem("userName", e.userName);
                     var userId = e.userId;
