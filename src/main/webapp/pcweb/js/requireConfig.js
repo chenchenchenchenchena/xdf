@@ -208,7 +208,7 @@ require(['jquery-1.11.0.min'],function(){
                     userId = userId.split('@')[0];
                     sessionStorage.setItem("userId", userId);
                     sessionStorage.setItem("sid",e.sid);
-                    sessionStorage.setItem('functionList',e.functionList);
+                    sessionStorage.setItem('functionList',JSON.stringify(e.functionList));
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
                         var $schoolId_ = $.parseJSON(e.userList)
