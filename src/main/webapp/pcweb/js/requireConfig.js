@@ -159,7 +159,7 @@ require(['jquery-1.11.0.min'],function(){
         };
         var businessP = {"returnUrl": returnUrl, "sid": sessionStorage.getItem("sid")};
         jQuery.ajax({
-            type: "POST",
+            type: "post",
             url: url,
             async: false,//同步
             dataType: 'json',
@@ -179,8 +179,6 @@ require(['jquery-1.11.0.min'],function(){
             }
         });
     }
-
-
 //e2登陆回调
     function e2Login() {
         var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
