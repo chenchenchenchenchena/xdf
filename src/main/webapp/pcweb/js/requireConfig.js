@@ -153,6 +153,7 @@ require(['jquery-1.11.0.min'],function(){
         if(sessionStorage.superstar){
             //表示当前用户为超级管理员
             sessionStorage.clear();
+            localStorage.clear();
             location.href = 'login_web.html';
             return false;
         }else {
@@ -168,14 +169,8 @@ require(['jquery-1.11.0.min'],function(){
             data: JSON.stringify(businessP),
             success: function (json) {
                 if (json.result == true) {
-                    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-                    if (keys) {
-                        for (var i = keys.length; i--;)
-                            setCookie(keys[i], 1, -1);
-                    }
-                    sessionStorage.removeItem("sid");
-                    sessionStorage.removeItem("userId");
-                    sessionStorage.removeItem("userName");
+                    sessionStorage.clear();
+                    localStorage.clear();
                     window.top.location.href = json.logoutUrl;
                 }
             }
