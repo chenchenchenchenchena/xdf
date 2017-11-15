@@ -201,7 +201,7 @@ require(['jquery-1.11.0.min'],function(){
                         toLogout();
                     }else{
                         $('.user_name').html(sessionStorage.getItem('userName'));
-                        left_navlist(sessionStorage.getItem('functionList'))
+                        left_navlist(JSON.parse(sessionStorage.getItem('functionList')))
                     }
                 } else {
                     sessionStorage.setItem("userName", e.userName);
