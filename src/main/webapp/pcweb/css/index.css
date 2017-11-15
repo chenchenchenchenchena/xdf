@@ -457,11 +457,10 @@ html body .homework_operation{
 	cursor: pointer;
 }
 .homework_explain a{
-	position:absolute;
-	margin-left:78.3%;
 	font-size:14px;
 	color:#00ba97;
-
+	float:right;
+	margin-right:10px;
 }
 .detail_s ul li span{
 	width:134px;
