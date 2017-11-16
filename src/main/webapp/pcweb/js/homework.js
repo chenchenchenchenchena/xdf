@@ -430,8 +430,8 @@ function selectHwData() {
 
                         $('#publish h1 i').html(totalAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
-                        $('#publish .normal span').eq(0).html(publishAudioRate + "%(" + publishAudio + "条)");
-                        $('#publish .normal span').eq(1).html((publishPictureRate) + "%(" + publishPicture + "条)");
+                        $('#publish .normal span').eq(1).html(publishAudioRate + "%(" + publishAudio + "条)");
+                        $('#publish .normal span').eq(0).html((publishPictureRate) + "%(" + publishPicture + "条)");
 
 
                         replyAll = data.replyAll;//总批复数
@@ -443,8 +443,8 @@ function selectHwData() {
 
                         $('#reply h1 i').html(replyAllRate + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
-                        $('#reply .normal span').eq(0).html(replyAudioRate + "%(" + replyAudio + "条)");
-                        $('#reply .normal span').eq(1).html(replyPictureRate + "%(" + replyPicture + "条)");
+                        $('#reply .normal span').eq(1).html(replyAudioRate + "%(" + replyAudio + "条)");
+                        $('#reply .normal span').eq(0).html(replyPictureRate + "%(" + replyPicture + "条)");
 
 
                         commitAll = data.commitAll;//总提交数
@@ -456,8 +456,8 @@ function selectHwData() {
 
                         $('#commit h1 i').html(commitAllRate + "%");
                         $('#commit h1 span').html("(" + commitAll + "条)");
-                        $('#commit .normal span').eq(0).html(commitAudioRate + "%(" + commitAudio + "条)");
-                        $('#commit .normal span').eq(1).html(commitPictureRate + "%(" + commitPicture + "条)");
+                        $('#commit .normal span').eq(1).html(commitAudioRate + "%(" + commitAudio + "条)");
+                        $('#commit .normal span').eq(0).html(commitPictureRate + "%(" + commitPicture + "条)");
 
                     } else if (homeworkType == "2") {//电子
                         $('#reply').hide();

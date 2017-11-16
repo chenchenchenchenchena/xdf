@@ -66,6 +66,16 @@ function line_echar(id, campus, value, type, yName, xName) {
         }
 
     }
+    var isAll = 1;//x轴不全显示
+    var angularity = 0;//x轴倾斜度
+    if(xName == "校区"){
+        isAll = 0;
+        angularity = -30;
+    }else {
+        isAll = 1;
+        angularity = 0;
+    }
+
     var myChart = ECharts.init(document.getElementById(id));
     option = {
         color: ['#3398DB'],
@@ -93,6 +103,10 @@ function line_echar(id, campus, value, type, yName, xName) {
                 },
                 name: x,
                 nameGap: '-5',
+                axisLabel:{
+                    interval:isAll,//横轴信息全部显示
+                    rotate:angularity,//-30度角倾斜显示
+                }
             }
         ],
         yAxis: [
@@ -262,7 +276,7 @@ function SelectData() {
                         var schoolId = teacherTotalData[k].schoolId;//分校区id
                         lessonNumList.push(totalLessonNos);
                         lessonHourList.push(totalLessonHour);
-                        schoolList.push(schoolName);
+                        schoolList.push(schoolName.substring(0,schoolName.length-3));
 
                         var html_ = "<li><span>" + schoolName + "</span><span>" + headTeacherTotal + "</span><span>" + totalLessonNos + "</span><span>" + totalLessonHour + "</span></li>";
                         $('.lesstime_list').append(html_);

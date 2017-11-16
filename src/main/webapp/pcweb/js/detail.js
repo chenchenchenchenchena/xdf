@@ -26,6 +26,11 @@ require(['jquery-1.11.0.min'], function () {
                     range: true //指定元素
                 });
 
+                //返回上一页
+                $('#back_homework').click(function(){
+                    history.go(-1);
+                });
+
                 //从上个页面获取筛选数据,初始化页面
                 var params = JSON.parse(sessionStorage.homeworkDetailParams);
                 homeworkType = params.homeworkType;

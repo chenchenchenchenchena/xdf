@@ -20,6 +20,10 @@ require(['jquery-1.11.0.min'], function () {
                     elem: '#date_input',
                     range: true //指定元素
                 });
+                //返回上一页
+                $('#back_lesstime').click(function(){
+                    history.go(-1);
+                })
 
                 //从上个页面获取筛选数据
                 var params = JSON.parse(sessionStorage.lesstimeDetailParams);
