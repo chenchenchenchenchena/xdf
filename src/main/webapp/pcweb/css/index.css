@@ -48,10 +48,14 @@ body{
 	height:23px;
 	margin:7px auto 0;
 	font-size:12px;
-	color:#fff;
+	color:#000;
 	text-align:center;
-	background:#00ba97;
+	background:#fff;
 	cursor:pointer;
+}
+.usermenu input:hover{
+	background:#00ba97;
+	color:#fff;
 }
 .usermenu span{
 	display:block;
