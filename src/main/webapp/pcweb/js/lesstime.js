@@ -123,7 +123,7 @@ function line_echar(id, campus, value, type, yName, xName) {
                 name: x,
                 nameGap: '-5',
                 axisLabel:{
-                    interval:isAll,//横轴信息全部显示
+                    // interval:isAll,//横轴信息全部显示
                     rotate:angularity,//-30度角倾斜显示
                 }
             }
