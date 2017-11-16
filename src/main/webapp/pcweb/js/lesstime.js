@@ -135,9 +135,97 @@ function line_echar(id, campus, value, type, yName, xName) {
 
             }
         ],
+        series: [
+            {
+                name: yName,
+                type: type,
+                barWidth: '60%',
+                data: value
+            }
+        ]
+    };
+    myChart.setOption(option);
+}
+
+function line_echar_(id, campus, value, type, yName, xName) {
+    var x = xName;
+    if(xName == "日期"){
+        var xType = parseInt(lookType);
+        switch (xType){
+            case 0:
+                x = "日";
+                break;
+            case 1:
+                x = "周";
+                break;
+            case 2:
+                x = "月";
+                break;
+            case 3:
+                x = "年";
+                break;
+        }
+
+    }
+    var isAll = 1;//x轴不全显示
+    var angularity = 0;//x轴倾斜度
+    if(xName == "校区"){
+        isAll = 0;
+        angularity = -30;
+    }else {
+        isAll = 1;
+        angularity = 0;
+    }
+
+    var myChart = ECharts.init(document.getElementById(id));
+    option = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+
+                //type : 'shadow'
+
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: campus,
+                axisTick: {
+                    alignWithLabel: true
+
+                },
+                name: x,
+                nameGap: '-5',
+                axisLabel:{
+                    interval:isAll,//横轴信息全部显示
+                    rotate:angularity,//-30度角倾斜显示
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: yName,
+
+            }
+        ],
         dataZoom: [{
             type: 'slider',
-            // show:true
+            start: 1,
+            end: 20,
+            handleSize: 8,
+        },{
+            type: 'inside',
+            start: 94,
+            end: 100,
         }],
         series: [
             {
@@ -279,9 +367,9 @@ function SelectData() {
                 $('#head_lesstime h1').html(classTeacherTotal);//班主任
                 $('#master_lesstime h1').html(masterTeacherTotal);//主讲
                 $('#teacher_lesstime h1').html(total);//老师
-                line_echar('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
-                line_echar('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
-                line_echar('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
+                line_echar_('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
+                line_echar_('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
+                line_echar_('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
 
                 /*校区数据处理展示*/
                 if (teacherTotalData != undefined && teacherTotalData.length > 0) {

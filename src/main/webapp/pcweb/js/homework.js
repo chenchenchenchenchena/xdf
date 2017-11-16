@@ -303,7 +303,6 @@ function changeHomeworkType(this_, flag) {
  * 作业统计接口实现
  */
 function selectHwData() {
-
     //获取筛选条件
     var time = $('#date_input').val();
     if (time != "" && time != undefined) {
