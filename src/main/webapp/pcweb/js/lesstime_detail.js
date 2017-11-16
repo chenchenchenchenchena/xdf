@@ -97,23 +97,27 @@ function timeClick(this_) {
 
 //获取校区
 function getSchool() {
-    if (sessionStorage.schoolList) {
-        var json = JSON.parse(sessionStorage.schoolList);
-        showSchoolList(json);
-    } else {
-        var table = {
-            "tableName": "dict_school_info"
-        };
-        $.ajax({
-            type: "POST",
-            url: url_o + 'dict/getDictListByTableName.do',
-            dataType: 'json',
-            data: table,
-            success: function (e) {
-                sessionStorage.schoolList = JSON.stringify(e);
-                showSchoolList(e)
-            }
-        })
+    if($('#select-school ul').css('display') != 'none'){
+        $('#select-school ul').hide();
+    }else {
+        if (sessionStorage.schoolList) {
+            var json = JSON.parse(sessionStorage.schoolList);
+            showSchoolList(json);
+        } else {
+            var table = {
+                "tableName": "dict_school_info"
+            };
+            $.ajax({
+                type: "POST",
+                url: url_o + 'dict/getDictListByTableName.do',
+                dataType: 'json',
+                data: table,
+                success: function (e) {
+                    sessionStorage.schoolList = JSON.stringify(e);
+                    showSchoolList(e)
+                }
+            })
+        }
     }
 
 }
