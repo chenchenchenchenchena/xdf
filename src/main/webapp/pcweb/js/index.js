@@ -5,7 +5,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
 
      layer.load();
     /*css 兼容*/
-    $('.index_forms li:nth-child(odd)').css('background', '#f5fbfa')
+    $('.index_forms li:nth-child(odd)').css('background', '#f5fbfa');
     $('.index_forms li:first-of-type').css({
         'background': '#fff',
         'color': '#bababa'
@@ -40,7 +40,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
             layer.msg('暂无列表');
             return false;
         }
-        window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId')+'&schoolName='+$(this).attr('schoolName');
+                                                                                                                                                                                                                                                                                                                   window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId')+'&schoolName='+$(this).attr('schoolName');
     });
         //导出总表点击
         $(document).on('click','.index_formtit a',function(){

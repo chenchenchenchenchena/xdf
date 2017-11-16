@@ -36,6 +36,7 @@ var global = {
     'hw_expor':url_o+'backEndHomework/exportHomeWorkTeacherDetail.do',//作业统计导出
 };
 require(['jquery-1.11.0.min'],function(){
+    $('body').hide();
 /*数据交互请求地址*/
         if(sessionStorage.superstar){
             $('.user_name').html(sessionStorage.getItem('userName'));
@@ -196,6 +197,7 @@ require(['jquery-1.11.0.min'],function(){
                         layer.msg(e.message);
                         toLogout();
                     }else{
+                        $('body').show();
                         $('.user_name').html(sessionStorage.getItem('userName'));
                         left_navlist(JSON.parse(sessionStorage.getItem('functionList')))
                     }
@@ -208,8 +210,9 @@ require(['jquery-1.11.0.min'],function(){
                     sessionStorage.setItem('functionList',JSON.stringify(e.functionList));
                     $('.user_name').html(sessionStorage.getItem('userName'));
                     if(e.userList){
-                        var $schoolId_ = $.parseJSON(e.userList)
+                        var $schoolId_ = $.parseJSON(e.userList);
                         localStorage.schoolList = $schoolId_[0].schoolId;
+                        location.reload();
                     }
                     left_navlist(e.functionList)
                 }
