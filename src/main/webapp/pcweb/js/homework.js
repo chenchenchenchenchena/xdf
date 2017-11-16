@@ -498,7 +498,11 @@ function selectHwData() {
                         commitAll = parseInt(data.commitAll);//总提交数
                         publishAll = parseInt(data.publishAll);//总布置次数
                         reachAll = parseInt(data.reachAll);//总送达人次
-                        var commitAllRate = parseInt(parseFloat((commitAll / reachAll)) * 100);
+                        if(commitAll==0&&reachAll==0){
+                            var commitAllRate = 0;
+                        }else{
+                            var commitAllRate = parseInt(parseFloat((commitAll / reachAll)) * 100);
+                        }
                         $('#publish h1 i').html(publishAll + "次");
                         $('#publish span').html("(总送达" + reachAll + "人次)");
 
