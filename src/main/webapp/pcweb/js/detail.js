@@ -131,51 +131,54 @@ function lookType(this_, flag) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
-
-    var json;
-    switch (flag) {
-        case 0:
-            json = sessionStorage.stageList;
-            break;
-        case 1:
-            if (currentStageCode == undefined) {
-                layer.msg("请先选择学段");
-                return false;
-            }
-            json = sessionStorage.gradelList;
-            break;
-        case 2:
-            json = sessionStorage.subjectList;
-            break;
-    }
-    if (json != undefined) {
-        json = JSON.parse(json);
-        showDrownList(json, this_, flag);
-    } else {
-        var table = {
-            "tableName": type
-        };
-        $.ajax({
-            type: "POST",
-            url: url_o + 'dict/getDictListByTableName.do',
-            async: true,//同步
-            dataType: 'json',
-            data: table,
-            success: function (e) {
-                switch (flag) {
-                    case 0:
-                        sessionStorage.stageList = JSON.stringify(e);
-                        break;
-                    case 1:
-                        sessionStorage.gradelList = JSON.stringify(e);
-                        break;
-                    case 2:
-                        sessionStorage.subjectList = JSON.stringify(e);
-                        break;
+    if($(this_).parent().find('ul').css('display') != 'none'){
+        $(this_).parent().find('ul').hide();
+    }else {
+        var json;
+        switch (flag) {
+            case 0:
+                json = sessionStorage.stageList;
+                break;
+            case 1:
+                if (currentStageCode == undefined) {
+                    layer.msg("请先选择学段");
+                    return false;
                 }
-                showDrownList(e, this_, flag);
-            }
-        })
+                json = sessionStorage.gradelList;
+                break;
+            case 2:
+                json = sessionStorage.subjectList;
+                break;
+        }
+        if (json != undefined) {
+            json = JSON.parse(json);
+            showDrownList(json, this_, flag);
+        } else {
+            var table = {
+                "tableName": type
+            };
+            $.ajax({
+                type: "POST",
+                url: url_o + 'dict/getDictListByTableName.do',
+                async: true,//同步
+                dataType: 'json',
+                data: table,
+                success: function (e) {
+                    switch (flag) {
+                        case 0:
+                            sessionStorage.stageList = JSON.stringify(e);
+                            break;
+                        case 1:
+                            sessionStorage.gradelList = JSON.stringify(e);
+                            break;
+                        case 2:
+                            sessionStorage.subjectList = JSON.stringify(e);
+                            break;
+                    }
+                    showDrownList(e, this_, flag);
+                }
+            })
+        }
     }
 
 }

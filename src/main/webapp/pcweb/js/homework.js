@@ -62,23 +62,27 @@ require(['jquery-1.11.0.min'], function () {
 
 //校区展示
 function getSchool() {
-    if (sessionStorage.schoolList) {
-        var json = JSON.parse(sessionStorage.schoolList);
-        showSchoolList(json);
-    } else {
-        var table = {
-            "tableName": "dict_school_info"
-        };
-        $.ajax({
-            type: "POST",
-            url: url_o + 'dict/getDictListByTableName.do',
-            dataType: 'json',
-            data: table,
-            success: function (e) {
-                sessionStorage.schoolList = JSON.stringify(e);
-                showSchoolList(e)
-            }
-        })
+    if($("#school").parent().find('ul').css('display') != 'none'){
+        $("#school").parent().find('ul').hide();
+    }else {
+        if (sessionStorage.schoolList) {
+            var json = JSON.parse(sessionStorage.schoolList);
+            showSchoolList(json);
+        } else {
+            var table = {
+                "tableName": "dict_school_info"
+            };
+            $.ajax({
+                type: "POST",
+                url: url_o + 'dict/getDictListByTableName.do',
+                dataType: 'json',
+                data: table,
+                success: function (e) {
+                    sessionStorage.schoolList = JSON.stringify(e);
+                    showSchoolList(e)
+                }
+            })
+        }
     }
 
 }
@@ -119,51 +123,56 @@ function filterByCityId(_this, schoolName) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
-
-    var json;
-    switch (flag) {
-        case 0:
-            json = sessionStorage.stageList;
-            break;
-        case 1:
-            if (currentStageCode == undefined) {
-                layer.msg("请先选择学段");
-                return false;
-            }
-            json = sessionStorage.gradelList;
-            break;
-        case 2:
-            json = sessionStorage.subjectList;
-            break;
-    }
-    if (json != undefined) {
-        json = JSON.parse(json);
-        showDrownList(json, this_, flag);
-    } else {
-        var table = {
-            "tableName": type
-        };
-        $.ajax({
-            type: "POST",
-            url: url_o + 'dict/getDictListByTableName.do',
-            dataType: 'json',
-            data: table,
-            success: function (e) {
-                switch (flag) {
-                    case 0:
-                        sessionStorage.stageList = JSON.stringify(e);
-                        break;
-                    case 1:
-                        sessionStorage.gradelList = JSON.stringify(e);
-                        break;
-                    case 2:
-                        sessionStorage.subjectList = JSON.stringify(e);
-                        break;
+    if($(this_).parent().find('ul').css('display') != 'none'){
+        $(this_).parent().find('ul').hide();
+    }else {
+        var json;
+        switch (flag) {
+            case 0:
+                json = sessionStorage.stageList;
+                break;
+            case 1:
+                if (currentStageCode == undefined) {
+                    layer.msg("请先选择学段");
+                    return false;
                 }
-                showDrownList(e, this_, flag);
-            }
-        })
+                json = sessionStorage.gradelList;
+                break;
+            case 2:
+                json = sessionStorage.subjectList;
+                break;
+        }
+        if (json != undefined) {
+            json = JSON.parse(json);
+            showDrownList(json, this_, flag);
+        } else {
+            var table = {
+                "tableName": type
+            };
+            $.ajax({
+                type: "POST",
+                url: url_o + 'dict/getDictListByTableName.do',
+                dataType: 'json',
+                data: table,
+                success: function (e) {
+                    switch (flag) {
+                        case 0:
+                            sessionStorage.stageList = JSON.stringify(e);
+                            break;
+                        case 1:
+                            sessionStorage.gradelList = JSON.stringify(e);
+                            break;
+                        case 2:
+                            sessionStorage.subjectList = JSON.stringify(e);
+                            break;
+                    }
+                    showDrownList(e, this_, flag);
+                }
+            })
+        }
     }
+
+
 
 }
 
