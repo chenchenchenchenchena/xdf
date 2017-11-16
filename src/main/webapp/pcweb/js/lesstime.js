@@ -12,6 +12,25 @@ var schoolLookType_ = 1;//柱形图和列表的标志
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min', 'layer'], function () {
         require(['echarts.min'], function (echarts) {
+            // 重置左导航
+            var number_l = 0;
+            var url_l =  location.href;
+
+            if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+                number_l = 1;
+            }
+            else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+                number_l = 2;
+            }
+            else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+                number_l = 3
+            }
+            else if(url_l.indexOf('master')!=-1){
+                number_l = 4
+            }
+            var $bure_true = $('.left_nav ul li').eq(number_l);
+            $bure_true.addClass('activ_nav').siblings().removeClass('activ_nav');
+
             laydate.render({
                 elem: '#date_input',
                 range: true //指定元素
@@ -116,6 +135,10 @@ function line_echar(id, campus, value, type, yName, xName) {
 
             }
         ],
+        dataZoom: [{
+            type: 'slider',
+            // show:true
+        }],
         series: [
             {
                 name: yName,
