@@ -84,11 +84,11 @@ require(['jquery-1.11.0.min'], function () {
                     success:function(e){
                         if(e.result==true){
                             layer.msg('操作成功');
-                            $(this).removeAttr('checked');
+                            $('.edit_s i').removeAttr('checked');
                             Olddata();
                         }else{
                             layer.msg('操作失败');
-                            $(this).removeAttr('checked')
+                            $('.edit_s i').removeAttr('checked')
                         }
                     }
                 });
