@@ -450,7 +450,7 @@ function selectHwData() {
                         $('#correctRateAll').css('float', 'right');
                         $('#correctRateAll').hide();
 
-                        var totalAll = data.totalAll;//总布置数
+                        var totalAll = parseInt(data.totalAll);//总布置数
                         var reachAll = data.reachAll;//总送达人数
                         var publishAudio = data.publishAudio;//总布置语音数
                         var publishAudioRate = totalAll == 0 ? 0 : parseInt(parseFloat((publishAudio / totalAll)) * 100);//总布置语音率
@@ -477,7 +477,7 @@ function selectHwData() {
                         $('#reply .normal span').eq(0).html(replyPictureRate + "%(" + replyPicture + "条)");
 
 
-                        commitAll = data.commitAll;//总提交数
+                        commitAll = parseInt(data.commitAll);//总提交数
                         var commitAllRate = totalAll == 0 ? 0 : parseInt(parseFloat((commitAll / totalAll)) * 100);//总提交率
                         var commitAudio = data.commitAudio;//总提交语音数
                         var commitAudioRate = commitAll == 0 ? 0 : parseInt(parseFloat((commitAudio / commitAll)) * 100);//总提交语音率
