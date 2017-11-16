@@ -1,7 +1,6 @@
 /* 作业统计 */
 
 /*默认筛选条件*/
-var dateMonth = '6';// 默认半年
 var stage = "";//默认全部
 var grade = "";//默认全部
 var subject = "";//默认全部
@@ -14,7 +13,7 @@ var currentStageCode;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-        require(['layer','requireConfig'], function () {
+        require(['layer', 'requireConfig'], function () {
 
             /*默认导航选中样式*/
             $('.homework_Statistics div:nth-child(even)').css('float', 'right');
@@ -51,10 +50,10 @@ require(['jquery-1.11.0.min'], function () {
                 $('.back_big ').hide();
                 $('.operation_s ').hide();
             })
-            $(document).on('click','.look_details',function(){
+            $(document).on('click', '.look_details', function () {
                 var schoolId = $(this).attr('data-schoolId');
                 var schoolName = $(this).attr('data-schoolName');
-                lookHwDetails(this,schoolId,schoolName);
+                lookHwDetails(this, schoolId, schoolName);
             })
         });
     });
@@ -229,11 +228,9 @@ function lookType(this_, flag) {
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
         if (flag == 1) {
-            dateMonth = '6';
             $('#date_input').val(halfYear + " - " + today);
         } else {
-            dateMonth = '12';
-            $('#date_input').val(today + " - " + oneYear);
+            $('#date_input').val(oneYear + " - " + today);
         }
         selectHwData();
     }
@@ -267,7 +264,6 @@ function changeHomeworkType(this_, flag) {
     currentSchool = "全部";
     beginTime = "";
     endTime = "";
-    dateMonth = '6';
     var today = new Date().Format("yyyy-MM-dd");
     var timeArray = getlastmonth();
     var halfYear = timeArray[3];
@@ -291,7 +287,6 @@ function selectHwData() {
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
-        'dateMonth': dateMonth,
         'beginTime': beginTime,
         'endTime': endTime,
         'paperSubject': subject,
@@ -336,11 +331,11 @@ function selectHwData() {
                         if (homeworkType == "1") {
                             //手动作业，正确率显示空
                             var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>暂无</span><span >' +
-                                '<span style="width: auto"  data-schoolId="'+schoolId+'" data-schoolName="'+schoolName+'" class="look_details homework_operation">查看明细</span></span></li>';
+                                '<span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">查看明细</span></span></li>';
 
                         } else {
                             var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
-                                '<span style="width: auto" data-schoolId="'+schoolId+'" data-schoolName="'+schoolName+'" class="look_details homework_operation">查看明细</span></span></li>';
+                                '<span style="width: auto" data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">查看明细</span></span></li>';
                         }
                         $('#schoolComparsion').append(html_);
 
@@ -424,9 +419,9 @@ function selectHwData() {
                         var totalAll = data.totalAll;//总布置数
                         var reachAll = data.reachAll;//总送达人数
                         var publishAudio = data.publishAudio;//总布置语音数
-                        var publishAudioRate = parseInt(parseFloat((publishAudio / totalAll)) * 100);//总布置语音率
+                        var publishAudioRate = totalAll == 0 ? 0 : parseInt(parseFloat((publishAudio / totalAll)) * 100);//总布置语音率
                         var publishPicture = data.publishPicture;//总布置图片数
-                        var publishPictureRate = parseInt(parseFloat((publishPicture / totalAll)) * 100);//总布置图片率
+                        var publishPictureRate = totalAll == 0 ? 0 : parseInt(parseFloat((publishPicture / totalAll)) * 100);//总布置图片率
 
                         $('#publish h1 i').html(totalAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
@@ -435,11 +430,12 @@ function selectHwData() {
 
 
                         replyAll = data.replyAll;//总批复数
-                        var replyAllRate = parseInt(parseFloat((replyAll / totalAll)) * 100);//总批复率
                         var replyAudio = data.replyAudio;//总批复语音数
-                        var replyAudioRate = parseInt(parseFloat((replyAudio / replyAll)) * 100);//总批复语音率
                         var replyPicture = data.replyPicture;//总批复图片数
-                        var replyPictureRate = parseInt(parseFloat((replyPicture / replyAll)) * 100);//总批复图片率
+                        var replyAudioRate = replyAll == 0 ? 0 : parseInt(parseFloat((replyAudio / replyAll)) * 100);//总批复语音率
+                        var replyPictureRate = replyAll == 0 ? 0 : parseInt(parseFloat((replyPicture / replyAll)) * 100);//总批复图片率
+
+                        var replyAllRate = totalAll == 0 ? 0 : parseInt(parseFloat((replyAll / totalAll)) * 100);//总批复率
 
                         $('#reply h1 i').html(replyAllRate + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
@@ -448,11 +444,11 @@ function selectHwData() {
 
 
                         commitAll = data.commitAll;//总提交数
-                        var commitAllRate = parseInt(parseFloat((commitAll / totalAll)) * 100);//总提交率
+                        var commitAllRate = totalAll == 0 ? 0 : parseInt(parseFloat((commitAll / totalAll)) * 100);//总提交率
                         var commitAudio = data.commitAudio;//总提交语音数
-                        var commitAudioRate = parseInt(parseFloat((commitAudio / commitAll)) * 100);//总提交语音率
+                        var commitAudioRate = commitAll == 0 ? 0 : parseInt(parseFloat((commitAudio / commitAll)) * 100);//总提交语音率
                         var commitPicture = data.commitPicture;//总提交图片数
-                        var commitPictureRate = parseInt(parseFloat((commitPicture / commitAll)) * 100);//总提交图片率
+                        var commitPictureRate = commitAll == 0 ? 0 : parseInt(parseFloat((commitPicture / commitAll)) * 100);//总提交图片率
 
                         $('#commit h1 i').html(commitAllRate + "%");
                         $('#commit h1 span').html("(" + commitAll + "条)");
@@ -496,7 +492,6 @@ function lookHwDetails(this_, schoolId, schoolName) {
     var params = {
         'homeworkType': homeworkType,
         'schoolId': schoolId,
-        'dateMonth': dateMonth,
         'beginTime': beginTime,
         'endTime': endTime,
         'paperSubject': subject,

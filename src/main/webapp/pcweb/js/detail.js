@@ -1,7 +1,6 @@
 /* 查看作业 */
 
 /*默认筛选条件*/
-var dateMonth = '6';// 默认半年
 var stage = "";//默认全部
 var grade = "";//默认全部
 var subject = "";//默认全部
@@ -35,7 +34,6 @@ require(['jquery-1.11.0.min'], function () {
                 var params = JSON.parse(sessionStorage.homeworkDetailParams);
                 homeworkType = params.homeworkType;
                 currentSchoolId = params.schoolId;
-                dateMonth = params.dateMonth;
                 beginTime = params.beginTime;
                 endTime = params.endTime;
                 subject = params.paperSubject;
@@ -123,10 +121,8 @@ function lookType(this_, flag) {
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
         if (flag == 1) {
-            dateMonth = '6';
             $('#date_input').val(today + " - " + halfYear);
         } else {
-            dateMonth = '12';
             $('#date_input').val(today + " - " + oneYear);
         }
         SelectTeacherList();
@@ -268,7 +264,6 @@ function SelectTeacherList() {
     var params = {
         'schoolId': currentSchoolId,
         'teacher': seacherName,
-        'dateMonth': dateMonth,
         'paperStage': stage,
         'paperClass': grade,
         'paperSubject': subject,
@@ -320,7 +315,7 @@ function SelectTeacherList() {
 
 //导出教师列表
 function exporTeacherList() {
-    window.location.href = global.hw_expor + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
+    window.location.href = global.hw_expor + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
 }
 
 
