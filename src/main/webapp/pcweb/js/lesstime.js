@@ -367,9 +367,24 @@ function SelectData() {
                 $('#head_lesstime h1').html(classTeacherTotal);//班主任
                 $('#master_lesstime h1').html(masterTeacherTotal);//主讲
                 $('#teacher_lesstime h1').html(total);//老师
-                line_echar_('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
-                line_echar_('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
-                line_echar_('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
+                if(teacherXList.length>10){
+                    line_echar_('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
+                }else{
+                    line_echar('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
+
+                }
+                if(headTeacherXList.length>10){
+                    line_echar_('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
+                }else{
+                    line_echar('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
+
+                }
+                if(masterTeacherXList.length>10){
+                    line_echar_('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
+                }else{
+                    line_echar('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
+                }
+
 
                 /*校区数据处理展示*/
                 if (teacherTotalData != undefined && teacherTotalData.length > 0) {
