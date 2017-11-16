@@ -13,38 +13,38 @@ var totalCounts = 0;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-    require(['jqPaginator.min'], function () {
-        require(['layer'], function () {
+        require(['jqPaginator.min'], function () {
+            require(['layer'], function () {
 
-            laydate.render({
-                elem: '#date_input',
-                range: true //指定元素
+                laydate.render({
+                    elem: '#date_input',
+                    range: true //指定元素
+                });
+
+                //从上个页面获取筛选数据
+                var params = JSON.parse(sessionStorage.lesstimeDetailParams);
+                currentCity = params.currentCity;
+                currentCityId = params.currentCityId;
+                beginTime = params.beginTime;
+                endTime = params.endTime;
+                masterTeacherFlag = params.flag;
+                $('#select-school h4').html(params.currentCity);
+                if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
+                    $('#date_input').val(params.beginTime + " - " + params.endTime);
+                }
+                //初始化分页控件
+                initPage(totalCounts, page);
+
+                //查询数据
+                SelectData();
+
+                //导出教师列表
+                $('#expor_hour').click(function () {
+                    exporHourList();
+                })
+
             });
-
-            //从上个页面获取筛选数据
-            var params = JSON.parse(sessionStorage.lesstimeDetailParams);
-            currentCity = params.currentCity;
-            currentCityId = params.currentCityId;
-            beginTime = params.beginTime;
-            endTime = params.endTime;
-            masterTeacherFlag = params.flag;
-            $('#select-school h4').html(params.currentCity);
-            if(beginTime != undefined && endTime != undefined && beginTime != "" && endTime != ""){
-                $('#date_input').val(params.beginTime+" - "+params.endTime);
-            }
-            //初始化分页控件
-            initPage(totalCounts, page);
-
-            //查询数据
-            SelectData();
-
-            //导出教师列表
-            $('#expor_hour').click(function(){
-                exporHourList();
-            })
-
         });
-    });
     });
 });
 function initPage(totalCounts, currentPage) {
@@ -71,9 +71,9 @@ function initPage(totalCounts, currentPage) {
 }
 
 // 输入教师名称筛选数据
-function seacherByName(){
+function seacherByName() {
     seacherKey = $('.homework_sea input').val();
-    if(seacherKey == undefined || seacherKey == ""){
+    if (seacherKey == undefined || seacherKey == "") {
         layer.msg("请先填写老师名称");
         return false;
     }
@@ -81,11 +81,11 @@ function seacherByName(){
 }
 
 //时间筛选
-function selectTime(){
+function selectTime() {
     $('#select-time ul').show();
 }
 //时间筛选点击事件
-function timeClick(this_){
+function timeClick(this_) {
 
     $('#select-time h4').html(this_);
     $('#select-time ul').hide();
@@ -115,19 +115,19 @@ function getSchool() {
 }
 
 //筛选校区列表显示
-function showSchoolList(e){
+function showSchoolList(e) {
     var schoolStr = localStorage.schoolList;// 全部的校区ID
     var schoolIdList = schoolStr.split(',');
 
     var schoolList = e.data;
-    if (schoolList != undefined && schoolList.length > 0 ) {
+    if (schoolList != undefined && schoolList.length > 0) {
         $("#select-school ul").html("");
-        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='"+schoolStr+"'><span>全部</span></li>";
+        var cityContent = "<li onclick='filterByCityId(this, \"" + "全部" + "\")' data-schoolId='" + schoolStr + "'><span>全部</span></li>";
         for (var i = 0; i < schoolIdList.length; i++) {
-            for(var j = 0;j < schoolList.length;j++){
+            for (var j = 0; j < schoolList.length; j++) {
                 var schoolId = schoolList[j].tCode;
-                if(schoolIdList[i] == schoolId){
-                    cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[j].tName + "\")' data-schoolId='"+schoolId+"' ><span>" + schoolList[j].tName + "</span></li>";
+                if (schoolIdList[i] == schoolId) {
+                    cityContent += "<li onclick='filterByCityId(this, \"" + schoolList[j].tName + "\")' data-schoolId='" + schoolId + "' ><span>" + schoolList[j].tName + "</span></li>";
                 }
             }
 
@@ -149,25 +149,25 @@ function filterByCityId(_this, cityName) {
 }
 
 //筛选数据接口实现
-function SelectData(){
+function SelectData() {
 
     var time = $('#date_input').val();
-    if(time != undefined && time != "") {
+    if (time != undefined && time != "") {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
     seacherKey = $('.homework_sea input').val();
-    if(seacherKey == undefined){
+    if (seacherKey == undefined) {
         seacherKey = "";
     }
     var params = {
         "schoolId": currentCityId,
-        'beginDate':beginTime,
-        'endDate':endTime,
-        'masterTeacherFlag':masterTeacherFlag,
-        'pageNum':page,
-        'pageSize':pageSize,
-        'teacherName':seacherKey
+        'beginDate': beginTime,
+        'endDate': endTime,
+        'masterTeacherFlag': masterTeacherFlag,
+        'pageNum': page,
+        'pageSize': pageSize,
+        'teacherName': seacherKey
     };
     $.ajax({
         type: "POST",
@@ -178,23 +178,23 @@ function SelectData(){
             var data = e.Data;
             if (data != undefined) {
                 var list = data.list;
-                if(list != undefined && list.length > 0 ){
+                if (list != undefined && list.length > 0) {
                     $('.homework_list li').remove();
                     totalCounts = data.total;//总条数
                     $('.lesstime_Result').show();
-                    $('.lesstime_Result').html("共"+data.total+"条数据");
+                    $('.lesstime_Result').html("共" + data.total + "条数据");
                     var currentPage = data.pageNum;
                     initPage(totalCounts, currentPage);
 
                     var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）</span><span>当月课时（h）</span></li>';
                     $('.homework_list').append(str_th);
 
-                    for (var i = 0; i < list.length; i++){
-                        var html_ = '<li><span>'+list[i].teacherName+'</span><span>'+list[i].lessonHours+'</span><span>'+list[i].monthHours+'</span></li>';
+                    for (var i = 0; i < list.length; i++) {
+                        var html_ = '<li><span>' + list[i].teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
                         $('.homework_list').append(html_);
                     }
                 }
-            }else {
+            } else {
                 layer.msg("暂无数据");
                 $('.homework_list li').remove();
                 $('.lesstime_Result').hide();
@@ -206,21 +206,11 @@ function SelectData(){
 }
 
 //导出
-function exporHourList(){
+function exporHourList() {
     if ($('.homework_list li') == undefined || $('.homework_list li').length == 0) {
         layer.msg("暂无列表");
         return false;
     }
-    window.location.href = global.expor_hour + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&dateMonth=" + dateMonth + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
-    var params = {
-        'schoolId': currentCityId,
-        'beginDate': beginTime,
-        'endDate': endTime,
-        'masterTeacherFlag': masterTeacherFlag,
-        'teacherName': seacherKey,
-        'nextPage': page,
-        'pageSize': pageSize,
-        'schoolName': currentCity,
-    }
+    window.location.href = global.expor_hour + "?schoolName=" + currentCity + "&schoolId=" + currentCityId + "&masterTeacherFlag=" + masterTeacherFlag + "&teacherName=" + seacherKey + "&beginTime=" + beginTime + "&endTime=" + endTime + "&nextPage=" + page + "&pageSize=" + pageSize;
 
 }
