@@ -39,6 +39,7 @@ require(['jquery-1.11.0.min'],function(){
     $('body').hide();
 /*数据交互请求地址*/
         if(sessionStorage.superstar){
+            $('body').show();
             $('.user_name').html(sessionStorage.getItem('userName'));
             left_navlist(JSON.parse(sessionStorage.superstar));
         }else{

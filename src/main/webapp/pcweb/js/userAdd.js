@@ -114,8 +114,7 @@ require(['jquery-1.11.0.min'], function () {
                 history.go(-1)
             });
             $('.user_operation_cancel').eq(0).click(function(){
-                history.go(-1)
-            });
+             });
 
 
             // 权限事件
