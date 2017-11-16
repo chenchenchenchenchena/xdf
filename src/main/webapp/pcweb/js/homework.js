@@ -292,9 +292,15 @@ function selectHwData() {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
-        subject = $('#subject').html();
-        grade = $('#grade').html();
-        stage = $('#stage').html();
+        if($('#subject').html()!='全部'){
+            subject = $('#subject').html();
+        };
+        if($('#grade').html()!='全部'){
+            grade = $('#grade').html();
+        };
+        if($('#stage').html()!='全部'){
+            stage = $('#stage').html();
+        }
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
