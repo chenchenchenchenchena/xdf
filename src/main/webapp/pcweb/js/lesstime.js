@@ -395,7 +395,7 @@ function SelectData() {
                     var schoolList = [];
 
                     $('.lesstime_list li').remove();
-                    var str_th = '<li class="homework_list_title"><span>校区</span><span>班主任数量（人）</span><span>班课量（个）</span><span>课时量（h）</span></li>';
+                    var str_th = '<li class="homework_list_title"><span>校区</span><span>班主任数量（人）</span><span>班课次（个）</span><span>课时量（h）</span></li>';
                     $('.lesstime_list').append(str_th);
                     for (var k = 0; k < teacherTotalData.length; k++) {
 
@@ -412,8 +412,8 @@ function SelectData() {
                         $('.lesstime_list').append(html_);
                     }
                     /*班课量/课时量趋势图展示*/
-                    line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课量", "校区");
-                    line_echar('lesstime_echart', schoolList, lessonHourList, 'bar', "课时量", "校区");
+                    line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课次", "校区");
+                    line_echar('lesstime_echart', schoolList, lessonHourList, 'bar', "课时次", "校区");
                     if (schoolLookType_ == 1) {
                         //隐藏柱状图
                         $('.last_lesstime_chart').css('opacity', 1);
