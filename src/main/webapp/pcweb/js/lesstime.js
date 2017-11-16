@@ -437,7 +437,6 @@ function SelectData() {
  */
 function lookDetails(this_, flag) {
     //flag:0表示班主任；1表示主讲
-    $(this_).attr('href', "#/lesstime_detail");
     var params = {
         'currentCityId': currentCityId,
         'currentCity': currentCity,
@@ -446,6 +445,8 @@ function lookDetails(this_, flag) {
         'flag': flag
     }
     sessionStorage.lesstimeDetailParams = JSON.stringify(params);
+    $(this_).attr('href', "#/lesstime_detail");
+
 }
 
 /**
