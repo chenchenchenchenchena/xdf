@@ -292,7 +292,9 @@ function selectHwData() {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
-
+        subject = $('#subject').html();
+        grade = $('#grade').html();
+        stage = $('#stage').html();
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
