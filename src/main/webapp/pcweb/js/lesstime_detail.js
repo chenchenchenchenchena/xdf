@@ -22,7 +22,7 @@ require(['jquery-1.11.0.min'], function () {
                 if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
                     number_l = 1;
                 }
-                else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+                if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
                     number_l = 2;
                 }
                 else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
