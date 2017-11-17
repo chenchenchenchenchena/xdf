@@ -128,7 +128,6 @@ require(['jquery-1.11.0.min'], function () {
                 $('.adduser_list').find('li').remove();
             });
             //面包屑
-            $('.index_title h4').css('cursor','pointer');
             $('.index_title h4 i').click(function(){
                 history.go(-1)
             });
