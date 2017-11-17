@@ -222,7 +222,7 @@ require(['jquery-1.11.0.min'], function () {
                 dataType: 'json',
                 data:JSON.stringify(config),
                 success:function(e){
-                    if(e.result){
+                    if(e.result&&e.code!=1){
                         $.ajax({
                             url:global.user_power,
                             type: 'post',
@@ -241,13 +241,17 @@ require(['jquery-1.11.0.min'], function () {
                                 }
                             }
                         });
+                    }else{
+                        $('.user_Prompt_confirm').removeAttr('checked');
+                        $('.user_Enable').hide();
+                        layer.msg('请不要重复新建用户');
                     }
                 }
             });
         });
             $('.user_Enable input:last-of-type').click(function(){
                 $(this).parent().hide();
-                $('.user_operation_confirm').removeAttr('checked');
+                $('.usernew_true').removeAttr('checked');
             })
 
 
