@@ -947,3 +947,9 @@ html body .adduser_list_active{
 	width: 28px;
 	text-align: center;
 }
+.no_echart_data{
+	height: 260px;
+	line-height: 260px;
+	text-align: center;
+	display: none;
+}
