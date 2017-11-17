@@ -396,14 +396,14 @@ function selectHwData() {
                         if (publishAll == 0) {
                             normalRate = 0;
                         } else {
-                            normalRate = (1 - publishEAllRate) * 100;
+                            normalRate = parseInt((1 - publishEAllRate) * 100);
                         }
                         var normalAll = publishAll - publishEAll;//手动作业用户量
 
                         $('#publish h1 i').html(publishAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
                         $('#publish .all span').eq(0).html(normalRate + "%(" + normalAll + "条)");
-                        $('#publish .all span').eq(1).html((publishEAllRate * 100) + "%(" + publishEAll + "条)");
+                        $('#publish .all span').eq(1).html(parseInt(publishEAllRate * 100) + "%(" + publishEAll + "条)");
 
                         /*批复量数据处理*/
                         replyAll = resultReply.replyAll;//总批复量
@@ -415,13 +415,13 @@ function selectHwData() {
                         if (replyAll == 0) {
                             replyNomalRate = 0;
                         } else {
-                            replyNomalRate = (1 - replyEAllRate) * 100;
+                            replyNomalRate = parseInt((1 - replyEAllRate) * 100);
                         }
 
-                        $('#reply h1 i').html(replyAllRate * 100 + "%");
+                        $('#reply h1 i').html(parseInt(replyAllRate * 100) + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
                         $('#reply .all span').eq(0).html(replyNomalRate + "%(" + replyEAll + "条)");
-                        $('#reply .all span').eq(1).html((replyEAllRate * 100) + "%(" + replyNomal + "条)");
+                        $('#reply .all span').eq(1).html(parseInt(replyEAllRate * 100) + "%(" + replyNomal + "条)");
 
                         /*提交率数据处理*/
                         commitAll = resultCommit.commitAll;//总提交量
@@ -433,13 +433,13 @@ function selectHwData() {
                         if (commitAll == 0) {
                             commitNormalRate = 0;
                         } else {
-                            commitNormalRate = (1 - commitEAllRate) * 100;
+                            commitNormalRate = parseInt((1 - commitEAllRate) * 100);
                         }
 
-                        $('#commit h1 i').html(commitAllRate * 100 + "%");
+                        $('#commit h1 i').html(parseInt(commitAllRate * 100) + "%");
                         $('#commit h1 span').html("(" + commitAll + "条)");
                         $('#commit .all span').eq(0).html(commitNormalRate + "%(" + commitNormal + "条)");
-                        $('#commit .all span').eq(1).html((commitEAllRate * 100) + "%(" + commitEAll + "条)");
+                        $('#commit .all span').eq(1).html(parseInt(commitEAllRate * 100) + "%(" + commitEAll + "条)");
 
                         /*总正确率数据处理*/
                         $('#correctRateAll h1 i').html(parseInt(correctRateAll * 100) + "%");
