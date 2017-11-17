@@ -86,8 +86,19 @@ function line_echar(id, campus, value, type, yName, xName) {
 
     }
     var isAll = 1;//x轴不全显示
+    var dataZoom_ = [{
+        type: 'slider',
+        start: 1,
+        end: 20,
+        handleSize: 8,
+    }, {
+        type: 'inside',
+        start: 94,
+        end: 100,
+    }]
     if (xName == "校区" || campus.length <= 6) {
         isAll = 0;
+        dataZoom_ = [];
     } else {
         isAll = 1;
     }
@@ -132,16 +143,7 @@ function line_echar(id, campus, value, type, yName, xName) {
 
             }
         ],
-        dataZoom: [{
-            type: 'slider',
-            start: 1,
-            end: 20,
-            handleSize: 8,
-        }, {
-            type: 'inside',
-            start: 94,
-            end: 100,
-        }],
+        dataZoom: dataZoom_,
         series: [
             {
                 name: yName,
@@ -151,7 +153,7 @@ function line_echar(id, campus, value, type, yName, xName) {
             }
         ]
     };
-    myChart.setOption(option,true);
+    myChart.setOption(option, true);
 }
 
 function line_echar_(id, campus, value, type, yName, xName) {
