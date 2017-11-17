@@ -102,17 +102,6 @@ function seacherByName() {
     SelectData();
 }
 
-//时间筛选
-function selectTime() {
-    $('#select-time ul').show();
-}
-//时间筛选点击事件
-function timeClick(this_) {
-
-    $('#select-time h4').html(this_);
-    $('#select-time ul').hide();
-}
-
 //获取校区
 function getSchool() {
     if($('#select-school ul').css('display') != 'none'){
