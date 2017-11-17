@@ -23,11 +23,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
 
      layer.load();
     /*css 兼容*/
-    $('.index_forms li:nth-child(odd)').css('background', '#f5fbfa');
-    $('.index_forms li:first-of-type').css({
-        'background': '#fff',
-        'color': '#bababa'
-    });
+
 
     layer.closeAll('loading');
     //请求列表
@@ -48,6 +44,11 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
                 for(var i = 0;i<usernum.data.length;i++){
                     $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+usernum.data[i].schoolId+'"schoolName="'+usernum.data[i].schoolName+'" index = '+i+' tea_num = "'+usernum.data[i].branchTotalUser+'">导出教师列表</a></span> </li>')
                 }
+                $('.index_forms li:nth-child(even)').css('background', '#f5fbfa');
+                $('.index_forms li:first-of-type').css({
+                    'background': '#fff',
+                    'color': '#bababa'
+                });
             }
         }
     });
