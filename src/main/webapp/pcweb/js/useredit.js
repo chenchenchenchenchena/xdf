@@ -95,8 +95,7 @@ require(['jquery-1.11.0.min'], function () {
         }else{
             $('.user_operation_confirm').html('启用')
         }
-        $('.index_title h4').css('cursor','pointer');
-        $('.index_title h4').click(function(){
+        $('.index_title h4 i').click(function(){
             history.go(-1)
         });
         //选取邮箱
