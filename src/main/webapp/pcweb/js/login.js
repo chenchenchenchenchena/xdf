@@ -5,6 +5,14 @@ if(window.location.host == onlineUrl){   //正式环境
     var url_o = 'http://dt.staff.xdf.cn/xdfdtmanager/';
 }
 //不走e2登陆
+$(function(){
+    $('#password').keydown(function(event){
+        if(event.keyCode ==13){
+            tLogin()
+        }
+    });
+});
+
 function tLogin() {
     var loginName = document.getElementById("loginId").value;
     var loginPassword = document.getElementById("password").value;
