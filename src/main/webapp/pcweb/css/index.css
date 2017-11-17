@@ -127,6 +127,7 @@ body{
 	line-height:37px;
 	padding-left:10px;
 	border-bottom:2px solid #ccf1ea;
+	cursor: pointer;
 }
 .index_user{
 	width:99%;
