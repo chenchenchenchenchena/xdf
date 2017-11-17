@@ -36,7 +36,7 @@ require(['jquery-1.11.0.min'], function () {
             /*默认导航选中样式*/
             $('.homework_Statistics div:nth-child(even)').css('float', 'right');
             $('.homework_Statistics div h1 i').css('margin-left', '0px');
-            $('.homework_list li:nth-child(odd)').css('background', '#f5fbfa');
+
             laydate.render({
                 elem: '#date_input',
                 range: true //指定元素
@@ -374,6 +374,7 @@ function selectHwData() {
                         $('#schoolComparsion').append(html_);
 
                     }
+                    $('.homework_list li:nth-child(odd)').css('background', '#f5fbfa');
 
                     if (homeworkType == "0") {//全部
                         $('#reply').show();

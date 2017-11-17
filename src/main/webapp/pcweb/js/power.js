@@ -104,6 +104,7 @@ require(['jquery-1.11.0.min'], function () {
                                 $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
                             }
                         }
+                        $('.power_list li:nth-child(odd)').css('background', '#f5fbfa');
                     }
                 }
             });
@@ -144,7 +145,9 @@ require(['jquery-1.11.0.min'], function () {
                             }else{
                                 $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
                             }
+
                         }
+                        $('.power_list li:nth-child(odd)').css('background', '#f5fbfa');
                         $('#publicPage').show();
                     }else{
                         $('.user_Prompt').show();
@@ -260,7 +263,9 @@ function seachlist_(page){
                     }else{
                         $('.power_list').append('<li><span title="'+allLength[i].school+'">'+allLength[i].school+'</span><span>'+allLength[i].userName+'</span><span>'+allLength[i].email+'</span><span>'+allLength[i].createTime+'</span><span>'+str+'</span><span><a href="javascript:;" class="homework_operation"  schoolId="'+allLength[i].auth+'" loginId="'+allLength[i].loginId+'" edite_bur="'+allLength[i].isEnabled+'" id_s="'+allLength[i].id+'">编辑</a></span></li>')
                     }
+
                 }
+                $('.power_list li:nth-child(odd)').css('background', '#f5fbfa');
                 $('#publicPage').show();
             }else{
                 $('.user_Prompt').show();
