@@ -401,8 +401,8 @@ function selectHwData() {
 
                         $('#publish h1 i').html(publishAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
-                        $('#publish .all span').eq(0).html(normalRate + "%(" + normalAll + "次)");
-                        $('#publish .all span').eq(1).html(parseInt(publishEAllRate.toFixed(2) * 100) + "%(" + publishEAll + "次)");
+                        $('#publish .all span').eq(0).html(normalRate + "%(" + publishEAll + "次)");
+                        $('#publish .all span').eq(1).html(parseInt(publishEAllRate.toFixed(2) * 100) + "%(" + normalAll + "次)");
 
                         /*批复量数据处理*/
                         replyAll = parseInt(resultReply.replyAll);//总批复量
@@ -419,8 +419,8 @@ function selectHwData() {
 
                         $('#reply h1 i').html(parseInt(replyAllRate.toFixed(2) * 100) + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
-                        $('#reply .all span').eq(0).html(replyNomalRate + "%(" + replyEAll + "条)");
-                        $('#reply .all span').eq(1).html(parseInt(replyEAllRate.toFixed(2) * 100) + "%(" + replyNomal + "条)");
+                        $('#reply .all span').eq(0).html(replyNomalRate + "%(" + replyNomal + "条)");
+                        $('#reply .all span').eq(1).html(parseInt(replyEAllRate.toFixed(2) * 100) + "%(" + replyEAll + "条)");
 
                         /*提交率数据处理*/
                         commitAll = parseInt(resultCommit.commitAll);//总提交量
