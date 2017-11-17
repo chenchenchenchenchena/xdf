@@ -125,7 +125,7 @@ function lookType(this_, flag) {
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
         if (flag == 1) {
-            $('#date_input').val(today + " - " + halfYear);
+            $('#date_input').val(halfYear + " - " + today);
         } else {
             $('#date_input').val(today + " - " + oneYear);
         }

@@ -288,23 +288,29 @@ function SelectData() {
                 if (teacherXList.length == 0) {
                     //隐藏图，显示暂无数据
                     $('#teacher_echart').siblings().eq(1).show();
+                    $('#teacher_echart').hide();
 
                 } else {
                     $('#teacher_echart').siblings().eq(1).hide();
+                    $('#teacher_echart').show();
                     line_echar('teacher_echart', teacherXList, teacherYList, 'line', "课时", "日期");
 
                 }
                 if (headTeacherXList.length == 0) {
                     $('#head_echart').siblings().eq(1).show();
+                    $('#head_echart').hide();
                 } else {
                     $('#head_echart').siblings().eq(1).hide();
+                    $('#head_echart').show();
                     line_echar('head_echart', headTeacherXList, headTeacherYList, 'line', "课时", "日期");
 
                 }
                 if (masterTeacherXList.length == 0) {
                     $('#master_echart').siblings().eq(1).show();
+                    $('#master_echart').hide();
                 } else {
                     $('#master_echart').siblings().eq(1).hide();
+                    $('#master_echart').show();
                     line_echar('master_echart', masterTeacherXList, masterTeacherYList, 'line', "课时", "日期");
                 }
 
