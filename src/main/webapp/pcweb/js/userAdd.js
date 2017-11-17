@@ -129,7 +129,7 @@ require(['jquery-1.11.0.min'], function () {
             });
             //面包屑
             $('.index_title h4').css('cursor','pointer');
-            $('.index_title h4').click(function(){
+            $('.index_title h4 i').click(function(){
                 history.go(-1)
             });
             $('.user_operation_cancel').eq(0).click(function(){
