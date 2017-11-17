@@ -85,22 +85,22 @@ function line_echar(id, campus, value, type, yName, xName) {
         }
 
     }
-    var isAll = 1;//x轴不全显示
     var dataZoom_ = [{
         type: 'slider',
         start: 1,
-        end: 20,
+        end: 50,
         handleSize: 8,
     }, {
         type: 'inside',
         start: 94,
         end: 100,
-    }]
-    if (xName == "校区" || campus.length <= 6) {
-        isAll = 0;
+    }];
+    var maxNum;
+    if (xName == "校区" || campus.length <=4) {
         dataZoom_ = [];
+        maxNum = campus.length;
     } else {
-        isAll = 1;
+        maxNum = 4;
     }
 
     var myChart = ECharts.init(document.getElementById(id));
@@ -129,10 +129,11 @@ function line_echar(id, campus, value, type, yName, xName) {
                     alignWithLabel: true
 
                 },
+                splitNumber:maxNum,//分割段数，默认为5
                 name: x,
                 nameGap: '-5',
                 axisLabel: {
-                    interval: isAll,//横轴信息全部显示
+                    //interval: isAll,//横轴信息全部显示
                 }
             }
         ],
@@ -154,98 +155,6 @@ function line_echar(id, campus, value, type, yName, xName) {
         ]
     };
     myChart.setOption(option, true);
-}
-
-function line_echar_(id, campus, value, type, yName, xName) {
-    var x = xName;
-    if (xName == "日期") {
-        var xType = parseInt(lookType);
-        switch (xType) {
-            case 0:
-                x = "日";
-                break;
-            case 1:
-                x = "周";
-                break;
-            case 2:
-                x = "月";
-                break;
-            case 3:
-                x = "年";
-                break;
-        }
-
-    }
-    var isAll = 1;//x轴不全显示
-    var angularity = 0;//x轴倾斜度
-    if (xName == "校区") {
-        isAll = 0;
-        angularity = -30;
-    } else {
-        isAll = 1;
-        angularity = 0;
-    }
-
-    var myChart = ECharts.init(document.getElementById(id));
-    option = {
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-
-                //type : 'shadow'
-
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: campus,
-                axisTick: {
-                    alignWithLabel: true
-
-                },
-                name: x,
-                nameGap: '-5',
-                axisLabel: {
-                    interval: isAll,//横轴信息全部显示
-                    rotate: angularity,//-30度角倾斜显示
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: yName,
-
-            }
-        ],
-        dataZoom: [{
-            type: 'slider',
-            start: 1,
-            end: 20,
-            handleSize: 8,
-        }, {
-            type: 'inside',
-            start: 94,
-            end: 100,
-        }],
-        series: [
-            {
-                name: yName,
-                type: type,
-                barWidth: '60%',
-                data: value
-            }
-        ]
-    };
-    myChart.setOption(option);
 }
 
 /**
