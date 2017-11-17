@@ -98,16 +98,20 @@ function line_echar(id, campus, value, type, yName, xName) {
     var interval = {};
     var maxNum;
     if(xName == "校区"){
-        interval = {
-            interval: 0,
-            rotate: -30
-        };
+
         if (campus.length <= 10) {
             dataZoom_ = [];
             maxNum = campus.length;
+            interval = {
+                interval: 0,
+                rotate: -30
+            };
 
         } else {
             maxNum = 10;
+            interval = {
+                rotate: -30
+            };
         }
     }else {
         interval = {};
