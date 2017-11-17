@@ -29,7 +29,11 @@ require(['jquery-1.11.0.min'], function () {
                 $('#back_homework').click(function () {
                     history.go(-1);
                 });
-
+                $('.homework_sea input').keydown(function(even){
+                    if(event.keyCode ==13){
+                        SelectTeacherList();
+                    }
+                });
                 //从上个页面获取筛选数据,初始化页面
                 var params = JSON.parse(sessionStorage.homeworkDetailParams);
                 homeworkType = params.homeworkType;
