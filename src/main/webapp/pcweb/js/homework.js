@@ -9,7 +9,7 @@ var currentSchool = "全部";//默认全部
 var beginTime = "";//默认全部
 var endTime = "";//默认全部
 var homeworkType = "0"//默认作业类型全部 0表示查询所以 1表示查询普通 2表示查询电子
-var currentStageCode;
+var currentStageCode = "";
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -150,7 +150,7 @@ function getSelectList(this_, type, flag) {
                 json = sessionStorage.stageList;
                 break;
             case 1:
-                if (currentStageCode == undefined) {
+                if (currentStageCode == undefined || currentStageCode == "") {
                     layer.msg("请先选择学段");
                     return false;
                 }
@@ -264,19 +264,22 @@ function lookType(this_, flag) {
 
 //切换作业类型
 function changeHomeworkType(this_, flag) {
+    $('#stage').siblings().hide();
+    $('#grade').siblings().hide();
+    $('#subject').siblings().hide();
     homeworkType = flag;
     $(this_).find('img').attr('src', "images/checked.png");
     $(this_).siblings().find('img').attr('src', "images/check.png");
     if (flag == 1) {
         //手动作业不能选择学段／年级／科目
-        $('.homewor_small_selecet ul li').eq(1).hide();
-        $('.homewor_small_selecet ul li').eq(2).hide();
-        $('.homewor_small_selecet ul li').eq(3).hide();
+        $('#stage').parent().parent().hide();
+        $('#grade').parent().parent().hide();
+        $('#subject').parent().parent().hide();
     } else {
 
-        $('.homewor_small_selecet ul li').eq(1).show();
-        $('.homewor_small_selecet ul li').eq(2).show();
-        $('.homewor_small_selecet ul li').eq(3).show();
+        $('#stage').parent().parent().show();
+        $('#grade').parent().parent().show();
+        $('#subject').parent().parent().show();
     }
     /*重置筛选条件*/
     $('#school').html("全部");

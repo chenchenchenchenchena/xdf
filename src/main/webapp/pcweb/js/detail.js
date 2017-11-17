@@ -144,7 +144,7 @@ function getSelectList(this_, type, flag) {
                 json = sessionStorage.stageList;
                 break;
             case 1:
-                if (currentStageCode == undefined) {
+                if (currentStageCode == undefined || currentStageCode == "") {
                     layer.msg("请先选择学段");
                     return false;
                 }
