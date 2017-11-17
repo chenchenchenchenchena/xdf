@@ -470,7 +470,7 @@ function selectHwData() {
                         var replyPictureRate = replyAll == 0 ? 0 : parseInt(parseFloat((replyPicture / replyAll)).toFixed(2) * 100);//总批复图片率
                         commitAll = parseInt(data.commitAll);//总提交数
 
-                        var replyAllRate = totalAll == 0 ? 0 : parseInt(parseFloat((replyAll / commitAll)).toFixed(2) * 100);//总批复率
+                        var replyAllRate = commitAll == 0 ? 0 : parseInt(parseFloat((replyAll / commitAll)).toFixed(2) * 100);//总批复率
 
                         $('#reply h1 i').html(replyAllRate + "%");
                         $('#reply h1 span').html("(" + replyAll + "条)");
@@ -478,7 +478,7 @@ function selectHwData() {
                         $('#reply .normal span').eq(0).html(replyPictureRate + "%(" + replyPicture + "条)");
 
 
-                        var commitAllRate = totalAll == 0 ? 0 : parseInt(parseFloat((commitAll / reachAll)).toFixed(2) * 100);//总提交率
+                        var commitAllRate = reachAll == 0 ? 0 : parseInt(parseFloat((commitAll / reachAll)).toFixed(2) * 100);//总提交率
                         var commitAudio = parseInt(data.commitAudio);//总提交语音数
                         var commitAudioRate = commitAll == 0 ? 0 : parseInt(parseFloat((commitAudio / commitAll)).toFixed(2) * 100);//总提交语音率
                         var commitPicture = parseInt(data.commitPicture);//总提交图片数
