@@ -84,6 +84,10 @@ require(['jquery-1.11.0.min'], function () {
 
                 //导出教师列表
                 $('#expor_teacher').click(function () {
+                    if($('#teacher-list li') == undefined || $('#teacher-list li').length == 0){
+                        layer.msg("暂无列表");
+                        return false;
+                    }
                     exporTeacherList();
                 })
 
@@ -148,7 +152,7 @@ function getSelectList(this_, type, flag) {
                 json = sessionStorage.stageList;
                 break;
             case 1:
-                if (currentStageCode == undefined) {
+                if (currentStageCode == undefined || currentStageCode == "") {
                     layer.msg("请先选择学段");
                     return false;
                 }
