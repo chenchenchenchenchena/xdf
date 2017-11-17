@@ -95,12 +95,33 @@ function line_echar(id, campus, value, type, yName, xName) {
         start: 94,
         end: 100,
     }];
+    var interval = {};
     var maxNum;
-    if (xName == "校区" || campus.length <=4) {
-        dataZoom_ = [];
-        maxNum = campus.length;
-    } else {
-        maxNum = 4;
+    if(xName == "校区"){
+
+        if (campus.length <= 10) {
+            dataZoom_ = [];
+            maxNum = campus.length;
+            interval = {
+                interval: 0,
+                rotate: -30
+            };
+
+        } else {
+            maxNum = 10;
+            interval = {
+                rotate: -30
+            };
+        }
+    }else {
+        interval = {};
+        if (campus.length <= 4) {
+            dataZoom_ = [];
+            maxNum = campus.length;
+
+        } else {
+            maxNum = 4;
+        }
     }
 
     var myChart = ECharts.init(document.getElementById(id));
@@ -132,9 +153,7 @@ function line_echar(id, campus, value, type, yName, xName) {
                 splitNumber:maxNum,//分割段数，默认为5
                 name: x,
                 nameGap: '-5',
-                axisLabel: {
-                    //interval: isAll,//横轴信息全部显示
-                }
+                axisLabel: interval
             }
         ],
         yAxis: [
