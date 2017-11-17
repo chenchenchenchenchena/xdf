@@ -73,6 +73,7 @@ body{
 }
 .left_nav{
 	width:10%;
+	min-width:142px;
 	height:100%;
 	display:block;
 	float:left;
