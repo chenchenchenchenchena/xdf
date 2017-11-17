@@ -18,7 +18,7 @@ var currentStageCode;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['jqPaginator.min'], function () {
-            require(['layer','requireConfig'], function () {
+            require(['layer', 'requireConfig'], function () {
 
                 laydate.render({
                     elem: '#date_input',
@@ -26,7 +26,7 @@ require(['jquery-1.11.0.min'], function () {
                 });
 
                 //返回上一页
-                $('#back_homework').click(function(){
+                $('#back_homework').click(function () {
                     history.go(-1);
                 });
 
@@ -51,6 +51,10 @@ require(['jquery-1.11.0.min'], function () {
                     $('.homewor_small_selecet ul li').eq(1).show();
                     $('.homewor_small_selecet ul li').eq(2).show();
                 }
+
+                $("#stage").html(stage);
+                $("#grade").html(grade);
+                $("#subject").html(subject);
 
                 $('#select-school h4').html(params.currentCity);
                 if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
@@ -131,9 +135,9 @@ function lookType(this_, flag) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
-    if($(this_).parent().find('ul').css('display') != 'none'){
+    if ($(this_).parent().find('ul').css('display') != 'none') {
         $(this_).parent().find('ul').hide();
-    }else {
+    } else {
         var json;
         switch (flag) {
             case 0:

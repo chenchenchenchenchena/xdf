@@ -16,18 +16,18 @@ require(['jquery-1.11.0.min'], function () {
         require(['layer', 'requireConfig'], function () {
             // 重置左导航
             var number_l = 0;
-            var url_l =  location.href;
+            var url_l = location.href;
 
-            if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+            if (url_l.indexOf('homework') != -1 || url_l.indexOf('detail') != -1) {
                 number_l = 1;
             }
-            else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+            else if (url_l.indexOf('lesstime') != -1 || url_l.indexOf('lesstime_detail') != -1) {
                 number_l = 2;
             }
-            else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
+            else if (url_l.indexOf('power') != -1 || url_l.indexOf('userAdd') != -1 || url_l.indexOf('useredit') != -1) {
                 number_l = 3
             }
-            else if(url_l.indexOf('master')!=-1){
+            else if (url_l.indexOf('master') != -1) {
                 number_l = 4
             }
             var $bure_true = $('.left_nav ul li').eq(number_l);
@@ -80,9 +80,9 @@ require(['jquery-1.11.0.min'], function () {
 
 //校区展示
 function getSchool() {
-    if($("#school").parent().find('ul').css('display') != 'none'){
+    if ($("#school").parent().find('ul').css('display') != 'none') {
         $("#school").parent().find('ul').hide();
-    }else {
+    } else {
         if (sessionStorage.schoolList) {
             var json = JSON.parse(sessionStorage.schoolList);
             showSchoolList(json);
@@ -141,9 +141,9 @@ function filterByCityId(_this, schoolName) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
-    if($(this_).parent().find('ul').css('display') != 'none'){
+    if ($(this_).parent().find('ul').css('display') != 'none') {
         $(this_).parent().find('ul').hide();
-    }else {
+    } else {
         var json;
         switch (flag) {
             case 0:
@@ -189,7 +189,6 @@ function getSelectList(this_, type, flag) {
             })
         }
     }
-
 
 
 }
@@ -309,15 +308,15 @@ function selectHwData() {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
-        if($('#subject').html()!='全部'){
-            subject = $('#subject').html();
-        };
-        if($('#grade').html()!='全部'){
-            grade = $('#grade').html();
-        };
-        if($('#stage').html()!='全部'){
-            stage = $('#stage').html();
-        }
+    if ($('#subject').html() != '全部') {
+        subject = $('#subject').html();
+    }
+    if ($('#grade').html() != '全部') {
+        grade = $('#grade').html();
+    }
+    if ($('#stage').html() != '全部') {
+        stage = $('#stage').html();
+    }
     var params = {
         'homeworkType': homeworkType,
         'schoolId': currentSchoolId,
@@ -499,9 +498,9 @@ function selectHwData() {
                         commitAll = parseInt(data.commitAll);//总提交数
                         publishAll = parseInt(data.publishAll);//总布置次数
                         reachAll = parseInt(data.reachAll);//总送达人次
-                        if(commitAll==0&&reachAll==0){
+                        if (commitAll == 0 && reachAll == 0) {
                             var commitAllRate = 0;
-                        }else{
+                        } else {
                             var commitAllRate = parseInt(parseFloat((commitAll / reachAll)) * 100);
                         }
                         $('#publish h1 i').html(publishAll + "次");
@@ -523,6 +522,9 @@ function selectHwData() {
 
 //查看明细
 function lookHwDetails(this_, schoolId, schoolName) {
+    subject = $('#subject').html();
+    grade = $('#grade').html();
+    stage = $('#stage').html();
     var time = $('#date_input').val();
     if (time != "" && time != undefined) {
         beginTime = time.substring(0, 10);
