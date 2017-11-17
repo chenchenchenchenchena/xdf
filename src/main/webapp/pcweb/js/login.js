@@ -40,7 +40,7 @@ function tLogin() {
         success: function (e) {
             console.log(e);
             if (e.result == false) {
-                alert(e.message);
+                layer.msg(e.message);
             } else {
                 sessionStorage.setItem("sid", e.sid, 1);
                 sessionStorage.setItem("userName", e.userName, 1);
