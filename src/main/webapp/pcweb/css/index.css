@@ -127,6 +127,9 @@ body{
 	line-height:37px;
 	padding-left:10px;
 	border-bottom:2px solid #ccf1ea;
+}
+.index_title h4 i{
+	font-style:normal;
 	cursor: pointer;
 }
 .index_user{
