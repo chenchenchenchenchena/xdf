@@ -624,7 +624,7 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        ajaxRequest("Post",url_o + "upload/uploadAudio.do",cbconfig,function(e){
+        ajaxRequest("Post",homework_s.uploadAudio,cbconfig,function(e){
                 $('.big_back').hide();
                 if (e.status == "failure") {
                     layer.msg(e.msg);
@@ -668,7 +668,7 @@ $(function () {
      */
     function getRecordInfo(diskFileUrl) {
         var optionFile = {"fullPath": diskFileUrl};
-        ajaxRequest("Post",url_o + "upload/getMp3Url.do",optionFile,function(e){
+        ajaxRequest("Post",homework_s.getMp3Url,optionFile,function(e){
 
             if (e.status == "success") {
                 //显示语音布局
@@ -769,7 +769,7 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        ajaxRequest("Post",url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
+        ajaxRequest("Post",homework_s.uploadImage,cbconfig,function(e){
             $('.big_back').hide();
             // alert(JSON.stringify(data));
             if (e.status == "failure") {

@@ -345,6 +345,11 @@ html body .tealist_s .more_so{
 .Voice{
 	margin-left:40px;
 }
+.template_ic{
+	width: 58px;
+	height: 48px;
+	margin-left:60px;
+}
 
 .Submit_s,.class_sub{
 	width:690px;

@@ -150,6 +150,9 @@ var homework_s = {
     's_hw_getClassDetails':url_o+'studentHWork/finishHomeworkClassListData.do',//获取学生作业班级详情列表
     't_hw_getClassList':url_o+'teacherData/queryHomeWorkListClassData.do',//获取老师作业班级列表
     't_hw_getClassDetails':url_o+'teacherData/queryHomeWorkListClassInfo.do',//获取老师作业班级详情列表
+    'uploadAudio':url_o + "upload/uploadAudio.do",//上传语音接口
+    'getMp3Url':url_o + "upload/getMp3Url.do",//下载语音播放地址接口
+    'uploadImage':url_o + "upload/uploadFileByWeiChat.do",//上传图片接口
 
 };
 var pcweb = {

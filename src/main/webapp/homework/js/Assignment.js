@@ -761,7 +761,7 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': classCode.split(',')[0]
         };
-        ajaxRequest("Post",url_o + "upload/uploadAudio.do",cbconfig,function(e){
+        ajaxRequest("Post",homework_s.uploadAudio,cbconfig,function(e){
             $('.big_back').hide();
             if (e.status == "failure") {
                 layer.msg(e.msg);
@@ -812,7 +812,7 @@ $(function () {
          *  }
          */
         var optionFile = {"fullPath": diskFileUrl};
-        ajaxRequest("Post",url_o + "upload/getMp3Url.do",optionFile,function(e){
+        ajaxRequest("Post",homework_s.getMp3Url,optionFile,function(e){
             if (e.status == "failed") {
                 layer.msg("语音获取失败");
             } else {
@@ -995,7 +995,7 @@ $(function () {
             'schoolId': localStorage.schoolId,
             'classId': classCode.split(',')[0]
         };
-        ajaxRequest("Post",url_o + "upload/uploadFileByWeiChat.do",cbconfig,function(e){
+        ajaxRequest("Post",homework_s.uploadImage,cbconfig,function(e){
             $('.big_back').hide();
             if (e.status == "failure") {
                 layer.msg('图片上传失败');

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加新模版</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes"/>
+    <link rel="stylesheet" href="../common/css/base.css"  />
+    <link rel="stylesheet" href="css/dohomework_s.css"  />
+    <link rel="stylesheet" href="css/homeworklist_s.css"  />
+    <script src="../common/js/jweixin-1.2.0.js"></script>
+    <script src="js/wx.js"></script>
+    <script src="../common/js/ajax.js"></script>
+    <script src="../common/js/layer-v2.1/layer/layer.js"></script>
+    <script src="../common/js/scale.js"></script>
+    <script src="js/voice_check.js"></script>
+    <script src="js/reply_template.js"></script>
+</head>
+<body>
+<div class="answer" style="display: block;">
+    <textarea class="teBox" placeholder="请输入作业答案或点击一下按钮上传答案图片、语音" maxlength="200"
+              style="resize:none;margin-top: 60px"></textarea>
+
+    <p class="word teacherword"><span>0</span>/<span>200</span>
+    <div class="Media_s">
+        <img src="images/B02-2_10.png?v=7b99044" alt="" id="add_image" style="margin-right:20px;">
+        <img src="images/voice.png?v=f509f41" alt="" id="add_voice" class="Voice">
+    </div>
+    <ul id="notsubmit_voice" class="big_s" style="display: none;"></ul>
+    <div class="notsubmit" style="display: block;">
+        <ul class="imgBox" style="display: none">
+        </ul>
+    </div>
+    <button id="sumbit_temp" class="btn sub_p">提交</button>
+</div>
+</body>
+</html>
