@@ -34,6 +34,7 @@ var global = {
     'user_power_':url_o+'user/enableUser.do', //用户禁用
     'hw_details':url_o+'backEndHomework/queryHomeWorkTeacherDetail.do',//作业统计
     'hw_expor':url_o+'backEndHomework/exportHomeWorkTeacherDetail.do',//作业统计导出
+    'hw_dictList':url_o + 'dict/getDictListByTableName.do',//字典
 };
 require(['jquery-1.11.0.min'],function(){
     $('body').hide();

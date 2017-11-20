@@ -171,7 +171,7 @@ function getSelectList(this_, type, flag) {
             };
             $.ajax({
                 type: "POST",
-                url: url_o + 'dict/getDictListByTableName.do',
+                url: global.hw_dictList,
                 async: true,//同步
                 dataType: 'json',
                 data: table,

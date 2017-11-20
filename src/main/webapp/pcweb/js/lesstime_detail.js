@@ -116,7 +116,7 @@ function getSchool() {
             };
             $.ajax({
                 type: "POST",
-                url: url_o + 'dict/getDictListByTableName.do',
+                url: global.hw_dictList,
                 dataType: 'json',
                 data: table,
                 success: function (e) {
