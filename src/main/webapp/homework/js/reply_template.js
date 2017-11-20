@@ -48,24 +48,15 @@ $(function(){
      * 删除
      */
     $(document).on('touchend','.delete_temp',function () {
-        delTempLayer = layer.open({
-            type: 1,
-            area: ['548px', '345px'],
-            shade: [0.2, '#000'],
-            title: '',
-            skin: '',
-            content: $(".erro")
-        })
+        $('.erro').show();
     });
     // 删除模版-取消
-    $(document).on('touchend', '.erro button', function () {
-        layer.close(delTempLayer);
+    $('.erro input:first-of-type').on('touchend', function () {
+        $(".erro").hide();
     });
     // 删除模版-确定
-    $(document).on('touchend', '.erro button', function () {
-
-        var index = parseInt($(this).attr('voice-index'));
-        layer.close(delTempLayer);
+    $('.erro input:last-of-type').on('touchend', function () {
+        $(".erro").hide();
     });
 
     /**
