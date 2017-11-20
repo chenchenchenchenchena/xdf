@@ -5,8 +5,12 @@ $(function(){
         if($(this).children('.remove_temp')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.temp_list li',function(){
-                console.log($(this).offsetHeight());
+                var listHeight = $(this)[0].offsetHeight;
+                console.log(listHeight);
                 var move_s = parseInt(event.targetTouches[0].pageX);
+                $(this).find('.remove_temp').css('height',listHeight+"px");
+                $(this).find('.remove_temp span').css('height',listHeight+"px");
+                $(this).find('.remove_temp span').css('line-height',listHeight+"px");
                 if(begin_s-move_s>=20){
                     $(this).siblings().css('margin-left','0px');
                     $(this).siblings().find('.remove_temp').css('right','-270px');
