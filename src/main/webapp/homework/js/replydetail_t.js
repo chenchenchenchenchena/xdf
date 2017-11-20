@@ -1412,7 +1412,7 @@ $(function () {
 
     /*模版选择*/
     $('.template_ic').click(function(){
-        location.href = 'add_template.html';
+        location.href = 'reply_template.html';
     })
 });
 
