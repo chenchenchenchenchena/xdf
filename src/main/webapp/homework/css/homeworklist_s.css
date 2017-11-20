@@ -36,6 +36,93 @@ input{
 	line-height: 86px;
 	
 }
+.stu_list{
+	background:#fff;
+	margin-bottom:20px;
+	overflow:hidden;
+}
+.stu_list ul{
+	width:auto;
+	display:flex;
+	overflow:auto;
+}
+.stu_list li{
+	-webkit-flex: 1 1 auto;
+	min-width:200px;
+	text-align: center;
+	width: 164px;
+	line-height: 86px;
+	font-size: 30px;
+}
+.stu_list li a{
+	color:#000;
+}
+.stulist_{
+	padding:20px;
+	background:#fff;
+	display:none;
+}
+.tips-box{
+	position: fixed;
+	width: 500px;
+	height:300px;
+	top:50%;
+	left:50%;
+	margin-left:-250px;
+	margin-top:-150px;
+	border-radius:8px;
+	z-index:10;
+	background:#fff;
+	display:none;
+}
+.tips-box img{
+	margin-left:207px;
+}
+.tips-box p{
+	margin-top:10px;
+}
+.checked,.check{
+	padding:0 20px;
+}
+.checked h4,.check h4{
+	font-size:32px;
+	color:#000;
+}
+.checked h4 span,.check h4 span{
+	float:right;
+}
+.checked h4 span img,.check h4 span img{
+	width:30px;
+	height:30px;
+	margin-right:10px;
+	position:relative;
+	top:5px;
+}
+.checked ul,.check ul{
+	margin-top:20px;
+}
+.checked ul li,.check ul li {
+	display:inline-block;
+	width:24%;
+	padding-bottom:20px;
+}
+.checked ul li span,.check ul li span{
+	display:block;
+	margin:0 auto;
+	width:100px;
+	height:100px;
+	background:#ffbb37;
+	color:#fff;
+	border-radius:50%;
+	line-height:100px;
+	font-size:25px;
+	text-align:center;
+}
+.checked ul li p,.check ul li p{
+	text-align:center;
+	font-size:25px;
+	margin-top:20px;
+}
 .hwHeader ul>li:first-child{
 	margin: 0 175px 0 129px;
 }
