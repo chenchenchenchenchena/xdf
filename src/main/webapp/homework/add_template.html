@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="../common/css/base.css"  />
     <link rel="stylesheet" href="css/dohomework_s.css"  />
     <link rel="stylesheet" href="css/homeworklist_s.css"  />
+    <script src="../common/js/jquery.js"></script>
     <script src="../common/js/jweixin-1.2.0.js"></script>
     <script src="js/wx.js"></script>
     <script src="../common/js/ajax.js"></script>
     <script src="../common/js/layer-v2.1/layer/layer.js"></script>
     <script src="../common/js/scale.js"></script>
     <script src="js/voice_check.js"></script>
-    <script src="js/reply_template.js"></script>
+    <script src="js/add_template.js"></script>
 </head>
 <body>
 <div class="answer" style="display: block;">
@@ -35,6 +36,23 @@
         </ul>
     </div>
     <button id="sumbit_temp" class="btn sub_p">提交</button>
+</div>
+<div class="big_whit" style="background: rgba(0,0,0,0.5);"></div>
+<div class="song_s">
+    <img src="images/C04-03.png?v=c6eab1f" alt="">
+    <p>按住说话</p>
+    <div id="record"></div>
+</div>
+<div class="big_back"></div>
+<div class="tips-box delete-voice" style="display: none;"><img src="images/redtan.png?v=e8c7965"/>
+    <p>确定删除语音</p>
+    <button class="cancelBtn">取消</button>
+    <button class="confirmBtn">确定</button>
+</div>
+<div class="tips-box delete-img" style="display: none;"><img src="images/redtan.png?v=e8c7965"/>
+    <p>确定删除图片</p>
+    <button class="cancelBtn">取消</button>
+    <button class="confirmBtn">确定</button>
 </div>
 </body>
 </html>

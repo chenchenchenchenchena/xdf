@@ -110,7 +110,6 @@ $(function () {
         }
         $('title').html('已批复');
         //获取文件信息
-        // ajaxRequest('post', homework_s.t_two, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
         e = JSON.parse(sessionStorage.detailsStrYes);
         if (e.StudentAnswer == undefined || e.StudentAnswer == null || e.StudentAnswer == "undefined") {
             $('.anDes').eq(0).html("");
@@ -165,30 +164,19 @@ $(function () {
         $('.hwCon').eq(0).html(decodeURIComponent(e.description));
         getFileInfo(e);
 
-        // });
 
     } else {//待批复
         $('.hmAnswer').eq(1).hide();
         //获取文件信息
-        // ajaxRequest('post', homework_s.t_modi, {Tcid: sessionStorage.Tid, Sdtid: sessionStorage.stuid}, function (e) {
-            e = JSON.parse(sessionStorage.detailsStrNot);
-            console.log(e);
-            classYHname = e.className;
-            $('.anDes').eq(0).html();
-            $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
-            $('.hwCon').eq(0).html(decodeURIComponent(e.description));
-            // var stu = e.File.StudentHomeworkFile;
-            // var tea = e.File.TeacherHomeworkFile;
-            // for (var a = 0; a < stu.length; a++) {
-            //     stuAnwersFiles.push(stu[a].diskFilePath);
-            // }
-            // for (var b = 0; b < tea.length; b++) {
-            //     hwFiles.push(tea[b].diskFilePath);
-            // }
-            $('.anSwer').append( '<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">'+decodeURIComponent(e.StudentAnswer)+'</div><div><ul class="voiceBox"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>')
-            $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
-            getFileInfo(e);
-        // });
+        e = JSON.parse(sessionStorage.detailsStrNot);
+        console.log(e);
+        classYHname = e.className;
+        $('.anDes').eq(0).html();
+        $('.kon p:last-of-type').html(decodeURIComponent(decodeURIComponent(e.knowledgePoint)));
+        $('.hwCon').eq(0).html(decodeURIComponent(e.description));
+        $('.anSwer').append('<div class="hmAnswer"><div class="infoTitle">作业答案 </div><div class="anDes">' + decodeURIComponent(e.StudentAnswer) + '</div><div><ul class="voiceBox"></ul><div class="imgBox" id="imagBox_3" style="display:block;"></div><img class="loading-back" src="../common/images/loading.gif" /></div></div>')
+        $('.hmAnswer:last .infoTitle').append('<span>优秀</span>')
+        getFileInfo(e);
     }
 
     /**
@@ -367,11 +355,6 @@ $(function () {
         }else {
             //将文件显示到布局中
             voiceCount++;
-            //var numa = flag;
-            //if(flag==1){
-            //     numa = 1;
-            //}
-            //console.log(flag)
             showAudio(playTime, diskFileUrl, $("#audio_" + flag), "audio" + flag + "" + voiceCount, 2);
         }
 
@@ -544,7 +527,7 @@ $(function () {
             layer.msg('语音最多只能录制三条');
             return false;
         }
-        if(arr_voice.length > 3){
+        if(arr_image.length > 3){
             layer.msg('图片最多上传三张');
             return false;
         }
@@ -577,11 +560,7 @@ $(function () {
                 } else {
                     if ($('.tea_sp .hmAnswer').eq(o).find('div .voiceBox').html() == "" && $('.tea_sp .hmAnswer').eq(o).find('.imgBox').html() == "") {
 
-                        //if ($('.tea_sp .hmAnswer').length == 1) {
-                        //    need.replyDesc += ' |>|';
-                        //}else {
-                            need.replyDesc += 'undefined|>|';
-                        //}
+                        need.replyDesc += 'undefined|>|';
 
                     } else {
                         need.replyDesc += ' |>|';
@@ -1175,18 +1154,6 @@ $(function () {
         })
     }
 
-    // $('.big_back_s').on('touchend', function () {
-    //     if($('.true_s').css('display')!='block'&&event.touches.length==0){
-    //         $(this).find('canvas').hide();
-    //         $(this).find('img').show();
-    //         $(this).find('.esc_s').hide();
-    //         $(this).find('.true_s').hide();
-    //         $(this).find('span:last-of-type').show();
-    //         $(this).hide();
-    //         $('body').css('overflow', 'auto');
-    //         $('body').css('overflow-x', 'hidden')
-    //     }
-    // });
     function stopDrop() {
         var lastY;//最后一次y坐标点
         $(document.body).on('touchstart', function (event) {
