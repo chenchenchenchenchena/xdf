@@ -56,6 +56,7 @@ if(getRequest('state').state=='JT'||sessionStorage.signal){
 // 接口路径
 var url = {
     'e_elog': url_o+'e2Login/login.do',//e2登录
+    'h_list':url_o+'teacherData/queryStudentsByClassCode.do',//作业获取学生列表
     'e_elast':url_o+'u2Login/login.do', //u2Dengl
     'w_xmor': url_o+'wechatSignature/getWeChatSignature.do', //获取微信授权信息
     'w_open': url_o+'wechatSignature/getUserInfo.do',//获取openid
