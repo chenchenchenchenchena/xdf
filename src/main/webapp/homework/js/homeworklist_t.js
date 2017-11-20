@@ -203,7 +203,7 @@ $(function(){
                         '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
 
-                    getListDetails($('.firstList'));
+                    getListDetails($('.firstList').eq(i));
                 }else {
                     $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
                         '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
