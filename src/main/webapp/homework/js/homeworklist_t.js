@@ -1,4 +1,7 @@
 $(function(){
+    //获取页面跳转参数
+    var checkedClassCode = GetRequest('classCode');
+
     //登录相关
     if(!sessionStorage.openid){
         wechatCode(location.href);
@@ -192,10 +195,22 @@ $(function(){
                     courseCode = list_s[i].courseCode;
                 }
 
-                $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                    '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
-                    '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
-                    '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
+                if(checkedClassCode != undefined && checkedClassCode == list_s[i].classCode){
+
+                    //从老师主页点击进入作业列表：被选中的班级自动打开详情
+                    $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                        '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
+                        '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
+                        '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
+
+                    getListDetails($('.firstList'));
+                }else {
+                    $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                        '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
+                        '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
+                        '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
+                }
+
             }
         }, error);
     }
@@ -208,6 +223,7 @@ $(function(){
         var classCode = this_.attr('classCode');
         var studentNum = this_.attr('studentNum');
         var className = this_.attr('className');
+
         var params = {
             'classCode':classCode
         };

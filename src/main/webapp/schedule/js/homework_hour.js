@@ -109,7 +109,7 @@ $(function(){
                 $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
                 $('.canvs_more li').eq(0).siblings().remove();
                 for(var i = 0;i<e.data.length;i++){
-                    $('.canvs_more ul').append('<li><span>'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
+                    $('.canvs_more ul').append('<li><span data-classCode="'+e.data[i].classCode+'" class="hw_class">'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
                 }
             }else{
                 $('.no-data').show();
@@ -140,8 +140,12 @@ $(function(){
             
         })
     }
+    //点击班级名称，直接进入作业列表，并打开该班级作业目录
+    $(document).on('touchend','.hw_class',function(){
+        var classCode = $(this).attr("data-classCode");
+        location.href = '../homework/homeworklist_t.html?classcode='+classCode;
 
-
+    });
 
     //tab切换
     $('.tab-title li').on('touchend',function(){
