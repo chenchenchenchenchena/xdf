@@ -90,7 +90,11 @@ $(function(){
                 less_need_.schoolId = '';
             }
             homework() // 作业率请求
-    })
+    });
+    $('.switch_').on('touchend',function(){
+
+    });
+
     function homework(){
         ajax_S(url.t_houehome,less_need_,function(e){
             if(e.result!=false&&e.data.length!=0){
@@ -109,7 +113,7 @@ $(function(){
                 $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
                 $('.canvs_more li').eq(0).siblings().remove();
                 for(var i = 0;i<e.data.length;i++){
-                    $('.canvs_more ul').append('<li><span data-classCode="'+e.data[i].classCode+'" class="hw_class">'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
+                    $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.data[i].classCode+'" class="hw_class">'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
                 }
             }else{
                 $('.no-data').show();

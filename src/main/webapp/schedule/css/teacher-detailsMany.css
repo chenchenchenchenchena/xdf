@@ -371,6 +371,14 @@ a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
 .canvs_hour{
 	min-height:353px;
 	background:#fff;
+	position:relative;
+}
+.switch_{
+	width:40px;
+	height:40px;
+	position: absolute;
+	right:20px;
+	top:10px;
 }
 .canvs_hour div,.lesso_cav div{
 	width:33%;

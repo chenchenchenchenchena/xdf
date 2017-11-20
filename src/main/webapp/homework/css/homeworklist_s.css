@@ -281,7 +281,7 @@ html body .tealist_s .more_so{
 /*布置作业*/
 
 .Choice_s{
-	height:210px;
+	min-height:210px;
 	padding:0 30px;
 	line-height:104px;
 	font-size:30px;
@@ -436,7 +436,7 @@ html body .tealist_s .more_so{
 	text-align: right;
 	color:#808080;
 }
-.time_S i{
+.time_S i,.student_S i{
 	font-style:normal;
 	float:right;
 	margin-right:20px;
