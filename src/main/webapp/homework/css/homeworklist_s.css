@@ -16,6 +16,9 @@ input{
 	top:0;
 	top:0;
 }
+.state_s{
+	margin-left:20px;
+}
 .hwHeader{
 	height: 88px;
 	margin-bottom: 18px;
@@ -680,7 +683,7 @@ html body .esc_s{
 	background: #fff;
 	text-align: center;
 	border-radius: 5px;
-	margin-right: 10px;
+	margin-right: 20px;
 	display: inline-block;
 }
 .hwS{

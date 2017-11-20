@@ -286,7 +286,7 @@ $(function(){
                     }
                     var rankListHtml='<tr><td class="check-td"><i class="check-box checked" data-stuNo="'+items.studentNo+'"></i></td><td><span class="'+rankCss+'">'+items.ranking+'</span></td>'
                         +'<td>'+items.studentName+'</td><td style="text-align: left;padding-left: 47px;">'+items.grade+'</td>'
-                        +'<td style="text-align: left; padding-left: 20px;"><i class="change-state '+floatGradeCss+'"></i>'+parseInt(Math.abs(gradeFloat))+'分</td>'
+                        +'<td style="text-align: left; padding-left: 20px;"><i class="change-state '+floatGradeCss+'"></i>'+Math.abs(gradeFloat)+'分</td>'
                         +'<td style="text-align: left; padding-left: 20px;"><i class="change-state '+floatRankCss+'"></i>'+parseInt(Math.abs(rankFloat))+'名</td>'
                         +'<td><a class="link-to" href="reportstu_t.html?studentNo='+items.studentNo+'&tCode='+$('.main-content').attr('teststate')+'&studentName='+items.studentName+'"></a></td>'
                         +'</tr>';

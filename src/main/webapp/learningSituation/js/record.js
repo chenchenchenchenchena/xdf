@@ -361,22 +361,19 @@ $(function () {
     })
     //录入表单
     $(".scoreTitle input").keyup(function(){
-        if(parseInt($(".scoreTitle input").val()) > parseInt($(".totalScore").val())){
-            $(".scoreTitle input").val("");
-        }
-        if($(".scoreTitle input").val().length>=4){
-            $(".scoreTitle input").val("");
-        }
-        var slength=$(".scoreTitle input").val().length;
-        if(slength>=2){
-            var r=$(".scoreTitle input").val().substring(0,1);
-            if(r==0){
-                var	m =$(".scoreTitle input").val().substring(1,slength);
-                $(".scoreTitle input").val(m);
+        if($(".scoreTitle input").val()!=''){
+            if(parseFloat($(".scoreTitle input").val()) > parseFloat($(".totalScore").val())){
+                $(".scoreTitle input").val(null)
             }
         }
-
-    })
+        var html_ = $(".scoreTitle input").val();
+        if(html_.indexOf('.')!=-1){
+            var behind = html_.substr(html_.indexOf('.')+1,html_.length-html_.indexOf('.'))
+            if(behind.length>=2){
+                $(".scoreTitle input").val(null)
+            }
+        }
+    });
     //满分表单
     $(".totalScore").blur(function(){
         if($(".totalScore").val().length>=4||parseInt($(".totalScore").val())<10||parseInt($(".totalScore").val())>999){
@@ -487,7 +484,7 @@ $(function () {
                         "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
                         "studentNo": $(".scoreList dl").eq(i).find("dd").eq(1).html(),
                         "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
-                        "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())
+                        "realGrade": parseFloat($(".scoreList dl").eq(i).find("dt").html())
                     }
                     var studentid={
                         "flag": $(".scoreList dl").eq(i).find("dd").eq(2).html(),
@@ -496,7 +493,7 @@ $(function () {
                     var pushStu={
                         "title":"亲爱的"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"家长，"+$(".scoreList dl").eq(i).find("dd").eq(0).html()+"同学本次考试成绩如下：",
                         "studentName": $(".scoreList dl").eq(i).find("dd").eq(0).html(),
-                        "realGrade": parseInt($(".scoreList dl").eq(i).find("dt").html())+"分",
+                        "realGrade": parseFloat($(".scoreList dl").eq(i).find("dt").html())+"分",
                         "sNo": $(".scoreList dl").eq(i).find("dd").eq(1).html()
                     }
                     pushStuent.push(pushStu);
@@ -898,7 +895,6 @@ $(function () {
                 j--;
             }
         }
-        alert(JSON.stringify(pushinfo))
         return pushinfo;
     }
     //清缓存

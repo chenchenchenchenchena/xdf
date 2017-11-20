@@ -1379,7 +1379,14 @@ $(function () {
         if (parseInt($(this).val()) > 100) {
             $(this).val('100')
         }
-    })
+        var html_ = $(this).val();
+        if(html_.indexOf('.')!=-1){
+            var behind = html_.substr(html_.indexOf('.')+1,html_.length-html_.indexOf('.'))
+            if(behind.length>=2){
+                $(this).val(html_.substr(0,html_.indexOf('.')+2))
+            }
+        }
+    });
     function cnv(index,id,num){
         clearInterval(times);
         var bian = index;    //这里改数值~
