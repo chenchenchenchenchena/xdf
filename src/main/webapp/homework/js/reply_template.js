@@ -36,6 +36,19 @@ $(function(){
             });
         }
     });
+    //获取模版列表
+    var listParams = {
+        'teacherEmail':location.terEmail
+    };
+    ajaxRequest("POST",homework_s.get_tempList,listParams,dealTempListData(e));
+    /**
+     * 处理模版列表返回数据
+     * @param e
+     */
+    function dealTempListData(e){
+        console.log(e);
+    }
+
 
     /**
      * 编辑
