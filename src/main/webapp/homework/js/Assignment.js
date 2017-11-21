@@ -11,7 +11,11 @@ $(function () {
     } else {
         $('#image_s').show();
     }
-
+    //修改作业 隐藏学生
+    if(sessionStorage.Classname_x){
+        $('.student_S').hide();
+        $('.Choice_s input').css('margin-top','-90px')
+    }
     var urlPush = '';
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
@@ -32,9 +36,20 @@ $(function () {
         'url': urlPush,
         'templateId': TemplateId_home
     };
+
     var layer1, layer2, loading;
-
-
+    var className = '';
+    var classCode = '';
+    //作业选择学生
+    $('.student_S').on('touchend',function(){
+        if(classCode==''){
+            layer.msg('请先选择班级');
+            return false;
+        };
+        sessionStorage.classCode_tstu = classCode;
+        sessionStorage.className_tstu = className;
+        location.href = 'home_student.html';
+    });
     //设置当天默认值
     $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     //获取班级信息
@@ -43,10 +58,28 @@ $(function () {
             $('.load_t').hide();
             return false;
         }
-        var className = e.data;
-        for (var a = 0; a < className.length; a++) {
-            $('.class_name ul').append('<li classCode="' + className[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className[a].ClassName + '</span>（'+className[a].ClassCode+'）</b></li>')
+        var className_ = e.data;
+        for (var a = 0; a < className_.length; a++) {
+            $('.class_name ul').append('<li classCode="' + className_[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className_[a].ClassName + '</span>（'+className_[a].ClassCode+'）</b></li>')
         }
+        //选择完毕
+        if(getRequest()['checked']==1){
+            classCode =  sessionStorage.classCode_tstu;
+            className =  sessionStorage.className_tstu;
+            var classCode_ =  sessionStorage.classCode_tstu.split(',');
+            $('.class_s i').html('已选择'+classCode_.length+'个班' + sessionStorage.className_tstu + ';');
+            $('.class_name p i').html(classCode_.length);
+            for(var i = 0;i<classCode_.length;i++){
+               $('.class_name li[classcode="'+classCode_[i]+'"]').find('img').attr('src','images/C0503.png');
+            }
+            if(sessionStorage.Stuname.length<15){
+                $('.student_S i').html( sessionStorage.Stuname.substr(0,15))
+            }else{
+                $('.student_S i').html( sessionStorage.Stuname.substr(0,15)+'...')
+            }
+            homeworksubm.studentInfos = JSON.parse(sessionStorage.SelectStu_)
+        }
+
         if (sessionStorage.Classname_x) {
 
 
@@ -101,6 +134,8 @@ $(function () {
         $('.load_t').hide();
     });
 
+
+
     function showUpdataImage(url) {
 
         var str = "<li><span class='stuImg' img-index='" + imgCount + "'></span><img src='" + url + "'/></li>";
@@ -124,6 +159,9 @@ $(function () {
     });
 
     $(document).on('tap', '.class_name li', function () {
+        sessionStorage.removeItem('SelectStu_');
+        homeworksubm.studentInfos = [];
+        $('.student_S i').html('全部');
         var html_ = $('.class_name i').html();
         if ($(this).find('img').attr('src') == 'images/C05_06.png') {
             $(this).find('img').attr('src', 'images/C0503.png');
@@ -136,8 +174,7 @@ $(function () {
         }
     });
 
-    var className = '';
-    var classCode = '';
+
     //确认班级
     $('.class_sub').on('touchend', function () {
         className = '';
@@ -260,7 +297,8 @@ $(function () {
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
-        $(".areyok").hide()
+        $(".areyok").hide();
+        $('.big_back').hide();
     });
     //提交作业
     $('.areyok input:last-of-type').on('touchend', function () {
@@ -426,8 +464,14 @@ $(function () {
                 $('.erro').show();
             })
         } else {
+            className =  sessionStorage.className_tstu;
+            if(sessionStorage.className_tstu){
+                var class_n = sessionStorage.className_tstu.replace(/\；/g, ',').substr(0, className.length - 1);
+
+            }else{
+                var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
+            }
             var class_c = classCode;
-            var class_n = className.replace(/\；/g, ',').substr(0, className.length - 1);
             arr_s = arr_voice.concat(arr_image);
             homeworksubm.classCode = class_c;
             homeworksubm.className = class_n;
@@ -439,6 +483,10 @@ $(function () {
                 $('.areyok input:last-of-type').css('background','#00ba97');
                 $('.Submit_s').css('background', '#ccc');
                 if (e.result == true) {
+                    sessionStorage.removeItem('Stuname');
+                    sessionStorage.removeItem('classCode_tstu');
+                    sessionStorage.removeItem('className_tstu');
+                    sessionStorage.removeItem('Stuname');
                     $('.areyok').hide();
                     $('.big_back').show();
                     $('.succ').show();
