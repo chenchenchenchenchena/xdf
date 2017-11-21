@@ -544,6 +544,7 @@ $(function () {
      * 提交接口实现
      */
     function tempCommit(){
+        var text_content = $('.teBox').val();
         arr_s = arr_voice.concat(arr_image);
         var params = {
             'id':tempId,
