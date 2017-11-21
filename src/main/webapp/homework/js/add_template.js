@@ -555,7 +555,7 @@ $(function () {
             'homeworkReplyTemplateFiles':arr_s
         };
         loading = layer.load();
-        ajaxRequest("POST",homework_s.temp_commit,params,function(e){
+        ajaxRequest("POST",homework_s.temp_commit,JSON.stringify(params),function(e){
             layer.close(loading);
             if(e.code == 200){
                 layer.msg(e.msg);

@@ -40,7 +40,7 @@ $(function(){
     var listParams = {
         'teacherEmail':location.terEmail
     };
-    ajaxRequest("POST",homework_s.get_tempList,listParams,dealTempListData(e));
+    ajaxRequest("POST",homework_s.get_tempList,listParams,dealTempListData());
     /**
      * 处理模版列表返回数据
      * @param e
