@@ -5,7 +5,7 @@
 
 $(function(){
     $('.load_t').show();        
-    
+    var Data_all;
     if(!sessionStorage.openid){
         wechatCode(location.href);
     };
@@ -91,37 +91,93 @@ $(function(){
             }
             homework() // 作业率请求
     });
+    var temporary = false;
     $('.switch_').on('touchend',function(){
-
+        if(temporary){
+            return;
+        }
+        temporary = true;
+        setTimeout(function(){
+            temporary = false;
+        },700);
+        if($(this).attr('checked')){
+            Percentage(Data_all);
+            $(this).attr('checked',false)
+        }else{
+            Per_all(Data_all);
+            $(this).attr('checked',true)
+        }
     });
 
     function homework(){
         ajax_S(url.t_houehome,less_need_,function(e){
-            if(e.result!=false&&e.data.length!=0){
-                cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37')
-                cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a')
-                cnv('can_h',parseInt(e.dzsumcorrectReplyt*100),'#6ab4ff')
-                //提交率
-                $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt*100)+'%')
-                $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt*100)+'%')
-                //批复率
-                $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt*100)+'%')
-                if(e.dzpfnum==0){
-                    $('.sdpfsumReplyt').siblings('p').html('电子：0%')
-                }
-                //正确率
-                $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
-                $('.canvs_more li').eq(0).siblings().remove();
-                for(var i = 0;i<e.data.length;i++){
-                    $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.data[i].classCode+'" class="hw_class">'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
-                }
-            }else{
-                $('.no-data').show();
-                $('.no-data p').html(e.message);
-                $('.canvs_hour_big div').eq(0).hide();
-            }
-        $('.load_t').hide()
+            Data_all = e;
+            Percentage(Data_all)
         })
+    };
+    function Percentage(Data_ALL){
+        if(Data_ALL.result!=false){
+            $('.canvs_hour').find('h4').eq(0).html('总提交率');
+            $('.canvs_hour').find('h4').eq(1).html('总批复率');
+            $('.canvs_more li').eq(0).find('span').eq(2).html('提交率');
+            $('.canvs_more li').eq(0).find('span').eq(3).html('批复率');
+            var e = Data_ALL.Data[0];
+            //百分比
+            cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37','%');
+            cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a','%');
+            cnv('can_h',parseInt(e.dzsumcorrectReplyt*100),'#6ab4ff','%');
+            //提交率
+            $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt*100)+'%');
+            $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt*100)+'%');
+            //批复率
+            $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt*100)+'%');
+            if(e.dzpfnum==0){
+                $('.sdpfsumReplyt').siblings('p').html('电子：0%')
+            }
+            //正确率
+            $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
+            $('.canvs_more li').eq(0).siblings().remove();
+            for(var i = 0;i<e.data.length;i++){
+                $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.data[i].classCode+'" class="hw_class">'+e.data[i].className+'</span><span>'+e.data[i].classCode+'</span><span>'+parseInt(e.data[i].classcommitReplyt*100)+'%</span><span>'+parseInt(e.data[i].classcorrectReplyt*100)+'%</span><span>'+parseInt(e.data[i].classDzCorcsReplyt*100)+'%</span></li>')
+            }
+        }else{
+            $('.no-data').show();
+            $('.no-data p').html(e.message);
+            $('.canvs_hour_big div').eq(0).hide();
+        }
+        $('.load_t').hide()
+    }
+    function Per_all(Data_ALL){
+        if(Data_ALL.result!=false){
+            $('.canvs_hour').find('h4').eq(0).html('总提交量');
+            $('.canvs_hour').find('h4').eq(1).html('总批复量');
+            $('.canvs_more li').eq(0).find('span').eq(2).html('提交量');
+            $('.canvs_more li').eq(0).find('span').eq(3).html('批复量');
+            var e = Data_ALL.DataInfos[0];
+            //百分比
+            cnv('can_o',parseInt(e.sumcommitReplyt),'#ffbb37','');
+            cnv('can_t',parseInt(e.sdpfsumReplyt),'#ff6a6a','');
+            cnv('can_h',parseInt(e.dzsumcorrectReplyt),'#6ab4ff','');
+            //提交率
+            $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt));
+            $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt));
+            //批复率
+            $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt));
+            if(e.dzpfnum==0){
+                $('.sdpfsumReplyt').siblings('p').html('电子：0')
+            }
+            //正确率
+            $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
+            $('.canvs_more li').eq(0).siblings().remove();
+            for(var i = 0;i<e.dataInfo.length;i++){
+                $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.dataInfo[i].classCode+'" class="hw_class">'+e.dataInfo[i].className+'</span><span>'+e.dataInfo[i].classCode+'</span><span>'+parseInt(e.dataInfo[i].classcommitReplyt)+'</span><span>'+parseInt(e.dataInfo[i].classcorrectReplyt)+'</span><span>'+parseInt(e.dataInfo[i].classDzCorcsReplyt)+'</span></li>')
+            }
+        }else{
+            $('.no-data').show();
+            $('.no-data p').html(e.message);
+            $('.canvs_hour_big div').eq(0).hide();
+        }
+        $('.load_t').hide()
     }
     function lessontime(){
         //获取月课时 日课时
@@ -186,10 +242,8 @@ $(function(){
     $('.big_center').on('touchend',function(){
         event.stopPropagation();
     })
-    // cnv('can_o')
-    
     //环形图
-    function cnv(id,num,color){
+    function cnv(id,num,color,Per){
         var bian = 0    //这里改数值~
         var canvas = document.getElementById(id);
         var ctx = canvas.getContext("2d");
@@ -203,12 +257,12 @@ $(function(){
             ctx.lineWidth=4;
             ctx.arc(W/2,H/2,80,0,Math.PI*2,false);
             ctx.stroke();
-            
+
             var r = bian*2*Math.PI/100;
             ctx.beginPath();
-            var linear = ctx.createLinearGradient(100,100,200,100); 
-            linear.addColorStop(0,color); 
-            linear.addColorStop(1,color); 
+            var linear = ctx.createLinearGradient(100,100,200,100);
+            linear.addColorStop(0,color);
+            linear.addColorStop(1,color);
             ctx.strokeStyle =linear;
 
             ctx.lineCap = 'round'
@@ -217,7 +271,7 @@ $(function(){
             ctx.stroke();
             ctx.fillStyle="#333";
             ctx.font="34px abc";
-            text = num+"%";
+            text = num+''+Per;
             text_w = ctx.measureText(text).width;
             ctx.fillText(text,W/2 - text_w/2,H/2+15);
         }
