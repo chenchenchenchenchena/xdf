@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../common/css/base.css"/>
     <link rel="stylesheet" href="css/homeworklist_s.css"/>
     <link rel="stylesheet" href="css/hwcommon.css"/>
+    <link rel="stylesheet" href="css/template.css"/>
     <script src="../common/js/jquery.js"></script>
     <script src="../common/js/jweixin-1.2.0.js"></script>
     <script src="js/wx.js"></script>
@@ -20,74 +21,6 @@
     <script src="../common/js/scale.js"></script>
     <script src="js/reply_template.js"></script>
     <script src="js/voice_check.js"></script>
-    <style>
-        .temp_list li {
-            position: relative;
-            transition: 1s all ease;
-            overflow: hidden;
-        }
-        .item_temp {
-            background: #ffffff;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 30px;
-            margin-top: 20px;
-        }
-        .item_temp p{
-            font-size: 28px;
-            margin-top: 20px;
-        }
-        .voiceBox{
-            margin-top: 20px;
-        }
-
-        .remove_temp {
-            transition: 1s all ease;
-            width: 240px;
-            height: 460px;
-            position: absolute;
-            top: 0px;
-            right: -270px;
-
-        }
-
-        .remove_temp span {
-            display: block;
-            float: left;
-            width: 50%;
-            height: 460px;
-            background: #fd9840;
-            color: #fff;
-            font-size: 30px;
-            line-height: 460px;
-            /*_padding-bottom:1000px;*/
-            text-align: center;
-            border: none;
-        }
-
-        .remove_temp .delete_s {
-            background: #fe6464;
-        }
-
-        .eBtn {
-            width: 690px;
-            height: 88px;
-            background: #11bf9e;
-            text-align: center;
-            line-height: 88px;
-            font-size: 32px;
-            color: #fff;
-            margin: 30px 0 0 30px;
-            border: none;
-            outline: none;
-            border-radius: 10px;
-            display: block;
-        }
-        .padding-no{
-            margin-top: 0px;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body class="list_t">
 <div class="empty" style="display:none;">
@@ -123,7 +56,7 @@
             <div><img src="images/error-image.png" alt=""></div>
         </div>
         <img class="loading-back" src="../common/images/loading.gif" style="display: none;">
-        <div class="remove_temp"><span class="changeHw">编辑</span><span class="delete_s">删除</span></div>
+        <div class="remove_temp"><span class="edit_temp">编辑</span><span class="delete_temp">删除</span></div>
     </li>
     <li class="item_temp">
         <p>回答的非常好！</p>
@@ -142,7 +75,7 @@
             <div><img src='images/error-image.png' alt=""></div>
         </div>
         <img class="loading-back" src="../common/images/loading.gif" style="display: none;">
-        <div class="remove_temp"><span class="changeHw">编辑</span><span class="delete_s">删除</span></div>
+        <div class="remove_temp"><span class="edit_temp">编辑</span><span class="delete_temp">删除</span></div>
     </li>
 </ul>
 <div>
@@ -154,5 +87,10 @@
     <input type="button" value="取消" style="margin-left: 2px;">
     <input type="button" value="确认">
 </div>
+<!--<div class="delete" style="display: none;"><img src="images/redtan.png?v=e8c7965"/>-->
+    <!--<p>确定删除</p>-->
+    <!--<button class="cancelBtn">取消</button>-->
+    <!--<button class="confirmBtn">确定</button>-->
+<!--</div>-->
 </body>
 </html>

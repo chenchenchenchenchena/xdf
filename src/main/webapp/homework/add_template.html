@@ -9,6 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="full-screen" content="yes"/>
     <link rel="stylesheet" href="../common/css/base.css"  />
+    <link rel="stylesheet" href="css/hwcommon.css"  />
     <link rel="stylesheet" href="css/dohomework_s.css"  />
     <link rel="stylesheet" href="css/homeworklist_s.css"  />
     <script src="../common/js/jquery.js"></script>
@@ -19,6 +20,20 @@
     <script src="../common/js/scale.js"></script>
     <script src="js/voice_check.js"></script>
     <script src="js/add_template.js"></script>
+    <style>
+        .imgBox div{
+            margin: 0 14px 30px 0!important;
+        }
+        .layui-layer{
+            padding:0!important;
+            font-size:40px;
+            line-height:80px;
+        }
+        .layui-layer .layui-layer-content{
+            font-size: 40px !important;
+            line-height: 80px !important;
+        }
+    </style>
 </head>
 <body>
 <div class="answer" style="display: block;">
@@ -44,12 +59,12 @@
     <div id="record"></div>
 </div>
 <div class="big_back"></div>
-<div class="tips-box delete-voice" style="display: none;"><img src="images/redtan.png?v=e8c7965"/>
+<div class="tips-box delete-voice" style="display: none;"><img style="margin-top: 0px;" src="images/redtan.png?v=e8c7965"/>
     <p>确定删除语音</p>
     <button class="cancelBtn">取消</button>
     <button class="confirmBtn">确定</button>
 </div>
-<div class="tips-box delete-img" style="display: none;"><img src="images/redtan.png?v=e8c7965"/>
+<div class="tips-box delete-img" style="display: none;"><img style="margin-top: 0px;" src="images/redtan.png?v=e8c7965"/>
     <p>确定删除图片</p>
     <button class="cancelBtn">取消</button>
     <button class="confirmBtn">确定</button>
