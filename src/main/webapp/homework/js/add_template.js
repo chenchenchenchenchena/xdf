@@ -212,7 +212,8 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': sessionStorage.classCode_s,
+            'templateFlag':"1"
         };
         ajaxRequest("Post", homework_s.uploadAudio, cbconfig, function (e) {
             $('.big_back').hide();
@@ -224,7 +225,8 @@ $(function () {
                         'fileName': e.data.fileName,
                         'fileType': e.data.fileType,
                         'fileSize': e.data.fileSize,
-                        'diskFilePath': e.data.diskFilePath
+                        'diskFilePath': e.data.diskFilePath,
+                        'uploadUser':localStorage.teacherName
                     });
                     layer.open({
                         type: 1,
@@ -373,7 +375,8 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': localStorage.schoolId,
-            'classId': sessionStorage.classCode_s
+            'classId': sessionStorage.classCode_s,
+            'templateFlag':"1"
         };
         ajaxRequest("Post", homework_s.uploadImage, cbconfig, function (e) {
             $('.big_back').hide();
@@ -387,7 +390,8 @@ $(function () {
                     'fileName': e.data.fileName,
                     'fileType': e.data.fileType,
                     'fileSize': e.data.fileSize,
-                    'diskFilePath': e.data.diskFilePath
+                    'diskFilePath': e.data.diskFilePath,
+                    'uploadUser':localStorage.teacherName
                 });
             }
 
@@ -515,7 +519,20 @@ $(function () {
         }
         arr_s = arr_voice.concat(arr_image);
         var params = {
-
-        }
+            'id':tempId,
+            'schoolId':localStorage.schoolId,
+            'teacherEmail':localStorage.terEmail,
+            'teacherName':localStorage.teacherName,
+            'description':encodeURIComponent(text_content).replace(/'\+'/,'%20'),
+            'homeworkReplyTemplateFiles':arr_s
+        };
+        ajaxRequest("POST",homework_s.temp_commit,params,function(e){
+            if(e.code == 200){
+                layer.msg(e.msg);
+                history.go(-1);
+            }else {
+                layer.msg(e.msg);
+            }
+        });
     });
 })

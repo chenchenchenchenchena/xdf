@@ -154,6 +154,7 @@ var homework_s = {
     'uploadAudio':url_o + "upload/uploadAudio.do",//上传语音接口
     'getMp3Url':url_o + "upload/getMp3Url.do",//下载语音播放地址接口
     'uploadImage':url_o + "upload/uploadFileByWeiChat.do",//上传图片接口
+    'temp_commit':url_o + "teacherData/insertAndEditHomeworkReplyTemplate.do",//模版上传接口
 
 };
 var pcweb = {
