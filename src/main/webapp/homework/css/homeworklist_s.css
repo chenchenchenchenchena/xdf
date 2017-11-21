@@ -540,10 +540,15 @@ html body .tealist_s .more_so{
 .classEmpty img,.classTime img,.classKnow img,.classHome img,.classText img{
 	margin: 42px 0 15px 0;
 }
-
+.classname{
+	font-size: 32px;
+	color: #000;
+	padding-left:20px;
+	margin-bottom:20px;
+}
 .Choice_s input{
 	position: absolute;
-	margin-top: -90px;
+	margin-top: -180px;
 	width: 95%;
 	height: 90px;
 	opacity: 0;
