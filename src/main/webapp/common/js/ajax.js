@@ -306,7 +306,7 @@ function ajaxRequest(typeIn, targetUrl, requestData, successCallback,errof) {
         
         error: function (err) {
             // failureCallback(msg);
-            errof();
+            errof(err);
             console.log("err:"+err);
         },
         complete:function(XMLHttpRequest,status){
