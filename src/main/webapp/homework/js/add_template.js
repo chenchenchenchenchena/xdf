@@ -17,6 +17,10 @@ $(function () {
 
     var delVoiceLayer;
     var delImageLayer;
+    var confirmSubLayer;
+
+    var tempId = "";//为空则表示当前是新建模版，不为空则表示修改模版
+    var loading;
 
     /*---------全局参数定义--------end*/
 
@@ -517,6 +521,30 @@ $(function () {
             //如果三者都为空，则不能提交
             layer.msg('请输入内容');
         }
+        //提交二次确认
+        confirmSubLayer = layer.open({
+            type: 1,
+            area: ['548px', '345px'],
+            shade: [0.2, '#000'],
+            title: '',
+            skin: '',
+            content: $(".confirm-sub")
+        });
+    });
+    //提交二次确认---确认
+    $(document).on('touchend', '.confirm-sub .confirmBtn', function () {
+        tempCommit();
+    });
+    //提交二次确认---取消
+    $(document).on('touchend', '.confirm-sub .cancelBtn', function () {
+        layer.close(confirmSubLayer);
+    });
+
+    /**
+     * 提交接口实现
+     */
+    function tempCommit(){
+        var text_content = $('.teBox').val();
         arr_s = arr_voice.concat(arr_image);
         var params = {
             'id':tempId,
@@ -526,7 +554,9 @@ $(function () {
             'description':encodeURIComponent(text_content).replace(/'\+'/,'%20'),
             'homeworkReplyTemplateFiles':arr_s
         };
-        ajaxRequest("POST",homework_s.temp_commit,params,function(e){
+        loading = layer.load();
+        ajaxRequest("POST",homework_s.temp_commit,JSON.stringify(params),function(e){
+            layer.close(loading);
             if(e.code == 200){
                 layer.msg(e.msg);
                 history.go(-1);
@@ -534,5 +564,5 @@ $(function () {
                 layer.msg(e.msg);
             }
         });
-    });
+    }
 })
