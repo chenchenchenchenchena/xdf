@@ -133,6 +133,8 @@ $(function(){
             $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt*100)+'%');
             if(e.dzpfnum==0){
                 $('.sdpfsumReplyt').siblings('p').html('电子：0%')
+            }else{
+                $('.sdpfsumReplyt').siblings('p').html('电子：100%')
             }
             //正确率
             $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
@@ -157,7 +159,6 @@ $(function(){
             //百分比
             cnv('can_o',parseInt(e.sumcommitReplyt),'#ffbb37','');
             cnv('can_t',parseInt(e.sdpfsumReplyt),'#ff6a6a','');
-            cnv('can_h',parseInt(e.dzsumcorrectReplyt),'#6ab4ff','');
             //提交率
             $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt));
             $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt));
@@ -165,12 +166,13 @@ $(function(){
             $('.sdpfsumReplyt').html('手动：'+parseInt(e.sdpfsumReplyt));
             if(e.dzpfnum==0){
                 $('.sdpfsumReplyt').siblings('p').html('电子：0')
+            }else{
+                $('.sdpfsumReplyt').siblings('p').html('电子：'+parseInt(e.dzsumcommitReplyt)+'')
             }
             //正确率
-            $('.dzsumcorrectReplyt').html('电子：'+parseInt(e.dzsumcorrectReplyt*100)+'%')
             $('.canvs_more li').eq(0).siblings().remove();
             for(var i = 0;i<e.dataInfo.length;i++){
-                $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.dataInfo[i].classCode+'" class="hw_class">'+e.dataInfo[i].className+'</span><span>'+e.dataInfo[i].classCode+'</span><span>'+parseInt(e.dataInfo[i].classcommitReplyt)+'</span><span>'+parseInt(e.dataInfo[i].classcorrectReplyt)+'</span><span>'+parseInt(e.dataInfo[i].classDzCorcsReplyt)+'</span></li>')
+                $('.canvs_more ul').append('<li class="go_homework"><span data-classCode="'+e.dataInfo[i].classCode+'" class="hw_class">'+e.dataInfo[i].className+'</span><span>'+e.dataInfo[i].classCode+'</span><span>'+parseInt(e.dataInfo[i].classcommitReplyt)+'</span><span>'+parseInt(e.dataInfo[i].classcorrectReplyt)+'</span><span>'+parseInt(Data_ALL.Data[0].data[i].classDzCorcsReplyt*100)+'%</span></li>')
             }
         }else{
             $('.no-data').show();
