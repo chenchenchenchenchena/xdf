@@ -54,13 +54,21 @@ $(function () {
 
         }
     });
+
+    loading = layer.load();
     //获取模版列表
     var listParams = {
         'teacherEmail': localStorage.terEmail
     };
-    ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData);
+    ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData,function(e){
+        layer.msg("模版信息加载失败");
+        layer.close(loading);
+    });
 
 
+    /**
+     * 文件获取失败，点击重新获取
+     */
     $(document).on('tap', '.item_temp .load_fail', function () {
         $(this).parent().find('.loading-back').show();
         $(this).hide();
@@ -135,6 +143,8 @@ $(function () {
  * @param e
  */
 function dealTempListData(e) {
+
+    layer.close(loading);
     if (e.code == 200) {
         var list = e.data;
         if (list != undefined && list.length != 0) {
@@ -201,17 +211,13 @@ function getFileInfo(tempId, k) {
                 }
 
             }
-            $('.loading-back').hide();
-        }, errorFile);
+        }, function(e){
+
+            $(".temp_list .item_temp").eq(k).find('.loading-back').hide();
+            $(".temp_list .item_temp").eq(k).find('.load_fail').show();
+        });
 
     } else {
-        $('.loading-back').hide();
+        $(".temp_list .item_temp").eq(k).find('.loading-back').hide();
     }
-}
-
-/**
- * 文件获取失败处理
- */
-function errorFile() {
-    $('.load_fail').show();
 }
