@@ -1414,5 +1414,58 @@ $(function () {
     $('.template_ic').click(function(){
         location.href = 'reply_template.html';
     })
+    loadTemplate();
+    /*模版返回,加载模版*/
+    function loadTemplate(){
+        if(sessionStorage.template){
+            var templateData = JSON.parse(sessionStorage.template);//获取模版信息
+            sessionStorage.removeItem('template');
+            //首先获取未提交区域的内容信息
+            var notCommitContent = $('.answer .teBox').val();
+            var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
+            var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
+            //将文本信心合并
+            notCommitContent = notCommitContent + tempContent;
+            getTempFileInfo(JSON.stringify(templateFileList))
+        }
+    }
+    /**
+     * 调取接口获取文件展示信息
+     * @param e
+     */
+    function getTempFileInfo(templateFile) {
+        var templateFileList = JSON.parse(templateFile);
+        var fileFullPath = [];
+        for (var j = 0; j < templateFileList.length; j++) {
+            fileFullPath.push({"fullPath": templateFileList[j].diskFilePath});
+        }
+        if (fileFullPath.length != 0) {
+
+            var params = {
+                'fileSfullPath': [],
+                'fileTfullPath': [],
+                'fileRfullPath': fileFullPath
+            };
+            ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), function(e){
+                if(e.code == 200){
+                    var fileR = e.data.fileR;
+                    $('.notsubmit #record_audio_box li').remove();
+                    recordCount = 0;
+                    for(var i = 0;i<fileR.length;i++){
+                        var fileType = fileR[i].fileType;
+                        var playTime = fileR[i].playTime;
+                        if(fileType == "mp3"){
+                            showAudio(playTime, url_o + fileR[i].relativePath, $('#record_audio_box'), recordCount, 1);
+                            recordCount++;
+                        }else {
+                            showUpdataImage(fileR[i].fileUrl);
+                        }
+                    }
+
+                }
+            }, errorFile);
+
+        }
+    }
 });
 

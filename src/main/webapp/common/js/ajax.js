@@ -156,6 +156,7 @@ var homework_s = {
     'uploadImage':url_o + "upload/uploadFileByWeiChat.do",//上传图片接口
     'temp_commit':url_o + "teacherData/insertAndEditHomeworkReplyTemplate.do",//模版上传接口
     'get_tempList':url_o + "teacherData/queryHomeworkReplyTemplateAll.do",//获取模版列表接口
+    'del_temp':url_o + "teacherData/deleteHomeworkReplyTemplate.do",//获取模版列表接口
 
 };
 var pcweb = {
