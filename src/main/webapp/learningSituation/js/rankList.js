@@ -267,7 +267,7 @@ $(function(){
                     if(items.lastGrade<=0){
                         gradeFloat = items.grade;
                     }else{
-                        gradeFloat = items.grade -  items.lastGrade;// 分数浮动
+                        gradeFloat = parseInt(items.grade -  items.lastGrade);// 分数浮动
                     }
                     if(items.lastRanking<=0){
                         rankFloat = 0;
