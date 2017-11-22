@@ -26,12 +26,10 @@ $(function () {
                         $(this).css('margin-left', '-181px');
                         $(this).find('.remove_temp').css('right', '-0px');
                         $(this).parent().css('overflow', 'inherit');
-                        $(this).css('margin-left', '-50px');
                     } else if (begin_s - move_s <= -20) {
                         $(this).css('margin-left', '0px');
                         $(this).find('.remove_temp').css('right', '-270px');
                         $(this).parent().css('overflow', 'hidden');
-                        $(this).css('margin-left', '0');
                     }
                 }
 
