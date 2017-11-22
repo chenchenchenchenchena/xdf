@@ -7,7 +7,7 @@ var loading;
 
 $(function () {
 
-    $('.content').show();
+    $('.temp_list').show();
     $('.searchEmpty').hide();
     $('.reload').hide();
     //滑动事件
@@ -67,7 +67,7 @@ $(function () {
         layer.msg("模版信息加载失败");
         layer.close(loading);
         $('.reload').show();
-        $('.content').hide();
+        $('.temp_list').hide();
         $('.searchEmpty').hide();
     });
 
@@ -147,7 +147,7 @@ $(function () {
      * 重新加载页面
      */
     $('.reload img').click(function(){
-        $('.content').hide();
+        $('.temp_list').hide();
         window.location.reload();
     })
 
@@ -178,7 +178,7 @@ function dealTempListData(e) {
             }
         } else {
             $('.searchEmpty').show();
-            $('.content').hide();
+            $('.temp_list').hide();
         }
 
     }else{

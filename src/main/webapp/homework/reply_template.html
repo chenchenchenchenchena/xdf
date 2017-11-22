@@ -37,9 +37,10 @@
         .searchEmpty {
             width: 220px;
             margin: 110px auto 0;
-            height: 954px;
+            height: 937px;
             display: block;
         }
+
         .searchEmpty p {
             color: #aeadad;
             margin-left: 40px;
@@ -52,30 +53,24 @@
     </style>
 </head>
 <body class="list_t">
-<div class="content">
+<div class="searchEmpty" style="display: none;">
+    <img src="images/kong.png">
+    <p>暂无模版</p>
+</div>
 
-    <ul class="temp_list">
-    </ul>
-    <div class="sub">
-        <button class="eBtn">添加新模版</button>
-    </div>
-</div>
-<div class="reload" style="display:none;">
+<div class="reload" style="display:none;margin-bottom: 820px">
     <img src="images/reload.png"/>
-    <p style="margin-left: 22px;">请刷新重试</p>
+    <p>请刷新重试</p>
 </div>
-<div class="reload" style="display: none;">
-    <img src="images/reload.png"/>
-    <p>请重新加载</p>
+<ul class="temp_list">
+</ul>
+<div class="sub">
+    <button class="eBtn">添加新模版</button>
 </div>
 <div class="tips-box delete" style="display: none;"><img style="margin-top: 0px;" src="images/redtan.png"/>
     <p>确定删除</p>
     <button class="cancelBtn">取消</button>
     <button class="confirmBtn">确定</button>
-</div>
-<div class="searchEmpty" style="display: none;">
-    <img src="images/kong.png">
-    <p>暂无模版</p>
 </div>
 </body>
 </html>
