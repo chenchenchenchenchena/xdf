@@ -627,7 +627,8 @@ $(function () {
             layer.close(loading);
             if(e.code == 200){
                 layer.msg(e.msg);
-                history.go(-1);
+                //history.go(-1);
+                location.href = 'reply_template.html';
             }else {
                 layer.msg(e.msg);
             }

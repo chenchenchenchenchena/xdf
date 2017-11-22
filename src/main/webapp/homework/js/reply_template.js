@@ -41,16 +41,15 @@ $(function () {
             }
 
             $(document).on('touchend mouseup', '.temp_list li', function () {
-                if(flag == 0){
+                if (flag == 0) {
 
                     var d = $(this).find('.remove_temp').css('right');
-                    if(d == "0px"){
+                    if (d == "0px") {
                         //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
-                    }else {
+                    } else {
                         //整条item的点击事件
                         var tempId = $(this).attr('data-tempId');
-                        sessionStorage.template = sessionStorage.getItem(tempId);
-                        history.go(-1);
+                        goBack(tempId);
                     }
                 }
             });
@@ -63,7 +62,7 @@ $(function () {
     var listParams = {
         'teacherEmail': localStorage.terEmail
     };
-    ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData,function(e){
+    ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData, function (e) {
         layer.msg("模版信息加载失败");
         layer.close(loading);
         $('.reload').show();
@@ -146,12 +145,22 @@ $(function () {
     /**
      * 重新加载页面
      */
-    $('.reload img').click(function(){
+    $('.reload img').click(function () {
         $('.temp_list').hide();
         window.location.reload();
     })
 
 });
+
+function goBack(tempId) {
+    sessionStorage.template = sessionStorage.getItem(tempId);
+    setTimeout(function(){
+        //history.go(-1);
+        location.href = 'replydetail_t.html';
+    },500)
+}
+
+
 /**
  * 处理模版列表返回数据
  * @param e
@@ -181,7 +190,7 @@ function dealTempListData(e) {
             $('.temp_list').hide();
         }
 
-    }else{
+    } else {
 
     }
 
@@ -229,7 +238,7 @@ function getFileInfo(tempId, k) {
                 }
 
             }
-        }, function(e){
+        }, function (e) {
 
             $(".temp_list .item_temp").eq(k).find('.loading-back').hide();
             $(".temp_list .item_temp").eq(k).find('.load_fail').show();
