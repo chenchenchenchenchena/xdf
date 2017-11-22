@@ -21,7 +21,7 @@ $(function(){
         var Data = e.data;
         Class_stu = e.data;
         for(var k = 0;k<Data.length;k++){
-        $('.bi_stulist').append('<div class="stulist_"><h4 class="classname">'+classNmae_[k]+'</h4><div class="checked" classCode="'+Data[k].classCode+'"><h4>已选 <span><img src="images/stu_check.png" alt="">全选</span></h4><ul></ul></div><div class="check"><h4>待选 (点击添加到已选)</h4> <ul></ul> </div> </div>');
+        $('.bi_stulist').append('<div class="stulist_"><h4 class="classname">'+classNmae_[k]+'</h4><div class="checked" classCode="'+Data[k].classCode+'"><h4>已选 (点击添加到待选)<span><img src="images/stu_check.png" alt="">全选</span></h4><ul></ul></div><div class="check"><h4>待选 (点击添加到已选)</h4> <ul></ul> </div> </div>');
                 var Stu = Data[k].students;
                 for(var i = 0;i<Stu.length;i++){
                     if(sessionStorage.SelectStu_){
