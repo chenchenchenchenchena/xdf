@@ -7,8 +7,9 @@ var loading;
 
 $(function () {
 
-    $('.temp_list').show();
+    $('.content').show();
     $('.searchEmpty').hide();
+    $('.reload').hide();
     //滑动事件
     $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
@@ -65,6 +66,9 @@ $(function () {
     ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData,function(e){
         layer.msg("模版信息加载失败");
         layer.close(loading);
+        $('.reload').show();
+        $('.content').hide();
+        $('.searchEmpty').hide();
     });
 
 
@@ -143,7 +147,7 @@ $(function () {
      * 重新加载页面
      */
     $('.reload img').click(function(){
-        $('.temp_list').hide();
+        $('.content').hide();
         window.location.reload();
     })
 
@@ -174,7 +178,7 @@ function dealTempListData(e) {
             }
         } else {
             $('.searchEmpty').show();
-            $('.temp_list').hide();
+            $('.content').hide();
         }
 
     }else{
