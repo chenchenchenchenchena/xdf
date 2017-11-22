@@ -48,6 +48,7 @@ $(function () {
         };
         sessionStorage.classCode_tstu = classCode;
         sessionStorage.className_tstu = className;
+        sessionStorage.homeTime = $('.time_S i').html();
         location.href = 'home_student.html';
     });
     //设置当天默认值
@@ -64,13 +65,14 @@ $(function () {
         }
         //选择完毕
         if(getRequest()['checked']==1){
+            $('.time_S i').html(sessionStorage.homeTime);
             classCode =  sessionStorage.classCode_tstu;
             className =  sessionStorage.className_tstu;
             var classCode_ =  sessionStorage.classCode_tstu.split(',');
             $('.class_s i').html('已选择'+classCode_.length+'个班' + sessionStorage.className_tstu + ';');
             $('.class_name p i').html(classCode_.length);
             for(var i = 0;i<classCode_.length;i++){
-               $('.class_name li[classcode="'+classCode_[i]+'"]').find('img').attr('src','images/C0503.png');
+               $('.class_name li[class_namelasscode="'+classCode_[i]+'"]').find('img').attr('src','images/C0503.png');
             }
             if(sessionStorage.Stuname.length<15){
                 $('.student_S i').html( sessionStorage.Stuname.substr(0,15))
