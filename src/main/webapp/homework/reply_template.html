@@ -10,7 +10,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="full-screen" content="yes"/>
     <link rel="stylesheet" href="../common/css/base.css"/>
-    <link rel="stylesheet" href="css/dohomework_s.css"  />
+    <link rel="stylesheet" href="css/dohomework_s.css"/>
     <link rel="stylesheet" href="css/homeworklist_s.css"/>
     <link rel="stylesheet" href="css/hwcommon.css"/>
     <link rel="stylesheet" href="css/template.css"/>
@@ -23,37 +23,50 @@
     <script src="js/reply_template.js"></script>
     <script src="js/voice_check.js"></script>
     <style>
-        .layui-layer{
-            padding:0!important;
-            font-size:40px;
-            line-height:80px;
+        .layui-layer {
+            padding: 0 !important;
+            font-size: 40px;
+            line-height: 80px;
         }
-        .layui-layer .layui-layer-content{
+
+        .layui-layer .layui-layer-content {
             font-size: 40px !important;
             line-height: 80px !important;
+        }
+
+        .searchEmpty {
+            width: 220px;
+            margin: 110px auto 0;
+            height: 937px;
+            display: block;
+        }
+
+        .searchEmpty p {
+            color: #aeadad;
+            margin-left: 40px;
+            font-size: 32px;
+        }
+
+        .sub {
+            bottom: 22px;
         }
     </style>
 </head>
 <body class="list_t">
-<div class="empty" style="display:none;">
-    <img src="images/B01_03.png?v=b9e71f4"/>
-    <p style="margin-left: 22px;">当前没有作业</p>
+<div class="searchEmpty" style="display: none;">
+    <img src="images/kong.png">
+    <p>暂无模版</p>
 </div>
-<div class="reload" style="display:none;">
+
+<div class="reload" style="display:none;margin-bottom: 820px">
     <img src="images/reload.png"/>
-    <p style="margin-left: 22px;">请刷新重试</p>
+    <p>请刷新重试</p>
 </div>
 <ul class="temp_list">
 </ul>
-<div>
-<button class="eBtn">添加新模版</button>
+<div class="sub">
+    <button class="eBtn">添加新模版</button>
 </div>
-<!--<div class="erro">-->
-    <!--<img src="images/redtan.png" alt="">-->
-    <!--<p>确认删除？</p>-->
-    <!--<input type="button" value="取消" style="margin-left: 2px;">-->
-    <!--<input type="button" value="确认">-->
-<!--</div>-->
 <div class="tips-box delete" style="display: none;"><img style="margin-top: 0px;" src="images/redtan.png"/>
     <p>确定删除</p>
     <button class="cancelBtn">取消</button>
