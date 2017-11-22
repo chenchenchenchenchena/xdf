@@ -1,7 +1,7 @@
 /*---------全局参数定义--------start*/
 var currentDelId;//当前要删除的ID
 var delTempLayer;
-
+var touchViewFlag = 0;//判断是否是图片点击事件
 var loading;
 /*---------全局参数定义--------end*/
 
@@ -47,9 +47,13 @@ $(function () {
                     if (d == "0px") {
                         //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
                     } else {
-                        //整条item的点击事件
-                        var tempId = $(this).attr('data-tempId');
-                        goBack(tempId);
+                        if(touchViewFlag == 1){
+
+                        }else {
+                            //整条item的点击事件
+                            var tempId = $(this).attr('data-tempId');
+                            goBack(tempId);
+                        }
                     }
                 }
             });
@@ -83,6 +87,51 @@ $(function () {
     });
 
     /**
+     * 查看大图
+     */
+    $(document).on('touchend', '.imgBox img', function () {
+        touchViewFlag = 1;
+        var previewUrl = $(this).attr('data-id');
+        lookBigImage(previewUrl, true);
+    });
+
+    function lookBigImage(diskPath, saveServer) {
+        var params = {
+            'fullPath': diskPath,
+            'saveServer': saveServer
+        }
+        ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
+            var previewUrl = e;
+            //true:返回服务器所在的地址，false:返回云盘的预览地址
+            previewUrl = url_o + previewUrl;
+            lookBig(previewUrl);
+        });
+
+
+    }
+
+    function lookBig(previewUrl) {
+        $('.big_back_s').show();
+        $('.big_back_s img').attr('src', previewUrl);
+
+        $('.big_back_s img').load(function () {
+            $('.big_back_s img').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+            });
+        })
+        $('.big_back_s img').error(function () {
+            alert('图片加载失败，正在重新加载');
+            location.reload();
+        })
+    }
+
+    $(document).on('touchend', '.pinch-zoom', function () {
+        $('.big_back_s').hide();
+    });
+
+
+    /**
      * 编辑
      */
     $(document).on('touchend', '.edit_temp', function () {
@@ -106,6 +155,7 @@ $(function () {
             content: $(".delete")
         });
     });
+
     //删除模版-确定
     $(document).on('touchend', '.delete .confirmBtn', function () {
         layer.close(delTempLayer);
@@ -153,10 +203,10 @@ $(function () {
 
 function goBack(tempId) {
     sessionStorage.template = sessionStorage.getItem(tempId);
-    setTimeout(function(){
+    setTimeout(function () {
         //history.go(-1);
         location.href = 'replydetail_t.html';
-    },500)
+    }, 500)
 }
 
 
