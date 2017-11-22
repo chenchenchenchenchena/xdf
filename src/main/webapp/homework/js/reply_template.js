@@ -56,9 +56,11 @@ $(function () {
      * item点击事件
      */
     $(document).on('touchend', '.temp_list .item_temp', function () {
-        var tempId = $(this).attr('data-tempId');
-        sessionStorage.template = sessionStorage.getItem(tempId);
-        history.go(-1);
+        setTimeout(function () {
+            var tempId = $(this).attr('data-tempId');
+            sessionStorage.template = sessionStorage.getItem(tempId);
+            history.go(-1);
+        }, 300)
     });
 
     /**
