@@ -178,8 +178,8 @@ $(function(){
             if(flag != 3){
                 $('.mor_home').show();
             }
-
-            var list_s = e.data;
+            for(var j = 0;j<e.data.length;j++){
+            var list_s = e.data[j];
             $('.Prompt_s i').html(e.SumUpnotCorrect);
             for (var i = 0; i < list_s.length; i++) {
 
@@ -211,7 +211,7 @@ $(function(){
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
                 }
 
-            }
+            }}
         }, error);
     }
 
