@@ -1174,6 +1174,7 @@ $(function () {
     stopDrop();
     $('.esc_s').on('touchend', function () {
         clearInterval(time_s);
+        ber_L = true;
         $('.big_back_s').hide();
         $('.big_back_s canvas').hide();
         $('.big_back_s img').show();
