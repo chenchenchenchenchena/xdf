@@ -31,9 +31,9 @@ $(function () {
     /**
      * 判断是否是编辑模版
      */
-    if(sessionStorage.template){
+    if(sessionStorage.templateEdit){
         var templateData = JSON.parse(sessionStorage.template);//获取模版信息
-        sessionStorage.removeItem('template');
+        sessionStorage.removeItem('templateEdit');
         //首先获取未提交区域的内容信息
         var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
         var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表

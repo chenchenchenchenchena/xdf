@@ -67,7 +67,7 @@ $(function () {
     $(document).on('touchend', '.edit_temp', function () {
 
         var tempId = $(this).parent().parent().attr('data-tempId');
-        sessionStorage.template = sessionStorage.getItem(tempId);
+        sessionStorage.templateEdit = sessionStorage.getItem(tempId);
         location.href = "add_template.html";
     });
 
