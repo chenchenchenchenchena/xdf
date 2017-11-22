@@ -1262,6 +1262,7 @@ $(function () {
             str = canvas.toDataURL("image/jpeg", 0.5);
             if($('.notsubmit .imgBox li') != undefined && $('.notsubmit .imgBox li').length >= 3){
                 layer.msg('最多只能批复三张');
+                ber_L = true;
                 return false;
             }
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img isEdit='1' data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
