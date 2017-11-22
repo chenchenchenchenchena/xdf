@@ -6,6 +6,9 @@ var loading;
 /*---------全局参数定义--------end*/
 
 $(function () {
+
+    $('.temp_list').show();
+    $('.searchEmpty').hide();
     //滑动事件
     $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
@@ -33,14 +36,13 @@ $(function () {
                             $(this).parent().css('overflow', 'hidden');
                         }
                     }
-
                 });
             }
 
             $(document).on('touchend mouseup', '.temp_list li', function () {
                 if(flag == 0){
 
-                    var d = $(this).siblings().find('.remove_temp').css('right');
+                    var d = $(this).find('.remove_temp').css('right');
                     if(d == "0px"){
                         //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
                     }else {
@@ -137,6 +139,14 @@ $(function () {
         location.href = 'add_template.html';
     });
 
+    /**
+     * 重新加载页面
+     */
+    $('.reload img').click(function(){
+        $('.temp_list').hide();
+        window.location.reload();
+    })
+
 });
 /**
  * 处理模版列表返回数据
@@ -163,10 +173,14 @@ function dealTempListData(e) {
                 getFileInfo(tempId, i);
             }
         } else {
-            layer.msg("暂无模版");
+            $('.searchEmpty').show();
+            $('.temp_list').hide();
         }
 
+    }else{
+
     }
+
 }
 
 /**
