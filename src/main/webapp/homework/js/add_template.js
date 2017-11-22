@@ -29,6 +29,57 @@ $(function () {
     /*---------全局参数定义--------end*/
 
     /**
+     * 判断是否是编辑模版
+     */
+    if(sessionStorage.template){
+        var templateData = JSON.parse(sessionStorage.template);//获取模版信息
+        sessionStorage.removeItem('template');
+        //首先获取未提交区域的内容信息
+        var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
+        var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
+        $('.answer .teBox').val(tempContent);
+        getTempFileInfo(JSON.stringify(templateFileList));
+    }
+
+    /**
+     * 调取接口获取文件展示信息
+     * @param e
+     */
+    function getTempFileInfo(templateFile) {
+        var templateFileList = JSON.parse(templateFile);
+        var fileFullPath = [];
+        for (var j = 0; j < templateFileList.length; j++) {
+            fileFullPath.push({"fullPath": templateFileList[j].diskFilePath});
+        }
+        if (fileFullPath.length != 0) {
+
+            var params = {
+                'fileSfullPath': [],
+                'fileTfullPath': [],
+                'fileRfullPath': fileFullPath
+            };
+            ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), function(e){
+                if(e.code == 200){
+                    var fileR = e.data.fileR;
+                    recordCount = 0;
+                    for(var i = 0;i<fileR.length;i++){
+                        var fileType = fileR[i].fileType;
+                        var playTime = fileR[i].playTime;
+                        if(fileType == "mp3"){
+                            showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
+                            recordCount++;
+                        }else {
+                            showUpdataImage(fileR[i].fileUrl);
+                        }
+                    }
+
+                }
+            }, errorFile);
+
+        }
+    }
+
+    /**
      * 添加文本描述
      */
     $('.teBox').on('keyup change', function () {
