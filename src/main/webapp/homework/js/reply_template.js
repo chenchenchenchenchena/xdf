@@ -70,7 +70,6 @@ $(function () {
         $('.searchEmpty').hide();
     });
 
-
     /**
      * 文件获取失败，点击重新获取
      */

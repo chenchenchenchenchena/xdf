@@ -70,7 +70,7 @@ $(function () {
                                 'diskFilePath': fileR[i].diskFilePath,
                                 'uploadUser':localStorage.teacherName
                             });
-                            showAudio(e.data.playTime, url_o + fileR[i].diskFilePath, $('#record_audio_box'), recordCount);
+                            showAudio(playTime, url_o + fileR[i].diskFilePath, $('#notsubmit_voice'), recordCount);
                             recordCount++;
                         }else {
                             arr_image.push({
