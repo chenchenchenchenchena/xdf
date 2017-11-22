@@ -29,7 +29,7 @@ $(function(){
             }
         });
     }
- 
+
     //tab
     $('.hwHeader li:last').on('touchend',function(){
         if(localStorage.mastTeater){
@@ -38,9 +38,9 @@ $(function(){
             $(this).find('a').attr('href','workIndex.html')
         }
     })
-	$(document).on('tap','.firstList>p',function(){
+    $(document).on('tap','.firstList>p',function(){
         var this_ = $(this).parent();
-	    if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
+        if($('.firstList').eq($(this).parent().index()).find('ul').css('display')=='none'){
             $('.firstList').eq($(this).parent().index()).find('ul').show();
             $('.firstList').eq($(this).parent().index()).css("background","url(images/jiao11.png) no-repeat right 55px");
             getListDetails(this_);
@@ -54,10 +54,10 @@ $(function(){
     });
 
 
-	//滑动事件
-	$(document).on('touchstart mouusedown','.tealist_s',function(){
+    //滑动事件
+    $(document).on('touchstart mouusedown','.tealist_s',function(){
         // e.stopPropagation();
-	    if($(this).children('.remove_s')){
+        if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
@@ -87,38 +87,38 @@ $(function(){
     });
 
     //校区相关
-   if(localStorage.mastTeater){
+    if(localStorage.mastTeater){
         $(document).on('touchend',".select p",function(e){
-        $(".select").toggleClass('open');
-        e.stopPropagation();
-    });
-    $(document).on('touchend','.content_t .select ul li',function(e){
-        var _this=$(this);
-        $(".select > p").text(_this.attr('data-value'));
-        _this.addClass("Selected").siblings().removeClass("Selected");
-        $(".select").removeClass("open");
-        e.stopPropagation();
-    });
-    var table={
-        "tableName":"dict_school_info"
-    }
-    ajaxRequest("POST", url.s_select, table , selectData);
-    function selectData(e) {
-        console.log(e);
-        $(".select ul").html("");
-        if(e.code=="200"){
-            // $(".select ul").append('<li>全部校区</li>')
-            for(var i=0;i<e.data.length;i++){
-                var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
-                $(".select ul").append(str);
-            }
-            $('.content_t').find('li').eq(0).addClass('Selected');
-            $('.content_t').find('p').eq(0).html(e.data[0].tName);
-            
+            $(".select").toggleClass('open');
+            e.stopPropagation();
+        });
+        $(document).on('touchend','.content_t .select ul li',function(e){
+            var _this=$(this);
+            $(".select > p").text(_this.attr('data-value'));
+            _this.addClass("Selected").siblings().removeClass("Selected");
+            $(".select").removeClass("open");
+            e.stopPropagation();
+        });
+        var table={
+            "tableName":"dict_school_info"
         }
-    
+        ajaxRequest("POST", url.s_select, table , selectData);
+        function selectData(e) {
+            console.log(e);
+            $(".select ul").html("");
+            if(e.code=="200"){
+                // $(".select ul").append('<li>全部校区</li>')
+                for(var i=0;i<e.data.length;i++){
+                    var str ='<li data-value='+e.data[i].tName+' data-code='+e.data[i].tCode+'>'+e.data[i].tName+'</li>';
+                    $(".select ul").append(str);
+                }
+                $('.content_t').find('li').eq(0).addClass('Selected');
+                $('.content_t').find('p').eq(0).html(e.data[0].tName);
+
+            }
+
+        }
     }
-   }
     $('.truorfal input').on('touchend',function(){
         $('.big_select').hide();
         need_mas.schoolId = $('.Selected').attr('data-code');
@@ -178,8 +178,8 @@ $(function(){
             if(flag != 3){
                 $('.mor_home').show();
             }
-            for(var j = 0;j<e.data.length;j++){
-            var list_s = e.data[j];
+
+            var list_s = e.data;
             $('.Prompt_s i').html(e.SumUpnotCorrect);
             for (var i = 0; i < list_s.length; i++) {
 
@@ -199,7 +199,7 @@ $(function(){
 
                     //从老师主页点击进入作业列表：被选中的班级自动打开详情
                     $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                        '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].studentNum + '人)</p>' +
+                        '<p style="display: inline-block;height: 100%;width: 100%;">' + list_s[i].className + '&nbsp;(' + list_s[i].classCode + ')</p>' +
                         '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
 
@@ -211,7 +211,7 @@ $(function(){
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
                 }
 
-            }}
+            }
         }, error);
     }
 
@@ -346,13 +346,13 @@ $(function(){
 
     });
 
-    
+
     //查看更多
     $(document).on('touchend','.more_so',function(){
-            ajaxRequest('pos' +
-                't',homework_s.t_stat,{Tcid:$(this).attr('tid')},function(e){
+        ajaxRequest('pos' +
+            't',homework_s.t_stat,{Tcid:$(this).attr('tid')},function(e){
 
-            });
+        });
         sessionStorage.classCode_s = $(this).attr('classCode');
         sessionStorage.courseCode_s = $(this).attr('courseCode');
         sessionStorage.homeworkTime_s = $(this).attr('homeworkTime');
