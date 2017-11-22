@@ -266,7 +266,6 @@ $(function () {
             }
             if (sessionStorage.Teatwo) {
 
-                sessionStorage.removeItem('Teatwo');
                 var tea = e.data.fileR;//老师批注
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
@@ -1413,6 +1412,7 @@ $(function () {
 
     /*模版选择*/
     $('.template_ic').click(function(){
+        sessionStorage.Teatwo = '1';
         location.href = 'reply_template.html';
     })
     loadTemplate();
