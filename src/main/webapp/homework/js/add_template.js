@@ -21,6 +21,10 @@ $(function () {
 
     var tempId = "";//为空则表示当前是新建模版，不为空则表示修改模版
     var loading;
+    tempId = GetRequest('tempId');
+    if(tempId == undefined){
+        tempId = "";
+    }
 
     /*---------全局参数定义--------end*/
 
