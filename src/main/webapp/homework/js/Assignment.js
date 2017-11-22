@@ -464,7 +464,6 @@ $(function () {
                 $('.erro').show();
             })
         } else {
-            className =  sessionStorage.className_tstu;
             if(sessionStorage.className_tstu){
                 var class_n = sessionStorage.className_tstu.replace(/\；/g, ',').substr(0, className.length - 1);
 
