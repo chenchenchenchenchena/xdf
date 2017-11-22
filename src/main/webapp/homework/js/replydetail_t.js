@@ -1426,6 +1426,7 @@ $(function () {
             var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
             //将文本信心合并
             notCommitContent = notCommitContent + tempContent;
+            $('.answer .teBox').val(notCommitContent);
             getTempFileInfo(JSON.stringify(templateFileList))
         }
     }
@@ -1463,7 +1464,9 @@ $(function () {
                     }
 
                 }
-            }, errorFile);
+            }, function(e){
+                layer.msg('模版信息获取失败');
+            });
 
         }
     }

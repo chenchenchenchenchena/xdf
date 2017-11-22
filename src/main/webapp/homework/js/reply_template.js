@@ -7,11 +7,13 @@ var loading;
 
 $(function () {
     //滑动事件
-    $(document).on('touchstart mouusedown', '.temp_list', function () {
+    $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
+        var flag = 0;
         if ($(this).children('.remove_temp')) {
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove', '.temp_list li', function () {
+                flag = 1;
                 var listHeight = $(this)[0].offsetHeight;
                 if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                     var move_s = parseInt(event.targetTouches[0].pageX);
@@ -34,6 +36,14 @@ $(function () {
                 }
 
             });
+            $(document).on('touchend mouseup', '.temp_list li', function () {
+                if(flag == 0){
+                    var tempId = $(this).attr('data-tempId');
+                    sessionStorage.template = sessionStorage.getItem(tempId);
+                    history.go(-1);
+                }
+            })
+
         }
     });
     //获取模版列表
@@ -50,17 +60,6 @@ $(function () {
         var index = $(this).parent().attr('data-index');
         $(this).parent().find('.load_fail').hide();
         getFileInfo(tempId, index);
-    });
-
-    /**
-     * item点击事件
-     */
-    $(document).on('touchend', '.temp_list .item_temp', function () {
-        setTimeout(function () {
-            var tempId = $(this).attr('data-tempId');
-            sessionStorage.template = sessionStorage.getItem(tempId);
-            history.go(-1);
-        }, 300)
     });
 
     /**
