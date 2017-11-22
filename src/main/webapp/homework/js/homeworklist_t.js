@@ -199,16 +199,16 @@ $(function(){
                 if(checkedClassCode != undefined && checkedClassCode == list_s[i].classCode){
 
                     //从老师主页点击进入作业列表：被选中的班级自动打开详情
-                    $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px;height: 111px;" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                        '<p style="display: inline-block;height: 100%;    width: 670px;white-space: nowrap;text-overflow: ellipsis;' +
-                        '    overflow: hidden;">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
+                    $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                        '<p style="display: inline-block;vertical-align: middle;height: 100%;    width: 670px;white-space: nowrap;text-overflow: ellipsis;' +
+                        '    overflow: hidden;vertical-align: middle;">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
                         '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
 
                     getListDetails($('.firstList').eq(i));
                 }else {
-                    $('.hwFinish>ul').append('<li class="firstList" style="height: 111px;" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                        '<p style="display: inline-block;height: 100%;   width: 670px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden;">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
+                    $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                        '<p style="display: inline-block;vertical-align: middle;height: 100%;   width: 670px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
                         '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
                         '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
                 }
