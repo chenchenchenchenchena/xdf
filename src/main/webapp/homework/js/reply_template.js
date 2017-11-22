@@ -7,11 +7,13 @@ var loading;
 
 $(function () {
     //滑动事件
-    $(document).on('touchstart mouusedown', '.temp_list', function () {
+    $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
+        var flag = 0;//判断啊滑动和点击的标记
         if ($(this).children('.remove_temp')) {
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove', '.temp_list li', function () {
+                flag = 1;
                 var listHeight = $(this)[0].offsetHeight;
                 if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                     var move_s = parseInt(event.targetTouches[0].pageX);
@@ -24,16 +26,32 @@ $(function () {
                         $(this).css('margin-left', '-181px');
                         $(this).find('.remove_temp').css('right', '-0px');
                         $(this).parent().css('overflow', 'inherit');
-                        $(this).css('margin-left', '-50px');
                     } else if (begin_s - move_s <= -20) {
                         $(this).css('margin-left', '0px');
                         $(this).find('.remove_temp').css('right', '-270px');
                         $(this).parent().css('overflow', 'hidden');
-                        $(this).css('margin-left', '0');
                     }
                 }
 
             });
+            $(document).on('touchend mouseup', '.temp_list li', function () {
+                if(flag == 0){
+                    if(event.targetTouches != undefined && event.targetTouches[0] != undefined){
+
+                    }
+
+                    var d = $(this).siblings().find('.remove_temp').css('right');
+                    if(d == "-270px"){
+                        //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
+                    }else {
+                        //整条item的点击事件
+                        var tempId = $(this).attr('data-tempId');
+                        sessionStorage.template = sessionStorage.getItem(tempId);
+                        history.go(-1);
+                    }
+                }
+            });
+
         }
     });
     //获取模版列表
@@ -50,17 +68,6 @@ $(function () {
         var index = $(this).parent().attr('data-index');
         $(this).parent().find('.load_fail').hide();
         getFileInfo(tempId, index);
-    });
-
-    /**
-     * item点击事件
-     */
-    $(document).on('touchend', '.temp_list .item_temp', function () {
-        setTimeout(function () {
-            var tempId = $(this).attr('data-tempId');
-            sessionStorage.template = sessionStorage.getItem(tempId);
-            history.go(-1);
-        }, 300)
     });
 
     /**

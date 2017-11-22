@@ -21,10 +21,6 @@ $(function () {
 
     var tempId = "";//为空则表示当前是新建模版，不为空则表示修改模版
     var loading;
-    tempId = GetRequest('tempId');
-    if(tempId == undefined){
-        tempId = "";
-    }
 
     /*---------全局参数定义--------end*/
 
@@ -32,9 +28,10 @@ $(function () {
      * 判断是否是编辑模版
      */
     if(sessionStorage.templateEdit){
-        var templateData = JSON.parse(sessionStorage.template);//获取模版信息
+        var templateData = JSON.parse(sessionStorage.templateEdit);//获取模版信息
         sessionStorage.removeItem('templateEdit');
         //首先获取未提交区域的内容信息
+        tempId = templateData.id;
         var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
         var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
         $('.answer .teBox').val(tempContent);
@@ -66,15 +63,31 @@ $(function () {
                         var fileType = fileR[i].fileType;
                         var playTime = fileR[i].playTime;
                         if(fileType == "mp3"){
-                            showAudio(e.data.playTime, url_o + e.data.fullPath, $('#record_audio_box'), recordCount);
+                            arr_voice.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileR[i].fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath,
+                                'uploadUser':localStorage.teacherName
+                            });
+                            showAudio(e.data.playTime, url_o + fileR[i].diskFilePath, $('#record_audio_box'), recordCount);
                             recordCount++;
                         }else {
+                            arr_image.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileR[i].fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath,
+                                'uploadUser':localStorage.teacherName
+                            });
                             showUpdataImage(fileR[i].fileUrl);
                         }
                     }
 
                 }
-            }, errorFile);
+            }, function(e){
+                layer.msg('模版信息获取失败');
+            });
 
         }
     }
