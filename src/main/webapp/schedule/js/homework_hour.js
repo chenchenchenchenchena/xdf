@@ -116,7 +116,7 @@ $(function(){
         })
     };
     function Percentage(Data_ALL){
-        if(Data_ALL.result!=false){
+        if(Data_ALL.result!=false&&Data_ALL.data.length!=0){
             $('.canvs_hour').find('h4').eq(0).html('总提交率');
             $('.canvs_hour').find('h4').eq(1).html('总批复率');
             $('.canvs_more li').eq(0).find('span').eq(2).html('提交率');
@@ -144,13 +144,13 @@ $(function(){
             }
         }else{
             $('.no-data').show();
-            $('.no-data p').html(e.message);
+            $('.no-data p').html(Data_ALL.message);
             $('.canvs_hour_big div').eq(0).hide();
         }
         $('.load_t').hide()
     }
     function Per_all(Data_ALL){
-        if(Data_ALL.result!=false){
+        if(Data_ALL.result!=false&&Data_ALL.data.length!=0){
             $('.canvs_hour').find('h4').eq(0).html('总提交量');
             $('.canvs_hour').find('h4').eq(1).html('总批复量');
             $('.canvs_more li').eq(0).find('span').eq(2).html('提交量');
@@ -176,7 +176,7 @@ $(function(){
             }
         }else{
             $('.no-data').show();
-            $('.no-data p').html(e.message);
+            $('.no-data p').html(Data_ALL.message);
             $('.canvs_hour_big div').eq(0).hide();
         }
         $('.load_t').hide()
