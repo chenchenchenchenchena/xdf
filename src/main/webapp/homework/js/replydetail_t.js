@@ -1413,7 +1413,6 @@ $(function () {
 
     /*模版选择*/
     $('.template_ic').click(function(){
-        sessionStorage.Teatwo = '1';
         location.href = 'reply_template.html';
     })
     loadTemplate();
