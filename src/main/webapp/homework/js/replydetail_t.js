@@ -599,12 +599,17 @@ $(function () {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('.areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
                 $('.erro').show();
             }
+            $('.areyok input:last-of-type').css('background', '#00ba97');
+        },function(error){
+
+            $('.big_back').show();
+            $('.succ').show();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
         })
 
 
@@ -1461,9 +1466,21 @@ $(function () {
                         var fileType = fileR[i].fileType;
                         var playTime = fileR[i].playTime;
                         if(fileType == "mp3"){
+                            arr_voice.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath
+                            });
                             showAudio(playTime, url_o + fileR[i].relativePath, $('#record_audio_box'), recordCount, 1);
                             recordCount++;
                         }else {
+                            arr_image.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath
+                            });
                             showUpdataImage(fileR[i].fileUrl);
                         }
                     }
