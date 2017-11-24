@@ -16,7 +16,7 @@ $(function () {
         if ($(this).children('.remove_temp')) {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
-                $(document).on('touchmove mousemove', '.temp_list li', function () {
+                $(document).on('touchmove mousemove', '.temp_list .item_temp', function () {
                     flag = 1;
                     var listHeight = $(this)[0].offsetHeight;
                     if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
@@ -39,7 +39,7 @@ $(function () {
                 });
             }
 
-            $(document).on('touchend mouseup', '.temp_list li', function () {
+            $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
                 if (flag == 0) {
 
                     var d = $(this).find('.remove_temp').css('right');
