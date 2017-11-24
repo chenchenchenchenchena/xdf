@@ -14,6 +14,7 @@ $(function () {
     $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
         var flag = 0;//判断啊滑动和点击的标记
+        touchViewFlag = 0;
         if ($(this).children('.remove_temp')) {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
