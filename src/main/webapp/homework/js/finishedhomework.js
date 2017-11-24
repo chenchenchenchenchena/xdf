@@ -756,9 +756,11 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
+
+        alert(JSON.stringify(cbconfig));
         ajaxRequest("Post",homework_s.uploadImage,cbconfig,function(e){
             $('.big_back').hide();
-            // alert(JSON.stringify(data));
+             alert(JSON.stringify(data));
             if (e.status == "failure") {
                 layer.msg('图片上传失败');
             } else if (e.status == "succeed") {
