@@ -46,9 +46,9 @@ $(function () {
                     if (d == "0px") {
                         //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
                     } else {
-                            //整条item的点击事件
-                            var tempId = $(this).attr('data-tempId');
-                            goBack(tempId);
+                        //整条item的点击事件
+                        var tempId = $(this).attr('data-tempId');
+                        goBack(tempId);
                     }
                 }
             });
@@ -281,7 +281,7 @@ function getFileInfo(tempId, k) {
                         $(".temp_list .item_temp").eq(k).find('.voiceBox').show();
                         var voiceStr = '<li class="audio_box padding-no"><div> ' +
                             '<audio id="audio_' + k + i + '" preload="auto" data-time=' + playTime + '> ' +
-                            '<source src="' + fileR[i].relativePath + '" type="audio/mpeg"> ' +
+                            '<source src="' + url_o + fileR[i].relativePath + '" type="audio/mpeg"> ' +
                             '</audio>' +
                             '<i class="play-icon"></i></div> ' +
                             '<span class="voice_lenth">' + playTime + '"</span></li>';
