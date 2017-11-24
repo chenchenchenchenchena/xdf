@@ -1,7 +1,7 @@
 /*---------全局参数定义--------start*/
 var currentDelId;//当前要删除的ID
 var delTempLayer;
-var touchViewFlag = 0;//判断是否是图片点击事件
+var touchViewFlag = 0;//判断是否是图片(语音)点击事件
 var loading;
 /*---------全局参数定义--------end*/
 
@@ -85,6 +85,13 @@ $(function () {
         var index = $(this).parent().attr('data-index');
         $(this).parent().find('.load_fail').hide();
         getFileInfo(tempId, index);
+    });
+
+    /**
+     * 播放语音
+     */
+    $(document).on('touchend', '.audio_box>div', function () {
+        touchViewFlag = 1;
     });
 
     /**
