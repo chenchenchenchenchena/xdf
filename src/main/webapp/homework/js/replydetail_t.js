@@ -5,7 +5,6 @@ $(function () {
     var stuAnwersFiles = [];
     var teaReplyFiles = [];
 
-    var replyTimes = [];
     var answerTimes = [];
     var answerT;
     var maxTimesR = 0;//老师最大批复次数
@@ -202,14 +201,12 @@ $(function () {
         if (tea != undefined) {
 
             for (var b = 0; b < tea.length; b++) {
-                teaReplyFiles.push({'fullPath': tea[b].diskFilePath});
-                replyTimes.push(parseInt(tea[b].replyTimes));
+                teaReplyFiles.push({'fullPath': tea[b].diskFilePath,'fileTimes': tea[b].replyTimes});
                 if(parseInt(tea[b].replyTimes) > maxTimesR){
                     maxTimesR = parseInt(tea[b].replyTimes);
                 }
             }
         }
-        replyTimes.sort();
         if(!(stuAnwersFiles.length == 0 && hwFiles.length == 0 && teaReplyFiles.length == 0)){
 
             var params = {
@@ -275,9 +272,9 @@ $(function () {
                             delt = maxTimesR - lenR +1;
                         }
                         if (tea[b].fileType == 'mp3') {
-                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - delt)]);
+                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(tea[b].fileTimes - delt)]);
                         } else {
-                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - delt) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(tea[b].fileTimes - delt) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                         }
                     }
