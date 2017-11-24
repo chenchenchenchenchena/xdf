@@ -143,6 +143,7 @@ $(function () {
         var tempId = $(this).parent().parent().attr('data-tempId');
         sessionStorage.templateEdit = sessionStorage.getItem(tempId);
         location.href = "add_template.html";
+        return false;
     });
 
     /**
@@ -182,10 +183,12 @@ $(function () {
             layer.close(loading);
             layer.msg("删除失败")
         })
+        return false;
     });
     //删除模版-取消
     $(document).on('touchend', '.delete .cancelBtn', function () {
         layer.close(delTempLayer);
+        return false;
     });
 
     /**
