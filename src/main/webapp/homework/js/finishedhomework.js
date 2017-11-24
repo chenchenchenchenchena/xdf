@@ -609,7 +609,7 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': localStorage.classCode
+            'classId': localStorage.classcode
         };
         ajaxRequest("Post",homework_s.uploadAudio,cbconfig,function(e){
                 $('.big_back').hide();
@@ -754,13 +754,11 @@ $(function () {
             'appSecret': secreT,
             'mediaId': serverId,
             'schoolId': sessionStorage.schoolId,
-            'classId': localStorage.classCode
+            'classId': localStorage.classcode
         };
 
-        alert(JSON.stringify(cbconfig));
         ajaxRequest("Post",homework_s.uploadImage,cbconfig,function(e){
             $('.big_back').hide();
-             alert(JSON.stringify(data));
             if (e.status == "failure") {
                 layer.msg('图片上传失败');
             } else if (e.status == "succeed") {
