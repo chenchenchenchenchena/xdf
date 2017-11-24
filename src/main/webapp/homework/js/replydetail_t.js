@@ -1423,12 +1423,16 @@ $(function () {
             sessionStorage.removeItem('template');
             //首先获取未提交区域的内容信息
             var notCommitContent = $('.answer .teBox').val();
-            var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
-            var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
-            //将文本信心合并
-            notCommitContent = notCommitContent + tempContent;
-            $('.answer .teBox').val(notCommitContent);
-            getTempFileInfo(JSON.stringify(templateFileList))
+            if(templateData.description != undefined){
+                var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
+                //将文本信心合并
+                notCommitContent = notCommitContent + tempContent;
+                $('.answer .teBox').val(notCommitContent);
+            }
+            if(templateData.homeworkReplyTemplateFileList != undefined){
+                var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
+                getTempFileInfo(JSON.stringify(templateFileList));
+            }
         }
     }
     /**

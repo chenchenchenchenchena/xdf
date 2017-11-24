@@ -1,7 +1,6 @@
 /*---------全局参数定义--------start*/
 var currentDelId;//当前要删除的ID
 var delTempLayer;
-var touchViewFlag = 0;//判断是否是图片(语音)点击事件
 var loading;
 /*---------全局参数定义--------end*/
 
@@ -14,7 +13,6 @@ $(function () {
     $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
         var flag = 0;//判断啊滑动和点击的标记
-        touchViewFlag = 0;
         if ($(this).children('.remove_temp')) {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
@@ -48,13 +46,9 @@ $(function () {
                     if (d == "0px") {
                         //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
                     } else {
-                        if(touchViewFlag == 1){
-
-                        }else {
                             //整条item的点击事件
                             var tempId = $(this).attr('data-tempId');
                             goBack(tempId);
-                        }
                     }
                 }
             });
@@ -91,16 +85,16 @@ $(function () {
      * 播放语音
      */
     $(document).on('touchend', '.audio_box>div', function () {
-        touchViewFlag = 1;
+        return false;
     });
 
     /**
      * 查看大图
      */
     $(document).on('touchend', '.imgBox img', function () {
-        touchViewFlag = 1;
         var previewUrl = $(this).attr('data-id');
         lookBigImage(previewUrl, true);
+        return false;
     });
 
     function lookBigImage(diskPath, saveServer) {
@@ -135,7 +129,9 @@ $(function () {
     }
 
     $(document).on('touchend', '.pinch-zoom', function () {
+
         $('.big_back_s').hide();
+        return false;
     });
 
 
