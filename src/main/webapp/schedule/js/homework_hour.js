@@ -4,6 +4,7 @@
 */
 
 $(function(){
+    var timesList = [];//计时器对象列表
     $('.load_t').show();        
     var Data_all;
     if(!sessionStorage.openid){
@@ -100,6 +101,15 @@ $(function(){
         setTimeout(function(){
             temporary = false;
         },700);
+
+        //清除动画计时器
+        if(timesList != undefined && timesList.length > 0){
+
+            for(var i = 0;i<timesList.length;i++){
+                clearInterval(timesList[i]);
+            }
+        }
+
         if($(this).attr('checked')){
             Percentage(Data_all);
             $(this).attr('checked',false)
@@ -285,5 +295,6 @@ $(function(){
             }
             init()
         },30)
+        timesList.push(times);
     }
 })
