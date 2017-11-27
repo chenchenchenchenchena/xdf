@@ -4,6 +4,7 @@
 */
 
 $(function(){
+    var timesList = [];//计时器对象列表
     $('.load_t').show();        
     var Data_all;
     if(!sessionStorage.openid){
@@ -99,7 +100,16 @@ $(function(){
         temporary = true;
         setTimeout(function(){
             temporary = false;
-        },1000);
+        },700);
+
+        //清除动画计时器
+        if(timesList != undefined && timesList.length > 0){
+
+            for(var i = 0;i<timesList.length;i++){
+                clearInterval(timesList[i]);
+            }
+        }
+
         if($(this).attr('checked')){
             Percentage(Data_all);
             $(this).attr('checked',false)
@@ -150,7 +160,7 @@ $(function(){
         $('.load_t').hide()
     }
     function Per_all(Data_ALL){
-        if(Data_ALL.result!=false&&Data_ALL.DataInfos.length!=0){
+        if(Data_ALL.result!=false&&Data_ALL.Data.length!=0){
             $('.canvs_hour').find('h4').eq(0).html('总提交量');
             $('.canvs_hour').find('h4').eq(1).html('总批复量');
             $('.canvs_more li').eq(0).find('span').eq(2).html('提交量');
@@ -285,5 +295,6 @@ $(function(){
             }
             init()
         },30)
+        timesList.push(times);
     }
 })

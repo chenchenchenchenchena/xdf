@@ -5,7 +5,6 @@ $(function () {
     var stuAnwersFiles = [];
     var teaReplyFiles = [];
 
-    var replyTimes = [];
     var answerTimes = [];
     var answerT;
     var maxTimesR = 0;//老师最大批复次数
@@ -202,14 +201,12 @@ $(function () {
         if (tea != undefined) {
 
             for (var b = 0; b < tea.length; b++) {
-                teaReplyFiles.push({'fullPath': tea[b].diskFilePath});
-                replyTimes.push(parseInt(tea[b].replyTimes));
+                teaReplyFiles.push({'fullPath': tea[b].diskFilePath,'fileTimes': tea[b].replyTimes});
                 if(parseInt(tea[b].replyTimes) > maxTimesR){
                     maxTimesR = parseInt(tea[b].replyTimes);
                 }
             }
         }
-        replyTimes.sort();
         if(!(stuAnwersFiles.length == 0 && hwFiles.length == 0 && teaReplyFiles.length == 0)){
 
             var params = {
@@ -266,7 +263,6 @@ $(function () {
             }
             if (sessionStorage.Teatwo) {
 
-                sessionStorage.removeItem('Teatwo');
                 var tea = e.data.fileR;//老师批注
                 if (tea != undefined) {
                     for (var b = 0; b < tea.length; b++) {
@@ -276,9 +272,9 @@ $(function () {
                             delt = maxTimesR - lenR +1;
                         }
                         if (tea[b].fileType == 'mp3') {
-                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(replyTimes[b] - delt)]);
+                            getAudioInfo([3, url_o + tea[b].relativePath, tea[b].playTime, "mp3"], ['replayT', parseInt(tea[b].fileTimes - delt)]);
                         } else {
-                            $('.tea_sp .hmAnswer:eq(' + parseInt(replyTimes[b] - delt) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
+                            $('.tea_sp .hmAnswer:eq(' + parseInt(tea[b].fileTimes - delt) + ')').find('.imgBox').append('<div><img data-id="'+tea[b].diskFilePath+'"  onerror=javascript:this.src="images/error-image.png" data-thumbnail="' + tea[b].thumbnail + '" data-ramke="3" data-img="' + tea[b].fileUrl + '" src="images/error-image.png" alt="" /></div>');
                             // $('.imgBox').eq(2).append('<div><img src="'+tea[b].url + '" alt="" /></div>')
                         }
                     }
@@ -600,12 +596,17 @@ $(function () {
             if (e.result == true) {
                 $('.big_back').show();
                 $('.succ').show();
-                $('.areyok input:last-of-type').css('background', '#00ba97');
             } else {
                 $('.erro p').html(e.message);
                 $('.big_back').show();
                 $('.erro').show();
             }
+            $('.areyok input:last-of-type').css('background', '#00ba97');
+        },function(error){
+
+            $('.big_back').show();
+            $('.succ').show();
+            $('.areyok input:last-of-type').css('background', '#00ba97');
         })
 
 
@@ -1263,6 +1264,7 @@ $(function () {
             str = canvas.toDataURL("image/jpeg", 0.5);
             if($('.notsubmit .imgBox li') != undefined && $('.notsubmit .imgBox li').length >= 3){
                 layer.msg('最多只能批复三张');
+                ber_L = true;
                 return false;
             }
             $('.notsubmit .imgBox').append("<li><span class='stuImg' img-index='" + Index_Last + "'></span><img isEdit='1' data-img='" + canvas.toDataURL("image/jpeg", 0.5) + "' src='" + canvas.toDataURL("image/jpeg", 0.5) + "'/></li>");
@@ -1423,12 +1425,16 @@ $(function () {
             sessionStorage.removeItem('template');
             //首先获取未提交区域的内容信息
             var notCommitContent = $('.answer .teBox').val();
-            var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
-            var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
-            //将文本信心合并
-            notCommitContent = notCommitContent + tempContent;
-            $('.answer .teBox').val(notCommitContent);
-            getTempFileInfo(JSON.stringify(templateFileList))
+            if(templateData.description != undefined){
+                var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
+                //将文本信心合并
+                notCommitContent = notCommitContent + tempContent;
+                $('.answer .teBox').val(notCommitContent);
+            }
+            if(templateData.homeworkReplyTemplateFileList != undefined){
+                var templateFileList = templateData.homeworkReplyTemplateFileList;//文件列表
+                getTempFileInfo(JSON.stringify(templateFileList));
+            }
         }
     }
     /**
@@ -1457,9 +1463,21 @@ $(function () {
                         var fileType = fileR[i].fileType;
                         var playTime = fileR[i].playTime;
                         if(fileType == "mp3"){
+                            arr_voice.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath
+                            });
                             showAudio(playTime, url_o + fileR[i].relativePath, $('#record_audio_box'), recordCount, 1);
                             recordCount++;
                         }else {
+                            arr_image.push({
+                                'fileName': fileR[i].fileName,
+                                'fileType': fileType,
+                                'fileSize': fileR[i].fileSize,
+                                'diskFilePath': fileR[i].diskFilePath
+                            });
                             showUpdataImage(fileR[i].fileUrl);
                         }
                     }

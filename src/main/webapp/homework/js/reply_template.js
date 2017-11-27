@@ -1,7 +1,6 @@
 /*---------全局参数定义--------start*/
 var currentDelId;//当前要删除的ID
 var delTempLayer;
-
 var loading;
 /*---------全局参数定义--------end*/
 
@@ -17,7 +16,7 @@ $(function () {
         if ($(this).children('.remove_temp')) {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
-                $(document).on('touchmove mousemove', '.temp_list li', function () {
+                $(document).on('touchmove mousemove', '.temp_list .item_temp', function () {
                     flag = 1;
                     var listHeight = $(this)[0].offsetHeight;
                     if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
@@ -40,7 +39,7 @@ $(function () {
                 });
             }
 
-            $(document).on('touchend mouseup', '.temp_list li', function () {
+            $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
                 if (flag == 0) {
 
                     var d = $(this).find('.remove_temp').css('right');
@@ -70,7 +69,6 @@ $(function () {
         $('.searchEmpty').hide();
     });
 
-
     /**
      * 文件获取失败，点击重新获取
      */
@@ -84,6 +82,60 @@ $(function () {
     });
 
     /**
+     * 播放语音
+     */
+    $(document).on('touchend', '.audio_box>div', function () {
+        return false;
+    });
+
+    /**
+     * 查看大图
+     */
+    $(document).on('touchend', '.imgBox img', function () {
+        var previewUrl = $(this).attr('data-id');
+        lookBigImage(previewUrl, true);
+        return false;
+    });
+
+    function lookBigImage(diskPath, saveServer) {
+        var params = {
+            'fullPath': diskPath,
+            'saveServer': saveServer
+        }
+        ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
+            var previewUrl = e;
+            //true:返回服务器所在的地址，false:返回云盘的预览地址
+            previewUrl = url_o + previewUrl;
+            lookBig(previewUrl);
+        });
+
+
+    }
+
+    function lookBig(previewUrl) {
+        $('.big_back_s').show();
+        $('.big_back_s img').attr('src', previewUrl);
+
+        $('.big_back_s img').load(function () {
+            $('.big_back_s img').css({
+                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+            });
+        })
+        $('.big_back_s img').error(function () {
+            alert('图片加载失败，正在重新加载');
+            location.reload();
+        })
+    }
+
+    $(document).on('touchend', '.pinch-zoom', function () {
+
+        $('.big_back_s').hide();
+        return false;
+    });
+
+
+    /**
      * 编辑
      */
     $(document).on('touchend', '.edit_temp', function () {
@@ -91,6 +143,7 @@ $(function () {
         var tempId = $(this).parent().parent().attr('data-tempId');
         sessionStorage.templateEdit = sessionStorage.getItem(tempId);
         location.href = "add_template.html";
+        return false;
     });
 
     /**
@@ -107,6 +160,7 @@ $(function () {
             content: $(".delete")
         });
     });
+
     //删除模版-确定
     $(document).on('touchend', '.delete .confirmBtn', function () {
         layer.close(delTempLayer);
@@ -129,10 +183,12 @@ $(function () {
             layer.close(loading);
             layer.msg("删除失败")
         })
+        return false;
     });
     //删除模版-取消
     $(document).on('touchend', '.delete .cancelBtn', function () {
         layer.close(delTempLayer);
+        return false;
     });
 
     /**
@@ -154,10 +210,10 @@ $(function () {
 
 function goBack(tempId) {
     sessionStorage.template = sessionStorage.getItem(tempId);
-    setTimeout(function(){
+    setTimeout(function () {
         //history.go(-1);
         location.href = 'replydetail_t.html';
-    },500)
+    }, 500)
 }
 
 
@@ -225,7 +281,7 @@ function getFileInfo(tempId, k) {
                         $(".temp_list .item_temp").eq(k).find('.voiceBox').show();
                         var voiceStr = '<li class="audio_box padding-no"><div> ' +
                             '<audio id="audio_' + k + i + '" preload="auto" data-time=' + playTime + '> ' +
-                            '<source src="' + fileR[i].relativePath + '" type="audio/mpeg"> ' +
+                            '<source src="' + url_o + fileR[i].relativePath + '" type="audio/mpeg"> ' +
                             '</audio>' +
                             '<i class="play-icon"></i></div> ' +
                             '<span class="voice_lenth">' + playTime + '"</span></li>';

@@ -1,4 +1,5 @@
 $(function() {
+    sessionStorage.removeItem('Teatwo');
     var need = {
         "Tcid": sessionStorage.Tid
     };

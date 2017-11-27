@@ -70,7 +70,7 @@ $(function () {
                                 'diskFilePath': fileR[i].diskFilePath,
                                 'uploadUser':localStorage.teacherName
                             });
-                            showAudio(e.data.playTime, url_o + fileR[i].diskFilePath, $('#record_audio_box'), recordCount);
+                            showAudio(playTime, url_o + fileR[i].diskFilePath, $('#notsubmit_voice'), recordCount);
                             recordCount++;
                         }else {
                             arr_image.push({
@@ -527,7 +527,7 @@ $(function () {
             $('#record_audio_box').hide();
         }
 
-        $('#record_audio_box li:eq(' + index + ')').remove();
+        $('#notsubmit_voice li:eq(' + index + ')').remove();
         // 语音小于三张，显示添加语音按钮
         if ($('.notsubmit #record_audio_box li').length < 3) {
             $('#record').show();
