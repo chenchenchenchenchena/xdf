@@ -12,6 +12,7 @@ $(function () {
         $('#image_s').show();
     }
     //修改作业 隐藏学生
+
     if(sessionStorage.Classname_x){
         $('.student_S').hide();
         $('.Choice_s input').css('margin-top','-90px')
