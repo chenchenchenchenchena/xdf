@@ -82,7 +82,7 @@ $(function(){
     $('.stu_list').on('tap','li',function(){
         $(this).addClass('hwShow').siblings().removeClass('hwShow');
        $('.stulist_').eq($(this).index()).show().siblings().hide();
-    })
+    });
 
     //提交数据
     $('.Submit_s').on('touchend',function(){

@@ -12,10 +12,11 @@ $(function () {
         $('#image_s').show();
     }
     //修改作业 隐藏学生
-    if(sessionStorage.Classname_x){
+
+    // if(sessionStorage.Classname_x){
         $('.student_S').hide();
         $('.Choice_s input').css('margin-top','-90px')
-    }
+    // }
     var urlPush = '';
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
