@@ -313,12 +313,18 @@ function selectHwData() {
     }
     if ($('#subject').html() != '全部') {
         subject = $('#subject').html();
+    }else {
+        subject = "";
     }
     if ($('#grade').html() != '全部') {
         grade = $('#grade').html();
+    }else {
+        grade = "";
     }
     if ($('#stage').html() != '全部') {
         stage = $('#stage').html();
+    }else {
+        stage = "";
     }
     var params = {
         'homeworkType': homeworkType,
