@@ -178,42 +178,42 @@ $(function(){
             if(flag != 3){
                 $('.mor_home').show();
             }
-            for(var j = 0;j<e.data.length;j++){
+            for(var j = 0;j<e.data.length;j++) {
 
-            var list_s = e.data[j];
-            $('.Prompt_s i').html(e.SumUpnotCorrect);
-            for (var i = 0; i < list_s.length; i++) {
+                var list_s = e.data[j];
+                $('.Prompt_s i').html(e.SumUpnotCorrect);
+                for (var i = 0; i < list_s.length; i++) {
 
-                if (list_s[i].readStatus == 0) {
-                    Read = 'state_st';
-                } else {
-                    Read = '';
+                    if (list_s[i].readStatus == 0) {
+                        Read = 'state_st';
+                    } else {
+                        Read = '';
+                    }
+                    var courseCode = "";
+                    if (list_s[i].courseCode == undefined) {
+                        courseCode = "";
+                    } else {
+                        courseCode = list_s[i].courseCode;
+                    }
+
+                    if (checkedClassCode != undefined && checkedClassCode == list_s[i].classCode) {
+
+                        //从老师主页点击进入作业列表：被选中的班级自动打开详情
+                        $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px" className="' + list_s[i].className + '" studentNum="' + list_s[i].studentNum + '" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                            '<p style="display: inline-block;vertical-align: middle;height: 100%;    width: 670px;white-space: nowrap;text-overflow: ellipsis;' +
+                            '    overflow: hidden;vertical-align: middle;">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
+                            '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
+                            '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
+
+                        getListDetails($('.firstList').eq(j));
+                    } else {
+                        $('.hwFinish>ul').append('<li class="firstList" className="' + list_s[i].className + '" studentNum="' + list_s[i].studentNum + '" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
+                            '<p style="display: inline-block;vertical-align: middle;height: 100%;   width: 670px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
+                            '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
+                            '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
+                    }
+
                 }
-                var courseCode = "";
-                if(list_s[i].courseCode == undefined){
-                    courseCode = "";
-                }else {
-                    courseCode = list_s[i].courseCode;
-                }
-
-                if(checkedClassCode != undefined && checkedClassCode == list_s[i].classCode){
-
-                    //从老师主页点击进入作业列表：被选中的班级自动打开详情
-                    $('.hwFinish>ul').append('<li class="firstList" style="background: url(images/jiao11.png) no-repeat right 55px" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                        '<p style="display: inline-block;vertical-align: middle;height: 100%;    width: 670px;white-space: nowrap;text-overflow: ellipsis;' +
-                        '    overflow: hidden;vertical-align: middle;">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
-                        '<span class=' + Read + '></span><ul class="secul tealist_s" style="display: block"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
-                        '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
-
-                    getListDetails($('.firstList').eq(i));
-                }else {
-                    $('.hwFinish>ul').append('<li class="firstList" className="'+list_s[i].className+'" studentNum="'+list_s[i].studentNum+'" classCode="' + list_s[i].classCode + '" courseCode="' + courseCode + '"> ' +
-                        '<p style="display: inline-block;vertical-align: middle;height: 100%;   width: 670px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden">' + list_s[i].className + '<i style="font-size:24px;font-style:normal;">(' + list_s[i].classCode + ')</i></p>' +
-                        '<span class=' + Read + '></span><ul class="secul tealist_s"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" />' +
-                        '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul></li>');
-                }
-
-            }
             }
         }, error);
     }
