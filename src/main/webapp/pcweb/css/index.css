@@ -395,7 +395,7 @@ html body .homework_active{
 	height:46px;
 	line-height:46px;
 	font-size:12px;
-	ocerflow:hidden;
+	overflow:hidden;
 }
 .homework_list_title{
 	font-size:14px;
