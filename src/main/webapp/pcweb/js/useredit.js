@@ -90,6 +90,7 @@ require(['jquery-1.11.0.min'], function () {
         $('.user_sea_last input').val(sessionStorage.loginId);
         $('.user_sea_last input').attr('disabled',true);
         $('.user_sea_last').css('background','rgb(235, 235, 228)');
+        $('.user_sea_last input').css('background','rgb(235, 235, 228)');
         if(sessionStorage.edite_bur==1){
             $('.user_operation_confirm').html('禁用')
         }else{
