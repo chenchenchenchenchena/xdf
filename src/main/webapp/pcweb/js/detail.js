@@ -314,7 +314,11 @@ function SelectTeacherList() {
                     var publishCount = teacherList[i].publishCount;
                     var replyRate = teacherList[i].replyRate;
                     var teacherEmail = teacherList[i].teacherEmail;
-                    var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>' + parseInt((correctRate * 100)) + '%</span></li>';
+                    if(homeworkType != "1"){
+                        var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>' + parseInt((correctRate * 100)) + '%</span></li>';
+                    }else {
+                        var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>暂无</span></li>';
+                    }
                     $('#teacher-list').append(itemHtml_);
                 }
             } else {
