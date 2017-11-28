@@ -88,14 +88,14 @@ $(function () {
     /**
      * 播放语音
      */
-    $(document).on('touchend', '.audio_box>div', function () {
+    $(document).on('touchend mouseup', '.audio_box>div', function () {
         return false;
     });
 
     /**
      * 查看大图
      */
-    $(document).on('touchend', '.imgBox img', function () {
+    $(document).on('touchend mouseup', '.imgBox img', function () {
         var previewUrl = $(this).attr('data-id');
         lookBigImage(previewUrl, true);
         return false;

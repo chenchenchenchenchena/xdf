@@ -393,6 +393,7 @@ $(function () {
      */
     $('#add_image').click(function () {
         imgCount = $('.notsubmit .imgBox li').length;
+        alert(imgCount);
         //重新选择图片，追加图片，max = 3；
         var count = 3 - imgCount;
         wx.chooseImage({
@@ -402,8 +403,6 @@ $(function () {
                     //上传服务器
                     upLoadWxImage(res);
                 }
-
-
             }
         });
     });
