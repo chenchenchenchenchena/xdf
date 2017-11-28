@@ -20,6 +20,7 @@ $(function () {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
                 $(document).on('touchmove mousemove', '.temp_list .item_temp', function () {
 
+                    flag = 1;
                     var listHeight = $(this)[0].offsetHeight;
                     if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                         var move_s = parseInt(event.targetTouches[0].pageX);
@@ -27,7 +28,6 @@ $(function () {
                         $(this).find('.remove_temp span').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('line-height', listHeight + "px");
                         if (begin_s - move_s >= 45) {
-                            flag = 1;
                             $(this).siblings().css('margin-left', '0px');
                             $(this).siblings().find('.remove_temp').css('right', '-270px');
                             $(this).css('margin-left', '-181px');
@@ -42,12 +42,12 @@ $(function () {
                     }
                 });
                 $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
-                    if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
-                        var end_s = parseInt(event.targetTouches[0].pageX);
+                    flag = 0;
+                    if (event != undefined && event.pageX != undefined) {
+                        var end_s = parseInt(event.pageX);
                         var angle = end_s - begin_s;
                         if (angle <= 2 && angle >= -2) {
 
-                            flag = 0;
                             var d = $(this).find('.remove_temp').css('right');
                             if (d == "0px") {
                                 //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
