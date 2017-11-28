@@ -54,6 +54,11 @@ require(['jquery-1.11.0.min'], function () {
                 if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
                     $('#date_input').val(params.beginTime + " - " + params.endTime);
                 }
+                $('.homework_sea input').off("keyup").on('keyup',function(even){
+                    if(even.keyCode==13){
+                        SelectData();
+                    }
+                })
                 //初始化分页控件
                 initPage(totalCounts, page);
 
@@ -94,11 +99,6 @@ function initPage(totalCounts, currentPage) {
 
 // 输入教师名称筛选数据
 function seacherByName() {
-    seacherKey = $('.homework_sea input').val();
-    if (seacherKey == undefined || seacherKey == "") {
-        layer.msg("请先填写老师名称");
-        return false;
-    }
     SelectData();
 }
 
