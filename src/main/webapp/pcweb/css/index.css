@@ -81,7 +81,7 @@ body{
 	overflow:hidden;
 	position:fixed;
 	top:51px;
-	z-index:999;
+	z-index:10;
 }
 .left_nav h2{
 	line-height:50px;

@@ -202,6 +202,7 @@ require(['jquery-1.11.0.min'],function(){
                         $('body').show();
                         $('.user_name').html(sessionStorage.getItem('userName'));
                         left_navlist(JSON.parse(sessionStorage.getItem('functionList')))
+                        location.href = location.href.substring(0,lcoation.href.indexOf('?'))
                     }
                 } else {
                     sessionStorage.setItem("userName", e.userName);
