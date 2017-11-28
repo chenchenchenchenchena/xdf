@@ -87,9 +87,9 @@ require(['jquery-1.11.0.min'], function () {
         });
 
         //名字重置
-        $('.homework_sea input').val(sessionStorage.loginId);
-        $('.homework_sea input').attr('disabled',true);
-        $('.homework_sea').css('background','rgb(235, 235, 228)');
+        $('.user_sea_last input').val(sessionStorage.loginId);
+        $('.user_sea_last input').attr('disabled',true);
+        $('.user_sea_last').css('background','rgb(235, 235, 228)');
         if(sessionStorage.edite_bur==1){
             $('.user_operation_confirm').html('禁用')
         }else{
@@ -100,8 +100,8 @@ require(['jquery-1.11.0.min'], function () {
         });
         //选取邮箱
         $(document).off("click").on('click','.adduser_list li',function(){
-            $('.homework_sea input').val($(this).html());
-            $('.homework_sea input').attr('name',$(this).attr('name'));
+            $('.user_sea_last input').val($(this).html());
+            $('.user_sea_last input').attr('name',$(this).attr('name'));
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
         });
@@ -161,7 +161,7 @@ require(['jquery-1.11.0.min'], function () {
             history.go(-1)
         });
         function seachUser(){
-            if($('.homework_sea input').val()!=''){
+            if($('.user_sea_last input').val()!=''){
                 $.ajax({
                     url:global.user_seac,
                     type: 'post',
@@ -246,7 +246,7 @@ require(['jquery-1.11.0.min'], function () {
             }
             $(this).attr('checked',true);
             var config = {
-                userid:$('.homework_sea input').val(),
+                userid:$('.user_sea_last input').val(),
             };
             var schoolId = [];
             var powerId = [];
