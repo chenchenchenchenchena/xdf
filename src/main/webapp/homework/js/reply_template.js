@@ -2,17 +2,19 @@
 var currentDelId;//当前要删除的ID
 var delTempLayer;
 var loading;
+
+var homeworkTime =  sessionStorage.homeworkTime_s;
+var classCode = sessionStorage.classCode_s;
+var flag = 0;//判断啊滑动和点击的标记
 /*---------全局参数定义--------end*/
 
 $(function () {
-
     $('.temp_list').show();
     $('.searchEmpty').hide();
     $('.reload').hide();
     //滑动事件
     $(document).on('touchstart mousedown', '.temp_list', function () {
         // e.stopPropagation();
-        var flag = 0;//判断啊滑动和点击的标记
         if ($(this).children('.remove_temp')) {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
@@ -24,7 +26,7 @@ $(function () {
                         $(this).find('.remove_temp').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('line-height', listHeight + "px");
-                        if (begin_s - move_s >= 20) {
+                        if (begin_s - move_s >= 45) {
                             $(this).siblings().css('margin-left', '0px');
                             $(this).siblings().find('.remove_temp').css('right', '-270px');
                             $(this).css('margin-left', '-181px');
@@ -59,7 +61,9 @@ $(function () {
     loading = layer.load();
     //获取模版列表
     var listParams = {
-        'teacherEmail': localStorage.terEmail
+        'teacherEmail': localStorage.terEmail,
+        'homeworkTime':homeworkTime,
+        'classCode':classCode
     };
     ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData, function (e) {
         layer.msg("模版信息加载失败");
@@ -84,17 +88,22 @@ $(function () {
     /**
      * 播放语音
      */
-    $(document).on('touchend', '.audio_box>div', function () {
-        return false;
+    $(document).on('touchend mouseup', '.audio_box>div', function () {
+        if (flag == 0) {
+
+            return false;
+        }
     });
 
     /**
      * 查看大图
      */
-    $(document).on('touchend', '.imgBox img', function () {
-        var previewUrl = $(this).attr('data-id');
-        lookBigImage(previewUrl, true);
-        return false;
+    $(document).on('touchend mouseup', '.imgBox img', function () {
+        if (flag == 0) {
+            var previewUrl = $(this).attr('data-id');
+            lookBigImage(previewUrl, true);
+            return false;
+        }
     });
 
     function lookBigImage(diskPath, saveServer) {

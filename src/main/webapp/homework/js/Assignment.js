@@ -54,7 +54,7 @@ $(function () {
     //设置当天默认值
     $('.time_S i').html(new Date().format("yyyy-MM-dd"));
     //获取班级信息
-    ajax_S(homework_s.t_clas, trardata, function (e) {
+    ajax_S(homework_s.t_class, trardata, function (e) {
         if(e.data==undefined||e.data==null){
             $('.load_t').hide();
             return false;
