@@ -26,7 +26,7 @@ $(function () {
                         $(this).find('.remove_temp').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('line-height', listHeight + "px");
-                        if (begin_s - move_s >= 20) {
+                        if (begin_s - move_s >= 45) {
                             $(this).siblings().css('margin-left', '0px');
                             $(this).siblings().find('.remove_temp').css('right', '-270px');
                             $(this).css('margin-left', '-181px');
