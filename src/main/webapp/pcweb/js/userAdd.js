@@ -88,10 +88,21 @@ require(['jquery-1.11.0.min'], function () {
 
             //搜索框事件
             $('.adduser_sea img').off("click").on('click',seachUser);
-            $('.adduser_sea input').off("keyup").on('keyup',seachUser);
+            $('.adduser_sea input').off("keyup").on('keyup',function(){
+                seachUser();
+                var num_zz  = /^[0-9a-zA_Z]+$/;
+                if(num_zz.test($(this).val())!=false){
+
+                }else{
+                    $(this).val(null);
+                    $(this).blur();
+                    $('.adduser_list').hide().find('li').remove();
+                }
+            });
 
             //搜索用户
             function seachUser(){
+                // console.log($(this).attr('src'))
                 if($('.adduser_sea input').val()!=''){
                     $.ajax({
                         url:global.user_seac,
@@ -100,12 +111,14 @@ require(['jquery-1.11.0.min'], function () {
                         dataType: 'json',
                         data:JSON.stringify({"keyword":$('.power_screen input').val()}),
                         success:function(e){
-                            if(e.data&&e.data.length!=0){
+                            if(e.data&&e.data.length!=0&&$('.power_screen input').val()!=''){
                                 $('.adduser_list').find('li').remove();
                                 for(var i = 0;i<e.data.length;i++){
                                     $('.adduser_list').show();
                                     $('.adduser_list').append('<li name="'+e.data[i].name+'" comname="'+e.data[i].companyName+'" deptName="'+e.data[i].deptName+'" userId="'+e.data[i].emailAddr+'">'+e.data[i].emailAddr+'</li>')
                                 }
+                            }else{
+                                $('.new_username').hide();
                             }
                         }
                     });
