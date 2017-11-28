@@ -216,7 +216,9 @@ require(['jquery-1.11.0.min'],function(){
                         localStorage.schoolList = $schoolId_[0].schoolId;
                         location.reload();
                     }
-                    left_navlist(e.functionList)
+                    left_navlist(e.functionList);
+                    location.href = location.href.substring(0,location.href.indexOf('?'))
+
                 }
             }
         });
