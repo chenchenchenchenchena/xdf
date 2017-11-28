@@ -2,10 +2,12 @@
 var currentDelId;//当前要删除的ID
 var delTempLayer;
 var loading;
+
+var homeworkTime =  sessionStorage.homeworkTime_s;
+var classCode = sessionStorage.classCode_s;
 /*---------全局参数定义--------end*/
 
 $(function () {
-
     $('.temp_list').show();
     $('.searchEmpty').hide();
     $('.reload').hide();
@@ -59,7 +61,9 @@ $(function () {
     loading = layer.load();
     //获取模版列表
     var listParams = {
-        'teacherEmail': localStorage.terEmail
+        'teacherEmail': localStorage.terEmail,
+        'homeworkTime':homeworkTime,
+        'classCode':classCode
     };
     ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData, function (e) {
         layer.msg("模版信息加载失败");

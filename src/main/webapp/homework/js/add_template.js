@@ -22,6 +22,9 @@ $(function () {
     var tempId = "";//为空则表示当前是新建模版，不为空则表示修改模版
     var loading;
 
+    var homeworkTime =  sessionStorage.homeworkTime_s;
+    var classCode = sessionStorage.classCode_s;
+
     /*---------全局参数定义--------end*/
 
     /**
@@ -29,7 +32,6 @@ $(function () {
      */
     if(sessionStorage.templateEdit){
         var templateData = JSON.parse(sessionStorage.templateEdit);//获取模版信息
-        sessionStorage.removeItem('templateEdit');
         //首先获取未提交区域的内容信息
         tempId = templateData.id;
         var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));
@@ -614,14 +616,30 @@ $(function () {
     function tempCommit(){
         var text_content = $('.teBox').val();
         arr_s = arr_voice.concat(arr_image);
-        var params = {
-            'id':tempId,
-            'schoolId':localStorage.schoolId,
-            'teacherEmail':localStorage.terEmail,
-            'teacherName':localStorage.teacherName,
-            'description':encodeURIComponent(text_content).replace(/'\+'/,'%20'),
-            'homeworkReplyTemplateFiles':arr_s
-        };
+        var params;
+        if(sessionStorage.templateEdit){
+            params = {
+                'id':tempId,
+                'schoolId':localStorage.schoolId,
+                'teacherEmail':localStorage.terEmail,
+                'teacherName':localStorage.teacherName,
+                'description':encodeURIComponent(text_content).replace(/'\+'/,'%20'),
+                'homeworkReplyTemplateFiles':arr_s
+            };
+        }else {
+            params = {
+                'id':tempId,
+                'schoolId':localStorage.schoolId,
+                'teacherEmail':localStorage.terEmail,
+                'teacherName':localStorage.teacherName,
+                'description':encodeURIComponent(text_content).replace(/'\+'/,'%20'),
+                'homeworkReplyTemplateFiles':arr_s,
+                'homeworkTime':homeworkTime,
+                'classCode':classCode
+            };
+        }
+
+        sessionStorage.removeItem('templateEdit');//移除编辑状态标志
         loading = layer.load();
         ajaxRequest("POST",homework_s.temp_commit,JSON.stringify(params),function(e){
             layer.close(loading);
@@ -632,6 +650,9 @@ $(function () {
             }else {
                 layer.msg(e.msg);
             }
+        },function(e){
+            layer.msg("提交失败");
+            layer.close(loading);
         });
     }
 })
