@@ -217,7 +217,7 @@ require(['jquery-1.11.0.min'],function(){
                         location.reload();
                     }
                     left_navlist(e.functionList);
-                    location.href = location.href.substring(0,lcoation.href.indexOf('?'))
+                    location.href = location.href.substring(0,location.href.indexOf('?'))
 
                 }
             }
