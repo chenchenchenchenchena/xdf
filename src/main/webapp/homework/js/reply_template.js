@@ -3,7 +3,7 @@ var currentDelId;//当前要删除的ID
 var delTempLayer;
 var loading;
 
-var homeworkTime =  sessionStorage.homeworkTime_s;
+var homeworkTime = sessionStorage.homeworkTime_s;
 var classCode = sessionStorage.classCode_s;
 var flag = 0;//判断啊滑动和点击的标记
 /*---------全局参数定义--------end*/
@@ -19,7 +19,7 @@ $(function () {
             if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                 var begin_s = parseInt(event.targetTouches[0].pageX);
                 $(document).on('touchmove mousemove', '.temp_list .item_temp', function () {
-                    flag = 1;
+
                     var listHeight = $(this)[0].offsetHeight;
                     if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
                         var move_s = parseInt(event.targetTouches[0].pageX);
@@ -27,33 +27,41 @@ $(function () {
                         $(this).find('.remove_temp span').css('height', listHeight + "px");
                         $(this).find('.remove_temp span').css('line-height', listHeight + "px");
                         if (begin_s - move_s >= 45) {
+                            flag = 1;
                             $(this).siblings().css('margin-left', '0px');
                             $(this).siblings().find('.remove_temp').css('right', '-270px');
                             $(this).css('margin-left', '-181px');
                             $(this).find('.remove_temp').css('right', '-0px');
                             $(this).parent().css('overflow', 'inherit');
                         } else if (begin_s - move_s <= -20) {
+
                             $(this).css('margin-left', '0px');
                             $(this).find('.remove_temp').css('right', '-270px');
                             $(this).parent().css('overflow', 'hidden');
                         }
                     }
                 });
+                $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
+                    if (event.targetTouches != undefined && event.targetTouches[0] != undefined) {
+                        var end_s = parseInt(event.targetTouches[0].pageX);
+                        var angle = end_s - begin_s;
+                        if (angle <= 2 && angle >= -2) {
+
+                            flag = 0;
+                            var d = $(this).find('.remove_temp').css('right');
+                            if (d == "0px") {
+                                //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
+                            } else {
+                                //整条item的点击事件
+                                var tempId = $(this).attr('data-tempId');
+                                goBack(tempId);
+                            }
+                        }
+                    }
+                });
+
             }
 
-            $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
-                if (flag == 0) {
-
-                    var d = $(this).find('.remove_temp').css('right');
-                    if (d == "0px") {
-                        //如何编辑和删除按钮显示，则拦截整条item的点击事件，否则删除和编辑点击事件会被忽略
-                    } else {
-                        //整条item的点击事件
-                        var tempId = $(this).attr('data-tempId');
-                        goBack(tempId);
-                    }
-                }
-            });
 
         }
     });
@@ -62,8 +70,8 @@ $(function () {
     //获取模版列表
     var listParams = {
         'teacherEmail': localStorage.terEmail,
-        'homeworkTime':homeworkTime,
-        'classCode':classCode
+        'homeworkTime': homeworkTime,
+        'classCode': classCode
     };
     ajaxRequest("POST", homework_s.get_tempList, listParams, dealTempListData, function (e) {
         layer.msg("模版信息加载失败");
@@ -89,10 +97,7 @@ $(function () {
      * 播放语音
      */
     $(document).on('touchend mouseup', '.audio_box>div', function () {
-        if (flag == 0) {
-
-            return false;
-        }
+        return false;
     });
 
     /**
