@@ -482,7 +482,7 @@ $(function () {
         $(".notsubmit .imgBox").append(str);
         //界面样式控制
         if ($('.notsubmit .imgBox li').length >= 3) {
-            $('.image_s').hide();
+            $('#add_image').hide();
         }
     }
 
@@ -530,8 +530,8 @@ $(function () {
 
         $('#notsubmit_voice li:eq(' + index + ')').remove();
         // 语音小于三张，显示添加语音按钮
-        if ($('.notsubmit #record_audio_box li').length < 3) {
-            $('#record').show();
+        if ($('#notsubmit_voice li').length < 3) {
+            $('#add_voice').show();
         }
         if (arr_voice.length > 0) {
             arr_voice.splice(index, 1);
@@ -574,7 +574,7 @@ $(function () {
         $('.notsubmit .imgBox li:eq(' + index + ')').remove();
         // 图片小于三张，显示添加图片按钮
         if ($('.notsubmit .imgBox').children('div').length < 3) {
-            $('.image_s').show();
+            $('#add_image').show();
         }
         if (arr_image.length > 0) {
             arr_image.splice(index, 1);
