@@ -113,7 +113,14 @@ require(['jquery-1.11.0.min'], function () {
         //
         // });
 
+
         $('.powerindex_sea img').off("click").on('click',seachlist);
+        $('.powerindex_sea input').off("keyup").on('keyup',function(even){
+            if(even.keyCode==13){
+                seachlist();
+            }
+        });
+
         function seachlist(){
             $('.adduser_list').hide();
             $('.adduser_list').find('li').remove();
