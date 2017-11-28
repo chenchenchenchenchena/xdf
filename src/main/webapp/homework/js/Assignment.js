@@ -24,7 +24,6 @@ $(function () {
         urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
     }
     var trardata = {
-        'teacherCode': localStorage.teacherId,
         'schoolId': localStorage.schoolId,
         'email': localStorage.terEmail
     };
