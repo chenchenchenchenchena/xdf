@@ -44,7 +44,7 @@ $(function () {
     $(".txtDiv").hide();
     // var firstLoad = layer.load();
     //录入数据
-    var inputData = {"sCode": localStorage.teacherId, "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
+    var inputData = { "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
         if(e.result){
