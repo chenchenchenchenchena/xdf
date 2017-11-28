@@ -71,13 +71,14 @@ require(['jquery-1.11.0.min'], function () {
 
                 //搜素点击事件
                 $('#seacher_hw').parent().find('img').click(function () {
-                    seacherName = $('#seacher_hw').val();
-                    //if (seacherName == undefined || seacherName == "") {
-                    //    layer.msg("请先填写教师名称");
-                    //    return false;
-                    //}
                     SelectTeacherList();
                 });
+                //搜素回车事件
+                $('#seacher_hw').off("keyup").on('keyup',function(even){
+                    if(even.keyCode==13){
+                        SelectTeacherList();
+                    }
+                })
                 $('#hw_selectBtn').click(function () {
                     SelectTeacherList();
                 });

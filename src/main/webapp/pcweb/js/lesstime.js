@@ -87,7 +87,7 @@ function line_echar(id, campus, value, type, yName, xName) {
     }
     var dataZoom_ = [{
         type: 'slider',
-        start: 1,
+        start: 100,
         end: 50,
         handleSize: 8,
     }, {
