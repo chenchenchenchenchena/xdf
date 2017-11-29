@@ -6,7 +6,7 @@ $(function(){
 		sessionStorage.studentName = GetRequest('studentName');
 	}*/
 
-	sessionStorage.stuNumber = 'ss2856';
+	// sessionStorage.stuNumber = 'ss2856';
 	//sessionStorage.studentName = '刘一硕';
 	//sessionStorage.schoolId = '73';
 	// localStorage.classCode = 'hx001';
