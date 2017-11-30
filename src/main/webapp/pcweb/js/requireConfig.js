@@ -96,7 +96,11 @@ require(['jquery-1.11.0.min'],function(){
                                 layer.msg('您暂无权限,请联系管理员');
                                 return false;
                             }
-                     }
+                     }else{
+                            $('.content ').hide();
+                            layer.msg('您暂无权限,请联系管理员');
+                            return false;
+                        }
 
                     }
                     var number_l = 0;
