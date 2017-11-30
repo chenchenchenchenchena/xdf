@@ -85,7 +85,7 @@ require(['jquery-1.11.0.min'],function(){
                         if(onelistbure.isValid ==1&&childlist.length!=0){
                         $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         for(var k = 0;k<childlist.length;k++){
-                            if(childlist[k].isValid ==1){
+                            if(childlist[k].isValid ==1&&childlist[k].checked ==true){
                              $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
                             }else{
                                 $('.left_nav ul').append('<li class="no_la"></li>')
