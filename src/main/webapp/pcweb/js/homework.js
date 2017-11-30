@@ -297,14 +297,14 @@ function changeHomeworkType(this_, flag) {
     var timeArray = getlastmonth();
     var halfYear = timeArray[3];
     $('#date_input').val(halfYear + " - " + today);
-    selectHwData();
+    selectHwData(homeworkType);
 
 }
 
 /**
  * 作业统计接口实现
  */
-function selectHwData() {
+function selectHwData(homeworkType) {
     //获取筛选条件
     var time = $('#date_input').val();
     if (time != "" && time != undefined) {
