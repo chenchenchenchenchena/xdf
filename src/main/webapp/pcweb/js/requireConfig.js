@@ -82,7 +82,7 @@ require(['jquery-1.11.0.min'],function(){
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
-                        if(onelistbure.isValid ==1&&childlist.length!=0&&onelistbure.checked==true){
+                        if(onelistbure.isValid ==1&&childlist.length!=0){
                         $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
@@ -96,11 +96,7 @@ require(['jquery-1.11.0.min'],function(){
                                 layer.msg('您暂无权限,请联系管理员');
                                 return false;
                             }
-                     }else{
-                            $('.content ').hide();
-                            layer.msg('您暂无权限,请联系管理员');
-                            return false;
-                        }
+                     }
 
                     }
                     var number_l = 0;
