@@ -868,12 +868,11 @@ html body .adduser_list_active{
 	color:#fff;
 }
 .date-input {
-	padding-left: 10px;
-	height: 18px;
-	font-size:18px;
-	padding:10px 10px;
+	height: 12px;
+	font-size:12px;
+	padding:13px 0 13px 10px;
 	min-width: 143px;
-	line-height: 18px;
+	line-height: 12px;
 	background-color: #fff;
 	display: inline;
 	color: #666;
