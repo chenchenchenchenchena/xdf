@@ -67,7 +67,7 @@ $(function () {
     });
 
     loading = layer.load();
-    //获取模版列表
+    //获取模板列表
     var listParams = {
         'teacherEmail': localStorage.terEmail,
         'homeworkTime': homeworkTime,
@@ -175,7 +175,7 @@ $(function () {
         });
     });
 
-    //删除模版-确定
+    //删除模板-确定
     $(document).on('touchend', '.delete .confirmBtn', function () {
         layer.close(delTempLayer);
         loading = layer.load();
@@ -199,14 +199,14 @@ $(function () {
         })
         return false;
     });
-    //删除模版-取消
+    //删除模板-取消
     $(document).on('touchend', '.delete .cancelBtn', function () {
         layer.close(delTempLayer);
         return false;
     });
 
     /**
-     * 点击添加模版
+     * 点击添加模板
      */
     $('.eBtn').click(function () {
         location.href = 'add_template.html';
@@ -232,7 +232,7 @@ function goBack(tempId) {
 
 
 /**
- * 处理模版列表返回数据
+ * 处理模板列表返回数据
  * @param e
  */
 function dealTempListData(e) {
@@ -245,7 +245,7 @@ function dealTempListData(e) {
             for (var i = 0; i < list.length; i++) {
                 var description = decodeURIComponent(decodeURIComponent(list[i].description));//文本信息
                 var templateFileList = list[i].homeworkReplyTemplateFileList;//文件列表
-                var tempId = list[i].id;//模版id
+                var tempId = list[i].id;//模板id
                 var status = list[i].status;
                 var str = '<li data-index="' + i + '" data-tempId="' + tempId + '" class="item_temp"><p>' + description + '</p><ul style="display: none;" class="voiceBox"></ul> ' +
                     '<div class="imgBox" style="display: none;"></div><img style="display: block;" class="loading-back" src="../common/images/loading.gif">' +
