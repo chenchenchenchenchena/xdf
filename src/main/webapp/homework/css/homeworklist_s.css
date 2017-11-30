@@ -428,6 +428,15 @@ html body .tealist_s .more_so{
 	bottom:30px;
 	right:30px;
 }
+.quck_mb{
+	float:right;
+	line-height:64px;
+}
+.template_ic{
+	position:relative;
+	top:10px;
+
+}
 .Media_s{
 	padding:0 30px;
 	margin-top:30px;
