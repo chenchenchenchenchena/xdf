@@ -372,9 +372,8 @@ $(function(){
 						+'<p>'+className+'('+teacherName+')<span class="'+readStatus+'"></span></p>'
 						+'<ul class="secul"><div class="load_html"><img class="loading-back" src="../common/images/loading.gif" /><div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div></div></ul>'
 						+'</li>';
-
-					$(".hwFinish>ul").append(hwListFinishHtml);
-				}
+                    $(".hwFinish>ul").append(hwListFinishHtml);
+                }
 
 				$(".hwFinish").show();
 				$(".hwFinish .secul").hide();

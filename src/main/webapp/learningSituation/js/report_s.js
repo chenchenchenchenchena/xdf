@@ -3,8 +3,8 @@ $(function () {
 //     addEventListener("touchmove", function (event) {
 //         event.preventDefault();
 //     }, false);
-    sessionStorage.schoolId="73";
-    sessionStorage.stuNumber = 'SS5358';
+//     sessionStorage.schoolId="73";
+    // sessionStorage.stuNumber = 'SS5358';
 //点击显示图标
     $('.load_t').show();
 
