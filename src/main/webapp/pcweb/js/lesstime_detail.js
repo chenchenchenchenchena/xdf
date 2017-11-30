@@ -205,8 +205,11 @@ function SelectData() {
                     $('.homework_list').append(str_th);
 
                     for (var i = 0; i < list.length; i++) {
-                        var html_ = '<li><span>' + list[i].teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
-                        $('.homework_list').append(html_);
+                        if(list[i].teacherName != undefined && list[i].teacherName != ""){
+
+                            var html_ = '<li><span>' + list[i].teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
+                            $('.homework_list').append(html_);
+                        }
                     }
                 }
             } else {

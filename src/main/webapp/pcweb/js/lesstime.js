@@ -355,10 +355,12 @@ function SelectData() {
                         lessonNumList.push(totalLessonNos);
                         lessonHourList.push(totalLessonHour);
                         schoolList.push(schoolName.substring(0, schoolName.length - 3));
+                        if(schoolName != undefined && schoolName != ""){
+                            var html_ = "<li><span>" + schoolName + "</span><span>" + headTeacherTotal + "</span><span>" + totalLessonNos + "</span><span>" + totalLessonHour + "</span></li>";
+                            $('.lesstime_list').append(html_);
+                            $('.lesstime_list li:nth-child(odd)').css('background', '#f5fbfa');
+                        }
 
-                        var html_ = "<li><span>" + schoolName + "</span><span>" + headTeacherTotal + "</span><span>" + totalLessonNos + "</span><span>" + totalLessonHour + "</span></li>";
-                        $('.lesstime_list').append(html_);
-                        $('.lesstime_list li:nth-child(odd)').css('background', '#f5fbfa');
                     }
                     /*班课量/课时量趋势图展示*/
                     line_echar('class_echart', schoolList, lessonNumList, 'bar', "班课次", "校区");
