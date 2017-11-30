@@ -78,14 +78,14 @@ require(['jquery-1.11.0.min'],function(){
     $('#logout').click(toLogout);
     //左侧菜单栏
     function left_navlist(list){
-
+                    var booleaN = false;
                     var onelist = list;
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
                         if(onelistbure.isValid ==1&&childlist.length!=0){
                         $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
-                        var booleaN = false;
+
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
                                 booleaN = true;
@@ -126,7 +126,7 @@ require(['jquery-1.11.0.min'],function(){
                     }else{
                         $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
                     }
-                    if(url_l.indexOf($bure_true.attr('href'))<0){
+                    if(url_l.indexOf($bure_true.attr('href'))<0||booleaN){
                         location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
                     }
 
