@@ -37,7 +37,7 @@ var global = {
     'hw_dictList':url_o + 'dict/getDictListByTableName.do',//字典
 };
 
-debugger;
+
 require(['jquery-1.11.0.min'],function(){
     $('body').hide();
 /*数据交互请求地址*/
@@ -196,6 +196,7 @@ require(['jquery-1.11.0.min'],function(){
             dataType: 'json',
             data: JSON.stringify(calbac),
             success: function (e) {
+                debugger;
                 if (e.result == false) {
                     if(!sessionStorage.getItem('sid')){
                         layer.msg(e.message);
