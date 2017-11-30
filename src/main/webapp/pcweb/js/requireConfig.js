@@ -82,7 +82,7 @@ require(['jquery-1.11.0.min'],function(){
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
-                        if(onelistbure.isValid ==1&&childlist.length!=0){
+                        if(onelistbure.isValid ==1&&childlist.length!=0&&onelistbure.checked==true){
                         $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
