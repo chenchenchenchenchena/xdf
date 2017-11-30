@@ -19,7 +19,7 @@ $(function () {
     var delImageLayer;
     var confirmSubLayer;
 
-    var tempId = "";//为空则表示当前是新建模版，不为空则表示修改模版
+    var tempId = "";//为空则表示当前是新建模板，不为空则表示修改模板
     var loading;
 
     var homeworkTime =  sessionStorage.homeworkTime_s;
@@ -28,10 +28,10 @@ $(function () {
     /*---------全局参数定义--------end*/
 
     /**
-     * 判断是否是编辑模版
+     * 判断是否是编辑模板
      */
     if(sessionStorage.templateEdit){
-        var templateData = JSON.parse(sessionStorage.templateEdit);//获取模版信息
+        var templateData = JSON.parse(sessionStorage.templateEdit);//获取模板信息
         //首先获取未提交区域的内容信息
         tempId = templateData.id;
         var tempContent = decodeURIComponent(decodeURIComponent(templateData.description));

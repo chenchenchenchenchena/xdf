@@ -1413,15 +1413,15 @@ $(function () {
     }
     stopDrop();
 
-    /*模版选择*/
+    /*模板选择*/
     $('.template_ic').click(function(){
         location.href = 'reply_template.html';
     })
     loadTemplate();
-    /*模版返回,加载模版*/
+    /*模板返回,加载模板*/
     function loadTemplate(){
         if(sessionStorage.template){
-            var templateData = JSON.parse(sessionStorage.template);//获取模版信息
+            var templateData = JSON.parse(sessionStorage.template);//获取模板信息
             sessionStorage.removeItem('template');
             //首先获取未提交区域的内容信息
             var notCommitContent = $('.answer .teBox').val();
