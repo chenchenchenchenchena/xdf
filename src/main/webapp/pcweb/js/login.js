@@ -47,7 +47,15 @@ function tLogin() {
                 sessionStorage.setItem("userId", e.userId, 1);
                 var functionList = e.functionList;
                 sessionStorage.superstar = JSON.stringify(functionList);
-                localStorage.schoolList = e.userList[0].schoolId;
+                var schoolID = '';
+                for(i in e.userList){
+                    if(i==e.userList.length-1){
+                        schoolID+=e.userList[i].schoolId;
+                    }else{
+                        schoolID+=e.userList[i].schoolId+',';
+                    }
+                }
+                localStorage.schoolList = schoolID;
 
                 location.href = 'index.html#/index'
             }
