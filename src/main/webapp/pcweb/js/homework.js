@@ -409,8 +409,8 @@ function selectHwData() {
 
                         $('#publish h1 i').html(publishAll + "次");
                         $('#publish h1 span').html("(总送达" + reachAll + "人次)");
-                        $('#publish .all span').eq(0).html(normalRate + "%(" + publishEAll + "次)");
-                        $('#publish .all span').eq(1).html(parseInt(publishEAllRate.toFixed(2) * 100) + "%(" + normalAll + "次)");
+                        $('#publish .all span').eq(0).html(normalRate + "%(" + normalAll + "次)");
+                        $('#publish .all span').eq(1).html(parseInt(publishEAllRate.toFixed(2) * 100) + "%(" + publishEAll + "次)");
 
                         /*批复量数据处理*/
                         replyAll = parseInt(resultReply.replyAll);//总批复量
