@@ -20,9 +20,9 @@ $(function () {
     $('.load_t').show();
 
     /*sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA';*/
-    if(!sessionStorage.openid){
+    // if(!sessionStorage.openid){
         // wechatCode(location.href)
-    }
+    // }
     if(getRequest('state').state=='JT'||sessionStorage.signal){
         urlPush=url_o2+"/xdfdthome/learningSituation/report_t.html?state=JT";
     }else{
