@@ -78,20 +78,23 @@ require(['jquery-1.11.0.min'],function(){
     $('#logout').click(toLogout);
     //左侧菜单栏
     function left_navlist(list){
+
                     var onelist = list;
                     for(var i = 0;i<onelist.length;i++){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
                         if(onelistbure.isValid ==1&&childlist.length!=0){
                         $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
+                        var booleaN = false;
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1&&childlist[k].checked ==true){
+                                booleaN = true;
                              $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
                             }else{
                                 $('.left_nav ul').append('<li class="no_la"></li>')
                             }
                         }
-                            if( $('.left_nav ul').eq(i).find('.no_la').length==childlist.length){
+                            if( $('.left_nav ul').eq(i).find('.no_la').length==childlist.length||booleaN){
                                 $('.content ').hide();
                                 layer.msg('您暂无权限,请联系管理员');
                                 return false;
