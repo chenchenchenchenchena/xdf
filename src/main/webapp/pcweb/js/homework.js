@@ -352,7 +352,7 @@ function selectHwData() {
                     var publishAll;//总用户量(总布置次数)
                     var reachAll;//总送达人次
                     var replyAll;//总批复量
-                    var correctRateAll = 0;//总正确率
+                    var correctRateAll = data.correctAllRate;//总正确率
 
 
                     /*校区对比数据展示*/
@@ -369,7 +369,6 @@ function selectHwData() {
                         var publishCount = parseInt(schoolComparsion[i].publishCount);//布置次数
                         var correctRate = parseFloat(schoolComparsion[i].correctRate);//正确率
                         var reachCount = parseInt(schoolComparsion[i].reachCount);//送达人数
-                        correctRateAll += correctRate;
                         if (homeworkType == "1") {
                             //手动作业，正确率显示空
                             var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>暂无</span><span >' +
