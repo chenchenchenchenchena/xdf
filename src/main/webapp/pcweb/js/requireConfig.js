@@ -128,6 +128,7 @@ require(['jquery-1.11.0.min'],function(){
                         $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
                     }
                     if(url_l.indexOf($bure_true.attr('href'))<0){
+                        debugger;
                         location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
                     }
 
