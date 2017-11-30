@@ -876,6 +876,7 @@ html body .adduser_list_active{
 	background-color: #fff;
 	display: inline;
 	color: #666;
+	margin-right:20px;
 }
 .select-btn{
 	background-color: #00ba97;
