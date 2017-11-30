@@ -78,7 +78,6 @@ require(['jquery-1.11.0.min'],function(){
     $('#logout').click(toLogout);
     //左侧菜单栏
     function left_navlist(list){
-                    debugger;
                     var booleaN = false;
                     var onelist = list;
                     for(var i = 0;i<onelist.length;i++){
@@ -121,7 +120,7 @@ require(['jquery-1.11.0.min'],function(){
                     }else{
                         $('.left_nav ul .active_me').eq(0).addClass('activ_nav');
                     }
-                    if(url_l.indexOf($bure_true.attr('href'))<0||booleaN==true){
+                    if(url_l.indexOf($bure_true.attr('href'))<0||booleaN==false){
                         location.href =url_l.substr(0,url_l.indexOf('#'))+$url_;
                     }
 
@@ -183,7 +182,6 @@ require(['jquery-1.11.0.min'],function(){
     }
 //e2登陆回调
     function e2Login() {
-        debugger;
 
         var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
         var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
