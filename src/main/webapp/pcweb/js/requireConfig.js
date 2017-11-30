@@ -78,6 +78,7 @@ require(['jquery-1.11.0.min'],function(){
     $('#logout').click(toLogout);
     //左侧菜单栏
     function left_navlist(list){
+                    debugger;
                     var booleaN = false;
                     var onelist = list;
                     for(var i = 0;i<onelist.length;i++){
@@ -94,13 +95,7 @@ require(['jquery-1.11.0.min'],function(){
                                 $('.left_nav ul').append('<li class="no_la"></li>')
                             }
                         }
-                            if( $('.left_nav ul').eq(i).find('.no_la').length==childlist.length||booleaN){
-                                $('.content ').hide();
-                                layer.msg('您暂无权限,请联系管理员');
-                                return false;
-                            }
                      }
-
                     }
                     var number_l = 0;
                     var url_l =  location.href;
@@ -188,6 +183,8 @@ require(['jquery-1.11.0.min'],function(){
     }
 //e2登陆回调
     function e2Login() {
+        debugger;
+
         var code_s = location.search.substring(location.search.indexOf('code') + 5, location.search.indexOf('&'));
         var state_s = location.search.substring(location.search.indexOf('state') + 6, location.search.length);
         var calbac = {
