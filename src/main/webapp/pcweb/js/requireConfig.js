@@ -83,19 +83,21 @@ require(['jquery-1.11.0.min'],function(){
                         var onelistbure = onelist[i];
                         var childlist = onelistbure.children;
                         if(onelistbure.isValid ==1&&childlist.length!=0){
-                            $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
-                        };
+                        $('.left_nav').prepend('<h2>'+onelistbure.text+'</h2>');
                         for(var k = 0;k<childlist.length;k++){
                             if(childlist[k].isValid ==1){
                              $('.left_nav ul').append('<li href="'+childlist[k].url+'" class="active_me"><a href="'+childlist[k].url+'">'+childlist[k].text+'</a></li>')
                             }else{
-                                $('.left_nav ul').append('<li></li>')
+                                $('.left_nav ul').append('<li class="no_la"></li>')
                             }
                         }
-                    }
-                    if( $('.left_nav ul li').length=='0'){
-                        $('.content ').hide();
-                        layer.msg('您暂无权限,请联系管理员');
+                            if( $('.left_nav ul').eq(i).find('.no_la').length==childlist.length){
+                                $('.content ').hide();
+                                layer.msg('您暂无权限,请联系管理员');
+                                return false;
+                            }
+                     }
+
                     }
                     var number_l = 0;
                     var url_l =  location.href;
@@ -196,7 +198,7 @@ require(['jquery-1.11.0.min'],function(){
             dataType: 'json',
             data: JSON.stringify(calbac),
             success: function (e) {
-                debugger;
+
                 if (e.result == false) {
                     if(!sessionStorage.getItem('sid')){
                         layer.msg(e.message);
