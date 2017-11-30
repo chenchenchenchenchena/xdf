@@ -251,6 +251,7 @@ body{
 	float: left;
 	background:url(../images/img_5.png) no-repeat right 8px center;
 	cursor: pointer;
+	overflow:hidden;
 }
 .homewor_big_selecet input{
 	float:left;
