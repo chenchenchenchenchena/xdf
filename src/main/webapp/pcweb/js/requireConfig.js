@@ -36,6 +36,8 @@ var global = {
     'hw_expor':url_o+'backEndHomework/exportHomeWorkTeacherDetail.do',//作业统计导出
     'hw_dictList':url_o + 'dict/getDictListByTableName.do',//字典
 };
+
+debugger;
 require(['jquery-1.11.0.min'],function(){
     $('body').hide();
 /*数据交互请求地址*/
