@@ -18,7 +18,7 @@ var currentStageCode;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['jqPaginator.min'], function () {
-            require(['layer', 'requireConfig'], function () {
+            require(['layer'], function () {
 
                 laydate.render({
                     elem: '#date_input',
