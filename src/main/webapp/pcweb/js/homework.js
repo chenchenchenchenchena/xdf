@@ -80,7 +80,7 @@ require(['jquery-1.11.0.min'], function () {
 
 //校区展示
 function getSchool() {
-    $('#select_html>li').find('ul').hide();
+    $('#select_html>ul>li').find('ul').hide();
     if ($("#school").parent().find('ul').css('display') != 'none') {
         $("#school").parent().find('ul').hide();
     } else {
@@ -142,7 +142,7 @@ function filterByCityId(_this, schoolName) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
-    $('#select_html>li').find('ul').hide();
+    $('#select_html>ul>li').find('ul').hide();
     if ($(this_).parent().find('ul').css('display') != 'none') {
         $(this_).parent().find('ul').hide();
     } else {
