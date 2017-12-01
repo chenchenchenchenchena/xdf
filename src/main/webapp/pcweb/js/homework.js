@@ -142,6 +142,7 @@ function filterByCityId(_this, schoolName) {
 
 //获取学段／年级／科目
 function getSelectList(this_, type, flag) {
+    $('#select_html>li').find('ul').hide();
     if ($(this_).parent().find('ul').css('display') != 'none') {
         $(this_).parent().find('ul').hide();
     } else {
