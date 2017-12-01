@@ -555,7 +555,8 @@ $(function () {
             'schoolId': sessionStorage.schoolId,
             'classId': localStorage.classCode
         };
-        ajaxRequest("Post",homework_s.uploadImage,cbconfig,function(e){
+        var url = "http://10.162.7.139:8080/xdfdtmanager/upload/uploadFileByWeiChat.do";
+        ajaxRequest("Post",url,cbconfig,function(e){
 
             $('.big_back').hide();
             // alert(JSON.stringify(data));
