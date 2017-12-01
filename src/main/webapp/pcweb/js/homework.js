@@ -8,15 +8,12 @@ var currentSchoolId = "";//默认全部
 var currentSchool = "全部";//默认全部
 var beginTime = "";//默认全部
 var endTime = "";//默认全部
-var homeworkType = "0"//默认作业类型全部 0表示查询所以 1表示查询普通 2表示查询电子
+var homeworkType = "0"//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
 var currentStageCode = "";
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig'], function () {
-            $('body').on('touchend',function(){
-                $('#select_html>ul>li').find('ul').hide();
-            });
             // 重置左导航
             var number_l = 0;
             var url_l = location.href;

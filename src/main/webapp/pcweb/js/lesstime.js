@@ -343,7 +343,7 @@ function SelectData() {
                     var schoolList = [];
 
                     $('.lesstime_list li').remove();
-                    var str_th = '<li class="homework_list_title"><span>校区</span><span>班主任数量（人）</span><span>班课次（个）</span><span>课时量（h）</span></li>';
+                    var str_th = '<li class="homework_list_title"><span>学校</span><span>班主任数量（人）</span><span>班课次（个）</span><span>课时量（h）</span></li>';
                     $('.lesstime_list').append(str_th);
                     for (var k = 0; k < teacherTotalData.length; k++) {
 
