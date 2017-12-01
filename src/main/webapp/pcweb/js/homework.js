@@ -14,6 +14,9 @@ var currentStageCode = "";
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig'], function () {
+            $('body').on('touchend',function(){
+                $('#select_html>ul>li').find('ul').hide();
+            });
             // 重置左导航
             var number_l = 0;
             var url_l = location.href;
@@ -359,7 +362,7 @@ function selectHwData() {
 
                     /*校区对比数据展示*/
                     $('#schoolComparsion li').remove();
-                    var str = '<li class="homework_list_title "><span>校区</span><span>布置次数</span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数</span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
                     for (var i = 0; i < schoolComparsion.length; i++) {
 
