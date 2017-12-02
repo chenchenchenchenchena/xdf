@@ -19,9 +19,9 @@ $(function () {
     // }
     var urlPush = '';
     if(getRequest('state').state=='JT'||sessionStorage.signal){
-        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html?state=JT";
+        urlPush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67e16b7247bde1a8&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=JT&connect_redirect=1#wechat_redirect";
     }else{
-        urlPush=url_o2+"/xdfdthome/homework/homeworklist_t.html";
+        urlPush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxab29a3e2000b8d2a&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=JT&connect_redirect=1#wechat_redirect";
     }
     var trardata = {
         'schoolId': localStorage.schoolId,
