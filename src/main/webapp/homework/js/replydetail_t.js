@@ -404,8 +404,8 @@ $(function () {
         $('.song_s,.mask').hide();
         $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
-        if ($('.notsubmit #record_audio_box li').length >= 3) {
-            $('#record').hide();
+        if ($('#record_audio_box li').length >= 3) {
+            $('.Voice').hide();
         }
     }
 
@@ -1316,8 +1316,8 @@ $(function () {
 
         $('#record_audio_box li:eq(' + index + ')').remove();
         // 语音小于三张，显示添加语音按钮
-        if ($('.notsubmit #record_audio_box li').length < 3) {
-            $('#record').show();
+        if ($('#record_audio_box li').length < 3) {
+            $('.Voice').show();
         }
         if (arr_voice.length > 0) {
             arr_voice.splice(index, 1);

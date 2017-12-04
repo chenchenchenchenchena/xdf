@@ -375,7 +375,7 @@ $(function () {
         $('.big_back').hide();
         // 语音大于三张，隐藏添加语音按钮
         if (parentId.find('li').length >= 3) {
-            $('#record').hide();
+            $('#add_voice').hide();
         }
     }
 
