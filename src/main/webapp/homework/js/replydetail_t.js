@@ -1414,7 +1414,7 @@ $(function () {
     stopDrop();
 
     /*模板选择*/
-    $('.template_ic').click(function(){
+    $('.quck_mb').click(function(){
         location.href = 'reply_template.html';
     })
     loadTemplate();
