@@ -133,9 +133,9 @@ $(function(){
             $('.canvs_more li').eq(0).find('span').eq(3).html('批复率');
             var e = Data_ALL.Data[0];
             //百分比
-            cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37','%');
-            cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a','%');
-            cnv('can_h',parseInt(e.dzsumcorrectReplyt*100),'#6ab4ff','%');
+            cnv('can_o',parseInt(e.sumcommitReplyt*100),'#ffbb37','%',parseInt(e.sumcommitReplyt*100));
+            cnv('can_t',parseInt(e.sdpfsumReplyt*100),'#ff6a6a','%',parseInt(e.sdpfsumReplyt*100));
+            cnv('can_h',parseInt(e.dzsumcorrectReplyt*100),'#6ab4ff','%',parseInt(e.dzsumcorrectReplyt*100));
             //提交率
             $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt*100)+'%');
             $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt*100)+'%');
@@ -166,9 +166,10 @@ $(function(){
             $('.canvs_more li').eq(0).find('span').eq(2).html('提交量');
             $('.canvs_more li').eq(0).find('span').eq(3).html('批复量');
             var e = Data_ALL.DataInfos[0];
+            var e2 = Data_ALL.Data[0];
             //百分比
-            cnv('can_o',parseInt(e.sumcommitReplyt),'#ffbb37','');
-            cnv('can_t',parseInt(e.sdpfsumReplyt),'#ff6a6a','');
+            cnv('can_o',parseInt(e.sumcommitReplyt),'#ffbb37','',parseInt(e2.sumcommitReplyt*100));
+            cnv('can_t',parseInt(e.sdpfsumReplyt),'#ff6a6a','',parseInt(e2.sdpfsumReplyt*100));
             //提交率
             $('.sdsumcommitReplyt').html('手动：'+parseInt(e.sdsumcommitReplyt));
             $('.dzsumcommitReplyt').html('电子：'+parseInt(e.dzsumcommitReplyt));
@@ -255,7 +256,7 @@ $(function(){
         event.stopPropagation();
     })
     //环形图
-    function cnv(id,num,color,Per){
+    function cnv(id,num,color,Per,num2){
         var bian = 0    //这里改数值~
         var canvas = document.getElementById(id);
         var ctx = canvas.getContext("2d");
@@ -290,7 +291,7 @@ $(function(){
         init()
         var times = setInterval(function(){
             bian +=1;
-            if(bian>=num){
+            if(bian>=num2){
                 clearInterval(times)
             }
             init()
