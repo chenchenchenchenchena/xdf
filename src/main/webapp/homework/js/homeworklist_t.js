@@ -59,7 +59,6 @@ $(function(){
         // e.stopPropagation();
         if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
-            alert(0)
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
                 if(begin_s-move_s>=100){
