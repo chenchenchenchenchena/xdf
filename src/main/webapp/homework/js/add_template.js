@@ -453,7 +453,6 @@ $(function () {
         ajaxRequest("Post", homework_s.uploadImage, cbconfig, function (e) {
             $('.big_back').hide();
             if (e.status == "failure") {
-                // alert(e.msg);
                 layer.msg('图片上传失败');
 
             } else if (e.status == "succeed") {
@@ -588,6 +587,7 @@ $(function () {
         if(text_content == "" && arr_voice.length == 0 && arr_image.length == 0){
             //如果三者都为空，则不能提交
             layer.msg('请输入内容');
+            return false;
         }
         //提交二次确认
         confirmSubLayer = layer.open({
