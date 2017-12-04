@@ -209,6 +209,7 @@ $(function () {
      * 点击添加模板
      */
     $('.eBtn').click(function () {
+        sessionStorage.removeItem("templateEdit");
         location.href = 'add_template.html';
     });
 
