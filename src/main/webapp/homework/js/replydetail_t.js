@@ -485,22 +485,6 @@ $(function () {
 
     //提交确认
     $('.sub_p').on('touchend', function () {
-        $('.areyok').show();
-    });
-    $('.areyok input:first-of-type').on('touchend', function () {
-        $(".areyok").hide();
-        $('.big_back').hide();
-    });
-    //批改作业提交
-    $('.areyok input:last-of-type').on('touchend', function () {
-        $(".areyok").hide();
-        var arr_s = [];
-        if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
-            layer.msg('正在提交，请稍等');
-            return false;
-        }
-        var buer = false;
-        $(this).css('background', 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
         if (sessionStorage.bangbang) {
             if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
                 buer = true;
@@ -527,6 +511,23 @@ $(function () {
             layer.msg('图片最多上传三张');
             return false;
         }
+        $('.areyok').show();
+    });
+    $('.areyok input:first-of-type').on('touchend', function () {
+        $(".areyok").hide();
+        $('.big_back').hide();
+    });
+    //批改作业提交
+    $('.areyok input:last-of-type').on('touchend', function () {
+        $(".areyok").hide();
+        var arr_s = [];
+        if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
+            layer.msg('正在提交，请稍等');
+            return false;
+        }
+        var buer = false;
+        $(this).css('background', 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box');
+
 
         if ($('.infoTitle span').css('color') == 'rgb(255, 106, 106)') {
             need.tag = '0'
