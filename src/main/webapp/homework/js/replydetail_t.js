@@ -519,7 +519,9 @@ $(function () {
     });
     //批改作业提交
     $('.areyok input:last-of-type').on('touchend', function () {
-        $(".areyok").hide();
+        setTimeout(function(){
+            $(".areyok").hide();
+        },500);
         var arr_s = [];
         if ($(this).css('background') == 'rgb(204, 204, 204) none repeat scroll 0% 0% / auto padding-box border-box') {
             layer.msg('正在提交，请稍等');
@@ -614,8 +616,10 @@ $(function () {
     });
     //状态点击
     $('.succ input').on('touchend', function () {
-        $('.big_back').hide();
-        $('.succ').hide();
+        setTimeout(function(){
+            $('.big_back').hide();
+            $('.succ').hide();
+        },500);
         location.href = 'reply_t.html';
     });
 
