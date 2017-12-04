@@ -13,6 +13,7 @@
 .item_temp p{
     font-size: 28px;
     margin-top: 20px;
+    padding-bottom:24px;
 }
 .voiceBox{
     margin-top: 20px;
@@ -53,7 +54,7 @@
     line-height: 88px;
     font-size: 32px;
     color: #fff;
-    margin: 30px 0 0 30px;
+    margin: 30px 0 30px 30px;
     border: none;
     outline: none;
     border-radius: 10px;
