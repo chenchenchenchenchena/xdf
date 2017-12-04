@@ -41,7 +41,7 @@ $(function () {
                         }
                     }
                 });
-                $(document).on('touchend mouseup', '.temp_list .item_temp', function () {
+                $(document).on('touchend mouseover', '.temp_list .item_temp', function () {
                     flag = 0;
                     if (event != undefined && event.pageX != undefined) {
                         var end_s = parseInt(event.pageX);
