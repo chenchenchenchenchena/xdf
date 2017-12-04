@@ -46,7 +46,7 @@ $(function () {
                     if (event != undefined && event.pageX != undefined) {
                         var end_s = parseInt(event.pageX);
                         var angle = end_s - begin_s;
-                        if (angle <= 0 && angle >= -1) {
+                        if (angle == 0) {
 
                             var d = $(this).find('.remove_temp').css('right');
                             if (d == "0px") {
