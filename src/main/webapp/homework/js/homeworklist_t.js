@@ -61,7 +61,7 @@ $(function(){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
-                if(begin_s-move_s>=500){
+                if(begin_s-move_s>=400){
                     if(localStorage.mastTeater){
                         alert('您当前的账户为主讲老师，暂仅能查看哦。')
                         return false;
@@ -73,7 +73,7 @@ $(function(){
                     $(this).parent().css('overflow','inherit');
                     $(this).css('margin-left','-50px');
                     // return false;
-                }else if(begin_s-move_s<=-500){
+                }else if(begin_s-move_s<=-400){
                     $(this).css('margin-left','0px');
                     $(this).find('.remove_s').css('right','-270px');
                     $(this).parent().css('overflow','hidden');
