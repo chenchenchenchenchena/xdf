@@ -59,6 +59,7 @@ $(function(){
         // e.stopPropagation();
         if($(this).children('.remove_s')){
             var begin_s = parseInt(event.targetTouches[0].pageX);
+            alert(0)
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
                 if(begin_s-move_s>=100){
@@ -73,7 +74,7 @@ $(function(){
                     $(this).parent().css('overflow','inherit');
                     $(this).css('margin-left','-50px');
                     // return false;
-                }else if(begin_s-move_s<=-20){
+                }else if(begin_s-move_s<=-100){
                     $(this).css('margin-left','0px');
                     $(this).find('.remove_s').css('right','-270px');
                     $(this).parent().css('overflow','hidden');
