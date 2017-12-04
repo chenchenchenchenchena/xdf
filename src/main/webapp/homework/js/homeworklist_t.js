@@ -61,7 +61,7 @@ $(function(){
             var begin_s = parseInt(event.targetTouches[0].pageX);
             $(document).on('touchmove mousemove','.tealist_s li',function(){
                 var move_s = parseInt(event.targetTouches[0].pageX);
-                if(begin_s-move_s>=20){
+                if(begin_s-move_s>=100){
                     if(localStorage.mastTeater){
                         alert('您当前的账户为主讲老师，暂仅能查看哦。')
                         return false;
