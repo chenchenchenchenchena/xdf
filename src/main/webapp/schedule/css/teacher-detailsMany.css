@@ -374,8 +374,8 @@ a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
 	position:relative;
 }
 .switch_{
-	width:40px;
-	height:40px;
+	width:35px;
+	height:35px;
 	position: absolute;
 	right:20px;
 	top:10px;
@@ -423,6 +423,9 @@ a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
 }
 .canvs_more_tit img{
 	float:right;
+	display:block;
+	width:40px;
+	height:40px;
 	padding-top:23px;
 	margin-right:30px;
 }
