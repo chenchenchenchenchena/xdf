@@ -817,19 +817,29 @@ $(function () {
 
     function stopRecordBack(this_,event){
         clearInterval(ts);
+        layer.msg("3");
         if(!isCanStopRecord){
             return;
         }
+        layer.msg("4");
         this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
 
         clearInterval(recordTimer);
         timeInedex = 0;
+        layer.msg("5");
         wx.stopRecord({
             success: function (res) {
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
+                $('.song_s').hide();
+                $('.big_whit').hide();
+                $('.big_back').hide();
+                isCanStartRecord = true;
+                isCanStopRecord = false;
+            },
+            fail: function () {
                 $('.song_s').hide();
                 $('.big_whit').hide();
                 $('.big_back').hide();
