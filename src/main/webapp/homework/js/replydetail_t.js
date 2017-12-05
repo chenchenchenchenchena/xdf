@@ -770,7 +770,7 @@ $(function () {
         if(timeInedex == 0){
             setTimeout(function () {
                 END = new Date().getTime();
-                if ((END - START) < 1500) {
+                if ((END - START) < 1500 || !isCanStartRecord) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
@@ -799,13 +799,7 @@ $(function () {
                     });
                     return false;
                 } else {
-
                     //表示录制刚结束
-                    if(!isCanStartRecord){
-                        this_.siblings('img').attr('src', 'images/C04-03.png');
-                        isCanStartRecord = true;
-                        isCanStopRecord = false;
-                    }
                     return false;
                 }
             }, 300);
