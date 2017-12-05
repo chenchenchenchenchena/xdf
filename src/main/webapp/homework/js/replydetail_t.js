@@ -711,6 +711,7 @@ $(function () {
             success: function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
+                    layer.msg("0+");
                     timeInedex++;
                     if(timeInedex == 49){
                         //layer.msg("语音录制长度最大限度为60s");
