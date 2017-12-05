@@ -702,6 +702,7 @@ $(function () {
         if(!isCanStartRecord){
             return;
         }
+        isCanStartRecord = false;
         START = new Date().getTime();
         timeInedex = 0;
         var this_ = $(this);
@@ -711,7 +712,6 @@ $(function () {
             success: function () {
                 localStorage.rainAllowRecord = 'true';
                 recordTimer = setInterval(function () {
-                    layer.msg("0+");
                     timeInedex++;
                     if(timeInedex == 49){
                         //layer.msg("语音录制长度最大限度为60s");
@@ -768,12 +768,9 @@ $(function () {
     $('#record').on('touchend', function (event) {
         var this_ = $(this);
         if(timeInedex == 0){
-            layer.msg("0-");
             setTimeout(function () {
                 END = new Date().getTime();
                 if ((END - START) < 1500) {
-
-                    layer.msg("0");
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
@@ -803,13 +800,16 @@ $(function () {
                     return false;
                 } else {
 
-                    layer.msg("1");
                     //表示录制刚结束
+                    if(!isCanStartRecord){
+                        this_.siblings('img').attr('src', 'images/C04-03.png');
+                        isCanStartRecord = true;
+                        isCanStopRecord = false;
+                    }
                     return false;
                 }
             }, 300);
         } else {
-            layer.msg("2");
             isCanStopRecord = true;
             stopRecordBack(this_, event);
         }
@@ -818,17 +818,14 @@ $(function () {
 
     function stopRecordBack(this_,event){
         clearInterval(ts);
-        layer.msg("3");
         if(!isCanStopRecord){
             return;
         }
-        layer.msg("4");
         this_.siblings('img').attr('src', 'images/C04-03.png');
         event.preventDefault();
 
         clearInterval(recordTimer);
         timeInedex = 0;
-        layer.msg("5");
         wx.stopRecord({
             success: function (res) {
                 var localId = res.localId;
