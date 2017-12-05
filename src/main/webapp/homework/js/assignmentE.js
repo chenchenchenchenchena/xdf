@@ -10,11 +10,11 @@ $(function () {
     var ePush;
     var AppId = appId;
     var SecreT = secreT;
-    
+
     if(getRequest('state').state=='JT'||sessionStorage.signal){
-        ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html?state=JT";
+        ePush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67e16b7247bde1a8&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=JT&connect_redirect=1#wechat_redirect";
     }else{
-        ePush=url_o2+"/xdfdthome/homework/pushhomeworkE.html";
+        ePush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxab29a3e2000b8d2a&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=IQ&connect_redirect=1#wechat_redirect";
     }
     if (isUpdata == 1) {
 

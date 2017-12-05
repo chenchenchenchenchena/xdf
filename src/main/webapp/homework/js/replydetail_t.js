@@ -14,10 +14,10 @@ $(function () {
     
     /*------------------------------------定义存储文件信息变量-------------end---------------------------*/
     var urlPush;
-    if (getRequest('state').state == 'JT' || sessionStorage.signal) {
-        urlPush = url_o2 + "/xdfdthome/homework/homeworklist_t.html?state=JT";
-    } else {
-        urlPush = url_o2 + "/xdfdthome/homework/homeworklist_t.html";
+    if(getRequest('state').state=='JT'||sessionStorage.signal){
+        urlPush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67e16b7247bde1a8&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=JT&connect_redirect=1#wechat_redirect";
+    }else{
+        urlPush="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxab29a3e2000b8d2a&redirect_uri=http://dt.xdf.cn/xdfdthome/homework/homeworklist_t.html&response_type=code&scope=snsapi_userinfo&state=IQ&connect_redirect=1#wechat_redirect";
     }
     var need = {
         'stuHomeworkId': sessionStorage.stuid,
