@@ -302,7 +302,7 @@ $(function () {
         //if(layerE == undefined){
             layerE = layer.open({
                 type: 1,
-                area: ['548px', '345px'],
+                area: ['548px', '325px'],
                 shade: [0.2, '#000'],
                 title: '',
                 skin: '',
@@ -888,7 +888,7 @@ $(function () {
                     });
                     layer.open({
                         type: 1,
-                        area: ['548px', '345px'],
+                        area: ['548px', '325px'],
                         shade: [0.2, '#000'],
                         title: '',
                         skin: '',
@@ -1031,7 +1031,7 @@ $(function () {
         //删除图片
         layer2 = layer.open({
             type: 1,
-            area: ['548px', '345px'],
+            area: ['548px', '325px'],
             shade: [0.2, '#000'],
             title: '',
             skin: '',
@@ -1304,7 +1304,7 @@ $(function () {
         //删除语音
         layer2 = layer.open({
             type: 1,
-            area: ['548px', '345px'],
+            area: ['548px', '325px'],
             shade: [0.2, '#000'],
             title: '',
             skin: '',
