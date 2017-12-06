@@ -1061,6 +1061,12 @@ $(function () {
         if (arr_image.length > 0) {
             arr_image.splice(index, 1);
         }
+
+        $('.quck_mb').css('pointer-events', 'none');
+
+        setTimeout(function(){
+            $('.quck_mb').css('pointer-events', 'auto');
+        }, 400);
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
@@ -1335,6 +1341,11 @@ $(function () {
             arr_voice.splice(index, 1);
             recordCount--;
         }
+        $('.quck_mb').css('pointer-events', 'none');
+
+        setTimeout(function(){
+            $('.quck_mb').css('pointer-events', 'auto');
+        }, 400);
 
 
     });
