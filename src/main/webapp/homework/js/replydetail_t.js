@@ -1039,12 +1039,12 @@ $(function () {
         })
     });
     // 删除图片-取消
-    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+    $(document).on('tap', '.delete-img .cancelBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
     });
     // 删除图片-确定
-    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+    $(document).on('tap', '.delete-img .confirmBtn', function () {
 
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
@@ -1312,12 +1312,12 @@ $(function () {
         })
     });
     // 删除语音-取消
-    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+    $(document).on('tap', '.delete-voice .cancelBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
     });
     // 删除语音-确定
-    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+    $(document).on('tap', '.delete-voice .confirmBtn', function () {
 
         var index = parseInt($(this).attr('voice-index'));
         layer.close(layer1);
