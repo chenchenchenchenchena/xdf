@@ -127,6 +127,7 @@ $(function () {
         if (!isCanStartRecord) {
             return;
         }
+        isCanStartRecord = false;
         START = new Date().getTime();
         timeInedex = 0;
         var this_ = $(this);
@@ -195,7 +196,7 @@ $(function () {
         if (timeInedex == 0) {
             setTimeout(function () {
                 END = new Date().getTime();
-                if ((END - START) < 1500) {
+                if ((END - START) < 1500 || !isCanStartRecord) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音

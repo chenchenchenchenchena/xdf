@@ -302,7 +302,7 @@ $(function () {
         //if(layerE == undefined){
             layerE = layer.open({
                 type: 1,
-                area: ['548px', '345px'],
+                area: ['548px', '325px'],
                 shade: [0.2, '#000'],
                 title: '',
                 skin: '',
@@ -702,6 +702,7 @@ $(function () {
         if(!isCanStartRecord){
             return;
         }
+        isCanStartRecord = false;
         START = new Date().getTime();
         timeInedex = 0;
         var this_ = $(this);
@@ -769,13 +770,14 @@ $(function () {
         if(timeInedex == 0){
             setTimeout(function () {
                 END = new Date().getTime();
-                if ((END - START) < 1500) {
+                if ((END - START) < 1500 || !isCanStartRecord) {
                     END = 0;
                     START = 0;
                     //小于1000ms，不录音
                     clearTimeout(recordTimer);
                     wx.stopRecord({
                         success: function (res) {
+                            layer.msg("录制时间太短");
                             clearInterval(recordTimer);
                             $('.song_s').hide();
                             $('.big_whit').hide();
@@ -783,7 +785,6 @@ $(function () {
                             this_.siblings('img').attr('src', 'images/C04-03.png');
                             isCanStartRecord = true;
                             isCanStopRecord = false;
-                            layer.msg("录制时间太短");
                         },
                         fail: function () {
                             layer.msg("录制时间太短");
@@ -798,7 +799,6 @@ $(function () {
                     });
                     return false;
                 } else {
-
                     //表示录制刚结束
                     return false;
                 }
@@ -825,6 +825,13 @@ $(function () {
                 var localId = res.localId;
                 song_s = localId;
                 uploadVoiceWX(localId);
+                $('.song_s').hide();
+                $('.big_whit').hide();
+                $('.big_back').hide();
+                isCanStartRecord = true;
+                isCanStopRecord = false;
+            },
+            fail: function () {
                 $('.song_s').hide();
                 $('.big_whit').hide();
                 $('.big_back').hide();
@@ -881,7 +888,7 @@ $(function () {
                     });
                     layer.open({
                         type: 1,
-                        area: ['548px', '345px'],
+                        area: ['548px', '325px'],
                         shade: [0.2, '#000'],
                         title: '',
                         skin: '',
@@ -1024,7 +1031,7 @@ $(function () {
         //删除图片
         layer2 = layer.open({
             type: 1,
-            area: ['548px', '345px'],
+            area: ['548px', '325px'],
             shade: [0.2, '#000'],
             title: '',
             skin: '',
@@ -1032,12 +1039,12 @@ $(function () {
         })
     });
     // 删除图片-取消
-    $(document).on('touchend', '.delete-img .cancelBtn', function () {
+    $(document).on('tap', '.delete-img .cancelBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
     });
     // 删除图片-确定
-    $(document).on('touchend', '.delete-img .confirmBtn', function () {
+    $(document).on('tap', '.delete-img .confirmBtn', function () {
 
         var index = parseInt($(this).attr('img-index'));
         layer.close(layer1);
@@ -1054,6 +1061,12 @@ $(function () {
         if (arr_image.length > 0) {
             arr_image.splice(index, 1);
         }
+
+        $('.quck_mb').css('pointer-events', 'none');
+
+        setTimeout(function(){
+            $('.quck_mb').css('pointer-events', 'auto');
+        }, 400);
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
@@ -1297,7 +1310,7 @@ $(function () {
         //删除语音
         layer2 = layer.open({
             type: 1,
-            area: ['548px', '345px'],
+            area: ['548px', '325px'],
             shade: [0.2, '#000'],
             title: '',
             skin: '',
@@ -1305,12 +1318,12 @@ $(function () {
         })
     });
     // 删除语音-取消
-    $(document).on('touchend', '.delete-voice .cancelBtn', function () {
+    $(document).on('tap', '.delete-voice .cancelBtn', function () {
         layer.close(layer1);
         layer.close(layer2);
     });
     // 删除语音-确定
-    $(document).on('touchend', '.delete-voice .confirmBtn', function () {
+    $(document).on('tap', '.delete-voice .confirmBtn', function () {
 
         var index = parseInt($(this).attr('voice-index'));
         layer.close(layer1);
@@ -1328,6 +1341,11 @@ $(function () {
             arr_voice.splice(index, 1);
             recordCount--;
         }
+        $('.quck_mb').css('pointer-events', 'none');
+
+        setTimeout(function(){
+            $('.quck_mb').css('pointer-events', 'auto');
+        }, 400);
 
 
     });
