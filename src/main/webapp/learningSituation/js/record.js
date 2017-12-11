@@ -47,6 +47,10 @@ $(function () {
     var inputData = { "email": localStorage.terEmail,"schoolId":localStorage.schoolId};
     ajax_S(url.t_record,inputData,recordData);
     function recordData(e){
+        if(e.Data==0){
+            $('.load_t').hide();
+            layer.msg(e.message)
+        }
         if(e.result){
             console.log(e);
             // layer.close(firstLoad);
