@@ -1,6 +1,7 @@
 require(['jquery-1.11.0.min'], function () {
     require(['layer','jqPaginator.min'],function() {
         // 重置左导航
+
         var number_l = 0;
         var url_l =  location.href;
 

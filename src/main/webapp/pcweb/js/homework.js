@@ -14,6 +14,8 @@ var currentStageCode = "";
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig'], function () {
+            $('.loading_pre').show();
+
             // 重置左导航
             var number_l = 0;
             var url_l = location.href;
@@ -346,6 +348,7 @@ function changeHomeworkType(this_, flag) {
  * 作业统计接口实现
  */
 function selectHwData() {
+    $('.loading_pre').show();
     //获取筛选条件
     var time = $('#date_input').val();
     if (time != "" && time != undefined) {
@@ -384,6 +387,7 @@ function selectHwData() {
         data: JSON.stringify(params),
         success: function (e) {
             if (e.code = 200) {
+                $('.loading_pre').hide();
                 var data = e.data;
                 if (data != undefined) {
 

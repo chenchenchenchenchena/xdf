@@ -15,6 +15,8 @@ require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['jqPaginator.min'], function () {
             require(['layer'], function () {
+                $('.loading_pre').show();
+
                 // 重置左导航
                 var number_l = 0;
                 var url_l =  location.href;
@@ -165,6 +167,7 @@ function filterByCityId(_this, cityName) {
 
 //筛选数据接口实现
 function SelectData() {
+    $('.loading_pre').show();
 
     var time = $('#date_input').val();
     if (time != undefined && time != "") {
@@ -213,11 +216,15 @@ function SelectData() {
                         $('.homework_list').append(html_);
                     }
                 }
+                $('.loading_pre').hide();
+
             } else {
                 layer.msg("暂无数据");
                 $('.homework_list li').remove();
                 $('.lesstime_Result').hide();
                 initPage(0, 1);
+                $('.loading_pre').hide();
+
             }
 
         }
