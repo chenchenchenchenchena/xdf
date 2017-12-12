@@ -40,6 +40,9 @@ $(function () {
     var layer1, layer2, loading;
     var className = '';
     var classCode = '';
+    var lessonBeginDate = '';
+    var lessonEndDate = '';
+    var lessonMaster = '';
     //作业选择学生
     $('.student_S').on('touchend',function(){
         if(classCode==''){
@@ -61,7 +64,14 @@ $(function () {
         }
         var className_ = e.data;
         for (var a = 0; a < className_.length; a++) {
-            $('.class_name ul').append('<li classCode="' + className_[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className_[a].ClassName + '</span>（'+className_[a].ClassCode+'）</b></li>')
+            var beginDate = className_[a].BeginDate.split(' ')[0];
+            var endDate = className_[a].EndDate.split(' ')[0];
+            if(className_[a].masterTeacherName == undefined){
+                master = "";
+            }else {
+                master = className_[a].masterTeacherName;
+            }
+            $('.class_name ul').append('<li data-beginDate="'+beginDate+'" data-endDate="'+endDate+'" data-master="'+master+'" classCode="' + className_[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className_[a].ClassName + '</span>（'+className_[a].ClassCode+'）</b></li>')
         }
         //选择完毕
         if(getRequest()['checked']==1){
@@ -181,13 +191,22 @@ $(function () {
     $('.class_sub').on('touchend', function () {
         className = '';
         classCode = '';
+        lessonBeginDate = '';
+        lessonEndDate = '';
+        lessonMaster = '';
         $(this).parent().find('li').each(function () {
             if ($(this).find('img').attr('src') == 'images/C0503.png') {
                 className += $(this).find('span').text() + '；';
                 classCode += $(this).attr('ClassCode') + ',';
+                lessonBeginDate += $(this).attr('data-beginDate') + ',';
+                lessonEndDate += $(this).attr('data-endDate') + ',';
+                lessonMaster += $(this).attr('data-master') + ',';
             }
         });
         classCode = classCode.substr(0, classCode.length - 1);
+        lessonBeginDate = lessonBeginDate.substr(0, lessonBeginDate.length - 1);
+        lessonEndDate = lessonEndDate.substr(0, lessonEndDate.length - 1);
+        lessonMaster = lessonMaster.substr(0, lessonMaster.length - 1);
         if (className == '') {
             layer.open({
                 type: 1,
@@ -480,6 +499,9 @@ $(function () {
             homeworksubm.knowledgePoint = encodeURIComponent($('.Knowledge input').val()).replace(/'\+'/,'%20');
             homeworksubm.description = encodeURIComponent($('.home_text textarea').val()).replace(/'\+'/,'%20');
             homeworksubm.fileInfo = arr_s;
+            homeworksubm.masterTeacherName = lessonMaster;
+            homeworksubm.beginDate = lessonBeginDate;
+            homeworksubm.endDate = lessonEndDate;
             ajax_S(homework_s.t_sbim, homeworksubm, function (e) {
                 $('.areyok input:last-of-type').css('background','#00ba97');
                 $('.Submit_s').css('background', '#ccc');

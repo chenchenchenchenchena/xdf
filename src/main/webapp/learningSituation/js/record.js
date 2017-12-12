@@ -64,11 +64,19 @@ $(function () {
             }
             if(e.Data!=undefined&&e.Data.length>0){
                 for (var i = 0; i < e.Data.length; i++) {
+                    var beginDate = e.Data[i].beginDate.split(" ")[0];
+                    var endDate = e.Data[i].endDate.split(" ")[0];
+                    var master;
+                    if(e.Data[i].masterTeacherName == undefined){
+                        master = "";
+                    }else {
+                        master = e.Data[i].masterTeacherName;
+                    }
                     var sMouth=e.Data[i].beginDate.split(" ")[0].split("-")[1];
                     var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
                     var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];
                     var eDay=e.Data[i].endDate.split(" ")[0].split("-")[2];
-                    var str = "<li style='white-space: nowrap;overflow-x:auto;'><span class='courseName'>" + e.Data[i].className + "</span>(<span class=classCode>" + e.Data[i].classCode + "</span>)</li><span class='courseTime' style='display: none'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span>";
+                    var str = "<li data-beginDate='"+beginDate+"' data-endDate='"+endDate+"' data-master='"+master+"' style='white-space: nowrap;overflow-x:auto;'><span class='courseName'>" + e.Data[i].className + "</span>(<span class=classCode>" + e.Data[i].classCode + "</span>)</li><span class='courseTime' style='display: none'>("+sMouth+"."+sDay+"-"+eMouth+"."+eDay+")</span>";
                     $(".chooseClass ul").append(str);
                 }
             }
@@ -85,6 +93,9 @@ $(function () {
             $(this).addClass("chooseClassActive").siblings("li").removeClass("chooseClassActive");
             $(".classrome").html($(this).find(".courseName").html());
             $(".class").html($(this).find(".classCode").html());
+            $(".classrome").attr('data-beginDate',$(this).attr('data-beginDate'));
+            $(".classrome").attr('data-endDate',$(this).attr('data-endDate'));
+            $(".classrome").attr('data-master',$(this).attr('data-master'));
             /*var spanObj = $(this).next();
             $(".class").html(spanObj.html());*/
             /*if($(".tCode").html()>0&&$(".tCode").html()<3){
@@ -393,6 +404,10 @@ $(function () {
         //禁用按钮
         $('.subtn').attr('disabled', "true");//禁用按钮
         load = layer.load(0,{shade: [0.8, '#000']});
+
+        var lessonBeginDate = $(".classrome").attr('data-beginDate');
+        var lessonEndDate = $(".classrome").attr('data-endDate');
+        var masterTeacherName = $(".classrome").attr('data-master');
         var saveInfo = {
             "email": localStorage.terEmail,
             "teacherName": localStorage.teacherName,
@@ -403,7 +418,10 @@ $(function () {
             "lessonTime": $(".classTime").find(".lestime").html(),
             "fullMarks": $(".totalScore").val(),
             "schoolId":localStorage.schoolId,
-            "student": student
+            "student": student,
+            "beginDate":lessonBeginDate,
+            "endDate":lessonEndDate,
+            "masterTeacherName":masterTeacherName
         }
         console.log(saveInfo)
         ajax_S(url.t_save,saveInfo,saveAjax)
@@ -681,6 +699,7 @@ $(function () {
 
 
     $(".chooseBtn").click(function () {
+
         $(".mask").hide();
         $("body,html").css({"width": "", "height": "", "overflow": ""})
         $(".chooseClass").hide();
