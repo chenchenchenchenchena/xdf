@@ -66,7 +66,12 @@ $(function () {
                 for (var i = 0; i < e.Data.length; i++) {
                     var beginDate = e.Data[i].beginDate.split(" ")[0];
                     var endDate = e.Data[i].endDate.split(" ")[0];
-                    var master = e.Data[i].masterTeacherName;
+                    var master;
+                    if(e.Data[i].masterTeacherName == undefined){
+                        master = "";
+                    }else {
+                        master = e.Data[i].masterTeacherName;
+                    }
                     var sMouth=e.Data[i].beginDate.split(" ")[0].split("-")[1];
                     var sDay=e.Data[i].beginDate.split(" ")[0].split("-")[2];
                     var eMouth=e.Data[i].endDate.split(" ")[0].split("-")[1];

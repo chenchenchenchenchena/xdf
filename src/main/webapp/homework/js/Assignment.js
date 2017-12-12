@@ -66,7 +66,12 @@ $(function () {
         for (var a = 0; a < className_.length; a++) {
             var beginDate = className_[a].BeginDate.split(' ')[0];
             var endDate = className_[a].EndDate.split(' ')[0];
-            $('.class_name ul').append('<li data-beginDate="'+beginDate+'" data-endDate="'+endDate+'" data-master="'+className_[a].masterTeacherName+'" classCode="' + className_[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className_[a].ClassName + '</span>（'+className_[a].ClassCode+'）</b></li>')
+            if(className_[a].masterTeacherName == undefined){
+                master = "";
+            }else {
+                master = className_[a].masterTeacherName;
+            }
+            $('.class_name ul').append('<li data-beginDate="'+beginDate+'" data-endDate="'+endDate+'" data-master="'+master+'" classCode="' + className_[a].ClassCode + '" style="white-space:nowrap;overflow-x:auto;"><img src="images/C05_06.png" alt=""><b style="font-weight:normal;"><span>'+ className_[a].ClassName + '</span>（'+className_[a].ClassCode+'）</b></li>')
         }
         //选择完毕
         if(getRequest()['checked']==1){
@@ -193,11 +198,9 @@ $(function () {
             if ($(this).find('img').attr('src') == 'images/C0503.png') {
                 className += $(this).find('span').text() + '；';
                 classCode += $(this).attr('ClassCode') + ',';
-                lessonBeginDate = $(this).attr('data-beginDate') + ',';
-                lessonEndDate = $(this).attr('data-endDate') + ',';
-                if($(this).attr('data-master') != "" && $(this).attr('data-master') != undefined){
-                    lessonMaster = $(this).attr('data-master') + ',';
-                }
+                lessonBeginDate += $(this).attr('data-beginDate') + ',';
+                lessonEndDate += $(this).attr('data-endDate') + ',';
+                lessonMaster += $(this).attr('data-master') + ',';
             }
         });
         classCode = classCode.substr(0, classCode.length - 1);
