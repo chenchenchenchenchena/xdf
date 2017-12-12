@@ -2,6 +2,8 @@
 
 require(['jquery-1.11.0.min','requireConfig'], function () {
     require(['layer'], function () {
+        $('.loading_pre').show();
+
         // 重置左导航
         var number_l = 0;
         var url_l =  location.href;
@@ -49,12 +51,14 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
                     'background': '#fff',
                     'color': '#bababa'
                 });
+                $('.loading_pre').hide();
             }
         }
     });
 
     //导出列表
     $(document).on('click','.export_s',function(){
+        layer.msg('导出列表较慢，请您耐心等待');
         if($(this).attr('tea_num')==0){
             layer.msg('暂无列表');
             return false;
@@ -63,6 +67,7 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
     });
         //导出总表点击
         $(document).on('click','.index_formtit a',function(){
+            layer.msg('导出列表较慢，请您耐心等待');
             window.location.href = global.indexFormAll + "?schoolId=" + localStorage.schoolList
         })
 

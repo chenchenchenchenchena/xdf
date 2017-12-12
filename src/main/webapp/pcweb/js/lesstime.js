@@ -12,6 +12,8 @@ var schoolLookType_ = 1;//柱形图和列表的标志
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min', 'layer'], function () {
         require(['echarts.min'], function (echarts) {
+            $('.loading_pre').show();
+
             // 重置左导航
             var number_l = 0;
             var url_l = location.href;
@@ -248,6 +250,7 @@ function filterByCityId(_this, cityName) {
  * @constructor
  */
 function SelectData() {
+    $('.loading_pre').show();
     var params = {
         "schoolId": currentCityId,
         'beginDate': beginTime,
@@ -376,6 +379,7 @@ function SelectData() {
                     $('.lesstime_list li').remove();
                     layer.msg("暂无数据");
                 }
+                $('.loading_pre').hide();
 
             }
         }

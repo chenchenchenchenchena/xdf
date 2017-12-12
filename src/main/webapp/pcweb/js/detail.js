@@ -19,7 +19,7 @@ require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['jqPaginator.min'], function () {
             require(['layer'], function () {
-
+                $('.loading_pre').show();
                 laydate.render({
                     elem: '#date_input',
                     range: true //指定元素
@@ -71,20 +71,27 @@ require(['jquery-1.11.0.min'], function () {
 
                 //搜素点击事件
                 $('#seacher_hw').parent().find('img').click(function () {
+                    $('.loading_pre').show();
                     SelectTeacherList();
                 });
                 //搜素回车事件
                 $('#seacher_hw').off("keyup").on('keyup',function(even){
+
                     if(even.keyCode==13){
+                        $('.loading_pre').show();
+                        $('.lesstime_Result').show();
                         SelectTeacherList();
                     }
                 })
                 $('#hw_selectBtn').click(function () {
+                    $('.loading_pre').show();
+                    $('.lesstime_Result').show();
                     SelectTeacherList();
                 });
 
                 //导出教师列表
                 $('#expor_teacher').click(function () {
+                    layer.msg('导出列表较慢，请您耐心等待');
                     if($('#teacher-list li') == undefined || $('#teacher-list li').length == 0){
                         layer.msg("暂无列表");
                         return false;
@@ -206,6 +213,7 @@ function getSelectList(this_, type, flag) {
 
 //筛选学段／年级／科目列表显示
 function showDrownList(json, this_, flag) {
+
     $(this_).parent().find('ul').show();
     $(this_).parent().parent().siblings().find('ul').hide();
     if (json.code == "200") {
@@ -259,6 +267,8 @@ function filterByDrownId(_this, name, flag) {
  * 作业统计-教师明细接口实现
  */
 function SelectTeacherList() {
+    $('.loading_pre').show();
+
     stage = $("#stage").html();
     grade = $("#grade").html();
     subject = $("#subject").html();
@@ -306,6 +316,7 @@ function SelectTeacherList() {
         success: function (e) {
 
             if (e.list != undefined && e.list.length > 0) {
+
                 var teacherList = e.list;
                 totalCounts = e.total;//总条数
                 $('.lesstime_Result').show();
@@ -329,8 +340,12 @@ function SelectTeacherList() {
                     }
                     $('#teacher-list').append(itemHtml_);
                 }
+                $('.loading_pre').hide();
+
             } else {
                 layer.msg("暂无数据");
+                $('.loading_pre').hide();
+
                 $('#teacher-list li').remove();
                 $('.lesstime_Result').hide();
                 initPage(0, 1);

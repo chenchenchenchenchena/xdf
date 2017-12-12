@@ -40,7 +40,7 @@ var global = {
 
 require(['jquery-1.11.0.min'],function(){
     require(['layer'],function(){
-    $('body').hide();
+
 /*数据交互请求地址*/
         if(sessionStorage.superstar){
             $('body').show();
