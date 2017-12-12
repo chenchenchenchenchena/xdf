@@ -251,6 +251,7 @@ function getlastmonth() {
     var lastMonth=myDate.getMonth();
     var currentDate=myDate.getDate();
     var lastDate;
+
     //一个月前的时间
     var prevCurrentYear=0;
     var prevCurrentMonth=0;
@@ -355,7 +356,18 @@ function getlastmonth() {
             return s;
         }
     }
+
+
+    //一周前的时间
+    var oneweekdate = new Date(myDate-7*24*3600*1000);
+    var y = oneweekdate.getFullYear();
+    var m = oneweekdate.getMonth()+1;
+    var d = oneweekdate.getDate();
+    var lastWeek = y+'-'+m+'-'+d;
+
+    //现在时间
     var now=currentYear+'-'+p(currentMonth)+"-"+p(currentDate);
+    //一个月前时间
     var priceLastMonth = prevCurrentYear+"-"+p(prevCurrentMonth)+"-"+p(lastDate);
     //三个月前的时间
     var threeMonth = tmY + "-" + p(tmM) + '-' + p(tmD);
@@ -365,7 +377,7 @@ function getlastmonth() {
 
     //一年前的时间
     var oneTime = oneY + "-" + p(oneM) + "-" + p(oneD)
-    var timeArr=[now,priceLastMonth,threeMonth,halfTime,oneTime]
+    var timeArr=[now,priceLastMonth,threeMonth,halfTime,oneTime,lastWeek]
     return timeArr;
 }
 function p(s) {

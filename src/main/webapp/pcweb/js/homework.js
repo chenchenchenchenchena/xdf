@@ -268,21 +268,35 @@ function filterByDrownId(_this, name, flag) {
     }
 }
 
-//查看方式切换
+/**
+ * 查看方式切换
+ * @param this_
+ * @param flag
+ */
 function lookType(this_, flag) {
     if ($(this_).hasClass("homework_active")) {
         //如果已选中，则不做处理
     } else {
         //默认为半年，与时间段为正向半联动。
-        var today = new Date().Format("yyyy-MM-dd");
         var timeArray = getlastmonth();
+        var today = timeArray[0];
+        var lastMonth = timeArray[1];
         var halfYear = timeArray[3];
         var oneYear = timeArray[4];
+        var lastWeek = timeArray[5];
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
-        if (flag == 1) {
+        if (flag == 0) {
+            //一周前
+            $('#date_input').val(lastWeek + " - " + today);
+        } else if (flag == 1){
+            //一月前
+            $('#date_input').val(lastMonth + " - " + today);
+        }else if (flag == 2){
+            //半年前
             $('#date_input').val(halfYear + " - " + today);
-        } else {
+        }else if (flag == 3){
+            //一年前
             $('#date_input').val(oneYear + " - " + today);
         }
         selectHwData();

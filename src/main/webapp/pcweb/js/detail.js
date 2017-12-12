@@ -125,18 +125,26 @@ function lookType(this_, flag) {
     if ($(this_).hasClass("homework_active")) {
         //如果已选中，则不做处理
     } else {
-
-        var today = new Date().Format("yyyy-MM-dd");
         var timeArray = getlastmonth();
+        var today = timeArray[0];
+        var lastMonth = timeArray[1];
         var halfYear = timeArray[3];
         var oneYear = timeArray[4];
-
+        var lastWeek = timeArray[5];
         $(this_).addClass("homework_active")
         $(this_).siblings().removeClass("homework_active")
-        if (flag == 1) {
+        if (flag == 0) {
+            //一周前
+            $('#date_input').val(lastWeek + " - " + today);
+        } else if (flag == 1){
+            //一月前
+            $('#date_input').val(lastMonth + " - " + today);
+        }else if (flag == 2){
+            //半年前
             $('#date_input').val(halfYear + " - " + today);
-        } else {
-            $('#date_input').val(today + " - " + oneYear);
+        }else if (flag == 3){
+            //一年前
+            $('#date_input').val(oneYear + " - " + today);
         }
         SelectTeacherList();
     }
