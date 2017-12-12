@@ -201,6 +201,9 @@ $(function () {
             }
         });
         classCode = classCode.substr(0, classCode.length - 1);
+        lessonBeginDate = lessonBeginDate.substr(0, lessonBeginDate.length - 1);
+        lessonEndDate = lessonEndDate.substr(0, lessonEndDate.length - 1);
+        lessonMaster = lessonMaster.substr(0, lessonMaster.length - 1);
         if (className == '') {
             layer.open({
                 type: 1,
