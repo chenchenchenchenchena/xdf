@@ -420,7 +420,7 @@ html body .homework_operation{
 }
 .operation_s{
 	width:882px;
-	height:555px;
+	height:auto;
 	position:fixed;
 	left:50%;
 	top:50%;
@@ -429,6 +429,7 @@ html body .homework_operation{
 	z-index:12;
 	border:1px solid #dfdfdf;
 	display:none;
+	padding-bottom: 45px;
 }
 .operation_s img{
 	position:absolute;
@@ -964,4 +965,9 @@ html body .adduser_list_active{
 	line-height: 260px;
 	text-align: center;
 	display: none;
+}
+.noun_explanation_icon{
+	width: 16px;
+	height: 16px;
+	margin-left: 5px;
 }

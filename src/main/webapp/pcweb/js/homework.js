@@ -59,15 +59,40 @@ require(['jquery-1.11.0.min'], function () {
                 selectHwData();
             });
             //名词解释
-            $('.homework_explain img').click(function () {
+            $('#publish img').click(function () {
                 $('.back_big ').show();
-                $('.operation_s ').show();
+                if (homeworkType == 1) {
+                    $('#N_publish_operation ').show();
+                } else {
+                    $('#publish_operation ').show();
+                }
             });
+            $('#commit img').click(function () {
+                $('.back_big ').show();
+                if (homeworkType == 1) {
+                    $('#N_commit_operation ').show();
+                } else {
+                    $('#commit_operation ').show();
+                }
+            });
+            $('#reply img').click(function () {
+                $('.back_big ').show();
+                if (homeworkType == 1) {
+                    $('#N_reply_operation').show();
+                } else {
+                    $('#reply_operation ').show();
+                }
+            });
+            $('#correctRateAll img').click(function () {
+                $('.back_big ').show();
+                $('#correctRate_operation ').show();
+            });
+
             //名词解释关闭
             $('.operation_s  img').click(function () {
                 $('.back_big ').hide();
                 $('.operation_s ').hide();
-            })
+            });
             $(document).on('click', '.look_details', function () {
                 var schoolId = $(this).attr('data-schoolId');
                 var schoolName = $(this).attr('data-schoolName');
@@ -315,17 +340,17 @@ function selectHwData() {
     }
     if ($('#subject').html() != '全部') {
         subject = $('#subject').html();
-    }else {
+    } else {
         subject = "";
     }
     if ($('#grade').html() != '全部') {
         grade = $('#grade').html();
-    }else {
+    } else {
         grade = "";
     }
     if ($('#stage').html() != '全部') {
         stage = $('#stage').html();
-    }else {
+    } else {
         stage = "";
     }
     var params = {
