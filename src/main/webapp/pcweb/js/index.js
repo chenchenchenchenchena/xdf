@@ -59,22 +59,20 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
         }
     });
 
-    //导出列表
-    $(document).on('click','.export_s',function(){
-        layer.msg('导出列表较慢，请您耐心等待');
-        if($(this).attr('tea_num')==0){
-            layer.msg('暂无列表');
-            return false;
-        }
-                                                                                                                                                                                                                                                                                                                   window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId')+'&schoolName='+$(this).attr('schoolName');
-    });
+        //导出列表
+        $(document).on('click', '.export_s', function () {
+            layer.msg('导出列表较慢，请您耐心等待');
+            if ($(this).attr('tea_num') == 0) {
+                layer.msg('暂无列表');
+                return false;
+            }
+            window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
+        });
         //导出总表点击
-        $(document).on('click','.index_formtit a',function(){
+        $(document).on('click', '.index_formtit a', function () {
             layer.msg('导出列表较慢，请您耐心等待');
             window.location.href = global.indexFormAll + "?schoolId=" + localStorage.schoolList
         })
-
-
 
 
     })

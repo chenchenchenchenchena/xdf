@@ -219,7 +219,7 @@ function SelectList() {
                         if(masterTeacherName == undefined){
                             masterTeacherName = "暂无";
                         }
-                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span>EXCEL</span></li>';
+                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">EXCEL</span></span></li>';
                         $('#learnReportList').append(itemHtml_);
                     }
                     $('.loading_pre').hide();
