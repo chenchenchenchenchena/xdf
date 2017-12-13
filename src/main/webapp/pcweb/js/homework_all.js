@@ -26,7 +26,7 @@ require(['jquery-1.11.0.min'], function () {
             });
 
             //从上个页面获取筛选数据,初始化页面
-            var params = JSON.parse(sessionStorage.homeworkDetailParams);
+            var params = JSON.parse(sessionStorage.homeworkAllParams);
             homeworkType = params.homeworkType;
             currentSchoolId = params.schoolId;
             beginTime = params.beginTime;
@@ -35,16 +35,16 @@ require(['jquery-1.11.0.min'], function () {
             //初始化作业类型视图
             if(homeworkType == 0){
                 $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(1).siblings().find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(2).siblings().find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
             }else if(homeworkType == 1){
                 $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(0).siblings().find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(2).siblings().find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
             }else if(homeworkType == 2){
                 $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(1).siblings().find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(0).siblings().find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
+                $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
             }
             //初始化时间段视图
             if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
