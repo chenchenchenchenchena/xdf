@@ -402,7 +402,7 @@ function selectHwData() {
 
                     /*校区对比数据展示*/
                     $('#schoolComparsion li').remove();
-                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数</span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/" alt=""></span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
                     for (var i = 0; i < schoolComparsion.length; i++) {
 

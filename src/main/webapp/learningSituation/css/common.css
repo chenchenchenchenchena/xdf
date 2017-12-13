@@ -136,6 +136,7 @@ body,html{
 }
 .achievement_s{
     display:none;
+    position:relative;;
 }
 .achievement_s h4{
     display: inline-block;
