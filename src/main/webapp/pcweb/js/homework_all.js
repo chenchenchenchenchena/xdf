@@ -205,16 +205,6 @@ function SelectTeacherList(){
         seacherName = "";
     }
 
-    if (stage == "全部") {
-        stage = "";
-    }
-    if (grade == "全部") {
-        grade = "";
-    }
-    if (subject == "全部") {
-        subject = "";
-    }
-
     var params = {
         'schoolId': currentSchoolId,
         'teacher': seacherName,
