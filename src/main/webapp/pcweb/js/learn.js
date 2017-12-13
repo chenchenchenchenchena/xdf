@@ -10,13 +10,46 @@ var pageSize = 15;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-        require(['layer', 'requireConfig'], function () {
+        require(['layer', 'requireConfig','jqPaginator.min'], function () {
             $('.loading_pre').show();
+
+            // 重置左导航
+            var number_l = 0;
+            var url_l = location.href;
+
+            if (url_l.indexOf('homework') != -1 || url_l.indexOf('homeworkdetail') != -1) {
+                number_l = 1;
+            }
+            else if (url_l.indexOf('lesstime') != -1 || url_l.indexOf('lesstime_detail') != -1) {
+                number_l = 2;
+            }
+            else if (url_l.indexOf('power') != -1 || url_l.indexOf('userAdd') != -1 || url_l.indexOf('useredit') != -1) {
+                number_l = 3
+            }
+            else if (url_l.indexOf('master') != -1) {
+                number_l = 4
+            }
+            else if (url_l.indexOf('learn') != -1) {
+                number_l = 5
+            }
+            var $bure_true = $('.left_nav ul li').eq(number_l);
+            $bure_true.addClass('activ_nav').siblings().removeClass('activ_nav');
+
 
             laydate.render({
                 elem: '#date_input',
                 range: true //指定元素
             });
+
+            //默认为半年，与时间段为正向半联动。
+            var today = new Date().Format("yyyy-MM-dd");
+            var timeArray = getlastmonth();
+            var halfYear = timeArray[3];
+            $('#date_input').val(halfYear + " - " + today);
+
+            //默认首次查询校区为全部
+            currentSchoolId = localStorage.schoolList;
+            currentSchool = "全部";
 
             //初始化分页控件
             initPage(totalCounts, page);
@@ -154,8 +187,7 @@ function SelectList() {
         'pageNum': page,
         'pageSize': pageSize,
         'beginDate': beginTime,
-        'endDate': endTime,
-        'homeworkType': homeworkType
+        'endDate': endTime
     };
     $.ajax({
         type: "POST",
@@ -165,17 +197,17 @@ function SelectList() {
         data: JSON.stringify(params),
         success: function (e) {
             if (e.result) {
-                if (e.list != undefined && e.list.length > 0) {
+                if (e.Data.list != undefined && e.Data.list.length > 0) {
 
-                    var list = e.list;
-                    totalCounts = e.total;//总条数
+                    var list = e.Data.list;
+                    totalCounts = e.Data.total;//总条数
                     $('.lesstime_Result').show();
                     $('.lesstime_Result').html("共" + totalCounts + "条数据");
-                    var currentPage = e.pageNum;
+                    var currentPage = e.Data.pageNum;
                     initPage(totalCounts, currentPage);
-                    $('#teacher-list li').remove();
+                    $('#learnReportList li').remove();
                     var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量</span><span>导出本班汇总</span></li>';
-                    $('#teacher-list').append(str);
+                    $('#learnReportList').append(str);
                     for (var i = 0; i < list.length; i++) {
                         var classCode = list[i].classCode;
                         var className = list[i].className;
@@ -183,16 +215,19 @@ function SelectList() {
                         var schoolName = list[i].schoolName;
                         var stuNums = list[i].stuNums;
                         var teacherName = list[i].teacherName;
-                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span>EXCEL</span></li>';
-                        $('#teacher-list').append(itemHtml_);
+                        var masterTeacherName = list[i].masterTeacherName;
+                        if(masterTeacherName == undefined){
+                            masterTeacherName = "暂无";
+                        }
+                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span>EXCEL</span></li>';
+                        $('#learnReportList').append(itemHtml_);
                     }
                     $('.loading_pre').hide();
 
                 } else {
                     layer.msg("暂无数据");
                     $('.loading_pre').hide();
-
-                    $('#teacher-list li').remove();
+                    $('#learnReportList li').remove();
                     $('.lesstime_Result').hide();
                     initPage(0, 1);
                 }
