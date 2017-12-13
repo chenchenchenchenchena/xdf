@@ -64,6 +64,10 @@
             url:"/detail",
             templateUrl:"homework_detail.html",
             controller:'detail'
+        }).state("homework_all",{
+            url:"/homework_all",
+            templateUrl:"lookHomeworkAll.html",
+            controller:'homework_all'
         }).state("lesstime_detail",{
             url:"/lesstime_detail",
             templateUrl:"lesstime_detail.html",
@@ -103,6 +107,10 @@
             clear();
             require(['detail'],function(){})
         })
+        .controller('homework_all',function(){
+            clear();
+            require(['homework_all'],function(){})
+        })
         .controller('lesstime_detail',function(){
             clear();
 			require(['lesstime_detail'],function(){})
@@ -126,6 +134,7 @@
             requirejs.undef('lesstime');
             requirejs.undef('power');
             requirejs.undef('detail');
+            requirejs.undef('homework_all');
             requirejs.undef('lesstime_detail');
             requirejs.undef('userAdd');
             requirejs.undef('master');

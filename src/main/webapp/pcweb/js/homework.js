@@ -8,7 +8,7 @@ var currentSchoolId = "";//默认全部
 var currentSchool = "全部";//默认全部
 var beginTime = "";//默认全部
 var endTime = "";//默认全部
-var homeworkType = "0"//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
+var homeworkType = 0//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
 var currentStageCode = "";
 
 require(['jquery-1.11.0.min'], function () {
@@ -573,7 +573,9 @@ function selectHwData() {
     })
 }
 
-//查看明细
+/**
+ * 查看明细
+ */
 function lookHwDetails(this_, schoolId, schoolName) {
     subject = $('#subject').html();
     grade = $('#grade').html();
@@ -595,6 +597,26 @@ function lookHwDetails(this_, schoolId, schoolName) {
     };
     sessionStorage.homeworkDetailParams = JSON.stringify(params);
     window.location.href = "#/detail";
+}
+
+/**
+ * 查看全部
+ */
+function lookHwAll(){
+    var time = $('#date_input').val();
+    if (time != "" && time != undefined) {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
+    }
+    var params = {
+        'homeworkType': homeworkType,
+        'schoolId': currentSchoolId,
+        'beginTime': beginTime,
+        'endTime': endTime,
+        'schoolName': currentSchool
+    };
+    sessionStorage.homeworkAllParams = JSON.stringify(params);
+    window.location.href = "#/homework_all";
 }
 
 
