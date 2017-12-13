@@ -391,12 +391,20 @@ html body .homework_active{
 
 .homework_list span{
 	display:inline-block;
+	position:relative;
 	width:14%;
 	text-align:center;
 	height:46px;
 	line-height:46px;
 	font-size:12px;
 	overflow:hidden;
+}
+.sort_h{
+	position:absolute;
+	width:20px;
+	height:20px;
+	right:20%;
+	top:13px;
 }
 .homework_list_title{
 	font-size:14px;
