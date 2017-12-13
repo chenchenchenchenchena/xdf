@@ -6,7 +6,7 @@ require(['jquery-1.11.0.min'], function () {
         var number_l = 0;
         var url_l =  location.href;
 
-        if(url_l.indexOf('homework')!=-1||url_l.indexOf('detail')!=-1){
+        if(url_l.indexOf('homework')!=-1||url_l.indexOf('homeworkdetail')!=-1){
             number_l = 1;
         }
         else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
