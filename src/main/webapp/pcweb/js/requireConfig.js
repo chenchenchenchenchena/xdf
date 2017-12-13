@@ -35,6 +35,7 @@ var global = {
     'hw_details':url_o+'backEndHomework/queryHomeWorkTeacherDetail.do',//作业统计
     'hw_expor':url_o+'backEndHomework/exportHomeWorkTeacherDetail.do',//作业统计导出
     'hw_dictList':url_o + 'dict/getDictListByTableName.do',//字典
+    'lean_List':url_o + 'backEndStudyReport/queryStudyReport.do',//学情列表
 };
 
 

@@ -1,4 +1,3 @@
-
 /*默认筛选条件*/
 var currentSchoolId = "";//默认全部
 var currentSchool = "全部";//默认全部
@@ -12,7 +11,7 @@ var pageSize = 15;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig'], function () {
-            //$('.loading_pre').show();
+            $('.loading_pre').show();
 
             laydate.render({
                 elem: '#date_input',
@@ -30,9 +29,9 @@ require(['jquery-1.11.0.min'], function () {
                 SelectList();
             });
             //搜索回车事件
-            $('#seacher_hw').off("keyup").on('keyup',function(even){
+            $('#seacher_hw').off("keyup").on('keyup', function (even) {
 
-                if(even.keyCode==13){
+                if (even.keyCode == 13) {
                     $('.loading_pre').show();
                     $('.lesstime_Result').show();
                     SelectList();
@@ -134,8 +133,8 @@ function initPage(totalCounts, currentPage) {
     }
 }
 
-function SelectList(){
-    //$('.loading_pre').show();
+function SelectList() {
+    $('.loading_pre').show();
 
     //获取筛选条件
     var time = $('#date_input').val();
@@ -151,22 +150,53 @@ function SelectList(){
 
     var params = {
         'schoolId': currentSchoolId,
-        'teacher': seacherName,
+        'className': seacherName,
         'pageNum': page,
         'pageSize': pageSize,
-        'beginTime': beginTime,
-        'endTime': endTime,
+        'beginDate': beginTime,
+        'endDate': endTime,
         'homeworkType': homeworkType
     };
-    //$.ajax({
-    //    type: "POST",
-    //    url: global.hw_details,
-    //    dataType: 'json',
-    //    contentType: "application/json",
-    //    data: JSON.stringify(params),
-    //    success: function (e) {
-    //
-    //    }
-    //})
-    $('.loading_pre').hide();
+    $.ajax({
+        type: "POST",
+        url: global.lean_List,
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(params),
+        success: function (e) {
+            if (e.result) {
+                if (e.list != undefined && e.list.length > 0) {
+
+                    var list = e.list;
+                    totalCounts = e.total;//总条数
+                    $('.lesstime_Result').show();
+                    $('.lesstime_Result').html("共" + totalCounts + "条数据");
+                    var currentPage = e.pageNum;
+                    initPage(totalCounts, currentPage);
+                    $('#teacher-list li').remove();
+                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量</span><span>导出本班汇总</span></li>';
+                    $('#teacher-list').append(str);
+                    for (var i = 0; i < list.length; i++) {
+                        var classCode = list[i].classCode;
+                        var className = list[i].className;
+                        var schoolId = list[i].schoolId;
+                        var schoolName = list[i].schoolName;
+                        var stuNums = list[i].stuNums;
+                        var teacherName = list[i].teacherName;
+                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span>EXCEL</span></li>';
+                        $('#teacher-list').append(itemHtml_);
+                    }
+                    $('.loading_pre').hide();
+
+                } else {
+                    layer.msg("暂无数据");
+                    $('.loading_pre').hide();
+
+                    $('#teacher-list li').remove();
+                    $('.lesstime_Result').hide();
+                    initPage(0, 1);
+                }
+            }
+        }
+    })
 }
