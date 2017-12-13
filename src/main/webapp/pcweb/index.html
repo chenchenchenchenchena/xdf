@@ -84,6 +84,10 @@
             url:"/useredit",
             templateUrl:"useredit.html",
             controller:'useredit'
+        }).state("learn",{
+            url:"/learn",
+            templateUrl:"learn.html",
+            controller:'learn'
         });
         $urlRouterProvider.otherwise("/index")
     })
@@ -126,10 +130,15 @@
 		.controller('useredit', function () {
 			clear();
 			require(['useredit'], function () {})
-		});
+		})
+        .controller('learn', function () {
+            clear();
+            require(['learn'], function () {})
+        });
 
 		function clear(){
             requirejs.undef('index');
+            requirejs.undef('learn');
             requirejs.undef('homework');
             requirejs.undef('lesstime');
             requirejs.undef('power');
