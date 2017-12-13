@@ -68,7 +68,7 @@ $(function () {
                     var endDate = e.Data[i].endDate.split(" ")[0];
                     var master;
                     if(e.Data[i].masterTeacherName == undefined){
-                        master = "";
+                        master = "暂无";
                     }else {
                         master = e.Data[i].masterTeacherName;
                     }

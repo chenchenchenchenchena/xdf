@@ -81,7 +81,7 @@ $(function () {
             var endDate = className_[a].EndDate.split(' ')[0];
             var master;
             if(className_[a].masterTeacherName == undefined){
-                master = "";
+                master = "暂无";
             }else {
                 master = className_[a].masterTeacherName;
             }
