@@ -77,13 +77,13 @@ $(function () {
     ajax_S(homework_s.t_class, trardata, function (e) {
         var className = e.data;
         for (var a = 0; a < className.length; a++) {
-            var beginDate = className_[a].BeginDate.split(' ')[0];
-            var endDate = className_[a].EndDate.split(' ')[0];
+            var beginDate = className[a].BeginDate.split(' ')[0];
+            var endDate = className[a].EndDate.split(' ')[0];
             var master;
-            if(className_[a].masterTeacherName == undefined){
+            if(className[a].masterTeacherName == undefined){
                 master = "暂无";
             }else {
-                master = className_[a].masterTeacherName;
+                master = className[a].masterTeacherName;
             }
             $('.class_name ul').append('<li style="white-space: nowrap;overflow-x:auto;"  data-beginDate="'+beginDate+'" data-endDate="'+endDate+'" data-master="'+master+'" classCode="' + className[a].ClassCode + '"><img src="images/C05_06.png" alt=""><span class="cn">' + className[a].ClassName + '</span><span style="font-size: 32px">(' + className[a].ClassCode + ')</span></li>')
         }
