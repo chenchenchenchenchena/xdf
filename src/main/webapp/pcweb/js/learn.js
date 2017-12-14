@@ -157,7 +157,7 @@ function initPage(totalCounts, currentPage) {
             onPageChange: function (num, type) {
                 if (type != "init") {
                     page = num;
-                    SelectTeacherList();
+                    SelectList();
                 }
             }
         });

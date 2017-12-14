@@ -103,6 +103,10 @@ require(['jquery-1.11.0.min'], function () {
                 $('.lesstime_Result').show();
                 SelectTeacherList();
             });
+            //排序点击事件
+            $(document).on('click','.sort_h',function(){
+                $(this).attr()
+            })
         });
     });
 });
@@ -342,6 +346,10 @@ function initPage(totalCounts, currentPage) {
     }
 }
 
+/**
+ * 获取列表
+ * @constructor
+ */
 function SelectTeacherList() {
     $('.loading_pre').show();
 
@@ -383,7 +391,7 @@ function SelectTeacherList() {
                 var currentPage = e.pageNum;
                 initPage(totalCounts, currentPage);
                 $('#homeworkAllList li').remove();
-                var str = '<li class="homework_list_title"><span style="width: 14%">班名</span><span>班号</span><span style="width: 14%">学校</span><span>主讲</span><span>班主任</span><span>布置次数</span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                var str = '<li class="homework_list_title"><span style="width: 14%">班名</span><span>班号</span><span style="width: 14%">学校</span><span>主讲</span><span>班主任</span><span>布置次数<img style="right: 0" src="images/sort_h.png" alt="" class="sort_h sort_homework" type="publishCount"></span><span>送达人次<img style="right: 0" src="images/sort_h.png" alt="" class="sort_h sort_homework" type="reachCount"></span><span>提交率<img style="right: 0" src="images/sort_h.png" alt="" class="sort_h sort_homework" type="commitRate"></span><span>批复率<img style="right: 0" src="images/sort_h.png" alt="" class="sort_h sort_homework" type="replyRate"></span><span>正确率</span><span>操作</span></li>';
                 $('#homeworkAllList').append(str);
                 for (var i = 0; i < teacherList.length; i++) {
                     var className = isNULL(teacherList[i].className);

@@ -192,6 +192,7 @@ function SelectData() {
         url: global.lesstime_detail,
         dataType: 'json',
         data: JSON.stringify(params),
+        contentType: 'application/json;charset=UTF-8',
         success: function (e) {
             var data = e.Data;
             if (data != undefined) {
