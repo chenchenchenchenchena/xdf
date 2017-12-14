@@ -439,7 +439,7 @@ function selectHwData() {
 
                     /*校区对比数据展示*/
                     $('#schoolComparsion li').remove();
-                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="publishCount"></span><span>送达人次<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="reachCount"></span><span>提交率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="commitRate"></span><span>批复率<img src="images/sort_h.png" alt="" class="sort_h sort_homework"  type="replyRate"></span><span>正确率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="correctRate"></span><span>操作</span></li>';
+                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/sort_t.png" alt="" class="sort_h sort_homework" type="publishCount"></span><span>送达人次<img src="images/sort_c.png" alt="" class="sort_h sort_homework" type="reachCount"></span><span>提交率<img src="images/sort_c.png" alt="" class="sort_h sort_homework" type="commitRate"></span><span>批复率<img src="images/sort_c.png" alt="" class="sort_c sort_homework"  type="replyRate"></span><span>正确率<img src="images/sort_c.png" alt="" class="sort_h sort_homework" type="correctRate"></span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
                     sort_arr = schoolComparsion
 
