@@ -103,19 +103,22 @@ require(['jquery-1.11.0.min'], function () {
                 var schoolName = $(this).attr('data-schoolName');
                 lookHwDetails(this, schoolId, schoolName);
             })
-            $(document).on('click','.sort_homework',function(){
+            $(document).off('click').on('click','.sort_homework',function(){
+                alert(0)
                 var type_ = $(this).attr('type');
                 $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
                 if($(this).attr('src').indexOf('sort_h')!=-1){
                     var schoolComparsion = sort_arr.sort(px_home(type_)).reverse();
                     $(this).attr('src','images/sort_t.png')
-                }else{
+                }else if($(this).attr('src').indexOf('sort_t')!=-1){
                     var schoolComparsion = sort_arr.sort(px_home(type_));
-                    $(this).attr('src','images/sort_h.png')
+                    $(this).attr('src','images/sort_c.png')
+                }else if($(this).attr('src').indexOf('sort_c')!=-1){
+                    var schoolComparsion = sort_arr.sort(px_home(type_)).reverse();
+                    $(this).attr('src','images/sort_t.png')
                 }
                 $('.homework_list_title ').siblings().remove();
                 for (var i = 0; i < schoolComparsion.length; i++) {
-
                     var schoolName = schoolComparsion[i].schoolName;//校区
                     var schoolId = schoolComparsion[i].schoolId;//校区id
                     var replyRate = parseInt(schoolComparsion[i].replyRate.toFixed(2) * 100);//批复率
@@ -429,7 +432,7 @@ function selectHwData() {
                 if (data != undefined) {
 
                     var schoolComparsion_ = data.schoolComparsion;//校区对比数据
-                    var schoolComparsion = schoolComparsion_.sort(px_home('publishCount'));
+                    var schoolComparsion = schoolComparsion_.sort(px_home('publishCount')).reverse();
                     var commitAll;//总提交量
                     var publishAll;//总用户量(总布置次数)
                     var reachAll;//总送达人次
