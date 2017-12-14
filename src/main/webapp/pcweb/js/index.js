@@ -35,11 +35,14 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
         var type_ = $(this).attr('type');
         $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
         if($(this).attr('src').indexOf('sort_h')!=-1){
-            var index_peo = index_data.sort(px_home(type_));
-            $(this).attr('src','images/sort_t.png')
-        }else{
             var index_peo = index_data.sort(px_home(type_)).reverse();
-            $(this).attr('src','images/sort_h.png')
+            $(this).attr('src','images/sort_t.png')
+        }else if($(this).attr('src').indexOf('sort_t')!=-1){
+            var index_peo = index_data.sort(px_home(type_));
+            $(this).attr('src','images/sort_c.png')
+        }else if($(this).attr('src').indexOf('sort_c')!=-1){
+            var index_peo = index_data.sort(px_home(type_)).reverse();
+            $(this).attr('src','images/sort_t.png')
         }
         $('.index_first ').siblings().remove();
         for(var i = 0;i<index_peo.length;i++){
