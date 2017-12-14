@@ -8,12 +8,12 @@ var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
 var stuNumsOrder = "";
-var img_order = "images/sort_t.png";
+var img_order = "images/sort_h.png";
 var order = "desc";
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-        require(['layer', 'requireConfig','jqPaginator.min'], function () {
+        require(['layer', 'requireConfig', 'jqPaginator.min'], function () {
             $('.loading_pre').show();
 
             // 重置左导航
@@ -79,10 +79,10 @@ require(['jquery-1.11.0.min'], function () {
                 $('.lesstime_Result').show();
                 SelectList();
             });
+
         });
     });
 });
-
 
 //校区展示
 function getSchool() {
@@ -169,6 +169,10 @@ function initPage(totalCounts, currentPage) {
     }
 }
 
+/**
+ * 获取学情列表
+ * @constructor
+ */
 function SelectList() {
     $('.loading_pre').show();
 
@@ -191,7 +195,7 @@ function SelectList() {
         'pageSize': pageSize,
         'beginDate': beginTime,
         'endDate': endTime,
-        'stuNumsOrder':stuNumsOrder
+        'stuNumsOrder': stuNumsOrder
     };
     $.ajax({
         type: "POST",
@@ -210,7 +214,7 @@ function SelectList() {
                     var currentPage = e.Data.pageNum;
                     initPage(totalCounts, currentPage);
                     $('#learnReportList li').remove();
-                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量<img style="right: 0" src="'+img_order+'" alt="" class="sort_h sort_homework" data-order="'+order+'"></span><span>导出本班汇总</span></li>';
+                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量<img style="right: 0" src="' + img_order + '" alt="" onclick="get_order()" class="sort_h sort_homework" data-order="' + order + '"></span><span>导出本班汇总</span></li>';
                     $('#learnReportList').append(str);
                     for (var i = 0; i < list.length; i++) {
                         var classCode = list[i].classCode;
@@ -220,7 +224,7 @@ function SelectList() {
                         var stuNums = list[i].stuNums;
                         var teacherName = list[i].teacherName;
                         var masterTeacherName = list[i].masterTeacherName;
-                        if(masterTeacherName == undefined){
+                        if (masterTeacherName == undefined) {
                             masterTeacherName = "暂无";
                         }
                         var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">EXCEL</span></span></li>';
@@ -238,4 +242,22 @@ function SelectList() {
             }
         }
     })
+}
+
+
+/**
+ * 排序
+ */
+function  get_order(){
+    if (order == 'desc') {
+        stuNumsOrder = "stuNums desc";
+        order = "asc";
+        img_order = "images/sort_t.png";
+    } else {
+        stuNumsOrder = "stuNums asc";
+        order = "desc";
+        img_order = "images/sort_c.png";
+    }
+    page = 1;
+    SelectList();
 }
