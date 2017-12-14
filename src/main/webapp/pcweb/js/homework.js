@@ -104,7 +104,6 @@ require(['jquery-1.11.0.min'], function () {
                 lookHwDetails(this, schoolId, schoolName);
             })
             $(document).off('click').on('click','.sort_homework',function(){
-                alert(0)
                 var type_ = $(this).attr('type');
                 $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
                 if($(this).attr('src').indexOf('sort_h')!=-1){
