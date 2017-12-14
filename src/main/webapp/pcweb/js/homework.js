@@ -616,6 +616,9 @@ function lookHwAll(){
         'schoolId': currentSchoolId,
         'beginTime': beginTime,
         'endTime': endTime,
+        'paperSubject': subject,
+        'paperClass': grade,
+        'paperStage': stage,
         'schoolName': currentSchool
     };
     sessionStorage.homeworkAllParams = JSON.stringify(params);

@@ -7,7 +7,7 @@
         <h4>搜索</h4>
     </div>
     <div class="homework_sea">
-        <input id="seacher_hw" type="text" placeholder="输入老师名称">
+        <input id="seacher_hw" type="text" placeholder="输入班名/班号/主讲姓名/班主任姓名进行搜索">
         <img src="images/seach.png" alt="">
     </div>
     <div class="homework_title">
@@ -41,6 +41,30 @@
                     </div>
                 </li>
                 <li>
+                    <span class="homework_samll_title">学段</span>
+                    <div class="homework_samll_one">
+                        <h4 id="stage" onclick="getSelectList(this,'dict_tps_stage_info',0)" tabindex="1">全部</h4>
+                        <ul>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span class="homework_samll_title">年级</span>
+                    <div class="homework_samll_one">
+                        <h4 id="grade" onclick="getSelectList(this,'dict_tps_class_info',1)" tabindex="1">全部</h4>
+                        <ul>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span class="homework_samll_title">科目</span>
+                    <div class="homework_samll_one">
+                        <h4 id="subject" onclick="getSelectList(this,'dict_tps_subject_info',2)" tabindex="1">全部</h4>
+                        <ul>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <button id="hw_selectBtn" class="select-btn">确定</button>
                 </li>
             </ul>
@@ -49,7 +73,7 @@
     <div class="homework_title homework_explain">
         <h4>结果列表</h4>
     </div>
-    <ul id="schoolComparsion" class="homework_list">
+    <ul id="homeworkAllList" class="homework_list all_homework">
         <!--<li class="homework_list_title"><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>-->
         <!--<li><span>校区</span><span>布置次数</span><span>送达人数</span><span>提交率</span><span>批复率</span><span>正确率</span><span ><a-->
         <!--href="#/detail" class="homework_operation">查看明细</a></span></li>-->
@@ -57,7 +81,13 @@
     <p class="lesstime_Result">
         共0条结果
     </p>
+    <div class="PublicPage" id="publicPage"></div>
 </div>
 <div class="loading_pre">
     <img src="images/loading_pre.gif" alt="">
 </div>
+<style>
+    .all_homework span{
+        width: 8%;
+    }
+</style>

@@ -1,19 +1,31 @@
-
 /*默认筛选条件*/
+var stage = "";//默认全部
+var grade = "";//默认全部
+var subject = "";//默认全部
 var currentSchoolId = "";//默认全部
 var currentSchool = "全部";//默认全部
 var beginTime = "";//默认全部
 var endTime = "";//默认全部
 var homeworkType = "0"//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
-var seacherName = "";
+var searchName = "";
+var currentStageCode = "";
 var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
+var publishD = "publishCount desc";//布置次数降序
+var publishA = "publishCount asc";//布置次数升序
+var reachD = "reachCount desc";//送达人次降序
+var reachA = "reachCount asc";//送达人次升序
+var commitD = "commitRate desc";//提交率降序
+var commitA = "commitRate asc";//提交率升序
+var replyD = "replyRate desc";//回复率降序
+var replyA = "replyRate asc";//回复率升序
+var homeWorkClassOrder = "";//排序类型
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
-        require(['layer', 'requireConfig'], function () {
-            //$('.loading_pre').show();
+        require(['layer', 'requireConfig', 'jqPaginator.min'], function () {
+            $('.loading_pre').show();
 
             laydate.render({
                 elem: '#date_input',
@@ -31,21 +43,37 @@ require(['jquery-1.11.0.min'], function () {
             currentSchoolId = params.schoolId;
             beginTime = params.beginTime;
             endTime = params.endTime;
+            subject = params.paperSubject;
+            grade = params.paperClass;
+            stage = params.paperStage;
             currentSchool = params.schoolName;
             //初始化作业类型视图
-            if(homeworkType == 0){
+            if (homeworkType == 0) {
                 $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/checked.png");
                 $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
                 $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
-            }else if(homeworkType == 1){
+                $('.homewor_small_selecet ul li').eq(0).show();
+                $('.homewor_small_selecet ul li').eq(1).show();
+                $('.homewor_small_selecet ul li').eq(2).show();
+            } else if (homeworkType == 1) {
                 $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/checked.png");
                 $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
                 $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
-            }else if(homeworkType == 2){
+
+                $('.homewor_small_selecet ul li').eq(0).hide();
+                $('.homewor_small_selecet ul li').eq(1).hide();
+                $('.homewor_small_selecet ul li').eq(2).hide();
+            } else if (homeworkType == 2) {
                 $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/checked.png");
                 $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
                 $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
+                $('.homewor_small_selecet ul li').eq(0).show();
+                $('.homewor_small_selecet ul li').eq(1).show();
+                $('.homewor_small_selecet ul li').eq(2).show();
             }
+            $("#stage").html(stage);
+            $("#grade").html(grade);
+            $("#subject").html(subject);
             //初始化时间段视图
             if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
                 $('#date_input').val(params.beginTime + " - " + params.endTime);
@@ -61,9 +89,9 @@ require(['jquery-1.11.0.min'], function () {
                 SelectTeacherList();
             });
             //搜索回车事件
-            $('#seacher_hw').off("keyup").on('keyup',function(even){
+            $('#seacher_hw').off("keyup").on('keyup', function (even) {
 
-                if(even.keyCode==13){
+                if (even.keyCode == 13) {
                     $('.loading_pre').show();
                     $('.lesstime_Result').show();
                     SelectTeacherList();
@@ -83,11 +111,27 @@ require(['jquery-1.11.0.min'], function () {
  *切换作业类型
  */
 function changeHomeworkType(this_, flag) {
+    $('#stage').siblings().hide();
+    $('#grade').siblings().hide();
+    $('#subject').siblings().hide();
     homeworkType = flag;
     $(this_).find('img').attr('src', "images/checked.png");
     $(this_).siblings().find('img').attr('src', "images/check.png");
+    if (flag == 1) {
+        //手动作业不能选择学段／年级／科目
+        $('#stage').parent().parent().hide();
+        $('#grade').parent().parent().hide();
+        $('#subject').parent().parent().hide();
+    } else {
 
+        $('#stage').parent().parent().show();
+        $('#grade').parent().parent().show();
+        $('#subject').parent().parent().show();
+    }
     /*重置筛选条件*/
+    stage = "";
+    grade = "";
+    subject = "";
     $('#school').html("全部");
     $('#stage').html("全部");
     $('#grade').html("全部");
@@ -167,6 +211,114 @@ function filterByCityId(_this, schoolName) {
     $("#school").parent().find("ul").hide();
 }
 
+//获取学段／年级／科目
+function getSelectList(this_, type, flag) {
+    $('#select_html>ul>li').find('ul').hide();
+    if ($(this_).parent().find('ul').css('display') != 'none') {
+        $(this_).parent().find('ul').hide();
+    } else {
+        var json;
+        switch (flag) {
+            case 0:
+                json = sessionStorage.stageList;
+                break;
+            case 1:
+                if (currentStageCode == undefined || currentStageCode == "") {
+                    layer.msg("请先选择学段");
+                    return false;
+                }
+                json = sessionStorage.gradelList;
+                break;
+            case 2:
+                json = sessionStorage.subjectList;
+                break;
+        }
+        if (json != undefined) {
+            json = JSON.parse(json);
+            showDrownList(json, this_, flag);
+        } else {
+            var table = {
+                "tableName": type
+            };
+            $.ajax({
+                type: "POST",
+                url: global.hw_dictList,
+                dataType: 'json',
+                data: table,
+                success: function (e) {
+                    switch (flag) {
+                        case 0:
+                            sessionStorage.stageList = JSON.stringify(e);
+                            break;
+                        case 1:
+                            sessionStorage.gradelList = JSON.stringify(e);
+                            break;
+                        case 2:
+                            sessionStorage.subjectList = JSON.stringify(e);
+                            break;
+                    }
+                    showDrownList(e, this_, flag);
+                }
+            })
+        }
+    }
+
+
+}
+
+//筛选学段／年级／科目列表显示
+function showDrownList(json, this_, flag) {
+    $(this_).parent().find('ul').show();
+    $(this_).parent().parent().siblings().find('ul').hide();
+    if (json.code == "200") {
+        $(this_).siblings().find('ul').html("");
+        var list = json.data;
+        var content = "<li onclick='filterByDrownId(this, \"" + "全部" + "\"," + flag + ")' data-tCode=''><span>全部</span></li>";
+        for (var i = 0; i < list.length; i++) {
+            var tCode = list[i].tCode;
+            if (flag == 1) {
+                if (tCode.indexOf(currentStageCode) >= 0) {
+                    content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+                }
+            } else {
+                content += "<li onclick='filterByDrownId(this, \"" + list[i].tName + "\"," + flag + ")' data-tCode='" + tCode + "' ><span>" + list[i].tName + "</span></li>";
+            }
+        }
+
+        $(this_).parent().find('ul').html(content);
+    } else {
+        layer.msg("查询失败!")
+    }
+
+    $(this_).parent().find('ul').show();
+}
+
+//点击选择学段／年级／科目
+function filterByDrownId(_this, name, flag) {
+    var id = $(_this).attr('data-tCode');
+    $(_this).parent().parent().find('h4').html(name);
+    $(_this).parent().parent().find('h4').attr('tCode', id);
+    $(_this).parent().hide();
+    if (flag == 0) {
+        if (id == "") {
+            currentStageCode = "";
+        } else {
+            currentStageCode = id.substring(0, 2);
+        }
+        //如果切换学段，则将年级科目置成默认值："全部"
+        $('#grade').html("全部");
+        $('#grade').attr('tCode', "");
+        $('#subject').html("全部");
+        $('#subject').attr('tCode', "");
+
+    }
+}
+
+/**
+ * 分页控件
+ * @param totalCounts
+ * @param currentPage
+ */
 function initPage(totalCounts, currentPage) {
     if (totalCounts != null && totalCounts != 0) {
         $.jqPaginator("#publicPage", {
@@ -190,8 +342,8 @@ function initPage(totalCounts, currentPage) {
     }
 }
 
-function SelectTeacherList(){
-    //$('.loading_pre').show();
+function SelectTeacherList() {
+    $('.loading_pre').show();
 
     //获取筛选条件
     var time = $('#date_input').val();
@@ -200,29 +352,112 @@ function SelectTeacherList(){
         endTime = time.substring(13, time.length);
     }
 
-    seacherName = $('#seacher_hw').val();
-    if (seacherName == undefined) {
-        seacherName = "";
+    searchName = $('#seacher_hw').val();
+    if (searchName == undefined) {
+        searchName = "";
     }
 
     var params = {
         'schoolId': currentSchoolId,
-        'teacher': seacherName,
+        'searchName': searchName,
         'pageNum': page,
         'pageSize': pageSize,
         'beginTime': beginTime,
         'endTime': endTime,
-        'homeworkType': homeworkType
+        'homeworkType': homeworkType,
+        'homeWorkClassOrder': homeWorkClassOrder
     };
-    //$.ajax({
-    //    type: "POST",
-    //    url: global.hw_details,
-    //    dataType: 'json',
-    //    contentType: "application/json",
-    //    data: JSON.stringify(params),
-    //    success: function (e) {
-    //
-    //    }
-    //})
-    $('.loading_pre').hide();
+    $.ajax({
+        type: "POST",
+        url: global.hw_all,
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(params),
+        success: function (e) {
+            if (e.list != undefined && e.list.length > 0) {
+
+                var teacherList = e.list;
+                totalCounts = e.total;//总条数
+                $('.lesstime_Result').show();
+                $('.lesstime_Result').html("共" + totalCounts + "条数据");
+                var currentPage = e.pageNum;
+                initPage(totalCounts, currentPage);
+                $('#homeworkAllList li').remove();
+                var str = '<li class="homework_list_title"><span style="width: 14%">班名</span><span>班号</span><span style="width: 14%">学校</span><span>主讲</span><span>班主任</span><span>布置次数</span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                $('#homeworkAllList').append(str);
+                for (var i = 0; i < teacherList.length; i++) {
+                    var className = isNULL(teacherList[i].className);
+                    var classCode = isNULL(teacherList[i].classCode);
+                    var masterTeacherName = isNULL(teacherList[i].masterTeacherName);
+                    var teacherName = isNULL(teacherList[i].teacherName);
+                    var commitCount = parseINT(teacherList[i].commitCount);
+                    var commitRate = parsePercent(teacherList[i].commitRate);
+                    var correctRate = parsePercent(teacherList[i].correctRate);
+                    var publishCount = parseINT(teacherList[i].publishCount);
+                    var replyRate = parsePercent(teacherList[i].replyRate);
+                    var reachCount = parseINT(teacherList[i].reachCount);
+                    var schoolId = teacherList[i].schoolId;
+                    var schoolName = teacherList[i].schoolName;
+                    if(homeworkType == 1){
+                        var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class="look_details homework_operation">查看分析</span></span></li>';
+
+                    }else {
+                        var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class="look_details homework_operation">查看分析</span></span></li>';
+
+                    }
+
+
+                    $('#homeworkAllList').append(itemHtml_);
+                }
+                $('.loading_pre').hide();
+
+            } else {
+                layer.msg("暂无数据");
+                $('.loading_pre').hide();
+
+                $('#homeworkAllList li').remove();
+                $('.lesstime_Result').hide();
+                initPage(0, 1);
+            }
+        }
+    });
+}
+
+/**
+ * 判断是否为空
+ * @param str
+ * @returns {*}
+ */
+function isNULL(str) {
+    if (str == undefined || str == "") {
+        return "暂无";
+    } else {
+        return str;
+    }
+}
+/**
+ * 将string转成Int
+ * @param str
+ * @returns {*}
+ */
+function parseINT(str) {
+    if (str == undefined || str == "") {
+        return 0;
+    } else {
+        return parseInt(str);
+    }
+}
+/**
+ * 将string转成百分比
+ * @param str
+ * @returns {*}
+ */
+function parsePercent(str) {
+    if (str == undefined || str == "" || str == "0" ) {
+        return 0 + "%";
+    }else {
+        return parseInt(parseFloat(str).toFixed(2) * 100) + "%";
+    }
 }
