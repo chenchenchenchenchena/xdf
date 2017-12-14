@@ -8,7 +8,7 @@ var endTime = '';
 var lookType = '2';
 var ECharts;
 var schoolLookType_ = 1;//柱形图和列表的标志
-
+var lesstime_data;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min', 'layer'], function () {
         require(['echarts.min'], function (echarts) {
@@ -57,6 +57,38 @@ require(['jquery-1.11.0.min'], function () {
             });
 
             ECharts = echarts;//保存图标实例化对象
+
+            $(document).on('click','.sort_lesstime',function(){
+                var type_ = $(this).attr('type');
+                $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
+                if($(this).attr('src').indexOf('sort_h')!=-1){
+                    var teacherTotalData = lesstime_data.sort(px_home(type_)).reverse();
+                    $(this).attr('src','images/sort_t.png')
+                }else if($(this).attr('src').indexOf('sort_t')!=-1){
+                    var teacherTotalData = lesstime_data.sort(px_home(type_));
+                    $(this).attr('src','images/sort_c.png')
+                }else if($(this).attr('src').indexOf('sort_c')!=-1){
+                    var teacherTotalData = lesstime_data.sort(px_home(type_)).reverse();
+                    $(this).attr('src','images/sort_t.png')
+                }
+                $('.homework_list_title ').siblings().remove();
+                for (var k = 0; k < teacherTotalData.length; k++) {
+
+                    var headTeacherTotal = teacherTotalData[k].headTeacherTotal;//班主任数量
+                    var totalLessonHour = parseInt(teacherTotalData[k].totalLessonHour);//分校区班主任课时总量
+                    var totalLessonNos = parseInt(teacherTotalData[k].totalLessonNos);//分校区班主任班课总量
+                    var schoolName = teacherTotalData[k].schoolName;//分校区名称
+                    var schoolId = teacherTotalData[k].schoolId;//分校区id
+                    if(schoolName == undefined || schoolName == ""){
+                        schoolName = "";
+                    }
+                    var html_ = "<li><span>" + schoolName + "</span><span>" + headTeacherTotal + "</span><span>" + totalLessonNos + "</span><span>" + totalLessonHour + "</span></li>";
+                    $('.lesstime_list').append(html_);
+                    $('.lesstime_list li:nth-child(odd)').css('background', '#f5fbfa');
+
+                }
+            });
+
         });
     });
 });
@@ -267,7 +299,9 @@ function SelectData() {
         data: JSON.stringify(params),
         success: function (e) {
             if (e.result) {
-                var teacherTotalData = e.TeacherTotalData;//校区对比集合
+
+                var teacherTotalData =  e.TeacherTotalData.sort(px_home('headTeacherTotal')).reverse();//校区对比集合
+                lesstime_data = e.TeacherTotalData;
                 var viewClassTeacherData = e.ViewClassTeacherData;//班主任集合
                 var viewMasterTeacherData = e.ViewMasterTeacherData;//主讲老师集合
                 var teacherData = e.TeacherData;//老师集合
@@ -349,7 +383,7 @@ function SelectData() {
                     var schoolList = [];
 
                     $('.lesstime_list li').remove();
-                    var str_th = '<li class="homework_list_title"><span>学校</span><span>班主任数量（人）</span><span>班课次（个）</span><span>课时量（h）</span></li>';
+                    var str_th = '<li class="homework_list_title"><span>学校</span><span>班主任数量（人）<img src="images/sort_t.png" alt="" class="sort_h sort_lesstime" type="headTeacherTotal"></span><span>班课次（个）<img src="images/sort_h.png" alt="" class="sort_h sort_lesstime" type="totalLessonNos"></span><span>课时量（h）<img src="images/sort_h.png" alt="" class="sort_h sort_lesstime" type="totalLessonHour"></span></li>';
                     $('.lesstime_list').append(str_th);
                     for (var k = 0; k < teacherTotalData.length; k++) {
 
