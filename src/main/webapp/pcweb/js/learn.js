@@ -7,6 +7,9 @@ var seacherName = "";
 var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
+var stuNumsOrder = "";
+var img_order = "images/sort_t.png";
+var order = "desc";
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -187,7 +190,8 @@ function SelectList() {
         'pageNum': page,
         'pageSize': pageSize,
         'beginDate': beginTime,
-        'endDate': endTime
+        'endDate': endTime,
+        'stuNumsOrder':stuNumsOrder
     };
     $.ajax({
         type: "POST",
@@ -206,7 +210,7 @@ function SelectList() {
                     var currentPage = e.Data.pageNum;
                     initPage(totalCounts, currentPage);
                     $('#learnReportList li').remove();
-                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量</span><span>导出本班汇总</span></li>';
+                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量<img style="right: 0" src="'+img_order+'" alt="" class="sort_h sort_homework" data-order="'+order+'"></span><span>导出本班汇总</span></li>';
                     $('#learnReportList').append(str);
                     for (var i = 0; i < list.length; i++) {
                         var classCode = list[i].classCode;

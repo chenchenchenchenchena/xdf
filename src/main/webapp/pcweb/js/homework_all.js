@@ -148,6 +148,8 @@ require(['jquery-1.11.0.min'], function () {
                         $(this).attr('src','images/sort_c.png');
                     }
                 }
+
+                $(this).parent().siblings().find('.sort_h').attr('src','images/sort_h.png');
                 page = 1;
                 SelectTeacherList();
             })
@@ -409,6 +411,22 @@ function SelectTeacherList() {
         searchName = "";
     }
 
+    if ($('#subject').html() != '全部') {
+        subject = $('#subject').html();
+    } else {
+        subject = "";
+    }
+    if ($('#grade').html() != '全部') {
+        grade = $('#grade').html();
+    } else {
+        grade = "";
+    }
+    if ($('#stage').html() != '全部') {
+        stage = $('#stage').html();
+    } else {
+        stage = "";
+    }
+
     var params = {
         'schoolId': currentSchoolId,
         'searchName': searchName,
@@ -417,7 +435,10 @@ function SelectTeacherList() {
         'beginTime': beginTime,
         'endTime': endTime,
         'homeworkType': homeworkType,
-        'homeWorkClassOrder': homeWorkClassOrder
+        'homeWorkClassOrder': homeWorkClassOrder,
+        'paperSubject': subject,
+        'paperClass': grade,
+        'paperStage': stage
     };
     $.ajax({
         type: "POST",
