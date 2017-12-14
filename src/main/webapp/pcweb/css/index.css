@@ -164,7 +164,7 @@ body{
 	color:#333333;
 	font-size:16px;
 	background:#ccf1ea;
-	padding-left:10px;
+	padding-left:1%;
 }
 .index_formtit a{
 	float:right;
@@ -175,7 +175,8 @@ body{
 }
 .index_forms{
 	display:inline-block;
-	width:99%;
+	margin-top:10px;
+	width:99.5%;
 }
 .index_forms li{
 	display:block;
@@ -195,6 +196,7 @@ body{
 	font-size:14px;
 	color:#666;
 	overflow:hidden;
+	position: relative;
 }
 .index_forms li span a{
 	color:#00ba97;

@@ -3,6 +3,7 @@
 require(['jquery-1.11.0.min','requireConfig'], function () {
     require(['layer'], function () {
         $('.loading_pre').show();
+        var index_data;
 
         // 重置左导航
         var number_l = 0;
@@ -29,7 +30,22 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
      layer.load();
     /*css 兼容*/
 
-
+    $('.sort_index').click(function(){
+        console.log(index_data);
+        var type_ = $(this).attr('type');
+        $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
+        if($(this).attr('src').indexOf('sort_h')!=-1){
+            var index_peo = index_data.sort(px_home(type_));
+            $(this).attr('src','images/sort_t.png')
+        }else{
+            var index_peo = index_data.sort(px_home(type_)).reverse();
+            $(this).attr('src','images/sort_h.png')
+        }
+        $('.index_first ').siblings().remove();
+        for(var i = 0;i<index_peo.length;i++){
+            $('.index_forms').append(' <li> <span>'+index_peo[i].schoolName+'</span> <span>'+index_peo[i].branchTotalUser+'</span> <span>'+index_peo[i].studentCount+'</span> <span>'+index_peo[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+index_peo[i].schoolId+'"schoolName="'+index_peo[i].schoolName+'" index = '+i+' tea_num = "'+index_peo[i].branchTotalUser+'">导出教师列表</a></span> </li>')
+        }
+    });
     layer.closeAll('loading');
     //请求列表
     $.ajax({
@@ -46,12 +62,14 @@ require(['jquery-1.11.0.min','requireConfig'], function () {
                 $('.teacherTotal').html(usernum.teacherTotal+'<span>人</span>');
                 $('.studentTotal').html(usernum.studentTotal+'<span>人</span>');
                 $('.index_forms').find('li').eq(0).siblings().remove();
-                for(var i = 0;i<usernum.data.length;i++){
-                    $('.index_forms').append(' <li> <span>'+usernum.data[i].schoolName+'</span> <span>'+usernum.data[i].branchTotalUser+'</span> <span>'+usernum.data[i].studentCount+'</span> <span>'+usernum.data[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+usernum.data[i].schoolId+'"schoolName="'+usernum.data[i].schoolName+'" index = '+i+' tea_num = "'+usernum.data[i].branchTotalUser+'">导出教师列表</a></span> </li>')
+                index_data = usernum.data;
+                var index_peo = usernum.data.sort(px_home('branchTotalUser')).reverse();
+                for(var i = 0;i<index_peo.length;i++){
+                    $('.index_forms').append(' <li> <span>'+index_peo[i].schoolName+'</span> <span>'+index_peo[i].branchTotalUser+'</span> <span>'+index_peo[i].studentCount+'</span> <span>'+index_peo[i].teacherCount+'</span> <span><a href="javascript:;" class="export_s" schoolId="'+index_peo[i].schoolId+'"schoolName="'+index_peo[i].schoolName+'" index = '+i+' tea_num = "'+index_peo[i].branchTotalUser+'">导出教师列表</a></span> </li>')
                 }
                 $('.index_forms li:nth-child(even)').css('background', '#f5fbfa');
                 $('.index_forms li:first-of-type').css({
-                    'background': '#fff',
+                    'background': '#ccf1ea',
                     'color': '#bababa'
                 });
                 $('.loading_pre').hide();
