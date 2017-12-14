@@ -115,7 +115,7 @@ require(['jquery-1.11.0.min'], function () {
                     }else {
                         homeWorkClassOrder = publishA;
                         $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_h.png');
+                        $(this).attr('src','images/sort_c.png');
                     }
                 }else if(type == "reachCount"){
                     if(order == 'desc'){
@@ -125,7 +125,7 @@ require(['jquery-1.11.0.min'], function () {
                     }else {
                         homeWorkClassOrder = reachA;
                         $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_h.png');
+                        $(this).attr('src','images/sort_c.png');
                     }
                 }else if(type == "commitRate"){
                     if(order == 'desc'){
@@ -135,7 +135,7 @@ require(['jquery-1.11.0.min'], function () {
                     }else {
                         homeWorkClassOrder = commitA;
                         $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_h.png');
+                        $(this).attr('src','images/sort_c.png');
                     }
                 }else if(type == "replyRate"){
                     if(order == 'desc'){
@@ -145,7 +145,7 @@ require(['jquery-1.11.0.min'], function () {
                     }else {
                         homeWorkClassOrder = replyA;
                         $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_h.png');
+                        $(this).attr('src','images/sort_c.png');
                     }
                 }
                 page = 1;

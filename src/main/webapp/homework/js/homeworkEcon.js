@@ -9,9 +9,9 @@ $(function () {
     var stageList = [];
     var gradeList = [];
     var subjectList = [];
-    var currentStage;
-    var currentGrade;
-    var currentSubject;
+    var currentStage = "";
+    var currentGrade = "";
+    var currentSubject = "";
 
 
     var paperId = "";
@@ -171,21 +171,10 @@ $(function () {
         $('.listOne').hide();
         $('.listTwo').hide();
         $('.listThree').hide();
-        // if ($('.searchE input').val() == "") {
-        //     layer.msg("请先填写试卷内容");
-        //     return;
-        // }
-        if (undefined == currentStage || currentStage == "") {
-            layer.msg("请先选择学段");
-            return;
-        }
-        if (undefined == currentGrade || currentGrade == "") {
-            layer.msg("请先选择年级");
-            return;
-        }
-        if (undefined == currentSubject || currentSubject == "") {
-            layer.msg("请先选择科目");
-            return;
+        var paperContent = $('.searchE input').val();
+        if (paperContent == "" && (undefined == currentStage || currentStage == "") && (undefined == currentGrade || currentGrade == "") && (undefined == currentSubject || currentSubject == "")) {
+            layer.msg("至少输入一个条件");
+            return false;
         }
         pageNo = 1;
         getHwList();
@@ -208,6 +197,7 @@ $(function () {
             'paperClass': currentGrade.gradeCode,
             'paperSubject': currentSubject.subjectCode,
             'paperName': $('.searchE input').val(),
+            'paperStage': currentStage.stageCode,
             'pageNo': pageNo
         };
         var url = homework_s.t_getExcellent;
@@ -221,7 +211,7 @@ $(function () {
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
                         if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
-                            strHtml_ += "<li><h3 paperTotalScore='"+dataList[i].paperTotalScore+"' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                            strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
@@ -233,7 +223,7 @@ $(function () {
                             gradeName = currentGrade.gradeName;
                             subjectName = currentSubject.subjectName;
                         } else {
-                            strHtml_ += "<li><h3 paperTotalScore='"+dataList[i].paperTotalScore+"' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
+                            strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
                                 "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
@@ -243,7 +233,7 @@ $(function () {
                         }
 
                     }
-                    if(pageNo == 1){
+                    if (pageNo == 1) {
                         $('.searchCon ul').find('li').remove();
                     }
 
@@ -257,10 +247,10 @@ $(function () {
                     isLoading = false;
                 } else {
                     isEnd = true;
-                    if(pageNo == 1){
+                    if (pageNo == 1) {
                         showEmptyHtml();
                         layer.msg(e.message);
-                    }else {
+                    } else {
 
                         layer.msg("暂无数据");
                     }
@@ -322,7 +312,7 @@ $(function () {
     $(".eBtn").click(function () {
         var checkNum = 0;
         var contentName = "";
-        for (var i = 0; i < $(".searchCon li").length; i++) { 
+        for (var i = 0; i < $(".searchCon li").length; i++) {
             if ($(".searchCon li").eq(i).find("img").attr('src') == "images/yu2.png") {
                 contentName += $(".searchCon li").eq(i).find("h3").html();
                 checkNum++;
