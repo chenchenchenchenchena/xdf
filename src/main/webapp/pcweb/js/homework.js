@@ -10,7 +10,7 @@ var beginTime = "";//默认全部
 var endTime = "";//默认全部
 var homeworkType = 0//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
 var currentStageCode = "";
-
+var sort_arr;
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig'], function () {
@@ -102,6 +102,40 @@ require(['jquery-1.11.0.min'], function () {
                 var schoolId = $(this).attr('data-schoolId');
                 var schoolName = $(this).attr('data-schoolName');
                 lookHwDetails(this, schoolId, schoolName);
+            })
+            $(document).on('click','.sort_homework',function(){
+                var type_ = $(this).attr('type');
+                $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
+                if($(this).attr('src').indexOf('sort_h')!=-1){
+                    var schoolComparsion = sort_arr.sort(px_home(type_)).reverse();
+                    $(this).attr('src','images/sort_t.png')
+                }else{
+                    var schoolComparsion = sort_arr.sort(px_home(type_));
+                    $(this).attr('src','images/sort_h.png')
+                }
+                $('.homework_list_title ').siblings().remove();
+                for (var i = 0; i < schoolComparsion.length; i++) {
+
+                    var schoolName = schoolComparsion[i].schoolName;//校区
+                    var schoolId = schoolComparsion[i].schoolId;//校区id
+                    var replyRate = parseInt(schoolComparsion[i].replyRate.toFixed(2) * 100);//批复率
+                    var commitCount = parseInt(schoolComparsion[i].commitCount);//提交人数
+                    var commitRate = parseInt(schoolComparsion[i].commitRate.toFixed(2) * 100);//提交率=
+                    var publishCount = parseInt(schoolComparsion[i].publishCount);//布置次数
+                    var correctRate = parseFloat(schoolComparsion[i].correctRate);//正确率
+                    var reachCount = parseInt(schoolComparsion[i].reachCount);//送达人数
+                    if (homeworkType == "1") {
+                        //手动作业，正确率显示空
+                        var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>暂无</span><span >' +
+                            '<span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">查看明细</span></span></li>';
+
+                    } else {
+                        var html_ = '<li><span title="' + schoolName + '">' + schoolName + '</span><span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '%</span><span>' + replyRate + '%</span><span>' + parseInt(correctRate * 100) + '%</span><span >' +
+                            '<span style="width: auto" data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="look_details homework_operation">查看明细</span></span></li>';
+                    }
+                    $('#schoolComparsion').append(html_);
+
+                }
             })
         });
     });
@@ -394,8 +428,8 @@ function selectHwData() {
                 var data = e.data;
                 if (data != undefined) {
 
-                    var schoolComparsion = data.schoolComparsion;//校区对比数据
-
+                    var schoolComparsion_ = data.schoolComparsion;//校区对比数据
+                    var schoolComparsion = schoolComparsion_.sort(px_home('publishCount'));
                     var commitAll;//总提交量
                     var publishAll;//总用户量(总布置次数)
                     var reachAll;//总送达人次
@@ -405,15 +439,17 @@ function selectHwData() {
 
                     /*校区对比数据展示*/
                     $('#schoolComparsion li').remove();
-                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/sort_h.png" alt="" class="sort_h sort_homework"></span><span>送达人次</span><span>提交率</span><span>批复率</span><span>正确率</span><span>操作</span></li>';
+                    var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="publishCount"></span><span>送达人次<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="reachCount"></span><span>提交率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="commitRate"></span><span>批复率<img src="images/sort_h.png" alt="" class="sort_h sort_homework"  type="replyRate"></span><span>正确率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="correctRate"></span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
+                    sort_arr = schoolComparsion
+
                     for (var i = 0; i < schoolComparsion.length; i++) {
 
                         var schoolName = schoolComparsion[i].schoolName;//校区
                         var schoolId = schoolComparsion[i].schoolId;//校区id
                         var replyRate = parseInt(schoolComparsion[i].replyRate.toFixed(2) * 100);//批复率
                         var commitCount = parseInt(schoolComparsion[i].commitCount);//提交人数
-                        var commitRate = parseInt(schoolComparsion[i].commitRate.toFixed(2) * 100);//提交率
+                        var commitRate = parseInt(schoolComparsion[i].commitRate.toFixed(2) * 100);//提交率=
                         var publishCount = parseInt(schoolComparsion[i].publishCount);//布置次数
                         var correctRate = parseFloat(schoolComparsion[i].correctRate);//正确率
                         var reachCount = parseInt(schoolComparsion[i].reachCount);//送达人数
