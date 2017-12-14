@@ -105,21 +105,14 @@ require(['jquery-1.11.0.min'], function () {
             })
             $(document).on('click','.sort_homework',function(){
                 var type_ = $(this).attr('type');
-                $('.sort_homework').attr('src','images/sort_h.png');
-                $('.sort_homework').removeAttr('checked');
-                $(this).attr('checked',true);
-
-                if($(this).attr('checked')){
+                $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
+                if($(this).attr('src').indexOf('sort_h')!=-1){
                     var schoolComparsion = sort_arr.sort(px_home(type_)).reverse();
                     $(this).attr('src','images/sort_t.png')
-                }else if($(this).attr('src').indexOf('sort_t')!=-1&&$(this).attr('checked')){
+                }else{
                     var schoolComparsion = sort_arr.sort(px_home(type_));
                     $(this).attr('src','images/sort_h.png')
                 }
-                // if($(this).attr('src').indexOf('sort_t')!=-1&&$(this).attr('checked')){
-                //     var schoolComparsion = sort_arr.sort(px_home(type_));
-                //     $(this).attr('src','images/sort_h.png')
-                // }
                 $('.homework_list_title ').siblings().remove();
                 for (var i = 0; i < schoolComparsion.length; i++) {
 
@@ -435,8 +428,8 @@ function selectHwData() {
                 var data = e.data;
                 if (data != undefined) {
 
-                    var schoolComparsion = data.schoolComparsion;//校区对比数据
-
+                    var schoolComparsion_ = data.schoolComparsion;//校区对比数据
+                    var schoolComparsion = schoolComparsion_.sort(px_home('publishCount'));
                     var commitAll;//总提交量
                     var publishAll;//总用户量(总布置次数)
                     var reachAll;//总送达人次
@@ -449,6 +442,7 @@ function selectHwData() {
                     var str = '<li class="homework_list_title "><span>学校</span><span>布置次数 <img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="publishCount"></span><span>送达人次<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="reachCount"></span><span>提交率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="commitRate"></span><span>批复率<img src="images/sort_h.png" alt="" class="sort_h sort_homework"  type="replyRate"></span><span>正确率<img src="images/sort_h.png" alt="" class="sort_h sort_homework" type="correctRate"></span><span>操作</span></li>';
                     $('#schoolComparsion').append(str);
                     sort_arr = schoolComparsion
+
                     for (var i = 0; i < schoolComparsion.length; i++) {
 
                         var schoolName = schoolComparsion[i].schoolName;//校区
