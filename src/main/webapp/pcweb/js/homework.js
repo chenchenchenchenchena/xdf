@@ -642,6 +642,9 @@ function lookHwDetails(this_, schoolId, schoolName) {
  * 查看全部
  */
 function lookHwAll(){
+    subject = $('#subject').html();
+    grade = $('#grade').html();
+    stage = $('#stage').html();
     var time = $('#date_input').val();
     if (time != "" && time != undefined) {
         beginTime = time.substring(0, 10);
