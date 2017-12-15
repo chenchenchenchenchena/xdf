@@ -10,6 +10,11 @@ var masterTeacherFlag = 0;
 var page = 1;
 var pageSize = 15;
 var totalCounts = 0;
+var lessonHoursOrder = "";
+var img_order = "images/sort_h.png";
+var order = "desc";
+var currentMonth_img_order = "images/sort_h.png";
+var currentMonthOrder = "desc";
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -185,7 +190,8 @@ function SelectData() {
         'masterTeacherFlag': masterTeacherFlag,
         'pageNum': page,
         'pageSize': pageSize,
-        'teacherName': seacherKey
+        'teacherName': seacherKey,
+        'lessonHoursOrder':lessonHoursOrder
     };
     $.ajax({
         type: "POST",
@@ -205,7 +211,7 @@ function SelectData() {
                     var currentPage = data.pageNum;
                     initPage(totalCounts, currentPage);
 
-                    var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）</span><span>当月课时（h）</span></li>';
+                    var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）<img style="right: 0" src="' + img_order + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + order + '"></span><span>当月课时（h）<img style="right: 0" src="' + currentMonth_img_order + '" alt="" data-type="2" onclick="get_order(this)" class="sort_h sort_homework" data-order="' + currentMonthOrder + '"></span></li>';
                     $('.homework_list').append(str_th);
 
                     for (var i = 0; i < list.length; i++) {
@@ -240,4 +246,35 @@ function exporHourList() {
     }
     window.location.href = global.expor_hour + "?schoolName=" + currentCity + "&schoolId=" + currentCityId + "&masterTeacherFlag=" + masterTeacherFlag + "&teacherName=" + seacherKey + "&beginTime=" + beginTime + "&endTime=" + endTime + "&nextPage=" + page + "&pageSize=" + pageSize;
 
+}
+
+/**
+ * 排序
+ */
+function get_order(this_){
+    var orderThis = $(this_).attr('data-type');
+    if (orderThis == '1') {
+        if(order == 'desc'){
+            lessonHoursOrder = "lessonHours desc";
+            order = "asc";
+            img_order = "images/sort_t.png";
+        }else {
+            lessonHoursOrder = "lessonHours asc";
+            order = "desc";
+            img_order = "images/sort_c.png";
+        }
+
+    } else {
+        if(currentMonthOrder == 'desc'){
+            lessonHoursOrder = "monthHours desc";
+            currentMonthOrder = "asc";
+            currentMonth_img_order = "images/sort_t.png";
+        }else {
+            lessonHoursOrder = "monthHours asc";
+            currentMonthOrder = "desc";
+            currentMonth_img_order = "images/sort_c.png";
+        }
+    }
+    page = 1;
+    SelectData();
 }
