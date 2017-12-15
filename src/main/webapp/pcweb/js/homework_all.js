@@ -266,6 +266,7 @@ require(['jquery-1.11.0.min'], function () {
 function line_echar(id, campus, value, type, yName, xName) {
 
     var dataSeries = [];
+    var legend = [];
     if(value.commit.length != 0){
         var data = {
             name: "提交率",
@@ -274,6 +275,7 @@ function line_echar(id, campus, value, type, yName, xName) {
             data: value.commit
         }
         dataSeries.push(data);
+        legend.push("提交率");
     }
     if(value.reply.length != 0){
         var data = {
@@ -283,6 +285,7 @@ function line_echar(id, campus, value, type, yName, xName) {
             data: value.reply
         }
         dataSeries.push(data);
+        legend.push("批复率");
     }
     if(value.correct.length != 0){
         var data = {
@@ -292,6 +295,7 @@ function line_echar(id, campus, value, type, yName, xName) {
             data: value.correct
         }
         dataSeries.push(data);
+        legend.push("正确率");
     }
 
     var dataZoom_ = [{
@@ -326,6 +330,9 @@ function line_echar(id, campus, value, type, yName, xName) {
                 //type : 'shadow'
 
             }
+        },
+        legend: {
+            data:legend
         },
         grid: {
             left: '3%',
