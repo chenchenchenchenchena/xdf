@@ -322,7 +322,7 @@ function line_echar(id, campus, value, type, yName, xName) {
     var myChart = ECharts.init(document.getElementById(id));
     myChart.clear();
     var option = {
-        color: ['#3398DB'],
+        //color: ['#3398DB'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
