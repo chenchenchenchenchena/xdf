@@ -6,7 +6,7 @@ var currentSchoolId = "";//默认全部
 var currentSchool = "全部";//默认全部
 var beginTime = "";//默认全部
 var endTime = "";//默认全部
-var homeworkType = "0"//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
+var homeworkType = 0//默认作业类型全 部 0表示查询所以 1表示查询普通 2表示查询电子
 var searchName = "";
 var currentStageCode = "";
 var totalCounts = "0";
@@ -152,6 +152,126 @@ require(['jquery-1.11.0.min'], function () {
                 $(this).parent().siblings().find('.sort_h').attr('src','images/sort_h.png');
                 page = 1;
                 SelectTeacherList();
+            });
+            $(document).on('click','.look_w',function(){
+                $('.back_big_all').show();
+                var $homeworke_all_center = $('.homeworke_all_center');
+                $homeworke_all_center.css({
+                    'margin-top':-$homeworke_all_center.height()/2,
+                    'margin-left':-$homeworke_all_center.width()/2
+                });
+                var need_str = {
+                    'schoolId':$(this).attr('schoolId'),
+                    'classCode':$(this).attr('classCode'),
+                    'homeworkType':homeworkType
+                };
+                $.ajax({
+                    type: "POST",
+                    url: global.hw_see,
+                    dataType: 'json',
+                    data: need_str,
+                    success: function (e) {
+                        console.log(e)
+                        var classCode = e.data.classCode,
+                            className = e.data.className,
+                            teacherName = e.data.teacherName,
+                            masterTeacherName = e.data.masterTeacherName,
+                            $homework_all_content = $('.homework_all_content'),
+                            homeworkTimeData = e.data.homeworkTimeData,
+                            $homework_all_data = $('.homework_all_data ul'),
+                            x_line = [],
+                            y_line = [],
+                            $html_ = '';
+
+                        if(masterTeacherName==''){
+                            masterTeacherName = '暂无'
+                        }
+
+                        $homework_all_content.append('<li>班级编号：'+classCode+'</li>');
+                        $homework_all_content.append('<li>班级名称：'+className+'</li>');
+                        $homework_all_content.append('<li>班 主 任：'+teacherName+'</li>');
+                        $homework_all_content.append('<li>主    讲：'+masterTeacherName+'</li>');
+
+                        if(homeworkTimeData.length>0){
+                            if(homeworkType==0){
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
+                            }else if(homeworkType==1){
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
+                            }else{
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
+                            }
+                            for(i in homeworkTimeData){
+                                if(homeworkType==0){
+                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].replyRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].correctRate)*100)+'%</span></li>'
+                                    $homework_all_data.append($html_)
+                                }else if(homeworkType==1){
+                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].replyRate)*100)+'%</span></li>'
+
+                                }else{
+                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].correctRate)*100)+'%</span></li>'
+                                }
+                            }
+                            // line_echar('homework_all_echart',)
+                        }
+
+                    }
+                })
+            });
+            function line_echar(id, campus, value, type, yName, xName) {
+                var myChart = ECharts.init(document.getElementById(id));
+                myChart.clear();
+                option = {
+                    color: ['#3398DB'],
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+
+                            //type : 'shadow'
+
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: campus,
+                            axisTick: {
+                                alignWithLabel: true
+
+                            },
+                            splitNumber:maxNum,//分割段数，默认为5
+                            name: x,
+                            nameGap: '-5',
+                            axisLabel: interval
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: yName,
+
+                        }
+                    ],
+                    dataZoom: dataZoom_,
+                    series: [
+                        {
+                            name: yName,
+                            type: type,
+                            barWidth: '60%',
+                            data: value
+                        }
+                    ]
+                };
+                myChart.setOption(option, true);
+            }
+
+            $('.homework_all_title img').click(function(){
+                $('.back_big_all').hide();
             })
         });
     });
@@ -473,15 +593,13 @@ function SelectTeacherList() {
                     var schoolName = teacherList[i].schoolName;
                     if(homeworkType == 1){
                         var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
-                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class=" homework_operation">查看分析</span></span></li>';
+                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class="look_w homework_operation" classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
                     }else {
                         var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
-                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class=" homework_operation">查看分析</span></span></li>';
+                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class="look_w homework_operation"  classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
                     }
-
-
                     $('#homeworkAllList').append(itemHtml_);
                 }
                 $('.loading_pre').hide();
