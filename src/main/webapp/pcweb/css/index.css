@@ -405,7 +405,7 @@ html body .homework_active{
 	position:absolute;
 	width:20px;
 	height:20px;
-	right:14%;
+	/*right:14%;*/
 	/*top:13px;*/
 	padding:12px;
 	padding-right:0;
@@ -1003,6 +1003,7 @@ html body .adduser_list_active{
 .homeworke_all_center{
 	width:50%;
 	height:80%;
+	min-height:666px;
 	background:#fff;
 	position:absolute;
 	top:50%;
