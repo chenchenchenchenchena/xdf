@@ -1016,6 +1016,7 @@ html body .adduser_list_active{
 	line-height:50px;
 	font-size:20px;
 	text-align:center;
+	background:#ccf1ea;
 }
 .homework_all_title i{
 	font-style:normal;
@@ -1095,5 +1096,4 @@ html body .adduser_list_active{
 	width:90%;
 	height:40%;
 	margin:10px auto 0;
-	background:red;
 }

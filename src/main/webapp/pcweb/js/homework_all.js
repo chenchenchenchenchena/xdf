@@ -248,12 +248,13 @@ require(['jquery-1.11.0.min'], function () {
                 //点击关闭分析弹框
                 $('.homework_all_title img').click(function () {
                     $('.back_big_all').hide();
+                    $('.homework_all_content').children().remove();
+                    $('.homework_all_data ul').children().remove();
                 })
             });
         });
     });
 });
-
 /**
  * 曲线图/柱状图
  * @param id:捆绑的布局ID
