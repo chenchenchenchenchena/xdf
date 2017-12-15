@@ -307,7 +307,7 @@ function SelectTeacherList() {
         'beginTime': beginTime,
         'endTime': endTime,
         'homeworkType': homeworkType,
-        'homeworkTeacherOrder':homeworkTeacherOrder
+        'homeWorkTeacherOrder':homeworkTeacherOrder
     };
     $.ajax({
         type: "POST",
