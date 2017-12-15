@@ -14,6 +14,13 @@ var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
 var currentStageCode;
+var homeworkTeacherOrder = "";
+var img_order_publish = "images/sort_h.png";
+var publishOrder = "desc";//布置量的排序状态
+var img_order_commit = "images/sort_h.png";
+var commitOrder = "desc";//提交率的排序状态
+var img_order_reply = "images/sort_h.png";
+var replyOrder = "desc";//批复率的排序状态
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
@@ -299,7 +306,8 @@ function SelectTeacherList() {
         'pageSize': pageSize,
         'beginTime': beginTime,
         'endTime': endTime,
-        'homeworkType': homeworkType
+        'homeworkType': homeworkType,
+        'homeworkTeacherOrder':homeworkTeacherOrder
     };
     $.ajax({
         type: "POST",
@@ -318,7 +326,7 @@ function SelectTeacherList() {
                 var currentPage = e.pageNum;
                 initPage(totalCounts, currentPage);
                 $('#teacher-list li').remove();
-                var str = '<li class="homework_list_title"><span>姓名</span><span>布置量</span><span>提交率</span><span>批复率</span><span>正确率（电子）</span></li>';
+                var str = '<li class="homework_list_title"><span>姓名</span><span>布置量<img style="right: 0" src="' + img_order_publish + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + publishOrder + '"></span><span>提交率<img style="right: 0" src="' + img_order_commit + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="2" data-order="' + commitOrder + '"></span><span>批复率<img style="right: 0" src="' + img_order_reply + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="3" data-order="' + replyOrder + '"></span><span>正确率（电子）</span></li>';
                 $('#teacher-list').append(str);
                 for (var i = 0; i < teacherList.length; i++) {
                     var teacherName = teacherList[i].teacherName;
@@ -355,4 +363,45 @@ function exporTeacherList() {
     window.location.href = global.hw_expor + "?schoolName=" + currentSchool + "&schoolId=" + currentSchoolId + "&homeworkType=" + homeworkType + "&teacher=" + seacherName + "&beginTime=" + beginTime + "&endTime=" + endTime + "&paperStage=" + stage + "&paperClass=" + grade + "&paperSubject=" + subject;
 }
 
+
+/**
+ * 排序
+ */
+function get_order(this_){
+    var orderThis = $(this_).attr('data-type');
+    if (orderThis == '1') {//布置量
+        if(publishOrder == 'desc'){
+            homeworkTeacherOrder = "publishCount desc";
+            publishOrder = "asc";
+            img_order_publish = "images/sort_t.png";
+        }else {
+            lessonHoursOrder = "publishCount asc";
+            publishOrder = "desc";
+            img_order_publish = "images/sort_c.png";
+        }
+
+    } else if (orderThis == '2'){//提交率
+        if(commitOrder == 'desc'){
+            homeworkTeacherOrder = "commitRate desc";
+            commitOrder = "asc";
+            img_order_commit = "images/sort_t.png";
+        }else {
+            homeworkTeacherOrder = "commitRate asc";
+            commitOrder = "desc";
+            img_order_commit = "images/sort_c.png";
+        }
+    } else if (orderThis == '3'){//批复率
+        if(replyOrder == 'desc'){
+            homeworkTeacherOrder = "replyRate desc";
+            replyOrder = "asc";
+            img_order_reply = "images/sort_t.png";
+        }else {
+            homeworkTeacherOrder = "replyRate asc";
+            replyOrder = "desc";
+            img_order_reply = "images/sort_c.png";
+        }
+    }
+    page = 1;
+    SelectTeacherList();
+}
 

@@ -534,3 +534,20 @@ function parsePercent(str) {
         return parseInt(parseFloat(str).toFixed(2) * 100) + "%";
     }
 }
+
+/**
+ * 导出
+ */
+function exporClass() {
+    if ($('#homeworkAllList li') == undefined || $('#homeworkAllList li').length == 0) {
+        layer.msg("暂无列表");
+        return false;
+    }
+    var time = $('#date_input').val();
+    if (time != "" && time != undefined) {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
+    }
+    window.location.href = global.expor_hw_all + "?homeworkType=" + homeworkType + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
+
+}

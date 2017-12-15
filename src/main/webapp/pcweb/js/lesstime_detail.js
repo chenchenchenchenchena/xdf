@@ -244,6 +244,11 @@ function exporHourList() {
         layer.msg("暂无列表");
         return false;
     }
+    var time = $('#date_input').val();
+    if (time != undefined && time != "") {
+        beginTime = time.substring(0, 10);
+        endTime = time.substring(13, time.length);
+    }
     window.location.href = global.expor_hour + "?schoolName=" + currentCity + "&schoolId=" + currentCityId + "&masterTeacherFlag=" + masterTeacherFlag + "&teacherName=" + seacherKey + "&beginTime=" + beginTime + "&endTime=" + endTime + "&nextPage=" + page + "&pageSize=" + pageSize;
 
 }

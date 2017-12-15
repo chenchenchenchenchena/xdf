@@ -37,6 +37,7 @@ var global = {
     'hw_dictList':url_o + 'dict/getDictListByTableName.do',//字典
     'lean_List':url_o + 'backEndStudyReport/queryStudyReport.do',//学情列表
     'hw_all':url_o + 'backEndHomework/queryHomeWorkTotalClass.do',//作业全部
+    'expor_hw_all':url_o + 'backEndHomework/exportWorkTotalClass.do',//导出作业全部
 };
 
 
