@@ -21,261 +21,344 @@ var commitA = "commitRate asc";//提交率升序
 var replyD = "replyRate desc";//回复率降序
 var replyA = "replyRate asc";//回复率升序
 var homeWorkClassOrder = "";//排序类型
+var ECharts;
 
 require(['jquery-1.11.0.min'], function () {
     require(['jquery-ui.min'], function () {
         require(['layer', 'requireConfig', 'jqPaginator.min'], function () {
-            $('.loading_pre').show();
-
-            laydate.render({
-                elem: '#date_input',
-                range: true //指定元素
-            });
-
-            //返回上一页
-            $('#back_homework').click(function () {
-                history.go(-1);
-            });
-
-            //从上个页面获取筛选数据,初始化页面
-            var params = JSON.parse(sessionStorage.homeworkAllParams);
-            homeworkType = params.homeworkType;
-            currentSchoolId = params.schoolId;
-            beginTime = params.beginTime;
-            endTime = params.endTime;
-            subject = params.paperSubject;
-            grade = params.paperClass;
-            stage = params.paperStage;
-            currentSchool = params.schoolName;
-            //初始化作业类型视图
-            if (homeworkType == 0) {
-                $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
-                $('.homewor_small_selecet ul li').eq(0).show();
-                $('.homewor_small_selecet ul li').eq(1).show();
-                $('.homewor_small_selecet ul li').eq(2).show();
-            } else if (homeworkType == 1) {
-                $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
-
-                $('.homewor_small_selecet ul li').eq(0).hide();
-                $('.homewor_small_selecet ul li').eq(1).hide();
-                $('.homewor_small_selecet ul li').eq(2).hide();
-            } else if (homeworkType == 2) {
-                $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/checked.png");
-                $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
-                $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
-                $('.homewor_small_selecet ul li').eq(0).show();
-                $('.homewor_small_selecet ul li').eq(1).show();
-                $('.homewor_small_selecet ul li').eq(2).show();
-            }
-            $("#stage").html(stage);
-            $("#grade").html(grade);
-            $("#subject").html(subject);
-            //初始化时间段视图
-            if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
-                $('#date_input').val(params.beginTime + " - " + params.endTime);
-            }
-            //初始化分页控件
-            initPage(totalCounts, page);
-            //查询数据
-            SelectTeacherList();
-
-            //搜索点击事件
-            $('#seacher_hw').parent().find('img').click(function () {
+            require(['echarts.min'], function (echarts) {
                 $('.loading_pre').show();
-                SelectTeacherList();
-            });
-            //搜索回车事件
-            $('#seacher_hw').off("keyup").on('keyup', function (even) {
 
-                if (even.keyCode == 13) {
+                ECharts = echarts;//保存图标实例化对象
+
+                laydate.render({
+                    elem: '#date_input',
+                    range: true //指定元素
+                });
+
+                //返回上一页
+                $('#back_homework').click(function () {
+                    history.go(-1);
+                });
+
+                //从上个页面获取筛选数据,初始化页面
+                var params = JSON.parse(sessionStorage.homeworkAllParams);
+                homeworkType = params.homeworkType;
+                currentSchoolId = params.schoolId;
+                beginTime = params.beginTime;
+                endTime = params.endTime;
+                subject = params.paperSubject;
+                grade = params.paperClass;
+                stage = params.paperStage;
+                currentSchool = params.schoolName;
+                //初始化作业类型视图
+                if (homeworkType == 0) {
+                    $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/checked.png");
+                    $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
+                    $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
+                    $('.homewor_small_selecet ul li').eq(0).show();
+                    $('.homewor_small_selecet ul li').eq(1).show();
+                    $('.homewor_small_selecet ul li').eq(2).show();
+                } else if (homeworkType == 1) {
+                    $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/checked.png");
+                    $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
+                    $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/check.png");
+
+                    $('.homewor_small_selecet ul li').eq(0).hide();
+                    $('.homewor_small_selecet ul li').eq(1).hide();
+                    $('.homewor_small_selecet ul li').eq(2).hide();
+                } else if (homeworkType == 2) {
+                    $('.homework_radiu ul li').eq(2).find('img').attr('src', "images/checked.png");
+                    $('.homework_radiu ul li').eq(1).find('img').attr('src', "images/check.png");
+                    $('.homework_radiu ul li').eq(0).find('img').attr('src', "images/check.png");
+                    $('.homewor_small_selecet ul li').eq(0).show();
+                    $('.homewor_small_selecet ul li').eq(1).show();
+                    $('.homewor_small_selecet ul li').eq(2).show();
+                }
+                $("#stage").html(stage);
+                $("#grade").html(grade);
+                $("#subject").html(subject);
+                //初始化时间段视图
+                if (beginTime != undefined && endTime != undefined && beginTime != "" && endTime != "") {
+                    $('#date_input').val(params.beginTime + " - " + params.endTime);
+                }
+                //初始化分页控件
+                initPage(totalCounts, page);
+                //查询数据
+                SelectTeacherList();
+
+                //搜索点击事件
+                $('#seacher_hw').parent().find('img').click(function () {
+                    $('.loading_pre').show();
+                    SelectTeacherList();
+                });
+                //搜索回车事件
+                $('#seacher_hw').off("keyup").on('keyup', function (even) {
+
+                    if (even.keyCode == 13) {
+                        $('.loading_pre').show();
+                        $('.lesstime_Result').show();
+                        SelectTeacherList();
+                    }
+                });
+                //筛选条件"确认"按钮 点击事件
+                $('#hw_selectBtn').click(function () {
                     $('.loading_pre').show();
                     $('.lesstime_Result').show();
                     SelectTeacherList();
-                }
-            });
-            //筛选条件"确认"按钮 点击事件
-            $('#hw_selectBtn').click(function () {
-                $('.loading_pre').show();
-                $('.lesstime_Result').show();
-                SelectTeacherList();
-            });
-            //排序点击事件
-            $(document).on('click','.sort_h',function(){
-                var type = $(this).attr('type');
-                var order = $(this).attr('data-order');
-                if(type == "publishCount"){
-                    if(order == 'desc'){
-                        homeWorkClassOrder = publishD;
-                        $(this).attr('data-order','asc');
-                        $(this).attr('src','images/sort_t.png');
-                    }else {
-                        homeWorkClassOrder = publishA;
-                        $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_c.png');
-                    }
-                }else if(type == "reachCount"){
-                    if(order == 'desc'){
-                        homeWorkClassOrder = reachD;
-                        $(this).attr('data-order','asc');
-                        $(this).attr('src','images/sort_t.png');
-                    }else {
-                        homeWorkClassOrder = reachA;
-                        $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_c.png');
-                    }
-                }else if(type == "commitRate"){
-                    if(order == 'desc'){
-                        homeWorkClassOrder = commitD;
-                        $(this).attr('data-order','asc');
-                        $(this).attr('src','images/sort_t.png');
-                    }else {
-                        homeWorkClassOrder = commitA;
-                        $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_c.png');
-                    }
-                }else if(type == "replyRate"){
-                    if(order == 'desc'){
-                        homeWorkClassOrder = replyD;
-                        $(this).attr('data-order','asc');
-                        $(this).attr('src','images/sort_t.png');
-                    }else {
-                        homeWorkClassOrder = replyA;
-                        $(this).attr('data-order','desc');
-                        $(this).attr('src','images/sort_c.png');
-                    }
-                }
-
-                $(this).parent().siblings().find('.sort_h').attr('src','images/sort_h.png');
-                page = 1;
-                SelectTeacherList();
-            });
-            $(document).on('click','.look_w',function(){
-                $('.back_big_all').show();
-                var $homeworke_all_center = $('.homeworke_all_center');
-                $homeworke_all_center.css({
-                    'margin-top':-$homeworke_all_center.height()/2,
-                    'margin-left':-$homeworke_all_center.width()/2
                 });
-                var need_str = {
-                    'schoolId':$(this).attr('schoolId'),
-                    'classCode':$(this).attr('classCode'),
-                    'homeworkType':homeworkType
-                };
-                $.ajax({
-                    type: "POST",
-                    url: global.hw_see,
-                    dataType: 'json',
-                    data: need_str,
-                    success: function (e) {
-                        console.log(e)
-                        var classCode = e.data.classCode,
-                            className = e.data.className,
-                            teacherName = e.data.teacherName,
-                            masterTeacherName = e.data.masterTeacherName,
-                            $homework_all_content = $('.homework_all_content'),
-                            homeworkTimeData = e.data.homeworkTimeData,
-                            $homework_all_data = $('.homework_all_data ul'),
-                            x_line = [],
-                            y_line = [],
-                            $html_ = '';
-
-                        if(masterTeacherName==''){
-                            masterTeacherName = '暂无'
+                //排序点击事件
+                $(document).on('click', '.sort_h', function () {
+                    var type = $(this).attr('type');
+                    var order = $(this).attr('data-order');
+                    if (type == "publishCount") {
+                        if (order == 'desc') {
+                            homeWorkClassOrder = publishD;
+                            $(this).attr('data-order', 'asc');
+                            $(this).attr('src', 'images/sort_t.png');
+                        } else {
+                            homeWorkClassOrder = publishA;
+                            $(this).attr('data-order', 'desc');
+                            $(this).attr('src', 'images/sort_c.png');
                         }
-
-                        $homework_all_content.append('<li>班级编号：'+classCode+'</li>');
-                        $homework_all_content.append('<li>班级名称：'+className+'</li>');
-                        $homework_all_content.append('<li>班 主 任：'+teacherName+'</li>');
-                        $homework_all_content.append('<li>主    讲：'+masterTeacherName+'</li>');
-
-                        if(homeworkTimeData.length>0){
-                            if(homeworkType==0){
-                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                            }else if(homeworkType==1){
-                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
-                            }else{
-                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                            }
-                            for(i in homeworkTimeData){
-                                if(homeworkType==0){
-                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].replyRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].correctRate)*100)+'%</span></li>'
-                                    $homework_all_data.append($html_)
-                                }else if(homeworkType==1){
-                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].replyRate)*100)+'%</span></li>'
-
-                                }else{
-                                    $html_ = '<li><p>'+homeworkTimeData[i].homeworkTime+'</p><span>'+parseInt(parseFloat(homeworkTimeData[i].commitRate)*100)+'%</span><span>'+parseInt(parseFloat(homeworkTimeData[i].correctRate)*100)+'%</span></li>'
-                                }
-                            }
-                            // line_echar('homework_all_echart',)
+                    } else if (type == "reachCount") {
+                        if (order == 'desc') {
+                            homeWorkClassOrder = reachD;
+                            $(this).attr('data-order', 'asc');
+                            $(this).attr('src', 'images/sort_t.png');
+                        } else {
+                            homeWorkClassOrder = reachA;
+                            $(this).attr('data-order', 'desc');
+                            $(this).attr('src', 'images/sort_c.png');
                         }
-
+                    } else if (type == "commitRate") {
+                        if (order == 'desc') {
+                            homeWorkClassOrder = commitD;
+                            $(this).attr('data-order', 'asc');
+                            $(this).attr('src', 'images/sort_t.png');
+                        } else {
+                            homeWorkClassOrder = commitA;
+                            $(this).attr('data-order', 'desc');
+                            $(this).attr('src', 'images/sort_c.png');
+                        }
+                    } else if (type == "replyRate") {
+                        if (order == 'desc') {
+                            homeWorkClassOrder = replyD;
+                            $(this).attr('data-order', 'asc');
+                            $(this).attr('src', 'images/sort_t.png');
+                        } else {
+                            homeWorkClassOrder = replyA;
+                            $(this).attr('data-order', 'desc');
+                            $(this).attr('src', 'images/sort_c.png');
+                        }
                     }
+
+                    $(this).parent().siblings().find('.sort_h').attr('src', 'images/sort_h.png');
+                    page = 1;
+                    SelectTeacherList();
+                });
+                //查看分析
+                $(document).on('click', '.look_w', function () {
+                    $('.back_big_all').show();
+                    var $homeworke_all_center = $('.homeworke_all_center');
+                    $homeworke_all_center.css({
+                        'margin-top': -$homeworke_all_center.height() / 2,
+                        'margin-left': -$homeworke_all_center.width() / 2
+                    });
+                    var need_str = {
+                        'schoolId': $(this).attr('schoolId'),
+                        'classCode': $(this).attr('classCode'),
+                        'homeworkType': homeworkType
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: global.hw_see,
+                        dataType: 'json',
+                        data: need_str,
+                        success: function (e) {
+                            console.log(e)
+                            var classCode = e.data.classCode,
+                                className = e.data.className,
+                                teacherName = e.data.teacherName,
+                                masterTeacherName = e.data.masterTeacherName,
+                                $homework_all_content = $('.homework_all_content'),
+                                homeworkTimeData = e.data.homeworkTimeData,
+                                $homework_all_data = $('.homework_all_data ul'),
+                                x_line = [],
+                                y_line = {
+                                    'commit':[],
+                                    'reply':[],
+                                    'correct':[]
+                                },
+                                y_line_c = [],
+                                y_line_r = [],
+                                y_line_cc = [],
+                                $html_ = '';
+
+                            if (masterTeacherName == '') {
+                                masterTeacherName = '暂无'
+                            }
+
+                            $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
+                            $homework_all_content.append('<li>班级名称：' + className + '</li>');
+                            $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
+                            $homework_all_content.append('<li>主    讲：' + masterTeacherName + '</li>');
+
+                            if (homeworkTimeData.length > 0) {
+                                if (homeworkType == 0) {
+                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
+                                } else if (homeworkType == 1) {
+                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
+                                } else {
+                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
+                                }
+                                for (i in homeworkTimeData) {
+                                    var dateType = "";
+                                    if (homeworkType == 0) {
+                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+                                        $homework_all_data.append($html_)
+                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
+
+                                    } else if (homeworkType == 1) {
+                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
+
+                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                    } else {
+                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+
+                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
+                                    }
+                                    x_line.push(homeworkTimeData[i].homeworkTime);
+                                    y_line.commit = y_line_c;
+                                    y_line.reply = y_line_r;
+                                    y_line.correct = y_line_cc;
+
+                                }
+                                line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
+                            }
+
+                        }
+                    })
+                });
+
+                //点击关闭分析弹框
+                $('.homework_all_title img').click(function () {
+                    $('.back_big_all').hide();
                 })
             });
-            function line_echar(id, campus, value, type, yName, xName) {
-                var myChart = ECharts.init(document.getElementById(id));
-                myChart.clear();
-                option = {
-                    color: ['#3398DB'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-
-                            //type : 'shadow'
-
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            data: campus,
-                            axisTick: {
-                                alignWithLabel: true
-
-                            },
-                            splitNumber:maxNum,//分割段数，默认为5
-                            name: x,
-                            nameGap: '-5',
-                            axisLabel: interval
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value',
-                            name: yName,
-
-                        }
-                    ],
-                    dataZoom: dataZoom_,
-                    series: [
-                        {
-                            name: yName,
-                            type: type,
-                            barWidth: '60%',
-                            data: value
-                        }
-                    ]
-                };
-                myChart.setOption(option, true);
-            }
-
-            $('.homework_all_title img').click(function(){
-                $('.back_big_all').hide();
-            })
         });
     });
 });
+
+/**
+ * 曲线图/柱状图
+ * @param id:捆绑的布局ID
+ * @param campus:x轴
+ * @param value:对应的值
+ * @param type :line-曲线图,bar-柱状图
+ * @param yName :y轴显示的名字
+ * @param xName :x轴显示的名字
+ */
+function line_echar(id, campus, value, type, yName, xName) {
+
+    var dataSeries = [];
+    if(value.commit.length != 0){
+        var data = {
+            name: "提交率",
+            type: type,
+            barWidth: '60%',
+            data: value.commit
+        }
+        dataSeries.push(data);
+    }
+    if(value.reply.length != 0){
+        var data = {
+            name: "批复率",
+            type: type,
+            barWidth: '60%',
+            data: value.reply
+        }
+        dataSeries.push(data);
+    }
+    if(value.correct.length != 0){
+        var data = {
+            name: "正确率",
+            type: type,
+            barWidth: '60%',
+            data: value.correct
+        }
+        dataSeries.push(data);
+    }
+
+    var dataZoom_ = [{
+        type: 'slider',
+        start: 100,
+        end: 50,
+        handleSize: 8,
+    }, {
+        type: 'inside',
+        start: 94,
+        end: 100,
+    }];
+    var interval = {};
+    var maxNum;
+    interval = {};
+    if (campus.length <= 4) {
+        dataZoom_ = [];
+        maxNum = campus.length;
+
+    } else {
+        maxNum = 4;
+    }
+
+    var myChart = ECharts.init(document.getElementById(id));
+    myChart.clear();
+    var option = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+
+                //type : 'shadow'
+
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: campus,
+                axisTick: {
+                    alignWithLabel: true
+
+                },
+                splitNumber:maxNum,//分割段数，默认为5
+                name: xName,
+                nameGap: '-5',
+                axisLabel: interval
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: yName,
+
+            }
+        ],
+        dataZoom: dataZoom_,
+        series: dataSeries,
+    };
+    myChart.setOption(option, true);
+}
 
 /**
  *切换作业类型
