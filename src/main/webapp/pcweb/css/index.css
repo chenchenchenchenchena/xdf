@@ -1026,6 +1026,7 @@ html body .adduser_list_active{
 .homework_all_title img{
 	float:right;
 	padding:10px;
+	cursor: pointer;
 }
 .homework_all_content{
 	display:block;
