@@ -116,6 +116,9 @@ require(['jquery-1.11.0.min'],function(){
                     else if(url_l.indexOf('master')!=-1){
                         number_l = 4
                     }
+                    else if(url_l.indexOf('learn')!=-1){
+                        number_l = 5
+                    }
 
                     var $bure_true = $('.left_nav ul li').eq(number_l);
                     var $url_ = $('.left_nav ul .active_me').eq(number_l).attr('href');

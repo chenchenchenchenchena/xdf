@@ -211,7 +211,7 @@ function SelectData() {
                     var currentPage = data.pageNum;
                     initPage(totalCounts, currentPage);
 
-                    var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）<img style="right: 0" src="' + img_order + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + order + '"></span><span>当月课时（h）<img style="right: 0" src="' + currentMonth_img_order + '" alt="" data-type="2" onclick="get_order(this)" class="sort_h sort_homework" data-order="' + currentMonthOrder + '"></span></li>';
+                    var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）<img src="' + img_order + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + order + '"></span><span>当月课时（h）<img src="' + currentMonth_img_order + '" alt="" data-type="2" onclick="get_order(this)" class="sort_h sort_homework" data-order="' + currentMonthOrder + '"></span></li>';
                     $('.homework_list').append(str_th);
 
                     for (var i = 0; i < list.length; i++) {

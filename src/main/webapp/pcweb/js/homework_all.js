@@ -202,33 +202,38 @@ require(['jquery-1.11.0.min'], function () {
                             $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
                             $homework_all_content.append('<li>班级名称：' + className + '</li>');
                             $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
-                            $homework_all_content.append('<li>主    讲：' + masterTeacherName + '</li>');
+                            $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
 
                             if (homeworkTimeData.length > 0) {
                                 if (homeworkType == 0) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
+                                    $homework_all_content.css('height','183px')
                                 } else if (homeworkType == 1) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
+                                    $homework_all_content.css('height','132px')
+
                                 } else {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
+                                    $homework_all_content.css('height','132px')
+
                                 }
                                 for (i in homeworkTimeData) {
                                     var dateType = "";
                                     if (homeworkType == 0) {
                                         $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_)
+                                        $homework_all_data.append($html_);
                                         y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
                                         y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
                                         y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
 
                                     } else if (homeworkType == 1) {
                                         $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
-
+                                        $homework_all_data.append($html_);
                                         y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
                                         y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
                                     } else {
                                         $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-
+                                        $homework_all_data.append($html_);
                                         y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
                                         y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
                                     }
