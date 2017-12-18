@@ -159,6 +159,8 @@ require(['jquery-1.11.0.min'], function () {
                 });
                 //查看分析
                 $('#homeworkAllList').on('click', '.look_w', function () {
+                    $('.homework_all_content').children().remove();
+                    $('.homework_all_data ul').children().remove();
                     $('.back_big_all').show();
                     var $homeworke_all_center = $('.homeworke_all_center');
                     $homeworke_all_center.css({
