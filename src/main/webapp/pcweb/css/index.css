@@ -1024,6 +1024,7 @@ html body .adduser_list_active{
 	position:absolute;
 	margin-top:5px;
 	margin-left:10px;
+
 }
 .homework_all_title img{
 	float:right;
@@ -1053,6 +1054,16 @@ html body .adduser_list_active{
 	margin-top:10px;
 	border-bottom:none;
 	border-bottom:1px solid #ccc;
+}
+.homework_all_data::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	height:8px;
+	background-color: #555;
+}
+.homework_all_data::-webkit-scrollbar {
+	height:8px;
+	width: 12px;
+	background-color: #F5F5F5;
 }
 .homework_all_data ul{
 	display:block;

@@ -158,7 +158,7 @@ require(['jquery-1.11.0.min'], function () {
                     SelectTeacherList();
                 });
                 //查看分析
-                $(document).on('click', '.look_w', function () {
+                $('#homeworkAllList').on('click', '.look_w', function () {
                     $('.back_big_all').show();
                     var $homeworke_all_center = $('.homeworke_all_center');
                     $homeworke_all_center.css({
@@ -182,7 +182,7 @@ require(['jquery-1.11.0.min'], function () {
                                 teacherName = e.data.teacherName,
                                 masterTeacherName = e.data.masterTeacherName,
                                 $homework_all_content = $('.homework_all_content'),
-                                $homework_all_data = $('.homework_all_data'),
+                                $homework_all_data_ = $('.homework_all_data'),
                                 homeworkTimeData = e.data.homeworkTimeData,
                                 $homework_all_data = $('.homework_all_data ul'),
                                 x_line = [],
@@ -201,22 +201,21 @@ require(['jquery-1.11.0.min'], function () {
                             }
 
                             $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
-                            $homework_all_content.append('<li>班级名称：' + className + '</li>');
+                            $homework_all_content.append('<li style="overflow:hidden;">班级名称：' + className + '</li>');
                             $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
                             $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
 
                             if (homeworkTimeData.length > 0) {
                                 if (homeworkType == 0) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                                    $homework_all_data.css('height','183px')
+                                    $homework_all_data_.css('height','183px')
                                 } else if (homeworkType == 1) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
-                                    $homework_all_data.css('height','132px')
+                                    $homework_all_data_.css('height','132px')
 
                                 } else {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                                    $homework_all_data.css('height','132px')
-
+                                    $homework_all_data_.css('height','132px')
                                 }
                                 for (i in homeworkTimeData) {
                                     var dateType = "";
@@ -244,6 +243,8 @@ require(['jquery-1.11.0.min'], function () {
                                     y_line.correct = y_line_cc;
 
                                 }
+                                $homework_all_data.find('li').eq(0).css('background','#f5fbfa');
+                                $homework_all_data.find('li p').css('background','#f5fbfa');
                                 line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
                             }
 
