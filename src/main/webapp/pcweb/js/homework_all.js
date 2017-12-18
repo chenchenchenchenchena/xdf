@@ -182,6 +182,7 @@ require(['jquery-1.11.0.min'], function () {
                                 teacherName = e.data.teacherName,
                                 masterTeacherName = e.data.masterTeacherName,
                                 $homework_all_content = $('.homework_all_content'),
+                                $homework_all_data = $('.homework_all_data'),
                                 homeworkTimeData = e.data.homeworkTimeData,
                                 $homework_all_data = $('.homework_all_data ul'),
                                 x_line = [],
@@ -207,14 +208,14 @@ require(['jquery-1.11.0.min'], function () {
                             if (homeworkTimeData.length > 0) {
                                 if (homeworkType == 0) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                                    $homework_all_content.css('height','183px')
+                                    $homework_all_data.css('height','183px')
                                 } else if (homeworkType == 1) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
-                                    $homework_all_content.css('height','132px')
+                                    $homework_all_data.css('height','132px')
 
                                 } else {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                                    $homework_all_content.css('height','132px')
+                                    $homework_all_data.css('height','132px')
 
                                 }
                                 for (i in homeworkTimeData) {
