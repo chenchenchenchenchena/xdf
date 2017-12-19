@@ -88,7 +88,12 @@
             url:"/learn",
             templateUrl:"learn.html",
             controller:'learn'
-        });
+        }).state("learn_detail",{
+            url:"/learn_detail",
+            templateUrl:"learn_detail.html",
+            controller:'learn_detail'
+        })
+
         $urlRouterProvider.otherwise("/index")
     })
 		.controller('index',function(){
@@ -134,10 +139,15 @@
         .controller('learn', function () {
             clear();
             require(['learn'], function () {})
+        })
+        .controller('learn_detail', function () {
+            clear();
+            require(['learn_detail'], function () {})
         });
 
 		function clear(){
             requirejs.undef('index');
+            requirejs.undef('learn_detail');
             requirejs.undef('learn');
             requirejs.undef('homework');
             requirejs.undef('lesstime');

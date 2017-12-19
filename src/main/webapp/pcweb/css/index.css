@@ -1055,6 +1055,31 @@ html body .adduser_list_active{
 	border-bottom:none;
 	border-bottom:1px solid #ccc;
 }
+.learn_all_data{
+	width:100%;
+	/*min-height:183px;*/
+	border-top:1px solid #ccc;
+	margin-top:10px;
+}
+.learn_all_data li{
+	border-bottom:1px solid #ccc;
+}
+.learn_all_data span{
+	display:block;
+	float:left;
+	height:50px;
+	font-size:14px;
+	width:24.5%;
+	line-height:50px;
+	text-align:center;
+}
+.learn_Export{
+	margin-top:-31px;
+	float:right;
+	margin-right:8px;
+	cursor: pointer;
+	color:#01a889;
+}
 .homework_all_data::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	height:8px;

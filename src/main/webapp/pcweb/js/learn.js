@@ -79,6 +79,36 @@ require(['jquery-1.11.0.min'], function () {
                 $('.lesstime_Result').show();
                 SelectList();
             });
+            //导出总表
+            $('.learn_Export').click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: global.hw_dictList,
+                    dataType: 'json',
+                    data: table,
+                    success: function (e) {
+                        sessionStorage.schoolList = JSON.stringify(e);
+                        showSchoolList(e)
+                    }
+                })
+            });
+            $('#learnReportList').on('click','.learm_more',function(){
+                // sessionStorage.schoolId = $(this).attr('data-schoolid');
+                // sessionStorage.classCode = $(this).attr('classCode');
+                // sessionStorage.pageNum = $(this).attr('pagenum');
+                // sessionStorage.pageSize = $(this).attr('pagesize');
+                // sessionStorage.stuNumsOrder = $(this).attr('stuNumsOrder');
+                sessionStorage.need_learn = JSON.stringify({
+                    'schoolId': $(this).attr('data-schoolid'),
+                    'classCode':$(this).attr('classCode'),
+                    'pageNum':$(this).attr('pagenum'),
+                    'pageSize': $(this).attr('pagesize'),
+                    'stuNumsOrder': $(this).attr('stuNumsOrder'),
+                });
+                location.href  = '#/learn_detail'
+            })
+
+
 
         });
     });
@@ -227,7 +257,7 @@ function SelectList() {
                         if (masterTeacherName == undefined) {
                             masterTeacherName = "暂无";
                         }
-                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" class="homework_operation">EXCEL</span></span></li>';
+                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
                         $('#learnReportList').append(itemHtml_);
                     }
                     $('.loading_pre').hide();
