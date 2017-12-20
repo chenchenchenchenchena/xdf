@@ -66,6 +66,7 @@ require(['jquery-1.11.0.min'], function () {
                 data:need_,
                 success:function(e){
                     if(e.timeData.length>0){
+                        $(".learn_all_echart div").remove();
                         $learn_self_data.find('li').remove();
                         var time = e.timeData,
                             title_=e.studentResultsCase,
@@ -135,14 +136,6 @@ require(['jquery-1.11.0.min'], function () {
                                 }
                         }
                     }
-
-
-
-                    $(".learn_all_echart div").remove();
-                    for(var i = 0;i< e.studentResultsCase.length;i++){
-
-                    }
-
 
                 }
             });
