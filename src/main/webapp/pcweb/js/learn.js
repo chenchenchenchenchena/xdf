@@ -7,8 +7,8 @@ var seacherName = "";
 var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
-var stuNumsOrder = "";
-var img_order = "images/sort_h.png";
+var stuNumsOrder = "stuNums desc";
+var img_order = "images/sort_t.png";
 var order = "desc";
 
 require(['jquery-1.11.0.min'], function () {
@@ -100,10 +100,7 @@ require(['jquery-1.11.0.min'], function () {
             $('#learnReportList').on('click','.learm_more',function(){
                 sessionStorage.need_learn = JSON.stringify({
                     'schoolId': $(this).attr('data-schoolid'),
-                    'classCode':$(this).attr('classCode'),
-                    'pageNum':$(this).attr('pagenum'),
-                    'pageSize': $(this).attr('pagesize'),
-                    'stuNumsOrder': $(this).attr('stuNumsOrder'),
+                    'classCode':$(this).attr('classCode')
                 });
                 location.href  = '#/learn_detail'
             })
@@ -280,13 +277,13 @@ function SelectList() {
  */
 function  get_order(){
     if (order == 'desc') {
-        stuNumsOrder = "stuNums desc";
-        order = "asc";
-        img_order = "images/sort_t.png";
-    } else {
         stuNumsOrder = "stuNums asc";
-        order = "desc";
+        order = "asc";
         img_order = "images/sort_c.png";
+    } else {
+        stuNumsOrder = "stuNums desc";
+        order = "desc";
+        img_order = "images/sort_t.png";
     }
     page = 1;
     SelectList();

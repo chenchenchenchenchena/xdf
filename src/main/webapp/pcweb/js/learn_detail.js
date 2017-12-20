@@ -3,6 +3,9 @@
 var page = 1;
 var pageSize = 15;
 var totalCounts = 0;
+var studentNoOrder = "studentNo desc";
+var img_order = "";
+var order = "";
 
 require(['jquery-1.11.0.min'], function () {
     require(['layer', 'jqPaginator.min'],function() {
@@ -59,7 +62,8 @@ function SelectLearnData(){
         'pageNum':page,
         'pageSize':pageSize,
         'schoolId':learnData.schoolId,
-        'classCode':learnData.classCode
+        'classCode':learnData.classCode,
+        'studentNoOrder':studentNoOrder
     }
     $.ajax({
         url:global.learn_detail,
@@ -120,4 +124,24 @@ function SelectLearnData(){
 
         }
     });
+}
+
+/**
+ * 排序
+ */
+function  get_order(this_){
+    order = $(this_).attr('data-order');
+    if (order == 'desc') {
+        studentNoOrder = "studentNo asc";
+        order = "asc";
+        img_order = "images/sort_c.png";
+    } else {
+        studentNoOrder = "studentNo desc";
+        order = "desc";
+        img_order = "images/sort_t.png";
+    }
+    $(this_).attr('data-order', order);
+    $(this_).attr('src', img_order);
+    page = 1;
+    SelectLearnData();
 }
