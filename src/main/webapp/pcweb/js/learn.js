@@ -81,23 +81,23 @@ require(['jquery-1.11.0.min'], function () {
             });
             //导出总表
             $('.learn_Export').click(function(){
-                $.ajax({
-                    type: "POST",
-                    url: global.hw_dictList,
-                    dataType: 'json',
-                    data: table,
-                    success: function (e) {
-                        sessionStorage.schoolList = JSON.stringify(e);
-                        showSchoolList(e)
-                    }
-                })
+                layer.msg('导出列表较慢，请您耐心等待');
+                if ($('#learnReportList li') == undefined || $('#learnReportList li').length == 0) {
+                    layer.msg("暂无列表");
+                    return false;
+                }
+                var time = $('#date_input').val();
+                if (time != "" && time != undefined) {
+                    beginTime = time.substring(0, 10);
+                    endTime = time.substring(13, time.length);
+                }
+                seacherName = $('#seacher_hw').val();
+                if (seacherName == undefined) {
+                    seacherName = "";
+                }
+                window.location.href = global.expor_learn_all + "?className=" + seacherName + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
             });
             $('#learnReportList').on('click','.learm_more',function(){
-                // sessionStorage.schoolId = $(this).attr('data-schoolid');
-                // sessionStorage.classCode = $(this).attr('classCode');
-                // sessionStorage.pageNum = $(this).attr('pagenum');
-                // sessionStorage.pageSize = $(this).attr('pagesize');
-                // sessionStorage.stuNumsOrder = $(this).attr('stuNumsOrder');
                 sessionStorage.need_learn = JSON.stringify({
                     'schoolId': $(this).attr('data-schoolid'),
                     'classCode':$(this).attr('classCode'),

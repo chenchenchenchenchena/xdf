@@ -757,6 +757,7 @@ function parsePercent(str) {
  * 导出
  */
 function exporClass() {
+    layer.msg('导出列表较慢，请您耐心等待');
     if ($('#homeworkAllList li') == undefined || $('#homeworkAllList li').length == 0) {
         layer.msg("暂无列表");
         return false;

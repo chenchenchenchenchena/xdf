@@ -40,6 +40,7 @@ var global = {
     'hw_see':url_o+'backEndHomework/homeWorkTotalClassByClassCode.do',//查看分析
     'expor_hw_all':url_o + 'backEndHomework/exportWorkTotalClass.do',//导出作业全部
     'learn_detail':url_o+'backEndStudyReport/queryStudyReportClassDetail.do',//学情报告列表查询
+    'expor_learn_all':url_o+'backEndStudyReport/exportExcelStudyReport.do',//学情报告列表查询
 };
 
 

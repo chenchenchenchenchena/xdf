@@ -240,6 +240,7 @@ function SelectData() {
 
 //导出
 function exporHourList() {
+    layer.msg('导出列表较慢，请您耐心等待');
     if ($('.homework_list li') == undefined || $('.homework_list li').length == 0) {
         layer.msg("暂无列表");
         return false;
