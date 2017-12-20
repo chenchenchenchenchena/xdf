@@ -197,25 +197,18 @@ function line_echar(id, campus, value, type, yName, xName, legendName) {
     var myChart = ECharts.init(document.getElementById(id));
     myChart.clear();
     var option = {
-        //color: ['#3398DB'],
+        //color: ['#eb7d3c','#5e9cd3'],
+        color: ['#39c7c8','#b6a3dc'],
+        //color: ['#be3636','#3398db'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
-
-                //type : 'shadow'
-
             }
         },
         legend: {
             data:legend
         },
         calculable : true,
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
         xAxis: [
             {
                 type: 'category',
