@@ -210,14 +210,11 @@ require(['jquery-1.11.0.min'], function () {
                             if (homeworkTimeData.length > 0) {
                                 if (homeworkType == 0) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                                    $homework_all_data_.css('height','183px')
                                 } else if (homeworkType == 1) {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
-                                    $homework_all_data_.css('height','132px')
 
                                 } else {
                                     $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                                    $homework_all_data_.css('height','132px')
                                 }
                                 for (i in homeworkTimeData) {
                                     var dateType = "";
@@ -245,8 +242,9 @@ require(['jquery-1.11.0.min'], function () {
                                     y_line.correct = y_line_cc;
 
                                 }
-                                $homework_all_data.find('li').eq(0).css('background','#f5fbfa');
+                                $homework_all_data.find('li span:nth-child(odd)').css('background','#efefef');
                                 $homework_all_data.find('li p').css('background','#f5fbfa');
+                                $homework_all_data.find('li').eq(0).find('span').css('background','#f5fbfa');;
                                 line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
                             }
 

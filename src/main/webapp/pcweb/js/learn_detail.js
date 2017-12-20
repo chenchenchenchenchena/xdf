@@ -114,27 +114,25 @@ require(['jquery-1.11.0.min'], function () {
 
                         }
                         $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
-
                             for(i in time){
-                                $learn_self_data.append('<li><span>' + time[i] + '</span></li>');
-                                console.log(i+'qqqqqqqq')
+                                $learn_self_data.append('<li><span style="background:#ccf1ea">' + time[i] + '</span></li>');
                                 for(h in title_) {
                                     var boolean = false;
                                     for (o in title_[h].data) {
                                         var Data = title_[h].data[o];
                                         var time_one = Data.lessonTime.split(' ')[0];
                                         if (time[i] == time_one) {
-                                            console.log($learn_self_data.find('li'))
-                                            console.log($learn_self_data.find('li').eq(i+1))
-                                            $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>'+Data.realGrade+'</span><span>'+Data.avgGrade+'</span>')
+                                            $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>'+Data.realGrade+'</span><span style="background:#efefef;">'+Data.avgGrade+'</span>')
                                             boolean = true;
                                         }
                                     }
                                     if(boolean==false){
-                                        $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span></span>')
+                                        $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span style="background:#efefef;"></span>')
                                     }
                                 }
                         }
+                        $learn_self_data.find('li').eq(0).css('background','#ccf1ea')
+
                     }
 
                 }
