@@ -182,6 +182,10 @@ function line_echar(id, campus, value, type, yName, xName, legendName) {
         start: 100,
         end: 20,
         handleSize: 8,
+    }, {
+        type: 'inside',
+        start: 20,
+        end: 100,
     }];
     var interval = {};
     var maxNum;
