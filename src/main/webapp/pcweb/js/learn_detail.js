@@ -64,7 +64,38 @@ require(['jquery-1.11.0.min'], function () {
                 dataType: 'json',
                 data:need_,
                 success:function(e){
-                    $learn_self_data.append('')
+                    if(e.timeData.length>0){
+                        $learn_self_data.find('li').remove();
+                        var time = e.timeData,
+                            title_=e.studentResultsCase,
+                            html_ = '';
+                        for(h in title_){
+                            switch(title_[h].type){
+                                case '1':
+                                    html_+= '<span>入门测</span><span>平均分</span>';
+                                    break;
+                                case '2':
+                                    html_+= '<span>出门测</span><span>平均分</span>';
+                                    break;
+                                case '3':
+                                    html_+= '<span>期中测</span><span>平均分</span>';
+                                    break;
+                                case '4':
+                                    html_+= '<span>期末测</span><span>平均分</span>';
+                                    break;
+                                case '5':
+                                    html_+= '<span>入学测</span><span>平均分</span>';
+                                    break;
+                            };
+                            for(o in title_[h]){
+
+                            }
+                        }
+                        $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
+                        for(i in time){
+                            $learn_self_data.append('<li><span>'+time[i]+'</span></li>')
+                        }
+                    }
 
                 }
             });
