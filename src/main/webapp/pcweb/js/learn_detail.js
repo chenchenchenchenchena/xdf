@@ -9,7 +9,8 @@ var order = "";
 
 require(['jquery-1.11.0.min'], function () {
     require(['layer', 'jqPaginator.min'],function() {
-
+        require(['echarts.min'], function (echarts) {
+            ECharts = echarts;//保存图标实例化对象
         //初始化分页控件
         initPage(totalCounts, page);
 
@@ -69,24 +70,46 @@ require(['jquery-1.11.0.min'], function () {
                         var time = e.timeData,
                             title_=e.studentResultsCase,
                             html_ = '';
-                        for(t in title_){
-                            switch(title_[t].type){
+                        for(i in title_){
+                            var charType = "";
+                            switch(title_[i].type){
                                 case '1':
                                     html_+= '<span>入门测</span><span>平均分</span>';
+                                    charType = "入门测";
                                     break;
                                 case '2':
                                     html_+= '<span>出门测</span><span>平均分</span>';
+                                    charType = "出门测";
                                     break;
                                 case '3':
                                     html_+= '<span>期中测</span><span>平均分</span>';
+                                    charType = "期中测";
                                     break;
                                 case '4':
                                     html_+= '<span>期末测</span><span>平均分</span>';
+                                    charType = "期末测";
                                     break;
                                 case '5':
                                     html_+= '<span>入学测</span><span>平均分</span>';
+                                    charType = "入学测";
                                     break;
                             };
+
+                            var charHtml = "<div id='chart_"+i+"' class='learn_all_echart_left'></div>";
+                            $(".learn_all_echart").append(charHtml);
+                            var char_x = [];
+                            var char_y = {
+                                'avg':[],
+                                'real':[]
+                            };
+                            for(var j = 0;j<e.studentResultsCase[i].data.length;j++){
+                                var item = e.studentResultsCase[i].data[j];
+                                var time_char = item.lessonTime.split(' ')[0];
+                                char_x.push(time_char);
+                                char_y.avg.push(item.avgGrade);
+                                char_y.real.push(item.realGrade);
+                            }
+                            line_echar('chart_'+i,char_x,char_y,'bar', "分数", "日期",charType);
 
                         }
                         $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
@@ -113,14 +136,126 @@ require(['jquery-1.11.0.min'], function () {
                         }
                     }
 
+
+
+                    $(".learn_all_echart div").remove();
+                    for(var i = 0;i< e.studentResultsCase.length;i++){
+
+                    }
+
+
                 }
             });
 
 
 
         });
+        });
     })
 });
+
+/**
+ * 曲线图/柱状图
+ * @param id:捆绑的布局ID
+ * @param campus:x轴
+ * @param value:对应的值
+ * @param type :line-曲线图,bar-柱状图
+ * @param yName :y轴显示的名字
+ * @param xName :x轴显示的名字
+ * @param legendName :x轴显示的名字
+ */
+function line_echar(id, campus, value, type, yName, xName, legendName) {
+
+    var dataSeries = [];
+    var legend = [];
+    if(value.avg.length != 0){
+        var data = {
+            name: "平均分",
+            type: type,
+            data: value.avg
+        }
+        dataSeries.push(data);
+        legend.push("平均分");
+    }
+    if(value.real.length != 0){
+        var data = {
+            name: legendName,
+            type: type,
+            data: value.real
+        }
+        dataSeries.push(data);
+        legend.push(legendName);
+    }
+
+    var dataZoom_ = [{
+        type: 'slider',
+        start: 100,
+        end: 50,
+        handleSize: 8,
+    }, {
+        type: 'inside',
+        start: 94,
+        end: 100,
+    }];
+    var interval = {};
+    var maxNum;
+    interval = {};
+    if (campus.length <= 4) {
+        dataZoom_ = [];
+        maxNum = campus.length;
+
+    } else {
+        maxNum = 4;
+    }
+
+    var myChart = ECharts.init(document.getElementById(id));
+    myChart.clear();
+    var option = {
+        //color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+
+                //type : 'shadow'
+
+            }
+        },
+        legend: {
+            data:legend
+        },
+        calculable : true,
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: campus,
+                axisTick: {
+                    alignWithLabel: true
+
+                },
+                splitNumber:maxNum,//分割段数，默认为5
+                name: xName,
+                nameGap: '-5',
+                axisLabel: interval
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: yName,
+
+            }
+        ],
+        dataZoom: dataZoom_,
+        series: dataSeries,
+    };
+    myChart.setOption(option, true);
+}
 
 /**
  * 分页
