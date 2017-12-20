@@ -7,8 +7,8 @@ var seacherName = "";
 var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
-var stuNumsOrder = "";
-var img_order = "images/sort_h.png";
+var stuNumsOrder = "stuNums desc";
+var img_order = "images/sort_t.png";
 var order = "desc";
 
 require(['jquery-1.11.0.min'], function () {
@@ -47,8 +47,8 @@ require(['jquery-1.11.0.min'], function () {
             //默认为半年，与时间段为正向半联动。
             var today = new Date().Format("yyyy-MM-dd");
             var timeArray = getlastmonth();
-            var halfYear = timeArray[3];
-            $('#date_input').val(halfYear + " - " + today);
+            var lastMonth = timeArray[1];
+            $('#date_input').val(lastMonth + " - " + today);
 
             //默认首次查询校区为全部
             currentSchoolId = localStorage.schoolList;
@@ -95,15 +95,12 @@ require(['jquery-1.11.0.min'], function () {
                 if (seacherName == undefined) {
                     seacherName = "";
                 }
-                window.location.href = global.expor_learn_all + "?className=" + seacherName + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
+                window.location.href = global.expor_learn_all + "?className=" + seacherName + "&schoolId=" + currentSchoolId + "&beginDate=" + beginTime + "&endDate=" + endTime;
             });
             $('#learnReportList').on('click','.learm_more',function(){
                 sessionStorage.need_learn = JSON.stringify({
                     'schoolId': $(this).attr('data-schoolid'),
-                    'classCode':$(this).attr('classCode'),
-                    'pageNum':$(this).attr('pagenum'),
-                    'pageSize': $(this).attr('pagesize'),
-                    'stuNumsOrder': $(this).attr('stuNumsOrder'),
+                    'classCode':$(this).attr('classCode')
                 });
                 location.href  = '#/learn_detail'
             })
@@ -280,13 +277,13 @@ function SelectList() {
  */
 function  get_order(){
     if (order == 'desc') {
-        stuNumsOrder = "stuNums desc";
-        order = "asc";
-        img_order = "images/sort_t.png";
-    } else {
         stuNumsOrder = "stuNums asc";
-        order = "desc";
+        order = "asc";
         img_order = "images/sort_c.png";
+    } else {
+        stuNumsOrder = "stuNums desc";
+        order = "desc";
+        img_order = "images/sort_t.png";
     }
     page = 1;
     SelectList();
