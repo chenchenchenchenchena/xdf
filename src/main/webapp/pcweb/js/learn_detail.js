@@ -13,7 +13,10 @@ require(['jquery-1.11.0.min'], function () {
         //获取校区列表
         SelectLearnData();
 
-
+        //返回上一页
+        $('#back_learn').click(function(){
+            history.go(-1);
+        });
 
     })
 });
@@ -56,8 +59,7 @@ function SelectLearnData(){
         'pageNum':page,
         'pageSize':pageSize,
         'schoolId':learnData.schoolId,
-        'classCode':learnData.classCode,
-        'stuNumsOrder':learnData.stuNumsOrder
+        'classCode':learnData.classCode
     }
     $.ajax({
         url:global.learn_detail,
@@ -67,49 +69,53 @@ function SelectLearnData(){
         contentType: 'application/json;charset=UTF-8',
         data:JSON.stringify(params),
         success:function(e){
+
             $('.loading_pre').hide();
+            if(e.result){
+                var masterTeacherName = e.masterTeacherName,
+                    $learm_detail_data = $('.learm_detail_data'),
+                    $learn_all_data_ul  = $('.learn_all_data ul'),
+                    list = e.Data.studentData.list;
+                if(e.beginDat!=undefined&&e.endDate!=undefined){
+                    var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
+                }else{
+                    var tiem_ = '暂无';
+                }
+                if(masterTeacherName==undefined){
+                    masterTeacherName = '暂无'
+                }
+                $learm_detail_data.find('li').remove();
+                $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
+                $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
+                $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
+                $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
+                $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
+                $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
 
-            var masterTeacherName = e.masterTeacherName,
-                $learm_detail_data = $('.learm_detail_data'),
-                $learn_all_data_ul  = $('.learn_all_data ul'),
-                list = e.Data.studentData.list;
-            if(e.beginDat!=undefined&&e.endDate!=undefined){
-                var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
-            }else{
-                var tiem_ = '暂无';
-            }
-            if(masterTeacherName==undefined){
-                masterTeacherName = '暂无'
-            }
-            $learm_detail_data.find('li').remove();
-            $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
-            $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
-            $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
-            $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
-            $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
-            $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
+                if(list != undefined && list.length > 0){
 
-            if(list != undefined && list.length > 0){
+                    var strTitle = $('.title_learn');
+                    $('.learn_all_data ul li').remove();
+                    $('.learn_all_data ul').append(strTitle);
 
-                var strTitle = $('.title_learn');
-                $('.learn_all_data ul li').remove();
-                $('.learn_all_data ul').append(strTitle);
+                    totalCounts = e.Data.studentData.total;//总条数
+                    $('#learn_result').show();
+                    $('#learn_result').html("共" + e.Data.studentData.total + "条数据");
+                    var currentPage = e.Data.studentData.pageNum;
+                    initPage(totalCounts, currentPage);
 
-                totalCounts = e.Data.studentData.total;//总条数
-                $('#learn_result').show();
-                $('#learn_result').html("共" + e.Data.studentData.total + "条数据");
-                var currentPage = e.Data.studentData.pageNum;
-                initPage(totalCounts, currentPage);
-
-                for(i in list){
-                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more">查看</span><span class="learn_exit">导出</span></li>')
+                    for(i in list){
+                        $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more">查看</span><span class="learn_exit">导出</span></li>')
+                    }
+                }else {
+                    layer.msg("暂无数据");
+                    $('.learn_all_data ul li').remove();
+                    $('#learn_result').hide();
+                    initPage(0, 1);
+                    $('.loading_pre').hide();
                 }
             }else {
-                layer.msg("暂无数据");
-                $('.learn_all_data ul li').remove();
-                $('#learn_result').hide();
-                initPage(0, 1);
-                $('.loading_pre').hide();
+                layer.msg(e.msg);
             }
 
         }
