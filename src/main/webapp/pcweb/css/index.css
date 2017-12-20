@@ -1089,6 +1089,15 @@ html body .adduser_list_active{
 	height:8px;
 	background-color: #555;
 }
+.learn_self_data{
+	height:254px;
+}
+html body .learn_self_data ul{
+	height:254px;
+}
+html body .learn_self_data ul li {
+	width:15%;
+}
 .homework_all_data::-webkit-scrollbar {
 	height:8px;
 	width: 12px;
@@ -1099,7 +1108,6 @@ html body .adduser_list_active{
 	height:183px;
 	white-space: nowrap;
 	font-size:0px;
-
 }
 .homework_all_data li{
 	display:inline-block;
