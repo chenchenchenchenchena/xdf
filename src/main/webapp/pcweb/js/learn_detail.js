@@ -69,8 +69,8 @@ require(['jquery-1.11.0.min'], function () {
                         var time = e.timeData,
                             title_=e.studentResultsCase,
                             html_ = '';
-                        for(h in title_){
-                            switch(title_[h].type){
+                        for(t in title_){
+                            switch(title_[t].type){
                                 case '1':
                                     html_+= '<span>入门测</span><span>平均分</span>';
                                     break;
@@ -87,13 +87,29 @@ require(['jquery-1.11.0.min'], function () {
                                     html_+= '<span>入学测</span><span>平均分</span>';
                                     break;
                             };
-                            for(o in title_[h]){
 
-                            }
                         }
                         $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
-                        for(i in time){
-                            $learn_self_data.append('<li><span>'+time[i]+'</span></li>')
+
+                            for(i in time){
+                                $learn_self_data.append('<li><span>' + time[i] + '</span></li>');
+                                console.log(i+'qqqqqqqq')
+                                for(h in title_) {
+                                    var boolean = false;
+                                    for (o in title_[h].data) {
+                                        var Data = title_[h].data[o];
+                                        var time_one = Data.lessonTime.split(' ')[0];
+                                        if (time[i] == time_one) {
+                                            console.log($learn_self_data.find('li'))
+                                            console.log($learn_self_data.find('li').eq(i+1))
+                                            $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>'+Data.realGrade+'</span><span>'+Data.avgGrade+'</span>')
+                                            boolean = true;
+                                        }
+                                    }
+                                    if(boolean==false){
+                                        $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span></span>')
+                                    }
+                                }
                         }
                     }
 
