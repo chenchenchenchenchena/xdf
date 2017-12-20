@@ -47,8 +47,8 @@ require(['jquery-1.11.0.min'], function () {
             //默认为半年，与时间段为正向半联动。
             var today = new Date().Format("yyyy-MM-dd");
             var timeArray = getlastmonth();
-            var halfYear = timeArray[3];
-            $('#date_input').val(halfYear + " - " + today);
+            var lastMonth = timeArray[1];
+            $('#date_input').val(lastMonth + " - " + today);
 
             //默认首次查询校区为全部
             currentSchoolId = localStorage.schoolList;
@@ -95,7 +95,7 @@ require(['jquery-1.11.0.min'], function () {
                 if (seacherName == undefined) {
                     seacherName = "";
                 }
-                window.location.href = global.expor_learn_all + "?className=" + seacherName + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
+                window.location.href = global.expor_learn_all + "?className=" + seacherName + "&schoolId=" + currentSchoolId + "&beginDate=" + beginTime + "&endDate=" + endTime;
             });
             $('#learnReportList').on('click','.learm_more',function(){
                 sessionStorage.need_learn = JSON.stringify({
