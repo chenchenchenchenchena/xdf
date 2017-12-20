@@ -27,12 +27,12 @@ require(['jquery-1.11.0.min'], function () {
                 }
                 $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
                 $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
-                $learm_detail_data.append('<li>班 主 任:'+e.teacherName+'</li>');
-                $learm_detail_data.append('<li>主    讲:'+masterTeacherName+'</li>');
-                $learm_detail_data.append('<li>课程时间:'+tiem_+'</li>');
-                $learm_detail_data.append('<li>课    次：'+e.lessonNo+'</li>');
+                $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
+                $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
+                $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
+                $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
                 for(i in list){
-                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span>查看</span><span>导出</span></li>')
+                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more">查看</span><span class="learn_exit">导出</span></li>')
 
 
                 }

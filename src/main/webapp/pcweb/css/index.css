@@ -1080,6 +1080,10 @@ html body .adduser_list_active{
 	cursor: pointer;
 	color:#01a889;
 }
+.learn_more,.learn_exit{
+	color:#00ba97;
+	cursor: pointer;
+}
 .homework_all_data::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	height:8px;
