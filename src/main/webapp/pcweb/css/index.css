@@ -1092,7 +1092,7 @@ html body .adduser_list_active{
 	line-height:45px;
 	font-size:15px;
 }
-.homework_all_data::-webkit-scrollbar-thumb{
+.homework_all_data::-webkit-scrollbar-thumb,.learn_center_all::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	height:8px;
 	background-color: #555;
@@ -1131,9 +1131,9 @@ html body .learn_self_data ul{
 html body .learn_self_data ul li {
 	width:12%;
 }
-.homework_all_data::-webkit-scrollbar {
+.homework_all_data::-webkit-scrollbar,.learn_center_all::-webkit-scrollbar{
 	height:8px;
-	width: 12px;
+	width: 8px;
 	background-color: #F5F5F5;
 }
 .homework_all_data ul{
