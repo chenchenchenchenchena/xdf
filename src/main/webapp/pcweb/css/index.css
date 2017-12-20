@@ -1133,7 +1133,7 @@ html body .learn_self_data ul li {
 }
 .homework_all_data::-webkit-scrollbar,.learn_center_all::-webkit-scrollbar{
 	height:8px;
-	width: 12px;
+	width: 8px;
 	background-color: #F5F5F5;
 }
 .homework_all_data ul{
