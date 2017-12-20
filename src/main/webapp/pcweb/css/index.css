@@ -1084,16 +1084,49 @@ html body .adduser_list_active{
 	color:#00ba97;
 	cursor: pointer;
 }
+.learn_self_data ul li span{
+	height:40px;
+	line-height:40px;
+}
+.learn_self li{
+	height:45px;
+	line-height:45px;
+	font-size:15px;
+}
 .homework_all_data::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	height:8px;
 	background-color: #555;
 }
+.learn_center_all{
+	overflow-y:auto;
+}
+.learn_all_echart{
+	width:95%;
+	margin:0 auto ;
+	height:39%;
+}
 .learn_self_data{
-	height:254px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.learm_detail_data{
+	width:100%;
+}
+.learn_all_echart_left,.learn_all_echart_right{
+	width:48%;
+	height:100%;
+	float:left;
+	background:pink;
+}
+.learn_all_echart_right{
+	float:right;
+}
+.learn_self_data{
+	height:auto;
 }
 html body .learn_self_data ul{
-	height:254px;
+	height:auto;
 }
 html body .learn_self_data ul li {
 	width:15%;
@@ -1115,7 +1148,6 @@ html body .learn_self_data ul li {
 	height:100%;
 	border:1px solid #ccc;
 	border-bottom:none;
-	border-right:none;
 	margin-left:-1px;
 	margin-top:-1px;
 	overflow:hidden;
@@ -1126,6 +1158,7 @@ html body .learn_self_data ul li {
 	text-align:center;
 	line-height:30px;
 	border:1px solid #ccc;
+	border-right:none;
 	margin-left:-1px;
 	margin-top:-1px;
 }
@@ -1135,11 +1168,12 @@ html body .learn_self_data ul li {
 	font-size:14px;
 	width:99%;
 	line-height:50px;
-	border:1px solid #ccc;
 	margin-left:-1px;
 	margin-top:-1px;
 	margin-bottom: -1px;
 	text-align:center;
+	border:1px solid #ccc;
+	border-right:none;
 }
 .homework_all_echart{
 	width:90%;

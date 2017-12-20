@@ -21,7 +21,12 @@ require(['jquery-1.11.0.min'], function () {
             history.go(-1);
         });
         $('.learn_all_data').on('click','.learn_exit',function(){
-            window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
+            layer.msg('导出列表较慢，请您耐心等待');
+            // window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
+        });
+        $('.lear_all_excel').on('click',function(){
+            layer.msg('导出列表较慢，请您耐心等待');
+            // window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
         });
 
         $('.learn_self_title').on('click','img',function(){
