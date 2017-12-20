@@ -181,14 +181,9 @@ function line_echar(id, campus, value, type, yName, xName, legendName) {
     }
 
     var dataZoom_ = [{
-        type: 'slider',
         start: 100,
-        end: 50,
+        end: 20,
         handleSize: 8,
-    }, {
-        type: 'inside',
-        start: 94,
-        end: 100,
     }];
     var interval = {};
     var maxNum;
