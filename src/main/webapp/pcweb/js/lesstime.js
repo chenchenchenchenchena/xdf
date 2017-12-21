@@ -58,7 +58,7 @@ require(['jquery-1.11.0.min'], function () {
 
             ECharts = echarts;//保存图标实例化对象
 
-            $(document).on('click','.sort_lesstime',function(){
+            $('.lesstime_list ').on('click','.sort_lesstime',function(){
                 var type_ = $(this).attr('type');
                 $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
                 if($(this).attr('src').indexOf('sort_h')!=-1){
