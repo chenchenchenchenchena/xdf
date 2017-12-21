@@ -279,13 +279,13 @@ function SelectLearnData(){
     ajax_S(global.learn_detail,JSON.stringify(params),function(e){
         $('.loading_pre').hide();
         if(e.result){
-            var masterTeacherName = e.masterTeacherName,
+            var masterTeacherName = e.masterTeachereName,
                 $learm_detail_data = $('.learm_detail_data'),
                 $learn_all_data_ul  = $('.learn_all_data ul'),
                 $learn_self = $('.learn_self'),
                 list = e.Data.studentData.list;
-            if(e.beginDat!=undefined&&e.endDate!=undefined){
-                var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
+            if(e.beginDate!=undefined&&e.endDate!=undefined){
+                var tiem_ = e.beginDate.replace(/-/g, '/')+'   ~    '+e.endDate.replace(/-/g, '/');
             }else{
                 var tiem_ = '暂无';
             }
