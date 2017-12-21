@@ -260,6 +260,12 @@ function SelectList() {
                 $('.lesstime_Result').hide();
                 initPage(0, 1);
             }
+        }else {
+            layer.msg("暂无数据");
+            $('.loading_pre').hide();
+            $('#learnReportList li').remove();
+            $('.lesstime_Result').hide();
+            initPage(0, 1);
         }
     },function(error){
         layer.msg("请刷新重试");
