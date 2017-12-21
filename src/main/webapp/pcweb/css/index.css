@@ -571,6 +571,15 @@ html body .homework_operation{
 .lesstime_detail .homewor_big_selecet{
 	margin-right:20px;
 }
+#date_input{
+    width:100%;
+    max-width:100%!important;
+    background-color:#fff;
+    background-image:url(../images/img_5.png);
+    background-repeat:no-repeat;
+    background-position:90% center ;
+
+}
 .lesstime_detail_list span{
 	width:33%;
 }

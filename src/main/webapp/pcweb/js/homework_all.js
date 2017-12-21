@@ -203,7 +203,7 @@ require(['jquery-1.11.0.min'], function () {
                             }
 
                             $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
-                            $homework_all_content.append('<li style="overflow:hidden;">班级名称：' + className + '</li>');
+                            $homework_all_content.append('<li style="overflow:hidden;" title="'+className+'">班级名称：' + className + '</li>');
                             $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
                             $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
 
