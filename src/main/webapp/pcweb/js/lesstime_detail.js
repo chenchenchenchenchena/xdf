@@ -193,49 +193,44 @@ function SelectData() {
         'teacherName': seacherKey,
         'lessonHoursOrder':lessonHoursOrder
     };
-    $.ajax({
-        type: "POST",
-        url: global.lesstime_detail,
-        dataType: 'json',
-        data: JSON.stringify(params),
-        contentType: 'application/json;charset=UTF-8',
-        success: function (e) {
-            var data = e.Data;
-            if (data != undefined) {
-                var list = data.list;
-                if (list != undefined && list.length > 0) {
-                    $('.homework_list li').remove();
-                    totalCounts = data.total;//总条数
-                    $('.lesstime_Result').show();
-                    $('.lesstime_Result').html("共" + data.total + "条数据");
-                    var currentPage = data.pageNum;
-                    initPage(totalCounts, currentPage);
-
-                    var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）<img src="' + img_order + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + order + '"></span><span>当月课时（h）<img src="' + currentMonth_img_order + '" alt="" data-type="2" onclick="get_order(this)" class="sort_h sort_homework" data-order="' + currentMonthOrder + '"></span></li>';
-                    $('.homework_list').append(str_th);
-
-                    for (var i = 0; i < list.length; i++) {
-                        var teacherName = list[i].teacherName;
-                        if(teacherName == undefined || teacherName == ""){
-                            teacherName = "";
-                        }
-                        var html_ = '<li><span>' + teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
-                        $('.homework_list').append(html_);
-                    }
-                }
-                $('.loading_pre').hide();
-
-            } else {
-                layer.msg("暂无数据");
+    ajax_S(global.lesstime_detail,JSON.stringify(params),function(e){
+        var data = e.Data;
+        if (data != undefined) {
+            var list = data.list;
+            if (list != undefined && list.length > 0) {
                 $('.homework_list li').remove();
-                $('.lesstime_Result').hide();
-                initPage(0, 1);
-                $('.loading_pre').hide();
+                totalCounts = data.total;//总条数
+                $('.lesstime_Result').show();
+                $('.lesstime_Result').html("共" + data.total + "条数据");
+                var currentPage = data.pageNum;
+                initPage(totalCounts, currentPage);
 
+                var str_th = '<li class="homework_list_title"><span>教师姓名</span><span>课时（h）<img src="' + img_order + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + order + '"></span><span>当月课时（h）<img src="' + currentMonth_img_order + '" alt="" data-type="2" onclick="get_order(this)" class="sort_h sort_homework" data-order="' + currentMonthOrder + '"></span></li>';
+                $('.homework_list').append(str_th);
+
+                for (var i = 0; i < list.length; i++) {
+                    var teacherName = list[i].teacherName;
+                    if(teacherName == undefined || teacherName == ""){
+                        teacherName = "";
+                    }
+                    var html_ = '<li><span>' + teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
+                    $('.homework_list').append(html_);
+                }
             }
+            $('.loading_pre').hide();
+
+        } else {
+            layer.msg("暂无数据");
+            $('.homework_list li').remove();
+            $('.lesstime_Result').hide();
+            initPage(0, 1);
+            $('.loading_pre').hide();
 
         }
-    })
+    },function(error){
+        layer.msg("请刷新重试");
+        $('.loading_pre').hide();
+    });
 }
 
 //导出

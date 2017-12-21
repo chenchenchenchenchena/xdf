@@ -224,51 +224,48 @@ function SelectList() {
         'endDate': endTime,
         'stuNumsOrder': stuNumsOrder
     };
-    $.ajax({
-        type: "POST",
-        url: global.lean_List,
-        dataType: 'json',
-        contentType: "application/json",
-        data: JSON.stringify(params),
-        success: function (e) {
-            if (e.result) {
-                if (e.Data.list != undefined && e.Data.list.length > 0) {
+    ajax_S(global.lean_List,JSON.stringify(params),function(e){
+        if (e.result) {
+            if (e.Data.list != undefined && e.Data.list.length > 0) {
 
-                    var list = e.Data.list;
-                    totalCounts = e.Data.total;//总条数
-                    $('.lesstime_Result').show();
-                    $('.lesstime_Result').html("共" + totalCounts + "条数据");
-                    var currentPage = e.Data.pageNum;
-                    initPage(totalCounts, currentPage);
-                    $('#learnReportList li').remove();
-                    var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量<img style="right: 0" src="' + img_order + '" alt="" onclick="get_order()" class="sort_h sort_homework" data-order="' + order + '"></span><span>查看班级详情</span></li>';
-                    $('#learnReportList').append(str);
-                    for (var i = 0; i < list.length; i++) {
-                        var classCode = list[i].classCode;
-                        var className = list[i].className;
-                        var schoolId = list[i].schoolId;
-                        var schoolName = list[i].schoolName;
-                        var stuNums = list[i].stuNums;
-                        var teacherName = list[i].teacherName;
-                        var masterTeacherName = list[i].masterTeacherName;
-                        if (masterTeacherName == undefined) {
-                            masterTeacherName = "暂无";
-                        }
-                        var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
-                        $('#learnReportList').append(itemHtml_);
+                var list = e.Data.list;
+                totalCounts = e.Data.total;//总条数
+                $('.lesstime_Result').show();
+                $('.lesstime_Result').html("共" + totalCounts + "条数据");
+                var currentPage = e.Data.pageNum;
+                initPage(totalCounts, currentPage);
+                $('#learnReportList li').remove();
+                var str = '<li class="homework_list_title"><span>学校</span><span>班级编号</span><span>班级名称</span><span>主讲</span><span>班主任</span><span>学员量<img style="right: 0" src="' + img_order + '" alt="" onclick="get_order()" class="sort_h sort_homework" data-order="' + order + '"></span><span>查看班级详情</span></li>';
+                $('#learnReportList').append(str);
+                for (var i = 0; i < list.length; i++) {
+                    var classCode = list[i].classCode;
+                    var className = list[i].className;
+                    var schoolId = list[i].schoolId;
+                    var schoolName = list[i].schoolName;
+                    var stuNums = list[i].stuNums;
+                    var teacherName = list[i].teacherName;
+                    var masterTeacherName = list[i].masterTeacherName;
+                    if (masterTeacherName == undefined) {
+                        masterTeacherName = "暂无";
                     }
-                    $('.loading_pre').hide();
-
-                } else {
-                    layer.msg("暂无数据");
-                    $('.loading_pre').hide();
-                    $('#learnReportList li').remove();
-                    $('.lesstime_Result').hide();
-                    initPage(0, 1);
+                    var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
+                    $('#learnReportList').append(itemHtml_);
                 }
+                $('.loading_pre').hide();
+
+            } else {
+                layer.msg("暂无数据");
+                $('.loading_pre').hide();
+                $('#learnReportList li').remove();
+                $('.lesstime_Result').hide();
+                initPage(0, 1);
             }
         }
-    })
+    },function(error){
+        layer.msg("请刷新重试");
+        $('.loading_pre').hide();
+    });
+
 }
 
 
