@@ -20,7 +20,15 @@ var commitD = "commitRate desc";//提交率降序
 var commitA = "commitRate asc";//提交率升序
 var replyD = "replyRate desc";//回复率降序
 var replyA = "replyRate asc";//回复率升序
-var homeWorkClassOrder = "";//排序类型
+var homeWorkClassOrder = publishD;//排序类型
+var publish_img_order = "images/sort_t.png";
+var publishOrder = "asc";
+var reach_img_order = "images/sort_h.png";
+var reachOrder = "desc";
+var commit_img_order = "images/sort_h.png";
+var commitOrder = "desc";
+var reply_img_order = "images/sort_h.png";
+var replyOrder = "desc";
 var ECharts;
 
 require(['jquery-1.11.0.min'], function () {
@@ -105,56 +113,6 @@ require(['jquery-1.11.0.min'], function () {
                 $('#hw_selectBtn').click(function () {
                     $('.loading_pre').show();
                     $('.lesstime_Result').show();
-                    SelectTeacherList();
-                });
-                //排序点击事件
-                $(document).on('click', '.sort_h', function () {
-                    var type = $(this).attr('type');
-                    var order = $(this).attr('data-order');
-                    if (type == "publishCount") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = publishD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = publishA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "reachCount") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = reachD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = reachA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "commitRate") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = commitD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = commitA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "replyRate") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = replyD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = replyA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    }
-
-                    $(this).parent().siblings().find('.sort_h').attr('src', 'images/sort_h.png');
-                    page = 1;
                     SelectTeacherList();
                 });
                 //查看分析
@@ -662,9 +620,19 @@ function SelectTeacherList() {
             $('.lesstime_Result').html("共" + totalCounts + "条数据");
             var currentPage = e.pageNum;
             initPage(totalCounts, currentPage);
-            var strTitle = $('.homework_list_title');
+
             $('#homeworkAllList li').remove();
-            $('#homeworkAllList').append(strTitle);
+            var str_ = '<li class="homework_list_title">' +
+                '<span style="width: 14%">班名</span><span>班号</span>' +
+                '<span style="width: 14%">学校</span><span>主讲 </span>' +
+                '<span>班主任</span>' +
+                '<span>布置次数<img onclick="get_order(this)" style="right: 0" src="' + publish_img_order + '" alt="" data-order="'+publishOrder+'" class="sort_h sort_homework" data-type="1"></span>' +
+                '<span>送达人次<img onclick="get_order(this)" style="right: 0" src="' + reach_img_order + '" alt="" data-order="'+reachOrder+'" class="sort_h sort_homework" data-type="2"></span>' +
+                '<span>提交率<img onclick="get_order(this)" style="right: 0" src="' + commit_img_order + '" alt="" data-order="'+commitOrder+'" class="sort_h sort_homework" data-type="3"></span>' +
+                '<span>批复率<img onclick="get_order(this)" style="right: 0" src="' + reply_img_order + '" alt="" data-order="'+replyOrder+'" class="sort_h sort_homework" data-type="4"></span>' +
+                '<span>正确率</span><span>操作</span></li>';
+            $('#homeworkAllList').append(str_);
+
             for (var i = 0; i < teacherList.length; i++) {
                 var className = isNULL(teacherList[i].className);
                 var classCode = isNULL(teacherList[i].classCode);
@@ -757,4 +725,79 @@ function exporClass() {
     }
     window.location.href = global.expor_hw_all + "?homeworkType=" + homeworkType + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
 
+}
+
+/**
+ * 排序
+ */
+function get_order(this_){
+    var orderThis = $(this_).attr('data-type');
+    if (orderThis == '1') {
+        if(publishOrder == 'desc'){
+            homeWorkClassOrder = publishD;
+            publishOrder = "asc";
+            publish_img_order = "images/sort_t.png";
+        }else {
+            homeWorkClassOrder = publishA;
+            publishOrder = "desc";
+            publish_img_order = "images/sort_c.png";
+        }
+        reachOrder = 'desc';
+        reach_img_order = 'images/sort_h.png';
+        commitOrder = 'desc';
+        commit_img_order = 'images/sort_h.png';
+        replyOrder = 'desc';
+        reply_img_order = 'images/sort_h.png';
+
+    } else if (orderThis == '2') {
+        if(reachOrder == 'desc'){
+            homeWorkClassOrder = reachD;
+            reachOrder = "asc";
+            reach_img_order = "images/sort_t.png";
+        }else {
+            homeWorkClassOrder = reachA;
+            reachOrder = "desc";
+            reach_img_order = "images/sort_c.png";
+        }
+        publishOrder = "desc";
+        publish_img_order = 'images/sort_h.png';
+        commitOrder = 'desc';
+        commit_img_order = 'images/sort_h.png';
+        replyOrder = 'desc';
+        reply_img_order = 'images/sort_h.png';
+    }else if (orderThis == '3') {
+        if(commitOrder == 'desc'){
+            homeWorkClassOrder = commitD;
+            commitOrder = "asc";
+            commit_img_order = "images/sort_t.png";
+        }else {
+            homeWorkClassOrder = commitA;
+            commitOrder = "desc";
+            commit_img_order = "images/sort_c.png";
+        }
+        publishOrder = "desc";
+        publish_img_order = 'images/sort_h.png';
+        reachOrder = 'desc';
+        reach_img_order = 'images/sort_h.png';
+        replyOrder = 'desc';
+        reply_img_order = 'images/sort_h.png';
+    }else if (orderThis == '4') {
+        if(replyOrder == 'desc'){
+            homeWorkClassOrder = replyD
+            replyOrder = "asc";
+            reply_img_order = "images/sort_t.png";
+        }else {
+            homeWorkClassOrder = replyA;
+            replyOrder = "desc";
+            reply_img_order = "images/sort_c.png";
+        }
+        publishOrder = "desc";
+        publish_img_order = 'images/sort_h.png';
+        reachOrder = 'desc';
+        reach_img_order = 'images/sort_h.png';
+        commitOrder = 'desc';
+        commit_img_order = 'images/sort_h.png';
+    }
+    page = 1;
+    SelectTeacherList();
 }

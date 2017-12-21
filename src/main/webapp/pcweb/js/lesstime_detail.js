@@ -10,9 +10,9 @@ var masterTeacherFlag = 0;
 var page = 1;
 var pageSize = 15;
 var totalCounts = 0;
-var lessonHoursOrder = "";
-var img_order = "images/sort_h.png";
-var order = "desc";
+var lessonHoursOrder = "lessonHours desc";
+var img_order = "images/sort_t.png";
+var order = "asc";
 var currentMonth_img_order = "images/sort_h.png";
 var currentMonthOrder = "desc";
 
