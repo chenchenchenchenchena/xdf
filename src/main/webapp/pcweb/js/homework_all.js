@@ -201,7 +201,7 @@ require(['jquery-1.11.0.min'], function () {
                             line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
                         }
                     },function(error){
-
+                        layer.msg("请刷新重试");
                     });
                 });
 
@@ -668,6 +668,9 @@ function SelectTeacherList() {
             initPage(0, 1);
         }
     },function(error){
+        $('.loading_pre').hide();
+    },function(error){
+        layer.msg("请刷新重试");
         $('.loading_pre').hide();
     })
 }

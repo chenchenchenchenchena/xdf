@@ -309,52 +309,46 @@ function SelectTeacherList() {
         'homeworkType': homeworkType,
         'homeWorkTeacherOrder':homeworkTeacherOrder
     };
-    $.ajax({
-        type: "POST",
-        url: global.hw_details,
-        dataType: 'json',
-        contentType: "application/json",
-        data: JSON.stringify(params),
-        success: function (e) {
+    ajax_S(global.hw_details,JSON.stringify(params),function(e){
+        if (e.list != undefined && e.list.length > 0) {
 
-            if (e.list != undefined && e.list.length > 0) {
-
-                var teacherList = e.list;
-                totalCounts = e.total;//总条数
-                $('.lesstime_Result').show();
-                $('.lesstime_Result').html("共" + totalCounts + "条数据");
-                var currentPage = e.pageNum;
-                initPage(totalCounts, currentPage);
-                $('#teacher-list li').remove();
-                var str = '<li class="homework_list_title"><span>姓名</span><span>布置量<img style="right: 0" src="' + img_order_publish + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + publishOrder + '"></span><span>提交率<img style="right: 0" src="' + img_order_commit + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="2" data-order="' + commitOrder + '"></span><span>批复率<img style="right: 0" src="' + img_order_reply + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="3" data-order="' + replyOrder + '"></span><span>正确率（电子）</span></li>';
-                $('#teacher-list').append(str);
-                for (var i = 0; i < teacherList.length; i++) {
-                    var teacherName = teacherList[i].teacherName;
-                    var commitRate = teacherList[i].commitRate;
-                    var correctRate = teacherList[i].correctRate;
-                    var publishCount = teacherList[i].publishCount;
-                    var replyRate = teacherList[i].replyRate;
-                    var teacherEmail = teacherList[i].teacherEmail;
-                    if(homeworkType != "1"){
-                        var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>' + parseInt((correctRate * 100)) + '%</span></li>';
-                    }else {
-                        var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>暂无</span></li>';
-                    }
-                    $('#teacher-list').append(itemHtml_);
+            var teacherList = e.list;
+            totalCounts = e.total;//总条数
+            $('.lesstime_Result').show();
+            $('.lesstime_Result').html("共" + totalCounts + "条数据");
+            var currentPage = e.pageNum;
+            initPage(totalCounts, currentPage);
+            $('#teacher-list li').remove();
+            var str = '<li class="homework_list_title"><span>姓名</span><span>布置量<img style="right: 0" src="' + img_order_publish + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="1" data-order="' + publishOrder + '"></span><span>提交率<img style="right: 0" src="' + img_order_commit + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="2" data-order="' + commitOrder + '"></span><span>批复率<img style="right: 0" src="' + img_order_reply + '" alt="" onclick="get_order(this)" class="sort_h sort_homework" data-type="3" data-order="' + replyOrder + '"></span><span>正确率（电子）</span></li>';
+            $('#teacher-list').append(str);
+            for (var i = 0; i < teacherList.length; i++) {
+                var teacherName = teacherList[i].teacherName;
+                var commitRate = teacherList[i].commitRate;
+                var correctRate = teacherList[i].correctRate;
+                var publishCount = teacherList[i].publishCount;
+                var replyRate = teacherList[i].replyRate;
+                var teacherEmail = teacherList[i].teacherEmail;
+                if(homeworkType != "1"){
+                    var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>' + parseInt((correctRate * 100)) + '%</span></li>';
+                }else {
+                    var itemHtml_ = '<li><span>' + teacherName + '</span><span>' + publishCount + '</span><span>' + parseInt((commitRate * 100)) + '%</span><span>' + parseInt((replyRate * 100)) + '%</span><span>暂无</span></li>';
                 }
-                $('.loading_pre').hide();
-
-            } else {
-                layer.msg("暂无数据");
-                $('.loading_pre').hide();
-
-                $('#teacher-list li').remove();
-                $('.lesstime_Result').hide();
-                initPage(0, 1);
+                $('#teacher-list').append(itemHtml_);
             }
+            $('.loading_pre').hide();
 
+        } else {
+            layer.msg("暂无数据");
+            $('.loading_pre').hide();
+
+            $('#teacher-list li').remove();
+            $('.lesstime_Result').hide();
+            initPage(0, 1);
         }
-    })
+    },function(error){
+        layer.msg("请刷新重试");
+        $('.loading_pre').hide();
+    });
 
 }
 
