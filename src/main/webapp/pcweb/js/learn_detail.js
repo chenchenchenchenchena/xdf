@@ -60,7 +60,7 @@ require(['jquery-1.11.0.min'], function () {
                 'margin-top': -$homeworke_all_center.height() / 2,
                 'margin-left': -$homeworke_all_center.width() / 2
             });
-            ajax_S(global.learn_self,need_,function(e){
+            ajax_S2(global.learn_self,need_,function(e){
                 if(e.timeData.length>0){
                     $(".learn_all_echart div").remove();
                     $learn_self_data.find('li').remove();

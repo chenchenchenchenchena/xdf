@@ -131,7 +131,7 @@ require(['jquery-1.11.0.min'], function () {
                         'homeworkType': homeworkType
                     };
 
-                    ajax_S(global.hw_see,need_str,function(e){
+                    ajax_S2(global.hw_see,need_str,function(e){
                         var classCode = e.data.classCode,
                             className = e.data.className,
                             teacherName = e.data.teacherName,
