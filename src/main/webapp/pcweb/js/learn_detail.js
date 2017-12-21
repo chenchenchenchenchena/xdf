@@ -294,14 +294,14 @@ function SelectLearnData(){
             }
             $learm_detail_data.find('li').remove();
             $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
-            $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
+            $learm_detail_data.append('<li title="'+e.className+'">班级名称：'+e.className+'</li>');
             $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
             $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
             $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
             $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
             $learn_self.find('li').remove();
             $learn_self.append('<li>班级编号：'+e.classCode+'</li>');
-            $learn_self.append('<li>班级名称：'+e.className+'</li>');
+            $learn_self.append('<li title="'+e.className+'">班级名称：'+e.className+'</li>');
             $learn_self.append('<li>班 主 任：'+e.teacherName+'</li>');
             $learn_self.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
             if(list != undefined && list.length > 0){

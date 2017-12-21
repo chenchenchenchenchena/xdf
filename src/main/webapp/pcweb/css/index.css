@@ -1100,6 +1100,7 @@ html body .adduser_list_active{
 	height:45px;
 	line-height:45px;
 	font-size:15px;
+	overflow:hidden;
 }
 .homework_all_data::-webkit-scrollbar-thumb,.learn_center_all::-webkit-scrollbar-thumb{
 	border-radius: 10px;
