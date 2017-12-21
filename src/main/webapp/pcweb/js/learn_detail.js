@@ -58,87 +58,80 @@ require(['jquery-1.11.0.min'], function () {
                 'margin-top': -$homeworke_all_center.height() / 2,
                 'margin-left': -$homeworke_all_center.width() / 2
             });
-            $.ajax({
-                url:global.learn_self,
-                type: 'post',
-                asyns:false,
-                dataType: 'json',
-                data:need_,
-                success:function(e){
-                    if(e.timeData.length>0){
-                        $(".learn_all_echart div").remove();
-                        $learn_self_data.find('li').remove();
-                        var time = e.timeData,
-                            title_=e.studentResultsCase,
-                            html_ = '';
-                        for(i in title_){
-                            var charType = "";
-                            switch(title_[i].type){
-                                case '1':
-                                    html_+= '<span>入门测</span><span>平均分</span>';
-                                    charType = "入门测";
-                                    break;
-                                case '2':
-                                    html_+= '<span>出门测</span><span>平均分</span>';
-                                    charType = "出门测";
-                                    break;
-                                case '3':
-                                    html_+= '<span>期中测</span><span>平均分</span>';
-                                    charType = "期中测";
-                                    break;
-                                case '4':
-                                    html_+= '<span>期末测</span><span>平均分</span>';
-                                    charType = "期末测";
-                                    break;
-                                case '5':
-                                    html_+= '<span>入学测</span><span>平均分</span>';
-                                    charType = "入学测";
-                                    break;
-                            };
+            ajax_S(global.learn_self,need_,function(e){
+                if(e.timeData.length>0){
+                    $(".learn_all_echart div").remove();
+                    $learn_self_data.find('li').remove();
+                    var time = e.timeData,
+                        title_=e.studentResultsCase,
+                        html_ = '';
+                    for(i in title_){
+                        var charType = "";
+                        switch(title_[i].type){
+                            case '1':
+                                html_+= '<span>入门测</span><span>平均分</span>';
+                                charType = "入门测";
+                                break;
+                            case '2':
+                                html_+= '<span>出门测</span><span>平均分</span>';
+                                charType = "出门测";
+                                break;
+                            case '3':
+                                html_+= '<span>期中测</span><span>平均分</span>';
+                                charType = "期中测";
+                                break;
+                            case '4':
+                                html_+= '<span>期末测</span><span>平均分</span>';
+                                charType = "期末测";
+                                break;
+                            case '5':
+                                html_+= '<span>入学测</span><span>平均分</span>';
+                                charType = "入学测";
+                                break;
+                        };
 
-                            var charHtml = "<div id='chart_"+i+"' class='learn_all_echart_left'></div>";
-                            $(".learn_all_echart").append(charHtml);
-                            var char_x = [];
-                            var char_y = {
-                                'avg':[],
-                                'real':[]
-                            };
-                            for(var j = 0;j<e.studentResultsCase[i].data.length;j++){
-                                var item = e.studentResultsCase[i].data[j];
-                                var time_char = item.lessonTime.split(' ')[0];
-                                char_x.push(time_char);
-                                char_y.avg.push(item.avgGrade);
-                                char_y.real.push(item.realGrade);
-                            }
-                            line_echar('chart_'+i,char_x,char_y,'bar', "分数", "日期",charType);
-
+                        var charHtml = "<div id='chart_"+i+"' class='learn_all_echart_left'></div>";
+                        $(".learn_all_echart").append(charHtml);
+                        var char_x = [];
+                        var char_y = {
+                            'avg':[],
+                            'real':[]
+                        };
+                        for(var j = 0;j<e.studentResultsCase[i].data.length;j++){
+                            var item = e.studentResultsCase[i].data[j];
+                            var time_char = item.lessonTime.split(' ')[0];
+                            char_x.push(time_char);
+                            char_y.avg.push(item.avgGrade);
+                            char_y.real.push(item.realGrade);
                         }
-                        $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
-                            for(i in time){
-                                $learn_self_data.append('<li><span style="background:#ccf1ea">' + time[i] + '</span></li>');
-                                for(h in title_) {
-                                    var boolean = false;
-                                    for (o in title_[h].data) {
-                                        var Data = title_[h].data[o];
-                                        var time_one = Data.lessonTime.split(' ')[0];
-                                        if (time[i] == time_one) {
-                                            $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>'+Data.realGrade+'</span><span style="background:#efefef;">'+Data.avgGrade+'</span>')
-                                            boolean = true;
-                                        }
-                                    }
-                                    if(boolean==false){
-                                        $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span style="background:#efefef;"></span>')
-                                    }
-                                }
-                        }
-                        $learn_self_data.find('li').eq(0).css('background','#ccf1ea')
+                        line_echar('chart_'+i,char_x,char_y,'bar', "分数", "日期",charType);
 
                     }
+                    $learn_self_data.append('<li><span>日期</span>'+html_+'</li>');
+                    for(i in time){
+                        $learn_self_data.append('<li><span style="background:#ccf1ea">' + time[i] + '</span></li>');
+                        for(h in title_) {
+                            var boolean = false;
+                            for (o in title_[h].data) {
+                                var Data = title_[h].data[o];
+                                var time_one = Data.lessonTime.split(' ')[0];
+                                if (time[i] == time_one) {
+                                    $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>'+Data.realGrade+'</span><span style="background:#efefef;">'+Data.avgGrade+'</span>')
+                                    boolean = true;
+                                }
+                            }
+                            if(boolean==false){
+                                $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span style="background:#efefef;"></span>')
+                            }
+                        }
+                    }
+                    $learn_self_data.find('li').eq(0).css('background','#ccf1ea')
 
                 }
+
+            },function(error){
+
             });
-
-
 
         });
         });
@@ -182,6 +175,10 @@ function line_echar(id, campus, value, type, yName, xName, legendName) {
         start: 100,
         end: 20,
         handleSize: 8,
+    }, {
+        type: 'inside',
+        start: 20,
+        end: 100,
     }];
     var interval = {};
     var maxNum;
@@ -197,25 +194,18 @@ function line_echar(id, campus, value, type, yName, xName, legendName) {
     var myChart = ECharts.init(document.getElementById(id));
     myChart.clear();
     var option = {
-        //color: ['#3398DB'],
+        //color: ['#eb7d3c','#5e9cd3'],
+        color: ['#39c7c8','#b6a3dc'],
+        //color: ['#be3636','#3398db'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
-
-                //type : 'shadow'
-
             }
         },
         legend: {
             data:legend
         },
         calculable : true,
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
         xAxis: [
             {
                 type: 'category',
@@ -284,69 +274,61 @@ function SelectLearnData(){
         'classCode':learnData.classCode,
         'studentNoOrder':studentNoOrder
     }
-    $.ajax({
-        url:global.learn_detail,
-        type: 'post',
-        asyns:false,
-        dataType: 'json',
-        contentType: 'application/json;charset=UTF-8',
-        data:JSON.stringify(params),
-        success:function(e){
+    ajax_S(global.learn_detail,JSON.stringify(params),function(e){
+        $('.loading_pre').hide();
+        if(e.result){
+            var masterTeacherName = e.masterTeacherName,
+                $learm_detail_data = $('.learm_detail_data'),
+                $learn_all_data_ul  = $('.learn_all_data ul'),
+                $learn_self = $('.learn_self'),
+                list = e.Data.studentData.list;
+            if(e.beginDat!=undefined&&e.endDate!=undefined){
+                var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
+            }else{
+                var tiem_ = '暂无';
+            }
+            if(masterTeacherName==undefined){
+                masterTeacherName = '暂无'
+            }
+            $learm_detail_data.find('li').remove();
+            $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
+            $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
+            $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
+            $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
+            $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
+            $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
+            $learn_self.find('li').remove();
+            $learn_self.append('<li>班级编号：'+e.classCode+'</li>');
+            $learn_self.append('<li>班级名称：'+e.className+'</li>');
+            $learn_self.append('<li>班 主 任：'+e.teacherName+'</li>');
+            $learn_self.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
+            if(list != undefined && list.length > 0){
 
-            $('.loading_pre').hide();
-            if(e.result){
-                var masterTeacherName = e.masterTeacherName,
-                    $learm_detail_data = $('.learm_detail_data'),
-                    $learn_all_data_ul  = $('.learn_all_data ul'),
-                    $learn_self = $('.learn_self'),
-                    list = e.Data.studentData.list;
-                if(e.beginDat!=undefined&&e.endDate!=undefined){
-                    var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
-                }else{
-                    var tiem_ = '暂无';
-                }
-                if(masterTeacherName==undefined){
-                    masterTeacherName = '暂无'
-                }
-                $learm_detail_data.find('li').remove();
-                $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
-                $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
-                $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
-                $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
-                $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
-                $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
-                $learn_self.find('li').remove();
-                $learn_self.append('<li>班级编号：'+e.classCode+'</li>');
-                $learn_self.append('<li>班级名称：'+e.className+'</li>');
-                $learn_self.append('<li>班 主 任：'+e.teacherName+'</li>');
-                $learn_self.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
-                if(list != undefined && list.length > 0){
+                var strTitle = $('.title_learn');
+                $('.learn_all_data ul li').remove();
+                $('.learn_all_data ul').append(strTitle);
 
-                    var strTitle = $('.title_learn');
-                    $('.learn_all_data ul li').remove();
-                    $('.learn_all_data ul').append(strTitle);
+                totalCounts = e.Data.studentData.total;//总条数
+                $('#learn_result').show();
+                $('#learn_result').html("共" + e.Data.studentData.total + "条数据");
+                var currentPage = e.Data.studentData.pageNum;
+                initPage(totalCounts, currentPage);
 
-                    totalCounts = e.Data.studentData.total;//总条数
-                    $('#learn_result').show();
-                    $('#learn_result').html("共" + e.Data.studentData.total + "条数据");
-                    var currentPage = e.Data.studentData.pageNum;
-                    initPage(totalCounts, currentPage);
-
-                    for(i in list){
-                        $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit">导出</span></li>')
-                    }
-                }else {
-                    layer.msg("暂无数据");
-                    $('.learn_all_data ul li').remove();
-                    $('#learn_result').hide();
-                    initPage(0, 1);
-                    $('.loading_pre').hide();
+                for(i in list){
+                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit">导出</span></li>')
                 }
             }else {
-                layer.msg(e.msg);
+                layer.msg("暂无数据");
+                $('.learn_all_data ul li').remove();
+                $('#learn_result').hide();
+                initPage(0, 1);
+                $('.loading_pre').hide();
             }
-
+        }else {
+            layer.msg(e.msg);
         }
+    },function(error){
+        $('.loading_pre').hide();
     });
 }
 

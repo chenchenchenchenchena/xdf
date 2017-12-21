@@ -10,9 +10,9 @@ var masterTeacherFlag = 0;
 var page = 1;
 var pageSize = 15;
 var totalCounts = 0;
-var lessonHoursOrder = "";
-var img_order = "images/sort_h.png";
-var order = "desc";
+var lessonHoursOrder = "lessonHours desc";
+var img_order = "images/sort_t.png";
+var order = "asc";
 var currentMonth_img_order = "images/sort_h.png";
 var currentMonthOrder = "desc";
 
@@ -269,6 +269,8 @@ function get_order(this_){
             order = "desc";
             img_order = "images/sort_c.png";
         }
+        currentMonthOrder = 'desc';
+        currentMonth_img_order = 'images/sort_h.png';
 
     } else {
         if(currentMonthOrder == 'desc'){
@@ -280,6 +282,8 @@ function get_order(this_){
             currentMonthOrder = "desc";
             currentMonth_img_order = "images/sort_c.png";
         }
+        order = "desc";
+        img_order = 'images/sort_h.png';
     }
     page = 1;
     SelectData();

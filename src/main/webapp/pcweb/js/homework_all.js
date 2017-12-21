@@ -20,7 +20,15 @@ var commitD = "commitRate desc";//提交率降序
 var commitA = "commitRate asc";//提交率升序
 var replyD = "replyRate desc";//回复率降序
 var replyA = "replyRate asc";//回复率升序
-var homeWorkClassOrder = "";//排序类型
+var homeWorkClassOrder = publishD;//排序类型
+var publish_img_order = "images/sort_t.png";
+var publishOrder = "asc";
+var reach_img_order = "images/sort_h.png";
+var reachOrder = "desc";
+var commit_img_order = "images/sort_h.png";
+var commitOrder = "desc";
+var reply_img_order = "images/sort_h.png";
+var replyOrder = "desc";
 var ECharts;
 
 require(['jquery-1.11.0.min'], function () {
@@ -107,56 +115,6 @@ require(['jquery-1.11.0.min'], function () {
                     $('.lesstime_Result').show();
                     SelectTeacherList();
                 });
-                //排序点击事件
-                $(document).on('click', '.sort_h', function () {
-                    var type = $(this).attr('type');
-                    var order = $(this).attr('data-order');
-                    if (type == "publishCount") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = publishD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = publishA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "reachCount") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = reachD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = reachA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "commitRate") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = commitD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = commitA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    } else if (type == "replyRate") {
-                        if (order == 'desc') {
-                            homeWorkClassOrder = replyD;
-                            $(this).attr('data-order', 'asc');
-                            $(this).attr('src', 'images/sort_t.png');
-                        } else {
-                            homeWorkClassOrder = replyA;
-                            $(this).attr('data-order', 'desc');
-                            $(this).attr('src', 'images/sort_c.png');
-                        }
-                    }
-
-                    $(this).parent().siblings().find('.sort_h').attr('src', 'images/sort_h.png');
-                    page = 1;
-                    SelectTeacherList();
-                });
                 //查看分析
                 $('#homeworkAllList').on('click', '.look_w', function () {
                     $('.homework_all_content').children().remove();
@@ -172,84 +130,79 @@ require(['jquery-1.11.0.min'], function () {
                         'classCode': $(this).attr('classCode'),
                         'homeworkType': homeworkType
                     };
-                    $.ajax({
-                        type: "POST",
-                        url: global.hw_see,
-                        dataType: 'json',
-                        data: need_str,
-                        success: function (e) {
-                            console.log(e)
-                            var classCode = e.data.classCode,
-                                className = e.data.className,
-                                teacherName = e.data.teacherName,
-                                masterTeacherName = e.data.masterTeacherName,
-                                $homework_all_content = $('.homework_all_content'),
-                                $homework_all_data_ = $('.homework_all_data'),
-                                homeworkTimeData = e.data.homeworkTimeData,
-                                $homework_all_data = $('.homework_all_data ul'),
-                                x_line = [],
-                                y_line = {
-                                    'commit':[],
-                                    'reply':[],
-                                    'correct':[]
-                                },
-                                y_line_c = [],
-                                y_line_r = [],
-                                y_line_cc = [],
-                                $html_ = '';
 
-                            if (masterTeacherName == '') {
-                                masterTeacherName = '暂无'
-                            }
+                    ajax_S(global.hw_see,need_str,function(e){
+                        var classCode = e.data.classCode,
+                            className = e.data.className,
+                            teacherName = e.data.teacherName,
+                            masterTeacherName = e.data.masterTeacherName,
+                            $homework_all_content = $('.homework_all_content'),
+                            $homework_all_data_ = $('.homework_all_data'),
+                            homeworkTimeData = e.data.homeworkTimeData,
+                            $homework_all_data = $('.homework_all_data ul'),
+                            x_line = [],
+                            y_line = {
+                                'commit':[],
+                                'reply':[],
+                                'correct':[]
+                            },
+                            y_line_c = [],
+                            y_line_r = [],
+                            y_line_cc = [],
+                            $html_ = '';
+
+                        if (masterTeacherName == '') {
+                            masterTeacherName = '暂无'
+                        }
 
                             $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
                             $homework_all_content.append('<li style="overflow:hidden;" title="'+className+'">班级名称：' + className + '</li>');
                             $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
                             $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
 
-                            if (homeworkTimeData.length > 0) {
-                                if (homeworkType == 0) {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                                } else if (homeworkType == 1) {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
+                        if (homeworkTimeData.length > 0) {
+                            if (homeworkType == 0) {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
+                            } else if (homeworkType == 1) {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
 
-                                } else {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                                }
-                                for (i in homeworkTimeData) {
-                                    var dateType = "";
-                                    if (homeworkType == 0) {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
-                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
-
-                                    } else if (homeworkType == 1) {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
-                                    } else {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
-                                    }
-                                    x_line.push(homeworkTimeData[i].homeworkTime);
-                                    y_line.commit = y_line_c;
-                                    y_line.reply = y_line_r;
-                                    y_line.correct = y_line_cc;
-
-                                }
-                                $homework_all_data.find('li span:nth-child(odd)').css('background','#efefef');
-                                $homework_all_data.find('li p').css('background','#f5fbfa');
-                                $homework_all_data.find('li').eq(0).find('span').css('background','#f5fbfa');;
-                                line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
+                            } else {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
                             }
+                            for (i in homeworkTimeData) {
+                                var dateType = "";
+                                if (homeworkType == 0) {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                    y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
 
+                                } else if (homeworkType == 1) {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                } else {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
+                                }
+                                x_line.push(homeworkTimeData[i].homeworkTime);
+                                y_line.commit = y_line_c;
+                                y_line.reply = y_line_r;
+                                y_line.correct = y_line_cc;
+
+                            }
+                            $homework_all_data.find('li span:nth-child(odd)').css('background','#efefef');
+                            $homework_all_data.find('li p').css('background','#f5fbfa');
+                            $homework_all_data.find('li').eq(0).find('span').css('background','#f5fbfa');;
+                            line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
                         }
-                    })
+                    },function(error){
+
+                    });
                 });
 
                 //点击关闭分析弹框
