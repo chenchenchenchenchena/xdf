@@ -14,9 +14,9 @@ var totalCounts = "0";
 var page = 1;
 var pageSize = 15;
 var currentStageCode;
-var homeworkTeacherOrder = "";
-var img_order_publish = "images/sort_h.png";
-var publishOrder = "desc";//布置量的排序状态
+var homeworkTeacherOrder = "publishCount desc";
+var img_order_publish = "images/sort_t.png";
+var publishOrder = "asc";//布置量的排序状态
 var img_order_commit = "images/sort_h.png";
 var commitOrder = "desc";//提交率的排序状态
 var img_order_reply = "images/sort_h.png";
