@@ -375,10 +375,15 @@ function get_order(this_){
             publishOrder = "asc";
             img_order_publish = "images/sort_t.png";
         }else {
-            lessonHoursOrder = "publishCount asc";
+            homeworkTeacherOrder = "publishCount asc";
             publishOrder = "desc";
             img_order_publish = "images/sort_c.png";
         }
+
+        commitOrder = "desc";
+        img_order_commit = "images/sort_h.png";
+        replyOrder = "desc";
+        img_order_reply = "images/sort_h.png";
 
     } else if (orderThis == '2'){//提交率
         if(commitOrder == 'desc'){
@@ -390,6 +395,12 @@ function get_order(this_){
             commitOrder = "desc";
             img_order_commit = "images/sort_c.png";
         }
+
+        publishOrder = "desc";
+        img_order_publish = "images/sort_h.png";
+        replyOrder = "desc";
+        img_order_reply = "images/sort_h.png";
+
     } else if (orderThis == '3'){//批复率
         if(replyOrder == 'desc'){
             homeworkTeacherOrder = "replyRate desc";
@@ -400,6 +411,10 @@ function get_order(this_){
             replyOrder = "desc";
             img_order_reply = "images/sort_c.png";
         }
+        commitOrder = "desc";
+        img_order_commit = "images/sort_h.png";
+        publishOrder = "desc";
+        img_order_publish = "images/sort_h.png";
     }
     page = 1;
     SelectTeacherList();

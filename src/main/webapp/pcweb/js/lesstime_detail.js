@@ -269,6 +269,8 @@ function get_order(this_){
             order = "desc";
             img_order = "images/sort_c.png";
         }
+        currentMonthOrder = 'desc';
+        currentMonth_img_order = 'images/sort_h.png';
 
     } else {
         if(currentMonthOrder == 'desc'){
@@ -280,6 +282,8 @@ function get_order(this_){
             currentMonthOrder = "desc";
             currentMonth_img_order = "images/sort_c.png";
         }
+        order = "desc";
+        img_order = 'images/sort_h.png';
     }
     page = 1;
     SelectData();

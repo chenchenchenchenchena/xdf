@@ -172,84 +172,79 @@ require(['jquery-1.11.0.min'], function () {
                         'classCode': $(this).attr('classCode'),
                         'homeworkType': homeworkType
                     };
-                    $.ajax({
-                        type: "POST",
-                        url: global.hw_see,
-                        dataType: 'json',
-                        data: need_str,
-                        success: function (e) {
-                            console.log(e)
-                            var classCode = e.data.classCode,
-                                className = e.data.className,
-                                teacherName = e.data.teacherName,
-                                masterTeacherName = e.data.masterTeacherName,
-                                $homework_all_content = $('.homework_all_content'),
-                                $homework_all_data_ = $('.homework_all_data'),
-                                homeworkTimeData = e.data.homeworkTimeData,
-                                $homework_all_data = $('.homework_all_data ul'),
-                                x_line = [],
-                                y_line = {
-                                    'commit':[],
-                                    'reply':[],
-                                    'correct':[]
-                                },
-                                y_line_c = [],
-                                y_line_r = [],
-                                y_line_cc = [],
-                                $html_ = '';
 
-                            if (masterTeacherName == '') {
-                                masterTeacherName = '暂无'
-                            }
+                    ajax_S(global.hw_see,need_str,function(e){
+                        var classCode = e.data.classCode,
+                            className = e.data.className,
+                            teacherName = e.data.teacherName,
+                            masterTeacherName = e.data.masterTeacherName,
+                            $homework_all_content = $('.homework_all_content'),
+                            $homework_all_data_ = $('.homework_all_data'),
+                            homeworkTimeData = e.data.homeworkTimeData,
+                            $homework_all_data = $('.homework_all_data ul'),
+                            x_line = [],
+                            y_line = {
+                                'commit':[],
+                                'reply':[],
+                                'correct':[]
+                            },
+                            y_line_c = [],
+                            y_line_r = [],
+                            y_line_cc = [],
+                            $html_ = '';
 
-                            $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
-                            $homework_all_content.append('<li style="overflow:hidden;">班级名称：' + className + '</li>');
-                            $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
-                            $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
-
-                            if (homeworkTimeData.length > 0) {
-                                if (homeworkType == 0) {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
-                                } else if (homeworkType == 1) {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
-
-                                } else {
-                                    $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
-                                }
-                                for (i in homeworkTimeData) {
-                                    var dateType = "";
-                                    if (homeworkType == 0) {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
-                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
-
-                                    } else if (homeworkType == 1) {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
-                                    } else {
-                                        $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
-                                        $homework_all_data.append($html_);
-                                        y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
-                                        y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
-                                    }
-                                    x_line.push(homeworkTimeData[i].homeworkTime);
-                                    y_line.commit = y_line_c;
-                                    y_line.reply = y_line_r;
-                                    y_line.correct = y_line_cc;
-
-                                }
-                                $homework_all_data.find('li span:nth-child(odd)').css('background','#efefef');
-                                $homework_all_data.find('li p').css('background','#f5fbfa');
-                                $homework_all_data.find('li').eq(0).find('span').css('background','#f5fbfa');;
-                                line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
-                            }
-
+                        if (masterTeacherName == '') {
+                            masterTeacherName = '暂无'
                         }
-                    })
+
+                        $homework_all_content.append('<li>班级编号：' + classCode + '</li>');
+                        $homework_all_content.append('<li style="overflow:hidden;">班级名称：' + className + '</li>');
+                        $homework_all_content.append('<li>班 主 任：' + teacherName + '</li>');
+                        $homework_all_content.append('<li>主&nbsp;&nbsp;&nbsp;  讲：' + masterTeacherName + '</li>');
+
+                        if (homeworkTimeData.length > 0) {
+                            if (homeworkType == 0) {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span><span>正确率</span></li>')
+                            } else if (homeworkType == 1) {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>批复率</span></li>')
+
+                            } else {
+                                $homework_all_data.append('<li><p>日期</p><span>提交率</span><span>正确率</span></li>')
+                            }
+                            for (i in homeworkTimeData) {
+                                var dateType = "";
+                                if (homeworkType == 0) {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                    y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
+
+                                } else if (homeworkType == 1) {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_r.push(parseInt(parseFloat(homeworkTimeData[i].replyRate) * 100));
+                                } else {
+                                    $html_ = '<li><p>' + homeworkTimeData[i].homeworkTime + '</p><span>' + parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100) + '%</span><span>' + parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100) + '%</span></li>'
+                                    $homework_all_data.append($html_);
+                                    y_line_c.push(parseInt(parseFloat(homeworkTimeData[i].commitRate) * 100));
+                                    y_line_cc.push(parseInt(parseFloat(homeworkTimeData[i].correctRate) * 100));
+                                }
+                                x_line.push(homeworkTimeData[i].homeworkTime);
+                                y_line.commit = y_line_c;
+                                y_line.reply = y_line_r;
+                                y_line.correct = y_line_cc;
+
+                            }
+                            $homework_all_data.find('li span:nth-child(odd)').css('background','#efefef');
+                            $homework_all_data.find('li p').css('background','#f5fbfa');
+                            $homework_all_data.find('li').eq(0).find('span').css('background','#f5fbfa');;
+                            line_echar('homework_all_echart', x_line, y_line, 'line', "百分比(%)", "日期");
+                        }
+                    },function(error){
+
+                    });
                 });
 
                 //点击关闭分析弹框
@@ -658,60 +653,55 @@ function SelectTeacherList() {
         'paperClass': grade,
         'paperStage': stage
     };
-    $.ajax({
-        type: "POST",
-        url: global.hw_all,
-        dataType: 'json',
-        contentType: "application/json",
-        data: JSON.stringify(params),
-        success: function (e) {
-            if (e.list != undefined && e.list.length > 0) {
+    ajax_S(global.hw_all,JSON.stringify(params),function(e){
+        if (e.list != undefined && e.list.length > 0) {
 
-                var teacherList = e.list;
-                totalCounts = e.total;//总条数
-                $('.lesstime_Result').show();
-                $('.lesstime_Result').html("共" + totalCounts + "条数据");
-                var currentPage = e.pageNum;
-                initPage(totalCounts, currentPage);
-                var strTitle = $('.homework_list_title');
-                $('#homeworkAllList li').remove();
-                $('#homeworkAllList').append(strTitle);
-                for (var i = 0; i < teacherList.length; i++) {
-                    var className = isNULL(teacherList[i].className);
-                    var classCode = isNULL(teacherList[i].classCode);
-                    var masterTeacherName = isNULL(teacherList[i].masterTeacherName);
-                    var teacherName = isNULL(teacherList[i].teacherName);
-                    var commitCount = parseINT(teacherList[i].commitCount);
-                    var commitRate = parsePercent(teacherList[i].commitRate);
-                    var correctRate = parsePercent(teacherList[i].correctRate);
-                    var publishCount = parseINT(teacherList[i].publishCount);
-                    var replyRate = parsePercent(teacherList[i].replyRate);
-                    var reachCount = parseINT(teacherList[i].reachCount);
-                    var schoolId = teacherList[i].schoolId;
-                    var schoolName = teacherList[i].schoolName;
-                    if(homeworkType == 1){
-                        var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
-                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class="look_w homework_operation" classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
+            var teacherList = e.list;
+            totalCounts = e.total;//总条数
+            $('.lesstime_Result').show();
+            $('.lesstime_Result').html("共" + totalCounts + "条数据");
+            var currentPage = e.pageNum;
+            initPage(totalCounts, currentPage);
+            var strTitle = $('.homework_list_title');
+            $('#homeworkAllList li').remove();
+            $('#homeworkAllList').append(strTitle);
+            for (var i = 0; i < teacherList.length; i++) {
+                var className = isNULL(teacherList[i].className);
+                var classCode = isNULL(teacherList[i].classCode);
+                var masterTeacherName = isNULL(teacherList[i].masterTeacherName);
+                var teacherName = isNULL(teacherList[i].teacherName);
+                var commitCount = parseINT(teacherList[i].commitCount);
+                var commitRate = parsePercent(teacherList[i].commitRate);
+                var correctRate = parsePercent(teacherList[i].correctRate);
+                var publishCount = parseINT(teacherList[i].publishCount);
+                var replyRate = parsePercent(teacherList[i].replyRate);
+                var reachCount = parseINT(teacherList[i].reachCount);
+                var schoolId = teacherList[i].schoolId;
+                var schoolName = teacherList[i].schoolName;
+                if(homeworkType == 1){
+                    var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                        '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class="look_w homework_operation" classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
-                    }else {
-                        var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
-                            '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class="look_w homework_operation"  classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
+                }else {
+                    var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                        '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class="look_w homework_operation"  classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
-                    }
-                    $('#homeworkAllList').append(itemHtml_);
                 }
-                $('.loading_pre').hide();
-
-            } else {
-                layer.msg("暂无数据");
-                $('.loading_pre').hide();
-
-                $('#homeworkAllList li').remove();
-                $('.lesstime_Result').hide();
-                initPage(0, 1);
+                $('#homeworkAllList').append(itemHtml_);
             }
+            $('.loading_pre').hide();
+
+        } else {
+            layer.msg("暂无数据");
+            $('.loading_pre').hide();
+
+            $('#homeworkAllList li').remove();
+            $('.lesstime_Result').hide();
+            initPage(0, 1);
         }
-    });
+    },function(error){
+        $('.loading_pre').hide();
+    })
 }
 
 /**
