@@ -23,7 +23,9 @@ require(['jquery-1.11.0.min'], function () {
         });
         $('.learn_all_data').on('click','.learn_exit',function(){
             layer.msg('导出列表较慢，请您耐心等待');
-            // window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
+            var self_stu = JSON.parse(sessionStorage.need_learn);
+
+            window.location.href = global.learn_exsel_self + "?studentNo=" + $(this).attr('studentno') + '&schoolId=' +self_stu.schoolId+'&classCode='+ self_stu.classCode;
         });
         $('.lear_all_excel').on('click',function(){
             layer.msg('导出列表较慢，请您耐心等待');
@@ -315,7 +317,7 @@ function SelectLearnData(){
                 initPage(totalCounts, currentPage);
 
                 for(i in list){
-                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit">导出</span></li>')
+                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit"  studentNo="'+list[i].studentNo+'">导出</span></li>')
                 }
             }else {
                 layer.msg("暂无数据");

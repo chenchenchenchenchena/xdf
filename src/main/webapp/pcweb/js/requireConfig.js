@@ -43,6 +43,7 @@ var global = {
     'learn_All':url_o+'backEndStudyReport/exportExcelStudyReport.do', //学情导出全部
     'expor_learn_all':url_o+'backEndStudyReport/exportExcelStudyReport.do',//学情报告列表查询
     'learn_self':url_o+'backEndStudyReport/queryStudyReportStudentDetail.do',//学情查看个人
+    'learn_exsel_self':url_o+'backEndStudyReport/exportExcelStudyStudentDetail.do',//学情导出个人
 };
 
 
