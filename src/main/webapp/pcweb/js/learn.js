@@ -41,7 +41,14 @@ require(['jquery-1.11.0.min'], function () {
 
             laydate.render({
                 elem: '#date_input',
-                range: true //指定元素
+                range: true, //指定元素
+                done: function(value, date, endDate){
+                    if(value == ""){
+                        //表示清空日期
+                        beginTime = "";
+                        endTime = "";
+                    }
+                }
             });
 
             //默认为半年，与时间段为正向半联动。

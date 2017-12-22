@@ -29,7 +29,14 @@ require(['jquery-1.11.0.min'], function () {
                 $('.loading_pre').show();
                 laydate.render({
                     elem: '#date_input',
-                    range: true //指定元素
+                    range: true, //指定元素
+                    done: function(value, date, endDate){
+                        if(value == ""){
+                            //表示清空日期
+                            beginTime = "";
+                            endTime = "";
+                        }
+                    }
                 });
 
                 //返回上一页
