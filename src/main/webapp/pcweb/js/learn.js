@@ -41,14 +41,7 @@ require(['jquery-1.11.0.min'], function () {
 
             laydate.render({
                 elem: '#date_input',
-                range: true, //指定元素
-                done: function(value, date, endDate){
-                    if(value == ""){
-                        //表示清空日期
-                        beginTime = "";
-                        endTime = "";
-                    }
-                }
+                range: true //指定元素
             });
 
             //默认为半年，与时间段为正向半联动。
@@ -255,7 +248,7 @@ function SelectList() {
                     if (masterTeacherName == undefined||masterTeacherName=='') {
                         masterTeacherName = "暂无";
                     }
-                    var itemHtml_ = '<li><span title="'+schoolName+'">' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
+                    var itemHtml_ = '<li><span >' + schoolName + '</span><span>' + classCode + '</span><span title="'+className+'">' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
                     $('#learnReportList').append(itemHtml_);
                 }
                 $('.loading_pre').hide();
