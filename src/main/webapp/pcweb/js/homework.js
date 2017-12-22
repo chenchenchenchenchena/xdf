@@ -72,6 +72,10 @@ require(['jquery-1.11.0.min'], function () {
                     $('#publish_operation ').show();
                 }
             });
+            $('.back_big').click(function(){
+                    $('.operation_s ').hide();
+                    $(this).hide();
+            });
             $('#commit img').click(function () {
                 $('.back_big ').show();
                 if (homeworkType == 1) {
@@ -98,12 +102,15 @@ require(['jquery-1.11.0.min'], function () {
                 $('.back_big ').hide();
                 $('.operation_s ').hide();
             });
+            $('.operation_s ').click(function(){
+                return false;
+            })
             $(document).on('click', '.look_details', function () {
                 var schoolId = $(this).attr('data-schoolId');
                 var schoolName = $(this).attr('data-schoolName');
                 lookHwDetails(this, schoolId, schoolName);
             })
-            $(document).on('click','.sort_homework',function(){
+            $('#schoolComparsion').on('click','.sort_homework',function(){
                 var type_ = $(this).attr('type');
                 $(this).parent().siblings().find('img').attr('src','images/sort_h.png');
                 if($(this).attr('src').indexOf('sort_h')!=-1){
