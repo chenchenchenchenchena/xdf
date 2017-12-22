@@ -248,7 +248,7 @@ function SelectList() {
                     if (masterTeacherName == undefined||masterTeacherName=='') {
                         masterTeacherName = "暂无";
                     }
-                    var itemHtml_ = '<li><span>' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
+                    var itemHtml_ = '<li><span title="'+schoolName+'">' + schoolName + '</span><span>' + classCode + '</span><span>' + className + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span><span>' + stuNums + '</span><span><span style="width: auto"  data-schoolId="' + schoolId + '" data-schoolName="' + schoolName + '" classCode="'+classCode+'" pageNum ="'+currentPage+'" pageSize="'+pageSize+'" stuNumsOrder="'+stuNumsOrder+'" class="homework_operation learm_more">查看</span></span></li>';
                     $('#learnReportList').append(itemHtml_);
                 }
                 $('.loading_pre').hide();
