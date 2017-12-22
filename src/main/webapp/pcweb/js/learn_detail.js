@@ -60,7 +60,7 @@ require(['jquery-1.11.0.min'], function () {
                 'margin-top': -$homeworke_all_center.height() / 2,
                 'margin-left': -$homeworke_all_center.width() / 2
             });
-            ajax_S(global.learn_self,need_,function(e){
+            ajax_S2(global.learn_self,need_,function(e){
                 if(e.timeData.length>0){
                     $(".learn_all_echart div").remove();
                     $learn_self_data.find('li').remove();
@@ -279,13 +279,13 @@ function SelectLearnData(){
     ajax_S(global.learn_detail,JSON.stringify(params),function(e){
         $('.loading_pre').hide();
         if(e.result){
-            var masterTeacherName = e.masterTeacherName,
+            var masterTeacherName = e.masterTeachereName,
                 $learm_detail_data = $('.learm_detail_data'),
                 $learn_all_data_ul  = $('.learn_all_data ul'),
                 $learn_self = $('.learn_self'),
                 list = e.Data.studentData.list;
-            if(e.beginDat!=undefined&&e.endDate!=undefined){
-                var tiem_ = e.beginDate.replace(/-/g, '/')+'~'+e.endDate.replace(/-/g, '/');
+            if(e.beginDate!=undefined&&e.endDate!=undefined){
+                var tiem_ = e.beginDate.replace(/-/g, '/')+'   ~    '+e.endDate.replace(/-/g, '/');
             }else{
                 var tiem_ = '暂无';
             }
@@ -294,15 +294,15 @@ function SelectLearnData(){
             }
             $learm_detail_data.find('li').remove();
             $learm_detail_data.append('<li>班级编号：'+e.classCode+'</li>');
-            $learm_detail_data.append('<li>班级名称：'+e.className+'</li>');
+            $learm_detail_data.append('<li title="'+e.className+'">班级名称：'+e.className+'</li>');
             $learm_detail_data.append('<li>班 主 任：'+e.teacherName+'</li>');
             $learm_detail_data.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
             $learm_detail_data.append('<li>课程时间：'+tiem_+'</li>');
             $learm_detail_data.append('<li>课&nbsp;&nbsp;&nbsp;  次：'+e.lessonNo+'</li>');
             $learn_self.find('li').remove();
             $learn_self.append('<li>班级编号：'+e.classCode+'</li>');
-            $learn_self.append('<li>班级名称：'+e.className+'</li>');
-            $learn_self.append('<li>班 主 任：'+e.teacherName+'</li>');
+            $learn_self.append('<li title="'+e.className+'">班级名称：'+e.className+'</li>');
+            $learn_self.append('<li>班 `主 任：'+e.teacherName+'</li>');
             $learn_self.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
             if(list != undefined && list.length > 0){
 
@@ -317,7 +317,7 @@ function SelectLearnData(){
                 initPage(totalCounts, currentPage);
 
                 for(i in list){
-                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit"  studentNo="'+list[i].studentNo+'">导出</span></li>')
+                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'" style="width: 14%;margin: 0 5%;">查看</span><span class="learn_exit"  studentNo="'+list[i].studentNo+'"  style="width: 14%;margin: 0 5%;">导出</span></li>')
                 }
             }else {
                 layer.msg("暂无数据");

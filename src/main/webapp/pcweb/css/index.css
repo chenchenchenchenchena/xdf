@@ -449,6 +449,7 @@ html body .homework_operation{
 	right:0;
 	top:0;
 	padding:26px;
+	cursor: pointer;
 }
 .operation_s h4{
 	padding-top:36px;
@@ -1008,6 +1009,7 @@ html body .adduser_list_active{
 	width: 16px;
 	height: 16px;
 	margin-left: 5px;
+	cursor: pointer;
 }
 .homeworke_all_center{
 	width:50%;
@@ -1100,6 +1102,7 @@ html body .adduser_list_active{
 	height:45px;
 	line-height:45px;
 	font-size:15px;
+	overflow:hidden;
 }
 .homework_all_data::-webkit-scrollbar-thumb,.learn_center_all::-webkit-scrollbar-thumb{
 	border-radius: 10px;

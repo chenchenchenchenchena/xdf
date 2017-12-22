@@ -138,7 +138,7 @@ require(['jquery-1.11.0.min'], function () {
                         'homeworkType': homeworkType
                     };
 
-                    ajax_S(global.hw_see,need_str,function(e){
+                    ajax_S2(global.hw_see,need_str,function(e){
                         var classCode = e.data.classCode,
                             className = e.data.className,
                             teacherName = e.data.teacherName,
@@ -654,11 +654,11 @@ function SelectTeacherList() {
                 var schoolId = teacherList[i].schoolId;
                 var schoolName = teacherList[i].schoolName;
                 if(homeworkType == 1){
-                    var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                    var itemHtml_ = '<li><span style="width: 14%" title="'+className+'">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
                         '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + "暂无" + '</span><span><span style="width: auto" class="look_w homework_operation" classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
                 }else {
-                    var itemHtml_ = '<li><span style="width: 14%">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
+                    var itemHtml_ = '<li><span style="width: 14%" title="'+className+'">' + className + '</span><span>' + classCode + '</span><span style="width: 14%">' + schoolName + '</span><span>' + masterTeacherName + '</span><span>' + teacherName + '</span>' +
                         '<span>' + publishCount + '</span><span>' + reachCount + '</span><span>' + commitRate + '</span><span>' + replyRate + '</span><span>' + correctRate + '</span><span><span style="width: auto" class="look_w homework_operation"  classCode="'+classCode+'" schoolId="'+schoolId+'">查看分析</span></span></li>';
 
                 }

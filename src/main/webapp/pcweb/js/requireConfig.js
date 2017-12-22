@@ -252,6 +252,30 @@ require(['jquery-1.11.0.min'],function(){
 });
 });
 
+function ajax_S2(link,more,func,errof){
+    $.ajax({
+        url:link,
+        type: 'post',
+        asyns:false,
+        timeout:50000,
+        dataType: 'json',
+        data:more,
+        success:function(e){
+            func(e);
+        },
+        error: function (err) {
+            // failureCallback(msg);
+            errof();
+            console.log("err:"+err);
+        },
+        complete:function(XMLHttpRequest,status){
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                errof();
+            }
+        }
+
+    });
+}
 // ajax封装
 function ajax_S(link,more,func,errof){
     $.ajax({
