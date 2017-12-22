@@ -302,7 +302,7 @@ function SelectLearnData(){
             $learn_self.find('li').remove();
             $learn_self.append('<li>班级编号：'+e.classCode+'</li>');
             $learn_self.append('<li title="'+e.className+'">班级名称：'+e.className+'</li>');
-            $learn_self.append('<li>班 `主 任：'+e.teacherName+'</li>');
+            $learn_self.append('<li>班 主 任：'+e.teacherName+'</li>');
             $learn_self.append('<li>主&nbsp;&nbsp;&nbsp;  讲：'+masterTeacherName+'</li>');
             if(list != undefined && list.length > 0){
 
