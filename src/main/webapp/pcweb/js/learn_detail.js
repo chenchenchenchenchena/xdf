@@ -317,7 +317,7 @@ function SelectLearnData(){
                 initPage(totalCounts, currentPage);
 
                 for(i in list){
-                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'">查看</span><span class="learn_exit"  studentNo="'+list[i].studentNo+'">导出</span></li>')
+                    $learn_all_data_ul.append('<li class="clearfix"><span>'+list[i].studentName+'</span><span>'+list[i].studentNo+'</span><span class="learn_more" studentNo="'+list[i].studentNo+'" studentName="'+list[i].studentName+'" style="width: 14%;margin: 0 5%;">查看</span><span class="learn_exit"  studentNo="'+list[i].studentNo+'"  style="width: 14%;margin: 0 5%;">导出</span></li>')
                 }
             }else {
                 layer.msg("暂无数据");
