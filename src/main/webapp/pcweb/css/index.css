@@ -400,6 +400,7 @@ html body .homework_active{
 	line-height:46px;
 	font-size:14px;
 	overflow:hidden;
+	color:#666;
 }
 .sort_h{
 	position:absolute;
