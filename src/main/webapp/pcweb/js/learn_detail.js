@@ -29,7 +29,8 @@ require(['jquery-1.11.0.min'], function () {
         });
         $('.lear_all_excel').on('click',function(){
             layer.msg('导出列表较慢，请您耐心等待');
-            // window.location.href = global.indexForm + "?schoolId=" + $(this).attr('schoolId') + '&schoolName=' + $(this).attr('schoolName');
+            var learnData = JSON.parse(sessionStorage.need_learn);
+             window.location.href = global.learn_exsel_Class + "?schoolId=" + learnData.schoolId + '&classCode=' + learnData.classCode;
         });
 
         $('.learn_self_title').on('click','img',function(){
