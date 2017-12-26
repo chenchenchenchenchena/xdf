@@ -45,7 +45,7 @@ $(function(){
                     }else{
                         answer_ ='<span style="color:red;">'+answer+'</span>'
                     }
-                    $('.big_back_center ul').append('<li><span>'+detailItemId+'</span>'+answer_+'<span>'+correctAnswer+'</span><span>'+userTime+'</span></li>')
+                    $('.big_back_center ul').append('<li><span>'+detailItemId+'</span>'+answer_+'<span>'+correctAnswer+'</span><span>'+userTime+'"</span></li>')
                 }
 
                 $('.big_back').show();
