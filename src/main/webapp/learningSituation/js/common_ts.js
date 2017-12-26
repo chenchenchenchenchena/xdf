@@ -28,11 +28,12 @@ $(function(){
             classCode:$(this).attr('classcode'),
             lessonNo:$(this).attr('lessonno')
         };
+        var loading_ = layer.load('正在请求');
         ajaxRequest('post',url.anwser_t,need_,function(e){
+            layer.closeAll('loading');
             if(e.data.length==0){
                 layer.msg('暂无数据')
             }else{
-
                 for(i in e.data){
                     var detailItemId = e.data[i].detailItemId,
                      correctAnswer = e.data[i].correctAnswer,
