@@ -89,6 +89,7 @@ var url = {
     'w_email':url_o+'e2Login/queryTeacherInfo.do',//查询老师信息
     's_select':url_o+'dict/getDictListByTableName.do',//查询校区
     'stumo':url_o+'studentClassRoomData/querySdtClassRoomAnswerData.do',//查看单个学生课堂互动
+    'anwser_t':url_o+'studentClassRoomData/querySdtClassRoomAnswerDataByStuNo.do',//查看课堂互动详情
     't_leyh':url_o+'teacherClassData/queryClassData.do',//老师查看班级课堂互动数据
     't_redis':url_o+'redis/clearCacheByPrefixKey.do',//清redis缓存
     't_dictionary':url_o+'dict/getDictListByTableName.do',//获取字典信息
