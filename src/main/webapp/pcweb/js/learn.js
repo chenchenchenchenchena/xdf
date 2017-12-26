@@ -94,7 +94,7 @@ require(['jquery-1.11.0.min'], function () {
                 var beginTime_ = parseInt(beginTime.replace(/-/g,'')),
                     endTime_ = parseInt(endTime.replace(/-/g,''));
                 if(beginTime_-endTime_<-100){
-                    layer.msg('请选择一月内的数据')
+                    layer.msg('请选择一个月之内的数据')
                     return false;
                 }
                 seacherName = $('#seacher_hw').val();
