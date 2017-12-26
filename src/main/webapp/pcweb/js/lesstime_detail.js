@@ -218,7 +218,7 @@ function SelectData() {
                 for (var i = 0; i < list.length; i++) {
                     var teacherName = list[i].teacherName;
                     if(teacherName == undefined || teacherName == ""){
-                        teacherName = "";
+                        teacherName = "-";
                     }
                     var html_ = '<li><span>' + teacherName + '</span><span>' + list[i].lessonHours + '</span><span>' + list[i].monthHours + '</span></li>';
                     $('.homework_list').append(html_);
