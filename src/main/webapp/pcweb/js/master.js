@@ -7,20 +7,20 @@ require(['jquery-1.11.0.min'], function () {
         var number_l = 0;
         var url_l =  location.href;
 
-        if(url_l.indexOf('homework')!=-1||url_l.indexOf('homeworkdetail')!=-1){
+        if (url_l.indexOf('homework') != -1 || url_l.indexOf('homeworkdetail') != -1) {
             number_l = 1;
         }
-        else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+        else if (url_l.indexOf('lesstime') != -1 || url_l.indexOf('lesstime_detail') != -1) {
             number_l = 2;
         }
-        else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-            number_l = 3
-        }
-        else if(url_l.indexOf('master')!=-1){
+        else if (url_l.indexOf('power') != -1 || url_l.indexOf('userAdd') != -1 || url_l.indexOf('useredit') != -1) {
             number_l = 4
         }
-        else if (url_l.indexOf('learn') != -1) {
+        else if (url_l.indexOf('master') != -1) {
             number_l = 5
+        }
+        else if (url_l.indexOf('learn') != -1) {
+            number_l = 3
         }
         var $bure_true = $('.left_nav ul li').eq(number_l);
         $bure_true.addClass('activ_nav').siblings().removeClass('activ_nav');
