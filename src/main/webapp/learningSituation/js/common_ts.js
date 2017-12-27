@@ -3,6 +3,7 @@ $(function(){
     if(!sessionStorage.schoolId){
         sessionStorage.schoolId = localStorage.getItem('SCHOOLID')
     }
+    $('body').css('height',$('html').height())
     ajax_S(url.stumo,{'schoolId':sessionStorage.schoolId,'studentNo':sessionStorage.stuNumber,'classCode':sessionStorage.classCode},function(e){
 
         arr = e;
@@ -22,7 +23,7 @@ $(function(){
             $('.no-data').show();
         }
     });
-    $('.common_yh').on('touchend','.answer_more',function(){
+    $(document).on('touchend','.answer_more',function(){
         var need_ = {
             stuNum:$(this).attr('stunum'),
             classCode:$(this).attr('classcode'),
