@@ -91,6 +91,12 @@ require(['jquery-1.11.0.min'], function () {
                     beginTime = time.substring(0, 10);
                     endTime = time.substring(13, time.length);
                 }
+                var beginTime_ = parseInt(beginTime.replace(/-/g,'')),
+                    endTime_ = parseInt(endTime.replace(/-/g,''));
+                if(beginTime_-endTime_<-100){
+                    layer.msg('请选择一个月之内的数据')
+                    return false;
+                }
                 seacherName = $('#seacher_hw').val();
                 if (seacherName == undefined) {
                     seacherName = "";

@@ -124,7 +124,7 @@ require(['jquery-1.11.0.min'], function () {
                                 }
                             }
                             if(boolean==false){
-                                $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span></span><span style="background:#efefef;"></span>')
+                                $learn_self_data.find('li').eq(parseFloat(i)+1).append('<span>-</span><span style="background:#efefef;">-</span>')
                             }
                         }
                     }

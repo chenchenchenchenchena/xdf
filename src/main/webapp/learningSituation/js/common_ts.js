@@ -45,7 +45,7 @@ $(function(){
                     }else{
                         answer_ ='<span style="color:red;">'+answer+'</span>'
                     }
-                    $('.big_back_center ul').append('<li><span>'+detailItemId+'</span>'+answer_+'<span>'+correctAnswer+'</span><span>'+userTime+'</span></li>')
+                    $('.big_back_center ul').append('<li><span>'+detailItemId+'</span>'+answer_+'<span>'+correctAnswer+'</span><span>'+userTime+'"</span></li>')
                 }
 
                 $('.big_back').show();
@@ -58,8 +58,12 @@ $(function(){
         $('.big_back_center li').eq(0).siblings().remove();
     });
 
-
-
+    $('.big_back').on('touchend',function(){
+        $('.big_back').hide();
+    });
+    $('.big_back_center ul').on('touchend',function(){
+       return false;
+    });
 
 
 
