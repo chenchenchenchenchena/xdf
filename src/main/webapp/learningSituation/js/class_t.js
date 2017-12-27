@@ -22,7 +22,10 @@ $(function(){
             var Correct = parseFloat(classtime[i].correctRate);
             $('.reportstu_S').append('<ul><li>'+classtime[i].lessonNo+'</li><li>'+classtime[i].answerCount+'</li><li>'+classtime[i].stuNum+'</li><li>'+classtime[i].allCount+'</li><li>'+parseInt(Correct*100)+'%</li><li>'+classtime[i].averageTime+'"</li></ul>');
             }
-
+            if(!lessdata.studentData){
+              $('.stu_yh ul').append('<p style="font-size:25px;padding-bottom:20px;line-height:50px;text-align:center;">学生列表数据非正常扫码数据</p>')
+                return false;
+            }
             for(var k = 0;k<student.length;k++){
                 var studentname = '';
                 if(student[k].studentName.length>2){
