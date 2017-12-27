@@ -733,7 +733,27 @@ function exporClass() {
         beginTime = time.substring(0, 10);
         endTime = time.substring(13, time.length);
     }
-    window.location.href = global.expor_hw_all + "?homeworkType=" + homeworkType + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime;
+    searchName = $('#seacher_hw').val();
+    if (searchName == undefined) {
+        searchName = "";
+    }
+
+    if ($('#subject').html() != '全部') {
+        subject = $('#subject').html();
+    } else {
+        subject = "";
+    }
+    if ($('#grade').html() != '全部') {
+        grade = $('#grade').html();
+    } else {
+        grade = "";
+    }
+    if ($('#stage').html() != '全部') {
+        stage = $('#stage').html();
+    } else {
+        stage = "";
+    }
+    window.location.href = global.expor_hw_all + "?homeworkType=" + homeworkType + "&schoolId=" + currentSchoolId + "&beginTime=" + beginTime + "&endTime=" + endTime+ "&searchName=" + searchName+ "&paperSubject=" + subject+ "&paperClass=" + grade+ "&paperStage=" + stage;
 
 }
 
