@@ -7,20 +7,20 @@ require(['jquery-1.11.0.min'], function () {
         var number_l = 0;
         var url_l =  location.href;
 
-        if(url_l.indexOf('homework')!=-1||url_l.indexOf('homeworkdetail')!=-1){
+        if (url_l.indexOf('homework') != -1 || url_l.indexOf('homeworkdetail') != -1) {
             number_l = 1;
         }
-        else if(url_l.indexOf('lesstime')!=-1||url_l.indexOf('lesstime_detail')!=-1){
+        else if (url_l.indexOf('lesstime') != -1 || url_l.indexOf('lesstime_detail') != -1) {
             number_l = 2;
         }
-        else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-            number_l = 3
-        }
-        else if(url_l.indexOf('master')!=-1){
+        else if (url_l.indexOf('power') != -1 || url_l.indexOf('userAdd') != -1 || url_l.indexOf('useredit') != -1) {
             number_l = 4
         }
-        else if (url_l.indexOf('learn') != -1) {
+        else if (url_l.indexOf('master') != -1) {
             number_l = 5
+        }
+        else if (url_l.indexOf('learn') != -1) {
+            number_l = 3
         }
         var $bure_true = $('.left_nav ul li').eq(number_l);
         $bure_true.addClass('activ_nav').siblings().removeClass('activ_nav');
@@ -42,7 +42,7 @@ require(['jquery-1.11.0.min'], function () {
                         var email = masterlist[i].accountId;
                         var invalid = masterlist[i].invalid;
                         var pid = masterlist[i].teacherId;
-                        $('.master_list').append('<li><span>'+masterlist[i].teacherName+'</span><span>'+masterlist[i].accountId+'</span><span>'+masterlist[i].gradeCourse+'</span><span><a  href="javascript:;" class="master_edit" userName="'+masterlist[i].teacherName+'" email="'+email+'">编辑</a><a data-email="'+email+'" data-invalid="'+invalid+'" data-pid="'+pid+'" href="javascript:;" class="master_confrim">禁用</a></span></li>')
+                        $('.master_list').append('<li><span>'+masterlist[i].teacherName+'</span><span>'+masterlist[i].accountId+'</span><span>'+masterlist[i].gradeCourse+'</span><span><a  href="javascript:;" class="master_edit" userName="'+masterlist[i].teacherName+'" email="'+email+'" style="display:none">编辑</a><a data-email="'+email+'" data-invalid="'+invalid+'" data-pid="'+pid+'" href="javascript:;" class="master_confrim">禁用</a></span></li>')
                     }
                     $('.master_list  li:nth-child(odd)').css('background', '#f5fbfa');
                 }
