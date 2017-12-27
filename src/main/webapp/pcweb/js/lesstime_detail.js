@@ -276,11 +276,11 @@ function get_order(this_){
 
     } else {
         if(currentMonthOrder == 'desc'){
-            lessonHoursOrder = "monthHours desc";
+            lessonHoursOrder = "monthHours+0 desc";
             currentMonthOrder = "asc";
             currentMonth_img_order = "images/sort_t.png";
         }else {
-            lessonHoursOrder = "monthHours asc";
+            lessonHoursOrder = "monthHours+0 asc";
             currentMonthOrder = "desc";
             currentMonth_img_order = "images/sort_c.png";
         }
