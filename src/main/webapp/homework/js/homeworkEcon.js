@@ -76,9 +76,6 @@ $(function () {
         };
         ajaxRequest('POST', url.t_dictionary, reqData, function (e) {
             if (e.code == 200) {
-                stageList = [];
-                subjectList = [];
-                gradeList = [];
                 var tabTypes = e.data;
                 if (undefined == tabTypes || tabTypes.length <= 0) {
                     layer.msg("暂无数据");
@@ -92,7 +89,7 @@ $(function () {
                 if (type == subjectType) {
                     subjectList = tabTypes;
                 }
-                dealClassData(tabTypes, type);
+                //dealClassData(tabTypes, type);
 
             } else {
                 $('.listOne').hide();
