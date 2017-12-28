@@ -200,17 +200,17 @@ $(function () {
             'paperClass': currentGrade.gradeCode,
             'paperSubject': currentSubject.subjectCode,
             'paperName': $('.searchE input').val(),
-            'paperStage': currentStage.stageCode,
+            'stageCode': currentStage.stageCode,
             'pageNo': pageNo
         };
         if(currentGrade.gradeCode==undefined){
             params.paperClass = ''
         }
-        if(currentGrade.subjectCode==undefined){
+        if(currentSubject.subjectCode==undefined){
             params.paperSubject = ''
         }
-        if(currentGrade.stageCode==undefined){
-            params.paperStage = ''
+        if(currentStage.stageCode==undefined){
+            params.stageCode = ''
         }
         var url = homework_s.t_getExcellent;
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
