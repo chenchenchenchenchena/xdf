@@ -210,7 +210,7 @@ $(function () {
             params.paperSubject = ''
         }
         if(currentGrade.stageCode==undefined){
-            params.paperSubject = ''
+            params.paperStage = ''
         }
         var url = homework_s.t_getExcellent;
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
