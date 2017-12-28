@@ -247,6 +247,8 @@ if (!localStorage.terEmail) {
 //查询用户详细信息
 function more_s(){
     var  teacherid = localStorage.terEmail;//sessionStorage.terEmail
+    var need_ = {'email':teacherid,  'teacherCode':localStorage.teacherId,
+        'schoolId':localStorage.schoolId,}
 // var  teacherid = 'jinyongcun@xdf.cn'
     var  studata   = [],stumodata = [];
     var teachmore = {};
@@ -255,7 +257,7 @@ function more_s(){
         type: 'POST',
         dataType: 'JSON',
         asyns:false,
-        data:{'email':teacherid},
+        data:need_,
         success:function(e){
             // alert(0)
             var more = e;
@@ -377,7 +379,9 @@ function shareCmsFn() {//分享统计
         success: function (json) {
             alert(JSON.stringify(json));
             if (json.result == true) {
+                debugger;
             }
+
         }
     })
 }

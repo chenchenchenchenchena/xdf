@@ -17,7 +17,12 @@ $(function () {
             ajax_S(url.w_email,temail,terEmail);
         }
 
-    })
+    });
+   $('.code_').on('touchend','li',function(){
+       localStorage.schoolId = $(this).attr('schoolId');
+       localStorage.teacherId= $(this).attr('code');
+       layer.msg('储存成功'+localStorage.schoolId+ localStorage.teacherId+'')
+   });
     function terEmail(e){
         console.log(e.data);
         console.log(e.wechatData)
@@ -29,7 +34,13 @@ $(function () {
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                location.href="../wechat_list.html";
+                var Code_arr = e.tCodeData;
+                $('.code_').children().remove();
+                for(i in Code_arr){
+                    $('.code_').append('<li schoolId="'+Code_arr[i].schoolId+'"  code="'+Code_arr[i].code+'">'+'&nbsp;&nbsp;&nbsp;'+Code_arr[i].schoolName+Code_arr[i].code+'</li>')
+                };
+                // if()
+                // location.href="../wechat_list.html";
                 /*if(e.wechatData.length<=0){
                     layer.msg("微信未授权");
                 }else{

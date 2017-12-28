@@ -34,11 +34,13 @@ $(function(){
     if(!localStorage.mastTeater){
         var less_need_ = {
             'email':localStorage.terEmail,
-            'schoolId':localStorage.schoolId
+            'schoolId':localStorage.schoolId,
+            'teacherCode':localStorage.teacherId,
         }
         var less_need = {
             'email':localStorage.terEmail,
-            'schoolId':localStorage.schoolId
+            'schoolId':localStorage.schoolId,
+            'teacherCode':localStorage.teacherId,
         }
         homework() // 作业率请求
     }else{
