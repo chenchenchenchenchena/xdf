@@ -27,6 +27,8 @@ $(function(){
         var daycount = day.getDate();
         var menu_s = {
             'teacherEmail':localStorage.terEmail,
+            'teacherCode':localStorage.teacherId,
+            'schoolId':localStorage.schoolId,
             'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
             'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
         };
@@ -69,6 +71,8 @@ $(function(){
         }
         var emailm = {
             'teacherEmail':localStorage.terEmail,
+            'teacherCode':localStorage.teacherId,
+            'schoolId':localStorage.schoolId,
             'beginDate':time,
             'endDate':time
         };
@@ -88,12 +92,16 @@ var time1 = new Date().format("yyyy-MM-dd");
 //当天课程
 var emailm = {
         'teacherEmail':localStorage.terEmail,
+        'teacherCode':localStorage.teacherId,
+        'schoolId':localStorage.schoolId,
         'beginDate':time1,
         'endDate':time1
 };
 //当月课程
 var menu_s = {
     'teacherEmail':localStorage.terEmail,
+    'teacherCode':localStorage.teacherId,
+    'schoolId':localStorage.schoolId,
     'beginDate':new Date().format("yyyy-MM-01"),
     'endDate':new Date().format("yyyy-MM")+'-'+getCountDays()
 };
@@ -367,6 +375,8 @@ setTimeout(function(){
             var daycount = day.getDate();
             var emailm = {
                 'teacherEmail':localStorage.terEmail,
+                'teacherCode':localStorage.teacherId,
+                'schoolId':localStorage.schoolId,
                 'beginDate':time,
                 'endDate':time
             };
@@ -454,6 +464,8 @@ $(document).on('click','.H-data li',function(){
             var daycount = day.getDate();
             var menu_s = {
                 'teacherEmail':localStorage.terEmail,
+                'teacherCode':localStorage.teacherId,
+                'schoolId':localStorage.schoolId,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };

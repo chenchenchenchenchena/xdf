@@ -15,7 +15,7 @@ $(function () {
 
     // if(sessionStorage.Classname_x){
         $('.student_S').hide();
-        $('.Choice_s input').css('margin-top','-90px')
+        $('.Choice_s input').css('margin-top','-90px');
     // }
     var urlPush = '';
     if(getRequest('state').state=='JT'||sessionStorage.signal){
@@ -25,7 +25,8 @@ $(function () {
     }
     var trardata = {
         'schoolId': localStorage.schoolId,
-        'email': localStorage.terEmail
+        'email': localStorage.terEmail,
+        'teacherCode':localStorage.teacherId
     };
     var homeworksubm = {
         'teacherEmail': localStorage.terEmail,
