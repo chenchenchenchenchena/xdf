@@ -200,6 +200,13 @@ $(function () {
             'paperStage': currentStage.stageCode,
             'pageNo': pageNo
         };
+        if(currentGrade.paperClass==undefined){
+            params.paperClass = ''
+        }
+        if(currentGrade.paperSubject==undefined){
+            params.paperSubject = ''
+        }
+
         var url = homework_s.t_getExcellent;
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
             if (e.result) {
@@ -213,7 +220,7 @@ $(function () {
                         if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
                             strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
-                                "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
+                                    "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
                                 "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
                                 "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
                                 "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
