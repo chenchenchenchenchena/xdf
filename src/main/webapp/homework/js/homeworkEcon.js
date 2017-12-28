@@ -89,7 +89,6 @@ $(function () {
                 if (type == subjectType) {
                     subjectList = tabTypes;
                 }
-                //dealClassData(tabTypes, type);
 
             } else {
                 $('.listOne').hide();
@@ -229,7 +228,7 @@ $(function () {
                                 stageName_ = stageList[j].tName;
                             }
                         }
-                        for (var j = 0; i < gradeList.length; j++) {
+                        for (var j = 0; j < gradeList.length; j++) {
                             if(dataList[i].paperGrade != undefined && gradeList[j].tCode == dataList[i].paperGrade){
                                 gradeName_ = gradeList[j].tName;
                             }
