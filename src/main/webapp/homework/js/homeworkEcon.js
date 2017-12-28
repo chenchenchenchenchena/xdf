@@ -29,6 +29,10 @@ $(function () {
     var isModify = GetRequest("isModify");
     var Tcid = GetRequest("id");
 
+    getDictionary(stageType);
+    getDictionary(gradeType);
+    getDictionary(subjectType);
+
     $(document).on("touchstart", "#stage", function () {
         if (stageList == undefined || stageList.length == 0) {
 
@@ -217,24 +221,46 @@ $(function () {
                     // maxPage = 5;
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
+                        var stageName_ ;
+                        var gradeName_ ;
+                        var subjectName_ ;
+                        for (var i = 0; i < stageType.length; i++) {
+                            if(stageType[i].tCode = dataList[i].paperStage){
+                                stageName_ = stageType[i].tName;
+                            }
+                        }
+                        for (var i = 0; i < gradeType.length; i++) {
+                            if(gradeType[i].tCode = dataList[i].paperGrade){
+                                gradeName_ = gradeType[i].tName;
+                            }
+                        }
+                        for (var i = 0; i < subjectType.length; i++) {
+                            if(subjectType[i].tCode = dataList[i].paperSubject){
+                                subjectName_ = subjectType[i].tName;
+                            }
+                        }
+
                         if (undefined != paperIdSub && paperIdSub != "" && paperIdSub == dataList[i].paperID) {
+
                             strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
-                                    "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
-                                "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
-                                "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
+                                "<div><span>学段：</span><span class='stage-'>" + stageName_ + "</span></div>" +
+                                "<div><span>年级：</span><span class='grade-'>" + gradeName_ + "</span></div>" +
+                                "<div><span>学科：</span><span class='subject-'>" + subjectName_ + "</span></div>" +
                                 "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu2.png'/></li>";
                             paperId = dataList[i].paperID;
-                            stageName = currentStage.stageName;
-                            gradeName = currentGrade.gradeName;
-                            subjectName = currentSubject.subjectName;
+                            stageName = stageName_;
+                            gradeName = gradeName_;
+                            subjectName = subjectName_;
+
+
                         } else {
                             strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
-                                "<div><span>学段：</span><span class='stage-'>" + currentStage.stageName + "</span></div>" +
-                                "<div><span>年级：</span><span class='grade-'>" + currentGrade.gradeName + "</span></div>" +
-                                "<div><span>学科：</span><span class='subject-'>" + currentSubject.subjectName + "</span></div>" +
+                                "<div><span>学段：</span><span class='stage-'>" + stageName_ + "</span></div>" +
+                                "<div><span>年级：</span><span class='grade-'>" + gradeName_ + "</span></div>" +
+                                "<div><span>学科：</span><span class='subject-'>" + subjectName_ + "</span></div>" +
                                 "<div><span>发布人：</span><span>" + dataList[i].creator + "</span></div></div>" +
                                 "<img src='images/yu.png'/></li>";
                         }
