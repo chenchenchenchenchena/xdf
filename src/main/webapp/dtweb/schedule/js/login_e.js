@@ -23,6 +23,7 @@ $(function () {
        localStorage.teacherId= $(this).attr('code');
        layer.msg('储存成功'+localStorage.schoolId+ localStorage.teacherId+'')
    });
+
     function terEmail(e){
         console.log(e.data);
         console.log(e.wechatData)
@@ -40,7 +41,6 @@ $(function () {
                     $('.code_').append('<li schoolId="'+Code_arr[i].schoolId+'"  code="'+Code_arr[i].code+'">'+'&nbsp;&nbsp;&nbsp;'+Code_arr[i].schoolName+Code_arr[i].code+'</li>')
                 };
                 // if()
-                // location.href="../wechat_list.html";
                 /*if(e.wechatData.length<=0){
                     layer.msg("微信未授权");
                 }else{
