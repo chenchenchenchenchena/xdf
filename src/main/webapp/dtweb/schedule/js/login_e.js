@@ -7,6 +7,13 @@ $(function () {
    if(!sessionStorage.openid){
        sessionStorage.openid = '111';
     }
+    $('.go').touchend(function(){
+        if( localStorage.schoolId){
+            location.href="../wechat_list.html"
+        }else{
+            layer.msg('顽皮')
+        }
+    })
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
