@@ -32,6 +32,9 @@ $(function () {
     getDictionary(stageType);
     getDictionary(gradeType);
     getDictionary(subjectType);
+    $('.listOne').hide();
+    $('.listTwo').hide();
+    $('.listThree').hide();
 
     $(document).on("touchstart", "#stage", function () {
         if (stageList == undefined || stageList.length == 0) {
@@ -221,22 +224,22 @@ $(function () {
                     // maxPage = 5;
                     var strHtml_ = "";
                     for (var i = 0; i < dataList.length; i++) {
-                        var stageName_ ;
-                        var gradeName_ ;
-                        var subjectName_ ;
-                        for (var i = 0; i < stageType.length; i++) {
-                            if(stageType[i].tCode = dataList[i].paperStage){
-                                stageName_ = stageType[i].tName;
+                        var stageName_ = '';
+                        var gradeName_  = '';
+                        var subjectName_  = '';
+                        for (var j = 0; j < stageList.length; j++) {
+                            if(dataList[i].paperStage != undefined && stageList[j].tCode == dataList[i].paperStage){
+                                stageName_ = stageList[j].tName;
                             }
                         }
-                        for (var i = 0; i < gradeType.length; i++) {
-                            if(gradeType[i].tCode = dataList[i].paperGrade){
-                                gradeName_ = gradeType[i].tName;
+                        for (var j = 0; i < gradeList.length; j++) {
+                            if(dataList[i].paperGrade != undefined && gradeList[j].tCode == dataList[i].paperGrade){
+                                gradeName_ = gradeList[j].tName;
                             }
                         }
-                        for (var i = 0; i < subjectType.length; i++) {
-                            if(subjectType[i].tCode = dataList[i].paperSubject){
-                                subjectName_ = subjectType[i].tName;
+                        for (var j = 0; j < subjectList.length; j++) {
+                            if(dataList[i].paperSubject != undefined && subjectList[j].tCode == dataList[i].paperSubject){
+                                subjectName_ = subjectList[j].tName;
                             }
                         }
 
