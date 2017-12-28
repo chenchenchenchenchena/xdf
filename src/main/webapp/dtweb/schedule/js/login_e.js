@@ -7,7 +7,7 @@ $(function () {
    if(!sessionStorage.openid){
        sessionStorage.openid = '111';
     }
-    $('.go').touchend(function(){
+    $('.go').on('touchend',function(){
         if( localStorage.schoolId){
             location.href="../wechat_list.html"
         }else{
