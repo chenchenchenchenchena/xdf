@@ -203,13 +203,15 @@ $(function () {
             'paperStage': currentStage.stageCode,
             'pageNo': pageNo
         };
-        if(currentGrade.paperClass==undefined){
+        if(currentGrade.gradeCode==undefined){
             params.paperClass = ''
         }
-        if(currentGrade.paperSubject==undefined){
+        if(currentGrade.subjectCode==undefined){
             params.paperSubject = ''
         }
-
+        if(currentGrade.stageCode==undefined){
+            params.paperSubject = ''
+        }
         var url = homework_s.t_getExcellent;
         ajaxRequest("POST", url, JSON.stringify(params), function (e) {
             if (e.result) {
