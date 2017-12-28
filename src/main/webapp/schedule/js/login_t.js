@@ -17,13 +17,6 @@ if(localStorage.terEmail){
     var bindingtea0 = {};
     bindingtea0['email'] = localStorage.terEmail;
     bindingtea0['wechatId'] = sessionStorage.openid;
-    // alert(bindingtea0)
-    ajax_S(url.s_seac,WXnum,function(e){
-        if(e.data!=undefined){
-            var stumore = {'StudentCode':e.studentNo,'wechatId':sessionStorage.openid,'nickName':encodeURIComponent(encodeURIComponent(sessionStorage.nickname)),'headImg': sessionStorage.headimgurl};
-            ajax_S(url.s_nobd,stumore,telbind)
-        }
-    });
     ajax_S(url.t_wxmo, bindingtea0,binding)//ajax请求
 }else{
     var bindingtea0 = {};
@@ -72,7 +65,20 @@ function teac(e){
 // clearCookie('U2Token','/aaaaaaa','.xdf.cn')
 
 
+$('.Code_all p').on('touchend',function(){
+    $('.big_back').show();
+    $('.big_center').css('margin-top',-$('.big_center').height()/2)
+});
 
+$('.close_ws').on('touchend',function(){
+    $('.big_back').hide();
+});
+$('.big_center').on('touchend','li',function(){
+    $('.Code').html($(this).html())
+    localStorage.schoolId = $(this).attr('schoolId');
+    localStorage.teacherId=$(this).attr('code');
+    $('.big_back').hide();
+});
 //获取老师绑定信息
 function binding(e){
     if(e.result==false){
@@ -81,6 +87,12 @@ function binding(e){
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
+        var Code_arr = JSON.parse(localStorage.Codearr);
+        $('.Code').html(Code_arr[0].schoolName)
+        for(i in Code_arr){
+            $('.big_center ul').append('<li code="'+Code_arr[i].code+'" schoolId="'+Code_arr[i].schoolId+'">'+Code_arr[i].schoolName+'</li>')
+        }
+        $('.big_center ul li:last-of-type').css('border','none')
         localStorage.terEmail = teacontent.teacherEmail;
         localStorage.teacherId = teacontent.teacherNo;
         localStorage.schoolId = teacontent.schoolId;

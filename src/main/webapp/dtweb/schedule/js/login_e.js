@@ -4,16 +4,6 @@
 //sessionStorage.openid = 'ofZfFwgizCmzR5XXMQtC5Wx5wZrA'
 // sessionStorage.stuNum= 'sy1';
 $(function () {
-   if(!sessionStorage.openid){
-       sessionStorage.openid = '111';
-    }
-    $('.go').on('touchend',function(){
-        if( localStorage.schoolId){
-            location.href="../wechat_list.html"
-        }else{
-            layer.msg('顽皮')
-        }
-    })
     $(".t_email button").click(function () {
         var temail={
             "email":$(".t_email input").val()+"@xdf.cn"
@@ -24,13 +14,7 @@ $(function () {
             ajax_S(url.w_email,temail,terEmail);
         }
 
-    });
-   $('.code_').on('touchend','li',function(){
-       localStorage.schoolId = $(this).attr('schoolId');
-       localStorage.teacherId= $(this).attr('code');
-       layer.msg('储存成功'+localStorage.schoolId+ localStorage.teacherId+'')
-   });
-
+    })
     function terEmail(e){
         console.log(e.data);
         console.log(e.wechatData)
@@ -42,12 +26,9 @@ $(function () {
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                var Code_arr = e.tCodeData;
-                $('.code_').children().remove();
-                for(i in Code_arr){
-                    $('.code_').append('<li schoolId="'+Code_arr[i].schoolId+'"  code="'+Code_arr[i].code+'">'+'&nbsp;&nbsp;&nbsp;'+Code_arr[i].schoolName+Code_arr[i].code+'</li>')
-                };
+                localStorage.Codearr=JSON.stringify(e.tCodeData);
                 // if()
+                // location.href="../wechat_list.html";
                 /*if(e.wechatData.length<=0){
                     layer.msg("微信未授权");
                 }else{
