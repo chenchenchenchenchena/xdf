@@ -71,13 +71,17 @@ $('.Code_all p').on('touchend',function(){
 });
 
 $('.close_ws').on('touchend',function(){
-    $('.big_back').hide();
+    setTimeout(function(){
+        $('.big_back').hide();
+    },300);
 });
 $('.big_center').on('touchend','li',function(){
     $('.Code').html($(this).html())
     localStorage.schoolId = $(this).attr('schoolId');
     localStorage.teacherId=$(this).attr('code');
-    $('.big_back').hide();
+    setTimeout(function(){
+        $('.big_back').hide();
+    },300);
 });
 //获取老师绑定信息
 function binding(e){
@@ -87,17 +91,24 @@ function binding(e){
         var teacontent = JSON.parse(e.data);
         $('.name_s').html(teacontent.teacherName);
         $('.name_ema').html(teacontent.teacherEmail);
-        var Code_arr = JSON.parse(localStorage.Codearr);
-        $('.Code').html(Code_arr[0].schoolName)
+        var Code_arr = e.tCodeData;
+        var blean_ = false;
         for(i in Code_arr){
+            if(Code_arr[i].schoolId==localStorage.schoolId){
+                $('.Code').html(Code_arr[i].schoolName);
+                blean_ = true;
+            }
             $('.big_center ul').append('<li code="'+Code_arr[i].code+'" schoolId="'+Code_arr[i].schoolId+'">'+Code_arr[i].schoolName+'</li>')
         }
+        if(blean_==false){
+            $('.Code').html(Code_arr[0].schoolName);
+        }
         $('.big_center ul li:last-of-type').css('border','none')
-        localStorage.terEmail = teacontent.teacherEmail;
-        localStorage.teacherId = teacontent.teacherNo;
-        localStorage.schoolId = teacontent.schoolId;
-        localStorage.teacherName = teacontent.teacherName;
-        localStorage.teachertel = teacontent.mobile;
+        // localStorage.terEmail = teacontent.teacherEmail;
+        // localStorage.teacherId = teacontent.teacherNo;
+        // localStorage.schoolId = teacontent.schoolId;
+        // localStorage.teacherName = teacontent.teacherName;
+        // localStorage.teachertel = teacontent.mobile;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')

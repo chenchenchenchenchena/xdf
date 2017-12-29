@@ -6,7 +6,8 @@
 $(function () {
     $(".t_email button").click(function () {
         var temail={
-            "email":$(".t_email input").val()+"@xdf.cn"
+            "email":$(".t_email input").val()+"@xdf.cn",
+            // 'wechatId': sessionStorage.openid
         }
         if($(".t_email input").val()==""){
             layer.msg("邮箱不能为空");
@@ -15,6 +16,7 @@ $(function () {
         }
 
     })
+
     function terEmail(e){
         console.log(e.data);
         console.log(e.wechatData)
@@ -26,18 +28,36 @@ $(function () {
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                localStorage.Codearr= JSON.stringify(e.tCodeData);
+                // localStorage.Codearr= JSON.stringify(e.tCodeData);
                 // if()
-                location.href="../wechat_list.html";
-                /*if(e.wechatData.length<=0){
+                // location.href="../wechat_list.html";
+                if(!e.wechatData){
                     layer.msg("微信未授权");
+                    var time,
+                        number = 0,
+                        randomstr = '';
+                    time = setInterval(function(){
+                        number++
+                        var math_ = parseInt(Math.random()*10);
+                        randomstr+=math_
+                        if(number>=8){
+                            clearInterval(time)
+                            sessionStorage.openid = randomstr;
+                            localStorage.statusFlag="teacher";
+                            localStorage.terEmail = e.data.sEmail;
+                            localStorage.schoolId = e.data.nSchoolId;
+                            localStorage.teacherId=e.data.sCode;
+                            localStorage.teacherName=e.data.sName;
+                            location.href="../wechat_list.html";
+
+                        }
+                    },2)
                 }else{
                     sessionStorage.nickname=e.wechatData[0].nickName;
                     sessionStorage.headimgurl=e.wechatData[0].headImg;
                     sessionStorage.openid=e.wechatData[0].wechatId;
-                    // location.href="../../schedule/login_t.html";
-                    location.href="../wechat_list.html";
-                }*/
+                    // location.href="../wechat_list.html";
+                }
             }else{
                 layer.msg("教师邮箱不存在");
             }
