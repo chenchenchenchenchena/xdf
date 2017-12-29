@@ -39,6 +39,7 @@ function Wxtea(e){
 }
 function teac(e){
     if(e.result==false){
+        // layer.msg('绑定失败')
         ajax_S(url.t_wxmo,WXnum,Wxtea)//ajax请求
     }else{
         var Email_val = '';
@@ -99,6 +100,9 @@ function binding(e){
                 blean_ = true;
             }
             $('.big_center ul').append('<li code="'+Code_arr[i].code+'" schoolId="'+Code_arr[i].schoolId+'">'+Code_arr[i].schoolName+'</li>')
+        }
+        if(Code_arr.length<=1){
+            $('.Code_all p').hide();
         }
         if(blean_==false){
             $('.Code').html(Code_arr[0].schoolName);
