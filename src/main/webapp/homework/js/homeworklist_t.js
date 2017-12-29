@@ -135,11 +135,13 @@ $(function(){
     var Read = '';
     // 获取老师作业列表
     if(localStorage.mastTeater){
-        $('.big_select').show();
+        // $('.big_select').show();
         need_mas = {
-            'masterTeacherEmail':localStorage.terEmail,
-            'ifmore':'1'
+            'email':localStorage.terEmail,
+            'schoolId':localStorage.schoolId
         }
+        getList(need_mas,3);
+
     }else{
         need_mas = {
             'email':localStorage.terEmail,
