@@ -26,9 +26,9 @@ $(function () {
                 localStorage.schoolId = e.data.nSchoolId;
                 localStorage.teacherId=e.data.sCode;
                 localStorage.teacherName=e.data.sName;
-                localStorage.Codearr=JSON.stringify(e.tCodeData);
+                localStorage.Codearr= JSON.stringify(e.tCodeData);
                 // if()
-                // location.href="../wechat_list.html";
+                location.href="../wechat_list.html";
                 /*if(e.wechatData.length<=0){
                     layer.msg("微信未授权");
                 }else{
