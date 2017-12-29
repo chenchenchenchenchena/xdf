@@ -108,11 +108,11 @@ function binding(e){
             $('.Code').html(Code_arr[0].schoolName);
         }
         $('.big_center ul li:last-of-type').css('border','none')
-        // localStorage.terEmail = teacontent.teacherEmail;
-        // localStorage.teacherId = teacontent.teacherNo;
-        // localStorage.schoolId = teacontent.schoolId;
-        // localStorage.teacherName = teacontent.teacherName;
-        // localStorage.teachertel = teacontent.mobile;
+        localStorage.terEmail = teacontent.teacherEmail;
+        localStorage.teacherId = teacontent.teacherNo;
+        localStorage.schoolId = teacontent.schoolId;
+        localStorage.teacherName = teacontent.teacherName;
+        localStorage.teachertel = teacontent.mobile;
         if(sessionStorage.callbackconfig=='schedule'){
             location.href = 'schedule_s.html'
             sessionStorage.removeItem('callbackconfig')
