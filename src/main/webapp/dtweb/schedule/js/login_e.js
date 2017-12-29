@@ -56,7 +56,7 @@ $(function () {
                     sessionStorage.nickname=e.wechatData[0].nickName;
                     sessionStorage.headimgurl=e.wechatData[0].headImg;
                     sessionStorage.openid=e.wechatData[0].wechatId;
-                    // location.href="../wechat_list.html";
+                    location.href="../wechat_list.html";
                 }
             }else{
                 layer.msg("教师邮箱不存在");
