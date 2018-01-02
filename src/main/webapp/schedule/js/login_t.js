@@ -125,7 +125,7 @@ function binding(e){
             location.href = '../homework/homeworklist_t.html';
             sessionStorage.removeItem('homeCanfig');
         }
-    }
+    } 
 
 }
 

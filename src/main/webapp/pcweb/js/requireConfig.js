@@ -336,7 +336,7 @@ function getlastmonth() {
     var oneD  = 0;
     var daysInMonth = new Array(0,31,28,31,30,31,30,31,31,30,31,30,31);
     isYears(currentYear);
-    if(currentMonth==0){
+    if(currentMonth==1){
         //一月前的时间
         prevCurrentYear=currentYear-1;
         prevCurrentMonth=12;
@@ -432,7 +432,7 @@ function getlastmonth() {
     //现在时间
     var now=currentYear+'-'+p(currentMonth)+"-"+p(currentDate);
     //一个月前时间
-    var priceLastMonth = prevCurrentYear+"-"+p(prevCurrentMonth)+"-"+p(lastDate);
+    var priceLastMonth = prevCurrentYear+"-"+p(prevCurrentMonth)+"-"+p(preDay);
     //三个月前的时间
     var threeMonth = tmY + "-" + p(tmM) + '-' + p(tmD);
 
