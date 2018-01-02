@@ -35,7 +35,7 @@ $(function () {
                     layer.msg("微信未授权");
                     var time,
                         number = 0,
-                        randomstr = '';
+                        randomstr = null;
                     time = setInterval(function(){
                         number++
                         var math_ = parseInt(Math.random()*10);

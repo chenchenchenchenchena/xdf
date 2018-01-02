@@ -97,6 +97,8 @@ function binding(e){
         for(i in Code_arr){
             if(Code_arr[i].schoolId==localStorage.schoolId){
                 $('.Code').html(Code_arr[i].schoolName);
+                localStorage.teacherId = Code_arr[i].code;
+                localStorage.schoolId = Code_arr[i].schoolId;
                 blean_ = true;
             }
             $('.big_center ul').append('<li code="'+Code_arr[i].code+'" schoolId="'+Code_arr[i].schoolId+'">'+Code_arr[i].schoolName+'</li>')
@@ -106,11 +108,12 @@ function binding(e){
         }
         if(blean_==false){
             $('.Code').html(Code_arr[0].schoolName);
+            localStorage.teacherId = teacontent.teacherNo;
+            localStorage.schoolId = teacontent.schoolId;
         }
         $('.big_center ul li:last-of-type').css('border','none')
         localStorage.terEmail = teacontent.teacherEmail;
-        localStorage.teacherId = teacontent.teacherNo;
-        localStorage.schoolId = teacontent.schoolId;
+
         localStorage.teacherName = teacontent.teacherName;
         localStorage.teachertel = teacontent.mobile;
         if(sessionStorage.callbackconfig=='schedule'){
