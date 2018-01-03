@@ -30,7 +30,6 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        layer.msg("1");
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
@@ -101,14 +100,15 @@ $(function () {
         }
         wx.config({
             // 配置信息, 即使不正确也能使用 wx.ready
-            debug: false,
-            appId: '',
-            timestamp: 1,
-            nonceStr: '',
-            signature: '',
-            jsApiList: []
+            //debug: false,
+            //appId: '',
+            //timestamp: 1,
+            //nonceStr: '',
+            //signature: '',
+            //jsApiList: []
         });
         wx.ready(function () {
+            layer.msg($(audioCur).find('source').attr("src"));
             audioCur.play();
         });
         playAnimation();
