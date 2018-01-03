@@ -336,7 +336,7 @@ function getlastmonth() {
     var oneD  = 0;
     var daysInMonth = new Array(0,31,28,31,30,31,30,31,31,30,31,30,31);
     isYears(currentYear);
-    if(currentMonth == 1){
+    if(currentMonth==1){
         //一月前的时间
         prevCurrentYear=currentYear-1;
         prevCurrentMonth=12;

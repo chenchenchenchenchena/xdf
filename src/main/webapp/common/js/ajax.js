@@ -158,12 +158,12 @@ var pcweb = {
     'old_data':url_o+'backEndMasterTeacherManager/getTeacherAllCode.do',
     't_dele':url_o+'backEndMasterTeacherManager/editMasterTeacherCode.do',
 }
-if(localStorage.mastTeater){
-    homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
-    url.t_houehome = url_o+'masterTeacher/querMasterTeacherCurrentHmWorkRate.do';
-    Study.t_self = url_o+'masterTeacher/queryMasterTeacherScoreReport.do'
-       
-}
+// if(localStorage.mastTeater){
+//     homework_s.t_list = url_o+'masterTeacher/querMasterTeacherCurrentClassHmInfo.do';
+//     url.t_houehome = url_o+'masterTeacher/querMasterTeacherCurrentHmWorkRate.do';
+//     Study.t_self = url_o+'masterTeacher/queryMasterTeacherScoreReport.do'
+//
+// }
 //权限限制
 if(localStorage.terEmail&&!localStorage.mastTeater&&!localStorage.Assistant){
     // 获取主讲

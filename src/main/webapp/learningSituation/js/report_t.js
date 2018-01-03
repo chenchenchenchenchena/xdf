@@ -24,16 +24,17 @@ $(function(){
     }
     $('body').css('height',$(window).height())
     var Shchool;
-    if(localStorage.mastTeater){
-        $('.big_select').show();
-        $('.load_t').hide();
-    }
+    // if(localStorage.mastTeater){
+    //     $('.big_select').show();
+    //     $('.load_t').hide();
+    // }
     if(localStorage.mastTeater){
         var need_ = {
-            'masterTeacherEmail':localStorage.terEmail,
-            'gradeType':'1',
-            'ifmore':'1',
+            'teaEmail':localStorage.terEmail,
+            'tCode':'1'
         };
+        Interaction();
+
     }else{
         var need_ = {
             'teaEmail':localStorage.terEmail,
@@ -123,15 +124,17 @@ $(document).on('touchend', '.report_tab li', function () {
     Text_Grade = $(this).html();
     $('.class_big').find('.classroom_s').remove();
     if(localStorage.mastTeater){
-        Interaction_master();
+        // Interaction_master();
+        Interaction();
+
     }else{
      Interaction();
     }
 });
    
-function Interaction_master(){
-        ajax_S(Study.t_self,need_,less_Inter);
-    };
+// function Interaction_master(){
+//         ajax_S(Study.t_self,need_,less_Inter);
+//     };
 
 function Interaction(){
     ajaxRequest('post',Study.t_self,need_,less_Inter,function(){
@@ -240,7 +243,9 @@ $('.truorfal input').on('touchend',function(){
             need_.schoolId =''
         }
         $('.big_select').hide();
-        Interaction_master();
+        // Interaction_master();
+    Interaction();
+
 })
 
 

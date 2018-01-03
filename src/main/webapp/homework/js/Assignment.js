@@ -67,7 +67,7 @@ $(function () {
         for (var a = 0; a < className_.length; a++) {
             var beginDate = className_[a].BeginDate.split(' ')[0];
             var endDate = className_[a].EndDate.split(' ')[0];
-            if(className_[a].masterTeacherName == undefined){
+            if(className_[a].masterTeacherName == undefined||className_[a].masterTeacherName == ''){
                 master = "暂无";
             }else {
                 master = className_[a].masterTeacherName;

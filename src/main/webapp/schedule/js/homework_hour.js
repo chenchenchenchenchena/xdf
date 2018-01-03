@@ -44,15 +44,18 @@ $(function(){
         }
         homework() // 作业率请求
     }else{
-        $('.big_select').show();
+        // $('.big_select').show();
         var less_need_ = {
             'masterTeacherEmail':localStorage.terEmail,
+            'teacherCode':localStorage.teacherId,
             'ifmore':'1'
         }
         var less_need = {
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId,
+            'teacherCode':localStorage.teacherId,
         }
+        homework() // 作业率请求
     }
     //校区相关
     $(document).on('touchend',".select p",function(e){
@@ -128,7 +131,7 @@ $(function(){
         })
     };
     function Percentage(Data_ALL){
-        if(Data_ALL.result!=false&&Data_ALL.Data.length!=0){
+        if(Data_ALL.result!=false&&Data_ALL.Data){
             $('.canvs_hour').find('h4').eq(0).html('总提交率');
             $('.canvs_hour').find('h4').eq(1).html('总批复率');
             $('.canvs_more li').eq(0).find('span').eq(2).html('提交率');
