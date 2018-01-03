@@ -9,7 +9,7 @@ $(function () {
     /**
      * 播放作业描述语音
      */
-    $(document).on('touchend', '.audio_box>div', function () {
+    $(document).on('click', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
 
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
@@ -117,9 +117,15 @@ $(function () {
         audioCur.onended = function () {
             isPlaying = false;
             var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
-            if(nextAudio != null && nextAudio != undefined){
-                voiceCheck(nextAudio);
-            }
+            //if(nextAudio != null && nextAudio != undefined){
+            //    voiceCheck(nextAudio);
+            //}
+            var id = $(nextAudio).find('source').attr("id");
+            $(document).on('click', '#'+id, function () {
+
+                voiceCheck($(this).find('audio')[0]);//先播放当前语音
+
+            });
 
         };
 
