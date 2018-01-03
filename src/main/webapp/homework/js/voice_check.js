@@ -29,7 +29,6 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        layer.msg(newID + "~");
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
