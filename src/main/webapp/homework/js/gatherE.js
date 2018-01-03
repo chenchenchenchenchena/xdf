@@ -124,6 +124,10 @@ $('.noHwTitle span:last-of-type').on('touchend', function () {
     })
 
 });
+$('.quire_').on('touchend',function(){
+    $(this).hide();
+    $('#Preview_').hide();
+});
 //已交学生报告
 $(document).on("touchstart",".report",function () {
     var url = url_o+"/teacherData/getStudentReportUrl.do";
@@ -134,7 +138,11 @@ $(document).on("touchstart",".report",function () {
         if (e.result) {
             if(e.url!=undefined && e.url != ""){
                 console.log(e.url);
-                window.location.href = e.url;
+                $('#Preview_').css('width',$('body').width());
+                $('#Preview_').css('height',$('body').height());
+                $('#Preview_').attr('src',e.url);
+                $('#Preview_').show();
+                $('.quire_').show();
             }
         }
     });
