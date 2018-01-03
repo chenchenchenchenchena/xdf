@@ -3,12 +3,15 @@
  */
 $(function () {
     /*----------------语音播放开始--------------------------------------*/
+
+    var isPlaying = false;
+
     /**
      * 播放作业描述语音
      */
     $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
-        voiceCheck($(this).find('audio')[0]);
+        voiceCheck($(this).find('audio')[0]);//先播放当前语音
     });
 
     /**
@@ -83,15 +86,28 @@ $(function () {
     function stop() {
         audioCur.pause();
         stopAnimation();
+        isPlaying = false;
     }
 
     /**
      *开始播放方法
      */
     function play() {
-
+        if(isPlaying){
+           return false;
+        }
         audioCur.play();
         playAnimation();
+        isPlaying = true;
+        //onended
+        //监听播放完毕
+        audioCur.onended = function () {
+            isPlaying = false;
+            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
+            if(nextAudio != null && nextAudio != undefined){
+                voiceCheck(nextAudio);
+            }
+        };
 
     }
 
