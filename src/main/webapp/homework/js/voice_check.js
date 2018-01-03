@@ -104,6 +104,7 @@ $(function () {
         //onended
         //监听播放完毕
         audioCur.onended = function () {
+            layer.msg( "1" + "~");
             isPlaying = false;
             var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
             layer.msg( nextAudio + "~");
