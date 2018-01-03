@@ -16,6 +16,27 @@ input{
 	top:0;
 	top:0;
 }
+.quire_{
+	width:150px;
+	height:150px;
+	position:fixed;
+	top:50%;
+	right:0;
+	margin-top:-75px;
+	display:none;
+	z-index:10;
+}
+.quire_ h4{
+	line-height:40px;
+	font-size:25px;
+	text-align:center;
+}
+.quire_ img{
+	display:block;
+	width:50px;
+	height:50px;
+	margin:0 auto 10px;
+}
 #Preview_{
 	position: absolute;
 	top:0;
