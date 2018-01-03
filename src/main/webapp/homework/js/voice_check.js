@@ -29,7 +29,7 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        layer.msg($(audioCur).find('source').attr("src"));
+        layer.msg($(voiceId).find('source').attr("src"));
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
