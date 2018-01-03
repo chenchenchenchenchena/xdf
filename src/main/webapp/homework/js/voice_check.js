@@ -5,6 +5,7 @@ $(function () {
     /*----------------语音播放开始--------------------------------------*/
 
     var isPlaying = false;
+    var unPlayList = [];
 
     /**
      * 播放作业描述语音
@@ -13,6 +14,13 @@ $(function () {
         console.log('oooo' + $(this).find('audio')[0]);
 
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
+        unPlayList = [];
+        var nextList = $(audioCur).parent().parent().nextAll();
+        if(nextList != null && nextList != undefined && nextList.length > 0){
+            for (var i = 0;i<nextList.length;i++){
+                unPlayList.push(nextList[i].find('div').find('audio')[0]);
+            }
+        }
     });
 
     /**
@@ -104,9 +112,12 @@ $(function () {
         //监听播放完毕
         audioCur.onended = function () {
             isPlaying = false;
-            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
-            if(nextAudio != null && nextAudio != undefined){
-                voiceCheck(nextAudio);
+            //var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
+            //if(nextAudio != null && nextAudio != undefined){
+            //    voiceCheck(nextAudio);
+            //}
+            if(unPlayList.length>0){
+                voiceCheck(unPlayList[0]);
             }
         };
 
