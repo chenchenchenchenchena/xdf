@@ -369,7 +369,7 @@ $(function () {
             console.log(sessionStorage.contentName);
             location.href = "AssignmentE.html?isModify=" + isModify + "&id=" + Tcid + "&isUpdata=" + 1;
             sessionStorage.paperId = paperId;
-            sessionStorage.paperUrl = url_ + "/gwots/testprocess/control/index?clientType=mobile&paperId=" + sessionStorage.paperId;
+            sessionStorage.paperUrl = url_ + "/gwots/testprocess/testing/index_view?paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = gradeName;
             sessionStorage.subjectName = subjectName;
