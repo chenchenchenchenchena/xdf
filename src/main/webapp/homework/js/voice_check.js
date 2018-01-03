@@ -11,6 +11,7 @@ $(function () {
      */
     $(document).on('touchend', '.audio_box>div', function () {
         console.log('oooo' + $(this).find('audio')[0]);
+
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
     });
 
