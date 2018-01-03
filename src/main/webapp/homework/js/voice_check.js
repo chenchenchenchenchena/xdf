@@ -107,25 +107,26 @@ $(function () {
             //signature: '',
             //jsApiList: []
         });
-        wx.ready(function () {
-            layer.msg($(audioCur).find('source').attr("src"));
-            audioCur.play();
-        });
+        //wx.ready(function () {
+        //    layer.msg($(audioCur).find('source').attr("src"));
+        //    audioCur.play();
+        //});
+        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+            WeixinJSBridge.invoke('getNetworkType', {}, function (res) {
+                // 在这里拿到 e.err_msg, 这里面就包含了所有的网络类型
+                // alert(res.err_msg);
+                audioCur.play();
+            });
+        }
         playAnimation();
         isPlaying = true;
         //监听播放完毕
         audioCur.onended = function () {
             isPlaying = false;
             var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
-            //if(nextAudio != null && nextAudio != undefined){
-            //    voiceCheck(nextAudio);
-            //}
-            var id = $(nextAudio).find('source').attr("id");
-            $(document).on('click', '#'+id, function () {
-
-                voiceCheck($(this).find('audio')[0]);//先播放当前语音
-
-            });
+            if(nextAudio != null && nextAudio != undefined){
+                voiceCheck(nextAudio);
+            }
 
         };
 
