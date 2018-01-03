@@ -47,7 +47,7 @@ $(function () {
 
     if (sessionStorage.paperUrl) {
         $('.sResolve a').on("touchend",function(){
-            $('#Preview_').load(sessionStorage.paperUrl);
+            $('#Preview_').attr('src',sessionStorage.paperUrl);
             $('#Preview_').show();
         });
 
