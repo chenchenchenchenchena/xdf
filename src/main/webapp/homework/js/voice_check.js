@@ -29,7 +29,7 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        //layer.msg(newID + "~");
+        layer.msg($(voiceId).find('source').attr("src"));
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
@@ -101,15 +101,11 @@ $(function () {
         audioCur.play();
         playAnimation();
         isPlaying = true;
-        //onended
         //监听播放完毕
         audioCur.onended = function () {
-            layer.msg( "1" + "~");
             isPlaying = false;
             var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
-            layer.msg( nextAudio + "~");
             if(nextAudio != null && nextAudio != undefined){
-                layer.msg($(nextAudio).attr('id') + "@");
                 voiceCheck(nextAudio);
             }
         };
