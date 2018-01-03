@@ -390,12 +390,12 @@ $(function () {
         if (flag == 1) {
             idChildren = "record_audio" + id;
             //录音布局，可以删除
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "' autoplay preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i><span class='stuVoice'></span></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
         } else {
 
             idChildren = "audio_" + id;
-            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
+            strVoice += "<li class='audio_box'><div><audio id='" + idChildren + "' autoplay preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
                 "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
         }
 
@@ -438,7 +438,7 @@ $(function () {
             }
         }
         idChildren = "audio_" + id;
-        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
+        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "' autoplay preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
 
         $('.tea_sp .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
@@ -475,7 +475,7 @@ $(function () {
             }
         }
         idChildren = "audio_" + id;
-        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "'preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
+        strVoice = "<li class='audio_box'><div><audio id='" + idChildren + "' autoplay preload='auto' data-time='" + playTime + "'><source src='" + url + "' type='audio/mpeg'></audio>" +
             "<i class='play-icon'></i></div><span class='voice_lenth'>" + voiceLen + "</span></li>";
 
         $('.anSwer .hmAnswer:eq(' + domIndex + ')').find('.voiceBox').append(strVoice);
