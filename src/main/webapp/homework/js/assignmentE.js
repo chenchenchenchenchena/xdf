@@ -47,8 +47,17 @@ $(function () {
 
     if (sessionStorage.paperUrl) {
         $('.sResolve a').on("touchend",function(){
+
+                var version = parseFloat(RegExp.$1);
+
+                    var phoneScale = parseInt(window.screen.width)/750*1.8;
+
+                    $('head').append('<meta name="viewport" content="width=414, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+
+
             $('#Preview_').attr('src',sessionStorage.paperUrl);
             $('#Preview_').show();
+            console.log( $('#Preview_').length)
         });
 
 
