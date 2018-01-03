@@ -49,7 +49,13 @@ $(function () {
         $('.sResolve a').on("touchend",function(){
             $('#Preview_').attr('src',sessionStorage.paperUrl);
             $('#Preview_').show();
+            $('.quire_').show();
         });
+
+        $('.quire_').on('touchend',function(){
+            $(this).hide();
+            $('#Preview_').hide();
+        })
 
 
     }
