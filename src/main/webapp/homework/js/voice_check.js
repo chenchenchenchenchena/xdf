@@ -106,6 +106,7 @@ $(function () {
             isPlaying = false;
             var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
             if(nextAudio != null && nextAudio != undefined){
+                layer.msg($(nextAudio).attr('id') + "@");
                 voiceCheck(nextAudio);
             }
         };
