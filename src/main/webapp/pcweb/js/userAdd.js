@@ -13,10 +13,13 @@ require(['jquery-1.11.0.min'], function () {
             number_l = 2;
         }
         else if(url_l.indexOf('power')!=-1||url_l.indexOf('userAdd')!=-1||url_l.indexOf('useredit')!=-1){
-            number_l = 3
+            number_l = 4
         }
         else if(url_l.indexOf('master')!=-1){
             number_l = 4
+        }
+        else if (url_l.indexOf('learn') != -1) {
+            number_l = 3
         }
         var $bure_true = $('.left_nav ul li').eq(number_l);
         $bure_true.addClass('activ_nav').siblings().removeClass('activ_nav');
@@ -102,6 +105,8 @@ require(['jquery-1.11.0.min'], function () {
 
             //搜索用户
             function seachUser(){
+                $('.name_l').val(null);
+                $('.comname_l').val(null);
                 // console.log($(this).attr('src'))
                 if($('.adduser_sea input').val()!=''){
                     $.ajax({
@@ -119,6 +124,8 @@ require(['jquery-1.11.0.min'], function () {
                                 }
                             }else{
                                 $('.new_username').hide();
+                                $('.adduser_list').hide();
+                                $('.adduser_list').find('li').remove();
                             }
                         }
                     });
@@ -136,7 +143,9 @@ require(['jquery-1.11.0.min'], function () {
                 $('.adduser_sea input').attr('comname',$(this).attr('comname'));
                 $('.adduser_sea input').attr('deptName',$(this).attr('deptName'));
                 $('.adduser_sea input').attr('userId',$(this).attr('userId'));
-                $('.new_username').show().html('姓名：'+$('.adduser_sea input').attr('name'));
+                $('.name_l,.comname_l').siblings().css('width','auto')
+                $('.name_l').val($('.adduser_sea input').attr('name'));
+                $('.comname_l').val($('.adduser_sea input').attr('deptName'));
                 $('.adduser_list').hide();
                 $('.adduser_list').find('li').remove();
             });
@@ -182,38 +191,66 @@ require(['jquery-1.11.0.min'], function () {
             var emailtest =  /[^\u4e00-\u9fa5]/;
             if( $(this).attr('checked')){
                 layer.msg('正在提交');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
+
                 return false;
             }
             if($('.homework_sea input').val()==''){
                 layer.msg('请输入账号');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
+                return false;
+            }
+            if($('.name_l').val()==''){
+                layer.msg('请输入姓名');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
+                return false;
+            }
+            if($('.comname_l').val()==''){
+                layer.msg('请输入所在学校地区');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
                 return false;
             }
             if($('.checked_power').length==0){
                 layer.msg('请选择相关权限');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
                 return false;
             }
             if($('.checked_school').length==0){
                 layer.msg('请选择相关校区');
+                $('.user_Enable').hide();
+                $('.user_Prompt_confirm').removeAttr('checked');
                 return false;
             }
             if(!emailtest.test($('.homework_sea input').val())){
                 layer.msg('请输入合法账号');
-                return false;
-            }
-
-            if($('.homework_sea input').val()!=$('.homework_sea input').attr('userId')){
-                layer.msg('已选账户与输入账户不符');
+                $('.user_Prompt_confirm').removeAttr('checked');
                 $('.user_Enable').hide();
                 return false;
             }
+
             $(this).attr('checked',true);
             var config = {
                 loginId:$('.homework_sea input').val(),
-                userName:$('.homework_sea input').attr('name'),
+                userName:$('.name_l').val(),
                 email:$('.homework_sea input').val()+'@xdf.cn',
                 department:$('.homework_sea input').attr('deptName'),
-                school:$('.homework_sea input').attr('comname')
+                school:$('.comname_l').val()
             };
+                if($('.name_l').val()==''){
+                    layer.msg('请输入姓名');
+                    $('.user_Enable').hide();
+                    return false;
+                }
+                if($('.comname_l').val()==''){
+                    layer.msg('请输入所在学校地区');
+                    $('.user_Enable').hide();
+                    return false;
+                }
             var schoolId = [];
             var powerId = [];
             for(var k = 0;k<$('.checked_school').length;k++){
