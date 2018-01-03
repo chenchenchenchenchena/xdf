@@ -46,7 +46,12 @@ $(function () {
     }
 
     if (sessionStorage.paperUrl) {
-        $('.sResolve a').attr("href", sessionStorage.paperUrl);
+        $('.sResolve a').on("touchend",function(){
+            $('#Preview_').load(sessionStorage.paperUrl);
+            $('#Preview_').show();
+        });
+
+
     }
     var trardata = {
         'teacherCode': localStorage.teacherId,
