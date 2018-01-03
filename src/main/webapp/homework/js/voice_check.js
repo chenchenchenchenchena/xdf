@@ -98,26 +98,11 @@ $(function () {
         if(isPlaying){
            return false;
         }
-        wx.config({
-            // 配置信息, 即使不正确也能使用 wx.ready
-            //debug: false,
-            //appId: '',
-            //timestamp: 1,
-            //nonceStr: '',
-            //signature: '',
-            //jsApiList: []
+        wx.ready(function () {
+            layer.msg($(audioCur).find('source').attr("src"));
+            audioCur.play();
         });
-        //wx.ready(function () {
-        //    layer.msg($(audioCur).find('source').attr("src"));
-        //    audioCur.play();
-        //});
-        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
-            WeixinJSBridge.invoke('getNetworkType', {}, function (res) {
-                // 在这里拿到 e.err_msg, 这里面就包含了所有的网络类型
-                // alert(res.err_msg);
-                audioCur.play();
-            });
-        }
+
         playAnimation();
         isPlaying = true;
         //监听播放完毕
