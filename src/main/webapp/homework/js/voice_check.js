@@ -30,6 +30,7 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
+        layer.msg("1");
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
@@ -98,7 +99,9 @@ $(function () {
         if(isPlaying){
            return false;
         }
-        audioCur.play();
+        wx.ready(function () {
+            audioCur.play();
+        });
         playAnimation();
         isPlaying = true;
         //监听播放完毕
