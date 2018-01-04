@@ -139,6 +139,7 @@ $(function(){
         need_mas = {
             'email':localStorage.terEmail,
             'schoolId':localStorage.schoolId,
+            'teacherCode':localStorage.teacherId
 
 
         }
@@ -147,7 +148,9 @@ $(function(){
     }else{
         need_mas = {
             'email':localStorage.terEmail,
-            'schoolId':localStorage.schoolId
+            'schoolId':localStorage.schoolId,
+            'teacherCode':localStorage.teacherId
+
         }
         getList(need_mas,3);
     }

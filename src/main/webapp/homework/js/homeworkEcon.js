@@ -24,7 +24,7 @@ $(function () {
     var maxPage;
     var isLoading = false;
     var isEnd = false;
-
+    var stu_utl='';
 
     var isModify = GetRequest("isModify");
     var Tcid = GetRequest("id");
@@ -255,7 +255,6 @@ $(function () {
                             gradeName = gradeName_;
                             subjectName = subjectName_;
 
-
                         } else {
                             strHtml_ += "<li><h3 paperTotalScore='" + dataList[i].paperTotalScore + "' paperId='" + dataList[i].paperID + "'>" + dataList[i].paperName + "</h3>" +
                                 "<div class='sInfo'>" +
@@ -370,6 +369,7 @@ $(function () {
             location.href = "AssignmentE.html?isModify=" + isModify + "&id=" + Tcid + "&isUpdata=" + 1;
             sessionStorage.paperId = paperId;
             sessionStorage.paperUrl = url_ + "/gwots/testprocess/testing/index_view?paperId=" + sessionStorage.paperId;
+            sessionStorage.paperUrl_two = url_ + "/gwots/testprocess/control/index?clientType=mobile&paperId=" + sessionStorage.paperId;
             sessionStorage.stageName = stageName;
             sessionStorage.gradeName = gradeName;
             sessionStorage.subjectName = subjectName;

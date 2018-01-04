@@ -301,7 +301,7 @@ $(function () {
         // var paperName = hwName_.substring(0, hwName_.length - 1);
         var paperName = hwName_;
         var paperID = sessionStorage.paperId;
-        var paperUrl = sessionStorage.paperUrl;
+        var paperUrl = sessionStorage.paperUrl_two;
 
 
         if (isModify == 1) {

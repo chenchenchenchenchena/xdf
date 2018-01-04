@@ -128,6 +128,12 @@ $('.quire_').on('touchend',function(){
     $(this).hide();
     $('#Preview_').hide();
 });
+$(document).on('touchend','.loading_s',function(){
+    alert(0)
+})
+$(document).on('touchend','.loading_s',function(){
+
+})
 //已交学生报告
 $(document).on("touchstart",".report",function () {
     var url = url_o+"/teacherData/getStudentReportUrl.do";

@@ -273,7 +273,7 @@ $(function(){
 		if(msg.code==200){
 			if(msg.data.length>0){
 				var datas = msg.data;
-				$.each(datas,function(i,item){
+				$.each(datas,function(i,item){4
 					var classTitle = item.className;
 					//作业类型
 					var homeworkType=item.homeworkType;
