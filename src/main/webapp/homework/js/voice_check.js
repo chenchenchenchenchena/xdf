@@ -13,7 +13,6 @@ $(function () {
         console.log('oooo' + $(this).find('audio')[0]);
 
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
-
     });
 
     /**
@@ -30,7 +29,6 @@ $(function () {
     function voiceCheck(voiceId) {
 
         var newID = $(voiceId).attr('id');
-        layer.msg("1");
         if (newID != oldId) {
             if (audioCur != null) {
                 stop();
@@ -97,20 +95,9 @@ $(function () {
      */
     function play() {
         if(isPlaying){
-           return false;
+            return false;
         }
-        wx.config({
-            // 配置信息, 即使不正确也能使用 wx.ready
-            debug: false,
-            appId: '',
-            timestamp: 1,
-            nonceStr: '',
-            signature: '',
-            jsApiList: []
-        });
-        wx.ready(function () {
-            audioCur.play();
-        });
+        audioCur.play();
         playAnimation();
         isPlaying = true;
         //监听播放完毕
@@ -120,7 +107,6 @@ $(function () {
             if(nextAudio != null && nextAudio != undefined){
                 voiceCheck(nextAudio);
             }
-
         };
 
     }
