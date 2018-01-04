@@ -315,7 +315,7 @@ $(function () {
     });
     //提交确认
     $('.Submit_s').on('touchend', function () {
-        $('.big_back').show();
+        //$('.big_back').show();
         $('.areyok').show();
     });
     $('.areyok input:first-of-type').on('touchend', function () {
