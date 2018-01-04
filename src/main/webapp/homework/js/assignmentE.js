@@ -20,6 +20,13 @@ $(function () {
 
     } else {
         if (isModify == 1) {
+            var onlineUrl = 'dt.xdf.cn';
+            var url_ = "";
+            if (window.location.host == onlineUrl) {//正式环境
+                url_ = "http://tps.xdf.cn";
+            } else {//测试环境
+                url_ = "http://tps.staff.xdf.cn";
+            }
             ajaxRequest('post', homework_s.t_seac, {'Tcid': Tcid}, function (e) {
                 if (e.code == 200) {
                     var data = e.data;
@@ -28,7 +35,8 @@ $(function () {
                         $(".class_s i").attr("classcode", data.classCode);
                         $(".class_s i").attr("classname", data.className);
                         sessionStorage.paperId = data.paperId;
-                        sessionStorage.paperUrl = data.paperUrl;
+                        sessionStorage.paperUrl =  url_ + "/gwots/testprocess/testing/index_view?paperId=" + sessionStorage.paperId;
+                        sessionStorage.paperUrl_two = data.paperUrl;
                         sessionStorage.gradeName = data.paperName;
                         sessionStorage.stageName = data.paperStage;
                         sessionStorage.subjectName = data.paperSubject;
