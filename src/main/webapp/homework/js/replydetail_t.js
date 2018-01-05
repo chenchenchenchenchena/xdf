@@ -1083,7 +1083,7 @@ $(function () {
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
                 allimg_arr.push(e)
-
+                alert(now_index)
                 // console.log(previewUrl)
                 // console.log(previewUrl_)
                 if(allimg_arr.length==all_img.length){
