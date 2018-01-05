@@ -1082,9 +1082,10 @@ $(function () {
                 'saveServer':false
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
-                var previewUrl = e;
-                allimg_arr.push(previewUrl)
+                var previewUrl_ = e;
+                allimg_arr.push(previewUrl_)
                 if(allimg_arr.length==all_img.length){
+                    console.log(allimg_arr)
                     wx.previewImage({
                         current: previewUrl, // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
