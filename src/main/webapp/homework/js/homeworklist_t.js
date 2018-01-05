@@ -280,13 +280,13 @@ $(function(){
                                 this_.find('ul').append(' <li>' +
                                     '<span class="homework_time_">' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
                                     '<span class=' + dis_l + '></span><span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span><div class="remove_s">' +
-                                    '<span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '"  classCode="' + classCode + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
+                                    '<span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '"  classCode="' + classCode + '"><img src="images/edit_w.png" alt=""></span><span class="delete_s" id="' + list[i].id + '"><img src="images/delet_w.png" alt=""></span></div></li> ')
                             } else {
                                 this_.find('ul').append(' <li>' +
                                     '<span class="dian">电子</span><span class="homework_time_">' + list[i].homeworkTime + '</span>' +
                                     '<p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p>' +
                                     '<span class=' + dis_l + '></span><span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
-                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
+                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '"><img src="images/edit_w.png" alt=""></span><span class="delete_s" id="' + list[i].id + '"><img src="images/delet_w.png" alt=""></span></div></li> ')
                             }
 
                         } else {
@@ -294,13 +294,13 @@ $(function(){
                                 this_.find('ul').append(' <li style="color:#000;" >' +
                                     '<span class="homework_time_">' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
                                     '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
-                                    '<div class="remove_s"><span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '" classCode="' + classCode + '">修改</span>' +
-                                    '<span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
+                                    '<div class="remove_s"><span name="' + className + '" time="' + list[i].homeworkTime + '" know="' + list[i].knowledgePoint + '" text="' + decodeURI(list[i].description) + '" Id="' + list[i].id + '" classCode="' + classCode + '"><img src="images/edit_w.png" alt=""></span>' +
+                                    '<span class="delete_s" id="' + list[i].id + '"><img src="images/delet_w.png" alt=""></span></div></li> ')
                             } else {
                                 this_.find('ul').append(' <li style="color:#000;">' +
                                     '<span class="dian">电子</span><span class="homework_time_">' + list[i].homeworkTime + '</span><p class="state_s">已批:' + list[i].yescorrect + '/未批:' + list[i].nocorrect + '/未交:' + list[i].notcommit + '</p><span class=' + dis_l + '></span>' +
                                     '<span class="more_so"  classCode="' + classCode + '" courseCode="' + courseCode + '" homeworkTime="' + list[i].homeworkTime + '" Tid="' + list[i].id + '">查看 <img src="images/B02-2_03.png" alt="" /></span>' +
-                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '">修改</span><span class="delete_s" id="' + list[i].id + '">删除</span></div></li> ')
+                                    '<div class="remove_s"><span class="changeHw" Id="' + list[i].id + '"><img src="images/edit_w.png" alt=""></span><span class="delete_s" id="' + list[i].id + '"><img src="images/delet_w.png" alt=""></span></div></li> ')
                             }
 
                         }

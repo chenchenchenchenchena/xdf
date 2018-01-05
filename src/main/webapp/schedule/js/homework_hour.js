@@ -115,12 +115,13 @@ $(function(){
             }
         }
 
-        if($(this).attr('checked')){
+        if($(this).attr('src').indexOf('_1')!=-1){
             Percentage(Data_all);
-            $(this).attr('checked',false)
+            $(this).attr('src','images/switch.png')
         }else{
             Per_all(Data_all);
-            $(this).attr('checked',true)
+            $(this).attr('src','images/switch_1.png')
+
         }
     });
 
