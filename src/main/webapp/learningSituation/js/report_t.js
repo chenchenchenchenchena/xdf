@@ -31,6 +31,8 @@ $(function(){
     if(localStorage.mastTeater){
         var need_ = {
             'teaEmail':localStorage.terEmail,
+            'teacherNo':localStorage.teacherId,
+            'schoolId':localStorage.schoolId,
             'tCode':'1'
         };
         Interaction();
@@ -38,6 +40,8 @@ $(function(){
     }else{
         var need_ = {
             'teaEmail':localStorage.terEmail,
+            'teacherNo':localStorage.teacherId,
+            'schoolId':localStorage.schoolId,
             'tCode':'1'
         };
         Interaction();
