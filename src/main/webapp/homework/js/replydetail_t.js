@@ -1072,21 +1072,28 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
-        var previewUrl = $(this).attr('data-id');
+        var now_index = $(this).parent().index();
         var all_img = $('.hwInfo img');
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
-            var previewUrl_ = $('.hwInfo img').eq(i).attr('data-id')
+            var previewUrl_ = $('.hwInfo img').eq(i).attr('data-id');
+            if(previewUrl == previewUrl_){
+                var now_url = e
+            }
+            console.log(now_url)
             var params = {
                 'fullPath':previewUrl_,
                 'saveServer':false
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
                 allimg_arr.push(e)
+
+                // console.log(previewUrl)
+                // console.log(previewUrl_)
                 if(allimg_arr.length==all_img.length){
-                    console.log(allimg_arr)
+
                     wx.previewImage({
-                        current: previewUrl, // 当前显示图片的http链接
+                        current: allimg_arr[now_index], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
                     });
                 }
