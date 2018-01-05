@@ -270,7 +270,7 @@ function dealTempListData(e) {
                 var str = '<li data-index="' + i + '" data-tempId="' + tempId + '" class="item_temp"><p>' + description + '</p><ul style="display: none;" class="voiceBox"></ul> ' +
                     '<div class="imgBox" style="display: none;"></div><img style="display: block;" class="loading-back" src="../common/images/loading.gif">' +
                     '<div class="load_fail"><img src="images/reload.png" > <span>重新加载</span></div> ' +
-                    '<div class="remove_temp"><span class="edit_temp">编辑</span><span class="delete_temp">删除</span></div></li>';
+                    '<div class="remove_temp"><span class="edit_temp"><img src="images/edit_w.png" alt=""></span><span class="delete_temp"><img src="images/delet_w.png" alt=""></span></div></li>';
                 $('.temp_list').append(str);
                 sessionStorage.setItem(tempId, JSON.stringify(list[i]));
                 getFileInfo(tempId, i);

@@ -29,11 +29,12 @@
 
 }
 .remove_temp span {
+    position: relative;
     display: block;
     float: left;
     width: 50%;
     height: 460px;
-    background: #fd9840;
+    background: #f1f1f1;
     color: #fff;
     font-size: 30px;
     line-height: 460px;
@@ -41,11 +42,13 @@
     text-align: center;
     border: none;
 }
-
-.remove_temp .delete_temp {
-    background: #fe6464;
+.remove_temp span img{
+    width:72px;
+    height:72px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
-
 .eBtn {
     width: 690px;
     height: 88px;

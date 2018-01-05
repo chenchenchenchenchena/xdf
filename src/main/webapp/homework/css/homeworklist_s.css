@@ -356,15 +356,18 @@ body{
 	float:left;
 	width:50%;
 	height:105px;
-	background:#cecece;
+	background:#f1f1f1;
+	position: relative;
 	color:#fff;
 	font-size:30px;
 	line-height:105px;
 	text-align:center;
 	border:none;
 }
-.remove_s .delete_s{
-	background:#fe6464;
+.remove_s span img{
+	position: absolute;
+	top:50%;
+	transform: translate(-50%,-50%);
 }
 .tealist_s{
 	overflow-x:hidden;
