@@ -1073,24 +1073,28 @@ $(function () {
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
         var now_index = $(this).parent().index();
+        var index_arr;
         var all_img = $('.hwInfo img');
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
             var previewUrl_ = $('.hwInfo img').eq(i).attr('data-id');
+            var index_img = $('.hwInfo img').eq(i).parent().index();
             var params = {
                 'fullPath':previewUrl_,
-                'saveServer':false
+                'saveServer':false,
+                'fileTimes':index_img
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
-                allimg_arr.push(e)
-                alert(now_index)
-                // console.log(previewUrl)
-                // console.log(previewUrl_)
+                var Json_data = JSON.parse(e);
+                allimg_arr.push(Json_data.fileUrl);
+                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                    index_arr = allimg_arr.length-1
+                }
                 if(allimg_arr.length==all_img.length){
-                    console.log(allimg_arr[now_index])
-                    console.log(allimg_arr)
+                    console.log(allimg_arr[index_arr])
+
                     wx.previewImage({
-                        current: allimg_arr[now_index], // 当前显示图片的http链接
+                        current: allimg_arr[index_arr], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
                     });
                 }
