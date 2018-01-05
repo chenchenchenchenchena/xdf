@@ -324,7 +324,7 @@ function getFileInfo(tempId, k) {
                         $(".temp_list .item_temp").eq(k).find('.imgBox').show();
                         var imagStr = '<div><img data-id="' + fileR[i].diskFilePath + '"  onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + fileR[i].thumbnail + '"  data-img="' + fileR[i].fileUrl + '" src="' + fileR[i].thumbnail + '" alt="" /></div>';
                         $(".temp_list .item_temp").eq(k).find('.imgBox').append(imagStr);
-                        all_imag.push(fileR[i].diskFilePath);
+                        all_img.push(fileR[i].diskFilePath);
                     }
                 }
 
