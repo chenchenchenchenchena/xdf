@@ -1072,13 +1072,20 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
+        All_Wx_img($('.hwInfo img'));
+    });
+    //微信预览全部图片
+    function All_Wx_img(element){
         var now_index = $(this).parent().index();
         var index_arr;
-        var all_img = $('.hwInfo img');
+        var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
-            var previewUrl_ = $('.hwInfo img').eq(i).attr('data-id');
-            var index_img = $('.hwInfo img').eq(i).parent().index();
+            if(all_img.eq(i).attr('data-id')==undefined){
+                return;
+            }
+            var previewUrl_ = all_img.eq(i).attr('data-id');
+            var index_img = all_img.eq(i).parent().index();
             var params = {
                 'fullPath':previewUrl_,
                 'saveServer':false,
@@ -1091,22 +1098,17 @@ $(function () {
                     index_arr = allimg_arr.length-1
                 }
                 if(allimg_arr.length==all_img.length){
-                    console.log(allimg_arr[index_arr])
-
                     wx.previewImage({
                         current: allimg_arr[index_arr], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
                     });
                 }
             })
-            }
-        // lookBigImage(previewUrl,false);
+        }
+    }
 
-    });
     $(document).on('tap', '.tea_sp img', function () {
-        var previewUrl = $(this).attr('data-id');
-
-        lookBigImage(previewUrl,false);
+        All_Wx_img($('.tea_sp img'));
     });
     $(document).on('touchend', '.anSwer img', function () {
         if(localStorage.mastTeater){
