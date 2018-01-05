@@ -97,7 +97,18 @@ $(function () {
         if(isPlaying){
             return false;
         }
-        audioCur.play();
+        var audio = document.getElementById(audioCur);
+
+        audio.play();
+
+        document.addEventListener("WeixinJSBridgeReady",
+            function () {
+
+                audio.play();
+
+            }, false);
+
+        //audioCur.play();
         playAnimation();
         isPlaying = true;
         //监听播放完毕
