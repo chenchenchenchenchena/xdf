@@ -1077,10 +1077,6 @@ $(function () {
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
             var previewUrl_ = $('.hwInfo img').eq(i).attr('data-id');
-            if(previewUrl == previewUrl_){
-                var now_url = e
-            }
-            console.log(now_url)
             var params = {
                 'fullPath':previewUrl_,
                 'saveServer':false
@@ -1091,7 +1087,8 @@ $(function () {
                 // console.log(previewUrl)
                 // console.log(previewUrl_)
                 if(allimg_arr.length==all_img.length){
-
+                    console.log(allimg_arr[now_index])
+                    console.log(allimg_arr)
                     wx.previewImage({
                         current: allimg_arr[now_index], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
