@@ -1082,8 +1082,7 @@ $(function () {
                 'saveServer':false
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
-                var previewUrl_ = e;
-                allimg_arr.push(previewUrl_)
+                allimg_arr.push(e)
                 if(allimg_arr.length==all_img.length){
                     console.log(allimg_arr)
                     wx.previewImage({
