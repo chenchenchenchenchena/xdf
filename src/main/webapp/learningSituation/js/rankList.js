@@ -209,7 +209,7 @@ $(function(){
             'gradeType':testState, // 成绩类型 1 入门测 2 出门测
             'studentNos':[] //选中的学生号
         };
-        if(localStorage.terEmail){
+        if(localStorage.terEmail&& sessionStorage.banzhutea!='undefined'){
             reqData.teaEmail = sessionStorage.banzhutea
         }
         $('.main-content,.no-data').hide();
@@ -234,7 +234,7 @@ $(function(){
             'gradeType':$('.tab-active').attr('tcode'), // 成绩类型 1 入门测 2 出门测
             'studentNos':[] //选中的学生号
         };
-        if(localStorage.terEmail){
+        if(localStorage.terEmail&& sessionStorage.banzhutea!='undefined'){
             reqData.teaEmail = sessionStorage.banzhutea
         }
         $('.reload').remove();

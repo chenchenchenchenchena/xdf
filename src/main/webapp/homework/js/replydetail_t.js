@@ -7,6 +7,7 @@ $(function () {
 
     var answerTimes = [];
     var answerT;
+    var homework_content = [];
     var maxTimesR = 0;//老师最大批复次数
     if(localStorage.enlarge){
         localStorage.removeItem('enlarge')
@@ -214,6 +215,7 @@ $(function () {
                 'fileTfullPath': hwFiles,
                 'fileRfullPath': teaReplyFiles
             };
+            console.log(hwFiles)
             ajaxRequest("POST", homework_s.t_getFileDetails, JSON.stringify(params), getHwFilesSucess,errorFile);
         }else {
             $('.loading-back').hide();
@@ -1070,13 +1072,43 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
-        var previewUrl = $(this).attr('data-id');
-        lookBigImage(previewUrl,false);
-
+        All_Wx_img($('.hwInfo img'));
     });
+    //微信预览全部图片
+    function All_Wx_img(element){
+        var now_index = $(this).parent().index();
+        var index_arr;
+        var all_img = element;
+        var allimg_arr = [];
+        for(var i = 0;i<all_img.length;i++){
+            if(all_img.eq(i).attr('data-id')==undefined){
+                return;
+            }
+            var previewUrl_ = all_img.eq(i).attr('data-id');
+            var index_img = all_img.eq(i).parent().index();
+            var params = {
+                'fullPath':previewUrl_,
+                'saveServer':false,
+                'fileTimes':index_img
+            }
+            ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
+                var Json_data = JSON.parse(e);
+                allimg_arr.push(Json_data.fileUrl);
+                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                    index_arr = allimg_arr.length-1
+                }
+                if(allimg_arr.length==all_img.length){
+                    wx.previewImage({
+                        current: allimg_arr[index_arr], // 当前显示图片的http链接
+                        urls: allimg_arr // 需要预览的图片http链接列表
+                    });
+                }
+            })
+        }
+    }
+
     $(document).on('tap', '.tea_sp img', function () {
-        var previewUrl = $(this).attr('data-id');
-        lookBigImage(previewUrl,false);
+        All_Wx_img($('.tea_sp img'));
     });
     $(document).on('touchend', '.anSwer img', function () {
         if(localStorage.mastTeater){
