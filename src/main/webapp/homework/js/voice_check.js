@@ -2,6 +2,8 @@
  * Created by xupingwei on 2017/7/14.
  */
 $(function () {
+    var Wxconfig = {"url": location.href, "appid": appId, "secret": secreT};
+    var Wxconfig_h;
     /*----------------语音播放开始--------------------------------------*/
 
     var isPlaying = false;
