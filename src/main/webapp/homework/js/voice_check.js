@@ -2,8 +2,6 @@
  * Created by xupingwei on 2017/7/14.
  */
 $(function () {
-    var Wxconfig = {"url": location.href, "appid": appId, "secret": secreT};
-    var Wxconfig_h;
     /*----------------语音播放开始--------------------------------------*/
 
     var isPlaying = false;
@@ -99,14 +97,14 @@ $(function () {
         if(isPlaying){
             return false;
         }
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: Wxconfig.appid,   // 必填，公众号的唯一标识
-            timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
-            nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
-            signature: Wxconfig_h.signature, // 必填，签名
-            jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage","stopRecord", "uploadVoice", "playVoice", "downloadVoice"]
-        });
+        //wx.config({
+        //    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        //    appId: Wxconfig.appid,   // 必填，公众号的唯一标识
+        //    timestamp: Wxconfig_h.timestamp,   // 必填，生成签名的时间戳
+        //    nonceStr: Wxconfig_h.nonceStr,   // 必填，生成签名的随机串
+        //    signature: Wxconfig_h.signature, // 必填，签名
+        //    jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage","stopRecord", "uploadVoice", "playVoice", "downloadVoice"]
+        //});
         wx.ready(function() {
             audioCur.play();
         });
