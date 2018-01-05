@@ -6,6 +6,9 @@ var loading;
 var homeworkTime = sessionStorage.homeworkTime_s;
 var classCode = sessionStorage.classCode_s;
 var flag = 0;//判断啊滑动和点击的标记
+var currentImg = "";
+var all_img = [];
+
 /*---------全局参数定义--------end*/
 
 $(function () {
@@ -105,41 +108,57 @@ $(function () {
      */
     $(document).on('touchend mouseup', '.imgBox img', function () {
         if (flag == 0) {
-            var previewUrl = $(this).attr('data-id');
-            lookBigImage(previewUrl, true);
+            currentImg = $(this).attr('data-id');
+            if(all_img.length>0){
+                for (var i = 0;i<all_img.length;i++){
+                    lookBigImage(all_img[i], true);
+                }
+            }
             return false;
         }
     });
 
     function lookBigImage(diskPath, saveServer) {
+        var all_img_url = [];
+        var currentImgUrl = "";
         var params = {
             'fullPath': diskPath,
             'saveServer': saveServer
         }
         ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
             var previewUrl = e;
+            if(previewUrl == currentImg){
+                currentImgUrl = url_o + previewUrl;
+            }
+
             //true:返回服务器所在的地址，false:返回云盘的预览地址
             previewUrl = url_o + previewUrl;
-            lookBig(previewUrl);
+            all_img_url.push(previewUrl);
         });
+
+        lookBig(all_img_url,currentImgUrl);
 
 
     }
 
-    function lookBig(previewUrl) {
-        $('.big_back_s').show();
-        $('.big_back_s img').attr('src', previewUrl);
-
-        $('.big_back_s img').load(function () {
-            $('.big_back_s img').css({
-                'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
-                'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
-            });
-        })
-        $('.big_back_s img').error(function () {
-            alert('图片加载失败，正在重新加载');
-            location.reload();
-        })
+    function lookBig(all_img_url,currentImgUr) {
+        //$('.big_back_s').show();
+        //$('.big_back_s img').attr('src', previewUrl);
+        //
+        //$('.big_back_s img').load(function () {
+        //    $('.big_back_s img').css({
+        //        'margin-top': -parseInt($('.big_back_s img').css('height')) / 2,
+        //        'margin-left': -parseInt($('.big_back_s img').css('width')) / 2
+        //    });
+        //})
+        //$('.big_back_s img').error(function () {
+        //    alert('图片加载失败，正在重新加载');
+        //    location.reload();
+        //})
+        wx.previewImage({
+            current: currentImgUr, // 当前显示图片的http链接
+            urls: all_img_url // 需要预览的图片http链接列表
+        });
     }
 
     $(document).on('touchend', '.pinch-zoom', function () {
@@ -305,6 +324,7 @@ function getFileInfo(tempId, k) {
                         $(".temp_list .item_temp").eq(k).find('.imgBox').show();
                         var imagStr = '<div><img data-id="' + fileR[i].diskFilePath + '"  onerror=javascript:this.src="images/error-image.png" data-ramke="1" data-thumbnail="' + fileR[i].thumbnail + '"  data-img="' + fileR[i].fileUrl + '" src="' + fileR[i].thumbnail + '" alt="" /></div>';
                         $(".temp_list .item_temp").eq(k).find('.imgBox').append(imagStr);
+                        all_imag.push(fileR[i].diskFilePath);
                     }
                 }
 
