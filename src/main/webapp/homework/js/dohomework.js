@@ -598,12 +598,12 @@ $(function () {
             var previewUrl_ = all_img.eq(i).attr('data-img');
             var index_img = all_img.eq(i).parent().index();
                 allimg_arr.push(previewUrl_);
-                    wx.previewImage({
-                        current: allimg_arr[index_img], // 当前显示图片的http链接
-                        urls: allimg_arr // 需要预览的图片http链接列表
-                    });
             }
         }
+        wx.previewImage({
+            current: allimg_arr[index_img], // 当前显示图片的http链接
+            urls: allimg_arr // 需要预览的图片http链接列表
+        });
     }
 
     /*----------------图片选择结束--------------------------------------*/
