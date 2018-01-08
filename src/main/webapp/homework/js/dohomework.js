@@ -588,10 +588,7 @@ $(function () {
     }
     //微信预览全部图片
 
-    function All_Wx_img(element){
-        var now_index = $(this).parent().index();
-        var index_arr;
-
+    function All_Wx_img(element,this_index_){
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
@@ -601,7 +598,7 @@ $(function () {
             }
         }
         wx.previewImage({
-            current: allimg_arr[now_index], // 当前显示图片的http链接
+            current: allimg_arr[this_index_], // 当前显示图片的http链接
             urls: allimg_arr // 需要预览的图片http链接列表
         });
     }
@@ -609,7 +606,8 @@ $(function () {
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
     $(document).on('tap', '.imgBox img', function () {
-        All_Wx_img($('.imgBox img'));
+        var this_index = $(this).parent().index()
+        All_Wx_img($('.imgBox img'),this_index);
     });
 
     /*-------------------- 删除图片 --------------------*/
