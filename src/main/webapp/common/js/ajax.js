@@ -22,7 +22,8 @@ if (window.location.host == onlineUrl) {//正式环境
     appId =  'wxab29a3e2000b8d2a';
     secreT = '7739991fcce774c2281147eae3986ad9';
 } else {//测试环境
-    url_o = "http://dt.staff.xdf.cn/xdfdtmanager/";
+    url_o = "http://dt." +
+        ".xdf.cn/xdfdtmanager/";
     url_o2 = 'http://dt.staff.xdf.cn';
     appId =  'wx559791e14e9ce521';
     secreT = 'baa4373d5a8750c69b9d1655a2e31370';
@@ -77,7 +78,7 @@ var url = {
     't_rankl':url_o+'teacherAnalysis/studentFloatGrade.do',  //老师入门测，出门测排行列表
     't_record': url_o+'teacherData/queryTeacherLesson.do',//成绩录入
     't_save':url_o+'teacherData/addTeacherAnalysis.do',//成绩保存
-    't_modify':url_o+'teacherAnalysis/teacherqueryLitimesdtGrade.do',//修改成绩
+    't_modify':url_o+'teacherAnalysis/teacherqueryLitimesdtGradeByClassCode.do',//修改成绩
     't_addstu':url_o+'teacherData/addItionalStudent.do',//录成绩添加学生
     's_webseac': url_o+'studentBind/webQueryStudentInfo.do',  //web学员号查询
     's_webnafu': url_o+'studentBind/webQueryStuInfoByNameMobile.do', //web姓名手机号查询

@@ -752,7 +752,6 @@ $(function () {
     function query(){
         if($(".st").html()&&$(".classTime").html()&&$(".class").html()&&$(".scoreList").children()){
             var queryData={
-                "teacherEmail":localStorage.terEmail,
                 "classCode":$(".class").html(),
                 "tCode":$(".tCode").html(),
                 "schoolId":localStorage.schoolId,
