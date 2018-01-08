@@ -591,17 +591,17 @@ $(function () {
     function All_Wx_img(element){
         var now_index = $(this).parent().index();
         var index_arr;
+
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
             if(all_img.eq(i).attr('data-img')!=undefined){
             var previewUrl_ = all_img.eq(i).attr('data-img');
-            var index_img = all_img.eq(i).parent().index();
                 allimg_arr.push(previewUrl_);
             }
         }
         wx.previewImage({
-            current: allimg_arr[index_img], // 当前显示图片的http链接
+            current: allimg_arr[now_index], // 当前显示图片的http链接
             urls: allimg_arr // 需要预览的图片http链接列表
         });
     }
