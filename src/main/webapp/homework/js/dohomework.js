@@ -594,9 +594,7 @@ $(function () {
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
-            if(all_img.eq(i).attr('data-img')==undefined){
-                return;
-            }
+            if(all_img.eq(i).attr('data-img')!=undefined){
             var previewUrl_ = all_img.eq(i).attr('data-id');
             var index_img = all_img.eq(i).parent().index();
             var params = {
@@ -617,6 +615,7 @@ $(function () {
                     });
                 }
             })
+            }
         }
     }
 
