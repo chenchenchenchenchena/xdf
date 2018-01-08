@@ -606,8 +606,9 @@ $(function () {
     /*----------------图片选择结束--------------------------------------*/
     /*--------------------图片预览----------------------------------*/
     $(document).on('tap', '.imgBox img', function () {
-        var this_index = $(this).parent().index()
-        All_Wx_img($('.imgBox img'),this_index);
+        var this_index = $(this).parent().index();
+        var ele_ = $(this).parents('.imgBox').find('img')
+        All_Wx_img(ele_,this_index);
     });
 
     /*-------------------- 删除图片 --------------------*/
