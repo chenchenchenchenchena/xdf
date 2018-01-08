@@ -597,24 +597,11 @@ $(function () {
             if(all_img.eq(i).attr('data-img')!=undefined){
             var previewUrl_ = all_img.eq(i).attr('data-img');
             var index_img = all_img.eq(i).parent().index();
-            var params = {
-                'fullPath':previewUrl_,
-                'saveServer':false,
-                'fileTimes':index_img
-            }
-            ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
-                var Json_data = JSON.parse(e);
-                allimg_arr.push(Json_data.fileUrl);
-                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
-                    index_arr = allimg_arr.length-1
-                }
-                if(allimg_arr.length==all_img.length){
+                allimg_arr.push(previewUrl_);
                     wx.previewImage({
-                        current: allimg_arr[index_arr], // 当前显示图片的http链接
+                        current: allimg_arr[index_img], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
                     });
-                }
-            })
             }
         }
     }
