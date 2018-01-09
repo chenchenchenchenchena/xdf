@@ -488,13 +488,27 @@ $(function () {
     /**
      * 图片预览
      */
-    $(document).on('tap', '.notsubmit .imgBox img', function () {
-        var previewUrl = $(this).attr('data-img');
+    function All_Wx_img(element,this_index_){
+        var all_img = element;
+        var allimg_arr = [];
+        for(var i = 0;i<all_img.length;i++){
+            if(all_img.eq(i).attr('data-img')!=undefined){
+                var previewUrl_ = all_img.eq(i).attr('data-img');
+                allimg_arr.push(previewUrl_);
+            }
+        }
         wx.previewImage({
-            current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
+            current: allimg_arr[this_index_], // 当前显示图片的http链接
+            urls: allimg_arr // 需要预览的图片http链接列表
         });
-
+    }
+    /*----------------图片选择结束--------------------------------------*/
+    /*--------------------图片预览----------------------------------*/
+    $(document).on('tap', '.notsubmit .imgBox img', function () {
+        var this_index = $(this).parent().index();
+        var ele_ = $(this).parents('.imgBox').find('img')
+        All_Wx_img(ele_,this_index);
+    });
     });
 
     /*-------------------- 删除语音 --------------------*/

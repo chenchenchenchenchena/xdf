@@ -106,17 +106,43 @@ $(function () {
     /**
      * 查看大图
      */
-    $(document).on('touchend mouseup', '.imgBox img', function () {
-        if (flag == 0) {
-            currentImg = $(this).attr('data-id');
-            if(all_img.length>0){
-                for (var i = 0;i<all_img.length;i++){
-                    lookBigImage(all_img[i], true);
-                }
+    //微信预览全部图片
+    function All_Wx_img(element){
+        var now_index = $(this).parent().index();
+        var index_arr;
+        var all_img = element;
+        var allimg_arr = [];
+        for(var i = 0;i<all_img.length;i++){
+            if(all_img.eq(i).attr('data-id')==undefined){
+                return;
             }
-            return false;
+            var previewUrl_ = all_img.eq(i).attr('data-id');
+            var index_img = all_img.eq(i).parent().index();
+            var params = {
+                'fullPath':previewUrl_,
+                'saveServer':false,
+                'fileTimes':index_img
+            }
+            ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
+                var Json_data = JSON.parse(e);
+                allimg_arr.push(Json_data.fileUrl);
+                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                    index_arr = allimg_arr.length-1
+                }
+                if(allimg_arr.length==all_img.length){
+                    wx.previewImage({
+                        current: allimg_arr[index_arr], // 当前显示图片的http链接
+                        urls: allimg_arr // 需要预览的图片http链接列表
+                    });
+                }
+            })
         }
+    }
+
+    $(document).on('tap', '.imgBox img', function () {
+        All_Wx_img($('.imgBox img'));
     });
+
 
     function lookBigImage(diskPath, saveServer) {
         var all_img_url = [];

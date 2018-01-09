@@ -107,11 +107,13 @@ $(function () {
         //    signature: Wxconfig_h.signature, // 必填，签名
         //    jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage","stopRecord", "uploadVoice", "playVoice", "downloadVoice"]
         //});
-
-        alert(0)
-        document.addEventListener("WeixinJSBridgeReady", function () {
+        // wx.ready(function() {
             audioCur.play();
-        }, false);
+        // });
+
+        // document.addEventListener("WeixinJSBridgeReady", function () {
+        //     audioCur.play();
+        // }, false);
         //audioCur.play();
         playAnimation();
         isPlaying = true;
