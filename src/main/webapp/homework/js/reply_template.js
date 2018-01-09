@@ -139,8 +139,9 @@ $(function () {
         }
     }
 
-    $(document).on('tap', '.imgBox img', function () {
+    $(document).on('tap', '.imgBox img', function (event) {
         All_Wx_img($('.imgBox img'));
+        event.stopPropagation();
     });
 
 
