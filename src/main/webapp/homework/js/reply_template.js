@@ -110,7 +110,7 @@ $(function () {
     function All_Wx_img(element){
         var now_index = $(this).parent().index();
         var index_arr;
-        var all_img = element;
+        var all_img =  $(this).parents('.imgBox').find('img');
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
             if(all_img.eq(i).attr('data-id')==undefined){
@@ -137,7 +137,6 @@ $(function () {
                 }
             })
         }
-        return false;
     }
 
     $(document).on('tap', '.imgBox img', function () {
