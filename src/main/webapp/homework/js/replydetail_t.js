@@ -1111,7 +1111,19 @@ $(function () {
         All_Wx_img($('.tea_sp img'));
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
-        All_Wx_img($('.notsubmit .imgBox img'));
+        var this_index = $(this).parent().index();
+        var ele_ = $(this).parents('.imgBox').find('img')
+        var allimg_arr = [];
+        for(var i = 0;i<ele_.length;i++){
+            if(ele_.eq(i).attr('data-img')!=undefined){
+                var previewUrl_ = ele_.eq(i).attr('data-img');
+                allimg_arr.push(previewUrl_);
+            }
+        }
+        wx.previewImage({
+            current: allimg_arr[this_index], // 当前显示图片的http链接
+            urls: allimg_arr // 需要预览的图片http链接列表
+        });
     });
     $(document).on('touchend', '.anSwer img', function () {
         if(localStorage.mastTeater){
