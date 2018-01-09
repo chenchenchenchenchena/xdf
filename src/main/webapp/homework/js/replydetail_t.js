@@ -1110,6 +1110,9 @@ $(function () {
     $(document).on('tap', '.tea_sp img', function () {
         All_Wx_img($('.tea_sp img'));
     });
+    $(document).on('tap', '.notsubmit .imgBox img', function () {
+        All_Wx_img($('.notsubmit .imgBox img'));
+    });
     $(document).on('touchend', '.anSwer img', function () {
         if(localStorage.mastTeater){
             return false;
@@ -1138,21 +1141,7 @@ $(function () {
 
 
     });
-    $(document).on('tap', '.notsubmit .imgBox img', function () {
-        var previewUrl = $(this).attr('data-img');
-        var isEdit = $(this).attr('isEdit');
 
-        //isEdit==1 表示老师编辑后的图片；
-        if(isEdit == 1){
-            lookBig(previewUrl);
-        }else {
-            // isEdit== 0或者undefind  表示从本地相册选的图片
-            wx.previewImage({
-                current: previewUrl, // 当前显示图片的http链接
-                urls: [previewUrl] // 需要预览的图片http链接列表
-            });
-        }
-    });
 
     function lookBigImage(diskPath,saveServer) {
         var params = {
