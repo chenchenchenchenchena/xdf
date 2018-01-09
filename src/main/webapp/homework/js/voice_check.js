@@ -10,10 +10,10 @@ $(function () {
      * 播放作业描述语音
      */
     $(document).on('touchend', '.audio_box>div', function () {
-        if(!$(this).attr('P_time')){
-            console.log('****'+ $(this).parent().index());
-            $(this).attr('P_time',true)
-        }
+        // if(!$(this).attr('P_time')){
+        //
+        // }
+
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
     });
 
@@ -29,6 +29,7 @@ $(function () {
      *语音播放方法
      */
     function voiceCheck(voiceId) {
+
         var newID = $(voiceId).attr('id');
         if (newID != oldId) {
             if (audioCur != null) {
@@ -106,23 +107,21 @@ $(function () {
         //    signature: Wxconfig_h.signature, // 必填，签名
         //    jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage","stopRecord", "uploadVoice", "playVoice", "downloadVoice"]
         //});
-        wx.ready(function() {
-            audioCur.play();
-        });
 
+
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audioCur.play();
+        }, false);
         //audioCur.play();
         playAnimation();
         isPlaying = true;
         //监听播放完毕
         audioCur.onended = function () {
             isPlaying = false;
-            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0].attr('src');
-            var nextAudio_ = $(audioCur).parent().parent().next().find('div').find('audio')[0].attr('id');
-            $(audioCur).attr('src',nextAudio)
-            $(audioCur).attr('id',nextAudio_)
-            // if(nextAudio != null && nextAudio != undefined){
-            voiceCheck(audioCur);
-            // }
+            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
+            if(nextAudio != null && nextAudio != undefined){
+                voiceCheck(nextAudio);
+            }
         };
 
     }
