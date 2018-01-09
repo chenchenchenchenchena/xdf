@@ -509,7 +509,6 @@ $(function () {
         var ele_ = $(this).parents('.imgBox').find('img')
         All_Wx_img(ele_,this_index);
     });
-    });
 
     /*-------------------- 删除语音 --------------------*/
     $(document).on('touchend', '.stuVoice', function () {
