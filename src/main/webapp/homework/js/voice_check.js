@@ -116,10 +116,13 @@ $(function () {
         //监听播放完毕
         audioCur.onended = function () {
             isPlaying = false;
-            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0];
-            if(nextAudio != null && nextAudio != undefined){
-                voiceCheck(nextAudio);
-            }
+            var nextAudio = $(audioCur).parent().parent().next().find('div').find('audio')[0].attr('src');
+            var nextAudio_ = $(audioCur).parent().parent().next().find('div').find('audio')[0].attr('id');
+            $(audioCur).attr('src',nextAudio)
+            $(audioCur).attr('id',nextAudio_)
+            // if(nextAudio != null && nextAudio != undefined){
+            voiceCheck(audioCur);
+            // }
         };
 
     }
