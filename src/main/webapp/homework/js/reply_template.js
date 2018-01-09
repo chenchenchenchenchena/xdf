@@ -137,6 +137,7 @@ $(function () {
                 }
             })
         }
+        return false;
     }
 
     $(document).on('tap', '.imgBox img', function () {
