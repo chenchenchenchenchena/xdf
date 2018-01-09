@@ -108,7 +108,7 @@ $(function () {
         //    jsApiList: ["startRecord","uploadImage", "chooseImage", "previewImage","stopRecord", "uploadVoice", "playVoice", "downloadVoice"]
         //});
 
-
+        alert(0)
         document.addEventListener("WeixinJSBridgeReady", function () {
             audioCur.play();
         }, false);
