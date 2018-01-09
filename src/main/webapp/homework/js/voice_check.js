@@ -10,8 +10,10 @@ $(function () {
      * 播放作业描述语音
      */
     $(document).on('touchend', '.audio_box>div', function () {
-        console.log('oooo' + $(this).find('audio')[0]);
-
+        if(!$(this).attr('P_time')){
+            console.log('****'+ $(this).parent().index());
+            $(this).attr('P_time',true)
+        }
         voiceCheck($(this).find('audio')[0]);//先播放当前语音
     });
 
@@ -27,7 +29,6 @@ $(function () {
      *语音播放方法
      */
     function voiceCheck(voiceId) {
-
         var newID = $(voiceId).attr('id');
         if (newID != oldId) {
             if (audioCur != null) {

@@ -65,8 +65,16 @@ $(function () {
         }
         var className_ = e.data;
         for (var a = 0; a < className_.length; a++) {
-            var beginDate = className_[a].BeginDate.split(' ')[0];
-            var endDate = className_[a].EndDate.split(' ')[0];
+            if(className_[a].BeginDate!=undefined||className_[a].BeginDate == ''){
+                var beginDate = className_[a].BeginDate.split(' ')[0];
+            }else{
+                var beginDate = '暂无'
+            }
+            if(className_[a].endDate!=undefined||className_[a].endDate == ''){
+                var endDate = className_[a].endDate.split(' ')[0];
+            }else{
+                var endDate = '暂无'
+            }
             if(className_[a].masterTeacherName == undefined||className_[a].masterTeacherName == ''){
                 master = "暂无";
             }else {
