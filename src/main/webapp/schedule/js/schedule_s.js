@@ -490,7 +490,7 @@ $(function() {
                     $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s');
                     this_ = '.xuanzhong_s'
                 }else{
-                    $('.xuanzhong_s').removeClass('xuanzhong')
+                    $('.xuanzhong').removeClass('xuanzhong')
                     $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong');
                     this_ = '.xuanzhong'
                 }
