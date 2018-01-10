@@ -530,7 +530,7 @@ $(function() {
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
-                'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+                'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
                 'schoolId':sessionStorage.schoolId
 
             };
