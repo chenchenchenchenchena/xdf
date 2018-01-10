@@ -156,12 +156,9 @@ $(function(){
     }
 
     function getList(need_mas,flag){
-        if(loading == undefined){
-            loading = layer.load();
-        }
+
         ajax_S(homework_s.t_hw_getClassList, need_mas, function (e) {
 
-            layer.close(loading);
             $('.load_t').hide();
             if (e.data == undefined) {
                 if(flag == 1){
