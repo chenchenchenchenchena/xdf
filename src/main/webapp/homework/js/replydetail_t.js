@@ -1076,12 +1076,14 @@ $(function () {
     });
     //微信预览全部图片
     function All_Wx_img(element){
+        var blur_ = false;
         var now_index = $(this).parent().index();
         var index_arr;
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
             if(all_img.eq(i).attr('data-id')==undefined){
+                blur_ = true;
                 return;
             }
             var previewUrl_ = all_img.eq(i).attr('data-id');
@@ -1097,7 +1099,11 @@ $(function () {
                 if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
                     index_arr = allimg_arr.length-1
                 }
-                if(allimg_arr.length==all_img.length){
+                var length_ = allimg_arr.length;
+                if(blur_==true){
+                    length_ = length_+1
+                }
+                if(length_==all_img.length){
                     wx.previewImage({
                         current: allimg_arr[index_arr], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
