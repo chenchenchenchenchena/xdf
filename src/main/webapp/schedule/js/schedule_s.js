@@ -416,7 +416,6 @@ $(function() {
                 'schoolId':sessionStorage.schoolId
 
             };
-
             if (time1.split(' ')[0] > time) {
                 $(this).addClass('xuanzhong')
             } else if (time1.split(' ')[0] == time) {
@@ -484,6 +483,7 @@ $(function() {
             var dat_month = time1.substr(5,2);
             var this_;
             // console.log($('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong'));
+
             if(month!=dat_month){
                 if(day_this>dat_today){
                     $('.xuanzhong_s').removeClass('xuanzhong_s')
@@ -495,20 +495,19 @@ $(function() {
                     this_ = '.xuanzhong'
                 }
                 var emailm = {
-                    'teacherEmail':localStorage.terEmail,
-                    'teacherCode':localStorage.teacherId,
-                    'schoolId':localStorage.schoolId,
-                    'beginDate':day_this,
-                    'endDate':day_this
+                    'studentCode': sessionStorage.stuNum,
+                    'beginDate': day_this,
+                    'endDate': day_this,
+                    'schoolId':sessionStorage.schoolId
                 };
                 $('.H-data').show();
                 $('.N-data').hide();
                 $('.curriculum').hide();
                 $('.loading_s').show();
-                ajax_S(url.s_emai,emailm,stusea,erro_d);
+                ajax_S(url.s_stud, emailm, stusea,erro_d);
             }
             else{
-                this_ = '.today'
+                this_ = '.today';
                 $('.swiper-slide-active td[data_d="'+dat_day_today+'"]').eq(0).addClass('today').parents('tbody').find('td').removeClass('xuanzhong').removeClass('xuanzhong_s')
             }
             var month_  = $(this_).attr('data_m');
@@ -525,15 +524,18 @@ $(function() {
             $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
+            var time = '' + $(this).attr('data_y') + '-' + month + '-' + day + '';
+            var day = new Date($(this).attr('data_y'), month, '0');
+            var daycount = day.getDate();
             var menu_s = {
-                'teacherEmail':localStorage.terEmail,
-                'teacherCode':localStorage.teacherId,
-                'schoolId':localStorage.schoolId,
+                'studentCode': sessionStorage.stuNum,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
                 'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
+                'schoolId':sessionStorage.schoolId
+
             };
             monththis = month;
-            ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+            ajax_S(url.s_stud, menu_s, menufunc);
         }
 
         var html_s = $('.swiper-slide-active table').find('td');
