@@ -519,9 +519,9 @@ $(function() {
             };
             //当月课程
             var menu_s = {
-                'studentCode': sessionStorage.stuNum,
-                'beginDate': day_this,
-                'endDate': day_this,
+                'teacherEmail':localStorage.terEmail,
+                'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+                'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount,
                 'schoolId':sessionStorage.schoolId
 
             };
