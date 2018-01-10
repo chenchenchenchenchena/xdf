@@ -478,18 +478,6 @@ $(document).on('click','.H-data li',function(){
                     $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong');
                     this_ = '.xuanzhong'
                 }
-                var emailm = {
-                    'teacherEmail':localStorage.terEmail,
-                    'teacherCode':localStorage.teacherId,
-                    'schoolId':localStorage.schoolId,
-                    'beginDate':day_this,
-                    'endDate':day_this
-                };
-                $('.H-data').show();
-                $('.N-data').hide();
-                $('.curriculum').hide();
-                $('.loading_s').show();
-                ajax_S(url.s_emai,emailm,stusea,erro_d);
             }
             else{
                 this_ = '.today'

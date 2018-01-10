@@ -497,7 +497,7 @@ $(function() {
 
             }
             else{
-                this_ = '.today'
+                this_ = '.today';
                 $('.swiper-slide-active td[data_d="'+dat_day_today+'"]').eq(0).addClass('today').parents('tbody').find('td').removeClass('xuanzhong').removeClass('xuanzhong_s')
             }
             var month  = $(this_).attr('data_m');
