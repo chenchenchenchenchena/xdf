@@ -482,12 +482,17 @@ $(function() {
             var day_this = $('#ymym').html().substr(0,4)+'-'+ month+'-01';
             var dat_today = time1.split(' ')[0];
             var dat_month = time1.substr(5,2);
+            var this_;
             // console.log($('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong'));
             if(month!=dat_month){
                 if(day_this>dat_today){
-                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s')
+                    $('.xuanzhong_s').removeClass('xuanzhong_s')
+                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s');
+                    this_ = '.xuanzhong_s'
                 }else{
-                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong')
+                    $('.xuanzhong_s').removeClass('xuanzhong')
+                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong');
+                    this_ = '.xuanzhong'
                 }
                 var emailm = {
                     'teacherEmail':localStorage.terEmail,
@@ -503,8 +508,20 @@ $(function() {
                 ajax_S(url.s_emai,emailm,stusea,erro_d);
             }
             else{
+                this_ = '.today'
                 $('.swiper-slide-active td[data_d="'+dat_day_today+'"]').eq(0).addClass('today').parents('tbody').find('td').removeClass('xuanzhong').removeClass('xuanzhong_s')
             }
+            var month_  = $(this_).attr('data_m');
+            var day_ = $(this_).attr('data_d');
+            if(month_<10){
+                month_ = '0'+month_
+            }
+            if(day_<10){
+                day_ = '0'+day_
+            }
+            $('.CHour_s_title span').eq(1).html(month_+'-'+day_)
+            $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
+
             $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
