@@ -530,6 +530,8 @@ $(function() {
             $('.curriculum').hide();
             $('.loading_s').show();
             ajax_S(url.s_stud, emailm, stusea,erro_d);
+            ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+
         }
 
         var html_s = $('.swiper-slide-active table').find('td');
