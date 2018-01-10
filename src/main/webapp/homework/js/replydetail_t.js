@@ -1133,7 +1133,7 @@ $(function () {
         var preview = $(this).attr('data-thumbnail');
         $('.load img').attr('src',preview);
         $('.load').show();
-        cnv(0,'load_one',20)
+        cnv(0,'load_one',20);
         
         lookBigImage(previewUrl,true);
     });
