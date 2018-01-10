@@ -522,10 +522,9 @@ $(function() {
             $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
 
             $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
-            var  day = new Date($('#ymym').html().substring(0,4),month,'0');
-            var daycount = day.getDate();
-            var time = '' + $(this).attr('data_y') + '-' + month + '-' + day + '';
-            var day = new Date($(this).attr('data_y'), month, '0');
+
+            var time = '' + $(this_).attr('data_y') + '-' + month + '-' + day + '';
+            var day = new Date($(this_).attr('data_y'), month, '0');
             var daycount = day.getDate();
             var menu_s = {
                 'studentCode': sessionStorage.stuNum,
