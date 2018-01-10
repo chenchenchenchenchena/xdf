@@ -508,6 +508,7 @@ $(function() {
             if(day<10){
                 day = '0'+day
             }
+
             $('.CHour_s_title span').eq(1).html(month+'-'+day)
             $('.CHour_s_title span:last-of-type').html('周'+$('#top_week').html().substring(2,3))
             var emailm = {
@@ -518,6 +519,8 @@ $(function() {
 
             };
             //当月课程
+            var day_ = new Date($('#ymym').html().substring(0, 4), month, '0');
+            var daycount = day_.getDate();
             var menu_s = {
                 'teacherEmail':localStorage.terEmail,
                 'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
