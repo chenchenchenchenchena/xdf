@@ -472,19 +472,19 @@ $(function() {
     }, 100);
     function menu_int() {
         $('.not_this').css('opacity','0');
-        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
-        if(month<10){
-            month = '0'+month
+        var month_ = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
+        if(month_<10){
+            month_ = '0'+month_
         }
         var dat_day_today= new Date().format("d");
 
-        if(monththis!=month){
+        if(monththis!=month_){
             var day_this = $('#ymym').html().substr(0,4)+'-'+ month+'-01';
             var dat_today = time1.split(' ')[0];
             var dat_month = time1.substr(5,2);
             var this_;
             // console.log($('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong'));
-            if(month!=dat_month){
+            if(month_!=dat_month){
                 if(day_this>dat_today){
                     $('.xuanzhong_s').removeClass('xuanzhong_s')
                     $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s');
