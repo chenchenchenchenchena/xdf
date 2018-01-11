@@ -1072,12 +1072,13 @@ $(function () {
     });
     var Index_Last;
     $(document).on('tap', '.hwInfo img', function () {
-        All_Wx_img($('.hwInfo img'));
+        var inex_=  $(this).parent().index();
+        All_Wx_img($('.hwInfo img'),inex_);
     });
     //微信预览全部图片
-    function All_Wx_img(element){
+    function All_Wx_img(element,index_){
         var blur_ = false;
-        var now_index = $(this).parent().index();
+        var now_index = index_;
         var index_arr;
         var all_img = element;
         var allimg_arr = [];
@@ -1114,8 +1115,10 @@ $(function () {
     }
 
     $(document).on('tap', '.tea_sp img', function () {
-        var img_ = $(this).parents('.imgBox').find('img')
-        All_Wx_img(img_);
+        var img_ = $(this).parents('.imgBox').find('img');
+        var inex_=  $(this).parent().index();
+
+        All_Wx_img(img_,inex_);
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
         var this_index = $(this).parent().index();
