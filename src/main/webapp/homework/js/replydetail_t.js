@@ -1104,8 +1104,8 @@ $(function () {
                 // }
                 if(length_==all_img.length){
                     var blur = true;
-                    for(j in all_img){
-                        if(all_img[j]==null){
+                    for(j in allimg_arr){
+                        if(allimg_arr[j]==null){
                             blur = false;
                         }
                     }
