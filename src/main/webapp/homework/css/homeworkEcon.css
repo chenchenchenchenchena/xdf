@@ -23,7 +23,7 @@ body {
     margin:0 auto 10px;
 }
 #Preview_{
-    position: absolute;
+    position: fixed;
     top:0;
     z-index:200;
     /*width:100%;*/

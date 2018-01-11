@@ -145,7 +145,7 @@ $(document).on("touchstart",".report",function () {
             if(e.url!=undefined && e.url != ""){
                 console.log(e.url);
                 $('#Preview_').css('width',$('body').width());
-                $('#Preview_').css('height',$('body').height()*5);
+                $('#Preview_').css('height',$('body').height());
                 $('#Preview_').attr('src',e.url);
                 $('#Preview_').show();
                 $('.quire_').show();
