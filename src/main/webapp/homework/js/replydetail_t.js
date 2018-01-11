@@ -1079,7 +1079,6 @@ $(function () {
     function All_Wx_img(element,index_){
         var blur_ = false;
         var now_index = index_;
-        var index_arr;
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
@@ -1099,7 +1098,7 @@ $(function () {
                 able_++;
                 if(able_==all_img.length){
                     wx.previewImage({
-                        current: allimg_arr[index_arr], // 当前显示图片的http链接
+                        current: allimg_arr[now_index], // 当前显示图片的http链接
                         urls: allimg_arr // 需要预览的图片http链接列表
                     });
                 }
