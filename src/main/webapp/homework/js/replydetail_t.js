@@ -1089,33 +1089,43 @@ $(function () {
                 'fullPath':previewUrl_,
                 'saveServer':false,
                 'fileTimes':index_img
-            }
+            };
+            var able_ = 0;
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
                 var Json_data = JSON.parse(e);
                 // allimg_arr.push(Json_data.fileUrl);
                 allimg_arr[Json_data.fileTimes] = Json_data.fileUrl;
-                console.log(allimg_arr)
-                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
-                    index_arr = allimg_arr.length-1
+                console.log(allimg_arr);
+                able_++;
+                if(able_==all_img.length){
+                    wx.previewImage({
+                        current: allimg_arr[index_arr], // 当前显示图片的http链接
+                        urls: allimg_arr // 需要预览的图片http链接列表
+                    });
                 }
-                var length_ = allimg_arr.length;
-                // if(blur_==true){
-                //     length_ = length_+1
+
+
+                // if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                //     index_arr = allimg_arr.length-1
                 // }
-                if(length_==all_img.length){
-                    var blur = true;
-                    for(j in allimg_arr){
-                        if(allimg_arr[j]==null){
-                            blur = false;
-                        }
-                    }
-                    if(blur){
-                        wx.previewImage({
-                            current: allimg_arr[index_arr], // 当前显示图片的http链接
-                            urls: allimg_arr // 需要预览的图片http链接列表
-                        });
-                    }
-                }
+                // var length_ = allimg_arr.length;
+                // // if(blur_==true){
+                // //     length_ = length_+1
+                // // }
+                // if(length_==all_img.length){
+                //     var blur = true;
+                //     for(j in allimg_arr){
+                //         if(allimg_arr[j]==undefined){
+                //             blur = false;
+                //         }
+                //     }
+                //     if(blur){
+                //         wx.previewImage({
+                //             current: allimg_arr[index_arr], // 当前显示图片的http链接
+                //             urls: allimg_arr // 需要预览的图片http链接列表
+                //         });
+                //     }
+                // }
             })
         }
     }
