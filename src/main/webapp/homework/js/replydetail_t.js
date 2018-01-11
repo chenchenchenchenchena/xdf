@@ -1095,18 +1095,26 @@ $(function () {
                 // allimg_arr.push(Json_data.fileUrl);
                 allimg_arr[Json_data.fileTimes] = Json_data.fileUrl;
                 console.log(allimg_arr)
-                // if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
-                //     index_arr = allimg_arr.length-1
-                // }
+                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                    index_arr = allimg_arr.length-1
+                }
                 var length_ = allimg_arr.length;
                 // if(blur_==true){
                 //     length_ = length_+1
                 // }
                 if(length_==all_img.length){
-                    wx.previewImage({
-                        current: allimg_arr[index_arr], // 当前显示图片的http链接
-                        urls: allimg_arr // 需要预览的图片http链接列表
-                    });
+                    var blur = true;
+                    for(j in all_img){
+                        if(all_img[j]==null){
+                            blur = false;
+                        }
+                    }
+                    if(blur){
+                        wx.previewImage({
+                            current: allimg_arr[index_arr], // 当前显示图片的http链接
+                            urls: allimg_arr // 需要预览的图片http链接列表
+                        });
+                    }
                 }
             })
         }
