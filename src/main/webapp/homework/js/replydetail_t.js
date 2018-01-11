@@ -1114,7 +1114,8 @@ $(function () {
     }
 
     $(document).on('tap', '.tea_sp img', function () {
-        All_Wx_img($('.tea_sp img'));
+        var img_ = $(this).parents('.imgBox').find('img')
+        All_Wx_img(img_);
     });
     $(document).on('tap', '.notsubmit .imgBox img', function () {
         var this_index = $(this).parent().index();
