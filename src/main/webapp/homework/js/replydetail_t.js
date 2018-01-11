@@ -1083,10 +1083,6 @@ $(function () {
         var all_img = element;
         var allimg_arr = [];
         for(var i = 0;i<all_img.length;i++){
-            if(all_img.eq(i).attr('data-id')==undefined){
-                blur_ = true;
-                return;
-            }
             var previewUrl_ = all_img.eq(i).attr('data-id');
             var index_img = all_img.eq(i).parent().index();
             var params = {
@@ -1096,14 +1092,16 @@ $(function () {
             }
             ajaxRequest("POST", homework_s.t_getImgeUrl, params, function (e) {
                 var Json_data = JSON.parse(e);
-                allimg_arr.push(Json_data.fileUrl);
-                if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
-                    index_arr = allimg_arr.length-1
-                }
+                // allimg_arr.push(Json_data.fileUrl);
+                allimg_arr[Json_data.fileTimes] = Json_data.fileUrl;
+                console.log(allimg_arr)
+                // if(now_index==Json_data.fileTimes&&allimg_arr.length!=0){
+                //     index_arr = allimg_arr.length-1
+                // }
                 var length_ = allimg_arr.length;
-                if(blur_==true){
-                    length_ = length_+1
-                }
+                // if(blur_==true){
+                //     length_ = length_+1
+                // }
                 if(length_==all_img.length){
                     wx.previewImage({
                         current: allimg_arr[index_arr], // 当前显示图片的http链接
