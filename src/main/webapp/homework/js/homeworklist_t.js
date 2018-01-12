@@ -232,7 +232,9 @@ $(function(){
         var className = this_.attr('className');
 
         var params = {
-            'classCode':classCode
+            'classCode':classCode,
+            'email':localStorage.terEmail,
+            'schoolId':localStorage.schoolId
         };
         ajax_S(homework_s.t_hw_getClassDetails, params, function (e) {
             if(e.data != undefined && e.data.length > 0){
