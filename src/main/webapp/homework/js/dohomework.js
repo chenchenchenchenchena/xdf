@@ -593,7 +593,7 @@ $(function () {
         var previewUrl = $(this).attr('data-img');
         wx.previewImage({
             current: previewUrl, // 当前显示图片的http链接
-            urls: [previewUrl] // 需要预览的图片http链接列表
+            urls: [previewUrl,previewUrl,previewUrl,previewUrl,previewUrl] // 需要预览的图片http链接列表
         });
     });
 
