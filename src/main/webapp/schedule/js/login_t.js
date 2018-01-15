@@ -199,6 +199,8 @@ $(document).on('touchend',"#scanQRCode",function() {
         alert('您当前的账户为主讲老师，暂仅能查看哦。')
         return false;
     }
+    more_s()
+
     // alert(0)
     wx.scanQRCode({
         needResult : 1,  // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
@@ -277,7 +279,7 @@ if (!localStorage.terEmail) {
 //查询用户详细信息
 function more_s(){
     var  teacherid = localStorage.terEmail;//sessionStorage.terEmail
-    var need_ = {'email':teacherid,  'teacherCode':localStorage.teacherId,
+    var need_ = {'email':teacherid,  'classCode':localStorage.teacherId,
         'schoolId':localStorage.schoolId,}
 // var  teacherid = 'jinyongcun@xdf.cn'
     var  studata   = [],stumodata = [];
