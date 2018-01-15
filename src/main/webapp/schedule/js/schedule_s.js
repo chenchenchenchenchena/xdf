@@ -471,26 +471,54 @@ $(function() {
         $('.not_this').css('opacity', '0');
     }, 100);
     function menu_int() {
+        $('.not_this').css('opacity','0');
         var month = $('#ymym').html().substring($('#ymym').html().indexOf('年')+1,$('#ymym').html().indexOf('月'));
-        $('.not_this').css('opacity', '0');
-        var month = $('#ymym').html().substring($('#ymym').html().indexOf('年') + 1, $('#ymym').html().indexOf('月'));
-        if (month < 10) {
-            month = '0' + month
+        if(month<10){
+            month = '0'+month
         }
-        if (monththis != month) {
+        var dat_day_today= new Date().format("d");
+
+        if(monththis!=month){
+            var day_this = $('#ymym').html().substr(0,4)+'-'+ month+'-01';
+            var dat_today = time1.split(' ')[0];
+            var dat_month = time1.substr(5,2);
+            // console.log($('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong'));
+            if(month!=dat_month){
+                if(day_this>dat_today){
+                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s')
+                }else{
+                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong')
+                }
+                var emailm = {
+                    'teacherEmail':localStorage.terEmail,
+                    'teacherCode':localStorage.teacherId,
+                    'schoolId':localStorage.schoolId,
+                    'beginDate':day_this,
+                    'endDate':day_this
+                };
+                $('.H-data').show();
+                $('.N-data').hide();
+                $('.curriculum').hide();
+                $('.loading_s').show();
+                ajax_S(url.s_emai,emailm,stusea,erro_d);
+            }
+            else{
+                $('.swiper-slide-active td[data_d="'+dat_day_today+'"]').eq(0).addClass('today').parents('tbody').find('td').removeClass('xuanzhong').removeClass('xuanzhong_s')
+            }
             $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
-            var day = new Date($('#ymym').html().substring(0, 4), month, '0');
+            var  day = new Date($('#ymym').html().substring(0,4),month,'0');
             var daycount = day.getDate();
             var menu_s = {
-                'studentCode': sessionStorage.stuNum,
-                'beginDate': $('#ymym').html().substring(0, 4) + '-' + month + '-01',
-                'endDate': $('#ymym').html().substring(0, 4) + '-' + month + '-' + daycount,
-                'schoolId':sessionStorage.schoolId
-
+                'teacherEmail':localStorage.terEmail,
+                'teacherCode':localStorage.teacherId,
+                'schoolId':localStorage.schoolId,
+                'beginDate':$('#ymym').html().substring(0,4)+'-'+month+'-01',
+                'endDate':$('#ymym').html().substring(0,4)+'-'+month+'-'+daycount
             };
-            ajax_S(url.s_stud, menu_s, menufunc,erro_f);
-            monththis = month
+            monththis = month;
+            ajax_S(url.s_emai,menu_s,menufunc,erro_f);
         }
+
         var html_s = $('.swiper-slide-active table').find('td');
         for (var k = 0; k < html_s.length; k++) {
             var month = $(html_s).eq(k).attr('data_m');
