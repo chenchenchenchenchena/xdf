@@ -97,7 +97,9 @@ $(function () {
         if(isPlaying){
             return false;
         }
-        audioCur.play();
+        window.onload = function() {
+            audioCur.play();
+        }
         playAnimation();
         isPlaying = true;
         //监听播放完毕
