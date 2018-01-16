@@ -234,9 +234,9 @@ function stusea(e){
 // <span class="tx" index="'+i+'">'+htmltx+'</span>
     //按月查课程
     $(document).on('touchend','.see_back',function(){
-        var new_script = document.createElement("script");
-        new_script.src = 'http://p.bokecc.com/player?vid=28749E41D11E34F29C33DC5901307461&siteid=C29A03BE981EBA5D&autoStart=false&width=1200&height=495&playerid=D07C0642596B964D&playertype=1'
-        $('body').append(new_script)
+        sessionStorage.video_ulr = 'http://p.bokecc.com/player?vid=28749E41D11E34F29C33DC5901307461&siteid=C29A03BE981EBA5D&autoStart=false&width=100%&height=495&playerid=D07C0642596B964D&playertype=1';
+        location.href = 'video_t.html';
+
         return false;
     });
     function menufunc(e){
