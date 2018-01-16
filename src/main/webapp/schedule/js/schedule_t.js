@@ -217,10 +217,10 @@ function stusea(e){
             if(Shchool!=undefined){
                 console.log(Shchool)
                 if(curr_e[i].SchoolId==Shchool){
-                    $('.curriculum').append('<li data-item="'+curr_e[i]+'" class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                    $('.curriculum').append('<li data-item="'+curr_e[i]+'" class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""><span class="see_back">观看回放</span></div></a></li>')
                 }
             }else{
-                $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""><span class="see_back">观看回放</span></div></a></li>')
             }
             $('.curriculum').show();
         }
@@ -233,7 +233,12 @@ function stusea(e){
     }
 // <span class="tx" index="'+i+'">'+htmltx+'</span>
     //按月查课程
-
+    $(document).on('touchend','.see_back',function(){
+        var new_script = document.createElement("script");
+        new_script.src = 'http://p.bokecc.com/player?vid=28749E41D11E34F29C33DC5901307461&siteid=C29A03BE981EBA5D&autoStart=false&width=1200&height=495&playerid=D07C0642596B964D&playertype=1'
+        $('body').append(new_script)
+        return false;
+    });
     function menufunc(e){
     var arr = [];
     var arr_schoolid = [];
