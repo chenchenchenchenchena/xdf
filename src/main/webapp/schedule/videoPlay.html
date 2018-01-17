@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../common/css/base.css?v=4dffd2p"/>
+    <link rel="stylesheet" href="../common/css/swiper-3.4.2.min.css?v=018da5p"/>
+    <script src="../common/js/zepto.min.js?v=3b51bfp"></script>
+    <script src="../common/js/scale.js?v=f7ae47p"></script>
+    <script src="../common/js/ajax.js?v=f74118p"></script>
+    <script src="../common/js/swiper.min.js?v=287fddp"></script>
+</head>
+<script>
+    var url = 'http://10.162.7.142:8082'+ "/course/findPlayAddressByMasterMsg";
+    var url1 = 'http://10.162.7.142:8082'+ "/lessonData/getStudentData";
+    var param = [
+        {"masterTeacherName":"刘雪扬","lessonTime":"010:00:00-12:00:00", "date":"2018-01-17"},
+        {"masterTeacherName":"刘雪扬","lessonTime":"08:00:00-10:00:00", "date":"2018-01-15"},
+        {"masterTeacherName":"aa1a", "lessonTime":"vvv4", "date":"12134"}
+    ];
+//    var param1 = {'studentNo':'ZSGD514'};
+    $.ajax({
+        url:url,
+        type:'post',
+        dataType:'json',
+        contentType:"application/json",
+        data:JSON.stringify(param),
+        success:function(response){
+            console.log(response);
+//            var list = e.data;
+//            if(list.length > 0){
+//                for (var i = 0;i<list.length;i++){
+//
+//                }
+//            }
+
+        }
+    });
+
+
+</script>
+<body>
+
+</body>
+</html>
