@@ -1,5 +1,7 @@
 $(function(){
     //请求整月数据超时处理
+    var mastertae = [];
+
     function erro_f(){
         if($('.month_hour i')){
             $('.month_hour i').html('<img src="images/reload.png" class="reload_f" style="width:.6rem;height:.4rem;position:absolute;top:.62rem;">')
@@ -76,6 +78,8 @@ $(function(){
             'beginDate':time,
             'endDate':time
         };
+        this_dat_last = emailm
+
         ajax_S(url.s_emai,emailm,stusea,erro_d);
     })
 // 本地测试数据
@@ -109,7 +113,7 @@ var menu_s = {
 //储存课程信息
 var curr_e = [];
 $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
-
+var this_dat_last;
 //储存当月的日期
 var dateH = [];
 //储存当前日期
@@ -129,7 +133,7 @@ var touchtend;
 //按天查课程
 
 function stusea(e){
-
+    var need_see = [];
     sessionStorage.setItem("classData",JSON.stringify(e));
         $('.curriculum li').remove();
         if(e.result==false||e.data==undefined){
@@ -174,14 +178,16 @@ function stusea(e){
         for(var i = 0;i<curr_e.length;i++){
             var begtime = curr_e[i].SectBegin.split(' ');
             var begtime2 = begtime[1].substring(0,begtime[1].length-3);
+            var begtime3 = begtime[1].substring(0,begtime[1].length);
             var endtime = curr_e[i].SectEnd.split(' ');
             var endtime2 = endtime[1].substring(0,begtime[1].length-3);
-            var remindedata = {
-               'classCode':curr_e[i].ClassCode,
-                'courseCode':curr_e[i].CourseCode,
-                'email':localStorage.terEmail
-            };
-            var htmltx = '';
+            var endtime3 = endtime[1].substring(0,begtime[1].length);
+            // var remindedata = {
+            //    'classCode':curr_e[i].ClassCode,
+            //     'courseCode':curr_e[i].CourseCode,
+            //     'email':localStorage.terEmail
+            // };
+            // var htmltx = '';
             // ajax_S(url.t_data,remindedata,function(e){
             //     if(e.result==false){
             //         layer.msg('请求参数不可以为空')
@@ -207,6 +213,7 @@ function stusea(e){
             //         }
             //     }
             // });
+
             if(time1<curr_e[i].SectEnd){
                 old = ''
             }else{
@@ -215,26 +222,65 @@ function stusea(e){
 
             //主讲判断
             if(Shchool!=undefined){
-                console.log(Shchool)
                 if(curr_e[i].SchoolId==Shchool){
-                    $('.curriculum').append('<li data-item="'+curr_e[i]+'" class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""><span class="see_back">观看回放</span></div></a></li>')
+                    $('.curriculum').append('<li time_back="'+begtime3+'-'+endtime3+'" data-item="'+curr_e[i]+'" class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 }
             }else{
-                $('.curriculum').append('<li class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""><span class="see_back">观看回放</span></div></a></li>')
+                $('.curriculum').append('<li time_back="'+begtime3+'-'+endtime3+'" class="'+old+'" classCode="'+curr_e[i].ClassCode+'"><a href="javascript:;"><div class="CHour_s_more_left"><p>'+begtime2+'</p><span></span><p>'+endtime2+'</p></div><div class="CHour_s_more"><h4>'+curr_e[i].ClassName+'</h4><p><i>'+curr_e[i].LessonNo+' / '+curr_e[i].LessonCount+'</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
             }
             $('.curriculum').show();
+            var masterta = curr_e[i].Teachers.split(',');
+            var tem_json = [{
+                'lessonTime':begtime3+'-'+endtime3,
+                'date':this_dat_last.beginDate
+            }];
+            var back_blur = false;
+            for (var j = 0; j < mastertae.length; j++) {
+                for (var k = 0; k < masterta.length; k++) {
+                    if (mastertae[j].teacherName == masterta[k]) {
+                        sessionStorage.masterTeacherName = masterta[k];
+                        back_blur = true;
+                    }
+                }
+            }
+            if(back_blur==true){
+            tem_json[0].masterTeacherName = sessionStorage.masterTeacherName;
+            var url = 'http://10.162.7.57:8082/course/findPlayAddressByMasterMsg';
+            $.ajax({
+                url:url,
+                type:'post',
+                dataType:'json',
+                contentType:"application/json",
+                data:JSON.stringify(tem_json),
+                success:function(response){
+                    console.log(response.data);
+                    for(ele in response.data){
+                        if(response.data[ele]!=''){
+
+                        $(".curriculum li[time_back='"+ele+"']").find('.CHour_s_more_right').append('<span class="see_back" back_src="'+response.data[ele].videoId+'">观看回放</span>')
+                        console.log($(".curriculum li[time_back='"+ele+"']"))
+                        }
+                    }
+                }
+            });
+            }
         }
+
         $('.loading_s').eq(0).hide();
         if($('.curriculum li').length==0){
             $('.N-data').show();
             $('.H-data').hide();
             $('.loading_s').hide();
         }
-    }
+
+
+
+
+}
 // <span class="tx" index="'+i+'">'+htmltx+'</span>
     //按月查课程
     $(document).on('touchend','.see_back',function(){
-        sessionStorage.video_ulr = 'http://p.bokecc.com/player?vid=28749E41D11E34F29C33DC5901307461&siteid=C29A03BE981EBA5D&autoStart=false&width=100%&height=495&playerid=D07C0642596B964D&playertype=1';
+        sessionStorage.video_ulr = 'http://p.bokecc.com/player?vid='+$(this).attr('back_src')+'&siteid=C29A03BE981EBA5D&autoStart=false&width=100%&height=495&playerid=D07C0642596B964D&playertype=1';
         location.href = 'video_t.html';
 
         return false;
@@ -398,13 +444,23 @@ setTimeout(function(){
             $('.N-data').hide();
             $('.curriculum').hide();
             $('.loading_s').show();
+            this_dat_last = emailm;
             ajax_S(url.s_emai,emailm,stusea,erro_d);
             // ajax_S(url.s_emai,menu_s,menufunc);
         }
 
     });
+    this_dat_last = emailm
+    ajax_S(url.data_s, '', function (e) {
+        for (var i = 0; i < e.data.length; i++) {
+            mastertae.push(e.data[i]);
+        }
         ajax_S(url.s_emai,emailm,stusea,erro_d);
         ajax_S(url.s_emai,menu_s,menufunc,erro_f);
+    },function(){
+        layer.msg('当前网络不佳 请切换网络')
+    });
+
 //点击查看详情
 $(document).on('click','.H-data li',function(){
     var year = $('#ymym').html().substring(0,$('#ymym').html().indexOf('年'));
@@ -466,14 +522,15 @@ $(document).on('click','.H-data li',function(){
             month = '0'+month
         }
         var dat_day_today= new Date().format("d");
-
-        if(monththis!=month){
+        // console.log(monththis+'-****'+month)
+        if(monththis!=month&&monththis!=undefined){
             var day_this = $('#ymym').html().substr(0,4)+'-'+ month+'-01';
             var dat_today = time1.split(' ')[0];
             var dat_month = time1.substr(5,2);
             var this_ ;
             // console.log($('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong'));
             if(month!=dat_month){
+
                 if(day_this>dat_today){
                     $('.xuanzhong_s').removeClass('xuanzhong_s')
                    $('.swiper-slide-active td[data_d="1"]').eq(0).addClass('xuanzhong_s');
@@ -485,9 +542,10 @@ $(document).on('click','.H-data li',function(){
                 }
             }
             else{
-                this_ = '.today'
+                this_ = '.today';
                 $('.swiper-slide-active td[data_d="'+dat_day_today+'"]').eq(0).addClass('today').parents('tbody').find('td').removeClass('xuanzhong').removeClass('xuanzhong_s')
             }
+
             var month  = $(this_).attr('data_m');
             var day = $(this_).attr('data_d');
             if(month<10){
@@ -510,6 +568,8 @@ $(document).on('click','.H-data li',function(){
             $('.N-data').hide();
             $('.curriculum').hide();
             $('.loading_s').show();
+            this_dat_last = emailm
+
             ajax_S(url.s_emai,emailm,stusea,erro_d);
             $('.month_hour i').html('<img src="images/loading_s.gif" style="width:.4rem;height:.4rem;position:absolute;top:.62rem;">');
             var  day = new Date($('#ymym').html().substring(0,4),month,'0');
