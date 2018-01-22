@@ -304,8 +304,10 @@ $(function() {
                 }
                 var begtime = curr_e[i].SectBegin.split(' ');
                 var begtime2 = begtime[1].substring(0, begtime[1].length - 3);
+                var begtime3 = begtime[1].substring(0, begtime[1].length - 3);
                 var endtime = curr_e[i].SectEnd.split(' ');
                 var endtime2 = endtime[1].substring(0, begtime[1].length - 3);
+                var endtime3 = endtime[1].substring(0, begtime[1].length - 3);
                 var teaname = curr_e[i].Teachers.split(',');
                 var zteaname;
                 var jteaname;
@@ -330,9 +332,32 @@ $(function() {
                 if(masterta==''||masterta==undefined){
                     masterta  = '暂无'
                 }
-                $('.curriculum').append('<li class="' + old + '"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
+                $('.curriculum').append('<li class="' + old + '" time_back="'+begtime3+'-'+endtime3+"><a href="javascript:;"><div class="CHour_s_more_left"><p>' + begtime2 + '</p><span></span><p>' + endtime2 + '</p></div><div class="CHour_s_more"><h4>' + curr_e[i].ClassName + '</h4><p><i style="color:'+color+'" >主讲(' + jteaname + ')</i><span><i style="color:'+color+'" >班主任(' + masterta + ')</i></span></p><p><i>' + curr_e[i].LessonNo + ' / ' + curr_e[i].LessonCount + '</i>课次</p></div><div class="CHour_s_more_right"><img src="images/calendar_arrow_right.png" alt=""></div></a></li>')
                 $('.loading_s').hide();
-                $('.curriculum').show()
+                $('.curriculum').show();
+                var tem_json = [{
+                    'masterTeacherName':jteaname,
+                    'lessonTime':begtime3+'-'+endtime3,
+                    'date':this_dat_last.beginDate
+                }];
+                var url = 'http://10.162.7.57:8082/course/findPlayAddressByMasterMsg';
+                $.ajax({
+                    url:url,
+                    type:'post',
+                    dataType:'json',
+                    contentType:"application/json",
+                    data:JSON.stringify(tem_json),
+                    success:function(response){
+                        console.log(response.data);
+                        for(ele in response.data){
+                            if(response.data[ele]!=''){
+
+                                $(".curriculum li[time_back='"+ele+"']").find('.CHour_s_more_right').append('<span class="see_back" back_src="'+response.data[ele].videoId+'">观看回放</span>')
+                                console.log($(".curriculum li[time_back='"+ele+"']"))
+                            }
+                        }
+                    }
+                });
                 // <span class="tx" index="'+i+'">'+htmltx+'</span>
                 // ajax_S(url.s_data,remindedata,function(e){
                 //     if(e.result==false){
