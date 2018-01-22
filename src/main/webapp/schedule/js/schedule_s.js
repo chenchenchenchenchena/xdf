@@ -340,7 +340,7 @@ $(function() {
                     'lessonTime':begtime3+'-'+endtime3,
                     'date':this_dat_last.beginDate
                 }];
-                var url = 'http://10.162.7.57:8082/course/findPlayAddressByMasterMsg';
+                var url = 'http://10.162.7.137:8082/course/findPlayAddressByMasterMsg';
                 $.ajax({
                     url:url,
                     type:'post',
