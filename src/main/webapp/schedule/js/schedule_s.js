@@ -1,4 +1,5 @@
 $(function() {
+    var this_dat_last;
      //请求整月数据超时处理
      function erro_f(){
         if($('.month_hour i')){
@@ -74,6 +75,7 @@ $(function() {
             'endDate': time,
             'schoolId':sessionStorage.schoolId
         };
+        this_dat_last = emailm;
         ajax_S(url.s_seac,emailm,stusea,erro_d);
     })
     if (!sessionStorage.openid) {
@@ -134,6 +136,8 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
+        this_dat_last = emailm;
+
         ajax_S(url.s_stud, emailm, stusea,erro_d);
         var month = $('.today').attr('data_m');
         var day = new Date($('#ymym').html().substring(0, 4), month, '0');
@@ -176,6 +180,8 @@ $(function() {
                 'endDate': new Date().format("yyyy-MM") + '-' + getCountDays(),
                 'schoolId':sessionStorage.schoolId
             };
+            this_dat_last = emailm;
+
             ajax_S(url.s_stud, emailm, stusea,erro_d);
             ajax_S(url.s_stud, menu_s, menufunc,erro_f);
             ajax_S(url.data_s, '1', function (e) {
@@ -452,6 +458,8 @@ $(function() {
             $('.N-data').hide();
             $('.curriculum').hide();
             $('.loading_s').show();
+            this_dat_last = emailm;
+
             ajax_S(url.s_stud, emailm, stusea,erro_d);
             // ajax_S(url.s_stud, menu_s, menufunc);
         }
@@ -529,6 +537,8 @@ $(function() {
                 $('.N-data').hide();
                 $('.curriculum').hide();
                 $('.loading_s').show();
+                this_dat_last = emailm;
+
                 ajax_S(url.s_stud, emailm, stusea,erro_d);
             }
             else{
@@ -589,6 +599,8 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
+        this_dat_last = emailm;
+
         ajax_S(url.s_emai,emailm,stusea,erro_d);
         var month  = $('.today').attr('data_m');
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
@@ -612,6 +624,8 @@ $(function() {
             'schoolId':sessionStorage.schoolId
 
         };
+        this_dat_last = emailm;
+
         ajax_S(url.s_emai,emailm,stusea,erro_d);
         var month  = $('.today').attr('data_m');
         var  day = new Date($('#ymym').html().substring(0,4),month,'0');
