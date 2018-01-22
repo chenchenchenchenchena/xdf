@@ -310,10 +310,10 @@ $(function() {
                 }
                 var begtime = curr_e[i].SectBegin.split(' ');
                 var begtime2 = begtime[1].substring(0, begtime[1].length - 3);
-                var begtime3 = begtime[1].substring(0, begtime[1].length - 3);
+                var begtime3 = begtime[1].substring(0, begtime[1].length);
                 var endtime = curr_e[i].SectEnd.split(' ');
                 var endtime2 = endtime[1].substring(0, begtime[1].length - 3);
-                var endtime3 = endtime[1].substring(0, begtime[1].length - 3);
+                var endtime3 = endtime[1].substring(0, begtime[1].length);
                 var teaname = curr_e[i].Teachers.split(',');
                 var zteaname;
                 var jteaname;
